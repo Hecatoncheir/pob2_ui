@@ -129,7 +129,8 @@ class TreeHoverCard extends StatelessWidget {
   }
 
   Color _readableColor(Color source, ColorScheme colors) {
-    final background = colors.surface.computeLuminance();
+    final background = FrostedSurface.contrastBackground(colors)
+        .computeLuminance();
     for (final amount in const [0.0, .15, .3, .45, .6, .75]) {
       final color = Color.lerp(source, colors.onSurface, amount)!;
       final foreground = color.computeLuminance();
