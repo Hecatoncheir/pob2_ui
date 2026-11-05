@@ -28,12 +28,13 @@ class StatisticsPanel extends StatelessWidget {
       child: Stack(
         children: [
           Positioned.fill(
+            top: 8,
             child: ScrollConfiguration(
               behavior: ScrollConfiguration.of(context)
                   .copyWith(scrollbars: false),
               child: ListView(
                 key: const Key('statistics-scroll'),
-                padding: const EdgeInsets.fromLTRB(18, 68, 18, 18),
+                padding: const EdgeInsets.fromLTRB(18, 60, 18, 18),
                 children: [
                   SkillSelectors(model: model),
                   const Divider(height: 22),

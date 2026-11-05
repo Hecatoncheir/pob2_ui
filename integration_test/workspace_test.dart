@@ -466,6 +466,8 @@ Future<int> _allocateWeaponNode(
       .toList();
   candidates.sort((a, b) => (a['points'] as num).compareTo(b['points'] as num));
   final id = candidates.first['id'] as int;
+  await tester.ensureVisible(find.byKey(const Key('tree-search')));
+  await tester.pumpAndSettle();
   await tester.tap(find.byKey(const Key('tree-search')));
   await tester.pump();
   await tester.enterText(find.byKey(const Key('tree-search')), '$id');

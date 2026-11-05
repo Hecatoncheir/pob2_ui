@@ -50,6 +50,11 @@ void main() {
         await tester.pumpAndSettle();
         final header = find.byKey(const Key('statistics-header'));
         final before = tester.getRect(header);
+        final viewport = tester.getRect(
+          find.byKey(const Key('statistics-scroll')),
+        );
+        expect(viewport.top, greaterThan(before.top));
+        expect(viewport.top, lessThan(before.bottom));
         expect(
           find.descendant(of: header, matching: find.byType(BackdropFilter)),
           findsOneWidget,
