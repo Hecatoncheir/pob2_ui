@@ -105,25 +105,9 @@ class _WorkshopViewState extends State<WorkshopView> {
                             spacing: 24,
                             children: [
                               if (widget.updates != null)
-                                BlocBuilder<AppUpdateCubit, AppUpdateState>(
-                                  bloc: widget.updates!,
-                                  builder: (context, _) => TextButton.icon(
-                                    onPressed: () => showAppUpdates(
-                                      context,
-                                      widget.updates!,
-                                      model,
-                                    ),
-                                    icon: Icon(
-                                      widget.updates!.state.available
-                                          ? Icons.update
-                                          : Icons.info_outline,
-                                    ),
-                                    label: Text(
-                                      widget.updates!.state.available
-                                          ? 'Есть обновление'
-                                          : 'v$appVersion',
-                                    ),
-                                  ),
+                                _AppVersionButton(
+                                  updates: widget.updates!,
+                                  workshop: model,
                                 ),
                               const Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -392,4 +376,21 @@ class _ComponentCard extends StatelessWidget {
       ),
     );
   }
+}
+
+class _AppVersionButton extends StatelessWidget {
+  const _AppVersionButton({required this.updates, required this.workshop});
+  final AppUpdateCubit updates;
+  final WorkshopCubit workshop;
+  @override
+  Widget build(BuildContext context) =>
+      BlocSelector<AppUpdateCubit, AppUpdateState, bool>(
+        bloc: updates,
+        selector: (state) => state.available,
+        builder: (context, available) => TextButton.icon(
+          onPressed: () => showAppUpdates(context, updates, workshop),
+          icon: Icon(available ? Icons.update : Icons.info_outline),
+          label: Text(available ? 'Есть обновление' : 'v$appVersion'),
+        ),
+      );
 }

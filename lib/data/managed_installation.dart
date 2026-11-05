@@ -19,21 +19,23 @@ class ManagedInstallation {
   static Future<ManagedInstallation?> detect({String? executable}) async {
     final file = File(executable ?? Platform.resolvedExecutable);
     final path = File(await file.resolveSymbolicLinks());
-    if (Platform.isMacOS) {
-      final bundle = path.parent.parent.parent;
-      if (!bundle.path.endsWith('.app')) return null;
-      final marker = File.fromUri(
-        bundle.uri.resolve('Contents/Resources/pob2-install.json'),
-      );
-      if (!await validMarker(marker, 'macos-dmg')) return null;
-      final writable = await Process.run('/bin/test', [
-        '-w',
-        bundle.parent.path,
-      ]);
-      return writable.exitCode == 0
-          ? ManagedInstallation(root: bundle, kind: 'macos-dmg')
-          : null;
-    }
+    return Platform.isMacOS ? _detectMac(path) : _detectVersioned(path);
+  }
+
+  static Future<ManagedInstallation?> _detectMac(File path) async {
+    final bundle = path.parent.parent.parent;
+    if (!bundle.path.endsWith('.app')) return null;
+    final marker = File.fromUri(
+      bundle.uri.resolve('Contents/Resources/pob2-install.json'),
+    );
+    if (!await validMarker(marker, 'macos-dmg')) return null;
+    final writable = await Process.run('/bin/test', ['-w', bundle.parent.path]);
+    return writable.exitCode == 0
+        ? ManagedInstallation(root: bundle, kind: 'macos-dmg')
+        : null;
+  }
+
+  static Future<ManagedInstallation?> _detectVersioned(File path) async {
     final root = path.parent.parent.parent;
     final marker = File.fromUri(root.uri.resolve('pob2-install.json'));
     final kind = Platform.isWindows ? 'windows-inno' : 'linux-run';

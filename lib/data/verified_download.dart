@@ -49,34 +49,15 @@ class VerifiedDownload {
       return file;
     }
     final part = File('${file.path}.part');
-    if (await FileSystemEntity.type(part.path, followLinks: false) ==
-        FileSystemEntityType.link)
-      throw const FileSystemException(
-        'Вместо файла загрузки обнаружена ссылка',
-      );
-    var offset = await part.exists() ? await part.length() : 0;
-    if (offset >= asset.size) {
-      await part.delete();
-      offset = 0;
-    }
+    var offset = await _resumeOffset(part, asset.size);
     _cancelled = false;
     final client = http.createClient();
     _client = client;
     try {
       final response = await http.get(client, asset.url, offset: offset);
-      final resumed = response.statusCode == 206;
-      if (response.statusCode != 200 && !resumed)
-        throw HttpException('Загрузка: HTTP ${response.statusCode}');
-      if (resumed && !_validRange(response, offset, asset.size))
-        throw const HttpException('Неверный диапазон продолжения загрузки');
-      if (!resumed) offset = 0;
+      offset = _responseOffset(response, offset, asset.size);
       await _write(response, part, asset.size, offset, onProgress);
-      if (!await verify(part, asset)) {
-        await part.delete();
-        throw const FormatException('Размер или SHA-256 обновления не совпал');
-      }
-      if (await file.exists()) await file.delete();
-      return await part.rename(file.path);
+      return await _finish(part, file, asset);
     } catch (_) {
       if (_cancelled) throw DownloadCancelled();
       rethrow;
@@ -84,6 +65,38 @@ class VerifiedDownload {
       _client = null;
       client.close(force: true);
     }
+  }
+
+  Future<int> _resumeOffset(File part, int size) async {
+    if (await FileSystemEntity.type(part.path, followLinks: false) ==
+        FileSystemEntityType.link)
+      throw const FileSystemException(
+        'Вместо файла загрузки обнаружена ссылка',
+      );
+    var offset = await part.exists() ? await part.length() : 0;
+    if (offset >= size) {
+      await part.delete();
+      offset = 0;
+    }
+    return offset;
+  }
+
+  int _responseOffset(HttpClientResponse response, int offset, int total) {
+    if (response.statusCode == 200) return 0;
+    if (response.statusCode != 206)
+      throw HttpException('Загрузка: HTTP ${response.statusCode}');
+    if (!_validRange(response, offset, total))
+      throw const HttpException('Неверный диапазон продолжения загрузки');
+    return offset;
+  }
+
+  Future<File> _finish(File part, File file, AppAsset asset) async {
+    if (!await verify(part, asset)) {
+      await part.delete();
+      throw const FormatException('Размер или SHA-256 обновления не совпал');
+    }
+    if (await file.exists()) await file.delete();
+    return part.rename(file.path);
   }
 
   bool _validRange(HttpClientResponse response, int offset, int total) {

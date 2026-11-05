@@ -1,0 +1,11 @@
+{
+  "analyzer": {
+    "repository": "https://github.com/Hecatoncheir/treesitter_cyclomatic_complexity.git",
+    "revision": "7b216f2344d87a910e6c1ffbd974fe60950c15ce"
+  },
+  "dart": {
+    "repository": "https://github.com/UserNobody14/tree-sitter-dart.git",
+    "revision": "be07cf7118d3dba06236a3f19541685a68209934"
+  },
+  "maxCognitive": 10
+}

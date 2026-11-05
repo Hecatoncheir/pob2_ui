@@ -35,20 +35,7 @@ class AppHttp {
     for (var attempt = 0; attempt < 6; attempt++) {
       if (!trusted(current))
         throw const HttpException('Небезопасный адрес обновления');
-      final request = await client
-          .getUrl(current)
-          .timeout(const Duration(seconds: 25));
-      request.followRedirects = false;
-      request.headers.set('User-Agent', 'pob2-ui/$appVersion');
-      request.headers.set('Accept', 'application/vnd.github+json');
-      if (current.host == 'api.github.com' && _apiToken != null) {
-        request.headers.set('Authorization', 'Bearer $_apiToken');
-      }
-      if (offset > 0)
-        request.headers.set(HttpHeaders.rangeHeader, 'bytes=$offset-');
-      final response = await request.close().timeout(
-        const Duration(seconds: 30),
-      );
+      final response = await _request(client, current, offset);
       if (![301, 302, 303, 307, 308].contains(response.statusCode))
         return response;
       final location = response.headers.value(HttpHeaders.locationHeader);
@@ -58,6 +45,24 @@ class AppHttp {
       current = current.resolve(location);
     }
     throw const HttpException('Слишком много перенаправлений');
+  }
+
+  Future<HttpClientResponse> _request(
+    HttpClient client,
+    Uri uri,
+    int offset,
+  ) async {
+    final request = await client
+        .getUrl(uri)
+        .timeout(const Duration(seconds: 25));
+    request.followRedirects = false;
+    request.headers.set('User-Agent', 'pob2-ui/$appVersion');
+    request.headers.set('Accept', 'application/vnd.github+json');
+    if (uri.host == 'api.github.com' && _apiToken != null)
+      request.headers.set('Authorization', 'Bearer $_apiToken');
+    if (offset > 0)
+      request.headers.set(HttpHeaders.rangeHeader, 'bytes=$offset-');
+    return request.close().timeout(const Duration(seconds: 30));
   }
 
   Future<String> readText(

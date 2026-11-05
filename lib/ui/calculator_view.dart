@@ -16,8 +16,6 @@ class CalculatorView extends StatefulWidget {
 
 class _CalculatorViewState extends State<CalculatorView> {
   final xml = TextEditingController();
-  final level = TextEditingController(text: '90');
-  int? classId;
 
   @override
   void initState() {
@@ -28,7 +26,6 @@ class _CalculatorViewState extends State<CalculatorView> {
   @override
   void dispose() {
     xml.dispose();
-    level.dispose();
     super.dispose();
   }
 
@@ -75,53 +72,7 @@ class _CalculatorViewState extends State<CalculatorView> {
               ),
             ),
           const SizedBox(height: 16),
-          Wrap(
-            spacing: 12,
-            runSpacing: 12,
-            crossAxisAlignment: WrapCrossAlignment.center,
-            children: [
-              SizedBox(
-                width: 220,
-                child: DropdownButtonFormField<int>(
-                  key: ValueKey(model.state.classes),
-                  initialValue:
-                      model.state.classes.any((item) => item['id'] == classId)
-                      ? classId
-                      : null,
-                  decoration: const InputDecoration(labelText: 'Класс из Lua'),
-                  items: model.state.classes
-                      .map(
-                        (item) => DropdownMenuItem<int>(
-                          value: item['id'] as int,
-                          child: Text(item['name'] as String),
-                        ),
-                      )
-                      .toList(),
-                  onChanged: enabled
-                      ? (value) => setState(() => classId = value)
-                      : null,
-                ),
-              ),
-              SizedBox(
-                width: 110,
-                child: TextField(
-                  controller: level,
-                  enabled: enabled,
-                  keyboardType: TextInputType.number,
-                  decoration: const InputDecoration(labelText: 'Уровень'),
-                ),
-              ),
-              FilledButton(
-                onPressed: enabled && classId != null
-                    ? () => model.createBuild(
-                        classId!,
-                        int.tryParse(level.text) ?? 0,
-                      )
-                    : null,
-                child: const Text('Создать сборку'),
-              ),
-            ],
-          ),
+          _CharacterForm(model: model, enabled: enabled),
           const SizedBox(height: 24),
           TextField(
             controller: xml,
@@ -146,13 +97,7 @@ class _CalculatorViewState extends State<CalculatorView> {
               ),
               OutlinedButton(
                 onPressed: enabled && model.state.report != null
-                    ? () async {
-                        final result = await model.exportXml();
-                        if (mounted && result != null) {
-                          xml.text = result;
-                          model.editDraft(result);
-                        }
-                      }
+                    ? _exportXml
                     : null,
                 child: const Text('Получить XML'),
               ),
@@ -172,6 +117,81 @@ class _CalculatorViewState extends State<CalculatorView> {
             ),
         ],
       ),
+    );
+  }
+
+  Future<void> _exportXml() async {
+    final result = await widget.model.exportXml();
+    if (!mounted || result == null) return;
+    xml.text = result;
+    widget.model.editDraft(result);
+  }
+}
+
+class _CharacterForm extends StatefulWidget {
+  const _CharacterForm({required this.model, required this.enabled});
+  final WorkshopCubit model;
+  final bool enabled;
+  @override
+  State<_CharacterForm> createState() => _CharacterFormState();
+}
+
+class _CharacterFormState extends State<_CharacterForm> {
+  final level = TextEditingController(text: '90');
+  int? classId;
+  @override
+  void dispose() {
+    level.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final model = widget.model;
+    final enabled = widget.enabled;
+    return Wrap(
+      spacing: 12,
+      runSpacing: 12,
+      crossAxisAlignment: WrapCrossAlignment.center,
+      children: [
+        SizedBox(
+          width: 220,
+          child: DropdownButtonFormField<int>(
+            key: ValueKey(model.state.classes),
+            initialValue:
+                model.state.classes.any((item) => item['id'] == classId)
+                ? classId
+                : null,
+            decoration: const InputDecoration(labelText: 'Класс из Lua'),
+            items: model.state.classes
+                .map(
+                  (item) => DropdownMenuItem<int>(
+                    value: item['id'] as int,
+                    child: Text(item['name'] as String),
+                  ),
+                )
+                .toList(),
+            onChanged: enabled
+                ? (value) => setState(() => classId = value)
+                : null,
+          ),
+        ),
+        SizedBox(
+          width: 110,
+          child: TextField(
+            controller: level,
+            enabled: enabled,
+            keyboardType: TextInputType.number,
+            decoration: const InputDecoration(labelText: 'Уровень'),
+          ),
+        ),
+        FilledButton(
+          onPressed: enabled && classId != null
+              ? () => model.createBuild(classId!, int.tryParse(level.text) ?? 0)
+              : null,
+          child: const Text('Создать сборку'),
+        ),
+      ],
     );
   }
 }

@@ -26,8 +26,22 @@ class NativeRuntimeInstaller {
       throw UnsupportedError('Нет Lua runtime для этой архитектуры');
     final name = 'pob-poe2-mcp-native-$target.zip';
     log('Загрузка LuaJIT и lua-utf8 для $target…');
+    final asset = await _metadata(tag, name);
+    final cache = Directory.fromUri(candidate.uri.resolve('.native-download/'));
+    final package = await download.download(asset, cache, onProgress: (_) {});
+    final python = await processes.python();
+    await processes.run(python, [
+      '-X',
+      'utf8',
+      '-c',
+      extractionScript,
+      package.path,
+      candidate.path,
+    ]);
+  }
+
+  Future<AppAsset> _metadata(String tag, String name) async {
     final client = http.createClient();
-    late AppAsset asset;
     try {
       final response = await http.get(
         client,
@@ -45,53 +59,62 @@ class NativeRuntimeInstaller {
       final matches = assets.where((value) => value['name'] == name).toList();
       if (matches.length != 1)
         throw StateError('В $tag нет $name; требуется MCP 0.4.0 или новее');
-      final raw = matches.single;
-      final expected = Uri.parse(
-        'https://github.com/Hecatoncheir/pob-poe2-mcp/releases/download/$tag/$name',
-      );
-      if (raw['browser_download_url'] != '$expected')
-        throw const FormatException('Неожиданный источник Lua runtime');
-      var digest = RegExp(r'^sha256:([a-fA-F0-9]{64})$')
-          .firstMatch(raw['digest'] as String? ?? '')?[1]
-          ?.toLowerCase();
-      if (digest == null) {
-        final sums = await http.get(
-          client,
-          Uri.parse(
-            'https://github.com/Hecatoncheir/pob-poe2-mcp/releases/download/$tag/SHA256SUMS',
-          ),
-        );
-        if (sums.statusCode != 200)
-          throw const HttpException('Нет контрольной суммы Lua runtime');
-        final text = await http.readText(sums, limit: 64 * 1024);
-        final lines = RegExp(
-          r'^([a-fA-F0-9]{64}) [ *]' + RegExp.escape(name) + r'$',
-          multiLine: true,
-        ).allMatches(text.replaceAll('\r', '')).toList();
-        if (lines.length != 1)
-          throw const FormatException(
-            'Неоднозначная контрольная сумма Lua runtime',
-          );
-        digest = lines.single[1]!.toLowerCase();
-      }
-      final size = raw['size'] as int;
-      if (size <= 0 || size > 100 * 1024 * 1024)
-        throw const FormatException('Некорректный размер Lua runtime');
-      asset = AppAsset(name: name, url: expected, size: size, sha256: digest);
+      return await _asset(client, matches.single, tag, name);
     } finally {
       client.close(force: true);
     }
-    final cache = Directory.fromUri(candidate.uri.resolve('.native-download/'));
-    final package = await download.download(asset, cache, onProgress: (_) {});
-    final python = await processes.python();
-    await processes.run(python, [
-      '-X',
-      'utf8',
-      '-c',
-      extractionScript,
-      package.path,
-      candidate.path,
-    ]);
+  }
+
+  Future<AppAsset> _asset(
+    HttpClient client,
+    Map<String, dynamic> raw,
+    String tag,
+    String name,
+  ) async {
+    final expected = Uri.parse(
+      'https://github.com/Hecatoncheir/pob-poe2-mcp/releases/download/$tag/$name',
+    );
+    if (raw['browser_download_url'] != '$expected')
+      throw const FormatException('Неожиданный источник Lua runtime');
+    final size = raw['size'] as int;
+    if (size <= 0 || size > 100 * 1024 * 1024)
+      throw const FormatException('Некорректный размер Lua runtime');
+    return AppAsset(
+      name: name,
+      url: expected,
+      size: size,
+      sha256: await _digest(client, raw, tag, name),
+    );
+  }
+
+  Future<String> _digest(
+    HttpClient client,
+    Map<String, dynamic> raw,
+    String tag,
+    String name,
+  ) async {
+    final digest = RegExp(r'^sha256:([a-fA-F0-9]{64})$')
+        .firstMatch(raw['digest'] as String? ?? '')?[1]
+        ?.toLowerCase();
+    if (digest != null) return digest;
+    final response = await http.get(
+      client,
+      Uri.parse(
+        'https://github.com/Hecatoncheir/pob-poe2-mcp/releases/download/$tag/SHA256SUMS',
+      ),
+    );
+    if (response.statusCode != 200)
+      throw const HttpException('Нет контрольной суммы Lua runtime');
+    final text = await http.readText(response, limit: 64 * 1024);
+    final lines = RegExp(
+      r'^([a-fA-F0-9]{64}) [ *]' + RegExp.escape(name) + r'$',
+      multiLine: true,
+    ).allMatches(text.replaceAll('\r', '')).toList();
+    if (lines.length != 1)
+      throw const FormatException(
+        'Неоднозначная контрольная сумма Lua runtime',
+      );
+    return lines.single[1]!.toLowerCase();
   }
 
   static const extractionScript = r'''

@@ -33,14 +33,14 @@ class WorkshopCubit extends Cubit<WorkshopState> {
 
   Future<void> _run(Future<void> Function() action) async {
     if (isClosed || state.busy) return;
-    _update(state.copyWith(busy: true, clearError: true));
+    _update(state.copyWith(operation: (busy: true, error: null)));
     try {
       await action();
     } catch (failure) {
-      _update(state.copyWith(error: '$failure'));
+      _update(state.copyWith(operation: (busy: true, error: '$failure')));
       addLog('Ошибка: $failure');
     } finally {
-      _update(state.copyWith(busy: false));
+      _update(state.copyWith(operation: (busy: false, error: state.error)));
     }
   }
 
@@ -51,7 +51,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     _update(
       state.copyWith(
         sessionSaved: saved,
-        draftXml: state.draftEdited ? state.draftXml : draft,
+        draft: state.draftEdited ? state.draft : (xml: draft, edited: false),
         status: ready
             ? 'Компоненты установлены. Можно подключить Lua.'
             : state.status,
@@ -189,7 +189,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
   }
 
   void editDraft(String value) =>
-      _update(state.copyWith(draftXml: value, draftEdited: true));
+      _update(state.copyWith(draft: (xml: value, edited: true)));
 
   Future<void> checkpoint() async {
     if (state.busy) throw StateError('Дождитесь завершения текущей операции');

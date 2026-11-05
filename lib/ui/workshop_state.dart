@@ -1,14 +1,15 @@
 import '../domain/component.dart';
 
+typedef WorkshopOperation = ({bool busy, String? error});
+typedef XmlDraft = ({String xml, bool edited});
+
 class WorkshopState {
   WorkshopState({
-    this.busy = false,
-    this.error,
+    this.operation = (busy: false, error: null),
     this.status = 'Установите компоненты и подключите Lua',
     this.report,
     this.sessionSaved = false,
-    this.draftXml = '',
-    this.draftEdited = false,
+    this.draft = (xml: '', edited: false),
     Map<Component, Release> releases = const {},
     List<String> log = const [],
     List<Map<String, dynamic>> classes = const [],
@@ -16,38 +17,35 @@ class WorkshopState {
        log = List.unmodifiable(log),
        classes = List.unmodifiable(classes);
 
-  final bool busy;
-  final String? error;
+  final WorkshopOperation operation;
+  bool get busy => operation.busy;
+  String? get error => operation.error;
   final String status;
   final Map<String, dynamic>? report;
   final bool sessionSaved;
-  final String draftXml;
-  final bool draftEdited;
+  final XmlDraft draft;
+  String get draftXml => draft.xml;
+  bool get draftEdited => draft.edited;
   final Map<Component, Release> releases;
   final List<String> log;
   final List<Map<String, dynamic>> classes;
 
   WorkshopState copyWith({
-    bool? busy,
-    String? error,
-    bool clearError = false,
+    WorkshopOperation? operation,
     String? status,
     Map<String, dynamic>? report,
     bool clearReport = false,
     bool? sessionSaved,
-    String? draftXml,
-    bool? draftEdited,
+    XmlDraft? draft,
     Map<Component, Release>? releases,
     List<String>? log,
     List<Map<String, dynamic>>? classes,
   }) => WorkshopState(
-    busy: busy ?? this.busy,
-    error: clearError ? null : error ?? this.error,
+    operation: operation ?? this.operation,
     status: status ?? this.status,
     report: clearReport ? null : report ?? this.report,
     sessionSaved: sessionSaved ?? this.sessionSaved,
-    draftXml: draftXml ?? this.draftXml,
-    draftEdited: draftEdited ?? this.draftEdited,
+    draft: draft ?? this.draft,
     releases: releases ?? this.releases,
     log: log ?? this.log,
     classes: classes ?? this.classes,

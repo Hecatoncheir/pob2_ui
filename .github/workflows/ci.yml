@@ -18,6 +18,28 @@ env:
   PYTHONUTF8: '1'
 
 jobs:
+  complexity:
+    name: Когнитивная сложность Dart
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          ref: ${{ inputs.ref || github.ref }}
+      - uses: actions/setup-python@v7.1.0
+        with:
+          python-version: '3.13'
+      - uses: rhysd/action-setup-vim@febef33995d6649302e9d88dda81e071b68f16a7
+        with:
+          neovim: true
+          version: v0.11.5
+      - name: Проверить предел 10
+        run: python tool/check_complexity.py
+      - uses: actions/upload-artifact@v7.0.2
+        if: always()
+        with:
+          name: complexity-report
+          path: build/complexity/report.json
+
   desktop:
     name: ${{ matrix.target }}
     runs-on: ${{ matrix.os }}
