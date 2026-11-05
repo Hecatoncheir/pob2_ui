@@ -10,15 +10,19 @@ class SurfacePanel extends StatelessWidget {
     super.key,
     required this.child,
     this.padding = const EdgeInsets.all(20),
+    this.showBorder = true,
   });
   final Widget child;
   final EdgeInsetsGeometry padding;
+  final bool showBorder;
   @override
   Widget build(BuildContext context) => Material(
     color: Spark.of(context).surface,
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(18),
-      side: BorderSide(color: Spark.of(context).line),
+      side: showBorder
+          ? BorderSide(color: Spark.of(context).line)
+          : BorderSide.none,
     ),
     clipBehavior: Clip.antiAlias,
     child: Padding(padding: padding, child: child),

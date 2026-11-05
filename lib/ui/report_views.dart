@@ -24,6 +24,7 @@ class StatisticsPanel extends StatelessWidget {
     final report = model.state.report!;
     return SurfacePanel(
       padding: EdgeInsets.zero,
+      showBorder: false,
       child: Stack(
         children: [
           Positioned.fill(
@@ -79,9 +80,21 @@ class StatisticsPanel extends StatelessWidget {
               key: const Key('statistics-header'),
               showShadow: false,
               backgroundOpacity: .65,
-              borderRadius: BorderRadius.zero,
-              border: Border(bottom: BorderSide(color: Spark.of(context).line)),
-              child: _InspectorHeading(model: model, shell: shell),
+              borderRadius: const BorderRadius.vertical(
+                top: Radius.circular(18),
+              ),
+              border: const Border(),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  _InspectorHeading(model: model, shell: shell),
+                  Divider(
+                    height: 1,
+                    thickness: 1,
+                    color: Spark.of(context).line,
+                  ),
+                ],
+              ),
             ),
           ),
         ],
