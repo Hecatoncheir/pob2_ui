@@ -69,9 +69,9 @@ class NodePowerPanel extends StatelessWidget {
   );
 
   Widget _controls(BuildContext context, NodePowerState state, bool narrow) {
-    final metric = _metric(state);
+    final metric = _metric(context, state);
     final distance = SizedBox(width: 100, child: _distance(context, state));
-    final allocation = _allocation(state);
+    final allocation = _allocation(context, state);
     final action = FilledButton(
       key: const Key('node-power-calculate'),
       onPressed: enabled
@@ -112,54 +112,66 @@ class NodePowerPanel extends StatelessWidget {
     );
   }
 
-  Widget _metric(NodePowerState state) => DropdownButtonFormField<String>(
-    key: const Key('node-power-stat'),
-    initialValue: state.options.stat,
-    isExpanded: true,
-    decoration: const InputDecoration(
-      labelText: 'Характеристика',
-      contentPadding: EdgeInsets.all(10),
-    ),
-    style: const TextStyle(fontFamily: 'Nunito Sans', fontSize: 12),
-    items: [
-      for (final metric in state.metrics)
-        DropdownMenuItem(
-          value: '${metric['id']}',
-          child: Text(nodePowerLabel(metric)),
+  Widget _metric(BuildContext context, NodePowerState state) =>
+      DropdownButtonFormField<String>(
+        key: const Key('node-power-stat'),
+        initialValue: state.options.stat,
+        isExpanded: true,
+        decoration: const InputDecoration(
+          labelText: 'Характеристика',
+          contentPadding: EdgeInsets.all(10),
         ),
-    ],
-    onChanged: (value) {
-      if (value != null)
-        model.configure((
-          stat: value,
-          distance: state.options.distance,
-          allocation: state.options.allocation,
-        ));
-    },
-  );
+        style: TextStyle(
+          fontFamily: 'Nunito Sans',
+          fontSize: 12,
+          color: Spark.of(context).ink,
+        ),
+        dropdownColor: Spark.of(context).surface,
+        items: [
+          for (final metric in state.metrics)
+            DropdownMenuItem(
+              value: '${metric['id']}',
+              child: Text(nodePowerLabel(metric)),
+            ),
+        ],
+        onChanged: (value) {
+          if (value != null)
+            model.configure((
+              stat: value,
+              distance: state.options.distance,
+              allocation: state.options.allocation,
+            ));
+        },
+      );
 
-  Widget _allocation(NodePowerState state) => DropdownButtonFormField<String>(
-    initialValue: state.options.allocation,
-    isExpanded: true,
-    decoration: const InputDecoration(
-      labelText: 'Узлы',
-      contentPadding: EdgeInsets.all(10),
-    ),
-    style: const TextStyle(fontFamily: 'Nunito Sans', fontSize: 12),
-    items: const [
-      DropdownMenuItem(value: 'unallocated', child: Text('Не выбраны')),
-      DropdownMenuItem(value: 'allocated', child: Text('Выбраны')),
-      DropdownMenuItem(value: 'all', child: Text('Все')),
-    ],
-    onChanged: (value) {
-      if (value != null)
-        model.configure((
-          stat: state.options.stat,
-          distance: state.options.distance,
-          allocation: value,
-        ));
-    },
-  );
+  Widget _allocation(BuildContext context, NodePowerState state) =>
+      DropdownButtonFormField<String>(
+        initialValue: state.options.allocation,
+        isExpanded: true,
+        decoration: const InputDecoration(
+          labelText: 'Узлы',
+          contentPadding: EdgeInsets.all(10),
+        ),
+        style: TextStyle(
+          fontFamily: 'Nunito Sans',
+          fontSize: 12,
+          color: Spark.of(context).ink,
+        ),
+        dropdownColor: Spark.of(context).surface,
+        items: const [
+          DropdownMenuItem(value: 'unallocated', child: Text('Не выбраны')),
+          DropdownMenuItem(value: 'allocated', child: Text('Выбраны')),
+          DropdownMenuItem(value: 'all', child: Text('Все')),
+        ],
+        onChanged: (value) {
+          if (value != null)
+            model.configure((
+              stat: state.options.stat,
+              distance: state.options.distance,
+              allocation: value,
+            ));
+        },
+      );
 
   Widget _distance(BuildContext context, NodePowerState state) {
     final selected = state.options.distance ?? 0;
@@ -173,6 +185,12 @@ class NodePowerPanel extends StatelessWidget {
         child: DropdownButton<int>(
           key: const Key('node-power-distance'),
           value: selected,
+          style: TextStyle(
+            fontFamily: 'Nunito Sans',
+            fontSize: 12,
+            color: Spark.of(context).ink,
+          ),
+          dropdownColor: Spark.of(context).surface,
           isDense: true,
           isExpanded: true,
           items: [
@@ -251,6 +269,13 @@ class NodePowerPanel extends StatelessWidget {
       return const Center(
         child: Text(
           'Выберите характеристику и нажмите «Найти».',
+          style: TextStyle(fontSize: 12),
+        ),
+      );
+    if (state.options.stat == 'OffenceDefence')
+      return const Center(
+        child: Text(
+          'Общая карта урона и защиты. Для списка выберите отдельный показатель.',
           style: TextStyle(fontSize: 12),
         ),
       );

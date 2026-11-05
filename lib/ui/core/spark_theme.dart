@@ -176,6 +176,5 @@ class SparkColors {
   Color get sage => theme.colorScheme.secondaryContainer;
   Color get green => theme.colorScheme.secondary;
   Color get danger => theme.colorScheme.error;
-  Color get treeBackground =>
-      theme.brightness == Brightness.dark ? Gruvbox.canvas : Spark.ink;
+  Color get treeBackground => const Color(0xFF080C11);
 }

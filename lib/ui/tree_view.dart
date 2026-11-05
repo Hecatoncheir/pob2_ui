@@ -206,6 +206,20 @@ class _TreeViewState extends State<TreeView>
       children: [
         _toolbar(),
         const SizedBox(height: 12),
+        if (powerVisible)
+          Padding(
+            padding: const EdgeInsets.only(bottom: 10),
+            child: SizedBox(
+              height: MediaQuery.sizeOf(context).width < 650 ? 230 : 210,
+              child: NodePowerPanel(
+                model: powerModel,
+                onFocus: _focusPowerNode,
+                enabled:
+                    !widget.model.state.busy &&
+                    widget.model.state.document?.stale == false,
+              ),
+            ),
+          ),
         Expanded(
           child: ClipRRect(
             borderRadius: BorderRadius.circular(18),
@@ -266,20 +280,6 @@ class _TreeViewState extends State<TreeView>
             ),
           ),
         ),
-        if (powerVisible)
-          Padding(
-            padding: const EdgeInsets.only(top: 10),
-            child: SizedBox(
-              height: MediaQuery.sizeOf(context).width < 650 ? 230 : 210,
-              child: NodePowerPanel(
-                model: powerModel,
-                onFocus: _focusPowerNode,
-                enabled:
-                    !widget.model.state.busy &&
-                    widget.model.state.document?.stale == false,
-              ),
-            ),
-          ),
         if (decodeError case final error?)
           Text(
             error,
@@ -328,6 +328,7 @@ class _TreeViewState extends State<TreeView>
       ArtIconButton(
         'chart',
         label: 'Найти узлы по характеристике',
+        selected: powerVisible,
         onPressed: _togglePower,
       ),
       ArtIconButton('minus', label: 'Отдалить', onPressed: () => _zoom(.8)),
@@ -479,11 +480,25 @@ class _TreeViewState extends State<TreeView>
     final node = scene.nodes[id];
     if (node == null || widget.model.state.busy) return;
     if ({'ClassStart', 'AscendClassStart'}.contains(node.kind)) return;
-    if (node.kind == 'Mastery' && !node.allocated) {
-      sparkDialog<void>(context, _NodeDialog(widget.model, node));
-      return;
+    _selectNode(node);
+  }
+
+  Future<void> _selectNode(TreeNode node) async {
+    try {
+      final attribute =
+          node.isAttribute ?? await widget.model.isAttributeNode(node.id);
+      if (!mounted || widget.model.state.busy) return;
+      if (attribute || node.kind == 'Mastery' && !node.allocated) {
+        sparkDialog<void>(context, _NodeDialog(widget.model, node));
+      } else {
+        widget.model.treeAction(node.id, node.allocated);
+      }
+    } catch (error) {
+      if (mounted)
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Не удалось прочитать узел: $error')),
+        );
     }
-    widget.model.treeAction(node.id, node.allocated);
   }
 
   void _detailsAt(Offset point) {
@@ -604,12 +619,17 @@ class _NodeDialogState extends State<_NodeDialog> {
     final node = jsonRows(catalog['entries'])
         .where((entry) => entry['id'] == widget.node.id)
         .firstOrNull;
+    final attributes = jsonRows(node?['attributeOptions']);
+    final index = attributes.indexWhere(
+      (option) => option['name'] == widget.node.name,
+    );
+    if (index >= 0) attribute = index + 1;
     return (
       lines: NodePreview(tooltip: tooltip).lines
           .map((line) => cleanPoB('${line['text'] ?? ''}'))
           .where((line) => line.isNotEmpty)
           .toList(),
-      attributes: jsonRows(node?['attributeOptions']),
+      attributes: attributes,
     );
   }
 
@@ -628,6 +648,9 @@ class _NodeDialogState extends State<_NodeDialog> {
               onPressed: () => Navigator.pop(context),
               child: const Text('Закрыть'),
             ),
+            if (widget.node.allocated &&
+                snapshot.data?.attributes.isNotEmpty == true)
+              TextButton(onPressed: _refund, child: const Text('Вернуть очко')),
             if (snapshot.hasData &&
                 !{
                   'Mastery',
@@ -636,9 +659,7 @@ class _NodeDialogState extends State<_NodeDialog> {
                 }.contains(widget.node.kind))
               FilledButton(
                 onPressed: _canApply(snapshot.data!.attributes) ? _apply : null,
-                child: Text(
-                  widget.node.allocated ? 'Вернуть узел' : 'Выбрать путь',
-                ),
+                child: Text(_actionLabel(snapshot.data!.attributes)),
               ),
           ],
         ),
@@ -682,6 +703,17 @@ class _NodeDialogState extends State<_NodeDialog> {
   bool _canApply(List<JsonMap> attributes) =>
       !widget.model.state.busy &&
       (widget.node.allocated || attributes.isEmpty || attribute != null);
+
+  String _actionLabel(List<JsonMap> attributes) {
+    if (!widget.node.allocated) return 'Выбрать путь';
+    return attributes.isEmpty ? 'Вернуть узел' : 'Применить';
+  }
+
+  void _refund() {
+    widget.model.treeAction(widget.node.id, true);
+    Navigator.pop(context);
+  }
+
   void _apply() {
     widget.model.treeAction(
       widget.node.id,

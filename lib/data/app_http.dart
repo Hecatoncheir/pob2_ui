@@ -35,7 +35,7 @@ class AppHttp {
     for (var attempt = 0; attempt < 6; attempt++) {
       if (!trusted(current))
         throw const HttpException('Небезопасный адрес обновления');
-      final response = await _request(client, current, offset);
+      final response = await _requestWithRetry(client, current, offset);
       if (![301, 302, 303, 307, 308].contains(response.statusCode))
         return response;
       final location = response.headers.value(HttpHeaders.locationHeader);
@@ -63,6 +63,21 @@ class AppHttp {
     if (offset > 0)
       request.headers.set(HttpHeaders.rangeHeader, 'bytes=$offset-');
     return request.close().timeout(const Duration(seconds: 30));
+  }
+
+  Future<HttpClientResponse> _requestWithRetry(
+    HttpClient client,
+    Uri uri,
+    int offset,
+  ) async {
+    for (var attempt = 0; attempt < 3; attempt++) {
+      final response = await _request(client, uri, offset);
+      if (!const {502, 503, 504}.contains(response.statusCode) || attempt == 2)
+        return response;
+      await response.drain<void>().timeout(const Duration(seconds: 30));
+      await Future<void>.delayed(Duration(milliseconds: 400 * (attempt + 1)));
+    }
+    throw const HttpException('Не удалось получить ответ сервера');
   }
 
   Future<String> readText(

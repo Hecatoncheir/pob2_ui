@@ -39,7 +39,10 @@ class TreeHoverCard extends StatelessWidget {
   final TreeHoverState state;
   @override
   Widget build(BuildContext context) {
-    final colors = Theme.of(context).colorScheme;
+    final scheme = Theme.of(context).colorScheme;
+    final colors = scheme.brightness == Brightness.dark
+        ? scheme.copyWith(onSurface: Gruvbox.brightText)
+        : scheme;
     return FrostedSurface(
       child: Padding(
         padding: const EdgeInsets.all(18),

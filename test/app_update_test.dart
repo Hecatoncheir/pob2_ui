@@ -168,6 +168,29 @@ void main() {
     );
   });
 
+  test('Временные 504 повторяются ограниченно и сохраняют Range', () async {
+    final server = await HttpServer.bind(InternetAddress.loopbackIPv4, 0);
+    addTearDown(() => server.close(force: true));
+    var calls = 0;
+    final ranges = <String?>[];
+    server.listen((request) async {
+      ranges.add(request.headers.value('range'));
+      request.response.statusCode = ++calls < 3 ? 504 : 206;
+      await request.response.close();
+    });
+    final http = AppHttp(clientFactory: () => RoutedClient(server));
+    final client = http.createClient();
+    addTearDown(() => client.close(force: true));
+    final response = await http.get(
+      client,
+      Uri.https('github.com', '/test'),
+      offset: 5,
+    );
+    await response.drain<void>();
+    expect(response.statusCode, 206);
+    expect(ranges, ['bytes=5-', 'bytes=5-', 'bytes=5-']);
+  });
+
   test('404 означает отсутствие релиза, 500 — ошибку проверки', () async {
     final server = await HttpServer.bind(InternetAddress.loopbackIPv4, 0);
     addTearDown(() => server.close(force: true));

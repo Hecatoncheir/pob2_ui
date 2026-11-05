@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 class FrostedSurface extends StatelessWidget {
   const FrostedSurface({super.key, required this.child});
   final Widget child;
-  static const opacity = .92;
+  static const opacity = .85;
 
   static Color contrastBackground(ColorScheme colors) {
     final light =

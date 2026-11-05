@@ -117,9 +117,14 @@ void main() {
     await model.close();
   });
 
-  for (final width in [320.0, 700.0]) {
+  for (final (width, brightness) in [
+    (320.0, Brightness.light),
+    (700.0, Brightness.light),
+    (320.0, Brightness.dark),
+    (700.0, Brightness.dark),
+  ]) {
     testWidgets(
-      'Панель узлов: список, фокус и отмена своего расстояния, $width',
+      'Панель узлов: список, фокус и отмена своего расстояния, $width, $brightness',
       (tester) async {
         final model = NodePowerCubit(PowerEngine(), (_) async => {});
         await model.load();
@@ -127,7 +132,7 @@ void main() {
         int? focused;
         await tester.pumpWidget(
           MaterialApp(
-            theme: Spark.theme(),
+            theme: Spark.theme(brightness: brightness),
             home: Scaffold(
               body: Center(
                 child: SizedBox(
@@ -145,6 +150,18 @@ void main() {
         await tester.pumpAndSettle();
         await tester.tap(find.byKey(const ValueKey('power-node-1')));
         expect(focused, 1);
+        await tester.tap(find.byKey(const Key('node-power-stat')));
+        await tester.pumpAndSettle();
+        final menuText = find.text('Здоровье').last;
+        final foreground = DefaultTextStyle.of(tester.element(menuText))
+            .style
+            .color;
+        expect(
+          foreground,
+          Spark.theme(brightness: brightness).colorScheme.onSurface,
+        );
+        await tester.tap(menuText);
+        await tester.pumpAndSettle();
         await tester.tap(find.byKey(const Key('node-power-distance')));
         await tester.pumpAndSettle();
         await tester.tap(find.text('Свои…').last);

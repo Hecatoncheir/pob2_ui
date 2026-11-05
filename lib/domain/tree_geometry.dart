@@ -11,6 +11,7 @@ class TreeNode {
     required this.name,
     required this.kind,
     required this.allocated,
+    this.isAttribute,
     this.icon,
     this.drawSize = 37,
   });
@@ -31,6 +32,7 @@ class TreeNode {
         name: name,
         kind: kind,
         allocated: allocated,
+        isAttribute: json['isAttribute'] as bool?,
         icon: json['icon'] as String?,
         drawSize: (json['drawSize'] as num?)?.toDouble() ?? 37,
       ),
@@ -40,6 +42,7 @@ class TreeNode {
   final double x, y;
   final String name, kind;
   final bool allocated;
+  final bool? isAttribute;
   final String? icon;
   final double drawSize;
   bool matches(String query) =>

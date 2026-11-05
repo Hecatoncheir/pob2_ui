@@ -15,6 +15,29 @@ NodePreview preview(int id) => NodePreview(
 );
 
 void main() {
+  test('Пустые блоки не оставляют повторные или крайние разделители', () {
+    final value = NodePreview(
+      tooltip: {
+        'lines': [
+          {'separator': true},
+          {'text': ''},
+          {'text': 'Первый блок'},
+          {'separator': true},
+          {'text': '   '},
+          {'separator': true},
+          {'text': 'Tip: Hold Ctrl'},
+          {'separator': true},
+          {'text': 'Второй блок'},
+          {'separator': true},
+        ],
+      },
+    );
+    expect(value.lines, [
+      {'text': 'Первый блок'},
+      {'separator': true},
+      {'text': 'Второй блок'},
+    ]);
+  });
   test('Запоздавший ответ не подменяет подсказку нового узла', () async {
     final first = Completer<NodePreview>(), second = Completer<NodePreview>();
     final cubit = TreeHoverCubit(

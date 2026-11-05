@@ -27,6 +27,7 @@ String nodePowerLabel(JsonMap metric) {
   final label = statLabel(id);
   if (label != id) return label;
   return switch (id) {
+    'OffenceDefence' => 'Урон / защита',
     'CombinedDPS' => 'Суммарный DPS',
     'TotalAttr' => 'Все характеристики',
     'TotalEHP' => 'Эффективное здоровье',

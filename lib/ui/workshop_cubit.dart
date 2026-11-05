@@ -360,12 +360,26 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     _update(state.copyWith(library: builds));
   });
 
+  Future<bool> isAttributeNode(int id) async {
+    final catalog = await engine.call('pob_catalog', {
+      'kind': 'nodes',
+      'query': '$id',
+      'limit': 200,
+    });
+    final node = jsonRows(catalog['entries'])
+        .where((entry) => entry['id'] == id)
+        .firstOrNull;
+    if (node == null)
+      throw const FormatException('Lua не вернул сведения об узле');
+    return jsonRows(node['attributeOptions']).isNotEmpty;
+  }
+
   Future<void> treeAction(int id, bool allocated, {int? attribute}) =>
       _run(() async {
         _markStale();
         await engine.call('pob_tree_action', {
           'id': id,
-          'action': allocated ? 'refund' : 'allocate',
+          'action': allocated && attribute == null ? 'refund' : 'allocate',
           if (attribute != null) 'attribute': attribute,
         });
         await _readReport();

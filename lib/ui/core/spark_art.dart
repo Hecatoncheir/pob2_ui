@@ -67,12 +67,21 @@ class ArtIconButton extends StatelessWidget {
     super.key,
     required this.label,
     this.onPressed,
+    this.selected = false,
   });
   final String icon;
   final String label;
   final VoidCallback? onPressed;
+  final bool selected;
   @override
   Widget build(BuildContext context) => IconButton(
+    isSelected: selected,
+    style: IconButton.styleFrom(
+      backgroundColor: selected ? Spark.of(context).sage : null,
+      side: selected
+          ? BorderSide(color: Theme.of(context).colorScheme.primary)
+          : null,
+    ),
     tooltip: label,
     onPressed: onPressed,
     icon: SparkArt(
@@ -80,6 +89,8 @@ class ArtIconButton extends StatelessWidget {
       width: 19,
       color: onPressed == null
           ? Spark.of(context).muted
+          : selected
+          ? Theme.of(context).colorScheme.primary
           : Spark.of(context).ink,
     ),
   );

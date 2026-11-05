@@ -207,9 +207,7 @@ Future<void> _selectAttribute(WidgetTester tester, WorkshopCubit model) async {
   expect(tester.widget<EditableText>(input).controller.text, '$target');
   await tester.testTextInput.receiveAction(TextInputAction.done);
   await tester.pumpAndSettle();
-  await tester.longPressAt(
-    tester.getCenter(find.byKey(const Key('passive-tree'))),
-  );
+  await tester.tapAt(tester.getCenter(find.byKey(const Key('passive-tree'))));
   for (
     var attempt = 0;
     attempt < 100 && find.byKey(const Key('attribute-2')).evaluate().isEmpty;
@@ -232,8 +230,41 @@ Future<void> _selectAttribute(WidgetTester tester, WorkshopCubit model) async {
   expect(allocated.allocated, isTrue);
   expect(allocated.name, 'Dexterity');
   expect(model.state.report!.stats['Dex'], greaterThan(before as num));
-  await model.treeAction(target, true);
   await tester.pumpAndSettle();
+  final nodes = model.state.report!.raw['allocatedNodes'];
+  final points = model.state.report!.points;
+  await tester.tapAt(tester.getCenter(find.byKey(const Key('passive-tree'))));
+  await _waitForAttributePicker(tester);
+  await tester.tap(find.byKey(const Key('attribute-3')));
+  await tester.tap(find.text('Применить'));
+  await _waitForIdle(tester, model);
+  await tester.pumpAndSettle();
+  final changed = model.state.document!.tree!.nodes.firstWhere(
+    (node) => node.id == target,
+  );
+  expect(changed.allocated, isTrue);
+  expect(changed.name, 'Intelligence');
+  expect(model.state.report!.raw['allocatedNodes'], nodes);
+  expect(model.state.report!.points, points);
+  await tester.tapAt(tester.getCenter(find.byKey(const Key('passive-tree'))));
+  await _waitForAttributePicker(tester);
+  await tester.tap(find.text('Вернуть очко'));
+  await _waitForIdle(tester, model);
+  await tester.pumpAndSettle();
+  expect(
+    model.state.document!.tree!.nodes
+        .firstWhere((node) => node.id == target)
+        .allocated,
+    isFalse,
+  );
+}
+
+Future<void> _waitForAttributePicker(WidgetTester tester) async {
+  for (var attempt = 0; attempt < 100; attempt++) {
+    await tester.pump(const Duration(milliseconds: 100));
+    if (find.byKey(const Key('attribute-3')).evaluate().isNotEmpty) return;
+  }
+  fail('Не открылся выбор атрибута');
 }
 
 Future<void> _addRealSkill(WorkshopCubit model) async {
