@@ -11,13 +11,13 @@ class SparkArt extends StatelessWidget {
     super.key,
     this.width = 24,
     this.height,
-    this.color = Spark.ink,
+    this.color,
     this.label,
   });
   final String name;
   final double width;
   final double? height;
-  final Color color;
+  final Color? color;
   final String? label;
   @override
   Widget build(BuildContext context) => Semantics(
@@ -26,15 +26,21 @@ class SparkArt extends StatelessWidget {
     child: SizedBox(
       width: width,
       height: height ?? width,
-      child: CustomPaint(painter: _VectorPainter(name, color)),
+      child: CustomPaint(
+        painter: _VectorPainter(
+          name,
+          color ?? Spark.of(context).ink,
+          Spark.of(context).paper,
+        ),
+      ),
     ),
   );
 }
 
 class _VectorPainter extends CustomPainter {
-  const _VectorPainter(this.name, this.color);
+  const _VectorPainter(this.name, this.color, this.background);
   final String name;
-  final Color color;
+  final Color color, background;
   @override
   void paint(Canvas canvas, Size size) {
     final drawing = vectorDrawings[name]!;
@@ -47,12 +53,12 @@ class _VectorPainter extends CustomPainter {
       (size.height - drawing.size.height * scale) / 2,
     );
     canvas.scale(scale);
-    drawing.draw(canvas, color);
+    drawing.draw(canvas, color, background);
   }
 
   @override
   bool shouldRepaint(_VectorPainter old) =>
-      old.name != name || old.color != color;
+      old.name != name || old.color != color || old.background != background;
 }
 
 class ArtIconButton extends StatelessWidget {
@@ -72,7 +78,9 @@ class ArtIconButton extends StatelessWidget {
     icon: SparkArt(
       'icons/$icon',
       width: 19,
-      color: onPressed == null ? Spark.muted : Spark.ink,
+      color: onPressed == null
+          ? Spark.of(context).muted
+          : Spark.of(context).ink,
     ),
   );
 }

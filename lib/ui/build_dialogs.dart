@@ -182,7 +182,11 @@ Future<void> exportXml(BuildContext context, WorkshopCubit model) async {
         ),
         FilledButton.icon(
           onPressed: () => Clipboard.setData(ClipboardData(text: xml)),
-          icon: const SparkArt('icons/copy', color: Spark.paper, width: 17),
+          icon: SparkArt(
+            'icons/copy',
+            color: Spark.of(context).paper,
+            width: 17,
+          ),
           label: const Text('Скопировать XML'),
         ),
       ],

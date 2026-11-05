@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'dart:io';
+import 'dart:typed_data';
 
 import '../data/component_repository.dart';
 import '../data/mcp_client.dart';
@@ -47,14 +48,20 @@ class WorkshopCubit extends Cubit<WorkshopState> {
       'compare': true,
     });
     final scene = OriginalTreeScene.fromJson(jsonMap(result['scene']));
-    final base = state.document!.tree!.withScene(scene);
-    final images = await treeIcons.overlay(base, engine, _componentSource);
+    final images = await loadTreeSceneImages(scene);
     return NodePreview(
       tooltip: jsonMap(result['tooltip']),
       scene: scene,
       images: images,
     );
   }
+
+  Future<Map<String, Uint8List>> loadTreeSceneImages(OriginalTreeScene scene) =>
+      treeIcons.overlay(
+        state.document!.tree!.withScene(scene),
+        engine,
+        _componentSource,
+      );
 
   bool get canRollback =>
       components.store.previous.length == Component.values.length;

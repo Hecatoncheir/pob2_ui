@@ -1,6 +1,8 @@
 import 'dart:typed_data';
 import 'dart:ui' as ui;
 
+import 'package:flutter/foundation.dart' show listEquals;
+
 import '../domain/original_tree_scene.dart';
 
 class OriginalTreeArtwork {
@@ -9,12 +11,29 @@ class OriginalTreeArtwork {
     final canvas = ui.Canvas(recorder);
     for (final command in scene.commands) {
       final image = images[command.texture];
-      if (image != null) _draw(canvas, command, image);
+      if (image == null || _isBackdrop(scene, command)) continue;
+      _draw(canvas, command, image);
     }
     picture = recorder.endRecording();
   }
   late final ui.Picture picture;
   final _shaders = <(ui.Image, bool), ui.ImageShader>{};
+
+  bool _isBackdrop(OriginalTreeScene scene, TreeDrawCommand command) {
+    // main:DrawBackground рисует первым прямоугольник фона всего окна.
+    // Фон окна задаёт Flutter; игровые изображения остаются в сцене.
+    if (!identical(command, scene.commands.first)) return false;
+    return listEquals(command.positions, [
+      0.0,
+      0.0,
+      scene.width,
+      0.0,
+      scene.width,
+      scene.height,
+      0.0,
+      scene.height,
+    ]);
+  }
 
   void _draw(ui.Canvas canvas, TreeDrawCommand command, ui.Image image) {
     final shader = _shaders.putIfAbsent((image, command.clamp), () {

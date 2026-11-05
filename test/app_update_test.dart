@@ -14,6 +14,8 @@ import 'package:pob2_ui/domain/app_release.dart';
 import 'package:pob2_ui/ui/app_update_cubit.dart';
 import 'package:pob2_ui/ui/app_update_state.dart';
 
+import 'support/temporary_directory.dart';
+
 const digestAbc =
     'ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad';
 
@@ -50,7 +52,7 @@ void main() {
     temporary = await Directory.systemTemp.createTemp('pob2-update-test-');
   });
   tearDown(() async {
-    await temporary.delete(recursive: true);
+    await removeTemporaryDirectory(temporary);
   });
 
   test('Версии сравниваются числами; нестабильные теги отклоняются', () {

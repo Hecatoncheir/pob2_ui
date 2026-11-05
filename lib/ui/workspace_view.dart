@@ -138,21 +138,21 @@ class _WorkspaceHeading extends StatelessWidget {
             Expanded(
               child: Text(
                 '${report.characterClass} · уровень ${report.level}',
-                style: const TextStyle(color: Spark.muted, fontSize: 11),
+                style: TextStyle(color: Spark.of(context).muted, fontSize: 11),
               ),
             ),
             if (report.warnings.isNotEmpty)
               TextButton.icon(
                 onPressed: () => showWarnings(context, report),
                 style: TextButton.styleFrom(
-                  foregroundColor: Spark.danger,
+                  foregroundColor: Spark.of(context).danger,
                   minimumSize: const Size(0, 28),
                   padding: const EdgeInsets.symmetric(horizontal: 8),
                 ),
-                icon: const SparkArt(
+                icon: SparkArt(
                   'icons/info',
                   width: 14,
-                  color: Spark.danger,
+                  color: Spark.of(context).danger,
                 ),
                 label: Text(
                   'Предупреждения: ${report.warnings.length}',
@@ -179,8 +179,8 @@ class _Tabs extends StatelessWidget {
   Widget build(BuildContext context) => BlocBuilder<ShellCubit, ShellState>(
     bloc: shell,
     builder: (context, state) => Container(
-      decoration: const BoxDecoration(
-        border: Border(bottom: BorderSide(color: Spark.line)),
+      decoration: BoxDecoration(
+        border: Border(bottom: BorderSide(color: Spark.of(context).line)),
       ),
       child: Row(
         children: [
@@ -236,7 +236,7 @@ class _TabButton extends StatelessWidget {
           border: Border(
             bottom: BorderSide(
               width: 2,
-              color: selected ? Spark.ink : Colors.transparent,
+              color: selected ? Spark.of(context).ink : Colors.transparent,
             ),
           ),
         ),
@@ -245,7 +245,7 @@ class _TabButton extends StatelessWidget {
             SparkArt(
               'icons/${tabIcons[tab]}',
               width: 17,
-              color: selected ? Spark.ink : Spark.muted,
+              color: selected ? Spark.of(context).ink : Spark.of(context).muted,
             ),
             const SizedBox(width: 7),
             Text(
@@ -253,7 +253,9 @@ class _TabButton extends StatelessWidget {
               style: TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.w700,
-                color: selected ? Spark.ink : Spark.muted,
+                color: selected
+                    ? Spark.of(context).ink
+                    : Spark.of(context).muted,
               ),
             ),
           ],

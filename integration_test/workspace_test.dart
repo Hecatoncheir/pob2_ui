@@ -8,12 +8,16 @@ import 'package:integration_test/integration_test.dart';
 import 'package:pob2_ui/data/component_repository.dart';
 import 'package:pob2_ui/data/installation_store.dart';
 import 'package:pob2_ui/data/mcp_client.dart';
+import 'package:pob2_ui/data/appearance_repository.dart';
+import 'package:pob2_ui/domain/appearance.dart';
 import 'package:pob2_ui/domain/build_report.dart';
 import 'package:pob2_ui/ui/app.dart';
 import 'package:pob2_ui/ui/tree_canvas.dart';
 import 'package:pob2_ui/ui/tree_view.dart';
 import 'package:pob2_ui/ui/tree_hover_card.dart';
 import 'package:pob2_ui/ui/workshop_cubit.dart';
+import 'package:pob2_ui/ui/node_power_panel.dart';
+import 'package:pob2_ui/ui/app_update_cubit.dart';
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
@@ -31,6 +35,8 @@ void main() {
       McpClient(),
     );
     addTearDown(model.close);
+    final updates = AppUpdateCubit(root: root);
+    addTearDown(updates.close);
     await model.initialize();
     expect(model.state.error, isNull);
     expect(model.engine.connected, isTrue);
@@ -51,7 +57,7 @@ void main() {
     await tester.pumpWidget(
       RepaintBoundary(
         key: const Key('review-image'),
-        child: PobApp(model: model),
+        child: PobApp(model: model, updates: updates),
       ),
     );
     await tester.pumpAndSettle();
@@ -61,6 +67,10 @@ void main() {
     await _capture(tester);
     expect(find.byType(TreeView), findsOneWidget);
     await _searchAndAllocate(tester, model);
+    await tester.pumpAndSettle();
+    await _selectAttribute(tester, model);
+    await _switchTheme(tester);
+    await _searchNodePower(tester, model);
     expect(model.state.error, isNull);
     expect(model.state.report!.stats['Life'], greaterThan(0));
     final xml = await model.exportXml();
@@ -86,7 +96,7 @@ void main() {
   }, timeout: const Timeout(Duration(minutes: 4)));
 }
 
-Future<void> _capture(WidgetTester tester) async {
+Future<void> _capture(WidgetTester tester, {String suffix = ''}) async {
   final path = Platform.environment['POB2_UI_SCREENSHOT'];
   if (path == null) return;
   final boundary = tester.renderObject<RenderRepaintBoundary>(
@@ -94,10 +104,136 @@ Future<void> _capture(WidgetTester tester) async {
   );
   final image = await boundary.toImage();
   final data = await image.toByteData(format: ui.ImageByteFormat.png);
-  final output = File(path);
+  final output = File(path.replaceFirst('.png', '$suffix.png'));
   await output.parent.create(recursive: true);
   await output.writeAsBytes(data!.buffer.asUint8List());
   image.dispose();
+}
+
+Future<void> _switchTheme(WidgetTester tester) async {
+  await tester.tap(find.byKey(const Key('appearance-settings')));
+  await tester.pumpAndSettle();
+  await tester.tap(find.text('Тёмная'));
+  await tester.pumpAndSettle();
+  await tester.tap(find.text('Готово'));
+  await tester.pumpAndSettle();
+  expect(
+    Theme.of(tester.element(find.byType(Scaffold))).brightness,
+    Brightness.dark,
+  );
+  await _capture(tester, suffix: '-dark');
+  final mouse = await tester.createGesture(kind: ui.PointerDeviceKind.mouse);
+  await mouse.addPointer(location: Offset.zero);
+  await mouse.moveTo(tester.getCenter(find.byKey(const Key('passive-tree'))));
+  await _waitForHover(tester);
+  await _capture(tester, suffix: '-dark-hover');
+  await mouse.moveTo(const Offset(4, 4));
+  await mouse.removePointer();
+  await tester.pumpAndSettle();
+  final saved = await AppearanceRepository(InstallationStore.defaultRoot())
+      .load();
+  expect(saved, AppTheme.dark);
+}
+
+Future<void> _searchNodePower(WidgetTester tester, WorkshopCubit model) async {
+  expect(model.engine.tools, contains('pob_node_power'));
+  await tester.tap(find.byTooltip('Найти узлы по характеристике'));
+  final panel = find.byType(NodePowerPanel);
+  for (var attempt = 0; attempt < 100; attempt++) {
+    await tester.pump(const Duration(milliseconds: 100));
+    if (tester.widget<NodePowerPanel>(panel).model.state.metrics.isNotEmpty)
+      break;
+  }
+  final power = tester.widget<NodePowerPanel>(panel).model;
+  expect(power.state.error, isNull);
+  final xml = await model.exportXml();
+  await tester.pumpAndSettle();
+  await tester.tap(find.byKey(const Key('node-power-calculate')));
+  for (
+    var attempt = 0;
+    attempt < 1800 && power.state.report == null;
+    attempt++
+  ) {
+    await tester.pump(const Duration(milliseconds: 100));
+    if (power.state.error != null) fail(power.state.error!);
+  }
+  expect(power.state.report!.entries, isNotEmpty);
+  await tester.pumpAndSettle();
+  final target = power.state.report!.entries.first['id'] as int;
+  final viewer = tester.widget<InteractiveViewer>(
+    find.byKey(const Key('passive-tree')),
+  );
+  final before = viewer.transformationController!.value.clone();
+  await tester.tap(find.byKey(ValueKey('power-node-$target')));
+  await tester.pumpAndSettle();
+  expect(viewer.transformationController!.value, isNot(before));
+  expect(await model.exportXml(), xml);
+  await tester.pumpAndSettle();
+  await _capture(tester, suffix: '-power');
+  expect(tester.takeException(), isNull);
+  await model.treeAction(target, false);
+  await tester.pumpAndSettle();
+  expect(power.state.report, isNull);
+  await model.treeAction(target, true);
+  await tester.pumpAndSettle();
+  await tester.tap(find.byTooltip('Найти узлы по характеристике'));
+  await tester.pumpAndSettle();
+}
+
+Future<void> _selectAttribute(WidgetTester tester, WorkshopCubit model) async {
+  final catalog = await model.engine.call('pob_catalog', {
+    'kind': 'nodes',
+    'query': 'Attribute',
+    'limit': 200,
+  });
+  final candidates = jsonRows(catalog['entries'])
+      .where(
+        (node) =>
+            node['allocated'] != true &&
+            jsonRows(node['attributeOptions']).isNotEmpty,
+      )
+      .toList();
+  candidates.sort((a, b) => (a['points'] as num).compareTo(b['points'] as num));
+  final target = candidates.first['id'] as int;
+  final before = model.state.report!.stats['Dex'];
+  await tester.tap(find.byKey(const Key('tree-search')));
+  await tester.pump();
+  await tester.enterText(find.byKey(const Key('tree-search')), '$target');
+  await tester.pump();
+  final input = find.descendant(
+    of: find.byKey(const Key('tree-search')),
+    matching: find.byType(EditableText),
+  );
+  expect(tester.widget<EditableText>(input).controller.text, '$target');
+  await tester.testTextInput.receiveAction(TextInputAction.done);
+  await tester.pumpAndSettle();
+  await tester.longPressAt(
+    tester.getCenter(find.byKey(const Key('passive-tree'))),
+  );
+  for (
+    var attempt = 0;
+    attempt < 100 && find.byKey(const Key('attribute-2')).evaluate().isEmpty;
+    attempt++
+  ) {
+    await tester.pump(const Duration(milliseconds: 100));
+  }
+  if (find.byKey(const Key('attribute-2')).evaluate().isEmpty) {
+    await _capture(tester, suffix: '-attribute-error');
+  }
+  await tester.tap(find.byKey(const Key('attribute-2')));
+  await tester.pumpAndSettle();
+  expect(tester.takeException(), isNull);
+  await _capture(tester, suffix: '-attributes');
+  await tester.tap(find.text('Выбрать путь'));
+  await _waitForIdle(tester, model);
+  final allocated = model.state.document!.tree!.nodes.firstWhere(
+    (node) => node.id == target,
+  );
+  expect(allocated.allocated, isTrue);
+  expect(allocated.name, 'Dexterity');
+  expect(model.state.report!.stats['Dex'], greaterThan(before as num));
+  await model.treeAction(target, true);
+  await tester.pumpAndSettle();
 }
 
 Future<void> _addRealSkill(WorkshopCubit model) async {

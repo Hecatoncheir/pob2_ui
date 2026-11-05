@@ -99,7 +99,10 @@ class _BuildCard extends StatelessWidget {
             const Spacer(),
             Text(
               'ур. ${entry.level}',
-              style: Spark.mono.copyWith(fontSize: 11, color: Spark.muted),
+              style: Spark.mono.copyWith(
+                fontSize: 11,
+                color: Spark.of(context).muted,
+              ),
             ),
           ],
         ),
@@ -111,14 +114,17 @@ class _BuildCard extends StatelessWidget {
           style: Theme.of(context).textTheme.titleLarge,
         ),
         const SizedBox(height: 5),
-        Text(entry.characterClass, style: const TextStyle(color: Spark.muted)),
+        Text(
+          entry.characterClass,
+          style: TextStyle(color: Spark.of(context).muted),
+        ),
         const Spacer(),
         Row(
           children: [
             Expanded(
               child: Text(
                 '${entry.updated.day.toString().padLeft(2, '0')}.${entry.updated.month.toString().padLeft(2, '0')}.${entry.updated.year}',
-                style: const TextStyle(color: Spark.muted, fontSize: 10),
+                style: TextStyle(color: Spark.of(context).muted, fontSize: 10),
               ),
             ),
             TextButton(

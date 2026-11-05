@@ -3,6 +3,10 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../domain/app_info.dart';
+import '../domain/appearance.dart';
+import '../data/appearance_repository.dart';
+import 'appearance_cubit.dart';
+import 'appearance_picker.dart';
 import 'app_update_cubit.dart';
 import 'app_update_dialog.dart';
 import 'app_update_state.dart';
@@ -19,12 +23,23 @@ import 'workshop_state.dart';
 import 'workspace_view.dart';
 
 class PobApp extends StatelessWidget {
-  const PobApp({super.key, required this.model, this.updates});
+  const PobApp({super.key, required this.model, this.updates, this.appearance});
   final WorkshopCubit model;
   final AppUpdateCubit? updates;
+  final AppearanceCubit? appearance;
   @override
-  Widget build(BuildContext context) => BlocProvider(
-    create: (_) => ShellCubit(),
+  Widget build(BuildContext context) => MultiBlocProvider(
+    providers: [
+      BlocProvider(create: (_) => ShellCubit()),
+      if (appearance case final settings?)
+        BlocProvider<AppearanceCubit>.value(value: settings)
+      else
+        BlocProvider(
+          create: (_) => AppearanceCubit(
+            AppearanceRepository(model.components.store.root),
+          ),
+        ),
+    ],
     child: _MaterialApp(model, updates),
   );
 }
@@ -34,24 +49,34 @@ class _MaterialApp extends StatelessWidget {
   final WorkshopCubit model;
   final AppUpdateCubit? updates;
   @override
-  Widget build(BuildContext context) => BlocBuilder<ShellCubit, ShellState>(
-    builder: (context, state) => MaterialApp(
-      title: 'PoB II · Мастерская',
-      debugShowCheckedModeBanner: false,
-      theme: Spark.theme(),
-      builder: (context, child) => LayoutBuilder(
-        builder: (context, constraints) => MediaQuery(
-          data: MediaQuery.of(context).copyWith(
-            size: constraints.biggest,
-            disableAnimations:
-                MediaQuery.disableAnimationsOf(context) || !state.motion,
+  Widget build(BuildContext context) =>
+      BlocBuilder<AppearanceCubit, AppearanceState>(
+        builder: (context, appearance) => _app(context, appearance),
+      );
+
+  Widget _app(BuildContext context, AppearanceState appearance) =>
+      BlocBuilder<ShellCubit, ShellState>(
+        builder: (context, state) => MaterialApp(
+          title: 'PoB II · Мастерская',
+          debugShowCheckedModeBanner: false,
+          theme: Spark.theme(),
+          darkTheme: Spark.theme(brightness: Brightness.dark),
+          themeMode: appearance.theme == AppTheme.dark
+              ? ThemeMode.dark
+              : ThemeMode.light,
+          builder: (context, child) => LayoutBuilder(
+            builder: (context, constraints) => MediaQuery(
+              data: MediaQuery.of(context).copyWith(
+                size: constraints.biggest,
+                disableAnimations:
+                    MediaQuery.disableAnimationsOf(context) || !state.motion,
+              ),
+              child: child!,
+            ),
           ),
-          child: child!,
+          home: _Shell(model, updates),
         ),
-      ),
-      home: _Shell(model, updates),
-    ),
-  );
+      );
 }
 
 class _Shell extends StatelessWidget {
@@ -77,16 +102,12 @@ class _Shell extends StatelessWidget {
                       Expanded(
                         child: Column(
                           children: [
-                            _TopBar(
-                              page: state.page,
-                              model: model,
-                              updates: narrow ? updates : null,
-                            ),
+                            if (narrow) _CompactActions(model, updates),
                             if (model.state.busy)
-                              const LinearProgressIndicator(
+                              LinearProgressIndicator(
                                 minHeight: 2,
-                                color: Spark.green,
-                                backgroundColor: Spark.sage,
+                                color: Spark.of(context).green,
+                                backgroundColor: Spark.of(context).sage,
                               ),
                             if (model.state.error != null)
                               _ErrorNotice(model.state.error!),
@@ -181,8 +202,8 @@ class _Sidebar extends StatelessWidget {
     final shell = context.read<ShellCubit>();
     return Container(
       width: compact ? 78 : 198,
-      decoration: const BoxDecoration(
-        border: Border(right: BorderSide(color: Spark.line)),
+      decoration: BoxDecoration(
+        border: Border(right: BorderSide(color: Spark.of(context).line)),
       ),
       padding: EdgeInsets.symmetric(horizontal: compact ? 12 : 18),
       child: Column(
@@ -211,22 +232,50 @@ class _Sidebar extends StatelessWidget {
           ...AppPage.values.map((page) => _NavItem(page, compact: compact)),
           if (!compact) _Recents(model, shell),
           const Spacer(),
-          if (!compact)
-            Padding(
-              padding: const EdgeInsets.only(bottom: 15),
-              child: DotLabel(
-                model.engine.connected ? 'Lua подключён' : 'Lua не подключён',
-                active: model.engine.connected,
-              ),
-            ),
-          _SettingsButton(compact: compact),
-          if (updates != null)
-            _VersionButton(updates!, model, compact: compact),
+          _SidebarTools(model, updates, compact: compact),
           const SizedBox(height: 18),
         ],
       ),
     );
   }
+}
+
+class _SidebarTools extends StatelessWidget {
+  const _SidebarTools(this.model, this.updates, {required this.compact});
+  final WorkshopCubit model;
+  final AppUpdateCubit? updates;
+  final bool compact;
+
+  @override
+  Widget build(BuildContext context) => Container(
+    padding: EdgeInsets.symmetric(horizontal: compact ? 0 : 8, vertical: 8),
+    decoration: BoxDecoration(
+      color: Spark.of(context).surface,
+      borderRadius: BorderRadius.circular(16),
+      border: Border.all(color: Spark.of(context).line),
+    ),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        if (!compact) ...[
+          Padding(
+            padding: const EdgeInsets.fromLTRB(8, 6, 8, 12),
+            child: Center(
+              child: DotLabel(
+                model.engine.connected ? 'Lua подключён' : 'Lua не подключён',
+                active: model.engine.connected,
+              ),
+            ),
+          ),
+          const Divider(),
+          const SizedBox(height: 4),
+        ],
+        _SettingsButton(compact: compact),
+        if (updates != null) _VersionButton(updates!, model, compact: compact),
+      ],
+    ),
+  );
 }
 
 class _NewButton extends StatelessWidget {
@@ -248,7 +297,7 @@ class _NewButton extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       mainAxisSize: MainAxisSize.min,
       children: [
-        const SparkArt('icons/plus', color: Spark.paper, width: 18),
+        SparkArt('icons/plus', color: Spark.of(context).paper, width: 18),
         if (!compact) ...[
           const SizedBox(width: 8),
           const Flexible(
@@ -272,7 +321,8 @@ class _NavItem extends StatelessWidget {
   Widget build(BuildContext context) => BlocBuilder<ShellCubit, ShellState>(
     builder: (context, state) {
       final selected = state.page == page;
-      final color = selected ? Spark.paper : Spark.ink;
+      final scheme = Theme.of(context).colorScheme;
+      final color = selected ? scheme.onPrimary : scheme.onSurface;
       return Padding(
         padding: const EdgeInsets.only(bottom: 6),
         child: Tooltip(
@@ -280,7 +330,7 @@ class _NavItem extends StatelessWidget {
           child: AnimatedContainer(
             duration: motionDuration(context, milliseconds: 180),
             decoration: BoxDecoration(
-              color: selected ? Spark.ink : Colors.transparent,
+              color: selected ? scheme.primary : Colors.transparent,
               borderRadius: BorderRadius.circular(11),
             ),
             child: InkWell(
@@ -336,9 +386,13 @@ class _Recents extends StatelessWidget {
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
+        Text(
           'НЕДАВНИЕ',
-          style: TextStyle(color: Spark.muted, fontSize: 9, letterSpacing: 1.3),
+          style: TextStyle(
+            color: Spark.of(context).muted,
+            fontSize: 9,
+            letterSpacing: 1.3,
+          ),
         ),
         const SizedBox(height: 10),
         ...model.state.library.entries
@@ -375,8 +429,8 @@ class _BottomNav extends StatelessWidget {
   @override
   Widget build(BuildContext context) => NavigationBar(
     height: 68,
-    backgroundColor: Spark.surface,
-    indicatorColor: Spark.sage,
+    backgroundColor: Spark.of(context).surface,
+    indicatorColor: Spark.of(context).sage,
     selectedIndex: page.index,
     onDestinationSelected: (index) => shell.page(AppPage.values[index]),
     destinations: AppPage.values
@@ -391,29 +445,18 @@ class _BottomNav extends StatelessWidget {
   );
 }
 
-class _TopBar extends StatelessWidget {
-  const _TopBar({required this.page, required this.model, this.updates});
-  final AppPage page;
+class _CompactActions extends StatelessWidget {
+  const _CompactActions(this.model, this.updates);
   final WorkshopCubit model;
   final AppUpdateCubit? updates;
   @override
-  Widget build(BuildContext context) => Container(
-    height: 54,
-    padding: const EdgeInsets.symmetric(horizontal: 24),
-    decoration: const BoxDecoration(
-      border: Border(bottom: BorderSide(color: Spark.line)),
-    ),
+  Widget build(BuildContext context) => SizedBox(
+    height: 44,
     child: Row(
       children: [
-        Text(
-          pageLabels[page]!,
-          style: const TextStyle(color: Spark.muted, fontSize: 12),
-        ),
         const Spacer(),
-        if (updates != null)
-          _VersionButton(updates!, model, compact: true)
-        else if (MediaQuery.sizeOf(context).width >= 650)
-          const DotLabel('Локальное пространство'),
+        const _SettingsButton(compact: true),
+        if (updates != null) _VersionButton(updates!, model, compact: true),
       ],
     ),
   );
@@ -430,14 +473,21 @@ class _VersionButton extends StatelessWidget {
         bloc: updates,
         builder: (context, state) => TextButton(
           onPressed: () => showAppUpdates(context, updates, model),
+          style: TextButton.styleFrom(
+            padding: const EdgeInsets.symmetric(horizontal: 8),
+          ),
           child: compact
               ? SparkArt(
                   'icons/${state.available ? 'download' : 'info'}',
                   width: 18,
+                  label: 'Обновления приложения',
                 )
               : Text(
                   state.available ? 'Есть обновление' : 'PoB II · v$appVersion',
-                  style: const TextStyle(fontSize: 10, color: Spark.muted),
+                  style: TextStyle(
+                    fontSize: 10,
+                    color: Spark.of(context).muted,
+                  ),
                 ),
         ),
       );
@@ -450,8 +500,8 @@ class _StatusBar extends StatelessWidget {
   Widget build(BuildContext context) => Container(
     height: 30,
     padding: const EdgeInsets.symmetric(horizontal: 24),
-    decoration: const BoxDecoration(
-      border: Border(top: BorderSide(color: Spark.line)),
+    decoration: BoxDecoration(
+      border: Border(top: BorderSide(color: Spark.of(context).line)),
     ),
     child: Row(
       children: [
@@ -460,16 +510,16 @@ class _StatusBar extends StatelessWidget {
             model.state.busy ? 'Выполняем операцию…' : model.state.status,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
-            style: const TextStyle(color: Spark.muted, fontSize: 10),
+            style: TextStyle(color: Spark.of(context).muted, fontSize: 10),
           ),
         ),
         if (MediaQuery.sizeOf(context).width > 700)
-          const Text(
+          Text(
             'ЧИСЛА И ПРАВИЛА · LUA POB',
             style: TextStyle(
               fontFamily: 'JetBrains Mono',
               fontSize: 8,
-              color: Spark.muted,
+              color: Spark.of(context).muted,
             ),
           ),
       ],
@@ -483,7 +533,7 @@ class _ErrorNotice extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Container(
     width: double.infinity,
-    color: const Color(0xFFF2DFD5),
+    color: Theme.of(context).colorScheme.errorContainer,
     padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 10),
     child: Semantics(
       liveRegion: true,
@@ -491,7 +541,7 @@ class _ErrorNotice extends StatelessWidget {
         error,
         maxLines: 3,
         overflow: TextOverflow.ellipsis,
-        style: const TextStyle(color: Spark.danger, fontSize: 12),
+        style: TextStyle(color: Spark.of(context).danger, fontSize: 12),
       ),
     ),
   );
@@ -502,14 +552,29 @@ class _SettingsButton extends StatelessWidget {
   final bool compact;
   @override
   Widget build(BuildContext context) => TextButton(
+    key: const Key('appearance-settings'),
+    style: TextButton.styleFrom(
+      padding: EdgeInsets.symmetric(horizontal: compact ? 0 : 8),
+    ),
     onPressed: () => _show(context),
     child: Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        const SparkArt('icons/settings', width: 18),
+        SparkArt(
+          'icons/settings',
+          width: 18,
+          label: compact ? 'Оформление' : null,
+        ),
         if (!compact) ...[
           const SizedBox(width: 8),
-          const Text('Оформление', style: TextStyle(fontSize: 11)),
+          const Flexible(
+            child: Text(
+              'Оформление',
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(fontSize: 11),
+            ),
+          ),
         ],
       ],
     ),
@@ -524,14 +589,21 @@ class _SettingsButton extends StatelessWidget {
           width: 380,
           child: BlocBuilder<ShellCubit, ShellState>(
             bloc: shell,
-            builder: (context, state) => SwitchListTile(
-              contentPadding: EdgeInsets.zero,
-              title: const Text('Плавные анимации'),
-              subtitle: const Text(
-                'Системное уменьшение движения имеет приоритет',
-              ),
-              value: state.motion,
-              onChanged: shell.motion,
+            builder: (context, state) => Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const AppearancePicker(),
+                const SizedBox(height: 20),
+                SwitchListTile(
+                  contentPadding: EdgeInsets.zero,
+                  title: const Text('Плавные анимации'),
+                  subtitle: const Text(
+                    'Системное уменьшение движения имеет приоритет',
+                  ),
+                  value: state.motion,
+                  onChanged: shell.motion,
+                ),
+              ],
             ),
           ),
         ),

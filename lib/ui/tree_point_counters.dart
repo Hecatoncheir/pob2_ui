@@ -1,0 +1,49 @@
+import 'package:flutter/material.dart';
+
+import 'core/spark_theme.dart';
+
+class TreePointCounters extends StatelessWidget {
+  const TreePointCounters(this.display, {super.key});
+  final String display;
+
+  @override
+  Widget build(BuildContext context) {
+    // Значения и лимиты уже посчитаны Lua; разбираем только строку для показа.
+    final pairs = RegExp(r'(\d+)\s*/\s*(\d+)').allMatches(display).toList();
+    if (pairs.length != 4) return Text('Очки: $display');
+    return Wrap(
+      spacing: 18,
+      runSpacing: 8,
+      children: [
+        for (final (index, label) in const [
+          'Пассивные',
+          'Оружие I',
+          'Оружие II',
+          'Восхождение',
+        ].indexed)
+          Tooltip(
+            message:
+                '$label: потрачено ${pairs[index][1]} из ${pairs[index][2]} очков',
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  label,
+                  style: TextStyle(
+                    fontSize: 10,
+                    color: Spark.of(context).muted,
+                  ),
+                ),
+                const SizedBox(height: 2),
+                Text(
+                  '${pairs[index][1]} / ${pairs[index][2]}',
+                  style: Spark.mono.copyWith(fontSize: 11),
+                ),
+              ],
+            ),
+          ),
+      ],
+    );
+  }
+}

@@ -3,12 +3,15 @@ import 'build_report.dart';
 class OriginalTreeScene {
   OriginalTreeScene.fromJson(JsonMap json)
     : scale = (json['scale'] as num).toDouble(),
+      width = (json['width'] as num?)?.toDouble(),
+      height = (json['height'] as num?)?.toDouble(),
       offsetX = (json['offsetX'] as num).toDouble(),
       offsetY = (json['offsetY'] as num).toDouble(),
       commands = List.unmodifiable(
         jsonRows(json['commands']).map(TreeDrawCommand.fromJson),
       );
   final double scale, offsetX, offsetY;
+  final double? width, height;
   final List<TreeDrawCommand> commands;
 }
 

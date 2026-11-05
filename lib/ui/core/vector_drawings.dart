@@ -1,7 +1,7 @@
 // Сгенерировано tool/generate_vectors.py из SVG; правьте исходные SVG.
 import 'dart:ui';
 
-typedef VectorDrawing = ({Size size, void Function(Canvas, Color) draw});
+typedef VectorDrawing = ({Size size, void Function(Canvas, Color, Color) draw});
 final vectorDrawings = <String, VectorDrawing>{
   'brand/app-icon': (size: Size(256, 256), draw: drawVector0),
   'brand/badge': (size: Size(124, 124), draw: drawVector1),
@@ -46,7 +46,7 @@ final vectorDrawings = <String, VectorDrawing>{
   'illustrations/flask': (size: Size(160, 160), draw: drawVector40),
   'illustrations/gem': (size: Size(160, 160), draw: drawVector41),
 };
-void drawVector0(Canvas canvas, Color color) {
+void drawVector0(Canvas canvas, Color color, Color background) {
   canvas.save();
   canvas.save();
   final path0 = Path()
@@ -59,7 +59,7 @@ void drawVector0(Canvas canvas, Color color) {
         bottomRight: Radius.elliptical(66.0, 66.0),
       ),
     );
-  canvas.drawPath(path0, Paint()..color = const Color(0xFF242722));
+  canvas.drawPath(path0, Paint()..color = color);
   canvas.restore();
   canvas.save();
   canvas.translate(48.0, 28.0);
@@ -74,7 +74,7 @@ void drawVector0(Canvas canvas, Color color) {
     ..cubicTo(139.0, 78.0, 145.0, 67.0, 147.0, 56.0)
     ..cubicTo(170.0, 106.0, 160.0, 163.0, 81.0, 186.0)
     ..close();
-  canvas.drawPath(path1, Paint()..color = const Color(0xFFF2EFE5));
+  canvas.drawPath(path1, Paint()..color = background);
   canvas.restore();
   canvas.save();
   canvas.save();
@@ -90,7 +90,7 @@ void drawVector0(Canvas canvas, Color color) {
   canvas.drawPath(
     path2,
     Paint()
-      ..color = const Color(0xFF242722)
+      ..color = color
       ..style = PaintingStyle.stroke
       ..strokeWidth = 7.0
       ..strokeCap = StrokeCap.round
@@ -103,7 +103,7 @@ void drawVector0(Canvas canvas, Color color) {
   canvas.drawPath(
     path3,
     Paint()
-      ..color = const Color(0xFF242722)
+      ..color = color
       ..style = PaintingStyle.stroke
       ..strokeWidth = 7.0
       ..strokeCap = StrokeCap.round
@@ -116,7 +116,7 @@ void drawVector0(Canvas canvas, Color color) {
   canvas.drawPath(
     path4,
     Paint()
-      ..color = const Color(0xFF242722)
+      ..color = color
       ..style = PaintingStyle.stroke
       ..strokeWidth = 7.0
       ..strokeCap = StrokeCap.round
@@ -129,7 +129,7 @@ void drawVector0(Canvas canvas, Color color) {
   canvas.drawPath(
     path5,
     Paint()
-      ..color = const Color(0xFF242722)
+      ..color = color
       ..style = PaintingStyle.stroke
       ..strokeWidth = 7.0
       ..strokeCap = StrokeCap.round
@@ -142,7 +142,7 @@ void drawVector0(Canvas canvas, Color color) {
   canvas.drawPath(
     path6,
     Paint()
-      ..color = const Color(0xFF242722)
+      ..color = color
       ..style = PaintingStyle.stroke
       ..strokeWidth = 7.0
       ..strokeCap = StrokeCap.round
@@ -154,7 +154,7 @@ void drawVector0(Canvas canvas, Color color) {
   canvas.restore();
 }
 
-void drawVector1(Canvas canvas, Color color) {
+void drawVector1(Canvas canvas, Color color, Color background) {
   canvas.save();
   canvas.save();
   canvas.translate(-454.0, -36.0);
@@ -173,7 +173,7 @@ void drawVector1(Canvas canvas, Color color) {
         bottomRight: Radius.elliptical(33.0, 33.0),
       ),
     );
-  canvas.drawPath(path0, Paint()..color = const Color(0xFF242722));
+  canvas.drawPath(path0, Paint()..color = color);
   canvas.restore();
   canvas.save();
   final path1 = Path()
@@ -181,11 +181,11 @@ void drawVector1(Canvas canvas, Color color) {
     ..lineTo(500.0, 122.0)
     ..moveTo(532.0, 74.0)
     ..lineTo(532.0, 122.0);
-  canvas.drawPath(path1, Paint()..color = const Color(0xFF242722));
+  canvas.drawPath(path1, Paint()..color = color);
   canvas.drawPath(
     path1,
     Paint()
-      ..color = const Color(0xFFF2EFE5)
+      ..color = background
       ..style = PaintingStyle.stroke
       ..strokeWidth = 13.0
       ..strokeCap = StrokeCap.round
@@ -197,7 +197,7 @@ void drawVector1(Canvas canvas, Color color) {
   canvas.restore();
 }
 
-void drawVector2(Canvas canvas, Color color) {
+void drawVector2(Canvas canvas, Color color, Color background) {
   canvas.save();
   canvas.save();
   canvas.save();
@@ -215,7 +215,7 @@ void drawVector2(Canvas canvas, Color color) {
   canvas.drawPath(
     path0,
     Paint()
-      ..color = const Color(0xFF242722).withValues(alpha: 0.3)
+      ..color = color.withValues(alpha: 0.3)
       ..style = PaintingStyle.stroke
       ..strokeWidth = 1.2
       ..strokeCap = StrokeCap.round
@@ -237,7 +237,7 @@ void drawVector2(Canvas canvas, Color color) {
   canvas.drawPath(
     path1,
     Paint()
-      ..color = const Color(0xFF242722).withValues(alpha: 0.3)
+      ..color = color.withValues(alpha: 0.3)
       ..style = PaintingStyle.stroke
       ..strokeWidth = 1.2
       ..strokeCap = StrokeCap.round
@@ -250,7 +250,7 @@ void drawVector2(Canvas canvas, Color color) {
   canvas.drawPath(
     path2,
     Paint()
-      ..color = const Color(0xFF242722).withValues(alpha: 0.3)
+      ..color = color.withValues(alpha: 0.3)
       ..style = PaintingStyle.stroke
       ..strokeWidth = 1.2
       ..strokeCap = StrokeCap.round
@@ -267,7 +267,7 @@ void drawVector2(Canvas canvas, Color color) {
     ..cubicTo(241.0, 534.0, 277.0, 509.0, 217.0, 509.0)
     ..cubicTo(164.0, 509.0, 85.0, 485.0, 138.0, 452.0)
     ..close();
-  canvas.drawPath(path3, Paint()..color = const Color(0xFF242722));
+  canvas.drawPath(path3, Paint()..color = color);
   canvas.restore();
   canvas.save();
   canvas.translate(163.0, 58.0);
@@ -283,7 +283,7 @@ void drawVector2(Canvas canvas, Color color) {
     ..cubicTo(139.0, 78.0, 145.0, 67.0, 147.0, 56.0)
     ..cubicTo(170.0, 106.0, 160.0, 163.0, 81.0, 186.0)
     ..close();
-  canvas.drawPath(path4, Paint()..color = const Color(0xFF242722));
+  canvas.drawPath(path4, Paint()..color = color);
   canvas.restore();
   canvas.save();
   canvas.save();
@@ -299,7 +299,7 @@ void drawVector2(Canvas canvas, Color color) {
   canvas.drawPath(
     path5,
     Paint()
-      ..color = const Color(0xFFF2EFE5)
+      ..color = background
       ..style = PaintingStyle.stroke
       ..strokeWidth = 7.0
       ..strokeCap = StrokeCap.round
@@ -312,7 +312,7 @@ void drawVector2(Canvas canvas, Color color) {
   canvas.drawPath(
     path6,
     Paint()
-      ..color = const Color(0xFFF2EFE5)
+      ..color = background
       ..style = PaintingStyle.stroke
       ..strokeWidth = 7.0
       ..strokeCap = StrokeCap.round
@@ -325,7 +325,7 @@ void drawVector2(Canvas canvas, Color color) {
   canvas.drawPath(
     path7,
     Paint()
-      ..color = const Color(0xFFF2EFE5)
+      ..color = background
       ..style = PaintingStyle.stroke
       ..strokeWidth = 7.0
       ..strokeCap = StrokeCap.round
@@ -338,7 +338,7 @@ void drawVector2(Canvas canvas, Color color) {
   canvas.drawPath(
     path8,
     Paint()
-      ..color = const Color(0xFFF2EFE5)
+      ..color = background
       ..style = PaintingStyle.stroke
       ..strokeWidth = 7.0
       ..strokeCap = StrokeCap.round
@@ -351,7 +351,7 @@ void drawVector2(Canvas canvas, Color color) {
   canvas.drawPath(
     path9,
     Paint()
-      ..color = const Color(0xFFF2EFE5)
+      ..color = background
       ..style = PaintingStyle.stroke
       ..strokeWidth = 7.0
       ..strokeCap = StrokeCap.round
@@ -368,11 +368,11 @@ void drawVector2(Canvas canvas, Color color) {
     ..lineTo(165.0, 336.0)
     ..lineTo(125.0, 361.0)
     ..close();
-  canvas.drawPath(path10, Paint()..color = const Color(0xFFF2EFE5));
+  canvas.drawPath(path10, Paint()..color = background);
   canvas.drawPath(
     path10,
     Paint()
-      ..color = const Color(0xFF242722)
+      ..color = color
       ..style = PaintingStyle.stroke
       ..strokeWidth = 2.5
       ..strokeCap = StrokeCap.round
@@ -386,11 +386,11 @@ void drawVector2(Canvas canvas, Color color) {
     ..lineTo(125.0, 408.0)
     ..lineTo(85.0, 384.0)
     ..close();
-  canvas.drawPath(path11, Paint()..color = const Color(0xFFF2EFE5));
+  canvas.drawPath(path11, Paint()..color = background);
   canvas.drawPath(
     path11,
     Paint()
-      ..color = const Color(0xFF242722)
+      ..color = color
       ..style = PaintingStyle.stroke
       ..strokeWidth = 2.5
       ..strokeCap = StrokeCap.round
@@ -404,11 +404,11 @@ void drawVector2(Canvas canvas, Color color) {
     ..lineTo(165.0, 384.0)
     ..lineTo(125.0, 408.0)
     ..close();
-  canvas.drawPath(path12, Paint()..color = const Color(0xFF242722));
+  canvas.drawPath(path12, Paint()..color = color);
   canvas.drawPath(
     path12,
     Paint()
-      ..color = const Color(0xFF242722)
+      ..color = color
       ..style = PaintingStyle.stroke
       ..strokeWidth = 2.5
       ..strokeCap = StrokeCap.round
@@ -422,11 +422,11 @@ void drawVector2(Canvas canvas, Color color) {
     ..lineTo(504.0, 187.0)
     ..lineTo(467.0, 209.0)
     ..close();
-  canvas.drawPath(path13, Paint()..color = const Color(0xFFF2EFE5));
+  canvas.drawPath(path13, Paint()..color = background);
   canvas.drawPath(
     path13,
     Paint()
-      ..color = const Color(0xFF242722)
+      ..color = color
       ..style = PaintingStyle.stroke
       ..strokeWidth = 2.5
       ..strokeCap = StrokeCap.round
@@ -439,11 +439,11 @@ void drawVector2(Canvas canvas, Color color) {
     ..lineTo(504.0, 187.0)
     ..lineTo(467.0, 209.0)
     ..close();
-  canvas.drawPath(path14, Paint()..color = const Color(0xFF242722));
+  canvas.drawPath(path14, Paint()..color = color);
   canvas.drawPath(
     path14,
     Paint()
-      ..color = const Color(0xFF242722)
+      ..color = color
       ..style = PaintingStyle.stroke
       ..strokeWidth = 2.5
       ..strokeCap = StrokeCap.round
@@ -456,11 +456,11 @@ void drawVector2(Canvas canvas, Color color) {
     ..lineTo(467.0, 209.0)
     ..lineTo(467.0, 244.0)
     ..close();
-  canvas.drawPath(path15, Paint()..color = const Color(0xFFF2EFE5));
+  canvas.drawPath(path15, Paint()..color = background);
   canvas.drawPath(
     path15,
     Paint()
-      ..color = const Color(0xFF242722)
+      ..color = color
       ..style = PaintingStyle.stroke
       ..strokeWidth = 2.5
       ..strokeCap = StrokeCap.round
@@ -473,11 +473,11 @@ void drawVector2(Canvas canvas, Color color) {
     ..lineTo(504.0, 187.0)
     ..lineTo(467.0, 244.0)
     ..close();
-  canvas.drawPath(path16, Paint()..color = const Color(0xFF242722));
+  canvas.drawPath(path16, Paint()..color = color);
   canvas.drawPath(
     path16,
     Paint()
-      ..color = const Color(0xFF242722)
+      ..color = color
       ..style = PaintingStyle.stroke
       ..strokeWidth = 2.5
       ..strokeCap = StrokeCap.round
@@ -515,41 +515,41 @@ void drawVector2(Canvas canvas, Color color) {
     ..lineTo(168.0, 88.0)
     ..lineTo(179.0, 84.0)
     ..close();
-  canvas.drawPath(path17, Paint()..color = const Color(0xFF242722));
+  canvas.drawPath(path17, Paint()..color = color);
   canvas.restore();
   canvas.save();
   final path18 = Path()
     ..addOval(Rect.fromCircle(center: Offset(77.0, 267.0), radius: 4.0));
-  canvas.drawPath(path18, Paint()..color = const Color(0xFF242722));
+  canvas.drawPath(path18, Paint()..color = color);
   canvas.restore();
   canvas.save();
   final path19 = Path()
     ..addOval(Rect.fromCircle(center: Offset(411.0, 64.0), radius: 5.0));
-  canvas.drawPath(path19, Paint()..color = const Color(0xFF242722));
+  canvas.drawPath(path19, Paint()..color = color);
   canvas.restore();
   canvas.save();
   final path20 = Path()
     ..addOval(Rect.fromCircle(center: Offset(548.0, 279.0), radius: 3.0));
-  canvas.drawPath(path20, Paint()..color = const Color(0xFF242722));
+  canvas.drawPath(path20, Paint()..color = color);
   canvas.restore();
   canvas.save();
   final path21 = Path()
     ..addOval(Rect.fromCircle(center: Offset(195.0, 429.0), radius: 4.0));
-  canvas.drawPath(path21, Paint()..color = const Color(0xFF242722));
+  canvas.drawPath(path21, Paint()..color = color);
   canvas.restore();
   canvas.save();
   final path22 = Path()
     ..addOval(
       Rect.fromCenter(center: Offset(112.0, 462.0), width: 28.0, height: 16.0),
     );
-  canvas.drawPath(path22, Paint()..color = const Color(0xFF242722));
+  canvas.drawPath(path22, Paint()..color = color);
   canvas.restore();
   canvas.save();
   final path23 = Path()
     ..addOval(
       Rect.fromCenter(center: Offset(458.0, 487.0), width: 22.0, height: 12.0),
     );
-  canvas.drawPath(path23, Paint()..color = const Color(0xFF242722));
+  canvas.drawPath(path23, Paint()..color = color);
   canvas.restore();
   canvas.restore();
   canvas.save();
@@ -573,195 +573,14 @@ void drawVector2(Canvas canvas, Color color) {
     ..lineTo(376.0, 463.0)
     ..lineTo(384.0, 460.0)
     ..close();
-  canvas.drawPath(path24, Paint()..color = const Color(0xFFF2EFE5));
+  canvas.drawPath(path24, Paint()..color = background);
   canvas.restore();
   canvas.restore();
   canvas.restore();
 }
 
-void drawVector3(Canvas canvas, Color color) {
+void drawVector3(Canvas canvas, Color color, Color background) {
   canvas.save();
-  canvas.save();
-  canvas.save();
-  final path0 = Path()
-    ..moveTo(81.0, 186.0)
-    ..cubicTo(37.0, 173.0, 13.0, 141.0, 18.0, 108.0)
-    ..cubicTo(22.0, 83.0, 42.0, 70.0, 43.0, 41.0)
-    ..cubicTo(60.0, 51.0, 63.0, 65.0, 62.0, 76.0)
-    ..cubicTo(86.0, 55.0, 89.0, 25.0, 85.0, 5.0)
-    ..cubicTo(120.0, 29.0, 135.0, 58.0, 129.0, 84.0)
-    ..cubicTo(139.0, 78.0, 145.0, 67.0, 147.0, 56.0)
-    ..cubicTo(170.0, 106.0, 160.0, 163.0, 81.0, 186.0)
-    ..close();
-  canvas.drawPath(path0, Paint()..color = const Color(0xFF242722));
-  canvas.restore();
-  canvas.save();
-  canvas.save();
-  final path1 = Path()
-    ..moveTo(80.0, 160.0)
-    ..lineTo(80.0, 106.0)
-    ..moveTo(80.0, 131.0)
-    ..lineTo(58.0, 112.0)
-    ..moveTo(80.0, 116.0)
-    ..lineTo(104.0, 92.0)
-    ..moveTo(80.0, 145.0)
-    ..lineTo(105.0, 125.0);
-  canvas.drawPath(
-    path1,
-    Paint()
-      ..color = const Color(0xFFF2EFE5)
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 7.0
-      ..strokeCap = StrokeCap.round
-      ..strokeJoin = StrokeJoin.round,
-  );
-  canvas.restore();
-  canvas.save();
-  final path2 = Path()
-    ..addOval(Rect.fromCircle(center: Offset(80.0, 99.0), radius: 7.0));
-  canvas.drawPath(
-    path2,
-    Paint()
-      ..color = const Color(0xFFF2EFE5)
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 7.0
-      ..strokeCap = StrokeCap.round
-      ..strokeJoin = StrokeJoin.round,
-  );
-  canvas.restore();
-  canvas.save();
-  final path3 = Path()
-    ..addOval(Rect.fromCircle(center: Offset(52.0, 106.0), radius: 6.0));
-  canvas.drawPath(
-    path3,
-    Paint()
-      ..color = const Color(0xFFF2EFE5)
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 7.0
-      ..strokeCap = StrokeCap.round
-      ..strokeJoin = StrokeJoin.round,
-  );
-  canvas.restore();
-  canvas.save();
-  final path4 = Path()
-    ..addOval(Rect.fromCircle(center: Offset(110.0, 85.0), radius: 7.0));
-  canvas.drawPath(
-    path4,
-    Paint()
-      ..color = const Color(0xFFF2EFE5)
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 7.0
-      ..strokeCap = StrokeCap.round
-      ..strokeJoin = StrokeJoin.round,
-  );
-  canvas.restore();
-  canvas.save();
-  final path5 = Path()
-    ..addOval(Rect.fromCircle(center: Offset(111.0, 119.0), radius: 6.0));
-  canvas.drawPath(
-    path5,
-    Paint()
-      ..color = const Color(0xFFF2EFE5)
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 7.0
-      ..strokeCap = StrokeCap.round
-      ..strokeJoin = StrokeJoin.round,
-  );
-  canvas.restore();
-  canvas.restore();
-  canvas.restore();
-  canvas.save();
-  canvas.save();
-  final path6 = Path()
-    ..moveTo(207.0, 139.0)
-    ..lineTo(214.0, 43.0)
-    ..lineTo(236.0, 43.0)
-    ..cubicTo(284.0, 43.0, 280.0, 103.0, 233.0, 103.0)
-    ..lineTo(210.0, 103.0);
-  canvas.drawPath(
-    path6,
-    Paint()
-      ..color = const Color(0xFF242722)
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 19.0
-      ..strokeCap = StrokeCap.round
-      ..strokeJoin = StrokeJoin.round,
-  );
-  canvas.restore();
-  canvas.save();
-  final path7 = Path()
-    ..moveTo(310.0, 80.0)
-    ..cubicTo(272.0, 77.0, 269.0, 144.0, 304.0, 143.0)
-    ..cubicTo(340.0, 142.0, 346.0, 82.0, 310.0, 80.0)
-    ..close();
-  canvas.drawPath(
-    path7,
-    Paint()
-      ..color = const Color(0xFF242722)
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 19.0
-      ..strokeCap = StrokeCap.round
-      ..strokeJoin = StrokeJoin.round,
-  );
-  canvas.restore();
-  canvas.save();
-  final path8 = Path()
-    ..moveTo(363.0, 140.0)
-    ..lineTo(370.0, 44.0)
-    ..lineTo(393.0, 44.0)
-    ..cubicTo(433.0, 44.0, 431.0, 90.0, 398.0, 91.0)
-    ..cubicTo(439.0, 89.0, 439.0, 143.0, 395.0, 143.0)
-    ..close();
-  canvas.drawPath(
-    path8,
-    Paint()
-      ..color = const Color(0xFF242722)
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 19.0
-      ..strokeCap = StrokeCap.round
-      ..strokeJoin = StrokeJoin.round,
-  );
-  canvas.restore();
-  canvas.restore();
-  canvas.save();
-  canvas.translate(516.0, 100.0);
-  canvas.rotate(-0.087266);
-  canvas.translate(-516.0, -100.0);
-  canvas.save();
-  final path9 = Path()
-    ..addRRect(
-      RRect.fromRectAndCorners(
-        Rect.fromLTWH(466.0, 46.0, 103.0, 103.0),
-        topLeft: Radius.elliptical(33.0, 33.0),
-        topRight: Radius.elliptical(33.0, 33.0),
-        bottomLeft: Radius.elliptical(33.0, 33.0),
-        bottomRight: Radius.elliptical(33.0, 33.0),
-      ),
-    );
-  canvas.drawPath(path9, Paint()..color = const Color(0xFF242722));
-  canvas.restore();
-  canvas.save();
-  final path10 = Path()
-    ..moveTo(500.0, 74.0)
-    ..lineTo(500.0, 122.0)
-    ..moveTo(532.0, 74.0)
-    ..lineTo(532.0, 122.0);
-  canvas.drawPath(path10, Paint()..color = const Color(0xFF242722));
-  canvas.drawPath(
-    path10,
-    Paint()
-      ..color = const Color(0xFFF2EFE5)
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 13.0
-      ..strokeCap = StrokeCap.round
-      ..strokeJoin = StrokeJoin.round,
-  );
-  canvas.restore();
-  canvas.restore();
-  canvas.restore();
-}
-
-void drawVector4(Canvas canvas, Color color) {
   canvas.save();
   canvas.save();
   final path0 = Path()
@@ -790,7 +609,7 @@ void drawVector4(Canvas canvas, Color color) {
   canvas.drawPath(
     path1,
     Paint()
-      ..color = const Color(0xFFF2EFE5)
+      ..color = background
       ..style = PaintingStyle.stroke
       ..strokeWidth = 7.0
       ..strokeCap = StrokeCap.round
@@ -803,7 +622,7 @@ void drawVector4(Canvas canvas, Color color) {
   canvas.drawPath(
     path2,
     Paint()
-      ..color = const Color(0xFFF2EFE5)
+      ..color = background
       ..style = PaintingStyle.stroke
       ..strokeWidth = 7.0
       ..strokeCap = StrokeCap.round
@@ -816,7 +635,7 @@ void drawVector4(Canvas canvas, Color color) {
   canvas.drawPath(
     path3,
     Paint()
-      ..color = const Color(0xFFF2EFE5)
+      ..color = background
       ..style = PaintingStyle.stroke
       ..strokeWidth = 7.0
       ..strokeCap = StrokeCap.round
@@ -829,7 +648,7 @@ void drawVector4(Canvas canvas, Color color) {
   canvas.drawPath(
     path4,
     Paint()
-      ..color = const Color(0xFFF2EFE5)
+      ..color = background
       ..style = PaintingStyle.stroke
       ..strokeWidth = 7.0
       ..strokeCap = StrokeCap.round
@@ -842,7 +661,188 @@ void drawVector4(Canvas canvas, Color color) {
   canvas.drawPath(
     path5,
     Paint()
-      ..color = const Color(0xFFF2EFE5)
+      ..color = background
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 7.0
+      ..strokeCap = StrokeCap.round
+      ..strokeJoin = StrokeJoin.round,
+  );
+  canvas.restore();
+  canvas.restore();
+  canvas.restore();
+  canvas.save();
+  canvas.save();
+  final path6 = Path()
+    ..moveTo(207.0, 139.0)
+    ..lineTo(214.0, 43.0)
+    ..lineTo(236.0, 43.0)
+    ..cubicTo(284.0, 43.0, 280.0, 103.0, 233.0, 103.0)
+    ..lineTo(210.0, 103.0);
+  canvas.drawPath(
+    path6,
+    Paint()
+      ..color = color
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 19.0
+      ..strokeCap = StrokeCap.round
+      ..strokeJoin = StrokeJoin.round,
+  );
+  canvas.restore();
+  canvas.save();
+  final path7 = Path()
+    ..moveTo(310.0, 80.0)
+    ..cubicTo(272.0, 77.0, 269.0, 144.0, 304.0, 143.0)
+    ..cubicTo(340.0, 142.0, 346.0, 82.0, 310.0, 80.0)
+    ..close();
+  canvas.drawPath(
+    path7,
+    Paint()
+      ..color = color
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 19.0
+      ..strokeCap = StrokeCap.round
+      ..strokeJoin = StrokeJoin.round,
+  );
+  canvas.restore();
+  canvas.save();
+  final path8 = Path()
+    ..moveTo(363.0, 140.0)
+    ..lineTo(370.0, 44.0)
+    ..lineTo(393.0, 44.0)
+    ..cubicTo(433.0, 44.0, 431.0, 90.0, 398.0, 91.0)
+    ..cubicTo(439.0, 89.0, 439.0, 143.0, 395.0, 143.0)
+    ..close();
+  canvas.drawPath(
+    path8,
+    Paint()
+      ..color = color
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 19.0
+      ..strokeCap = StrokeCap.round
+      ..strokeJoin = StrokeJoin.round,
+  );
+  canvas.restore();
+  canvas.restore();
+  canvas.save();
+  canvas.translate(516.0, 100.0);
+  canvas.rotate(-0.087266);
+  canvas.translate(-516.0, -100.0);
+  canvas.save();
+  final path9 = Path()
+    ..addRRect(
+      RRect.fromRectAndCorners(
+        Rect.fromLTWH(466.0, 46.0, 103.0, 103.0),
+        topLeft: Radius.elliptical(33.0, 33.0),
+        topRight: Radius.elliptical(33.0, 33.0),
+        bottomLeft: Radius.elliptical(33.0, 33.0),
+        bottomRight: Radius.elliptical(33.0, 33.0),
+      ),
+    );
+  canvas.drawPath(path9, Paint()..color = color);
+  canvas.restore();
+  canvas.save();
+  final path10 = Path()
+    ..moveTo(500.0, 74.0)
+    ..lineTo(500.0, 122.0)
+    ..moveTo(532.0, 74.0)
+    ..lineTo(532.0, 122.0);
+  canvas.drawPath(path10, Paint()..color = color);
+  canvas.drawPath(
+    path10,
+    Paint()
+      ..color = background
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 13.0
+      ..strokeCap = StrokeCap.round
+      ..strokeJoin = StrokeJoin.round,
+  );
+  canvas.restore();
+  canvas.restore();
+  canvas.restore();
+}
+
+void drawVector4(Canvas canvas, Color color, Color background) {
+  canvas.save();
+  canvas.save();
+  final path0 = Path()
+    ..moveTo(81.0, 186.0)
+    ..cubicTo(37.0, 173.0, 13.0, 141.0, 18.0, 108.0)
+    ..cubicTo(22.0, 83.0, 42.0, 70.0, 43.0, 41.0)
+    ..cubicTo(60.0, 51.0, 63.0, 65.0, 62.0, 76.0)
+    ..cubicTo(86.0, 55.0, 89.0, 25.0, 85.0, 5.0)
+    ..cubicTo(120.0, 29.0, 135.0, 58.0, 129.0, 84.0)
+    ..cubicTo(139.0, 78.0, 145.0, 67.0, 147.0, 56.0)
+    ..cubicTo(170.0, 106.0, 160.0, 163.0, 81.0, 186.0)
+    ..close();
+  canvas.drawPath(path0, Paint()..color = color);
+  canvas.restore();
+  canvas.save();
+  canvas.save();
+  final path1 = Path()
+    ..moveTo(80.0, 160.0)
+    ..lineTo(80.0, 106.0)
+    ..moveTo(80.0, 131.0)
+    ..lineTo(58.0, 112.0)
+    ..moveTo(80.0, 116.0)
+    ..lineTo(104.0, 92.0)
+    ..moveTo(80.0, 145.0)
+    ..lineTo(105.0, 125.0);
+  canvas.drawPath(
+    path1,
+    Paint()
+      ..color = background
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 7.0
+      ..strokeCap = StrokeCap.round
+      ..strokeJoin = StrokeJoin.round,
+  );
+  canvas.restore();
+  canvas.save();
+  final path2 = Path()
+    ..addOval(Rect.fromCircle(center: Offset(80.0, 99.0), radius: 7.0));
+  canvas.drawPath(
+    path2,
+    Paint()
+      ..color = background
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 7.0
+      ..strokeCap = StrokeCap.round
+      ..strokeJoin = StrokeJoin.round,
+  );
+  canvas.restore();
+  canvas.save();
+  final path3 = Path()
+    ..addOval(Rect.fromCircle(center: Offset(52.0, 106.0), radius: 6.0));
+  canvas.drawPath(
+    path3,
+    Paint()
+      ..color = background
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 7.0
+      ..strokeCap = StrokeCap.round
+      ..strokeJoin = StrokeJoin.round,
+  );
+  canvas.restore();
+  canvas.save();
+  final path4 = Path()
+    ..addOval(Rect.fromCircle(center: Offset(110.0, 85.0), radius: 7.0));
+  canvas.drawPath(
+    path4,
+    Paint()
+      ..color = background
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 7.0
+      ..strokeCap = StrokeCap.round
+      ..strokeJoin = StrokeJoin.round,
+  );
+  canvas.restore();
+  canvas.save();
+  final path5 = Path()
+    ..addOval(Rect.fromCircle(center: Offset(111.0, 119.0), radius: 6.0));
+  canvas.drawPath(
+    path5,
+    Paint()
+      ..color = background
       ..style = PaintingStyle.stroke
       ..strokeWidth = 7.0
       ..strokeCap = StrokeCap.round
@@ -853,7 +853,7 @@ void drawVector4(Canvas canvas, Color color) {
   canvas.restore();
 }
 
-void drawVector5(Canvas canvas, Color color) {
+void drawVector5(Canvas canvas, Color color, Color background) {
   canvas.save();
   canvas.save();
   canvas.translate(-190.0, -30.0);
@@ -868,7 +868,7 @@ void drawVector5(Canvas canvas, Color color) {
   canvas.drawPath(
     path0,
     Paint()
-      ..color = const Color(0xFF242722)
+      ..color = color
       ..style = PaintingStyle.stroke
       ..strokeWidth = 19.0
       ..strokeCap = StrokeCap.round
@@ -884,7 +884,7 @@ void drawVector5(Canvas canvas, Color color) {
   canvas.drawPath(
     path1,
     Paint()
-      ..color = const Color(0xFF242722)
+      ..color = color
       ..style = PaintingStyle.stroke
       ..strokeWidth = 19.0
       ..strokeCap = StrokeCap.round
@@ -902,7 +902,7 @@ void drawVector5(Canvas canvas, Color color) {
   canvas.drawPath(
     path2,
     Paint()
-      ..color = const Color(0xFF242722)
+      ..color = color
       ..style = PaintingStyle.stroke
       ..strokeWidth = 19.0
       ..strokeCap = StrokeCap.round
@@ -925,7 +925,7 @@ void drawVector5(Canvas canvas, Color color) {
         bottomRight: Radius.elliptical(33.0, 33.0),
       ),
     );
-  canvas.drawPath(path3, Paint()..color = const Color(0xFF242722));
+  canvas.drawPath(path3, Paint()..color = color);
   canvas.restore();
   canvas.save();
   final path4 = Path()
@@ -933,11 +933,11 @@ void drawVector5(Canvas canvas, Color color) {
     ..lineTo(500.0, 122.0)
     ..moveTo(532.0, 74.0)
     ..lineTo(532.0, 122.0);
-  canvas.drawPath(path4, Paint()..color = const Color(0xFF242722));
+  canvas.drawPath(path4, Paint()..color = color);
   canvas.drawPath(
     path4,
     Paint()
-      ..color = const Color(0xFFF2EFE5)
+      ..color = background
       ..style = PaintingStyle.stroke
       ..strokeWidth = 13.0
       ..strokeCap = StrokeCap.round
@@ -949,7 +949,7 @@ void drawVector5(Canvas canvas, Color color) {
   canvas.restore();
 }
 
-void drawVector6(Canvas canvas, Color color) {
+void drawVector6(Canvas canvas, Color color, Color background) {
   canvas.save();
   canvas.save();
   final path0 = Path()
@@ -971,7 +971,7 @@ void drawVector6(Canvas canvas, Color color) {
   canvas.restore();
 }
 
-void drawVector7(Canvas canvas, Color color) {
+void drawVector7(Canvas canvas, Color color, Color background) {
   canvas.save();
   canvas.save();
   final path0 = Path()
@@ -993,7 +993,7 @@ void drawVector7(Canvas canvas, Color color) {
   canvas.restore();
 }
 
-void drawVector8(Canvas canvas, Color color) {
+void drawVector8(Canvas canvas, Color color, Color background) {
   canvas.save();
   canvas.save();
   final path0 = Path()
@@ -1023,7 +1023,7 @@ void drawVector8(Canvas canvas, Color color) {
   canvas.restore();
 }
 
-void drawVector9(Canvas canvas, Color color) {
+void drawVector9(Canvas canvas, Color color, Color background) {
   canvas.save();
   canvas.save();
   final path0 = Path()
@@ -1055,7 +1055,7 @@ void drawVector9(Canvas canvas, Color color) {
   canvas.restore();
 }
 
-void drawVector10(Canvas canvas, Color color) {
+void drawVector10(Canvas canvas, Color color, Color background) {
   canvas.save();
   canvas.save();
   final path0 = Path()
@@ -1079,7 +1079,7 @@ void drawVector10(Canvas canvas, Color color) {
   canvas.restore();
 }
 
-void drawVector11(Canvas canvas, Color color) {
+void drawVector11(Canvas canvas, Color color, Color background) {
   canvas.save();
   canvas.save();
   final path0 = Path()
@@ -1099,7 +1099,7 @@ void drawVector11(Canvas canvas, Color color) {
   canvas.restore();
 }
 
-void drawVector12(Canvas canvas, Color color) {
+void drawVector12(Canvas canvas, Color color, Color background) {
   canvas.save();
   canvas.save();
   final path0 = Path()
@@ -1119,7 +1119,7 @@ void drawVector12(Canvas canvas, Color color) {
   canvas.restore();
 }
 
-void drawVector13(Canvas canvas, Color color) {
+void drawVector13(Canvas canvas, Color color, Color background) {
   canvas.save();
   canvas.save();
   final path0 = Path()
@@ -1140,7 +1140,7 @@ void drawVector13(Canvas canvas, Color color) {
   canvas.restore();
 }
 
-void drawVector14(Canvas canvas, Color color) {
+void drawVector14(Canvas canvas, Color color, Color background) {
   canvas.save();
   canvas.save();
   final path0 = Path()
@@ -1165,7 +1165,7 @@ void drawVector14(Canvas canvas, Color color) {
   canvas.restore();
 }
 
-void drawVector15(Canvas canvas, Color color) {
+void drawVector15(Canvas canvas, Color color, Color background) {
   canvas.save();
   canvas.save();
   final path0 = Path()
@@ -1208,7 +1208,7 @@ void drawVector15(Canvas canvas, Color color) {
   canvas.restore();
 }
 
-void drawVector16(Canvas canvas, Color color) {
+void drawVector16(Canvas canvas, Color color, Color background) {
   canvas.save();
   canvas.save();
   final path0 = Path()
@@ -1234,7 +1234,7 @@ void drawVector16(Canvas canvas, Color color) {
   canvas.restore();
 }
 
-void drawVector17(Canvas canvas, Color color) {
+void drawVector17(Canvas canvas, Color color, Color background) {
   canvas.save();
   canvas.save();
   final path0 = Path()
@@ -1270,7 +1270,7 @@ void drawVector17(Canvas canvas, Color color) {
   canvas.restore();
 }
 
-void drawVector18(Canvas canvas, Color color) {
+void drawVector18(Canvas canvas, Color color, Color background) {
   canvas.save();
   canvas.save();
   final path0 = Path()
@@ -1299,7 +1299,7 @@ void drawVector18(Canvas canvas, Color color) {
   canvas.restore();
 }
 
-void drawVector19(Canvas canvas, Color color) {
+void drawVector19(Canvas canvas, Color color, Color background) {
   canvas.save();
   canvas.save();
   final path0 = Path()
@@ -1341,7 +1341,7 @@ void drawVector19(Canvas canvas, Color color) {
   canvas.restore();
 }
 
-void drawVector20(Canvas canvas, Color color) {
+void drawVector20(Canvas canvas, Color color, Color background) {
   canvas.save();
   canvas.save();
   final path0 = Path()
@@ -1370,7 +1370,7 @@ void drawVector20(Canvas canvas, Color color) {
   canvas.restore();
 }
 
-void drawVector21(Canvas canvas, Color color) {
+void drawVector21(Canvas canvas, Color color, Color background) {
   canvas.save();
   canvas.save();
   final path0 = Path()
@@ -1459,7 +1459,7 @@ void drawVector21(Canvas canvas, Color color) {
   canvas.restore();
 }
 
-void drawVector22(Canvas canvas, Color color) {
+void drawVector22(Canvas canvas, Color color, Color background) {
   canvas.save();
   canvas.save();
   final path0 = Path()
@@ -1494,7 +1494,7 @@ void drawVector22(Canvas canvas, Color color) {
   canvas.restore();
 }
 
-void drawVector23(Canvas canvas, Color color) {
+void drawVector23(Canvas canvas, Color color, Color background) {
   canvas.save();
   canvas.save();
   final path0 = Path()
@@ -1528,7 +1528,7 @@ void drawVector23(Canvas canvas, Color color) {
   canvas.restore();
 }
 
-void drawVector24(Canvas canvas, Color color) {
+void drawVector24(Canvas canvas, Color color, Color background) {
   canvas.save();
   canvas.save();
   final path0 = Path()
@@ -1567,7 +1567,7 @@ void drawVector24(Canvas canvas, Color color) {
   canvas.restore();
 }
 
-void drawVector25(Canvas canvas, Color color) {
+void drawVector25(Canvas canvas, Color color, Color background) {
   canvas.save();
   canvas.save();
   final path0 = Path()
@@ -1586,7 +1586,7 @@ void drawVector25(Canvas canvas, Color color) {
   canvas.restore();
 }
 
-void drawVector26(Canvas canvas, Color color) {
+void drawVector26(Canvas canvas, Color color, Color background) {
   canvas.save();
   canvas.save();
   final path0 = Path()
@@ -1619,7 +1619,7 @@ void drawVector26(Canvas canvas, Color color) {
   canvas.restore();
 }
 
-void drawVector27(Canvas canvas, Color color) {
+void drawVector27(Canvas canvas, Color color, Color background) {
   canvas.save();
   canvas.save();
   final path0 = Path()
@@ -1640,7 +1640,7 @@ void drawVector27(Canvas canvas, Color color) {
   canvas.restore();
 }
 
-void drawVector28(Canvas canvas, Color color) {
+void drawVector28(Canvas canvas, Color color, Color background) {
   canvas.save();
   canvas.save();
   final path0 = Path()
@@ -1681,7 +1681,7 @@ void drawVector28(Canvas canvas, Color color) {
   canvas.restore();
 }
 
-void drawVector29(Canvas canvas, Color color) {
+void drawVector29(Canvas canvas, Color color, Color background) {
   canvas.save();
   canvas.save();
   final path0 = Path()
@@ -1713,7 +1713,7 @@ void drawVector29(Canvas canvas, Color color) {
   canvas.restore();
 }
 
-void drawVector30(Canvas canvas, Color color) {
+void drawVector30(Canvas canvas, Color color, Color background) {
   canvas.save();
   canvas.save();
   final path0 = Path()
@@ -1734,7 +1734,7 @@ void drawVector30(Canvas canvas, Color color) {
   canvas.save();
   final path1 = Path()
     ..addOval(Rect.fromCircle(center: Offset(9.0, 7.0), radius: 3.0));
-  canvas.drawPath(path1, Paint()..color = const Color(0xFFF2EFE5));
+  canvas.drawPath(path1, Paint()..color = background);
   canvas.drawPath(
     path1,
     Paint()
@@ -1748,7 +1748,7 @@ void drawVector30(Canvas canvas, Color color) {
   canvas.save();
   final path2 = Path()
     ..addOval(Rect.fromCircle(center: Offset(15.0, 17.0), radius: 3.0));
-  canvas.drawPath(path2, Paint()..color = const Color(0xFFF2EFE5));
+  canvas.drawPath(path2, Paint()..color = background);
   canvas.drawPath(
     path2,
     Paint()
@@ -1762,7 +1762,7 @@ void drawVector30(Canvas canvas, Color color) {
   canvas.restore();
 }
 
-void drawVector31(Canvas canvas, Color color) {
+void drawVector31(Canvas canvas, Color color, Color background) {
   canvas.save();
   canvas.save();
   final path0 = Path()
@@ -1788,7 +1788,7 @@ void drawVector31(Canvas canvas, Color color) {
   canvas.restore();
 }
 
-void drawVector32(Canvas canvas, Color color) {
+void drawVector32(Canvas canvas, Color color, Color background) {
   canvas.save();
   canvas.save();
   final path0 = Path()
@@ -1814,7 +1814,7 @@ void drawVector32(Canvas canvas, Color color) {
   canvas.restore();
 }
 
-void drawVector33(Canvas canvas, Color color) {
+void drawVector33(Canvas canvas, Color color, Color background) {
   canvas.save();
   canvas.save();
   final path0 = Path()
@@ -1860,7 +1860,7 @@ void drawVector33(Canvas canvas, Color color) {
   canvas.restore();
 }
 
-void drawVector34(Canvas canvas, Color color) {
+void drawVector34(Canvas canvas, Color color, Color background) {
   canvas.save();
   canvas.save();
   final path0 = Path()
@@ -1888,7 +1888,7 @@ void drawVector34(Canvas canvas, Color color) {
   canvas.restore();
 }
 
-void drawVector35(Canvas canvas, Color color) {
+void drawVector35(Canvas canvas, Color color, Color background) {
   canvas.save();
   canvas.save();
   final path0 = Path()
@@ -1919,7 +1919,7 @@ void drawVector35(Canvas canvas, Color color) {
   canvas.restore();
 }
 
-void drawVector36(Canvas canvas, Color color) {
+void drawVector36(Canvas canvas, Color color, Color background) {
   canvas.save();
   canvas.save();
   final path0 = Path()
@@ -1996,7 +1996,7 @@ void drawVector36(Canvas canvas, Color color) {
   canvas.restore();
 }
 
-void drawVector37(Canvas canvas, Color color) {
+void drawVector37(Canvas canvas, Color color, Color background) {
   canvas.save();
   canvas.save();
   final path0 = Path()
@@ -2022,7 +2022,7 @@ void drawVector37(Canvas canvas, Color color) {
   canvas.restore();
 }
 
-void drawVector38(Canvas canvas, Color color) {
+void drawVector38(Canvas canvas, Color color, Color background) {
   canvas.save();
   canvas.save();
   final path0 = Path()
@@ -2031,7 +2031,7 @@ void drawVector38(Canvas canvas, Color color) {
     ..lineTo(143.0, 118.0)
     ..lineTo(77.0, 157.0)
     ..close();
-  canvas.drawPath(path0, Paint()..color = const Color(0xFF242722));
+  canvas.drawPath(path0, Paint()..color = color);
   canvas.restore();
   canvas.save();
   canvas.save();
@@ -2043,11 +2043,11 @@ void drawVector38(Canvas canvas, Color color) {
     ..lineTo(58.0, 146.0)
     ..lineTo(31.0, 130.0)
     ..close();
-  canvas.drawPath(path1, Paint()..color = const Color(0xFFF2EFE5));
+  canvas.drawPath(path1, Paint()..color = background);
   canvas.drawPath(
     path1,
     Paint()
-      ..color = const Color(0xFF242722)
+      ..color = color
       ..style = PaintingStyle.stroke
       ..strokeWidth = 2.2
       ..strokeCap = StrokeCap.round
@@ -2064,7 +2064,7 @@ void drawVector38(Canvas canvas, Color color) {
   canvas.drawPath(
     path2,
     Paint()
-      ..color = const Color(0xFF242722)
+      ..color = color
       ..style = PaintingStyle.stroke
       ..strokeWidth = 2.2
       ..strokeCap = StrokeCap.round
@@ -2078,11 +2078,11 @@ void drawVector38(Canvas canvas, Color color) {
     ..lineTo(125.0, 120.0)
     ..lineTo(99.0, 106.0)
     ..close();
-  canvas.drawPath(path3, Paint()..color = const Color(0xFF242722));
+  canvas.drawPath(path3, Paint()..color = color);
   canvas.drawPath(
     path3,
     Paint()
-      ..color = const Color(0xFF242722)
+      ..color = color
       ..style = PaintingStyle.stroke
       ..strokeWidth = 2.2
       ..strokeCap = StrokeCap.round
@@ -2100,7 +2100,7 @@ void drawVector38(Canvas canvas, Color color) {
   canvas.drawPath(
     path4,
     Paint()
-      ..color = const Color(0xFF242722)
+      ..color = color
       ..style = PaintingStyle.stroke
       ..strokeWidth = 2.2
       ..strokeCap = StrokeCap.round
@@ -2120,7 +2120,7 @@ void drawVector38(Canvas canvas, Color color) {
   canvas.drawPath(
     path5,
     Paint()
-      ..color = const Color(0xFF242722)
+      ..color = color
       ..style = PaintingStyle.stroke
       ..strokeWidth = 2.2
       ..strokeCap = StrokeCap.round
@@ -2130,11 +2130,11 @@ void drawVector38(Canvas canvas, Color color) {
   canvas.save();
   final path6 = Path()
     ..addOval(Rect.fromCircle(center: Offset(83.0, 61.0), radius: 5.0));
-  canvas.drawPath(path6, Paint()..color = const Color(0xFFF2EFE5));
+  canvas.drawPath(path6, Paint()..color = background);
   canvas.drawPath(
     path6,
     Paint()
-      ..color = const Color(0xFF242722)
+      ..color = color
       ..style = PaintingStyle.stroke
       ..strokeWidth = 2.2
       ..strokeCap = StrokeCap.round
@@ -2144,11 +2144,11 @@ void drawVector38(Canvas canvas, Color color) {
   canvas.save();
   final path7 = Path()
     ..addOval(Rect.fromCircle(center: Offset(66.0, 78.0), radius: 4.0));
-  canvas.drawPath(path7, Paint()..color = const Color(0xFFF2EFE5));
+  canvas.drawPath(path7, Paint()..color = background);
   canvas.drawPath(
     path7,
     Paint()
-      ..color = const Color(0xFF242722)
+      ..color = color
       ..style = PaintingStyle.stroke
       ..strokeWidth = 2.2
       ..strokeCap = StrokeCap.round
@@ -2158,11 +2158,11 @@ void drawVector38(Canvas canvas, Color color) {
   canvas.save();
   final path8 = Path()
     ..addOval(Rect.fromCircle(center: Offset(99.0, 63.0), radius: 4.0));
-  canvas.drawPath(path8, Paint()..color = const Color(0xFFF2EFE5));
+  canvas.drawPath(path8, Paint()..color = background);
   canvas.drawPath(
     path8,
     Paint()
-      ..color = const Color(0xFF242722)
+      ..color = color
       ..style = PaintingStyle.stroke
       ..strokeWidth = 2.2
       ..strokeCap = StrokeCap.round
@@ -2172,11 +2172,11 @@ void drawVector38(Canvas canvas, Color color) {
   canvas.save();
   final path9 = Path()
     ..addOval(Rect.fromCircle(center: Offset(98.0, 91.0), radius: 4.0));
-  canvas.drawPath(path9, Paint()..color = const Color(0xFFF2EFE5));
+  canvas.drawPath(path9, Paint()..color = background);
   canvas.drawPath(
     path9,
     Paint()
-      ..color = const Color(0xFF242722)
+      ..color = color
       ..style = PaintingStyle.stroke
       ..strokeWidth = 2.2
       ..strokeCap = StrokeCap.round
@@ -2187,7 +2187,7 @@ void drawVector38(Canvas canvas, Color color) {
   canvas.restore();
 }
 
-void drawVector39(Canvas canvas, Color color) {
+void drawVector39(Canvas canvas, Color color, Color background) {
   canvas.save();
   canvas.save();
   final path0 = Path()
@@ -2196,7 +2196,7 @@ void drawVector39(Canvas canvas, Color color) {
     ..lineTo(150.0, 119.0)
     ..lineTo(82.0, 158.0)
     ..close();
-  canvas.drawPath(path0, Paint()..color = const Color(0xFF242722));
+  canvas.drawPath(path0, Paint()..color = color);
   canvas.restore();
   canvas.save();
   canvas.save();
@@ -2208,11 +2208,11 @@ void drawVector39(Canvas canvas, Color color) {
     ..lineTo(67.0, 150.0)
     ..lineTo(25.0, 126.0)
     ..close();
-  canvas.drawPath(path1, Paint()..color = const Color(0xFFF2EFE5));
+  canvas.drawPath(path1, Paint()..color = background);
   canvas.drawPath(
     path1,
     Paint()
-      ..color = const Color(0xFF242722)
+      ..color = color
       ..style = PaintingStyle.stroke
       ..strokeWidth = 2.2
       ..strokeCap = StrokeCap.round
@@ -2229,7 +2229,7 @@ void drawVector39(Canvas canvas, Color color) {
   canvas.drawPath(
     path2,
     Paint()
-      ..color = const Color(0xFF242722)
+      ..color = color
       ..style = PaintingStyle.stroke
       ..strokeWidth = 2.2
       ..strokeCap = StrokeCap.round
@@ -2245,11 +2245,11 @@ void drawVector39(Canvas canvas, Color color) {
     ..lineTo(67.0, 101.0)
     ..lineTo(25.0, 77.0)
     ..close();
-  canvas.drawPath(path3, Paint()..color = const Color(0xFF242722));
+  canvas.drawPath(path3, Paint()..color = color);
   canvas.drawPath(
     path3,
     Paint()
-      ..color = const Color(0xFF242722)
+      ..color = color
       ..style = PaintingStyle.stroke
       ..strokeWidth = 2.2
       ..strokeCap = StrokeCap.round
@@ -2265,11 +2265,11 @@ void drawVector39(Canvas canvas, Color color) {
     ..lineTo(105.0, 78.0)
     ..lineTo(75.0, 61.0)
     ..close();
-  canvas.drawPath(path4, Paint()..color = const Color(0xFFF2EFE5));
+  canvas.drawPath(path4, Paint()..color = background);
   canvas.drawPath(
     path4,
     Paint()
-      ..color = const Color(0xFF242722)
+      ..color = color
       ..style = PaintingStyle.stroke
       ..strokeWidth = 2.2
       ..strokeCap = StrokeCap.round
@@ -2286,7 +2286,7 @@ void drawVector39(Canvas canvas, Color color) {
   canvas.drawPath(
     path5,
     Paint()
-      ..color = const Color(0xFF242722)
+      ..color = color
       ..style = PaintingStyle.stroke
       ..strokeWidth = 2.2
       ..strokeCap = StrokeCap.round
@@ -2302,11 +2302,11 @@ void drawVector39(Canvas canvas, Color color) {
     ..lineTo(105.0, 42.0)
     ..lineTo(75.0, 25.0)
     ..close();
-  canvas.drawPath(path6, Paint()..color = const Color(0xFF242722));
+  canvas.drawPath(path6, Paint()..color = color);
   canvas.drawPath(
     path6,
     Paint()
-      ..color = const Color(0xFF242722)
+      ..color = color
       ..style = PaintingStyle.stroke
       ..strokeWidth = 2.2
       ..strokeCap = StrokeCap.round
@@ -2320,11 +2320,11 @@ void drawVector39(Canvas canvas, Color color) {
     ..lineTo(54.0, 123.0)
     ..lineTo(37.0, 113.0)
     ..close();
-  canvas.drawPath(path7, Paint()..color = const Color(0xFFF2EFE5));
+  canvas.drawPath(path7, Paint()..color = background);
   canvas.drawPath(
     path7,
     Paint()
-      ..color = const Color(0xFF242722)
+      ..color = color
       ..style = PaintingStyle.stroke
       ..strokeWidth = 2.2
       ..strokeCap = StrokeCap.round
@@ -2340,11 +2340,11 @@ void drawVector39(Canvas canvas, Color color) {
     ..lineTo(109.0, 42.0)
     ..lineTo(82.0, 26.0)
     ..close();
-  canvas.drawPath(path8, Paint()..color = const Color(0xFFF2EFE5));
+  canvas.drawPath(path8, Paint()..color = background);
   canvas.drawPath(
     path8,
     Paint()
-      ..color = const Color(0xFF242722)
+      ..color = color
       ..style = PaintingStyle.stroke
       ..strokeWidth = 2.2
       ..strokeCap = StrokeCap.round
@@ -2355,14 +2355,14 @@ void drawVector39(Canvas canvas, Color color) {
   canvas.restore();
 }
 
-void drawVector40(Canvas canvas, Color color) {
+void drawVector40(Canvas canvas, Color color, Color background) {
   canvas.save();
   canvas.save();
   final path0 = Path()
     ..addOval(
       Rect.fromCenter(center: Offset(90.0, 136.0), width: 110.0, height: 32.0),
     );
-  canvas.drawPath(path0, Paint()..color = const Color(0xFF242722));
+  canvas.drawPath(path0, Paint()..color = color);
   canvas.restore();
   canvas.save();
   canvas.save();
@@ -2374,11 +2374,11 @@ void drawVector40(Canvas canvas, Color color) {
     ..lineTo(100.0, 55.0)
     ..lineTo(100.0, 26.0)
     ..close();
-  canvas.drawPath(path1, Paint()..color = const Color(0xFFF2EFE5));
+  canvas.drawPath(path1, Paint()..color = background);
   canvas.drawPath(
     path1,
     Paint()
-      ..color = const Color(0xFF242722)
+      ..color = color
       ..style = PaintingStyle.stroke
       ..strokeWidth = 2.2
       ..strokeCap = StrokeCap.round
@@ -2390,11 +2390,11 @@ void drawVector40(Canvas canvas, Color color) {
     ..addOval(
       Rect.fromCenter(center: Offset(80.0, 26.0), width: 50.0, height: 22.0),
     );
-  canvas.drawPath(path2, Paint()..color = const Color(0xFFF2EFE5));
+  canvas.drawPath(path2, Paint()..color = background);
   canvas.drawPath(
     path2,
     Paint()
-      ..color = const Color(0xFF242722)
+      ..color = color
       ..style = PaintingStyle.stroke
       ..strokeWidth = 2.2
       ..strokeCap = StrokeCap.round
@@ -2406,11 +2406,11 @@ void drawVector40(Canvas canvas, Color color) {
     ..addOval(
       Rect.fromCenter(center: Offset(80.0, 24.0), width: 32.0, height: 10.0),
     );
-  canvas.drawPath(path3, Paint()..color = const Color(0xFF242722));
+  canvas.drawPath(path3, Paint()..color = color);
   canvas.drawPath(
     path3,
     Paint()
-      ..color = const Color(0xFF242722)
+      ..color = color
       ..style = PaintingStyle.stroke
       ..strokeWidth = 2.2
       ..strokeCap = StrokeCap.round
@@ -2424,11 +2424,11 @@ void drawVector40(Canvas canvas, Color color) {
     ..cubicTo(34.0, 132.0, 124.0, 138.0, 124.0, 115.0)
     ..lineTo(112.0, 90.0)
     ..close();
-  canvas.drawPath(path4, Paint()..color = const Color(0xFF242722));
+  canvas.drawPath(path4, Paint()..color = color);
   canvas.drawPath(
     path4,
     Paint()
-      ..color = const Color(0xFF242722)
+      ..color = color
       ..style = PaintingStyle.stroke
       ..strokeWidth = 2.2
       ..strokeCap = StrokeCap.round
@@ -2440,11 +2440,11 @@ void drawVector40(Canvas canvas, Color color) {
     ..addOval(
       Rect.fromCenter(center: Offset(80.0, 92.0), width: 64.0, height: 24.0),
     );
-  canvas.drawPath(path5, Paint()..color = const Color(0xFFF2EFE5));
+  canvas.drawPath(path5, Paint()..color = background);
   canvas.drawPath(
     path5,
     Paint()
-      ..color = const Color(0xFF242722)
+      ..color = color
       ..style = PaintingStyle.stroke
       ..strokeWidth = 2.2
       ..strokeCap = StrokeCap.round
@@ -2456,11 +2456,11 @@ void drawVector40(Canvas canvas, Color color) {
     ..addOval(
       Rect.fromCenter(center: Offset(80.0, 92.0), width: 38.0, height: 12.0),
     );
-  canvas.drawPath(path6, Paint()..color = const Color(0xFF242722));
+  canvas.drawPath(path6, Paint()..color = color);
   canvas.drawPath(
     path6,
     Paint()
-      ..color = const Color(0xFF242722)
+      ..color = color
       ..style = PaintingStyle.stroke
       ..strokeWidth = 2.2
       ..strokeCap = StrokeCap.round
@@ -2472,30 +2472,30 @@ void drawVector40(Canvas canvas, Color color) {
   canvas.save();
   final path7 = Path()
     ..addOval(Rect.fromCircle(center: Offset(60.0, 116.0), radius: 4.0));
-  canvas.drawPath(path7, Paint()..color = const Color(0xFFF2EFE5));
+  canvas.drawPath(path7, Paint()..color = background);
   canvas.restore();
   canvas.save();
   final path8 = Path()
     ..addOval(Rect.fromCircle(center: Offset(94.0, 120.0), radius: 2.0));
-  canvas.drawPath(path8, Paint()..color = const Color(0xFFF2EFE5));
+  canvas.drawPath(path8, Paint()..color = background);
   canvas.restore();
   canvas.restore();
   canvas.save();
   canvas.save();
   final path9 = Path()
     ..addOval(Rect.fromCircle(center: Offset(117.0, 52.0), radius: 3.0));
-  canvas.drawPath(path9, Paint()..color = const Color(0xFF242722));
+  canvas.drawPath(path9, Paint()..color = color);
   canvas.restore();
   canvas.save();
   final path10 = Path()
     ..addOval(Rect.fromCircle(center: Offset(39.0, 54.0), radius: 2.0));
-  canvas.drawPath(path10, Paint()..color = const Color(0xFF242722));
+  canvas.drawPath(path10, Paint()..color = color);
   canvas.restore();
   canvas.restore();
   canvas.restore();
 }
 
-void drawVector41(Canvas canvas, Color color) {
+void drawVector41(Canvas canvas, Color color, Color background) {
   canvas.save();
   canvas.save();
   final path0 = Path()
@@ -2504,7 +2504,7 @@ void drawVector41(Canvas canvas, Color color) {
     ..lineTo(135.0, 131.0)
     ..lineTo(82.0, 153.0)
     ..close();
-  canvas.drawPath(path0, Paint()..color = const Color(0xFF242722));
+  canvas.drawPath(path0, Paint()..color = color);
   canvas.restore();
   canvas.save();
   canvas.save();
@@ -2514,11 +2514,11 @@ void drawVector41(Canvas canvas, Color color) {
     ..lineTo(125.0, 64.0)
     ..lineTo(82.0, 139.0)
     ..close();
-  canvas.drawPath(path1, Paint()..color = const Color(0xFFF2EFE5));
+  canvas.drawPath(path1, Paint()..color = background);
   canvas.drawPath(
     path1,
     Paint()
-      ..color = const Color(0xFF242722)
+      ..color = color
       ..style = PaintingStyle.stroke
       ..strokeWidth = 2.2
       ..strokeCap = StrokeCap.round
@@ -2532,11 +2532,11 @@ void drawVector41(Canvas canvas, Color color) {
     ..lineTo(82.0, 139.0)
     ..lineTo(101.0, 66.0)
     ..close();
-  canvas.drawPath(path2, Paint()..color = const Color(0xFFF2EFE5));
+  canvas.drawPath(path2, Paint()..color = background);
   canvas.drawPath(
     path2,
     Paint()
-      ..color = const Color(0xFF242722)
+      ..color = color
       ..style = PaintingStyle.stroke
       ..strokeWidth = 2.2
       ..strokeCap = StrokeCap.round
@@ -2552,11 +2552,11 @@ void drawVector41(Canvas canvas, Color color) {
     ..lineTo(82.0, 139.0)
     ..lineTo(101.0, 66.0)
     ..close();
-  canvas.drawPath(path3, Paint()..color = const Color(0xFF242722));
+  canvas.drawPath(path3, Paint()..color = color);
   canvas.drawPath(
     path3,
     Paint()
-      ..color = const Color(0xFF242722)
+      ..color = color
       ..style = PaintingStyle.stroke
       ..strokeWidth = 2.2
       ..strokeCap = StrokeCap.round
@@ -2571,7 +2571,7 @@ void drawVector41(Canvas canvas, Color color) {
   canvas.drawPath(
     path4,
     Paint()
-      ..color = const Color(0xFF242722)
+      ..color = color
       ..style = PaintingStyle.stroke
       ..strokeWidth = 2.2
       ..strokeCap = StrokeCap.round
@@ -2600,17 +2600,17 @@ void drawVector41(Canvas canvas, Color color) {
     ..lineTo(119.0, 103.0)
     ..lineTo(127.0, 100.0)
     ..close();
-  canvas.drawPath(path5, Paint()..color = const Color(0xFF242722));
+  canvas.drawPath(path5, Paint()..color = color);
   canvas.restore();
   canvas.save();
   final path6 = Path()
     ..addOval(Rect.fromCircle(center: Offset(124.0, 29.0), radius: 2.5));
-  canvas.drawPath(path6, Paint()..color = const Color(0xFF242722));
+  canvas.drawPath(path6, Paint()..color = color);
   canvas.restore();
   canvas.save();
   final path7 = Path()
     ..addOval(Rect.fromCircle(center: Offset(20.0, 99.0), radius: 2.0));
-  canvas.drawPath(path7, Paint()..color = const Color(0xFF242722));
+  canvas.drawPath(path7, Paint()..color = color);
   canvas.restore();
   canvas.restore();
   canvas.restore();

@@ -62,7 +62,10 @@ class _SkillGroup extends StatelessWidget {
               ),
             ),
             if (group['enabled'] != true)
-              const Text('Отключена', style: TextStyle(color: Spark.muted)),
+              Text(
+                'Отключена',
+                style: TextStyle(color: Spark.of(context).muted),
+              ),
           ],
         ),
         const SizedBox(height: 18),
@@ -81,7 +84,7 @@ class _GemRow extends StatelessWidget {
     child: Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const SparkArt('icons/spark', width: 17, color: Spark.green),
+        SparkArt('icons/spark', width: 17, color: Spark.of(context).green),
         const SizedBox(width: 12),
         Expanded(
           child: Column(
@@ -98,7 +101,10 @@ class _GemRow extends StatelessWidget {
               if (gem['error'] case final String error when error.isNotEmpty)
                 Text(
                   error,
-                  style: const TextStyle(color: Spark.danger, fontSize: 12),
+                  style: TextStyle(
+                    color: Spark.of(context).danger,
+                    fontSize: 12,
+                  ),
                 ),
             ],
           ),
@@ -175,7 +181,9 @@ class _ItemSlot extends StatelessWidget {
                   item == null ? 'Пусто' : '${item!['name']}',
                   style: TextStyle(
                     fontWeight: FontWeight.w700,
-                    color: item == null ? Spark.muted : Spark.ink,
+                    color: item == null
+                        ? Spark.of(context).muted
+                        : Spark.of(context).ink,
                   ),
                 ),
               ],
@@ -206,7 +214,7 @@ class _ItemSlot extends StatelessWidget {
                   padding: const EdgeInsets.only(top: 12),
                   child: Text(
                     'Не распознано: ${line['line']}',
-                    style: const TextStyle(color: Spark.danger),
+                    style: TextStyle(color: Spark.of(context).danger),
                   ),
                 ),
               ),
@@ -293,7 +301,7 @@ class _ConditionsViewState extends State<ConditionsView> {
     ),
     subtitle: Text(
       _conditionValue(entry.value),
-      style: Spark.mono.copyWith(fontSize: 11, color: Spark.green),
+      style: Spark.mono.copyWith(fontSize: 11, color: Spark.of(context).green),
     ),
     trailing: const SparkArt('icons/chevron', width: 14),
     onTap: widget.model.state.busy
@@ -391,7 +399,7 @@ class _ConditionDialogState extends State<_ConditionDialog> {
         const SizedBox(height: 18),
         _field(data),
         if (error != null)
-          Text(error!, style: const TextStyle(color: Spark.danger)),
+          Text(error!, style: TextStyle(color: Spark.of(context).danger)),
       ],
     );
   }

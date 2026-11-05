@@ -21,7 +21,11 @@ class ComponentsView extends StatelessWidget {
         alignment: Alignment.centerLeft,
         child: FilledButton.icon(
           onPressed: model.state.busy ? null : model.checkUpdates,
-          icon: const SparkArt('icons/refresh', color: Spark.paper, width: 17),
+          icon: SparkArt(
+            'icons/refresh',
+            color: Spark.of(context).paper,
+            width: 17,
+          ),
           label: const Text('Проверить обновления'),
         ),
       ),
@@ -54,9 +58,9 @@ class ComponentsView extends StatelessWidget {
         ],
       ),
       const SizedBox(height: 24),
-      const Text(
+      Text(
         'Для установки нужны Git и 64-битный Python 3.11+. После загрузки компонентов расчёты работают без сети.',
-        style: TextStyle(color: Spark.muted),
+        style: TextStyle(color: Spark.of(context).muted),
       ),
       const SizedBox(height: 20),
       ExpansionTile(
@@ -72,7 +76,7 @@ class ComponentsView extends StatelessWidget {
           const SizedBox(height: 12),
           SelectableText(
             model.components.store.root.path,
-            style: const TextStyle(color: Spark.muted, fontSize: 11),
+            style: TextStyle(color: Spark.of(context).muted, fontSize: 11),
           ),
         ],
       ),
@@ -111,7 +115,7 @@ class _Component extends StatelessWidget {
           const SizedBox(height: 12),
           Text(
             component.description,
-            style: const TextStyle(color: Spark.muted),
+            style: TextStyle(color: Spark.of(context).muted),
           ),
           const SizedBox(height: 20),
           Wrap(
@@ -126,7 +130,7 @@ class _Component extends StatelessWidget {
               if (latest != null)
                 Text(
                   'Последняя: ${latest.tag}',
-                  style: const TextStyle(color: Spark.green),
+                  style: TextStyle(color: Spark.of(context).green),
                 ),
               FilledButton.tonalIcon(
                 onPressed: model.state.busy || current

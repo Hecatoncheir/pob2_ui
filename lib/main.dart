@@ -1,3 +1,6 @@
+import 'data/appearance_repository.dart';
+import 'ui/appearance_cubit.dart';
+
 import 'package:flutter/material.dart';
 
 import 'data/startup_health.dart';
@@ -9,7 +12,7 @@ import 'data/mcp_client.dart';
 import 'ui/app.dart';
 import 'ui/workshop_cubit.dart';
 
-void main(List<String> arguments) {
+Future<void> main(List<String> arguments) async {
   WidgetsFlutterBinding.ensureInitialized();
   final model = WorkshopCubit(
     ComponentRepository(
@@ -18,7 +21,12 @@ void main(List<String> arguments) {
     McpClient(),
   );
   final updates = AppUpdateCubit(root: model.components.store.root);
-  runApp(PobApp(model: model, updates: updates));
+  final preferences = AppearanceRepository(model.components.store.root);
+  final appearance = AppearanceCubit(
+    preferences,
+    initialTheme: await preferences.load(),
+  );
+  runApp(PobApp(model: model, updates: updates, appearance: appearance));
   WidgetsBinding.instance.addPostFrameCallback((_) async {
     await markStartupHealthy(arguments);
     await updates.initialize();

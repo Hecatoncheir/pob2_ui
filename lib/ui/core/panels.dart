@@ -13,10 +13,10 @@ class SurfacePanel extends StatelessWidget {
   final EdgeInsetsGeometry padding;
   @override
   Widget build(BuildContext context) => Material(
-    color: Spark.surface,
+    color: Spark.of(context).surface,
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(18),
-      side: const BorderSide(color: Spark.line),
+      side: BorderSide(color: Spark.of(context).line),
     ),
     clipBehavior: Clip.antiAlias,
     child: Padding(padding: padding, child: child),
@@ -54,7 +54,7 @@ class EmptyPanel extends StatelessWidget {
               child: Text(
                 message,
                 textAlign: TextAlign.center,
-                style: const TextStyle(color: Spark.muted),
+                style: TextStyle(color: Spark.of(context).muted),
               ),
             ),
             if (action != null) ...[const SizedBox(height: 22), action!],
@@ -83,7 +83,10 @@ class SectionHeading extends StatelessWidget {
               Text(title, style: Theme.of(context).textTheme.headlineMedium),
               if (subtitle != null) ...[
                 const SizedBox(height: 5),
-                Text(subtitle!, style: const TextStyle(color: Spark.muted)),
+                Text(
+                  subtitle!,
+                  style: TextStyle(color: Spark.of(context).muted),
+                ),
               ],
             ],
           ),
@@ -106,7 +109,7 @@ class DotLabel extends StatelessWidget {
         width: 6,
         height: 6,
         decoration: BoxDecoration(
-          color: active ? Spark.green : Spark.muted,
+          color: active ? Spark.of(context).green : Spark.of(context).muted,
           shape: BoxShape.circle,
         ),
       ),

@@ -19,6 +19,13 @@ import 'core/spark_theme.dart';
 import 'workshop_cubit.dart';
 import 'tree_canvas.dart';
 import 'original_tree_artwork.dart';
+import 'attribute_picker.dart';
+import 'tree_point_counters.dart';
+import '../domain/node_power.dart';
+import 'node_power_cubit.dart';
+import 'node_power_panel.dart';
+import 'loaded_tree_artwork.dart';
+import 'workshop_state.dart';
 
 class TreeView extends StatefulWidget {
   const TreeView({super.key, required this.model, required this.tree});
@@ -50,6 +57,13 @@ class _TreeViewState extends State<TreeView>
   late final hoverModel = TreeHoverCubit(widget.model.previewNode);
   Offset mouse = Offset.zero;
   int previewGeneration = 0;
+  bool powerVisible = false;
+  int powerGeneration = 0;
+  LoadedTreeArtwork? powerArtwork;
+  late final powerModel = NodePowerCubit(
+    widget.model.engine,
+    widget.model.loadTreeSceneImages,
+  );
   @override
   void initState() {
     super.initState();
@@ -60,6 +74,7 @@ class _TreeViewState extends State<TreeView>
   void didUpdateWidget(TreeView old) {
     super.didUpdateWidget(old);
     if (old.tree == widget.tree) return;
+    powerModel.cancel();
     scene = TreeScene(widget.tree);
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (mounted) hoverModel.clear();
@@ -143,6 +158,9 @@ class _TreeViewState extends State<TreeView>
 
   @override
   void dispose() {
+    powerGeneration++;
+    powerModel.close();
+    powerArtwork?.dispose();
     hoverModel.close();
     hoverArtwork?.dispose();
     for (final image in extraImages.values) {
@@ -159,13 +177,26 @@ class _TreeViewState extends State<TreeView>
 
   @override
   Widget build(BuildContext context) =>
-      BlocListener<TreeHoverCubit, TreeHoverState>(
-        bloc: hoverModel,
-        listener: _hoverChanged,
-        child: OverlayPortal(
-          controller: tooltipPortal,
-          overlayChildBuilder: _tooltip,
-          child: _body(),
+      BlocListener<WorkshopCubit, WorkshopState>(
+        bloc: widget.model,
+        listenWhen: (before, after) =>
+            before.document?.stale != after.document?.stale,
+        listener: (context, state) {
+          if (state.document?.stale == true) powerModel.cancel();
+        },
+        child: BlocListener<NodePowerCubit, NodePowerState>(
+          bloc: powerModel,
+          listenWhen: (before, after) => before.report != after.report,
+          listener: _powerChanged,
+          child: BlocListener<TreeHoverCubit, TreeHoverState>(
+            bloc: hoverModel,
+            listener: _hoverChanged,
+            child: OverlayPortal(
+              controller: tooltipPortal,
+              overlayChildBuilder: _tooltip,
+              child: _body(),
+            ),
+          ),
         ),
       );
 
@@ -179,7 +210,7 @@ class _TreeViewState extends State<TreeView>
           child: ClipRRect(
             borderRadius: BorderRadius.circular(18),
             child: ColoredBox(
-              color: Spark.ink,
+              color: Spark.of(context).treeBackground,
               child: LayoutBuilder(
                 builder: (context, constraints) {
                   final size = Size(
@@ -223,7 +254,7 @@ class _TreeViewState extends State<TreeView>
                             icons,
                             transform,
                             size,
-                            artwork?.picture,
+                            powerArtwork?.artwork.picture ?? artwork?.picture,
                             hoverArtwork?.picture,
                           ),
                         ),
@@ -235,31 +266,41 @@ class _TreeViewState extends State<TreeView>
             ),
           ),
         ),
+        if (powerVisible)
+          Padding(
+            padding: const EdgeInsets.only(top: 10),
+            child: SizedBox(
+              height: MediaQuery.sizeOf(context).width < 650 ? 230 : 210,
+              child: NodePowerPanel(
+                model: powerModel,
+                onFocus: _focusPowerNode,
+                enabled:
+                    !widget.model.state.busy &&
+                    widget.model.state.document?.stale == false,
+              ),
+            ),
+          ),
         if (decodeError case final error?)
           Text(
             error,
             key: const Key('tree-decode-error'),
-            style: const TextStyle(color: Spark.danger, fontSize: 11),
+            style: TextStyle(color: Spark.of(context).danger, fontSize: 11),
           ),
         if (widget.tree.iconError case final error?)
           Text(
             error,
-            style: const TextStyle(color: Spark.danger, fontSize: 11),
+            style: TextStyle(color: Spark.of(context).danger, fontSize: 11),
           ),
         Padding(
           padding: const EdgeInsets.only(top: 8),
           child: Row(
             children: [
               Expanded(
-                child: Text(
-                  widget.model.state.report!.points,
-                  style: Spark.mono.copyWith(fontSize: 11),
-                  overflow: TextOverflow.ellipsis,
-                ),
+                child: TreePointCounters(widget.model.state.report!.points),
               ),
               Text(
                 'PoB · ${widget.tree.version.replaceAll('_', '.')}',
-                style: const TextStyle(color: Spark.muted, fontSize: 10),
+                style: TextStyle(color: Spark.of(context).muted, fontSize: 10),
               ),
             ],
           ),
@@ -284,11 +325,64 @@ class _TreeViewState extends State<TreeView>
         ),
       ),
       const SizedBox(width: 6),
+      ArtIconButton(
+        'chart',
+        label: 'Найти узлы по характеристике',
+        onPressed: _togglePower,
+      ),
       ArtIconButton('minus', label: 'Отдалить', onPressed: () => _zoom(.8)),
       ArtIconButton('plus', label: 'Приблизить', onPressed: () => _zoom(1.25)),
       ArtIconButton('fit', label: 'Показать всё дерево', onPressed: _fit),
     ],
   );
+
+  void _togglePower() {
+    setState(() => powerVisible = !powerVisible);
+    if (powerVisible) {
+      if (powerModel.state.metrics.isEmpty) powerModel.load();
+    } else {
+      powerModel.cancel();
+    }
+  }
+
+  void _focusPowerNode(int id) {
+    final point = scene.points[id];
+    if (point == null || viewport == null) return;
+    setState(() => selected = id);
+    _center(point, 8);
+  }
+
+  void _powerChanged(BuildContext context, NodePowerState state) {
+    final generation = ++powerGeneration;
+    hoverModel.clear();
+    setState(() {
+      powerArtwork?.dispose();
+      powerArtwork = null;
+    });
+    if (state.report case final report?) _loadPowerArtwork(report, generation);
+  }
+
+  Future<void> _loadPowerArtwork(NodePowerReport report, int generation) async {
+    try {
+      final loaded = await LoadedTreeArtwork.load(
+        report.scene,
+        report.images,
+        icons,
+      );
+      if (!mounted || generation != powerGeneration) {
+        loaded.dispose();
+        return;
+      }
+      setState(() => powerArtwork = loaded);
+    } catch (error) {
+      if (mounted && generation == powerGeneration) {
+        setState(
+          () => decodeError = 'Не удалось показать тепловую карту: $error',
+        );
+      }
+    }
+  }
+
   void _fit() {
     final size = viewport!;
     final scale = math.min(size.width, size.height) / 1800;
@@ -511,7 +605,7 @@ class _NodeDialogState extends State<_NodeDialog> {
         .where((entry) => entry['id'] == widget.node.id)
         .firstOrNull;
     return (
-      lines: jsonRows(tooltip['lines'])
+      lines: NodePreview(tooltip: tooltip).lines
           .map((line) => cleanPoB('${line['text'] ?? ''}'))
           .where((line) => line.isNotEmpty)
           .toList(),
@@ -571,22 +665,15 @@ class _NodeDialogState extends State<_NodeDialog> {
           ),
         ),
         if (attributes.isNotEmpty)
-          DropdownButtonFormField<int>(
-            hint: const Text('Выберите характеристику'),
-            items: attributes
-                .map(
-                  (option) => DropdownMenuItem(
-                    value: option['id'] as int,
-                    child: Text('${option['name']}'),
-                  ),
-                )
-                .toList(),
+          AttributePicker(
+            options: attributes,
+            value: attribute,
             onChanged: (value) => setState(() => attribute = value),
           ),
         if (widget.node.kind == 'Mastery')
-          const Text(
+          Text(
             'Выбор эффекта мастерства пока доступен через XML.',
-            style: TextStyle(color: Spark.muted),
+            style: TextStyle(color: Spark.of(context).muted),
           ),
       ],
     );

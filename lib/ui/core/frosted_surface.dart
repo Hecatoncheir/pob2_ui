@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 class FrostedSurface extends StatelessWidget {
   const FrostedSurface({super.key, required this.child});
   final Widget child;
-  static const opacity = .84;
+  static const opacity = .92;
 
   static Color contrastBackground(ColorScheme colors) {
     final light =
@@ -21,7 +21,7 @@ class FrostedSurface extends StatelessWidget {
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
     final radius = BorderRadius.circular(12);
-    final tintOpacity = MediaQuery.highContrastOf(context) ? .96 : opacity;
+    final tintOpacity = MediaQuery.highContrastOf(context) ? .98 : opacity;
     return DecoratedBox(
       decoration: BoxDecoration(
         borderRadius: radius,

@@ -46,9 +46,12 @@ class StatisticsPanel extends StatelessWidget {
                 ),
                 const SizedBox(height: 20),
                 if (model.state.document!.stale)
-                  const Text(
+                  Text(
                     'Предыдущий расчёт',
-                    style: TextStyle(color: Spark.danger, fontSize: 11),
+                    style: TextStyle(
+                      color: Spark.of(context).danger,
+                      fontSize: 11,
+                    ),
                   ),
                 WarningButton(report: report),
                 const SizedBox(height: 12),
@@ -224,9 +227,9 @@ class _PrimaryStat extends StatelessWidget {
               style: Spark.mono.copyWith(fontSize: 34, letterSpacing: -1.5),
             ),
           ),
-          const Text(
+          Text(
             'урон в секунду',
-            style: TextStyle(color: Spark.muted, fontSize: 10),
+            style: TextStyle(color: Spark.of(context).muted, fontSize: 10),
           ),
         ],
       ),
@@ -274,7 +277,10 @@ void statDetails(BuildContext context, BuildReport report, String key) =>
             const SizedBox(height: 8),
             Text(
               key,
-              style: Spark.mono.copyWith(fontSize: 12, color: Spark.muted),
+              style: Spark.mono.copyWith(
+                fontSize: 12,
+                color: Spark.of(context).muted,
+              ),
             ),
           ],
         ),
@@ -329,7 +335,7 @@ class StatRow extends StatelessWidget {
         Expanded(
           child: Text(
             label,
-            style: const TextStyle(color: Spark.muted, fontSize: 12),
+            style: TextStyle(color: Spark.of(context).muted, fontSize: 12),
           ),
         ),
         Text(
@@ -350,7 +356,9 @@ class WarningButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) => TextButton.icon(
     style: TextButton.styleFrom(
-      foregroundColor: report.warnings.isEmpty ? Spark.green : Spark.danger,
+      foregroundColor: report.warnings.isEmpty
+          ? Spark.of(context).green
+          : Spark.of(context).danger,
       padding: EdgeInsets.zero,
       alignment: Alignment.centerLeft,
     ),
@@ -358,7 +366,9 @@ class WarningButton extends StatelessWidget {
     icon: SparkArt(
       'icons/${report.warnings.isEmpty ? 'check' : 'info'}',
       width: 16,
-      color: report.warnings.isEmpty ? Spark.green : Spark.danger,
+      color: report.warnings.isEmpty
+          ? Spark.of(context).green
+          : Spark.of(context).danger,
     ),
     label: Text(
       'Предупреждения · ${report.warnings.length}',

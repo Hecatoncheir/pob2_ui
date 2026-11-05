@@ -4,6 +4,7 @@ import 'dart:math' as math;
 
 import '../domain/build_report.dart';
 import 'core/frosted_surface.dart';
+import 'core/gruvbox.dart';
 import 'tree_hover_cubit.dart';
 
 class NodeTooltipLayout extends SingleChildLayoutDelegate {
@@ -13,8 +14,8 @@ class NodeTooltipLayout extends SingleChildLayoutDelegate {
   BoxConstraints getConstraintsForChild(BoxConstraints constraints) =>
       BoxConstraints.loose(
         Size(
-          math.min(440, math.max(0, constraints.maxWidth - 24)),
-          math.min(560, math.max(0, constraints.maxHeight - 24)),
+          math.min(480, math.max(0, constraints.maxWidth - 24)),
+          math.min(640, math.max(0, constraints.maxHeight - 24)),
         ),
       );
   @override
@@ -41,7 +42,7 @@ class TreeHoverCard extends StatelessWidget {
     final colors = Theme.of(context).colorScheme;
     return FrostedSurface(
       child: Padding(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(18),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -51,11 +52,11 @@ class TreeHoverCard extends StatelessWidget {
               style: TextStyle(
                 color: colors.onSurface,
                 fontFamily: 'Nunito',
-                fontSize: 17,
+                fontSize: 18,
                 fontWeight: FontWeight.w800,
               ),
             ),
-            const SizedBox(height: 10),
+            const SizedBox(height: 12),
             if (state.loading) const LinearProgressIndicator(minHeight: 2),
             if (state.error case final error?)
               Text(
@@ -83,16 +84,21 @@ class TreeHoverCard extends StatelessWidget {
   Widget _line(JsonMap line, ColorScheme colors) {
     if (line['separator'] == true)
       return Padding(
-        padding: const EdgeInsets.symmetric(vertical: 6),
+        padding: const EdgeInsets.symmetric(vertical: 8),
         child: Divider(color: colors.outlineVariant),
       );
     final text = '${line['text'] ?? ''}';
     if (cleanPoB(text) == title) return const SizedBox.shrink();
     return Padding(
-      padding: const EdgeInsets.only(bottom: 3),
+      padding: const EdgeInsets.only(bottom: 5),
       child: Text.rich(
         TextSpan(children: _spans(text, colors)),
-        style: TextStyle(fontSize: 12, height: 1.35, color: colors.onSurface),
+        style: TextStyle(
+          fontSize: 14,
+          fontWeight: FontWeight.w500,
+          height: 1.5,
+          color: colors.onSurface,
+        ),
       ),
     );
   }
@@ -129,16 +135,32 @@ class TreeHoverCard extends StatelessWidget {
   }
 
   Color _readableColor(Color source, ColorScheme colors) {
+    source = _themeColor(source, colors);
     final background = FrostedSurface.contrastBackground(colors)
         .computeLuminance();
-    for (final amount in const [0.0, .15, .3, .45, .6, .75]) {
+    for (final amount in const [0.0, .15, .3, .45, .6, .75, .9]) {
       final color = Color.lerp(source, colors.onSurface, amount)!;
       final foreground = color.computeLuminance();
       final contrast =
           (math.max(foreground, background) + .05) /
           (math.min(foreground, background) + .05);
-      if (contrast >= 4.5) return color;
+      if (contrast >= 7) return color;
     }
     return colors.onSurface;
+  }
+
+  Color _themeColor(Color source, ColorScheme colors) {
+    if (colors.brightness != Brightness.dark) return source;
+    final hsv = HSVColor.fromColor(source);
+    if (hsv.saturation < .15) return colors.onSurfaceVariant;
+    return switch (hsv.hue) {
+      >= 15 && < 50 => Gruvbox.orange,
+      >= 50 && < 80 => Gruvbox.yellow,
+      >= 80 && < 160 => Gruvbox.green,
+      >= 160 && < 200 => Gruvbox.aqua,
+      >= 200 && < 270 => Gruvbox.blue,
+      >= 270 && < 330 => Gruvbox.purple,
+      _ => Gruvbox.red,
+    };
   }
 }

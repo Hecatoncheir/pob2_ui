@@ -82,6 +82,8 @@ def path_code(source):
 def color(value, opacity):
     if value.startswith('var('): value = re.search(r'#[a-fA-F0-9]+', value)[0]
     if value.startswith('#') and len(value) == 4: value = '#' + ''.join(c*2 for c in value[1:])
+    if value.lower() == '#242722': value = 'currentColor'
+    if value.lower() == '#f2efe5': return 'background' if opacity == 1 else f'background.withValues(alpha: {number(opacity)})'
     base = 'color' if value == 'currentColor' else f'const Color(0xFF{value.lstrip("#").upper()})'
     return base if opacity == 1 else f'{base}.withValues(alpha: {number(opacity)})'
 
@@ -134,7 +136,7 @@ def draw(element, inherited, output, counter):
 
 def main():
     files = sorted((ROOT / 'docs/assets').rglob('*.svg'))
-    header = ["// Сгенерировано tool/generate_vectors.py из SVG; правьте исходные SVG.", "import 'dart:ui';", "typedef VectorDrawing = ({Size size, void Function(Canvas, Color) draw});", 'final vectorDrawings = <String, VectorDrawing>{']
+    header = ["// Сгенерировано tool/generate_vectors.py из SVG; правьте исходные SVG.", "import 'dart:ui';", "typedef VectorDrawing = ({Size size, void Function(Canvas, Color, Color) draw});", 'final vectorDrawings = <String, VectorDrawing>{']
     functions = []
     for index, file in enumerate(files):
         tree = ET.parse(file).getroot()
@@ -143,7 +145,7 @@ def main():
         header.append(f"'{key}': (size: Size({width}, {height}), draw: drawVector{index}),")
         body = []
         draw(tree, {}, body, [0])
-        functions.append(f'void drawVector{index}(Canvas canvas, Color color) {{\n' + '\n'.join(body) + '\n}')
+        functions.append(f'void drawVector{index}(Canvas canvas, Color color, Color background) {{\n' + '\n'.join(body) + '\n}')
     output = ROOT / 'lib/ui/core/vector_drawings.dart'
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text('\n'.join(header + ['};'] + functions), encoding='utf-8')
