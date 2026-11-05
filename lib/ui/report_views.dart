@@ -27,44 +27,48 @@ class StatisticsPanel extends StatelessWidget {
       child: Stack(
         children: [
           Positioned.fill(
-            child: ListView(
-              key: const Key('statistics-scroll'),
-              padding: const EdgeInsets.fromLTRB(18, 68, 18, 18),
-              children: [
-                SkillSelectors(model: model),
-                const Divider(height: 22),
-                _PrimaryStat(report),
-                const SizedBox(height: 16),
-                BlocBuilder<ShellCubit, ShellState>(
-                  bloc: shell,
-                  builder: (context, state) => Wrap(
-                    spacing: 12,
-                    runSpacing: 18,
-                    children: state.pins
-                        .map(
-                          (key) =>
-                              SizedBox(width: 112, child: _Stat(report, key)),
-                        )
-                        .toList(),
-                  ),
-                ),
-                const SizedBox(height: 20),
-                if (model.state.document!.stale)
-                  AppText(
-                    'Предыдущий расчёт',
-                    style: TextStyle(
-                      color: Spark.of(context).danger,
-                      fontSize: 11,
+            child: ScrollConfiguration(
+              behavior: ScrollConfiguration.of(context)
+                  .copyWith(scrollbars: false),
+              child: ListView(
+                key: const Key('statistics-scroll'),
+                padding: const EdgeInsets.fromLTRB(18, 68, 18, 18),
+                children: [
+                  SkillSelectors(model: model),
+                  const Divider(height: 22),
+                  _PrimaryStat(report),
+                  const SizedBox(height: 16),
+                  BlocBuilder<ShellCubit, ShellState>(
+                    bloc: shell,
+                    builder: (context, state) => Wrap(
+                      spacing: 12,
+                      runSpacing: 18,
+                      children: state.pins
+                          .map(
+                            (key) =>
+                                SizedBox(width: 112, child: _Stat(report, key)),
+                          )
+                          .toList(),
                     ),
                   ),
-                WarningButton(report: report),
-                const SizedBox(height: 12),
-                ...statGroups.entries.map(
-                  (group) => _StatGroup(report, group.key, group.value),
-                ),
-                const SizedBox(height: 16),
-                const DotLabel('Рассчитано в Lua PoB'),
-              ],
+                  const SizedBox(height: 20),
+                  if (model.state.document!.stale)
+                    AppText(
+                      'Предыдущий расчёт',
+                      style: TextStyle(
+                        color: Spark.of(context).danger,
+                        fontSize: 11,
+                      ),
+                    ),
+                  WarningButton(report: report),
+                  const SizedBox(height: 12),
+                  ...statGroups.entries.map(
+                    (group) => _StatGroup(report, group.key, group.value),
+                  ),
+                  const SizedBox(height: 16),
+                  const DotLabel('Рассчитано в Lua PoB'),
+                ],
+              ),
             ),
           ),
           Positioned(
