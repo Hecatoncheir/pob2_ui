@@ -112,16 +112,14 @@ def check(target):
             check_macos(package, base, data, environment)
             return
         if target == 'windows-x64':
-            run(package, '/VERYSILENT', '/SUPPRESSMSGBOXES', '/NORESTART', '/SP-', '/DIR=' + str(install), env=environment)
+            run(package, '/VERYSILENT', '/SUPPRESSMSGBOXES', '/NORESTART', '/SP-', '/RELAUNCH', '/DIR=' + str(install), env=environment)
             binary = 'pob2_ui.exe'
         else:
-            run('/bin/sh', package, '--prefix', install, env=environment)
+            run('/bin/sh', package, '--prefix', install, '--wait-pid', '2147483647', '--relaunch', env=environment)
             binary = 'pob2-ui'
         marker = json.loads((install / 'pob2-install.json').read_text())
         assert marker['id'] == 'dev.hecatoncheir.pob2Ui'
-        process = subprocess.Popen([str(install / binary)], env=environment)
         wait_file(install / 'active-version', number)
-        process.wait(timeout=45)
         stop_versions(install, environment)
         # Отсутствующий кандидат должен вернуть рабочую версию.
         (install / 'pending-version').write_text('999.0.0')

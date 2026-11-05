@@ -68,6 +68,8 @@ if [ -n "$wait_pid" ]; then
   done
 fi
 echo "PoB II $version установлен: $prefix"
+flock -u 9
+exec 9>&-
 if [ "$relaunch" = 1 ]; then nohup "$prefix/pob2-ui" > "$prefix/launcher.log" 2>&1 < /dev/null & fi
 exit 0
 __POB2_PAYLOAD__
