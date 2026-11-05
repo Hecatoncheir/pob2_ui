@@ -10,6 +10,11 @@ import 'package:pob2_ui/ui/interface_scale_cubit.dart';
 import 'package:pob2_ui/ui/interface_scale_picker.dart';
 import 'package:pob2_ui/ui/interface_viewport.dart';
 import 'package:pob2_ui/ui/core/spark_theme.dart';
+import 'package:pob2_ui/data/component_repository.dart';
+import 'package:pob2_ui/data/installation_store.dart';
+import 'package:pob2_ui/data/mcp_client.dart';
+import 'package:pob2_ui/ui/app.dart';
+import 'package:pob2_ui/ui/workshop_cubit.dart';
 
 import 'support/temporary_directory.dart';
 
@@ -39,6 +44,37 @@ Future<void> shortcut(WidgetTester tester, LogicalKeyboardKey key) async {
 }
 
 void main() {
+  testWidgets(
+    'Настройки закрываются после исчезновения открывшей их боковой панели',
+    (tester) async {
+      await tester.binding.setSurfaceSize(const Size(800, 600));
+      addTearDown(() => tester.binding.setSurfaceSize(null));
+      final scale = InterfaceScaleCubit(MemoryScale());
+      final model = WorkshopCubit(
+        ComponentRepository(
+          store: InstallationStore(Directory('unused-scale-test')),
+        ),
+        McpClient(),
+      );
+      await tester.pumpWidget(PobApp(model: model, interfaceScale: scale));
+      await tester.pumpAndSettle();
+      final opener = tester.element(
+        find.byKey(const Key('appearance-settings')),
+      );
+      await tester.tap(find.byKey(const Key('appearance-settings')));
+      await tester.pumpAndSettle();
+      await scale.setPercent(135);
+      await tester.pumpAndSettle();
+      expect(opener.mounted, isFalse);
+      await tester.tap(find.text('Готово'));
+      await tester.pumpAndSettle();
+      expect(find.byType(AlertDialog), findsNothing);
+      expect(tester.takeException(), isNull);
+      await tester.pumpWidget(const SizedBox.shrink());
+      await scale.close();
+      await model.close();
+    },
+  );
   test('Масштаб сохраняет последний выбор и восстанавливается в допустимых границах', () async {
     final root = await Directory.systemTemp.createTemp('pob2-scale-');
     addTearDown(() => removeTemporaryDirectory(root));

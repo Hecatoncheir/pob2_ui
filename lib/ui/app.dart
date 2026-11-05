@@ -1,3 +1,4 @@
+import 'core/dialog_close_button.dart';
 import 'core/app_text.dart';
 
 import 'package:flutter/material.dart';
@@ -667,12 +668,7 @@ class _SettingsButton extends StatelessWidget {
             ),
           ),
         ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const AppText('Готово'),
-          ),
-        ],
+        actions: [const DialogCloseButton(label: 'Готово')],
       ),
     );
   }

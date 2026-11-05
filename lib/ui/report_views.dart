@@ -1,3 +1,4 @@
+import 'core/dialog_close_button.dart';
 import 'core/app_text.dart';
 
 import 'dart:convert';
@@ -130,12 +131,7 @@ class _InspectorHeading extends StatelessWidget {
           ),
         ),
       ),
-      actions: [
-        TextButton(
-          onPressed: () => Navigator.pop(context),
-          child: const AppText('Готово'),
-        ),
-      ],
+      actions: [const DialogCloseButton(label: 'Готово')],
     ),
   );
 }
@@ -287,12 +283,7 @@ void statDetails(BuildContext context, BuildReport report, String key) =>
             ),
           ],
         ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const AppText('Закрыть'),
-          ),
-        ],
+        actions: [const DialogCloseButton(label: 'Закрыть')],
       ),
     );
 
@@ -408,12 +399,7 @@ void showWarnings(BuildContext context, BuildReport report) =>
             ),
           ),
         ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const AppText('Закрыть'),
-          ),
-        ],
+        actions: [const DialogCloseButton(label: 'Закрыть')],
       ),
     );
 

@@ -1,3 +1,4 @@
+import 'core/dialog_close_button.dart';
 import 'core/app_text.dart';
 
 import 'package:flutter/material.dart';
@@ -245,10 +246,7 @@ class NodePowerPanel extends StatelessWidget {
           ),
         ),
         actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const AppText('Отмена'),
-          ),
+          const DialogCloseButton(label: 'Отмена'),
           FilledButton(
             onPressed: () {
               if (form.currentState!.validate())

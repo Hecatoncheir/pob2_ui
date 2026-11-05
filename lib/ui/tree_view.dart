@@ -1,3 +1,4 @@
+import 'core/dialog_close_button.dart';
 import 'core/app_text.dart';
 
 import 'dart:math' as math;
@@ -660,10 +661,7 @@ class _NodeDialogState extends State<_NodeDialog> {
             child: SingleChildScrollView(child: _content(snapshot)),
           ),
           actions: [
-            TextButton(
-              onPressed: () => Navigator.pop(context),
-              child: const AppText('Закрыть'),
-            ),
+            const DialogCloseButton(label: 'Закрыть'),
             if (widget.node.allocated &&
                 snapshot.data?.attributes.isNotEmpty == true)
               TextButton(

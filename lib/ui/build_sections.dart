@@ -1,3 +1,4 @@
+import 'core/dialog_close_button.dart';
 import 'core/app_text.dart';
 
 import 'package:flutter/material.dart';
@@ -227,12 +228,7 @@ class _ItemSlot extends StatelessWidget {
           ),
         ),
       ),
-      actions: [
-        TextButton(
-          onPressed: () => Navigator.pop(context),
-          child: const AppText('Закрыть'),
-        ),
-      ],
+      actions: [const DialogCloseButton(label: 'Закрыть')],
     ),
   );
 }
@@ -373,10 +369,7 @@ class _ConditionDialogState extends State<_ConditionDialog> {
       title: AppText(_conditionLabel(widget.name)),
       content: SizedBox(width: 400, child: _content(snapshot)),
       actions: [
-        TextButton(
-          onPressed: () => Navigator.pop(context),
-          child: const AppText('Отмена'),
-        ),
+        const DialogCloseButton(label: 'Отмена'),
         if (snapshot.hasData)
           FilledButton(
             onPressed: () => _save(snapshot.data!),

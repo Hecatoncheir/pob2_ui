@@ -1,3 +1,4 @@
+import 'core/dialog_close_button.dart';
 import 'core/app_text.dart';
 
 import 'package:flutter/material.dart';
@@ -98,10 +99,7 @@ class _NewBuildDialogState extends State<_NewBuildDialog> {
       ),
     ),
     actions: [
-      TextButton(
-        onPressed: () => Navigator.pop(context),
-        child: const AppText('Отмена'),
-      ),
+      const DialogCloseButton(label: 'Отмена'),
       FilledButton(onPressed: _create, child: const AppText('Создать сборку')),
     ],
   );
@@ -164,10 +162,7 @@ class _XmlDialogState extends State<_XmlDialog> {
       ),
     ),
     actions: [
-      TextButton(
-        onPressed: () => Navigator.pop(context),
-        child: const AppText('Закрыть'),
-      ),
+      const DialogCloseButton(label: 'Закрыть'),
       FilledButton(
         onPressed: () {
           if (xml.text.trim().isEmpty) return;
@@ -195,10 +190,7 @@ Future<void> exportXml(BuildContext context, WorkshopCubit model) async {
         ),
       ),
       actions: [
-        TextButton(
-          onPressed: () => Navigator.pop(context),
-          child: const AppText('Закрыть'),
-        ),
+        const DialogCloseButton(label: 'Закрыть'),
         FilledButton.icon(
           onPressed: () => Clipboard.setData(ClipboardData(text: xml)),
           icon: SparkArt(
@@ -228,10 +220,7 @@ Future<void> renameBuild(BuildContext context, WorkshopCubit model) async {
         onSubmitted: (value) => Navigator.pop(context, value),
       ),
       actions: [
-        TextButton(
-          onPressed: () => Navigator.pop(context),
-          child: const AppText('Отмена'),
-        ),
+        const DialogCloseButton(label: 'Отмена'),
         FilledButton(
           onPressed: () => Navigator.pop(context, field.text),
           child: const AppText('Сохранить'),
