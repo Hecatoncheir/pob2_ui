@@ -1,6 +1,7 @@
 """Проверить готовый установщик и подтверждение первого запуска Flutter."""
 
 import argparse
+import hashlib
 import json
 import os
 from pathlib import Path
@@ -39,6 +40,66 @@ def stop_versions(install, environment):
     time.sleep(1)
 
 
+def stop_macos(bundle):
+    expected = str(bundle / 'Contents/MacOS/PoB II')
+    processes = subprocess.check_output(['ps', '-eo', 'pid=,args='], text=True)
+    for line in processes.splitlines():
+        pieces = line.strip().split(None, 1)
+        if len(pieces) == 2 and pieces[1].startswith(expected):
+            os.kill(int(pieces[0]), 15)
+    time.sleep(1)
+
+
+def mount_macos(package, base):
+    mount = base / 'mount'
+    mount.mkdir()
+    run('hdiutil', 'attach', package, '-readonly', '-nobrowse', '-mountpoint', mount)
+    bundle = base / 'PoB II.app'
+    try:
+        run('ditto', mount / bundle.name, bundle)
+    finally:
+        run('hdiutil', 'detach', mount)
+    run('codesign', '--verify', '--deep', '--strict', bundle)
+    return bundle
+
+
+def failed_macos_package(bundle, base):
+    staging = base / 'failed-dmg'
+    staging.mkdir()
+    candidate = staging / bundle.name
+    run('ditto', bundle, candidate)
+    source = base / 'failed.c'
+    source.write_text('#include <unistd.h>\nint main(void) { sleep(60); return 0; }\n')
+    run('clang', source, '-o', candidate / 'Contents/MacOS/PoB II')
+    run('codesign', '--force', '--deep', '--sign', '-', candidate)
+    package = base / 'failed.dmg'
+    run('hdiutil', 'create', '-volname', 'PoB II', '-srcfolder', staging, '-format', 'UDZO', package)
+    return package
+
+
+def check_macos(package, base, data, environment):
+    bundle = mount_macos(package, base)
+    executable = bundle / 'Contents/MacOS/PoB II'
+    process = subprocess.Popen([str(executable), '--pob-update-token', '1' * 32], env=environment)
+    try:
+        wait_file(data / 'updates' / ('health-' + '1' * 32 + '.ready'), 'ready')
+    finally:
+        process.terminate()
+        process.wait(timeout=15)
+    helper = bundle / 'Contents/Resources/update-macos.sh'
+    arguments = ['/bin/sh', helper, package, bundle, str(process.pid), version()]
+    run(*arguments, env=environment, timeout=90)
+    assert Path(str(bundle) + '.previous').is_dir()
+    stop_macos(bundle)
+    original_digest = hashlib.sha256(executable.read_bytes()).digest()
+    arguments[2] = failed_macos_package(bundle, base)
+    failed = subprocess.run([str(value) for value in arguments], env=environment, timeout=90)
+    assert failed.returncode != 0
+    assert hashlib.sha256(executable.read_bytes()).digest() == original_digest
+    stop_macos(bundle)
+    print('macos-arm64: DMG, запуск, замена приложения и откат проверены')
+
+
 def check(target):
     number = version()
     package = ROOT / 'build/packages' / filename(number, target)
@@ -48,21 +109,7 @@ def check(target):
         data = base / 'data'
         environment = dict(os.environ, POB2_UI_HOME=str(data))
         if target == 'macos-arm64':
-            mount = base / 'mount'
-            mount.mkdir()
-            run('hdiutil', 'attach', package, '-readonly', '-nobrowse', '-mountpoint', mount)
-            try:
-                bundle = base / 'PoB II.app'
-                run('ditto', mount / bundle.name, bundle)
-            finally:
-                run('hdiutil', 'detach', mount)
-            run('codesign', '--verify', '--deep', '--strict', bundle)
-            process = subprocess.Popen([str(bundle / 'Contents/MacOS/PoB II'), '--pob-update-token', '1' * 32], env=environment)
-            try:
-                wait_file(data / 'updates' / ('health-' + '1' * 32 + '.ready'), 'ready')
-            finally:
-                process.terminate()
-                process.wait(timeout=15)
+            check_macos(package, base, data, environment)
             return
         if target == 'windows-x64':
             run(package, '/VERYSILENT', '/SUPPRESSMSGBOXES', '/NORESTART', '/SP-', '/DIR=' + str(install), env=environment)
