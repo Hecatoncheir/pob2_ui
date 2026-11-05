@@ -872,6 +872,12 @@ abstract class AppLocalizations {
   /// **'Workshop'**
   String get m6c50317db8;
 
+  /// Масштаб интерфейса
+  ///
+  /// In en, this message translates to:
+  /// **'Interface scale'**
+  String get mbe517dba6c;
+
   /// Множитель критического удара
   ///
   /// In en, this message translates to:
@@ -1069,6 +1075,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Failed to read node: {p0}'**
   String mbefc941808(String p0);
+
+  /// Не удалось сохранить масштаб.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to save scale.'**
+  String get mef9d01550d;
 
   /// Не удалось сохранить тему.
   ///
@@ -1868,6 +1880,12 @@ abstract class AppLocalizations {
   /// **'Assembly calculated by original Lua'**
   String get mc27d8aad03;
 
+  /// Сбросить
+  ///
+  /// In en, this message translates to:
+  /// **'Reset'**
+  String get m407f871778;
+
   /// Светлая
   ///
   /// In en, this message translates to:
@@ -2054,6 +2072,12 @@ abstract class AppLocalizations {
   /// **'Redirect has no address'**
   String get m2ec842e2f5;
 
+  /// Увеличить интерфейс
+  ///
+  /// In en, this message translates to:
+  /// **'Enlarge interface'**
+  String get mcacf1f7fd0;
+
   /// Уже выполняется установка
   ///
   /// In en, this message translates to:
@@ -2107,6 +2131,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Skills have not been added yet'**
   String get m8af375dfe7;
+
+  /// Уменьшить интерфейс
+  ///
+  /// In en, this message translates to:
+  /// **'Make the interface smaller'**
+  String get m7eac5d04d3;
 
   /// Уровень
   ///

@@ -1,3 +1,5 @@
+import 'package:pob2_ui/data/interface_scale_repository.dart';
+import 'package:pob2_ui/ui/interface_scale_cubit.dart';
 import 'package:pob2_ui/data/language_preferences.dart';
 import 'package:pob2_ui/data/game_dictionary_repository.dart';
 import 'package:pob2_ui/ui/language_cubit.dart';
@@ -32,7 +34,21 @@ Future<void> main() async {
     GameDictionaryRepository(model.components.store.root),
     initialLanguage: await languages.load(),
   );
-  runApp(PobApp(model: model, appearance: appearance, language: language));
+  final scalePreferences = InterfaceScaleRepository(
+    model.components.store.root,
+  );
+  final interfaceScale = InterfaceScaleCubit(
+    scalePreferences,
+    initialPercent: await scalePreferences.load(),
+  );
+  runApp(
+    PobApp(
+      model: model,
+      appearance: appearance,
+      language: language,
+      interfaceScale: interfaceScale,
+    ),
+  );
   language.load();
   model.initialize();
 }

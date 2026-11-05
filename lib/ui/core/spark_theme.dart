@@ -60,6 +60,14 @@ abstract final class Spark {
         bodySmall: TextStyle(fontSize: 11, height: 1.5, color: secondaryText),
       ),
       dividerTheme: DividerThemeData(color: border, thickness: 1, space: 1),
+      textButtonTheme: TextButtonThemeData(
+        style: TextButton.styleFrom(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+        ),
+      ),
       cardTheme: CardThemeData(
         color: panel,
         elevation: 0,

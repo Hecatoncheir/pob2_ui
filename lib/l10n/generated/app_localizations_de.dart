@@ -445,6 +445,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get m6c50317db8 => 'Werkstatt';
 
   @override
+  String get mbe517dba6c => 'Schnittstellenskala';
+
+  @override
   String get m22e1e2c7ad => 'Kritischer Multiplikator';
 
   @override
@@ -569,6 +572,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String mbefc941808(String p0) {
     return 'Knoten konnte nicht gelesen werden: $p0';
   }
+
+  @override
+  String get mef9d01550d => 'Maßstab konnte nicht gespeichert werden.';
 
   @override
   String get m92233abcc1 => 'Thema konnte nicht gespeichert werden.';
@@ -1005,6 +1011,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get mc27d8aad03 => 'Von Original Lua berechnete Baugruppe';
 
   @override
+  String get m407f871778 => 'Zurücksetzen';
+
+  @override
   String get mf0cd3a6033 => 'Licht';
 
   @override
@@ -1100,6 +1109,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get m2ec842e2f5 => 'Die Weiterleitung hat keine Adresse';
 
   @override
+  String get mcacf1f7fd0 => 'Schnittstelle vergrößern';
+
+  @override
   String get m97ac4c501c => 'Installation bereits im Gange';
 
   @override
@@ -1127,6 +1139,9 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get m8af375dfe7 => 'Fähigkeiten wurden noch nicht hinzugefügt';
+
+  @override
+  String get m7eac5d04d3 => 'Verkleinern Sie die Schnittstelle';
 
   @override
   String get m7f67af3d6c => 'Niveau';

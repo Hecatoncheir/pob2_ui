@@ -442,6 +442,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get m6c50317db8 => 'Atelier';
 
   @override
+  String get mbe517dba6c => 'Échelle d\'interface';
+
+  @override
   String get m22e1e2c7ad => 'Multiplicateur de critiques';
 
   @override
@@ -565,6 +568,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String mbefc941808(String p0) {
     return 'Échec de la lecture du nœud : $p0';
   }
+
+  @override
+  String get mef9d01550d => 'Échec de l\'enregistrement de l\'échelle.';
 
   @override
   String get m92233abcc1 => 'Échec de l\'enregistrement du sujet.';
@@ -1003,6 +1009,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get mc27d8aad03 => 'Assemblage calculé par l\'original Lua';
 
   @override
+  String get m407f871778 => 'Réinitialiser';
+
+  @override
   String get mf0cd3a6033 => 'Lumière';
 
   @override
@@ -1099,6 +1108,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get m2ec842e2f5 => 'La redirection n\'a pas d\'adresse';
 
   @override
+  String get mcacf1f7fd0 => 'Agrandir l\'interface';
+
+  @override
   String get m97ac4c501c => 'Installation déjà en cours';
 
   @override
@@ -1126,6 +1138,9 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get m8af375dfe7 => 'Les compétences n\'ont pas encore été ajoutées';
+
+  @override
+  String get m7eac5d04d3 => 'Rendre l\'interface plus petite';
 
   @override
   String get m7f67af3d6c => 'Niveau';

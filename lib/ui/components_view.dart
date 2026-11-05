@@ -32,13 +32,22 @@ class ComponentsView extends StatelessWidget {
         ),
       ),
       const SizedBox(height: 24),
-      ...Component.values.map(
-        (component) => Padding(
-          padding: const EdgeInsets.only(bottom: 16),
-          child: _Component(model, component),
-        ),
+      LayoutBuilder(
+        builder: (context, constraints) {
+          final width = constraints.maxWidth >= 760
+              ? (constraints.maxWidth - 16) / 2
+              : constraints.maxWidth;
+          return Wrap(
+            spacing: 16,
+            runSpacing: 16,
+            children: [
+              for (final component in Component.values)
+                SizedBox(width: width, child: _Component(model, component)),
+            ],
+          );
+        },
       ),
-      const SizedBox(height: 8),
+      const SizedBox(height: 24),
       Wrap(
         spacing: 12,
         runSpacing: 12,
@@ -96,6 +105,7 @@ class _Component extends StatelessWidget {
     final latest = model.state.releases[component];
     final current = installed != null && installed.tag == latest?.tag;
     return SurfacePanel(
+      key: ValueKey('component-card-${component.name}'),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

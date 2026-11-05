@@ -430,6 +430,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m6c50317db8 => 'ワークショップ';
 
   @override
+  String get mbe517dba6c => 'インターフェーススケール';
+
+  @override
   String get m22e1e2c7ad => 'クリティカル倍率';
 
   @override
@@ -553,6 +556,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String mbefc941808(String p0) {
     return 'ノードの読み取りに失敗しました: $p0';
   }
+
+  @override
+  String get mef9d01550d => 'スケールの保存に失敗しました。';
 
   @override
   String get m92233abcc1 => 'トピックの保存に失敗しました。';
@@ -978,6 +984,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get mc27d8aad03 => 'オリジナルの Lua によって計算されたアセンブリ';
 
   @override
+  String get m407f871778 => 'リセット';
+
+  @override
   String get mf0cd3a6033 => 'ライト';
 
   @override
@@ -1073,6 +1082,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m2ec842e2f5 => 'リダイレクトにはアドレスがありません';
 
   @override
+  String get mcacf1f7fd0 => 'インターフェースを拡大する';
+
+  @override
   String get m97ac4c501c => 'インストールはすでに進行中です';
 
   @override
@@ -1100,6 +1112,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m8af375dfe7 => 'スキルはまだ追加されていません';
+
+  @override
+  String get m7eac5d04d3 => 'インターフェースを小さくする';
 
   @override
   String get m7f67af3d6c => 'レベル';

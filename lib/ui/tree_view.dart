@@ -579,9 +579,11 @@ class _TreeViewState extends State<TreeView>
 
   Widget _tooltip(BuildContext context) {
     final name = scene.nodes[hoverModel.state.id]?.name ?? '';
+    final overlay =
+        Overlay.of(context).context.findRenderObject()! as RenderBox;
     return Positioned.fill(
       child: CustomSingleChildLayout(
-        delegate: NodeTooltipLayout(mouse),
+        delegate: NodeTooltipLayout(overlay.globalToLocal(mouse)),
         child: IgnorePointer(
           child: TreeHoverCard(
             key: const Key('node-tooltip'),

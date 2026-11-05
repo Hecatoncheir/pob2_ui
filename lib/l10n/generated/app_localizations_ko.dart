@@ -430,6 +430,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m6c50317db8 => '워크숍';
 
   @override
+  String get mbe517dba6c => '인터페이스 규모';
+
+  @override
   String get m22e1e2c7ad => '치명타 승수';
 
   @override
@@ -553,6 +556,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String mbefc941808(String p0) {
     return '노드를 읽지 못했습니다: $p0';
   }
+
+  @override
+  String get mef9d01550d => '스케일을 저장하지 못했습니다.';
 
   @override
   String get m92233abcc1 => '주제를 저장하지 못했습니다.';
@@ -978,6 +984,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get mc27d8aad03 => '원본으로 계산된 어셈블리 Lua';
 
   @override
+  String get m407f871778 => '재설정';
+
+  @override
   String get mf0cd3a6033 => '빛';
 
   @override
@@ -1073,6 +1082,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m2ec842e2f5 => '리디렉션에 주소가 없습니다.';
 
   @override
+  String get mcacf1f7fd0 => '인터페이스 확대';
+
+  @override
   String get m97ac4c501c => '이미 설치가 진행 중입니다.';
 
   @override
@@ -1100,6 +1112,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m8af375dfe7 => '아직 스킬이 추가되지 않았습니다';
+
+  @override
+  String get m7eac5d04d3 => '인터페이스를 더 작게 만드세요';
 
   @override
   String get m7f67af3d6c => '레벨';

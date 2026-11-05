@@ -439,6 +439,9 @@ class AppLocalizationsEs extends AppLocalizations {
   String get m6c50317db8 => 'Taller';
 
   @override
+  String get mbe517dba6c => 'Escala de interfaz';
+
+  @override
   String get m22e1e2c7ad => 'Multiplicador de críticos';
 
   @override
@@ -562,6 +565,9 @@ class AppLocalizationsEs extends AppLocalizations {
   String mbefc941808(String p0) {
     return 'No se pudo leer el nodo: $p0';
   }
+
+  @override
+  String get mef9d01550d => 'No se pudo guardar la escala.';
 
   @override
   String get m92233abcc1 => 'No se pudo guardar el tema.';
@@ -1001,6 +1007,9 @@ class AppLocalizationsEs extends AppLocalizations {
   String get mc27d8aad03 => 'Ensamblaje calculado por el Lua original';
 
   @override
+  String get m407f871778 => 'Restablecer';
+
+  @override
   String get mf0cd3a6033 => 'Luz';
 
   @override
@@ -1097,6 +1106,9 @@ class AppLocalizationsEs extends AppLocalizations {
   String get m2ec842e2f5 => 'El redireccionamiento no tiene dirección';
 
   @override
+  String get mcacf1f7fd0 => 'Ampliar interfaz';
+
+  @override
   String get m97ac4c501c => 'Instalación ya en progreso';
 
   @override
@@ -1124,6 +1136,9 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get m8af375dfe7 => 'Las habilidades aún no se han agregado';
+
+  @override
+  String get m7eac5d04d3 => 'Hacer la interfaz más pequeña';
 
   @override
   String get m7f67af3d6c => 'Nivel';

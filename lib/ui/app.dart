@@ -29,6 +29,10 @@ import 'shell_cubit.dart';
 import 'workshop_cubit.dart';
 import 'workshop_state.dart';
 import 'workspace_view.dart';
+import '../data/interface_scale_repository.dart';
+import 'interface_scale_cubit.dart';
+import 'interface_scale_picker.dart';
+import 'interface_viewport.dart';
 
 class PobApp extends StatelessWidget {
   const PobApp({
@@ -37,15 +41,25 @@ class PobApp extends StatelessWidget {
     this.updates,
     this.appearance,
     this.language,
+    this.interfaceScale,
   });
   final WorkshopCubit model;
   final AppUpdateCubit? updates;
   final AppearanceCubit? appearance;
   final LanguageCubit? language;
+  final InterfaceScaleCubit? interfaceScale;
   @override
   Widget build(BuildContext context) => MultiBlocProvider(
     providers: [
       BlocProvider(create: (_) => ShellCubit()),
+      if (interfaceScale case final settings?)
+        BlocProvider<InterfaceScaleCubit>.value(value: settings)
+      else
+        BlocProvider(
+          create: (_) => InterfaceScaleCubit(
+            InterfaceScaleRepository(model.components.store.root),
+          ),
+        ),
       if (language case final settings?)
         BlocProvider<LanguageCubit>.value(value: settings)
       else
@@ -100,16 +114,8 @@ class _MaterialApp extends StatelessWidget {
       themeMode: appearance.theme == AppTheme.dark
           ? ThemeMode.dark
           : ThemeMode.light,
-      builder: (context, child) => LayoutBuilder(
-        builder: (context, constraints) => MediaQuery(
-          data: MediaQuery.of(context).copyWith(
-            size: constraints.biggest,
-            disableAnimations:
-                MediaQuery.disableAnimationsOf(context) || !state.motion,
-          ),
-          child: child!,
-        ),
-      ),
+      builder: (context, child) =>
+          InterfaceViewport(child: child!, motion: state.motion),
       home: _Shell(model, updates),
     ),
   );
@@ -443,7 +449,13 @@ class _Recents extends StatelessWidget {
                       },
                 style: TextButton.styleFrom(
                   alignment: Alignment.centerLeft,
-                  padding: const EdgeInsets.symmetric(horizontal: 2),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 8,
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
                 ),
                 child: AppText(
                   entry.title,
@@ -633,6 +645,8 @@ class _SettingsButton extends StatelessWidget {
                   const AppearancePicker(),
                   const SizedBox(height: 20),
                   const LanguagePicker(),
+                  const SizedBox(height: 20),
+                  const InterfaceScalePicker(),
                   const SizedBox(height: 20),
                   SwitchListTile(
                     contentPadding: EdgeInsets.zero,

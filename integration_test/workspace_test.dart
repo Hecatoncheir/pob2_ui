@@ -3,6 +3,7 @@ import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:pob2_ui/data/component_repository.dart';
@@ -23,6 +24,8 @@ import 'package:pob2_ui/data/game_dictionary_repository.dart';
 import 'package:pob2_ui/domain/app_language.dart';
 import 'package:pob2_ui/ui/language_cubit.dart';
 import 'package:pob2_ui/ui/core/spark_art.dart';
+import 'package:pob2_ui/data/interface_scale_repository.dart';
+import 'package:pob2_ui/ui/interface_scale_cubit.dart';
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
@@ -47,6 +50,8 @@ void main() {
       GameDictionaryRepository(root),
     );
     addTearDown(language.close);
+    final scale = InterfaceScaleCubit(InterfaceScaleRepository(root));
+    addTearDown(scale.close);
     await model.initialize();
     expect(model.state.error, isNull);
     expect(model.engine.connected, isTrue);
@@ -67,7 +72,12 @@ void main() {
     await tester.pumpWidget(
       RepaintBoundary(
         key: const Key('review-image'),
-        child: PobApp(model: model, updates: updates, language: language),
+        child: PobApp(
+          model: model,
+          updates: updates,
+          language: language,
+          interfaceScale: scale,
+        ),
       ),
     );
     await tester.pumpAndSettle();
@@ -99,6 +109,10 @@ void main() {
       expect(tester.takeException(), isNull);
     }
     await _localizeTree(tester, model, language);
+    await _reviewScale(tester, scale);
+    await tester.tap(find.byKey(const ValueKey('page-components')));
+    await tester.pumpAndSettle();
+    await _capture(tester, suffix: '-components');
     await tester.tap(find.byKey(const ValueKey('page-library')));
     await tester.pumpAndSettle();
     expect(find.text('Проверка интерфейса Lua'), findsWidgets);
@@ -119,6 +133,49 @@ Future<void> _capture(WidgetTester tester, {String suffix = ''}) async {
   await output.parent.create(recursive: true);
   await output.writeAsBytes(data!.buffer.asUint8List());
   image.dispose();
+}
+
+Future<void> _reviewScale(
+  WidgetTester tester,
+  InterfaceScaleCubit scale,
+) async {
+  await tester.tap(find.byKey(const Key('appearance-settings')));
+  await tester.pumpAndSettle();
+  await scale.setPercent(125);
+  await tester.pumpAndSettle();
+  await tester.sendKeyDownEvent(LogicalKeyboardKey.controlLeft);
+  await tester.sendKeyEvent(LogicalKeyboardKey.equal);
+  await tester.sendKeyUpEvent(LogicalKeyboardKey.controlLeft);
+  await tester.pumpAndSettle();
+  expect(scale.state.percent, 135);
+  await _capture(tester, suffix: '-scale-settings');
+  await tester.tap(find.text('Готово'));
+  await tester.pumpAndSettle();
+  await tester.tap(find.byKey(const Key('tree-search')));
+  await tester.pump();
+  await tester.enterText(find.byKey(const Key('tree-search')), 'Интеллект');
+  await tester.pump();
+  await tester.testTextInput.receiveAction(TextInputAction.done);
+  await tester.pumpAndSettle();
+  final mouse = await tester.createGesture(kind: ui.PointerDeviceKind.mouse);
+  await mouse.addPointer(location: Offset.zero);
+  await mouse.moveTo(tester.getCenter(find.byKey(const Key('passive-tree'))));
+  await _waitForHover(tester);
+  final tooltip = tester.getRect(find.byType(TreeHoverCard));
+  final bounds = tester.getRect(find.byKey(const Key('review-image')));
+  expect(tooltip.left, greaterThanOrEqualTo(bounds.left));
+  expect(tooltip.right, lessThanOrEqualTo(bounds.right + 1));
+  expect(tooltip.bottom, lessThanOrEqualTo(bounds.bottom + 1));
+  await _capture(tester, suffix: '-scale-tooltip');
+  await mouse.moveTo(const Offset(4, 4));
+  await mouse.removePointer();
+  expect(
+    await InterfaceScaleRepository(InstallationStore.defaultRoot()).load(),
+    135,
+  );
+  await scale.setPercent(100);
+  await tester.pumpAndSettle();
+  expect(tester.takeException(), isNull);
 }
 
 Future<void> _switchTheme(WidgetTester tester) async {

@@ -737,6 +737,11 @@
     "description": "Мастерская",
     "placeholders": {}
   },
+  "mbe517dba6c": "Interface scale",
+  "@mbe517dba6c": {
+    "description": "Масштаб интерфейса",
+    "placeholders": {}
+  },
   "m22e1e2c7ad": "Crit Multiplier",
   "@m22e1e2c7ad": {
     "description": "Множитель критического удара",
@@ -953,6 +958,11 @@
         "type": "String"
       }
     }
+  },
+  "mef9d01550d": "Failed to save scale.",
+  "@mef9d01550d": {
+    "description": "Не удалось сохранить масштаб.",
+    "placeholders": {}
   },
   "m92233abcc1": "Failed to save topic.",
   "@m92233abcc1": {
@@ -1667,6 +1677,11 @@
     "description": "Сборка рассчитана исходным Lua",
     "placeholders": {}
   },
+  "m407f871778": "Reset",
+  "@m407f871778": {
+    "description": "Сбросить",
+    "placeholders": {}
+  },
   "mf0cd3a6033": "Light",
   "@mf0cd3a6033": {
     "description": "Светлая",
@@ -1822,6 +1837,11 @@
     "description": "У перенаправления нет адреса",
     "placeholders": {}
   },
+  "mcacf1f7fd0": "Enlarge interface",
+  "@mcacf1f7fd0": {
+    "description": "Увеличить интерфейс",
+    "placeholders": {}
+  },
   "m97ac4c501c": "Installation already in progress",
   "@m97ac4c501c": {
     "description": "Уже выполняется установка",
@@ -1869,6 +1889,11 @@
   "m8af375dfe7": "Skills have not been added yet",
   "@m8af375dfe7": {
     "description": "Умения ещё не добавлены",
+    "placeholders": {}
+  },
+  "m7eac5d04d3": "Make the interface smaller",
+  "@m7eac5d04d3": {
+    "description": "Уменьшить интерфейс",
     "placeholders": {}
   },
   "m7f67af3d6c": "Level",

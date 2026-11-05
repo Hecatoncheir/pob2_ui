@@ -429,6 +429,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m6c50317db8 => '工作坊';
 
   @override
+  String get mbe517dba6c => '介面規模';
+
+  @override
   String get m22e1e2c7ad => '爆擊倍數';
 
   @override
@@ -552,6 +555,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String mbefc941808(String p0) {
     return '無法讀取節點：$p0';
   }
+
+  @override
+  String get mef9d01550d => '無法保存比例。';
 
   @override
   String get m92233abcc1 => '無法儲存主體。';
@@ -977,6 +983,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get mc27d8aad03 => '由原始 Lua 計算的程序集';
 
   @override
+  String get m407f871778 => '重置';
+
+  @override
   String get mf0cd3a6033 => '光';
 
   @override
@@ -1070,6 +1079,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m2ec842e2f5 => '重定向沒有位址';
 
   @override
+  String get mcacf1f7fd0 => '放大介面';
+
+  @override
   String get m97ac4c501c => '安裝已在進行中';
 
   @override
@@ -1097,6 +1109,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m8af375dfe7 => '技能尚未添加';
+
+  @override
+  String get m7eac5d04d3 => '使介面更小';
 
   @override
   String get m7f67af3d6c => '等級';
@@ -1656,6 +1671,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m6c50317db8 => '工作坊';
 
   @override
+  String get mbe517dba6c => '介面規模';
+
+  @override
   String get m22e1e2c7ad => '爆擊倍數';
 
   @override
@@ -1779,6 +1797,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String mbefc941808(String p0) {
     return '無法讀取節點：$p0';
   }
+
+  @override
+  String get mef9d01550d => '無法保存比例。';
 
   @override
   String get m92233abcc1 => '無法儲存主體。';
@@ -2204,6 +2225,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get mc27d8aad03 => '由原始 Lua 計算的程序集';
 
   @override
+  String get m407f871778 => '重置';
+
+  @override
   String get mf0cd3a6033 => '光';
 
   @override
@@ -2297,6 +2321,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m2ec842e2f5 => '重定向沒有位址';
 
   @override
+  String get mcacf1f7fd0 => '放大介面';
+
+  @override
   String get m97ac4c501c => '安裝已在進行中';
 
   @override
@@ -2324,6 +2351,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m8af375dfe7 => '技能尚未添加';
+
+  @override
+  String get m7eac5d04d3 => '使介面更小';
 
   @override
   String get m7f67af3d6c => '等級';

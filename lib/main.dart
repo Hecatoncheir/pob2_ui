@@ -14,6 +14,8 @@ import 'ui/workshop_cubit.dart';
 import 'data/language_preferences.dart';
 import 'data/game_dictionary_repository.dart';
 import 'ui/language_cubit.dart';
+import 'data/interface_scale_repository.dart';
+import 'ui/interface_scale_cubit.dart';
 
 Future<void> main(List<String> arguments) async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -35,12 +37,20 @@ Future<void> main(List<String> arguments) async {
     GameDictionaryRepository(model.components.store.root),
     initialLanguage: await languagePreferences.load(),
   );
+  final scalePreferences = InterfaceScaleRepository(
+    model.components.store.root,
+  );
+  final interfaceScale = InterfaceScaleCubit(
+    scalePreferences,
+    initialPercent: await scalePreferences.load(),
+  );
   runApp(
     PobApp(
       model: model,
       updates: updates,
       appearance: appearance,
       language: language,
+      interfaceScale: interfaceScale,
     ),
   );
   WidgetsBinding.instance.addPostFrameCallback((_) async {

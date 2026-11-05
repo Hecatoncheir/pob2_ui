@@ -126,6 +126,7 @@
     "m187dafbec4": "Максимальный выдерживаемый удар",
     "mc73618fdf4": "Мана",
     "m6c50317db8": "Мастерская",
+    "mbe517dba6c": "Масштаб интерфейса",
     "m22e1e2c7ad": "Множитель критического удара",
     "m13e9f80144": "Мои сборки",
     "m16d1252699": "Молния",
@@ -159,6 +160,7 @@
     "mfdddf71553": "Не удалось прочитать изображения: {p0}",
     "mdace2a4a3b": "Не удалось прочитать каталог: {p0}",
     "mbefc941808": "Не удалось прочитать узел: {p0}",
+    "mef9d01550d": "Не удалось сохранить масштаб.",
     "m92233abcc1": "Не удалось сохранить тему.",
     "m45c78389e9": "Небезопасный адрес обновления",
     "m7a4c30c971": "Неверная запись каталога Lua",
@@ -292,6 +294,7 @@
     "ma735c975e0": "Руническая защита",
     "m8c39bb691b": "Сборка",
     "mc27d8aad03": "Сборка рассчитана исходным Lua",
+    "m407f871778": "Сбросить",
     "mf0cd3a6033": "Светлая",
     "ma50190234a": "Свои…",
     "m32bb1c680f": "Сессия закрыта",
@@ -323,6 +326,7 @@
     "m7242065c34": "Тип противника",
     "m1eecfcaa7b": "Тёмная",
     "m2ec842e2f5": "У перенаправления нет адреса",
+    "mcacf1f7fd0": "Увеличить интерфейс",
     "m97ac4c501c": "Уже выполняется установка",
     "m39e5ccc0fa": "Узел · {p0}",
     "m8cf5c33b30": "Узел не изменит показатели.",
@@ -332,6 +336,7 @@
     "m1a92bc6899": "Умение не выбрано",
     "ma0c169b941": "Умения",
     "m8af375dfe7": "Умения ещё не добавлены",
+    "m7eac5d04d3": "Уменьшить интерфейс",
     "m7f67af3d6c": "Уровень",
     "m88f6fabbe9": "Уровень {p0} · качество {p1} %",
     "mecb350422f": "Уровень противника",
@@ -747,7 +752,12 @@
     "mdf8f3ab9d3": "Crit Chance",
     "mc82be563bc": "Bleed Chance",
     "mdd380bd057": "Ignite Chance",
-    "m59245fe8a4": "Shock Chance"
+    "m59245fe8a4": "Shock Chance",
+    "mbe517dba6c": "Interface scale",
+    "mef9d01550d": "Failed to save scale.",
+    "m407f871778": "Reset",
+    "mcacf1f7fd0": "Enlarge interface",
+    "m7eac5d04d3": "Make the interface smaller"
   },
   "fr": {
     "m0c63e733f9": "Lua n'a pas renvoyé toutes les icônes",
@@ -1122,7 +1132,12 @@
     "mdf8f3ab9d3": "Chances de coup critique",
     "mc82be563bc": "Chance de saignement",
     "mdd380bd057": "Chance d'enflammer",
-    "m59245fe8a4": "Chances de choc"
+    "m59245fe8a4": "Chances de choc",
+    "mbe517dba6c": "Échelle d'interface",
+    "mef9d01550d": "Échec de l'enregistrement de l'échelle.",
+    "m407f871778": "Réinitialiser",
+    "mcacf1f7fd0": "Agrandir l'interface",
+    "m7eac5d04d3": "Rendre l'interface plus petite"
   },
   "de": {
     "m0c63e733f9": "Lua hat nicht alle Symbole zurückgegeben",
@@ -1497,7 +1512,12 @@
     "mdf8f3ab9d3": "Chance auf kritische Treffer",
     "mc82be563bc": "Blutungswahrscheinlichkeit",
     "mdd380bd057": "Chance entzünden",
-    "m59245fe8a4": "Schockchance"
+    "m59245fe8a4": "Schockchance",
+    "mbe517dba6c": "Schnittstellenskala",
+    "mef9d01550d": "Maßstab konnte nicht gespeichert werden.",
+    "m407f871778": "Zurücksetzen",
+    "mcacf1f7fd0": "Schnittstelle vergrößern",
+    "m7eac5d04d3": "Verkleinern Sie die Schnittstelle"
   },
   "es": {
     "m0c63e733f9": "Lua no devolvió todos los íconos",
@@ -1872,7 +1892,12 @@
     "mdf8f3ab9d3": "Probabilidad de crítico",
     "mc82be563bc": "Posibilidad de sangrado",
     "mdd380bd057": "Encender la oportunidad",
-    "m59245fe8a4": "Posibilidad de choque"
+    "m59245fe8a4": "Posibilidad de choque",
+    "mbe517dba6c": "Escala de interfaz",
+    "mef9d01550d": "No se pudo guardar la escala.",
+    "m407f871778": "Restablecer",
+    "mcacf1f7fd0": "Ampliar interfaz",
+    "m7eac5d04d3": "Hacer la interfaz más pequeña"
   },
   "pt_BR": {
     "m0c63e733f9": "Lua não retornou todos os ícones",
@@ -2247,7 +2272,12 @@
     "mdf8f3ab9d3": "Chance crítica",
     "mc82be563bc": "Chance de sangramento",
     "mdd380bd057": "Acender Chance",
-    "m59245fe8a4": "Chance de choque"
+    "m59245fe8a4": "Chance de choque",
+    "mbe517dba6c": "Escala de interface",
+    "mef9d01550d": "Falha ao salvar escala.",
+    "m407f871778": "Redefinir",
+    "mcacf1f7fd0": "Ampliar interface",
+    "m7eac5d04d3": "Diminua a interface"
   },
   "ja": {
     "m0c63e733f9": "Lua はすべてのアイコンを返しませんでした",
@@ -2622,7 +2652,12 @@
     "mdf8f3ab9d3": "クリティカルチャンス",
     "mc82be563bc": "ブリードチャンス",
     "mdd380bd057": "イグナイトチャンス",
-    "m59245fe8a4": "ショックチャンス"
+    "m59245fe8a4": "ショックチャンス",
+    "mbe517dba6c": "インターフェーススケール",
+    "mef9d01550d": "スケールの保存に失敗しました。",
+    "m407f871778": "リセット",
+    "mcacf1f7fd0": "インターフェースを拡大する",
+    "m7eac5d04d3": "インターフェースを小さくする"
   },
   "ko": {
     "m0c63e733f9": "Lua이 모든 아이콘을 반환하지 않았습니다.",
@@ -2997,7 +3032,12 @@
     "mdf8f3ab9d3": "치명타 확률",
     "mc82be563bc": "출혈 확률",
     "mdd380bd057": "점화 기회",
-    "m59245fe8a4": "충격 확률"
+    "m59245fe8a4": "충격 확률",
+    "mbe517dba6c": "인터페이스 규모",
+    "mef9d01550d": "스케일을 저장하지 못했습니다.",
+    "m407f871778": "재설정",
+    "mcacf1f7fd0": "인터페이스 확대",
+    "m7eac5d04d3": "인터페이스를 더 작게 만드세요"
   },
   "th": {
     "m0c63e733f9": "Lua ไม่ได้ส่งคืนไอคอนทั้งหมด",
@@ -3372,7 +3412,12 @@
     "mdf8f3ab9d3": "โอกาสคริติคอล",
     "mc82be563bc": "โอกาสตกเลือด",
     "mdd380bd057": "โอกาสจุดชนวน",
-    "m59245fe8a4": "โอกาสช็อก"
+    "m59245fe8a4": "โอกาสช็อก",
+    "mbe517dba6c": "ขนาดอินเทอร์เฟซ",
+    "mef9d01550d": "ไม่สามารถบันทึกมาตราส่วนได้",
+    "m407f871778": "รีเซ็ต",
+    "mcacf1f7fd0": "ขยายอินเทอร์เฟซ",
+    "m7eac5d04d3": "ทำให้อินเทอร์เฟซเล็กลง"
   },
   "zh_Hant": {
     "m0c63e733f9": "Lua 未傳回所有圖標",
@@ -3747,6 +3792,11 @@
     "mdf8f3ab9d3": "暴擊幾率",
     "mc82be563bc": "出血幾率",
     "mdd380bd057": "點燃機會",
-    "m59245fe8a4": "衝擊機會"
+    "m59245fe8a4": "衝擊機會",
+    "mbe517dba6c": "介面規模",
+    "mef9d01550d": "無法保存比例。",
+    "m407f871778": "重置",
+    "mcacf1f7fd0": "放大介面",
+    "m7eac5d04d3": "使介面更小"
   }
 }

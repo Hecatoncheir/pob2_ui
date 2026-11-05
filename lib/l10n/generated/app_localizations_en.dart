@@ -433,6 +433,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m6c50317db8 => 'Workshop';
 
   @override
+  String get mbe517dba6c => 'Interface scale';
+
+  @override
   String get m22e1e2c7ad => 'Crit Multiplier';
 
   @override
@@ -556,6 +559,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String mbefc941808(String p0) {
     return 'Failed to read node: $p0';
   }
+
+  @override
+  String get mef9d01550d => 'Failed to save scale.';
 
   @override
   String get m92233abcc1 => 'Failed to save topic.';
@@ -988,6 +994,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get mc27d8aad03 => 'Assembly calculated by original Lua';
 
   @override
+  String get m407f871778 => 'Reset';
+
+  @override
   String get mf0cd3a6033 => 'Light';
 
   @override
@@ -1083,6 +1092,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m2ec842e2f5 => 'Redirect has no address';
 
   @override
+  String get mcacf1f7fd0 => 'Enlarge interface';
+
+  @override
   String get m97ac4c501c => 'Installation already in progress';
 
   @override
@@ -1110,6 +1122,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get m8af375dfe7 => 'Skills have not been added yet';
+
+  @override
+  String get m7eac5d04d3 => 'Make the interface smaller';
 
   @override
   String get m7f67af3d6c => 'Level';

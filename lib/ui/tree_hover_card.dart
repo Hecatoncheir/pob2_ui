@@ -9,6 +9,7 @@ import 'core/frosted_surface.dart';
 import 'core/gruvbox.dart';
 import 'tree_hover_cubit.dart';
 import 'core/language_scope.dart';
+import 'core/spark_theme.dart';
 
 class NodeTooltipLayout extends SingleChildLayoutDelegate {
   NodeTooltipLayout(this.point);
@@ -139,13 +140,7 @@ class TreeHoverCard extends StatelessWidget {
           style: TextStyle(color: color),
         ),
       );
-      final hex = match.group(1);
-      color = hex == null
-          ? colors.onSurface
-          : _readableColor(
-              Color(0xFF000000 | int.parse(hex, radix: 16)),
-              colors,
-            );
+      color = _readableColor(_sourceColor(match, colors), colors);
       start = match.end;
     }
     result.add(
@@ -158,7 +153,9 @@ class TreeHoverCard extends StatelessWidget {
   }
 
   Color _readableColor(Color source, ColorScheme colors) {
-    source = _themeColor(source, colors);
+    final effect = _effectColor(source, colors);
+    final minimumContrast = effect == null ? 7.0 : 4.5;
+    source = effect ?? _themeColor(source, colors);
     final background = FrostedSurface.contrastBackground(colors)
         .computeLuminance();
     for (final amount in const [0.0, .15, .3, .45, .6, .75, .9]) {
@@ -167,9 +164,30 @@ class TreeHoverCard extends StatelessWidget {
       final contrast =
           (math.max(foreground, background) + .05) /
           (math.min(foreground, background) + .05);
-      if (contrast >= 7) return color;
+      if (contrast >= minimumContrast) return color;
     }
     return colors.onSurface;
+  }
+
+  Color _sourceColor(RegExpMatch match, ColorScheme colors) {
+    if (match.group(1) case final hex?)
+      return Color(0xFF000000 | int.parse(hex, radix: 16));
+    return switch (match[0]) {
+      '^1' => const Color(0xFFFF0000),
+      '^2' => const Color(0xFF00FF00),
+      '^8' => colors.onSurfaceVariant,
+      _ => colors.onSurface,
+    };
+  }
+
+  Color? _effectColor(Color source, ColorScheme colors) {
+    final dark = colors.brightness == Brightness.dark;
+    // Смысл изменения уже определён Lua. Знак числа здесь не оценивается.
+    return switch (source.toARGB32()) {
+      0xFF33FF77 || 0xFF00FF00 => dark ? Gruvbox.aqua : Spark.green,
+      0xFFDD0022 || 0xFFFF0000 => dark ? Gruvbox.red : Spark.danger,
+      _ => null,
+    };
   }
 
   Color _themeColor(Color source, ColorScheme colors) {

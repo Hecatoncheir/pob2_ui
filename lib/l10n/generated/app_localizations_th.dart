@@ -433,6 +433,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m6c50317db8 => 'เวิร์คช็อป';
 
   @override
+  String get mbe517dba6c => 'ขนาดอินเทอร์เฟซ';
+
+  @override
   String get m22e1e2c7ad => 'ตัวคูณคริติคอล';
 
   @override
@@ -556,6 +559,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String mbefc941808(String p0) {
     return 'ไม่สามารถอ่านโหนด: $p0';
   }
+
+  @override
+  String get mef9d01550d => 'ไม่สามารถบันทึกมาตราส่วนได้';
 
   @override
   String get m92233abcc1 => 'ไม่สามารถบันทึกหัวข้อ';
@@ -984,6 +990,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get mc27d8aad03 => 'การประกอบคำนวณโดยต้นฉบับ Lua';
 
   @override
+  String get m407f871778 => 'รีเซ็ต';
+
+  @override
   String get mf0cd3a6033 => 'เบา';
 
   @override
@@ -1079,6 +1088,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m2ec842e2f5 => 'การเปลี่ยนเส้นทางไม่มีที่อยู่';
 
   @override
+  String get mcacf1f7fd0 => 'ขยายอินเทอร์เฟซ';
+
+  @override
   String get m97ac4c501c => 'การติดตั้งอยู่ในระหว่างดำเนินการ';
 
   @override
@@ -1106,6 +1118,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m8af375dfe7 => 'ทักษะยังไม่ได้เพิ่ม';
+
+  @override
+  String get m7eac5d04d3 => 'ทำให้อินเทอร์เฟซเล็กลง';
 
   @override
   String get m7f67af3d6c => 'ระดับ';

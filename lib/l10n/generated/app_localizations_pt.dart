@@ -438,6 +438,9 @@ class AppLocalizationsPt extends AppLocalizations {
   String get m6c50317db8 => 'Oficina';
 
   @override
+  String get mbe517dba6c => 'Escala de interface';
+
+  @override
   String get m22e1e2c7ad => 'Multiplicador de críticos';
 
   @override
@@ -561,6 +564,9 @@ class AppLocalizationsPt extends AppLocalizations {
   String mbefc941808(String p0) {
     return 'Falha ao ler o nó: $p0';
   }
+
+  @override
+  String get mef9d01550d => 'Falha ao salvar escala.';
 
   @override
   String get m92233abcc1 => 'Falha ao salvar o tópico.';
@@ -998,6 +1004,9 @@ class AppLocalizationsPt extends AppLocalizations {
   String get mc27d8aad03 => 'Montagem calculada pelo original Lua';
 
   @override
+  String get m407f871778 => 'Redefinir';
+
+  @override
   String get mf0cd3a6033 => 'Luz';
 
   @override
@@ -1093,6 +1102,9 @@ class AppLocalizationsPt extends AppLocalizations {
   String get m2ec842e2f5 => 'Redirecionamento não tem endereço';
 
   @override
+  String get mcacf1f7fd0 => 'Ampliar interface';
+
+  @override
   String get m97ac4c501c => 'Instalação já em andamento';
 
   @override
@@ -1120,6 +1132,9 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get m8af375dfe7 => 'Habilidades ainda não foram adicionadas';
+
+  @override
+  String get m7eac5d04d3 => 'Diminua a interface';
 
   @override
   String get m7f67af3d6c => 'Nível';
@@ -1693,6 +1708,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get m6c50317db8 => 'Oficina';
 
   @override
+  String get mbe517dba6c => 'Escala de interface';
+
+  @override
   String get m22e1e2c7ad => 'Multiplicador de críticos';
 
   @override
@@ -1816,6 +1834,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String mbefc941808(String p0) {
     return 'Falha ao ler o nó: $p0';
   }
+
+  @override
+  String get mef9d01550d => 'Falha ao salvar escala.';
 
   @override
   String get m92233abcc1 => 'Falha ao salvar o tópico.';
@@ -2253,6 +2274,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get mc27d8aad03 => 'Montagem calculada pelo original Lua';
 
   @override
+  String get m407f871778 => 'Redefinir';
+
+  @override
   String get mf0cd3a6033 => 'Luz';
 
   @override
@@ -2348,6 +2372,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get m2ec842e2f5 => 'Redirecionamento não tem endereço';
 
   @override
+  String get mcacf1f7fd0 => 'Ampliar interface';
+
+  @override
   String get m97ac4c501c => 'Instalação já em andamento';
 
   @override
@@ -2375,6 +2402,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get m8af375dfe7 => 'Habilidades ainda não foram adicionadas';
+
+  @override
+  String get m7eac5d04d3 => 'Diminua a interface';
 
   @override
   String get m7f67af3d6c => 'Nível';
