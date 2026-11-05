@@ -37,9 +37,11 @@ tail -n +"$line" "$0" | tar -xz -C "$stage"
 test -x "$stage/bundle/pob2_ui"
 test -x "$stage/pob2-ui"
 if [ ! -e "$prefix/versions/$version" ]; then mv "$stage/bundle" "$prefix/versions/$version"; fi
-cp "$stage/pob2-ui" "$prefix/pob2-ui.new"
-chmod 755 "$prefix/pob2-ui.new"
-mv -f "$prefix/pob2-ui.new" "$prefix/pob2-ui"
+if [ ! -e "$prefix/pob2-ui" ]; then
+  cp "$stage/pob2-ui" "$prefix/pob2-ui.new"
+  chmod 755 "$prefix/pob2-ui.new"
+  mv -f "$prefix/pob2-ui.new" "$prefix/pob2-ui"
+fi
 printf '%s' "$version" > "$prefix/pending-version.tmp"
 mv -f "$prefix/pending-version.tmp" "$prefix/pending-version"
 applications="${XDG_DATA_HOME:-$HOME/.local/share}/applications"

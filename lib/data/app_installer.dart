@@ -11,7 +11,11 @@ class AppInstaller {
     }
   }
 
-  Future<void> start(File package, ManagedInstallation installation) async {
+  Future<void> start(
+    File package,
+    ManagedInstallation installation, {
+    required String version,
+  }) async {
     final root = installation.root.path;
     final arguments = switch (installation.kind) {
       'windows-inno' => [
@@ -38,6 +42,7 @@ class AppInstaller {
         package.path,
         root,
         '$pid',
+        version,
       ],
       _ => throw UnsupportedError('Неизвестный тип установки'),
     };

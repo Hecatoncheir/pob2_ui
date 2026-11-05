@@ -64,8 +64,11 @@ Future<void> launch(Directory root, List<String> arguments) async {
     final previous = await readVersion(root, 'previous-version');
     if (previous == null)
       throw const FileSystemException('Нет предыдущей версии');
+    if (active != null) await writeVersion(root, 'previous-version', active);
     await writeVersion(root, 'active-version', previous);
     active = previous;
+    final pendingFile = File.fromUri(root.uri.resolve('pending-version'));
+    if (await pendingFile.exists()) await pendingFile.delete();
   }
   String? pending;
   try {

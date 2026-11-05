@@ -39,7 +39,7 @@ Name: english; MessagesFile: compiler:Default.isl
 
 [Files]
 Source: "{#BundleDir}\*"; DestDir: "{app}\versions\{#AppVersion}"; Flags: recursesubdirs createallsubdirs onlyifdoesntexist
-Source: "{#LauncherFile}"; DestDir: "{app}"; DestName: "pob2_ui.exe"; Flags: ignoreversion
+Source: "{#LauncherFile}"; DestDir: "{app}"; DestName: "pob2_ui.exe"; Flags: onlyifdoesntexist
 Source: "windows-marker.json"; DestDir: "{app}"; DestName: "pob2-install.json"; Flags: ignoreversion
 
 [Icons]

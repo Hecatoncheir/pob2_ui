@@ -34,7 +34,11 @@ class RoutedClient implements HttpClient {
 class FakeInstaller extends AppInstaller {
   bool started = false;
   @override
-  Future<void> start(File package, ManagedInstallation installation) async {
+  Future<void> start(
+    File package,
+    ManagedInstallation installation, {
+    required String version,
+  }) async {
     started = true;
   }
 }

@@ -166,7 +166,11 @@ class AppUpdateModel extends ChangeNotifier {
           'Проверка пакета перед установкой не пройдена',
         );
       await checkpoint();
-      await installer.start(package!, installation!);
+      await installer.start(
+        package!,
+        installation!,
+        version: '${release!.version}',
+      );
       return true;
     } on Object catch (failure) {
       error = 'Обновление не запущено: $failure';

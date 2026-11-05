@@ -3,6 +3,7 @@ set -eu
 package=$1
 bundle=$2
 old_pid=$3
+expected_version=$4
 case "$bundle" in *.app) ;; *) exit 2 ;; esac
 case "$old_pid" in *[!0-9]*|'') exit 2 ;; esac
 parent=$(dirname "$bundle")
@@ -18,6 +19,8 @@ cleanup() {
     mv "$bundle" "$stage/failed.app" || true
     mv "$backup" "$bundle"
     /usr/bin/open "$bundle"
+  elif [ "$confirmed" = 0 ] && ! kill -0 "$old_pid" 2>/dev/null; then
+    /usr/bin/open "$bundle"
   fi
 }
 trap cleanup EXIT
@@ -25,6 +28,8 @@ trap cleanup EXIT
 source="$mount/PoB II.app"
 identifier=$(/usr/libexec/PlistBuddy -c 'Print :CFBundleIdentifier' "$source/Contents/Info.plist")
 [ "$identifier" = 'dev.hecatoncheir.pob2Ui' ]
+actual_version=$(/usr/libexec/PlistBuddy -c 'Print :CFBundleShortVersionString' "$source/Contents/Info.plist")
+[ "$actual_version" = "$expected_version" ]
 /usr/bin/codesign --verify --deep --strict "$source"
 old_team=$(/usr/bin/codesign -dv "$bundle" 2>&1 | sed -n 's/^TeamIdentifier=//p')
 new_team=$(/usr/bin/codesign -dv "$source" 2>&1 | sed -n 's/^TeamIdentifier=//p')
