@@ -71,7 +71,12 @@ def run(*arguments):
 
 
 def launcher(destination):
-    run('dart', 'compile', 'exe', 'tool/launcher.dart', '-o', destination)
+    dart = shutil.which('dart')
+    if not dart:
+        raise ValueError('Не найден Dart SDK')
+    if sys.platform == 'win32' and Path(dart).suffix.lower() in {'.bat', '.cmd'}:
+        dart = Path(dart).parent / 'cache/dart-sdk/bin/dart.exe'
+    run(dart, 'compile', 'exe', 'tool/launcher.dart', '-o', destination)
     if sys.platform == 'win32':
         # Стабильный запускатель не открывает консольное окно.
         data = bytearray(destination.read_bytes())
