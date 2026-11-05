@@ -70,6 +70,7 @@ jobs:
       - name: Проверить компоненты с настоящим Lua
         env:
           POB2_UI_HOME: ${{ runner.temp }}/pob2-lua-smoke
+          POB2_GITHUB_TOKEN: ${{ github.token }}
         run: dart run tool/smoke.dart --install
       - name: Проверить установку и настоящий запуск
         if: runner.os == 'Linux'

@@ -43,7 +43,7 @@ def check(target):
     number = version()
     package = ROOT / 'build/packages' / filename(number, target)
     with tempfile.TemporaryDirectory(prefix='pob2-install-check-') as temporary:
-        base = Path(temporary)
+        base = Path(temporary).resolve()
         install = base / 'PoB II'
         data = base / 'data'
         environment = dict(os.environ, POB2_UI_HOME=str(data))

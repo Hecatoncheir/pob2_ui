@@ -6,9 +6,11 @@ import '../domain/app_info.dart';
 typedef HttpClientFactory = HttpClient Function();
 
 class AppHttp {
-  AppHttp({HttpClientFactory? clientFactory})
-    : _factory = clientFactory ?? HttpClient.new;
+  AppHttp({HttpClientFactory? clientFactory, String? apiToken})
+    : _factory = clientFactory ?? HttpClient.new,
+      _apiToken = apiToken ?? Platform.environment['POB2_GITHUB_TOKEN'];
   final HttpClientFactory _factory;
+  final String? _apiToken;
 
   HttpClient createClient() =>
       _factory()..connectionTimeout = const Duration(seconds: 20);
@@ -39,6 +41,9 @@ class AppHttp {
       request.followRedirects = false;
       request.headers.set('User-Agent', 'pob2-ui/$appVersion');
       request.headers.set('Accept', 'application/vnd.github+json');
+      if (current.host == 'api.github.com' && _apiToken != null) {
+        request.headers.set('Authorization', 'Bearer $_apiToken');
+      }
       if (offset > 0)
         request.headers.set(HttpHeaders.rangeHeader, 'bytes=$offset-');
       final response = await request.close().timeout(
