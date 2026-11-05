@@ -76,6 +76,8 @@ class TreeGeometry {
         original,
       );
   final List<TreeNode> nodes;
+  TreeGeometry withScene(OriginalTreeScene scene) =>
+      TreeGeometry._(nodes, edges, version, const {}, null, scene);
   final List<(int, int)> edges;
   final String version;
   final Map<String, Uint8List> icons;

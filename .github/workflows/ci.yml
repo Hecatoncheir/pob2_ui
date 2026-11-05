@@ -113,16 +113,27 @@ jobs:
         if: runner.os != 'Linux'
         env:
           POB2_UI_HOME: ${{ runner.temp }}/pob2-lua-smoke
+          POB2_UI_SCREENSHOT: ${{ github.workspace }}/build/review/flutter-${{ matrix.platform }}.png
         run: flutter test integration_test/workspace_test.dart -d ${{ matrix.platform }} --no-pub
       - name: Новый интерфейс с настоящим Lua
         if: runner.os == 'Linux'
         env:
           POB2_UI_HOME: ${{ runner.temp }}/pob2-lua-smoke
+          POB2_UI_SCREENSHOT: ${{ github.workspace }}/build/review/flutter-linux.png
         run: xvfb-run -a flutter test integration_test/workspace_test.dart -d linux --no-pub
       - name: Проверить переключение Release → Debug
         if: runner.os == 'Windows'
         shell: bash
         run: python tool/check_windows_engine.py --flutter-root "$RUNNER_TEMP/flutter"
+      - name: Проверить сохранение окна
+        if: runner.os == 'Windows'
+        run: python -X utf8 tool/check_window_state.py
+      - uses: actions/upload-artifact@v7.0.2
+        if: always()
+        with:
+          name: ui-${{ matrix.target }}
+          path: build/review/*.png
+          if-no-files-found: ignore
       - uses: actions/upload-artifact@v7.0.2
         with:
           name: installer-${{ matrix.target }}

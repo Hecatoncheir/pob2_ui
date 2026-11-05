@@ -4,6 +4,7 @@
 #include <flutter_windows.h>
 
 #include "resource.h"
+#include "window_state.h"
 
 namespace {
 
@@ -144,13 +145,14 @@ bool Win32Window::Create(const std::wstring& title,
     return false;
   }
 
+  initial_show_command_ = RestoreWindowState(window);
   UpdateTheme(window);
 
   return OnCreate();
 }
 
 bool Win32Window::Show() {
-  return ShowWindow(window_handle_, SW_SHOWNORMAL);
+  return ShowWindow(window_handle_, initial_show_command_);
 }
 
 // static
@@ -179,6 +181,12 @@ Win32Window::MessageHandler(HWND hwnd,
                             WPARAM const wparam,
                             LPARAM const lparam) noexcept {
   switch (message) {
+    case WM_CLOSE:
+      SaveWindowState(hwnd);
+      break;
+    case WM_ENDSESSION:
+      if (wparam) SaveWindowState(hwnd);
+      break;
     case WM_DESTROY:
       window_handle_ = nullptr;
       Destroy();

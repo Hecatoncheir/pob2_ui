@@ -12,6 +12,7 @@ import 'package:pob2_ui/domain/build_report.dart';
 import 'package:pob2_ui/ui/app.dart';
 import 'package:pob2_ui/ui/tree_canvas.dart';
 import 'package:pob2_ui/ui/tree_view.dart';
+import 'package:pob2_ui/ui/tree_hover_card.dart';
 import 'package:pob2_ui/ui/workshop_cubit.dart';
 
 void main() {
@@ -115,7 +116,9 @@ Future<void> _addRealSkill(WorkshopCubit model) async {
 }
 
 Future<void> _waitForImages(WidgetTester tester) async {
-  for (var attempt = 0; attempt < 150; attempt++) {
+  for (var attempt = 0; attempt < 600; attempt++) {
+    final error = find.byKey(const Key('tree-decode-error'));
+    if (error.evaluate().isNotEmpty) fail(tester.widget<Text>(error).data!);
     final painters = tester.widgetList<CustomPaint>(find.byType(CustomPaint));
     final tree = painters
         .map((widget) => widget.painter)
@@ -132,22 +135,37 @@ Future<void> _searchAndAllocate(
   WorkshopCubit model,
 ) async {
   final tree = model.state.document!.tree!;
-  final start = tree.nodes.firstWhere((node) => node.allocated);
-  final edge = tree.edges.firstWhere(
-    (edge) => edge.$1 == start.id || edge.$2 == start.id,
-  );
-  final target = edge.$1 == start.id ? edge.$2 : edge.$1;
+  final candidates = await model.engine.call('pob_catalog', {
+    'kind': 'nodes',
+    'query': 'Damage',
+    'limit': 50,
+  });
+  final target = jsonRows(candidates['entries']).first['id'] as int;
   final node = tree.nodes.firstWhere((node) => node.id == target);
   await tester.enterText(find.byKey(const Key('tree-search')), '${node.id}');
   await tester.testTextInput.receiveAction(TextInputAction.done);
   await tester.pumpAndSettle();
   final viewer = find.byKey(const Key('passive-tree'));
-  await tester.tapAt(tester.getCenter(viewer));
+  final center = tester.getCenter(viewer);
+  final mouse = await tester.createGesture(kind: ui.PointerDeviceKind.mouse);
+  await mouse.addPointer(location: Offset.zero);
+  await mouse.moveTo(center);
+  await _waitForHover(tester);
+  final tooltip = tester.widget<TreeHoverCard>(find.byType(TreeHoverCard));
+  expect(tooltip.title, node.name);
+  expect(tooltip.state.preview!.path, contains(target));
+  expect(tooltip.state.preview!.scene!.commands.length, greaterThan(2));
+  expect(tooltip.state.preview!.path.length, greaterThan(1));
+  expect(
+    model.state.document!.tree!.nodes
+        .firstWhere((entry) => entry.id == target)
+        .allocated,
+    isFalse,
+  );
+  await _capture(tester);
+  await mouse.moveTo(const Offset(4, 4));
   await tester.pumpAndSettle();
-  await tester.tap(find.text('Подробнее'));
-  await tester.pumpAndSettle();
-  await _waitFor(tester, find.text('Выбрать путь'));
-  await tester.tap(find.text('Выбрать путь'));
+  await tester.tapAt(center);
   await tester.pumpAndSettle();
   await _waitForIdle(tester, model);
   expect(
@@ -156,13 +174,28 @@ Future<void> _searchAndAllocate(
         .allocated,
     isTrue,
   );
+  await tester.tapAt(center);
+  await _waitForIdle(tester, model);
+  expect(
+    model.state.document!.tree!.nodes
+        .firstWhere((entry) => entry.id == target)
+        .allocated,
+    isFalse,
+  );
+  await mouse.removePointer();
 }
 
-Future<void> _waitFor(WidgetTester tester, Finder finder) async {
-  for (var attempt = 0; attempt < 150 && finder.evaluate().isEmpty; attempt++) {
+Future<void> _waitForHover(WidgetTester tester) async {
+  for (var attempt = 0; attempt < 300; attempt++) {
+    final card = find.byType(TreeHoverCard);
+    if (card.evaluate().isNotEmpty) {
+      final state = tester.widget<TreeHoverCard>(card).state;
+      if (state.error != null) fail(state.error!);
+      if (state.preview != null) return;
+    }
     await tester.pump(const Duration(milliseconds: 100));
   }
-  expect(finder, findsOneWidget);
+  fail('Подсказка Lua не появилась');
 }
 
 Future<void> _waitForIdle(WidgetTester tester, WorkshopCubit model) async {

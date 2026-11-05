@@ -52,6 +52,7 @@ class TreePainter extends CustomPainter {
     this.transform,
     this.viewport,
     this.artwork,
+    this.hoverArtwork,
   ) : super(repaint: transform);
   final TreeScene scene;
   final int? selected;
@@ -61,9 +62,9 @@ class TreePainter extends CustomPainter {
   final TransformationController transform;
   final Size viewport;
   final ui.Picture? artwork;
+  final ui.Picture? hoverArtwork;
   late double zoom;
   late Rect visible;
-  final occupied = <Rect>[];
   @override
   void paint(Canvas canvas, Size size) {
     zoom = transform.value.getMaxScaleOnAxis();
@@ -71,13 +72,8 @@ class TreePainter extends CustomPainter {
       Matrix4.inverted(transform.value),
       Offset.zero & viewport,
     ).inflate(100 / zoom);
-    occupied.clear();
     _art(canvas);
-    final labels = scene.tree.nodes.where(_hasLabel).toList()
-      ..sort((a, b) => _labelPriority(a).compareTo(_labelPriority(b)));
-    for (final node in labels) {
-      _label(canvas, node);
-    }
+    if (hoverArtwork case final picture?) canvas.drawPicture(picture);
   }
 
   void _art(Canvas canvas) {
@@ -186,60 +182,6 @@ class TreePainter extends CustomPainter {
       Paint()..filterQuality = FilterQuality.medium,
     );
     canvas.restore();
-  }
-
-  int _labelPriority(TreeNode node) {
-    if (selected == node.id || hovered == node.id) return 0;
-    if (_matches(node)) return 1;
-    if (node.kind == 'Keystone' || node.kind == 'ClassStart') return 2;
-    return 3;
-  }
-
-  bool _hasLabel(TreeNode node) {
-    if (!visible.contains(scene.points[node.id]!)) return false;
-    if (_labelPriority(node) < 2) return true;
-    if (zoom < 2.2) return false;
-    if (node.kind != 'Normal') return true;
-    return zoom >= (scene.tree.original == null ? 6 : 10);
-  }
-
-  void _label(Canvas canvas, TreeNode node) {
-    final painter = TextPainter(
-      text: TextSpan(
-        text: node.name,
-        style: const TextStyle(
-          fontFamily: 'Nunito Sans',
-          fontSize: 12,
-          fontWeight: FontWeight.w700,
-          color: Spark.paper,
-        ),
-      ),
-      textDirection: TextDirection.ltr,
-      maxLines: 2,
-      ellipsis: '…',
-    )..layout(maxWidth: 150);
-    final point = scene.points[node.id]! + Offset(0, _radius(node) + 5 / zoom);
-    final rect = Rect.fromLTWH(
-      point.dx - painter.width / zoom / 2,
-      point.dy,
-      painter.width / zoom,
-      painter.height / zoom,
-    ).inflate(3 / zoom);
-    if (occupied.any((other) => other.overlaps(rect))) {
-      painter.dispose();
-      return;
-    }
-    occupied.add(rect);
-    canvas.drawRRect(
-      RRect.fromRectAndRadius(rect, Radius.circular(3 / zoom)),
-      Paint()..color = Spark.ink.withValues(alpha: .92),
-    );
-    canvas.save();
-    canvas.translate(point.dx - painter.width / zoom / 2, point.dy);
-    canvas.scale(1 / zoom);
-    painter.paint(canvas, Offset.zero);
-    canvas.restore();
-    painter.dispose();
   }
 
   @override

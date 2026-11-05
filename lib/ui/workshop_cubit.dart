@@ -9,6 +9,8 @@ import '../data/build_library.dart';
 import '../data/tree_icon_repository.dart';
 import '../domain/build_report.dart';
 import '../domain/tree_geometry.dart';
+import '../domain/original_tree_scene.dart';
+import '../domain/node_preview.dart';
 import '../domain/library_entry.dart';
 import '../domain/component.dart';
 import 'workshop_state.dart';
@@ -28,6 +30,32 @@ class WorkshopCubit extends Cubit<WorkshopState> {
   String? _nextTitle;
 
   bool get ready => components.active.length == Component.values.length;
+  String get _componentSource =>
+      Component.values.map((key) => components.active[key]!.commit).join('-');
+
+  Future<NodePreview> previewNode(int id) async {
+    if (!engine.tools.contains('pob_tree_hover')) {
+      return NodePreview(
+        tooltip: await engine.call('pob_node_tooltip', {
+          'id': id,
+          'compare': true,
+        }),
+      );
+    }
+    final result = await engine.call('pob_tree_hover', {
+      'id': id,
+      'compare': true,
+    });
+    final scene = OriginalTreeScene.fromJson(jsonMap(result['scene']));
+    final base = state.document!.tree!.withScene(scene);
+    final images = await treeIcons.overlay(base, engine, _componentSource);
+    return NodePreview(
+      tooltip: jsonMap(result['tooltip']),
+      scene: scene,
+      images: images,
+    );
+  }
+
   bool get canRollback =>
       components.store.previous.length == Component.values.length;
 

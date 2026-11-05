@@ -1,7 +1,14 @@
 import 'dart:math' as math;
 import 'dart:ui' as ui;
+import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../domain/node_preview.dart';
+import 'tree_hover_cubit.dart';
+import 'tree_hover_card.dart';
+
 import 'package:flutter/foundation.dart' show mapEquals;
 
 import '../domain/build_report.dart';
@@ -32,10 +39,17 @@ class _TreeViewState extends State<TreeView>
     ..addListener(_zoomFrame);
   Animation<Matrix4>? zoomTween;
   final icons = <String, ui.Image>{};
+  Map<String, Uint8List> decodedBytes = const {};
   int iconGeneration = 0;
   int? hovered;
   String? decodeError;
   OriginalTreeArtwork? artwork;
+  OriginalTreeArtwork? hoverArtwork;
+  final extraImages = <String, ui.Image>{};
+  final tooltipPortal = OverlayPortalController();
+  late final hoverModel = TreeHoverCubit(widget.model.previewNode);
+  Offset mouse = Offset.zero;
+  int previewGeneration = 0;
   @override
   void initState() {
     super.initState();
@@ -47,6 +61,9 @@ class _TreeViewState extends State<TreeView>
     super.didUpdateWidget(old);
     if (old.tree == widget.tree) return;
     scene = TreeScene(widget.tree);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted) hoverModel.clear();
+    });
     _updateArtwork(old.tree);
     if (_root(old.tree) != _root(widget.tree) ||
         old.tree.version != widget.tree.version)
@@ -69,9 +86,7 @@ class _TreeViewState extends State<TreeView>
     final loaded = <String, ui.Image>{};
     try {
       for (final entry in widget.tree.icons.entries) {
-        final codec = await ui.instantiateImageCodec(entry.value);
-        loaded[entry.key] = (await codec.getNextFrame()).image;
-        codec.dispose();
+        loaded[entry.key] = await _imageFor(entry);
       }
       _acceptIcons(generation, loaded);
     } catch (error) {
@@ -83,6 +98,18 @@ class _TreeViewState extends State<TreeView>
           () => decodeError = 'Не удалось прочитать изображения: $error',
         );
       }
+    }
+  }
+
+  Future<ui.Image> _imageFor(MapEntry<String, Uint8List> entry) async {
+    final cached = icons[entry.key];
+    if (cached != null && identical(decodedBytes[entry.key], entry.value))
+      return cached.clone();
+    final codec = await ui.instantiateImageCodec(entry.value);
+    try {
+      return (await codec.getNextFrame()).image;
+    } finally {
+      codec.dispose();
     }
   }
 
@@ -103,6 +130,7 @@ class _TreeViewState extends State<TreeView>
       icons
         ..clear()
         ..addAll(loaded);
+      decodedBytes = widget.tree.icons;
       _recordArtwork();
     });
   }
@@ -115,6 +143,11 @@ class _TreeViewState extends State<TreeView>
 
   @override
   void dispose() {
+    hoverModel.close();
+    hoverArtwork?.dispose();
+    for (final image in extraImages.values) {
+      image.dispose();
+    }
     zoomAnimation.dispose();
     transform.dispose();
     artwork?.dispose();
@@ -125,7 +158,18 @@ class _TreeViewState extends State<TreeView>
   }
 
   @override
-  Widget build(BuildContext context) => Padding(
+  Widget build(BuildContext context) =>
+      BlocListener<TreeHoverCubit, TreeHoverState>(
+        bloc: hoverModel,
+        listener: _hoverChanged,
+        child: OverlayPortal(
+          controller: tooltipPortal,
+          overlayChildBuilder: _tooltip,
+          child: _body(),
+        ),
+      );
+
+  Widget _body() => Padding(
     padding: const EdgeInsets.fromLTRB(0, 0, 0, 2),
     child: Column(
       children: [
@@ -150,14 +194,20 @@ class _TreeViewState extends State<TreeView>
                   }
                   viewport = size;
                   return MouseRegion(
-                    onHover: (event) => _hover(event.localPosition),
-                    onExit: (_) => setState(() => hovered = null),
+                    onHover: (event) =>
+                        _hover(event.localPosition, event.position),
+                    onExit: (_) => hoverModel.clear(),
                     child: GestureDetector(
                       onTapUp: _select,
+                      onLongPressStart: (event) =>
+                          _detailsAt(event.localPosition),
                       child: InteractiveViewer(
                         key: const Key('passive-tree'),
                         transformationController: transform,
-                        onInteractionStart: (_) => zoomAnimation.stop(),
+                        onInteractionStart: (_) {
+                          zoomAnimation.stop();
+                          hoverModel.clear();
+                        },
                         constrained: false,
                         minScale: .08,
                         maxScale: 12,
@@ -174,6 +224,7 @@ class _TreeViewState extends State<TreeView>
                             transform,
                             size,
                             artwork?.picture,
+                            hoverArtwork?.picture,
                           ),
                         ),
                       ),
@@ -184,10 +235,10 @@ class _TreeViewState extends State<TreeView>
             ),
           ),
         ),
-        _selection(),
         if (decodeError case final error?)
           Text(
             error,
+            key: const Key('tree-decode-error'),
             style: const TextStyle(color: Spark.danger, fontSize: 11),
           ),
         if (widget.tree.iconError case final error?)
@@ -238,47 +289,6 @@ class _TreeViewState extends State<TreeView>
       ArtIconButton('fit', label: 'Показать всё дерево', onPressed: _fit),
     ],
   );
-  Widget _selection() {
-    final node = widget.tree.nodes
-        .where((node) => node.id == selected)
-        .firstOrNull;
-    if (node == null)
-      return const SizedBox(
-        height: 38,
-        child: Align(
-          alignment: Alignment.centerLeft,
-          child: Text(
-            'Выберите узел, чтобы увидеть свойства',
-            style: TextStyle(color: Spark.muted, fontSize: 11),
-          ),
-        ),
-      );
-    return SizedBox(
-      height: 44,
-      child: Row(
-        children: [
-          Expanded(
-            child: Text(
-              node.name,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 12),
-            ),
-          ),
-          TextButton(
-            onPressed: widget.model.state.busy
-                ? null
-                : () => sparkDialog<void>(
-                    context,
-                    _NodeDialog(widget.model, node),
-                  ),
-            child: const Text('Подробнее'),
-          ),
-        ],
-      ),
-    );
-  }
-
   void _fit() {
     final size = viewport!;
     final scale = math.min(size.width, size.height) / 1800;
@@ -310,6 +320,7 @@ class _TreeViewState extends State<TreeView>
   }
 
   void _animateTo(Matrix4 target) {
+    hoverModel.clear();
     zoomAnimation.stop();
     if (MediaQuery.disableAnimationsOf(context)) {
       transform.value = target;
@@ -368,12 +379,95 @@ class _TreeViewState extends State<TreeView>
   }
 
   void _select(TapUpDetails event) {
-    setState(() => selected = _hit(event.localPosition));
+    final id = _hit(event.localPosition);
+    setState(() => selected = id);
+    hoverModel.clear();
+    final node = scene.nodes[id];
+    if (node == null || widget.model.state.busy) return;
+    if ({'ClassStart', 'AscendClassStart'}.contains(node.kind)) return;
+    if (node.kind == 'Mastery' && !node.allocated) {
+      sparkDialog<void>(context, _NodeDialog(widget.model, node));
+      return;
+    }
+    widget.model.treeAction(node.id, node.allocated);
   }
 
-  void _hover(Offset point) {
-    final id = _hit(point);
-    if (hovered != id) setState(() => hovered = id);
+  void _detailsAt(Offset point) {
+    final node = scene.nodes[_hit(point)];
+    if (node != null)
+      sparkDialog<void>(context, _NodeDialog(widget.model, node));
+  }
+
+  void _hover(Offset local, Offset global) {
+    if (widget.model.state.busy) return;
+    final id = _hit(local);
+    if (hoverModel.state.id == id) return;
+    mouse = global;
+    hoverModel.hover(id);
+  }
+
+  void _hoverChanged(BuildContext context, TreeHoverState state) {
+    final generation = ++previewGeneration;
+    setState(() {
+      hovered = state.id;
+      hoverArtwork?.dispose();
+      hoverArtwork = null;
+    });
+    if (state.id == null) {
+      tooltipPortal.hide();
+      return;
+    }
+    tooltipPortal.show();
+    if (state.preview case final preview?) _loadPreview(preview, generation);
+  }
+
+  Future<void> _loadPreview(NodePreview preview, int generation) async {
+    try {
+      for (final entry in preview.images.entries) {
+        if (icons.containsKey(entry.key) || extraImages.containsKey(entry.key))
+          continue;
+        final codec = await ui.instantiateImageCodec(entry.value);
+        final image = (await codec.getNextFrame()).image;
+        codec.dispose();
+        if (!mounted || generation != previewGeneration) {
+          image.dispose();
+          return;
+        }
+        extraImages[entry.key] = image;
+      }
+      _recordPreview(preview, generation);
+    } catch (error) {
+      if (mounted)
+        setState(() => decodeError = 'Не удалось показать подсветку: $error');
+    }
+  }
+
+  void _recordPreview(NodePreview preview, int generation) {
+    if (!mounted || generation != previewGeneration || preview.scene == null)
+      return;
+    setState(() {
+      hoverArtwork?.dispose();
+      hoverArtwork = OriginalTreeArtwork(preview.scene!, {
+        ...icons,
+        ...extraImages,
+      });
+    });
+  }
+
+  Widget _tooltip(BuildContext context) {
+    final name = scene.nodes[hoverModel.state.id]?.name ?? '';
+    return Positioned.fill(
+      child: CustomSingleChildLayout(
+        delegate: NodeTooltipLayout(mouse),
+        child: IgnorePointer(
+          child: TreeHoverCard(
+            key: const Key('node-tooltip'),
+            title: name,
+            state: hoverModel.state,
+          ),
+        ),
+      ),
+    );
   }
 
   int? _hit(Offset localPosition) {

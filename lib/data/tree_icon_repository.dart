@@ -7,6 +7,20 @@ import '../domain/tree_geometry.dart';
 import 'mcp_client.dart';
 
 class TreeIconRepository {
+  Future<Map<String, Uint8List>> overlay(
+    TreeGeometry tree,
+    McpClient engine,
+    String source,
+  ) async {
+    final loaded = await _loadScene(tree, engine, source, null);
+    if (loaded.iconError case final error?) throw StateError(error);
+    return {
+      for (final key
+          in tree.original!.commands.map((command) => command.texture).toSet())
+        key: loaded.icons[key]!,
+    };
+  }
+
   TreeIconRepository({this.root});
   final Directory? root;
   final _cache = <(String, String), Map<String, Uint8List>>{};

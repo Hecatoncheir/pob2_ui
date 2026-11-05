@@ -7,9 +7,20 @@ class MainFlutterWindow: NSWindow {
     let windowFrame = self.frame
     self.contentViewController = flutterViewController
     self.setFrame(windowFrame, display: true)
+    self.title = ""
+    self.setFrameAutosaveName("pob2_ui.mainWindow")
+    self.setFrameUsingName("pob2_ui.mainWindow", force: true)
 
     RegisterGeneratedPlugins(registry: flutterViewController)
 
     super.awakeFromNib()
+    if UserDefaults.standard.bool(forKey: "pob2_ui.windowZoomed") {
+      self.zoom(nil)
+    }
+  }
+
+  override func close() {
+    UserDefaults.standard.set(self.isZoomed, forKey: "pob2_ui.windowZoomed")
+    super.close()
   }
 }
