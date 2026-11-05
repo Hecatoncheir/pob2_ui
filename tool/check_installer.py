@@ -31,7 +31,7 @@ def stop_versions(install, environment):
         script = "Get-Process pob2_ui -ErrorAction SilentlyContinue | Where-Object { $_.Path -and $_.Path.StartsWith($env:POB2_CHECK_ROOT) } | Stop-Process -Force"
         run(shutil.which('pwsh') or 'powershell', '-NoProfile', '-Command', script, env=dict(environment, POB2_CHECK_ROOT=str(install)))
     else:
-        processes = subprocess.check_output(['ps', '-eo', 'pid=,args='], text=True)
+        processes = subprocess.check_output(['ps', '-ww', '-eo', 'pid=,args='], text=True)
         expected = str(install / 'versions') + '/'
         for line in processes.splitlines():
             pieces = line.strip().split(None, 1)
@@ -42,7 +42,7 @@ def stop_versions(install, environment):
 
 def stop_macos(bundle):
     expected = str(bundle / 'Contents/MacOS/PoB II')
-    processes = subprocess.check_output(['ps', '-eo', 'pid=,args='], text=True)
+    processes = subprocess.check_output(['ps', '-ww', '-eo', 'pid=,args='], text=True)
     for line in processes.splitlines():
         pieces = line.strip().split(None, 1)
         if len(pieces) == 2 and pieces[1].startswith(expected):
