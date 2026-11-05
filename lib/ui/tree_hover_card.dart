@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
 import '../domain/build_report.dart';
-import 'core/spark_theme.dart';
+import 'core/frosted_surface.dart';
 import 'tree_hover_cubit.dart';
 
 class NodeTooltipLayout extends SingleChildLayoutDelegate {
@@ -37,71 +37,70 @@ class TreeHoverCard extends StatelessWidget {
   final String title;
   final TreeHoverState state;
   @override
-  Widget build(BuildContext context) => Material(
-    color: Spark.ink.withValues(alpha: .97),
-    elevation: 10,
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(12),
-      side: const BorderSide(color: Color(0xFF978D6E)),
-    ),
-    child: Padding(
-      padding: const EdgeInsets.all(16),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            title,
-            style: const TextStyle(
-              color: Spark.paper,
-              fontFamily: 'Nunito',
-              fontSize: 17,
-              fontWeight: FontWeight.w800,
-            ),
-          ),
-          const SizedBox(height: 10),
-          if (state.loading) const LinearProgressIndicator(minHeight: 2),
-          if (state.error case final error?)
+  Widget build(BuildContext context) {
+    final colors = Theme.of(context).colorScheme;
+    return FrostedSurface(
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
             Text(
-              'Не удалось получить подсказку: $error',
-              style: const TextStyle(color: Spark.paper),
-            ),
-          if (state.preview case final preview?)
-            Flexible(
-              child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [for (final line in preview.lines) _line(line)],
-                ),
+              title,
+              style: TextStyle(
+                color: colors.onSurface,
+                fontFamily: 'Nunito',
+                fontSize: 17,
+                fontWeight: FontWeight.w800,
               ),
             ),
-        ],
+            const SizedBox(height: 10),
+            if (state.loading) const LinearProgressIndicator(minHeight: 2),
+            if (state.error case final error?)
+              Text(
+                'Не удалось получить подсказку: $error',
+                style: TextStyle(color: colors.onSurface),
+              ),
+            if (state.preview case final preview?)
+              Flexible(
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      for (final line in preview.lines) _line(line, colors),
+                    ],
+                  ),
+                ),
+              ),
+          ],
+        ),
       ),
-    ),
-  );
+    );
+  }
 
-  Widget _line(JsonMap line) {
+  Widget _line(JsonMap line, ColorScheme colors) {
     if (line['separator'] == true)
-      return const Padding(
-        padding: EdgeInsets.symmetric(vertical: 6),
-        child: Divider(color: Color(0xFF4B5044)),
+      return Padding(
+        padding: const EdgeInsets.symmetric(vertical: 6),
+        child: Divider(color: colors.outlineVariant),
       );
     final text = '${line['text'] ?? ''}';
     if (cleanPoB(text) == title) return const SizedBox.shrink();
     return Padding(
       padding: const EdgeInsets.only(bottom: 3),
       child: Text.rich(
-        TextSpan(children: _spans(text)),
-        style: const TextStyle(fontSize: 12, height: 1.35, color: Spark.paper),
+        TextSpan(children: _spans(text, colors)),
+        style: TextStyle(fontSize: 12, height: 1.35, color: colors.onSurface),
       ),
     );
   }
 
-  List<TextSpan> _spans(String source) {
+  List<TextSpan> _spans(String source, ColorScheme colors) {
     final result = <TextSpan>[];
     var start = 0;
-    var color = Spark.paper;
+    var color = colors.onSurface;
     for (final match in RegExp(
       r'\^x([a-fA-F0-9]{6})|\^[0-9]',
     ).allMatches(source)) {
@@ -113,8 +112,11 @@ class TreeHoverCard extends StatelessWidget {
       );
       final hex = match.group(1);
       color = hex == null
-          ? Spark.paper
-          : Color(0xFF000000 | int.parse(hex, radix: 16));
+          ? colors.onSurface
+          : _readableColor(
+              Color(0xFF000000 | int.parse(hex, radix: 16)),
+              colors,
+            );
       start = match.end;
     }
     result.add(
@@ -124,5 +126,18 @@ class TreeHoverCard extends StatelessWidget {
       ),
     );
     return result;
+  }
+
+  Color _readableColor(Color source, ColorScheme colors) {
+    final background = colors.surface.computeLuminance();
+    for (final amount in const [0.0, .15, .3, .45, .6, .75]) {
+      final color = Color.lerp(source, colors.onSurface, amount)!;
+      final foreground = color.computeLuminance();
+      final contrast =
+          (math.max(foreground, background) + .05) /
+          (math.min(foreground, background) + .05);
+      if (contrast >= 4.5) return color;
+    }
+    return colors.onSurface;
   }
 }
