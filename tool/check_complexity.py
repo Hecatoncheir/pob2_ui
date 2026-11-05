@@ -24,6 +24,8 @@ def checkout(name):
         actual = run('git', '-C', target, 'rev-parse', 'HEAD', capture=True).stdout.strip()
         if actual != item['revision']:
             raise ValueError('Ревизия инструмента сложности не совпадает')
+        if run('git', '-C', target, 'status', '--porcelain', '--untracked-files=no', capture=True).stdout.strip():
+            raise ValueError('Исходники инструмента сложности изменены')
         return target
     target.mkdir(parents=True)
     run('git', '-C', target, 'init', '--quiet')
@@ -44,7 +46,7 @@ def cmake_executable():
 
 
 def build_parser(grammar):
-    output = WORK / 'parser'
+    output = WORK / ('parser-' + LOCK['dart']['revision'][:12])
     output.mkdir(exist_ok=True)
     extension = 'dll' if os.name == 'nt' else 'so'
     library = output / ('dart.' + extension)
@@ -99,4 +101,6 @@ if __name__ == '__main__':
     try:
         check(parser.parse_args().report_only)
     except (OSError, ValueError, subprocess.CalledProcessError) as error:
+        if isinstance(error, subprocess.CalledProcessError) and error.stderr:
+            print(error.stderr, file=sys.stderr)
         raise SystemExit(f'Проверка сложности не пройдена: {error}')
