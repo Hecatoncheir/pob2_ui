@@ -8,8 +8,8 @@ class ScrollableWorkspace extends StatelessWidget {
   Widget build(BuildContext context) => LayoutBuilder(
     builder: (context, constraints) {
       final minimumHeight = MediaQuery.sizeOf(context).width >= 1250
-          ? 640.0
-          : 600.0;
+          ? 680.0
+          : 620.0;
       return SingleChildScrollView(
         key: const Key('workspace-overflow-scroll'),
         primary: false,

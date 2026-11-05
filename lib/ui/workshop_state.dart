@@ -2,6 +2,7 @@ import '../domain/component.dart';
 import '../domain/build_report.dart';
 import '../domain/tree_geometry.dart';
 import '../domain/library_entry.dart';
+import '../domain/tree_allocation_mode.dart';
 
 typedef WorkshopOperation = ({bool busy, String? error});
 typedef XmlDraft = ({String xml, bool edited});
@@ -17,6 +18,7 @@ class WorkshopState {
     this.operation = (busy: false, error: null),
     this.status = 'Установите компоненты и подключите Lua',
     this.document,
+    this.treeMode = TreeAllocationMode.common,
     LibraryState? library,
     this.sessionSaved = false,
     this.draft = (xml: '', edited: false),
@@ -33,6 +35,7 @@ class WorkshopState {
   String? get error => operation.error;
   final String status;
   final WorkshopDocument? document;
+  final TreeAllocationMode treeMode;
   BuildReport? get report => document?.report;
   final LibraryState library;
   final bool sessionSaved;
@@ -47,6 +50,7 @@ class WorkshopState {
     WorkshopOperation? operation,
     String? status,
     WorkshopDocument? document,
+    TreeAllocationMode? treeMode,
     LibraryState? library,
     bool clearReport = false,
     bool? sessionSaved,
@@ -57,7 +61,8 @@ class WorkshopState {
   }) => WorkshopState(
     operation: operation ?? this.operation,
     status: status ?? this.status,
-    document: clearReport ? null : document ?? this.document,
+    document: _nextDocument(document, clearReport),
+    treeMode: treeMode ?? this.treeMode,
     library: library ?? this.library,
     sessionSaved: sessionSaved ?? this.sessionSaved,
     draft: draft ?? this.draft,
@@ -65,4 +70,7 @@ class WorkshopState {
     log: log ?? this.log,
     classes: classes ?? this.classes,
   );
+
+  WorkshopDocument? _nextDocument(WorkshopDocument? next, bool clear) =>
+      clear ? null : next ?? document;
 }

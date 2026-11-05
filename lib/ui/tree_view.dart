@@ -300,9 +300,7 @@ class _TreeViewState extends State<TreeView>
           padding: const EdgeInsets.only(top: 8),
           child: Row(
             children: [
-              Expanded(
-                child: TreePointCounters(widget.model.state.report!.points),
-              ),
+              Expanded(child: _pointCounters()),
               AppText(
                 'PoB · ${widget.tree.version.replaceAll('_', '.')}',
                 style: TextStyle(color: Spark.of(context).muted, fontSize: 10),
@@ -313,6 +311,16 @@ class _TreeViewState extends State<TreeView>
       ],
     ),
   );
+  Widget _pointCounters() => TreePointCounters(
+    widget.model.state.report!.points,
+    mode: widget.model.state.treeMode,
+    onModeChanged:
+        widget.model.state.busy ||
+            !widget.model.engine.tools.contains('pob_tree_options')
+        ? null
+        : widget.model.selectTreeMode,
+  );
+
   Widget _toolbar() => Row(
     children: [
       Expanded(

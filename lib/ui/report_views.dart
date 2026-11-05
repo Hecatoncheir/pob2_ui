@@ -13,6 +13,7 @@ import 'core/spark_art.dart';
 import 'core/spark_theme.dart';
 import 'shell_cubit.dart';
 import 'workshop_cubit.dart';
+import 'core/frosted_surface.dart';
 
 class StatisticsPanel extends StatelessWidget {
   const StatisticsPanel({super.key, required this.model, required this.shell});
@@ -23,12 +24,12 @@ class StatisticsPanel extends StatelessWidget {
     final report = model.state.report!;
     return SurfacePanel(
       padding: EdgeInsets.zero,
-      child: Column(
+      child: Stack(
         children: [
-          _InspectorHeading(model: model, shell: shell),
-          Expanded(
+          Positioned.fill(
             child: ListView(
-              padding: const EdgeInsets.fromLTRB(18, 0, 18, 18),
+              key: const Key('statistics-scroll'),
+              padding: const EdgeInsets.fromLTRB(18, 68, 18, 18),
               children: [
                 SkillSelectors(model: model),
                 const Divider(height: 22),
@@ -64,6 +65,17 @@ class StatisticsPanel extends StatelessWidget {
                 const SizedBox(height: 16),
                 const DotLabel('Рассчитано в Lua PoB'),
               ],
+            ),
+          ),
+          Positioned(
+            top: 0,
+            left: 0,
+            right: 0,
+            child: FrostedSurface(
+              key: const Key('statistics-header'),
+              showShadow: false,
+              backgroundOpacity: .65,
+              child: _InspectorHeading(model: model, shell: shell),
             ),
           ),
         ],
@@ -293,22 +305,40 @@ class _StatGroup extends StatelessWidget {
   final String title;
   final Map<String, String> entries;
   @override
-  Widget build(BuildContext context) => ExpansionTile(
-    tilePadding: EdgeInsets.zero,
-    childrenPadding: const EdgeInsets.only(bottom: 12),
-    visualDensity: VisualDensity.compact,
-    title: AppText(
-      title,
-      style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w700),
+  Widget build(BuildContext context) => Padding(
+    padding: const EdgeInsets.only(bottom: 10),
+    child: ExpansionTile(
+      key: ValueKey('stat-group-$title'),
+      tilePadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 2),
+      childrenPadding: const EdgeInsets.fromLTRB(12, 0, 12, 12),
+      visualDensity: VisualDensity.compact,
+      clipBehavior: Clip.antiAlias,
+      collapsedBackgroundColor: Theme.of(context)
+          .colorScheme
+          .surfaceContainerHigh,
+      backgroundColor: Color.alphaBlend(
+        Theme.of(context).colorScheme.primary.withValues(alpha: .06),
+        Theme.of(context).colorScheme.surfaceContainerHigh,
+      ),
+      title: AppText(
+        title,
+        style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w700),
+      ),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(14),
+        side: BorderSide(color: Spark.of(context).line),
+      ),
+      collapsedShape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(14),
+        side: BorderSide(color: Spark.of(context).line),
+      ),
+      children: entries.entries
+          .map(
+            (entry) =>
+                StatRow(report: report, stat: entry.key, label: entry.value),
+          )
+          .toList(),
     ),
-    shape: const Border(),
-    collapsedShape: const Border(),
-    children: entries.entries
-        .map(
-          (entry) =>
-              StatRow(report: report, stat: entry.key, label: entry.value),
-        )
-        .toList(),
   );
 }
 

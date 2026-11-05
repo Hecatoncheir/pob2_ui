@@ -3,8 +3,15 @@ import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 
 class FrostedSurface extends StatelessWidget {
-  const FrostedSurface({super.key, required this.child});
+  const FrostedSurface({
+    super.key,
+    required this.child,
+    this.showShadow = true,
+    this.backgroundOpacity = opacity,
+  });
   final Widget child;
+  final bool showShadow;
+  final double backgroundOpacity;
   static const opacity = .85;
 
   static Color contrastBackground(ColorScheme colors) {
@@ -21,16 +28,19 @@ class FrostedSurface extends StatelessWidget {
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
     final radius = BorderRadius.circular(12);
-    final tintOpacity = MediaQuery.highContrastOf(context) ? .98 : opacity;
+    final tintOpacity = MediaQuery.highContrastOf(context)
+        ? .98
+        : backgroundOpacity;
     return DecoratedBox(
       decoration: BoxDecoration(
         borderRadius: radius,
         boxShadow: [
-          BoxShadow(
-            color: colors.shadow.withValues(alpha: .16),
-            blurRadius: 24,
-            offset: const Offset(0, 8),
-          ),
+          if (showShadow)
+            BoxShadow(
+              color: colors.shadow.withValues(alpha: .16),
+              blurRadius: 24,
+              offset: const Offset(0, 8),
+            ),
         ],
       ),
       child: ClipRRect(

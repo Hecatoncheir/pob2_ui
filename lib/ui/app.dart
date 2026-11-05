@@ -334,23 +334,44 @@ class _NewButton extends StatelessWidget {
   final ShellCubit shell;
   final bool compact;
   @override
-  Widget build(BuildContext context) => FilledButton(
+  Widget build(BuildContext context) => OutlinedButton(
     onPressed: model.state.busy ? null : () => _new(context, model, shell),
-    style: FilledButton.styleFrom(
-      padding: EdgeInsets.symmetric(horizontal: compact ? 0 : 14),
+    style: OutlinedButton.styleFrom(
+      minimumSize: const Size(44, 64),
+      backgroundColor: Spark.of(context).surface,
+      foregroundColor: Spark.of(context).ink,
+      padding: EdgeInsets.symmetric(horizontal: compact ? 8 : 14, vertical: 12),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
     ),
     child: Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: compact
+          ? MainAxisAlignment.center
+          : MainAxisAlignment.start,
+      mainAxisSize: MainAxisSize.max,
       children: [
-        SparkArt('icons/plus', color: Spark.of(context).paper, width: 18),
+        Container(
+          width: 32,
+          height: 32,
+          decoration: BoxDecoration(
+            color: Theme.of(context).colorScheme.primary.withValues(alpha: .12),
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: Center(
+            child: SparkArt(
+              'icons/plus',
+              color: Theme.of(context).colorScheme.primary,
+              width: 18,
+            ),
+          ),
+        ),
         if (!compact) ...[
-          const SizedBox(width: 8),
+          const SizedBox(width: 12),
           const Flexible(
             child: AppText(
               'Новая сборка',
-              maxLines: 1,
+              maxLines: 2,
               overflow: TextOverflow.ellipsis,
+              style: TextStyle(fontSize: 12, fontWeight: FontWeight.w700),
             ),
           ),
         ],

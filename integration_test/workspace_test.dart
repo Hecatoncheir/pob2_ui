@@ -26,6 +26,7 @@ import 'package:pob2_ui/ui/language_cubit.dart';
 import 'package:pob2_ui/ui/core/spark_art.dart';
 import 'package:pob2_ui/data/interface_scale_repository.dart';
 import 'package:pob2_ui/ui/interface_scale_cubit.dart';
+import 'package:pob2_ui/domain/tree_allocation_mode.dart';
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
@@ -89,6 +90,7 @@ void main() {
     await _searchAndAllocate(tester, model);
     await tester.pumpAndSettle();
     await _selectAttribute(tester, model);
+    await _selectWeaponModes(tester, model);
     await _switchTheme(tester);
     await _searchNodePower(tester, model);
     expect(model.state.error, isNull);
@@ -405,6 +407,85 @@ Future<void> _waitForAttributePicker(WidgetTester tester) async {
     if (find.byKey(const Key('attribute-3')).evaluate().isNotEmpty) return;
   }
   fail('Не открылся выбор атрибута');
+}
+
+Future<void> _selectWeaponModes(
+  WidgetTester tester,
+  WorkshopCubit model,
+) async {
+  final first = await _allocateWeaponNode(
+    tester,
+    model,
+    TreeAllocationMode.weaponOne,
+  );
+  final second = await _allocateWeaponNode(
+    tester,
+    model,
+    TreeAllocationMode.weaponTwo,
+  );
+  final xml = await model.exportXml();
+  expect(xml, contains('<WeaponSet1'));
+  expect(xml, contains('<WeaponSet2'));
+  await model.importXml(xml!);
+  expect(model.state.treeMode, TreeAllocationMode.weaponTwo);
+  final nodes = model.state.document!.tree!.nodes;
+  expect(nodes.firstWhere((node) => node.id == first).allocationMode, 1);
+  expect(nodes.firstWhere((node) => node.id == second).allocationMode, 2);
+  await tester.pumpAndSettle();
+  await _capture(tester, suffix: '-weapon-mode');
+  await tester.ensureVisible(find.byKey(const Key('tree-mode-0')));
+  await tester.tap(find.byKey(const Key('tree-mode-0')));
+  await _waitForIdle(tester, model);
+  expect(model.state.treeMode, TreeAllocationMode.common);
+}
+
+Future<int> _allocateWeaponNode(
+  WidgetTester tester,
+  WorkshopCubit model,
+  TreeAllocationMode mode,
+) async {
+  final button = find.byKey(Key('tree-mode-${mode.luaValue}'));
+  await tester.ensureVisible(button);
+  await tester.tap(button);
+  await _waitForIdle(tester, model);
+  expect(model.state.treeMode, mode);
+  await tester.pumpAndSettle();
+  final catalog = await model.engine.call('pob_catalog', {
+    'kind': 'nodes',
+    'query': 'Damage',
+    'limit': 200,
+  });
+  final candidates = jsonRows(catalog['entries'])
+      .where(
+        (node) =>
+            node['allocated'] != true &&
+            node['type'] == 'Normal' &&
+            jsonRows(node['attributeOptions']).isEmpty &&
+            node['points'] is num,
+      )
+      .toList();
+  candidates.sort((a, b) => (a['points'] as num).compareTo(b['points'] as num));
+  final id = candidates.first['id'] as int;
+  await tester.tap(find.byKey(const Key('tree-search')));
+  await tester.pump();
+  await tester.enterText(find.byKey(const Key('tree-search')), '$id');
+  await tester.pump();
+  await tester.testTextInput.receiveAction(TextInputAction.done);
+  await tester.pumpAndSettle();
+  final tree = find.byKey(const Key('passive-tree'));
+  await tester.ensureVisible(tree);
+  await tester.pumpAndSettle();
+  await tester.tapAt(tester.getCenter(tree));
+  await _waitForIdle(tester, model);
+  await tester.pumpAndSettle();
+  await _capture(tester, suffix: '-weapon-${mode.luaValue}');
+  final node = model.state.document!.tree!.nodes.firstWhere(
+    (node) => node.id == id,
+  );
+  expect(node.allocated, isTrue);
+  expect(node.allocationMode, mode.luaValue);
+  expect(model.state.error, isNull);
+  return id;
 }
 
 Future<void> _addRealSkill(WorkshopCubit model) async {

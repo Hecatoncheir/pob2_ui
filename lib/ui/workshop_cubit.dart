@@ -15,6 +15,7 @@ import '../domain/node_preview.dart';
 import '../domain/library_entry.dart';
 import '../domain/component.dart';
 import 'workshop_state.dart';
+import '../domain/tree_allocation_mode.dart';
 
 class WorkshopCubit extends Cubit<WorkshopState> {
   WorkshopCubit(this.components, this.engine, {WorkshopState? initialState})
@@ -151,7 +152,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     await _connect();
     if (await session.exists()) {
       if (state.library.active == null) _nextTitle = 'Восстановленная сборка';
-      await engine.call('pob_import_xml', {'xml': await session.read()});
+      await _loadXml(await session.read());
       await _readReport();
     }
   }
@@ -204,7 +205,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
 
   Future<void> importXml(String xml) => _run(() async {
     _markStale();
-    await engine.call('pob_import_xml', {'xml': xml});
+    await _loadXml(xml);
     _beginDocument('Импортированная сборка');
     await _readReport();
   });
@@ -220,6 +221,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
       'classId': classId,
       'level': level,
     });
+    await _restoreTreeMode();
     _beginDocument(name);
     await _readReport();
   });
@@ -230,7 +232,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
   });
 
   Future<void> restoreSession() => _run(() async {
-    await engine.call('pob_import_xml', {'xml': await session.read()});
+    await _loadXml(await session.read());
     await _readReport();
   });
 
@@ -324,7 +326,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
 
   Future<void> openBuild(String id) => _run(() async {
     _markStale();
-    await engine.call('pob_import_xml', {'xml': await library.read(id)});
+    await _loadXml(await library.read(id));
     _update(
       state.copyWith(
         library: LibraryState(entries: state.library.entries, activeId: id),
@@ -384,6 +386,25 @@ class WorkshopCubit extends Cubit<WorkshopState> {
         });
         await _readReport();
       });
+
+  Future<void> selectTreeMode(TreeAllocationMode mode) => _run(() async {
+    if (state.report == null) return;
+    if (mode == state.treeMode && state.document?.stale == false) return;
+    _markStale();
+    await engine.call('pob_tree_options', {'mode': mode.luaValue});
+    _update(state.copyWith(treeMode: mode));
+    await _readReport();
+  });
+
+  Future<void> _restoreTreeMode() async {
+    if (state.treeMode == TreeAllocationMode.common) return;
+    await engine.call('pob_tree_options', {'mode': state.treeMode.luaValue});
+  }
+
+  Future<void> _loadXml(String xml) async {
+    await engine.call('pob_import_xml', {'xml': xml});
+    await _restoreTreeMode();
+  }
 
   Future<void> selectMain(String control, int id) => _run(() async {
     _markStale();
