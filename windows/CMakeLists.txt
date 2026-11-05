@@ -78,7 +78,16 @@ install(TARGETS ${BINARY_NAME} RUNTIME DESTINATION "${CMAKE_INSTALL_PREFIX}"
 install(FILES "${FLUTTER_ICU_DATA_FILE}" DESTINATION "${INSTALL_BUNDLE_DATA_DIR}"
   COMPONENT Runtime)
 
-install(FILES "${FLUTTER_LIBRARY}" DESTINATION "${INSTALL_BUNDLE_LIB_DIR}"
+# В общем ephemeral после Release может остаться движок, ожидающий AOT.
+# Выбираем DLL непосредственно из кеша SDK для конфигурации текущей сборки.
+function(resolve_flutter_sdk output)
+  include("${FLUTTER_MANAGED_DIR}/ephemeral/generated_config.cmake")
+  set(${output} "${FLUTTER_ROOT}" PARENT_SCOPE)
+endfunction()
+resolve_flutter_sdk(FLUTTER_SDK_ROOT)
+set(FLUTTER_ENGINE_VARIANT
+  "$<IF:$<CONFIG:Debug>,windows-x64,windows-x64-$<LOWER_CASE:$<CONFIG>>>")
+install(FILES "${FLUTTER_SDK_ROOT}/bin/cache/artifacts/engine/${FLUTTER_ENGINE_VARIANT}/flutter_windows.dll" DESTINATION "${INSTALL_BUNDLE_LIB_DIR}"
   COMPONENT Runtime)
 
 if(PLUGIN_BUNDLED_LIBRARIES)

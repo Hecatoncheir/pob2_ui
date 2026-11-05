@@ -1,19 +1,30 @@
 import '../domain/component.dart';
+import '../domain/build_report.dart';
+import '../domain/tree_geometry.dart';
+import '../domain/library_entry.dart';
 
 typedef WorkshopOperation = ({bool busy, String? error});
 typedef XmlDraft = ({String xml, bool edited});
+typedef WorkshopDocument = ({
+  BuildReport report,
+  TreeGeometry? tree,
+  bool stale,
+  String? treeError,
+});
 
 class WorkshopState {
   WorkshopState({
     this.operation = (busy: false, error: null),
     this.status = 'Установите компоненты и подключите Lua',
-    this.report,
+    this.document,
+    LibraryState? library,
     this.sessionSaved = false,
     this.draft = (xml: '', edited: false),
     Map<Component, Release> releases = const {},
     List<String> log = const [],
     List<Map<String, dynamic>> classes = const [],
-  }) : releases = Map.unmodifiable(releases),
+  }) : library = library ?? LibraryState(),
+       releases = Map.unmodifiable(releases),
        log = List.unmodifiable(log),
        classes = List.unmodifiable(classes);
 
@@ -21,7 +32,9 @@ class WorkshopState {
   bool get busy => operation.busy;
   String? get error => operation.error;
   final String status;
-  final Map<String, dynamic>? report;
+  final WorkshopDocument? document;
+  BuildReport? get report => document?.report;
+  final LibraryState library;
   final bool sessionSaved;
   final XmlDraft draft;
   String get draftXml => draft.xml;
@@ -33,7 +46,8 @@ class WorkshopState {
   WorkshopState copyWith({
     WorkshopOperation? operation,
     String? status,
-    Map<String, dynamic>? report,
+    WorkshopDocument? document,
+    LibraryState? library,
     bool clearReport = false,
     bool? sessionSaved,
     XmlDraft? draft,
@@ -43,7 +57,8 @@ class WorkshopState {
   }) => WorkshopState(
     operation: operation ?? this.operation,
     status: status ?? this.status,
-    report: clearReport ? null : report ?? this.report,
+    document: clearReport ? null : document ?? this.document,
+    library: library ?? this.library,
     sessionSaved: sessionSaved ?? this.sessionSaved,
     draft: draft ?? this.draft,
     releases: releases ?? this.releases,

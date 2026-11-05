@@ -122,7 +122,7 @@ import pathlib, stat, sys, zipfile
 root = pathlib.Path(sys.argv[2]) / 'pob_poe2_mcp' / 'native'
 if root.exists() or root.is_symlink():
     raise ValueError('Каталог native уже существует')
-allowed = {'libluajit-5.1.so.2', 'libluajit-5.1.dylib', 'lua-utf8.so', 'LICENSE-LuaJIT.txt', 'LICENSE-luautf8.txt', 'sources.json'}
+allowed = {'libluajit-5.1.so.2', 'libluajit-5.1.dylib', 'lua-utf8.so', 'LICENSE-LuaJIT.txt', 'LICENSE-luautf8.txt', 'sources.json', 'libzstd.so', 'libzstd.dylib', 'LICENSE-Zstandard.txt', 'libpob-textures.so', 'libpob-textures.dylib', 'LICENSE-bcdec.txt'}
 with zipfile.ZipFile(sys.argv[1]) as archive:
     seen = set()
     total = 0

@@ -12,6 +12,10 @@ dependencies:
   flutter_bloc: 9.1.1
 
 dev_dependencies:
+  integration_test:
+    sdk: flutter
+  flutter_driver:
+    sdk: flutter
   flutter_test:
     sdk: flutter
 
@@ -19,3 +23,19 @@ flutter:
   uses-material-design: true
   assets:
     - docs/assets/brand/app-icon.svg
+    - docs/assets/fonts/OFL-nunito.txt
+    - docs/assets/fonts/OFL-nunitosans.txt
+    - docs/assets/fonts/OFL-jetbrainsmono.txt
+  fonts:
+    - family: Nunito
+      fonts:
+        - asset: docs/assets/fonts/nunito-800.ttf
+          weight: 800
+    - family: Nunito Sans
+      fonts:
+        - asset: docs/assets/fonts/nunito-sans-400.ttf
+        - asset: docs/assets/fonts/nunito-sans-700.ttf
+          weight: 700
+    - family: JetBrains Mono
+      fonts:
+        - asset: docs/assets/fonts/jetbrains-mono-400.ttf

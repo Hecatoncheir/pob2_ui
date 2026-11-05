@@ -4,6 +4,8 @@ import 'dart:io';
 import '../lib/data/component_repository.dart';
 import '../lib/data/installation_store.dart';
 import '../lib/data/mcp_client.dart';
+import '../lib/data/tree_icon_repository.dart';
+import '../lib/domain/tree_geometry.dart';
 import '../lib/domain/component.dart';
 
 Future<void> main(List<String> arguments) async {
@@ -37,6 +39,28 @@ Future<void> main(List<String> arguments) async {
       throw StateError('Не получены реальные показатели Lua');
     }
     final exported = await client.call('pob_export_xml');
+    final tree =
+        await TreeIconRepository(
+          root: Directory.fromUri(
+            repository.store.root.uri.resolve('tree-cache/'),
+          ),
+        ).load(
+          TreeGeometry.fromJson(
+            await client.call('pob_get_tree', {'includeScene': true}),
+          ),
+          client,
+          Component.values
+              .map((key) => repository.active[key]!.commit)
+              .join('-'),
+        );
+    if (tree.nodes.length < 1000 ||
+        tree.original == null ||
+        tree.icons.isEmpty ||
+        tree.iconError != null) {
+      throw StateError(
+        'Дерево или оригинальные иконки недоступны: ${tree.iconError}',
+      );
+    }
     await client.call('pob_import_xml', {'xml': exported['xml']});
     final restored = await client.call('pob_check_build');
     final restoredReport = restored['report'] as Map<String, dynamic>;
@@ -52,6 +76,9 @@ Future<void> main(List<String> arguments) async {
         'life': stats['Life'],
         'source': report['source'],
         'xmlRoundTrip': true,
+        'treeNodes': tree.nodes.length,
+        'treeTextures': tree.icons.length,
+        'treeDrawCommands': tree.original!.commands.length,
         'versions': {
           for (final entry in repository.active.entries)
             entry.key.name: entry.value.toJson(),

@@ -77,7 +77,13 @@ jobs:
       - name: Зависимости
         run: flutter pub get
       - name: Форматирование
-        run: dart format --output=none --set-exit-if-changed lib test tool
+        run: dart format --output=none --set-exit-if-changed lib test tool integration_test test_driver
+      - name: Проверить перенос SVG
+        shell: bash
+        run: |
+          python tool/generate_vectors.py
+          dart format lib/ui/core/vector_drawings.dart
+          git diff --exit-code -- lib/ui/core/vector_drawings.dart
       - name: Анализ
         run: flutter analyze
       - name: Тесты приложения
@@ -103,6 +109,20 @@ jobs:
       - name: Проверить установку и настоящий запуск
         if: runner.os != 'Linux'
         run: python tool/check_installer.py --target ${{ matrix.target }}
+      - name: Новый интерфейс с настоящим Lua
+        if: runner.os != 'Linux'
+        env:
+          POB2_UI_HOME: ${{ runner.temp }}/pob2-lua-smoke
+        run: flutter test integration_test/workspace_test.dart -d ${{ matrix.platform }} --no-pub
+      - name: Новый интерфейс с настоящим Lua
+        if: runner.os == 'Linux'
+        env:
+          POB2_UI_HOME: ${{ runner.temp }}/pob2-lua-smoke
+        run: xvfb-run -a flutter test integration_test/workspace_test.dart -d linux --no-pub
+      - name: Проверить переключение Release → Debug
+        if: runner.os == 'Windows'
+        shell: bash
+        run: python tool/check_windows_engine.py --flutter-root "$RUNNER_TEMP/flutter"
       - uses: actions/upload-artifact@v7.0.2
         with:
           name: installer-${{ matrix.target }}

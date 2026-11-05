@@ -12,6 +12,8 @@ class McpClient {
   int _counter = 0;
   final diagnostics = StringBuffer();
   bool get connected => _process != null;
+  Set<String> tools = const {};
+  void Function(Object)? onDisconnected;
 
   Future<void> connect(Installations pair) async {
     await close();
@@ -38,7 +40,9 @@ class McpClient {
             onDone: () {
               if (_process != process) return;
               _process = null;
-              _fail(StateError('MCP завершился. $diagnostics'));
+              final error = StateError('MCP завершился. $diagnostics');
+              _fail(error);
+              onDisconnected?.call(error);
             },
           ),
     );
@@ -59,7 +63,10 @@ class McpClient {
       process.stdin.writeln(
         jsonEncode({'jsonrpc': '2.0', 'method': 'notifications/initialized'}),
       );
-      await request('tools/list');
+      final available = await request('tools/list');
+      tools = (available['tools'] as List<dynamic>)
+          .map((tool) => (tool as Map<String, dynamic>)['name'] as String)
+          .toSet();
     } catch (_) {
       await close();
       rethrow;
@@ -145,6 +152,7 @@ class McpClient {
   Future<void> close() async {
     final process = _process;
     _process = null;
+    tools = const {};
     _fail(StateError('Сессия закрыта'));
     if (process != null) {
       await process.stdin.close();
