@@ -8,10 +8,14 @@ class FrostedSurface extends StatelessWidget {
     required this.child,
     this.showShadow = true,
     this.backgroundOpacity = opacity,
+    this.borderRadius = const BorderRadius.all(Radius.circular(12)),
+    this.border,
   });
   final Widget child;
   final bool showShadow;
   final double backgroundOpacity;
+  final BorderRadius borderRadius;
+  final Border? border;
   static const opacity = .85;
 
   static Color contrastBackground(ColorScheme colors) {
@@ -27,13 +31,12 @@ class FrostedSurface extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
-    final radius = BorderRadius.circular(12);
     final tintOpacity = MediaQuery.highContrastOf(context)
         ? .98
         : backgroundOpacity;
     return DecoratedBox(
       decoration: BoxDecoration(
-        borderRadius: radius,
+        borderRadius: borderRadius,
         boxShadow: [
           if (showShadow)
             BoxShadow(
@@ -44,16 +47,18 @@ class FrostedSurface extends StatelessWidget {
         ],
       ),
       child: ClipRRect(
-        borderRadius: radius,
+        borderRadius: borderRadius,
         child: BackdropFilter(
           filter: ui.ImageFilter.blur(sigmaX: 18, sigmaY: 18),
           child: DecoratedBox(
             decoration: BoxDecoration(
               color: colors.surface.withValues(alpha: tintOpacity),
-              borderRadius: radius,
-              border: Border.all(
-                color: colors.outlineVariant.withValues(alpha: .8),
-              ),
+              borderRadius: borderRadius,
+              border:
+                  border ??
+                  Border.all(
+                    color: colors.outlineVariant.withValues(alpha: .8),
+                  ),
             ),
             child: Material(type: MaterialType.transparency, child: child),
           ),

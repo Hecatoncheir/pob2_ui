@@ -75,6 +75,8 @@ class StatisticsPanel extends StatelessWidget {
               key: const Key('statistics-header'),
               showShadow: false,
               backgroundOpacity: .65,
+              borderRadius: BorderRadius.zero,
+              border: Border(bottom: BorderSide(color: Spark.of(context).line)),
               child: _InspectorHeading(model: model, shell: shell),
             ),
           ),
