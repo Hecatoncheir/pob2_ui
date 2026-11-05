@@ -33,6 +33,7 @@ import '../data/interface_scale_repository.dart';
 import 'interface_scale_cubit.dart';
 import 'interface_scale_picker.dart';
 import 'interface_viewport.dart';
+import 'core/scrollable_workspace.dart';
 
 class PobApp extends StatelessWidget {
   const PobApp({
@@ -138,36 +139,38 @@ class _Shell extends StatelessWidget {
               shell: shell,
               child: Scaffold(
                 body: SafeArea(
-                  child: Row(
-                    children: [
-                      if (!narrow) _Sidebar(model, updates),
-                      Expanded(
-                        child: Column(
-                          children: [
-                            if (narrow) _CompactActions(model, updates),
-                            if (model.state.busy)
-                              LinearProgressIndicator(
-                                minHeight: 2,
-                                color: Spark.of(context).green,
-                                backgroundColor: Spark.of(context).sage,
-                              ),
-                            if (model.state.error != null)
-                              _ErrorNotice(model.state.error!),
-                            Expanded(
-                              child: ClipRect(
-                                child: SoftSwitch(
-                                  child: KeyedSubtree(
-                                    key: ValueKey(state.page),
-                                    child: _page(state.page, model, shell),
+                  child: ScrollableWorkspace(
+                    child: Row(
+                      children: [
+                        if (!narrow) _Sidebar(model, updates),
+                        Expanded(
+                          child: Column(
+                            children: [
+                              if (narrow) _CompactActions(model, updates),
+                              if (model.state.busy)
+                                LinearProgressIndicator(
+                                  minHeight: 2,
+                                  color: Spark.of(context).green,
+                                  backgroundColor: Spark.of(context).sage,
+                                ),
+                              if (model.state.error != null)
+                                _ErrorNotice(model.state.error!),
+                              Expanded(
+                                child: ClipRect(
+                                  child: SoftSwitch(
+                                    child: KeyedSubtree(
+                                      key: ValueKey(state.page),
+                                      child: _page(state.page, model, shell),
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                            _StatusBar(model),
-                          ],
+                              _StatusBar(model),
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
                 bottomNavigationBar: narrow
@@ -368,7 +371,7 @@ class _NavItem extends StatelessWidget {
       return Padding(
         padding: const EdgeInsets.only(bottom: 6),
         child: AppTooltip(
-          message: compact ? pageLabels[page]! : '',
+          message: pageLabels[page]!,
           child: AnimatedContainer(
             duration: motionDuration(context, milliseconds: 180),
             decoration: BoxDecoration(
@@ -399,6 +402,8 @@ class _NavItem extends StatelessWidget {
                       Expanded(
                         child: AppText(
                           pageLabels[page]!,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
                           style: TextStyle(
                             color: color,
                             fontWeight: FontWeight.w700,

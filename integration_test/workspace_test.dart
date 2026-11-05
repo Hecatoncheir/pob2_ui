@@ -157,6 +157,8 @@ Future<void> _reviewScale(
   await tester.pump();
   await tester.testTextInput.receiveAction(TextInputAction.done);
   await tester.pumpAndSettle();
+  await tester.ensureVisible(find.byKey(const Key('passive-tree')));
+  await tester.pumpAndSettle();
   final mouse = await tester.createGesture(kind: ui.PointerDeviceKind.mouse);
   await mouse.addPointer(location: Offset.zero);
   await mouse.moveTo(tester.getCenter(find.byKey(const Key('passive-tree'))));
@@ -173,6 +175,11 @@ Future<void> _reviewScale(
     await InterfaceScaleRepository(InstallationStore.defaultRoot()).load(),
     135,
   );
+  await scale.setPercent(200);
+  await tester.pumpAndSettle();
+  await _waitForImages(tester);
+  await _capture(tester, suffix: '-scale-maximum');
+  expect(tester.takeException(), isNull);
   await scale.setPercent(100);
   await tester.pumpAndSettle();
   expect(tester.takeException(), isNull);

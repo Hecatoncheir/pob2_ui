@@ -10,6 +10,8 @@ import 'package:pob2_ui/domain/tree_geometry.dart';
 import 'package:pob2_ui/ui/app.dart';
 import 'package:pob2_ui/ui/workshop_cubit.dart';
 import 'package:pob2_ui/ui/workshop_state.dart';
+import 'package:pob2_ui/data/interface_scale_repository.dart';
+import 'package:pob2_ui/ui/interface_scale_cubit.dart';
 
 final fixture = BuildReport.fromJson({
   'source': 'original-lua',
@@ -79,6 +81,35 @@ final tree = TreeGeometry.fromJson({
 });
 
 void main() {
+  testWidgets('Рабочее дерево при масштабе 200% в небольшом окне', (
+    tester,
+  ) async {
+    await tester.binding.setSurfaceSize(const Size(800, 600));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+    final model = WorkshopCubit(
+      ComponentRepository(
+        store: InstallationStore(Directory('test-components')),
+      ),
+      McpClient(),
+      initialState: WorkshopState(
+        document: (report: fixture, tree: tree, stale: false, treeError: null),
+      ),
+    );
+    final scale = InterfaceScaleCubit(
+      InterfaceScaleRepository(Directory('test-components')),
+      initialPercent: 200,
+    );
+    await tester.pumpWidget(PobApp(model: model, interfaceScale: scale));
+    await tester.pumpAndSettle();
+    expect(tester.takeException(), isNull);
+    await tester.ensureVisible(find.byKey(const Key('tree-search')));
+    await tester.tap(find.byKey(const Key('tree-search')));
+    await tester.pumpAndSettle();
+    expect(tester.takeException(), isNull);
+    await tester.pumpWidget(const SizedBox.shrink());
+    await scale.close();
+    await model.close();
+  });
   for (final size in const [
     Size(360, 800),
     Size(768, 850),
