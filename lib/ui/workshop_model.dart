@@ -14,6 +14,8 @@ class WorkshopModel extends ChangeNotifier {
   final McpClient engine;
   final SessionRepository session;
   bool sessionSaved = false;
+  String draftXml = '';
+  bool draftEdited = false;
   final releases = <Component, Release>{};
   final log = <String>[];
   bool busy = false;
@@ -55,6 +57,8 @@ class WorkshopModel extends ChangeNotifier {
   Future<void> initialize() => _run(() async {
     await components.load();
     sessionSaved = await session.exists();
+    final savedDraft = await session.readDraft();
+    if (!draftEdited) draftXml = savedDraft;
     status = ready ? 'Компоненты установлены. Можно подключить Lua.' : status;
   });
 
@@ -145,6 +149,20 @@ class WorkshopModel extends ChangeNotifier {
     await engine.close();
     classes = [];
     report = null;
+  }
+
+  void editDraft(String value) {
+    draftEdited = true;
+    draftXml = value;
+  }
+
+  Future<void> checkpoint() async {
+    if (busy) throw StateError('Дождитесь завершения текущей операции');
+    await session.saveDraft(draftXml);
+    if (engine.connected && report != null) {
+      final result = await engine.call('pob_export_xml');
+      await session.save(result['xml'] as String);
+    }
   }
 
   @override

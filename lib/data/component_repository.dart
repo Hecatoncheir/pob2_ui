@@ -5,6 +5,8 @@ import '../domain/component.dart';
 import 'github_service.dart';
 import 'installation_store.dart';
 import 'process_service.dart';
+import 'native_runtime_installer.dart';
+import 'managed_installation.dart';
 
 class ComponentRepository {
   ComponentRepository({
@@ -51,8 +53,10 @@ class ComponentRepository {
     Release release,
     void Function(String) log,
   ) async {
-    if (!Platform.isWindows)
-      throw UnsupportedError('Пока поддерживается Windows x64');
+    if (currentAppTarget() == null)
+      throw UnsupportedError(
+        'Поддерживаются Windows x64, Linux x64 и macOS arm64',
+      );
     await _acquire();
     try {
       final versions = await Directory.fromUri(
@@ -80,6 +84,14 @@ class ComponentRepository {
       ], log);
       await _git(candidate, ['checkout', '--detach', 'FETCH_HEAD'], log);
       final commit = await _git(candidate, ['rev-parse', 'HEAD']);
+      if (component == Component.mcp) {
+        await NativeRuntimeInstaller().install(
+          candidate,
+          release.tag,
+          processes,
+          log,
+        );
+      }
       final installation = Installation(
         tag: release.tag,
         commit: commit,
@@ -110,7 +122,12 @@ class ComponentRepository {
 
   Future<void> _validate(Component component, Directory directory) async {
     final files = component == Component.pob
-        ? ['src/Launch.lua', 'runtime/lua51.dll', 'src/Modules/Main.lua']
+        ? [
+            'src/Launch.lua',
+            'runtime/lua/dkjson.lua',
+            'src/Modules/Main.lua',
+            if (Platform.isWindows) 'runtime/lua51.dll',
+          ]
         : ['run.py', 'pob_poe2_mcp/server.py'];
     for (final relative in files) {
       if (!await File.fromUri(directory.uri.resolve(relative)).exists()) {

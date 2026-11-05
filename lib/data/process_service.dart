@@ -53,10 +53,12 @@ class ProcessService {
   }
 
   Future<String> python() async {
-    final executable = Platform.environment['POB2_UI_PYTHON'] ?? 'python';
+    final executable =
+        Platform.environment['POB2_UI_PYTHON'] ??
+        (Platform.isWindows ? 'python' : 'python3');
     await run(executable, [
       '-c',
-      'import sys, struct; assert sys.version_info >= (3,11) and struct.calcsize("P") == 8, "Нужен Python x64 3.11+"',
+      'import sys, struct; assert sys.version_info >= (3,11) and struct.calcsize("P") == 8, "Нужен 64-битный Python 3.11+"',
     ], timeout: const Duration(seconds: 15));
     return executable;
   }

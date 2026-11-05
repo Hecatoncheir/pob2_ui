@@ -1,0 +1,72 @@
+name: Публикация релиза
+
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Существующий стабильный тег vX.Y.Z'
+        type: string
+        required: true
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release-${{ inputs.tag || github.ref_name }}
+  cancel-in-progress: false
+
+jobs:
+  metadata:
+    runs-on: ubuntu-22.04
+    outputs:
+      tag: ${{ steps.version.outputs.tag }}
+    env:
+      RELEASE_TAG: ${{ inputs.tag || github.ref_name }}
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          ref: ${{ env.RELEASE_TAG }}
+      - uses: actions/setup-python@v7.1.0
+        with:
+          python-version: '3.13'
+      - id: version
+        run: |
+          python tool/release.py --tag "$RELEASE_TAG" --check-only
+          echo "tag=$RELEASE_TAG" >> "$GITHUB_OUTPUT"
+  checks:
+    needs: metadata
+    uses: ./.github/workflows/ci.yml
+    with:
+      ref: ${{ needs.metadata.outputs.tag }}
+  publish:
+    needs: [metadata, checks]
+    runs-on: ubuntu-22.04
+    permissions:
+      contents: write
+    env:
+      GH_TOKEN: ${{ github.token }}
+      RELEASE_TAG: ${{ needs.metadata.outputs.tag }}
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          ref: ${{ env.RELEASE_TAG }}
+      - uses: actions/setup-python@v7.1.0
+        with:
+          python-version: '3.13'
+      - uses: actions/download-artifact@v8.0.2
+        with:
+          pattern: installer-*
+          merge-multiple: true
+          path: build/packages
+      - name: Проверить комплект и записать SHA-256
+        run: python tool/release.py --tag "$RELEASE_TAG" --artifacts build/packages
+      - name: Опубликовать неизменяемый выпуск
+        run: |
+          if gh release view "$RELEASE_TAG" >/dev/null 2>&1; then
+            echo 'Выпуск уже существует; файлы не будут заменены.'
+            exit 0
+          fi
+          gh release create "$RELEASE_TAG" build/packages/*.exe build/packages/*.dmg build/packages/*.run build/packages/SHA256SUMS \
+            --verify-tag --title "$RELEASE_TAG — PoB II" --notes-file build/packages/RELEASE_NOTES.md

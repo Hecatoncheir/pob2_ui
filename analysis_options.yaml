@@ -5,6 +5,8 @@ analyzer:
   exclude:
     - build/**
     - windows/**
+    - macos/**
+    - linux/**
 linter:
   rules:
     - avoid_print

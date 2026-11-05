@@ -17,6 +17,13 @@ class _CalculatorViewState extends State<CalculatorView> {
   int? classId;
 
   @override
+  void initState() {
+    super.initState();
+    xml.text = widget.model.draftXml;
+    xml.addListener(() => widget.model.editDraft(xml.text));
+  }
+
+  @override
   void dispose() {
     xml.dispose();
     level.dispose();
@@ -26,6 +33,8 @@ class _CalculatorViewState extends State<CalculatorView> {
   @override
   Widget build(BuildContext context) {
     final model = widget.model;
+    if (!model.draftEdited && xml.text != model.draftXml)
+      xml.text = model.draftXml;
     final enabled = model.engine.connected && !model.busy;
     return ListView(
       padding: const EdgeInsets.all(28),

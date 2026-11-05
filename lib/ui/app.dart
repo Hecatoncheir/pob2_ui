@@ -3,12 +3,16 @@ import 'package:flutter/material.dart';
 import '../domain/component.dart';
 import 'calculator_view.dart';
 import 'workshop_model.dart';
+import 'app_update_model.dart';
+import 'app_update_dialog.dart';
+import '../domain/app_info.dart';
 
 const accent = Color(0xFF8FE3CB);
 
 class PobApp extends StatelessWidget {
-  const PobApp({super.key, required this.model});
+  const PobApp({super.key, required this.model, this.updates});
   final WorkshopModel model;
+  final AppUpdateModel? updates;
 
   @override
   Widget build(BuildContext context) => MaterialApp(
@@ -35,13 +39,14 @@ class PobApp extends StatelessWidget {
         ),
       ),
     ),
-    home: WorkshopView(model: model),
+    home: WorkshopView(model: model, updates: updates),
   );
 }
 
 class WorkshopView extends StatefulWidget {
-  const WorkshopView({super.key, required this.model});
+  const WorkshopView({super.key, required this.model, this.updates});
   final WorkshopModel model;
+  final AppUpdateModel? updates;
   @override
   State<WorkshopView> createState() => _WorkshopViewState();
 }
@@ -94,6 +99,27 @@ class _WorkshopViewState extends State<WorkshopView> {
                         crossAxisAlignment: WrapCrossAlignment.center,
                         spacing: 24,
                         children: [
+                          if (widget.updates != null)
+                            ListenableBuilder(
+                              listenable: widget.updates!,
+                              builder: (context, _) => TextButton.icon(
+                                onPressed: () => showAppUpdates(
+                                  context,
+                                  widget.updates!,
+                                  model,
+                                ),
+                                icon: Icon(
+                                  widget.updates!.available
+                                      ? Icons.update
+                                      : Icons.info_outline,
+                                ),
+                                label: Text(
+                                  widget.updates!.available
+                                      ? 'Есть обновление'
+                                      : 'v$appVersion',
+                                ),
+                              ),
+                            ),
                           const Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -233,7 +259,7 @@ class _ComponentsView extends StatelessWidget {
         _ComponentCard(model: model, component: component),
       const SizedBox(height: 8),
       const Text(
-        'Для этой версии нужны Git и Python x64 3.11+ в PATH. '
+        'Для этой версии нужны Git и 64-битный Python 3.11+ в PATH. '
         'Проверка обновлений обращается к GitHub; расчёты после установки работают локально.',
         style: TextStyle(color: Colors.white60),
       ),

@@ -9,12 +9,30 @@ class InstallationStore {
   Installations previous = {};
   File get _manifest => File.fromUri(root.uri.resolve('components.json'));
 
-  static Directory defaultRoot() {
-    final explicit = Platform.environment['POB2_UI_HOME'];
+  static Directory defaultRoot({
+    String? system,
+    Map<String, String>? environment,
+  }) {
+    final variables = environment ?? Platform.environment;
+    final explicit = variables['POB2_UI_HOME'];
     if (explicit != null) return Directory(explicit).absolute;
-    final base = Platform.environment['LOCALAPPDATA'];
-    if (base == null) throw StateError('Не найден LOCALAPPDATA');
-    return Directory.fromUri(Directory(base).uri.resolve('pob2_ui/'));
+    final operatingSystem = system ?? Platform.operatingSystem;
+    if (operatingSystem == 'windows') {
+      final base = variables['LOCALAPPDATA'];
+      if (base == null) throw StateError('Не найден LOCALAPPDATA');
+      return Directory.fromUri(Directory(base).uri.resolve('pob2_ui/'));
+    }
+    final home = variables['HOME'];
+    if (home == null) throw StateError('Не найден домашний каталог');
+    if (operatingSystem == 'macos')
+      return Directory.fromUri(
+        Directory(home).uri.resolve('Library/Application%20Support/pob2_ui/'),
+      );
+    final data = variables['XDG_DATA_HOME'];
+    final base = data == null
+        ? Directory.fromUri(Directory(home).uri.resolve('.local/share/'))
+        : Directory(data);
+    return Directory.fromUri(base.uri.resolve('pob2_ui/'));
   }
 
   Future<Installations> load() async {
