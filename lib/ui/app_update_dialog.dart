@@ -91,7 +91,7 @@ Future<void> showAppUpdates(
         else if (updates.installation == null ||
             (updates.available && updates.release?.installer == null))
           FilledButton(
-            onPressed: updates.installer.openReleases,
+            onPressed: updates.openReleases,
             child: const Text('Страница выпусков'),
           )
         else if (updates.phase == UpdatePhase.ready)

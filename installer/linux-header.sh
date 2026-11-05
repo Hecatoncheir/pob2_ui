@@ -24,8 +24,9 @@ if [ -e "$prefix/pob2-install.json" ]; then
 elif [ -n "$(ls -A "$prefix")" ]; then
   echo 'Для первой установки выберите пустой каталог' >&2; exit 1
 fi
-mkdir "$prefix/.install-lock" || { echo 'Уже выполняется установка' >&2; exit 1; }
-trap 'rmdir "$prefix/.install-lock"' EXIT
+[ ! -L "$prefix/.install.lock" ] || exit 1
+exec 9>"$prefix/.install.lock"
+flock -n 9 || { echo 'Уже выполняется установка' >&2; exit 1; }
 printf '%s\n' "$marker" > "$prefix/pob2-install.json"
 for name in versions pending-version pending-version.tmp pob2-ui; do
   [ ! -L "$prefix/$name" ] || { echo 'Обнаружена ссылка в каталоге установки' >&2; exit 1; }

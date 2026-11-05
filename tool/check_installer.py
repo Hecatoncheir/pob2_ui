@@ -4,11 +4,12 @@ import argparse
 import json
 import os
 from pathlib import Path
+import shutil
 import subprocess
 import tempfile
 import time
 
-from release import ROOT, filename, version
+from release import ROOT, dart_executable, filename, version
 
 
 def run(*args, **kwargs):
@@ -22,6 +23,20 @@ def wait_file(path, expected, timeout=45):
             return
         time.sleep(.2)
     raise RuntimeError(f'Не подтверждён запуск: {path}')
+
+
+def stop_versions(install, environment):
+    if os.name == 'nt':
+        script = "Get-Process pob2_ui -ErrorAction SilentlyContinue | Where-Object { $_.Path -and $_.Path.StartsWith($env:POB2_CHECK_ROOT) } | Stop-Process -Force"
+        run(shutil.which('pwsh') or 'powershell', '-NoProfile', '-Command', script, env=dict(environment, POB2_CHECK_ROOT=str(install)))
+    else:
+        processes = subprocess.check_output(['ps', '-eo', 'pid=,args='], text=True)
+        expected = str(install / 'versions') + '/'
+        for line in processes.splitlines():
+            pieces = line.strip().split(None, 1)
+            if len(pieces) == 2 and pieces[1].startswith(expected):
+                os.kill(int(pieces[0]), 15)
+    time.sleep(1)
 
 
 def check(target):
@@ -60,19 +75,34 @@ def check(target):
         process = subprocess.Popen([str(install / binary)], env=environment)
         wait_file(install / 'active-version', number)
         process.wait(timeout=45)
-        # Сам Flutter работает отдельно от короткоживущего запускателя.
-        # Завершаем только процессы этого временного каталога.
-        if target == 'windows-x64':
-            script = "Get-Process pob2_ui -ErrorAction SilentlyContinue | Where-Object { $_.Path -and $_.Path.StartsWith($env:POB2_CHECK_ROOT) } | Stop-Process -Force"
-            run('powershell', '-NoProfile', '-Command', script, env=dict(environment, POB2_CHECK_ROOT=str(install)))
-        else:
-            processes = subprocess.check_output(['ps', '-eo', 'pid=,args='], text=True)
-            expected = str(install / 'versions' / number / 'pob2_ui')
-            for line in processes.splitlines():
-                pieces = line.strip().split(None, 1)
-                if len(pieces) == 2 and pieces[1].startswith(expected + ' '):
-                    os.kill(int(pieces[0]), 15)
-        time.sleep(1)
+        stop_versions(install, environment)
+        # Отсутствующий кандидат должен вернуть рабочую версию.
+        (install / 'pending-version').write_text('999.0.0')
+        run(install / binary, env=environment)
+        assert (install / 'active-version').read_text().strip() == number
+        assert not (install / 'pending-version').exists()
+        assert '999.0.0' in (install / 'update.log').read_text(encoding='utf-8')
+        stop_versions(install, environment)
+        failed = install / 'versions/999.0.2'
+        failed.mkdir()
+        run(dart_executable(), 'compile', 'exe', ROOT / 'tool/fixtures/failed_candidate.dart', '-o', failed / ('pob2_ui.exe' if os.name == 'nt' else 'pob2_ui'))
+        (install / 'pending-version').write_text('999.0.2')
+        run(install / binary, env=environment, timeout=45)
+        assert (install / 'active-version').read_text().strip() == number
+        assert not (install / 'pending-version').exists()
+        assert '999.0.2' in (install / 'update.log').read_text(encoding='utf-8')
+        stop_versions(install, environment)
+        # Проверяем протокол переключения на том же настоящем Flutter-бандле.
+        candidate = '999.0.1'
+        shutil.copytree(install / 'versions' / number, install / 'versions' / candidate, symlinks=True)
+        (install / 'pending-version').write_text(candidate)
+        run(install / binary, env=environment)
+        assert (install / 'active-version').read_text().strip() == candidate
+        assert (install / 'previous-version').read_text().strip() == number
+        stop_versions(install, environment)
+        run(install / binary, '--rollback', env=environment)
+        assert (install / 'active-version').read_text().strip() == number
+        stop_versions(install, environment)
     print(f'{target}: установщик и настоящий запуск проверены')
 
 

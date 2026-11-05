@@ -96,6 +96,9 @@ class AppUpdateModel extends ChangeNotifier {
     }
     phase = UpdatePhase.checking;
     error = null;
+    release = null;
+    package = null;
+    message = 'Проверяем выпуски…';
     _notify();
     try {
       final latest = await releases.latest(target);
@@ -153,6 +156,15 @@ class AppUpdateModel extends ChangeNotifier {
   }
 
   void cancel() => downloader.cancel();
+
+  Future<void> openReleases() async {
+    try {
+      await installer.openReleases();
+    } on Object catch (failure) {
+      error = 'Не удалось открыть страницу выпусков: $failure';
+      _notify();
+    }
+  }
 
   Future<bool> install(Future<void> Function() checkpoint) async {
     if (phase != UpdatePhase.ready || installation == null || package == null)
