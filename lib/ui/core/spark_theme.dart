@@ -28,6 +28,7 @@ abstract final class Spark {
       useMaterial3: true,
       colorScheme: scheme,
       fontFamily: 'Nunito Sans',
+      fontFamilyFallback: const ['Noto Thai', 'Noto CJK'],
       scaffoldBackgroundColor: background,
       textTheme: TextTheme(
         headlineLarge: TextStyle(

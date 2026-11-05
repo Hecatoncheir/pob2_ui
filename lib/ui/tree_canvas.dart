@@ -52,8 +52,9 @@ class TreePainter extends CustomPainter {
     this.transform,
     this.viewport,
     this.artwork,
-    this.hoverArtwork,
-  ) : super(repaint: transform);
+    this.hoverArtwork, {
+    this.matches,
+  }) : super(repaint: transform);
   final TreeScene scene;
   final int? selected;
   final int? hovered;
@@ -63,6 +64,7 @@ class TreePainter extends CustomPainter {
   final Size viewport;
   final ui.Picture? artwork;
   final ui.Picture? hoverArtwork;
+  final Set<int>? matches;
   late double zoom;
   late Rect visible;
   @override
@@ -131,7 +133,9 @@ class TreePainter extends CustomPainter {
     return kinds.contains('ClassStart') && kinds.contains('AscendClassStart');
   }
 
-  bool _matches(TreeNode node) => query.isNotEmpty && node.matches(query);
+  bool _matches(TreeNode node) =>
+      query.trim().isNotEmpty &&
+      (matches?.contains(node.id) ?? node.matches(query));
 
   double _radius(TreeNode node) => math.max(
     scene.tree.original == null ? 2.8 : 1,

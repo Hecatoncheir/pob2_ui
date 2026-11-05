@@ -18,6 +18,11 @@ import 'package:pob2_ui/ui/tree_hover_card.dart';
 import 'package:pob2_ui/ui/workshop_cubit.dart';
 import 'package:pob2_ui/ui/node_power_panel.dart';
 import 'package:pob2_ui/ui/app_update_cubit.dart';
+import 'package:pob2_ui/data/language_preferences.dart';
+import 'package:pob2_ui/data/game_dictionary_repository.dart';
+import 'package:pob2_ui/domain/app_language.dart';
+import 'package:pob2_ui/ui/language_cubit.dart';
+import 'package:pob2_ui/ui/core/spark_art.dart';
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
@@ -37,6 +42,11 @@ void main() {
     addTearDown(model.close);
     final updates = AppUpdateCubit(root: root);
     addTearDown(updates.close);
+    final language = LanguageCubit(
+      LanguagePreferences(root),
+      GameDictionaryRepository(root),
+    );
+    addTearDown(language.close);
     await model.initialize();
     expect(model.state.error, isNull);
     expect(model.engine.connected, isTrue);
@@ -57,7 +67,7 @@ void main() {
     await tester.pumpWidget(
       RepaintBoundary(
         key: const Key('review-image'),
-        child: PobApp(model: model, updates: updates),
+        child: PobApp(model: model, updates: updates, language: language),
       ),
     );
     await tester.pumpAndSettle();
@@ -88,6 +98,7 @@ void main() {
       await tester.pumpAndSettle();
       expect(tester.takeException(), isNull);
     }
+    await _localizeTree(tester, model, language);
     await tester.tap(find.byKey(const ValueKey('page-library')));
     await tester.pumpAndSettle();
     expect(find.text('Проверка интерфейса Lua'), findsWidgets);
@@ -138,6 +149,8 @@ Future<void> _switchTheme(WidgetTester tester) async {
 Future<void> _searchNodePower(WidgetTester tester, WorkshopCubit model) async {
   expect(model.engine.tools, contains('pob_node_power'));
   await tester.tap(find.byTooltip('Найти узлы по характеристике'));
+  await tester.pump();
+  expect(_powerButton(tester).selected, isTrue);
   final panel = find.byType(NodePowerPanel);
   for (var attempt = 0; attempt < 100; attempt++) {
     await tester.pump(const Duration(milliseconds: 100));
@@ -178,6 +191,70 @@ Future<void> _searchNodePower(WidgetTester tester, WorkshopCubit model) async {
   await tester.pumpAndSettle();
   await tester.tap(find.byTooltip('Найти узлы по характеристике'));
   await tester.pumpAndSettle();
+  expect(_powerButton(tester).selected, isFalse);
+}
+
+ArtIconButton _powerButton(WidgetTester tester) => tester
+    .widgetList<ArtIconButton>(find.byType(ArtIconButton))
+    .firstWhere((button) => button.icon == 'chart');
+
+Future<void> _localizeTree(
+  WidgetTester tester,
+  WorkshopCubit model,
+  LanguageCubit language,
+) async {
+  final xml = await model.exportXml();
+  final stats = model.state.report!.stats;
+  await language.selectLanguage(AppLanguage.russian);
+  expect(language.state.error, isNull);
+  await tester.pumpAndSettle();
+  await tester.tap(find.byKey(const Key('tree-search')));
+  await tester.pump();
+  await tester.enterText(find.byKey(const Key('tree-search')), 'Интеллект');
+  await tester.pump();
+  await tester.testTextInput.receiveAction(TextInputAction.done);
+  await tester.pumpAndSettle();
+  final painter = tester
+      .widgetList<CustomPaint>(find.byType(CustomPaint))
+      .map((widget) => widget.painter)
+      .whereType<TreePainter>()
+      .first;
+  expect(painter.matches, isNotEmpty);
+  expect(painter.query, 'Интеллект');
+  expect(painter.scene.nodes[painter.selected]!.name, 'Intelligence');
+  final mouse = await tester.createGesture(kind: ui.PointerDeviceKind.mouse);
+  await mouse.addPointer(location: Offset.zero);
+  await mouse.moveTo(tester.getCenter(find.byKey(const Key('passive-tree'))));
+  await _waitForHover(tester);
+  expect(
+    find.descendant(
+      of: find.byType(TreeHoverCard),
+      matching: find.text('Интеллект'),
+    ),
+    findsOneWidget,
+  );
+  await _capture(tester, suffix: '-ru');
+  await mouse.moveTo(const Offset(4, 4));
+  await mouse.removePointer();
+  await language.selectLanguage(AppLanguage.japanese);
+  expect(language.state.error, isNull);
+  await tester.pumpAndSettle();
+  await tester.tap(find.byKey(const Key('tree-search')));
+  await tester.pump();
+  await tester.enterText(find.byKey(const Key('tree-search')), '知性');
+  await tester.pump();
+  await tester.testTextInput.receiveAction(TextInputAction.done);
+  await tester.pumpAndSettle();
+  await _capture(tester, suffix: '-ja');
+  expect(model.state.report!.stats, stats);
+  expect(await model.exportXml(), xml);
+  await language.selectLanguage(AppLanguage.russian);
+  await tester.pumpAndSettle();
+  expect(
+    await LanguagePreferences(InstallationStore.defaultRoot()).load(),
+    AppLanguage.russian,
+  );
+  expect(tester.takeException(), isNull);
 }
 
 Future<void> _selectAttribute(WidgetTester tester, WorkshopCubit model) async {

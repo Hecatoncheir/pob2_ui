@@ -1,3 +1,5 @@
+import 'core/app_text.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -7,6 +9,12 @@ import '../domain/appearance.dart';
 import '../data/appearance_repository.dart';
 import 'appearance_cubit.dart';
 import 'appearance_picker.dart';
+import '../data/language_preferences.dart';
+import '../data/game_dictionary_repository.dart';
+import '../l10n/generated/app_localizations.dart';
+import 'language_cubit.dart';
+import 'language_picker.dart';
+import 'core/language_scope.dart';
 import 'app_update_cubit.dart';
 import 'app_update_dialog.dart';
 import 'app_update_state.dart';
@@ -23,14 +31,30 @@ import 'workshop_state.dart';
 import 'workspace_view.dart';
 
 class PobApp extends StatelessWidget {
-  const PobApp({super.key, required this.model, this.updates, this.appearance});
+  const PobApp({
+    super.key,
+    required this.model,
+    this.updates,
+    this.appearance,
+    this.language,
+  });
   final WorkshopCubit model;
   final AppUpdateCubit? updates;
   final AppearanceCubit? appearance;
+  final LanguageCubit? language;
   @override
   Widget build(BuildContext context) => MultiBlocProvider(
     providers: [
       BlocProvider(create: (_) => ShellCubit()),
+      if (language case final settings?)
+        BlocProvider<LanguageCubit>.value(value: settings)
+      else
+        BlocProvider(
+          create: (_) => LanguageCubit(
+            LanguagePreferences(model.components.store.root),
+            GameDictionaryRepository(model.components.store.root),
+          ),
+        ),
       if (appearance case final settings?)
         BlocProvider<AppearanceCubit>.value(value: settings)
       else
@@ -50,33 +74,45 @@ class _MaterialApp extends StatelessWidget {
   final AppUpdateCubit? updates;
   @override
   Widget build(BuildContext context) =>
-      BlocBuilder<AppearanceCubit, AppearanceState>(
-        builder: (context, appearance) => _app(context, appearance),
-      );
-
-  Widget _app(BuildContext context, AppearanceState appearance) =>
-      BlocBuilder<ShellCubit, ShellState>(
-        builder: (context, state) => MaterialApp(
-          title: 'PoB II · Мастерская',
-          debugShowCheckedModeBanner: false,
-          theme: Spark.theme(),
-          darkTheme: Spark.theme(brightness: Brightness.dark),
-          themeMode: appearance.theme == AppTheme.dark
-              ? ThemeMode.dark
-              : ThemeMode.light,
-          builder: (context, child) => LayoutBuilder(
-            builder: (context, constraints) => MediaQuery(
-              data: MediaQuery.of(context).copyWith(
-                size: constraints.biggest,
-                disableAnimations:
-                    MediaQuery.disableAnimationsOf(context) || !state.motion,
-              ),
-              child: child!,
-            ),
+      BlocBuilder<LanguageCubit, LanguageState>(
+        builder: (context, language) => LanguageScope(
+          dictionary: language.dictionary,
+          child: BlocBuilder<AppearanceCubit, AppearanceState>(
+            builder: (context, appearance) =>
+                _app(context, appearance, language),
           ),
-          home: _Shell(model, updates),
         ),
       );
+
+  Widget _app(
+    BuildContext context,
+    AppearanceState appearance,
+    LanguageState language,
+  ) => BlocBuilder<ShellCubit, ShellState>(
+    builder: (context, state) => MaterialApp(
+      title: 'PoB II · Мастерская',
+      locale: languageLocale(language.language),
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
+      debugShowCheckedModeBanner: false,
+      theme: Spark.theme(),
+      darkTheme: Spark.theme(brightness: Brightness.dark),
+      themeMode: appearance.theme == AppTheme.dark
+          ? ThemeMode.dark
+          : ThemeMode.light,
+      builder: (context, child) => LayoutBuilder(
+        builder: (context, constraints) => MediaQuery(
+          data: MediaQuery.of(context).copyWith(
+            size: constraints.biggest,
+            disableAnimations:
+                MediaQuery.disableAnimationsOf(context) || !state.motion,
+          ),
+          child: child!,
+        ),
+      ),
+      home: _Shell(model, updates),
+    ),
+  );
 }
 
 class _Shell extends StatelessWidget {
@@ -301,7 +337,7 @@ class _NewButton extends StatelessWidget {
         if (!compact) ...[
           const SizedBox(width: 8),
           const Flexible(
-            child: Text(
+            child: AppText(
               'Новая сборка',
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
@@ -325,7 +361,7 @@ class _NavItem extends StatelessWidget {
       final color = selected ? scheme.onPrimary : scheme.onSurface;
       return Padding(
         padding: const EdgeInsets.only(bottom: 6),
-        child: Tooltip(
+        child: AppTooltip(
           message: compact ? pageLabels[page]! : '',
           child: AnimatedContainer(
             duration: motionDuration(context, milliseconds: 180),
@@ -355,7 +391,7 @@ class _NavItem extends StatelessWidget {
                     if (!compact) ...[
                       const SizedBox(width: 11),
                       Expanded(
-                        child: Text(
+                        child: AppText(
                           pageLabels[page]!,
                           style: TextStyle(
                             color: color,
@@ -386,7 +422,7 @@ class _Recents extends StatelessWidget {
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
+        AppText(
           'НЕДАВНИЕ',
           style: TextStyle(
             color: Spark.of(context).muted,
@@ -409,8 +445,9 @@ class _Recents extends StatelessWidget {
                   alignment: Alignment.centerLeft,
                   padding: const EdgeInsets.symmetric(horizontal: 2),
                 ),
-                child: Text(
+                child: AppText(
                   entry.title,
+                  localize: false,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: const TextStyle(fontSize: 11),
@@ -482,7 +519,7 @@ class _VersionButton extends StatelessWidget {
                   width: 18,
                   label: 'Обновления приложения',
                 )
-              : Text(
+              : AppText(
                   state.available ? 'Есть обновление' : 'PoB II · v$appVersion',
                   style: TextStyle(
                     fontSize: 10,
@@ -506,7 +543,7 @@ class _StatusBar extends StatelessWidget {
     child: Row(
       children: [
         Expanded(
-          child: Text(
+          child: AppText(
             model.state.busy ? 'Выполняем операцию…' : model.state.status,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
@@ -514,7 +551,7 @@ class _StatusBar extends StatelessWidget {
           ),
         ),
         if (MediaQuery.sizeOf(context).width > 700)
-          Text(
+          AppText(
             'ЧИСЛА И ПРАВИЛА · LUA POB',
             style: TextStyle(
               fontFamily: 'JetBrains Mono',
@@ -537,7 +574,7 @@ class _ErrorNotice extends StatelessWidget {
     padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 10),
     child: Semantics(
       liveRegion: true,
-      child: Text(
+      child: AppText(
         error,
         maxLines: 3,
         overflow: TextOverflow.ellipsis,
@@ -568,7 +605,7 @@ class _SettingsButton extends StatelessWidget {
         if (!compact) ...[
           const SizedBox(width: 8),
           const Flexible(
-            child: Text(
+            child: AppText(
               'Оформление',
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
@@ -584,33 +621,37 @@ class _SettingsButton extends StatelessWidget {
     sparkDialog<void>(
       context,
       AlertDialog(
-        title: const Text('Оформление'),
+        title: const AppText('Оформление'),
         content: SizedBox(
           width: 380,
           child: BlocBuilder<ShellCubit, ShellState>(
             bloc: shell,
-            builder: (context, state) => Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const AppearancePicker(),
-                const SizedBox(height: 20),
-                SwitchListTile(
-                  contentPadding: EdgeInsets.zero,
-                  title: const Text('Плавные анимации'),
-                  subtitle: const Text(
-                    'Системное уменьшение движения имеет приоритет',
+            builder: (context, state) => SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const AppearancePicker(),
+                  const SizedBox(height: 20),
+                  const LanguagePicker(),
+                  const SizedBox(height: 20),
+                  SwitchListTile(
+                    contentPadding: EdgeInsets.zero,
+                    title: const AppText('Плавные анимации'),
+                    subtitle: const AppText(
+                      'Системное уменьшение движения имеет приоритет',
+                    ),
+                    value: state.motion,
+                    onChanged: shell.motion,
                   ),
-                  value: state.motion,
-                  onChanged: shell.motion,
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Готово'),
+            child: const AppText('Готово'),
           ),
         ],
       ),

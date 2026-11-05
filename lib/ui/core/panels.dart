@@ -1,3 +1,5 @@
+import 'app_text.dart';
+
 import 'package:flutter/material.dart';
 
 import 'spark_art.dart';
@@ -43,7 +45,7 @@ class EmptyPanel extends StatelessWidget {
           children: [
             SparkArt('illustrations/$art', width: 200, height: 154),
             const SizedBox(height: 24),
-            Text(
+            AppText(
               title,
               style: Theme.of(context).textTheme.titleLarge,
               textAlign: TextAlign.center,
@@ -51,7 +53,7 @@ class EmptyPanel extends StatelessWidget {
             const SizedBox(height: 8),
             ConstrainedBox(
               constraints: const BoxConstraints(maxWidth: 360),
-              child: Text(
+              child: AppText(
                 message,
                 textAlign: TextAlign.center,
                 style: TextStyle(color: Spark.of(context).muted),
@@ -80,10 +82,10 @@ class SectionHeading extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(title, style: Theme.of(context).textTheme.headlineMedium),
+              AppText(title, style: Theme.of(context).textTheme.headlineMedium),
               if (subtitle != null) ...[
                 const SizedBox(height: 5),
-                Text(
+                AppText(
                   subtitle!,
                   style: TextStyle(color: Spark.of(context).muted),
                 ),
@@ -115,7 +117,7 @@ class DotLabel extends StatelessWidget {
       ),
       const SizedBox(width: 7),
       Flexible(
-        child: Text(
+        child: AppText(
           text,
           overflow: TextOverflow.ellipsis,
           style: Theme.of(context).textTheme.bodySmall,

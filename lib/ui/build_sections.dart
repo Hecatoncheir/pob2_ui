@@ -1,3 +1,5 @@
+import 'core/app_text.dart';
+
 import 'package:flutter/material.dart';
 
 import '../domain/build_report.dart';
@@ -56,13 +58,14 @@ class _SkillGroup extends StatelessWidget {
             const SparkArt('icons/gem', width: 21),
             const SizedBox(width: 10),
             Expanded(
-              child: Text(
+              child: AppText(
                 '${group['label']}',
+                game: true,
                 style: Theme.of(context).textTheme.titleMedium,
               ),
             ),
             if (group['enabled'] != true)
-              Text(
+              AppText(
                 'Отключена',
                 style: TextStyle(color: Spark.of(context).muted),
               ),
@@ -90,16 +93,17 @@ class _GemRow extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
+              AppText(
                 '${gem['name']}',
+                game: true,
                 style: const TextStyle(fontWeight: FontWeight.w700),
               ),
-              Text(
+              AppText(
                 'Уровень ${gem['level']} · качество ${gem['quality']} %',
                 style: Theme.of(context).textTheme.bodySmall,
               ),
               if (gem['error'] case final String error when error.isNotEmpty)
-                Text(
+                AppText(
                   error,
                   style: TextStyle(
                     color: Spark.of(context).danger,
@@ -172,13 +176,14 @@ class _ItemSlot extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                AppText(
                   slotLabels[slot['name']] ?? '${slot['name']}',
                   style: Theme.of(context).textTheme.bodySmall,
                 ),
                 const SizedBox(height: 4),
-                Text(
+                AppText(
                   item == null ? 'Пусто' : '${item!['name']}',
+                  game: true,
                   style: TextStyle(
                     fontWeight: FontWeight.w700,
                     color: item == null
@@ -197,7 +202,7 @@ class _ItemSlot extends StatelessWidget {
   void _details(BuildContext context) => sparkDialog<void>(
     context,
     AlertDialog(
-      title: Text('${item!['name']}'),
+      title: AppText('${item!['name']}', game: true),
       content: SizedBox(
         width: 440,
         child: SingleChildScrollView(
@@ -212,7 +217,7 @@ class _ItemSlot extends StatelessWidget {
               ...jsonRows(item!['unsupported']).map(
                 (line) => Padding(
                   padding: const EdgeInsets.only(top: 12),
-                  child: Text(
+                  child: AppText(
                     'Не распознано: ${line['line']}',
                     style: TextStyle(color: Spark.of(context).danger),
                   ),
@@ -225,7 +230,7 @@ class _ItemSlot extends StatelessWidget {
       actions: [
         TextButton(
           onPressed: () => Navigator.pop(context),
-          child: const Text('Закрыть'),
+          child: const AppText('Закрыть'),
         ),
       ],
     ),
@@ -260,7 +265,7 @@ class _ConditionsViewState extends State<ConditionsView> {
         TextField(
           onChanged: (value) => setState(() => query = value),
           decoration: const InputDecoration(
-            hintText: 'Найти условие',
+            hint: AppText('Найти условие'),
             prefixIcon: Padding(
               padding: EdgeInsets.all(13),
               child: SparkArt('icons/search', width: 18),
@@ -275,7 +280,7 @@ class _ConditionsViewState extends State<ConditionsView> {
           const SizedBox(height: 16),
           ExpansionTile(
             tilePadding: EdgeInsets.zero,
-            title: const Text('Дополнительные условия'),
+            title: const AppText('Дополнительные условия'),
             children: entries
                 .where((entry) => !_common.contains(entry.key))
                 .map(_entry)
@@ -295,11 +300,11 @@ class _ConditionsViewState extends State<ConditionsView> {
 
   Widget _entry(MapEntry<String, dynamic> entry) => ListTile(
     contentPadding: const EdgeInsets.symmetric(horizontal: 4),
-    title: Text(
+    title: AppText(
       _conditionLabel(entry.key),
       style: const TextStyle(fontSize: 12),
     ),
-    subtitle: Text(
+    subtitle: AppText(
       _conditionValue(entry.value),
       style: Spark.mono.copyWith(fontSize: 11, color: Spark.of(context).green),
     ),
@@ -365,24 +370,24 @@ class _ConditionDialogState extends State<_ConditionDialog> {
   Widget build(BuildContext context) => FutureBuilder<JsonMap?>(
     future: definition,
     builder: (context, snapshot) => AlertDialog(
-      title: Text(_conditionLabel(widget.name)),
+      title: AppText(_conditionLabel(widget.name)),
       content: SizedBox(width: 400, child: _content(snapshot)),
       actions: [
         TextButton(
           onPressed: () => Navigator.pop(context),
-          child: const Text('Отмена'),
+          child: const AppText('Отмена'),
         ),
         if (snapshot.hasData)
           FilledButton(
             onPressed: () => _save(snapshot.data!),
-            child: const Text('Применить и рассчитать'),
+            child: const AppText('Применить и рассчитать'),
           ),
       ],
     ),
   );
   Widget _content(AsyncSnapshot<JsonMap?> snapshot) {
     if (snapshot.hasError)
-      return Text('Не удалось прочитать каталог: ${snapshot.error}');
+      return AppText('Не удалось прочитать каталог: ${snapshot.error}');
     if (snapshot.connectionState != ConnectionState.done)
       return const SizedBox(
         height: 80,
@@ -390,16 +395,16 @@ class _ConditionDialogState extends State<_ConditionDialog> {
       );
     final data = snapshot.data;
     if (data == null)
-      return const Text('Описание условия недоступно в этой версии PoB.');
+      return const AppText('Описание условия недоступно в этой версии PoB.');
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('${data['name']}'),
+        AppText('${data['name']}', game: true),
         const SizedBox(height: 18),
         _field(data),
         if (error != null)
-          Text(error!, style: TextStyle(color: Spark.of(context).danger)),
+          AppText(error!, style: TextStyle(color: Spark.of(context).danger)),
       ],
     );
   }
@@ -407,7 +412,7 @@ class _ConditionDialogState extends State<_ConditionDialog> {
   Widget _field(JsonMap data) => switch (data['type']) {
     'check' => SwitchListTile(
       contentPadding: EdgeInsets.zero,
-      title: const Text('Включено'),
+      title: const AppText('Включено'),
       value: value == true,
       onChanged: (next) => setState(() => value = next),
     ),
@@ -418,8 +423,9 @@ class _ConditionDialogState extends State<_ConditionDialog> {
           .map(
             (choice) => DropdownMenuItem<dynamic>(
               value: choice['value'],
-              child: Text(
+              child: AppText(
                 '${choice['label']}',
+                game: true,
                 overflow: TextOverflow.ellipsis,
               ),
             ),
@@ -429,7 +435,7 @@ class _ConditionDialogState extends State<_ConditionDialog> {
     ),
     _ => TextField(
       controller: text,
-      decoration: const InputDecoration(labelText: 'Значение'),
+      decoration: const InputDecoration(label: AppText('Значение')),
     ),
   };
   void _save(JsonMap data) {

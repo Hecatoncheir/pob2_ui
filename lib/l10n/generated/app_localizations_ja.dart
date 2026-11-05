@@ -1,0 +1,1237 @@
+// ignore: unused_import
+import 'package:intl/intl.dart' as intl;
+
+import 'app_localizations.dart';
+
+// ignore_for_file: type=lint
+
+/// The translations for Japanese (`ja`).
+class AppLocalizationsJa extends AppLocalizations {
+  AppLocalizationsJa([String locale = 'ja']) : super(locale);
+
+  @override
+  String get m4577961ef0 => '流血DPS';
+
+  @override
+  String get m702f584eba => '毒 DPS';
+
+  @override
+  String get m1f133cb415 => 'イグナイトDPS';
+
+  @override
+  String get m986eb99e35 => '突き刺す + ヒット DPS';
+
+  @override
+  String get m9ec0f47b47 => 'DPS をヒットします';
+
+  @override
+  String get m0c63e733f9 => 'Lua はすべてのアイコンを返しませんでした';
+
+  @override
+  String get m774193669c => 'Lua は空のツリーを返しました';
+
+  @override
+  String get mbb582808f3 => 'Lua がビルドを返しませんでしたXML';
+
+  @override
+  String get ma83268a520 => 'Lua はクラス ディレクトリを返しませんでした';
+
+  @override
+  String get m198b0a77f8 => 'Lua はビルド レポートを返しませんでした';
+
+  @override
+  String get m5bf96935c9 => 'Lua はこの計算に対して警告を返しませんでした。';
+
+  @override
+  String get m1f463483a4 => 'Lua はノード情報を返しませんでした';
+
+  @override
+  String get mecc0fe5cd1 => 'Lua は特性を返しませんでした';
+
+  @override
+  String get mddf65e8cca => 'Lua が接続されていません';
+
+  @override
+  String get m43ddb3a975 => 'Lua 検証に失敗しました';
+
+  @override
+  String mf01de15993(String p0) {
+    return 'Lua 個の回答 · $p0 個のクラス · 互換性をチェックしました';
+  }
+
+  @override
+  String md9540a4b84(String p0) {
+    return 'Lua が答えます。カタログ内のクラス: $p0';
+  }
+
+  @override
+  String get mbf7bbb22e3 => 'Lua 接続しました';
+
+  @override
+  String m12e8f27f62(String p0) {
+    return 'MCPは終了しました。 $p0';
+  }
+
+  @override
+  String get mcdf95e40cd => 'PoB II · ワークショップ';
+
+  @override
+  String get me72be74923 => 'XML ビルド';
+
+  @override
+  String get m0aefd8ac88 =>
+      'インポート sys、構造体; assert sys.version_info >= (3,11) および struct.calcsize(\"P\") == 8、「64 ビット Python 3.11+ が必要」';
+
+  @override
+  String m9cde7cfc3f(String p0, String p1, String p2) {
+    return '$p0 $p1 準備完了です。 Git: $p2';
+  }
+
+  @override
+  String m606849adbd(String p0, String p1) {
+    return '$p0 $p1 がインストールされました';
+  }
+
+  @override
+  String m613198439d(String p0) {
+    return '$p0 · コピー';
+  }
+
+  @override
+  String mbefa507d02(String p0, String p1) {
+    return '$p0 · レベル $p1';
+  }
+
+  @override
+  String mb7b217c429(String p0, String p1, String p2) {
+    return '$p0: $p2 ポイント中 $p1 ポイントが消費されました';
+  }
+
+  @override
+  String get mbd1c099ba2 => '現在のバージョン';
+
+  @override
+  String get m63141a77bf => 'アミュレット';
+
+  @override
+  String get mfc52cf98ef => 'ブロック';
+
+  @override
+  String get mb1ff29da2c => 'アーマー';
+
+  @override
+  String m7daed90e2c(String p0, String p1) {
+    return '$p0 には $p1 がありません。 MCP 0.4.0 以降が必要です';
+  }
+
+  @override
+  String m1163ee245e(String p0) {
+    return 'コンポーネント $p0 がありません。作業バージョンが保存されました。';
+  }
+
+  @override
+  String get m3e8bb03d9a => '重要な指標';
+
+  @override
+  String get m65d05ab17f => '次のビルド';
+
+  @override
+  String get m14183afd77 => '有効な値を入力してください';
+
+  @override
+  String get mbce24a2108 => '名前を入力してください';
+
+  @override
+  String get m73cac6c239 => 'リターンポイント';
+
+  @override
+  String get mea2c4cbc02 => '前のペアを返す';
+
+  @override
+  String get m495763fa3e => 'リターンノード';
+
+  @override
+  String get m386f7451f1 => 'トップボス';
+
+  @override
+  String get m4d1d43042e => '有効';
+
+  @override
+  String get m66b96db6c1 => 'ダウンロード ファイルの代わりにリンクが検出されました';
+
+  @override
+  String get mb087f895b2 => 'このノードの割り当てを解除すると、次のようになります。';
+
+  @override
+  String get m25d9d4dc90 => '回復可能な ES';
+
+  @override
+  String get m0265d6c32b => 'ライフ回復';
+
+  @override
+  String get ma22a7367c9 => 'マナ回復';
+
+  @override
+  String get md9b57dbdaf => 'エネルギーシールド再生';
+
+  @override
+  String get m497b4d2901 => 'ビルドを復元しました';
+
+  @override
+  String get m5e4d796025 => 'アセント';
+
+  @override
+  String get m215816bf42 => 'すべて';
+
+  @override
+  String get m4cd169b3d5 => 'すべてのインジケーター Lua';
+
+  @override
+  String get m51651958c6 => 'すべての特性';
+
+  @override
+  String get m6fd7c8e4f1 => '総寿命';
+
+  @override
+  String get m8d6001a308 => '総マナ';
+
+  @override
+  String get m6bf3b12df4 => 'XML アセンブリを挿入します。これは、Lua でチェックおよび計算されます。';
+
+  @override
+  String get m5b1968a662 => 'すべては仕事のため';
+
+  @override
+  String get m2ac910bfb3 => 'クラスの選択';
+
+  @override
+  String get m2749913680 => '特性を選択し、「検索」をクリックします。';
+
+  @override
+  String get m8d6db8b168 => 'このノードの割り当てによる変更はありません。';
+
+  @override
+  String get m350c155b79 => 'マスタリー効果の選択は現在、XML を通じて利用できます。';
+
+  @override
+  String get m19a610ab93 => 'Selected';
+
+  @override
+  String get m38aa0ac1ff => 'Select';
+
+  @override
+  String get m4cb6a01a0e => 'パスを選択してください';
+
+  @override
+  String get m20494f41ab => 'Off';
+
+  @override
+  String get m903bd09e68 => '操作を実行しています...';
+
+  @override
+  String get mac053cfb90 => 'Head';
+
+  @override
+  String m450afec8d6(String p0) {
+    return '完成したシーンが完全にロードされていません: $p0';
+  }
+
+  @override
+  String get mef05d57959 => 'Done';
+
+  @override
+  String get ma3ade41d93 => 'アセンブリからの石のグループ';
+
+  @override
+  String get ma755f360c2 => '2 つのコンポーネント。コンピューター上での計算。';
+
+  @override
+  String get me1daa9e250 => 'ツリー';
+
+  @override
+  String m0e1306f92c(String p0) {
+    return 'ツリーが利用できません: $p0';
+  }
+
+  @override
+  String get m57d9f5cb7c => 'ツリーはまだ利用できません';
+
+  @override
+  String get m7c2e51e000 => '完成した PoB ツリーの場合、MCP を 0.7.0 に更新します。';
+
+  @override
+  String get mdb491b2fb7 => 'ツリーには MCP 0.5.0 が必要です。コンポーネントを更新します。MCP';
+
+  @override
+  String get m130a0abbfa => 'オリジナルアイコンの場合、MCP を 0.6.0 に更新します。';
+
+  @override
+  String get m6f9519e788 => '特性で検索するには、「コンポーネント」セクションで MCP を 0.9.0 に更新します。';
+
+  @override
+  String get m3e069d1fae =>
+      'インストールには Git および 64 ビット Python 3.11 以降が必要です。コンポーネントをロードすると、計算はネットワークなしで機能します。';
+
+  @override
+  String get ma2ab6a340a => 'このプラットフォームにはサービス パックがありません';
+
+  @override
+  String get mc0259d55bc => 'このプラットフォーム用のインストーラーはまだありません';
+
+  @override
+  String get m08afe540b9 => 'ノードへ';
+
+  @override
+  String m8997ad5a89(String p0) {
+    return '$p0 はノードを指します';
+  }
+
+  @override
+  String get mab04eae138 => '現在の操作が完了するまで待ちます';
+
+  @override
+  String get m1ae52aaad7 => '追加の利用規約';
+
+  @override
+  String m10b5bc7e91(String p0) {
+    return 'バージョン $p0 が利用可能です';
+  }
+
+  @override
+  String get m41a4fa8b6a => 'スピリット';
+
+  @override
+  String get mcefa1c56a5 => 'アップデートがあります';
+
+  @override
+  String get mf9a38201c0 => 'ログと詳細';
+
+  @override
+  String get m230ebdecca => 'アップデートを自動的にダウンロードする';
+
+  @override
+  String m65a1b960c7(String p0) {
+    return '$p0 の LuaJIT と lua-utf8 をロードしています...';
+  }
+
+  @override
+  String maafcfa710b(String p0, String p1) {
+    return '$p0 $p1 を読み込み中…';
+  }
+
+  @override
+  String m912da5cc75(String p0) {
+    return '読み込みが不完全です: $p0';
+  }
+
+  @override
+  String m35c7d57c9f(String p0, String p1) {
+    return '元の PoB ツリー $p0 / $p1 をロードしています';
+  }
+
+  @override
+  String m7ac5d410c5(String p0) {
+    return '読み込み中: HTTP $p0';
+  }
+
+  @override
+  String get m540fb030a9 => 'インジケーターを締める';
+
+  @override
+  String get ma7a4033657 => '閉じる';
+
+  @override
+  String get m792acb40e4 => '保護';
+
+  @override
+  String get mfac4030099 => 'ビルドはここに配置されます';
+
+  @override
+  String get m0cc21de8b8 => '健康';
+
+  @override
+  String get mf869293c62 => '意味';
+
+  @override
+  String get mf6a527732e => '現在の Lua PoB レポートの値。';
+
+  @override
+  String get ma9f9d23dcb => 'ゲーム翻訳を読み込み中…';
+
+  @override
+  String get m5cb66ce618 => '戻りたいアイデア';
+
+  @override
+  String get ma48353b7b1 => '近接回避のチャンス';
+
+  @override
+  String get m8a055d1e48 => '発射物回避のチャンス';
+
+  @override
+  String get mdcd4c2c384 => 'スペル回避チャンス';
+
+  @override
+  String get m2c72186c20 => 'インポートされたアセンブリ';
+
+  @override
+  String get ma8f8e11f0c => 'インテリジェンス';
+
+  @override
+  String get m56e46960c1 => 'ソース';
+
+  @override
+  String m8b48ab31e9(String p0) {
+    return 'ソース Lua が接続されました · $p0 クラス';
+  }
+
+  @override
+  String get m26c6ade68e => 'ソース Lua エンジンとゲーム データ';
+
+  @override
+  String get m95cbeda583 => '元のレポート';
+
+  @override
+  String get m1711aecef4 => 'クラス';
+
+  @override
+  String get m209e516133 => 'リングI';
+
+  @override
+  String get m20555cd71a => 'リングII';
+
+  @override
+  String get m1e8466ebeb => 'コンポーネント';
+
+  @override
+  String get m9c01f77f07 => 'コンポーネントがインストールされています。 Lua に接続できます。';
+
+  @override
+  String get mcf9fbc3f41 => '転送チェックサムが一致しませんでした';
+
+  @override
+  String get m6916d088f3 => 'クリティカル。チャンス';
+
+  @override
+  String get m7bf311d808 => '左手';
+
+  @override
+  String get m609fc60c74 => '器用さ';
+
+  @override
+  String get m5da5bd2f47 => '計算を使用したローカル インターフェイス接続';
+
+  @override
+  String get m187dafbec4 => '効果。最大ヒット数';
+
+  @override
+  String get mc73618fdf4 => 'マナ';
+
+  @override
+  String get m6c50317db8 => 'ワークショップ';
+
+  @override
+  String get m22e1e2c7ad => 'クリティカル倍率';
+
+  @override
+  String get m13e9f80144 => '私のビルド';
+
+  @override
+  String get m16d1252699 => 'ライトニング';
+
+  @override
+  String get m204751ca09 => '最近';
+
+  @override
+  String get me113ee319c => 'На очко';
+
+  @override
+  String m1d32e63718(String p0) {
+    return 'На очко: $p0';
+  }
+
+  @override
+  String get mb862bf4e42 => 'この距離には適切なノードがありません。';
+
+  @override
+  String get mff86959fa1 => 'よだれかけ';
+
+  @override
+  String get m0918b4ba92 => 'タイトル';
+
+  @override
+  String get m51233393a5 => 'Название сборки';
+
+  @override
+  String get mbe6156b8e4 => '検索';
+
+  @override
+  String get m302605cf87 => 'Найти сборку';
+
+  @override
+  String get mf211301b5e => 'ノードの検索';
+
+  @override
+  String get m60ea60b326 => '特性によるノードの検索';
+
+  @override
+  String get mb37bd07a8a => '検索条件';
+
+  @override
+  String get m8823a786b9 => 'コンポーネントの構成';
+
+  @override
+  String m5ffb2fa414(String p0) {
+    return 'ネイティブ リリース MCP: HTTP $p0';
+  }
+
+  @override
+  String get m28997f7565 => '未選択';
+
+  @override
+  String get m09823db229 => 'LOCALAPPDATA が見つかりません';
+
+  @override
+  String get m0dbf2115c1 => 'ホームディレクトリが見つかりません';
+
+  @override
+  String m71a7205caa(String p0) {
+    return '認識されません: $p0';
+  }
+
+  @override
+  String m4b1c83eb15(String p0) {
+    return '翻訳をロードできませんでした: $p0';
+  }
+
+  @override
+  String mce8b7ad723(String p0) {
+    return 'リリース ページを開けませんでした: $p0';
+  }
+
+  @override
+  String m0d58180884(String p0) {
+    return 'ハイライトを表示できませんでした: $p0';
+  }
+
+  @override
+  String ma9bd749aa5(String p0) {
+    return 'ヒートマップを表示できませんでした: $p0';
+  }
+
+  @override
+  String get mcb5613d7e6 => 'SHA256SUMS の取得に失敗しました';
+
+  @override
+  String get m57c6abe340 => 'サーバー応答の取得に失敗しました';
+
+  @override
+  String mcd252d5275(String p0) {
+    return 'ヒントを取得できませんでした: $p0';
+  }
+
+  @override
+  String m3ce1fbdad2(String p0) {
+    return 'SHA-256 ファイルをチェックできませんでした: $p0';
+  }
+
+  @override
+  String m4d1a8400d5(String p0) {
+    return 'アップデートのチェックに失敗しました: $p0';
+  }
+
+  @override
+  String mfdddf71553(String p0) {
+    return '画像の読み取りに失敗しました: $p0';
+  }
+
+  @override
+  String mdace2a4a3b(String p0) {
+    return 'ディレクトリの読み取りに失敗しました: $p0';
+  }
+
+  @override
+  String mbefc941808(String p0) {
+    return 'ノードの読み取りに失敗しました: $p0';
+  }
+
+  @override
+  String get m92233abcc1 => 'トピックの保存に失敗しました。';
+
+  @override
+  String get m45c78389e9 => '安全でない更新アドレス';
+
+  @override
+  String get m7a4c30c971 => '無効なディレクトリ エントリ Lua';
+
+  @override
+  String get m4412eb3d42 => 'ブート継続範囲が無効です';
+
+  @override
+  String get m5426ce4a91 => '無効なリリース ファイル ソース';
+
+  @override
+  String get m34f418bb26 => '不明な設定バージョン';
+
+  @override
+  String m88bb56b333(String p0) {
+    return '不明な PoB シーン モード: $p0';
+  }
+
+  @override
+  String get me6b70e080e => '不明なインストール タイプ';
+
+  @override
+  String get me90bfa5f82 => '不明なアセンブリ ライブラリ形式';
+
+  @override
+  String get mf3a3cbeee9 => '間違ったアイコン Lua';
+
+  @override
+  String get mf1703df170 => 'ツリー リンクが正しくありません Lua';
+
+  @override
+  String get m3f7db06826 => '完成した木材のテクスチャが正しくありません';
+
+  @override
+  String get m571195d148 => '間違った PoB 座標';
+
+  @override
+  String get mc652a6b3a8 => 'アセンブリ ID が正しくありません';
+
+  @override
+  String get m7021e46018 => 'ツリー キャッシュ キーが正しくありません';
+
+  @override
+  String get m4e15785017 => 'サイズ Lua ランタイムが正しくありません';
+
+  @override
+  String get m6ddcbfade2 => 'ファイルサイズが正しくありません';
+
+  @override
+  String get m2469d9f2a8 => '無効なツリーノード Lua';
+
+  @override
+  String get m5f5263f78b => 'あいまいなチェックサム Lua ランタイム';
+
+  @override
+  String get m14889e0664 => '予期しないソース Lua ランタイム';
+
+  @override
+  String get mab1d20e880 => 'サポートされていないリリース タグ形式';
+
+  @override
+  String get m7b3c2887b7 => '不完全な PoB レンダリング コマンド';
+
+  @override
+  String get m6f381f6aed => 'このアーキテクチャには Lua ランタイムがありません';
+
+  @override
+  String get ma76f928c09 => '単一パケットのチェックサムがありません';
+
+  @override
+  String get mb71873c826 => 'チェックサムなし Lua ランタイム';
+
+  @override
+  String get m0497e1e404 => '答えはありません MCP。セッションは終了しました。再インポートします。XML';
+
+  @override
+  String get m323494c6da => '翻訳が利用できない場合は元のテキストが表示されます';
+
+  @override
+  String get m282cf4ee16 => '新しいビルド';
+
+  @override
+  String get md72a4c2675 => '0.2.0 のような安定したバージョンが必要です';
+
+  @override
+  String get m603e460bf5 => 'アップデート';
+
+  @override
+  String get mb2712dc98b => 'アップデート PoB II';
+
+  @override
+  String get m452a863748 => 'アップデートがダウンロードされ、確認されました。ビルドと XML は再起動前に保存されます。';
+
+  @override
+  String m425b17d88a(String p0) {
+    return 'アップデートが開始されていません: $p0';
+  }
+
+  @override
+  String get m1eb91e3a52 => 'アプリケーションのアップデート';
+
+  @override
+  String get m9e0611bf9b => 'シューズ';
+
+  @override
+  String get mc006d459af => '一般的なダメージと防御のマップ。リストでは、個々のメトリックを選択します。';
+
+  @override
+  String get m64c3dce838 => '通常の敵';
+
+  @override
+  String get m8cb7d50be2 => '火事';
+
+  @override
+  String get m480c4531b2 => '計算待ち';
+
+  @override
+  String get mbb08ba5f85 => '元の Lua からの予想されるレポート';
+
+  @override
+  String get mb3f794d1cf => 'まだ操作はありません';
+
+  @override
+  String get m47cd7c0de1 => 'リリースの説明がありません';
+
+  @override
+  String get m3645eb9961 => 'この PoB バージョンでは状態の説明は利用できません。';
+
+  @override
+  String get m0736fbba4d => '武器';
+
+  @override
+  String get m5bf15d8d42 => '武器Ⅰ';
+
+  @override
+  String get m750b8fab71 => '武器 II';
+
+  @override
+  String get md579b36c2e => 'メインスキル';
+
+  @override
+  String get m7fc991d63f => '1 から 100 まで';
+
+  @override
+  String get m957e42d5d4 => '1 ～ 200 ポイント';
+
+  @override
+  String get mcdc8c3d8af => '応答が許容サイズを超えています';
+
+  @override
+  String get m8e6a41ecd0 => 'ズームアウト';
+
+  @override
+  String get m5bd2e464d0 => '無効';
+
+  @override
+  String get me2c190631c => 'スキルで XML を開いてメインスキルを選択し、その計算を確認します。';
+
+  @override
+  String get mea1f408246 => '開く';
+
+  @override
+  String get mdccda63f51 => 'XML を開きます';
+
+  @override
+  String get m38ec738ed2 => 'PoB から XML を開きます';
+
+  @override
+  String get m589c35aaa6 => '開いて計算してください';
+
+  @override
+  String get m8fbe9b75cb => 'キャンセル';
+
+  @override
+  String get m1731619efa => 'デザイン';
+
+  @override
+  String get m6cc0ad9655 => 'メガネ';
+
+  @override
+  String m07817efe16(String p0) {
+    return 'ポイント: $p0';
+  }
+
+  @override
+  String mefe256475e(String p0) {
+    return 'エラー: $p0';
+  }
+
+  @override
+  String get m7352f28e7e => 'パケットが予想サイズより大きい';
+
+  @override
+  String get m1971cfb84c => 'パッシブ';
+
+  @override
+  String get m8188a57c48 => '転送サイズが予想より大きい';
+
+  @override
+  String m46c64e6832(String p0) {
+    return '翻訳: HTTP $p0';
+  }
+
+  @override
+  String get md3c6b76bfd => '動き';
+
+  @override
+  String get mcaceac98e9 => '再起動 - あなたのコマンドでのみ';
+
+  @override
+  String get m79a3312d3b => '再起動とアップデート';
+
+  @override
+  String get m79ab5f1286 => 'Lua に変換します';
+
+  @override
+  String get m98aa5e2776 => '手袋';
+
+  @override
+  String get m95121a4cc0 => 'スムーズなアニメーション';
+
+  @override
+  String get m5189135a61 => 'リピート';
+
+  @override
+  String get mbcc0fdbe14 => 'スペル抑制チャンス';
+
+  @override
+  String get m52d7142d18 => 'Windows x64、Linux x64、および macOS arm64 をサポート';
+
+  @override
+  String get m67f5d8880e => 'Lua に接続します';
+
+  @override
+  String get m538d913ee0 => 'Lua に接続します';
+
+  @override
+  String get mbf3c9df646 => 'インジケーター';
+
+  @override
+  String get m53788df38a => '現在のビルド状態のインジケーター';
+
+  @override
+  String get m21a6bb1840 => 'ツリー全体を表示';
+
+  @override
+  String get m233d77b731 => 'フル DPS';
+
+  @override
+  String get m56f7dfa459 => '雷ダメージを受けた';
+
+  @override
+  String get m767efb71d3 => '火災によるダメージを受けた';
+
+  @override
+  String get mfac34bf889 => 'カオスダメージを受けました';
+
+  @override
+  String get m22ad5a098c => '冷気ダメージを受けた';
+
+  @override
+  String get m2ffaee13bd => '物理ダメージを受けた';
+
+  @override
+  String get md90da4d82c => 'アセンブリを再計算してみてください。';
+
+  @override
+  String m032a431609(String p0) {
+    return '最後: $p0\n【m51d2753a44】ベルト';
+  }
+
+  @override
+  String get m0f80007ec0 => 'ドットDPS';
+
+  @override
+  String get ma01259ad57 => 'ライフヒル';
+
+  @override
+  String get m3e7c000702 => 'マナヒル';
+
+  @override
+  String get m6ec2f2eff4 => 'エネルギーシールドヒル';
+
+  @override
+  String get m51d2753a44 => 'ベルト';
+
+  @override
+  String m1a132e5834(String p0) {
+    return 'ランタイムが $p0 を超えました';
+  }
+
+  @override
+  String get m10e4fefa12 => 'アイテム';
+
+  @override
+  String get mca5b6399c3 => 'Lua のアイテムとアクティブなスロット';
+
+  @override
+  String get m3c2b5cfe97 => '警告 Lua';
+
+  @override
+  String m39215290bb(String p0) {
+    return '警告 · $p0';
+  }
+
+  @override
+  String m28ba7365b1(String p0) {
+    return '警告: $p0';
+  }
+
+  @override
+  String get mb45f78d483 => '以前のペアが Lua を通じて復元および検証されました';
+
+  @override
+  String get mf969e13b83 => '以前の完全なコンポーネントのペアはまだありません';
+
+  @override
+  String get mc0aa51ea34 => '前回の計算';
+
+  @override
+  String get mbfb85a0178 => 'ズームイン';
+
+  @override
+  String get me15f960d93 => '適用する';
+
+  @override
+  String get m84028563e4 => '適用して計算する';
+
+  @override
+  String get m6aab9e2cb4 => '一時停止';
+
+  @override
+  String m0680c9d188(String p0) {
+    return 'ミニオン $p0';
+  }
+
+  @override
+  String get me4424a6df6 => 'チェック';
+
+  @override
+  String get m93b08f7b14 => 'アップデートを確認する';
+
+  @override
+  String get mfa4af9bbe7 => '互換性を確認する';
+
+  @override
+  String mfeb5830ec9(String p0) {
+    return 'リリースチェック: HTTP $p0';
+  }
+
+  @override
+  String get m25ee4bf0ec => 'リリースの検証が完了しました';
+
+  @override
+  String get m3e4c852ed2 => 'チェックはまだ行われていません';
+
+  @override
+  String get m6f4c708fbf => 'インストール前のパッケージチェックに失敗しました';
+
+  @override
+  String get m9353cfd5f6 => '互換性チェック: オリジナルの Lua を実行中...';
+
+  @override
+  String get md8164e1acb => 'ネットワークとリクエスト制限を確認してください。';
+
+  @override
+  String get m1ea3791d9d => 'リリースを確認しています...';
+
+  @override
+  String get m62ed32eb22 => 'チェック中...';
+
+  @override
+  String get mac0a2199d9 => '空';
+
+  @override
+  String get m9aaa2d503d => 'ライト半径';
+
+  @override
+  String get m8c8ec94283 => 'サイズまたは SHA-256 アップデートが一致しませんでした';
+
+  @override
+  String get meabbc96d71 => '敵のサイズ';
+
+  @override
+  String get mde6527a5fe => 'ノードまでの距離';
+
+  @override
+  String get m7846ddb858 => 'Lua PoB で計算';
+
+  @override
+  String m33a38de9ff(String p0) {
+    return '計算 Lua · $p0%';
+  }
+
+  @override
+  String get m9b9370223c => '計算';
+
+  @override
+  String get m8d7bd9deb6 => '健康の再生';
+
+  @override
+  String get m40c71efeca => 'マナ再生';
+
+  @override
+  String get m3826292e79 => '見つかったアイテムのレア度';
+
+  @override
+  String get meba267d9f8 => 'リソース';
+
+  @override
+  String get ma735c975e0 => 'ルーン病棟';
+
+  @override
+  String get m8c39bb691b => 'アセンブリ';
+
+  @override
+  String get mc27d8aad03 => 'オリジナルの Lua によって計算されたアセンブリ';
+
+  @override
+  String get mf0cd3a6033 => 'ライト';
+
+  @override
+  String get ma50190234a => '自分の...';
+
+  @override
+  String get m32bb1c680f => 'セッションは終了しました';
+
+  @override
+  String get m69c1590a47 => '強さ';
+
+  @override
+  String get m9ea191ae12 => 'システムモーションの軽減が優先されます';
+
+  @override
+  String get m0a8113a0b9 => 'アップデートのダウンロード';
+
+  @override
+  String get m332899f398 => 'コピー XML';
+
+  @override
+  String get m70e98e3214 => '速度';
+
+  @override
+  String get m43d758cbe5 => '攻撃速度/詠唱速度';
+
+  @override
+  String get mf99463341e => '移動速度';
+
+  @override
+  String get m09b17c9d35 => 'アイコンが大きすぎます';
+
+  @override
+  String get m126aa994ee => 'リダイレクトが多すぎます';
+
+  @override
+  String get mc2fd3c5d27 => '装備';
+
+  @override
+  String get ma386719073 => '最初に両方のコンポーネントをインストールします';
+
+  @override
+  String get m9071a1a6f4 => 'Lua への接続が失われました';
+
+  @override
+  String get m7ab8e7349a =>
+      'キャラクターを作成するか、PoB から XML のロックを解除します。すべてのインジケーターは、Lua によって計算されます。';
+
+  @override
+  String get mb724f3e4cd =>
+      'キャラクターを作成するか、PoB から XML のロックを解除します。成功した計算は自動的に保存されます。';
+
+  @override
+  String get mc42ccf5a81 => 'コピーを作成します';
+
+  @override
+  String get md79906423b => 'アセンブリの作成';
+
+  @override
+  String get m62bb423bd3 => '抵抗';
+
+  @override
+  String get m2fe8f2fd72 => '保存しました';
+
+  @override
+  String get mb4d30cae52 => '保存';
+
+  @override
+  String get mc4268e6843 => '平均ヒット';
+
+  @override
+  String get ma775dcaa51 => '平均ダメージ';
+
+  @override
+  String get m91d6208508 => '安定リリースはまだありません';
+
+  @override
+  String get mf7eaffec2f => '問題ページ';
+
+  @override
+  String get m98b6085914 => '合計 DPS';
+
+  @override
+  String get m682f961a07 => 'トピック';
+
+  @override
+  String get m7242065c34 => '敵の種類';
+
+  @override
+  String get m1eecfcaa7b => 'ダーク';
+
+  @override
+  String get m2ec842e2f5 => 'リダイレクトにはアドレスがありません';
+
+  @override
+  String get m97ac4c501c => 'インストールはすでに進行中です';
+
+  @override
+  String m39e5ccc0fa(String p0) {
+    return 'ノード · $p0';
+  }
+
+  @override
+  String get m8cf5c33b30 => '変更はありません。';
+
+  @override
+  String get mf3a46c2f2b => 'ノード';
+
+  @override
+  String get mdba310a980 => '1～200の数値を指定してください';
+
+  @override
+  String get mdf00fd3d66 => '回避';
+
+  @override
+  String get m1a92bc6899 => 'スキルが選択されていません';
+
+  @override
+  String get ma0c169b941 => 'スキル';
+
+  @override
+  String get m8af375dfe7 => 'スキルはまだ追加されていません';
+
+  @override
+  String get m7f67af3d6c => 'レベル';
+
+  @override
+  String m88f6fabbe9(String p0, String p1) {
+    return 'レベル $p0 · 品質 $p1 %';
+  }
+
+  @override
+  String get mecb350422f => '敵のレベル';
+
+  @override
+  String get m5883e88858 => 'ダメージ';
+
+  @override
+  String get m9c6708a566 => 'ダメージ/防御力';
+
+  @override
+  String get m908b6d3a83 => '構成';
+
+  @override
+  String get m7186793dd5 => '計算条件';
+
+  @override
+  String get m720408ab97 => 'コンポーネントをインストールして接続 Lua';
+
+  @override
+  String get m4d9acf3506 => 'コンポーネントをインストールしてアセンブリを開き、実際の計算を取得します。';
+
+  @override
+  String get mb7cd6fae08 => 'インストール';
+
+  @override
+  String get mfcb7c67f91 => '現在のバージョンがインストールされています';
+
+  @override
+  String m44150e69ff(String p0) {
+    return 'バージョン $p0 がインストールされています';
+  }
+
+  @override
+  String mff8616cb20(String p0) {
+    return 'インストールされました: $p0';
+  }
+
+  @override
+  String get m64bd568b72 => 'アップデート ファイルには検証可能なチェックサムがありません';
+
+  @override
+  String get m62d8c4932b => 'カオス';
+
+  @override
+  String get mcf8ae48616 => '属性';
+
+  @override
+  String get ma07ca1b396 => '特徴';
+
+  @override
+  String get m8295a5b3a5 => '寒い';
+
+  @override
+  String get mb88cddfeb4 => '数字とルール · ルアポブ';
+
+  @override
+  String m913d7f855b(String p0) {
+    return '一部のアイコンは使用できません: $p0';
+  }
+
+  @override
+  String get mbc55227299 => 'ブロックチャンス';
+
+  @override
+  String get m7b138318fe => 'スペルブロックチャンス';
+
+  @override
+  String get m9c10fb432b => 'フリーズチャンス';
+
+  @override
+  String get mdf8f3ab9d3 => 'クリティカルチャンス';
+
+  @override
+  String get mc82be563bc => 'ブリードチャンス';
+
+  @override
+  String get mdd380bd057 => 'イグナイトチャンス';
+
+  @override
+  String get m75198457b7 => 'ヒットのチャンス';
+
+  @override
+  String get m59245fe8a4 => 'ショックチャンス';
+
+  @override
+  String get me43836c564 => '耐性ペナルティ';
+
+  @override
+  String get mae1df2993a => 'エクスポート XML';
+
+  @override
+  String get mf49983ccf6 => 'エネルギーシールド';
+
+  @override
+  String get m2b2c6df514 =>
+      'このコピーは、インストーラーなしで、または書き込み不可能なディレクトリから起動されました。リリース ページから新しいバージョンをインストールします。';
+
+  @override
+  String get mca16b5fe71 => 'これらの設定はビルドのパフォーマンスに影響します';
+
+  @override
+  String get m2709d16555 => 'このノードを割り当てると、次のことが得られます。';
+
+  @override
+  String get m428f165db1 => 'このノードとそれにつながるすべてのノードを割り当てると、次の結果が得られます。';
+
+  @override
+  String get me39133631f => '効果';
+
+  @override
+  String get mf83e6d742f => '効果的な健康';
+
+  @override
+  String get m5bd57038db => '言語';
+
+  @override
+  String get mdc9337ff5b => 'いいえ';
+
+  @override
+  String mfc1f7cd547(String p0) {
+    return 'Lv. $p0';
+  }
+
+  @override
+  String get m85436c1ab1 => '1 秒あたりのダメージ';
+}

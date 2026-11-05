@@ -1,3 +1,5 @@
+import 'core/app_text.dart';
+
 import 'package:flutter/material.dart';
 
 import '../domain/build_report.dart';
@@ -59,7 +61,7 @@ class AttributePicker extends StatelessWidget {
               children: [
                 SparkArt('icons/$icon', width: 26),
                 const SizedBox(height: 8),
-                Text(
+                AppText(
                   label,
                   style: const TextStyle(fontWeight: FontWeight.w700),
                 ),

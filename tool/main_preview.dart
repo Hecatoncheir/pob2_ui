@@ -1,3 +1,6 @@
+import 'package:pob2_ui/data/language_preferences.dart';
+import 'package:pob2_ui/data/game_dictionary_repository.dart';
+import 'package:pob2_ui/ui/language_cubit.dart';
 import 'package:pob2_ui/data/appearance_repository.dart';
 import 'package:pob2_ui/ui/appearance_cubit.dart';
 // Отладочный запуск с настоящим Lua; отдельный профиль задаётся через POB2_UI_HOME.
@@ -23,6 +26,13 @@ Future<void> main() async {
     preferences,
     initialTheme: await preferences.load(),
   );
-  runApp(PobApp(model: model, appearance: appearance));
+  final languages = LanguagePreferences(model.components.store.root);
+  final language = LanguageCubit(
+    languages,
+    GameDictionaryRepository(model.components.store.root),
+    initialLanguage: await languages.load(),
+  );
+  runApp(PobApp(model: model, appearance: appearance, language: language));
+  language.load();
   model.initialize();
 }

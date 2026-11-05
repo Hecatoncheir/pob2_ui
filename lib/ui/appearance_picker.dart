@@ -1,3 +1,5 @@
+import 'core/app_text.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -13,7 +15,10 @@ class AppearancePicker extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Text('Тема', style: TextStyle(fontWeight: FontWeight.w700)),
+            const AppText(
+              'Тема',
+              style: TextStyle(fontWeight: FontWeight.w700),
+            ),
             const SizedBox(height: 12),
             LayoutBuilder(
               builder: (context, constraints) =>
@@ -21,14 +26,14 @@ class AppearancePicker extends StatelessWidget {
             ),
             if (state.error != null) ...[
               const SizedBox(height: 8),
-              Text(
+              AppText(
                 'Не удалось сохранить тему.',
                 style: TextStyle(color: Theme.of(context).colorScheme.error),
               ),
               TextButton(
                 onPressed: () =>
                     context.read<AppearanceCubit>().selectTheme(state.theme),
-                child: const Text('Повторить'),
+                child: const AppText('Повторить'),
               ),
             ],
           ],
@@ -42,14 +47,14 @@ class AppearancePicker extends StatelessWidget {
         segments: [
           ButtonSegment(
             value: AppTheme.light,
-            label: const Text('Светлая'),
+            label: const AppText('Светлая'),
             icon: icons
                 ? const Icon(Icons.light_mode_outlined, size: 18)
                 : null,
           ),
           ButtonSegment(
             value: AppTheme.dark,
-            label: const Text('Тёмная'),
+            label: const AppText('Тёмная'),
             icon: icons ? const Icon(Icons.dark_mode_outlined, size: 18) : null,
           ),
         ],

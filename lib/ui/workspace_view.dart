@@ -1,3 +1,5 @@
+import 'core/app_text.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -62,7 +64,7 @@ class WorkspaceView extends StatelessWidget {
         onPressed: model.state.busy
             ? null
             : () => shell.page(AppPage.components),
-        child: const Text('Настроить компоненты'),
+        child: const AppText('Настроить компоненты'),
       );
     return Wrap(
       spacing: 10,
@@ -73,13 +75,13 @@ class WorkspaceView extends StatelessWidget {
           onPressed: model.state.busy
               ? null
               : () => showNewBuild(context, model),
-          child: const Text('Новая сборка'),
+          child: const AppText('Новая сборка'),
         ),
         OutlinedButton(
           onPressed: model.state.busy
               ? null
               : () => showXmlImport(context, model),
-          child: const Text('Открыть XML'),
+          child: const AppText('Открыть XML'),
         ),
       ],
     );
@@ -102,8 +104,9 @@ class _WorkspaceHeading extends StatelessWidget {
                 onTap: model.state.busy
                     ? null
                     : () => renameBuild(context, model),
-                child: Text(
+                child: AppText(
                   model.state.library.active?.title ?? report.name,
+                  localize: false,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: Theme.of(context).textTheme.headlineMedium,
@@ -136,7 +139,7 @@ class _WorkspaceHeading extends StatelessWidget {
         Row(
           children: [
             Expanded(
-              child: Text(
+              child: AppText(
                 '${report.characterClass} · уровень ${report.level}',
                 style: TextStyle(color: Spark.of(context).muted, fontSize: 11),
               ),
@@ -154,7 +157,7 @@ class _WorkspaceHeading extends StatelessWidget {
                   width: 14,
                   color: Spark.of(context).danger,
                 ),
-                label: Text(
+                label: AppText(
                   'Предупреждения: ${report.warnings.length}',
                   style: const TextStyle(fontSize: 10),
                 ),
@@ -248,7 +251,7 @@ class _TabButton extends StatelessWidget {
               color: selected ? Spark.of(context).ink : Spark.of(context).muted,
             ),
             const SizedBox(width: 7),
-            Text(
+            AppText(
               tabLabels[tab]!,
               style: TextStyle(
                 fontSize: 12,

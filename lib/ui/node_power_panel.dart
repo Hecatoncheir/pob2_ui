@@ -1,3 +1,5 @@
+import 'core/app_text.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -6,6 +8,7 @@ import '../domain/build_report.dart';
 import '../domain/node_power.dart';
 import 'core/spark_theme.dart';
 import 'node_power_cubit.dart';
+import 'core/ui_translation.dart';
 
 class NodePowerPanel extends StatelessWidget {
   const NodePowerPanel({
@@ -38,7 +41,7 @@ class NodePowerPanel extends StatelessWidget {
   Widget _loading(BuildContext context, NodePowerState state) => Center(
     child: state.error == null
         ? const CircularProgressIndicator()
-        : Text(state.error!),
+        : AppText(state.error!),
   );
 
   Widget _content(BuildContext context, NodePowerState state) => Column(
@@ -52,13 +55,13 @@ class NodePowerPanel extends StatelessWidget {
       if (state.progress case final progress?) ...[
         LinearProgressIndicator(value: progress.clamp(0, 1)),
         const SizedBox(height: 8),
-        Text(
+        AppText(
           'Расчёт Lua · ${(progress * 100).round()}%',
           style: const TextStyle(fontSize: 11),
         ),
       ],
       if (state.error case final error?)
-        Text(
+        AppText(
           error,
           maxLines: 2,
           overflow: TextOverflow.ellipsis,
@@ -77,7 +80,7 @@ class NodePowerPanel extends StatelessWidget {
       onPressed: enabled
           ? (state.progress == null ? model.calculate : model.cancel)
           : null,
-      child: Text(state.progress == null ? 'Найти' : 'Отмена'),
+      child: AppText(state.progress == null ? 'Найти' : 'Отмена'),
     );
     if (narrow)
       return Column(
@@ -118,7 +121,7 @@ class NodePowerPanel extends StatelessWidget {
         initialValue: state.options.stat,
         isExpanded: true,
         decoration: const InputDecoration(
-          labelText: 'Характеристика',
+          label: AppText('Характеристика'),
           contentPadding: EdgeInsets.all(10),
         ),
         style: TextStyle(
@@ -131,7 +134,7 @@ class NodePowerPanel extends StatelessWidget {
           for (final metric in state.metrics)
             DropdownMenuItem(
               value: '${metric['id']}',
-              child: Text(nodePowerLabel(metric)),
+              child: AppText(nodePowerLabel(metric), game: true),
             ),
         ],
         onChanged: (value) {
@@ -149,7 +152,7 @@ class NodePowerPanel extends StatelessWidget {
         initialValue: state.options.allocation,
         isExpanded: true,
         decoration: const InputDecoration(
-          labelText: 'Узлы',
+          label: AppText('Узлы'),
           contentPadding: EdgeInsets.all(10),
         ),
         style: TextStyle(
@@ -159,9 +162,9 @@ class NodePowerPanel extends StatelessWidget {
         ),
         dropdownColor: Spark.of(context).surface,
         items: const [
-          DropdownMenuItem(value: 'unallocated', child: Text('Не выбраны')),
-          DropdownMenuItem(value: 'allocated', child: Text('Выбраны')),
-          DropdownMenuItem(value: 'all', child: Text('Все')),
+          DropdownMenuItem(value: 'unallocated', child: AppText('Не выбраны')),
+          DropdownMenuItem(value: 'allocated', child: AppText('Выбраны')),
+          DropdownMenuItem(value: 'all', child: AppText('Все')),
         ],
         onChanged: (value) {
           if (value != null)
@@ -178,7 +181,7 @@ class NodePowerPanel extends StatelessWidget {
     final values = {0, 5, 10, 15, selected};
     return InputDecorator(
       decoration: const InputDecoration(
-        labelText: 'До узла',
+        label: AppText('До узла'),
         contentPadding: EdgeInsets.all(10),
       ),
       child: DropdownButtonHideUnderline(
@@ -197,9 +200,9 @@ class NodePowerPanel extends StatelessWidget {
             for (final value in values)
               DropdownMenuItem(
                 value: value,
-                child: Text(value == 0 ? 'Все' : '$value'),
+                child: AppText(value == 0 ? 'Все' : '$value'),
               ),
-            const DropdownMenuItem(value: -1, child: Text('Свои…')),
+            const DropdownMenuItem(value: -1, child: AppText('Свои…')),
           ],
           onChanged: (value) => _selectDistance(context, value),
         ),
@@ -225,7 +228,7 @@ class NodePowerPanel extends StatelessWidget {
     final result = await showDialog<int>(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Расстояние до узла'),
+        title: const AppText('Расстояние до узла'),
         content: Form(
           key: form,
           child: TextFormField(
@@ -234,21 +237,24 @@ class NodePowerPanel extends StatelessWidget {
             autofocus: true,
             keyboardType: TextInputType.number,
             inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-            decoration: const InputDecoration(labelText: 'От 1 до 200 очков'),
-            validator: _validateDistance,
+            decoration: const InputDecoration(
+              label: AppText('От 1 до 200 очков'),
+            ),
+            validator: (value) =>
+                translateUiError(context, _validateDistance(value)),
           ),
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Отмена'),
+            child: const AppText('Отмена'),
           ),
           FilledButton(
             onPressed: () {
               if (form.currentState!.validate())
                 Navigator.pop(context, int.parse(text));
             },
-            child: const Text('Выбрать'),
+            child: const AppText('Выбрать'),
           ),
         ],
       ),
@@ -267,21 +273,21 @@ class NodePowerPanel extends StatelessWidget {
     final entries = state.report?.entries;
     if (entries == null)
       return const Center(
-        child: Text(
+        child: AppText(
           'Выберите характеристику и нажмите «Найти».',
           style: TextStyle(fontSize: 12),
         ),
       );
     if (state.options.stat == 'OffenceDefence')
       return const Center(
-        child: Text(
+        child: AppText(
           'Общая карта урона и защиты. Для списка выберите отдельный показатель.',
           style: TextStyle(fontSize: 12),
         ),
       );
     if (entries.isEmpty)
       return const Center(
-        child: Text(
+        child: AppText(
           'На этом расстоянии подходящих узлов нет.',
           style: TextStyle(fontSize: 12),
         ),
@@ -316,7 +322,8 @@ class NodePowerPanel extends StatelessWidget {
     );
   }
 
-  Widget _entry(BuildContext context, JsonMap entry, bool wide) => Tooltip(
+  Widget _entry(BuildContext context, JsonMap entry, bool wide) => AppTooltip(
+    game: true,
     message: [
       ...jsonStrings(entry['sd']),
       'Очки: ${entry['pathDist']}',
@@ -350,8 +357,9 @@ class NodePowerPanel extends StatelessWidget {
   ) => Row(
     children: [
       Expanded(
-        child: Text(
+        child: AppText(
           name,
+          game: true,
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
           style: const TextStyle(fontSize: 12),
@@ -359,7 +367,7 @@ class NodePowerPanel extends StatelessWidget {
       ),
       SizedBox(
         width: 75,
-        child: Text(
+        child: AppText(
           power,
           textAlign: TextAlign.right,
           style: Spark.mono.copyWith(fontSize: 11),
@@ -367,7 +375,7 @@ class NodePowerPanel extends StatelessWidget {
       ),
       SizedBox(
         width: 45,
-        child: Text(
+        child: AppText(
           points,
           textAlign: TextAlign.right,
           style: Spark.mono.copyWith(fontSize: 11),
@@ -376,7 +384,7 @@ class NodePowerPanel extends StatelessWidget {
       if (wide)
         SizedBox(
           width: 80,
-          child: Text(
+          child: AppText(
             perPoint,
             textAlign: TextAlign.right,
             style: Spark.mono.copyWith(fontSize: 11),

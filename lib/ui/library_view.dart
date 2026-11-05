@@ -1,3 +1,5 @@
+import 'core/app_text.dart';
+
 import 'package:flutter/material.dart';
 
 import '../domain/library_entry.dart';
@@ -41,7 +43,7 @@ class _LibraryViewState extends State<LibraryView> {
                 TextField(
                   onChanged: (value) => setState(() => query = value),
                   decoration: const InputDecoration(
-                    hintText: 'Найти сборку',
+                    hint: AppText('Найти сборку'),
                     prefixIcon: Padding(
                       padding: EdgeInsets.all(13),
                       child: SparkArt('icons/search', width: 18),
@@ -97,7 +99,7 @@ class _BuildCard extends StatelessWidget {
           children: [
             const SparkArt('illustrations/gem', width: 60, height: 55),
             const Spacer(),
-            Text(
+            AppText(
               'ур. ${entry.level}',
               style: Spark.mono.copyWith(
                 fontSize: 11,
@@ -107,22 +109,24 @@ class _BuildCard extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 16),
-        Text(
+        AppText(
           entry.title,
+          localize: false,
           maxLines: 2,
           overflow: TextOverflow.ellipsis,
           style: Theme.of(context).textTheme.titleLarge,
         ),
         const SizedBox(height: 5),
-        Text(
+        AppText(
           entry.characterClass,
+          game: true,
           style: TextStyle(color: Spark.of(context).muted),
         ),
         const Spacer(),
         Row(
           children: [
             Expanded(
-              child: Text(
+              child: AppText(
                 '${entry.updated.day.toString().padLeft(2, '0')}.${entry.updated.month.toString().padLeft(2, '0')}.${entry.updated.year}',
                 style: TextStyle(color: Spark.of(context).muted, fontSize: 10),
               ),
@@ -134,7 +138,7 @@ class _BuildCard extends StatelessWidget {
                       model.openBuild(entry.id);
                       shell.page(AppPage.workspace);
                     },
-              child: const Text('Открыть'),
+              child: const AppText('Открыть'),
             ),
           ],
         ),

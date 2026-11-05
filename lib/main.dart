@@ -11,6 +11,9 @@ import 'data/installation_store.dart';
 import 'data/mcp_client.dart';
 import 'ui/app.dart';
 import 'ui/workshop_cubit.dart';
+import 'data/language_preferences.dart';
+import 'data/game_dictionary_repository.dart';
+import 'ui/language_cubit.dart';
 
 Future<void> main(List<String> arguments) async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,10 +29,24 @@ Future<void> main(List<String> arguments) async {
     preferences,
     initialTheme: await preferences.load(),
   );
-  runApp(PobApp(model: model, updates: updates, appearance: appearance));
+  final languagePreferences = LanguagePreferences(model.components.store.root);
+  final language = LanguageCubit(
+    languagePreferences,
+    GameDictionaryRepository(model.components.store.root),
+    initialLanguage: await languagePreferences.load(),
+  );
+  runApp(
+    PobApp(
+      model: model,
+      updates: updates,
+      appearance: appearance,
+      language: language,
+    ),
+  );
   WidgetsBinding.instance.addPostFrameCallback((_) async {
     await markStartupHealthy(arguments);
     await updates.initialize();
   });
   model.initialize();
+  language.load();
 }

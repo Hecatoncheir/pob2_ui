@@ -1,3 +1,5 @@
+import 'core/app_text.dart';
+
 import 'package:flutter/material.dart';
 
 import 'dart:math' as math;
@@ -6,6 +8,7 @@ import '../domain/build_report.dart';
 import 'core/frosted_surface.dart';
 import 'core/gruvbox.dart';
 import 'tree_hover_cubit.dart';
+import 'core/language_scope.dart';
 
 class NodeTooltipLayout extends SingleChildLayoutDelegate {
   NodeTooltipLayout(this.point);
@@ -50,8 +53,9 @@ class TreeHoverCard extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            AppText(
               title,
+              game: true,
               style: TextStyle(
                 color: colors.onSurface,
                 fontFamily: 'Nunito',
@@ -62,7 +66,7 @@ class TreeHoverCard extends StatelessWidget {
             const SizedBox(height: 12),
             if (state.loading) const LinearProgressIndicator(minHeight: 2),
             if (state.error case final error?)
-              Text(
+              AppText(
                 'Не удалось получить подсказку: $error',
                 style: TextStyle(color: colors.onSurface),
               ),
@@ -73,7 +77,8 @@ class TreeHoverCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      for (final line in preview.lines) _line(line, colors),
+                      for (final line in preview.lines)
+                        _line(context, line, colors),
                     ],
                   ),
                 ),
@@ -84,7 +89,7 @@ class TreeHoverCard extends StatelessWidget {
     );
   }
 
-  Widget _line(JsonMap line, ColorScheme colors) {
+  Widget _line(BuildContext context, JsonMap line, ColorScheme colors) {
     if (line['separator'] == true)
       return Padding(
         padding: const EdgeInsets.symmetric(vertical: 8),
@@ -95,7 +100,7 @@ class TreeHoverCard extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(bottom: 5),
       child: Text.rich(
-        TextSpan(children: _spans(text, colors)),
+        TextSpan(children: _localizedSpans(context, text, colors)),
         style: TextStyle(
           fontSize: 14,
           fontWeight: FontWeight.w500,
@@ -104,6 +109,21 @@ class TreeHoverCard extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  List<TextSpan> _localizedSpans(
+    BuildContext context,
+    String text,
+    ColorScheme colors,
+  ) {
+    final translated = translateGame(context, cleanPoB(text));
+    final spans = _spans(text, colors);
+    if (translated == cleanPoB(text)) return spans;
+    final style = spans
+        .where((span) => span.text?.isNotEmpty == true)
+        .firstOrNull
+        ?.style;
+    return [TextSpan(text: translated, style: style)];
   }
 
   List<TextSpan> _spans(String source, ColorScheme colors) {

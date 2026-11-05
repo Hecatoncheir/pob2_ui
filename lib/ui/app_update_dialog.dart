@@ -1,3 +1,5 @@
+import 'core/app_text.dart';
+
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -30,7 +32,7 @@ class _UpdateDialog extends StatelessWidget {
   Widget build(BuildContext context) =>
       BlocBuilder<AppUpdateCubit, AppUpdateState>(
         builder: (context, state) => AlertDialog(
-          title: const Text('Обновление PoB II'),
+          title: const AppText('Обновление PoB II'),
           content: SizedBox(
             width: 460,
             child: SingleChildScrollView(child: _UpdateContent(state)),
@@ -40,7 +42,7 @@ class _UpdateDialog extends StatelessWidget {
               onPressed: state.phase == UpdatePhase.installing
                   ? null
                   : () => Navigator.pop(context),
-              child: const Text('Закрыть'),
+              child: const AppText('Закрыть'),
             ),
             _PrimaryAction(state),
           ],
@@ -56,12 +58,12 @@ class _UpdateContent extends StatelessWidget {
     mainAxisSize: MainAxisSize.min,
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
-      const Text('Установлена версия $appVersion'),
+      const AppText('Установлена версия $appVersion'),
       const SizedBox(height: 12),
-      Text(state.message),
+      AppText(state.message),
       if (state.release case final release?) ...[
         const SizedBox(height: 12),
-        Text(
+        AppText(
           release.notes.isEmpty
               ? 'Описание выпуска отсутствует'
               : release.notes,
@@ -70,7 +72,7 @@ class _UpdateContent extends StatelessWidget {
       if (state.phase == UpdatePhase.downloading) ...[
         const SizedBox(height: 16),
         LinearProgressIndicator(value: state.progress),
-        Text('${(state.progress * 100).round()} %'),
+        AppText('${(state.progress * 100).round()} %'),
       ],
       if (state.phase == UpdatePhase.ready)
         const _Notice(
@@ -90,8 +92,8 @@ class _UpdateContent extends StatelessWidget {
         ),
       SwitchListTile.adaptive(
         contentPadding: EdgeInsets.zero,
-        title: const Text('Загружать обновления автоматически'),
-        subtitle: const Text('Перезапуск — только по вашей команде'),
+        title: const AppText('Загружать обновления автоматически'),
+        subtitle: const AppText('Перезапуск — только по вашей команде'),
         value: state.autoDownload,
         onChanged: state.busy || state.installation == null
             ? null
@@ -106,7 +108,7 @@ class _Notice extends StatelessWidget {
   final String text;
   @override
   Widget build(BuildContext context) =>
-      Padding(padding: const EdgeInsets.only(top: 12), child: Text(text));
+      Padding(padding: const EdgeInsets.only(top: 12), child: AppText(text));
 }
 
 class _PrimaryAction extends StatelessWidget {
@@ -118,23 +120,23 @@ class _PrimaryAction extends StatelessWidget {
     if (state.phase == UpdatePhase.downloading)
       return TextButton(
         onPressed: updates.cancel,
-        child: const Text('Приостановить'),
+        child: const AppText('Приостановить'),
       );
     if (state.installation == null ||
         (state.available && state.release?.installer == null))
       return FilledButton(
         onPressed: updates.openReleases,
-        child: const Text('Страница выпусков'),
+        child: const AppText('Страница выпусков'),
       );
     return switch (state.phase) {
       UpdatePhase.ready => const _RestartButton(),
       UpdatePhase.available => FilledButton(
         onPressed: updates.download,
-        child: const Text('Скачать обновление'),
+        child: const AppText('Скачать обновление'),
       ),
       _ => FilledButton(
         onPressed: state.busy ? null : updates.check,
-        child: Text(state.busy ? 'Проверяем…' : 'Проверить'),
+        child: AppText(state.busy ? 'Проверяем…' : 'Проверить'),
       ),
     };
   }
@@ -148,7 +150,7 @@ class _RestartButton extends StatelessWidget {
         selector: (state) => state.busy,
         builder: (context, busy) => FilledButton(
           onPressed: busy ? null : () => _restart(context),
-          child: const Text('Перезапустить и обновить'),
+          child: const AppText('Перезапустить и обновить'),
         ),
       );
 

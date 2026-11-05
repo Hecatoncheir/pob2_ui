@@ -1,9 +1,12 @@
+import 'core/app_text.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'core/motion.dart';
 import 'core/spark_art.dart';
 import 'core/spark_theme.dart';
+import 'core/ui_translation.dart';
 import 'workshop_cubit.dart';
 
 Future<void> showNewBuild(BuildContext context, WorkshopCubit model) =>
@@ -19,10 +22,19 @@ class _NewBuildDialog extends StatefulWidget {
 }
 
 class _NewBuildDialogState extends State<_NewBuildDialog> {
-  final name = TextEditingController(text: 'Новая сборка');
+  final name = TextEditingController();
+  bool initialized = false;
   final level = TextEditingController(text: '90');
   final form = GlobalKey<FormState>();
   int? classId;
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (initialized) return;
+    initialized = true;
+    name.text = translateUi(context, 'Новая сборка');
+  }
+
   @override
   void dispose() {
     name.dispose();
@@ -32,7 +44,7 @@ class _NewBuildDialogState extends State<_NewBuildDialog> {
 
   @override
   Widget build(BuildContext context) => AlertDialog(
-    title: const Text('Новая сборка'),
+    title: const AppText('Новая сборка'),
     content: SizedBox(
       width: 380,
       child: Form(
@@ -45,34 +57,41 @@ class _NewBuildDialogState extends State<_NewBuildDialog> {
               controller: name,
               autofocus: true,
               maxLength: 80,
-              decoration: const InputDecoration(labelText: 'Название'),
-              validator: (value) => value == null || value.trim().isEmpty
-                  ? 'Введите название'
-                  : null,
+              decoration: const InputDecoration(label: AppText('Название')),
+              validator: (value) => translateUiError(
+                context,
+                value == null || value.trim().isEmpty
+                    ? 'Введите название'
+                    : null,
+              ),
             ),
             const SizedBox(height: 16),
             DropdownButtonFormField<int>(
               key: const Key('build-class'),
               initialValue: classId,
               isExpanded: true,
-              decoration: const InputDecoration(labelText: 'Класс'),
+              decoration: const InputDecoration(label: AppText('Класс')),
               items: widget.model.state.classes
                   .map(
                     (entry) => DropdownMenuItem(
                       value: entry['id'] as int,
-                      child: Text('${entry['name']}'),
+                      child: AppText('${entry['name']}', game: true),
                     ),
                   )
                   .toList(),
               onChanged: (value) => classId = value,
-              validator: (value) => value == null ? 'Выберите класс' : null,
+              validator: (value) => translateUiError(
+                context,
+                value == null ? 'Выберите класс' : null,
+              ),
             ),
             const SizedBox(height: 16),
             TextFormField(
               controller: level,
               keyboardType: TextInputType.number,
-              decoration: const InputDecoration(labelText: 'Уровень'),
-              validator: _levelError,
+              decoration: const InputDecoration(label: AppText('Уровень')),
+              validator: (value) =>
+                  translateUiError(context, _levelError(value)),
             ),
           ],
         ),
@@ -81,9 +100,9 @@ class _NewBuildDialogState extends State<_NewBuildDialog> {
     actions: [
       TextButton(
         onPressed: () => Navigator.pop(context),
-        child: const Text('Отмена'),
+        child: const AppText('Отмена'),
       ),
-      FilledButton(onPressed: _create, child: const Text('Создать сборку')),
+      FilledButton(onPressed: _create, child: const AppText('Создать сборку')),
     ],
   );
   String? _levelError(String? value) {
@@ -119,14 +138,14 @@ class _XmlDialogState extends State<_XmlDialog> {
 
   @override
   Widget build(BuildContext context) => AlertDialog(
-    title: const Text('Открыть XML из PoB'),
+    title: const AppText('Открыть XML из PoB'),
     content: SizedBox(
       width: 580,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
+          const AppText(
             'Вставьте XML сборки. Она будет проверена и рассчитана в Lua.',
           ),
           const SizedBox(height: 16),
@@ -138,7 +157,7 @@ class _XmlDialogState extends State<_XmlDialog> {
             onChanged: widget.model.editDraft,
             style: Spark.mono.copyWith(fontSize: 11),
             decoration: const InputDecoration(
-              hintText: '<PathOfBuilding2>…</PathOfBuilding2>',
+              hint: AppText('<PathOfBuilding2>…</PathOfBuilding2>'),
             ),
           ),
         ],
@@ -147,7 +166,7 @@ class _XmlDialogState extends State<_XmlDialog> {
     actions: [
       TextButton(
         onPressed: () => Navigator.pop(context),
-        child: const Text('Закрыть'),
+        child: const AppText('Закрыть'),
       ),
       FilledButton(
         onPressed: () {
@@ -155,7 +174,7 @@ class _XmlDialogState extends State<_XmlDialog> {
           widget.model.importXml(xml.text);
           Navigator.pop(context);
         },
-        child: const Text('Открыть и рассчитать'),
+        child: const AppText('Открыть и рассчитать'),
       ),
     ],
   );
@@ -167,7 +186,7 @@ Future<void> exportXml(BuildContext context, WorkshopCubit model) async {
   await sparkDialog<void>(
     context,
     AlertDialog(
-      title: const Text('XML сборки'),
+      title: const AppText('XML сборки'),
       content: SizedBox(
         width: 600,
         height: 300,
@@ -178,7 +197,7 @@ Future<void> exportXml(BuildContext context, WorkshopCubit model) async {
       actions: [
         TextButton(
           onPressed: () => Navigator.pop(context),
-          child: const Text('Закрыть'),
+          child: const AppText('Закрыть'),
         ),
         FilledButton.icon(
           onPressed: () => Clipboard.setData(ClipboardData(text: xml)),
@@ -187,7 +206,7 @@ Future<void> exportXml(BuildContext context, WorkshopCubit model) async {
             color: Spark.of(context).paper,
             width: 17,
           ),
-          label: const Text('Скопировать XML'),
+          label: const AppText('Скопировать XML'),
         ),
       ],
     ),
@@ -201,7 +220,7 @@ Future<void> renameBuild(BuildContext context, WorkshopCubit model) async {
   final result = await sparkDialog<String>(
     context,
     AlertDialog(
-      title: const Text('Название сборки'),
+      title: const AppText('Название сборки'),
       content: TextField(
         controller: field,
         autofocus: true,
@@ -211,11 +230,11 @@ Future<void> renameBuild(BuildContext context, WorkshopCubit model) async {
       actions: [
         TextButton(
           onPressed: () => Navigator.pop(context),
-          child: const Text('Отмена'),
+          child: const AppText('Отмена'),
         ),
         FilledButton(
           onPressed: () => Navigator.pop(context, field.text),
-          child: const Text('Сохранить'),
+          child: const AppText('Сохранить'),
         ),
       ],
     ),

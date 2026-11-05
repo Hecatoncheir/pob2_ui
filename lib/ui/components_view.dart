@@ -1,3 +1,5 @@
+import 'core/app_text.dart';
+
 import 'package:flutter/material.dart';
 
 import '../domain/component.dart';
@@ -26,7 +28,7 @@ class ComponentsView extends StatelessWidget {
             color: Spark.of(context).paper,
             width: 17,
           ),
-          label: const Text('Проверить обновления'),
+          label: const AppText('Проверить обновления'),
         ),
       ),
       const SizedBox(height: 24),
@@ -43,29 +45,29 @@ class ComponentsView extends StatelessWidget {
         children: [
           OutlinedButton(
             onPressed: model.state.busy || !model.ready ? null : model.connect,
-            child: const Text('Подключить Lua'),
+            child: const AppText('Подключить Lua'),
           ),
           TextButton(
             onPressed: model.state.busy || !model.ready ? null : model.doctor,
-            child: const Text('Проверить совместимость'),
+            child: const AppText('Проверить совместимость'),
           ),
           TextButton(
             onPressed: model.state.busy || !model.canRollback
                 ? null
                 : model.rollback,
-            child: const Text('Вернуть предыдущую пару'),
+            child: const AppText('Вернуть предыдущую пару'),
           ),
         ],
       ),
       const SizedBox(height: 24),
-      Text(
+      AppText(
         'Для установки нужны Git и 64-битный Python 3.11+. После загрузки компонентов расчёты работают без сети.',
         style: TextStyle(color: Spark.of(context).muted),
       ),
       const SizedBox(height: 20),
       ExpansionTile(
         tilePadding: EdgeInsets.zero,
-        title: const Text('Журнал и подробности'),
+        title: const AppText('Журнал и подробности'),
         children: [
           SelectableText(
             model.state.log.isEmpty
@@ -105,7 +107,7 @@ class _Component extends StatelessWidget {
               ),
               const SizedBox(width: 14),
               Expanded(
-                child: Text(
+                child: AppText(
                   component.title,
                   style: Theme.of(context).textTheme.titleLarge,
                 ),
@@ -113,7 +115,7 @@ class _Component extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 12),
-          Text(
+          AppText(
             component.description,
             style: TextStyle(color: Spark.of(context).muted),
           ),
@@ -123,12 +125,12 @@ class _Component extends StatelessWidget {
             runSpacing: 12,
             crossAxisAlignment: WrapCrossAlignment.center,
             children: [
-              Text(
+              AppText(
                 'Установлена: ${installed?.tag ?? 'нет'}',
                 style: Spark.mono.copyWith(fontSize: 12),
               ),
               if (latest != null)
-                Text(
+                AppText(
                   'Последняя: ${latest.tag}',
                   style: TextStyle(color: Spark.of(context).green),
                 ),
@@ -137,7 +139,7 @@ class _Component extends StatelessWidget {
                     ? null
                     : () => model.install(component),
                 icon: const SparkArt('icons/download', width: 17),
-                label: Text(
+                label: AppText(
                   installed == null
                       ? 'Установить'
                       : current
@@ -150,7 +152,7 @@ class _Component extends StatelessWidget {
           if (installed != null)
             ExpansionTile(
               tilePadding: EdgeInsets.zero,
-              title: const Text('Источник', style: TextStyle(fontSize: 11)),
+              title: const AppText('Источник', style: TextStyle(fontSize: 11)),
               children: [
                 SelectableText(
                   '${component.url}\n${installed.commit}\n${installed.directory}',

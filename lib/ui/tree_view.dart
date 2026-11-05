@@ -1,3 +1,5 @@
+import 'core/app_text.dart';
+
 import 'dart:math' as math;
 import 'dart:ui' as ui;
 import 'dart:typed_data';
@@ -26,6 +28,7 @@ import 'node_power_cubit.dart';
 import 'node_power_panel.dart';
 import 'loaded_tree_artwork.dart';
 import 'workshop_state.dart';
+import 'core/language_scope.dart';
 
 class TreeView extends StatefulWidget {
   const TreeView({super.key, required this.model, required this.tree});
@@ -270,6 +273,7 @@ class _TreeViewState extends State<TreeView>
                             size,
                             powerArtwork?.artwork.picture ?? artwork?.picture,
                             hoverArtwork?.picture,
+                            matches: _matchedIds(),
                           ),
                         ),
                       ),
@@ -281,13 +285,13 @@ class _TreeViewState extends State<TreeView>
           ),
         ),
         if (decodeError case final error?)
-          Text(
+          AppText(
             error,
             key: const Key('tree-decode-error'),
             style: TextStyle(color: Spark.of(context).danger, fontSize: 11),
           ),
         if (widget.tree.iconError case final error?)
-          Text(
+          AppText(
             error,
             style: TextStyle(color: Spark.of(context).danger, fontSize: 11),
           ),
@@ -298,7 +302,7 @@ class _TreeViewState extends State<TreeView>
               Expanded(
                 child: TreePointCounters(widget.model.state.report!.points),
               ),
-              Text(
+              AppText(
                 'PoB · ${widget.tree.version.replaceAll('_', '.')}',
                 style: TextStyle(color: Spark.of(context).muted, fontSize: 10),
               ),
@@ -316,7 +320,7 @@ class _TreeViewState extends State<TreeView>
           onChanged: (value) => setState(() => query = value),
           onSubmitted: (_) => _focusMatch(),
           decoration: const InputDecoration(
-            hintText: 'Найти узел',
+            hint: AppText('Найти узел'),
             prefixIcon: Padding(
               padding: EdgeInsets.all(13),
               child: SparkArt('icons/search', width: 17),
@@ -452,13 +456,22 @@ class _TreeViewState extends State<TreeView>
 
   void _focusMatch() {
     if (query.isEmpty) return;
-    final node = widget.tree.nodes
-        .where((node) => node.matches(query))
-        .firstOrNull;
+    final node = widget.tree.nodes.where(_matches).firstOrNull;
     if (node == null) return;
     setState(() => selected = node.id);
     _center(scene.points[node.id]!, widget.tree.original == null ? 4 : 8);
   }
+
+  bool _matches(TreeNode node) =>
+      node.matches(query) ||
+      translateGame(
+        context,
+        node.name,
+      ).toLowerCase().contains(query.trim().toLowerCase());
+
+  Set<int> _matchedIds() => query.trim().isEmpty
+      ? const {}
+      : widget.tree.nodes.where(_matches).map((node) => node.id).toSet();
 
   void _center(Offset point, double scale, {bool animate = true}) {
     final target = Matrix4.diagonal3Values(scale, scale, 1)
@@ -496,7 +509,7 @@ class _TreeViewState extends State<TreeView>
     } catch (error) {
       if (mounted)
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Не удалось прочитать узел: $error')),
+          SnackBar(content: AppText('Не удалось прочитать узел: $error')),
         );
     }
   }
@@ -638,7 +651,7 @@ class _NodeDialogState extends State<_NodeDialog> {
       FutureBuilder<({List<String> lines, List<JsonMap> attributes})>(
         future: details,
         builder: (context, snapshot) => AlertDialog(
-          title: Text(widget.node.name),
+          title: AppText(widget.node.name, game: true),
           content: SizedBox(
             width: 470,
             child: SingleChildScrollView(child: _content(snapshot)),
@@ -646,11 +659,14 @@ class _NodeDialogState extends State<_NodeDialog> {
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(context),
-              child: const Text('Закрыть'),
+              child: const AppText('Закрыть'),
             ),
             if (widget.node.allocated &&
                 snapshot.data?.attributes.isNotEmpty == true)
-              TextButton(onPressed: _refund, child: const Text('Вернуть очко')),
+              TextButton(
+                onPressed: _refund,
+                child: const AppText('Вернуть очко'),
+              ),
             if (snapshot.hasData &&
                 !{
                   'Mastery',
@@ -659,7 +675,7 @@ class _NodeDialogState extends State<_NodeDialog> {
                 }.contains(widget.node.kind))
               FilledButton(
                 onPressed: _canApply(snapshot.data!.attributes) ? _apply : null,
-                child: Text(_actionLabel(snapshot.data!.attributes)),
+                child: AppText(_actionLabel(snapshot.data!.attributes)),
               ),
           ],
         ),
@@ -668,7 +684,7 @@ class _NodeDialogState extends State<_NodeDialog> {
     AsyncSnapshot<({List<String> lines, List<JsonMap> attributes})> snapshot,
   ) {
     if (snapshot.hasError)
-      return Text('Не удалось прочитать узел: ${snapshot.error}');
+      return AppText('Не удалось прочитать узел: ${snapshot.error}');
     if (!snapshot.hasData)
       return const SizedBox(
         height: 90,
@@ -682,7 +698,7 @@ class _NodeDialogState extends State<_NodeDialog> {
         ...lines.map(
           (line) => Padding(
             padding: const EdgeInsets.only(bottom: 8),
-            child: Text(line),
+            child: AppText(line, game: true),
           ),
         ),
         if (attributes.isNotEmpty)
@@ -692,7 +708,7 @@ class _NodeDialogState extends State<_NodeDialog> {
             onChanged: (value) => setState(() => attribute = value),
           ),
         if (widget.node.kind == 'Mastery')
-          Text(
+          AppText(
             'Выбор эффекта мастерства пока доступен через XML.',
             style: TextStyle(color: Spark.of(context).muted),
           ),

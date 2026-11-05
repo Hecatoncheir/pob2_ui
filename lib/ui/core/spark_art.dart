@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import 'spark_theme.dart';
 import 'vector_drawings.dart';
+import 'ui_translation.dart';
 
 class SparkArt extends StatelessWidget {
   const SparkArt(
@@ -21,7 +22,7 @@ class SparkArt extends StatelessWidget {
   final String? label;
   @override
   Widget build(BuildContext context) => Semantics(
-    label: label,
+    label: label == null ? null : translateUi(context, label!),
     excludeSemantics: label == null,
     child: SizedBox(
       width: width,
@@ -82,7 +83,7 @@ class ArtIconButton extends StatelessWidget {
           ? BorderSide(color: Theme.of(context).colorScheme.primary)
           : null,
     ),
-    tooltip: label,
+    tooltip: translateUi(context, label),
     onPressed: onPressed,
     icon: SparkArt(
       'icons/$icon',

@@ -10,6 +10,9 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_bloc: 9.1.1
+  flutter_localizations:
+    sdk: flutter
+  intl: ^0.20.3
 
 dev_dependencies:
   integration_test:
@@ -20,12 +23,15 @@ dev_dependencies:
     sdk: flutter
 
 flutter:
+  generate: true
   uses-material-design: true
   assets:
     - docs/assets/brand/app-icon.svg
     - docs/assets/fonts/OFL-nunito.txt
     - docs/assets/fonts/OFL-nunitosans.txt
     - docs/assets/fonts/OFL-jetbrainsmono.txt
+    - docs/assets/fonts/OFL-noto-cjk.txt
+    - docs/assets/fonts/OFL-noto-thai.txt
   fonts:
     - family: Nunito
       fonts:
@@ -39,3 +45,9 @@ flutter:
     - family: JetBrains Mono
       fonts:
         - asset: docs/assets/fonts/jetbrains-mono-400.ttf
+    - family: Noto CJK
+      fonts:
+        - asset: docs/assets/fonts/noto-sans-cjk-jp-400.otf
+    - family: Noto Thai
+      fonts:
+        - asset: docs/assets/fonts/noto-sans-thai.ttf

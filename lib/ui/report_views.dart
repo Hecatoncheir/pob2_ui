@@ -1,3 +1,5 @@
+import 'core/app_text.dart';
+
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -46,7 +48,7 @@ class StatisticsPanel extends StatelessWidget {
                 ),
                 const SizedBox(height: 20),
                 if (model.state.document!.stale)
-                  Text(
+                  AppText(
                     'Предыдущий расчёт',
                     style: TextStyle(
                       color: Spark.of(context).danger,
@@ -79,7 +81,7 @@ class _InspectorHeading extends StatelessWidget {
     child: Row(
       children: [
         const Expanded(
-          child: Text(
+          child: AppText(
             'Показатели',
             style: TextStyle(
               fontFamily: 'Nunito',
@@ -104,7 +106,7 @@ class _InspectorHeading extends StatelessWidget {
   void _pins(BuildContext context, ShellCubit shell) => sparkDialog<void>(
     context,
     AlertDialog(
-      title: const Text('Важные показатели'),
+      title: const AppText('Важные показатели'),
       content: SizedBox(
         width: 330,
         child: SingleChildScrollView(
@@ -118,7 +120,7 @@ class _InspectorHeading extends StatelessWidget {
                     (entry) => CheckboxListTile(
                       dense: true,
                       contentPadding: EdgeInsets.zero,
-                      title: Text(entry.value),
+                      title: AppText(entry.value),
                       value: state.pins.contains(entry.key),
                       onChanged: (_) => shell.pin(entry.key),
                     ),
@@ -131,7 +133,7 @@ class _InspectorHeading extends StatelessWidget {
       actions: [
         TextButton(
           onPressed: () => Navigator.pop(context),
-          child: const Text('Готово'),
+          child: const AppText('Готово'),
         ),
       ],
     ),
@@ -145,7 +147,7 @@ class SkillSelectors extends StatelessWidget {
   Widget build(BuildContext context) => Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
-      Text('Основное умение', style: Theme.of(context).textTheme.bodySmall),
+      AppText('Основное умение', style: Theme.of(context).textTheme.bodySmall),
       const SizedBox(height: 4),
       _Selector(
         model: model,
@@ -174,7 +176,7 @@ class _Selector extends StatelessWidget {
   Widget build(BuildContext context) {
     final entries = jsonRows(data['entries']);
     if (entries.isEmpty)
-      return const Text(
+      return const AppText(
         'Умение не выбрано',
         style: TextStyle(fontWeight: FontWeight.w700),
       );
@@ -188,8 +190,9 @@ class _Selector extends StatelessWidget {
           .map(
             (entry) => DropdownMenuItem(
               value: entry['id'] as int,
-              child: Text(
+              child: AppText(
                 '${entry['label']}',
+                game: true,
                 overflow: TextOverflow.ellipsis,
                 style: const TextStyle(
                   fontWeight: FontWeight.w700,
@@ -218,16 +221,16 @@ class _PrimaryStat extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(statLabel(key), style: Theme.of(context).textTheme.bodySmall),
+          AppText(statLabel(key), style: Theme.of(context).textTheme.bodySmall),
           const SizedBox(height: 6),
           SoftSwitch(
-            child: Text(
+            child: AppText(
               formatStat(report.stats[key]),
               key: ValueKey(report.stats[key]),
               style: Spark.mono.copyWith(fontSize: 34, letterSpacing: -1.5),
             ),
           ),
-          Text(
+          AppText(
             'урон в секунду',
             style: TextStyle(color: Spark.of(context).muted, fontSize: 10),
           ),
@@ -248,9 +251,9 @@ class _Stat extends StatelessWidget {
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(statLabel(stat), style: Theme.of(context).textTheme.bodySmall),
+        AppText(statLabel(stat), style: Theme.of(context).textTheme.bodySmall),
         const SizedBox(height: 4),
-        Text(
+        AppText(
           formatStat(report.stats[stat]),
           style: Spark.mono.copyWith(fontSize: 18),
         ),
@@ -263,19 +266,19 @@ void statDetails(BuildContext context, BuildReport report, String key) =>
     sparkDialog<void>(
       context,
       AlertDialog(
-        title: Text(statLabel(key)),
+        title: AppText(statLabel(key)),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            AppText(
               formatStat(report.stats[key]),
               style: Spark.mono.copyWith(fontSize: 32),
             ),
             const SizedBox(height: 16),
-            const Text('Значение из текущего отчёта Lua PoB.'),
+            const AppText('Значение из текущего отчёта Lua PoB.'),
             const SizedBox(height: 8),
-            Text(
+            AppText(
               key,
               style: Spark.mono.copyWith(
                 fontSize: 12,
@@ -287,7 +290,7 @@ void statDetails(BuildContext context, BuildReport report, String key) =>
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Закрыть'),
+            child: const AppText('Закрыть'),
           ),
         ],
       ),
@@ -303,7 +306,7 @@ class _StatGroup extends StatelessWidget {
     tilePadding: EdgeInsets.zero,
     childrenPadding: const EdgeInsets.only(bottom: 12),
     visualDensity: VisualDensity.compact,
-    title: Text(
+    title: AppText(
       title,
       style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w700),
     ),
@@ -333,12 +336,12 @@ class StatRow extends StatelessWidget {
     child: Row(
       children: [
         Expanded(
-          child: Text(
+          child: AppText(
             label,
             style: TextStyle(color: Spark.of(context).muted, fontSize: 12),
           ),
         ),
-        Text(
+        AppText(
           formatStat(
             report.stats[stat],
             suffix: stat.endsWith('Resist') ? ' %' : '',
@@ -370,47 +373,49 @@ class WarningButton extends StatelessWidget {
           ? Spark.of(context).green
           : Spark.of(context).danger,
     ),
-    label: Text(
+    label: AppText(
       'Предупреждения · ${report.warnings.length}',
       style: const TextStyle(fontSize: 11),
     ),
   );
 }
 
-void showWarnings(
-  BuildContext context,
-  BuildReport report,
-) => sparkDialog<void>(
-  context,
-  AlertDialog(
-    title: const Text('Предупреждения Lua'),
-    content: SizedBox(
-      width: 500,
-      child: SingleChildScrollView(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: report.warnings.isEmpty
-              ? [const Text('Lua не вернул предупреждений для этого расчёта.')]
-              : report.warnings
-                    .map(
-                      (line) => Padding(
-                        padding: const EdgeInsets.only(bottom: 14),
-                        child: Text(line),
+void showWarnings(BuildContext context, BuildReport report) =>
+    sparkDialog<void>(
+      context,
+      AlertDialog(
+        title: const AppText('Предупреждения Lua'),
+        content: SizedBox(
+          width: 500,
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: report.warnings.isEmpty
+                  ? [
+                      const AppText(
+                        'Lua не вернул предупреждений для этого расчёта.',
                       ),
-                    )
-                    .toList(),
+                    ]
+                  : report.warnings
+                        .map(
+                          (line) => Padding(
+                            padding: const EdgeInsets.only(bottom: 14),
+                            child: AppText(line),
+                          ),
+                        )
+                        .toList(),
+            ),
+          ),
         ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const AppText('Закрыть'),
+          ),
+        ],
       ),
-    ),
-    actions: [
-      TextButton(
-        onPressed: () => Navigator.pop(context),
-        child: const Text('Закрыть'),
-      ),
-    ],
-  ),
-);
+    );
 
 class CalculationsView extends StatelessWidget {
   const CalculationsView({super.key, required this.report});
@@ -445,16 +450,16 @@ class CalculationsView extends StatelessWidget {
         const SizedBox(height: 20),
         WarningButton(report: report),
         ExpansionTile(
-          title: const Text('Все показатели Lua'),
+          title: const AppText('Все показатели Lua'),
           children: report.stats.entries
               .map(
                 (entry) => ListTile(
                   dense: true,
-                  title: Text(
+                  title: AppText(
                     entry.key,
                     style: Spark.mono.copyWith(fontSize: 11),
                   ),
-                  trailing: Text(
+                  trailing: AppText(
                     '${entry.value}',
                     style: Spark.mono.copyWith(fontSize: 11),
                   ),
@@ -463,7 +468,7 @@ class CalculationsView extends StatelessWidget {
               .toList(),
         ),
         ExpansionTile(
-          title: const Text('Исходный отчёт'),
+          title: const AppText('Исходный отчёт'),
           children: [
             SelectableText(
               const JsonEncoder.withIndent('  ').convert(report.raw),
@@ -490,7 +495,7 @@ class _CalculationGroup extends StatelessWidget {
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Text(title, style: Theme.of(context).textTheme.titleMedium),
+        AppText(title, style: Theme.of(context).textTheme.titleMedium),
         const SizedBox(height: 14),
         ...entries.entries.map(
           (entry) =>
