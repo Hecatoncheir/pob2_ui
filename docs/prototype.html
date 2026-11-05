@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f2efe5">
+  <title>PoB II — прототип мастерской</title>
+  <link rel="icon" href="assets/brand/app-icon.svg">
+  <link rel="preload" href="assets/fonts/nunito-800.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="stylesheet" href="styles/base.css">
+  <link rel="stylesheet" href="styles/app.css">
+  <link rel="stylesheet" href="styles/workspace.css">
+  <script src="scripts/icons.js" defer></script>
+  <script src="scripts/workspace-data.js" defer></script>
+  <script src="scripts/workspace.js" defer></script>
+  <script src="scripts/workspace-actions.js" defer></script>
+  <script src="scripts/app.js" defer></script>
+</head>
+<body class="app-body">
+  <a class="skip" href="#page">К содержимому</a>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="index.html" aria-label="PoB II — сайт"><img src="assets/brand/mark.svg" alt=""><span><strong>PoB <span class="brand-ii">II</span></strong><small>МАСТЕРСКАЯ СБОРОК</small></span></a>
+      <button class="button new-build" data-action="new"><span data-icon="plus"></span><span>Новая сборка</span></button>
+      <nav class="app-nav" aria-label="Разделы приложения">
+        <button data-page="library"><span data-icon="grid"></span><span>Мои сборки</span><span class="nav-count" id="build-count">3</span></button>
+        <button data-page="workspace" aria-current="page"><span data-icon="tree"></span><span>Мастерская</span><span class="nav-indicator"></span></button>
+        <button data-page="components"><span data-icon="box"></span><span>Компоненты</span></button>
+      </nav>
+      <div class="sidebar-recent"><p class="eyebrow">НЕДАВНИЕ</p><div id="recent-builds"></div></div>
+      <div class="sidebar-bottom"><div class="demo-note"><span class="dot"></span><div><strong>Дизайн-прототип</strong><small>Демонстрационные данные</small></div><button class="icon-button" data-action="info" aria-label="О прототипе" data-icon="info"></button></div><div class="sidebar-links"><button data-action="settings"><span data-icon="settings"></span><span>Оформление</span></button><a href="index.html" aria-label="На сайт PoB II" data-icon="link"></a></div></div>
+    </aside>
+    <main class="app-main">
+      <header class="topbar"><div class="breadcrumbs"><span>Мастерская</span><span>/</span><strong id="breadcrumb">Сборка</strong></div><div class="topbar-right"><span class="local-label"><span class="dot"></span> Локальное пространство</span><button class="icon-button" data-action="info" aria-label="Справка о прототипе" data-icon="info"></button></div></header>
+      <div class="page-scroll" id="page" tabindex="-1"></div>
+      <footer class="app-status"><span><span class="dot"></span> Демо · без подключения к Lua</span><span class="mono" id="save-status">ИЗМЕНЕНИЯ СОХРАНЯЮТСЯ В БРАУЗЕРЕ</span></footer>
+    </main>
+  </div>
+  <dialog id="build-dialog"><div class="dialog-head"><h2>Новая сборка</h2><button class="icon-button" data-close aria-label="Закрыть" data-icon="close"></button></div><form id="build-form"><label class="field">Название<input name="name" autofocus placeholder="Имя вашей идеи" required maxlength="60" autocomplete="off"></label><div class="form-row"><label class="field">Класс<select name="class"><option>Ведьма</option><option>Воин</option><option>Монах</option><option>Наёмник</option><option>Охотница</option><option>Волшебница</option></select></label><label class="field">Уровень<input name="level" type="number" min="1" max="100" value="90" required></label></div><p class="form-note">Список классов — пример для макета. Новая сборка создаётся без расчётов.</p><div class="form-actions"><button class="button secondary" type="button" data-close>Отмена</button><button class="button" type="submit">Создать <span data-icon="arrow"></span></button></div></form></dialog>
+  <dialog id="import-dialog"><div class="dialog-head"><h2>Импорт сборки</h2><button class="icon-button" data-close aria-label="Закрыть" data-icon="close"></button></div><p>Откройте JSON, экспортированный из этого прототипа. Импорт XML PoB появится при подключении Lua во Flutter.</p><label class="field">Файл прототипа<input type="file" id="import-file" accept="application/json,.json"></label><p id="import-error" class="error-text" role="alert"></p></dialog>
+  <dialog id="info-dialog"><div class="dialog-head"><h2>Место для идей</h2><button class="icon-button" data-close aria-label="Закрыть" data-icon="close"></button></div><p>Это интерактивный проект интерфейса PoB II. Один пример содержит показатели с вашего скриншота PoB. Остальные данные и схема дерева иллюстративные.</p><p>Можно создавать сборки, переключать разделы, выбирать узлы и сохранять заметки. Изменения остаются в вашем браузере. Игровые расчёты будут выполняться только оригинальным Lua PoB в приложении Flutter.</p><div class="form-actions"><button class="button secondary" data-action="settings">Оформление</button><a class="button" href="brand.html">Логотип и иконки <span data-icon="arrow"></span></a></div></dialog>
+  <dialog id="settings-dialog"><div class="dialog-head"><h2>Оформление</h2><button class="icon-button" data-close aria-label="Закрыть" data-icon="close"></button></div><div class="setting-row"><div><strong>Плавные анимации</strong><p>Переходы и отклик элементов</p></div><label class="switch"><input type="checkbox" id="motion-toggle" checked aria-label="Плавные анимации"><span></span></label></div><p>Системная настройка уменьшения движения имеет приоритет.</p><div class="settings-fonts"><span>Nunito <b>Аа</b></span><span>Nunito Sans <b>Аа</b></span><span>JetBrains Mono <b>01</b></span></div></dialog>
+  <dialog id="detail-dialog"><div class="dialog-head"><h2 id="detail-title"></h2><button class="icon-button" data-close aria-label="Закрыть" data-icon="close"></button></div><div id="detail-content"></div></dialog>
+  <dialog id="workspace-dialog"><div class="dialog-head"><h2 id="workspace-dialog-title"></h2><button class="icon-button" data-close aria-label="Закрыть"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M6 18 18 6"/></svg></button></div><div id="workspace-dialog-content"></div></dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>

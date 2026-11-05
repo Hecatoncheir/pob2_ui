@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f2efe5">
+  <meta name="description" content="PoB II — мастерская сборок для Path of Exile 2. Новый интерфейс, оригинальные расчёты Path of Building.">
+  <title>PoB II — всё начинается с искры</title>
+  <link rel="icon" href="assets/brand/app-icon.svg" type="image/svg+xml">
+  <link rel="preload" href="assets/fonts/nunito-800.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="stylesheet" href="styles/base.css">
+  <link rel="stylesheet" href="styles/site.css">
+  <script src="scripts/icons.js" defer></script>
+  <script src="scripts/site.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#main">К содержимому</a>
+  <div class="site-shell">
+    <header class="site-header">
+      <a class="brand" href="./" aria-label="PoB II — главная"><img src="assets/brand/mark.svg" alt=""><span><strong>PoB <span class="brand-ii">II</span></strong><small>МАСТЕРСКАЯ СБОРОК</small></span></a>
+      <nav aria-label="Основные ссылки"><button class="text-button" data-dialog="about">О приложении</button><a href="https://github.com/Hecatoncheir/pob2_ui" target="_blank" rel="noopener">GitHub <span aria-hidden="true">↗</span></a><button class="icon-button" id="theme-toggle" aria-label="Включить тёмную тему" data-icon="moon"></button></nav>
+    </header>
+    <main id="main" class="hero">
+      <div class="hero-copy reveal">
+        <p class="eyebrow"><span class="dot"></span> ДЛЯ PATH OF EXILE 2</p>
+        <h1>Всё начинается<br>с <span class="spark-word">искры.<svg viewBox="0 0 360 20" aria-hidden="true"><path d="M5 14C100-1 225-1 350 7"/></svg></span></h1>
+        <p class="hero-lead">Собирайте идеи в сильного персонажа.<br>Знакомые расчёты PoB. Больше ясности.</p>
+        <div class="hero-actions"><a class="button" href="prototype.html">Открыть прототип <span data-icon="arrow"></span></a><button class="text-button" data-dialog="how">Как это работает <span aria-hidden="true">↗</span></button></div>
+        <div class="hero-facts"><span><span data-icon="shield"></span>Локально</span><span><span data-icon="code"></span>Открытый код</span><span><span data-icon="tree"></span>Исходный Lua</span></div>
+      </div>
+      <div class="hero-art reveal">
+        <div class="art-top"><span class="eyebrow">01 / ИСКРА ВАШЕЙ СБОРКИ</span><span class="tag">PoB × PoE 2</span></div>
+        <img class="emblem" src="assets/brand/emblem.svg" alt="Пламя с ветвями дерева умений, окружённое камнем и кубом">
+        <div class="floating-label label-tree"><span data-icon="tree"></span><span>Своя ветка развития</span></div>
+        <div class="floating-label label-gem"><span data-icon="gem"></span><span>Своя комбинация</span></div>
+        <div class="art-bottom"><span class="mono">ИДЕЯ → СБОРКА → РАСЧЁТ</span><span class="small-star" aria-hidden="true">✳</span></div>
+      </div>
+    </main>
+    <footer class="site-footer"><p>Меньше шума. Больше пространства для идей.</p><div><span class="tag"><span class="dot"></span> Дизайн-прототип</span><a href="brand.html">Логотип и иконки <span aria-hidden="true">↗</span></a></div></footer>
+  </div>
+  <dialog id="about"><div class="dialog-head"><h2>Ваша мастерская</h2><button class="icon-button" data-close aria-label="Закрыть" data-icon="close"></button></div><p>PoB II — самостоятельный интерфейс для Path of Building: Path of Exile 2. Flutter управляет интерфейсом, а оригинальный Lua PoB выполняет игровые расчёты.</p><p>Сейчас доступна рабочая основа приложения: установка компонентов, создание сборки, импорт XML и отчёт. Здесь показан проект будущего интерфейса; дерево, предметы и умения в HTML используют демонстрационные данные.</p><a class="button" href="https://github.com/Hecatoncheir/pob2_ui">Открыть репозиторий <span data-icon="arrow"></span></a></dialog>
+  <dialog id="how"><div class="dialog-head"><h2>От идеи к сборке</h2><button class="icon-button" data-close aria-label="Закрыть" data-icon="close"></button></div><ol class="how-list"><li><strong>Создайте персонажа</strong><span>Выберите класс и уровень или импортируйте XML.</span></li><li><strong>Соберите своё сочетание</strong><span>Продумайте дерево, предметы и умения.</span></li><li><strong>Проверьте в PoB</strong><span>Расчёты, условия и предупреждения — из исходного Lua.</span></li></ol><p>HTML-прототип показывает взаимодействия и оформление. Он не подключён к игровому движку и не рассчитывает сборки.</p><a class="button" href="prototype.html">Попробовать интерфейс <span data-icon="arrow"></span></a></dialog>
+</body>
+</html>

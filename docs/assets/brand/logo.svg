@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 192" fill="#242722">
+  <title>PoB II — мастерская сборок</title>
+  <g><path d="M81 186C37 173 13 141 18 108c4-25 24-38 25-67 17 10 20 24 19 35C86 55 89 25 85 5c35 24 50 53 44 79 10-6 16-17 18-28 23 50 13 107-66 130Z"/><g fill="none" stroke="#f2efe5" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"><path d="M80 160v-54m0 25-22-19m22 4 24-24m-24 53 25-20"/><circle cx="80" cy="99" r="7"/><circle cx="52" cy="106" r="6"/><circle cx="110" cy="85" r="7"/><circle cx="111" cy="119" r="6"/></g></g>
+  <g stroke="#242722" stroke-width="19" stroke-linecap="round" stroke-linejoin="round" fill="none"><path d="m207 139 7-96h22c48 0 44 60-3 60h-23"/><path d="M310 80c-38-3-41 64-6 63 36-1 42-61 6-63Z"/><path d="m363 140 7-96h23c40 0 38 46 5 47 41-2 41 52-3 52Z"/></g>
+  <g transform="rotate(-5 516 100)"><rect x="466" y="46" width="103" height="103" rx="33"/><path d="M500 74v48m32-48v48" stroke="#f2efe5" stroke-width="13" stroke-linecap="round"/></g>
+</svg>

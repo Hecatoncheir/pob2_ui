@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 192" fill="currentColor">
+  <title>PoB II — искра сборки</title>
+  <path d="M81 186C37 173 13 141 18 108c4-25 24-38 25-67 17 10 20 24 19 35C86 55 89 25 85 5c35 24 50 53 44 79 10-6 16-17 18-28 23 50 13 107-66 130Z"/>
+  <g fill="none" stroke="#f2efe5" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M80 160v-54m0 25-22-19m22 4 24-24m-24 53 25-20"/>
+    <circle cx="80" cy="99" r="7"/><circle cx="52" cy="106" r="6"/><circle cx="110" cy="85" r="7"/><circle cx="111" cy="119" r="6"/>
+  </g>
+</svg>
