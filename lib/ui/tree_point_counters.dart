@@ -3,6 +3,7 @@ import 'core/app_text.dart';
 import 'package:flutter/material.dart';
 
 import 'core/spark_theme.dart';
+import 'core/gruvbox.dart';
 
 class TreePointCounters extends StatelessWidget {
   const TreePointCounters(this.display, {super.key});
@@ -40,12 +41,27 @@ class TreePointCounters extends StatelessWidget {
                 const SizedBox(height: 2),
                 AppText(
                   '${pairs[index][1]} / ${pairs[index][2]}',
-                  style: Spark.mono.copyWith(fontSize: 11),
+                  key: ValueKey('tree-counter-$index'),
+                  style: Spark.mono.copyWith(
+                    fontSize: 11,
+                    color: _color(context, index),
+                  ),
                 ),
               ],
             ),
           ),
       ],
     );
+  }
+
+  Color _color(BuildContext context, int index) {
+    final dark = Theme.of(context).brightness == Brightness.dark;
+    return switch (index) {
+      0 => dark ? Gruvbox.yellow : const Color(0xFF8A5A13),
+      1 =>
+        dark ? Color.lerp(Gruvbox.red, Gruvbox.brightText, .25)! : Spark.danger,
+      2 => dark ? Gruvbox.aqua : Spark.green,
+      _ => dark ? Gruvbox.brightText : const Color(0xFF525D82),
+    };
   }
 }
