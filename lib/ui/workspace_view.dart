@@ -1,4 +1,5 @@
 import 'core/app_text.dart';
+import 'core/language_scope.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -140,7 +141,7 @@ class _WorkspaceHeading extends StatelessWidget {
           children: [
             Expanded(
               child: AppText(
-                '${report.characterClass} · уровень ${report.level}',
+                '${translateGame(context, report.characterClass)} · уровень ${report.level}',
                 style: TextStyle(color: Spark.of(context).muted, fontSize: 11),
               ),
             ),

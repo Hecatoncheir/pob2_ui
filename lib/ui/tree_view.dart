@@ -331,6 +331,7 @@ class _TreeViewState extends State<TreeView>
       const SizedBox(width: 6),
       ArtIconButton(
         'chart',
+        key: const Key('node-power-toggle'),
         label: 'Найти узлы по характеристике',
         selected: powerVisible,
         onPressed: _togglePower,

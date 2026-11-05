@@ -194,9 +194,8 @@ Future<void> _searchNodePower(WidgetTester tester, WorkshopCubit model) async {
   expect(_powerButton(tester).selected, isFalse);
 }
 
-ArtIconButton _powerButton(WidgetTester tester) => tester
-    .widgetList<ArtIconButton>(find.byType(ArtIconButton))
-    .firstWhere((button) => button.icon == 'chart');
+ArtIconButton _powerButton(WidgetTester tester) =>
+    tester.widget<ArtIconButton>(find.byKey(const Key('node-power-toggle')));
 
 Future<void> _localizeTree(
   WidgetTester tester,
