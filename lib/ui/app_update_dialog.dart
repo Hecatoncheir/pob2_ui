@@ -1,122 +1,162 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../domain/app_info.dart';
-import 'app_update_model.dart';
-import 'workshop_model.dart';
+import 'app_update_cubit.dart';
+import 'app_update_state.dart';
+import 'workshop_cubit.dart';
+import 'workshop_state.dart';
 
 Future<void> showAppUpdates(
   BuildContext context,
-  AppUpdateModel updates,
-  WorkshopModel workshop,
+  AppUpdateCubit updates,
+  WorkshopCubit workshop,
 ) => showDialog<void>(
   context: context,
-  builder: (context) => ListenableBuilder(
-    listenable: Listenable.merge([updates, workshop]),
-    builder: (context, _) => AlertDialog(
-      title: const Text('Обновление PoB II'),
-      content: SizedBox(
-        width: 460,
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text('Установлена версия $appVersion'),
-              const SizedBox(height: 12),
-              Text(updates.message),
-              if (updates.release != null) ...[
-                const SizedBox(height: 12),
-                Text(
-                  updates.release!.notes.isEmpty
-                      ? 'Описание выпуска отсутствует'
-                      : updates.release!.notes,
-                ),
-              ],
-              if (updates.phase == UpdatePhase.downloading) ...[
-                const SizedBox(height: 16),
-                LinearProgressIndicator(value: updates.progress),
-                Text('${(updates.progress * 100).round()} %'),
-              ],
-              if (updates.phase == UpdatePhase.ready)
-                const Padding(
-                  padding: EdgeInsets.only(top: 12),
-                  child: Text(
-                    'Обновление загружено и проверено. Перед перезапуском сборка и XML будут сохранены.',
-                  ),
-                ),
-              if (updates.installation == null)
-                const Padding(
-                  padding: EdgeInsets.only(top: 12),
-                  child: Text(
-                    'Эта копия запущена без установщика или из каталога без права записи. Установите новую версию со страницы выпусков.',
-                  ),
-                ),
-              if (updates.error != null)
-                Padding(
-                  padding: const EdgeInsets.only(top: 12),
-                  child: SelectableText(
-                    updates.error!,
-                    style: TextStyle(
-                      color: Theme.of(context).colorScheme.error,
-                    ),
-                  ),
-                ),
-              SwitchListTile.adaptive(
-                contentPadding: EdgeInsets.zero,
-                title: const Text('Загружать обновления автоматически'),
-                subtitle: const Text('Перезапуск — только по вашей команде'),
-                value: updates.autoDownload,
-                onChanged: updates.busy || updates.installation == null
-                    ? null
-                    : updates.setAutoDownload,
-              ),
-            ],
-          ),
-        ),
-      ),
-      actions: [
-        TextButton(
-          onPressed: updates.phase == UpdatePhase.installing
-              ? null
-              : () => Navigator.pop(context),
-          child: const Text('Закрыть'),
-        ),
-        if (updates.phase == UpdatePhase.downloading)
-          TextButton(
-            onPressed: updates.cancel,
-            child: const Text('Приостановить'),
-          )
-        else if (updates.installation == null ||
-            (updates.available && updates.release?.installer == null))
-          FilledButton(
-            onPressed: updates.openReleases,
-            child: const Text('Страница выпусков'),
-          )
-        else if (updates.phase == UpdatePhase.ready)
-          FilledButton(
-            onPressed: workshop.busy || updates.busy
-                ? null
-                : () async {
-                    if (await updates.install(workshop.checkpoint)) {
-                      await workshop.engine.close();
-                      exit(0);
-                    }
-                  },
-            child: const Text('Перезапустить и обновить'),
-          )
-        else if (updates.available)
-          FilledButton(
-            onPressed: updates.busy ? null : updates.download,
-            child: const Text('Скачать обновление'),
-          )
-        else
-          FilledButton(
-            onPressed: updates.busy ? null : updates.check,
-            child: Text(updates.busy ? 'Проверяем…' : 'Проверить'),
-          ),
-      ],
-    ),
+  builder: (_) => MultiBlocProvider(
+    providers: [
+      BlocProvider.value(value: updates),
+      BlocProvider.value(value: workshop),
+    ],
+    child: const _UpdateDialog(),
   ),
 );
+
+class _UpdateDialog extends StatelessWidget {
+  const _UpdateDialog();
+  @override
+  Widget build(BuildContext context) =>
+      BlocBuilder<AppUpdateCubit, AppUpdateState>(
+        builder: (context, state) => AlertDialog(
+          title: const Text('Обновление PoB II'),
+          content: SizedBox(
+            width: 460,
+            child: SingleChildScrollView(child: _UpdateContent(state)),
+          ),
+          actions: [
+            TextButton(
+              onPressed: state.phase == UpdatePhase.installing
+                  ? null
+                  : () => Navigator.pop(context),
+              child: const Text('Закрыть'),
+            ),
+            _PrimaryAction(state),
+          ],
+        ),
+      );
+}
+
+class _UpdateContent extends StatelessWidget {
+  const _UpdateContent(this.state);
+  final AppUpdateState state;
+  @override
+  Widget build(BuildContext context) => Column(
+    mainAxisSize: MainAxisSize.min,
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      const Text('Установлена версия $appVersion'),
+      const SizedBox(height: 12),
+      Text(state.message),
+      if (state.release case final release?) ...[
+        const SizedBox(height: 12),
+        Text(
+          release.notes.isEmpty
+              ? 'Описание выпуска отсутствует'
+              : release.notes,
+        ),
+      ],
+      if (state.phase == UpdatePhase.downloading) ...[
+        const SizedBox(height: 16),
+        LinearProgressIndicator(value: state.progress),
+        Text('${(state.progress * 100).round()} %'),
+      ],
+      if (state.phase == UpdatePhase.ready)
+        const _Notice(
+          'Обновление загружено и проверено. Перед перезапуском сборка и XML будут сохранены.',
+        ),
+      if (state.installation == null)
+        const _Notice(
+          'Эта копия запущена без установщика или из каталога без права записи. Установите новую версию со страницы выпусков.',
+        ),
+      if (state.error case final error?)
+        Padding(
+          padding: const EdgeInsets.only(top: 12),
+          child: SelectableText(
+            error,
+            style: TextStyle(color: Theme.of(context).colorScheme.error),
+          ),
+        ),
+      SwitchListTile.adaptive(
+        contentPadding: EdgeInsets.zero,
+        title: const Text('Загружать обновления автоматически'),
+        subtitle: const Text('Перезапуск — только по вашей команде'),
+        value: state.autoDownload,
+        onChanged: state.busy || state.installation == null
+            ? null
+            : context.read<AppUpdateCubit>().setAutoDownload,
+      ),
+    ],
+  );
+}
+
+class _Notice extends StatelessWidget {
+  const _Notice(this.text);
+  final String text;
+  @override
+  Widget build(BuildContext context) =>
+      Padding(padding: const EdgeInsets.only(top: 12), child: Text(text));
+}
+
+class _PrimaryAction extends StatelessWidget {
+  const _PrimaryAction(this.state);
+  final AppUpdateState state;
+  @override
+  Widget build(BuildContext context) {
+    final updates = context.read<AppUpdateCubit>();
+    if (state.phase == UpdatePhase.downloading)
+      return TextButton(
+        onPressed: updates.cancel,
+        child: const Text('Приостановить'),
+      );
+    if (state.installation == null ||
+        (state.available && state.release?.installer == null))
+      return FilledButton(
+        onPressed: updates.openReleases,
+        child: const Text('Страница выпусков'),
+      );
+    return switch (state.phase) {
+      UpdatePhase.ready => const _RestartButton(),
+      UpdatePhase.available => FilledButton(
+        onPressed: updates.download,
+        child: const Text('Скачать обновление'),
+      ),
+      _ => FilledButton(
+        onPressed: state.busy ? null : updates.check,
+        child: Text(state.busy ? 'Проверяем…' : 'Проверить'),
+      ),
+    };
+  }
+}
+
+class _RestartButton extends StatelessWidget {
+  const _RestartButton();
+  @override
+  Widget build(BuildContext context) =>
+      BlocSelector<WorkshopCubit, WorkshopState, bool>(
+        selector: (state) => state.busy,
+        builder: (context, busy) => FilledButton(
+          onPressed: busy ? null : () => _restart(context),
+          child: const Text('Перезапустить и обновить'),
+        ),
+      );
+
+  Future<void> _restart(BuildContext context) async {
+    final updates = context.read<AppUpdateCubit>();
+    final workshop = context.read<WorkshopCubit>();
+    if (!await updates.install(workshop.checkpoint)) return;
+    await workshop.close();
+    exit(0);
+  }
+}

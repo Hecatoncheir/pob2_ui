@@ -1,12 +1,15 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'workshop_model.dart';
+import 'workshop_state.dart';
+
+import 'workshop_cubit.dart';
 
 class CalculatorView extends StatefulWidget {
   const CalculatorView({super.key, required this.model});
-  final WorkshopModel model;
+  final WorkshopCubit model;
   @override
   State<CalculatorView> createState() => _CalculatorViewState();
 }
@@ -19,8 +22,7 @@ class _CalculatorViewState extends State<CalculatorView> {
   @override
   void initState() {
     super.initState();
-    xml.text = widget.model.draftXml;
-    xml.addListener(() => widget.model.editDraft(xml.text));
+    xml.text = widget.model.state.draftXml;
   }
 
   @override
@@ -33,131 +35,143 @@ class _CalculatorViewState extends State<CalculatorView> {
   @override
   Widget build(BuildContext context) {
     final model = widget.model;
-    if (!model.draftEdited && xml.text != model.draftXml)
-      xml.text = model.draftXml;
-    final enabled = model.engine.connected && !model.busy;
-    return ListView(
-      padding: const EdgeInsets.all(28),
-      children: [
-        const Text(
-          'Сборка начинается здесь',
-          style: TextStyle(fontSize: 22, fontWeight: FontWeight.w600),
-        ),
-        const SizedBox(height: 8),
-        const Text(
-          'Создайте персонажа или вставьте XML из PoB. Все показатели рассчитывает Lua.',
-          style: TextStyle(color: Colors.white60),
-        ),
-        const SizedBox(height: 24),
-        if (!model.engine.connected)
-          Align(
-            alignment: Alignment.centerLeft,
-            child: FilledButton.icon(
-              onPressed: model.busy || !model.ready ? null : model.connect,
-              icon: const Icon(Icons.cable),
-              label: const Text('Подключить Lua'),
-            ),
+    final enabled = model.engine.connected && !model.state.busy;
+    return BlocListener<WorkshopCubit, WorkshopState>(
+      bloc: model,
+      listenWhen: (before, after) =>
+          before.draftXml != after.draftXml && !after.draftEdited,
+      listener: (context, state) => xml.text = state.draftXml,
+      child: ListView(
+        padding: const EdgeInsets.all(28),
+        children: [
+          const Text(
+            'Сборка начинается здесь',
+            style: TextStyle(fontSize: 22, fontWeight: FontWeight.w600),
           ),
-        if (model.sessionSaved)
-          Align(
-            alignment: Alignment.centerLeft,
-            child: TextButton.icon(
-              onPressed: enabled ? model.restoreSession : null,
-              icon: const Icon(Icons.restore),
-              label: const Text('Восстановить последнюю сборку'),
-            ),
+          const SizedBox(height: 8),
+          const Text(
+            'Создайте персонажа или вставьте XML из PoB. Все показатели рассчитывает Lua.',
+            style: TextStyle(color: Colors.white60),
           ),
-        const SizedBox(height: 16),
-        Wrap(
-          spacing: 12,
-          runSpacing: 12,
-          crossAxisAlignment: WrapCrossAlignment.center,
-          children: [
-            SizedBox(
-              width: 220,
-              child: DropdownButtonFormField<int>(
-                key: ValueKey(model.classes),
-                initialValue: model.classes.any((item) => item['id'] == classId)
-                    ? classId
-                    : null,
-                decoration: const InputDecoration(labelText: 'Класс из Lua'),
-                items: model.classes
-                    .map(
-                      (item) => DropdownMenuItem<int>(
-                        value: item['id'] as int,
-                        child: Text(item['name'] as String),
-                      ),
-                    )
-                    .toList(),
-                onChanged: enabled
-                    ? (value) => setState(() => classId = value)
-                    : null,
+          const SizedBox(height: 24),
+          if (!model.engine.connected)
+            Align(
+              alignment: Alignment.centerLeft,
+              child: FilledButton.icon(
+                onPressed: model.state.busy || !model.ready
+                    ? null
+                    : model.connect,
+                icon: const Icon(Icons.cable),
+                label: const Text('Подключить Lua'),
               ),
             ),
-            SizedBox(
-              width: 110,
-              child: TextField(
-                controller: level,
-                enabled: enabled,
-                keyboardType: TextInputType.number,
-                decoration: const InputDecoration(labelText: 'Уровень'),
+          if (model.state.sessionSaved)
+            Align(
+              alignment: Alignment.centerLeft,
+              child: TextButton.icon(
+                onPressed: enabled ? model.restoreSession : null,
+                icon: const Icon(Icons.restore),
+                label: const Text('Восстановить последнюю сборку'),
               ),
             ),
-            FilledButton(
-              onPressed: enabled && classId != null
-                  ? () => model.createBuild(
-                      classId!,
-                      int.tryParse(level.text) ?? 0,
-                    )
-                  : null,
-              child: const Text('Создать сборку'),
-            ),
-          ],
-        ),
-        const SizedBox(height: 24),
-        TextField(
-          controller: xml,
-          minLines: 5,
-          maxLines: 9,
-          decoration: const InputDecoration(
-            labelText: 'XML сборки',
-            hintText: '<PathOfBuilding2>…</PathOfBuilding2>',
-            alignLabelWithHint: true,
+          const SizedBox(height: 16),
+          Wrap(
+            spacing: 12,
+            runSpacing: 12,
+            crossAxisAlignment: WrapCrossAlignment.center,
+            children: [
+              SizedBox(
+                width: 220,
+                child: DropdownButtonFormField<int>(
+                  key: ValueKey(model.state.classes),
+                  initialValue:
+                      model.state.classes.any((item) => item['id'] == classId)
+                      ? classId
+                      : null,
+                  decoration: const InputDecoration(labelText: 'Класс из Lua'),
+                  items: model.state.classes
+                      .map(
+                        (item) => DropdownMenuItem<int>(
+                          value: item['id'] as int,
+                          child: Text(item['name'] as String),
+                        ),
+                      )
+                      .toList(),
+                  onChanged: enabled
+                      ? (value) => setState(() => classId = value)
+                      : null,
+                ),
+              ),
+              SizedBox(
+                width: 110,
+                child: TextField(
+                  controller: level,
+                  enabled: enabled,
+                  keyboardType: TextInputType.number,
+                  decoration: const InputDecoration(labelText: 'Уровень'),
+                ),
+              ),
+              FilledButton(
+                onPressed: enabled && classId != null
+                    ? () => model.createBuild(
+                        classId!,
+                        int.tryParse(level.text) ?? 0,
+                      )
+                    : null,
+                child: const Text('Создать сборку'),
+              ),
+            ],
           ),
-        ),
-        const SizedBox(height: 12),
-        Wrap(
-          spacing: 12,
-          runSpacing: 12,
-          children: [
-            FilledButton.icon(
-              onPressed: enabled ? () => model.importXml(xml.text) : null,
-              icon: const Icon(Icons.play_arrow),
-              label: const Text('Импортировать и рассчитать'),
-            ),
-            OutlinedButton(
-              onPressed: enabled && model.report != null
-                  ? () async {
-                      final result = await model.exportXml();
-                      if (mounted && result != null) xml.text = result;
-                    }
-                  : null,
-              child: const Text('Получить XML'),
-            ),
-          ],
-        ),
-        const SizedBox(height: 28),
-        if (model.report != null) _ReportView(report: model.report!),
-        if (model.report == null)
-          const Padding(
-            padding: EdgeInsets.symmetric(vertical: 36),
-            child: Text(
-              'Показатели появятся после расчёта сборки.',
-              textAlign: TextAlign.center,
-              style: TextStyle(color: Colors.white54),
+          const SizedBox(height: 24),
+          TextField(
+            controller: xml,
+            onChanged: model.editDraft,
+            minLines: 5,
+            maxLines: 9,
+            decoration: const InputDecoration(
+              labelText: 'XML сборки',
+              hintText: '<PathOfBuilding2>…</PathOfBuilding2>',
+              alignLabelWithHint: true,
             ),
           ),
-      ],
+          const SizedBox(height: 12),
+          Wrap(
+            spacing: 12,
+            runSpacing: 12,
+            children: [
+              FilledButton.icon(
+                onPressed: enabled ? () => model.importXml(xml.text) : null,
+                icon: const Icon(Icons.play_arrow),
+                label: const Text('Импортировать и рассчитать'),
+              ),
+              OutlinedButton(
+                onPressed: enabled && model.state.report != null
+                    ? () async {
+                        final result = await model.exportXml();
+                        if (mounted && result != null) {
+                          xml.text = result;
+                          model.editDraft(result);
+                        }
+                      }
+                    : null,
+                child: const Text('Получить XML'),
+              ),
+            ],
+          ),
+          const SizedBox(height: 28),
+          if (model.state.report != null)
+            _ReportView(report: model.state.report!),
+          if (model.state.report == null)
+            const Padding(
+              padding: EdgeInsets.symmetric(vertical: 36),
+              child: Text(
+                'Показатели появятся после расчёта сборки.',
+                textAlign: TextAlign.center,
+                style: TextStyle(color: Colors.white54),
+              ),
+            ),
+        ],
+      ),
     );
   }
 }

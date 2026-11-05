@@ -6,7 +6,7 @@ import 'package:pob2_ui/data/component_repository.dart';
 import 'package:pob2_ui/data/installation_store.dart';
 import 'package:pob2_ui/data/mcp_client.dart';
 import 'package:pob2_ui/ui/app.dart';
-import 'package:pob2_ui/ui/workshop_model.dart';
+import 'package:pob2_ui/ui/workshop_cubit.dart';
 
 void main() {
   for (final size in const [Size(360, 800), Size(1280, 900)]) {
@@ -15,13 +15,13 @@ void main() {
     ) async {
       await tester.binding.setSurfaceSize(size);
       addTearDown(() => tester.binding.setSurfaceSize(null));
-      final model = WorkshopModel(
+      final model = WorkshopCubit(
         ComponentRepository(
           store: InstallationStore(Directory('test-components')),
         ),
         McpClient(),
       );
-      addTearDown(model.dispose);
+      addTearDown(model.close);
       await tester.pumpWidget(PobApp(model: model));
       await tester.pumpAndSettle();
       expect(tester.takeException(), isNull);

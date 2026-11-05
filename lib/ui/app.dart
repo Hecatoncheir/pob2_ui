@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'workshop_state.dart';
+import 'app_update_state.dart';
 
 import '../domain/component.dart';
 import 'calculator_view.dart';
-import 'workshop_model.dart';
-import 'app_update_model.dart';
+import 'workshop_cubit.dart';
+import 'app_update_cubit.dart';
 import 'app_update_dialog.dart';
 import '../domain/app_info.dart';
 
@@ -11,8 +15,8 @@ const accent = Color(0xFF8FE3CB);
 
 class PobApp extends StatelessWidget {
   const PobApp({super.key, required this.model, this.updates});
-  final WorkshopModel model;
-  final AppUpdateModel? updates;
+  final WorkshopCubit model;
+  final AppUpdateCubit? updates;
 
   @override
   Widget build(BuildContext context) => MaterialApp(
@@ -45,8 +49,8 @@ class PobApp extends StatelessWidget {
 
 class WorkshopView extends StatefulWidget {
   const WorkshopView({super.key, required this.model, this.updates});
-  final WorkshopModel model;
-  final AppUpdateModel? updates;
+  final WorkshopCubit model;
+  final AppUpdateCubit? updates;
   @override
   State<WorkshopView> createState() => _WorkshopViewState();
 }
@@ -55,170 +59,172 @@ class _WorkshopViewState extends State<WorkshopView> {
   int selected = 0;
 
   @override
-  Widget build(BuildContext context) => ListenableBuilder(
-    listenable: widget.model,
-    builder: (context, _) {
-      final model = widget.model;
-      return Scaffold(
-        body: SafeArea(
-          child: Row(
-            children: [
-              if (MediaQuery.sizeOf(context).width >= 850)
-                NavigationRail(
-                  selectedIndex: selected,
-                  onDestinationSelected: (value) =>
-                      setState(() => selected = value),
-                  labelType: NavigationRailLabelType.all,
-                  leading: const Padding(
-                    padding: EdgeInsets.symmetric(vertical: 24),
-                    child: Icon(
-                      Icons.auto_awesome_outlined,
-                      color: accent,
-                      size: 30,
+  Widget build(BuildContext context) =>
+      BlocBuilder<WorkshopCubit, WorkshopState>(
+        bloc: widget.model,
+        builder: (context, _) {
+          final model = widget.model;
+          return Scaffold(
+            body: SafeArea(
+              child: Row(
+                children: [
+                  if (MediaQuery.sizeOf(context).width >= 850)
+                    NavigationRail(
+                      selectedIndex: selected,
+                      onDestinationSelected: (value) =>
+                          setState(() => selected = value),
+                      labelType: NavigationRailLabelType.all,
+                      leading: const Padding(
+                        padding: EdgeInsets.symmetric(vertical: 24),
+                        child: Icon(
+                          Icons.auto_awesome_outlined,
+                          color: accent,
+                          size: 30,
+                        ),
+                      ),
+                      destinations: const [
+                        NavigationRailDestination(
+                          icon: Icon(Icons.widgets_outlined),
+                          label: Text('Компоненты'),
+                        ),
+                        NavigationRailDestination(
+                          icon: Icon(Icons.tune),
+                          label: Text('Сборка'),
+                        ),
+                      ],
                     ),
-                  ),
-                  destinations: const [
-                    NavigationRailDestination(
-                      icon: Icon(Icons.widgets_outlined),
-                      label: Text('Компоненты'),
-                    ),
-                    NavigationRailDestination(
-                      icon: Icon(Icons.tune),
-                      label: Text('Сборка'),
-                    ),
-                  ],
-                ),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(28, 24, 28, 12),
-                      child: Wrap(
-                        alignment: WrapAlignment.spaceBetween,
-                        crossAxisAlignment: WrapCrossAlignment.center,
-                        spacing: 24,
-                        children: [
-                          if (widget.updates != null)
-                            ListenableBuilder(
-                              listenable: widget.updates!,
-                              builder: (context, _) => TextButton.icon(
-                                onPressed: () => showAppUpdates(
-                                  context,
-                                  widget.updates!,
-                                  model,
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(28, 24, 28, 12),
+                          child: Wrap(
+                            alignment: WrapAlignment.spaceBetween,
+                            crossAxisAlignment: WrapCrossAlignment.center,
+                            spacing: 24,
+                            children: [
+                              if (widget.updates != null)
+                                BlocBuilder<AppUpdateCubit, AppUpdateState>(
+                                  bloc: widget.updates!,
+                                  builder: (context, _) => TextButton.icon(
+                                    onPressed: () => showAppUpdates(
+                                      context,
+                                      widget.updates!,
+                                      model,
+                                    ),
+                                    icon: Icon(
+                                      widget.updates!.state.available
+                                          ? Icons.update
+                                          : Icons.info_outline,
+                                    ),
+                                    label: Text(
+                                      widget.updates!.state.available
+                                          ? 'Есть обновление'
+                                          : 'v$appVersion',
+                                    ),
+                                  ),
                                 ),
-                                icon: Icon(
-                                  widget.updates!.available
-                                      ? Icons.update
-                                      : Icons.info_outline,
+                              const Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'POB II / МАСТЕРСКАЯ',
+                                    style: TextStyle(
+                                      color: accent,
+                                      fontSize: 13,
+                                      letterSpacing: 2,
+                                    ),
+                                  ),
+                                  SizedBox(height: 8),
+                                  Text(
+                                    'Место для вашей следующей сборки',
+                                    style: TextStyle(
+                                      fontSize: 25,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Chip(
+                                avatar: Icon(
+                                  Icons.circle,
+                                  size: 10,
+                                  color: model.engine.connected
+                                      ? accent
+                                      : Colors.grey,
                                 ),
                                 label: Text(
-                                  widget.updates!.available
-                                      ? 'Есть обновление'
-                                      : 'v$appVersion',
-                                ),
-                              ),
-                            ),
-                          const Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'POB II / МАСТЕРСКАЯ',
-                                style: TextStyle(
-                                  color: accent,
-                                  fontSize: 13,
-                                  letterSpacing: 2,
-                                ),
-                              ),
-                              SizedBox(height: 8),
-                              Text(
-                                'Место для вашей следующей сборки',
-                                style: TextStyle(
-                                  fontSize: 25,
-                                  fontWeight: FontWeight.w600,
+                                  model.engine.connected
+                                      ? 'Lua подключён'
+                                      : 'Lua не подключён',
                                 ),
                               ),
                             ],
                           ),
-                          Chip(
-                            avatar: Icon(
-                              Icons.circle,
-                              size: 10,
-                              color: model.engine.connected
-                                  ? accent
-                                  : Colors.grey,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 28),
+                          child: Text(
+                            model.state.status,
+                            style: const TextStyle(color: Colors.white60),
+                          ),
+                        ),
+                        const SizedBox(height: 16),
+                        if (model.state.busy)
+                          const LinearProgressIndicator(minHeight: 2),
+                        if (model.state.error != null)
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 28,
+                              vertical: 8,
                             ),
-                            label: Text(
-                              model.engine.connected
-                                  ? 'Lua подключён'
-                                  : 'Lua не подключён',
+                            child: SelectableText(
+                              model.state.error!,
+                              maxLines: 4,
+                              style: const TextStyle(color: Color(0xFFFFB4AB)),
                             ),
                           ),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 28),
-                      child: Text(
-                        model.status,
-                        style: const TextStyle(color: Colors.white60),
-                      ),
-                    ),
-                    const SizedBox(height: 16),
-                    if (model.busy) const LinearProgressIndicator(minHeight: 2),
-                    if (model.error != null)
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 28,
-                          vertical: 8,
+                        Expanded(
+                          child: IndexedStack(
+                            index: selected,
+                            children: [
+                              _ComponentsView(model: model),
+                              CalculatorView(model: model),
+                            ],
+                          ),
                         ),
-                        child: SelectableText(
-                          model.error!,
-                          maxLines: 4,
-                          style: const TextStyle(color: Color(0xFFFFB4AB)),
-                        ),
-                      ),
-                    Expanded(
-                      child: IndexedStack(
-                        index: selected,
-                        children: [
-                          _ComponentsView(model: model),
-                          CalculatorView(model: model),
-                        ],
-                      ),
+                      ],
                     ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
-        bottomNavigationBar: MediaQuery.sizeOf(context).width < 850
-            ? NavigationBar(
-                selectedIndex: selected,
-                onDestinationSelected: (value) =>
-                    setState(() => selected = value),
-                destinations: const [
-                  NavigationDestination(
-                    icon: Icon(Icons.widgets_outlined),
-                    label: 'Компоненты',
-                  ),
-                  NavigationDestination(
-                    icon: Icon(Icons.tune),
-                    label: 'Сборка',
                   ),
                 ],
-              )
-            : null,
+              ),
+            ),
+            bottomNavigationBar: MediaQuery.sizeOf(context).width < 850
+                ? NavigationBar(
+                    selectedIndex: selected,
+                    onDestinationSelected: (value) =>
+                        setState(() => selected = value),
+                    destinations: const [
+                      NavigationDestination(
+                        icon: Icon(Icons.widgets_outlined),
+                        label: 'Компоненты',
+                      ),
+                      NavigationDestination(
+                        icon: Icon(Icons.tune),
+                        label: 'Сборка',
+                      ),
+                    ],
+                  )
+                : null,
+          );
+        },
       );
-    },
-  );
 }
 
 class _ComponentsView extends StatelessWidget {
   const _ComponentsView({required this.model});
-  final WorkshopModel model;
+  final WorkshopCubit model;
 
   @override
   Widget build(BuildContext context) => ListView(
@@ -239,17 +245,17 @@ class _ComponentsView extends StatelessWidget {
         runSpacing: 12,
         children: [
           FilledButton.icon(
-            onPressed: model.busy ? null : model.checkUpdates,
+            onPressed: model.state.busy ? null : model.checkUpdates,
             icon: const Icon(Icons.sync),
             label: const Text('Проверить обновления'),
           ),
           OutlinedButton.icon(
-            onPressed: model.busy || !model.ready ? null : model.connect,
+            onPressed: model.state.busy || !model.ready ? null : model.connect,
             icon: const Icon(Icons.cable),
             label: const Text('Подключить Lua'),
           ),
           TextButton(
-            onPressed: model.busy || !model.ready ? null : model.doctor,
+            onPressed: model.state.busy || !model.ready ? null : model.doctor,
             child: const Text('Проверить совместимость'),
           ),
         ],
@@ -267,7 +273,9 @@ class _ComponentsView extends StatelessWidget {
       Align(
         alignment: Alignment.centerLeft,
         child: TextButton.icon(
-          onPressed: model.busy || !model.canRollback ? null : model.rollback,
+          onPressed: model.state.busy || !model.canRollback
+              ? null
+              : model.rollback,
           icon: const Icon(Icons.history),
           label: const Text('Вернуться к предыдущей паре'),
         ),
@@ -281,7 +289,9 @@ class _ComponentsView extends StatelessWidget {
           Align(
             alignment: Alignment.centerLeft,
             child: SelectableText(
-              model.log.isEmpty ? 'Операций пока нет' : model.log.join('\n'),
+              model.state.log.isEmpty
+                  ? 'Операций пока нет'
+                  : model.state.log.join('\n'),
               style: const TextStyle(fontFamily: 'Consolas', fontSize: 12),
             ),
           ),
@@ -293,13 +303,13 @@ class _ComponentsView extends StatelessWidget {
 
 class _ComponentCard extends StatelessWidget {
   const _ComponentCard({required this.model, required this.component});
-  final WorkshopModel model;
+  final WorkshopCubit model;
   final Component component;
 
   @override
   Widget build(BuildContext context) {
     final installed = model.components.active[component];
-    final latest = model.releases[component];
+    final latest = model.state.releases[component];
     final current = installed != null && installed.tag == latest?.tag;
     return Card(
       margin: const EdgeInsets.only(bottom: 16),
@@ -333,7 +343,7 @@ class _ComponentCard extends StatelessWidget {
                   ],
                 ),
                 FilledButton.tonalIcon(
-                  onPressed: model.busy || current
+                  onPressed: model.state.busy || current
                       ? null
                       : () => model.install(component),
                   icon: Icon(

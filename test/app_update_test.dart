@@ -11,7 +11,8 @@ import 'package:pob2_ui/data/managed_installation.dart';
 import 'package:pob2_ui/data/session_repository.dart';
 import 'package:pob2_ui/data/verified_download.dart';
 import 'package:pob2_ui/domain/app_release.dart';
-import 'package:pob2_ui/ui/app_update_model.dart';
+import 'package:pob2_ui/ui/app_update_cubit.dart';
+import 'package:pob2_ui/ui/app_update_state.dart';
 
 const digestAbc =
     'ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad';
@@ -188,21 +189,26 @@ void main() {
     final file = await File.fromUri(temporary.uri.resolve('update.run'))
         .writeAsString('abc');
     final installer = FakeInstaller();
-    final model = AppUpdateModel(root: temporary, installer: installer)
-      ..release = AppRelease(
-        version: AppVersion.parse('9.0.0'),
-        notes: '',
-        installer: AppAsset(
-          name: 'update.run',
-          url: Uri.https('github.com', '/test'),
-          size: 3,
-          sha256: digestAbc,
+    final model = AppUpdateCubit(
+      root: temporary,
+      installer: installer,
+      initialState: AppUpdateState(
+        release: AppRelease(
+          version: AppVersion.parse('9.0.0'),
+          notes: '',
+          installer: AppAsset(
+            name: 'update.run',
+            url: Uri.https('github.com', '/test'),
+            size: 3,
+            sha256: digestAbc,
+          ),
         ),
-      )
-      ..installation = ManagedInstallation(root: temporary, kind: 'linux-run')
-      ..package = file
-      ..phase = UpdatePhase.ready;
-    addTearDown(model.dispose);
+        installation: ManagedInstallation(root: temporary, kind: 'linux-run'),
+        package: file,
+        phase: UpdatePhase.ready,
+      ),
+    );
+    addTearDown(model.close);
     expect(
       await model.install(() async {
         throw StateError('Сохранение невозможно');
@@ -257,9 +263,9 @@ void main() {
   test(
     'Автоматическая загрузка выключена по умолчанию и сохраняется явно',
     () async {
-      final model = AppUpdateModel(root: temporary);
-      addTearDown(model.dispose);
-      expect(model.autoDownload, isFalse);
+      final model = AppUpdateCubit(root: temporary);
+      addTearDown(model.close);
+      expect(model.state.autoDownload, isFalse);
       await model.setAutoDownload(true);
       expect(jsonDecode(await model.preferences.readAsString()), {
         'autoDownload': true,
