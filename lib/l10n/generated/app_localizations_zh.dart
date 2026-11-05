@@ -232,6 +232,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get mac053cfb90 => '頭';
 
   @override
+  String get m13b0a5cc9a => '熱鍵';
+
+  @override
   String m450afec8d6(String p0) {
     return '完成的場景未完全載入：$p0';
   }
@@ -429,6 +432,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m6c50317db8 => '工作坊';
 
   @override
+  String get m7e5029786d => '比例 100%';
+
+  @override
   String get mbe517dba6c => '介面規模';
 
   @override
@@ -458,6 +464,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get mff86959fa1 => '圍兜';
 
   @override
+  String get m38509ab991 => '按 Ctrl、Alt 或 Cmd 組合鍵。 Esc - 取消。';
+
+  @override
   String get m0918b4ba92 => '標題';
 
   @override
@@ -482,12 +491,18 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m8823a786b9 => '配置組件';
 
   @override
+  String get m985b5e0f2c => '設定';
+
+  @override
   String m5ffb2fa414(String p0) {
     return '本機版本 MCP：HTTP $p0';
   }
 
   @override
   String get m28997f7565 => '未選擇';
+
+  @override
+  String get mf3120930ea => '未分配';
 
   @override
   String get m09823db229 => 'LOCALAPPDATA 未找到';
@@ -646,6 +661,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m282cf4ee16 => '新版本';
 
   @override
+  String get ma76e43569d => '新組合';
+
+  @override
   String get md72a4c2675 => '我們需要一個像0.2.0這樣的穩定版本';
 
   @override
@@ -736,6 +754,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m8fbe9b75cb => '取消';
+
+  @override
+  String get mb9b86803ad => '取消操作';
 
   @override
   String get m1731619efa => '設計';
@@ -839,6 +860,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m0f80007ec0 => '點 DPS';
 
   @override
+  String get mb4fd967719 => '拉動以更改面板寬度';
+
+  @override
   String get ma01259ad57 => '生命水蛭';
 
   @override
@@ -879,6 +903,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get mf969e13b83 => '尚無先前的完整組件對';
+
+  @override
+  String get mec5dbc31fc => '之前的結果 · 重新計算 Lua';
 
   @override
   String get mc0aa51ea34 => '先前的計算';
@@ -939,7 +966,13 @@ class AppLocalizationsZh extends AppLocalizations {
   String get mac0a2199d9 => '空';
 
   @override
+  String get m913b373c85 => '在應用程式視窗中工作。單擊組合即可更改它。';
+
+  @override
   String get m9aaa2d503d => '光半徑';
+
+  @override
+  String get mf66e719066 => '展開面板';
 
   @override
   String get m8c8ec94283 => '大小或 SHA-256 更新不匹配';
@@ -984,6 +1017,12 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m407f871778 => '重置';
+
+  @override
+  String get mde7b2b9b0d => '重置組合';
+
+  @override
+  String get m87b737d42c => '折疊面板';
 
   @override
   String get mf0cd3a6033 => '光';
@@ -1052,6 +1091,11 @@ class AppLocalizationsZh extends AppLocalizations {
   String get mb4d30cae52 => '保存';
 
   @override
+  String md7dfb40adb(String p0) {
+    return '組合已在使用：$p0';
+  }
+
+  @override
   String get mc4268e6843 => '平均命中';
 
   @override
@@ -1077,6 +1121,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m2ec842e2f5 => '重定向沒有位址';
+
+  @override
+  String get mcfa3d536f8 => '刪除組合';
 
   @override
   String get mcacf1f7fd0 => '放大介面';
@@ -1474,6 +1521,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get mac053cfb90 => '頭';
 
   @override
+  String get m13b0a5cc9a => '熱鍵';
+
+  @override
   String m450afec8d6(String p0) {
     return '完成的場景未完全載入：$p0';
   }
@@ -1671,6 +1721,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m6c50317db8 => '工作坊';
 
   @override
+  String get m7e5029786d => '比例 100%';
+
+  @override
   String get mbe517dba6c => '介面規模';
 
   @override
@@ -1700,6 +1753,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get mff86959fa1 => '圍兜';
 
   @override
+  String get m38509ab991 => '按 Ctrl、Alt 或 Cmd 組合鍵。 Esc - 取消。';
+
+  @override
   String get m0918b4ba92 => '標題';
 
   @override
@@ -1724,12 +1780,18 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m8823a786b9 => '配置組件';
 
   @override
+  String get m985b5e0f2c => '設定';
+
+  @override
   String m5ffb2fa414(String p0) {
     return '本機版本 MCP：HTTP $p0';
   }
 
   @override
   String get m28997f7565 => '未選擇';
+
+  @override
+  String get mf3120930ea => '未分配';
 
   @override
   String get m09823db229 => 'LOCALAPPDATA 未找到';
@@ -1888,6 +1950,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m282cf4ee16 => '新版本';
 
   @override
+  String get ma76e43569d => '新組合';
+
+  @override
   String get md72a4c2675 => '我們需要一個像0.2.0這樣的穩定版本';
 
   @override
@@ -1978,6 +2043,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m8fbe9b75cb => '取消';
+
+  @override
+  String get mb9b86803ad => '取消操作';
 
   @override
   String get m1731619efa => '設計';
@@ -2081,6 +2149,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m0f80007ec0 => '點 DPS';
 
   @override
+  String get mb4fd967719 => '拉動以更改面板寬度';
+
+  @override
   String get ma01259ad57 => '生命水蛭';
 
   @override
@@ -2121,6 +2192,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get mf969e13b83 => '尚無先前的完整組件對';
+
+  @override
+  String get mec5dbc31fc => '之前的結果 · 重新計算 Lua';
 
   @override
   String get mc0aa51ea34 => '先前的計算';
@@ -2181,7 +2255,13 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get mac0a2199d9 => '空';
 
   @override
+  String get m913b373c85 => '在應用程式視窗中工作。單擊組合即可更改它。';
+
+  @override
   String get m9aaa2d503d => '光半徑';
+
+  @override
+  String get mf66e719066 => '展開面板';
 
   @override
   String get m8c8ec94283 => '大小或 SHA-256 更新不匹配';
@@ -2226,6 +2306,12 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m407f871778 => '重置';
+
+  @override
+  String get mde7b2b9b0d => '重置組合';
+
+  @override
+  String get m87b737d42c => '折疊面板';
 
   @override
   String get mf0cd3a6033 => '光';
@@ -2294,6 +2380,11 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get mb4d30cae52 => '保存';
 
   @override
+  String md7dfb40adb(String p0) {
+    return '組合已在使用：$p0';
+  }
+
+  @override
   String get mc4268e6843 => '平均命中';
 
   @override
@@ -2319,6 +2410,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m2ec842e2f5 => '重定向沒有位址';
+
+  @override
+  String get mcfa3d536f8 => '刪除組合';
 
   @override
   String get mcacf1f7fd0 => '放大介面';

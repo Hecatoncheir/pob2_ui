@@ -30,6 +30,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     root: Directory.fromUri(components.store.root.uri.resolve('tree-cache/')),
   );
   String? _nextTitle;
+  final List<({String xml, String title})> _undoHistory = [];
 
   bool get ready => components.active.length == Component.values.length;
   String get _componentSource =>
@@ -208,6 +209,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     await _loadXml(xml);
     _beginDocument('Импортированная сборка');
     await _readReport();
+    _clearUndo();
   });
 
   Future<void> createBuild(
@@ -224,6 +226,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     await _restoreTreeMode();
     _beginDocument(name);
     await _readReport();
+    _clearUndo();
   });
 
   Future<void> refreshReport() => _run(() async {
@@ -333,6 +336,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
       ),
     );
     await _readReport();
+    _clearUndo();
   });
 
   Future<void> copyBuild() => _run(() async {
@@ -349,17 +353,22 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     );
     _nextTitle = null;
     _update(state.copyWith(library: builds));
+    _clearUndo();
   });
 
   Future<void> renameBuild(String title) => _run(() async {
     if (state.report == null || title.trim().isEmpty) return;
+    final previousTitle = state.library.active?.title ?? state.report!.name;
+    if (previousTitle == title.trim()) return;
+    final xml = await _currentXml();
     final builds = await library.save(
       state.library,
       state.report!,
-      await _currentXml(),
+      xml,
       title: title.trim(),
     );
     _update(state.copyWith(library: builds));
+    _pushUndo(xml, title: previousTitle);
   });
 
   Future<bool> isAttributeNode(int id) async {
@@ -377,14 +386,12 @@ class WorkshopCubit extends Cubit<WorkshopState> {
   }
 
   Future<void> treeAction(int id, bool allocated, {int? attribute}) =>
-      _run(() async {
-        _markStale();
+      _changeBuild(() async {
         await engine.call('pob_tree_action', {
           'id': id,
           'action': allocated && attribute == null ? 'refund' : 'allocate',
           if (attribute != null) 'attribute': attribute,
         });
-        await _readReport();
       });
 
   Future<void> selectTreeMode(TreeAllocationMode mode) => _run(() async {
@@ -406,18 +413,62 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     await _restoreTreeMode();
   }
 
-  Future<void> selectMain(String control, int id) => _run(() async {
-    _markStale();
+  Future<void> selectMain(String control, int id) => _changeBuild(() async {
     await engine.call('pob_select_main_skill', {'control': control, 'id': id});
+  });
+
+  Future<void> setCondition(String key, dynamic value) =>
+      _changeBuild(() async {
+        await engine.call('pob_set_config', {
+          'values': {key: value},
+        });
+      });
+
+  Future<void> _changeBuild(Future<void> Function() action) => _run(() async {
+    final before = await _currentXml();
+    _markStale();
+    await action();
+    await _rememberUndo(before);
     await _readReport();
   });
 
-  Future<void> setCondition(String key, dynamic value) => _run(() async {
+  Future<void> _rememberUndo(String before) async {
+    try {
+      if (await _currentXml() == before) return;
+    } catch (_) {
+      _pushUndo(before);
+      rethrow;
+    }
+    _pushUndo(before);
+  }
+
+  void _pushUndo(String xml, {String? title}) {
+    _undoHistory.add((
+      xml: xml,
+      title: title ?? state.library.active?.title ?? state.report!.name,
+    ));
+    if (_undoHistory.length > 50) _undoHistory.removeAt(0);
+    _update(state.copyWith(undoCount: _undoHistory.length));
+  }
+
+  void _clearUndo() {
+    _undoHistory.clear();
+    _update(state.copyWith(undoCount: 0));
+  }
+
+  Future<void> undo() => _run(() async {
+    if (_undoHistory.isEmpty) return;
     _markStale();
-    await engine.call('pob_set_config', {
-      'values': {key: value},
-    });
-    await _readReport();
+    final snapshot = _undoHistory.last;
+    await _loadXml(snapshot.xml);
+    _nextTitle = snapshot.title;
+    try {
+      await _readReport();
+    } finally {
+      _nextTitle = null;
+    }
+    _undoHistory.removeLast();
+    _update(state.copyWith(undoCount: _undoHistory.length));
   });
 
   Future<String> _currentXml() async =>
@@ -437,6 +488,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
   Future<void> _disconnect() async {
     await engine.close();
     _update(state.copyWith(classes: [], clearReport: true));
+    _clearUndo();
   }
 
   void editDraft(String value) =>

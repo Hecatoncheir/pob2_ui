@@ -16,6 +16,7 @@ class PowerEngine extends McpClient {
   Completer<JsonMap>? delayedPoll;
   Completer<JsonMap>? delayedCancel;
   int nextJob = 0;
+  late JsonMap result = _report();
   @override
   Future<JsonMap> call(String name, [JsonMap arguments = const {}]) async {
     requests.add(arguments);
@@ -28,7 +29,7 @@ class PowerEngine extends McpClient {
       },
       'start' => {'job': ++nextJob},
       'cancel' => delayedCancel?.future ?? Future.value({'cancelled': true}),
-      'poll' => delayedPoll?.future ?? Future.value(_report()),
+      'poll' => delayedPoll?.future ?? Future.value(result),
       _ => throw StateError('Неизвестное действие'),
     };
   }
@@ -58,6 +59,40 @@ JsonMap _report() => {
 };
 
 void main() {
+  test('Назначение убирает только выбранный узел; остальные строки остаются до нового отчёта Lua', () async {
+    final engine = PowerEngine();
+    engine.result['entries'] = [
+      ...jsonRows(engine.result['entries']),
+      {
+        ...jsonRows(engine.result['entries']).first,
+        'id': 2,
+        'name': 'Другой узел',
+      },
+    ];
+    final model = NodePowerCubit(engine, (_) async => {});
+    addTearDown(model.close);
+    await model.load();
+    await model.calculate();
+    await model.cancel(preserveReport: true);
+    expect(model.state.report!.entries.length, 2);
+    expect(model.state.stale, isTrue);
+    engine.delayedPoll = Completer<JsonMap>();
+    final pending = model.refresh({1});
+    while (engine.requests.where((r) => r['action'] == 'poll').length < 2) {
+      await Future<void>.delayed(Duration.zero);
+    }
+    expect(model.state.report!.entries.single['id'], 2);
+    expect(model.state.progress, isNotNull);
+    engine.delayedPoll!.complete({
+      ..._report(),
+      'entries': [
+        {...jsonRows(_report()['entries']).first, 'id': 2, 'powerStr': '24'},
+      ],
+    });
+    await pending;
+    expect(model.state.stale, isFalse);
+    expect(model.state.report!.entries.single['powerStr'], '24');
+  });
   test(
     'Расстояние и фильтр передаются Lua; устаревший ответ игнорируется',
     () async {

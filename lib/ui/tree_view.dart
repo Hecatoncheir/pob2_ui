@@ -61,9 +61,11 @@ class _TreeViewState extends State<TreeView>
   late final hoverModel = TreeHoverCubit(widget.model.previewNode);
   Offset mouse = Offset.zero;
   int previewGeneration = 0;
+  final editorFocus = FocusNode(debugLabel: 'Passive tree');
   bool powerVisible = false;
   int powerGeneration = 0;
   LoadedTreeArtwork? powerArtwork;
+  String? powerBuildId;
   late final powerModel = NodePowerCubit(
     widget.model.engine,
     widget.model.loadTreeSceneImages,
@@ -71,6 +73,7 @@ class _TreeViewState extends State<TreeView>
   @override
   void initState() {
     super.initState();
+    powerBuildId = widget.model.state.library.activeId;
     _loadIcons();
   }
 
@@ -78,7 +81,7 @@ class _TreeViewState extends State<TreeView>
   void didUpdateWidget(TreeView old) {
     super.didUpdateWidget(old);
     if (old.tree == widget.tree) return;
-    powerModel.cancel();
+    WidgetsBinding.instance.addPostFrameCallback((_) => _refreshPower());
     scene = TreeScene(widget.tree);
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (mounted) hoverModel.clear();
@@ -94,6 +97,24 @@ class _TreeViewState extends State<TreeView>
       _recordArtwork();
     else
       _loadIcons();
+  }
+
+  void _refreshPower() {
+    if (!mounted) return;
+    final nextBuild = widget.model.state.library.activeId;
+    if (powerBuildId != nextBuild) {
+      powerBuildId = nextBuild;
+      powerModel.cancel();
+      return;
+    }
+    if (powerVisible) {
+      powerModel.refresh(
+        widget.tree.nodes
+            .where((node) => node.allocated)
+            .map((node) => node.id)
+            .toSet(),
+      );
+    }
   }
 
   void _scheduleFocus() => WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -162,6 +183,7 @@ class _TreeViewState extends State<TreeView>
 
   @override
   void dispose() {
+    editorFocus.dispose();
     powerGeneration++;
     powerModel.close();
     powerArtwork?.dispose();
@@ -186,11 +208,13 @@ class _TreeViewState extends State<TreeView>
         listenWhen: (before, after) =>
             before.document?.stale != after.document?.stale,
         listener: (context, state) {
-          if (state.document?.stale == true) powerModel.cancel();
+          if (state.document?.stale == true)
+            powerModel.cancel(preserveReport: true);
         },
         child: BlocListener<NodePowerCubit, NodePowerState>(
           bloc: powerModel,
-          listenWhen: (before, after) => before.report != after.report,
+          listenWhen: (before, after) =>
+              before.report != after.report || before.stale != after.stale,
           listener: _powerChanged,
           child: BlocListener<TreeHoverCubit, TreeHoverState>(
             bloc: hoverModel,
@@ -198,7 +222,7 @@ class _TreeViewState extends State<TreeView>
             child: OverlayPortal(
               controller: tooltipPortal,
               overlayChildBuilder: _tooltip,
-              child: _body(),
+              child: Focus(focusNode: editorFocus, child: _body()),
             ),
           ),
         ),
@@ -254,6 +278,7 @@ class _TreeViewState extends State<TreeView>
                         key: const Key('passive-tree'),
                         transformationController: transform,
                         onInteractionStart: (_) {
+                          editorFocus.requestFocus();
                           zoomAnimation.stop();
                           hoverModel.clear();
                         },
@@ -361,6 +386,7 @@ class _TreeViewState extends State<TreeView>
   }
 
   void _focusPowerNode(int id) {
+    editorFocus.requestFocus();
     final point = scene.points[id];
     if (point == null || viewport == null) return;
     setState(() => selected = id);
@@ -374,7 +400,8 @@ class _TreeViewState extends State<TreeView>
       powerArtwork?.dispose();
       powerArtwork = null;
     });
-    if (state.report case final report?) _loadPowerArtwork(report, generation);
+    if (!state.stale && state.report != null)
+      _loadPowerArtwork(state.report!, generation);
   }
 
   Future<void> _loadPowerArtwork(NodePowerReport report, int generation) async {
@@ -507,6 +534,7 @@ class _TreeViewState extends State<TreeView>
   }
 
   Future<void> _selectNode(TreeNode node) async {
+    editorFocus.requestFocus();
     try {
       final attribute =
           node.isAttribute ?? await widget.model.isAttributeNode(node.id);

@@ -1,5 +1,6 @@
 import 'core/app_text.dart';
 import 'core/language_scope.dart';
+import 'core/ui_translation.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -115,6 +116,14 @@ class _WorkspaceHeading extends StatelessWidget {
               ),
             ),
             const SizedBox(width: 8),
+            IconButton(
+              key: const Key('undo-build'),
+              tooltip: translateUi(context, 'Отменить действие'),
+              onPressed: model.state.busy || model.state.undoCount == 0
+                  ? null
+                  : model.undo,
+              icon: const Icon(Icons.undo_rounded, size: 20),
+            ),
             ArtIconButton(
               'upload',
               label: 'Открыть XML',

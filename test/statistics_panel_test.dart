@@ -65,7 +65,7 @@ void main() {
         );
         await tester.pumpAndSettle();
         expect(tester.getRect(header), before);
-        final group = find.byKey(const ValueKey('stat-group-Урон'));
+        final group = find.byKey(const PageStorageKey('stat-group-Урон'));
         await Scrollable.ensureVisible(tester.element(group), alignment: .25);
         await tester.pumpAndSettle();
         await tester.tap(group);
@@ -77,6 +77,18 @@ void main() {
         );
         expect(tile.clipBehavior, Clip.antiAlias);
         expect(find.text('Средний урон'), findsOneWidget);
+        for (final title in ['Сопротивления', 'Характеристики']) {
+          final target = await _scrollToGroup(tester, title);
+          await tester.tap(target);
+          await tester.pumpAndSettle();
+        }
+        tester
+            .state<ScrollableState>(find.byType(Scrollable).first)
+            .position
+            .jumpTo(0);
+        await tester.pumpAndSettle();
+        await _scrollToGroup(tester, 'Характеристики');
+        expect(find.text('Ловкость'), findsOneWidget);
         expect(tester.getRect(header), before);
         expect(tester.takeException(), isNull);
         await tester.pumpWidget(const SizedBox.shrink());
@@ -85,4 +97,16 @@ void main() {
       },
     );
   }
+}
+
+Future<Finder> _scrollToGroup(WidgetTester tester, String title) async {
+  final target = find.byKey(PageStorageKey('stat-group-$title'));
+  await tester.scrollUntilVisible(
+    target,
+    150,
+    scrollable: find.byType(Scrollable).first,
+  );
+  await Scrollable.ensureVisible(tester.element(target), alignment: .25);
+  await tester.pumpAndSettle();
+  return target;
 }

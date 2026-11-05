@@ -2,7 +2,6 @@ import 'core/dialog_close_button.dart';
 import 'core/app_text.dart';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../domain/app_info.dart';
@@ -35,6 +34,13 @@ import 'interface_scale_cubit.dart';
 import 'interface_scale_picker.dart';
 import 'interface_viewport.dart';
 import 'core/scrollable_workspace.dart';
+import '../data/workspace_preferences_repository.dart';
+import '../domain/workspace_preferences.dart';
+import 'workspace_preferences_cubit.dart';
+import 'keyboard_bindings.dart';
+import 'shortcut_settings.dart';
+import 'resizable_sidebar.dart';
+import 'core/ui_translation.dart';
 
 class PobApp extends StatelessWidget {
   const PobApp({
@@ -44,16 +50,26 @@ class PobApp extends StatelessWidget {
     this.appearance,
     this.language,
     this.interfaceScale,
+    this.workspacePreferences,
   });
   final WorkshopCubit model;
   final AppUpdateCubit? updates;
   final AppearanceCubit? appearance;
   final LanguageCubit? language;
   final InterfaceScaleCubit? interfaceScale;
+  final WorkspacePreferencesCubit? workspacePreferences;
   @override
   Widget build(BuildContext context) => MultiBlocProvider(
     providers: [
       BlocProvider(create: (_) => ShellCubit()),
+      if (workspacePreferences case final preferences?)
+        BlocProvider<WorkspacePreferencesCubit>.value(value: preferences)
+      else
+        BlocProvider(
+          create: (_) => WorkspacePreferencesCubit(
+            WorkspacePreferencesRepository(model.components.store.root),
+          ),
+        ),
       if (interfaceScale case final settings?)
         BlocProvider<InterfaceScaleCubit>.value(value: settings)
       else
@@ -84,10 +100,16 @@ class PobApp extends StatelessWidget {
   );
 }
 
-class _MaterialApp extends StatelessWidget {
+class _MaterialApp extends StatefulWidget {
   const _MaterialApp(this.model, this.updates);
   final WorkshopCubit model;
   final AppUpdateCubit? updates;
+  @override
+  State<_MaterialApp> createState() => _MaterialAppState();
+}
+
+class _MaterialAppState extends State<_MaterialApp> {
+  final navigator = GlobalKey<NavigatorState>();
   @override
   Widget build(BuildContext context) =>
       BlocBuilder<LanguageCubit, LanguageState>(
@@ -106,6 +128,7 @@ class _MaterialApp extends StatelessWidget {
     LanguageState language,
   ) => BlocBuilder<ShellCubit, ShellState>(
     builder: (context, state) => MaterialApp(
+      navigatorKey: navigator,
       title: 'PoB II · Мастерская',
       locale: languageLocale(language.language),
       localizationsDelegates: AppLocalizations.localizationsDelegates,
@@ -116,9 +139,13 @@ class _MaterialApp extends StatelessWidget {
       themeMode: appearance.theme == AppTheme.dark
           ? ThemeMode.dark
           : ThemeMode.light,
-      builder: (context, child) =>
-          InterfaceViewport(child: child!, motion: state.motion),
-      home: _Shell(model, updates),
+      builder: (context, child) => _KeyboardActions(
+        model: widget.model,
+        shell: context.read<ShellCubit>(),
+        navigator: navigator,
+        child: InterfaceViewport(child: child!, motion: state.motion),
+      ),
+      home: _Shell(widget.model, widget.updates),
     ),
   );
 }
@@ -135,49 +162,45 @@ class _Shell extends StatelessWidget {
           builder: (context, state) {
             final shell = context.read<ShellCubit>();
             final narrow = MediaQuery.sizeOf(context).width < 650;
-            return _KeyboardActions(
-              model: model,
-              shell: shell,
-              child: Scaffold(
-                body: SafeArea(
-                  child: ScrollableWorkspace(
-                    child: Row(
-                      children: [
-                        if (!narrow) _Sidebar(model, updates),
-                        Expanded(
-                          child: Column(
-                            children: [
-                              if (narrow) _CompactActions(model, updates),
-                              if (model.state.busy)
-                                LinearProgressIndicator(
-                                  minHeight: 2,
-                                  color: Spark.of(context).green,
-                                  backgroundColor: Spark.of(context).sage,
-                                ),
-                              if (model.state.error != null)
-                                _ErrorNotice(model.state.error!),
-                              Expanded(
-                                child: ClipRect(
-                                  child: SoftSwitch(
-                                    child: KeyedSubtree(
-                                      key: ValueKey(state.page),
-                                      child: _page(state.page, model, shell),
-                                    ),
+            return Scaffold(
+              body: SafeArea(
+                child: ScrollableWorkspace(
+                  child: Row(
+                    children: [
+                      if (!narrow) _Sidebar(model, updates),
+                      Expanded(
+                        child: Column(
+                          children: [
+                            if (narrow) _CompactActions(model, updates),
+                            if (model.state.busy)
+                              LinearProgressIndicator(
+                                minHeight: 2,
+                                color: Spark.of(context).green,
+                                backgroundColor: Spark.of(context).sage,
+                              ),
+                            if (model.state.error != null)
+                              _ErrorNotice(model.state.error!),
+                            Expanded(
+                              child: ClipRect(
+                                child: SoftSwitch(
+                                  child: KeyedSubtree(
+                                    key: ValueKey(state.page),
+                                    child: _page(state.page, model, shell),
                                   ),
                                 ),
                               ),
-                              _StatusBar(model),
-                            ],
-                          ),
+                            ),
+                            _StatusBar(model),
+                          ],
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
-                bottomNavigationBar: narrow
-                    ? _BottomNav(state.page, shell)
-                    : null,
               ),
+              bottomNavigationBar: narrow
+                  ? _BottomNav(state.page, shell)
+                  : null,
             );
           },
         ),
@@ -195,28 +218,33 @@ class _KeyboardActions extends StatelessWidget {
     required this.model,
     required this.shell,
     required this.child,
+    required this.navigator,
   });
   final WorkshopCubit model;
   final ShellCubit shell;
   final Widget child;
+  final GlobalKey<NavigatorState> navigator;
   @override
-  Widget build(BuildContext context) => CallbackShortcuts(
-    bindings: {
-      const SingleActivator(LogicalKeyboardKey.keyN, control: true): () =>
-          _new(context, model, shell),
-      const SingleActivator(LogicalKeyboardKey.keyO, control: true): () =>
-          _import(context),
-      const SingleActivator(LogicalKeyboardKey.keyS, control: true): () =>
-          _export(context),
-      const SingleActivator(LogicalKeyboardKey.keyN, meta: true): () =>
-          _new(context, model, shell),
-      const SingleActivator(LogicalKeyboardKey.keyO, meta: true): () =>
-          _import(context),
-      const SingleActivator(LogicalKeyboardKey.keyS, meta: true): () =>
-          _export(context),
-    },
-    child: child,
-  );
+  Widget build(BuildContext context) =>
+      BlocBuilder<WorkspacePreferencesCubit, WorkspacePreferencesState>(
+        builder: (context, state) => CallbackShortcuts(
+          bindings: commandCallbacks(state.preferences, {
+            AppCommand.newBuild: () =>
+                _new(_dialogContext(context), model, shell),
+            AppCommand.importXml: () => _import(_dialogContext(context)),
+            AppCommand.exportXml: () => _export(_dialogContext(context)),
+            AppCommand.undo: _undo,
+          }),
+          child: child,
+        ),
+      );
+  BuildContext _dialogContext(BuildContext fallback) =>
+      navigator.currentState?.overlay?.context ?? fallback;
+  void _undo() {
+    if (navigator.currentState?.canPop() == true) return;
+    model.undo();
+  }
+
   void _import(BuildContext context) {
     if (model.engine.connected && !model.state.busy)
       showXmlImport(context, model);
@@ -244,43 +272,69 @@ class _Sidebar extends StatelessWidget {
   final AppUpdateCubit? updates;
   @override
   Widget build(BuildContext context) {
-    final compact = MediaQuery.sizeOf(context).width < 1250;
     final shell = context.read<ShellCubit>();
-    return Container(
-      width: compact ? 78 : 198,
-      decoration: BoxDecoration(
-        border: Border(right: BorderSide(color: Spark.of(context).line)),
-      ),
-      padding: EdgeInsets.symmetric(horizontal: compact ? 12 : 18),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          SizedBox(
-            height: 88,
-            child: Center(
-              child: compact
-                  ? const SparkArt(
-                      'brand/badge',
-                      width: 30,
-                      height: 32,
-                      label: 'PoB II',
-                    )
-                  : const SparkArt(
-                      'brand/wordmark',
-                      width: 110,
-                      height: 40,
-                      label: 'PoB II',
+    return ResizableSidebar(
+      builder: (compact, adjustable) => Container(
+        padding: EdgeInsets.symmetric(horizontal: compact ? 12 : 18),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            SizedBox(
+              height: 88,
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Center(
+                      child: compact
+                          ? const SparkArt(
+                              'brand/badge',
+                              width: 30,
+                              height: 32,
+                              label: 'PoB II',
+                            )
+                          : const SparkArt(
+                              'brand/wordmark',
+                              width: 110,
+                              height: 40,
+                              label: 'PoB II',
+                            ),
                     ),
+                  ),
+                  if (adjustable)
+                    SizedBox(
+                      width: 22,
+                      child: IconButton(
+                        key: const Key('sidebar-toggle'),
+                        padding: EdgeInsets.zero,
+                        constraints: const BoxConstraints(
+                          minWidth: 20,
+                          minHeight: 28,
+                        ),
+                        tooltip: translateUi(
+                          context,
+                          compact ? 'Развернуть панель' : 'Свернуть панель',
+                        ),
+                        onPressed: context
+                            .read<WorkspacePreferencesCubit>()
+                            .toggleSidebar,
+                        icon: Icon(
+                          compact ? Icons.chevron_right : Icons.chevron_left,
+                          size: 18,
+                        ),
+                      ),
+                    ),
+                ],
+              ),
             ),
-          ),
-          _NewButton(model: model, shell: shell, compact: compact),
-          const SizedBox(height: 24),
-          ...AppPage.values.map((page) => _NavItem(page, compact: compact)),
-          if (!compact) _Recents(model, shell),
-          const Spacer(),
-          _SidebarTools(model, updates, compact: compact),
-          const SizedBox(height: 18),
-        ],
+            _NewButton(model: model, shell: shell, compact: compact),
+            const SizedBox(height: 24),
+            ...AppPage.values.map((page) => _NavItem(page, compact: compact)),
+            if (!compact) _Recents(model, shell),
+            const Spacer(),
+            _SidebarTools(model, updates, compact: compact),
+            const SizedBox(height: 18),
+          ],
+        ),
       ),
     );
   }
@@ -317,8 +371,13 @@ class _SidebarTools extends StatelessWidget {
           const Divider(),
           const SizedBox(height: 4),
         ],
-        _SettingsButton(compact: compact),
-        if (updates != null) _VersionButton(updates!, model, compact: compact),
+        if (compact)
+          const Align(child: _SettingsButton(compact: true))
+        else
+          const _SettingsButton(compact: false),
+        if (compact) const SizedBox(height: 6),
+        if (updates != null)
+          Align(child: _VersionButton(updates!, model, compact: compact)),
       ],
     ),
   );
@@ -549,9 +608,7 @@ class _VersionButton extends StatelessWidget {
         bloc: updates,
         builder: (context, state) => TextButton(
           onPressed: () => showAppUpdates(context, updates, model),
-          style: TextButton.styleFrom(
-            padding: const EdgeInsets.symmetric(horizontal: 8),
-          ),
+          style: _sidebarToolStyle(context, compact),
           child: compact
               ? SparkArt(
                   'icons/${state.available ? 'download' : 'info'}',
@@ -629,23 +686,22 @@ class _SettingsButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) => TextButton(
     key: const Key('appearance-settings'),
-    style: TextButton.styleFrom(
-      padding: EdgeInsets.symmetric(horizontal: compact ? 0 : 8),
-    ),
+    style: _sidebarToolStyle(context, compact),
     onPressed: () => _show(context),
     child: Row(
+      mainAxisSize: compact ? MainAxisSize.min : MainAxisSize.max,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         SparkArt(
           'icons/settings',
           width: 18,
-          label: compact ? 'Оформление' : null,
+          label: compact ? 'Настройки' : null,
         ),
         if (!compact) ...[
           const SizedBox(width: 8),
           const Flexible(
             child: AppText(
-              'Оформление',
+              'Настройки',
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: TextStyle(fontSize: 11),
@@ -660,9 +716,9 @@ class _SettingsButton extends StatelessWidget {
     sparkDialog<void>(
       context,
       AlertDialog(
-        title: const AppText('Оформление'),
+        title: const AppText('Настройки'),
         content: SizedBox(
-          width: 380,
+          width: 620,
           child: BlocBuilder<ShellCubit, ShellState>(
             bloc: shell,
             builder: (context, state) => SingleChildScrollView(
@@ -674,6 +730,8 @@ class _SettingsButton extends StatelessWidget {
                   const LanguagePicker(),
                   const SizedBox(height: 20),
                   const InterfaceScalePicker(),
+                  const SizedBox(height: 20),
+                  const ShortcutSettings(),
                   const SizedBox(height: 20),
                   SwitchListTile(
                     contentPadding: EdgeInsets.zero,
@@ -693,4 +751,21 @@ class _SettingsButton extends StatelessWidget {
       ),
     );
   }
+}
+
+ButtonStyle _sidebarToolStyle(BuildContext context, bool compact) {
+  if (!compact) {
+    return TextButton.styleFrom(
+      padding: const EdgeInsets.symmetric(horizontal: 8),
+    );
+  }
+  return TextButton.styleFrom(
+    padding: EdgeInsets.zero,
+    fixedSize: const Size(36, 36),
+    minimumSize: const Size(36, 36),
+    tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+    backgroundColor: Theme.of(context).colorScheme.primary
+        .withValues(alpha: .12),
+    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+  );
 }

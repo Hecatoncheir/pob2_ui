@@ -235,6 +235,9 @@ class AppLocalizationsPt extends AppLocalizations {
   String get mac053cfb90 => 'Cabeça';
 
   @override
+  String get m13b0a5cc9a => 'Teclas de atalho';
+
+  @override
   String m450afec8d6(String p0) {
     return 'A cena finalizada não está totalmente carregada: $p0';
   }
@@ -438,6 +441,9 @@ class AppLocalizationsPt extends AppLocalizations {
   String get m6c50317db8 => 'Oficina';
 
   @override
+  String get m7e5029786d => 'Escala 100%';
+
+  @override
   String get mbe517dba6c => 'Escala de interface';
 
   @override
@@ -467,6 +473,10 @@ class AppLocalizationsPt extends AppLocalizations {
   String get mff86959fa1 => 'Babador';
 
   @override
+  String get m38509ab991 =>
+      'Pressione a combinação com Ctrl, Alt ou Cmd. Esc - cancelar.';
+
+  @override
   String get m0918b4ba92 => 'Título';
 
   @override
@@ -491,12 +501,18 @@ class AppLocalizationsPt extends AppLocalizations {
   String get m8823a786b9 => 'Configurar componentes';
 
   @override
+  String get m985b5e0f2c => 'Configurações';
+
+  @override
   String m5ffb2fa414(String p0) {
     return 'Versão nativa MCP: HTTP $p0';
   }
 
   @override
   String get m28997f7565 => 'Não selecionado';
+
+  @override
+  String get mf3120930ea => 'Não atribuído';
 
   @override
   String get m09823db229 => 'LOCALAPPDATA não encontrado';
@@ -659,6 +675,9 @@ class AppLocalizationsPt extends AppLocalizations {
   String get m282cf4ee16 => 'Nova compilação';
 
   @override
+  String get ma76e43569d => 'Nova combinação';
+
+  @override
   String get md72a4c2675 => 'Precisamos de uma versão estável como 0.2.0';
 
   @override
@@ -753,6 +772,9 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get m8fbe9b75cb => 'Cancelar';
+
+  @override
+  String get mb9b86803ad => 'Cancelar ação';
 
   @override
   String get m1731619efa => 'Projeto';
@@ -856,6 +878,9 @@ class AppLocalizationsPt extends AppLocalizations {
   String get m0f80007ec0 => 'Ponto DPS';
 
   @override
+  String get mb4fd967719 => 'Puxe para alterar a largura do painel';
+
+  @override
   String get ma01259ad57 => 'Sanguessuga de vida';
 
   @override
@@ -898,6 +923,9 @@ class AppLocalizationsPt extends AppLocalizations {
   @override
   String get mf969e13b83 =>
       'Ainda não existe um par completo de componentes anterior';
+
+  @override
+  String get mec5dbc31fc => 'Resultados anteriores · recálculo Lua';
 
   @override
   String get mc0aa51ea34 => 'Cálculo anterior';
@@ -960,7 +988,14 @@ class AppLocalizationsPt extends AppLocalizations {
   String get mac0a2199d9 => 'Vazio';
 
   @override
+  String get m913b373c85 =>
+      'Trabalhe na janela do aplicativo. Clique em uma combinação para alterá-la.';
+
+  @override
   String get m9aaa2d503d => 'Raio de luz';
+
+  @override
+  String get mf66e719066 => 'Expandir painel';
 
   @override
   String get m8c8ec94283 => 'Tamanho ou atualização SHA-256 não corresponde';
@@ -1005,6 +1040,12 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get m407f871778 => 'Redefinir';
+
+  @override
+  String get mde7b2b9b0d => 'Redefinir combinações';
+
+  @override
+  String get m87b737d42c => 'Recolher painel';
 
   @override
   String get mf0cd3a6033 => 'Luz';
@@ -1075,6 +1116,11 @@ class AppLocalizationsPt extends AppLocalizations {
   String get mb4d30cae52 => 'Salvar';
 
   @override
+  String md7dfb40adb(String p0) {
+    return 'Combinação já em uso: $p0';
+  }
+
+  @override
   String get mc4268e6843 => 'Acerto médio';
 
   @override
@@ -1100,6 +1146,9 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get m2ec842e2f5 => 'Redirecionamento não tem endereço';
+
+  @override
+  String get mcfa3d536f8 => 'Remover combinação';
 
   @override
   String get mcacf1f7fd0 => 'Ampliar interface';
@@ -1505,6 +1554,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get mac053cfb90 => 'Cabeça';
 
   @override
+  String get m13b0a5cc9a => 'Teclas de atalho';
+
+  @override
   String m450afec8d6(String p0) {
     return 'A cena finalizada não está totalmente carregada: $p0';
   }
@@ -1708,6 +1760,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get m6c50317db8 => 'Oficina';
 
   @override
+  String get m7e5029786d => 'Escala 100%';
+
+  @override
   String get mbe517dba6c => 'Escala de interface';
 
   @override
@@ -1737,6 +1792,10 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get mff86959fa1 => 'Babador';
 
   @override
+  String get m38509ab991 =>
+      'Pressione a combinação com Ctrl, Alt ou Cmd. Esc - cancelar.';
+
+  @override
   String get m0918b4ba92 => 'Título';
 
   @override
@@ -1761,12 +1820,18 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get m8823a786b9 => 'Configurar componentes';
 
   @override
+  String get m985b5e0f2c => 'Configurações';
+
+  @override
   String m5ffb2fa414(String p0) {
     return 'Versão nativa MCP: HTTP $p0';
   }
 
   @override
   String get m28997f7565 => 'Não selecionado';
+
+  @override
+  String get mf3120930ea => 'Não atribuído';
 
   @override
   String get m09823db229 => 'LOCALAPPDATA não encontrado';
@@ -1929,6 +1994,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get m282cf4ee16 => 'Nova compilação';
 
   @override
+  String get ma76e43569d => 'Nova combinação';
+
+  @override
   String get md72a4c2675 => 'Precisamos de uma versão estável como 0.2.0';
 
   @override
@@ -2023,6 +2091,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get m8fbe9b75cb => 'Cancelar';
+
+  @override
+  String get mb9b86803ad => 'Cancelar ação';
 
   @override
   String get m1731619efa => 'Projeto';
@@ -2126,6 +2197,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get m0f80007ec0 => 'Ponto DPS';
 
   @override
+  String get mb4fd967719 => 'Puxe para alterar a largura do painel';
+
+  @override
   String get ma01259ad57 => 'Sanguessuga de vida';
 
   @override
@@ -2168,6 +2242,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   @override
   String get mf969e13b83 =>
       'Ainda não existe um par completo de componentes anterior';
+
+  @override
+  String get mec5dbc31fc => 'Resultados anteriores · recálculo Lua';
 
   @override
   String get mc0aa51ea34 => 'Cálculo anterior';
@@ -2230,7 +2307,14 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get mac0a2199d9 => 'Vazio';
 
   @override
+  String get m913b373c85 =>
+      'Trabalhe na janela do aplicativo. Clique em uma combinação para alterá-la.';
+
+  @override
   String get m9aaa2d503d => 'Raio de luz';
+
+  @override
+  String get mf66e719066 => 'Expandir painel';
 
   @override
   String get m8c8ec94283 => 'Tamanho ou atualização SHA-256 não corresponde';
@@ -2275,6 +2359,12 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get m407f871778 => 'Redefinir';
+
+  @override
+  String get mde7b2b9b0d => 'Redefinir combinações';
+
+  @override
+  String get m87b737d42c => 'Recolher painel';
 
   @override
   String get mf0cd3a6033 => 'Luz';
@@ -2345,6 +2435,11 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get mb4d30cae52 => 'Salvar';
 
   @override
+  String md7dfb40adb(String p0) {
+    return 'Combinação já em uso: $p0';
+  }
+
+  @override
   String get mc4268e6843 => 'Acerto médio';
 
   @override
@@ -2370,6 +2465,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get m2ec842e2f5 => 'Redirecionamento não tem endereço';
+
+  @override
+  String get mcfa3d536f8 => 'Remover combinação';
 
   @override
   String get mcacf1f7fd0 => 'Ampliar interface';

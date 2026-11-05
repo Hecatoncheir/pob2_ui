@@ -518,6 +518,12 @@ abstract class AppLocalizations {
   /// **'Head'**
   String get mac053cfb90;
 
+  /// Горячие клавиши
+  ///
+  /// In en, this message translates to:
+  /// **'Hotkeys'**
+  String get m13b0a5cc9a;
+
   /// Готовая сцена загружена не полностью: {p0}
   ///
   /// In en, this message translates to:
@@ -872,6 +878,12 @@ abstract class AppLocalizations {
   /// **'Workshop'**
   String get m6c50317db8;
 
+  /// Масштаб 100%
+  ///
+  /// In en, this message translates to:
+  /// **'Scale 100%'**
+  String get m7e5029786d;
+
   /// Масштаб интерфейса
   ///
   /// In en, this message translates to:
@@ -926,6 +938,12 @@ abstract class AppLocalizations {
   /// **'Bib'**
   String get mff86959fa1;
 
+  /// Нажмите сочетание с Ctrl, Alt или Cmd. Esc — отмена.
+  ///
+  /// In en, this message translates to:
+  /// **'Press the combination with Ctrl, Alt or Cmd. Esc - cancel.'**
+  String get m38509ab991;
+
   /// Название
   ///
   /// In en, this message translates to:
@@ -974,6 +992,12 @@ abstract class AppLocalizations {
   /// **'Configure components'**
   String get m8823a786b9;
 
+  /// Настройки
+  ///
+  /// In en, this message translates to:
+  /// **'Settings'**
+  String get m985b5e0f2c;
+
   /// Нативный выпуск MCP: HTTP {p0}
   ///
   /// In en, this message translates to:
@@ -985,6 +1009,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Not selected'**
   String get m28997f7565;
+
+  /// Не назначено
+  ///
+  /// In en, this message translates to:
+  /// **'Not assigned'**
+  String get mf3120930ea;
 
   /// Не найден LOCALAPPDATA
   ///
@@ -1250,6 +1280,12 @@ abstract class AppLocalizations {
   /// **'New build'**
   String get m282cf4ee16;
 
+  /// Новое сочетание
+  ///
+  /// In en, this message translates to:
+  /// **'New combination'**
+  String get ma76e43569d;
+
   /// Нужна стабильная версия вида 0.2.0
   ///
   /// In en, this message translates to:
@@ -1429,6 +1465,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Cancel'**
   String get m8fbe9b75cb;
+
+  /// Отменить действие
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel action'**
+  String get mb9b86803ad;
 
   /// Оформление
   ///
@@ -1616,6 +1658,12 @@ abstract class AppLocalizations {
   /// **'DoT DPS'**
   String get m0f80007ec0;
 
+  /// Потяните, чтобы изменить ширину панели
+  ///
+  /// In en, this message translates to:
+  /// **'Pull to change panel width'**
+  String get mb4fd967719;
+
   /// Похищение здоровья
   ///
   /// In en, this message translates to:
@@ -1687,6 +1735,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'There is no previous complete pair of components yet'**
   String get mf969e13b83;
+
+  /// Предыдущие результаты · пересчёт Lua
+  ///
+  /// In en, this message translates to:
+  /// **'Previous results · recalculation Lua'**
+  String get mec5dbc31fc;
 
   /// Предыдущий расчёт
   ///
@@ -1796,11 +1850,23 @@ abstract class AppLocalizations {
   /// **'Empty'**
   String get mac0a2199d9;
 
+  /// Работают в окне приложения. Нажмите на сочетание, чтобы изменить его.
+  ///
+  /// In en, this message translates to:
+  /// **'Work in the application window. Click on a combination to change it.'**
+  String get m913b373c85;
+
   /// Радиус освещения
   ///
   /// In en, this message translates to:
   /// **'Light Radius'**
   String get m9aaa2d503d;
+
+  /// Развернуть панель
+  ///
+  /// In en, this message translates to:
+  /// **'Expand panel'**
+  String get mf66e719066;
 
   /// Размер или SHA-256 обновления не совпал
   ///
@@ -1885,6 +1951,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Reset'**
   String get m407f871778;
+
+  /// Сбросить сочетания
+  ///
+  /// In en, this message translates to:
+  /// **'Reset combinations'**
+  String get mde7b2b9b0d;
+
+  /// Свернуть панель
+  ///
+  /// In en, this message translates to:
+  /// **'Collapse panel'**
+  String get m87b737d42c;
 
   /// Светлая
   ///
@@ -2018,6 +2096,12 @@ abstract class AppLocalizations {
   /// **'Save'**
   String get mb4d30cae52;
 
+  /// Сочетание уже используется: {p0}
+  ///
+  /// In en, this message translates to:
+  /// **'Combination already in use: {p0}'**
+  String md7dfb40adb(String p0);
+
   /// Средний удар
   ///
   /// In en, this message translates to:
@@ -2071,6 +2155,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Redirect has no address'**
   String get m2ec842e2f5;
+
+  /// Убрать сочетание
+  ///
+  /// In en, this message translates to:
+  /// **'Remove combination'**
+  String get mcfa3d536f8;
 
   /// Увеличить интерфейс
   ///

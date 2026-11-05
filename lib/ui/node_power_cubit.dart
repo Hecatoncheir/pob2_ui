@@ -15,6 +15,7 @@ class NodePowerCubit extends Cubit<NodePowerState> {
         progress: null,
         report: null,
         error: null,
+        stale: false,
       ));
   final McpClient engine;
   final Future<Map<String, Uint8List>> Function(OriginalTreeScene) loadImages;
@@ -27,14 +28,17 @@ class NodePowerCubit extends Cubit<NodePowerState> {
     double? progress,
     NodePowerReport? report,
     String? error,
+    bool preserveReport = false,
+    bool stale = false,
   }) {
     if (isClosed) return;
     emit((
       metrics: metrics ?? state.metrics,
       options: options ?? state.options,
       progress: progress,
-      report: report,
+      report: report ?? (preserveReport ? state.report : null),
       error: error,
+      stale: stale,
     ));
   }
 
@@ -74,11 +78,11 @@ class NodePowerCubit extends Cubit<NodePowerState> {
     await pending;
   }
 
-  Future<void> calculate() async {
-    final pending = cancel();
+  Future<void> calculate({bool preserveReport = false}) async {
+    final pending = cancel(preserveReport: preserveReport);
     final generation = ++_generation;
     final options = state.options;
-    _publish(progress: 0);
+    _publish(progress: 0, preserveReport: preserveReport, stale: state.stale);
     try {
       await pending;
       if (!_current(generation)) return;
@@ -95,7 +99,8 @@ class NodePowerCubit extends Cubit<NodePowerState> {
       _job = job;
       await _poll(job, generation, options);
     } catch (error) {
-      if (_current(generation)) _publish(error: '$error');
+      if (_current(generation))
+        _publish(error: '$error', preserveReport: true, stale: state.stale);
     }
   }
 
@@ -115,7 +120,11 @@ class NodePowerCubit extends Cubit<NodePowerState> {
           _publish(report: NodePowerReport.fromJson(result, images));
         return;
       }
-      _publish(progress: (result['progress'] as num).toDouble() / 100);
+      _publish(
+        progress: (result['progress'] as num).toDouble() / 100,
+        preserveReport: true,
+        stale: state.stale,
+      );
       await Future<void>.delayed(const Duration(milliseconds: 16));
     }
   }
@@ -129,12 +138,25 @@ class NodePowerCubit extends Cubit<NodePowerState> {
     }
   }
 
-  Future<void> cancel() async {
+  Future<void> cancel({bool preserveReport = false}) async {
     _generation++;
     final job = _job;
     _job = null;
-    _publish();
+    _publish(
+      preserveReport: preserveReport,
+      stale: preserveReport && state.report != null,
+    );
     await _cancelJob(job);
+  }
+
+  Future<void> refresh(Set<int> allocated) async {
+    final report = state.report;
+    if (report == null) return;
+    _publish(
+      report: report.filtered(allocated, state.options.allocation),
+      stale: true,
+    );
+    await calculate(preserveReport: true);
   }
 
   @override

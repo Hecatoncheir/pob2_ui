@@ -62,12 +62,7 @@ class InterfaceScalePicker extends StatelessWidget {
               ),
               Row(
                 children: [
-                  const Expanded(
-                    child: AppText(
-                      'Ctrl+− / Ctrl+= · Ctrl+0',
-                      style: TextStyle(fontSize: 11),
-                    ),
-                  ),
+                  const Spacer(),
                   TextButton(
                     onPressed: () => scale.setPercent(100),
                     child: const AppText('Сбросить'),

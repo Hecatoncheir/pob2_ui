@@ -233,6 +233,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get mac053cfb90 => 'หัวหน้า';
 
   @override
+  String get m13b0a5cc9a => 'ปุ่มลัด';
+
+  @override
   String m450afec8d6(String p0) {
     return 'ฉากที่เสร็จแล้วยังโหลดไม่เสร็จสมบูรณ์: $p0';
   }
@@ -433,6 +436,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m6c50317db8 => 'เวิร์คช็อป';
 
   @override
+  String get m7e5029786d => 'สเกล 100%';
+
+  @override
   String get mbe517dba6c => 'ขนาดอินเทอร์เฟซ';
 
   @override
@@ -462,6 +468,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get mff86959fa1 => 'ผ้ากันเปื้อน';
 
   @override
+  String get m38509ab991 => 'กดร่วมกับ Ctrl, Alt หรือ Cmd Esc - ยกเลิก';
+
+  @override
   String get m0918b4ba92 => 'ชื่อเรื่อง';
 
   @override
@@ -486,12 +495,18 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m8823a786b9 => 'กำหนดค่าส่วนประกอบ';
 
   @override
+  String get m985b5e0f2c => 'การตั้งค่า';
+
+  @override
   String m5ffb2fa414(String p0) {
     return 'รุ่นดั้งเดิม MCP: HTTP $p0';
   }
 
   @override
   String get m28997f7565 => 'ไม่ได้เลือก';
+
+  @override
+  String get mf3120930ea => 'ไม่ได้กำหนด';
 
   @override
   String get m09823db229 => 'ไม่พบ LOCALAPPDATA';
@@ -650,6 +665,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m282cf4ee16 => 'บิลด์ใหม่';
 
   @override
+  String get ma76e43569d => 'ชุดค่าผสมใหม่';
+
+  @override
   String get md72a4c2675 => 'เราต้องการเวอร์ชันที่เสถียรเช่น 0.2.0';
 
   @override
@@ -743,6 +761,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m8fbe9b75cb => 'ยกเลิก';
+
+  @override
+  String get mb9b86803ad => 'ยกเลิกการกระทำ';
 
   @override
   String get m1731619efa => 'การออกแบบ';
@@ -846,6 +867,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m0f80007ec0 => 'ดอท DPS';
 
   @override
+  String get mb4fd967719 => 'ดึงเพื่อเปลี่ยนความกว้างของแผง';
+
+  @override
   String get ma01259ad57 => 'ปลิงชีวิต';
 
   @override
@@ -886,6 +910,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get mf969e13b83 => 'ยังไม่มีคู่ส่วนประกอบที่สมบูรณ์ก่อนหน้านี้';
+
+  @override
+  String get mec5dbc31fc => 'ผลลัพธ์ก่อนหน้า · การคำนวณใหม่ Lua';
 
   @override
   String get mc0aa51ea34 => 'การคำนวณก่อนหน้า';
@@ -946,7 +973,14 @@ class AppLocalizationsTh extends AppLocalizations {
   String get mac0a2199d9 => 'ว่างเปล่า';
 
   @override
+  String get m913b373c85 =>
+      'ทำงานในหน้าต่างแอปพลิเคชัน คลิกที่ชุดค่าผสมเพื่อเปลี่ยน';
+
+  @override
   String get m9aaa2d503d => 'รัศมีแสง';
+
+  @override
+  String get mf66e719066 => 'ขยายแผง';
 
   @override
   String get m8c8ec94283 => 'ขนาดหรือการอัปเดต SHA-256 ไม่ตรงกัน';
@@ -991,6 +1025,12 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m407f871778 => 'รีเซ็ต';
+
+  @override
+  String get mde7b2b9b0d => 'รีเซ็ตชุดค่าผสม';
+
+  @override
+  String get m87b737d42c => 'แผงยุบ';
 
   @override
   String get mf0cd3a6033 => 'เบา';
@@ -1061,6 +1101,11 @@ class AppLocalizationsTh extends AppLocalizations {
   String get mb4d30cae52 => 'บันทึก';
 
   @override
+  String md7dfb40adb(String p0) {
+    return 'ชุดค่าผสมถูกใช้แล้ว: $p0';
+  }
+
+  @override
   String get mc4268e6843 => 'การเข้าชมเฉลี่ย';
 
   @override
@@ -1086,6 +1131,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m2ec842e2f5 => 'การเปลี่ยนเส้นทางไม่มีที่อยู่';
+
+  @override
+  String get mcfa3d536f8 => 'ลบชุดค่าผสม';
 
   @override
   String get mcacf1f7fd0 => 'ขยายอินเทอร์เฟซ';

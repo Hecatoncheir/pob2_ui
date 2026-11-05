@@ -7,6 +7,8 @@ import 'package:pob2_ui/data/installation_store.dart';
 import 'package:pob2_ui/data/mcp_client.dart';
 import 'package:pob2_ui/ui/workshop_cubit.dart';
 
+import 'support/temporary_directory.dart';
+
 class DelayedComponents extends ComponentRepository {
   DelayedComponents(InstallationStore store) : super(store: store);
   final gate = Completer<void>();
@@ -24,7 +26,7 @@ void main() {
   setUp(() async {
     root = await Directory.systemTemp.createTemp('pob2-cubit-test-');
   });
-  tearDown(() => root.delete(recursive: true));
+  tearDown(() => removeTemporaryDirectory(root));
 
   test(
     'Снимок состояния неизменяем; загрузка не затирает новый черновик',

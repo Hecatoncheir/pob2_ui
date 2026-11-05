@@ -232,6 +232,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get mac053cfb90 => 'Head';
 
   @override
+  String get m13b0a5cc9a => 'ホットキー';
+
+  @override
   String m450afec8d6(String p0) {
     return '完成したシーンが完全にロードされていません: $p0';
   }
@@ -430,6 +433,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m6c50317db8 => 'ワークショップ';
 
   @override
+  String get m7e5029786d => 'スケール 100%';
+
+  @override
   String get mbe517dba6c => 'インターフェーススケール';
 
   @override
@@ -459,6 +465,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get mff86959fa1 => 'よだれかけ';
 
   @override
+  String get m38509ab991 => 'Ctrl、Alt、または Cmd を組み合わせて押します。 Esc - キャンセルします。';
+
+  @override
   String get m0918b4ba92 => 'タイトル';
 
   @override
@@ -483,12 +492,18 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m8823a786b9 => 'コンポーネントの構成';
 
   @override
+  String get m985b5e0f2c => '設定';
+
+  @override
   String m5ffb2fa414(String p0) {
     return 'ネイティブ リリース MCP: HTTP $p0';
   }
 
   @override
   String get m28997f7565 => '未選択';
+
+  @override
+  String get mf3120930ea => '割り当てられていません';
 
   @override
   String get m09823db229 => 'LOCALAPPDATA が見つかりません';
@@ -647,6 +662,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m282cf4ee16 => '新しいビルド';
 
   @override
+  String get ma76e43569d => '新しい組み合わせ';
+
+  @override
   String get md72a4c2675 => '0.2.0 のような安定したバージョンが必要です';
 
   @override
@@ -737,6 +755,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m8fbe9b75cb => 'キャンセル';
+
+  @override
+  String get mb9b86803ad => 'アクションをキャンセルします';
 
   @override
   String get m1731619efa => 'デザイン';
@@ -840,6 +861,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m0f80007ec0 => 'ドットDPS';
 
   @override
+  String get mb4fd967719 => '引いてパネルの幅を変更します';
+
+  @override
   String get ma01259ad57 => 'ライフヒル';
 
   @override
@@ -880,6 +904,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get mf969e13b83 => '以前の完全なコンポーネントのペアはまだありません';
+
+  @override
+  String get mec5dbc31fc => '以前の結果 · 再計算 Lua';
 
   @override
   String get mc0aa51ea34 => '前回の計算';
@@ -940,7 +967,13 @@ class AppLocalizationsJa extends AppLocalizations {
   String get mac0a2199d9 => '空';
 
   @override
+  String get m913b373c85 => 'アプリケーションウィンドウで作業します。組み合わせをクリックして変更します。';
+
+  @override
   String get m9aaa2d503d => 'ライト半径';
+
+  @override
+  String get mf66e719066 => 'パネルを展開します';
 
   @override
   String get m8c8ec94283 => 'サイズまたは SHA-256 アップデートが一致しませんでした';
@@ -985,6 +1018,12 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m407f871778 => 'リセット';
+
+  @override
+  String get mde7b2b9b0d => '組み合わせをリセット';
+
+  @override
+  String get m87b737d42c => 'パネルを折りたたむ';
 
   @override
   String get mf0cd3a6033 => 'ライト';
@@ -1055,6 +1094,11 @@ class AppLocalizationsJa extends AppLocalizations {
   String get mb4d30cae52 => '保存';
 
   @override
+  String md7dfb40adb(String p0) {
+    return '組み合わせはすでに使用されています: $p0';
+  }
+
+  @override
   String get mc4268e6843 => '平均ヒット';
 
   @override
@@ -1080,6 +1124,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m2ec842e2f5 => 'リダイレクトにはアドレスがありません';
+
+  @override
+  String get mcfa3d536f8 => '組み合わせを削除';
 
   @override
   String get mcacf1f7fd0 => 'インターフェースを拡大する';

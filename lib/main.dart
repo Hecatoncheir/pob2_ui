@@ -16,6 +16,8 @@ import 'data/game_dictionary_repository.dart';
 import 'ui/language_cubit.dart';
 import 'data/interface_scale_repository.dart';
 import 'ui/interface_scale_cubit.dart';
+import 'data/workspace_preferences_repository.dart';
+import 'ui/workspace_preferences_cubit.dart';
 
 Future<void> main(List<String> arguments) async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -44,6 +46,13 @@ Future<void> main(List<String> arguments) async {
     scalePreferences,
     initialPercent: await scalePreferences.load(),
   );
+  final workspaceRepository = WorkspacePreferencesRepository(
+    model.components.store.root,
+  );
+  final workspacePreferences = WorkspacePreferencesCubit(
+    workspaceRepository,
+    initial: await workspaceRepository.load(),
+  );
   runApp(
     PobApp(
       model: model,
@@ -51,6 +60,7 @@ Future<void> main(List<String> arguments) async {
       appearance: appearance,
       language: language,
       interfaceScale: interfaceScale,
+      workspacePreferences: workspacePreferences,
     ),
   );
   WidgetsBinding.instance.addPostFrameCallback((_) async {

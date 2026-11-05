@@ -396,6 +396,11 @@
     "description": "Голова",
     "placeholders": {}
   },
+  "m13b0a5cc9a": "Hotkeys",
+  "@m13b0a5cc9a": {
+    "description": "Горячие клавиши",
+    "placeholders": {}
+  },
   "m450afec8d6": "The finished scene is not fully loaded: {p0}",
   "@m450afec8d6": {
     "description": "Готовая сцена загружена не полностью: {p0}",
@@ -737,6 +742,11 @@
     "description": "Мастерская",
     "placeholders": {}
   },
+  "m7e5029786d": "Scale 100%",
+  "@m7e5029786d": {
+    "description": "Масштаб 100%",
+    "placeholders": {}
+  },
   "mbe517dba6c": "Interface scale",
   "@mbe517dba6c": {
     "description": "Масштаб интерфейса",
@@ -786,6 +796,11 @@
     "description": "Нагрудник",
     "placeholders": {}
   },
+  "m38509ab991": "Press the combination with Ctrl, Alt or Cmd. Esc - cancel.",
+  "@m38509ab991": {
+    "description": "Нажмите сочетание с Ctrl, Alt или Cmd. Esc — отмена.",
+    "placeholders": {}
+  },
   "m0918b4ba92": "Title",
   "@m0918b4ba92": {
     "description": "Название",
@@ -826,6 +841,11 @@
     "description": "Настроить компоненты",
     "placeholders": {}
   },
+  "m985b5e0f2c": "Settings",
+  "@m985b5e0f2c": {
+    "description": "Настройки",
+    "placeholders": {}
+  },
   "m5ffb2fa414": "Native release MCP: HTTP {p0}",
   "@m5ffb2fa414": {
     "description": "Нативный выпуск MCP: HTTP {p0}",
@@ -838,6 +858,11 @@
   "m28997f7565": "Not selected",
   "@m28997f7565": {
     "description": "Не выбраны",
+    "placeholders": {}
+  },
+  "mf3120930ea": "Not assigned",
+  "@mf3120930ea": {
+    "description": "Не назначено",
     "placeholders": {}
   },
   "m09823db229": "LOCALAPPDATA not found",
@@ -1108,6 +1133,11 @@
     "description": "Новая сборка",
     "placeholders": {}
   },
+  "ma76e43569d": "New combination",
+  "@ma76e43569d": {
+    "description": "Новое сочетание",
+    "placeholders": {}
+  },
   "md72a4c2675": "We need a stable version like 0.2.0",
   "@md72a4c2675": {
     "description": "Нужна стабильная версия вида 0.2.0",
@@ -1260,6 +1290,11 @@
   "m8fbe9b75cb": "Cancel",
   "@m8fbe9b75cb": {
     "description": "Отмена",
+    "placeholders": {}
+  },
+  "mb9b86803ad": "Cancel action",
+  "@mb9b86803ad": {
+    "description": "Отменить действие",
     "placeholders": {}
   },
   "m1731619efa": "Appearance",
@@ -1433,6 +1468,11 @@
     "description": "Постепенный DPS",
     "placeholders": {}
   },
+  "mb4fd967719": "Pull to change panel width",
+  "@mb4fd967719": {
+    "description": "Потяните, чтобы изменить ширину панели",
+    "placeholders": {}
+  },
   "ma01259ad57": "Life leech",
   "@ma01259ad57": {
     "description": "Похищение здоровья",
@@ -1503,6 +1543,11 @@
   "mf969e13b83": "There is no previous complete pair of components yet",
   "@mf969e13b83": {
     "description": "Предыдущей полной пары компонентов пока нет",
+    "placeholders": {}
+  },
+  "mec5dbc31fc": "Previous results · recalculation Lua",
+  "@mec5dbc31fc": {
+    "description": "Предыдущие результаты · пересчёт Lua",
     "placeholders": {}
   },
   "mc0aa51ea34": "Previous calculation",
@@ -1603,9 +1648,19 @@
     "description": "Пусто",
     "placeholders": {}
   },
+  "m913b373c85": "Work in the application window. Click on a combination to change it.",
+  "@m913b373c85": {
+    "description": "Работают в окне приложения. Нажмите на сочетание, чтобы изменить его.",
+    "placeholders": {}
+  },
   "m9aaa2d503d": "Light Radius",
   "@m9aaa2d503d": {
     "description": "Радиус освещения",
+    "placeholders": {}
+  },
+  "mf66e719066": "Expand panel",
+  "@mf66e719066": {
+    "description": "Развернуть панель",
     "placeholders": {}
   },
   "m8c8ec94283": "Size or SHA-256 update did not match",
@@ -1680,6 +1735,16 @@
   "m407f871778": "Reset",
   "@m407f871778": {
     "description": "Сбросить",
+    "placeholders": {}
+  },
+  "mde7b2b9b0d": "Reset combinations",
+  "@mde7b2b9b0d": {
+    "description": "Сбросить сочетания",
+    "placeholders": {}
+  },
+  "m87b737d42c": "Collapse panel",
+  "@m87b737d42c": {
+    "description": "Свернуть панель",
     "placeholders": {}
   },
   "mf0cd3a6033": "Light",
@@ -1792,6 +1857,15 @@
     "description": "Сохранить",
     "placeholders": {}
   },
+  "md7dfb40adb": "Combination already in use: {p0}",
+  "@md7dfb40adb": {
+    "description": "Сочетание уже используется: {p0}",
+    "placeholders": {
+      "p0": {
+        "type": "String"
+      }
+    }
+  },
   "mc4268e6843": "Average Hit",
   "@mc4268e6843": {
     "description": "Средний удар",
@@ -1835,6 +1909,11 @@
   "m2ec842e2f5": "Redirect has no address",
   "@m2ec842e2f5": {
     "description": "У перенаправления нет адреса",
+    "placeholders": {}
+  },
+  "mcfa3d536f8": "Remove combination",
+  "@mcfa3d536f8": {
+    "description": "Убрать сочетание",
     "placeholders": {}
   },
   "mcacf1f7fd0": "Enlarge interface",

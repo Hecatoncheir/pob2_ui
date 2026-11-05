@@ -233,6 +233,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get mac053cfb90 => 'Голова';
 
   @override
+  String get m13b0a5cc9a => 'Горячие клавиши';
+
+  @override
   String m450afec8d6(String p0) {
     return 'Готовая сцена загружена не полностью: $p0';
   }
@@ -433,6 +436,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m6c50317db8 => 'Мастерская';
 
   @override
+  String get m7e5029786d => 'Масштаб 100%';
+
+  @override
   String get mbe517dba6c => 'Масштаб интерфейса';
 
   @override
@@ -462,6 +468,10 @@ class AppLocalizationsRu extends AppLocalizations {
   String get mff86959fa1 => 'Нагрудник';
 
   @override
+  String get m38509ab991 =>
+      'Нажмите сочетание с Ctrl, Alt или Cmd. Esc — отмена.';
+
+  @override
   String get m0918b4ba92 => 'Название';
 
   @override
@@ -486,12 +496,18 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m8823a786b9 => 'Настроить компоненты';
 
   @override
+  String get m985b5e0f2c => 'Настройки';
+
+  @override
   String m5ffb2fa414(String p0) {
     return 'Нативный выпуск MCP: HTTP $p0';
   }
 
   @override
   String get m28997f7565 => 'Не выбраны';
+
+  @override
+  String get mf3120930ea => 'Не назначено';
 
   @override
   String get m09823db229 => 'Не найден LOCALAPPDATA';
@@ -651,6 +667,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m282cf4ee16 => 'Новая сборка';
 
   @override
+  String get ma76e43569d => 'Новое сочетание';
+
+  @override
   String get md72a4c2675 => 'Нужна стабильная версия вида 0.2.0';
 
   @override
@@ -744,6 +763,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get m8fbe9b75cb => 'Отмена';
+
+  @override
+  String get mb9b86803ad => 'Отменить действие';
 
   @override
   String get m1731619efa => 'Оформление';
@@ -848,6 +870,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m0f80007ec0 => 'Постепенный DPS';
 
   @override
+  String get mb4fd967719 => 'Потяните, чтобы изменить ширину панели';
+
+  @override
   String get ma01259ad57 => 'Похищение здоровья';
 
   @override
@@ -889,6 +914,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get mf969e13b83 => 'Предыдущей полной пары компонентов пока нет';
+
+  @override
+  String get mec5dbc31fc => 'Предыдущие результаты · пересчёт Lua';
 
   @override
   String get mc0aa51ea34 => 'Предыдущий расчёт';
@@ -949,7 +977,14 @@ class AppLocalizationsRu extends AppLocalizations {
   String get mac0a2199d9 => 'Пусто';
 
   @override
+  String get m913b373c85 =>
+      'Работают в окне приложения. Нажмите на сочетание, чтобы изменить его.';
+
+  @override
   String get m9aaa2d503d => 'Радиус освещения';
+
+  @override
+  String get mf66e719066 => 'Развернуть панель';
 
   @override
   String get m8c8ec94283 => 'Размер или SHA-256 обновления не совпал';
@@ -994,6 +1029,12 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get m407f871778 => 'Сбросить';
+
+  @override
+  String get mde7b2b9b0d => 'Сбросить сочетания';
+
+  @override
+  String get m87b737d42c => 'Свернуть панель';
 
   @override
   String get mf0cd3a6033 => 'Светлая';
@@ -1064,6 +1105,11 @@ class AppLocalizationsRu extends AppLocalizations {
   String get mb4d30cae52 => 'Сохранить';
 
   @override
+  String md7dfb40adb(String p0) {
+    return 'Сочетание уже используется: $p0';
+  }
+
+  @override
   String get mc4268e6843 => 'Средний удар';
 
   @override
@@ -1089,6 +1135,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get m2ec842e2f5 => 'У перенаправления нет адреса';
+
+  @override
+  String get mcfa3d536f8 => 'Убрать сочетание';
 
   @override
   String get mcacf1f7fd0 => 'Увеличить интерфейс';

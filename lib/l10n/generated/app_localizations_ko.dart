@@ -232,6 +232,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get mac053cfb90 => '머리';
 
   @override
+  String get m13b0a5cc9a => '단축키';
+
+  @override
   String m450afec8d6(String p0) {
     return '완성된 장면이 완전히 로드되지 않았습니다: $p0';
   }
@@ -430,6 +433,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m6c50317db8 => '워크숍';
 
   @override
+  String get m7e5029786d => '배율 100%';
+
+  @override
   String get mbe517dba6c => '인터페이스 규모';
 
   @override
@@ -459,6 +465,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get mff86959fa1 => '턱받이';
 
   @override
+  String get m38509ab991 => 'Ctrl, Alt 또는 Cmd 조합을 누르세요. Esc - 취소합니다.';
+
+  @override
   String get m0918b4ba92 => '제목';
 
   @override
@@ -483,12 +492,18 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m8823a786b9 => '구성 요소 구성';
 
   @override
+  String get m985b5e0f2c => '설정';
+
+  @override
   String m5ffb2fa414(String p0) {
     return '기본 출시 MCP: HTTP $p0';
   }
 
   @override
   String get m28997f7565 => '선택되지 않음';
+
+  @override
+  String get mf3120930ea => '할당되지 않음';
 
   @override
   String get m09823db229 => 'LOCALAPPDATA를 찾을 수 없습니다.';
@@ -647,6 +662,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m282cf4ee16 => '새 빌드';
 
   @override
+  String get ma76e43569d => '새로운 조합';
+
+  @override
   String get md72a4c2675 => '0.2.0과 같은 안정적인 버전이 필요합니다.';
 
   @override
@@ -737,6 +755,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m8fbe9b75cb => '취소';
+
+  @override
+  String get mb9b86803ad => '작업 취소';
 
   @override
   String get m1731619efa => '디자인';
@@ -840,6 +861,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m0f80007ec0 => 'DoT DPS';
 
   @override
+  String get mb4fd967719 => '당겨서 패널 너비 변경';
+
+  @override
   String get ma01259ad57 => '생활거머리';
 
   @override
@@ -880,6 +904,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get mf969e13b83 => '아직 이전의 완전한 구성요소 쌍이 없습니다.';
+
+  @override
+  String get mec5dbc31fc => '이전 결과 · 재계산 Lua';
 
   @override
   String get mc0aa51ea34 => '이전 계산';
@@ -940,7 +967,13 @@ class AppLocalizationsKo extends AppLocalizations {
   String get mac0a2199d9 => '비어 있음';
 
   @override
+  String get m913b373c85 => '응용프로그램 창에서 작업합니다. 변경하려면 조합을 클릭하세요.';
+
+  @override
   String get m9aaa2d503d => '빛의 반경';
+
+  @override
+  String get mf66e719066 => '패널 확장';
 
   @override
   String get m8c8ec94283 => '크기 또는 SHA-256 업데이트가 일치하지 않습니다.';
@@ -985,6 +1018,12 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m407f871778 => '재설정';
+
+  @override
+  String get mde7b2b9b0d => '조합 재설정';
+
+  @override
+  String get m87b737d42c => '패널 축소';
 
   @override
   String get mf0cd3a6033 => '빛';
@@ -1055,6 +1094,11 @@ class AppLocalizationsKo extends AppLocalizations {
   String get mb4d30cae52 => '저장';
 
   @override
+  String md7dfb40adb(String p0) {
+    return '이미 사용 중인 조합: $p0';
+  }
+
+  @override
   String get mc4268e6843 => '평균 적중률';
 
   @override
@@ -1080,6 +1124,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m2ec842e2f5 => '리디렉션에 주소가 없습니다.';
+
+  @override
+  String get mcfa3d536f8 => '조합 제거';
 
   @override
   String get mcacf1f7fd0 => '인터페이스 확대';

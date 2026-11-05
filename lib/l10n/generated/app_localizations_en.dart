@@ -234,6 +234,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get mac053cfb90 => 'Head';
 
   @override
+  String get m13b0a5cc9a => 'Hotkeys';
+
+  @override
   String m450afec8d6(String p0) {
     return 'The finished scene is not fully loaded: $p0';
   }
@@ -433,6 +436,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m6c50317db8 => 'Workshop';
 
   @override
+  String get m7e5029786d => 'Scale 100%';
+
+  @override
   String get mbe517dba6c => 'Interface scale';
 
   @override
@@ -462,6 +468,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get mff86959fa1 => 'Bib';
 
   @override
+  String get m38509ab991 =>
+      'Press the combination with Ctrl, Alt or Cmd. Esc - cancel.';
+
+  @override
   String get m0918b4ba92 => 'Title';
 
   @override
@@ -486,12 +496,18 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m8823a786b9 => 'Configure components';
 
   @override
+  String get m985b5e0f2c => 'Settings';
+
+  @override
   String m5ffb2fa414(String p0) {
     return 'Native release MCP: HTTP $p0';
   }
 
   @override
   String get m28997f7565 => 'Not selected';
+
+  @override
+  String get mf3120930ea => 'Not assigned';
 
   @override
   String get m09823db229 => 'LOCALAPPDATA not found';
@@ -652,6 +668,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m282cf4ee16 => 'New build';
 
   @override
+  String get ma76e43569d => 'New combination';
+
+  @override
   String get md72a4c2675 => 'We need a stable version like 0.2.0';
 
   @override
@@ -746,6 +765,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get m8fbe9b75cb => 'Cancel';
+
+  @override
+  String get mb9b86803ad => 'Cancel action';
 
   @override
   String get m1731619efa => 'Appearance';
@@ -849,6 +871,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m0f80007ec0 => 'DoT DPS';
 
   @override
+  String get mb4fd967719 => 'Pull to change panel width';
+
+  @override
   String get ma01259ad57 => 'Life leech';
 
   @override
@@ -890,6 +915,9 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get mf969e13b83 =>
       'There is no previous complete pair of components yet';
+
+  @override
+  String get mec5dbc31fc => 'Previous results · recalculation Lua';
 
   @override
   String get mc0aa51ea34 => 'Previous calculation';
@@ -950,7 +978,14 @@ class AppLocalizationsEn extends AppLocalizations {
   String get mac0a2199d9 => 'Empty';
 
   @override
+  String get m913b373c85 =>
+      'Work in the application window. Click on a combination to change it.';
+
+  @override
   String get m9aaa2d503d => 'Light Radius';
+
+  @override
+  String get mf66e719066 => 'Expand panel';
 
   @override
   String get m8c8ec94283 => 'Size or SHA-256 update did not match';
@@ -995,6 +1030,12 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get m407f871778 => 'Reset';
+
+  @override
+  String get mde7b2b9b0d => 'Reset combinations';
+
+  @override
+  String get m87b737d42c => 'Collapse panel';
 
   @override
   String get mf0cd3a6033 => 'Light';
@@ -1065,6 +1106,11 @@ class AppLocalizationsEn extends AppLocalizations {
   String get mb4d30cae52 => 'Save';
 
   @override
+  String md7dfb40adb(String p0) {
+    return 'Combination already in use: $p0';
+  }
+
+  @override
   String get mc4268e6843 => 'Average Hit';
 
   @override
@@ -1090,6 +1136,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get m2ec842e2f5 => 'Redirect has no address';
+
+  @override
+  String get mcfa3d536f8 => 'Remove combination';
 
   @override
   String get mcacf1f7fd0 => 'Enlarge interface';

@@ -328,7 +328,7 @@ class _StatGroup extends StatelessWidget {
   Widget build(BuildContext context) => Padding(
     padding: const EdgeInsets.only(bottom: 10),
     child: ExpansionTile(
-      key: ValueKey('stat-group-$title'),
+      key: PageStorageKey('stat-group-$title'),
       tilePadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 2),
       childrenPadding: const EdgeInsets.fromLTRB(12, 0, 12, 12),
       visualDensity: VisualDensity.compact,

@@ -53,6 +53,11 @@ class NodePowerPanel extends StatelessWidget {
             _controls(context, state, size.maxWidth < 580),
       ),
       const SizedBox(height: 8),
+      if (state.stale)
+        const AppText(
+          'Предыдущие результаты · пересчёт Lua',
+          style: TextStyle(fontSize: 11),
+        ),
       if (state.progress case final progress?) ...[
         LinearProgressIndicator(value: progress.clamp(0, 1)),
         const SizedBox(height: 8),

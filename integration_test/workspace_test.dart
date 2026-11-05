@@ -18,6 +18,7 @@ import 'package:pob2_ui/ui/tree_view.dart';
 import 'package:pob2_ui/ui/tree_hover_card.dart';
 import 'package:pob2_ui/ui/workshop_cubit.dart';
 import 'package:pob2_ui/ui/node_power_panel.dart';
+import 'package:pob2_ui/ui/node_power_cubit.dart';
 import 'package:pob2_ui/ui/app_update_cubit.dart';
 import 'package:pob2_ui/data/language_preferences.dart';
 import 'package:pob2_ui/data/game_dictionary_repository.dart';
@@ -252,12 +253,27 @@ Future<void> _searchNodePower(WidgetTester tester, WorkshopCubit model) async {
   expect(tester.takeException(), isNull);
   await model.treeAction(target, false);
   await tester.pumpAndSettle();
-  expect(power.state.report, isNull);
-  await model.treeAction(target, true);
+  expect(power.state.report, isNotNull);
+  expect(
+    power.state.report!.entries.any((entry) => entry['id'] == target),
+    isFalse,
+  );
+  await _waitForPower(tester, power);
+  await model.undo();
   await tester.pumpAndSettle();
+  await _waitForPower(tester, power);
   await tester.tap(find.byTooltip('Найти узлы по характеристике'));
   await tester.pumpAndSettle();
   expect(_powerButton(tester).selected, isFalse);
+}
+
+Future<void> _waitForPower(WidgetTester tester, NodePowerCubit power) async {
+  for (var attempt = 0; attempt < 1800; attempt++) {
+    await tester.pump(const Duration(milliseconds: 100));
+    if (power.state.error != null) fail(power.state.error!);
+    if (power.state.progress == null && power.state.stale == false) return;
+  }
+  fail('Lua не завершил обновление списка узлов');
 }
 
 ArtIconButton _powerButton(WidgetTester tester) =>
@@ -564,11 +580,23 @@ Future<void> _searchAndAllocate(
         .allocated,
     isTrue,
   );
-  await tester.tapAt(center);
+  await tester.tap(find.byKey(const Key('undo-build')));
   await _waitForIdle(tester, model);
   expect(
     model.state.document!.tree!.nodes
         .firstWhere((entry) => entry.id == target)
+        .allocated,
+    isFalse,
+  );
+  await tester.tapAt(center);
+  await _waitForIdle(tester, model);
+  await tester.sendKeyDownEvent(LogicalKeyboardKey.controlLeft);
+  await tester.sendKeyEvent(LogicalKeyboardKey.keyZ);
+  await tester.sendKeyUpEvent(LogicalKeyboardKey.controlLeft);
+  await _waitForIdle(tester, model);
+  expect(
+    model.state.document!.tree!.nodes
+        .firstWhere((node) => node.id == target)
         .allocated,
     isFalse,
   );

@@ -19,6 +19,7 @@ class WorkshopState {
     this.status = 'Установите компоненты и подключите Lua',
     this.document,
     this.treeMode = TreeAllocationMode.common,
+    this.undoCount = 0,
     LibraryState? library,
     this.sessionSaved = false,
     this.draft = (xml: '', edited: false),
@@ -36,6 +37,7 @@ class WorkshopState {
   final String status;
   final WorkshopDocument? document;
   final TreeAllocationMode treeMode;
+  final int undoCount;
   BuildReport? get report => document?.report;
   final LibraryState library;
   final bool sessionSaved;
@@ -51,6 +53,7 @@ class WorkshopState {
     String? status,
     WorkshopDocument? document,
     TreeAllocationMode? treeMode,
+    int? undoCount,
     LibraryState? library,
     bool clearReport = false,
     bool? sessionSaved,
@@ -63,6 +66,7 @@ class WorkshopState {
     status: status ?? this.status,
     document: _nextDocument(document, clearReport),
     treeMode: treeMode ?? this.treeMode,
+    undoCount: undoCount ?? this.undoCount,
     library: library ?? this.library,
     sessionSaved: sessionSaved ?? this.sessionSaved,
     draft: draft ?? this.draft,
