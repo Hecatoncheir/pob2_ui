@@ -861,6 +861,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get m616c984fe4 => 'Update MCP für Steinkatalog und Kompatibilität';
 
   @override
+  String get m9488a3217c => 'Update MCP für Edelsteinbeschreibungen';
+
+  @override
   String get m648c9e0082 => 'Update MCP für Originalsymbole und Kompatibilität';
 
   @override

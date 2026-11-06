@@ -854,6 +854,9 @@ class AppLocalizationsEs extends AppLocalizations {
       'Actualización MCP para catálogo de piedras y compatibilidad';
 
   @override
+  String get m9488a3217c => 'Actualización MCP para descripciones de gemas';
+
+  @override
   String get m648c9e0082 =>
       'Actualización MCP para iconos originales y compatibilidad';
 

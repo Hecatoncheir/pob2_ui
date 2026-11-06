@@ -836,6 +836,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m616c984fe4 => '石のカタログと互換性に関する MCP の更新';
 
   @override
+  String get m9488a3217c => '宝石の説明の MCP を更新';
+
+  @override
   String get m648c9e0082 => 'オリジナルのアイコンと互換性のために MCP を更新します';
 
   @override

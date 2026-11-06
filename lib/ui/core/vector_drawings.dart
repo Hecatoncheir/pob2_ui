@@ -12,39 +12,42 @@ final vectorDrawings = <String, VectorDrawing>{
   'icons/arrow': (size: Size(24, 24), draw: drawVector6),
   'icons/back': (size: Size(24, 24), draw: drawVector7),
   'icons/book': (size: Size(24, 24), draw: drawVector8),
-  'icons/box': (size: Size(24, 24), draw: drawVector9),
-  'icons/chart': (size: Size(24, 24), draw: drawVector10),
-  'icons/check': (size: Size(24, 24), draw: drawVector11),
-  'icons/chevron': (size: Size(24, 24), draw: drawVector12),
-  'icons/close': (size: Size(24, 24), draw: drawVector13),
-  'icons/code': (size: Size(24, 24), draw: drawVector14),
-  'icons/copy': (size: Size(24, 24), draw: drawVector15),
-  'icons/download': (size: Size(24, 24), draw: drawVector16),
-  'icons/eye': (size: Size(24, 24), draw: drawVector17),
-  'icons/fit': (size: Size(24, 24), draw: drawVector18),
-  'icons/flask': (size: Size(24, 24), draw: drawVector19),
-  'icons/gem': (size: Size(24, 24), draw: drawVector20),
-  'icons/grid': (size: Size(24, 24), draw: drawVector21),
-  'icons/heart': (size: Size(24, 24), draw: drawVector22),
-  'icons/info': (size: Size(24, 24), draw: drawVector23),
-  'icons/link': (size: Size(24, 24), draw: drawVector24),
-  'icons/minus': (size: Size(24, 24), draw: drawVector25),
-  'icons/moon': (size: Size(24, 24), draw: drawVector26),
-  'icons/plus': (size: Size(24, 24), draw: drawVector27),
-  'icons/refresh': (size: Size(24, 24), draw: drawVector28),
-  'icons/search': (size: Size(24, 24), draw: drawVector29),
-  'icons/settings': (size: Size(24, 24), draw: drawVector30),
-  'icons/shield': (size: Size(24, 24), draw: drawVector31),
-  'icons/spark': (size: Size(24, 24), draw: drawVector32),
-  'icons/sun': (size: Size(24, 24), draw: drawVector33),
-  'icons/sword': (size: Size(24, 24), draw: drawVector34),
-  'icons/trash': (size: Size(24, 24), draw: drawVector35),
-  'icons/tree': (size: Size(24, 24), draw: drawVector36),
-  'icons/upload': (size: Size(24, 24), draw: drawVector37),
-  'illustrations/atlas': (size: Size(160, 160), draw: drawVector38),
-  'illustrations/components': (size: Size(160, 160), draw: drawVector39),
-  'illustrations/flask': (size: Size(160, 160), draw: drawVector40),
-  'illustrations/gem': (size: Size(160, 160), draw: drawVector41),
+  'icons/boots': (size: Size(32, 32), draw: drawVector9),
+  'icons/box': (size: Size(24, 24), draw: drawVector10),
+  'icons/chart': (size: Size(24, 24), draw: drawVector11),
+  'icons/check': (size: Size(24, 24), draw: drawVector12),
+  'icons/chest-armour': (size: Size(24, 24), draw: drawVector13),
+  'icons/chevron': (size: Size(24, 24), draw: drawVector14),
+  'icons/close': (size: Size(24, 24), draw: drawVector15),
+  'icons/code': (size: Size(24, 24), draw: drawVector16),
+  'icons/copy': (size: Size(24, 24), draw: drawVector17),
+  'icons/download': (size: Size(24, 24), draw: drawVector18),
+  'icons/eye': (size: Size(24, 24), draw: drawVector19),
+  'icons/fit': (size: Size(24, 24), draw: drawVector20),
+  'icons/flask': (size: Size(24, 24), draw: drawVector21),
+  'icons/gem': (size: Size(24, 24), draw: drawVector22),
+  'icons/grid': (size: Size(24, 24), draw: drawVector23),
+  'icons/heart': (size: Size(24, 24), draw: drawVector24),
+  'icons/helmet': (size: Size(24, 24), draw: drawVector25),
+  'icons/info': (size: Size(24, 24), draw: drawVector26),
+  'icons/link': (size: Size(24, 24), draw: drawVector27),
+  'icons/minus': (size: Size(24, 24), draw: drawVector28),
+  'icons/moon': (size: Size(24, 24), draw: drawVector29),
+  'icons/plus': (size: Size(24, 24), draw: drawVector30),
+  'icons/refresh': (size: Size(24, 24), draw: drawVector31),
+  'icons/search': (size: Size(24, 24), draw: drawVector32),
+  'icons/settings': (size: Size(24, 24), draw: drawVector33),
+  'icons/shield': (size: Size(24, 24), draw: drawVector34),
+  'icons/spark': (size: Size(24, 24), draw: drawVector35),
+  'icons/sun': (size: Size(24, 24), draw: drawVector36),
+  'icons/sword': (size: Size(24, 24), draw: drawVector37),
+  'icons/trash': (size: Size(24, 24), draw: drawVector38),
+  'icons/tree': (size: Size(24, 24), draw: drawVector39),
+  'icons/upload': (size: Size(24, 24), draw: drawVector40),
+  'illustrations/atlas': (size: Size(160, 160), draw: drawVector41),
+  'illustrations/components': (size: Size(160, 160), draw: drawVector42),
+  'illustrations/flask': (size: Size(160, 160), draw: drawVector43),
+  'illustrations/gem': (size: Size(160, 160), draw: drawVector44),
 };
 void drawVector0(Canvas canvas, Color color, Color background) {
   canvas.save();
@@ -1027,6 +1030,88 @@ void drawVector9(Canvas canvas, Color color, Color background) {
   canvas.save();
   canvas.save();
   final path0 = Path()
+    ..moveTo(8.0, 3.0)
+    ..lineTo(21.0, 3.0)
+    ..lineTo(19.0, 15.0)
+    ..cubicTo(18.7, 17.0, 18.8, 18.3, 19.5, 19.5)
+    ..lineTo(25.0, 21.5)
+    ..cubicTo(27.8, 22.5, 29.5, 24.7, 30.0, 28.0)
+    ..lineTo(5.0, 28.0)
+    ..cubicTo(4.3, 24.8, 5.1, 22.5, 6.3, 20.0)
+    ..lineTo(9.0, 14.0)
+    ..cubicTo(10.0, 10.0, 9.5, 6.0, 8.0, 3.0)
+    ..close();
+  canvas.drawPath(
+    path0,
+    Paint()
+      ..color = color
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 1.7
+      ..strokeCap = StrokeCap.round
+      ..strokeJoin = StrokeJoin.round,
+  );
+  canvas.restore();
+  canvas.save();
+  final path1 = Path()
+    ..moveTo(14.0, 3.0)
+    ..cubicTo(14.4, 9.3, 13.9, 14.2, 8.5, 18.5)
+    ..moveTo(6.2, 22.0)
+    ..cubicTo(10.6, 22.0, 13.7, 18.8, 19.2, 18.0)
+    ..moveTo(11.0, 28.0)
+    ..cubicTo(12.2, 24.8, 14.6, 21.8, 20.4, 20.0)
+    ..moveTo(23.0, 28.0)
+    ..cubicTo(22.9, 25.4, 23.5, 23.9, 24.7, 22.4)
+    ..moveTo(5.0, 30.0)
+    ..lineTo(30.0, 30.0);
+  canvas.drawPath(
+    path1,
+    Paint()
+      ..color = color
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 1.7
+      ..strokeCap = StrokeCap.round
+      ..strokeJoin = StrokeJoin.round,
+  );
+  canvas.restore();
+  canvas.save();
+  canvas.save();
+  final path2 = Path()
+    ..addOval(Rect.fromCircle(center: Offset(17.3, 6.0), radius: 0.8));
+  canvas.drawPath(path2, Paint()..color = color);
+  canvas.restore();
+  canvas.save();
+  final path3 = Path()
+    ..addOval(Rect.fromCircle(center: Offset(16.8, 9.5), radius: 0.8));
+  canvas.drawPath(path3, Paint()..color = color);
+  canvas.restore();
+  canvas.save();
+  final path4 = Path()
+    ..addOval(Rect.fromCircle(center: Offset(16.0, 13.0), radius: 0.8));
+  canvas.drawPath(path4, Paint()..color = color);
+  canvas.restore();
+  canvas.save();
+  final path5 = Path()
+    ..addOval(Rect.fromCircle(center: Offset(14.4, 16.5), radius: 0.8));
+  canvas.drawPath(path5, Paint()..color = color);
+  canvas.restore();
+  canvas.save();
+  final path6 = Path()
+    ..addOval(Rect.fromCircle(center: Offset(7.3, 26.0), radius: 0.8));
+  canvas.drawPath(path6, Paint()..color = color);
+  canvas.restore();
+  canvas.save();
+  final path7 = Path()
+    ..addOval(Rect.fromCircle(center: Offset(26.0, 26.0), radius: 0.8));
+  canvas.drawPath(path7, Paint()..color = color);
+  canvas.restore();
+  canvas.restore();
+  canvas.restore();
+}
+
+void drawVector10(Canvas canvas, Color color, Color background) {
+  canvas.save();
+  canvas.save();
+  final path0 = Path()
     ..moveTo(12.0, 2.0)
     ..lineTo(21.0, 7.0)
     ..lineTo(21.0, 17.0)
@@ -1055,7 +1140,7 @@ void drawVector9(Canvas canvas, Color color, Color background) {
   canvas.restore();
 }
 
-void drawVector10(Canvas canvas, Color color, Color background) {
+void drawVector11(Canvas canvas, Color color, Color background) {
   canvas.save();
   canvas.save();
   final path0 = Path()
@@ -1079,7 +1164,7 @@ void drawVector10(Canvas canvas, Color color, Color background) {
   canvas.restore();
 }
 
-void drawVector11(Canvas canvas, Color color, Color background) {
+void drawVector12(Canvas canvas, Color color, Color background) {
   canvas.save();
   canvas.save();
   final path0 = Path()
@@ -1099,7 +1184,58 @@ void drawVector11(Canvas canvas, Color color, Color background) {
   canvas.restore();
 }
 
-void drawVector12(Canvas canvas, Color color, Color background) {
+void drawVector13(Canvas canvas, Color color, Color background) {
+  canvas.save();
+  canvas.save();
+  final path0 = Path()
+    ..moveTo(8.0, 3.0)
+    ..lineTo(4.0, 5.0)
+    ..lineTo(2.0, 10.0)
+    ..lineTo(6.0, 12.0)
+    ..lineTo(6.0, 19.0)
+    ..lineTo(12.0, 21.0)
+    ..lineTo(18.0, 19.0)
+    ..lineTo(18.0, 12.0)
+    ..lineTo(22.0, 10.0)
+    ..lineTo(20.0, 5.0)
+    ..lineTo(16.0, 3.0)
+    ..cubicTo(16.0, 7.0, 8.0, 7.0, 8.0, 3.0)
+    ..close();
+  canvas.drawPath(
+    path0,
+    Paint()
+      ..color = color
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 1.6
+      ..strokeCap = StrokeCap.round
+      ..strokeJoin = StrokeJoin.round,
+  );
+  canvas.restore();
+  canvas.save();
+  final path1 = Path()
+    ..moveTo(12.0, 7.0)
+    ..lineTo(12.0, 20.0)
+    ..moveTo(6.0, 12.0)
+    ..lineTo(12.0, 14.0)
+    ..lineTo(18.0, 12.0)
+    ..moveTo(4.0, 5.0)
+    ..lineTo(7.0, 9.0)
+    ..moveTo(20.0, 5.0)
+    ..lineTo(17.0, 9.0);
+  canvas.drawPath(
+    path1,
+    Paint()
+      ..color = color
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 1.6
+      ..strokeCap = StrokeCap.round
+      ..strokeJoin = StrokeJoin.round,
+  );
+  canvas.restore();
+  canvas.restore();
+}
+
+void drawVector14(Canvas canvas, Color color, Color background) {
   canvas.save();
   canvas.save();
   final path0 = Path()
@@ -1119,7 +1255,7 @@ void drawVector12(Canvas canvas, Color color, Color background) {
   canvas.restore();
 }
 
-void drawVector13(Canvas canvas, Color color, Color background) {
+void drawVector15(Canvas canvas, Color color, Color background) {
   canvas.save();
   canvas.save();
   final path0 = Path()
@@ -1140,7 +1276,7 @@ void drawVector13(Canvas canvas, Color color, Color background) {
   canvas.restore();
 }
 
-void drawVector14(Canvas canvas, Color color, Color background) {
+void drawVector16(Canvas canvas, Color color, Color background) {
   canvas.save();
   canvas.save();
   final path0 = Path()
@@ -1165,7 +1301,7 @@ void drawVector14(Canvas canvas, Color color, Color background) {
   canvas.restore();
 }
 
-void drawVector15(Canvas canvas, Color color, Color background) {
+void drawVector17(Canvas canvas, Color color, Color background) {
   canvas.save();
   canvas.save();
   final path0 = Path()
@@ -1208,7 +1344,7 @@ void drawVector15(Canvas canvas, Color color, Color background) {
   canvas.restore();
 }
 
-void drawVector16(Canvas canvas, Color color, Color background) {
+void drawVector18(Canvas canvas, Color color, Color background) {
   canvas.save();
   canvas.save();
   final path0 = Path()
@@ -1234,7 +1370,7 @@ void drawVector16(Canvas canvas, Color color, Color background) {
   canvas.restore();
 }
 
-void drawVector17(Canvas canvas, Color color, Color background) {
+void drawVector19(Canvas canvas, Color color, Color background) {
   canvas.save();
   canvas.save();
   final path0 = Path()
@@ -1270,7 +1406,7 @@ void drawVector17(Canvas canvas, Color color, Color background) {
   canvas.restore();
 }
 
-void drawVector18(Canvas canvas, Color color, Color background) {
+void drawVector20(Canvas canvas, Color color, Color background) {
   canvas.save();
   canvas.save();
   final path0 = Path()
@@ -1299,7 +1435,7 @@ void drawVector18(Canvas canvas, Color color, Color background) {
   canvas.restore();
 }
 
-void drawVector19(Canvas canvas, Color color, Color background) {
+void drawVector21(Canvas canvas, Color color, Color background) {
   canvas.save();
   canvas.save();
   final path0 = Path()
@@ -1341,7 +1477,7 @@ void drawVector19(Canvas canvas, Color color, Color background) {
   canvas.restore();
 }
 
-void drawVector20(Canvas canvas, Color color, Color background) {
+void drawVector22(Canvas canvas, Color color, Color background) {
   canvas.save();
   canvas.save();
   final path0 = Path()
@@ -1370,7 +1506,7 @@ void drawVector20(Canvas canvas, Color color, Color background) {
   canvas.restore();
 }
 
-void drawVector21(Canvas canvas, Color color, Color background) {
+void drawVector23(Canvas canvas, Color color, Color background) {
   canvas.save();
   canvas.save();
   final path0 = Path()
@@ -1459,7 +1595,7 @@ void drawVector21(Canvas canvas, Color color, Color background) {
   canvas.restore();
 }
 
-void drawVector22(Canvas canvas, Color color, Color background) {
+void drawVector24(Canvas canvas, Color color, Color background) {
   canvas.save();
   canvas.save();
   final path0 = Path()
@@ -1494,7 +1630,55 @@ void drawVector22(Canvas canvas, Color color, Color background) {
   canvas.restore();
 }
 
-void drawVector23(Canvas canvas, Color color, Color background) {
+void drawVector25(Canvas canvas, Color color, Color background) {
+  canvas.save();
+  canvas.save();
+  final path0 = Path()
+    ..moveTo(6.0, 6.0)
+    ..cubicTo(8.0, 2.0, 16.0, 2.0, 18.0, 6.0)
+    ..lineTo(19.0, 16.0)
+    ..lineTo(12.0, 21.0)
+    ..lineTo(5.0, 16.0)
+    ..lineTo(6.0, 6.0)
+    ..close();
+  canvas.drawPath(
+    path0,
+    Paint()
+      ..color = color
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 1.6
+      ..strokeCap = StrokeCap.round
+      ..strokeJoin = StrokeJoin.round,
+  );
+  canvas.restore();
+  canvas.save();
+  final path1 = Path()
+    ..moveTo(6.0, 9.0)
+    ..lineTo(18.0, 9.0)
+    ..moveTo(12.0, 9.0)
+    ..lineTo(12.0, 20.0)
+    ..moveTo(7.5, 12.0)
+    ..lineTo(9.5, 12.0)
+    ..moveTo(14.5, 12.0)
+    ..lineTo(16.5, 12.0)
+    ..moveTo(7.5, 15.0)
+    ..lineTo(9.5, 15.0)
+    ..moveTo(14.5, 15.0)
+    ..lineTo(16.5, 15.0);
+  canvas.drawPath(
+    path1,
+    Paint()
+      ..color = color
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 1.6
+      ..strokeCap = StrokeCap.round
+      ..strokeJoin = StrokeJoin.round,
+  );
+  canvas.restore();
+  canvas.restore();
+}
+
+void drawVector26(Canvas canvas, Color color, Color background) {
   canvas.save();
   canvas.save();
   final path0 = Path()
@@ -1528,7 +1712,7 @@ void drawVector23(Canvas canvas, Color color, Color background) {
   canvas.restore();
 }
 
-void drawVector24(Canvas canvas, Color color, Color background) {
+void drawVector27(Canvas canvas, Color color, Color background) {
   canvas.save();
   canvas.save();
   final path0 = Path()
@@ -1567,7 +1751,7 @@ void drawVector24(Canvas canvas, Color color, Color background) {
   canvas.restore();
 }
 
-void drawVector25(Canvas canvas, Color color, Color background) {
+void drawVector28(Canvas canvas, Color color, Color background) {
   canvas.save();
   canvas.save();
   final path0 = Path()
@@ -1586,7 +1770,7 @@ void drawVector25(Canvas canvas, Color color, Color background) {
   canvas.restore();
 }
 
-void drawVector26(Canvas canvas, Color color, Color background) {
+void drawVector29(Canvas canvas, Color color, Color background) {
   canvas.save();
   canvas.save();
   final path0 = Path()
@@ -1619,7 +1803,7 @@ void drawVector26(Canvas canvas, Color color, Color background) {
   canvas.restore();
 }
 
-void drawVector27(Canvas canvas, Color color, Color background) {
+void drawVector30(Canvas canvas, Color color, Color background) {
   canvas.save();
   canvas.save();
   final path0 = Path()
@@ -1640,7 +1824,7 @@ void drawVector27(Canvas canvas, Color color, Color background) {
   canvas.restore();
 }
 
-void drawVector28(Canvas canvas, Color color, Color background) {
+void drawVector31(Canvas canvas, Color color, Color background) {
   canvas.save();
   canvas.save();
   final path0 = Path()
@@ -1681,7 +1865,7 @@ void drawVector28(Canvas canvas, Color color, Color background) {
   canvas.restore();
 }
 
-void drawVector29(Canvas canvas, Color color, Color background) {
+void drawVector32(Canvas canvas, Color color, Color background) {
   canvas.save();
   canvas.save();
   final path0 = Path()
@@ -1713,7 +1897,7 @@ void drawVector29(Canvas canvas, Color color, Color background) {
   canvas.restore();
 }
 
-void drawVector30(Canvas canvas, Color color, Color background) {
+void drawVector33(Canvas canvas, Color color, Color background) {
   canvas.save();
   canvas.save();
   final path0 = Path()
@@ -1762,7 +1946,7 @@ void drawVector30(Canvas canvas, Color color, Color background) {
   canvas.restore();
 }
 
-void drawVector31(Canvas canvas, Color color, Color background) {
+void drawVector34(Canvas canvas, Color color, Color background) {
   canvas.save();
   canvas.save();
   final path0 = Path()
@@ -1788,7 +1972,7 @@ void drawVector31(Canvas canvas, Color color, Color background) {
   canvas.restore();
 }
 
-void drawVector32(Canvas canvas, Color color, Color background) {
+void drawVector35(Canvas canvas, Color color, Color background) {
   canvas.save();
   canvas.save();
   final path0 = Path()
@@ -1814,7 +1998,7 @@ void drawVector32(Canvas canvas, Color color, Color background) {
   canvas.restore();
 }
 
-void drawVector33(Canvas canvas, Color color, Color background) {
+void drawVector36(Canvas canvas, Color color, Color background) {
   canvas.save();
   canvas.save();
   final path0 = Path()
@@ -1860,7 +2044,7 @@ void drawVector33(Canvas canvas, Color color, Color background) {
   canvas.restore();
 }
 
-void drawVector34(Canvas canvas, Color color, Color background) {
+void drawVector37(Canvas canvas, Color color, Color background) {
   canvas.save();
   canvas.save();
   final path0 = Path()
@@ -1888,7 +2072,7 @@ void drawVector34(Canvas canvas, Color color, Color background) {
   canvas.restore();
 }
 
-void drawVector35(Canvas canvas, Color color, Color background) {
+void drawVector38(Canvas canvas, Color color, Color background) {
   canvas.save();
   canvas.save();
   final path0 = Path()
@@ -1919,7 +2103,7 @@ void drawVector35(Canvas canvas, Color color, Color background) {
   canvas.restore();
 }
 
-void drawVector36(Canvas canvas, Color color, Color background) {
+void drawVector39(Canvas canvas, Color color, Color background) {
   canvas.save();
   canvas.save();
   final path0 = Path()
@@ -1996,7 +2180,7 @@ void drawVector36(Canvas canvas, Color color, Color background) {
   canvas.restore();
 }
 
-void drawVector37(Canvas canvas, Color color, Color background) {
+void drawVector40(Canvas canvas, Color color, Color background) {
   canvas.save();
   canvas.save();
   final path0 = Path()
@@ -2022,7 +2206,7 @@ void drawVector37(Canvas canvas, Color color, Color background) {
   canvas.restore();
 }
 
-void drawVector38(Canvas canvas, Color color, Color background) {
+void drawVector41(Canvas canvas, Color color, Color background) {
   canvas.save();
   canvas.save();
   final path0 = Path()
@@ -2187,7 +2371,7 @@ void drawVector38(Canvas canvas, Color color, Color background) {
   canvas.restore();
 }
 
-void drawVector39(Canvas canvas, Color color, Color background) {
+void drawVector42(Canvas canvas, Color color, Color background) {
   canvas.save();
   canvas.save();
   final path0 = Path()
@@ -2355,7 +2539,7 @@ void drawVector39(Canvas canvas, Color color, Color background) {
   canvas.restore();
 }
 
-void drawVector40(Canvas canvas, Color color, Color background) {
+void drawVector43(Canvas canvas, Color color, Color background) {
   canvas.save();
   canvas.save();
   final path0 = Path()
@@ -2495,7 +2679,7 @@ void drawVector40(Canvas canvas, Color color, Color background) {
   canvas.restore();
 }
 
-void drawVector41(Canvas canvas, Color color, Color background) {
+void drawVector44(Canvas canvas, Color color, Color background) {
   canvas.save();
   canvas.save();
   final path0 = Path()

@@ -13,6 +13,7 @@ import 'package:pob2_ui/ui/app.dart';
 import 'package:pob2_ui/ui/exit_protection.dart';
 import 'package:pob2_ui/ui/workshop_cubit.dart';
 import 'package:pob2_ui/ui/appearance_cubit.dart';
+import 'package:pob2_ui/ui/gem_medallion.dart';
 import 'package:pob2_ui/data/appearance_repository.dart';
 import 'package:pob2_ui/domain/appearance.dart';
 
@@ -66,6 +67,7 @@ void main() {
       );
       await tester.pumpAndSettle();
       await _addGroup(tester, model);
+      await _hoverDescriptions(tester, model);
       await _previewDraft(tester, model);
       await _workspaceEditing(tester, model);
       await _setCondition(tester, model);
@@ -89,6 +91,51 @@ void main() {
     },
     timeout: Timeout(Duration(minutes: Platform.isWindows ? 4 : 8)),
   );
+}
+
+Future<void> _hoverDescriptions(
+  WidgetTester tester,
+  WorkshopCubit model,
+) async {
+  final before = await model.exportXml();
+  final groupId = model.state.report!.groups.last['id'];
+  final pointer = await tester.createGesture(kind: ui.PointerDeviceKind.mouse);
+  await pointer.addPointer(location: Offset.zero);
+  for (final index in [1, 2]) {
+    final gem = find.byWidgetPredicate(
+      (widget) =>
+          widget is GemMedallion &&
+          widget.groupId == groupId &&
+          widget.sourceIndex == index,
+    );
+    await tester.ensureVisible(gem);
+    await pointer.moveTo(tester.getCenter(gem));
+    await tester.pump(const Duration(milliseconds: 450));
+    await _wait(
+      tester,
+      () => find
+          .byKey(const Key('gem-tooltip-description'))
+          .evaluate()
+          .isNotEmpty,
+    );
+    expect(
+      find.textContaining(
+        index == 1 ? 'Fireball' : 'Controlled Destruction',
+        findRichText: true,
+      ),
+      findsWidgets,
+    );
+    if (index == 1) {
+      expect(find.textContaining('20%', findRichText: true), findsWidgets);
+      await _capture(tester, '-gem-tooltip');
+    }
+    await pointer.moveTo(Offset.zero);
+    await tester.pumpAndSettle(const Duration(milliseconds: 300));
+  }
+  await pointer.removePointer();
+  expect(await model.exportXml(), before);
+  expect(tester.takeException(), isNull);
+  debugPrint('Готово: подсказки умения и поддержки из оригинального Lua');
 }
 
 Future<void> _addGroup(WidgetTester tester, WorkshopCubit model) async {

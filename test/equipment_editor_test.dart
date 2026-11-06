@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:ui' show PointerDeviceKind;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -6,10 +7,12 @@ import 'package:pob2_ui/data/mcp_error_message.dart';
 import 'package:pob2_ui/domain/build_report.dart';
 import 'package:pob2_ui/domain/equipment_item.dart';
 import 'package:pob2_ui/ui/equipment_view.dart';
+import 'package:pob2_ui/ui/equipment_board.dart';
 import 'package:pob2_ui/ui/item_editor_cubit.dart';
 
 import 'editor_widget_test.dart' show application;
 import 'support/editor_fakes.dart';
+import 'support/workshop_fixture.dart' show fixture;
 
 ItemInspection inspection({
   bool compatible = true,
@@ -80,6 +83,38 @@ class EquipmentWorkshop extends EditorWorkshop {
 }
 
 void main() {
+  testWidgets('Название оберега видно только при наведении', (tester) async {
+    await tester.binding.setSurfaceSize(const Size(600, 800));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+    final report = BuildReport.fromJson({
+      ...fixture.raw,
+      'items': [],
+      'slots': [
+        {'name': 'Charm 1', 'itemId': 0, 'visible': true},
+      ],
+    });
+    await tester.pumpWidget(
+      application(
+        EquipmentBoard(
+          report: report,
+          selected: null,
+          select: (_) {},
+          busy: false,
+        ),
+      ),
+    );
+    await tester.pumpAndSettle();
+    expect(find.text('Оберег I'), findsNothing);
+    final mouse = await tester.createGesture(kind: PointerDeviceKind.mouse);
+    await mouse.addPointer();
+    addTearDown(mouse.removePointer);
+    await mouse.moveTo(
+      tester.getCenter(find.byKey(const ValueKey('equipment-slot-Charm 1'))),
+    );
+    await tester.pump(const Duration(seconds: 1));
+    await tester.pumpAndSettle();
+    expect(find.text('Оберег I'), findsOneWidget);
+  });
   test('Сообщение Lua показывается без служебного JSON', () {
     expect(
       mcpErrorMessage(

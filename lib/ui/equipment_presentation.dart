@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../domain/build_report.dart';
+import 'core/spark_art.dart';
 
 const equipmentLabels = {
   'Weapon 1': 'Оружие',
@@ -25,13 +26,29 @@ const equipmentLabels = {
 
 String equipmentLabel(String slot) => equipmentLabels[slot] ?? slot;
 
-IconData equipmentIcon(String slot) => switch (slot) {
+class EquipmentIcon extends StatelessWidget {
+  const EquipmentIcon(
+    this.slot, {
+    super.key,
+    required this.color,
+    required this.size,
+  });
+  final String slot;
+  final Color color;
+  final double size;
+  @override
+  Widget build(BuildContext context) => switch (slot) {
+    'Helmet' => SparkArt('icons/helmet', width: size, color: color),
+    'Boots' => SparkArt('icons/boots', width: size, color: color),
+    'Body Armour' => SparkArt('icons/chest-armour', width: size, color: color),
+    _ => Icon(_equipmentIcon(slot), color: color, size: size),
+  };
+}
+
+IconData _equipmentIcon(String slot) => switch (slot) {
   'Weapon 1' || 'Weapon 1 Swap' => Icons.gavel_outlined,
   'Weapon 2' || 'Weapon 2 Swap' => Icons.shield_outlined,
-  'Helmet' => Icons.sports_motorsports_outlined,
-  'Body Armour' => Icons.checkroom_outlined,
   'Gloves' => Icons.back_hand_outlined,
-  'Boots' => Icons.ice_skating_outlined,
   'Amulet' => Icons.diamond_outlined,
   'Belt' => Icons.horizontal_split_outlined,
   'Flask 1' || 'Flask 2' => Icons.science_outlined,

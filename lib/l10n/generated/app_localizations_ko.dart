@@ -836,6 +836,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m616c984fe4 => '석재 카탈로그 및 호환성 업데이트 MCP';
 
   @override
+  String get m9488a3217c => '보석 설명 업데이트 MCP';
+
+  @override
   String get m648c9e0082 => '원본 아이콘 및 호환성을 위한 MCP 업데이트';
 
   @override

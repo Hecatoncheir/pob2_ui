@@ -42,6 +42,7 @@ class DraggableGem extends StatelessWidget {
               highlighted: true,
               id: data.gem.id,
               repository: repository,
+              showTooltip: false,
             ),
             const SizedBox(height: 8),
             AppText(

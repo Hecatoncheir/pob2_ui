@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 
 import '../domain/build_report.dart';
 import 'core/app_text.dart';
+import 'core/language_scope.dart';
 import 'core/spark_theme.dart';
+import 'core/ui_translation.dart';
 import 'equipment_presentation.dart';
 
 // Координаты задают только расположение ячеек; доступность приходит из Lua.
@@ -140,9 +142,8 @@ class _EquipmentTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
     final tint = _rarity(colors);
-    return AppTooltip(
-      message: item == null ? equipmentLabel(name) : '${item!['name']}',
-      game: item != null,
+    return Tooltip(
+      message: _tooltip(context),
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 180),
         decoration: BoxDecoration(
@@ -178,24 +179,26 @@ class _EquipmentTile extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Icon(
-          equipmentIcon(name),
+        EquipmentIcon(
+          name,
           color: item == null ? Spark.of(context).muted : tint,
           size: constraints.maxHeight < 70 ? 20 : 36,
         ),
-        const SizedBox(height: 5),
-        Flexible(
-          child: AppText(
-            equipmentLabel(name),
-            textAlign: TextAlign.center,
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
-            style: TextStyle(
-              fontSize: constraints.maxWidth < 55 ? 8 : 10,
-              color: Spark.of(context).muted,
+        if (!name.startsWith('Charm ')) ...[
+          const SizedBox(height: 5),
+          Flexible(
+            child: AppText(
+              equipmentLabel(name),
+              textAlign: TextAlign.center,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                fontSize: constraints.maxWidth < 55 ? 8 : 10,
+                color: Spark.of(context).muted,
+              ),
             ),
           ),
-        ),
+        ],
         if (item != null && constraints.maxHeight > 75) ...[
           const SizedBox(height: 5),
           Flexible(
@@ -223,4 +226,10 @@ class _EquipmentTile extends StatelessWidget {
     'MAGIC' => colors.tertiary,
     _ => item == null ? colors.outline : colors.onSurface,
   };
+
+  String _tooltip(BuildContext context) {
+    final label = translateUi(context, equipmentLabel(name));
+    if (item == null) return label;
+    return '$label\n${translateGame(context, '${item!['name']}')}';
+  }
 }

@@ -96,6 +96,8 @@ class SkillGroupSockets extends StatelessWidget {
                   enabled: draft.enabled,
                   id: draft.gem.id,
                   repository: editor.repository,
+                  level: int.tryParse(draft.level) ?? 1,
+                  quality: int.tryParse(draft.quality) ?? 0,
                 ),
               ),
               const SizedBox(height: 7),

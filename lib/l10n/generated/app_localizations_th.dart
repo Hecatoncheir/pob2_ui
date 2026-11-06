@@ -839,6 +839,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m616c984fe4 => 'อัปเดต MCP สำหรับแคตตาล็อกหินและความเข้ากันได้';
 
   @override
+  String get m9488a3217c => 'อัปเดต MCP สำหรับคำอธิบายอัญมณี';
+
+  @override
   String get m648c9e0082 => 'อัปเดต MCP สำหรับไอคอนดั้งเดิมและความเข้ากันได้';
 
   @override

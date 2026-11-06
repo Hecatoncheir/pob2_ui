@@ -835,6 +835,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m616c984fe4 => '更新 MCP 以取得石材目錄和相容性';
 
   @override
+  String get m9488a3217c => '更新 MCP 的寶石描述';
+
+  @override
   String get m648c9e0082 => '更新 MCP 以取得原始圖示和相容性';
 
   @override
@@ -2413,6 +2416,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m616c984fe4 => '更新 MCP 以取得石材目錄和相容性';
+
+  @override
+  String get m9488a3217c => '更新 MCP 的寶石描述';
 
   @override
   String get m648c9e0082 => '更新 MCP 以取得原始圖示和相容性';

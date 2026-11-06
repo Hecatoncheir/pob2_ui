@@ -40,7 +40,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get ma83268a520 => 'Lua did not return class directory';
 
   @override
-  String get me9dd147860 => 'Lua did not return the description of the stone';
+  String get me9dd147860 => 'Lua did not return a gem description';
 
   @override
   String get m59e00dc2d6 => 'Lua did not return condition description';
@@ -841,6 +841,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get m616c984fe4 => 'Update MCP for stone catalog and compatibility';
+
+  @override
+  String get m9488a3217c => 'Update MCP for gem descriptions';
 
   @override
   String get m648c9e0082 => 'Update MCP for original icons and compatibility';

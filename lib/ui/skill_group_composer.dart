@@ -77,6 +77,8 @@ class SkillGroupComposer extends StatelessWidget {
           enabled: primary.enabled,
           id: primary.gem.id,
           repository: editor.repository,
+          level: int.tryParse(primary.level) ?? 1,
+          quality: int.tryParse(primary.quality) ?? 0,
         ),
       ),
     );

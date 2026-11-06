@@ -50,7 +50,7 @@
     "description": "Lua не вернул каталог классов",
     "placeholders": {}
   },
-  "me9dd147860": "Lua did not return the description of the stone",
+  "me9dd147860": "Lua did not return a gem description",
   "@me9dd147860": {
     "description": "Lua не вернул описание камня",
     "placeholders": {}
@@ -1423,6 +1423,11 @@
   "m616c984fe4": "Update MCP for stone catalog and compatibility",
   "@m616c984fe4": {
     "description": "Обновите MCP для каталога камней и совместимости",
+    "placeholders": {}
+  },
+  "m9488a3217c": "Update MCP for gem descriptions",
+  "@m9488a3217c": {
+    "description": "Обновите MCP для описаний камней",
     "placeholders": {}
   },
   "m648c9e0082": "Update MCP for original icons and compatibility",

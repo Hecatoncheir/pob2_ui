@@ -29,6 +29,8 @@ SEEDS.update({'Полный DPS': 'Full DPS', 'Суммарный DPS': 'Combine
 
 
 SEEDS.update({
+    'Обновите MCP для описаний камней': 'Update MCP for gem descriptions',
+    'Lua не вернул описание камня': 'Lua did not return a gem description',
     'Новая группа умений': 'New skill group', 'Новая группа': 'New group',
     'Название группы': 'Group name', 'Найти камень': 'Search gems',
     'Добавить и рассчитать': 'Add and calculate', 'Заданные': 'Configured',

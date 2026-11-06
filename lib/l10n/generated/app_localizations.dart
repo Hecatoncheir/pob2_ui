@@ -179,7 +179,7 @@ abstract class AppLocalizations {
   /// Lua не вернул описание камня
   ///
   /// In en, this message translates to:
-  /// **'Lua did not return the description of the stone'**
+  /// **'Lua did not return a gem description'**
   String get me9dd147860;
 
   /// Lua не вернул описание условия
@@ -1616,6 +1616,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Update MCP for stone catalog and compatibility'**
   String get m616c984fe4;
+
+  /// Обновите MCP для описаний камней
+  ///
+  /// In en, this message translates to:
+  /// **'Update MCP for gem descriptions'**
+  String get m9488a3217c;
 
   /// Обновите MCP для оригинальных иконок и совместимости
   ///

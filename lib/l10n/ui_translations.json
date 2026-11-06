@@ -250,6 +250,7 @@
     "mbe485a0526": "Оберег II",
     "m4a1afe7893": "Оберег III",
     "m616c984fe4": "Обновите MCP для каталога камней и совместимости",
+    "m9488a3217c": "Обновите MCP для описаний камней",
     "m648c9e0082": "Обновите MCP для оригинальных иконок и совместимости",
     "md423f03f4f": "Обновите MCP для оригинальных иконок камней",
     "m2788a17cac": "Обновите MCP для редактирования группы",
@@ -900,7 +901,7 @@
     "mbfea4c6fd4": "New skill group",
     "m94fde688e0": "Remove gem",
     "m88beda68f0": "Lua returned an incomplete directory",
-    "me9dd147860": "Lua did not return the description of the stone",
+    "me9dd147860": "Lua did not return a gem description",
     "m59e00dc2d6": "Lua did not return condition description",
     "mdd0a89ad92": "Enter an integer",
     "m005a65ad56": "Enter number",
@@ -973,7 +974,8 @@
     "md8a38f5bc2": "Vial of Health",
     "m5d2173db9c": "Mana Vial",
     "m53d8cdfa9d": "Helmet",
-    "mf0216281b8": "Additional cells"
+    "mf0216281b8": "Additional cells",
+    "m9488a3217c": "Update MCP for gem descriptions"
   },
   "fr": {
     "m0c63e733f9": "Lua n'a pas renvoyé toutes les icônes",
@@ -1461,7 +1463,8 @@
     "md8a38f5bc2": "Fiole de santé",
     "m5d2173db9c": "Fiole de mana",
     "m53d8cdfa9d": "Casque",
-    "mf0216281b8": "Cellules supplémentaires"
+    "mf0216281b8": "Cellules supplémentaires",
+    "m9488a3217c": "Mise à jour MCP pour les descriptions de gemmes"
   },
   "de": {
     "m0c63e733f9": "Lua hat nicht alle Symbole zurückgegeben",
@@ -1949,7 +1952,8 @@
     "md8a38f5bc2": "Fläschchen der Gesundheit",
     "m5d2173db9c": "Manaphiole",
     "m53d8cdfa9d": "Helm",
-    "mf0216281b8": "Zusätzliche Zellen"
+    "mf0216281b8": "Zusätzliche Zellen",
+    "m9488a3217c": "Update MCP für Edelsteinbeschreibungen"
   },
   "es": {
     "m0c63e733f9": "Lua no devolvió todos los íconos",
@@ -2437,7 +2441,8 @@
     "md8a38f5bc2": "Frasco de Salud",
     "m5d2173db9c": "Vial de maná",
     "m53d8cdfa9d": "Casco",
-    "mf0216281b8": "Celdas adicionales"
+    "mf0216281b8": "Celdas adicionales",
+    "m9488a3217c": "Actualización MCP para descripciones de gemas"
   },
   "pt_BR": {
     "m0c63e733f9": "Lua não retornou todos os ícones",
@@ -2925,7 +2930,8 @@
     "md8a38f5bc2": "Frasco de Saúde",
     "m5d2173db9c": "Frasco de Mana",
     "m53d8cdfa9d": "Capacete",
-    "mf0216281b8": "Células adicionais"
+    "mf0216281b8": "Células adicionais",
+    "m9488a3217c": "Atualização MCP para descrições de gemas"
   },
   "ja": {
     "m0c63e733f9": "Lua はすべてのアイコンを返しませんでした",
@@ -3413,7 +3419,8 @@
     "md8a38f5bc2": "健康の小瓶",
     "m5d2173db9c": "マナの小瓶",
     "m53d8cdfa9d": "ヘルメット",
-    "mf0216281b8": "追加のセル"
+    "mf0216281b8": "追加のセル",
+    "m9488a3217c": "宝石の説明の MCP を更新"
   },
   "ko": {
     "m0c63e733f9": "Lua이 모든 아이콘을 반환하지 않았습니다.",
@@ -3901,7 +3908,8 @@
     "md8a38f5bc2": "건강의 약병",
     "m5d2173db9c": "마나 약병",
     "m53d8cdfa9d": "헬멧",
-    "mf0216281b8": "추가 셀"
+    "mf0216281b8": "추가 셀",
+    "m9488a3217c": "보석 설명 업데이트 MCP"
   },
   "th": {
     "m0c63e733f9": "Lua ไม่ได้ส่งคืนไอคอนทั้งหมด",
@@ -4389,7 +4397,8 @@
     "md8a38f5bc2": "ขวดเพื่อสุขภาพ",
     "m5d2173db9c": "ขวดมานา",
     "m53d8cdfa9d": "หมวกกันน็อค",
-    "mf0216281b8": "เซลล์เพิ่มเติม"
+    "mf0216281b8": "เซลล์เพิ่มเติม",
+    "m9488a3217c": "อัปเดต MCP สำหรับคำอธิบายอัญมณี"
   },
   "zh_Hant": {
     "m0c63e733f9": "Lua 未傳回所有圖標",
@@ -4877,6 +4886,7 @@
     "md8a38f5bc2": "小瓶健康",
     "m5d2173db9c": "法力瓶",
     "m53d8cdfa9d": "頭盔",
-    "mf0216281b8": "其他單元格"
+    "mf0216281b8": "其他單元格",
+    "m9488a3217c": "更新 MCP 的寶石描述"
   }
 }

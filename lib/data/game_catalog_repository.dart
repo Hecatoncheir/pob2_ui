@@ -18,6 +18,29 @@ class GameCatalogRepository {
   bool get hasGemEditor =>
       engine.tools.containsAll({'pob_gem_icons', 'pob_gem_supports'});
 
+  Future<List<JsonMap>> gemTooltip({
+    required String id,
+    int level = 1,
+    int quality = 0,
+    int? groupId,
+    int? sourceIndex,
+  }) async {
+    if (!engine.tools.contains('pob_gem_tooltip')) {
+      throw const FormatException('Обновите MCP для описаний камней');
+    }
+    final arguments = groupId != null && sourceIndex != null
+        ? <String, dynamic>{'groupId': groupId, 'sourceIndex': sourceIndex}
+        : <String, dynamic>{'id': id, 'level': level, 'quality': quality};
+    final result = await engine.call('pob_gem_tooltip', arguments);
+    if (result case {
+      'source': 'original-lua',
+      'lines': final List<dynamic> _,
+    }) {
+      return List.unmodifiable(jsonRows(result['lines']));
+    }
+    throw const FormatException('Lua не вернул описание камня');
+  }
+
   void clear() {
     _cache.clear();
     _icons.clear();
