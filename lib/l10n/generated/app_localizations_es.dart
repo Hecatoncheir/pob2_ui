@@ -527,6 +527,11 @@ class AppLocalizationsEs extends AppLocalizations {
   }
 
   @override
+  String mcf4205d2e9(String p0) {
+    return 'No se pudo restaurar el estado después del error: $p0';
+  }
+
+  @override
   String m4b1c83eb15(String p0) {
     return 'No se pudo cargar la traducción: $p0';
   }
@@ -828,6 +833,9 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get m5189135a61 => 'Repetir';
+
+  @override
+  String get madb0c613d6 => 'Repetir acción';
 
   @override
   String get mbcc0fdbe14 => 'Probabilidad de supresión de hechizos';

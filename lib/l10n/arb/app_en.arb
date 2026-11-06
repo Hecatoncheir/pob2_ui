@@ -884,6 +884,15 @@
       }
     }
   },
+  "mcf4205d2e9": "Failed to restore state after error: {p0}",
+  "@mcf4205d2e9": {
+    "description": "Не удалось восстановить состояние после ошибки: {p0}",
+    "placeholders": {
+      "p0": {
+        "type": "String"
+      }
+    }
+  },
   "m4b1c83eb15": "Failed to load translation: {p0}",
   "@m4b1c83eb15": {
     "description": "Не удалось загрузить перевод: {p0}",
@@ -1382,6 +1391,11 @@
   "m5189135a61": "Repeat",
   "@m5189135a61": {
     "description": "Повторить",
+    "placeholders": {}
+  },
+  "madb0c613d6": "Repeat action",
+  "@madb0c613d6": {
+    "description": "Повторить действие",
     "placeholders": {}
   },
   "mbcc0fdbe14": "Spell Suppression Chance",

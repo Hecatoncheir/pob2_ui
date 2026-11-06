@@ -600,6 +600,32 @@ Future<void> _searchAndAllocate(
         .allocated,
     isFalse,
   );
+  await tester.pumpAndSettle();
+  await tester.tap(find.byKey(const Key('redo-build')));
+  await _waitForIdle(tester, model);
+  expect(
+    model.state.document!.tree!.nodes
+        .firstWhere((node) => node.id == target)
+        .allocated,
+    isTrue,
+  );
+  final restoredStats = model.state.report!.stats;
+  await model.undo();
+  await tester.pumpAndSettle();
+  await tester.sendKeyDownEvent(LogicalKeyboardKey.controlLeft);
+  await tester.sendKeyDownEvent(LogicalKeyboardKey.shiftLeft);
+  await tester.sendKeyEvent(LogicalKeyboardKey.keyZ);
+  await tester.sendKeyUpEvent(LogicalKeyboardKey.shiftLeft);
+  await tester.sendKeyUpEvent(LogicalKeyboardKey.controlLeft);
+  await _waitForIdle(tester, model);
+  expect(
+    model.state.document!.tree!.nodes
+        .firstWhere((node) => node.id == target)
+        .allocated,
+    isTrue,
+  );
+  expect(model.state.report!.stats, restoredStats);
+  await model.undo();
   await mouse.removePointer();
 }
 

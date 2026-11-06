@@ -6,6 +6,7 @@ import '../domain/tree_allocation_mode.dart';
 
 typedef WorkshopOperation = ({bool busy, String? error});
 typedef XmlDraft = ({String xml, bool edited});
+typedef HistoryCounts = ({int undo, int redo});
 typedef WorkshopDocument = ({
   BuildReport report,
   TreeGeometry? tree,
@@ -19,7 +20,7 @@ class WorkshopState {
     this.status = 'Установите компоненты и подключите Lua',
     this.document,
     this.treeMode = TreeAllocationMode.common,
-    this.undoCount = 0,
+    this.history = (undo: 0, redo: 0),
     LibraryState? library,
     this.sessionSaved = false,
     this.draft = (xml: '', edited: false),
@@ -37,7 +38,9 @@ class WorkshopState {
   final String status;
   final WorkshopDocument? document;
   final TreeAllocationMode treeMode;
-  final int undoCount;
+  final HistoryCounts history;
+  int get undoCount => history.undo;
+  int get redoCount => history.redo;
   BuildReport? get report => document?.report;
   final LibraryState library;
   final bool sessionSaved;
@@ -53,7 +56,7 @@ class WorkshopState {
     String? status,
     WorkshopDocument? document,
     TreeAllocationMode? treeMode,
-    int? undoCount,
+    HistoryCounts? history,
     LibraryState? library,
     bool clearReport = false,
     bool? sessionSaved,
@@ -66,7 +69,7 @@ class WorkshopState {
     status: status ?? this.status,
     document: _nextDocument(document, clearReport),
     treeMode: treeMode ?? this.treeMode,
-    undoCount: undoCount ?? this.undoCount,
+    history: history ?? this.history,
     library: library ?? this.library,
     sessionSaved: sessionSaved ?? this.sessionSaved,
     draft: draft ?? this.draft,

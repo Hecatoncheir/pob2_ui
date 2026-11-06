@@ -534,6 +534,11 @@ class AppLocalizationsDe extends AppLocalizations {
   }
 
   @override
+  String mcf4205d2e9(String p0) {
+    return 'Fehler beim Wiederherstellen des Status nach Fehler: $p0';
+  }
+
+  @override
   String m4b1c83eb15(String p0) {
     return 'Übersetzung konnte nicht geladen werden: $p0';
   }
@@ -832,6 +837,9 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get m5189135a61 => 'Wiederholen';
+
+  @override
+  String get madb0c613d6 => 'Aktion wiederholen';
 
   @override
   String get mbcc0fdbe14 => 'Chance auf Zauberunterdrückung';

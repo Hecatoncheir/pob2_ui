@@ -17,6 +17,8 @@ import '../domain/component.dart';
 import 'workshop_state.dart';
 import '../domain/tree_allocation_mode.dart';
 
+typedef _BuildSnapshot = ({String xml, String title});
+
 class WorkshopCubit extends Cubit<WorkshopState> {
   WorkshopCubit(this.components, this.engine, {WorkshopState? initialState})
     : session = SessionRepository(components.store.root),
@@ -30,7 +32,8 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     root: Directory.fromUri(components.store.root.uri.resolve('tree-cache/')),
   );
   String? _nextTitle;
-  final List<({String xml, String title})> _undoHistory = [];
+  final List<_BuildSnapshot> _undoHistory = [];
+  final List<_BuildSnapshot> _redoHistory = [];
 
   bool get ready => components.active.length == Component.values.length;
   String get _componentSource =>
@@ -209,7 +212,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     await _loadXml(xml);
     _beginDocument('Импортированная сборка');
     await _readReport();
-    _clearUndo();
+    _clearHistory();
   });
 
   Future<void> createBuild(
@@ -226,7 +229,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     await _restoreTreeMode();
     _beginDocument(name);
     await _readReport();
-    _clearUndo();
+    _clearHistory();
   });
 
   Future<void> refreshReport() => _run(() async {
@@ -336,7 +339,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
       ),
     );
     await _readReport();
-    _clearUndo();
+    _clearHistory();
   });
 
   Future<void> copyBuild() => _run(() async {
@@ -353,7 +356,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     );
     _nextTitle = null;
     _update(state.copyWith(library: builds));
-    _clearUndo();
+    _clearHistory();
   });
 
   Future<void> renameBuild(String title) => _run(() async {
@@ -443,23 +446,57 @@ class WorkshopCubit extends Cubit<WorkshopState> {
   }
 
   void _pushUndo(String xml, {String? title}) {
-    _undoHistory.add((
+    _appendSnapshot(_undoHistory, (
       xml: xml,
       title: title ?? state.library.active?.title ?? state.report!.name,
     ));
-    if (_undoHistory.length > 50) _undoHistory.removeAt(0);
-    _update(state.copyWith(undoCount: _undoHistory.length));
+    _redoHistory.clear();
+    _publishHistory();
   }
 
-  void _clearUndo() {
+  void _appendSnapshot(List<_BuildSnapshot> history, _BuildSnapshot snapshot) {
+    history.add(snapshot);
+    if (history.length > 50) history.removeAt(0);
+  }
+
+  void _publishHistory() => _update(
+    state.copyWith(
+      history: (undo: _undoHistory.length, redo: _redoHistory.length),
+    ),
+  );
+
+  void _clearHistory() {
     _undoHistory.clear();
-    _update(state.copyWith(undoCount: 0));
+    _redoHistory.clear();
+    _publishHistory();
   }
 
-  Future<void> undo() => _run(() async {
-    if (_undoHistory.isEmpty) return;
+  Future<void> undo() => _moveHistory(_undoHistory, _redoHistory);
+
+  Future<void> redo() => _moveHistory(_redoHistory, _undoHistory);
+
+  Future<void> _moveHistory(
+    List<_BuildSnapshot> source,
+    List<_BuildSnapshot> destination,
+  ) => _run(() async {
+    if (source.isEmpty) return;
+    final before = (
+      xml: await _currentXml(),
+      title: state.library.active?.title ?? state.report!.name,
+    );
+    try {
+      await _restoreSnapshot(source.last);
+    } catch (_) {
+      await _recoverSnapshot(before);
+      rethrow;
+    }
+    source.removeLast();
+    _appendSnapshot(destination, before);
+    _publishHistory();
+  });
+
+  Future<void> _restoreSnapshot(_BuildSnapshot snapshot) async {
     _markStale();
-    final snapshot = _undoHistory.last;
     await _loadXml(snapshot.xml);
     _nextTitle = snapshot.title;
     try {
@@ -467,9 +504,16 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     } finally {
       _nextTitle = null;
     }
-    _undoHistory.removeLast();
-    _update(state.copyWith(undoCount: _undoHistory.length));
-  });
+  }
+
+  Future<void> _recoverSnapshot(_BuildSnapshot snapshot) async {
+    try {
+      await _restoreSnapshot(snapshot);
+    } catch (error) {
+      _markStale();
+      addLog('Не удалось восстановить состояние после ошибки: $error');
+    }
+  }
 
   Future<String> _currentXml() async =>
       switch (await engine.call('pob_export_xml')) {
@@ -488,7 +532,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
   Future<void> _disconnect() async {
     await engine.close();
     _update(state.copyWith(classes: [], clearReport: true));
-    _clearUndo();
+    _clearHistory();
   }
 
   void editDraft(String value) =>

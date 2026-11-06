@@ -27,11 +27,101 @@ class ShortcutWorkshop extends WorkshopCubit {
   ShortcutWorkshop(Directory root)
     : super(ComponentRepository(store: InstallationStore(root)), McpClient());
   int undoCalls = 0;
+  int redoCalls = 0;
   @override
   Future<void> undo() async => undoCalls++;
+  @override
+  Future<void> redo() async => redoCalls++;
 }
 
 void main() {
+  test('Новый Redo не перехватывает старые пользовательские Ctrl+Shift+Z и Cmd+Shift+Z', () {
+    final primary = defaultBinding(AppCommand.redo);
+    final legacy = WorkspacePreferences(shortcuts: {AppCommand.undo: primary});
+    expect(commandBinding(legacy, AppCommand.redo), isNull);
+    expect(commandBindings(legacy, AppCommand.undo), [primary]);
+    final meta = (
+      key: primary.key,
+      control: false,
+      alt: false,
+      shift: true,
+      meta: true,
+    );
+    final metaLegacy = WorkspacePreferences(
+      shortcuts: {AppCommand.newBuild: meta},
+    );
+    expect(commandBinding(metaLegacy, AppCommand.redo), primary);
+    expect(commandBindings(metaLegacy, AppCommand.redo), [primary]);
+  });
+  test('Старые настройки получают Ctrl+Shift+Z; новое сочетание Redo сохраняется и проверяется на конфликты', () async {
+    final root = await Directory.systemTemp.createTemp('pob2-redo-keys-');
+    addTearDown(() => removeTemporaryDirectory(root));
+    final repository = WorkspacePreferencesRepository(root);
+    final preferences = WorkspacePreferencesCubit(repository);
+    final defaultRedo = defaultBinding(AppCommand.redo);
+    expect(defaultRedo.key, LogicalKeyboardKey.keyZ.keyId);
+    expect(defaultRedo.control, isTrue);
+    expect(defaultRedo.shift, isTrue);
+    expect(
+      commandBindings(preferences.state.preferences, AppCommand.redo).last.meta,
+      isTrue,
+    );
+    expect(
+      commandBindings(
+        preferences.state.preferences,
+        AppCommand.redo,
+      ).last.shift,
+      isTrue,
+    );
+    await preferences.setBinding(AppCommand.undo, defaultRedo);
+    expect(preferences.state.error, isNotNull);
+    final custom = (
+      key: LogicalKeyboardKey.keyR.keyId,
+      control: true,
+      alt: true,
+      shift: false,
+      meta: false,
+    );
+    await preferences.setBinding(AppCommand.redo, custom);
+    await preferences.close();
+    expect(commandBinding(await repository.load(), AppCommand.redo), custom);
+  });
+
+  testWidgets(
+    'Ctrl+Shift+Z повторяет действие; сочетание Redo меняется в настройках',
+    (tester) async {
+      final root = Directory('unused-redo-shortcuts-test');
+      final repository = MemoryWorkspacePreferences(root);
+      final preferences = WorkspacePreferencesCubit(repository);
+      final model = ShortcutWorkshop(root);
+      await tester.pumpWidget(
+        PobApp(model: model, workspacePreferences: preferences),
+      );
+      await tester.pumpAndSettle();
+      await _redoKeys(tester, LogicalKeyboardKey.keyZ, shift: true);
+      expect(model.redoCalls, 1);
+      expect(model.undoCalls, 0);
+      await tester.tap(find.byKey(const Key('appearance-settings')));
+      await tester.pumpAndSettle();
+      final row = find.byKey(const Key('shortcut-redo'));
+      await tester.ensureVisible(row);
+      await tester.tap(row);
+      await tester.pumpAndSettle();
+      await _redoKeys(tester, LogicalKeyboardKey.keyR, alt: true);
+      expect(model.redoCalls, 1);
+      await tester.tap(find.text('Готово'));
+      await tester.pumpAndSettle();
+      await _redoKeys(tester, LogicalKeyboardKey.keyZ, shift: true);
+      expect(model.redoCalls, 1);
+      await _redoKeys(tester, LogicalKeyboardKey.keyR, alt: true);
+      expect(model.redoCalls, 2);
+      expect(model.undoCalls, 0);
+      expect(commandBinding(repository.saved, AppCommand.redo)!.alt, isTrue);
+      await tester.pumpWidget(const SizedBox.shrink());
+      await preferences.close();
+      await model.close();
+    },
+  );
   test('Ширина и сочетания сохраняются; конфликты, включая Cmd и дополнительные клавиши масштаба, отклоняются', () async {
     final root = await Directory.systemTemp.createTemp('pob2-preferences-');
     addTearDown(() => removeTemporaryDirectory(root));
@@ -170,4 +260,20 @@ void main() {
       expect(commandBinding(repository.saved, AppCommand.undo)!.shift, isTrue);
     },
   );
+}
+
+Future<void> _redoKeys(
+  WidgetTester tester,
+  LogicalKeyboardKey key, {
+  bool shift = false,
+  bool alt = false,
+}) async {
+  await tester.sendKeyDownEvent(LogicalKeyboardKey.controlLeft);
+  if (shift) await tester.sendKeyDownEvent(LogicalKeyboardKey.shiftLeft);
+  if (alt) await tester.sendKeyDownEvent(LogicalKeyboardKey.altLeft);
+  await tester.sendKeyEvent(key);
+  if (alt) await tester.sendKeyUpEvent(LogicalKeyboardKey.altLeft);
+  if (shift) await tester.sendKeyUpEvent(LogicalKeyboardKey.shiftLeft);
+  await tester.sendKeyUpEvent(LogicalKeyboardKey.controlLeft);
+  await tester.pumpAndSettle();
 }

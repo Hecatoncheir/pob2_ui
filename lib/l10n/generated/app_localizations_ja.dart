@@ -517,6 +517,11 @@ class AppLocalizationsJa extends AppLocalizations {
   }
 
   @override
+  String mcf4205d2e9(String p0) {
+    return 'エラーの後、状態を復元できませんでした: $p0';
+  }
+
+  @override
   String m4b1c83eb15(String p0) {
     return '翻訳をロードできませんでした: $p0';
   }
@@ -809,6 +814,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m5189135a61 => 'リピート';
+
+  @override
+  String get madb0c613d6 => 'アクションを繰り返す';
 
   @override
   String get mbcc0fdbe14 => 'スペル抑制チャンス';

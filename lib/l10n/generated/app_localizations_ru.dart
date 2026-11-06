@@ -521,6 +521,11 @@ class AppLocalizationsRu extends AppLocalizations {
   }
 
   @override
+  String mcf4205d2e9(String p0) {
+    return 'Не удалось восстановить состояние после ошибки: $p0';
+  }
+
+  @override
   String m4b1c83eb15(String p0) {
     return 'Не удалось загрузить перевод: $p0';
   }
@@ -817,6 +822,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get m5189135a61 => 'Повторить';
+
+  @override
+  String get madb0c613d6 => 'Повторить действие';
 
   @override
   String get mbcc0fdbe14 => 'Подавление урона чар';

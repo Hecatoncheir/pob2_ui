@@ -526,6 +526,11 @@ class AppLocalizationsPt extends AppLocalizations {
   }
 
   @override
+  String mcf4205d2e9(String p0) {
+    return 'Falha ao restaurar o estado após erro: $p0';
+  }
+
+  @override
   String m4b1c83eb15(String p0) {
     return 'Falha ao carregar a tradução: $p0';
   }
@@ -826,6 +831,9 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get m5189135a61 => 'Repita';
+
+  @override
+  String get madb0c613d6 => 'Repetir ação';
 
   @override
   String get mbcc0fdbe14 => 'Chance de supressão de feitiço';
@@ -1845,6 +1853,11 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   }
 
   @override
+  String mcf4205d2e9(String p0) {
+    return 'Falha ao restaurar o estado após erro: $p0';
+  }
+
+  @override
   String m4b1c83eb15(String p0) {
     return 'Falha ao carregar a tradução: $p0';
   }
@@ -2145,6 +2158,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get m5189135a61 => 'Repita';
+
+  @override
+  String get madb0c613d6 => 'Repetir ação';
 
   @override
   String get mbcc0fdbe14 => 'Chance de supressão de feitiço';

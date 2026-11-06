@@ -517,6 +517,11 @@ class AppLocalizationsKo extends AppLocalizations {
   }
 
   @override
+  String mcf4205d2e9(String p0) {
+    return '오류 후 상태를 복원하지 못했습니다: $p0';
+  }
+
+  @override
   String m4b1c83eb15(String p0) {
     return '번역을 로드하지 못했습니다: $p0';
   }
@@ -809,6 +814,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m5189135a61 => '반복';
+
+  @override
+  String get madb0c613d6 => '작업 반복';
 
   @override
   String get mbcc0fdbe14 => '주문 억제 확률';

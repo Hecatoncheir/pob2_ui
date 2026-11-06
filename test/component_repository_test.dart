@@ -6,6 +6,8 @@ import 'package:pob2_ui/data/installation_store.dart';
 import 'package:pob2_ui/data/process_service.dart';
 import 'package:pob2_ui/domain/component.dart';
 
+import 'support/temporary_directory.dart';
+
 const oldPob = Installation(tag: 'v1', commit: 'old-pob', directory: 'old-pob');
 const oldMcp = Installation(tag: 'v1', commit: 'old-mcp', directory: 'old-mcp');
 
@@ -30,7 +32,7 @@ void main() {
     temporary = await Directory.systemTemp.createTemp('pob2-ui-test-');
     store = InstallationStore(temporary);
   });
-  tearDown(() async => temporary.delete(recursive: true));
+  tearDown(() => removeTemporaryDirectory(temporary));
 
   test(
     'Повторное сохранение заменяет активную пару и сохраняет предыдущую',

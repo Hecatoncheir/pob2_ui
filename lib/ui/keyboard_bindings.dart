@@ -5,6 +5,7 @@ import '../domain/workspace_preferences.dart';
 
 const commandLabels = {
   AppCommand.undo: 'Отменить действие',
+  AppCommand.redo: 'Повторить действие',
   AppCommand.newBuild: 'Новая сборка',
   AppCommand.importXml: 'Открыть XML',
   AppCommand.exportXml: 'Экспорт XML',
@@ -15,7 +16,7 @@ const commandLabels = {
 
 KeyBinding defaultBinding(AppCommand command) => (
   key: switch (command) {
-    AppCommand.undo => LogicalKeyboardKey.keyZ.keyId,
+    AppCommand.undo || AppCommand.redo => LogicalKeyboardKey.keyZ.keyId,
     AppCommand.newBuild => LogicalKeyboardKey.keyN.keyId,
     AppCommand.importXml => LogicalKeyboardKey.keyO.keyId,
     AppCommand.exportXml => LogicalKeyboardKey.keyS.keyId,
@@ -25,16 +26,19 @@ KeyBinding defaultBinding(AppCommand command) => (
   },
   control: true,
   alt: false,
-  shift: false,
+  shift: command == AppCommand.redo,
   meta: false,
 );
 
 KeyBinding? commandBinding(
   WorkspacePreferences preferences,
   AppCommand command,
-) => preferences.shortcuts.containsKey(command)
-    ? preferences.shortcuts[command]
-    : defaultBinding(command);
+) {
+  if (preferences.shortcuts.containsKey(command))
+    return preferences.shortcuts[command];
+  final binding = defaultBinding(command);
+  return preferences.shortcuts.values.contains(binding) ? null : binding;
+}
 
 Map<ShortcutActivator, VoidCallback> commandCallbacks(
   WorkspacePreferences preferences,
@@ -53,11 +57,20 @@ Iterable<KeyBinding> commandBindings(
   if (binding == null) return;
   yield binding;
   if (preferences.shortcuts.containsKey(command)) return;
+  for (final alias in _defaultAliases(command, binding)) {
+    if (!preferences.shortcuts.values.contains(alias)) yield alias;
+  }
+}
+
+Iterable<KeyBinding> _defaultAliases(
+  AppCommand command,
+  KeyBinding binding,
+) sync* {
   yield (
     key: binding.key,
     control: false,
     alt: false,
-    shift: false,
+    shift: binding.shift,
     meta: true,
   );
   if (command == AppCommand.zoomIn) {

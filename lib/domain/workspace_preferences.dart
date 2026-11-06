@@ -1,5 +1,6 @@
 enum AppCommand {
   undo,
+  redo,
   newBuild,
   importXml,
   exportXml,

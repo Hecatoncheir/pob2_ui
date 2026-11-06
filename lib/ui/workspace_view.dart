@@ -116,14 +116,7 @@ class _WorkspaceHeading extends StatelessWidget {
               ),
             ),
             const SizedBox(width: 8),
-            IconButton(
-              key: const Key('undo-build'),
-              tooltip: translateUi(context, 'Отменить действие'),
-              onPressed: model.state.busy || model.state.undoCount == 0
-                  ? null
-                  : model.undo,
-              icon: const Icon(Icons.undo_rounded, size: 20),
-            ),
+            _historyButtons(context, model),
             ArtIconButton(
               'upload',
               label: 'Открыть XML',
@@ -183,6 +176,28 @@ class _WorkspaceHeading extends StatelessWidget {
     );
   }
 }
+
+Widget _historyButtons(BuildContext context, WorkshopCubit model) => Row(
+  mainAxisSize: MainAxisSize.min,
+  children: [
+    IconButton(
+      key: const Key('undo-build'),
+      tooltip: translateUi(context, 'Отменить действие'),
+      onPressed: model.state.busy || model.state.undoCount == 0
+          ? null
+          : model.undo,
+      icon: const Icon(Icons.undo_rounded, size: 20),
+    ),
+    IconButton(
+      key: const Key('redo-build'),
+      tooltip: translateUi(context, 'Повторить действие'),
+      onPressed: model.state.busy || model.state.redoCount == 0
+          ? null
+          : model.redo,
+      icon: const Icon(Icons.redo_rounded, size: 20),
+    ),
+  ],
+);
 
 class _Tabs extends StatelessWidget {
   const _Tabs({required this.model, required this.shell});

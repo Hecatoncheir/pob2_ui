@@ -521,6 +521,11 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String mcf4205d2e9(String p0) {
+    return 'Failed to restore state after error: $p0';
+  }
+
+  @override
   String m4b1c83eb15(String p0) {
     return 'Failed to load translation: $p0';
   }
@@ -819,6 +824,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get m5189135a61 => 'Repeat';
+
+  @override
+  String get madb0c613d6 => 'Repeat action';
 
   @override
   String get mbcc0fdbe14 => 'Spell Suppression Chance';

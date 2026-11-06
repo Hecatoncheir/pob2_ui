@@ -530,6 +530,11 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
+  String mcf4205d2e9(String p0) {
+    return 'Échec de la restauration de l\'état après une erreur : $p0';
+  }
+
+  @override
   String m4b1c83eb15(String p0) {
     return 'Échec du chargement de la traduction : $p0';
   }
@@ -830,6 +835,9 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get m5189135a61 => 'Répéter';
+
+  @override
+  String get madb0c613d6 => 'Répéter l\'action';
 
   @override
   String get mbcc0fdbe14 => 'Chances de suppression des sorts';

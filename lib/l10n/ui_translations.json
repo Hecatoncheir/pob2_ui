@@ -153,6 +153,7 @@
     "m09823db229": "Не найден LOCALAPPDATA",
     "m0dbf2115c1": "Не найден домашний каталог",
     "m71a7205caa": "Не распознано: {p0}",
+    "mcf4205d2e9": "Не удалось восстановить состояние после ошибки: {p0}",
     "m4b1c83eb15": "Не удалось загрузить перевод: {p0}",
     "mce8b7ad723": "Не удалось открыть страницу выпусков: {p0}",
     "m0d58180884": "Не удалось показать подсветку: {p0}",
@@ -241,6 +242,7 @@
     "m98aa5e2776": "Перчатки",
     "m95121a4cc0": "Плавные анимации",
     "m5189135a61": "Повторить",
+    "madb0c613d6": "Повторить действие",
     "mbcc0fdbe14": "Подавление урона чар",
     "m52d7142d18": "Поддерживаются Windows x64, Linux x64 и macOS arm64",
     "m67f5d8880e": "Подключите Lua",
@@ -787,7 +789,9 @@
     "mde7b2b9b0d": "Reset combinations",
     "m87b737d42c": "Collapse panel",
     "md7dfb40adb": "Combination already in use: {p0}",
-    "mcfa3d536f8": "Remove combination"
+    "mcfa3d536f8": "Remove combination",
+    "mcf4205d2e9": "Failed to restore state after error: {p0}",
+    "madb0c613d6": "Repeat action"
   },
   "fr": {
     "m0c63e733f9": "Lua n'a pas renvoyé toutes les icônes",
@@ -1182,7 +1186,9 @@
     "mde7b2b9b0d": "Réinitialiser les combinaisons",
     "m87b737d42c": "Réduire le panneau",
     "md7dfb40adb": "Combinaison déjà utilisée : {p0}",
-    "mcfa3d536f8": "Supprimer la combinaison"
+    "mcfa3d536f8": "Supprimer la combinaison",
+    "mcf4205d2e9": "Échec de la restauration de l'état après une erreur : {p0}",
+    "madb0c613d6": "Répéter l'action"
   },
   "de": {
     "m0c63e733f9": "Lua hat nicht alle Symbole zurückgegeben",
@@ -1577,7 +1583,9 @@
     "mde7b2b9b0d": "Kombinationen zurücksetzen",
     "m87b737d42c": "Bedienfeld minimieren",
     "md7dfb40adb": "Kombination bereits verwendet: {p0}",
-    "mcfa3d536f8": "Kombination entfernen"
+    "mcfa3d536f8": "Kombination entfernen",
+    "mcf4205d2e9": "Fehler beim Wiederherstellen des Status nach Fehler: {p0}",
+    "madb0c613d6": "Aktion wiederholen"
   },
   "es": {
     "m0c63e733f9": "Lua no devolvió todos los íconos",
@@ -1972,7 +1980,9 @@
     "mde7b2b9b0d": "Restablecer combinaciones",
     "m87b737d42c": "Contraer panel",
     "md7dfb40adb": "Combinación ya en uso: {p0}",
-    "mcfa3d536f8": "Eliminar combinación"
+    "mcfa3d536f8": "Eliminar combinación",
+    "mcf4205d2e9": "No se pudo restaurar el estado después del error: {p0}",
+    "madb0c613d6": "Repetir acción"
   },
   "pt_BR": {
     "m0c63e733f9": "Lua não retornou todos os ícones",
@@ -2367,7 +2377,9 @@
     "mde7b2b9b0d": "Redefinir combinações",
     "m87b737d42c": "Recolher painel",
     "md7dfb40adb": "Combinação já em uso: {p0}",
-    "mcfa3d536f8": "Remover combinação"
+    "mcfa3d536f8": "Remover combinação",
+    "mcf4205d2e9": "Falha ao restaurar o estado após erro: {p0}",
+    "madb0c613d6": "Repetir ação"
   },
   "ja": {
     "m0c63e733f9": "Lua はすべてのアイコンを返しませんでした",
@@ -2762,7 +2774,9 @@
     "mde7b2b9b0d": "組み合わせをリセット",
     "m87b737d42c": "パネルを折りたたむ",
     "md7dfb40adb": "組み合わせはすでに使用されています: {p0}",
-    "mcfa3d536f8": "組み合わせを削除"
+    "mcfa3d536f8": "組み合わせを削除",
+    "mcf4205d2e9": "エラーの後、状態を復元できませんでした: {p0}",
+    "madb0c613d6": "アクションを繰り返す"
   },
   "ko": {
     "m0c63e733f9": "Lua이 모든 아이콘을 반환하지 않았습니다.",
@@ -3157,7 +3171,9 @@
     "mde7b2b9b0d": "조합 재설정",
     "m87b737d42c": "패널 축소",
     "md7dfb40adb": "이미 사용 중인 조합: {p0}",
-    "mcfa3d536f8": "조합 제거"
+    "mcfa3d536f8": "조합 제거",
+    "mcf4205d2e9": "오류 후 상태를 복원하지 못했습니다: {p0}",
+    "madb0c613d6": "작업 반복"
   },
   "th": {
     "m0c63e733f9": "Lua ไม่ได้ส่งคืนไอคอนทั้งหมด",
@@ -3552,7 +3568,9 @@
     "mde7b2b9b0d": "รีเซ็ตชุดค่าผสม",
     "m87b737d42c": "แผงยุบ",
     "md7dfb40adb": "ชุดค่าผสมถูกใช้แล้ว: {p0}",
-    "mcfa3d536f8": "ลบชุดค่าผสม"
+    "mcfa3d536f8": "ลบชุดค่าผสม",
+    "mcf4205d2e9": "ไม่สามารถกู้คืนสถานะหลังจากข้อผิดพลาด: {p0}",
+    "madb0c613d6": "ทำซ้ำการกระทำ"
   },
   "zh_Hant": {
     "m0c63e733f9": "Lua 未傳回所有圖標",
@@ -3947,6 +3965,8 @@
     "mde7b2b9b0d": "重置組合",
     "m87b737d42c": "折疊面板",
     "md7dfb40adb": "組合已在使用：{p0}",
-    "mcfa3d536f8": "刪除組合"
+    "mcfa3d536f8": "刪除組合",
+    "mcf4205d2e9": "發生錯誤後無法恢復狀態：{p0}",
+    "madb0c613d6": "重複操作"
   }
 }

@@ -427,6 +427,8 @@ final uiExactTranslations = <String, String Function(AppLocalizations)>{
   "Smooth animations": (l) => l.m95121a4cc0,
   "Повторить": (l) => l.m5189135a61,
   "Repeat": (l) => l.m5189135a61,
+  "Повторить действие": (l) => l.madb0c613d6,
+  "Repeat action": (l) => l.madb0c613d6,
   "Подавление урона чар": (l) => l.mbcc0fdbe14,
   "Spell Suppression Chance": (l) => l.mbcc0fdbe14,
   "Поддерживаются Windows x64, Linux x64 и macOS arm64": (l) => l.m52d7142d18,
@@ -733,6 +735,10 @@ final uiPatternTranslations = <UiRule>[
     (l, args) => l.mf01de15993(args[0]),
   ),
   UiRule(
+    "Не удалось восстановить состояние после ошибки: {p0}",
+    (l, args) => l.mcf4205d2e9(args[0]),
+  ),
+  UiRule(
     "Lua answers · {p0} classes · compatibility checked",
     (l, args) => l.mf01de15993(args[0]),
   ),
@@ -763,6 +769,10 @@ final uiPatternTranslations = <UiRule>[
   UiRule(
     "Lua answers. Classes in the catalog: {p0}",
     (l, args) => l.md9540a4b84(args[0]),
+  ),
+  UiRule(
+    "Failed to restore state after error: {p0}",
+    (l, args) => l.mcf4205d2e9(args[0]),
   ),
   UiRule(
     "Не удалось проверить SHA-256 файла: {p0}",

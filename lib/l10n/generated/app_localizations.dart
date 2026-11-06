@@ -1034,6 +1034,12 @@ abstract class AppLocalizations {
   /// **'Not recognized: {p0}'**
   String m71a7205caa(String p0);
 
+  /// Не удалось восстановить состояние после ошибки: {p0}
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to restore state after error: {p0}'**
+  String mcf4205d2e9(String p0);
+
   /// Не удалось загрузить перевод: {p0}
   ///
   /// In en, this message translates to:
@@ -1561,6 +1567,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Repeat'**
   String get m5189135a61;
+
+  /// Повторить действие
+  ///
+  /// In en, this message translates to:
+  /// **'Repeat action'**
+  String get madb0c613d6;
 
   /// Подавление урона чар
   ///

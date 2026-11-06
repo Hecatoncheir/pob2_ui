@@ -13,6 +13,7 @@ import 'support/workshop_fixture.dart';
 class HistoryEngine extends McpClient {
   int value = 0;
   bool reject = false;
+  int failedReports = 0;
   final imported = <String>[];
   @override
   Future<Map<String, dynamic>> call(
@@ -35,6 +36,10 @@ class HistoryEngine extends McpClient {
       case 'pob_set_config':
         return {};
       case 'pob_check_build':
+        if (failedReports > 0) {
+          failedReports--;
+          throw StateError('Lua не завершил расчёт');
+        }
         return {'report': fixture.raw};
       default:
         throw StateError(name);
@@ -43,6 +48,62 @@ class HistoryEngine extends McpClient {
 }
 
 void main() {
+  test('Несколько отмен и повторов восстанавливают XML и название в правильном порядке', () async {
+    final (model: model, engine: engine) = await _historyFixture();
+    await model.treeAction(1, false);
+    await model.treeAction(2, false);
+    final title = model.state.library.active!.title;
+    await model.renameBuild('После переименования');
+    await model.undo();
+    await model.undo();
+    expect(engine.value, 1);
+    expect(model.state.history, (undo: 1, redo: 2));
+    await model.redo();
+    expect(engine.value, 2);
+    expect(model.state.library.active!.title, title);
+    await model.redo();
+    expect(model.state.library.active!.title, 'После переименования');
+    expect(model.state.history, (undo: 3, redo: 0));
+    await model.redo();
+    expect(engine.value, 2);
+    expect(model.state.history, (undo: 3, redo: 0));
+  });
+
+  test('Неизменяющие и отклонённые действия сохраняют Redo; новое изменение и импорт очищают его', () async {
+    final (model: model, engine: engine) = await _historyFixture();
+    await model.treeAction(1, false);
+    await model.undo();
+    await model.setCondition('noop', true);
+    expect(model.state.redoCount, 1);
+    engine.reject = true;
+    await model.treeAction(2, false);
+    expect(model.state.redoCount, 1);
+    engine.reject = false;
+    await model.treeAction(3, false);
+    expect(model.state.redoCount, 0);
+    await model.redo();
+    expect(engine.value, 1);
+    await model.undo();
+    await model.importXml('<build value="10"/>');
+    expect(model.state.history, (undo: 0, redo: 0));
+  });
+
+  test('Ошибка Redo после импорта откатывает XML и сохраняет обе истории для следующей попытки', () async {
+    final (model: model, engine: engine) = await _historyFixture();
+    await model.treeAction(1, false);
+    await model.treeAction(2, false);
+    await model.undo();
+    engine.failedReports = 1;
+    await model.redo();
+    expect(model.state.error, contains('Lua не завершил расчёт'));
+    expect(engine.value, 1);
+    expect(model.state.history, (undo: 1, redo: 1));
+    await model.redo();
+    expect(engine.value, 2);
+    expect(model.state.error, isNull);
+    expect(model.state.history, (undo: 2, redo: 0));
+  });
+
   test('Отмена восстанавливает последовательные XML через Lua; отказ сохраняет историю', () async {
     final root = await Directory.systemTemp.createTemp('pob2-undo-');
     addTearDown(() => removeTemporaryDirectory(root));
@@ -86,4 +147,19 @@ void main() {
     await model.importXml('<build value="10"/>');
     expect(model.state.undoCount, 0);
   });
+}
+
+Future<({WorkshopCubit model, HistoryEngine engine})> _historyFixture() async {
+  final root = await Directory.systemTemp.createTemp('pob2-history-');
+  addTearDown(() => removeTemporaryDirectory(root));
+  final engine = HistoryEngine();
+  final model = WorkshopCubit(
+    ComponentRepository(store: InstallationStore(root)),
+    engine,
+    initialState: WorkshopState(
+      document: (report: fixture, tree: tree, stale: false, treeError: null),
+    ),
+  );
+  addTearDown(model.close);
+  return (model: model, engine: engine);
 }

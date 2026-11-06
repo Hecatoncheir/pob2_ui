@@ -233,16 +233,17 @@ class _KeyboardActions extends StatelessWidget {
                 _new(_dialogContext(context), model, shell),
             AppCommand.importXml: () => _import(_dialogContext(context)),
             AppCommand.exportXml: () => _export(_dialogContext(context)),
-            AppCommand.undo: _undo,
+            AppCommand.undo: () => _historyAction(model.undo),
+            AppCommand.redo: () => _historyAction(model.redo),
           }),
           child: child,
         ),
       );
   BuildContext _dialogContext(BuildContext fallback) =>
       navigator.currentState?.overlay?.context ?? fallback;
-  void _undo() {
+  void _historyAction(VoidCallback action) {
     if (navigator.currentState?.canPop() == true) return;
-    model.undo();
+    action();
   }
 
   void _import(BuildContext context) {
