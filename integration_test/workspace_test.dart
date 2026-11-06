@@ -66,7 +66,7 @@ void main() {
     addTearDown(language.close);
     final scale = InterfaceScaleCubit(InterfaceScaleRepository(root));
     addTearDown(scale.close);
-    await model.initialize();
+    await _stage('Подключение Lua', model.initialize);
     expect(model.state.error, isNull);
     expect(model.engine.connected, isTrue);
     final witch = model.state.classes.firstWhere(
@@ -103,19 +103,22 @@ void main() {
     expect(model.state.document!.tree!.original, isNotNull);
     await _capture(tester);
     expect(find.byType(TreeView), findsOneWidget);
-    await _searchAndAllocate(tester, model);
+    await _stage('Путь, Undo и Redo', () => _searchAndAllocate(tester, model));
     await tester.pumpAndSettle();
-    await _selectAttribute(tester, model);
-    await _selectWeaponModes(tester, model);
-    await _switchTheme(tester);
-    await _searchNodePower(tester, model);
+    await _stage('Смена атрибута', () => _selectAttribute(tester, model));
+    await _stage('Два набора оружия', () => _selectWeaponModes(tester, model));
+    await _stage('Темы и подсказки', () => _switchTheme(tester));
+    await _stage('Влияние узлов', () => _searchNodePower(tester, model));
     expect(model.state.error, isNull);
     expect(model.state.report!.stats['Life'], greaterThan(0));
     final xml = await model.exportXml();
     final stats = model.state.report!.stats;
     await model.importXml(xml!);
     expect(model.state.report!.stats, stats);
-    await _fileWorkflow(model, dialogs, root);
+    await _stage(
+      'Файлы XML, отказ импорта и заметки',
+      () => _fileWorkflow(model, dialogs, root),
+    );
     for (final tab in [
       'items',
       'skills',
@@ -127,14 +130,22 @@ void main() {
       await tester.pumpAndSettle();
       expect(tester.takeException(), isNull);
     }
-    await _localizeTree(tester, model, language);
-    await _reviewScale(tester, scale);
+    await _stage(
+      'Переводы дерева',
+      () => _localizeTree(tester, model, language),
+    );
+    await _stage(
+      'Масштаб 135, 200 и 100 процентов',
+      () => _reviewScale(tester, scale),
+    );
+    debugPrint('Начало: компоненты и библиотека');
     await tester.tap(find.byKey(const ValueKey('page-components')));
     await tester.pumpAndSettle();
     await _capture(tester, suffix: '-components');
     await tester.tap(find.byKey(const ValueKey('page-library')));
     await tester.pumpAndSettle();
     expect(find.text('Проверка интерфейса Lua'), findsWidgets);
+    debugPrint('Готово: компоненты и библиотека');
     await tester.pumpWidget(
       RepaintBoundary(
         key: const Key('review-image'),
@@ -142,7 +153,14 @@ void main() {
       ),
     );
     await tester.pumpAndSettle();
-  }, timeout: const Timeout(Duration(minutes: 4)));
+  }, timeout: Timeout(Duration(minutes: Platform.isLinux ? 8 : 4)));
+}
+
+Future<void> _stage(String label, Future<void> Function() action) async {
+  final watch = Stopwatch()..start();
+  debugPrint('Начало: $label');
+  await action();
+  debugPrint('Готово: $label (${watch.elapsed.inSeconds} с)');
 }
 
 Future<void> _fileWorkflow(
