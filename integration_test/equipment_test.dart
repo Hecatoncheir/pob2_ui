@@ -165,7 +165,16 @@ Future<void> _tradePreview(WidgetTester tester, WorkshopCubit model) async {
     'maximum Life',
   );
   await tester.pumpAndSettle();
-  await _tap(tester, find.byKey(ValueKey('trade-choice-${stat.id}')));
+  final choice = find.byKey(ValueKey('trade-choice-${stat.id}'));
+  await tester.scrollUntilVisible(
+    choice,
+    120,
+    scrollable: find.descendant(
+      of: find.byKey(const Key('trade-choice-list')),
+      matching: find.byType(Scrollable),
+    ),
+  );
+  await _tap(tester, choice);
   final minimum = find.byKey(ValueKey('trade-${stat.id}-min'));
   await tester.ensureVisible(minimum);
   await tester.enterText(minimum, '80');

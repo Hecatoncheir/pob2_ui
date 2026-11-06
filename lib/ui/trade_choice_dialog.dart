@@ -66,6 +66,7 @@ class _ChoiceDialog extends StatelessWidget {
     final rows = choices.where((row) => _matches(context, row, query)).toList();
     if (rows.isEmpty) return const Center(child: AppText('Ничего не найдено'));
     return ListView.builder(
+      key: const Key('trade-choice-list'),
       itemCount: rows.length,
       itemBuilder: (context, index) {
         final row = rows[index];
