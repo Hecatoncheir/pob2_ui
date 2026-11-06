@@ -1,4 +1,4 @@
-"""Настоящее окно Windows: размер, положение, разворачивание и отключённый экран."""
+"""Настоящее окно Windows: геометрия и сохранение данных перед закрытием."""
 
 import ctypes as C
 import argparse
@@ -6,6 +6,7 @@ from ctypes import wintypes as W
 import os
 from pathlib import Path
 import subprocess
+import stat
 import tempfile
 import time
 
@@ -65,6 +66,7 @@ def check(binary, root):
         expected = rectangle(window)
         close(process, window)
         assert (root / 'window-state.bin').is_file(), 'Положение не сохранено'
+        assert (root / 'draft.xml').is_file(), 'Закрытие обошло сохранение Flutter'
         process, window = start(binary, root)
         assert rectangle(window) == expected, (rectangle(window), expected)
         USER.ShowWindow(window, 3)
@@ -88,9 +90,41 @@ def check(binary, root):
             process.wait(timeout=10)
 
 
+def check_close_guard(binary, root):
+    root.mkdir()
+    draft = root / 'draft.xml'
+    backup = root / 'draft.xml.bak'
+    text = '<draft>Проверка сохранения</draft>'
+    draft.write_text(text, encoding='utf-8')
+    draft.chmod(stat.S_IREAD)
+    process, window = start(binary, root)
+    try:
+        deadline = time.monotonic() + 10
+        while not backup.exists():
+            USER.PostMessageW(window, 0x10, 0, 0)
+            time.sleep(.2)
+            assert process.poll() is None, 'Ошибка записи не остановила закрытие'
+            if time.monotonic() > deadline:
+                raise RuntimeError('Обработчик закрытия не попытался сохранить черновик')
+        assert draft.read_text(encoding='utf-8') == text, 'Черновик изменён при отказе записи'
+        draft.chmod(stat.S_IREAD | stat.S_IWRITE)
+        backup.chmod(stat.S_IREAD | stat.S_IWRITE)
+        close(process, window)
+        assert draft.read_text(encoding='utf-8') == text, 'Повторное закрытие потеряло текст'
+        print('Закрытие: ошибка записи удерживает окно; повтор сохраняет текст и завершает приложение')
+    finally:
+        for file in (draft, backup):
+            if file.exists():
+                file.chmod(stat.S_IREAD | stat.S_IWRITE)
+        if process.poll() is None:
+            process.kill()
+            process.wait(timeout=10)
+
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--binary', type=Path, default=ROOT / 'build/windows/x64/runner/Release/pob2_ui.exe')
     arguments = parser.parse_args()
     with tempfile.TemporaryDirectory(prefix='pob2-window-test-') as temporary:
         check(arguments.binary, Path(temporary))
+        check_close_guard(arguments.binary, Path(temporary) / 'close-guard')
