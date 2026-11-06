@@ -135,7 +135,10 @@ def draw(element, inherited, output, counter):
 
 
 def main():
-    files = sorted((ROOT / 'docs/assets').rglob('*.svg'))
+    # Значки ОС предназначены для сайта и не входят в ресурсы Flutter.
+    assets = ROOT / 'docs/assets'
+    files = sorted(file for folder in ('brand', 'icons', 'illustrations')
+                   for file in (assets / folder).rglob('*.svg'))
     header = ["// Сгенерировано tool/generate_vectors.py из SVG; правьте исходные SVG.", "import 'dart:ui';", "typedef VectorDrawing = ({Size size, void Function(Canvas, Color, Color) draw});", 'final vectorDrawings = <String, VectorDrawing>{']
     functions = []
     for index, file in enumerate(files):
