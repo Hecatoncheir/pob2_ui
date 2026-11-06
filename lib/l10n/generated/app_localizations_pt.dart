@@ -217,6 +217,9 @@ class AppLocalizationsPt extends AppLocalizations {
   String get m8d6001a308 => 'Mana total';
 
   @override
+  String get mec79f4d0c8 => 'Colar';
+
+  @override
   String get me4c25f9a5f => 'Inserir XML';
 
   @override
@@ -249,6 +252,9 @@ class AppLocalizationsPt extends AppLocalizations {
       'Selecione uma característica e clique em Localizar.';
 
   @override
+  String get mf99d75f022 => 'Selecione um slot de equipamento';
+
+  @override
   String get m8d6db8b168 => 'Nenhuma alteração na alocação deste nó.';
 
   @override
@@ -272,9 +278,6 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get m903bd09e68 => 'Executando a operação...';
-
-  @override
-  String get mac053cfb90 => 'Cabeça';
 
   @override
   String get m13b0a5cc9a => 'Teclas de atalho';
@@ -350,11 +353,17 @@ class AppLocalizationsPt extends AppLocalizations {
   String get ma11b26e5e9 => 'Adicionar e calcular';
 
   @override
+  String get m9cef26392f => 'Adicionar item';
+
+  @override
   String get mbc10505bdf =>
       'Adicione um grupo de pedras para obter o cálculo da habilidade.';
 
   @override
   String get mab04eae138 => 'Aguarde a conclusão da operação atual';
+
+  @override
+  String get mf0216281b8 => 'Células adicionais';
 
   @override
   String m10b5bc7e91(String p0) {
@@ -412,6 +421,9 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get ma7a4033657 => 'Fechar';
+
+  @override
+  String get mbfc7b67eb5 => 'Substituir item';
 
   @override
   String get mdc4baf32ac => 'Notas de construção';
@@ -500,6 +512,9 @@ class AppLocalizationsPt extends AppLocalizations {
   String get m20555cd71a => 'Anel II';
 
   @override
+  String get m9ca9ef70fe => 'Anel III';
+
+  @override
   String get m1e8466ebeb => 'Componentes';
 
   @override
@@ -515,6 +530,9 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get m7bf311d808 => 'Mão esquerda';
+
+  @override
+  String get m7825825def => 'Mão esquerda II';
 
   @override
   String get m609fc60c74 => 'Destreza';
@@ -561,7 +579,13 @@ class AppLocalizationsPt extends AppLocalizations {
   String get mb862bf4e42 => 'Não há nós adequados nesta distância.';
 
   @override
+  String get mf71a076c69 => 'Conjunto de armas';
+
+  @override
   String get mff86959fa1 => 'Babador';
+
+  @override
+  String get m36c56d21df => 'Coloque e calcule';
 
   @override
   String get m38509ab991 =>
@@ -618,9 +642,7 @@ class AppLocalizationsPt extends AppLocalizations {
   String get m0dbf2115c1 => 'Diretório inicial não encontrado';
 
   @override
-  String m71a7205caa(String p0) {
-    return 'Não reconhecido: $p0';
-  }
+  String get m3427d6812f => 'Não reconhecido Lua';
 
   @override
   String mcf4205d2e9(String p0) {
@@ -816,6 +838,15 @@ class AppLocalizationsPt extends AppLocalizations {
   String get md72a4c2675 => 'Precisamos de uma versão estável como 0.2.0';
 
   @override
+  String get m83e9fd7c8a => 'Amuleto I';
+
+  @override
+  String get mbe485a0526 => 'Amuleto II';
+
+  @override
+  String get m4a1afe7893 => 'Amuleto III';
+
+  @override
   String get m616c984fe4 =>
       'Atualização MCP para catálogo de pedras e compatibilidade';
 
@@ -828,6 +859,9 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get m2788a17cac => 'Atualização MCP para editar o grupo';
+
+  @override
+  String get mfa7a72dbc1 => 'Atualização MCP para o editor de equipamentos';
 
   @override
   String get m124cd4a205 => 'Atualização MCP para remover habilidade';
@@ -862,6 +896,9 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get m480c4531b2 => 'Aguardando cálculo';
+
+  @override
+  String get mdda947ef31 => 'Descrição do item esperado de Lua';
 
   @override
   String get mbb08ba5f85 => 'Relatório esperado do original Lua';
@@ -1065,10 +1102,13 @@ class AppLocalizationsPt extends AppLocalizations {
   }
 
   @override
-  String get m10e4fefa12 => 'Itens';
+  String get m7ba6aa7f66 => 'Item de montagem';
 
   @override
-  String get mca5b6399c3 => 'Itens e slots ativos de Lua';
+  String get m9ce35b77ce => 'O item não é adequado para este slot';
+
+  @override
+  String get m10e4fefa12 => 'Itens';
 
   @override
   String get m3c2b5cfe97 => 'Avisos Lua';
@@ -1126,6 +1166,9 @@ class AppLocalizationsPt extends AppLocalizations {
   String get m93b08f7b14 => 'Verifique se há atualizações';
 
   @override
+  String get me269e51359 => 'Verificar item';
+
+  @override
   String get mfa4af9bbe7 => 'Verifique a compatibilidade';
 
   @override
@@ -1151,13 +1194,14 @@ class AppLocalizationsPt extends AppLocalizations {
   String get md8164e1acb => 'Verifique sua rede e limite de solicitações.';
 
   @override
+  String get m21d9ad659d =>
+      'Verifique o texto para ver a descrição e compatibilidade';
+
+  @override
   String get m1ea3791d9d => 'Verificando os lançamentos...';
 
   @override
   String get m62ed32eb22 => 'Verificando...';
-
-  @override
-  String get mac0a2199d9 => 'Vazio';
 
   @override
   String get m913b373c85 =>
@@ -1276,6 +1320,9 @@ class AppLocalizationsPt extends AppLocalizations {
   String get m332899f398 => 'Copiar XML';
 
   @override
+  String get m052e3a8cc9 => 'Copie um item do jogo ou PoB';
+
+  @override
   String get m70e98e3214 => 'Velocidade';
 
   @override
@@ -1291,13 +1338,13 @@ class AppLocalizationsPt extends AppLocalizations {
   String get m126aa994ee => 'Muitos redirecionamentos';
 
   @override
-  String get mc2fd3c5d27 => 'Equipamento';
-
-  @override
   String get m59b50cc146 => 'Remova primeiro as pedras de suporte';
 
   @override
   String get ma386719073 => 'Instale os dois componentes primeiro';
+
+  @override
+  String get md4b51f7a04 => 'Remover';
 
   @override
   String get m9071a1a6f4 => 'Conexão com Lua perdida';
@@ -1354,6 +1401,9 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get m98b6085914 => 'Total DPS';
+
+  @override
+  String get mcda85a1ad9 => 'Texto do item';
 
   @override
   String get m682f961a07 => 'Tópico';
@@ -1471,6 +1521,12 @@ class AppLocalizationsPt extends AppLocalizations {
       'O arquivo de atualização não possui uma soma de verificação verificável';
 
   @override
+  String get md8a38f5bc2 => 'Frasco de Saúde';
+
+  @override
+  String get m5d2173db9c => 'Frasco de Mana';
+
+  @override
   String get m62d8c4932b => 'Caos';
 
   @override
@@ -1513,6 +1569,9 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get m59245fe8a4 => 'Chance de choque';
+
+  @override
+  String get m53d8cdfa9d => 'Capacete';
 
   @override
   String get me43836c564 => 'Penalidade de resistência';
@@ -1775,6 +1834,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get m8d6001a308 => 'Mana total';
 
   @override
+  String get mec79f4d0c8 => 'Colar';
+
+  @override
   String get me4c25f9a5f => 'Inserir XML';
 
   @override
@@ -1807,6 +1869,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
       'Selecione uma característica e clique em Localizar.';
 
   @override
+  String get mf99d75f022 => 'Selecione um slot de equipamento';
+
+  @override
   String get m8d6db8b168 => 'Nenhuma alteração na alocação deste nó.';
 
   @override
@@ -1830,9 +1895,6 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get m903bd09e68 => 'Executando a operação...';
-
-  @override
-  String get mac053cfb90 => 'Cabeça';
 
   @override
   String get m13b0a5cc9a => 'Teclas de atalho';
@@ -1908,11 +1970,17 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get ma11b26e5e9 => 'Adicionar e calcular';
 
   @override
+  String get m9cef26392f => 'Adicionar item';
+
+  @override
   String get mbc10505bdf =>
       'Adicione um grupo de pedras para obter o cálculo da habilidade.';
 
   @override
   String get mab04eae138 => 'Aguarde a conclusão da operação atual';
+
+  @override
+  String get mf0216281b8 => 'Células adicionais';
 
   @override
   String m10b5bc7e91(String p0) {
@@ -1970,6 +2038,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get ma7a4033657 => 'Fechar';
+
+  @override
+  String get mbfc7b67eb5 => 'Substituir item';
 
   @override
   String get mdc4baf32ac => 'Notas de construção';
@@ -2058,6 +2129,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get m20555cd71a => 'Anel II';
 
   @override
+  String get m9ca9ef70fe => 'Anel III';
+
+  @override
   String get m1e8466ebeb => 'Componentes';
 
   @override
@@ -2073,6 +2147,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get m7bf311d808 => 'Mão esquerda';
+
+  @override
+  String get m7825825def => 'Mão esquerda II';
 
   @override
   String get m609fc60c74 => 'Destreza';
@@ -2119,7 +2196,13 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get mb862bf4e42 => 'Não há nós adequados nesta distância.';
 
   @override
+  String get mf71a076c69 => 'Conjunto de armas';
+
+  @override
   String get mff86959fa1 => 'Babador';
+
+  @override
+  String get m36c56d21df => 'Coloque e calcule';
 
   @override
   String get m38509ab991 =>
@@ -2176,9 +2259,7 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get m0dbf2115c1 => 'Diretório inicial não encontrado';
 
   @override
-  String m71a7205caa(String p0) {
-    return 'Não reconhecido: $p0';
-  }
+  String get m3427d6812f => 'Não reconhecido Lua';
 
   @override
   String mcf4205d2e9(String p0) {
@@ -2374,6 +2455,15 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get md72a4c2675 => 'Precisamos de uma versão estável como 0.2.0';
 
   @override
+  String get m83e9fd7c8a => 'Amuleto I';
+
+  @override
+  String get mbe485a0526 => 'Amuleto II';
+
+  @override
+  String get m4a1afe7893 => 'Amuleto III';
+
+  @override
   String get m616c984fe4 =>
       'Atualização MCP para catálogo de pedras e compatibilidade';
 
@@ -2386,6 +2476,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get m2788a17cac => 'Atualização MCP para editar o grupo';
+
+  @override
+  String get mfa7a72dbc1 => 'Atualização MCP para o editor de equipamentos';
 
   @override
   String get m124cd4a205 => 'Atualização MCP para remover habilidade';
@@ -2420,6 +2513,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get m480c4531b2 => 'Aguardando cálculo';
+
+  @override
+  String get mdda947ef31 => 'Descrição do item esperado de Lua';
 
   @override
   String get mbb08ba5f85 => 'Relatório esperado do original Lua';
@@ -2623,10 +2719,13 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   }
 
   @override
-  String get m10e4fefa12 => 'Itens';
+  String get m7ba6aa7f66 => 'Item de montagem';
 
   @override
-  String get mca5b6399c3 => 'Itens e slots ativos de Lua';
+  String get m9ce35b77ce => 'O item não é adequado para este slot';
+
+  @override
+  String get m10e4fefa12 => 'Itens';
 
   @override
   String get m3c2b5cfe97 => 'Avisos Lua';
@@ -2684,6 +2783,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get m93b08f7b14 => 'Verifique se há atualizações';
 
   @override
+  String get me269e51359 => 'Verificar item';
+
+  @override
   String get mfa4af9bbe7 => 'Verifique a compatibilidade';
 
   @override
@@ -2709,13 +2811,14 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get md8164e1acb => 'Verifique sua rede e limite de solicitações.';
 
   @override
+  String get m21d9ad659d =>
+      'Verifique o texto para ver a descrição e compatibilidade';
+
+  @override
   String get m1ea3791d9d => 'Verificando os lançamentos...';
 
   @override
   String get m62ed32eb22 => 'Verificando...';
-
-  @override
-  String get mac0a2199d9 => 'Vazio';
 
   @override
   String get m913b373c85 =>
@@ -2834,6 +2937,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get m332899f398 => 'Copiar XML';
 
   @override
+  String get m052e3a8cc9 => 'Copie um item do jogo ou PoB';
+
+  @override
   String get m70e98e3214 => 'Velocidade';
 
   @override
@@ -2849,13 +2955,13 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get m126aa994ee => 'Muitos redirecionamentos';
 
   @override
-  String get mc2fd3c5d27 => 'Equipamento';
-
-  @override
   String get m59b50cc146 => 'Remova primeiro as pedras de suporte';
 
   @override
   String get ma386719073 => 'Instale os dois componentes primeiro';
+
+  @override
+  String get md4b51f7a04 => 'Remover';
 
   @override
   String get m9071a1a6f4 => 'Conexão com Lua perdida';
@@ -2912,6 +3018,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get m98b6085914 => 'Total DPS';
+
+  @override
+  String get mcda85a1ad9 => 'Texto do item';
 
   @override
   String get m682f961a07 => 'Tópico';
@@ -3029,6 +3138,12 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
       'O arquivo de atualização não possui uma soma de verificação verificável';
 
   @override
+  String get md8a38f5bc2 => 'Frasco de Saúde';
+
+  @override
+  String get m5d2173db9c => 'Frasco de Mana';
+
+  @override
   String get m62d8c4932b => 'Caos';
 
   @override
@@ -3071,6 +3186,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get m59245fe8a4 => 'Chance de choque';
+
+  @override
+  String get m53d8cdfa9d => 'Capacete';
 
   @override
   String get me43836c564 => 'Penalidade de resistência';

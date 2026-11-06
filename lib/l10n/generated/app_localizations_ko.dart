@@ -217,6 +217,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m8d6001a308 => '총 마나';
 
   @override
+  String get mec79f4d0c8 => '붙여넣기';
+
+  @override
   String get me4c25f9a5f => '삽입 XML';
 
   @override
@@ -247,6 +250,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m2749913680 => '특성을 선택하고 찾기를 클릭합니다.';
 
   @override
+  String get mf99d75f022 => '장비 슬롯 선택';
+
+  @override
   String get m8d6db8b168 => '이 노드 할당으로 인해 변경된 사항은 없습니다.';
 
   @override
@@ -269,9 +275,6 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m903bd09e68 => '작업을 수행하는 중...';
-
-  @override
-  String get mac053cfb90 => '머리';
 
   @override
   String get m13b0a5cc9a => '단축키';
@@ -344,10 +347,16 @@ class AppLocalizationsKo extends AppLocalizations {
   String get ma11b26e5e9 => '추가 및 계산';
 
   @override
+  String get m9cef26392f => '항목 추가';
+
+  @override
   String get mbc10505bdf => '스킬 계산을 위해 돌그룹을 추가합니다.';
 
   @override
   String get mab04eae138 => '현재 작업이 완료될 때까지 기다립니다.';
+
+  @override
+  String get mf0216281b8 => '추가 셀';
 
   @override
   String m10b5bc7e91(String p0) {
@@ -405,6 +414,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get ma7a4033657 => '닫기';
+
+  @override
+  String get mbfc7b67eb5 => '항목 교체';
 
   @override
   String get mdc4baf32ac => '빌드 노트';
@@ -493,6 +505,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m20555cd71a => '링II';
 
   @override
+  String get m9ca9ef70fe => '링III';
+
+  @override
   String get m1e8466ebeb => '구성요소';
 
   @override
@@ -506,6 +521,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m7bf311d808 => '왼손';
+
+  @override
+  String get m7825825def => '왼손 II';
 
   @override
   String get m609fc60c74 => '민첩성';
@@ -552,7 +570,13 @@ class AppLocalizationsKo extends AppLocalizations {
   String get mb862bf4e42 => '이 거리에는 적합한 노드가 없습니다.';
 
   @override
+  String get mf71a076c69 => '무기 세트';
+
+  @override
   String get mff86959fa1 => '턱받이';
+
+  @override
+  String get m36c56d21df => '바르고 계산해 보세요';
 
   @override
   String get m38509ab991 => 'Ctrl, Alt 또는 Cmd 조합을 누르세요. Esc - 취소합니다.';
@@ -608,9 +632,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m0dbf2115c1 => '홈 디렉토리를 찾을 수 없습니다.';
 
   @override
-  String m71a7205caa(String p0) {
-    return '인식되지 않음: $p0';
-  }
+  String get m3427d6812f => '인식되지 않습니다. Lua';
 
   @override
   String mcf4205d2e9(String p0) {
@@ -802,6 +824,15 @@ class AppLocalizationsKo extends AppLocalizations {
   String get md72a4c2675 => '0.2.0과 같은 안정적인 버전이 필요합니다.';
 
   @override
+  String get m83e9fd7c8a => '부적 I';
+
+  @override
+  String get mbe485a0526 => '부적II';
+
+  @override
+  String get m4a1afe7893 => '아뮬렛III';
+
+  @override
   String get m616c984fe4 => '석재 카탈로그 및 호환성 업데이트 MCP';
 
   @override
@@ -812,6 +843,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m2788a17cac => '그룹을 수정하려면 MCP을 업데이트하세요.';
+
+  @override
+  String get mfa7a72dbc1 => '장비 편집기용 업데이트 MCP';
 
   @override
   String get m124cd4a205 => '스킬을 제거하려면 MCP을 업데이트하세요.';
@@ -844,6 +878,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m480c4531b2 => '계산 대기 중';
+
+  @override
+  String get mdda947ef31 => 'Lua에서 예상되는 항목 설명';
 
   @override
   String get mbb08ba5f85 => '원본에서 예상되는 보고서 Lua';
@@ -1045,10 +1082,13 @@ class AppLocalizationsKo extends AppLocalizations {
   }
 
   @override
-  String get m10e4fefa12 => '아이템';
+  String get m7ba6aa7f66 => '조립 품목';
 
   @override
-  String get mca5b6399c3 => 'Lua의 항목 및 활성 슬롯';
+  String get m9ce35b77ce => '이 슬롯에는 아이템이 적합하지 않습니다';
+
+  @override
+  String get m10e4fefa12 => '아이템';
 
   @override
   String get m3c2b5cfe97 => '경고 Lua';
@@ -1104,6 +1144,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m93b08f7b14 => '업데이트 확인';
 
   @override
+  String get me269e51359 => '항목 확인';
+
+  @override
   String get mfa4af9bbe7 => '호환성 확인';
 
   @override
@@ -1127,13 +1170,13 @@ class AppLocalizationsKo extends AppLocalizations {
   String get md8164e1acb => '네트워크 및 요청 제한을 확인하세요.';
 
   @override
+  String get m21d9ad659d => '설명 및 호환성을 보려면 텍스트를 확인하세요.';
+
+  @override
   String get m1ea3791d9d => '릴리스 확인 중...';
 
   @override
   String get m62ed32eb22 => '확인 중...';
-
-  @override
-  String get mac0a2199d9 => '비어 있음';
 
   @override
   String get m913b373c85 => '응용프로그램 창에서 작업합니다. 변경하려면 조합을 클릭하세요.';
@@ -1250,6 +1293,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m332899f398 => '복사 XML';
 
   @override
+  String get m052e3a8cc9 => '게임이나 PoB에서 아이템 복사';
+
+  @override
   String get m70e98e3214 => '속도';
 
   @override
@@ -1265,13 +1311,13 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m126aa994ee => '리디렉션이 너무 많습니다.';
 
   @override
-  String get mc2fd3c5d27 => '장비';
-
-  @override
   String get m59b50cc146 => '받침돌을 먼저 제거하세요';
 
   @override
   String get ma386719073 => '먼저 두 구성 요소를 모두 설치합니다.';
+
+  @override
+  String get md4b51f7a04 => '제거';
 
   @override
   String get m9071a1a6f4 => 'Lua에 대한 연결이 끊어졌습니다.';
@@ -1327,6 +1373,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m98b6085914 => '합계 DPS';
+
+  @override
+  String get mcda85a1ad9 => '항목 텍스트';
 
   @override
   String get m682f961a07 => '주제';
@@ -1442,6 +1491,12 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m64bd568b72 => '업데이트 파일에 확인 가능한 체크섬이 없습니다.';
 
   @override
+  String get md8a38f5bc2 => '건강의 약병';
+
+  @override
+  String get m5d2173db9c => '마나 약병';
+
+  @override
   String get m62d8c4932b => '카오스';
 
   @override
@@ -1484,6 +1539,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m59245fe8a4 => '충격 확률';
+
+  @override
+  String get m53d8cdfa9d => '헬멧';
 
   @override
   String get me43836c564 => '저항 패널티';

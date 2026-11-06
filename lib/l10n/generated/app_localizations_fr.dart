@@ -221,6 +221,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get m8d6001a308 => 'Mana total';
 
   @override
+  String get mec79f4d0c8 => 'Coller';
+
+  @override
   String get me4c25f9a5f => 'Insérer XML';
 
   @override
@@ -254,6 +257,9 @@ class AppLocalizationsFr extends AppLocalizations {
       'Sélectionnez une caractéristique et cliquez sur Rechercher.';
 
   @override
+  String get mf99d75f022 => 'Sélectionnez un emplacement d\'équipement';
+
+  @override
   String get m8d6db8b168 => 'Aucun changement lié à l\'allocation de ce nœud.';
 
   @override
@@ -277,9 +283,6 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get m903bd09e68 => 'Exécution de l\'opération...';
-
-  @override
-  String get mac053cfb90 => 'Tête';
 
   @override
   String get m13b0a5cc9a => 'Raccourcis clavier';
@@ -358,11 +361,17 @@ class AppLocalizationsFr extends AppLocalizations {
   String get ma11b26e5e9 => 'Ajouter et calculer';
 
   @override
+  String get m9cef26392f => 'Ajouter un élément';
+
+  @override
   String get mbc10505bdf =>
       'Ajoutez un groupe de pierres pour obtenir le calcul des compétences.';
 
   @override
   String get mab04eae138 => 'Attendez la fin de l\'opération en cours';
+
+  @override
+  String get mf0216281b8 => 'Cellules supplémentaires';
 
   @override
   String m10b5bc7e91(String p0) {
@@ -421,6 +430,9 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get ma7a4033657 => 'Close';
+
+  @override
+  String get mbfc7b67eb5 => 'Remplacer l\'élément';
 
   @override
   String get mdc4baf32ac => 'Notes de construction';
@@ -509,6 +521,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get m20555cd71a => 'Anneau II';
 
   @override
+  String get m9ca9ef70fe => 'Anneau III';
+
+  @override
   String get m1e8466ebeb => 'Composants';
 
   @override
@@ -523,6 +538,9 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get m7bf311d808 => 'Main gauche';
+
+  @override
+  String get m7825825def => 'Main gauche II';
 
   @override
   String get m609fc60c74 => 'Dextérité';
@@ -569,7 +587,13 @@ class AppLocalizationsFr extends AppLocalizations {
   String get mb862bf4e42 => 'Il n\'y a aucun nœud approprié à cette distance.';
 
   @override
+  String get mf71a076c69 => 'Ensemble d\'armes';
+
+  @override
   String get mff86959fa1 => 'Bavoir';
+
+  @override
+  String get m36c56d21df => 'Enfilez et calculez';
 
   @override
   String get m38509ab991 =>
@@ -626,9 +650,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get m0dbf2115c1 => 'Répertoire personnel introuvable';
 
   @override
-  String m71a7205caa(String p0) {
-    return 'Non reconnu : $p0';
-  }
+  String get m3427d6812f => 'Non reconnu Lua';
 
   @override
   String mcf4205d2e9(String p0) {
@@ -824,6 +846,15 @@ class AppLocalizationsFr extends AppLocalizations {
       'Nous avons besoin d\'une version stable comme la 0.2.0';
 
   @override
+  String get m83e9fd7c8a => 'Amulette I';
+
+  @override
+  String get mbe485a0526 => 'Amulette II';
+
+  @override
+  String get m4a1afe7893 => 'Amulette III';
+
+  @override
   String get m616c984fe4 =>
       'Mise à jour MCP pour le catalogue de pierres et la compatibilité';
 
@@ -837,6 +868,9 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get m2788a17cac => 'Mettre à jour MCP pour modifier le groupe';
+
+  @override
+  String get mfa7a72dbc1 => 'Mise à jour MCP pour l\'éditeur d\'équipement';
 
   @override
   String get m124cd4a205 => 'Mettre à jour MCP pour supprimer la compétence';
@@ -871,6 +905,9 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get m480c4531b2 => 'En attente de calcul';
+
+  @override
+  String get mdda947ef31 => 'Description de l\'élément attendue de Lua';
 
   @override
   String get mbb08ba5f85 => 'Rapport attendu de l\'original Lua';
@@ -1075,10 +1112,13 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get m10e4fefa12 => 'Articles';
+  String get m7ba6aa7f66 => 'Article d\'assemblage';
 
   @override
-  String get mca5b6399c3 => 'Objets et emplacements actifs de Lua';
+  String get m9ce35b77ce => 'L\'article ne convient pas à cet emplacement';
+
+  @override
+  String get m10e4fefa12 => 'Articles';
 
   @override
   String get m3c2b5cfe97 => 'Avertissements Lua';
@@ -1135,6 +1175,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get m93b08f7b14 => 'Rechercher les mises à jour';
 
   @override
+  String get me269e51359 => 'Vérifier l\'article';
+
+  @override
   String get mfa4af9bbe7 => 'Vérifier la compatibilité';
 
   @override
@@ -1160,13 +1203,14 @@ class AppLocalizationsFr extends AppLocalizations {
   String get md8164e1acb => 'Vérifiez votre réseau et la limite de demandes.';
 
   @override
+  String get m21d9ad659d =>
+      'Vérifiez le texte pour voir la description et la compatibilité';
+
+  @override
   String get m1ea3791d9d => 'Vérification des versions...';
 
   @override
   String get m62ed32eb22 => 'Vérification...';
-
-  @override
-  String get mac0a2199d9 => 'Vide';
 
   @override
   String get m913b373c85 =>
@@ -1287,6 +1331,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get m332899f398 => 'Copier XML';
 
   @override
+  String get m052e3a8cc9 => 'Copier un élément du jeu ou du PoB';
+
+  @override
   String get m70e98e3214 => 'Vitesse';
 
   @override
@@ -1302,13 +1349,13 @@ class AppLocalizationsFr extends AppLocalizations {
   String get m126aa994ee => 'Trop de redirections';
 
   @override
-  String get mc2fd3c5d27 => 'Équipement';
-
-  @override
   String get m59b50cc146 => 'Retirez d\'abord les pierres de support';
 
   @override
   String get ma386719073 => 'Installez d\'abord les deux composants';
+
+  @override
+  String get md4b51f7a04 => 'Supprimer';
 
   @override
   String get m9071a1a6f4 => 'Connexion à Lua perdue';
@@ -1365,6 +1412,9 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get m98b6085914 => 'Total DPS';
+
+  @override
+  String get mcda85a1ad9 => 'Texte de l\'élément';
 
   @override
   String get m682f961a07 => 'Sujet';
@@ -1484,6 +1534,12 @@ class AppLocalizationsFr extends AppLocalizations {
       'Le fichier de mise à jour n\'a pas de somme de contrôle vérifiable';
 
   @override
+  String get md8a38f5bc2 => 'Fiole de santé';
+
+  @override
+  String get m5d2173db9c => 'Fiole de mana';
+
+  @override
   String get m62d8c4932b => 'Chaos';
 
   @override
@@ -1526,6 +1582,9 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get m59245fe8a4 => 'Chances de choc';
+
+  @override
+  String get m53d8cdfa9d => 'Casque';
 
   @override
   String get me43836c564 => 'Pénalité de résistance';

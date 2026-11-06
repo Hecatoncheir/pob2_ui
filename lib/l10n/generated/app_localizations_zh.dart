@@ -217,6 +217,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m8d6001a308 => '總法力';
 
   @override
+  String get mec79f4d0c8 => '貼上';
+
+  @override
   String get me4c25f9a5f => '插入 XML';
 
   @override
@@ -247,6 +250,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m2749913680 => '選擇一個特徵並按一下「尋找」。';
 
   @override
+  String get mf99d75f022 => '選擇設備插槽';
+
+  @override
   String get m8d6db8b168 => '指派此節點後沒有任何變更。';
 
   @override
@@ -269,9 +275,6 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m903bd09e68 => '正在執行操作...';
-
-  @override
-  String get mac053cfb90 => '頭';
 
   @override
   String get m13b0a5cc9a => '熱鍵';
@@ -343,10 +346,16 @@ class AppLocalizationsZh extends AppLocalizations {
   String get ma11b26e5e9 => '新增並計算';
 
   @override
+  String get m9cef26392f => '新增項目';
+
+  @override
   String get mbc10505bdf => '增加一組石頭以獲得技能計算。';
 
   @override
   String get mab04eae138 => '等待目前操作完成';
+
+  @override
+  String get mf0216281b8 => '其他單元格';
 
   @override
   String m10b5bc7e91(String p0) {
@@ -404,6 +413,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get ma7a4033657 => '關閉';
+
+  @override
+  String get mbfc7b67eb5 => '替換項目';
 
   @override
   String get mdc4baf32ac => '建構說明';
@@ -492,6 +504,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m20555cd71a => '環 II';
 
   @override
+  String get m9ca9ef70fe => '環 III';
+
+  @override
   String get m1e8466ebeb => '組件';
 
   @override
@@ -505,6 +520,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m7bf311d808 => '左手';
+
+  @override
+  String get m7825825def => '左手 II';
 
   @override
   String get m609fc60c74 => '敏捷';
@@ -551,7 +569,13 @@ class AppLocalizationsZh extends AppLocalizations {
   String get mb862bf4e42 => '此距離沒有合適的節點。';
 
   @override
+  String get mf71a076c69 => '武器套裝';
+
+  @override
   String get mff86959fa1 => '圍兜';
+
+  @override
+  String get m36c56d21df => '穿上併計算';
 
   @override
   String get m38509ab991 => '按 Ctrl、Alt 或 Cmd 組合鍵。 Esc - 取消。';
@@ -607,9 +631,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m0dbf2115c1 => '找不到主目錄';
 
   @override
-  String m71a7205caa(String p0) {
-    return '無法辨識：$p0';
-  }
+  String get m3427d6812f => '無法辨識Lua';
 
   @override
   String mcf4205d2e9(String p0) {
@@ -801,6 +823,15 @@ class AppLocalizationsZh extends AppLocalizations {
   String get md72a4c2675 => '我們需要一個像0.2.0這樣的穩定版本';
 
   @override
+  String get m83e9fd7c8a => '護身符 I';
+
+  @override
+  String get mbe485a0526 => '護身符 II';
+
+  @override
+  String get m4a1afe7893 => '護身符 III';
+
+  @override
   String get m616c984fe4 => '更新 MCP 以取得石材目錄和相容性';
 
   @override
@@ -811,6 +842,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m2788a17cac => '更新 MCP 以編輯群組';
+
+  @override
+  String get mfa7a72dbc1 => '裝置編輯器更新 MCP';
 
   @override
   String get m124cd4a205 => '更新 MCP 以刪除技能';
@@ -843,6 +877,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m480c4531b2 => '等待計算';
+
+  @override
+  String get mdda947ef31 => '預期來自 Lua 的項目描述';
 
   @override
   String get mbb08ba5f85 => '原始 Lua 的預期報告';
@@ -1044,10 +1081,13 @@ class AppLocalizationsZh extends AppLocalizations {
   }
 
   @override
-  String get m10e4fefa12 => '物品';
+  String get m7ba6aa7f66 => '組裝項目';
 
   @override
-  String get mca5b6399c3 => '來自 Lua 的物品和活動槽位';
+  String get m9ce35b77ce => '物品不適用於此插槽';
+
+  @override
+  String get m10e4fefa12 => '物品';
 
   @override
   String get m3c2b5cfe97 => '警告Lua';
@@ -1103,6 +1143,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m93b08f7b14 => '檢查更新';
 
   @override
+  String get me269e51359 => '檢查項目';
+
+  @override
   String get mfa4af9bbe7 => '檢查相容性';
 
   @override
@@ -1126,13 +1169,13 @@ class AppLocalizationsZh extends AppLocalizations {
   String get md8164e1acb => '檢查您的網路和請求限制。';
 
   @override
+  String get m21d9ad659d => '檢查文字以查看說明和相容性';
+
+  @override
   String get m1ea3791d9d => '檢查版本...';
 
   @override
   String get m62ed32eb22 => '正在檢查中...';
-
-  @override
-  String get mac0a2199d9 => '空';
 
   @override
   String get m913b373c85 => '在應用程式視窗中工作。單擊組合即可更改它。';
@@ -1249,6 +1292,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m332899f398 => '複製 XML';
 
   @override
+  String get m052e3a8cc9 => '從遊戲或 PoB 複製項目';
+
+  @override
   String get m70e98e3214 => '速度';
 
   @override
@@ -1264,13 +1310,13 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m126aa994ee => '重定向太多';
 
   @override
-  String get mc2fd3c5d27 => '設備';
-
-  @override
   String get m59b50cc146 => '先移除支撐石';
 
   @override
   String get ma386719073 => '先安裝兩個組件';
+
+  @override
+  String get md4b51f7a04 => '刪除';
 
   @override
   String get m9071a1a6f4 => '與 Lua 的連接遺失';
@@ -1324,6 +1370,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m98b6085914 => '總計 DPS';
+
+  @override
+  String get mcda85a1ad9 => '項目文本';
 
   @override
   String get m682f961a07 => '主題';
@@ -1439,6 +1488,12 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m64bd568b72 => '更新檔案沒有可驗證的校驗和';
 
   @override
+  String get md8a38f5bc2 => '小瓶健康';
+
+  @override
+  String get m5d2173db9c => '法力瓶';
+
+  @override
   String get m62d8c4932b => '混亂';
 
   @override
@@ -1481,6 +1536,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m59245fe8a4 => '衝擊機會';
+
+  @override
+  String get m53d8cdfa9d => '頭盔';
 
   @override
   String get me43836c564 => '抵抗懲罰';
@@ -1739,6 +1797,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m8d6001a308 => '總法力';
 
   @override
+  String get mec79f4d0c8 => '貼上';
+
+  @override
   String get me4c25f9a5f => '插入 XML';
 
   @override
@@ -1769,6 +1830,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m2749913680 => '選擇一個特徵並按一下「尋找」。';
 
   @override
+  String get mf99d75f022 => '選擇設備插槽';
+
+  @override
   String get m8d6db8b168 => '指派此節點後沒有任何變更。';
 
   @override
@@ -1791,9 +1855,6 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m903bd09e68 => '正在執行操作...';
-
-  @override
-  String get mac053cfb90 => '頭';
 
   @override
   String get m13b0a5cc9a => '熱鍵';
@@ -1865,10 +1926,16 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get ma11b26e5e9 => '新增並計算';
 
   @override
+  String get m9cef26392f => '新增項目';
+
+  @override
   String get mbc10505bdf => '增加一組石頭以獲得技能計算。';
 
   @override
   String get mab04eae138 => '等待目前操作完成';
+
+  @override
+  String get mf0216281b8 => '其他單元格';
 
   @override
   String m10b5bc7e91(String p0) {
@@ -1926,6 +1993,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get ma7a4033657 => '關閉';
+
+  @override
+  String get mbfc7b67eb5 => '替換項目';
 
   @override
   String get mdc4baf32ac => '建構說明';
@@ -2014,6 +2084,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m20555cd71a => '環 II';
 
   @override
+  String get m9ca9ef70fe => '環 III';
+
+  @override
   String get m1e8466ebeb => '組件';
 
   @override
@@ -2027,6 +2100,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m7bf311d808 => '左手';
+
+  @override
+  String get m7825825def => '左手 II';
 
   @override
   String get m609fc60c74 => '敏捷';
@@ -2073,7 +2149,13 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get mb862bf4e42 => '此距離沒有合適的節點。';
 
   @override
+  String get mf71a076c69 => '武器套裝';
+
+  @override
   String get mff86959fa1 => '圍兜';
+
+  @override
+  String get m36c56d21df => '穿上併計算';
 
   @override
   String get m38509ab991 => '按 Ctrl、Alt 或 Cmd 組合鍵。 Esc - 取消。';
@@ -2129,9 +2211,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m0dbf2115c1 => '找不到主目錄';
 
   @override
-  String m71a7205caa(String p0) {
-    return '無法辨識：$p0';
-  }
+  String get m3427d6812f => '無法辨識Lua';
 
   @override
   String mcf4205d2e9(String p0) {
@@ -2323,6 +2403,15 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get md72a4c2675 => '我們需要一個像0.2.0這樣的穩定版本';
 
   @override
+  String get m83e9fd7c8a => '護身符 I';
+
+  @override
+  String get mbe485a0526 => '護身符 II';
+
+  @override
+  String get m4a1afe7893 => '護身符 III';
+
+  @override
   String get m616c984fe4 => '更新 MCP 以取得石材目錄和相容性';
 
   @override
@@ -2333,6 +2422,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m2788a17cac => '更新 MCP 以編輯群組';
+
+  @override
+  String get mfa7a72dbc1 => '裝置編輯器更新 MCP';
 
   @override
   String get m124cd4a205 => '更新 MCP 以刪除技能';
@@ -2365,6 +2457,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m480c4531b2 => '等待計算';
+
+  @override
+  String get mdda947ef31 => '預期來自 Lua 的項目描述';
 
   @override
   String get mbb08ba5f85 => '原始 Lua 的預期報告';
@@ -2566,10 +2661,13 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   }
 
   @override
-  String get m10e4fefa12 => '物品';
+  String get m7ba6aa7f66 => '組裝項目';
 
   @override
-  String get mca5b6399c3 => '來自 Lua 的物品和活動槽位';
+  String get m9ce35b77ce => '物品不適用於此插槽';
+
+  @override
+  String get m10e4fefa12 => '物品';
 
   @override
   String get m3c2b5cfe97 => '警告Lua';
@@ -2625,6 +2723,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m93b08f7b14 => '檢查更新';
 
   @override
+  String get me269e51359 => '檢查項目';
+
+  @override
   String get mfa4af9bbe7 => '檢查相容性';
 
   @override
@@ -2648,13 +2749,13 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get md8164e1acb => '檢查您的網路和請求限制。';
 
   @override
+  String get m21d9ad659d => '檢查文字以查看說明和相容性';
+
+  @override
   String get m1ea3791d9d => '檢查版本...';
 
   @override
   String get m62ed32eb22 => '正在檢查中...';
-
-  @override
-  String get mac0a2199d9 => '空';
 
   @override
   String get m913b373c85 => '在應用程式視窗中工作。單擊組合即可更改它。';
@@ -2771,6 +2872,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m332899f398 => '複製 XML';
 
   @override
+  String get m052e3a8cc9 => '從遊戲或 PoB 複製項目';
+
+  @override
   String get m70e98e3214 => '速度';
 
   @override
@@ -2786,13 +2890,13 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m126aa994ee => '重定向太多';
 
   @override
-  String get mc2fd3c5d27 => '設備';
-
-  @override
   String get m59b50cc146 => '先移除支撐石';
 
   @override
   String get ma386719073 => '先安裝兩個組件';
+
+  @override
+  String get md4b51f7a04 => '刪除';
 
   @override
   String get m9071a1a6f4 => '與 Lua 的連接遺失';
@@ -2846,6 +2950,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m98b6085914 => '總計 DPS';
+
+  @override
+  String get mcda85a1ad9 => '項目文本';
 
   @override
   String get m682f961a07 => '主題';
@@ -2961,6 +3068,12 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m64bd568b72 => '更新檔案沒有可驗證的校驗和';
 
   @override
+  String get md8a38f5bc2 => '小瓶健康';
+
+  @override
+  String get m5d2173db9c => '法力瓶';
+
+  @override
   String get m62d8c4932b => '混亂';
 
   @override
@@ -3003,6 +3116,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m59245fe8a4 => '衝擊機會';
+
+  @override
+  String get m53d8cdfa9d => '頭盔';
 
   @override
   String get me43836c564 => '抵抗懲罰';

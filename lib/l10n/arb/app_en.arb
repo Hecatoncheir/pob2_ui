@@ -371,6 +371,11 @@
     "description": "Всего маны",
     "placeholders": {}
   },
+  "mec79f4d0c8": "Paste",
+  "@mec79f4d0c8": {
+    "description": "Вставить",
+    "placeholders": {}
+  },
   "me4c25f9a5f": "Insert XML",
   "@me4c25f9a5f": {
     "description": "Вставить XML",
@@ -421,6 +426,11 @@
     "description": "Выберите характеристику и нажмите «Найти».",
     "placeholders": {}
   },
+  "mf99d75f022": "Select an equipment slot",
+  "@mf99d75f022": {
+    "description": "Выберите ячейку экипировки",
+    "placeholders": {}
+  },
   "m8d6db8b168": "No changes from allocating this node.",
   "@m8d6db8b168": {
     "description": "Выбор этого узла не изменит показатели.",
@@ -459,11 +469,6 @@
   "m903bd09e68": "Performing the operation...",
   "@m903bd09e68": {
     "description": "Выполняем операцию…",
-    "placeholders": {}
-  },
-  "mac053cfb90": "Head",
-  "@mac053cfb90": {
-    "description": "Голова",
     "placeholders": {}
   },
   "m13b0a5cc9a": "Hotkeys",
@@ -583,6 +588,11 @@
     "description": "Добавить и рассчитать",
     "placeholders": {}
   },
+  "m9cef26392f": "Add item",
+  "@m9cef26392f": {
+    "description": "Добавить предмет",
+    "placeholders": {}
+  },
   "mbc10505bdf": "Add a group of stones to get the skill calculation.",
   "@mbc10505bdf": {
     "description": "Добавьте группу камней, чтобы получить расчёт умения.",
@@ -591,6 +601,11 @@
   "mab04eae138": "Wait for the current operation to complete",
   "@mab04eae138": {
     "description": "Дождитесь завершения текущей операции",
+    "placeholders": {}
+  },
+  "mf0216281b8": "Additional cells",
+  "@mf0216281b8": {
+    "description": "Дополнительные ячейки",
     "placeholders": {}
   },
   "m10b5bc7e91": "Version {p0} available",
@@ -696,6 +711,11 @@
   "ma7a4033657": "Close",
   "@ma7a4033657": {
     "description": "Закрыть",
+    "placeholders": {}
+  },
+  "mbfc7b67eb5": "Replace item",
+  "@mbfc7b67eb5": {
+    "description": "Заменить предмет",
     "placeholders": {}
   },
   "mdc4baf32ac": "Build notes",
@@ -842,6 +862,11 @@
     "description": "Кольцо II",
     "placeholders": {}
   },
+  "m9ca9ef70fe": "Ring III",
+  "@m9ca9ef70fe": {
+    "description": "Кольцо III",
+    "placeholders": {}
+  },
   "m1e8466ebeb": "Components",
   "@m1e8466ebeb": {
     "description": "Компоненты",
@@ -865,6 +890,11 @@
   "m7bf311d808": "Left hand",
   "@m7bf311d808": {
     "description": "Левая рука",
+    "placeholders": {}
+  },
+  "m7825825def": "Left hand II",
+  "@m7825825def": {
+    "description": "Левая рука II",
     "placeholders": {}
   },
   "m609fc60c74": "Dexterity",
@@ -941,9 +971,19 @@
     "description": "На этом расстоянии подходящих узлов нет.",
     "placeholders": {}
   },
+  "mf71a076c69": "Weapon set",
+  "@mf71a076c69": {
+    "description": "Набор оружия",
+    "placeholders": {}
+  },
   "mff86959fa1": "Bib",
   "@mff86959fa1": {
     "description": "Нагрудник",
+    "placeholders": {}
+  },
+  "m36c56d21df": "Put on and calculate",
+  "@m36c56d21df": {
+    "description": "Надеть и рассчитать",
     "placeholders": {}
   },
   "m38509ab991": "Press the combination with Ctrl, Alt or Cmd. Esc - cancel.",
@@ -1035,14 +1075,10 @@
     "description": "Не найден домашний каталог",
     "placeholders": {}
   },
-  "m71a7205caa": "Not recognized: {p0}",
-  "@m71a7205caa": {
-    "description": "Не распознано: {p0}",
-    "placeholders": {
-      "p0": {
-        "type": "String"
-      }
-    }
+  "m3427d6812f": "Not recognized Lua",
+  "@m3427d6812f": {
+    "description": "Не распознано Lua",
+    "placeholders": {}
   },
   "mcf4205d2e9": "Failed to restore state after error: {p0}",
   "@mcf4205d2e9": {
@@ -1369,6 +1405,21 @@
     "description": "Нужна стабильная версия вида 0.2.0",
     "placeholders": {}
   },
+  "m83e9fd7c8a": "Amulet I",
+  "@m83e9fd7c8a": {
+    "description": "Оберег I",
+    "placeholders": {}
+  },
+  "mbe485a0526": "Amulet II",
+  "@mbe485a0526": {
+    "description": "Оберег II",
+    "placeholders": {}
+  },
+  "m4a1afe7893": "Amulet III",
+  "@m4a1afe7893": {
+    "description": "Оберег III",
+    "placeholders": {}
+  },
   "m616c984fe4": "Update MCP for stone catalog and compatibility",
   "@m616c984fe4": {
     "description": "Обновите MCP для каталога камней и совместимости",
@@ -1387,6 +1438,11 @@
   "m2788a17cac": "Update MCP to edit group",
   "@m2788a17cac": {
     "description": "Обновите MCP для редактирования группы",
+    "placeholders": {}
+  },
+  "mfa7a72dbc1": "Update MCP for the equipment editor",
+  "@mfa7a72dbc1": {
+    "description": "Обновите MCP для редактора экипировки",
     "placeholders": {}
   },
   "m124cd4a205": "Update MCP to remove skill",
@@ -1441,6 +1497,11 @@
   "m480c4531b2": "Awaiting calculation",
   "@m480c4531b2": {
     "description": "Ожидает расчёта",
+    "placeholders": {}
+  },
+  "mdda947ef31": "Expected item description from Lua",
+  "@mdda947ef31": {
+    "description": "Ожидалось описание предмета из Lua",
     "placeholders": {}
   },
   "mbb08ba5f85": "Expected report from original Lua",
@@ -1778,14 +1839,19 @@
       }
     }
   },
+  "m7ba6aa7f66": "Assembly item",
+  "@m7ba6aa7f66": {
+    "description": "Предмет из сборки",
+    "placeholders": {}
+  },
+  "m9ce35b77ce": "Item is not suitable for this slot",
+  "@m9ce35b77ce": {
+    "description": "Предмет не подходит для этого слота",
+    "placeholders": {}
+  },
   "m10e4fefa12": "Items",
   "@m10e4fefa12": {
     "description": "Предметы",
-    "placeholders": {}
-  },
-  "mca5b6399c3": "Items and active slots from Lua",
-  "@mca5b6399c3": {
-    "description": "Предметы и активные слоты из Lua",
     "placeholders": {}
   },
   "m3c2b5cfe97": "Warnings Lua",
@@ -1879,6 +1945,11 @@
     "description": "Проверить обновления",
     "placeholders": {}
   },
+  "me269e51359": "Check item",
+  "@me269e51359": {
+    "description": "Проверить предмет",
+    "placeholders": {}
+  },
   "mfa4af9bbe7": "Check compatibility",
   "@mfa4af9bbe7": {
     "description": "Проверить совместимость",
@@ -1918,6 +1989,11 @@
     "description": "Проверьте сеть и лимит запросов.",
     "placeholders": {}
   },
+  "m21d9ad659d": "Check text to see description and compatibility",
+  "@m21d9ad659d": {
+    "description": "Проверьте текст, чтобы увидеть описание и совместимость",
+    "placeholders": {}
+  },
   "m1ea3791d9d": "Checking the releases...",
   "@m1ea3791d9d": {
     "description": "Проверяем выпуски…",
@@ -1926,11 +2002,6 @@
   "m62ed32eb22": "Checking...",
   "@m62ed32eb22": {
     "description": "Проверяем…",
-    "placeholders": {}
-  },
-  "mac0a2199d9": "Empty",
-  "@mac0a2199d9": {
-    "description": "Пусто",
     "placeholders": {}
   },
   "m913b373c85": "Work in the application window. Click on a combination to change it.",
@@ -2125,6 +2196,11 @@
     "description": "Скопировать XML",
     "placeholders": {}
   },
+  "m052e3a8cc9": "Copy an item from the game or PoB",
+  "@m052e3a8cc9": {
+    "description": "Скопируйте предмет из игры или PoB",
+    "placeholders": {}
+  },
   "m70e98e3214": "Speed",
   "@m70e98e3214": {
     "description": "Скорость",
@@ -2150,11 +2226,6 @@
     "description": "Слишком много перенаправлений",
     "placeholders": {}
   },
-  "mc2fd3c5d27": "Equipment",
-  "@mc2fd3c5d27": {
-    "description": "Снаряжение",
-    "placeholders": {}
-  },
   "m59b50cc146": "Remove support stones first",
   "@m59b50cc146": {
     "description": "Сначала уберите камни поддержки",
@@ -2163,6 +2234,11 @@
   "ma386719073": "Install both components first",
   "@ma386719073": {
     "description": "Сначала установите оба компонента",
+    "placeholders": {}
+  },
+  "md4b51f7a04": "Remove",
+  "@md4b51f7a04": {
+    "description": "Снять",
     "placeholders": {}
   },
   "m9071a1a6f4": "Connection to Lua lost",
@@ -2252,6 +2328,11 @@
   "m98b6085914": "Combined DPS",
   "@m98b6085914": {
     "description": "Суммарный DPS",
+    "placeholders": {}
+  },
+  "mcda85a1ad9": "Item text",
+  "@mcda85a1ad9": {
+    "description": "Текст предмета",
     "placeholders": {}
   },
   "m682f961a07": "Topic",
@@ -2448,6 +2529,16 @@
     "description": "Файл обновления не имеет проверяемой контрольной суммы",
     "placeholders": {}
   },
+  "md8a38f5bc2": "Vial of Health",
+  "@md8a38f5bc2": {
+    "description": "Флакон здоровья",
+    "placeholders": {}
+  },
+  "m5d2173db9c": "Mana Vial",
+  "@m5d2173db9c": {
+    "description": "Флакон маны",
+    "placeholders": {}
+  },
   "m62d8c4932b": "Chaos",
   "@m62d8c4932b": {
     "description": "Хаос",
@@ -2520,6 +2611,11 @@
   "m59245fe8a4": "Shock Chance",
   "@m59245fe8a4": {
     "description": "Шанс шока",
+    "placeholders": {}
+  },
+  "m53d8cdfa9d": "Helmet",
+  "@m53d8cdfa9d": {
+    "description": "Шлем",
     "placeholders": {}
   },
   "me43836c564": "Resistance penalty",

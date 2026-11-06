@@ -488,6 +488,12 @@ abstract class AppLocalizations {
   /// **'Total Mana'**
   String get m8d6001a308;
 
+  /// Вставить
+  ///
+  /// In en, this message translates to:
+  /// **'Paste'**
+  String get mec79f4d0c8;
+
   /// Вставить XML
   ///
   /// In en, this message translates to:
@@ -548,6 +554,12 @@ abstract class AppLocalizations {
   /// **'Select a characteristic and click Find.'**
   String get m2749913680;
 
+  /// Выберите ячейку экипировки
+  ///
+  /// In en, this message translates to:
+  /// **'Select an equipment slot'**
+  String get mf99d75f022;
+
   /// Выбор этого узла не изменит показатели.
   ///
   /// In en, this message translates to:
@@ -595,12 +607,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Performing the operation...'**
   String get m903bd09e68;
-
-  /// Голова
-  ///
-  /// In en, this message translates to:
-  /// **'Head'**
-  String get mac053cfb90;
 
   /// Горячие клавиши
   ///
@@ -728,6 +734,12 @@ abstract class AppLocalizations {
   /// **'Add and calculate'**
   String get ma11b26e5e9;
 
+  /// Добавить предмет
+  ///
+  /// In en, this message translates to:
+  /// **'Add item'**
+  String get m9cef26392f;
+
   /// Добавьте группу камней, чтобы получить расчёт умения.
   ///
   /// In en, this message translates to:
@@ -739,6 +751,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Wait for the current operation to complete'**
   String get mab04eae138;
+
+  /// Дополнительные ячейки
+  ///
+  /// In en, this message translates to:
+  /// **'Additional cells'**
+  String get mf0216281b8;
 
   /// Доступна версия {p0}
   ///
@@ -829,6 +847,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Close'**
   String get ma7a4033657;
+
+  /// Заменить предмет
+  ///
+  /// In en, this message translates to:
+  /// **'Replace item'**
+  String get mbfc7b67eb5;
 
   /// Заметки к сборке
   ///
@@ -998,6 +1022,12 @@ abstract class AppLocalizations {
   /// **'Ring II'**
   String get m20555cd71a;
 
+  /// Кольцо III
+  ///
+  /// In en, this message translates to:
+  /// **'Ring III'**
+  String get m9ca9ef70fe;
+
   /// Компоненты
   ///
   /// In en, this message translates to:
@@ -1027,6 +1057,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Left hand'**
   String get m7bf311d808;
+
+  /// Левая рука II
+  ///
+  /// In en, this message translates to:
+  /// **'Left hand II'**
+  String get m7825825def;
 
   /// Ловкость
   ///
@@ -1112,11 +1148,23 @@ abstract class AppLocalizations {
   /// **'There are no suitable nodes at this distance.'**
   String get mb862bf4e42;
 
+  /// Набор оружия
+  ///
+  /// In en, this message translates to:
+  /// **'Weapon set'**
+  String get mf71a076c69;
+
   /// Нагрудник
   ///
   /// In en, this message translates to:
   /// **'Bib'**
   String get mff86959fa1;
+
+  /// Надеть и рассчитать
+  ///
+  /// In en, this message translates to:
+  /// **'Put on and calculate'**
+  String get m36c56d21df;
 
   /// Нажмите сочетание с Ctrl, Alt или Cmd. Esc — отмена.
   ///
@@ -1220,11 +1268,11 @@ abstract class AppLocalizations {
   /// **'Home directory not found'**
   String get m0dbf2115c1;
 
-  /// Не распознано: {p0}
+  /// Не распознано Lua
   ///
   /// In en, this message translates to:
-  /// **'Not recognized: {p0}'**
-  String m71a7205caa(String p0);
+  /// **'Not recognized Lua'**
+  String get m3427d6812f;
 
   /// Не удалось восстановить состояние после ошибки: {p0}
   ///
@@ -1545,6 +1593,24 @@ abstract class AppLocalizations {
   /// **'We need a stable version like 0.2.0'**
   String get md72a4c2675;
 
+  /// Оберег I
+  ///
+  /// In en, this message translates to:
+  /// **'Amulet I'**
+  String get m83e9fd7c8a;
+
+  /// Оберег II
+  ///
+  /// In en, this message translates to:
+  /// **'Amulet II'**
+  String get mbe485a0526;
+
+  /// Оберег III
+  ///
+  /// In en, this message translates to:
+  /// **'Amulet III'**
+  String get m4a1afe7893;
+
   /// Обновите MCP для каталога камней и совместимости
   ///
   /// In en, this message translates to:
@@ -1568,6 +1634,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Update MCP to edit group'**
   String get m2788a17cac;
+
+  /// Обновите MCP для редактора экипировки
+  ///
+  /// In en, this message translates to:
+  /// **'Update MCP for the equipment editor'**
+  String get mfa7a72dbc1;
 
   /// Обновите MCP для удаления умения
   ///
@@ -1628,6 +1700,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Awaiting calculation'**
   String get m480c4531b2;
+
+  /// Ожидалось описание предмета из Lua
+  ///
+  /// In en, this message translates to:
+  /// **'Expected item description from Lua'**
+  String get mdda947ef31;
 
   /// Ожидался отчёт исходного Lua
   ///
@@ -2007,17 +2085,23 @@ abstract class AppLocalizations {
   /// **'Runtime exceeded {p0}'**
   String m1a132e5834(String p0);
 
+  /// Предмет из сборки
+  ///
+  /// In en, this message translates to:
+  /// **'Assembly item'**
+  String get m7ba6aa7f66;
+
+  /// Предмет не подходит для этого слота
+  ///
+  /// In en, this message translates to:
+  /// **'Item is not suitable for this slot'**
+  String get m9ce35b77ce;
+
   /// Предметы
   ///
   /// In en, this message translates to:
   /// **'Items'**
   String get m10e4fefa12;
-
-  /// Предметы и активные слоты из Lua
-  ///
-  /// In en, this message translates to:
-  /// **'Items and active slots from Lua'**
-  String get mca5b6399c3;
 
   /// Предупреждения Lua
   ///
@@ -2109,6 +2193,12 @@ abstract class AppLocalizations {
   /// **'Check for updates'**
   String get m93b08f7b14;
 
+  /// Проверить предмет
+  ///
+  /// In en, this message translates to:
+  /// **'Check item'**
+  String get me269e51359;
+
   /// Проверить совместимость
   ///
   /// In en, this message translates to:
@@ -2151,6 +2241,12 @@ abstract class AppLocalizations {
   /// **'Check your network and request limit.'**
   String get md8164e1acb;
 
+  /// Проверьте текст, чтобы увидеть описание и совместимость
+  ///
+  /// In en, this message translates to:
+  /// **'Check text to see description and compatibility'**
+  String get m21d9ad659d;
+
   /// Проверяем выпуски…
   ///
   /// In en, this message translates to:
@@ -2162,12 +2258,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Checking...'**
   String get m62ed32eb22;
-
-  /// Пусто
-  ///
-  /// In en, this message translates to:
-  /// **'Empty'**
-  String get mac0a2199d9;
 
   /// Работают в окне приложения. Нажмите на сочетание, чтобы изменить его.
   ///
@@ -2385,6 +2475,12 @@ abstract class AppLocalizations {
   /// **'Copy XML'**
   String get m332899f398;
 
+  /// Скопируйте предмет из игры или PoB
+  ///
+  /// In en, this message translates to:
+  /// **'Copy an item from the game or PoB'**
+  String get m052e3a8cc9;
+
   /// Скорость
   ///
   /// In en, this message translates to:
@@ -2415,12 +2511,6 @@ abstract class AppLocalizations {
   /// **'Too many redirects'**
   String get m126aa994ee;
 
-  /// Снаряжение
-  ///
-  /// In en, this message translates to:
-  /// **'Equipment'**
-  String get mc2fd3c5d27;
-
   /// Сначала уберите камни поддержки
   ///
   /// In en, this message translates to:
@@ -2432,6 +2522,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Install both components first'**
   String get ma386719073;
+
+  /// Снять
+  ///
+  /// In en, this message translates to:
+  /// **'Remove'**
+  String get md4b51f7a04;
 
   /// Соединение с Lua прервано
   ///
@@ -2534,6 +2630,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Combined DPS'**
   String get m98b6085914;
+
+  /// Текст предмета
+  ///
+  /// In en, this message translates to:
+  /// **'Item text'**
+  String get mcda85a1ad9;
 
   /// Тема
   ///
@@ -2745,6 +2847,18 @@ abstract class AppLocalizations {
   /// **'The update file does not have a verifiable checksum'**
   String get m64bd568b72;
 
+  /// Флакон здоровья
+  ///
+  /// In en, this message translates to:
+  /// **'Vial of Health'**
+  String get md8a38f5bc2;
+
+  /// Флакон маны
+  ///
+  /// In en, this message translates to:
+  /// **'Mana Vial'**
+  String get m5d2173db9c;
+
   /// Хаос
   ///
   /// In en, this message translates to:
@@ -2828,6 +2942,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Shock Chance'**
   String get m59245fe8a4;
+
+  /// Шлем
+  ///
+  /// In en, this message translates to:
+  /// **'Helmet'**
+  String get m53d8cdfa9d;
 
   /// Штраф сопротивлений
   ///

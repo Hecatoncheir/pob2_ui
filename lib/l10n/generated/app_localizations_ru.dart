@@ -217,6 +217,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m8d6001a308 => 'Всего маны';
 
   @override
+  String get mec79f4d0c8 => 'Вставить';
+
+  @override
   String get me4c25f9a5f => 'Вставить XML';
 
   @override
@@ -248,6 +251,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m2749913680 => 'Выберите характеристику и нажмите «Найти».';
 
   @override
+  String get mf99d75f022 => 'Выберите ячейку экипировки';
+
+  @override
   String get m8d6db8b168 => 'Выбор этого узла не изменит показатели.';
 
   @override
@@ -270,9 +276,6 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get m903bd09e68 => 'Выполняем операцию…';
-
-  @override
-  String get mac053cfb90 => 'Голова';
 
   @override
   String get m13b0a5cc9a => 'Горячие клавиши';
@@ -347,11 +350,17 @@ class AppLocalizationsRu extends AppLocalizations {
   String get ma11b26e5e9 => 'Добавить и рассчитать';
 
   @override
+  String get m9cef26392f => 'Добавить предмет';
+
+  @override
   String get mbc10505bdf =>
       'Добавьте группу камней, чтобы получить расчёт умения.';
 
   @override
   String get mab04eae138 => 'Дождитесь завершения текущей операции';
+
+  @override
+  String get mf0216281b8 => 'Дополнительные ячейки';
 
   @override
   String m10b5bc7e91(String p0) {
@@ -410,6 +419,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get ma7a4033657 => 'Закрыть';
+
+  @override
+  String get mbfc7b67eb5 => 'Заменить предмет';
 
   @override
   String get mdc4baf32ac => 'Заметки к сборке';
@@ -498,6 +510,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m20555cd71a => 'Кольцо II';
 
   @override
+  String get m9ca9ef70fe => 'Кольцо III';
+
+  @override
   String get m1e8466ebeb => 'Компоненты';
 
   @override
@@ -511,6 +526,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get m7bf311d808 => 'Левая рука';
+
+  @override
+  String get m7825825def => 'Левая рука II';
 
   @override
   String get m609fc60c74 => 'Ловкость';
@@ -557,7 +575,13 @@ class AppLocalizationsRu extends AppLocalizations {
   String get mb862bf4e42 => 'На этом расстоянии подходящих узлов нет.';
 
   @override
+  String get mf71a076c69 => 'Набор оружия';
+
+  @override
   String get mff86959fa1 => 'Нагрудник';
+
+  @override
+  String get m36c56d21df => 'Надеть и рассчитать';
 
   @override
   String get m38509ab991 =>
@@ -614,9 +638,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m0dbf2115c1 => 'Не найден домашний каталог';
 
   @override
-  String m71a7205caa(String p0) {
-    return 'Не распознано: $p0';
-  }
+  String get m3427d6812f => 'Не распознано Lua';
 
   @override
   String mcf4205d2e9(String p0) {
@@ -809,6 +831,15 @@ class AppLocalizationsRu extends AppLocalizations {
   String get md72a4c2675 => 'Нужна стабильная версия вида 0.2.0';
 
   @override
+  String get m83e9fd7c8a => 'Оберег I';
+
+  @override
+  String get mbe485a0526 => 'Оберег II';
+
+  @override
+  String get m4a1afe7893 => 'Оберег III';
+
+  @override
   String get m616c984fe4 => 'Обновите MCP для каталога камней и совместимости';
 
   @override
@@ -820,6 +851,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get m2788a17cac => 'Обновите MCP для редактирования группы';
+
+  @override
+  String get mfa7a72dbc1 => 'Обновите MCP для редактора экипировки';
 
   @override
   String get m124cd4a205 => 'Обновите MCP для удаления умения';
@@ -854,6 +888,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get m480c4531b2 => 'Ожидает расчёта';
+
+  @override
+  String get mdda947ef31 => 'Ожидалось описание предмета из Lua';
 
   @override
   String get mbb08ba5f85 => 'Ожидался отчёт исходного Lua';
@@ -1058,10 +1095,13 @@ class AppLocalizationsRu extends AppLocalizations {
   }
 
   @override
-  String get m10e4fefa12 => 'Предметы';
+  String get m7ba6aa7f66 => 'Предмет из сборки';
 
   @override
-  String get mca5b6399c3 => 'Предметы и активные слоты из Lua';
+  String get m9ce35b77ce => 'Предмет не подходит для этого слота';
+
+  @override
+  String get m10e4fefa12 => 'Предметы';
 
   @override
   String get m3c2b5cfe97 => 'Предупреждения Lua';
@@ -1118,6 +1158,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m93b08f7b14 => 'Проверить обновления';
 
   @override
+  String get me269e51359 => 'Проверить предмет';
+
+  @override
   String get mfa4af9bbe7 => 'Проверить совместимость';
 
   @override
@@ -1141,13 +1184,14 @@ class AppLocalizationsRu extends AppLocalizations {
   String get md8164e1acb => 'Проверьте сеть и лимит запросов.';
 
   @override
+  String get m21d9ad659d =>
+      'Проверьте текст, чтобы увидеть описание и совместимость';
+
+  @override
   String get m1ea3791d9d => 'Проверяем выпуски…';
 
   @override
   String get m62ed32eb22 => 'Проверяем…';
-
-  @override
-  String get mac0a2199d9 => 'Пусто';
 
   @override
   String get m913b373c85 =>
@@ -1266,6 +1310,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m332899f398 => 'Скопировать XML';
 
   @override
+  String get m052e3a8cc9 => 'Скопируйте предмет из игры или PoB';
+
+  @override
   String get m70e98e3214 => 'Скорость';
 
   @override
@@ -1281,13 +1328,13 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m126aa994ee => 'Слишком много перенаправлений';
 
   @override
-  String get mc2fd3c5d27 => 'Снаряжение';
-
-  @override
   String get m59b50cc146 => 'Сначала уберите камни поддержки';
 
   @override
   String get ma386719073 => 'Сначала установите оба компонента';
+
+  @override
+  String get md4b51f7a04 => 'Снять';
 
   @override
   String get m9071a1a6f4 => 'Соединение с Lua прервано';
@@ -1343,6 +1390,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get m98b6085914 => 'Суммарный DPS';
+
+  @override
+  String get mcda85a1ad9 => 'Текст предмета';
 
   @override
   String get m682f961a07 => 'Тема';
@@ -1460,6 +1510,12 @@ class AppLocalizationsRu extends AppLocalizations {
       'Файл обновления не имеет проверяемой контрольной суммы';
 
   @override
+  String get md8a38f5bc2 => 'Флакон здоровья';
+
+  @override
+  String get m5d2173db9c => 'Флакон маны';
+
+  @override
   String get m62d8c4932b => 'Хаос';
 
   @override
@@ -1502,6 +1558,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get m59245fe8a4 => 'Шанс шока';
+
+  @override
+  String get m53d8cdfa9d => 'Шлем';
 
   @override
   String get me43836c564 => 'Штраф сопротивлений';

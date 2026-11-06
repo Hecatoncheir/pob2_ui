@@ -552,6 +552,19 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     await engine.call('pob_delete_skill_group', {'groupId': id});
   });
 
+  Future<BuildEditResult> equipItem(String slot, {String? raw, int? itemId}) =>
+      _changeBuild(() async {
+        await engine.call('pob_equip_item', {
+          'slot': slot,
+          if (raw != null) 'raw': raw,
+          if (itemId != null) 'itemId': itemId,
+        });
+      });
+
+  Future<BuildEditResult> selectWeaponSet(int index) => _changeBuild(() async {
+    await engine.call('pob_select_weapon_set', {'index': index});
+  });
+
   Future<BuildEditResult> setCondition(String key, dynamic value) =>
       _changeBuild(() async {
         await engine.call('pob_set_config', {

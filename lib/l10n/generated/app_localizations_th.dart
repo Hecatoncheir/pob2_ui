@@ -217,6 +217,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m8d6001a308 => 'มานาทั้งหมด';
 
   @override
+  String get mec79f4d0c8 => 'วาง';
+
+  @override
   String get me4c25f9a5f => 'แทรก XML';
 
   @override
@@ -247,6 +250,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m2749913680 => 'เลือกคุณสมบัติแล้วคลิกค้นหา';
 
   @override
+  String get mf99d75f022 => 'เลือกช่องอุปกรณ์';
+
+  @override
   String get m8d6db8b168 => 'ไม่มีการเปลี่ยนแปลงจากการจัดสรรโหนดนี้';
 
   @override
@@ -270,9 +276,6 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m903bd09e68 => 'กำลังดำเนินการ...';
-
-  @override
-  String get mac053cfb90 => 'หัวหน้า';
 
   @override
   String get m13b0a5cc9a => 'ปุ่มลัด';
@@ -347,10 +350,16 @@ class AppLocalizationsTh extends AppLocalizations {
   String get ma11b26e5e9 => 'บวกและคำนวณ';
 
   @override
+  String get m9cef26392f => 'เพิ่มรายการ';
+
+  @override
   String get mbc10505bdf => 'เพิ่มกลุ่มหินเพื่อรับการคำนวณทักษะ';
 
   @override
   String get mab04eae138 => 'รอให้การดำเนินการปัจจุบันเสร็จสิ้น';
+
+  @override
+  String get mf0216281b8 => 'เซลล์เพิ่มเติม';
 
   @override
   String m10b5bc7e91(String p0) {
@@ -408,6 +417,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get ma7a4033657 => 'ปิด';
+
+  @override
+  String get mbfc7b67eb5 => 'เปลี่ยนรายการ';
 
   @override
   String get mdc4baf32ac => 'บันทึกการสร้าง';
@@ -496,6 +508,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m20555cd71a => 'ริงทู';
 
   @override
+  String get m9ca9ef70fe => 'แหวน III';
+
+  @override
   String get m1e8466ebeb => 'ส่วนประกอบ';
 
   @override
@@ -509,6 +524,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m7bf311d808 => 'มือซ้าย';
+
+  @override
+  String get m7825825def => 'มือซ้าย II';
 
   @override
   String get m609fc60c74 => 'ความคล่องแคล่ว';
@@ -555,7 +573,13 @@ class AppLocalizationsTh extends AppLocalizations {
   String get mb862bf4e42 => 'ไม่มีโหนดที่เหมาะสมในระยะนี้';
 
   @override
+  String get mf71a076c69 => 'ชุดอาวุธ';
+
+  @override
   String get mff86959fa1 => 'ผ้ากันเปื้อน';
+
+  @override
+  String get m36c56d21df => 'ใส่แล้วคำนวนครับ';
 
   @override
   String get m38509ab991 => 'กดร่วมกับ Ctrl, Alt หรือ Cmd Esc - ยกเลิก';
@@ -611,9 +635,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m0dbf2115c1 => 'ไม่พบโฮมไดเร็กตอรี่';
 
   @override
-  String m71a7205caa(String p0) {
-    return 'ไม่รู้จัก: $p0';
-  }
+  String get m3427d6812f => 'ไม่รู้จัก Lua';
 
   @override
   String mcf4205d2e9(String p0) {
@@ -805,6 +827,15 @@ class AppLocalizationsTh extends AppLocalizations {
   String get md72a4c2675 => 'เราต้องการเวอร์ชันที่เสถียรเช่น 0.2.0';
 
   @override
+  String get m83e9fd7c8a => 'พระเครื่อง I';
+
+  @override
+  String get mbe485a0526 => 'พระเครื่อง II';
+
+  @override
+  String get m4a1afe7893 => 'พระเครื่อง III';
+
+  @override
   String get m616c984fe4 => 'อัปเดต MCP สำหรับแคตตาล็อกหินและความเข้ากันได้';
 
   @override
@@ -815,6 +846,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m2788a17cac => 'อัปเดต MCP เพื่อแก้ไขกลุ่ม';
+
+  @override
+  String get mfa7a72dbc1 => 'อัปเดต MCP สำหรับผู้แก้ไขอุปกรณ์';
 
   @override
   String get m124cd4a205 => 'อัปเดต MCP เพื่อลบทักษะ';
@@ -849,6 +883,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m480c4531b2 => 'รอการคำนวณ';
+
+  @override
+  String get mdda947ef31 => 'คำอธิบายรายการที่คาดหวังจาก Lua';
 
   @override
   String get mbb08ba5f85 => 'รายงานที่คาดหวังจากต้นฉบับ Lua';
@@ -1051,10 +1088,13 @@ class AppLocalizationsTh extends AppLocalizations {
   }
 
   @override
-  String get m10e4fefa12 => 'รายการ';
+  String get m7ba6aa7f66 => 'รายการประกอบ';
 
   @override
-  String get mca5b6399c3 => 'รายการและช่องที่ใช้งานอยู่จาก Lua';
+  String get m9ce35b77ce => 'รายการไม่เหมาะกับช่องนี้';
+
+  @override
+  String get m10e4fefa12 => 'รายการ';
 
   @override
   String get m3c2b5cfe97 => 'คำเตือน Lua';
@@ -1110,6 +1150,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m93b08f7b14 => 'ตรวจสอบการอัปเดต';
 
   @override
+  String get me269e51359 => 'ตรวจสอบรายการ';
+
+  @override
   String get mfa4af9bbe7 => 'ตรวจสอบความเข้ากันได้';
 
   @override
@@ -1133,13 +1176,13 @@ class AppLocalizationsTh extends AppLocalizations {
   String get md8164e1acb => 'ตรวจสอบเครือข่ายของคุณและขีดจำกัดคำขอ';
 
   @override
+  String get m21d9ad659d => 'ตรวจสอบข้อความเพื่อดูคำอธิบายและความเข้ากันได้';
+
+  @override
   String get m1ea3791d9d => 'กำลังตรวจสอบการเผยแพร่...';
 
   @override
   String get m62ed32eb22 => 'กำลังตรวจสอบ...';
-
-  @override
-  String get mac0a2199d9 => 'ว่างเปล่า';
 
   @override
   String get m913b373c85 =>
@@ -1257,6 +1300,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m332899f398 => 'คัดลอก XML';
 
   @override
+  String get m052e3a8cc9 => 'คัดลอกรายการจากเกมหรือ PoB';
+
+  @override
   String get m70e98e3214 => 'ความเร็ว';
 
   @override
@@ -1272,13 +1318,13 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m126aa994ee => 'มีการเปลี่ยนเส้นทางมากเกินไป';
 
   @override
-  String get mc2fd3c5d27 => 'อุปกรณ์';
-
-  @override
   String get m59b50cc146 => 'ถอดหินรองรับออกก่อน';
 
   @override
   String get ma386719073 => 'ติดตั้งทั้งสององค์ประกอบก่อน';
+
+  @override
+  String get md4b51f7a04 => 'ลบ';
 
   @override
   String get m9071a1a6f4 => 'การเชื่อมต่อกับ Lua ขาดหายไป';
@@ -1334,6 +1380,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m98b6085914 => 'รวม DPS';
+
+  @override
+  String get mcda85a1ad9 => 'ข้อความรายการ';
 
   @override
   String get m682f961a07 => 'หัวข้อ';
@@ -1450,6 +1499,12 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m64bd568b72 => 'ไฟล์อัพเดตไม่มีเช็คซัมที่ตรวจสอบได้';
 
   @override
+  String get md8a38f5bc2 => 'ขวดเพื่อสุขภาพ';
+
+  @override
+  String get m5d2173db9c => 'ขวดมานา';
+
+  @override
   String get m62d8c4932b => 'ความโกลาหล';
 
   @override
@@ -1492,6 +1547,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m59245fe8a4 => 'โอกาสช็อก';
+
+  @override
+  String get m53d8cdfa9d => 'หมวกกันน็อค';
 
   @override
   String get me43836c564 => 'การลงโทษความต้านทาน';

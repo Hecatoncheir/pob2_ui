@@ -140,6 +140,18 @@ jobs:
           POB2_UI_HOME: ${{ runner.temp }}/pob2-lua-smoke
           POB2_UI_SCREENSHOT: ${{ github.workspace }}/build/review/editors-linux.png
         run: xvfb-run -a flutter test integration_test/editors_test.dart -d linux --no-pub
+      - name: Редактор экипировки с настоящим Lua
+        if: runner.os != 'Linux'
+        env:
+          POB2_UI_HOME: ${{ runner.temp }}/pob2-lua-smoke
+          POB2_UI_SCREENSHOT: ${{ github.workspace }}/build/review/equipment-${{ matrix.platform }}.png
+        run: flutter test integration_test/equipment_test.dart -d ${{ matrix.platform }} --no-pub
+      - name: Редактор экипировки с настоящим Lua
+        if: runner.os == 'Linux'
+        env:
+          POB2_UI_HOME: ${{ runner.temp }}/pob2-lua-smoke
+          POB2_UI_SCREENSHOT: ${{ github.workspace }}/build/review/equipment-linux.png
+        run: xvfb-run -a flutter test integration_test/equipment_test.dart -d linux --no-pub
       - name: Проверить переключение Release → Debug
         if: runner.os == 'Windows'
         shell: bash

@@ -217,6 +217,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m8d6001a308 => '総マナ';
 
   @override
+  String get mec79f4d0c8 => 'ペースト';
+
+  @override
   String get me4c25f9a5f => 'XML を挿入';
 
   @override
@@ -247,6 +250,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m2749913680 => '特性を選択し、「検索」をクリックします。';
 
   @override
+  String get mf99d75f022 => '装備スロットを選択してください';
+
+  @override
   String get m8d6db8b168 => 'このノードの割り当てによる変更はありません。';
 
   @override
@@ -269,9 +275,6 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m903bd09e68 => '操作を実行しています...';
-
-  @override
-  String get mac053cfb90 => 'Head';
 
   @override
   String get m13b0a5cc9a => 'ホットキー';
@@ -344,10 +347,16 @@ class AppLocalizationsJa extends AppLocalizations {
   String get ma11b26e5e9 => 'Add and calculate';
 
   @override
+  String get m9cef26392f => 'アイテムを追加';
+
+  @override
   String get mbc10505bdf => '石のグループを追加してスキル計算を取得します。';
 
   @override
   String get mab04eae138 => '現在の操作が完了するまで待ちます';
+
+  @override
+  String get mf0216281b8 => '追加のセル';
 
   @override
   String m10b5bc7e91(String p0) {
@@ -405,6 +414,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get ma7a4033657 => '閉じる';
+
+  @override
+  String get mbfc7b67eb5 => 'アイテムを置き換える';
 
   @override
   String get mdc4baf32ac => 'ビルドノート';
@@ -493,6 +505,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m20555cd71a => 'リングII';
 
   @override
+  String get m9ca9ef70fe => 'リングIII';
+
+  @override
   String get m1e8466ebeb => 'コンポーネント';
 
   @override
@@ -506,6 +521,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m7bf311d808 => '左手';
+
+  @override
+  String get m7825825def => '左手II';
 
   @override
   String get m609fc60c74 => '器用さ';
@@ -552,7 +570,13 @@ class AppLocalizationsJa extends AppLocalizations {
   String get mb862bf4e42 => 'この距離には適切なノードがありません。';
 
   @override
+  String get mf71a076c69 => '武器セット';
+
+  @override
   String get mff86959fa1 => 'よだれかけ';
+
+  @override
+  String get m36c56d21df => '履いて計算してみる';
 
   @override
   String get m38509ab991 => 'Ctrl、Alt、または Cmd を組み合わせて押します。 Esc - キャンセルします。';
@@ -608,9 +632,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m0dbf2115c1 => 'ホームディレクトリが見つかりません';
 
   @override
-  String m71a7205caa(String p0) {
-    return '認識されません: $p0';
-  }
+  String get m3427d6812f => '認識されません Lua';
 
   @override
   String mcf4205d2e9(String p0) {
@@ -802,6 +824,15 @@ class AppLocalizationsJa extends AppLocalizations {
   String get md72a4c2675 => '0.2.0 のような安定したバージョンが必要です';
 
   @override
+  String get m83e9fd7c8a => 'アミュレット I';
+
+  @override
+  String get mbe485a0526 => 'アミュレット II';
+
+  @override
+  String get m4a1afe7893 => 'アミュレットⅢ';
+
+  @override
   String get m616c984fe4 => '石のカタログと互換性に関する MCP の更新';
 
   @override
@@ -812,6 +843,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m2788a17cac => 'MCP を編集グループに更新します';
+
+  @override
+  String get mfa7a72dbc1 => '機器エディターのアップデート MCP';
 
   @override
   String get m124cd4a205 => 'MCP を更新してスキルを削除します';
@@ -844,6 +878,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m480c4531b2 => '計算待ち';
+
+  @override
+  String get mdda947ef31 => 'Lua からのアイテム説明が必要です\n【m7ba6aa7f66】組立品';
 
   @override
   String get mbb08ba5f85 => '元の Lua からの予想されるレポート';
@@ -1045,10 +1082,13 @@ class AppLocalizationsJa extends AppLocalizations {
   }
 
   @override
-  String get m10e4fefa12 => 'アイテム';
+  String get m7ba6aa7f66 => '組立品';
 
   @override
-  String get mca5b6399c3 => 'Lua のアイテムとアクティブなスロット';
+  String get m9ce35b77ce => 'アイテムはこのスロットには適していません';
+
+  @override
+  String get m10e4fefa12 => 'アイテム';
 
   @override
   String get m3c2b5cfe97 => '警告 Lua';
@@ -1104,6 +1144,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m93b08f7b14 => 'アップデートを確認する';
 
   @override
+  String get me269e51359 => 'チェック項目';
+
+  @override
   String get mfa4af9bbe7 => '互換性を確認する';
 
   @override
@@ -1127,13 +1170,13 @@ class AppLocalizationsJa extends AppLocalizations {
   String get md8164e1acb => 'ネットワークとリクエスト制限を確認してください。';
 
   @override
+  String get m21d9ad659d => 'テキストをチェックして説明と互換性を確認してください';
+
+  @override
   String get m1ea3791d9d => 'リリースを確認しています...';
 
   @override
   String get m62ed32eb22 => 'チェック中...';
-
-  @override
-  String get mac0a2199d9 => '空';
 
   @override
   String get m913b373c85 => 'アプリケーションウィンドウで作業します。組み合わせをクリックして変更します。';
@@ -1250,6 +1293,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m332899f398 => 'コピー XML';
 
   @override
+  String get m052e3a8cc9 => 'ゲームまたは PoB からアイテムをコピーします';
+
+  @override
   String get m70e98e3214 => '速度';
 
   @override
@@ -1265,13 +1311,13 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m126aa994ee => 'リダイレクトが多すぎます';
 
   @override
-  String get mc2fd3c5d27 => '装備';
-
-  @override
   String get m59b50cc146 => 'まずサポートストーンを取り外します';
 
   @override
   String get ma386719073 => '最初に両方のコンポーネントをインストールします';
+
+  @override
+  String get md4b51f7a04 => '削除';
 
   @override
   String get m9071a1a6f4 => 'Lua への接続が失われました';
@@ -1327,6 +1373,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m98b6085914 => '合計 DPS';
+
+  @override
+  String get mcda85a1ad9 => 'アイテムテキスト';
 
   @override
   String get m682f961a07 => 'トピック';
@@ -1442,6 +1491,12 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m64bd568b72 => 'アップデート ファイルには検証可能なチェックサムがありません';
 
   @override
+  String get md8a38f5bc2 => '健康の小瓶';
+
+  @override
+  String get m5d2173db9c => 'マナの小瓶';
+
+  @override
   String get m62d8c4932b => 'カオス';
 
   @override
@@ -1484,6 +1539,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m59245fe8a4 => 'ショックチャンス';
+
+  @override
+  String get m53d8cdfa9d => 'ヘルメット';
 
   @override
   String get me43836c564 => '耐性ペナルティ';

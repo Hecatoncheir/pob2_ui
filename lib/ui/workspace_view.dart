@@ -360,7 +360,7 @@ class _EditorStageState extends State<_EditorStage>
                         document.treeError ?? 'Попробуйте пересчитать сборку.',
                   )
                 : TreeView(model: widget.model, tree: document.tree!),
-            ItemsView(report: document.report),
+            ItemsView(model: widget.model),
             SkillsView(model: widget.model),
             ConditionsView(model: widget.model),
             CalculationsView(report: document.report),
