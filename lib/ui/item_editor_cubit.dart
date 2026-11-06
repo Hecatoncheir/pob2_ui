@@ -12,6 +12,7 @@ typedef InspectItem = Future<ItemInspection> Function({
 typedef EquipItem = Future<BuildEditResult> Function({
   String? raw,
   int? itemId,
+  int? expectedRevision,
 });
 typedef ItemEditorState = ({
   String raw,
@@ -105,7 +106,14 @@ class ItemEditorCubit extends Cubit<ItemEditorState> {
       final result = await equip(
         raw: state.itemId == null ? state.raw : null,
         itemId: state.itemId,
+        expectedRevision: state.preview?.comparison?.revision,
       );
+      if (!result.committed) {
+        await _failed(
+          mcpErrorMessage(result.error ?? 'Не удалось применить предмет'),
+        );
+        return false;
+      }
       if (!isClosed)
         emit((
           raw: state.raw,
@@ -117,17 +125,31 @@ class ItemEditorCubit extends Cubit<ItemEditorState> {
         ));
       return result.committed;
     } catch (error) {
-      if (!isClosed)
-        emit((
-          raw: state.raw,
-          itemId: state.itemId,
-          preview: state.preview,
-          loading: false,
-          saving: false,
-          error: mcpErrorMessage(error),
-        ));
+      await _failed(mcpErrorMessage(error));
       return false;
     }
+  }
+
+  Future<void> _failed(String error) async {
+    if (isClosed) return;
+    ItemInspection? refreshed;
+    try {
+      refreshed = await inspect(
+        raw: state.itemId == null ? state.raw : null,
+        itemId: state.itemId,
+      );
+    } catch (_) {
+      // Повтор разрешён только после успешной примерки текущей ревизии.
+    }
+    if (!isClosed)
+      emit((
+        raw: state.raw,
+        itemId: state.itemId,
+        preview: refreshed,
+        loading: false,
+        saving: false,
+        error: error,
+      ));
   }
 
   bool mayExit() {

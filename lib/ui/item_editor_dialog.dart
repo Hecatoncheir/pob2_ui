@@ -10,23 +10,26 @@ import 'core/motion.dart';
 import 'core/spark_theme.dart';
 import 'equipment_presentation.dart';
 import 'item_description.dart';
+import 'item_comparison_panel.dart';
 import 'item_editor_cubit.dart';
 import 'workshop_cubit.dart';
 
 Future<void> showItemEditor(
   BuildContext context,
   WorkshopCubit model,
-  String slot,
-) => sparkDialog<void>(
+  String slot, {
+  String initial = '',
+}) => sparkDialog<void>(
   context,
-  _ItemEditorDialog(model, slot),
+  _ItemEditorDialog(model, slot, initial),
   barrierDismissible: false,
 );
 
 class _ItemEditorDialog extends StatefulWidget {
-  const _ItemEditorDialog(this.model, this.slot);
+  const _ItemEditorDialog(this.model, this.slot, this.initial);
   final WorkshopCubit model;
   final String slot;
+  final String initial;
   @override
   State<_ItemEditorDialog> createState() => _ItemEditorDialogState();
 }
@@ -34,16 +37,28 @@ class _ItemEditorDialog extends StatefulWidget {
 class _ItemEditorDialogState extends State<_ItemEditorDialog> {
   late final repository = EquipmentRepository(widget.model.engine);
   late final editor = ItemEditorCubit(
-    ({raw, itemId}) =>
-        repository.inspect(widget.slot, raw: raw, itemId: itemId),
-    ({raw, itemId}) =>
-        widget.model.equipItem(widget.slot, raw: raw, itemId: itemId),
+    ({raw, itemId}) => repository.inspect(
+      widget.slot,
+      raw: raw,
+      itemId: itemId,
+      compare: true,
+    ),
+    ({raw, itemId, expectedRevision}) => widget.model.equipItem(
+      widget.slot,
+      raw: raw,
+      itemId: itemId,
+      expectedRevision: expectedRevision,
+    ),
   );
-  final text = TextEditingController();
+  late final text = TextEditingController(text: widget.initial);
   late final AppLifecycleListener exitListener;
   @override
   void initState() {
     super.initState();
+    if (widget.initial.isNotEmpty) {
+      editor.text(widget.initial);
+      editor.preview();
+    }
     exitListener = AppLifecycleListener(
       onExitRequested: () async =>
           editor.mayExit() ? AppExitResponse.exit : AppExitResponse.cancel,
@@ -81,9 +96,7 @@ class _ItemEditorDialogState extends State<_ItemEditorDialog> {
               FilledButton(
                 key: const Key('item-editor-save'),
                 onPressed: editor.canSave ? _save : null,
-                child: AppText(
-                  state.saving ? 'Расчёт…' : 'Надеть и рассчитать',
-                ),
+                child: AppText(state.saving ? 'Расчёт…' : 'Применить'),
               ),
             ],
           ),
@@ -199,9 +212,18 @@ class _ItemEditorDialogState extends State<_ItemEditorDialog> {
             style: TextStyle(color: Spark.of(context).danger),
           ),
         ),
-      if (state.preview case final preview?)
-        ItemDescription(preview)
-      else if (!state.loading)
+      if (state.preview case final preview?) ...[
+        if (preview.comparison case final comparison?) ...[
+          ItemComparisonPanel(comparison),
+          const SizedBox(height: 14),
+        ],
+        if (!repository.canCompare)
+          const Padding(
+            padding: EdgeInsets.only(bottom: 12),
+            child: AppText('Обновите MCP для сравнения предметов'),
+          ),
+        ItemDescription(preview),
+      ] else if (!state.loading)
         const Padding(
           padding: EdgeInsets.all(20),
           child: AppText(

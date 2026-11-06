@@ -132,6 +132,11 @@
     "description": "PoB II · Мастерская",
     "placeholders": {}
   },
+  "mb8ddc14d08": "PoB did not return the correct search link",
+  "@mb8ddc14d08": {
+    "description": "PoB не вернул корректную ссылку поиска",
+    "placeholders": {}
+  },
   "m3127345008": "XML more than 16 MB",
   "@m3127345008": {
     "description": "XML больше 16 МБ",
@@ -230,6 +235,16 @@
     "description": "Амулет",
     "placeholders": {}
   },
+  "mc11be494c0": "Item base",
+  "@mc11be494c0": {
+    "description": "База предмета",
+    "placeholders": {}
+  },
+  "m0792a052a1": "No limit",
+  "@m0792a052a1": {
+    "description": "Без ограничения",
+    "placeholders": {}
+  },
   "mfc52cf98ef": "Block",
   "@mfc52cf98ef": {
     "description": "Блок",
@@ -238,6 +253,16 @@
   "mb1ff29da2c": "Armour",
   "@mb1ff29da2c": {
     "description": "Броня",
+    "placeholders": {}
+  },
+  "m4fae346e6c": "Before",
+  "@m4fae346e6c": {
+    "description": "Было",
+    "placeholders": {}
+  },
+  "m84e960d40a": "Budget",
+  "@m84e960d40a": {
+    "description": "Бюджет",
     "placeholders": {}
   },
   "m7daed90e2c": "There is no {p1} in {p0}; requires MCP 0.4.0 or later",
@@ -266,9 +291,29 @@
     "description": "Важные показатели",
     "placeholders": {}
   },
+  "m6aa14ce33b": "Currency",
+  "@m6aa14ce33b": {
+    "description": "Валюта",
+    "placeholders": {}
+  },
+  "m84bb1ae656": "Option",
+  "@m84bb1ae656": {
+    "description": "Вариант",
+    "placeholders": {}
+  },
   "m65d05ab17f": "Your next build",
   "@m65d05ab17f": {
     "description": "Ваша следующая сборка",
+    "placeholders": {}
+  },
+  "mfc903d7f16": "Enter a valid number",
+  "@mfc903d7f16": {
+    "description": "Введите корректное число",
+    "placeholders": {}
+  },
+  "m6ac5360d13": "Enter a correct budget",
+  "@m6ac5360d13": {
+    "description": "Введите корректный бюджет",
     "placeholders": {}
   },
   "mbce24a2108": "Enter a name",
@@ -379,6 +424,11 @@
   "me4c25f9a5f": "Insert XML",
   "@me4c25f9a5f": {
     "description": "Вставить XML",
+    "placeholders": {}
+  },
+  "md6ad11ba2b": "Insert found item",
+  "@md6ad11ba2b": {
+    "description": "Вставить найденный предмет",
     "placeholders": {}
   },
   "m6bf3b12df4": "Insert XML assemblies. It will be checked and calculated in Lua.",
@@ -583,6 +633,11 @@
       }
     }
   },
+  "m71038c53bb": "Add",
+  "@m71038c53bb": {
+    "description": "Добавить",
+    "placeholders": {}
+  },
   "ma11b26e5e9": "Add and calculate",
   "@ma11b26e5e9": {
     "description": "Добавить и рассчитать",
@@ -726,6 +781,11 @@
   "mbdb05f34ee": "Notes are saved automatically",
   "@mbdb05f34ee": {
     "description": "Заметки сохраняются автоматически",
+    "placeholders": {}
+  },
+  "m1107806954": "Enchantments",
+  "@m1107806954": {
+    "description": "Зачарования",
     "placeholders": {}
   },
   "m792acb40e4": "Protection",
@@ -897,6 +957,11 @@
     "description": "Левая рука II",
     "placeholders": {}
   },
+  "m1190db95a3": "League",
+  "@m1190db95a3": {
+    "description": "Лига",
+    "placeholders": {}
+  },
   "m609fc60c74": "Dexterity",
   "@m609fc60c74": {
     "description": "Ловкость",
@@ -907,9 +972,19 @@
     "description": "Локальная связь интерфейса с расчётами",
     "placeholders": {}
   },
+  "mab7d96eb1a": "Any base",
+  "@mab7d96eb1a": {
+    "description": "Любая база",
+    "placeholders": {}
+  },
   "m187dafbec4": "Eff. Maximum Hit Taken",
   "@m187dafbec4": {
     "description": "Максимальный выдерживаемый удар",
+    "placeholders": {}
+  },
+  "mf33c9a814c": "Maximum",
+  "@mf33c9a814c": {
+    "description": "Максимум",
     "placeholders": {}
   },
   "mc73618fdf4": "Mana",
@@ -930,6 +1005,11 @@
   "mbe517dba6c": "Interface scale",
   "@mbe517dba6c": {
     "description": "Масштаб интерфейса",
+    "placeholders": {}
+  },
+  "m10808f1297": "Minimum",
+  "@m10808f1297": {
+    "description": "Минимум",
     "placeholders": {}
   },
   "m22e1e2c7ad": "Crit Multiplier",
@@ -981,11 +1061,6 @@
     "description": "Нагрудник",
     "placeholders": {}
   },
-  "m36c56d21df": "Put on and calculate",
-  "@m36c56d21df": {
-    "description": "Надеть и рассчитать",
-    "placeholders": {}
-  },
   "m38509ab991": "Press the combination with Ctrl, Alt or Cmd. Esc - cancel.",
   "@m38509ab991": {
     "description": "Нажмите сочетание с Ctrl, Alt или Cmd. Esc — отмена.",
@@ -1014,6 +1089,11 @@
   "m7d4ff2d217": "Search gems",
   "@m7d4ff2d217": {
     "description": "Найти камень",
+    "placeholders": {}
+  },
+  "m0eff361901": "Find on trade",
+  "@m0eff361901": {
+    "description": "Найти на торговле",
     "placeholders": {}
   },
   "m302605cf87": "Найти сборку",
@@ -1098,6 +1178,15 @@
       }
     }
   },
+  "m725605a944": "Failed to open browser: {p0}",
+  "@m725605a944": {
+    "description": "Не удалось открыть браузер: {p0}",
+    "placeholders": {
+      "p0": {
+        "type": "String"
+      }
+    }
+  },
   "m189f5a7238": "Failed to open or save notes.\n{p0}",
   "@m189f5a7238": {
     "description": "Не удалось открыть или сохранить заметки.\n{p0}",
@@ -1161,6 +1250,11 @@
         "type": "String"
       }
     }
+  },
+  "m57d96c50f4": "Failed to apply item",
+  "@m57d96c50f4": {
+    "description": "Не удалось применить предмет",
+    "placeholders": {}
   },
   "m3ce1fbdad2": "Failed to check SHA-256 file: {p0}",
   "@m3ce1fbdad2": {
@@ -1290,6 +1384,11 @@
     "description": "Некорректная связь дерева Lua",
     "placeholders": {}
   },
+  "m57e2535a94": "Incorrect search link",
+  "@m57e2535a94": {
+    "description": "Некорректная ссылка поиска",
+    "placeholders": {}
+  },
   "m3f7db06826": "Incorrect texture of the finished wood",
   "@m3f7db06826": {
     "description": "Некорректная текстура готового дерева",
@@ -1380,6 +1479,11 @@
     "description": "Нет перевода — показываем оригинал",
     "placeholders": {}
   },
+  "m480fae1c4b": "Nothing found",
+  "@m480fae1c4b": {
+    "description": "Ничего не найдено",
+    "placeholders": {}
+  },
   "mc9fd9fc0e5": "New group",
   "@mc9fd9fc0e5": {
     "description": "Новая группа",
@@ -1440,6 +1544,11 @@
     "description": "Обновите MCP для оригинальных иконок камней",
     "placeholders": {}
   },
+  "m2efaa26ed2": "Update MCP for trade search",
+  "@m2efaa26ed2": {
+    "description": "Обновите MCP для поиска на торговле",
+    "placeholders": {}
+  },
   "m2788a17cac": "Update MCP to edit group",
   "@m2788a17cac": {
     "description": "Обновите MCP для редактирования группы",
@@ -1448,6 +1557,11 @@
   "mfa7a72dbc1": "Update MCP for the equipment editor",
   "@mfa7a72dbc1": {
     "description": "Обновите MCP для редактора экипировки",
+    "placeholders": {}
+  },
+  "md708edb156": "Update MCP item comparison",
+  "@md708edb156": {
+    "description": "Обновите MCP для сравнения предметов",
     "placeholders": {}
   },
   "m124cd4a205": "Update MCP to remove skill",
@@ -1512,6 +1626,11 @@
   "mbb08ba5f85": "Expected report from original Lua",
   "@mbb08ba5f85": {
     "description": "Ожидался отчёт исходного Lua",
+    "placeholders": {}
+  },
+  "mab5f9b4d06": "PoB trade catalog was expected",
+  "@mab5f9b4d06": {
+    "description": "Ожидался торговый каталог PoB",
     "placeholders": {}
   },
   "mb3f794d1cf": "No operations yet",
@@ -1582,6 +1701,11 @@
   "m589c35aaa6": "Open and calculate",
   "@m589c35aaa6": {
     "description": "Открыть и рассчитать",
+    "placeholders": {}
+  },
+  "mcfc22a4611": "Open search",
+  "@mcfc22a4611": {
+    "description": "Открыть поиск",
     "placeholders": {}
   },
   "m8fbe9b75cb": "Cancel",
@@ -1741,14 +1865,39 @@
     "description": "Подходящие поддержки",
     "placeholders": {}
   },
+  "m180f58ab97": "Search",
+  "@m180f58ab97": {
+    "description": "Поиск",
+    "placeholders": {}
+  },
+  "mec63af0ca6": "Search on trade",
+  "@mec63af0ca6": {
+    "description": "Поиск на торговле",
+    "placeholders": {}
+  },
+  "md133559e02": "The search will open on the official website",
+  "@md133559e02": {
+    "description": "Поиск откроется на официальном сайте",
+    "placeholders": {}
+  },
   "mbf3c9df646": "Indicators",
   "@mbf3c9df646": {
     "description": "Показатели",
     "placeholders": {}
   },
+  "mc7fc04e5df": "Indicators will not change",
+  "@mc7fc04e5df": {
+    "description": "Показатели не изменятся",
+    "placeholders": {}
+  },
   "m53788df38a": "Indicators of the current build state",
   "@m53788df38a": {
     "description": "Показатели текущего состояния сборки",
+    "placeholders": {}
+  },
+  "mfdf0487fc4": "Indicator",
+  "@mfdf0487fc4": {
+    "description": "Показатель",
     "placeholders": {}
   },
   "m21a6bb1840": "Show whole tree",
@@ -1924,6 +2073,11 @@
   "m84028563e4": "Apply and calculate",
   "@m84028563e4": {
     "description": "Применить и рассчитать",
+    "placeholders": {}
+  },
+  "mae2ea1c701": "Preview",
+  "@mae2ea1c701": {
+    "description": "Примерка",
     "placeholders": {}
   },
   "m6aab9e2cb4": "Suspend",
@@ -2112,9 +2266,19 @@
     "description": "Руническая защита",
     "placeholders": {}
   },
+  "m9c7a204d54": "Runes",
+  "@m9c7a204d54": {
+    "description": "Руны",
+    "placeholders": {}
+  },
   "m8c39bb691b": "Assembly",
   "@m8c39bb691b": {
     "description": "Сборка",
+    "placeholders": {}
+  },
+  "m544bec7909": "The build will change after clicking \"Apply\"",
+  "@m544bec7909": {
+    "description": "Сборка изменится после нажатия «Применить»",
     "placeholders": {}
   },
   "m5c8bb47697": "Assembly not found",
@@ -2201,6 +2365,11 @@
     "description": "Скопировать XML",
     "placeholders": {}
   },
+  "m8d81013698": "Copy link",
+  "@m8d81013698": {
+    "description": "Скопировать ссылку",
+    "placeholders": {}
+  },
   "m052e3a8cc9": "Copy an item from the game or PoB",
   "@m052e3a8cc9": {
     "description": "Скопируйте предмет из игры или PoB",
@@ -2244,6 +2413,11 @@
   "md4b51f7a04": "Remove",
   "@md4b51f7a04": {
     "description": "Снять",
+    "placeholders": {}
+  },
+  "mf3f1d96087": "Own properties",
+  "@mf3f1d96087": {
+    "description": "Собственные свойства",
     "placeholders": {}
   },
   "m9071a1a6f4": "Connection to Lua lost",
@@ -2325,9 +2499,19 @@
     "description": "Стабильных выпусков пока нет",
     "placeholders": {}
   },
+  "md3ae3e1986": "After",
+  "@md3ae3e1986": {
+    "description": "Стало",
+    "placeholders": {}
+  },
   "mf7eaffec2f": "Issues page",
   "@mf7eaffec2f": {
     "description": "Страница выпусков",
+    "placeholders": {}
+  },
+  "m4ef88e033d": "Summary properties",
+  "@m4ef88e033d": {
+    "description": "Суммарные свойства",
     "placeholders": {}
   },
   "m98b6085914": "Combined DPS",
@@ -2355,6 +2539,11 @@
     "description": "Тип условия пока не поддерживается",
     "placeholders": {}
   },
+  "m0ba4c8c62f": "Online only",
+  "@m0ba4c8c62f": {
+    "description": "Только в сети",
+    "placeholders": {}
+  },
   "m1eecfcaa7b": "Dark",
   "@m1eecfcaa7b": {
     "description": "Тёмная",
@@ -2363,6 +2552,11 @@
   "m2ec842e2f5": "Redirect has no address",
   "@m2ec842e2f5": {
     "description": "У перенаправления нет адреса",
+    "placeholders": {}
+  },
+  "m07cb650874": "Remove",
+  "@m07cb650874": {
+    "description": "Убрать",
     "placeholders": {}
   },
   "m94fde688e0": "Remove gem",
@@ -2671,6 +2865,11 @@
   "mf83e6d742f": "Effective Hit Pool",
   "@mf83e6d742f": {
     "description": "Эффективное здоровье",
+    "placeholders": {}
+  },
+  "m612d4e1470": "Explicit properties",
+  "@m612d4e1470": {
+    "description": "Явные свойства",
     "placeholders": {}
   },
   "m5bd57038db": "Language",

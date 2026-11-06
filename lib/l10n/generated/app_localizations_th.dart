@@ -88,6 +88,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get mcdf95e40cd => 'PoB II · เวิร์กช็อป';
 
   @override
+  String get mb8ddc14d08 => 'PoB ไม่ได้ส่งคืนลิงก์การค้นหาที่ถูกต้อง';
+
+  @override
   String get m3127345008 => 'XML มากกว่า 16 MB';
 
   @override
@@ -135,10 +138,22 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m63141a77bf => 'พระเครื่อง';
 
   @override
+  String get mc11be494c0 => 'ฐานรายการ';
+
+  @override
+  String get m0792a052a1 => 'ไม่มีขีดจำกัด';
+
+  @override
   String get mfc52cf98ef => 'บล็อก';
 
   @override
   String get mb1ff29da2c => 'เกราะ';
+
+  @override
+  String get m4fae346e6c => 'มันเป็นอย่างนั้น';
+
+  @override
+  String get m84e960d40a => 'งบประมาณ';
 
   @override
   String m7daed90e2c(String p0, String p1) {
@@ -154,7 +169,19 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m3e8bb03d9a => 'ตัวชี้วัดที่สำคัญ';
 
   @override
+  String get m6aa14ce33b => 'สกุลเงิน';
+
+  @override
+  String get m84bb1ae656 => 'ตัวเลือก';
+
+  @override
   String get m65d05ab17f => 'งานสร้างครั้งต่อไปของคุณ';
+
+  @override
+  String get mfc903d7f16 => 'ป้อนตัวเลขที่ถูกต้อง';
+
+  @override
+  String get m6ac5360d13 => 'ป้อนงบประมาณที่ถูกต้อง';
 
   @override
   String get mbce24a2108 => 'ป้อนชื่อ';
@@ -221,6 +248,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get me4c25f9a5f => 'แทรก XML';
+
+  @override
+  String get md6ad11ba2b => 'แทรกรายการที่พบ';
 
   @override
   String get m6bf3b12df4 => 'ใส่แอสเซมบลี XML จะมีการตรวจสอบและคำนวณในปี Lua';
@@ -347,6 +377,9 @@ class AppLocalizationsTh extends AppLocalizations {
   }
 
   @override
+  String get m71038c53bb => 'เพิ่ม';
+
+  @override
   String get ma11b26e5e9 => 'บวกและคำนวณ';
 
   @override
@@ -426,6 +459,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get mbdb05f34ee => 'บันทึกย่อจะถูกบันทึกโดยอัตโนมัติ';
+
+  @override
+  String get m1107806954 => 'มนต์เสน่ห์';
 
   @override
   String get m792acb40e4 => 'การป้องกัน';
@@ -529,13 +565,22 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m7825825def => 'มือซ้าย II';
 
   @override
+  String get m1190db95a3 => 'ลีก';
+
+  @override
   String get m609fc60c74 => 'ความคล่องแคล่ว';
 
   @override
   String get m5da5bd2f47 => 'การเชื่อมต่ออินเทอร์เฟซท้องถิ่นพร้อมการคำนวณ';
 
   @override
+  String get mab7d96eb1a => 'ฐานใดก็ได้';
+
+  @override
   String get m187dafbec4 => 'เอฟเฟค การโจมตีสูงสุดที่ทำได้';
+
+  @override
+  String get mf33c9a814c => 'สูงสุด';
 
   @override
   String get mc73618fdf4 => 'มานะ';
@@ -548,6 +593,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get mbe517dba6c => 'ขนาดอินเทอร์เฟซ';
+
+  @override
+  String get m10808f1297 => 'ขั้นต่ำ';
 
   @override
   String get m22e1e2c7ad => 'ตัวคูณคริติคอล';
@@ -579,9 +627,6 @@ class AppLocalizationsTh extends AppLocalizations {
   String get mff86959fa1 => 'ผ้ากันเปื้อน';
 
   @override
-  String get m36c56d21df => 'ใส่แล้วคำนวนครับ';
-
-  @override
   String get m38509ab991 => 'กดร่วมกับ Ctrl, Alt หรือ Cmd Esc - ยกเลิก';
 
   @override
@@ -598,6 +643,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m7d4ff2d217 => 'ค้นหาอัญมณี';
+
+  @override
+  String get m0eff361901 => 'ค้นหาการซื้อขาย';
 
   @override
   String get m302605cf87 => 'ไม่เป็นไร';
@@ -648,6 +696,11 @@ class AppLocalizationsTh extends AppLocalizations {
   }
 
   @override
+  String m725605a944(String p0) {
+    return 'ไม่สามารถเปิดเบราว์เซอร์: $p0';
+  }
+
+  @override
   String m189f5a7238(String p0) {
     return 'ไม่สามารถเปิดหรือบันทึกบันทึกย่อ\n$p0';
   }
@@ -682,6 +735,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String mcd252d5275(String p0) {
     return 'ไม่สามารถรับคำใบ้: $p0';
   }
+
+  @override
+  String get m57d96c50f4 => 'ไม่สามารถใช้รายการได้';
 
   @override
   String m3ce1fbdad2(String p0) {
@@ -758,6 +814,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get mf1703df170 => 'ลิงก์ต้นไม้ไม่ถูกต้อง Lua';
 
   @override
+  String get m57e2535a94 => 'ลิงก์ค้นหาไม่ถูกต้อง';
+
+  @override
   String get m3f7db06826 => 'พื้นผิวของไม้ที่เสร็จแล้วไม่ถูกต้อง';
 
   @override
@@ -812,6 +871,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m323494c6da => 'ข้อความต้นฉบับจะแสดงขึ้นเมื่อการแปลไม่พร้อมใช้งาน';
 
   @override
+  String get m480fae1c4b => 'ไม่พบสิ่งใด';
+
+  @override
   String get mc9fd9fc0e5 => 'กลุ่มใหม่';
 
   @override
@@ -848,10 +910,16 @@ class AppLocalizationsTh extends AppLocalizations {
   String get md423f03f4f => 'อัปเดต MCP สำหรับไอคอนหินดั้งเดิม';
 
   @override
+  String get m2efaa26ed2 => 'อัปเดต MCP สำหรับการค้นหาการค้า';
+
+  @override
   String get m2788a17cac => 'อัปเดต MCP เพื่อแก้ไขกลุ่ม';
 
   @override
   String get mfa7a72dbc1 => 'อัปเดต MCP สำหรับผู้แก้ไขอุปกรณ์';
+
+  @override
+  String get md708edb156 => 'อัปเดตการเปรียบเทียบรายการ MCP รายการ';
 
   @override
   String get m124cd4a205 => 'อัปเดต MCP เพื่อลบทักษะ';
@@ -894,6 +962,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get mbb08ba5f85 => 'รายงานที่คาดหวังจากต้นฉบับ Lua';
 
   @override
+  String get mab5f9b4d06 => 'แค็ตตาล็อกการค้า PoB คาดว่าจะเกิดขึ้น';
+
+  @override
   String get mb3f794d1cf => 'ยังไม่มีการดำเนินการใดๆ';
 
   @override
@@ -934,6 +1005,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m589c35aaa6 => 'เปิดและคำนวณ';
+
+  @override
+  String get mcfc22a4611 => 'เปิดการค้นหา';
 
   @override
   String get m8fbe9b75cb => 'ยกเลิก';
@@ -1030,10 +1104,25 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m5f5155bb1f => 'รองรับการจับคู่';
 
   @override
+  String get m180f58ab97 => 'ค้นหา';
+
+  @override
+  String get mec63af0ca6 => 'ค้นหาเกี่ยวกับการค้าขาย';
+
+  @override
+  String get md133559e02 => 'การค้นหาจะเปิดขึ้นบนเว็บไซต์อย่างเป็นทางการ';
+
+  @override
   String get mbf3c9df646 => 'ตัวบ่งชี้';
 
   @override
+  String get mc7fc04e5df => 'ตัวบ่งชี้จะไม่เปลี่ยนแปลง';
+
+  @override
   String get m53788df38a => 'ตัวบ่งชี้สถานะการสร้างปัจจุบัน';
+
+  @override
+  String get mfdf0487fc4 => 'ตัวบ่งชี้';
 
   @override
   String get m21a6bb1840 => 'แสดงทั้งต้นไม้';
@@ -1137,6 +1226,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m84028563e4 => 'นำไปใช้และคำนวณ';
+
+  @override
+  String get mae2ea1c701 => 'กำลังพยายามอยู่';
 
   @override
   String get m6aab9e2cb4 => 'Suspend';
@@ -1250,7 +1342,13 @@ class AppLocalizationsTh extends AppLocalizations {
   String get ma735c975e0 => 'วอร์ดรูนิก';
 
   @override
+  String get m9c7a204d54 => 'รูน';
+
+  @override
   String get m8c39bb691b => 'การประกอบ';
+
+  @override
+  String get m544bec7909 => 'โครงสร้างจะเปลี่ยนไปหลังจากคลิก \"นำไปใช้\"';
 
   @override
   String get m5c8bb47697 => 'ไม่พบชุดประกอบ';
@@ -1303,6 +1401,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m332899f398 => 'คัดลอก XML';
 
   @override
+  String get m8d81013698 => 'คัดลอกลิงก์';
+
+  @override
   String get m052e3a8cc9 => 'คัดลอกรายการจากเกมหรือ PoB';
 
   @override
@@ -1328,6 +1429,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get md4b51f7a04 => 'ลบ';
+
+  @override
+  String get mf3f1d96087 => 'คุณสมบัติของตัวเอง';
 
   @override
   String get m9071a1a6f4 => 'การเชื่อมต่อกับ Lua ขาดหายไป';
@@ -1379,7 +1483,13 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m91d6208508 => 'ยังไม่มีการเผยแพร่ที่เสถียร';
 
   @override
+  String get md3ae3e1986 => 'กลายเป็น';
+
+  @override
   String get mf7eaffec2f => 'หน้าปัญหา';
+
+  @override
+  String get m4ef88e033d => 'คุณสมบัติสรุป';
 
   @override
   String get m98b6085914 => 'รวม DPS';
@@ -1397,10 +1507,16 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m0472e6790c => 'ยังไม่รองรับประเภทเงื่อนไข';
 
   @override
+  String get m0ba4c8c62f => 'ออนไลน์เท่านั้น';
+
+  @override
   String get m1eecfcaa7b => 'มืด';
 
   @override
   String get m2ec842e2f5 => 'การเปลี่ยนเส้นทางไม่มีที่อยู่';
+
+  @override
+  String get m07cb650874 => 'ลบ';
 
   @override
   String get m94fde688e0 => 'ลบอัญมณี';
@@ -1585,6 +1701,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get mf83e6d742f => 'สุขภาพที่มีประสิทธิภาพ';
+
+  @override
+  String get m612d4e1470 => 'คุณสมบัติที่ชัดเจน';
 
   @override
   String get m5bd57038db => 'ภาษา';

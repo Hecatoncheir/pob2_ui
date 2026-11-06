@@ -12,6 +12,8 @@ import 'equipment_presentation.dart';
 import 'item_description.dart';
 import 'item_editor_dialog.dart';
 import 'workshop_cubit.dart';
+import 'trade_search_dialog.dart';
+import '../data/trade_search_repository.dart';
 
 class ItemsView extends StatefulWidget {
   const ItemsView({super.key, required this.model});
@@ -163,6 +165,21 @@ class _ItemsViewState extends State<ItemsView> {
                       icon: const Icon(Icons.remove_circle_outline, size: 18),
                       label: const AppText('Снять'),
                     ),
+                  OutlinedButton.icon(
+                    key: const Key('equipment-trade'),
+                    onPressed:
+                        widget.model.state.busy ||
+                            !TradeSearchRepository(widget.model.engine)
+                                .available
+                        ? null
+                        : () => showTradeSearch(
+                            context,
+                            widget.model,
+                            state.slot!,
+                          ),
+                    icon: const Icon(Icons.search, size: 18),
+                    label: const AppText('Найти на торговле'),
+                  ),
                 ],
               ),
               if (!equipment.repository.available)

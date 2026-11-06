@@ -91,6 +91,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get mcdf95e40cd => 'PoB II · Atelier';
 
   @override
+  String get mb8ddc14d08 => 'PoB n\'a pas renvoyé le lien de recherche correct';
+
+  @override
   String get m3127345008 => 'XML plus de 16 Mo';
 
   @override
@@ -138,10 +141,22 @@ class AppLocalizationsFr extends AppLocalizations {
   String get m63141a77bf => 'Amulette';
 
   @override
+  String get mc11be494c0 => 'Base d\'articles';
+
+  @override
+  String get m0792a052a1 => 'Aucune limite';
+
+  @override
   String get mfc52cf98ef => 'Bloquer';
 
   @override
   String get mb1ff29da2c => 'Armure';
+
+  @override
+  String get m4fae346e6c => 'C\'était';
+
+  @override
+  String get m84e960d40a => 'Budget';
 
   @override
   String m7daed90e2c(String p0, String p1) {
@@ -157,7 +172,19 @@ class AppLocalizationsFr extends AppLocalizations {
   String get m3e8bb03d9a => 'Indicateurs importants';
 
   @override
+  String get m6aa14ce33b => 'Devise';
+
+  @override
+  String get m84bb1ae656 => 'Option';
+
+  @override
   String get m65d05ab17f => 'Votre prochaine version';
+
+  @override
+  String get mfc903d7f16 => 'Entrez un numéro valide';
+
+  @override
+  String get m6ac5360d13 => 'Saisissez un budget correct';
 
   @override
   String get mbce24a2108 => 'Entrez un nom';
@@ -225,6 +252,9 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get me4c25f9a5f => 'Insérer XML';
+
+  @override
+  String get md6ad11ba2b => 'Insérer l\'élément trouvé';
 
   @override
   String get m6bf3b12df4 =>
@@ -358,6 +388,9 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
+  String get m71038c53bb => 'Ajouter';
+
+  @override
   String get ma11b26e5e9 => 'Ajouter et calculer';
 
   @override
@@ -439,6 +472,9 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get mbdb05f34ee => 'Les notes sont enregistrées automatiquement';
+
+  @override
+  String get m1107806954 => 'Enchantements';
 
   @override
   String get m792acb40e4 => 'Protection';
@@ -543,13 +579,22 @@ class AppLocalizationsFr extends AppLocalizations {
   String get m7825825def => 'Main gauche II';
 
   @override
+  String get m1190db95a3 => 'Ligue';
+
+  @override
   String get m609fc60c74 => 'Dextérité';
 
   @override
   String get m5da5bd2f47 => 'Connexion d\'interface locale avec calculs';
 
   @override
+  String get mab7d96eb1a => 'N\'importe quelle base';
+
+  @override
   String get m187dafbec4 => 'Eff. Coup maximum reçu';
+
+  @override
+  String get mf33c9a814c => 'Maximum';
 
   @override
   String get mc73618fdf4 => 'Mana';
@@ -562,6 +607,9 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get mbe517dba6c => 'Échelle d\'interface';
+
+  @override
+  String get m10808f1297 => 'Minimum';
 
   @override
   String get m22e1e2c7ad => 'Multiplicateur de critiques';
@@ -593,9 +641,6 @@ class AppLocalizationsFr extends AppLocalizations {
   String get mff86959fa1 => 'Bavoir';
 
   @override
-  String get m36c56d21df => 'Enfilez et calculez';
-
-  @override
   String get m38509ab991 =>
       'Appuyez sur la combinaison avec Ctrl, Alt ou Cmd. Echap - annuler.';
 
@@ -613,6 +658,9 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get m7d4ff2d217 => 'Rechercher des gemmes';
+
+  @override
+  String get m0eff361901 => 'Trouver sur le commerce';
 
   @override
   String get m302605cf87 => 'Найти сборку';
@@ -663,6 +711,11 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
+  String m725605a944(String p0) {
+    return 'Échec de l\'ouverture du navigateur : $p0';
+  }
+
+  @override
   String m189f5a7238(String p0) {
     return 'Échec de l\'ouverture ou de l\'enregistrement des notes.\n$p0';
   }
@@ -697,6 +750,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String mcd252d5275(String p0) {
     return 'Échec de l\'obtention de l\'indice : $p0';
   }
+
+  @override
+  String get m57d96c50f4 => 'Échec de l\'application de l\'élément';
 
   @override
   String m3ce1fbdad2(String p0) {
@@ -773,6 +829,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get mf1703df170 => 'Lien d\'arborescence incorrect Lua';
 
   @override
+  String get m57e2535a94 => 'Lien de recherche incorrect';
+
+  @override
   String get m3f7db06826 => 'Texture incorrecte du bois fini';
 
   @override
@@ -830,6 +889,9 @@ class AppLocalizationsFr extends AppLocalizations {
       'Le texte original s\'affiche lorsqu\'une traduction n\'est pas disponible';
 
   @override
+  String get m480fae1c4b => 'Rien trouvé';
+
+  @override
   String get mc9fd9fc0e5 => 'Nouveau groupe';
 
   @override
@@ -870,10 +932,16 @@ class AppLocalizationsFr extends AppLocalizations {
       'Mise à jour MCP pour les icônes de pierre originales';
 
   @override
+  String get m2efaa26ed2 => 'Mise à jour MCP pour la recherche commerciale';
+
+  @override
   String get m2788a17cac => 'Mettre à jour MCP pour modifier le groupe';
 
   @override
   String get mfa7a72dbc1 => 'Mise à jour MCP pour l\'éditeur d\'équipement';
+
+  @override
+  String get md708edb156 => 'Mettre à jour la comparaison d\'éléments MCP';
 
   @override
   String get m124cd4a205 => 'Mettre à jour MCP pour supprimer la compétence';
@@ -916,6 +984,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get mbb08ba5f85 => 'Rapport attendu de l\'original Lua';
 
   @override
+  String get mab5f9b4d06 => 'Le catalogue commercial PoB était attendu';
+
+  @override
   String get mb3f794d1cf => 'Aucune opération pour l\'instant';
 
   @override
@@ -956,6 +1027,9 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get m589c35aaa6 => 'Ouvrir et calculer';
+
+  @override
+  String get mcfc22a4611 => 'Ouvrir la recherche';
 
   @override
   String get m8fbe9b75cb => 'Annuler';
@@ -1054,10 +1128,25 @@ class AppLocalizationsFr extends AppLocalizations {
   String get m5f5155bb1f => 'Supports correspondants';
 
   @override
+  String get m180f58ab97 => 'Rechercher';
+
+  @override
+  String get mec63af0ca6 => 'Recherche sur le commerce';
+
+  @override
+  String get md133559e02 => 'La recherche s\'ouvrira sur le site officiel';
+
+  @override
   String get mbf3c9df646 => 'Indicateurs';
 
   @override
+  String get mc7fc04e5df => 'Les indicateurs ne changeront pas';
+
+  @override
   String get m53788df38a => 'Indicateurs de l\'état actuel de la build';
+
+  @override
+  String get mfdf0487fc4 => 'Indicateur';
 
   @override
   String get m21a6bb1840 => 'Afficher l\'arbre entier';
@@ -1162,6 +1251,9 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get m84028563e4 => 'Appliquer et calculer';
+
+  @override
+  String get mae2ea1c701 => 'Essayer';
 
   @override
   String get m6aab9e2cb4 => 'Suspendre';
@@ -1280,7 +1372,14 @@ class AppLocalizationsFr extends AppLocalizations {
   String get ma735c975e0 => 'Protection runique';
 
   @override
+  String get m9c7a204d54 => 'Runes';
+
+  @override
   String get m8c39bb691b => 'Assemblage';
+
+  @override
+  String get m544bec7909 =>
+      'La build changera après avoir cliqué sur \"Appliquer\"';
 
   @override
   String get m5c8bb47697 => 'Assemblage introuvable';
@@ -1334,6 +1433,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get m332899f398 => 'Copier XML';
 
   @override
+  String get m8d81013698 => 'Copier le lien';
+
+  @override
   String get m052e3a8cc9 => 'Copier un élément du jeu ou du PoB';
 
   @override
@@ -1359,6 +1461,9 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get md4b51f7a04 => 'Supprimer';
+
+  @override
+  String get mf3f1d96087 => 'Posséder des propriétés';
 
   @override
   String get m9071a1a6f4 => 'Connexion à Lua perdue';
@@ -1411,7 +1516,13 @@ class AppLocalizationsFr extends AppLocalizations {
   String get m91d6208508 => 'Pas encore de version stable';
 
   @override
+  String get md3ae3e1986 => 'Devenu';
+
+  @override
   String get mf7eaffec2f => 'Page des problèmes';
+
+  @override
+  String get m4ef88e033d => 'Propriétés récapitulatives';
 
   @override
   String get m98b6085914 => 'Total DPS';
@@ -1430,10 +1541,16 @@ class AppLocalizationsFr extends AppLocalizations {
       'Le type de condition n\'est pas encore pris en charge';
 
   @override
+  String get m0ba4c8c62f => 'En ligne uniquement';
+
+  @override
   String get m1eecfcaa7b => 'Sombre';
 
   @override
   String get m2ec842e2f5 => 'La redirection n\'a pas d\'adresse';
+
+  @override
+  String get m07cb650874 => 'Supprimer';
 
   @override
   String get m94fde688e0 => 'Supprimer la gemme';
@@ -1622,6 +1739,9 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get mf83e6d742f => 'Santé efficace';
+
+  @override
+  String get m612d4e1470 => 'Propriétés explicites';
 
   @override
   String get m5bd57038db => 'Langue';

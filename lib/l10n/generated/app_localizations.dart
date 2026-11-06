@@ -260,6 +260,12 @@ abstract class AppLocalizations {
   /// **'PoB II · Workshop'**
   String get mcdf95e40cd;
 
+  /// PoB не вернул корректную ссылку поиска
+  ///
+  /// In en, this message translates to:
+  /// **'PoB did not return the correct search link'**
+  String get mb8ddc14d08;
+
   /// XML больше 16 МБ
   ///
   /// In en, this message translates to:
@@ -332,6 +338,18 @@ abstract class AppLocalizations {
   /// **'Amulet'**
   String get m63141a77bf;
 
+  /// База предмета
+  ///
+  /// In en, this message translates to:
+  /// **'Item base'**
+  String get mc11be494c0;
+
+  /// Без ограничения
+  ///
+  /// In en, this message translates to:
+  /// **'No limit'**
+  String get m0792a052a1;
+
   /// Блок
   ///
   /// In en, this message translates to:
@@ -343,6 +361,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Armour'**
   String get mb1ff29da2c;
+
+  /// Было
+  ///
+  /// In en, this message translates to:
+  /// **'Before'**
+  String get m4fae346e6c;
+
+  /// Бюджет
+  ///
+  /// In en, this message translates to:
+  /// **'Budget'**
+  String get m84e960d40a;
 
   /// В {p0} нет {p1}; требуется MCP 0.4.0 или новее
   ///
@@ -362,11 +392,35 @@ abstract class AppLocalizations {
   /// **'Important indicators'**
   String get m3e8bb03d9a;
 
+  /// Валюта
+  ///
+  /// In en, this message translates to:
+  /// **'Currency'**
+  String get m6aa14ce33b;
+
+  /// Вариант
+  ///
+  /// In en, this message translates to:
+  /// **'Option'**
+  String get m84bb1ae656;
+
   /// Ваша следующая сборка
   ///
   /// In en, this message translates to:
   /// **'Your next build'**
   String get m65d05ab17f;
+
+  /// Введите корректное число
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a valid number'**
+  String get mfc903d7f16;
+
+  /// Введите корректный бюджет
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a correct budget'**
+  String get m6ac5360d13;
 
   /// Введите название
   ///
@@ -499,6 +553,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Insert XML'**
   String get me4c25f9a5f;
+
+  /// Вставить найденный предмет
+  ///
+  /// In en, this message translates to:
+  /// **'Insert found item'**
+  String get md6ad11ba2b;
 
   /// Вставьте XML сборки. Она будет проверена и рассчитана в Lua.
   ///
@@ -728,6 +788,12 @@ abstract class AppLocalizations {
   /// **'{p0} points to node'**
   String m8997ad5a89(String p0);
 
+  /// Добавить
+  ///
+  /// In en, this message translates to:
+  /// **'Add'**
+  String get m71038c53bb;
+
   /// Добавить и рассчитать
   ///
   /// In en, this message translates to:
@@ -865,6 +931,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Notes are saved automatically'**
   String get mbdb05f34ee;
+
+  /// Зачарования
+  ///
+  /// In en, this message translates to:
+  /// **'Enchantments'**
+  String get m1107806954;
 
   /// Защита
   ///
@@ -1064,6 +1136,12 @@ abstract class AppLocalizations {
   /// **'Left hand II'**
   String get m7825825def;
 
+  /// Лига
+  ///
+  /// In en, this message translates to:
+  /// **'League'**
+  String get m1190db95a3;
+
   /// Ловкость
   ///
   /// In en, this message translates to:
@@ -1076,11 +1154,23 @@ abstract class AppLocalizations {
   /// **'Local interface connection with calculations'**
   String get m5da5bd2f47;
 
+  /// Любая база
+  ///
+  /// In en, this message translates to:
+  /// **'Any base'**
+  String get mab7d96eb1a;
+
   /// Максимальный выдерживаемый удар
   ///
   /// In en, this message translates to:
   /// **'Eff. Maximum Hit Taken'**
   String get m187dafbec4;
+
+  /// Максимум
+  ///
+  /// In en, this message translates to:
+  /// **'Maximum'**
+  String get mf33c9a814c;
 
   /// Мана
   ///
@@ -1105,6 +1195,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Interface scale'**
   String get mbe517dba6c;
+
+  /// Минимум
+  ///
+  /// In en, this message translates to:
+  /// **'Minimum'**
+  String get m10808f1297;
 
   /// Множитель критического удара
   ///
@@ -1160,12 +1256,6 @@ abstract class AppLocalizations {
   /// **'Bib'**
   String get mff86959fa1;
 
-  /// Надеть и рассчитать
-  ///
-  /// In en, this message translates to:
-  /// **'Put on and calculate'**
-  String get m36c56d21df;
-
   /// Нажмите сочетание с Ctrl, Alt или Cmd. Esc — отмена.
   ///
   /// In en, this message translates to:
@@ -1201,6 +1291,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Search gems'**
   String get m7d4ff2d217;
+
+  /// Найти на торговле
+  ///
+  /// In en, this message translates to:
+  /// **'Find on trade'**
+  String get m0eff361901;
 
   /// Найти сборку
   ///
@@ -1286,6 +1382,12 @@ abstract class AppLocalizations {
   /// **'Failed to load translation: {p0}'**
   String m4b1c83eb15(String p0);
 
+  /// Не удалось открыть браузер: {p0}
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to open browser: {p0}'**
+  String m725605a944(String p0);
+
   /// Не удалось открыть или сохранить заметки.
   /// {p0}
   ///
@@ -1334,6 +1436,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Failed to get hint: {p0}'**
   String mcd252d5275(String p0);
+
+  /// Не удалось применить предмет
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to apply item'**
+  String get m57d96c50f4;
 
   /// Не удалось проверить SHA-256 файла: {p0}
   ///
@@ -1455,6 +1563,12 @@ abstract class AppLocalizations {
   /// **'Incorrect tree link Lua'**
   String get mf1703df170;
 
+  /// Некорректная ссылка поиска
+  ///
+  /// In en, this message translates to:
+  /// **'Incorrect search link'**
+  String get m57e2535a94;
+
   /// Некорректная текстура готового дерева
   ///
   /// In en, this message translates to:
@@ -1563,6 +1677,12 @@ abstract class AppLocalizations {
   /// **'Original text is shown when a translation is unavailable'**
   String get m323494c6da;
 
+  /// Ничего не найдено
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing found'**
+  String get m480fae1c4b;
+
   /// Новая группа
   ///
   /// In en, this message translates to:
@@ -1635,6 +1755,12 @@ abstract class AppLocalizations {
   /// **'Update MCP for original stone icons'**
   String get md423f03f4f;
 
+  /// Обновите MCP для поиска на торговле
+  ///
+  /// In en, this message translates to:
+  /// **'Update MCP for trade search'**
+  String get m2efaa26ed2;
+
   /// Обновите MCP для редактирования группы
   ///
   /// In en, this message translates to:
@@ -1646,6 +1772,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Update MCP for the equipment editor'**
   String get mfa7a72dbc1;
+
+  /// Обновите MCP для сравнения предметов
+  ///
+  /// In en, this message translates to:
+  /// **'Update MCP item comparison'**
+  String get md708edb156;
 
   /// Обновите MCP для удаления умения
   ///
@@ -1718,6 +1850,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Expected report from original Lua'**
   String get mbb08ba5f85;
+
+  /// Ожидался торговый каталог PoB
+  ///
+  /// In en, this message translates to:
+  /// **'PoB trade catalog was expected'**
+  String get mab5f9b4d06;
 
   /// Операций пока нет
   ///
@@ -1802,6 +1940,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Open and calculate'**
   String get m589c35aaa6;
+
+  /// Открыть поиск
+  ///
+  /// In en, this message translates to:
+  /// **'Open search'**
+  String get mcfc22a4611;
 
   /// Отмена
   ///
@@ -1977,17 +2121,47 @@ abstract class AppLocalizations {
   /// **'Matching supports'**
   String get m5f5155bb1f;
 
+  /// Поиск
+  ///
+  /// In en, this message translates to:
+  /// **'Search'**
+  String get m180f58ab97;
+
+  /// Поиск на торговле
+  ///
+  /// In en, this message translates to:
+  /// **'Search on trade'**
+  String get mec63af0ca6;
+
+  /// Поиск откроется на официальном сайте
+  ///
+  /// In en, this message translates to:
+  /// **'The search will open on the official website'**
+  String get md133559e02;
+
   /// Показатели
   ///
   /// In en, this message translates to:
   /// **'Indicators'**
   String get mbf3c9df646;
 
+  /// Показатели не изменятся
+  ///
+  /// In en, this message translates to:
+  /// **'Indicators will not change'**
+  String get mc7fc04e5df;
+
   /// Показатели текущего состояния сборки
   ///
   /// In en, this message translates to:
   /// **'Indicators of the current build state'**
   String get m53788df38a;
+
+  /// Показатель
+  ///
+  /// In en, this message translates to:
+  /// **'Indicator'**
+  String get mfdf0487fc4;
 
   /// Показать всё дерево
   ///
@@ -2174,6 +2348,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Apply and calculate'**
   String get m84028563e4;
+
+  /// Примерка
+  ///
+  /// In en, this message translates to:
+  /// **'Preview'**
+  String get mae2ea1c701;
 
   /// Приостановить
   ///
@@ -2379,11 +2559,23 @@ abstract class AppLocalizations {
   /// **'Runic Ward'**
   String get ma735c975e0;
 
+  /// Руны
+  ///
+  /// In en, this message translates to:
+  /// **'Runes'**
+  String get m9c7a204d54;
+
   /// Сборка
   ///
   /// In en, this message translates to:
   /// **'Assembly'**
   String get m8c39bb691b;
+
+  /// Сборка изменится после нажатия «Применить»
+  ///
+  /// In en, this message translates to:
+  /// **'The build will change after clicking \"Apply\"'**
+  String get m544bec7909;
 
   /// Сборка не найдена
   ///
@@ -2481,6 +2673,12 @@ abstract class AppLocalizations {
   /// **'Copy XML'**
   String get m332899f398;
 
+  /// Скопировать ссылку
+  ///
+  /// In en, this message translates to:
+  /// **'Copy link'**
+  String get m8d81013698;
+
   /// Скопируйте предмет из игры или PoB
   ///
   /// In en, this message translates to:
@@ -2534,6 +2732,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Remove'**
   String get md4b51f7a04;
+
+  /// Собственные свойства
+  ///
+  /// In en, this message translates to:
+  /// **'Own properties'**
+  String get mf3f1d96087;
 
   /// Соединение с Lua прервано
   ///
@@ -2625,11 +2829,23 @@ abstract class AppLocalizations {
   /// **'No stable releases yet'**
   String get m91d6208508;
 
+  /// Стало
+  ///
+  /// In en, this message translates to:
+  /// **'After'**
+  String get md3ae3e1986;
+
   /// Страница выпусков
   ///
   /// In en, this message translates to:
   /// **'Issues page'**
   String get mf7eaffec2f;
+
+  /// Суммарные свойства
+  ///
+  /// In en, this message translates to:
+  /// **'Summary properties'**
+  String get m4ef88e033d;
 
   /// Суммарный DPS
   ///
@@ -2661,6 +2877,12 @@ abstract class AppLocalizations {
   /// **'Condition type is not yet supported'**
   String get m0472e6790c;
 
+  /// Только в сети
+  ///
+  /// In en, this message translates to:
+  /// **'Online only'**
+  String get m0ba4c8c62f;
+
   /// Тёмная
   ///
   /// In en, this message translates to:
@@ -2672,6 +2894,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Redirect has no address'**
   String get m2ec842e2f5;
+
+  /// Убрать
+  ///
+  /// In en, this message translates to:
+  /// **'Remove'**
+  String get m07cb650874;
 
   /// Убрать камень
   ///
@@ -3014,6 +3242,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Effective Hit Pool'**
   String get mf83e6d742f;
+
+  /// Явные свойства
+  ///
+  /// In en, this message translates to:
+  /// **'Explicit properties'**
+  String get m612d4e1470;
 
   /// Язык
   ///

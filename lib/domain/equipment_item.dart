@@ -1,4 +1,5 @@
 import 'build_report.dart';
+import 'item_comparison.dart';
 
 class EquipmentItem {
   EquipmentItem.fromJson(JsonMap json)
@@ -18,7 +19,10 @@ class ItemInspection {
     : item = EquipmentItem.fromJson(jsonMap(json['item'])),
       slots = List.unmodifiable(jsonStrings(json['slots'])),
       compatible = json['compatible'] == true,
-      lines = List.unmodifiable(jsonRows(json['lines'])) {
+      lines = List.unmodifiable(jsonRows(json['lines'])),
+      comparison = json['comparison'] is JsonMap
+          ? ItemComparison.fromJson(json['comparison'] as JsonMap)
+          : null {
     if (json['source'] != 'original-lua')
       throw const FormatException('Ожидалось описание предмета из Lua');
   }
@@ -26,4 +30,5 @@ class ItemInspection {
   final List<String> slots;
   final List<JsonMap> lines;
   final bool compatible;
+  final ItemComparison? comparison;
 }

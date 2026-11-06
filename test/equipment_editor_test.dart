@@ -76,6 +76,7 @@ class EquipmentWorkshop extends EditorWorkshop {
     String slot, {
     String? raw,
     int? itemId,
+    int? expectedRevision,
   }) async {
     equipped = (slot: slot, raw: raw, id: itemId);
     return result;
@@ -134,7 +135,8 @@ void main() {
       final editor = ItemEditorCubit(
         ({raw, itemId}) async =>
             ++calls == 1 ? first.future : inspection(compatible: false),
-        ({raw, itemId}) async => (committed: false, error: 'Сбой записи'),
+        ({raw, itemId, expectedRevision}) async =>
+            (committed: false, error: 'Сбой записи'),
       );
       addTearDown(editor.close);
       editor.text('first');

@@ -88,6 +88,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get mcdf95e40cd => 'PoB II · Workshop';
 
   @override
+  String get mb8ddc14d08 => 'PoB did not return the correct search link';
+
+  @override
   String get m3127345008 => 'XML more than 16 MB';
 
   @override
@@ -135,10 +138,22 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m63141a77bf => 'Amulet';
 
   @override
+  String get mc11be494c0 => 'Item base';
+
+  @override
+  String get m0792a052a1 => 'No limit';
+
+  @override
   String get mfc52cf98ef => 'Block';
 
   @override
   String get mb1ff29da2c => 'Armour';
+
+  @override
+  String get m4fae346e6c => 'Before';
+
+  @override
+  String get m84e960d40a => 'Budget';
 
   @override
   String m7daed90e2c(String p0, String p1) {
@@ -154,7 +169,19 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m3e8bb03d9a => 'Important indicators';
 
   @override
+  String get m6aa14ce33b => 'Currency';
+
+  @override
+  String get m84bb1ae656 => 'Option';
+
+  @override
   String get m65d05ab17f => 'Your next build';
+
+  @override
+  String get mfc903d7f16 => 'Enter a valid number';
+
+  @override
+  String get m6ac5360d13 => 'Enter a correct budget';
 
   @override
   String get mbce24a2108 => 'Enter a name';
@@ -221,6 +248,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get me4c25f9a5f => 'Insert XML';
+
+  @override
+  String get md6ad11ba2b => 'Insert found item';
 
   @override
   String get m6bf3b12df4 =>
@@ -347,6 +377,9 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String get m71038c53bb => 'Add';
+
+  @override
   String get ma11b26e5e9 => 'Add and calculate';
 
   @override
@@ -427,6 +460,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get mbdb05f34ee => 'Notes are saved automatically';
+
+  @override
+  String get m1107806954 => 'Enchantments';
 
   @override
   String get m792acb40e4 => 'Protection';
@@ -530,13 +566,22 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m7825825def => 'Left hand II';
 
   @override
+  String get m1190db95a3 => 'League';
+
+  @override
   String get m609fc60c74 => 'Dexterity';
 
   @override
   String get m5da5bd2f47 => 'Local interface connection with calculations';
 
   @override
+  String get mab7d96eb1a => 'Any base';
+
+  @override
   String get m187dafbec4 => 'Eff. Maximum Hit Taken';
+
+  @override
+  String get mf33c9a814c => 'Maximum';
 
   @override
   String get mc73618fdf4 => 'Mana';
@@ -549,6 +594,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get mbe517dba6c => 'Interface scale';
+
+  @override
+  String get m10808f1297 => 'Minimum';
 
   @override
   String get m22e1e2c7ad => 'Crit Multiplier';
@@ -580,9 +628,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get mff86959fa1 => 'Bib';
 
   @override
-  String get m36c56d21df => 'Put on and calculate';
-
-  @override
   String get m38509ab991 =>
       'Press the combination with Ctrl, Alt or Cmd. Esc - cancel.';
 
@@ -600,6 +645,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get m7d4ff2d217 => 'Search gems';
+
+  @override
+  String get m0eff361901 => 'Find on trade';
 
   @override
   String get m302605cf87 => 'Найти сборку';
@@ -650,6 +698,11 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String m725605a944(String p0) {
+    return 'Failed to open browser: $p0';
+  }
+
+  @override
   String m189f5a7238(String p0) {
     return 'Failed to open or save notes.\n$p0';
   }
@@ -684,6 +737,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String mcd252d5275(String p0) {
     return 'Failed to get hint: $p0';
   }
+
+  @override
+  String get m57d96c50f4 => 'Failed to apply item';
 
   @override
   String m3ce1fbdad2(String p0) {
@@ -760,6 +816,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get mf1703df170 => 'Incorrect tree link Lua';
 
   @override
+  String get m57e2535a94 => 'Incorrect search link';
+
+  @override
   String get m3f7db06826 => 'Incorrect texture of the finished wood';
 
   @override
@@ -816,6 +875,9 @@ class AppLocalizationsEn extends AppLocalizations {
       'Original text is shown when a translation is unavailable';
 
   @override
+  String get m480fae1c4b => 'Nothing found';
+
+  @override
   String get mc9fd9fc0e5 => 'New group';
 
   @override
@@ -852,10 +914,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String get md423f03f4f => 'Update MCP for original stone icons';
 
   @override
+  String get m2efaa26ed2 => 'Update MCP for trade search';
+
+  @override
   String get m2788a17cac => 'Update MCP to edit group';
 
   @override
   String get mfa7a72dbc1 => 'Update MCP for the equipment editor';
+
+  @override
+  String get md708edb156 => 'Update MCP item comparison';
 
   @override
   String get m124cd4a205 => 'Update MCP to remove skill';
@@ -898,6 +966,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get mbb08ba5f85 => 'Expected report from original Lua';
 
   @override
+  String get mab5f9b4d06 => 'PoB trade catalog was expected';
+
+  @override
   String get mb3f794d1cf => 'No operations yet';
 
   @override
@@ -938,6 +1009,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get m589c35aaa6 => 'Open and calculate';
+
+  @override
+  String get mcfc22a4611 => 'Open search';
 
   @override
   String get m8fbe9b75cb => 'Cancel';
@@ -1035,10 +1109,25 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m5f5155bb1f => 'Matching supports';
 
   @override
+  String get m180f58ab97 => 'Search';
+
+  @override
+  String get mec63af0ca6 => 'Search on trade';
+
+  @override
+  String get md133559e02 => 'The search will open on the official website';
+
+  @override
   String get mbf3c9df646 => 'Indicators';
 
   @override
+  String get mc7fc04e5df => 'Indicators will not change';
+
+  @override
   String get m53788df38a => 'Indicators of the current build state';
+
+  @override
+  String get mfdf0487fc4 => 'Indicator';
 
   @override
   String get m21a6bb1840 => 'Show whole tree';
@@ -1143,6 +1232,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get m84028563e4 => 'Apply and calculate';
+
+  @override
+  String get mae2ea1c701 => 'Preview';
 
   @override
   String get m6aab9e2cb4 => 'Suspend';
@@ -1256,7 +1348,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get ma735c975e0 => 'Runic Ward';
 
   @override
+  String get m9c7a204d54 => 'Runes';
+
+  @override
   String get m8c39bb691b => 'Assembly';
+
+  @override
+  String get m544bec7909 => 'The build will change after clicking \"Apply\"';
 
   @override
   String get m5c8bb47697 => 'Assembly not found';
@@ -1309,6 +1407,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m332899f398 => 'Copy XML';
 
   @override
+  String get m8d81013698 => 'Copy link';
+
+  @override
   String get m052e3a8cc9 => 'Copy an item from the game or PoB';
 
   @override
@@ -1334,6 +1435,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get md4b51f7a04 => 'Remove';
+
+  @override
+  String get mf3f1d96087 => 'Own properties';
 
   @override
   String get m9071a1a6f4 => 'Connection to Lua lost';
@@ -1386,7 +1490,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m91d6208508 => 'No stable releases yet';
 
   @override
+  String get md3ae3e1986 => 'After';
+
+  @override
   String get mf7eaffec2f => 'Issues page';
+
+  @override
+  String get m4ef88e033d => 'Summary properties';
 
   @override
   String get m98b6085914 => 'Combined DPS';
@@ -1404,10 +1514,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m0472e6790c => 'Condition type is not yet supported';
 
   @override
+  String get m0ba4c8c62f => 'Online only';
+
+  @override
   String get m1eecfcaa7b => 'Dark';
 
   @override
   String get m2ec842e2f5 => 'Redirect has no address';
+
+  @override
+  String get m07cb650874 => 'Remove';
 
   @override
   String get m94fde688e0 => 'Remove gem';
@@ -1593,6 +1709,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get mf83e6d742f => 'Effective Hit Pool';
+
+  @override
+  String get m612d4e1470 => 'Explicit properties';
 
   @override
   String get m5bd57038db => 'Language';
