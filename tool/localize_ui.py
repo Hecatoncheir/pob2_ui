@@ -30,6 +30,9 @@ SEEDS.update({'Полный DPS': 'Full DPS', 'Суммарный DPS': 'Combine
 
 SEEDS.update({
     'Примерка': 'Preview',
+    'Искать на рынке': 'Search the market',
+    'Поиск на рынке': 'Market search',
+    'Обновите MCP для поиска на рынке': 'Update MCP for market search',
     'Было': 'Before',
     'Стало': 'After',
     'Обновите MCP для описаний камней': 'Update MCP for gem descriptions',

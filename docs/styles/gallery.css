@@ -1,0 +1,39 @@
+.gallery-shell { height: auto; min-height: 100svh }
+.gallery-heading { padding: 68px 0 48px }
+.gallery-heading h1 { font-size: clamp(42px,5vw,72px); letter-spacing: -.045em; margin: 20px 0 }
+.gallery-heading>p:last-child { color: var(--muted); font-size: 16px; line-height: 1.7; max-width: 740px }
+.gallery-section-heading { display: flex; align-items: center; justify-content: space-between; gap: 24px; margin: 0 0 22px }
+.gallery-section-heading h2 { font-size: 24px }
+.gallery-section-heading>span { color: var(--muted); font-size: 12px }
+.screenshot-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 28px }
+.screenshot-card { margin: 0; border: 1px solid var(--line); border-radius: 18px; background: var(--surface); overflow: hidden }
+.screenshot-card.wide { grid-column: 1/-1 }
+.screenshot-card>a { display: block; overflow: hidden; background: var(--soft); cursor: zoom-in }
+.screenshot-card img { width: 100%; height: auto; transition: transform 600ms var(--ease) }
+.screenshot-card a:hover img { transform: scale(1.015) }
+.screenshot-card figcaption { padding: 20px 24px }
+.screenshot-card h3 { font-size: 19px; margin-bottom: 6px }
+.screenshot-card p { font-size: 13px; color: var(--muted) }
+.upcoming-heading { margin-top: 64px }
+.upcoming-heading .eyebrow { margin-bottom: 10px }
+.upcoming { border-style: dashed }
+.gallery-note { display: flex; align-items: flex-start; gap: 12px; margin: 36px 0 50px; font-size: 12px; color: var(--muted); max-width: 840px }
+.gallery-note>.icon { flex-shrink: 0; margin-top: 2px }
+#screenshot-viewer { width: min(1480px,calc(100% - 32px)); padding: 20px; max-height: 96dvh }
+#screenshot-viewer .dialog-head { margin-bottom: 12px }
+#screenshot-viewer h2 { font-size: 20px }
+#viewer-image { width: 100%; max-height: 73dvh; object-fit: contain; border-radius: 10px; background: var(--paper); cursor: zoom-out }
+.viewer-bottom { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding-top: 14px }
+.viewer-bottom p { font-size: 12px; color: var(--muted); margin: 0 }
+.viewer-controls { display: flex; align-items: center; gap: 10px; flex-shrink: 0 }
+@media(max-width:640px) {
+  .gallery-heading { padding: 40px 0 32px }
+  .gallery-heading>p:last-child { font-size: 14px }
+  .gallery-section-heading { align-items: flex-start; flex-direction: column; gap: 10px }
+  .screenshot-grid { grid-template-columns: 1fr; gap: 20px }
+  .screenshot-card figcaption { padding: 16px }
+  .screenshot-card h3 { font-size: 18px }
+  #screenshot-viewer { padding: 12px; width: calc(100% - 16px) }
+  #screenshot-viewer h2 { font-size: 16px }
+  .viewer-bottom { flex-direction: column; gap: 8px }
+}

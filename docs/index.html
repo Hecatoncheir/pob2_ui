@@ -5,12 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#f2efe5">
   <meta name="description" content="PoB II — мастерская сборок для Path of Exile 2. Новый интерфейс, оригинальные расчёты Path of Building.">
-  <title>PoB II — всё начинается с искры</title>
+  <title>PoB II — ваша сборка, всё под рукой</title>
   <link rel="icon" href="assets/brand/app-icon.svg" type="image/svg+xml">
   <link rel="preload" href="assets/fonts/nunito-800.ttf" as="font" type="font/ttf" crossorigin>
   <link rel="stylesheet" href="styles/base.css">
   <link rel="stylesheet" href="styles/site.css">
   <script src="scripts/icons.js" defer></script>
+  <script src="scripts/downloads.js" defer></script>
   <script src="scripts/site.js" defer></script>
 </head>
 <body>
@@ -23,22 +24,30 @@
     <main id="main" class="hero">
       <div class="hero-copy reveal">
         <p class="eyebrow"><span class="dot"></span> ДЛЯ PATH OF EXILE 2</p>
-        <h1>Всё начинается<br>с <span class="spark-word">искры.<svg viewBox="0 0 360 20" aria-hidden="true"><path d="M5 14C100-1 225-1 350 7"/></svg></span></h1>
-        <p class="hero-lead">Собирайте идеи в сильного персонажа.<br>Знакомые расчёты PoB. Больше ясности.</p>
-        <div class="hero-actions"><a class="button" href="prototype.html">Открыть прототип <span data-icon="arrow"></span></a><button class="text-button" data-dialog="how">Как это работает <span aria-hidden="true">↗</span></button></div>
+        <h1>Ваша сборка.<br>Всё <span class="spark-word">под рукой.<svg viewBox="0 0 360 20" aria-hidden="true"><path d="M5 14C100-1 225-1 350 7"/></svg></span></h1>
+        <p class="hero-lead">Дерево, умения и экипировка в одном месте.<br>Понятный интерфейс. Исходные расчёты PoB.</p>
+        <div class="hero-actions"><a class="button" href="gallery.html">Посмотреть приложение <span data-icon="arrow"></span></a><button class="text-button" data-dialog="how">Как это работает <span aria-hidden="true">↗</span></button></div>
+        <section id="download" class="downloads" aria-label="Скачать приложение">
+          <div class="downloads-heading"><span>Скачать для компьютера</span><a data-release-version href="https://github.com/Hecatoncheir/pob2_ui/releases/tag/v0.1.4">v0.1.4 ↗</a></div>
+          <div class="download-links">
+            <a class="download-link" data-download="windows" href="https://github.com/Hecatoncheir/pob2_ui/releases/download/v0.1.4/pob2-ui-0.1.4-windows-x64-setup.exe"><img src="assets/platforms/windows.svg" alt="" width="22" height="22"><span><strong>Windows</strong><small>x64 · .exe</small></span></a>
+            <a class="download-link" data-download="macos" href="https://github.com/Hecatoncheir/pob2_ui/releases/download/v0.1.4/pob2-ui-0.1.4-macos-arm64.dmg"><img src="assets/platforms/macos.svg" alt="" width="22" height="22"><span><strong>macOS</strong><small>Apple Silicon · .dmg</small></span></a>
+            <a class="download-link" data-download="linux" href="https://github.com/Hecatoncheir/pob2_ui/releases/download/v0.1.4/pob2-ui-0.1.4-linux-x64.run"><img src="assets/platforms/linux.svg" alt="" width="22" height="22"><span><strong>Linux</strong><small>x64 · .run</small></span></a>
+          </div>
+        </section>
         <div class="hero-facts"><span><span data-icon="shield"></span>Локально</span><span><span data-icon="code"></span>Открытый код</span><span><span data-icon="tree"></span>Исходный Lua</span></div>
       </div>
       <div class="hero-art reveal">
-        <div class="art-top"><span class="eyebrow">01 / ИСКРА ВАШЕЙ СБОРКИ</span><span class="tag">PoB × PoE 2</span></div>
+        <div class="art-top"><span class="eyebrow">01 / ОТ ИДЕИ К ПЕРСОНАЖУ</span><span class="tag">PoB × PoE 2</span></div>
         <img class="emblem" src="assets/brand/emblem.svg" alt="Пламя с ветвями дерева умений, окружённое камнем и кубом">
         <div class="floating-label label-tree"><span data-icon="tree"></span><span>Своя ветка развития</span></div>
         <div class="floating-label label-gem"><span data-icon="gem"></span><span>Своя комбинация</span></div>
         <div class="art-bottom"><span class="mono">ИДЕЯ → СБОРКА → РАСЧЁТ</span><span class="small-star" aria-hidden="true">✳</span></div>
       </div>
     </main>
-    <footer class="site-footer"><p>Меньше шума. Больше пространства для идей.</p><div><span class="tag"><span class="dot"></span> Дизайн-прототип</span><a href="brand.html">Логотип и иконки <span aria-hidden="true">↗</span></a></div></footer>
+    <footer class="site-footer"><p>Меньше шума. Больше пространства для идей.</p><div><a href="gallery.html">Скриншоты приложения ↗</a><a href="brand.html">Логотип и иконки ↗</a></div></footer>
   </div>
-  <dialog id="about"><div class="dialog-head"><h2>Ваша мастерская</h2><button class="icon-button" data-close aria-label="Закрыть" data-icon="close"></button></div><p>PoB II — самостоятельный интерфейс для Path of Building: Path of Exile 2. Flutter управляет интерфейсом, а оригинальный Lua PoB выполняет игровые расчёты.</p><p>Сейчас доступна рабочая основа приложения: установка компонентов, создание сборки, импорт XML и отчёт. Здесь показан проект будущего интерфейса; дерево, предметы и умения в HTML используют демонстрационные данные.</p><a class="button" href="https://github.com/Hecatoncheir/pob2_ui">Открыть репозиторий <span data-icon="arrow"></span></a></dialog>
-  <dialog id="how"><div class="dialog-head"><h2>От идеи к сборке</h2><button class="icon-button" data-close aria-label="Закрыть" data-icon="close"></button></div><ol class="how-list"><li><strong>Создайте персонажа</strong><span>Выберите класс и уровень или импортируйте XML.</span></li><li><strong>Соберите своё сочетание</strong><span>Продумайте дерево, предметы и умения.</span></li><li><strong>Проверьте в PoB</strong><span>Расчёты, условия и предупреждения — из исходного Lua.</span></li></ol><p>HTML-прототип показывает взаимодействия и оформление. Он не подключён к игровому движку и не рассчитывает сборки.</p><a class="button" href="prototype.html">Попробовать интерфейс <span data-icon="arrow"></span></a></dialog>
+  <dialog id="about"><div class="dialog-head"><h2>О приложении</h2><button class="icon-button" data-close aria-label="Закрыть" data-icon="close"></button></div><p>PoB II — приложение для планирования персонажей Path of Exile 2 на Windows, macOS и Linux. Интерфейс написан на Flutter, а игровые данные, правила и расчёты получает из исходного Lua Path of Building через локальный MCP.</p><p>В опубликованной версии доступны оригинальное дерево с подсказками и поиском узлов, группы умений с перетаскиванием камней и проверкой совместимости, редактор экипировки, условия и показатели сборки.</p><p>Сборки и заметки хранятся на вашем компьютере. Есть открытие и сохранение XML, Undo/Redo, светлая и тёмная темы, выбор языка, масштаба и горячих клавиш. Компоненты устанавливаются отдельно и обновляются с проверкой Lua и возможностью отката.</p><p>Для первоначальной установки компонентов нужны интернет, Git и 64-битный Python 3.11+. После загрузки расчёты работают локально. Независимый открытый проект, не официальный продукт Grinding Gear Games.</p><a class="button" href="gallery.html">Посмотреть скриншоты <span data-icon="arrow"></span></a></dialog>
+  <dialog id="how"><div class="dialog-head"><h2>От идеи к сборке</h2><button class="icon-button" data-close aria-label="Закрыть" data-icon="close"></button></div><ol class="how-list"><li><strong>Установите приложение</strong><span>Выберите свою ОС. В разделе «Компоненты» загрузите PoB и MCP.</span></li><li><strong>Соберите персонажа</strong><span>Создайте сборку или откройте XML, выберите узлы дерева, умения и предметы.</span></li><li><strong>Проверьте изменения</strong><span>Исходный Lua рассчитывает показатели. Undo/Redo позволяет вернуться к предыдущему решению.</span></li></ol><p>Галерея показывает работающий Flutter-интерфейс с настоящими данными PoB. Возможности следующей версии отмечены отдельно.</p><a class="button" href="gallery.html">В галерею <span data-icon="arrow"></span></a></dialog>
 </body>
 </html>

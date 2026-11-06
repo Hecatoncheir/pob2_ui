@@ -507,6 +507,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get ma8f8e11f0c => 'Intelligence';
 
   @override
+  String get mb1f4f27181 => 'Search the market';
+
+  @override
   String get m56e46960c1 => 'Source';
 
   @override
@@ -645,9 +648,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get m7d4ff2d217 => 'Search gems';
-
-  @override
-  String get m0eff361901 => 'Find on trade';
 
   @override
   String get m302605cf87 => 'Найти сборку';
@@ -914,7 +914,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get md423f03f4f => 'Update MCP for original stone icons';
 
   @override
-  String get m2efaa26ed2 => 'Update MCP for trade search';
+  String get m48626fbe0c => 'Update MCP for market search';
 
   @override
   String get m2788a17cac => 'Update MCP to edit group';
@@ -1112,7 +1112,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m180f58ab97 => 'Search';
 
   @override
-  String get mec63af0ca6 => 'Search on trade';
+  String get m885946a42e => 'Market search';
 
   @override
   String get md133559e02 => 'The search will open on the official website';

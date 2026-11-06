@@ -858,6 +858,11 @@
     "description": "Интеллект",
     "placeholders": {}
   },
+  "mb1f4f27181": "Search the market",
+  "@mb1f4f27181": {
+    "description": "Искать на рынке",
+    "placeholders": {}
+  },
   "m56e46960c1": "Source",
   "@m56e46960c1": {
     "description": "Источник",
@@ -1089,11 +1094,6 @@
   "m7d4ff2d217": "Search gems",
   "@m7d4ff2d217": {
     "description": "Найти камень",
-    "placeholders": {}
-  },
-  "m0eff361901": "Find on trade",
-  "@m0eff361901": {
-    "description": "Найти на торговле",
     "placeholders": {}
   },
   "m302605cf87": "Найти сборку",
@@ -1544,9 +1544,9 @@
     "description": "Обновите MCP для оригинальных иконок камней",
     "placeholders": {}
   },
-  "m2efaa26ed2": "Update MCP for trade search",
-  "@m2efaa26ed2": {
-    "description": "Обновите MCP для поиска на торговле",
+  "m48626fbe0c": "Update MCP for market search",
+  "@m48626fbe0c": {
+    "description": "Обновите MCP для поиска на рынке",
     "placeholders": {}
   },
   "m2788a17cac": "Update MCP to edit group",
@@ -1870,9 +1870,9 @@
     "description": "Поиск",
     "placeholders": {}
   },
-  "mec63af0ca6": "Search on trade",
-  "@mec63af0ca6": {
-    "description": "Поиск на торговле",
+  "m885946a42e": "Market search",
+  "@m885946a42e": {
+    "description": "Поиск на рынке",
     "placeholders": {}
   },
   "md133559e02": "The search will open on the official website",

@@ -503,6 +503,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get ma8f8e11f0c => 'インテリジェンス';
 
   @override
+  String get mb1f4f27181 => 'マーケットを検索する';
+
+  @override
   String get m56e46960c1 => 'ソース';
 
   @override
@@ -640,9 +643,6 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m7d4ff2d217 => '宝石を検索';
-
-  @override
-  String get m0eff361901 => '取引で探す';
 
   @override
   String get m302605cf87 => 'Найти сборку';
@@ -907,7 +907,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get md423f03f4f => 'オリジナルの石アイコンの MCP を更新';
 
   @override
-  String get m2efaa26ed2 => 'トレード検索の MCP を更新';
+  String get m48626fbe0c => 'マーケット検索用の MCP を更新します';
 
   @override
   String get m2788a17cac => 'MCP を編集グループに更新します';
@@ -1101,7 +1101,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m180f58ab97 => '検索';
 
   @override
-  String get mec63af0ca6 => '貿易に関する検索';
+  String get m885946a42e => 'マーケット検索';
 
   @override
   String get md133559e02 => '公式ウェブサイトで検索が開きます';

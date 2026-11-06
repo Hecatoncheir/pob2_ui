@@ -510,6 +510,9 @@ class AppLocalizationsPt extends AppLocalizations {
   String get ma8f8e11f0c => 'Inteligência';
 
   @override
+  String get mb1f4f27181 => 'Pesquise no mercado';
+
+  @override
   String get m56e46960c1 => 'Fonte';
 
   @override
@@ -650,9 +653,6 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get m7d4ff2d217 => 'Pesquise joias';
-
-  @override
-  String get m0eff361901 => 'Encontre no comércio';
 
   @override
   String get m302605cf87 => 'Natи сборку';
@@ -923,7 +923,7 @@ class AppLocalizationsPt extends AppLocalizations {
   String get md423f03f4f => 'Atualização MCP para ícones de pedra originais';
 
   @override
-  String get m2efaa26ed2 => 'Atualização MCP para pesquisa comercial';
+  String get m48626fbe0c => 'Atualização MCP para pesquisa de mercado';
 
   @override
   String get m2788a17cac => 'Atualização MCP para editar o grupo';
@@ -1121,7 +1121,7 @@ class AppLocalizationsPt extends AppLocalizations {
   String get m180f58ab97 => 'Pesquisa';
 
   @override
-  String get mec63af0ca6 => 'Pesquisa sobre comércio';
+  String get m885946a42e => 'Pesquisa de mercado';
 
   @override
   String get md133559e02 => 'A busca será aberta no site oficial';
@@ -2250,6 +2250,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get ma8f8e11f0c => 'Inteligência';
 
   @override
+  String get mb1f4f27181 => 'Pesquise no mercado';
+
+  @override
   String get m56e46960c1 => 'Fonte';
 
   @override
@@ -2390,9 +2393,6 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get m7d4ff2d217 => 'Pesquise joias';
-
-  @override
-  String get m0eff361901 => 'Encontre no comércio';
 
   @override
   String get m302605cf87 => 'Natи сборку';
@@ -2663,7 +2663,7 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get md423f03f4f => 'Atualização MCP para ícones de pedra originais';
 
   @override
-  String get m2efaa26ed2 => 'Atualização MCP para pesquisa comercial';
+  String get m48626fbe0c => 'Atualização MCP para pesquisa de mercado';
 
   @override
   String get m2788a17cac => 'Atualização MCP para editar o grupo';
@@ -2861,7 +2861,7 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get m180f58ab97 => 'Pesquisa';
 
   @override
-  String get mec63af0ca6 => 'Pesquisa sobre comércio';
+  String get m885946a42e => 'Pesquisa de mercado';
 
   @override
   String get md133559e02 => 'A busca será aberta no site oficial';

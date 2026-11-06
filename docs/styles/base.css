@@ -225,7 +225,7 @@ dialog {
   max-height: 90dvh;
   box-shadow: 0 30px 120px #0004
 }
-dialog: :backdrop {
+dialog::backdrop {
   background: #24272266;
   backdrop-filter: blur(7px)
 }

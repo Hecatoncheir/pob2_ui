@@ -178,7 +178,7 @@ class _ItemsViewState extends State<ItemsView> {
                             state.slot!,
                           ),
                     icon: const Icon(Icons.search, size: 18),
-                    label: const AppText('Найти на торговле'),
+                    label: const AppText('Искать на рынке'),
                   ),
                 ],
               ),

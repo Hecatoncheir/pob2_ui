@@ -524,6 +524,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get ma8f8e11f0c => 'Intelligenz';
 
   @override
+  String get mb1f4f27181 => 'Durchsuchen Sie den Markt';
+
+  @override
   String get m56e46960c1 => 'Quelle';
 
   @override
@@ -664,9 +667,6 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get m7d4ff2d217 => 'Edelsteine suchen';
-
-  @override
-  String get m0eff361901 => 'Im Handel finden';
 
   @override
   String get m302605cf87 => 'Найти сборку';
@@ -933,7 +933,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get md423f03f4f => 'Update MCP für Original-Steinsymbole';
 
   @override
-  String get m2efaa26ed2 => 'Update MCP für die Handelssuche';
+  String get m48626fbe0c => 'Update MCP für die Marktsuche';
 
   @override
   String get m2788a17cac =>
@@ -1133,7 +1133,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get m180f58ab97 => 'Suchen';
 
   @override
-  String get mec63af0ca6 => 'Suche nach Handel';
+  String get m885946a42e => 'Marktsuche';
 
   @override
   String get md133559e02 =>

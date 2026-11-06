@@ -111,6 +111,35 @@
   width: 16px;
   height: 16px
 }
+.downloads {
+  margin-top: 28px;
+  max-width: 570px
+}
+.downloads-heading {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+  color: var(--muted);
+  font-size: 11px
+}
+.downloads-heading a { text-decoration: underline; text-underline-offset: 3px }
+.download-links { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 8px }
+.download-link {
+  display: grid;
+  grid-template-columns: 22px minmax(0,1fr);
+  align-items: center;
+  gap: 9px;
+  padding: 12px 10px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--surface)
+}
+.download-link:hover { background: var(--soft); transform: translateY(-2px) }
+.download-link strong { display: block; font-size: 12px }
+.download-link small { display: block; color: var(--muted); font-size: 9px; line-height: 1.45; overflow-wrap: anywhere }
+.download-link>.icon { display: none }
+.download-link>img { flex-shrink: 0 }
 .hero-art {
   position: relative;
   align-self: center;
@@ -218,12 +247,12 @@
   color: var(--muted)
 }
 body.dark {
-  --paper: #242722;
-  --surface: #30342d;
-  --ink: #f2efe5;
-  --muted: #aaa99e;
-  --line: #474b41;
-  --soft: #363b31;
+  --paper: #282828;
+  --surface: #32302f;
+  --ink: #ebdbb2;
+  --muted: #bdae93;
+  --line: #504945;
+  --soft: #3c3836;
   color-scheme: dark
 }
 .dark .brand>img,.dark .emblem {
@@ -231,6 +260,9 @@ body.dark {
 }
 .dark .button:hover {
   background: #d8d9c7
+}
+.dark .download-link>img {
+  filter: brightness(0) saturate(100%) invert(89%) sepia(20%) saturate(470%) hue-rotate(352deg) brightness(96%)
 }
 .dark .button.secondary:hover {
   background: var(--soft)
@@ -253,7 +285,7 @@ body.dark {
 @media(min-width:901px) and (max-height:900px) {
   .site-shell {
     height: 100svh;
-    min-height: 620px
+    min-height: 720px
   }
   .site-header {
     height: 96px
@@ -269,7 +301,7 @@ body.dark {
     margin: 26px 0
   }
   .hero-facts {
-    margin-top: 28px
+    margin-top: 20px
   }
   .site-footer {
     min-height: 64px
@@ -297,6 +329,10 @@ body.dark {
   }
 }
 @media(max-width:900px) {
+  .download-links { grid-template-columns: 1fr }
+  .download-link { padding: 8px 12px }
+  .download-link strong,.download-link small { display: inline }
+  .download-link small { margin-left: 8px }
   .hero h1 {
     font-size: clamp(43px,6vw,66px)
   }
@@ -320,6 +356,11 @@ body.dark {
   }
 }
 @media(max-width:640px) {
+  .download-links { grid-template-columns: repeat(3,minmax(0,1fr)) }
+  .download-link { display: flex; flex-direction: column; padding: 12px 4px; gap: 6px; text-align: center }
+  .download-link strong,.download-link small { display: block }
+  .download-link small { margin: 0; font-size: 8px }
+  .download-link>.icon { display: none }
   .site-header {
     height: 88px
   }

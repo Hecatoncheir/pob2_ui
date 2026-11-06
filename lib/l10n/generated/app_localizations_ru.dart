@@ -508,6 +508,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get ma8f8e11f0c => 'Интеллект';
 
   @override
+  String get mb1f4f27181 => 'Искать на рынке';
+
+  @override
   String get m56e46960c1 => 'Источник';
 
   @override
@@ -646,9 +649,6 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get m7d4ff2d217 => 'Найти камень';
-
-  @override
-  String get m0eff361901 => 'Найти на торговле';
 
   @override
   String get m302605cf87 => 'Найти сборку';
@@ -915,7 +915,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get md423f03f4f => 'Обновите MCP для оригинальных иконок камней';
 
   @override
-  String get m2efaa26ed2 => 'Обновите MCP для поиска на торговле';
+  String get m48626fbe0c => 'Обновите MCP для поиска на рынке';
 
   @override
   String get m2788a17cac => 'Обновите MCP для редактирования группы';
@@ -1114,7 +1114,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m180f58ab97 => 'Поиск';
 
   @override
-  String get mec63af0ca6 => 'Поиск на торговле';
+  String get m885946a42e => 'Поиск на рынке';
 
   @override
   String get md133559e02 => 'Поиск откроется на официальном сайте';

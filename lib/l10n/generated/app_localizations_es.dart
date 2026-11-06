@@ -512,6 +512,9 @@ class AppLocalizationsEs extends AppLocalizations {
   String get ma8f8e11f0c => 'Inteligencia';
 
   @override
+  String get mb1f4f27181 => 'Buscar en el mercado';
+
+  @override
   String get m56e46960c1 => 'Fuente';
 
   @override
@@ -652,9 +655,6 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get m7d4ff2d217 => 'Buscar gemas';
-
-  @override
-  String get m0eff361901 => 'Buscar en el comercio';
 
   @override
   String get m302605cf87 => 'Найти сборку';
@@ -927,7 +927,7 @@ class AppLocalizationsEs extends AppLocalizations {
       'Actualización MCP para íconos de piedra originales';
 
   @override
-  String get m2efaa26ed2 => 'Actualización MCP para búsqueda comercial';
+  String get m48626fbe0c => 'Actualización MCP para búsqueda de mercado';
 
   @override
   String get m2788a17cac => 'Actualización MCP para editar grupo';
@@ -1125,7 +1125,7 @@ class AppLocalizationsEs extends AppLocalizations {
   String get m180f58ab97 => 'Buscar';
 
   @override
-  String get mec63af0ca6 => 'Búsqueda sobre comercio';
+  String get m885946a42e => 'Búsqueda de mercado';
 
   @override
   String get md133559e02 => 'La búsqueda se abrirá en el sitio web oficial.';

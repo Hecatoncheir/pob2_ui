@@ -506,6 +506,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get ma8f8e11f0c => 'ความฉลาด';
 
   @override
+  String get mb1f4f27181 => 'ค้นหาตลาด';
+
+  @override
   String get m56e46960c1 => 'ที่มา';
 
   @override
@@ -643,9 +646,6 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m7d4ff2d217 => 'ค้นหาอัญมณี';
-
-  @override
-  String get m0eff361901 => 'ค้นหาการซื้อขาย';
 
   @override
   String get m302605cf87 => 'ไม่เป็นไร';
@@ -910,7 +910,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get md423f03f4f => 'อัปเดต MCP สำหรับไอคอนหินดั้งเดิม';
 
   @override
-  String get m2efaa26ed2 => 'อัปเดต MCP สำหรับการค้นหาการค้า';
+  String get m48626fbe0c => 'อัปเดต MCP สำหรับการค้นหาตลาด';
 
   @override
   String get m2788a17cac => 'อัปเดต MCP เพื่อแก้ไขกลุ่ม';
@@ -1107,7 +1107,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m180f58ab97 => 'ค้นหา';
 
   @override
-  String get mec63af0ca6 => 'ค้นหาเกี่ยวกับการค้าขาย';
+  String get m885946a42e => 'ค้นหาตลาด';
 
   @override
   String get md133559e02 => 'การค้นหาจะเปิดขึ้นบนเว็บไซต์อย่างเป็นทางการ';

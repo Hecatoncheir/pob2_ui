@@ -10,7 +10,7 @@ class TradeSearchRepository {
 
   Future<TradeCatalog> catalog(String slot) async {
     if (!available)
-      throw const FormatException('Обновите MCP для поиска на торговле');
+      throw const FormatException('Обновите MCP для поиска на рынке');
     return TradeCatalog.fromJson(
       await engine.call('pob_trade_catalog', {'slot': slot}),
     );

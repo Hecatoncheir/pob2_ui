@@ -1022,6 +1022,12 @@ abstract class AppLocalizations {
   /// **'Intelligence'**
   String get ma8f8e11f0c;
 
+  /// Искать на рынке
+  ///
+  /// In en, this message translates to:
+  /// **'Search the market'**
+  String get mb1f4f27181;
+
   /// Источник
   ///
   /// In en, this message translates to:
@@ -1291,12 +1297,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Search gems'**
   String get m7d4ff2d217;
-
-  /// Найти на торговле
-  ///
-  /// In en, this message translates to:
-  /// **'Find on trade'**
-  String get m0eff361901;
 
   /// Найти сборку
   ///
@@ -1755,11 +1755,11 @@ abstract class AppLocalizations {
   /// **'Update MCP for original stone icons'**
   String get md423f03f4f;
 
-  /// Обновите MCP для поиска на торговле
+  /// Обновите MCP для поиска на рынке
   ///
   /// In en, this message translates to:
-  /// **'Update MCP for trade search'**
-  String get m2efaa26ed2;
+  /// **'Update MCP for market search'**
+  String get m48626fbe0c;
 
   /// Обновите MCP для редактирования группы
   ///
@@ -2127,11 +2127,11 @@ abstract class AppLocalizations {
   /// **'Search'**
   String get m180f58ab97;
 
-  /// Поиск на торговле
+  /// Поиск на рынке
   ///
   /// In en, this message translates to:
-  /// **'Search on trade'**
-  String get mec63af0ca6;
+  /// **'Market search'**
+  String get m885946a42e;
 
   /// Поиск откроется на официальном сайте
   ///

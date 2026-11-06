@@ -198,6 +198,7 @@ Future<void> _tradePreview(WidgetTester tester, WorkshopCubit model) async {
     5,
   );
   expect(await model.exportXml(), before);
+  await _capture(tester, '-market');
   await Clipboard.setData(ClipboardData(text: ring.replaceFirst('+50', '+80')));
   await _tap(tester, find.byKey(const Key('trade-import')));
   await _wait(

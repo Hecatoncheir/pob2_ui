@@ -65,7 +65,7 @@ class _TradeSearchDialogState extends State<TradeSearchDialog> {
       BlocBuilder<TradeSearchCubit, TradeSearchState>(
         bloc: editor,
         builder: (context, state) => AlertDialog(
-          title: const AppText('Поиск на торговле'),
+          title: const AppText('Поиск на рынке'),
           insetPadding: const EdgeInsets.all(18),
           content: SizedBox(
             width: 720,

@@ -502,6 +502,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get ma8f8e11f0c => '情報';
 
   @override
+  String get mb1f4f27181 => '搜尋市場';
+
+  @override
   String get m56e46960c1 => '來源';
 
   @override
@@ -639,9 +642,6 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m7d4ff2d217 => '搜尋寶石';
-
-  @override
-  String get m0eff361901 => '在交易中查找';
 
   @override
   String get m302605cf87 => 'Найти сборку';
@@ -906,7 +906,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get md423f03f4f => '更新原始石頭圖示的 MCP';
 
   @override
-  String get m2efaa26ed2 => '更新貿易搜尋的 MCP';
+  String get m48626fbe0c => '更新市集搜尋的 MCP';
 
   @override
   String get m2788a17cac => '更新 MCP 以編輯群組';
@@ -1100,7 +1100,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m180f58ab97 => '搜索';
 
   @override
-  String get mec63af0ca6 => '貿易搜索';
+  String get m885946a42e => '市場搜索';
 
   @override
   String get md133559e02 => '搜尋會在官網打開';
@@ -2204,6 +2204,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get ma8f8e11f0c => '情報';
 
   @override
+  String get mb1f4f27181 => '搜尋市場';
+
+  @override
   String get m56e46960c1 => '來源';
 
   @override
@@ -2341,9 +2344,6 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m7d4ff2d217 => '搜尋寶石';
-
-  @override
-  String get m0eff361901 => '在交易中查找';
 
   @override
   String get m302605cf87 => 'Найти сборку';
@@ -2608,7 +2608,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get md423f03f4f => '更新原始石頭圖示的 MCP';
 
   @override
-  String get m2efaa26ed2 => '更新貿易搜尋的 MCP';
+  String get m48626fbe0c => '更新市集搜尋的 MCP';
 
   @override
   String get m2788a17cac => '更新 MCP 以編輯群組';
@@ -2802,7 +2802,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m180f58ab97 => '搜索';
 
   @override
-  String get mec63af0ca6 => '貿易搜索';
+  String get m885946a42e => '市場搜索';
 
   @override
   String get md133559e02 => '搜尋會在官網打開';

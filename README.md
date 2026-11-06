@@ -4,9 +4,9 @@
 
 Проект начинается с нового дизайна. Интерфейс из `Hecatoncheir/PathOfBuilding-PoE2/app` не переносится. Сохраняется архитектурный принцип связи с отдельным процессом Lua; транспорт реализован через API самостоятельного [pob-poe2-mcp](https://github.com/Hecatoncheir/pob-poe2-mcp).
 
-## Дизайн-прототип
+## Сайт и галерея
 
-[Сайт](https://hecatoncheir.github.io/pob2_ui/) · [Прототип приложения](https://hecatoncheir.github.io/pob2_ui/prototype.html) · [Логотип и иконки](https://hecatoncheir.github.io/pob2_ui/brand.html).
+[Сайт и загрузки](https://hecatoncheir.github.io/pob2_ui/) · [Галерея работающего приложения](https://hecatoncheir.github.io/pob2_ui/gallery.html) · [Логотип и иконки](https://hecatoncheir.github.io/pob2_ui/brand.html).
 
 В `docs/` подготовлены [одностраничный сайт](docs/index.html), [интерактивный HTML/CSS/JS-прототип](docs/prototype.html) и [логотип, палитра и SVG-иконки](docs/brand.html). Направление «Искра»: молочный фон, графитовая графика, Nunito / Nunito Sans / JetBrains Mono и спокойные анимации. Шрифты включены локально.
 
@@ -14,7 +14,7 @@
 
 В мастерской — пять рабочих разделов, большой редактор и настраиваемая панель показателей с раскрываемыми подробностями. На узких экранах показатели открываются отдельно. Добавлены поиск по дереву, два варианта, отмена/повтор, сравнение и подготовка XML для Lua. Проверки данных прототипа: `node --test tool/design_state_test.cjs`.
 
-[Описание дизайна и правила переноса](docs/DESIGN.md). Workflow GitHub Pages проверяет JavaScript и данные прототипа, затем публикует каталог `docs` при изменениях в `main`.
+[Описание дизайна и правила переноса](docs/DESIGN.md). Главная ведёт в галерею настоящих окон Flutter; примерка и торговля отмечены как возможности следующей версии. Ссылки `.exe` / `.dmg` / `.run` и номер стабильного выпуска подготавливает `node tool/update_site_release.cjs` из GitHub Releases. Workflow GitHub Pages проверяет сайт и обновляет его при изменениях `main` и после успешной публикации выпуска, включая выпуск через `GITHUB_TOKEN`. Ссылки работают и без JavaScript. Старый [HTML-прототип](docs/prototype.html) сохранён как материал разработки.
 
 ## Взаимодействие компонентов
 

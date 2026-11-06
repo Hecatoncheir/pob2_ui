@@ -503,6 +503,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get ma8f8e11f0c => '지능';
 
   @override
+  String get mb1f4f27181 => '시장 검색';
+
+  @override
   String get m56e46960c1 => '소스';
 
   @override
@@ -640,9 +643,6 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m7d4ff2d217 => '보석 검색';
-
-  @override
-  String get m0eff361901 => '거래 찾기';
 
   @override
   String get m302605cf87 => '나이티 сборку';
@@ -907,7 +907,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get md423f03f4f => '원본 돌 아이콘 업데이트 MCP';
 
   @override
-  String get m2efaa26ed2 => '거래 검색을 위한 업데이트 MCP';
+  String get m48626fbe0c => '시장 검색을 위한 업데이트 MCP';
 
   @override
   String get m2788a17cac => '그룹을 수정하려면 MCP을 업데이트하세요.';
@@ -1101,7 +1101,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m180f58ab97 => '검색';
 
   @override
-  String get mec63af0ca6 => '무역 검색';
+  String get m885946a42e => '시장 검색';
 
   @override
   String get md133559e02 => '공식 홈페이지에서 검색이 열립니다';
