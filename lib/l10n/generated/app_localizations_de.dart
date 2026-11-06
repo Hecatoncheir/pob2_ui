@@ -78,7 +78,16 @@ class AppLocalizationsDe extends AppLocalizations {
   String get mcdf95e40cd => 'PoB II · Workshop';
 
   @override
+  String get m3127345008 => 'XML mehr als 16 MB';
+
+  @override
+  String get m8ed6f8a850 => 'XML leer';
+
+  @override
   String get me72be74923 => 'XML Builds';
+
+  @override
+  String get me097dcd9f8 => 'XML gespeichert';
 
   @override
   String get m0aefd8ac88 =>
@@ -197,6 +206,9 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get m8d6001a308 => 'Gesamtmana';
+
+  @override
+  String get me4c25f9a5f => 'Fügen Sie XML ein';
 
   @override
   String get m6bf3b12df4 =>
@@ -321,6 +333,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get mcefa1c56a5 => 'Es gibt ein Update';
 
   @override
+  String get m2071fb9905 => 'Mehr';
+
+  @override
   String get mf9a38201c0 => 'Protokoll und Details';
 
   @override
@@ -356,6 +371,12 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get ma7a4033657 => 'Schließen';
+
+  @override
+  String get mdc4baf32ac => 'Build-Notizen';
+
+  @override
+  String get mbdb05f34ee => 'Notizen werden automatisch gespeichert';
 
   @override
   String get m792acb40e4 => 'Schutz';
@@ -544,6 +565,16 @@ class AppLocalizationsDe extends AppLocalizations {
   }
 
   @override
+  String m189f5a7238(String p0) {
+    return 'Notizen konnten nicht geöffnet oder gespeichert werden.\n$p0';
+  }
+
+  @override
+  String mfc401e8783(String p0) {
+    return 'Der neueste Build konnte nicht geöffnet werden. Überprüfen Sie die Wiederherstellungskopie: $p0';
+  }
+
+  @override
   String mce8b7ad723(String p0) {
     return 'Die Veröffentlichungsseite konnte nicht geöffnet werden: $p0';
   }
@@ -601,6 +632,11 @@ class AppLocalizationsDe extends AppLocalizations {
   String get m92233abcc1 => 'Thema konnte nicht gespeichert werden.';
 
   @override
+  String m62f5b562c1(String p0) {
+    return 'Entwurf XML konnte nicht gespeichert werden: $p0';
+  }
+
+  @override
   String get m45c78389e9 => 'Unsichere Update-Adresse';
 
   @override
@@ -637,6 +673,9 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get m571195d148 => 'Falsche PoB-Koordinaten';
+
+  @override
+  String get mec07f569e3 => 'Falsche Notiz-ID';
 
   @override
   String get mc652a6b3a8 => 'Falsche Assembly-ID';
@@ -836,10 +875,16 @@ class AppLocalizationsDe extends AppLocalizations {
   String get m95121a4cc0 => 'Reibungslose Animationen';
 
   @override
+  String get m1474fac529 => 'Pläne, Gegenstände, Entwicklungsmöglichkeiten...';
+
+  @override
   String get m5189135a61 => 'Wiederholen';
 
   @override
   String get madb0c613d6 => 'Aktion wiederholen';
+
+  @override
+  String get m3c320d7fe3 => 'Erneut speichern';
 
   @override
   String get mbcc0fdbe14 => 'Chance auf Zauberunterdrückung';
@@ -948,6 +993,11 @@ class AppLocalizationsDe extends AppLocalizations {
   String get mbfb85a0178 => 'Vergrößern';
 
   @override
+  String md25ca8974f(String p0) {
+    return 'Die Anwendung bleibt zum Speichern von Daten geöffnet: $p0';
+  }
+
+  @override
   String get me15f960d93 => 'Bewerben';
 
   @override
@@ -1007,6 +1057,11 @@ class AppLocalizationsDe extends AppLocalizations {
       'Arbeiten Sie im Anwendungsfenster. Klicken Sie auf eine Kombination, um sie zu ändern.';
 
   @override
+  String m0964e41783(String p0) {
+    return 'Arbeitsbaugruppe gespeichert; Lua konnte nicht wiederhergestellt werden: $p0';
+  }
+
+  @override
   String get m9aaa2d503d => 'Lichtradius';
 
   @override
@@ -1051,7 +1106,15 @@ class AppLocalizationsDe extends AppLocalizations {
   String get m8c39bb691b => 'Versammlung';
 
   @override
+  String get m5c8bb47697 => 'Baugruppe nicht gefunden';
+
+  @override
   String get mc27d8aad03 => 'Von Original Lua berechnete Baugruppe';
+
+  @override
+  String mae943799b7(String p0) {
+    return 'Der Build wird in der Bibliothek gespeichert, aber die Wiederherstellungskopie ist nicht verfügbar: $p0';
+  }
 
   @override
   String get m407f871778 => 'Zurücksetzen';
@@ -1079,6 +1142,9 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get m0a8113a0b9 => 'Update herunterladen';
+
+  @override
+  String get mf02956c165 => 'Kopieren';
 
   @override
   String get m332899f398 => 'XML kopieren';
@@ -1123,6 +1189,9 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get m62bb423bd3 => 'Widerstände';
+
+  @override
+  String get mbd97450c85 => 'Speichern…';
 
   @override
   String get m2fe8f2fd72 => 'Gespeichert';

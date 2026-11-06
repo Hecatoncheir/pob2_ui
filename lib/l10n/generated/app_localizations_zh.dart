@@ -76,7 +76,16 @@ class AppLocalizationsZh extends AppLocalizations {
   String get mcdf95e40cd => 'PoB II · 研討會';
 
   @override
+  String get m3127345008 => 'XML 超過 16 MB';
+
+  @override
+  String get m8ed6f8a850 => 'XML 空';
+
+  @override
   String get me72be74923 => 'XML 構建';
+
+  @override
+  String get me097dcd9f8 => 'XML 已儲存';
 
   @override
   String get m0aefd8ac88 =>
@@ -196,6 +205,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m8d6001a308 => '總法力';
 
   @override
+  String get me4c25f9a5f => '插入 XML';
+
+  @override
   String get m6bf3b12df4 => '插入 XML 程序集。將在Lua中進行檢查和計算。';
 
   @override
@@ -306,6 +318,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get mcefa1c56a5 => '有更新';
 
   @override
+  String get m2071fb9905 => '更多';
+
+  @override
   String get mf9a38201c0 => '日誌和詳細信息';
 
   @override
@@ -341,6 +356,12 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get ma7a4033657 => '關閉';
+
+  @override
+  String get mdc4baf32ac => '建構說明';
+
+  @override
+  String get mbdb05f34ee => '筆記自動儲存';
 
   @override
   String get m792acb40e4 => '保護';
@@ -526,6 +547,16 @@ class AppLocalizationsZh extends AppLocalizations {
   }
 
   @override
+  String m189f5a7238(String p0) {
+    return '無法開啟或儲存筆記。\n$p0';
+  }
+
+  @override
+  String mfc401e8783(String p0) {
+    return '無法開啟最新版本，請檢查復原副本：$p0';
+  }
+
+  @override
   String mce8b7ad723(String p0) {
     return '無法開啟版本頁面：$p0';
   }
@@ -583,6 +614,11 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m92233abcc1 => '無法儲存主體。';
 
   @override
+  String m62f5b562c1(String p0) {
+    return '無法儲存草稿 XML：$p0';
+  }
+
+  @override
   String get m45c78389e9 => '不安全的更新位址';
 
   @override
@@ -619,6 +655,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m571195d148 => 'PoB 座標不正確';
+
+  @override
+  String get mec07f569e3 => '筆記 ID 不正確';
 
   @override
   String get mc652a6b3a8 => '程序集 ID 不正確';
@@ -812,10 +851,16 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m95121a4cc0 => '流暢的動畫';
 
   @override
+  String get m1474fac529 => '計劃、專案、開發選項...';
+
+  @override
   String get m5189135a61 => '重複';
 
   @override
   String get madb0c613d6 => '重複操作';
+
+  @override
+  String get m3c320d7fe3 => '再次儲存';
 
   @override
   String get mbcc0fdbe14 => '法術抑制幾率';
@@ -922,6 +967,11 @@ class AppLocalizationsZh extends AppLocalizations {
   String get mbfb85a0178 => '放大';
 
   @override
+  String md25ca8974f(String p0) {
+    return '應用程式保持開啟以儲存資料：$p0';
+  }
+
+  @override
   String get me15f960d93 => '申請';
 
   @override
@@ -977,6 +1027,11 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m913b373c85 => '在應用程式視窗中工作。單擊組合即可更改它。';
 
   @override
+  String m0964e41783(String p0) {
+    return '工作組裝已儲存；未能恢復Lua：$p0';
+  }
+
+  @override
   String get m9aaa2d503d => '光半徑';
 
   @override
@@ -1021,7 +1076,15 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m8c39bb691b => '裝配';
 
   @override
+  String get m5c8bb47697 => '找不到程序集';
+
+  @override
   String get mc27d8aad03 => '由原始 Lua 計算的程序集';
+
+  @override
+  String mae943799b7(String p0) {
+    return '版本已儲存在庫中，但恢復副本不可用：$p0';
+  }
 
   @override
   String get m407f871778 => '重置';
@@ -1049,6 +1112,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m0a8113a0b9 => '下載更新';
+
+  @override
+  String get mf02956c165 => '複製';
 
   @override
   String get m332899f398 => '複製 XML';
@@ -1091,6 +1157,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m62bb423bd3 => '抵抗';
+
+  @override
+  String get mbd97450c85 => '正在儲存...';
 
   @override
   String get m2fe8f2fd72 => '已儲存';
@@ -1373,7 +1442,16 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get mcdf95e40cd => 'PoB II · 研討會';
 
   @override
+  String get m3127345008 => 'XML 超過 16 MB';
+
+  @override
+  String get m8ed6f8a850 => 'XML 空';
+
+  @override
   String get me72be74923 => 'XML 構建';
+
+  @override
+  String get me097dcd9f8 => 'XML 已儲存';
 
   @override
   String get m0aefd8ac88 =>
@@ -1493,6 +1571,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m8d6001a308 => '總法力';
 
   @override
+  String get me4c25f9a5f => '插入 XML';
+
+  @override
   String get m6bf3b12df4 => '插入 XML 程序集。將在Lua中進行檢查和計算。';
 
   @override
@@ -1603,6 +1684,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get mcefa1c56a5 => '有更新';
 
   @override
+  String get m2071fb9905 => '更多';
+
+  @override
   String get mf9a38201c0 => '日誌和詳細信息';
 
   @override
@@ -1638,6 +1722,12 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get ma7a4033657 => '關閉';
+
+  @override
+  String get mdc4baf32ac => '建構說明';
+
+  @override
+  String get mbdb05f34ee => '筆記自動儲存';
 
   @override
   String get m792acb40e4 => '保護';
@@ -1823,6 +1913,16 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   }
 
   @override
+  String m189f5a7238(String p0) {
+    return '無法開啟或儲存筆記。\n$p0';
+  }
+
+  @override
+  String mfc401e8783(String p0) {
+    return '無法開啟最新版本，請檢查復原副本：$p0';
+  }
+
+  @override
   String mce8b7ad723(String p0) {
     return '無法開啟版本頁面：$p0';
   }
@@ -1880,6 +1980,11 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m92233abcc1 => '無法儲存主體。';
 
   @override
+  String m62f5b562c1(String p0) {
+    return '無法儲存草稿 XML：$p0';
+  }
+
+  @override
   String get m45c78389e9 => '不安全的更新位址';
 
   @override
@@ -1916,6 +2021,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m571195d148 => 'PoB 座標不正確';
+
+  @override
+  String get mec07f569e3 => '筆記 ID 不正確';
 
   @override
   String get mc652a6b3a8 => '程序集 ID 不正確';
@@ -2109,10 +2217,16 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m95121a4cc0 => '流暢的動畫';
 
   @override
+  String get m1474fac529 => '計劃、專案、開發選項...';
+
+  @override
   String get m5189135a61 => '重複';
 
   @override
   String get madb0c613d6 => '重複操作';
+
+  @override
+  String get m3c320d7fe3 => '再次儲存';
 
   @override
   String get mbcc0fdbe14 => '法術抑制幾率';
@@ -2219,6 +2333,11 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get mbfb85a0178 => '放大';
 
   @override
+  String md25ca8974f(String p0) {
+    return '應用程式保持開啟以儲存資料：$p0';
+  }
+
+  @override
   String get me15f960d93 => '申請';
 
   @override
@@ -2274,6 +2393,11 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m913b373c85 => '在應用程式視窗中工作。單擊組合即可更改它。';
 
   @override
+  String m0964e41783(String p0) {
+    return '工作組裝已儲存；未能恢復Lua：$p0';
+  }
+
+  @override
   String get m9aaa2d503d => '光半徑';
 
   @override
@@ -2318,7 +2442,15 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m8c39bb691b => '裝配';
 
   @override
+  String get m5c8bb47697 => '找不到程序集';
+
+  @override
   String get mc27d8aad03 => '由原始 Lua 計算的程序集';
+
+  @override
+  String mae943799b7(String p0) {
+    return '版本已儲存在庫中，但恢復副本不可用：$p0';
+  }
 
   @override
   String get m407f871778 => '重置';
@@ -2346,6 +2478,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m0a8113a0b9 => '下載更新';
+
+  @override
+  String get mf02956c165 => '複製';
 
   @override
   String get m332899f398 => '複製 XML';
@@ -2388,6 +2523,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m62bb423bd3 => '抵抗';
+
+  @override
+  String get mbd97450c85 => '正在儲存...';
 
   @override
   String get m2fe8f2fd72 => '已儲存';

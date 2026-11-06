@@ -76,7 +76,16 @@ class AppLocalizationsJa extends AppLocalizations {
   String get mcdf95e40cd => 'PoB II · ワークショップ';
 
   @override
+  String get m3127345008 => 'XML 16 MB 以上';
+
+  @override
+  String get m8ed6f8a850 => 'XML 空';
+
+  @override
   String get me72be74923 => 'XML ビルド';
+
+  @override
+  String get me097dcd9f8 => 'XML を保存しました';
 
   @override
   String get m0aefd8ac88 =>
@@ -196,6 +205,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m8d6001a308 => '総マナ';
 
   @override
+  String get me4c25f9a5f => 'XML を挿入';
+
+  @override
   String get m6bf3b12df4 => 'XML アセンブリを挿入します。これは、Lua でチェックおよび計算されます。';
 
   @override
@@ -307,6 +319,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get mcefa1c56a5 => 'アップデートがあります';
 
   @override
+  String get m2071fb9905 => '詳細';
+
+  @override
   String get mf9a38201c0 => 'ログと詳細';
 
   @override
@@ -342,6 +357,12 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get ma7a4033657 => '閉じる';
+
+  @override
+  String get mdc4baf32ac => 'ビルドノート';
+
+  @override
+  String get mbdb05f34ee => 'メモは自動的に保存されます';
 
   @override
   String get m792acb40e4 => '保護';
@@ -527,6 +548,16 @@ class AppLocalizationsJa extends AppLocalizations {
   }
 
   @override
+  String m189f5a7238(String p0) {
+    return 'メモを開いたり保存したりできませんでした。\n$p0';
+  }
+
+  @override
+  String mfc401e8783(String p0) {
+    return '最新のビルドを開けませんでした。リカバリ コピーを確認してください: $p0';
+  }
+
+  @override
   String mce8b7ad723(String p0) {
     return 'リリース ページを開けませんでした: $p0';
   }
@@ -584,6 +615,11 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m92233abcc1 => 'トピックの保存に失敗しました。';
 
   @override
+  String m62f5b562c1(String p0) {
+    return '下書き XML を保存できませんでした: $p0';
+  }
+
+  @override
   String get m45c78389e9 => '安全でない更新アドレス';
 
   @override
@@ -620,6 +656,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m571195d148 => '間違った PoB 座標';
+
+  @override
+  String get mec07f569e3 => 'メモ ID が正しくありません';
 
   @override
   String get mc652a6b3a8 => 'アセンブリ ID が正しくありません';
@@ -813,10 +852,16 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m95121a4cc0 => 'スムーズなアニメーション';
 
   @override
+  String get m1474fac529 => '計画、項目、開発オプション...';
+
+  @override
   String get m5189135a61 => 'リピート';
 
   @override
   String get madb0c613d6 => 'アクションを繰り返す';
+
+  @override
+  String get m3c320d7fe3 => '再度保存します';
 
   @override
   String get mbcc0fdbe14 => 'スペル抑制チャンス';
@@ -923,6 +968,11 @@ class AppLocalizationsJa extends AppLocalizations {
   String get mbfb85a0178 => 'ズームイン';
 
   @override
+  String md25ca8974f(String p0) {
+    return 'アプリケーションはデータを保存するために開いたままになります: $p0';
+  }
+
+  @override
   String get me15f960d93 => '適用する';
 
   @override
@@ -978,6 +1028,11 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m913b373c85 => 'アプリケーションウィンドウで作業します。組み合わせをクリックして変更します。';
 
   @override
+  String m0964e41783(String p0) {
+    return '作業アセンブリが保存されました。 Lua を復元できませんでした: $p0';
+  }
+
+  @override
   String get m9aaa2d503d => 'ライト半径';
 
   @override
@@ -1022,7 +1077,15 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m8c39bb691b => 'アセンブリ';
 
   @override
+  String get m5c8bb47697 => 'アセンブリが見つかりません';
+
+  @override
   String get mc27d8aad03 => 'オリジナルの Lua によって計算されたアセンブリ';
+
+  @override
+  String mae943799b7(String p0) {
+    return 'ビルドはライブラリに保存されていますが、リカバリ コピーは利用できません: $p0';
+  }
 
   @override
   String get m407f871778 => 'リセット';
@@ -1050,6 +1113,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m0a8113a0b9 => 'アップデートのダウンロード';
+
+  @override
+  String get mf02956c165 => 'コピー';
 
   @override
   String get m332899f398 => 'コピー XML';
@@ -1094,6 +1160,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m62bb423bd3 => '抵抗';
+
+  @override
+  String get mbd97450c85 => '保存中…';
 
   @override
   String get m2fe8f2fd72 => '保存しました';

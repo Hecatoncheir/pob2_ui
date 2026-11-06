@@ -76,7 +76,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String get mcdf95e40cd => 'PoB II · Workshop';
 
   @override
+  String get m3127345008 => 'XML more than 16 MB';
+
+  @override
+  String get m8ed6f8a850 => 'XML empty';
+
+  @override
   String get me72be74923 => 'XML builds';
+
+  @override
+  String get me097dcd9f8 => 'XML saved';
 
   @override
   String get m0aefd8ac88 =>
@@ -196,6 +205,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m8d6001a308 => 'Total Mana';
 
   @override
+  String get me4c25f9a5f => 'Insert XML';
+
+  @override
   String get m6bf3b12df4 =>
       'Insert XML assemblies. It will be checked and calculated in Lua.';
 
@@ -310,6 +322,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get mcefa1c56a5 => 'There is an update';
 
   @override
+  String get m2071fb9905 => 'More';
+
+  @override
   String get mf9a38201c0 => 'Log and details';
 
   @override
@@ -345,6 +360,12 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get ma7a4033657 => 'Close';
+
+  @override
+  String get mdc4baf32ac => 'Build notes';
+
+  @override
+  String get mbdb05f34ee => 'Notes are saved automatically';
 
   @override
   String get m792acb40e4 => 'Protection';
@@ -531,6 +552,16 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String m189f5a7238(String p0) {
+    return 'Failed to open or save notes.\n$p0';
+  }
+
+  @override
+  String mfc401e8783(String p0) {
+    return 'Could not open the latest build, check the recovery copy: $p0';
+  }
+
+  @override
   String mce8b7ad723(String p0) {
     return 'Failed to open releases page: $p0';
   }
@@ -588,6 +619,11 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m92233abcc1 => 'Failed to save topic.';
 
   @override
+  String m62f5b562c1(String p0) {
+    return 'Failed to save draft XML: $p0';
+  }
+
+  @override
   String get m45c78389e9 => 'Insecure update address';
 
   @override
@@ -624,6 +660,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get m571195d148 => 'Incorrect PoB coordinates';
+
+  @override
+  String get mec07f569e3 => 'Incorrect note ID';
 
   @override
   String get mc652a6b3a8 => 'Incorrect assembly ID';
@@ -823,10 +862,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m95121a4cc0 => 'Smooth animations';
 
   @override
+  String get m1474fac529 => 'Plans, items, development options...';
+
+  @override
   String get m5189135a61 => 'Repeat';
 
   @override
   String get madb0c613d6 => 'Repeat action';
+
+  @override
+  String get m3c320d7fe3 => 'Save again';
 
   @override
   String get mbcc0fdbe14 => 'Spell Suppression Chance';
@@ -934,6 +979,11 @@ class AppLocalizationsEn extends AppLocalizations {
   String get mbfb85a0178 => 'Zoom in';
 
   @override
+  String md25ca8974f(String p0) {
+    return 'The application remains open to save data: $p0';
+  }
+
+  @override
   String get me15f960d93 => 'Apply';
 
   @override
@@ -990,6 +1040,11 @@ class AppLocalizationsEn extends AppLocalizations {
       'Work in the application window. Click on a combination to change it.';
 
   @override
+  String m0964e41783(String p0) {
+    return 'Working assembly saved; failed to restore Lua: $p0';
+  }
+
+  @override
   String get m9aaa2d503d => 'Light Radius';
 
   @override
@@ -1034,7 +1089,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m8c39bb691b => 'Assembly';
 
   @override
+  String get m5c8bb47697 => 'Assembly not found';
+
+  @override
   String get mc27d8aad03 => 'Assembly calculated by original Lua';
+
+  @override
+  String mae943799b7(String p0) {
+    return 'The build is saved in the library, but the recovery copy is not available: $p0';
+  }
 
   @override
   String get m407f871778 => 'Reset';
@@ -1062,6 +1125,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get m0a8113a0b9 => 'Download update';
+
+  @override
+  String get mf02956c165 => 'Copy';
 
   @override
   String get m332899f398 => 'Copy XML';
@@ -1106,6 +1172,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get m62bb423bd3 => 'Resistances';
+
+  @override
+  String get mbd97450c85 => 'Saving…';
 
   @override
   String get m2fe8f2fd72 => 'Saved';

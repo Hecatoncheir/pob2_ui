@@ -18,6 +18,7 @@ import 'data/interface_scale_repository.dart';
 import 'ui/interface_scale_cubit.dart';
 import 'data/workspace_preferences_repository.dart';
 import 'ui/workspace_preferences_cubit.dart';
+import 'ui/exit_protection.dart';
 
 Future<void> main(List<String> arguments) async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -54,13 +55,16 @@ Future<void> main(List<String> arguments) async {
     initial: await workspaceRepository.load(),
   );
   runApp(
-    PobApp(
+    ExitProtection(
       model: model,
-      updates: updates,
-      appearance: appearance,
-      language: language,
-      interfaceScale: interfaceScale,
-      workspacePreferences: workspacePreferences,
+      child: PobApp(
+        model: model,
+        updates: updates,
+        appearance: appearance,
+        language: language,
+        interfaceScale: interfaceScale,
+        workspacePreferences: workspacePreferences,
+      ),
     ),
   );
   WidgetsBinding.instance.addPostFrameCallback((_) async {

@@ -8,6 +8,8 @@ import 'core/spark_art.dart';
 import 'core/spark_theme.dart';
 import 'shell_cubit.dart';
 import 'workshop_cubit.dart';
+import 'build_notes_dialog.dart';
+import 'core/ui_translation.dart';
 
 class LibraryView extends StatefulWidget {
   const LibraryView({super.key, required this.model, required this.shell});
@@ -130,6 +132,11 @@ class _BuildCard extends StatelessWidget {
                 '${entry.updated.day.toString().padLeft(2, '0')}.${entry.updated.month.toString().padLeft(2, '0')}.${entry.updated.year}',
                 style: TextStyle(color: Spark.of(context).muted, fontSize: 10),
               ),
+            ),
+            IconButton(
+              tooltip: translateUi(context, 'Заметки к сборке'),
+              onPressed: () => showBuildNotes(context, model, entry.id),
+              icon: const Icon(Icons.notes_rounded, size: 18),
             ),
             TextButton(
               onPressed: model.state.busy || !model.engine.connected

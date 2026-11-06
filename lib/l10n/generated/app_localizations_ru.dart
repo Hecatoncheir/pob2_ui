@@ -76,7 +76,16 @@ class AppLocalizationsRu extends AppLocalizations {
   String get mcdf95e40cd => 'PoB II · Мастерская';
 
   @override
+  String get m3127345008 => 'XML больше 16 МБ';
+
+  @override
+  String get m8ed6f8a850 => 'XML пуст';
+
+  @override
   String get me72be74923 => 'XML сборки';
+
+  @override
+  String get me097dcd9f8 => 'XML сохранён';
 
   @override
   String get m0aefd8ac88 =>
@@ -196,6 +205,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m8d6001a308 => 'Всего маны';
 
   @override
+  String get me4c25f9a5f => 'Вставить XML';
+
+  @override
   String get m6bf3b12df4 =>
       'Вставьте XML сборки. Она будет проверена и рассчитана в Lua.';
 
@@ -310,6 +322,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get mcefa1c56a5 => 'Есть обновление';
 
   @override
+  String get m2071fb9905 => 'Ещё';
+
+  @override
   String get mf9a38201c0 => 'Журнал и подробности';
 
   @override
@@ -345,6 +360,12 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get ma7a4033657 => 'Закрыть';
+
+  @override
+  String get mdc4baf32ac => 'Заметки к сборке';
+
+  @override
+  String get mbdb05f34ee => 'Заметки сохраняются автоматически';
 
   @override
   String get m792acb40e4 => 'Защита';
@@ -531,6 +552,16 @@ class AppLocalizationsRu extends AppLocalizations {
   }
 
   @override
+  String m189f5a7238(String p0) {
+    return 'Не удалось открыть или сохранить заметки.\n$p0';
+  }
+
+  @override
+  String mfc401e8783(String p0) {
+    return 'Не удалось открыть последнюю сборку, проверяем копию восстановления: $p0';
+  }
+
+  @override
   String mce8b7ad723(String p0) {
     return 'Не удалось открыть страницу выпусков: $p0';
   }
@@ -588,6 +619,11 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m92233abcc1 => 'Не удалось сохранить тему.';
 
   @override
+  String m62f5b562c1(String p0) {
+    return 'Не удалось сохранить черновик XML: $p0';
+  }
+
+  @override
   String get m45c78389e9 => 'Небезопасный адрес обновления';
 
   @override
@@ -624,6 +660,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get m571195d148 => 'Некорректные координаты PoB';
+
+  @override
+  String get mec07f569e3 => 'Некорректный идентификатор заметок';
 
   @override
   String get mc652a6b3a8 => 'Некорректный идентификатор сборки';
@@ -821,10 +860,16 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m95121a4cc0 => 'Плавные анимации';
 
   @override
+  String get m1474fac529 => 'Планы, предметы, варианты развития…';
+
+  @override
   String get m5189135a61 => 'Повторить';
 
   @override
   String get madb0c613d6 => 'Повторить действие';
+
+  @override
+  String get m3c320d7fe3 => 'Повторить сохранение';
 
   @override
   String get mbcc0fdbe14 => 'Подавление урона чар';
@@ -933,6 +978,11 @@ class AppLocalizationsRu extends AppLocalizations {
   String get mbfb85a0178 => 'Приблизить';
 
   @override
+  String md25ca8974f(String p0) {
+    return 'Приложение остаётся открытым, чтобы сохранить данные: $p0';
+  }
+
+  @override
   String get me15f960d93 => 'Применить';
 
   @override
@@ -989,6 +1039,11 @@ class AppLocalizationsRu extends AppLocalizations {
       'Работают в окне приложения. Нажмите на сочетание, чтобы изменить его.';
 
   @override
+  String m0964e41783(String p0) {
+    return 'Рабочая сборка сохранена; не удалось восстановить Lua: $p0';
+  }
+
+  @override
   String get m9aaa2d503d => 'Радиус освещения';
 
   @override
@@ -1033,7 +1088,15 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m8c39bb691b => 'Сборка';
 
   @override
+  String get m5c8bb47697 => 'Сборка не найдена';
+
+  @override
   String get mc27d8aad03 => 'Сборка рассчитана исходным Lua';
+
+  @override
+  String mae943799b7(String p0) {
+    return 'Сборка сохранена в библиотеке, но копия восстановления недоступна: $p0';
+  }
 
   @override
   String get m407f871778 => 'Сбросить';
@@ -1061,6 +1124,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get m0a8113a0b9 => 'Скачать обновление';
+
+  @override
+  String get mf02956c165 => 'Скопировать';
 
   @override
   String get m332899f398 => 'Скопировать XML';
@@ -1105,6 +1171,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get m62bb423bd3 => 'Сопротивления';
+
+  @override
+  String get mbd97450c85 => 'Сохранение…';
 
   @override
   String get m2fe8f2fd72 => 'Сохранено';

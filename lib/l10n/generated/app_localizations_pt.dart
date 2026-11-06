@@ -76,7 +76,16 @@ class AppLocalizationsPt extends AppLocalizations {
   String get mcdf95e40cd => 'PoB II · Oficina';
 
   @override
+  String get m3127345008 => 'XML mais de 16 MB';
+
+  @override
+  String get m8ed6f8a850 => 'XML vazio';
+
+  @override
   String get me72be74923 => 'XML compilações';
+
+  @override
+  String get me097dcd9f8 => 'XML salvo';
 
   @override
   String get m0aefd8ac88 =>
@@ -196,6 +205,9 @@ class AppLocalizationsPt extends AppLocalizations {
   String get m8d6001a308 => 'Mana total';
 
   @override
+  String get me4c25f9a5f => 'Inserir XML';
+
+  @override
   String get m6bf3b12df4 =>
       'Inserir XML montagens. Ele será verificado e calculado em Lua.';
 
@@ -313,6 +325,9 @@ class AppLocalizationsPt extends AppLocalizations {
   String get mcefa1c56a5 => 'Há uma atualização';
 
   @override
+  String get m2071fb9905 => 'Mais';
+
+  @override
   String get mf9a38201c0 => 'Registro e detalhes';
 
   @override
@@ -348,6 +363,12 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get ma7a4033657 => 'Fechar';
+
+  @override
+  String get mdc4baf32ac => 'Notas de construção';
+
+  @override
+  String get mbdb05f34ee => 'As notas são salvas automaticamente';
 
   @override
   String get m792acb40e4 => 'Proteção';
@@ -536,6 +557,16 @@ class AppLocalizationsPt extends AppLocalizations {
   }
 
   @override
+  String m189f5a7238(String p0) {
+    return 'Falha ao abrir ou salvar notas.\n$p0';
+  }
+
+  @override
+  String mfc401e8783(String p0) {
+    return 'Não foi possível abrir a versão mais recente. Verifique a cópia de recuperação: $p0';
+  }
+
+  @override
   String mce8b7ad723(String p0) {
     return 'Falha ao abrir a página de lançamentos: $p0';
   }
@@ -593,6 +624,11 @@ class AppLocalizationsPt extends AppLocalizations {
   String get m92233abcc1 => 'Falha ao salvar o tópico.';
 
   @override
+  String m62f5b562c1(String p0) {
+    return 'Falha ao salvar o rascunho XML: $p0';
+  }
+
+  @override
   String get m45c78389e9 => 'Endereço de atualização inseguro';
 
   @override
@@ -630,6 +666,9 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get m571195d148 => 'Coordenadas PoB incorretas';
+
+  @override
+  String get mec07f569e3 => 'ID de nota incorreto';
 
   @override
   String get mc652a6b3a8 => 'ID de montagem incorreto';
@@ -830,10 +869,16 @@ class AppLocalizationsPt extends AppLocalizations {
   String get m95121a4cc0 => 'Animações suaves';
 
   @override
+  String get m1474fac529 => 'Planos, itens, opções de desenvolvimento...';
+
+  @override
   String get m5189135a61 => 'Repita';
 
   @override
   String get madb0c613d6 => 'Repetir ação';
+
+  @override
+  String get m3c320d7fe3 => 'Salve novamente';
 
   @override
   String get mbcc0fdbe14 => 'Chance de supressão de feitiço';
@@ -942,6 +987,11 @@ class AppLocalizationsPt extends AppLocalizations {
   String get mbfb85a0178 => 'Aumentar o zoom';
 
   @override
+  String md25ca8974f(String p0) {
+    return 'O aplicativo permanece aberto para salvar dados: $p0';
+  }
+
+  @override
   String get me15f960d93 => 'Aplicar';
 
   @override
@@ -1000,6 +1050,11 @@ class AppLocalizationsPt extends AppLocalizations {
       'Trabalhe na janela do aplicativo. Clique em uma combinação para alterá-la.';
 
   @override
+  String m0964e41783(String p0) {
+    return 'Montagem de trabalho salva; falha ao restaurar Lua: $p0';
+  }
+
+  @override
   String get m9aaa2d503d => 'Raio de luz';
 
   @override
@@ -1044,7 +1099,15 @@ class AppLocalizationsPt extends AppLocalizations {
   String get m8c39bb691b => 'Montagem';
 
   @override
+  String get m5c8bb47697 => 'Montagem não encontrada';
+
+  @override
   String get mc27d8aad03 => 'Montagem calculada pelo original Lua';
+
+  @override
+  String mae943799b7(String p0) {
+    return 'A compilação é salva na biblioteca, mas a cópia de recuperação não está disponível: $p0';
+  }
 
   @override
   String get m407f871778 => 'Redefinir';
@@ -1072,6 +1135,9 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get m0a8113a0b9 => 'Baixar atualização';
+
+  @override
+  String get mf02956c165 => 'Copiar';
 
   @override
   String get m332899f398 => 'Copiar XML';
@@ -1116,6 +1182,9 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get m62bb423bd3 => 'Resistências';
+
+  @override
+  String get mbd97450c85 => 'Salvando…';
 
   @override
   String get m2fe8f2fd72 => 'Salvo';
@@ -1403,7 +1472,16 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get mcdf95e40cd => 'PoB II · Oficina';
 
   @override
+  String get m3127345008 => 'XML mais de 16 MB';
+
+  @override
+  String get m8ed6f8a850 => 'XML vazio';
+
+  @override
   String get me72be74923 => 'XML compilações';
+
+  @override
+  String get me097dcd9f8 => 'XML salvo';
 
   @override
   String get m0aefd8ac88 =>
@@ -1523,6 +1601,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get m8d6001a308 => 'Mana total';
 
   @override
+  String get me4c25f9a5f => 'Inserir XML';
+
+  @override
   String get m6bf3b12df4 =>
       'Inserir XML montagens. Ele será verificado e calculado em Lua.';
 
@@ -1640,6 +1721,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get mcefa1c56a5 => 'Há uma atualização';
 
   @override
+  String get m2071fb9905 => 'Mais';
+
+  @override
   String get mf9a38201c0 => 'Registro e detalhes';
 
   @override
@@ -1675,6 +1759,12 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get ma7a4033657 => 'Fechar';
+
+  @override
+  String get mdc4baf32ac => 'Notas de construção';
+
+  @override
+  String get mbdb05f34ee => 'As notas são salvas automaticamente';
 
   @override
   String get m792acb40e4 => 'Proteção';
@@ -1863,6 +1953,16 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   }
 
   @override
+  String m189f5a7238(String p0) {
+    return 'Falha ao abrir ou salvar notas.\n$p0';
+  }
+
+  @override
+  String mfc401e8783(String p0) {
+    return 'Não foi possível abrir a versão mais recente. Verifique a cópia de recuperação: $p0';
+  }
+
+  @override
   String mce8b7ad723(String p0) {
     return 'Falha ao abrir a página de lançamentos: $p0';
   }
@@ -1920,6 +2020,11 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get m92233abcc1 => 'Falha ao salvar o tópico.';
 
   @override
+  String m62f5b562c1(String p0) {
+    return 'Falha ao salvar o rascunho XML: $p0';
+  }
+
+  @override
   String get m45c78389e9 => 'Endereço de atualização inseguro';
 
   @override
@@ -1957,6 +2062,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get m571195d148 => 'Coordenadas PoB incorretas';
+
+  @override
+  String get mec07f569e3 => 'ID de nota incorreto';
 
   @override
   String get mc652a6b3a8 => 'ID de montagem incorreto';
@@ -2157,10 +2265,16 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get m95121a4cc0 => 'Animações suaves';
 
   @override
+  String get m1474fac529 => 'Planos, itens, opções de desenvolvimento...';
+
+  @override
   String get m5189135a61 => 'Repita';
 
   @override
   String get madb0c613d6 => 'Repetir ação';
+
+  @override
+  String get m3c320d7fe3 => 'Salve novamente';
 
   @override
   String get mbcc0fdbe14 => 'Chance de supressão de feitiço';
@@ -2269,6 +2383,11 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get mbfb85a0178 => 'Aumentar o zoom';
 
   @override
+  String md25ca8974f(String p0) {
+    return 'O aplicativo permanece aberto para salvar dados: $p0';
+  }
+
+  @override
   String get me15f960d93 => 'Aplicar';
 
   @override
@@ -2327,6 +2446,11 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
       'Trabalhe na janela do aplicativo. Clique em uma combinação para alterá-la.';
 
   @override
+  String m0964e41783(String p0) {
+    return 'Montagem de trabalho salva; falha ao restaurar Lua: $p0';
+  }
+
+  @override
   String get m9aaa2d503d => 'Raio de luz';
 
   @override
@@ -2371,7 +2495,15 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get m8c39bb691b => 'Montagem';
 
   @override
+  String get m5c8bb47697 => 'Montagem não encontrada';
+
+  @override
   String get mc27d8aad03 => 'Montagem calculada pelo original Lua';
+
+  @override
+  String mae943799b7(String p0) {
+    return 'A compilação é salva na biblioteca, mas a cópia de recuperação não está disponível: $p0';
+  }
 
   @override
   String get m407f871778 => 'Redefinir';
@@ -2399,6 +2531,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get m0a8113a0b9 => 'Baixar atualização';
+
+  @override
+  String get mf02956c165 => 'Copiar';
 
   @override
   String get m332899f398 => 'Copiar XML';
@@ -2443,6 +2578,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get m62bb423bd3 => 'Resistências';
+
+  @override
+  String get mbd97450c85 => 'Salvando…';
 
   @override
   String get m2fe8f2fd72 => 'Salvo';

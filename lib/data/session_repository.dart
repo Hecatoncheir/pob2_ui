@@ -1,22 +1,24 @@
 import 'dart:io';
 
+import 'atomic_text_file.dart';
+import 'text_draft_store.dart';
+
 class SessionRepository {
-  SessionRepository(this.root);
+  SessionRepository(this.root, {AtomicTextFile? files})
+    : files = files ?? AtomicTextFile(),
+      drafts = TextDraftStore(root, files: files);
   final Directory root;
+  final AtomicTextFile files;
+  final TextDraftStore drafts;
   File get _file => File.fromUri(root.uri.resolve('session.xml'));
-  Future<bool> exists() => _file.exists();
-  Future<String> read() => _file.readAsString();
-  File get _draft => File.fromUri(root.uri.resolve('draft.xml'));
-  Future<String> readDraft() async =>
-      await _draft.exists() ? _draft.readAsString() : '';
-  Future<void> saveDraft(String xml) => _save('draft.xml', xml);
+  Future<bool> exists() async =>
+      await _file.exists() || await File('${_file.path}.bak').exists();
+  Future<String> read() => files.read(_file);
+  Future<String> readDraft() => drafts.read('draft.xml');
+  Future<void> saveDraft(String xml) => drafts.save('draft.xml', xml);
+  Future<String> readNotes(String id) => drafts.read('$id.md');
+  Future<void> saveNotes(String id, String text) => drafts.save('$id.md', text);
+  Future<void> flushText() => drafts.flush();
 
-  Future<void> save(String xml) => _save('session.xml', xml);
-
-  Future<void> _save(String name, String xml) async {
-    await root.create(recursive: true);
-    final temporary = File.fromUri(root.uri.resolve('$name.tmp'));
-    await temporary.writeAsString(xml, flush: true);
-    await temporary.rename(File.fromUri(root.uri.resolve(name)).path);
-  }
+  Future<void> save(String xml) => files.write(_file, xml, backup: true);
 }

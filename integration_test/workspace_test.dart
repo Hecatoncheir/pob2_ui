@@ -28,6 +28,16 @@ import 'package:pob2_ui/ui/core/spark_art.dart';
 import 'package:pob2_ui/data/interface_scale_repository.dart';
 import 'package:pob2_ui/ui/interface_scale_cubit.dart';
 import 'package:pob2_ui/domain/tree_allocation_mode.dart';
+import 'package:pob2_ui/data/xml_file_service.dart';
+import 'package:pob2_ui/ui/exit_protection.dart';
+
+class SelectedXmlFiles implements XmlFileDialogs {
+  String? path;
+  @override
+  Future<String?> open() async => path;
+  @override
+  Future<String?> save(String suggestedName) async => path;
+}
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
@@ -40,9 +50,11 @@ void main() {
         'Задайте отдельный профиль POB2_UI_HOME с установленными компонентами',
       );
     }
+    final dialogs = SelectedXmlFiles();
     final model = WorkshopCubit(
       ComponentRepository(store: InstallationStore(root)),
       McpClient(),
+      files: XmlFileService(dialogs: dialogs),
     );
     addTearDown(model.close);
     final updates = AppUpdateCubit(root: root);
@@ -74,11 +86,14 @@ void main() {
     await tester.pumpWidget(
       RepaintBoundary(
         key: const Key('review-image'),
-        child: PobApp(
+        child: ExitProtection(
           model: model,
-          updates: updates,
-          language: language,
-          interfaceScale: scale,
+          child: PobApp(
+            model: model,
+            updates: updates,
+            language: language,
+            interfaceScale: scale,
+          ),
         ),
       ),
     );
@@ -100,6 +115,7 @@ void main() {
     final stats = model.state.report!.stats;
     await model.importXml(xml!);
     expect(model.state.report!.stats, stats);
+    await _fileWorkflow(model, dialogs, root);
     for (final tab in [
       'items',
       'skills',
@@ -119,9 +135,62 @@ void main() {
     await tester.tap(find.byKey(const ValueKey('page-library')));
     await tester.pumpAndSettle();
     expect(find.text('Проверка интерфейса Lua'), findsWidgets);
-    await tester.pumpWidget(const SizedBox.shrink());
+    await tester.pumpWidget(
+      RepaintBoundary(
+        key: const Key('review-image'),
+        child: ExitProtection(model: model, child: const SizedBox.shrink()),
+      ),
+    );
     await tester.pumpAndSettle();
   }, timeout: const Timeout(Duration(minutes: 4)));
+}
+
+Future<void> _fileWorkflow(
+  WorkshopCubit model,
+  SelectedXmlFiles dialogs,
+  Directory root,
+) async {
+  final id = model.state.library.activeId!;
+  final stats = model.state.report!.stats;
+  await model.session.saveNotes(id, 'Проверка заметок с настоящим Lua');
+  final file = File.fromUri(root.uri.resolve('Проверка файлового XML.xml'));
+  dialogs.path = file.path;
+  await model.saveXmlFile();
+  expect(model.state.error, isNull);
+  final xml = await file.readAsString();
+  expect(xml, contains('<PathOfBuilding'));
+  await _rejectBadFile(model, dialogs, root);
+  dialogs.path = file.path;
+  await model.openXmlFile();
+  expect(model.state.error, isNull);
+  expect(model.state.report!.stats, stats);
+  expect(model.state.library.active!.title, 'Проверка файлового XML');
+  expect(await model.session.readNotes(id), 'Проверка заметок с настоящим Lua');
+  await model.openBuild(id);
+  await model.checkpoint();
+  expect(model.state.report!.stats, stats);
+}
+
+Future<void> _rejectBadFile(
+  WorkshopCubit model,
+  SelectedXmlFiles dialogs,
+  Directory root,
+) async {
+  final id = model.state.library.activeId;
+  final stats = model.state.report!.stats;
+  final history = model.state.history;
+  final bad = File.fromUri(root.uri.resolve('invalid.xml'));
+  await bad.writeAsString('<broken>');
+  dialogs.path = bad.path;
+  await model.openXmlFile();
+  expect(model.state.error, isNotNull);
+  expect(model.state.library.activeId, id);
+  expect(model.state.report!.stats, stats);
+  expect(model.state.document!.stale, isFalse);
+  expect(model.state.history, history);
+  dialogs.path = null;
+  await model.openXmlFile();
+  expect(model.state.library.activeId, id);
 }
 
 Future<void> _capture(WidgetTester tester, {String suffix = ''}) async {

@@ -236,11 +236,29 @@ abstract class AppLocalizations {
   /// **'PoB II · Workshop'**
   String get mcdf95e40cd;
 
+  /// XML больше 16 МБ
+  ///
+  /// In en, this message translates to:
+  /// **'XML more than 16 MB'**
+  String get m3127345008;
+
+  /// XML пуст
+  ///
+  /// In en, this message translates to:
+  /// **'XML empty'**
+  String get m8ed6f8a850;
+
   /// XML сборки
   ///
   /// In en, this message translates to:
   /// **'XML builds'**
   String get me72be74923;
+
+  /// XML сохранён
+  ///
+  /// In en, this message translates to:
+  /// **'XML saved'**
+  String get me097dcd9f8;
 
   /// import sys, struct; assert sys.version_info >= (3,11) and struct.calcsize("P") == 8, "Нужен 64-битный Python 3.11+"
   ///
@@ -446,6 +464,12 @@ abstract class AppLocalizations {
   /// **'Total Mana'**
   String get m8d6001a308;
 
+  /// Вставить XML
+  ///
+  /// In en, this message translates to:
+  /// **'Insert XML'**
+  String get me4c25f9a5f;
+
   /// Вставьте XML сборки. Она будет проверена и рассчитана в Lua.
   ///
   /// In en, this message translates to:
@@ -650,6 +674,12 @@ abstract class AppLocalizations {
   /// **'There is an update'**
   String get mcefa1c56a5;
 
+  /// Ещё
+  ///
+  /// In en, this message translates to:
+  /// **'More'**
+  String get m2071fb9905;
+
   /// Журнал и подробности
   ///
   /// In en, this message translates to:
@@ -703,6 +733,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Close'**
   String get ma7a4033657;
+
+  /// Заметки к сборке
+  ///
+  /// In en, this message translates to:
+  /// **'Build notes'**
+  String get mdc4baf32ac;
+
+  /// Заметки сохраняются автоматически
+  ///
+  /// In en, this message translates to:
+  /// **'Notes are saved automatically'**
+  String get mbdb05f34ee;
 
   /// Защита
   ///
@@ -1046,6 +1088,19 @@ abstract class AppLocalizations {
   /// **'Failed to load translation: {p0}'**
   String m4b1c83eb15(String p0);
 
+  /// Не удалось открыть или сохранить заметки.
+  /// {p0}
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to open or save notes.\n{p0}'**
+  String m189f5a7238(String p0);
+
+  /// Не удалось открыть последнюю сборку, проверяем копию восстановления: {p0}
+  ///
+  /// In en, this message translates to:
+  /// **'Could not open the latest build, check the recovery copy: {p0}'**
+  String mfc401e8783(String p0);
+
   /// Не удалось открыть страницу выпусков: {p0}
   ///
   /// In en, this message translates to:
@@ -1124,6 +1179,12 @@ abstract class AppLocalizations {
   /// **'Failed to save topic.'**
   String get m92233abcc1;
 
+  /// Не удалось сохранить черновик XML: {p0}
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to save draft XML: {p0}'**
+  String m62f5b562c1(String p0);
+
   /// Небезопасный адрес обновления
   ///
   /// In en, this message translates to:
@@ -1195,6 +1256,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Incorrect PoB coordinates'**
   String get m571195d148;
+
+  /// Некорректный идентификатор заметок
+  ///
+  /// In en, this message translates to:
+  /// **'Incorrect note ID'**
+  String get mec07f569e3;
 
   /// Некорректный идентификатор сборки
   ///
@@ -1562,6 +1629,12 @@ abstract class AppLocalizations {
   /// **'Smooth animations'**
   String get m95121a4cc0;
 
+  /// Планы, предметы, варианты развития…
+  ///
+  /// In en, this message translates to:
+  /// **'Plans, items, development options...'**
+  String get m1474fac529;
+
   /// Повторить
   ///
   /// In en, this message translates to:
@@ -1573,6 +1646,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Repeat action'**
   String get madb0c613d6;
+
+  /// Повторить сохранение
+  ///
+  /// In en, this message translates to:
+  /// **'Save again'**
+  String get m3c320d7fe3;
 
   /// Подавление урона чар
   ///
@@ -1766,6 +1845,12 @@ abstract class AppLocalizations {
   /// **'Zoom in'**
   String get mbfb85a0178;
 
+  /// Приложение остаётся открытым, чтобы сохранить данные: {p0}
+  ///
+  /// In en, this message translates to:
+  /// **'The application remains open to save data: {p0}'**
+  String md25ca8974f(String p0);
+
   /// Применить
   ///
   /// In en, this message translates to:
@@ -1868,6 +1953,12 @@ abstract class AppLocalizations {
   /// **'Work in the application window. Click on a combination to change it.'**
   String get m913b373c85;
 
+  /// Рабочая сборка сохранена; не удалось восстановить Lua: {p0}
+  ///
+  /// In en, this message translates to:
+  /// **'Working assembly saved; failed to restore Lua: {p0}'**
+  String m0964e41783(String p0);
+
   /// Радиус освещения
   ///
   /// In en, this message translates to:
@@ -1952,11 +2043,23 @@ abstract class AppLocalizations {
   /// **'Assembly'**
   String get m8c39bb691b;
 
+  /// Сборка не найдена
+  ///
+  /// In en, this message translates to:
+  /// **'Assembly not found'**
+  String get m5c8bb47697;
+
   /// Сборка рассчитана исходным Lua
   ///
   /// In en, this message translates to:
   /// **'Assembly calculated by original Lua'**
   String get mc27d8aad03;
+
+  /// Сборка сохранена в библиотеке, но копия восстановления недоступна: {p0}
+  ///
+  /// In en, this message translates to:
+  /// **'The build is saved in the library, but the recovery copy is not available: {p0}'**
+  String mae943799b7(String p0);
 
   /// Сбросить
   ///
@@ -2011,6 +2114,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Download update'**
   String get m0a8113a0b9;
+
+  /// Скопировать
+  ///
+  /// In en, this message translates to:
+  /// **'Copy'**
+  String get mf02956c165;
 
   /// Скопировать XML
   ///
@@ -2095,6 +2204,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Resistances'**
   String get m62bb423bd3;
+
+  /// Сохранение…
+  ///
+  /// In en, this message translates to:
+  /// **'Saving…'**
+  String get mbd97450c85;
 
   /// Сохранено
   ///

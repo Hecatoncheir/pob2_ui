@@ -76,7 +76,16 @@ class AppLocalizationsKo extends AppLocalizations {
   String get mcdf95e40cd => 'PoB II · 워크숍';
 
   @override
+  String get m3127345008 => 'XML 16MB 이상';
+
+  @override
+  String get m8ed6f8a850 => 'XML 비어 있음';
+
+  @override
   String get me72be74923 => 'XML 빌드';
+
+  @override
+  String get me097dcd9f8 => 'XML 저장됨';
 
   @override
   String get m0aefd8ac88 =>
@@ -196,6 +205,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m8d6001a308 => '총 마나';
 
   @override
+  String get me4c25f9a5f => '삽입 XML';
+
+  @override
   String get m6bf3b12df4 => 'XML 어셈블리를 삽입합니다. 이는 확인되고 계산됩니다.Lua';
 
   @override
@@ -307,6 +319,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get mcefa1c56a5 => '업데이트가 있습니다';
 
   @override
+  String get m2071fb9905 => '더보기';
+
+  @override
   String get mf9a38201c0 => '로그 및 세부정보';
 
   @override
@@ -342,6 +357,12 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get ma7a4033657 => '닫기';
+
+  @override
+  String get mdc4baf32ac => '빌드 노트';
+
+  @override
+  String get mbdb05f34ee => '메모가 자동으로 저장됩니다.';
 
   @override
   String get m792acb40e4 => '보호';
@@ -527,6 +548,16 @@ class AppLocalizationsKo extends AppLocalizations {
   }
 
   @override
+  String m189f5a7238(String p0) {
+    return '메모를 열거나 저장하지 못했습니다.\n$p0';
+  }
+
+  @override
+  String mfc401e8783(String p0) {
+    return '최신 빌드를 열 수 없습니다. 복구 복사본을 확인하세요. $p0';
+  }
+
+  @override
   String mce8b7ad723(String p0) {
     return '릴리스 페이지를 열지 못했습니다: $p0';
   }
@@ -584,6 +615,11 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m92233abcc1 => '주제를 저장하지 못했습니다.';
 
   @override
+  String m62f5b562c1(String p0) {
+    return '임시 저장 실패 XML: $p0';
+  }
+
+  @override
   String get m45c78389e9 => '안전하지 않은 업데이트 주소';
 
   @override
@@ -620,6 +656,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m571195d148 => '잘못된 PoB 좌표';
+
+  @override
+  String get mec07f569e3 => '잘못된 노트 ID';
 
   @override
   String get mc652a6b3a8 => '잘못된 어셈블리 ID';
@@ -813,10 +852,16 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m95121a4cc0 => '부드러운 애니메이션';
 
   @override
+  String get m1474fac529 => '계획, 아이템, 개발 옵션...';
+
+  @override
   String get m5189135a61 => '반복';
 
   @override
   String get madb0c613d6 => '작업 반복';
+
+  @override
+  String get m3c320d7fe3 => '다시 저장하세요';
 
   @override
   String get mbcc0fdbe14 => '주문 억제 확률';
@@ -923,6 +968,11 @@ class AppLocalizationsKo extends AppLocalizations {
   String get mbfb85a0178 => '확대';
 
   @override
+  String md25ca8974f(String p0) {
+    return '데이터를 저장하기 위해 애플리케이션이 열려 있습니다: $p0';
+  }
+
+  @override
   String get me15f960d93 => '신청';
 
   @override
@@ -978,6 +1028,11 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m913b373c85 => '응용프로그램 창에서 작업합니다. 변경하려면 조합을 클릭하세요.';
 
   @override
+  String m0964e41783(String p0) {
+    return '작업 어셈블리가 저장되었습니다. Lua 복원 실패: $p0';
+  }
+
+  @override
   String get m9aaa2d503d => '빛의 반경';
 
   @override
@@ -1022,7 +1077,15 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m8c39bb691b => '조립';
 
   @override
+  String get m5c8bb47697 => '어셈블리를 찾을 수 없습니다.';
+
+  @override
   String get mc27d8aad03 => '원본으로 계산된 어셈블리 Lua';
+
+  @override
+  String mae943799b7(String p0) {
+    return '빌드가 라이브러리에 저장되었지만 복구 복사본을 사용할 수 없습니다: $p0';
+  }
 
   @override
   String get m407f871778 => '재설정';
@@ -1050,6 +1113,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m0a8113a0b9 => '업데이트 다운로드';
+
+  @override
+  String get mf02956c165 => '복사';
 
   @override
   String get m332899f398 => '복사 XML';
@@ -1094,6 +1160,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m62bb423bd3 => '저항';
+
+  @override
+  String get mbd97450c85 => '저장 중…';
 
   @override
   String get m2fe8f2fd72 => '저장됨';

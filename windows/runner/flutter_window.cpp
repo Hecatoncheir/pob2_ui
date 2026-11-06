@@ -1,6 +1,8 @@
 #include "flutter_window.h"
 
 #include <optional>
+#include <flutter/method_result_functions.h>
+#include <flutter/standard_method_codec.h>
 
 #include "flutter/generated_plugin_registrant.h"
 
@@ -26,6 +28,10 @@ bool FlutterWindow::OnCreate() {
   }
   RegisterPlugins(flutter_controller_->engine());
   SetChildContent(flutter_controller_->view()->GetNativeWindow());
+  close_channel_ =
+      std::make_unique<flutter::MethodChannel<flutter::EncodableValue>>(
+          flutter_controller_->engine()->messenger(), "pob2_ui/window",
+          &flutter::StandardMethodCodec::GetInstance());
 
   flutter_controller_->engine()->SetNextFrameCallback([&]() {
     this->Show();
@@ -40,6 +46,7 @@ bool FlutterWindow::OnCreate() {
 }
 
 void FlutterWindow::OnDestroy() {
+  close_channel_.reset();
   if (flutter_controller_) {
     flutter_controller_ = nullptr;
   }
@@ -51,6 +58,13 @@ LRESULT
 FlutterWindow::MessageHandler(HWND hwnd, UINT const message,
                               WPARAM const wparam,
                               LPARAM const lparam) noexcept {
+  if (message == WM_CLOSE) {
+    if (close_allowed_) {
+      return Win32Window::MessageHandler(hwnd, message, wparam, lparam);
+    }
+    RequestClose(hwnd);
+    return 0;
+  }
   // Give Flutter, including plugins, an opportunity to handle window messages.
   if (flutter_controller_) {
     std::optional<LRESULT> result =
@@ -68,4 +82,23 @@ FlutterWindow::MessageHandler(HWND hwnd, UINT const message,
   }
 
   return Win32Window::MessageHandler(hwnd, message, wparam, lparam);
+}
+
+void FlutterWindow::RequestClose(HWND window) {
+  if (close_pending_ || !close_channel_) return;
+  close_pending_ = true;
+  close_channel_->InvokeMethod(
+      "requestClose", nullptr,
+      std::make_unique<flutter::MethodResultFunctions<flutter::EncodableValue>>(
+          [this, window](const flutter::EncodableValue* response) {
+            close_pending_ = false;
+            const auto* allowed = response ? std::get_if<bool>(response) : nullptr;
+            if (allowed && *allowed) {
+              close_allowed_ = true;
+              PostMessage(window, WM_CLOSE, 0, 0);
+            }
+          },
+          [this](const std::string&, const std::string&,
+                 const flutter::EncodableValue*) { close_pending_ = false; },
+          [this]() { close_pending_ = false; }));
 }

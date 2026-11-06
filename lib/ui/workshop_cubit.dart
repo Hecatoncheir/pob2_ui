@@ -16,18 +16,27 @@ import '../domain/library_entry.dart';
 import '../domain/component.dart';
 import 'workshop_state.dart';
 import '../domain/tree_allocation_mode.dart';
+import '../data/xml_file_service.dart';
 
 typedef _BuildSnapshot = ({String xml, String title});
 
 class WorkshopCubit extends Cubit<WorkshopState> {
-  WorkshopCubit(this.components, this.engine, {WorkshopState? initialState})
-    : session = SessionRepository(components.store.root),
-      library = BuildLibrary(components.store.root),
-      super(initialState ?? WorkshopState());
+  WorkshopCubit(
+    this.components,
+    this.engine, {
+    WorkshopState? initialState,
+    SessionRepository? session,
+    BuildLibrary? library,
+    XmlFileService? files,
+  }) : session = session ?? SessionRepository(components.store.root),
+       library = library ?? BuildLibrary(components.store.root),
+       files = files ?? XmlFileService(),
+       super(initialState ?? WorkshopState());
   final ComponentRepository components;
   final McpClient engine;
   final SessionRepository session;
   final BuildLibrary library;
+  final XmlFileService files;
   late final treeIcons = TreeIconRepository(
     root: Directory.fromUri(components.store.root.uri.resolve('tree-cache/')),
   );
@@ -154,10 +163,29 @@ class WorkshopCubit extends Cubit<WorkshopState> {
   Future<void> _resume() async {
     if (!ready) return;
     await _connect();
+    if (await _resumeLibrary()) return;
     if (await session.exists()) {
-      if (state.library.active == null) _nextTitle = 'Восстановленная сборка';
       await _loadXml(await session.read());
+      await _readReport(
+        target: LibraryState(entries: state.library.entries),
+        title: 'Восстановленная сборка',
+      );
+      _clearHistory();
+    }
+  }
+
+  Future<bool> _resumeLibrary() async {
+    final active = state.library.active;
+    if (active == null) return false;
+    try {
+      await _loadXml(await library.read(active.id));
       await _readReport();
+      return true;
+    } catch (error) {
+      addLog(
+        'Не удалось открыть последнюю сборку, проверяем копию восстановления: $error',
+      );
+      return false;
     }
   }
 
@@ -208,11 +236,31 @@ class WorkshopCubit extends Cubit<WorkshopState> {
   });
 
   Future<void> importXml(String xml) => _run(() async {
-    _markStale();
-    await _loadXml(xml);
-    _beginDocument('Импортированная сборка');
-    await _readReport();
-    _clearHistory();
+    await _switchBuild(
+      () => _loadXml(xml),
+      target: LibraryState(entries: state.library.entries),
+      title: 'Импортированная сборка',
+    );
+  });
+
+  Future<void> openXmlFile() => _run(() async {
+    final selected = await files.open();
+    if (selected == null) return;
+    await _switchBuild(
+      () => _loadXml(selected.xml),
+      target: LibraryState(entries: state.library.entries),
+      title: selected.title,
+    );
+  });
+
+  Future<void> saveXmlFile() => _run(() async {
+    if (state.report == null) return;
+    await session.flushText();
+    final path = await files.save(
+      await _currentXml(),
+      state.library.active?.title ?? state.report!.name,
+    );
+    if (path != null) _update(state.copyWith(status: 'XML сохранён'));
   });
 
   Future<void> createBuild(
@@ -220,16 +268,18 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     int level, {
     String name = 'Новая сборка',
   }) => _run(() async {
-    _markStale();
-    await engine.call('pob_create_build', {
-      'name': name,
-      'classId': classId,
-      'level': level,
-    });
-    await _restoreTreeMode();
-    _beginDocument(name);
-    await _readReport();
-    _clearHistory();
+    await _switchBuild(
+      () async {
+        await engine.call('pob_create_build', {
+          'name': name,
+          'classId': classId,
+          'level': level,
+        });
+        await _restoreTreeMode();
+      },
+      target: LibraryState(entries: state.library.entries),
+      title: name,
+    );
   });
 
   Future<void> refreshReport() => _run(() async {
@@ -238,8 +288,10 @@ class WorkshopCubit extends Cubit<WorkshopState> {
   });
 
   Future<void> restoreSession() => _run(() async {
-    await _loadXml(await session.read());
-    await _readReport();
+    await _switchBuild(
+      () async => _loadXml(await session.read()),
+      target: state.library,
+    );
   });
 
   Future<({BuildReport report, String xml})> _readResult() async {
@@ -253,26 +305,38 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     return (report: report, xml: await _currentXml());
   }
 
-  Future<void> _readReport() async {
+  Future<void> _readReport({LibraryState? target, String? title}) async {
     final (:report, :xml) = await _readResult();
     final (:tree, :error) = await _readTree();
-    await session.save(xml);
     final builds = await library.save(
-      state.library,
+      target ?? state.library,
       report,
       xml,
-      title: _nextTitle,
+      title: title ?? _nextTitle,
     );
+    final saved = await _saveRecovery(xml);
     _nextTitle = null;
     _update(
       state.copyWith(
         document: (report: report, tree: tree, stale: false, treeError: error),
         library: builds,
-        sessionSaved: true,
+        sessionSaved: saved,
         status: 'Сборка рассчитана исходным Lua',
       ),
     );
     addLog(state.status);
+  }
+
+  Future<bool> _saveRecovery(String xml) async {
+    try {
+      await session.save(xml);
+      return true;
+    } catch (error) {
+      reportPersistenceError(
+        'Сборка сохранена в библиотеке, но копия восстановления недоступна: $error',
+      );
+      return false;
+    }
   }
 
   Future<({TreeGeometry? tree, String? error})> _readTree() async {
@@ -308,13 +372,6 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     }
   }
 
-  void _beginDocument(String title) {
-    _nextTitle = title;
-    _update(
-      state.copyWith(library: LibraryState(entries: state.library.entries)),
-    );
-  }
-
   void _markStale() {
     if (state.document case final document?) {
       _update(
@@ -331,25 +388,72 @@ class WorkshopCubit extends Cubit<WorkshopState> {
   }
 
   Future<void> openBuild(String id) => _run(() async {
-    _markStale();
-    await _loadXml(await library.read(id));
-    _update(
-      state.copyWith(
-        library: LibraryState(entries: state.library.entries, activeId: id),
-      ),
+    final xml = await library.read(id);
+    await _switchBuild(
+      () => _loadXml(xml),
+      target: LibraryState(entries: state.library.entries, activeId: id),
     );
-    await _readReport();
-    _clearHistory();
   });
+
+  Future<void> _switchBuild(
+    Future<void> Function() action, {
+    required LibraryState target,
+    String? title,
+  }) async {
+    await session.flushText();
+    final previous = state.document;
+    final previousLibrary = state.library;
+    final xml = previous == null ? null : await _currentXml();
+    _markStale();
+    try {
+      await action();
+      await _readReport(target: target, title: title);
+      _clearHistory();
+    } catch (_) {
+      _nextTitle = null;
+      if (xml != null && previous != null) {
+        await _restoreWorking(xml, previous, previousLibrary);
+      }
+      rethrow;
+    }
+  }
+
+  Future<void> _restoreWorking(
+    String xml,
+    WorkshopDocument document,
+    LibraryState builds,
+  ) async {
+    try {
+      await _loadXml(xml);
+      final restored = await _readResult();
+      _update(
+        state.copyWith(
+          library: builds,
+          document: (
+            report: restored.report,
+            tree: document.tree,
+            stale: false,
+            treeError: document.treeError,
+          ),
+        ),
+      );
+    } catch (error) {
+      _markStale();
+      addLog('Рабочая сборка сохранена; не удалось восстановить Lua: $error');
+    }
+  }
 
   Future<void> copyBuild() => _run(() async {
     if (state.report == null) return;
     final xml = await _currentXml();
     final title =
         '${state.library.active?.title ?? state.report!.name} · копия';
-    _beginDocument(title);
+    final id = library.newId();
+    if (state.library.activeId case final source?) {
+      await session.saveNotes(id, await session.readNotes(source));
+    }
     final builds = await library.save(
-      state.library,
+      LibraryState(entries: state.library.entries, activeId: id),
       state.report!,
       xml,
       title: title,
@@ -535,18 +639,47 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     _clearHistory();
   }
 
-  void editDraft(String value) =>
-      _update(state.copyWith(draft: (xml: value, edited: true)));
+  void editDraft(String value) {
+    _update(state.copyWith(draft: (xml: value, edited: true)));
+    _saveDraft(value);
+  }
+
+  Future<void> _saveDraft(String value) async {
+    try {
+      await session.saveDraft(value);
+    } catch (error) {
+      reportPersistenceError('Не удалось сохранить черновик XML: $error');
+    }
+  }
+
+  void reportPersistenceError(Object error) {
+    _update(state.copyWith(operation: (busy: state.busy, error: '$error')));
+    addLog('$error');
+  }
 
   Future<void> checkpoint() async {
     if (state.busy) throw StateError('Дождитесь завершения текущей операции');
-    await session.saveDraft(state.draftXml);
-    if (engine.connected && state.report != null)
-      await session.save(await _currentXml());
+    _update(state.copyWith(operation: (busy: true, error: state.error)));
+    try {
+      await session.saveDraft(state.draftXml);
+      await session.flushText();
+      await _checkpointBuild();
+    } finally {
+      _update(state.copyWith(operation: (busy: false, error: state.error)));
+    }
+  }
+
+  Future<void> _checkpointBuild() async {
+    if (!engine.connected || state.report == null) return;
+    if (state.document?.stale == true) {
+      await _readReport();
+    }
+    await session.save(await _currentXml());
   }
 
   @override
   Future<void> close() async {
+    await session.flushText();
     await engine.close();
     await super.close();
   }

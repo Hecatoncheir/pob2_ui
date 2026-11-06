@@ -112,9 +112,24 @@
     "description": "PoB II · Мастерская",
     "placeholders": {}
   },
+  "m3127345008": "XML more than 16 MB",
+  "@m3127345008": {
+    "description": "XML больше 16 МБ",
+    "placeholders": {}
+  },
+  "m8ed6f8a850": "XML empty",
+  "@m8ed6f8a850": {
+    "description": "XML пуст",
+    "placeholders": {}
+  },
   "me72be74923": "XML builds",
   "@me72be74923": {
     "description": "XML сборки",
+    "placeholders": {}
+  },
+  "me097dcd9f8": "XML saved",
+  "@me097dcd9f8": {
+    "description": "XML сохранён",
     "placeholders": {}
   },
   "m0aefd8ac88": "import sys, struct; assert sys.version_info >= (3,11) and struct.calcsize(\"P\") == 8, \"Need 64-bit Python 3.11+\"",
@@ -336,6 +351,11 @@
     "description": "Всего маны",
     "placeholders": {}
   },
+  "me4c25f9a5f": "Insert XML",
+  "@me4c25f9a5f": {
+    "description": "Вставить XML",
+    "placeholders": {}
+  },
   "m6bf3b12df4": "Insert XML assemblies. It will be checked and calculated in Lua.",
   "@m6bf3b12df4": {
     "description": "Вставьте XML сборки. Она будет проверена и рассчитана в Lua.",
@@ -522,6 +542,11 @@
     "description": "Есть обновление",
     "placeholders": {}
   },
+  "m2071fb9905": "More",
+  "@m2071fb9905": {
+    "description": "Ещё",
+    "placeholders": {}
+  },
   "mf9a38201c0": "Log and details",
   "@mf9a38201c0": {
     "description": "Журнал и подробности",
@@ -591,6 +616,16 @@
   "ma7a4033657": "Close",
   "@ma7a4033657": {
     "description": "Закрыть",
+    "placeholders": {}
+  },
+  "mdc4baf32ac": "Build notes",
+  "@mdc4baf32ac": {
+    "description": "Заметки к сборке",
+    "placeholders": {}
+  },
+  "mbdb05f34ee": "Notes are saved automatically",
+  "@mbdb05f34ee": {
+    "description": "Заметки сохраняются автоматически",
     "placeholders": {}
   },
   "m792acb40e4": "Protection",
@@ -902,6 +937,24 @@
       }
     }
   },
+  "m189f5a7238": "Failed to open or save notes.\n{p0}",
+  "@m189f5a7238": {
+    "description": "Не удалось открыть или сохранить заметки.\n{p0}",
+    "placeholders": {
+      "p0": {
+        "type": "String"
+      }
+    }
+  },
+  "mfc401e8783": "Could not open the latest build, check the recovery copy: {p0}",
+  "@mfc401e8783": {
+    "description": "Не удалось открыть последнюю сборку, проверяем копию восстановления: {p0}",
+    "placeholders": {
+      "p0": {
+        "type": "String"
+      }
+    }
+  },
   "mce8b7ad723": "Failed to open releases page: {p0}",
   "@mce8b7ad723": {
     "description": "Не удалось открыть страницу выпусков: {p0}",
@@ -1003,6 +1056,15 @@
     "description": "Не удалось сохранить тему.",
     "placeholders": {}
   },
+  "m62f5b562c1": "Failed to save draft XML: {p0}",
+  "@m62f5b562c1": {
+    "description": "Не удалось сохранить черновик XML: {p0}",
+    "placeholders": {
+      "p0": {
+        "type": "String"
+      }
+    }
+  },
   "m45c78389e9": "Insecure update address",
   "@m45c78389e9": {
     "description": "Небезопасный адрес обновления",
@@ -1065,6 +1127,11 @@
   "m571195d148": "Incorrect PoB coordinates",
   "@m571195d148": {
     "description": "Некорректные координаты PoB",
+    "placeholders": {}
+  },
+  "mec07f569e3": "Incorrect note ID",
+  "@mec07f569e3": {
+    "description": "Некорректный идентификатор заметок",
     "placeholders": {}
   },
   "mc652a6b3a8": "Incorrect assembly ID",
@@ -1388,6 +1455,11 @@
     "description": "Плавные анимации",
     "placeholders": {}
   },
+  "m1474fac529": "Plans, items, development options...",
+  "@m1474fac529": {
+    "description": "Планы, предметы, варианты развития…",
+    "placeholders": {}
+  },
   "m5189135a61": "Repeat",
   "@m5189135a61": {
     "description": "Повторить",
@@ -1396,6 +1468,11 @@
   "madb0c613d6": "Repeat action",
   "@madb0c613d6": {
     "description": "Повторить действие",
+    "placeholders": {}
+  },
+  "m3c320d7fe3": "Save again",
+  "@m3c320d7fe3": {
+    "description": "Повторить сохранение",
     "placeholders": {}
   },
   "mbcc0fdbe14": "Spell Suppression Chance",
@@ -1574,6 +1651,15 @@
     "description": "Приблизить",
     "placeholders": {}
   },
+  "md25ca8974f": "The application remains open to save data: {p0}",
+  "@md25ca8974f": {
+    "description": "Приложение остаётся открытым, чтобы сохранить данные: {p0}",
+    "placeholders": {
+      "p0": {
+        "type": "String"
+      }
+    }
+  },
   "me15f960d93": "Apply",
   "@me15f960d93": {
     "description": "Применить",
@@ -1667,6 +1753,15 @@
     "description": "Работают в окне приложения. Нажмите на сочетание, чтобы изменить его.",
     "placeholders": {}
   },
+  "m0964e41783": "Working assembly saved; failed to restore Lua: {p0}",
+  "@m0964e41783": {
+    "description": "Рабочая сборка сохранена; не удалось восстановить Lua: {p0}",
+    "placeholders": {
+      "p0": {
+        "type": "String"
+      }
+    }
+  },
   "m9aaa2d503d": "Light Radius",
   "@m9aaa2d503d": {
     "description": "Радиус освещения",
@@ -1741,10 +1836,24 @@
     "description": "Сборка",
     "placeholders": {}
   },
+  "m5c8bb47697": "Assembly not found",
+  "@m5c8bb47697": {
+    "description": "Сборка не найдена",
+    "placeholders": {}
+  },
   "mc27d8aad03": "Assembly calculated by original Lua",
   "@mc27d8aad03": {
     "description": "Сборка рассчитана исходным Lua",
     "placeholders": {}
+  },
+  "mae943799b7": "The build is saved in the library, but the recovery copy is not available: {p0}",
+  "@mae943799b7": {
+    "description": "Сборка сохранена в библиотеке, но копия восстановления недоступна: {p0}",
+    "placeholders": {
+      "p0": {
+        "type": "String"
+      }
+    }
   },
   "m407f871778": "Reset",
   "@m407f871778": {
@@ -1789,6 +1898,11 @@
   "m0a8113a0b9": "Download update",
   "@m0a8113a0b9": {
     "description": "Скачать обновление",
+    "placeholders": {}
+  },
+  "mf02956c165": "Copy",
+  "@mf02956c165": {
+    "description": "Скопировать",
     "placeholders": {}
   },
   "m332899f398": "Copy XML",
@@ -1859,6 +1973,11 @@
   "m62bb423bd3": "Resistances",
   "@m62bb423bd3": {
     "description": "Сопротивления",
+    "placeholders": {}
+  },
+  "mbd97450c85": "Saving…",
+  "@mbd97450c85": {
+    "description": "Сохранение…",
     "placeholders": {}
   },
   "m2fe8f2fd72": "Saved",

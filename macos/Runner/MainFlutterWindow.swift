@@ -23,4 +23,10 @@ class MainFlutterWindow: NSWindow {
     UserDefaults.standard.set(self.isZoomed, forKey: "pob2_ui.windowZoomed")
     super.close()
   }
+
+  override func performClose(_ sender: Any?) {
+    // Окно остаётся открытым, пока Flutter сохраняет данные и решает, можно ли выйти.
+    UserDefaults.standard.set(self.isZoomed, forKey: "pob2_ui.windowZoomed")
+    NSApp.terminate(sender)
+  }
 }

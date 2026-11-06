@@ -15,6 +15,7 @@ import 'report_views.dart';
 import 'shell_cubit.dart';
 import 'tree_view.dart';
 import 'workshop_cubit.dart';
+import 'build_notes_dialog.dart';
 
 class WorkspaceView extends StatelessWidget {
   const WorkspaceView({super.key, required this.model, required this.shell});
@@ -131,11 +132,7 @@ class _WorkspaceHeading extends StatelessWidget {
                   ? null
                   : () => exportXml(context, model),
             ),
-            ArtIconButton(
-              'copy',
-              label: 'Создать копию',
-              onPressed: model.state.busy ? null : model.copyBuild,
-            ),
+            _BuildMenu(model),
           ],
         ),
         const SizedBox(height: 6),
@@ -198,6 +195,37 @@ Widget _historyButtons(BuildContext context, WorkshopCubit model) => Row(
     ),
   ],
 );
+
+class _BuildMenu extends StatelessWidget {
+  const _BuildMenu(this.model);
+  final WorkshopCubit model;
+  @override
+  Widget build(BuildContext context) => PopupMenuButton<String>(
+    tooltip: translateUi(context, 'Ещё'),
+    enabled: !model.state.busy,
+    icon: const Icon(Icons.more_horiz, size: 20),
+    itemBuilder: (_) => const [
+      PopupMenuItem(value: 'notes', child: AppText('Заметки к сборке')),
+      PopupMenuItem(value: 'paste', child: AppText('Вставить XML')),
+      PopupMenuItem(value: 'xml', child: AppText('Скопировать XML')),
+      PopupMenuItem(value: 'copy', child: AppText('Создать копию')),
+    ],
+    onSelected: (value) => _select(context, value),
+  );
+  void _select(BuildContext context, String value) {
+    switch (value) {
+      case 'notes':
+        final id = model.state.library.activeId;
+        if (id != null) showBuildNotes(context, model, id);
+      case 'paste':
+        showXmlPaste(context, model);
+      case 'xml':
+        showXmlCopy(context, model);
+      case 'copy':
+        model.copyBuild();
+    }
+  }
+}
 
 class _Tabs extends StatelessWidget {
   const _Tabs({required this.model, required this.shell});

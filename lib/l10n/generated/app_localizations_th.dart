@@ -76,7 +76,16 @@ class AppLocalizationsTh extends AppLocalizations {
   String get mcdf95e40cd => 'PoB II · เวิร์กช็อป';
 
   @override
+  String get m3127345008 => 'XML มากกว่า 16 MB';
+
+  @override
+  String get m8ed6f8a850 => 'XML ว่างเปล่า';
+
+  @override
   String get me72be74923 => 'XML บิลด์';
+
+  @override
+  String get me097dcd9f8 => 'บันทึกแล้ว XML';
 
   @override
   String get m0aefd8ac88 =>
@@ -196,6 +205,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m8d6001a308 => 'มานาทั้งหมด';
 
   @override
+  String get me4c25f9a5f => 'แทรก XML';
+
+  @override
   String get m6bf3b12df4 => 'ใส่แอสเซมบลี XML จะมีการตรวจสอบและคำนวณในปี Lua';
 
   @override
@@ -310,6 +322,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get mcefa1c56a5 => 'มีอัพเดตครับ';
 
   @override
+  String get m2071fb9905 => 'เพิ่มเติม';
+
+  @override
   String get mf9a38201c0 => 'บันทึกและรายละเอียด';
 
   @override
@@ -345,6 +360,12 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get ma7a4033657 => 'ปิด';
+
+  @override
+  String get mdc4baf32ac => 'บันทึกการสร้าง';
+
+  @override
+  String get mbdb05f34ee => 'บันทึกย่อจะถูกบันทึกโดยอัตโนมัติ';
 
   @override
   String get m792acb40e4 => 'การป้องกัน';
@@ -530,6 +551,16 @@ class AppLocalizationsTh extends AppLocalizations {
   }
 
   @override
+  String m189f5a7238(String p0) {
+    return 'ไม่สามารถเปิดหรือบันทึกบันทึกย่อ\n$p0';
+  }
+
+  @override
+  String mfc401e8783(String p0) {
+    return 'ไม่สามารถเปิดบิลด์ล่าสุดได้ ตรวจสอบสำเนาการกู้คืน: $p0';
+  }
+
+  @override
   String mce8b7ad723(String p0) {
     return 'ไม่สามารถเปิดหน้าการเผยแพร่: $p0';
   }
@@ -587,6 +618,11 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m92233abcc1 => 'ไม่สามารถบันทึกหัวข้อ';
 
   @override
+  String m62f5b562c1(String p0) {
+    return 'ไม่สามารถบันทึกแบบร่าง XML: $p0';
+  }
+
+  @override
   String get m45c78389e9 => 'ที่อยู่การอัปเดตที่ไม่ปลอดภัย';
 
   @override
@@ -623,6 +659,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m571195d148 => 'พิกัด PoB ไม่ถูกต้อง';
+
+  @override
+  String get mec07f569e3 => 'ID บันทึกไม่ถูกต้อง';
 
   @override
   String get mc652a6b3a8 => 'ID แอสเซมบลีไม่ถูกต้อง';
@@ -819,10 +858,16 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m95121a4cc0 => 'แอนิเมชั่นที่ราบรื่น';
 
   @override
+  String get m1474fac529 => 'แผน รายการ ทางเลือกการพัฒนา...';
+
+  @override
   String get m5189135a61 => 'ทำซ้ำ';
 
   @override
   String get madb0c613d6 => 'ทำซ้ำการกระทำ';
+
+  @override
+  String get m3c320d7fe3 => 'บันทึกอีกครั้ง';
 
   @override
   String get mbcc0fdbe14 => 'โอกาสในการสะกดคำ';
@@ -929,6 +974,11 @@ class AppLocalizationsTh extends AppLocalizations {
   String get mbfb85a0178 => 'Zoom in';
 
   @override
+  String md25ca8974f(String p0) {
+    return 'แอปพลิเคชันยังคงเปิดอยู่เพื่อบันทึกข้อมูล: $p0';
+  }
+
+  @override
   String get me15f960d93 => 'Apply';
 
   @override
@@ -985,6 +1035,11 @@ class AppLocalizationsTh extends AppLocalizations {
       'ทำงานในหน้าต่างแอปพลิเคชัน คลิกที่ชุดค่าผสมเพื่อเปลี่ยน';
 
   @override
+  String m0964e41783(String p0) {
+    return 'บันทึกชุดประกอบการทำงานแล้ว ไม่สามารถกู้คืน Lua: $p0';
+  }
+
+  @override
   String get m9aaa2d503d => 'รัศมีแสง';
 
   @override
@@ -1029,7 +1084,15 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m8c39bb691b => 'การประกอบ';
 
   @override
+  String get m5c8bb47697 => 'ไม่พบชุดประกอบ';
+
+  @override
   String get mc27d8aad03 => 'การประกอบคำนวณโดยต้นฉบับ Lua';
+
+  @override
+  String mae943799b7(String p0) {
+    return 'บิลด์ถูกบันทึกไว้ในไลบรารี แต่ไม่มีสำเนาการกู้คืน: $p0';
+  }
 
   @override
   String get m407f871778 => 'รีเซ็ต';
@@ -1057,6 +1120,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m0a8113a0b9 => 'ดาวน์โหลดอัปเดต';
+
+  @override
+  String get mf02956c165 => 'คัดลอก';
 
   @override
   String get m332899f398 => 'คัดลอก XML';
@@ -1101,6 +1167,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m62bb423bd3 => 'แนวต้าน';
+
+  @override
+  String get mbd97450c85 => 'กำลังบันทึก...';
 
   @override
   String get m2fe8f2fd72 => 'บันทึกแล้ว';

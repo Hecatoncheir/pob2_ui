@@ -37,8 +37,14 @@ final uiExactTranslations = <String, String Function(AppLocalizations)>{
   "Lua connected": (l) => l.mbf7bbb22e3,
   "PoB II · Мастерская": (l) => l.mcdf95e40cd,
   "PoB II · Workshop": (l) => l.mcdf95e40cd,
+  "XML больше 16 МБ": (l) => l.m3127345008,
+  "XML more than 16 MB": (l) => l.m3127345008,
+  "XML пуст": (l) => l.m8ed6f8a850,
+  "XML empty": (l) => l.m8ed6f8a850,
   "XML сборки": (l) => l.me72be74923,
   "XML builds": (l) => l.me72be74923,
+  "XML сохранён": (l) => l.me097dcd9f8,
+  "XML saved": (l) => l.me097dcd9f8,
   "import sys, struct; assert sys.version_info >= (3,11) and struct.calcsize(\"P\") == 8, \"Нужен 64-битный Python 3.11+\"":
       (l) => l.m0aefd8ac88,
   "import sys, struct; assert sys.version_info >= (3,11) and struct.calcsize(\"P\") == 8, \"Need 64-bit Python 3.11+\"":
@@ -95,6 +101,8 @@ final uiExactTranslations = <String, String Function(AppLocalizations)>{
   "Total Life": (l) => l.m6fd7c8e4f1,
   "Всего маны": (l) => l.m8d6001a308,
   "Total Mana": (l) => l.m8d6001a308,
+  "Вставить XML": (l) => l.me4c25f9a5f,
+  "Insert XML": (l) => l.me4c25f9a5f,
   "Вставьте XML сборки. Она будет проверена и рассчитана в Lua.": (l) =>
       l.m6bf3b12df4,
   "Insert XML assemblies. It will be checked and calculated in Lua.": (l) =>
@@ -162,6 +170,8 @@ final uiExactTranslations = <String, String Function(AppLocalizations)>{
   "Spirit": (l) => l.m41a4fa8b6a,
   "Есть обновление": (l) => l.mcefa1c56a5,
   "There is an update": (l) => l.mcefa1c56a5,
+  "Ещё": (l) => l.m2071fb9905,
+  "More": (l) => l.m2071fb9905,
   "Журнал и подробности": (l) => l.mf9a38201c0,
   "Log and details": (l) => l.mf9a38201c0,
   "Загружать обновления автоматически": (l) => l.m230ebdecca,
@@ -170,6 +180,10 @@ final uiExactTranslations = <String, String Function(AppLocalizations)>{
   "Fasten indicators": (l) => l.m540fb030a9,
   "Закрыть": (l) => l.ma7a4033657,
   "Close": (l) => l.ma7a4033657,
+  "Заметки к сборке": (l) => l.mdc4baf32ac,
+  "Build notes": (l) => l.mdc4baf32ac,
+  "Заметки сохраняются автоматически": (l) => l.mbdb05f34ee,
+  "Notes are saved automatically": (l) => l.mbdb05f34ee,
   "Защита": (l) => l.m792acb40e4,
   "Protection": (l) => l.m792acb40e4,
   "Здесь будут ваши сборки": (l) => l.mfac4030099,
@@ -300,6 +314,8 @@ final uiExactTranslations = <String, String Function(AppLocalizations)>{
   "Incorrect texture of the finished wood": (l) => l.m3f7db06826,
   "Некорректные координаты PoB": (l) => l.m571195d148,
   "Incorrect PoB coordinates": (l) => l.m571195d148,
+  "Некорректный идентификатор заметок": (l) => l.mec07f569e3,
+  "Incorrect note ID": (l) => l.mec07f569e3,
   "Некорректный идентификатор сборки": (l) => l.mc652a6b3a8,
   "Incorrect assembly ID": (l) => l.mc652a6b3a8,
   "Некорректный ключ кеша дерева": (l) => l.m7021e46018,
@@ -425,10 +441,14 @@ final uiExactTranslations = <String, String Function(AppLocalizations)>{
   "Gloves": (l) => l.m98aa5e2776,
   "Плавные анимации": (l) => l.m95121a4cc0,
   "Smooth animations": (l) => l.m95121a4cc0,
+  "Планы, предметы, варианты развития…": (l) => l.m1474fac529,
+  "Plans, items, development options...": (l) => l.m1474fac529,
   "Повторить": (l) => l.m5189135a61,
   "Repeat": (l) => l.m5189135a61,
   "Повторить действие": (l) => l.madb0c613d6,
   "Repeat action": (l) => l.madb0c613d6,
+  "Повторить сохранение": (l) => l.m3c320d7fe3,
+  "Save again": (l) => l.m3c320d7fe3,
   "Подавление урона чар": (l) => l.mbcc0fdbe14,
   "Spell Suppression Chance": (l) => l.mbcc0fdbe14,
   "Поддерживаются Windows x64, Linux x64 и macOS arm64": (l) => l.m52d7142d18,
@@ -543,6 +563,8 @@ final uiExactTranslations = <String, String Function(AppLocalizations)>{
   "Runic Ward": (l) => l.ma735c975e0,
   "Сборка": (l) => l.m8c39bb691b,
   "Assembly": (l) => l.m8c39bb691b,
+  "Сборка не найдена": (l) => l.m5c8bb47697,
+  "Assembly not found": (l) => l.m5c8bb47697,
   "Сборка рассчитана исходным Lua": (l) => l.mc27d8aad03,
   "Assembly calculated by original Lua": (l) => l.mc27d8aad03,
   "Сбросить": (l) => l.m407f871778,
@@ -563,6 +585,8 @@ final uiExactTranslations = <String, String Function(AppLocalizations)>{
   "System motion reduction takes priority": (l) => l.m9ea191ae12,
   "Скачать обновление": (l) => l.m0a8113a0b9,
   "Download update": (l) => l.m0a8113a0b9,
+  "Скопировать": (l) => l.mf02956c165,
+  "Copy": (l) => l.mf02956c165,
   "Скопировать XML": (l) => l.m332899f398,
   "Copy XML": (l) => l.m332899f398,
   "Скорость": (l) => l.m70e98e3214,
@@ -595,6 +619,8 @@ final uiExactTranslations = <String, String Function(AppLocalizations)>{
   "Create assembly": (l) => l.md79906423b,
   "Сопротивления": (l) => l.m62bb423bd3,
   "Resistances": (l) => l.m62bb423bd3,
+  "Сохранение…": (l) => l.mbd97450c85,
+  "Saving…": (l) => l.mbd97450c85,
   "Сохранено": (l) => l.m2fe8f2fd72,
   "Saved": (l) => l.m2fe8f2fd72,
   "Сохранить": (l) => l.mb4d30cae52,
@@ -723,8 +749,32 @@ final uiExactTranslations = <String, String Function(AppLocalizations)>{
 
 final uiPatternTranslations = <UiRule>[
   UiRule(
+    "The build is saved in the library, but the recovery copy is not available: {p0}",
+    (l, args) => l.mae943799b7(args[0]),
+  ),
+  UiRule(
+    "Не удалось открыть последнюю сборку, проверяем копию восстановления: {p0}",
+    (l, args) => l.mfc401e8783(args[0]),
+  ),
+  UiRule(
+    "Сборка сохранена в библиотеке, но копия восстановления недоступна: {p0}",
+    (l, args) => l.mae943799b7(args[0]),
+  ),
+  UiRule(
     "The component is missing {p0}. The working version has been saved.",
     (l, args) => l.m1163ee245e(args[0]),
+  ),
+  UiRule(
+    "Could not open the latest build, check the recovery copy: {p0}",
+    (l, args) => l.mfc401e8783(args[0]),
+  ),
+  UiRule(
+    "Рабочая сборка сохранена; не удалось восстановить Lua: {p0}",
+    (l, args) => l.m0964e41783(args[0]),
+  ),
+  UiRule(
+    "Приложение остаётся открытым, чтобы сохранить данные: {p0}",
+    (l, args) => l.md25ca8974f(args[0]),
   ),
   UiRule(
     "В компоненте отсутствует {p0}. Рабочая версия сохранена.",
@@ -739,12 +789,24 @@ final uiPatternTranslations = <UiRule>[
     (l, args) => l.mcf4205d2e9(args[0]),
   ),
   UiRule(
+    "Working assembly saved; failed to restore Lua: {p0}",
+    (l, args) => l.m0964e41783(args[0]),
+  ),
+  UiRule(
     "Lua answers · {p0} classes · compatibility checked",
     (l, args) => l.mf01de15993(args[0]),
   ),
   UiRule(
     "There is no {p1} in {p0}; requires MCP 0.4.0 or later",
     (l, args) => l.m7daed90e2c(args[0], args[1]),
+  ),
+  UiRule(
+    "The application remains open to save data: {p0}",
+    (l, args) => l.md25ca8974f(args[0]),
+  ),
+  UiRule(
+    "Не удалось открыть или сохранить заметки.\n{p0}",
+    (l, args) => l.m189f5a7238(args[0]),
   ),
   UiRule(
     "The finished scene is not fully loaded: {p0}",
@@ -781,6 +843,10 @@ final uiPatternTranslations = <UiRule>[
   UiRule(
     "Не удалось показать тепловую карту: {p0}",
     (l, args) => l.ma9bd749aa5(args[0]),
+  ),
+  UiRule(
+    "Не удалось сохранить черновик XML: {p0}",
+    (l, args) => l.m62f5b562c1(args[0]),
   ),
   UiRule(
     "Loading LuaJIT and lua-utf8 for {p0}...",
@@ -831,6 +897,10 @@ final uiPatternTranslations = <UiRule>[
     (l, args) => l.mce8b7ad723(args[0]),
   ),
   UiRule(
+    "Failed to open or save notes.\n{p0}",
+    (l, args) => l.m189f5a7238(args[0]),
+  ),
+  UiRule(
     "Failed to check SHA-256 file: {p0}",
     (l, args) => l.m3ce1fbdad2(args[0]),
   ),
@@ -872,6 +942,7 @@ final uiPatternTranslations = <UiRule>[
   ),
   UiRule("Нативный выпуск MCP: HTTP {p0}", (l, args) => l.m5ffb2fa414(args[0])),
   UiRule("Failed to show highlight: {p0}", (l, args) => l.m0d58180884(args[0])),
+  UiRule("Failed to save draft XML: {p0}", (l, args) => l.m62f5b562c1(args[0])),
   UiRule("Failed to read directory: {p0}", (l, args) => l.mdace2a4a3b(args[0])),
   UiRule("Часть иконок недоступна: {p0}", (l, args) => l.m913d7f855b(args[0])),
   UiRule("Native release MCP: HTTP {p0}", (l, args) => l.m5ffb2fa414(args[0])),

@@ -13,6 +13,8 @@ import 'workshop_cubit.dart';
 Future<void> showNewBuild(BuildContext context, WorkshopCubit model) =>
     sparkDialog<void>(context, _NewBuildDialog(model));
 Future<void> showXmlImport(BuildContext context, WorkshopCubit model) =>
+    model.openXmlFile();
+Future<void> showXmlPaste(BuildContext context, WorkshopCubit model) =>
     sparkDialog<void>(context, _XmlDialog(model));
 
 class _NewBuildDialog extends StatefulWidget {
@@ -175,7 +177,10 @@ class _XmlDialogState extends State<_XmlDialog> {
   );
 }
 
-Future<void> exportXml(BuildContext context, WorkshopCubit model) async {
+Future<void> exportXml(BuildContext context, WorkshopCubit model) =>
+    model.saveXmlFile();
+
+Future<void> showXmlCopy(BuildContext context, WorkshopCubit model) async {
   final xml = await model.exportXml();
   if (!context.mounted || xml == null) return;
   await sparkDialog<void>(

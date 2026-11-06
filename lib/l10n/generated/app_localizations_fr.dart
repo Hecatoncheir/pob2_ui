@@ -77,7 +77,16 @@ class AppLocalizationsFr extends AppLocalizations {
   String get mcdf95e40cd => 'PoB II · Atelier';
 
   @override
+  String get m3127345008 => 'XML plus de 16 Mo';
+
+  @override
+  String get m8ed6f8a850 => 'XML vide';
+
+  @override
   String get me72be74923 => 'XML versions';
+
+  @override
+  String get me097dcd9f8 => 'XML enregistrés';
 
   @override
   String get m0aefd8ac88 =>
@@ -196,6 +205,9 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get m8d6001a308 => 'Mana total';
+
+  @override
+  String get me4c25f9a5f => 'Insérer XML';
 
   @override
   String get m6bf3b12df4 =>
@@ -318,6 +330,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get mcefa1c56a5 => 'Il y a une mise à jour';
 
   @override
+  String get m2071fb9905 => 'Plus';
+
+  @override
   String get mf9a38201c0 => 'Journal et détails';
 
   @override
@@ -353,6 +368,12 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get ma7a4033657 => 'Close';
+
+  @override
+  String get mdc4baf32ac => 'Notes de construction';
+
+  @override
+  String get mbdb05f34ee => 'Les notes sont enregistrées automatiquement';
 
   @override
   String get m792acb40e4 => 'Protection';
@@ -540,6 +561,16 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
+  String m189f5a7238(String p0) {
+    return 'Échec de l\'ouverture ou de l\'enregistrement des notes.\n$p0';
+  }
+
+  @override
+  String mfc401e8783(String p0) {
+    return 'Impossible d\'ouvrir la dernière version, vérifiez la copie de récupération : $p0';
+  }
+
+  @override
   String mce8b7ad723(String p0) {
     return 'Échec de l\'ouverture de la page des versions : $p0';
   }
@@ -597,6 +628,11 @@ class AppLocalizationsFr extends AppLocalizations {
   String get m92233abcc1 => 'Échec de l\'enregistrement du sujet.';
 
   @override
+  String m62f5b562c1(String p0) {
+    return 'Échec de l\'enregistrement du brouillon XML : $p0';
+  }
+
+  @override
   String get m45c78389e9 => 'Adresse de mise à jour non sécurisée';
 
   @override
@@ -633,6 +669,9 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get m571195d148 => 'Coordonnées PoB incorrectes';
+
+  @override
+  String get mec07f569e3 => 'ID de note incorrect';
 
   @override
   String get mc652a6b3a8 => 'ID d\'assemblage incorrect';
@@ -834,10 +873,16 @@ class AppLocalizationsFr extends AppLocalizations {
   String get m95121a4cc0 => 'Animations fluides';
 
   @override
+  String get m1474fac529 => 'Plans, éléments, options d\'aménagement...';
+
+  @override
   String get m5189135a61 => 'Répéter';
 
   @override
   String get madb0c613d6 => 'Répéter l\'action';
+
+  @override
+  String get m3c320d7fe3 => 'Enregistrer à nouveau';
 
   @override
   String get mbcc0fdbe14 => 'Chances de suppression des sorts';
@@ -946,6 +991,11 @@ class AppLocalizationsFr extends AppLocalizations {
   String get mbfb85a0178 => 'Zoom avant';
 
   @override
+  String md25ca8974f(String p0) {
+    return 'L\'application reste ouverte pour enregistrer les données : $p0';
+  }
+
+  @override
   String get me15f960d93 => 'Postuler';
 
   @override
@@ -1004,6 +1054,11 @@ class AppLocalizationsFr extends AppLocalizations {
       'Travaillez dans la fenêtre de l\'application. Cliquez sur une combinaison pour la modifier.';
 
   @override
+  String m0964e41783(String p0) {
+    return 'Assemblage de travail enregistré ; échec de la restauration de Lua : $p0';
+  }
+
+  @override
   String get m9aaa2d503d => 'Rayon de lumière';
 
   @override
@@ -1049,7 +1104,15 @@ class AppLocalizationsFr extends AppLocalizations {
   String get m8c39bb691b => 'Assemblage';
 
   @override
+  String get m5c8bb47697 => 'Assemblage introuvable';
+
+  @override
   String get mc27d8aad03 => 'Assemblage calculé par l\'original Lua';
+
+  @override
+  String mae943799b7(String p0) {
+    return 'La build est enregistrée dans la bibliothèque, mais la copie de récupération n\'est pas disponible : $p0';
+  }
 
   @override
   String get m407f871778 => 'Réinitialiser';
@@ -1078,6 +1141,9 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get m0a8113a0b9 => 'Télécharger la mise à jour';
+
+  @override
+  String get mf02956c165 => 'Copier';
 
   @override
   String get m332899f398 => 'Copier XML';
@@ -1122,6 +1188,9 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get m62bb423bd3 => 'Résistances';
+
+  @override
+  String get mbd97450c85 => 'Enregistrement…';
 
   @override
   String get m2fe8f2fd72 => 'Enregistré';
