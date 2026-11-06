@@ -17,12 +17,13 @@ class TooltipEngine extends EditorCatalogEngine {
   }
   final descriptions = <JsonMap>[];
   Completer<JsonMap>? pending;
+  JsonMap description = response;
   @override
   Future<JsonMap> call(String name, [JsonMap arguments = const {}]) async {
     if (name != 'pob_gem_tooltip') return super.call(name, arguments);
     descriptions.add(arguments);
     if (pending case final value?) return value.future;
-    return response;
+    return description;
   }
 
   static const response = {
@@ -36,6 +37,57 @@ class TooltipEngine extends EditorCatalogEngine {
 }
 
 void main() {
+  testWidgets(
+    'Длинная подсказка в центре окна помещается по высоте и прокручивается',
+    (tester) async {
+      await tester.binding.setSurfaceSize(const Size(800, 640));
+      addTearDown(() => tester.binding.setSurfaceSize(null));
+      final engine = TooltipEngine()
+        ..description = {
+          'source': 'original-lua',
+          'lines': [
+            for (var i = 0; i < 80; i++) {'text': 'Строка описания $i'},
+          ],
+        };
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: Center(
+              child: GemMedallion(
+                id: 'fireball',
+                repository: GameCatalogRepository(engine),
+              ),
+            ),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+      final pointer = await tester.createGesture(kind: PointerDeviceKind.mouse);
+      await pointer.addPointer(location: Offset.zero);
+      await pointer.moveTo(tester.getCenter(find.byType(GemMedallion)));
+      await tester.pump(const Duration(milliseconds: 450));
+      await tester.pumpAndSettle();
+      final card = tester.getRect(find.byType(FrostedSurface));
+      expect(card.top, greaterThanOrEqualTo(0));
+      expect(card.bottom, lessThanOrEqualTo(640));
+      final scrollable = find.descendant(
+        of: find.byKey(const Key('gem-tooltip-description')),
+        matching: find.byType(Scrollable),
+      );
+      final position = tester.state<ScrollableState>(scrollable).position;
+      position.jumpTo(position.maxScrollExtent);
+      await tester.pump();
+      expect(
+        find.text('Строка описания 79', findRichText: true).hitTestable(),
+        findsOneWidget,
+      );
+      await pointer.removePointer();
+      await tester.pumpWidget(const SizedBox.shrink());
+      await tester.pumpAndSettle();
+      expect(tester.takeException(), isNull);
+    },
+  );
+
   for (final brightness in Brightness.values) {
     testWidgets(
       'Описание по наведению, скрытие и повторное чтение: $brightness',

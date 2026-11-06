@@ -67,7 +67,7 @@ class GemTooltip extends StatelessWidget {
       child: BlocProvider(
         key: ValueKey(request),
         create: (_) => GemTooltipCubit()..load(repository, request),
-        child: const _GemTooltipCard(),
+        child: _GemTooltipCard(anchor: context),
       ),
     ),
     child: child,
@@ -75,7 +75,8 @@ class GemTooltip extends StatelessWidget {
 }
 
 class _GemTooltipCard extends StatelessWidget {
-  const _GemTooltipCard();
+  const _GemTooltipCard({required this.anchor});
+  final BuildContext anchor;
 
   @override
   Widget build(BuildContext context) {
@@ -83,9 +84,7 @@ class _GemTooltipCard extends StatelessWidget {
     return SizedBox(
       width: math.min(420, math.max(0, viewport.width - 48)),
       child: ConstrainedBox(
-        constraints: BoxConstraints(
-          maxHeight: math.min(540, math.max(0, viewport.height - 80)),
-        ),
+        constraints: BoxConstraints(maxHeight: _availableHeight(viewport)),
         child: FrostedSurface(
           child: Padding(
             padding: const EdgeInsets.all(18),
@@ -96,6 +95,21 @@ class _GemTooltipCard extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  double _availableHeight(Size viewport) {
+    final target = anchor.findRenderObject();
+    final overlay = Overlay.of(anchor).context.findRenderObject();
+    final height = overlay is RenderBox && overlay.hasSize
+        ? overlay.size.height
+        : viewport.height;
+    final center = target is RenderBox && target.hasSize
+        ? target
+              .localToGlobal(target.size.center(Offset.zero), ancestor: overlay)
+              .dy
+        : height / 2;
+    final space = math.max(center, height - center) - 60;
+    return math.min(540, math.max(40, space));
   }
 
   Widget _content(GemTooltipState state) {
