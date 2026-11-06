@@ -28,6 +28,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m0c63e733f9 => 'Lua ไม่ได้ส่งคืนไอคอนทั้งหมด';
 
   @override
+  String get m88beda68f0 => 'Lua ส่งคืนไดเรกทอรีที่ไม่สมบูรณ์';
+
+  @override
   String get m774193669c => 'Lua ส่งคืนต้นไม้ที่ว่างเปล่า';
 
   @override
@@ -37,6 +40,12 @@ class AppLocalizationsTh extends AppLocalizations {
   String get ma83268a520 => 'Lua ไม่ได้ส่งคืนไดเรกทอรีคลาส';
 
   @override
+  String get me9dd147860 => 'Lua ไม่ได้ส่งคืนคำอธิบายของหิน';
+
+  @override
+  String get m59e00dc2d6 => 'Lua ไม่ได้ส่งคืนคำอธิบายเงื่อนไข';
+
+  @override
   String get m198b0a77f8 => 'Lua ไม่ได้ส่งคืนรายงานบิลด์';
 
   @override
@@ -44,6 +53,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m1f463483a4 => 'Lua ไม่ส่งคืนข้อมูลโหนด';
+
+  @override
+  String get m35f86d9c5e => 'Lua ไม่ได้ส่งคืนความเข้ากันได้ของ stone';
 
   @override
   String get mecc0fe5cd1 => 'Lua ไม่ได้ส่งคืนคุณลักษณะ';
@@ -145,10 +157,13 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m65d05ab17f => 'งานสร้างครั้งต่อไปของคุณ';
 
   @override
-  String get m14183afd77 => 'ป้อนค่าที่ถูกต้อง';
+  String get mbce24a2108 => 'ป้อนชื่อ';
 
   @override
-  String get mbce24a2108 => 'ป้อนชื่อ';
+  String get mdd0a89ad92 => 'ป้อนจำนวนเต็ม';
+
+  @override
+  String get m005a65ad56 => 'ใส่หมายเลข';
 
   @override
   String get m73cac6c239 => 'จุดกลับ';
@@ -158,9 +173,6 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m495763fa3e => 'ส่งคืนโหนด';
-
-  @override
-  String get m386f7451f1 => 'สุดยอดบอส';
 
   @override
   String get m4d1d43042e => 'เปิดใช้งานแล้ว';
@@ -214,6 +226,18 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m5b1968a662 => 'ทุกอย่างเพื่อการทำงาน';
 
   @override
+  String get m33813b1d8e => 'เลือกค่า';
+
+  @override
+  String get mcc8443a04f => 'เลือกค่าจากแค็ตตาล็อก';
+
+  @override
+  String get m55a2cd1b28 => 'เลือกสกิลเจม';
+
+  @override
+  String get mef96629088 => 'เลือกอัญมณีเข้ากลุ่ม';
+
+  @override
   String get m2ac910bfb3 => 'เลือกคลาส';
 
   @override
@@ -225,6 +249,9 @@ class AppLocalizationsTh extends AppLocalizations {
   @override
   String get m350c155b79 =>
       'ขณะนี้ตัวเลือกของเอฟเฟกต์การเรียนรู้สามารถใช้ได้จนถึง XML';
+
+  @override
+  String get m9cf249e2a8 => 'เลือกแล้ว';
 
   @override
   String get m19a610ab93 => 'เลือกแล้ว';
@@ -260,6 +287,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get ma755f360c2 => 'สองส่วนประกอบ การคำนวณบนคอมพิวเตอร์ของคุณ';
+
+  @override
+  String get me3c3ea3a85 => 'ไม่สามารถดำเนินการได้';
 
   @override
   String get me1daa9e250 => 'ต้นไม้';
@@ -305,10 +335,13 @@ class AppLocalizationsTh extends AppLocalizations {
   }
 
   @override
-  String get mab04eae138 => 'รอให้การดำเนินการปัจจุบันเสร็จสิ้น';
+  String get ma11b26e5e9 => 'บวกและคำนวณ';
 
   @override
-  String get m1ae52aaad7 => 'ข้อกำหนดและเงื่อนไขเพิ่มเติม';
+  String get mbc10505bdf => 'เพิ่มกลุ่มหินเพื่อรับการคำนวณทักษะ';
+
+  @override
+  String get mab04eae138 => 'รอให้การดำเนินการปัจจุบันเสร็จสิ้น';
 
   @override
   String m10b5bc7e91(String p0) {
@@ -326,6 +359,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get mf9a38201c0 => 'บันทึกและรายละเอียด';
+
+  @override
+  String get m0f98334ad1 => 'แก้ไขให้เสร็จสิ้นก่อนปิดแอปพลิเคชัน';
 
   @override
   String get m230ebdecca => 'ดาวน์โหลดอัพเดตอัตโนมัติ';
@@ -354,6 +390,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String m7ac5d410c5(String p0) {
     return 'กำลังโหลด: HTTP $p0';
   }
+
+  @override
+  String get m09fef6d0df => 'กำหนดค่าแล้ว';
 
   @override
   String get m540fb030a9 => 'ติดไฟแสดง';
@@ -398,6 +437,12 @@ class AppLocalizationsTh extends AppLocalizations {
   String get mdcd4c2c384 => 'คาถาหลีกเลี่ยงโอกาส';
 
   @override
+  String get md5a9ca934e => 'ไม่พบรูปหิน';
+
+  @override
+  String get m1ccb8777b8 => 'ไม่มีรูปหิน';
+
+  @override
   String get m2c72186c20 => 'ชุดประกอบนำเข้า';
 
   @override
@@ -416,6 +461,21 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m95cbeda583 => 'รายงานต้นฉบับ';
+
+  @override
+  String get mfc105fdc07 => 'เปิดใช้งานอัญมณีแล้ว';
+
+  @override
+  String get m05b721e615 => 'ไม่พบหิน';
+
+  @override
+  String get m566d4d32d7 => 'หินสนับสนุน';
+
+  @override
+  String get md0ef3540b0 => 'แค็ตตาล็อก';
+
+  @override
+  String get m74189f93c7 => 'คุณภาพ, %';
 
   @override
   String get m1711aecef4 => 'คลาส';
@@ -495,10 +555,16 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m0918b4ba92 => 'ชื่อเรื่อง';
 
   @override
+  String get md45e66ab55 => 'ชื่อกลุ่ม';
+
+  @override
   String get m51233393a5 => 'สโมสรฟุตบอล';
 
   @override
   String get mbe6156b8e4 => 'ค้นหา';
+
+  @override
+  String get m7d4ff2d217 => 'ค้นหาอัญมณี';
 
   @override
   String get m302605cf87 => 'ไม่เป็นไร';
@@ -679,6 +745,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m2469d9f2a8 => 'โหนดแผนผังไม่ถูกต้อง Lua';
 
   @override
+  String get mf6d959d4c7 => 'ไม่จำเป็น';
+
+  @override
   String get m5f5263f78b => 'รันไทม์การตรวจสอบผลรวม Lua ที่ไม่ชัดเจน';
 
   @override
@@ -706,6 +775,12 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m323494c6da => 'ข้อความต้นฉบับจะแสดงขึ้นเมื่อการแปลไม่พร้อมใช้งาน';
 
   @override
+  String get mc9fd9fc0e5 => 'กลุ่มใหม่';
+
+  @override
+  String get mbfea4c6fd4 => 'กลุ่มทักษะใหม่';
+
+  @override
   String get m282cf4ee16 => 'บิลด์ใหม่';
 
   @override
@@ -713,6 +788,15 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get md72a4c2675 => 'เราต้องการเวอร์ชันที่เสถียรเช่น 0.2.0';
+
+  @override
+  String get m616c984fe4 => 'อัปเดต MCP สำหรับแคตตาล็อกหินและความเข้ากันได้';
+
+  @override
+  String get m648c9e0082 => 'อัปเดต MCP สำหรับไอคอนดั้งเดิมและความเข้ากันได้';
+
+  @override
+  String get md423f03f4f => 'อัปเดต MCP สำหรับไอคอนหินดั้งเดิม';
 
   @override
   String get m603e460bf5 => 'อัปเดต';
@@ -740,9 +824,6 @@ class AppLocalizationsTh extends AppLocalizations {
       'แผนที่ความเสียหายและการป้องกันทั่วไป สำหรับรายการ ให้เลือกเมตริกแต่ละรายการ';
 
   @override
-  String get m64c3dce838 => 'ศัตรูธรรมดา';
-
-  @override
   String get m8cb7d50be2 => 'ไฟไหม้';
 
   @override
@@ -756,9 +837,6 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m47cd7c0de1 => 'ไม่มีคำอธิบายการเปิดตัว';
-
-  @override
-  String get m3645eb9961 => 'ไม่มีคำอธิบายสภาพในเวอร์ชัน PoB นี้';
 
   @override
   String get m0736fbba4d => 'อาวุธ';
@@ -788,8 +866,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m5bd2e464d0 => 'ปิดการใช้งาน';
 
   @override
-  String get me2c190631c =>
-      'เปิด XML ด้วยทักษะเพื่อเลือกทักษะหลักและดูการคำนวณ';
+  String get ma3fbed9442 => 'ปิดการใช้งาน';
 
   @override
   String get mea1f408246 => 'เปิด';
@@ -852,6 +929,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m79ab5f1286 => 'แปลงเป็น Lua';
 
   @override
+  String get m24ad4cc4a3 => 'ลากหินมาที่นี่หรือคลิกที่ไอคอนเพื่อกำหนดค่า';
+
+  @override
   String get m98aa5e2776 => 'ถุงมือ';
 
   @override
@@ -861,10 +941,16 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m1474fac529 => 'แผน รายการ ทางเลือกการพัฒนา...';
 
   @override
+  String get mfd0560ebbf => 'ค่าเริ่มต้น';
+
+  @override
   String get m5189135a61 => 'ทำซ้ำ';
 
   @override
   String get madb0c613d6 => 'ทำซ้ำการกระทำ';
+
+  @override
+  String get m298e41327f => 'ลองดาวน์โหลดอีกครั้ง';
 
   @override
   String get m3c320d7fe3 => 'บันทึกอีกครั้ง';
@@ -880,6 +966,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m538d913ee0 => 'เชื่อมต่อ Lua';
+
+  @override
+  String get m5f5155bb1f => 'รองรับการจับคู่';
 
   @override
   String get mbf3c9df646 => 'ตัวบ่งชี้';
@@ -907,6 +996,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m2ffaee13bd => 'รับ Phys dmg';
+
+  @override
+  String get m8c0ef0f511 => 'ตัวปรับแต่งแบบกำหนดเอง';
 
   @override
   String get md90da4d82c => 'ลองคำนวณแอสเซมบลีใหม่';
@@ -1066,6 +1158,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m9b9370223c => 'Calculations';
 
   @override
+  String get m1e135b51f1 => 'การคำนวณ...';
+
+  @override
   String get m8d7bd9deb6 => 'Health regeneration';
 
   @override
@@ -1110,6 +1205,12 @@ class AppLocalizationsTh extends AppLocalizations {
   String get ma50190234a => 'เป็นเจ้าของ...';
 
   @override
+  String get m7434b2e81b => 'เลื่อนไปทางซ้าย';
+
+  @override
+  String get m63a2484f1c => 'เลื่อนไปทางขวา';
+
+  @override
   String get m32bb1c680f => 'ปิดเซสชันแล้ว';
 
   @override
@@ -1144,6 +1245,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get mc2fd3c5d27 => 'อุปกรณ์';
+
+  @override
+  String get m59b50cc146 => 'ถอดหินรองรับออกก่อน';
 
   @override
   String get ma386719073 => 'ติดตั้งทั้งสององค์ประกอบก่อน';
@@ -1204,10 +1308,16 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m7242065c34 => 'ประเภทศัตรู';
 
   @override
+  String get m0472e6790c => 'ยังไม่รองรับประเภทเงื่อนไข';
+
+  @override
   String get m1eecfcaa7b => 'มืด';
 
   @override
   String get m2ec842e2f5 => 'การเปลี่ยนเส้นทางไม่มีที่อยู่';
+
+  @override
+  String get m94fde688e0 => 'ลบอัญมณี';
 
   @override
   String get mcfa3d536f8 => 'ลบชุดค่าผสม';
@@ -1256,6 +1366,9 @@ class AppLocalizationsTh extends AppLocalizations {
   }
 
   @override
+  String get mbb0ceac2d1 => 'ระดับและคุณภาพต้องเป็นจำนวนเต็ม';
+
+  @override
   String get mecb350422f => 'ระดับศัตรู';
 
   @override
@@ -1266,6 +1379,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m908b6d3a83 => 'การกำหนดค่า';
+
+  @override
+  String get m288545991b => 'ไม่พบเงื่อนไข';
 
   @override
   String get m7186793dd5 => 'เงื่อนไขการคำนวณ';
@@ -1352,6 +1468,9 @@ class AppLocalizationsTh extends AppLocalizations {
   @override
   String get m2b2c6df514 =>
       'สำเนานี้เปิดใช้งานโดยไม่มีตัวติดตั้งหรือจากไดเร็กทอรีที่ไม่สามารถเขียนได้ ติดตั้งเวอร์ชันใหม่จากหน้าเผยแพร่';
+
+  @override
+  String get m902b19aeea => 'การสนับสนุนนี้ไม่ตรงกับทักษะที่เลือก';
 
   @override
   String get mca16b5fe71 => 'การตั้งค่าเหล่านี้ส่งผลต่อประสิทธิภาพของบิลด์';

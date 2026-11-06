@@ -152,6 +152,12 @@ abstract class AppLocalizations {
   /// **'Lua did not return all icons'**
   String get m0c63e733f9;
 
+  /// Lua вернул неполный каталог
+  ///
+  /// In en, this message translates to:
+  /// **'Lua returned an incomplete directory'**
+  String get m88beda68f0;
+
   /// Lua вернул пустое дерево
   ///
   /// In en, this message translates to:
@@ -170,6 +176,18 @@ abstract class AppLocalizations {
   /// **'Lua did not return class directory'**
   String get ma83268a520;
 
+  /// Lua не вернул описание камня
+  ///
+  /// In en, this message translates to:
+  /// **'Lua did not return the description of the stone'**
+  String get me9dd147860;
+
+  /// Lua не вернул описание условия
+  ///
+  /// In en, this message translates to:
+  /// **'Lua did not return condition description'**
+  String get m59e00dc2d6;
+
   /// Lua не вернул отчёт сборки
   ///
   /// In en, this message translates to:
@@ -187,6 +205,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Lua did not return node information'**
   String get m1f463483a4;
+
+  /// Lua не вернул совместимость камней
+  ///
+  /// In en, this message translates to:
+  /// **'Lua did not return stone compatibility'**
+  String get m35f86d9c5e;
 
   /// Lua не вернул характеристики
   ///
@@ -344,17 +368,23 @@ abstract class AppLocalizations {
   /// **'Your next build'**
   String get m65d05ab17f;
 
-  /// Введите корректное значение
-  ///
-  /// In en, this message translates to:
-  /// **'Enter a valid value'**
-  String get m14183afd77;
-
   /// Введите название
   ///
   /// In en, this message translates to:
   /// **'Enter a name'**
   String get mbce24a2108;
+
+  /// Введите целое число
+  ///
+  /// In en, this message translates to:
+  /// **'Enter an integer'**
+  String get mdd0a89ad92;
+
+  /// Введите число
+  ///
+  /// In en, this message translates to:
+  /// **'Enter number'**
+  String get m005a65ad56;
 
   /// Вернуть очко
   ///
@@ -373,12 +403,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Return node'**
   String get m495763fa3e;
-
-  /// Вершинный босс
-  ///
-  /// In en, this message translates to:
-  /// **'Top Boss'**
-  String get m386f7451f1;
 
   /// Включено
   ///
@@ -482,6 +506,30 @@ abstract class AppLocalizations {
   /// **'Everything for work'**
   String get m5b1968a662;
 
+  /// Выберите значение
+  ///
+  /// In en, this message translates to:
+  /// **'Select value'**
+  String get m33813b1d8e;
+
+  /// Выберите значение из каталога
+  ///
+  /// In en, this message translates to:
+  /// **'Select a value from the catalog'**
+  String get mcc8443a04f;
+
+  /// Выберите камень умения
+  ///
+  /// In en, this message translates to:
+  /// **'Select a skill gem'**
+  String get m55a2cd1b28;
+
+  /// Выберите камни для группы
+  ///
+  /// In en, this message translates to:
+  /// **'Choose gems for the group'**
+  String get mef96629088;
+
   /// Выберите класс
   ///
   /// In en, this message translates to:
@@ -505,6 +553,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'The choice of mastery effect is currently available through XML.'**
   String get m350c155b79;
+
+  /// Выбрано
+  ///
+  /// In en, this message translates to:
+  /// **'Selected'**
+  String get m9cf249e2a8;
 
   /// Выбраны
   ///
@@ -571,6 +625,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Two components. Calculations on your computer.'**
   String get ma755f360c2;
+
+  /// Действие недоступно
+  ///
+  /// In en, this message translates to:
+  /// **'Action not available'**
+  String get me3c3ea3a85;
 
   /// Дерево
   ///
@@ -644,17 +704,23 @@ abstract class AppLocalizations {
   /// **'{p0} points to node'**
   String m8997ad5a89(String p0);
 
+  /// Добавить и рассчитать
+  ///
+  /// In en, this message translates to:
+  /// **'Add and calculate'**
+  String get ma11b26e5e9;
+
+  /// Добавьте группу камней, чтобы получить расчёт умения.
+  ///
+  /// In en, this message translates to:
+  /// **'Add a group of stones to get the skill calculation.'**
+  String get mbc10505bdf;
+
   /// Дождитесь завершения текущей операции
   ///
   /// In en, this message translates to:
   /// **'Wait for the current operation to complete'**
   String get mab04eae138;
-
-  /// Дополнительные условия
-  ///
-  /// In en, this message translates to:
-  /// **'Additional terms and conditions'**
-  String get m1ae52aaad7;
 
   /// Доступна версия {p0}
   ///
@@ -685,6 +751,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Log and details'**
   String get mf9a38201c0;
+
+  /// Завершите редактирование перед закрытием приложения
+  ///
+  /// In en, this message translates to:
+  /// **'Complete editing before closing the application'**
+  String get m0f98334ad1;
 
   /// Загружать обновления автоматически
   ///
@@ -721,6 +793,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Loading: HTTP {p0}'**
   String m7ac5d410c5(String p0);
+
+  /// Заданные
+  ///
+  /// In en, this message translates to:
+  /// **'Configured'**
+  String get m09fef6d0df;
 
   /// Закрепить показатели
   ///
@@ -806,6 +884,18 @@ abstract class AppLocalizations {
   /// **'Spell avoid chance'**
   String get mdcd4c2c384;
 
+  /// Изображение камня не найдено
+  ///
+  /// In en, this message translates to:
+  /// **'Stone image not found'**
+  String get md5a9ca934e;
+
+  /// Изображение камня недоступно
+  ///
+  /// In en, this message translates to:
+  /// **'Stone image unavailable'**
+  String get m1ccb8777b8;
+
   /// Импортированная сборка
   ///
   /// In en, this message translates to:
@@ -841,6 +931,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Original report'**
   String get m95cbeda583;
+
+  /// Камень включён
+  ///
+  /// In en, this message translates to:
+  /// **'Gem enabled'**
+  String get mfc105fdc07;
+
+  /// Камни не найдены
+  ///
+  /// In en, this message translates to:
+  /// **'No stones found'**
+  String get m05b721e615;
+
+  /// Камни поддержки
+  ///
+  /// In en, this message translates to:
+  /// **'Support stones'**
+  String get m566d4d32d7;
+
+  /// Каталог
+  ///
+  /// In en, this message translates to:
+  /// **'Catalog'**
+  String get md0ef3540b0;
+
+  /// Качество, %
+  ///
+  /// In en, this message translates to:
+  /// **'Quality, %'**
+  String get m74189f93c7;
 
   /// Класс
   ///
@@ -992,6 +1112,12 @@ abstract class AppLocalizations {
   /// **'Title'**
   String get m0918b4ba92;
 
+  /// Название группы
+  ///
+  /// In en, this message translates to:
+  /// **'Group name'**
+  String get md45e66ab55;
+
   /// Название сборки
   ///
   /// In en, this message translates to:
@@ -1003,6 +1129,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Find'**
   String get mbe6156b8e4;
+
+  /// Найти камень
+  ///
+  /// In en, this message translates to:
+  /// **'Search gems'**
+  String get m7d4ff2d217;
 
   /// Найти сборку
   ///
@@ -1293,6 +1425,12 @@ abstract class AppLocalizations {
   /// **'Invalid tree node Lua'**
   String get m2469d9f2a8;
 
+  /// Необязательно
+  ///
+  /// In en, this message translates to:
+  /// **'Optional'**
+  String get mf6d959d4c7;
+
   /// Неоднозначная контрольная сумма Lua runtime
   ///
   /// In en, this message translates to:
@@ -1347,6 +1485,18 @@ abstract class AppLocalizations {
   /// **'Original text is shown when a translation is unavailable'**
   String get m323494c6da;
 
+  /// Новая группа
+  ///
+  /// In en, this message translates to:
+  /// **'New group'**
+  String get mc9fd9fc0e5;
+
+  /// Новая группа умений
+  ///
+  /// In en, this message translates to:
+  /// **'New skill group'**
+  String get mbfea4c6fd4;
+
   /// Новая сборка
   ///
   /// In en, this message translates to:
@@ -1364,6 +1514,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'We need a stable version like 0.2.0'**
   String get md72a4c2675;
+
+  /// Обновите MCP для каталога камней и совместимости
+  ///
+  /// In en, this message translates to:
+  /// **'Update MCP for stone catalog and compatibility'**
+  String get m616c984fe4;
+
+  /// Обновите MCP для оригинальных иконок и совместимости
+  ///
+  /// In en, this message translates to:
+  /// **'Update MCP for original icons and compatibility'**
+  String get m648c9e0082;
+
+  /// Обновите MCP для оригинальных иконок камней
+  ///
+  /// In en, this message translates to:
+  /// **'Update MCP for original stone icons'**
+  String get md423f03f4f;
 
   /// Обновить
   ///
@@ -1407,12 +1575,6 @@ abstract class AppLocalizations {
   /// **'General damage and defense map. For the list, select an individual metric.'**
   String get mc006d459af;
 
-  /// Обычный противник
-  ///
-  /// In en, this message translates to:
-  /// **'Normal enemy'**
-  String get m64c3dce838;
-
   /// Огонь
   ///
   /// In en, this message translates to:
@@ -1442,12 +1604,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No release description'**
   String get m47cd7c0de1;
-
-  /// Описание условия недоступно в этой версии PoB.
-  ///
-  /// In en, this message translates to:
-  /// **'Condition description not available in this PoB version.'**
-  String get m3645eb9961;
 
   /// Оружие
   ///
@@ -1503,11 +1659,11 @@ abstract class AppLocalizations {
   /// **'Disabled'**
   String get m5bd2e464d0;
 
-  /// Откройте XML с умениями, чтобы выбрать основной навык и увидеть его расчёт.
+  /// Отключён
   ///
   /// In en, this message translates to:
-  /// **'Open XML with skills to select the main skill and see its calculation.'**
-  String get me2c190631c;
+  /// **'Disabled'**
+  String get ma3fbed9442;
 
   /// Открыть
   ///
@@ -1617,6 +1773,12 @@ abstract class AppLocalizations {
   /// **'Convert to Lua'**
   String get m79ab5f1286;
 
+  /// Перетащите камень сюда или нажмите на иконку для настройки
+  ///
+  /// In en, this message translates to:
+  /// **'Drag the stone here or click on the icon to configure'**
+  String get m24ad4cc4a3;
+
   /// Перчатки
   ///
   /// In en, this message translates to:
@@ -1635,6 +1797,12 @@ abstract class AppLocalizations {
   /// **'Plans, items, development options...'**
   String get m1474fac529;
 
+  /// По умолчанию
+  ///
+  /// In en, this message translates to:
+  /// **'Default'**
+  String get mfd0560ebbf;
+
   /// Повторить
   ///
   /// In en, this message translates to:
@@ -1646,6 +1814,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Repeat action'**
   String get madb0c613d6;
+
+  /// Повторить загрузку
+  ///
+  /// In en, this message translates to:
+  /// **'Retry download'**
+  String get m298e41327f;
 
   /// Повторить сохранение
   ///
@@ -1676,6 +1850,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Connect Lua'**
   String get m538d913ee0;
+
+  /// Подходящие поддержки
+  ///
+  /// In en, this message translates to:
+  /// **'Matching supports'**
+  String get m5f5155bb1f;
 
   /// Показатели
   ///
@@ -1730,6 +1910,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Taken Phys dmg'**
   String get m2ffaee13bd;
+
+  /// Пользовательские модификаторы
+  ///
+  /// In en, this message translates to:
+  /// **'Custom modifiers'**
+  String get m8c0ef0f511;
 
   /// Попробуйте пересчитать сборку.
   ///
@@ -2007,6 +2193,12 @@ abstract class AppLocalizations {
   /// **'Calculations'**
   String get m9b9370223c;
 
+  /// Расчёт…
+  ///
+  /// In en, this message translates to:
+  /// **'Calculation…'**
+  String get m1e135b51f1;
+
   /// Регенерация здоровья
   ///
   /// In en, this message translates to:
@@ -2091,6 +2283,18 @@ abstract class AppLocalizations {
   /// **'Own...'**
   String get ma50190234a;
 
+  /// Сдвинуть влево
+  ///
+  /// In en, this message translates to:
+  /// **'Move left'**
+  String get m7434b2e81b;
+
+  /// Сдвинуть вправо
+  ///
+  /// In en, this message translates to:
+  /// **'Move right'**
+  String get m63a2484f1c;
+
   /// Сессия закрыта
   ///
   /// In en, this message translates to:
@@ -2162,6 +2366,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Equipment'**
   String get mc2fd3c5d27;
+
+  /// Сначала уберите камни поддержки
+  ///
+  /// In en, this message translates to:
+  /// **'Remove support stones first'**
+  String get m59b50cc146;
 
   /// Сначала установите оба компонента
   ///
@@ -2271,6 +2481,12 @@ abstract class AppLocalizations {
   /// **'Enemy type'**
   String get m7242065c34;
 
+  /// Тип условия пока не поддерживается
+  ///
+  /// In en, this message translates to:
+  /// **'Condition type is not yet supported'**
+  String get m0472e6790c;
+
   /// Тёмная
   ///
   /// In en, this message translates to:
@@ -2282,6 +2498,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Redirect has no address'**
   String get m2ec842e2f5;
+
+  /// Убрать камень
+  ///
+  /// In en, this message translates to:
+  /// **'Remove gem'**
+  String get m94fde688e0;
 
   /// Убрать сочетание
   ///
@@ -2367,6 +2589,12 @@ abstract class AppLocalizations {
   /// **'Level {p0} · quality {p1} %'**
   String m88f6fabbe9(String p0, String p1);
 
+  /// Уровень и качество должны быть целыми числами
+  ///
+  /// In en, this message translates to:
+  /// **'Level and quality must be integers'**
+  String get mbb0ceac2d1;
+
   /// Уровень противника
   ///
   /// In en, this message translates to:
@@ -2390,6 +2618,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Configuration'**
   String get m908b6d3a83;
+
+  /// Условия не найдены
+  ///
+  /// In en, this message translates to:
+  /// **'Conditions not found'**
+  String get m288545991b;
 
   /// Условия расчёта
   ///
@@ -2546,6 +2780,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'This copy was launched without an installer or from a non-writable directory. Install the new version from the releases page.'**
   String get m2b2c6df514;
+
+  /// Эта поддержка не подходит выбранному умению
+  ///
+  /// In en, this message translates to:
+  /// **'This support does not match the selected skill'**
+  String get m902b19aeea;
 
   /// Эти настройки влияют на показатели сборки
   ///

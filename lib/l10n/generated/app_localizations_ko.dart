@@ -28,6 +28,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m0c63e733f9 => 'Lua이 모든 아이콘을 반환하지 않았습니다.';
 
   @override
+  String get m88beda68f0 => 'Lua이 불완전한 디렉터리를 반환했습니다.';
+
+  @override
   String get m774193669c => 'Lua이 빈 트리를 반환했습니다.';
 
   @override
@@ -37,6 +40,12 @@ class AppLocalizationsKo extends AppLocalizations {
   String get ma83268a520 => 'Lua이 클래스 디렉터리를 반환하지 않았습니다.';
 
   @override
+  String get me9dd147860 => 'Lua님이 돌에 대한 설명을 반환하지 않았습니다.';
+
+  @override
+  String get m59e00dc2d6 => 'Lua이(가) 조건 설명을 반환하지 않았습니다.';
+
+  @override
   String get m198b0a77f8 => 'Lua이 빌드 보고서를 반환하지 않았습니다.';
 
   @override
@@ -44,6 +53,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m1f463483a4 => 'Lua이 노드 정보를 반환하지 않았습니다.';
+
+  @override
+  String get m35f86d9c5e => 'Lua이 스톤 호환성을 반환하지 않았습니다.';
 
   @override
   String get mecc0fe5cd1 => 'Lua이 특성을 반환하지 않았습니다.';
@@ -145,10 +157,13 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m65d05ab17f => '다음 빌드';
 
   @override
-  String get m14183afd77 => '유효한 값을 입력하세요.';
+  String get mbce24a2108 => '이름을 입력하세요';
 
   @override
-  String get mbce24a2108 => '이름을 입력하세요';
+  String get mdd0a89ad92 => '정수를 입력하세요.';
+
+  @override
+  String get m005a65ad56 => '번호를 입력하세요';
 
   @override
   String get m73cac6c239 => '복귀 지점';
@@ -158,9 +173,6 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m495763fa3e => '반환 노드';
-
-  @override
-  String get m386f7451f1 => '탑보스';
 
   @override
   String get m4d1d43042e => '활성화됨';
@@ -214,6 +226,18 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m5b1968a662 => '업무를 위한 모든 것';
 
   @override
+  String get m33813b1d8e => '값 선택';
+
+  @override
+  String get mcc8443a04f => '카탈로그에서 값을 선택하세요';
+
+  @override
+  String get m55a2cd1b28 => '스킬젬 선택';
+
+  @override
+  String get mef96629088 => '그룹을 위한 보석을 선택하세요';
+
+  @override
   String get m2ac910bfb3 => '수업 선택';
 
   @override
@@ -224,6 +248,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m350c155b79 => '마스터리 효과 선택은 현재 XML을 통해 가능합니다.';
+
+  @override
+  String get m9cf249e2a8 => '선택됨';
 
   @override
   String get m19a610ab93 => '선택됨';
@@ -259,6 +286,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get ma755f360c2 => '두 가지 구성요소. 컴퓨터에서의 계산.';
+
+  @override
+  String get me3c3ea3a85 => '사용할 수 없는 작업';
 
   @override
   String get me1daa9e250 => '나무';
@@ -302,10 +332,13 @@ class AppLocalizationsKo extends AppLocalizations {
   }
 
   @override
-  String get mab04eae138 => '현재 작업이 완료될 때까지 기다립니다.';
+  String get ma11b26e5e9 => '추가 및 계산';
 
   @override
-  String get m1ae52aaad7 => '추가 이용약관';
+  String get mbc10505bdf => '스킬 계산을 위해 돌그룹을 추가합니다.';
+
+  @override
+  String get mab04eae138 => '현재 작업이 완료될 때까지 기다립니다.';
 
   @override
   String m10b5bc7e91(String p0) {
@@ -323,6 +356,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get mf9a38201c0 => '로그 및 세부정보';
+
+  @override
+  String get m0f98334ad1 => '애플리케이션을 닫기 전에 편집을 완료하세요.';
 
   @override
   String get m230ebdecca => '자동으로 업데이트 다운로드';
@@ -351,6 +387,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String m7ac5d410c5(String p0) {
     return '로드 중: HTTP $p0';
   }
+
+  @override
+  String get m09fef6d0df => '구성됨';
 
   @override
   String get m540fb030a9 => '표시기를 고정하세요';
@@ -395,6 +434,12 @@ class AppLocalizationsKo extends AppLocalizations {
   String get mdcd4c2c384 => '주문 회피 확률';
 
   @override
+  String get md5a9ca934e => '스톤 이미지를 찾을 수 없습니다.';
+
+  @override
+  String get m1ccb8777b8 => '스톤 이미지를 사용할 수 없습니다.';
+
+  @override
   String get m2c72186c20 => '가져온 어셈블리';
 
   @override
@@ -413,6 +458,21 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m95cbeda583 => '보고서 원본';
+
+  @override
+  String get mfc105fdc07 => 'Gem 활성화됨';
+
+  @override
+  String get m05b721e615 => '돌이 발견되지 않았습니다';
+
+  @override
+  String get m566d4d32d7 => '지지석';
+
+  @override
+  String get md0ef3540b0 => '카탈로그';
+
+  @override
+  String get m74189f93c7 => '품질, %';
 
   @override
   String get m1711aecef4 => '클래스';
@@ -492,10 +552,16 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m0918b4ba92 => '제목';
 
   @override
+  String get md45e66ab55 => '그룹 이름';
+
+  @override
   String get m51233393a5 => 'Название сборки';
 
   @override
   String get mbe6156b8e4 => '찾기';
+
+  @override
+  String get m7d4ff2d217 => '보석 검색';
 
   @override
   String get m302605cf87 => '나이티 сборку';
@@ -676,6 +742,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m2469d9f2a8 => '잘못된 트리 노드 Lua';
 
   @override
+  String get mf6d959d4c7 => '선택 사항';
+
+  @override
   String get m5f5263f78b => '모호한 체크섬 Lua 런타임';
 
   @override
@@ -703,6 +772,12 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m323494c6da => '번역을 사용할 수 없는 경우 원본 텍스트가 표시됩니다.';
 
   @override
+  String get mc9fd9fc0e5 => '새 그룹';
+
+  @override
+  String get mbfea4c6fd4 => '새로운 스킬 그룹';
+
+  @override
   String get m282cf4ee16 => '새 빌드';
 
   @override
@@ -710,6 +785,15 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get md72a4c2675 => '0.2.0과 같은 안정적인 버전이 필요합니다.';
+
+  @override
+  String get m616c984fe4 => '석재 카탈로그 및 호환성 업데이트 MCP';
+
+  @override
+  String get m648c9e0082 => '원본 아이콘 및 호환성을 위한 MCP 업데이트';
+
+  @override
+  String get md423f03f4f => '원본 돌 아이콘 업데이트 MCP';
 
   @override
   String get m603e460bf5 => '업데이트';
@@ -735,9 +819,6 @@ class AppLocalizationsKo extends AppLocalizations {
   String get mc006d459af => '일반 데미지 및 방어 맵입니다. 목록의 경우 개별 측정항목을 선택하세요.';
 
   @override
-  String get m64c3dce838 => '일반 적';
-
-  @override
   String get m8cb7d50be2 => '불';
 
   @override
@@ -751,9 +832,6 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m47cd7c0de1 => '출시 설명 없음';
-
-  @override
-  String get m3645eb9961 => '이 PoB 버전에서는 조건 설명을 사용할 수 없습니다.';
 
   @override
   String get m0736fbba4d => '무기';
@@ -783,7 +861,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m5bd2e464d0 => '비활성화됨';
 
   @override
-  String get me2c190631c => '스킬이 포함된 XML을 열어 주요 스킬을 선택하고 계산을 확인하세요.';
+  String get ma3fbed9442 => '비활성화됨';
 
   @override
   String get mea1f408246 => '열기';
@@ -846,6 +924,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m79ab5f1286 => 'Lua로 변환';
 
   @override
+  String get m24ad4cc4a3 => '여기에 돌을 드래그하거나 아이콘을 클릭하여 구성하세요.';
+
+  @override
   String get m98aa5e2776 => '장갑';
 
   @override
@@ -855,10 +936,16 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m1474fac529 => '계획, 아이템, 개발 옵션...';
 
   @override
+  String get mfd0560ebbf => '기본값';
+
+  @override
   String get m5189135a61 => '반복';
 
   @override
   String get madb0c613d6 => '작업 반복';
+
+  @override
+  String get m298e41327f => '다운로드 다시 시도';
 
   @override
   String get m3c320d7fe3 => '다시 저장하세요';
@@ -874,6 +961,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m538d913ee0 => '연결 Lua';
+
+  @override
+  String get m5f5155bb1f => '매칭 지원';
 
   @override
   String get mbf3c9df646 => '지표';
@@ -901,6 +991,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m2ffaee13bd => 'Taken Phys dmg';
+
+  @override
+  String get m8c0ef0f511 => '맞춤 수정자';
 
   @override
   String get md90da4d82c => '어셈블리를 다시 계산해 보세요.';
@@ -1059,6 +1152,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m9b9370223c => '계산';
 
   @override
+  String get m1e135b51f1 => '계산 중…';
+
+  @override
   String get m8d7bd9deb6 => '체력 재생';
 
   @override
@@ -1103,6 +1199,12 @@ class AppLocalizationsKo extends AppLocalizations {
   String get ma50190234a => '나만의...';
 
   @override
+  String get m7434b2e81b => '왼쪽으로 이동';
+
+  @override
+  String get m63a2484f1c => '오른쪽으로 이동';
+
+  @override
   String get m32bb1c680f => '세션이 종료되었습니다.';
 
   @override
@@ -1137,6 +1239,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get mc2fd3c5d27 => '장비';
+
+  @override
+  String get m59b50cc146 => '받침돌을 먼저 제거하세요';
 
   @override
   String get ma386719073 => '먼저 두 구성 요소를 모두 설치합니다.';
@@ -1197,10 +1302,16 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m7242065c34 => '적 유형';
 
   @override
+  String get m0472e6790c => '조건 유형이 아직 지원되지 않습니다.';
+
+  @override
   String get m1eecfcaa7b => '어두움';
 
   @override
   String get m2ec842e2f5 => '리디렉션에 주소가 없습니다.';
+
+  @override
+  String get m94fde688e0 => '보석 제거';
 
   @override
   String get mcfa3d536f8 => '조합 제거';
@@ -1249,6 +1360,9 @@ class AppLocalizationsKo extends AppLocalizations {
   }
 
   @override
+  String get mbb0ceac2d1 => '레벨과 품질은 정수여야 합니다.';
+
+  @override
   String get mecb350422f => '적 레벨';
 
   @override
@@ -1259,6 +1373,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m908b6d3a83 => '구성';
+
+  @override
+  String get m288545991b => '조건을 찾을 수 없습니다.';
 
   @override
   String get m7186793dd5 => '계산 조건';
@@ -1344,6 +1461,9 @@ class AppLocalizationsKo extends AppLocalizations {
   @override
   String get m2b2c6df514 =>
       '이 복사본은 설치 프로그램 없이 또는 쓰기 불가능한 디렉터리에서 실행되었습니다. 릴리스 페이지에서 새 버전을 설치하십시오.';
+
+  @override
+  String get m902b19aeea => '이 지원은 선택한 스킬과 일치하지 않습니다.';
 
   @override
   String get mca16b5fe71 => '이러한 설정은 빌드 성능에 영향을 미칩니다.';

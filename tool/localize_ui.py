@@ -28,6 +28,15 @@ SEEDS = {
 SEEDS.update({'Полный DPS': 'Full DPS', 'Суммарный DPS': 'Combined DPS', 'DPS ударов': 'Hit DPS', 'DPS пронзания и ударов': 'Impale + Hit DPS', 'Средний удар': 'Average Hit', 'Скорость атак и чар': 'Attack/Cast Speed', 'Постепенный DPS': 'DoT DPS', 'DPS кровотечения': 'Bleed DPS', 'DPS поджога': 'Ignite DPS', 'DPS отравления': 'Poison DPS', 'Здоровье': 'Life', 'Восстановление здоровья': 'Life regen', 'Похищение здоровья': 'Life leech', 'Восстанавливаемый энергощит': 'Recoverable ES', 'Восстановление энергощита': 'Energy Shield regen', 'Похищение энергощита': 'Energy Shield leech', 'Мана': 'Mana', 'Восстановление маны': 'Mana regen', 'Похищение маны': 'Mana leech', 'Руническая защита': 'Runic Ward', 'Дух': 'Spirit', 'Все характеристики': 'Total Attributes', 'Избежание атак вблизи': 'Melee avoid chance', 'Избежание чар': 'Spell avoid chance', 'Избежание снарядов': 'Projectile avoid chance', 'Эффективное здоровье': 'Effective Hit Pool', 'Максимальный выдерживаемый удар': 'Eff. Maximum Hit Taken', 'Получаемый физический урон': 'Taken Phys dmg', 'Получаемый урон молнией': 'Taken Lightning dmg', 'Получаемый урон холодом': 'Taken Cold dmg', 'Получаемый урон огнём': 'Taken Fire dmg', 'Получаемый урон хаосом': 'Taken Chaos dmg', 'Шанс критического удара': 'Crit Chance', 'Множитель критического удара': 'Crit Multiplier', 'Шанс кровотечения': 'Bleed Chance', 'Шанс заморозки': 'Freeze Chance', 'Шанс поджога': 'Ignite Chance', 'Шанс шока': 'Shock Chance', 'Скорость передвижения': 'Move speed', 'Радиус освещения': 'Light Radius', 'Шанс блока': 'Block Chance', 'Шанс блока чар': 'Spell Block Chance', 'Подавление урона чар': 'Spell Suppression Chance', 'Редкость найденных предметов': 'Rarity of Items found', 'Приспешник · {p0}': 'Minion {p0}', 'Всего маны': 'Total Mana', 'Всего здоровья': 'Total Life', 'Урон / защита': 'Offence/Defence', 'Узел не изменит показатели.': 'No changes.'})
 
 
+SEEDS.update({
+    'Новая группа умений': 'New skill group', 'Новая группа': 'New group',
+    'Название группы': 'Group name', 'Найти камень': 'Search gems',
+    'Добавить и рассчитать': 'Add and calculate', 'Заданные': 'Configured',
+    'Выберите камни для группы': 'Choose gems for the group',
+    'Качество, %': 'Quality, %', 'Камень включён': 'Gem enabled',
+    'Убрать камень': 'Remove gem',
+})
+
 def quoted(text, start, found):
     quote = text[start]
     delimiter = quote * (3 if text.startswith(quote * 3, start) else 1)

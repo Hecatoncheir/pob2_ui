@@ -44,6 +44,13 @@ class FileEngine extends McpClient {
       case 'pob_tree_action':
         value++;
         return {};
+      case 'pob_add_skill_group':
+        value++;
+        final gems = arguments['gems'] as List;
+        if ((gems.first as Map)['level'] == 999) {
+          throw StateError('Lua отклонил уровень камня');
+        }
+        return {};
       default:
         throw StateError(name);
     }
@@ -106,6 +113,43 @@ void main() {
     },
   );
 
+  test('Отказ добавления возвращает XML и сохраняет Redo; успешная группа участвует в истории', () async {
+    await model.treeAction(1, false);
+    await model.undo();
+    final history = model.state.history;
+    final rejected = await model.addSkillGroup('Ошибка', [
+      {'id': 'gem', 'level': 999},
+    ]);
+    expect(rejected.committed, isFalse);
+    expect(engine.value, 1);
+    expect(model.state.document!.stale, isFalse);
+    expect(model.state.history, history);
+    final added = await model.addSkillGroup('Группа', [
+      {'id': 'gem', 'level': 5},
+    ]);
+    expect(added.committed, isTrue);
+    expect(model.state.history, (undo: 1, redo: 0));
+    await model.undo();
+    expect(engine.value, 1);
+    await model.redo();
+    expect(engine.value, 2);
+  });
+
+  test(
+    'Ошибка диска при изменении не оставляет неподтверждённую группу в Lua',
+    () async {
+      final id = model.state.library.activeId!;
+      storage.failName = 'index.json';
+      final result = await model.addSkillGroup('Группа', [
+        {'id': 'gem', 'level': 5},
+      ]);
+      expect(result.committed, isFalse);
+      expect(engine.value, 1);
+      expect(await model.library.read(id), '<build value="1"/>');
+      expect(model.state.undoCount, 0);
+    },
+  );
+
   test('Отмена файлового диалога не меняет сборку; успешный файл получает своё название', () async {
     final id = model.state.library.activeId;
     await model.openXmlFile();
@@ -141,7 +185,8 @@ void main() {
     () async {
       final id = model.state.library.activeId!;
       storage.failName = 'index.json';
-      await model.treeAction(1, false);
+      engine.value++;
+      await model.refreshReport();
       expect(model.state.document!.stale, isTrue);
       expect(await model.library.read(id), '<build value="1"/>');
       await expectLater(

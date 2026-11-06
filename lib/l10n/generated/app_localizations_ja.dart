@@ -28,6 +28,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m0c63e733f9 => 'Lua はすべてのアイコンを返しませんでした';
 
   @override
+  String get m88beda68f0 => 'Lua が不完全なディレクトリを返しました';
+
+  @override
   String get m774193669c => 'Lua は空のツリーを返しました';
 
   @override
@@ -37,6 +40,12 @@ class AppLocalizationsJa extends AppLocalizations {
   String get ma83268a520 => 'Lua はクラス ディレクトリを返しませんでした';
 
   @override
+  String get me9dd147860 => 'Lua は石の説明を返しませんでした';
+
+  @override
+  String get m59e00dc2d6 => 'Lua が条件の説明を返しませんでした';
+
+  @override
   String get m198b0a77f8 => 'Lua はビルド レポートを返しませんでした';
 
   @override
@@ -44,6 +53,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m1f463483a4 => 'Lua はノード情報を返しませんでした';
+
+  @override
+  String get m35f86d9c5e => 'Lua は石の互換性を返しませんでした';
 
   @override
   String get mecc0fe5cd1 => 'Lua は特性を返しませんでした';
@@ -145,10 +157,13 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m65d05ab17f => '次のビルド';
 
   @override
-  String get m14183afd77 => '有効な値を入力してください';
+  String get mbce24a2108 => '名前を入力してください';
 
   @override
-  String get mbce24a2108 => '名前を入力してください';
+  String get mdd0a89ad92 => 'Enter an integer';
+
+  @override
+  String get m005a65ad56 => 'Enter number';
 
   @override
   String get m73cac6c239 => 'リターンポイント';
@@ -158,9 +173,6 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m495763fa3e => 'リターンノード';
-
-  @override
-  String get m386f7451f1 => 'トップボス';
 
   @override
   String get m4d1d43042e => '有効';
@@ -214,6 +226,18 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m5b1968a662 => 'すべては仕事のため';
 
   @override
+  String get m33813b1d8e => 'Select value';
+
+  @override
+  String get mcc8443a04f => 'Select a value from the catalog';
+
+  @override
+  String get m55a2cd1b28 => 'スキルジェムを選択してください';
+
+  @override
+  String get mef96629088 => 'Choose gems for the group';
+
+  @override
   String get m2ac910bfb3 => 'クラスの選択';
 
   @override
@@ -224,6 +248,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m350c155b79 => 'マスタリー効果の選択は現在、XML を通じて利用できます。';
+
+  @override
+  String get m9cf249e2a8 => '選択済み';
 
   @override
   String get m19a610ab93 => 'Selected';
@@ -259,6 +286,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get ma755f360c2 => '2 つのコンポーネント。コンピューター上での計算。';
+
+  @override
+  String get me3c3ea3a85 => 'Action not available';
 
   @override
   String get me1daa9e250 => 'ツリー';
@@ -302,10 +332,13 @@ class AppLocalizationsJa extends AppLocalizations {
   }
 
   @override
-  String get mab04eae138 => '現在の操作が完了するまで待ちます';
+  String get ma11b26e5e9 => 'Add and calculate';
 
   @override
-  String get m1ae52aaad7 => '追加の利用規約';
+  String get mbc10505bdf => '石のグループを追加してスキル計算を取得します。';
+
+  @override
+  String get mab04eae138 => '現在の操作が完了するまで待ちます';
 
   @override
   String m10b5bc7e91(String p0) {
@@ -323,6 +356,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get mf9a38201c0 => 'ログと詳細';
+
+  @override
+  String get m0f98334ad1 => 'アプリケーションを閉じる前に編集を完了してください';
 
   @override
   String get m230ebdecca => 'アップデートを自動的にダウンロードする';
@@ -351,6 +387,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String m7ac5d410c5(String p0) {
     return '読み込み中: HTTP $p0';
   }
+
+  @override
+  String get m09fef6d0df => '設定済み';
 
   @override
   String get m540fb030a9 => 'インジケーターを締める';
@@ -395,6 +434,12 @@ class AppLocalizationsJa extends AppLocalizations {
   String get mdcd4c2c384 => 'スペル回避チャンス';
 
   @override
+  String get md5a9ca934e => '石の画像が見つかりません';
+
+  @override
+  String get m1ccb8777b8 => '石の画像が利用できません';
+
+  @override
   String get m2c72186c20 => 'インポートされたアセンブリ';
 
   @override
@@ -413,6 +458,21 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m95cbeda583 => '元のレポート';
+
+  @override
+  String get mfc105fdc07 => 'ジェムが有効になりました';
+
+  @override
+  String get m05b721e615 => '石が見つかりませんでした';
+
+  @override
+  String get m566d4d32d7 => 'サポートストーン';
+
+  @override
+  String get md0ef3540b0 => 'カタログ';
+
+  @override
+  String get m74189f93c7 => '品質、%';
 
   @override
   String get m1711aecef4 => 'クラス';
@@ -492,10 +552,16 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m0918b4ba92 => 'タイトル';
 
   @override
+  String get md45e66ab55 => 'グループ名';
+
+  @override
   String get m51233393a5 => 'Название сборки';
 
   @override
   String get mbe6156b8e4 => '検索';
+
+  @override
+  String get m7d4ff2d217 => '宝石を検索';
 
   @override
   String get m302605cf87 => 'Найти сборку';
@@ -676,6 +742,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m2469d9f2a8 => '無効なツリーノード Lua';
 
   @override
+  String get mf6d959d4c7 => 'オプション';
+
+  @override
   String get m5f5263f78b => 'あいまいなチェックサム Lua ランタイム';
 
   @override
@@ -703,6 +772,12 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m323494c6da => '翻訳が利用できない場合は元のテキストが表示されます';
 
   @override
+  String get mc9fd9fc0e5 => '新しいグループ';
+
+  @override
+  String get mbfea4c6fd4 => '新しいスキルグループ';
+
+  @override
   String get m282cf4ee16 => '新しいビルド';
 
   @override
@@ -710,6 +785,15 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get md72a4c2675 => '0.2.0 のような安定したバージョンが必要です';
+
+  @override
+  String get m616c984fe4 => '石のカタログと互換性に関する MCP の更新';
+
+  @override
+  String get m648c9e0082 => 'オリジナルのアイコンと互換性のために MCP を更新します';
+
+  @override
+  String get md423f03f4f => 'オリジナルの石アイコンの MCP を更新';
 
   @override
   String get m603e460bf5 => 'アップデート';
@@ -735,9 +819,6 @@ class AppLocalizationsJa extends AppLocalizations {
   String get mc006d459af => '一般的なダメージと防御のマップ。リストでは、個々のメトリックを選択します。';
 
   @override
-  String get m64c3dce838 => '通常の敵';
-
-  @override
   String get m8cb7d50be2 => '火事';
 
   @override
@@ -751,9 +832,6 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m47cd7c0de1 => 'リリースの説明がありません';
-
-  @override
-  String get m3645eb9961 => 'この PoB バージョンでは状態の説明は利用できません。';
 
   @override
   String get m0736fbba4d => '武器';
@@ -783,7 +861,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m5bd2e464d0 => '無効';
 
   @override
-  String get me2c190631c => 'スキルで XML を開いてメインスキルを選択し、その計算を確認します。';
+  String get ma3fbed9442 => '無効です';
 
   @override
   String get mea1f408246 => '開く';
@@ -846,6 +924,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m79ab5f1286 => 'Lua に変換します';
 
   @override
+  String get m24ad4cc4a3 => '石をここにドラッグするか、アイコンをクリックして設定します';
+
+  @override
   String get m98aa5e2776 => '手袋';
 
   @override
@@ -855,10 +936,16 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m1474fac529 => '計画、項目、開発オプション...';
 
   @override
+  String get mfd0560ebbf => 'デフォルト';
+
+  @override
   String get m5189135a61 => 'リピート';
 
   @override
   String get madb0c613d6 => 'アクションを繰り返す';
+
+  @override
+  String get m298e41327f => 'ダウンロードを再試行します';
 
   @override
   String get m3c320d7fe3 => '再度保存します';
@@ -874,6 +961,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m538d913ee0 => 'Lua に接続します';
+
+  @override
+  String get m5f5155bb1f => 'マッチングサポート';
 
   @override
   String get mbf3c9df646 => 'インジケーター';
@@ -901,6 +991,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m2ffaee13bd => '物理ダメージを受けた';
+
+  @override
+  String get m8c0ef0f511 => 'カスタム修飾子';
 
   @override
   String get md90da4d82c => 'アセンブリを再計算してみてください。';
@@ -1059,6 +1152,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m9b9370223c => '計算';
 
   @override
+  String get m1e135b51f1 => '計算中…';
+
+  @override
   String get m8d7bd9deb6 => '健康の再生';
 
   @override
@@ -1103,6 +1199,12 @@ class AppLocalizationsJa extends AppLocalizations {
   String get ma50190234a => '自分の...';
 
   @override
+  String get m7434b2e81b => '左に移動';
+
+  @override
+  String get m63a2484f1c => '右に移動';
+
+  @override
   String get m32bb1c680f => 'セッションは終了しました';
 
   @override
@@ -1137,6 +1239,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get mc2fd3c5d27 => '装備';
+
+  @override
+  String get m59b50cc146 => 'まずサポートストーンを取り外します';
 
   @override
   String get ma386719073 => '最初に両方のコンポーネントをインストールします';
@@ -1197,10 +1302,16 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m7242065c34 => '敵の種類';
 
   @override
+  String get m0472e6790c => '条件タイプはまだサポートされていません';
+
+  @override
   String get m1eecfcaa7b => 'ダーク';
 
   @override
   String get m2ec842e2f5 => 'リダイレクトにはアドレスがありません';
+
+  @override
+  String get m94fde688e0 => 'gemを削除';
 
   @override
   String get mcfa3d536f8 => '組み合わせを削除';
@@ -1249,6 +1360,9 @@ class AppLocalizationsJa extends AppLocalizations {
   }
 
   @override
+  String get mbb0ceac2d1 => 'レベルと品質は整数でなければなりません';
+
+  @override
   String get mecb350422f => '敵のレベル';
 
   @override
@@ -1259,6 +1373,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m908b6d3a83 => '構成';
+
+  @override
+  String get m288545991b => '条件が見つかりません';
 
   @override
   String get m7186793dd5 => '計算条件';
@@ -1344,6 +1461,9 @@ class AppLocalizationsJa extends AppLocalizations {
   @override
   String get m2b2c6df514 =>
       'このコピーは、インストーラーなしで、または書き込み不可能なディレクトリから起動されました。リリース ページから新しいバージョンをインストールします。';
+
+  @override
+  String get m902b19aeea => 'このサポートは選択されたスキルと一致しません';
 
   @override
   String get mca16b5fe71 => 'これらの設定はビルドのパフォーマンスに影響します';

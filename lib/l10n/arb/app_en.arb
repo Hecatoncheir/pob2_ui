@@ -30,6 +30,11 @@
     "description": "Lua вернул не все иконки",
     "placeholders": {}
   },
+  "m88beda68f0": "Lua returned an incomplete directory",
+  "@m88beda68f0": {
+    "description": "Lua вернул неполный каталог",
+    "placeholders": {}
+  },
   "m774193669c": "Lua returned an empty tree",
   "@m774193669c": {
     "description": "Lua вернул пустое дерево",
@@ -45,6 +50,16 @@
     "description": "Lua не вернул каталог классов",
     "placeholders": {}
   },
+  "me9dd147860": "Lua did not return the description of the stone",
+  "@me9dd147860": {
+    "description": "Lua не вернул описание камня",
+    "placeholders": {}
+  },
+  "m59e00dc2d6": "Lua did not return condition description",
+  "@m59e00dc2d6": {
+    "description": "Lua не вернул описание условия",
+    "placeholders": {}
+  },
   "m198b0a77f8": "Lua did not return the build report",
   "@m198b0a77f8": {
     "description": "Lua не вернул отчёт сборки",
@@ -58,6 +73,11 @@
   "m1f463483a4": "Lua did not return node information",
   "@m1f463483a4": {
     "description": "Lua не вернул сведения об узле",
+    "placeholders": {}
+  },
+  "m35f86d9c5e": "Lua did not return stone compatibility",
+  "@m35f86d9c5e": {
+    "description": "Lua не вернул совместимость камней",
     "placeholders": {}
   },
   "mecc0fe5cd1": "Lua did not return characteristics",
@@ -251,14 +271,19 @@
     "description": "Ваша следующая сборка",
     "placeholders": {}
   },
-  "m14183afd77": "Enter a valid value",
-  "@m14183afd77": {
-    "description": "Введите корректное значение",
-    "placeholders": {}
-  },
   "mbce24a2108": "Enter a name",
   "@mbce24a2108": {
     "description": "Введите название",
+    "placeholders": {}
+  },
+  "mdd0a89ad92": "Enter an integer",
+  "@mdd0a89ad92": {
+    "description": "Введите целое число",
+    "placeholders": {}
+  },
+  "m005a65ad56": "Enter number",
+  "@m005a65ad56": {
+    "description": "Введите число",
     "placeholders": {}
   },
   "m73cac6c239": "Return point",
@@ -274,11 +299,6 @@
   "m495763fa3e": "Return node",
   "@m495763fa3e": {
     "description": "Вернуть узел",
-    "placeholders": {}
-  },
-  "m386f7451f1": "Top Boss",
-  "@m386f7451f1": {
-    "description": "Вершинный босс",
     "placeholders": {}
   },
   "m4d1d43042e": "Enabled",
@@ -366,6 +386,26 @@
     "description": "Всё для работы",
     "placeholders": {}
   },
+  "m33813b1d8e": "Select value",
+  "@m33813b1d8e": {
+    "description": "Выберите значение",
+    "placeholders": {}
+  },
+  "mcc8443a04f": "Select a value from the catalog",
+  "@mcc8443a04f": {
+    "description": "Выберите значение из каталога",
+    "placeholders": {}
+  },
+  "m55a2cd1b28": "Select a skill gem",
+  "@m55a2cd1b28": {
+    "description": "Выберите камень умения",
+    "placeholders": {}
+  },
+  "mef96629088": "Choose gems for the group",
+  "@mef96629088": {
+    "description": "Выберите камни для группы",
+    "placeholders": {}
+  },
   "m2ac910bfb3": "Select class",
   "@m2ac910bfb3": {
     "description": "Выберите класс",
@@ -384,6 +424,11 @@
   "m350c155b79": "The choice of mastery effect is currently available through XML.",
   "@m350c155b79": {
     "description": "Выбор эффекта мастерства пока доступен через XML.",
+    "placeholders": {}
+  },
+  "m9cf249e2a8": "Selected",
+  "@m9cf249e2a8": {
+    "description": "Выбрано",
     "placeholders": {}
   },
   "m19a610ab93": "Selected",
@@ -443,6 +488,11 @@
   "ma755f360c2": "Two components. Calculations on your computer.",
   "@ma755f360c2": {
     "description": "Два компонента. Расчёты на вашем компьютере.",
+    "placeholders": {}
+  },
+  "me3c3ea3a85": "Action not available",
+  "@me3c3ea3a85": {
+    "description": "Действие недоступно",
     "placeholders": {}
   },
   "me1daa9e250": "Tree",
@@ -513,14 +563,19 @@
       }
     }
   },
+  "ma11b26e5e9": "Add and calculate",
+  "@ma11b26e5e9": {
+    "description": "Добавить и рассчитать",
+    "placeholders": {}
+  },
+  "mbc10505bdf": "Add a group of stones to get the skill calculation.",
+  "@mbc10505bdf": {
+    "description": "Добавьте группу камней, чтобы получить расчёт умения.",
+    "placeholders": {}
+  },
   "mab04eae138": "Wait for the current operation to complete",
   "@mab04eae138": {
     "description": "Дождитесь завершения текущей операции",
-    "placeholders": {}
-  },
-  "m1ae52aaad7": "Additional terms and conditions",
-  "@m1ae52aaad7": {
-    "description": "Дополнительные условия",
     "placeholders": {}
   },
   "m10b5bc7e91": "Version {p0} available",
@@ -550,6 +605,11 @@
   "mf9a38201c0": "Log and details",
   "@mf9a38201c0": {
     "description": "Журнал и подробности",
+    "placeholders": {}
+  },
+  "m0f98334ad1": "Complete editing before closing the application",
+  "@m0f98334ad1": {
+    "description": "Завершите редактирование перед закрытием приложения",
     "placeholders": {}
   },
   "m230ebdecca": "Download updates automatically",
@@ -607,6 +667,11 @@
         "type": "String"
       }
     }
+  },
+  "m09fef6d0df": "Configured",
+  "@m09fef6d0df": {
+    "description": "Заданные",
+    "placeholders": {}
   },
   "m540fb030a9": "Fasten indicators",
   "@m540fb030a9": {
@@ -678,6 +743,16 @@
     "description": "Избежание чар",
     "placeholders": {}
   },
+  "md5a9ca934e": "Stone image not found",
+  "@md5a9ca934e": {
+    "description": "Изображение камня не найдено",
+    "placeholders": {}
+  },
+  "m1ccb8777b8": "Stone image unavailable",
+  "@m1ccb8777b8": {
+    "description": "Изображение камня недоступно",
+    "placeholders": {}
+  },
   "m2c72186c20": "Imported assembly",
   "@m2c72186c20": {
     "description": "Импортированная сборка",
@@ -710,6 +785,31 @@
   "m95cbeda583": "Original report",
   "@m95cbeda583": {
     "description": "Исходный отчёт",
+    "placeholders": {}
+  },
+  "mfc105fdc07": "Gem enabled",
+  "@mfc105fdc07": {
+    "description": "Камень включён",
+    "placeholders": {}
+  },
+  "m05b721e615": "No stones found",
+  "@m05b721e615": {
+    "description": "Камни не найдены",
+    "placeholders": {}
+  },
+  "m566d4d32d7": "Support stones",
+  "@m566d4d32d7": {
+    "description": "Камни поддержки",
+    "placeholders": {}
+  },
+  "md0ef3540b0": "Catalog",
+  "@md0ef3540b0": {
+    "description": "Каталог",
+    "placeholders": {}
+  },
+  "m74189f93c7": "Quality, %",
+  "@m74189f93c7": {
+    "description": "Качество, %",
     "placeholders": {}
   },
   "m1711aecef4": "Class",
@@ -841,6 +941,11 @@
     "description": "Название",
     "placeholders": {}
   },
+  "md45e66ab55": "Group name",
+  "@md45e66ab55": {
+    "description": "Название группы",
+    "placeholders": {}
+  },
   "m51233393a5": "Название сборки",
   "@m51233393a5": {
     "description": "Название сборки",
@@ -849,6 +954,11 @@
   "mbe6156b8e4": "Find",
   "@mbe6156b8e4": {
     "description": "Найти",
+    "placeholders": {}
+  },
+  "m7d4ff2d217": "Search gems",
+  "@m7d4ff2d217": {
+    "description": "Найти камень",
     "placeholders": {}
   },
   "m302605cf87": "Найти сборку",
@@ -1159,6 +1269,11 @@
     "description": "Некорректный узел дерева Lua",
     "placeholders": {}
   },
+  "mf6d959d4c7": "Optional",
+  "@mf6d959d4c7": {
+    "description": "Необязательно",
+    "placeholders": {}
+  },
   "m5f5263f78b": "Ambiguous checksum Lua runtime",
   "@m5f5263f78b": {
     "description": "Неоднозначная контрольная сумма Lua runtime",
@@ -1204,6 +1319,16 @@
     "description": "Нет перевода — показываем оригинал",
     "placeholders": {}
   },
+  "mc9fd9fc0e5": "New group",
+  "@mc9fd9fc0e5": {
+    "description": "Новая группа",
+    "placeholders": {}
+  },
+  "mbfea4c6fd4": "New skill group",
+  "@mbfea4c6fd4": {
+    "description": "Новая группа умений",
+    "placeholders": {}
+  },
   "m282cf4ee16": "New build",
   "@m282cf4ee16": {
     "description": "Новая сборка",
@@ -1217,6 +1342,21 @@
   "md72a4c2675": "We need a stable version like 0.2.0",
   "@md72a4c2675": {
     "description": "Нужна стабильная версия вида 0.2.0",
+    "placeholders": {}
+  },
+  "m616c984fe4": "Update MCP for stone catalog and compatibility",
+  "@m616c984fe4": {
+    "description": "Обновите MCP для каталога камней и совместимости",
+    "placeholders": {}
+  },
+  "m648c9e0082": "Update MCP for original icons and compatibility",
+  "@m648c9e0082": {
+    "description": "Обновите MCP для оригинальных иконок и совместимости",
+    "placeholders": {}
+  },
+  "md423f03f4f": "Update MCP for original stone icons",
+  "@md423f03f4f": {
+    "description": "Обновите MCP для оригинальных иконок камней",
     "placeholders": {}
   },
   "m603e460bf5": "Update",
@@ -1258,11 +1398,6 @@
     "description": "Общая карта урона и защиты. Для списка выберите отдельный показатель.",
     "placeholders": {}
   },
-  "m64c3dce838": "Normal enemy",
-  "@m64c3dce838": {
-    "description": "Обычный противник",
-    "placeholders": {}
-  },
   "m8cb7d50be2": "Fire",
   "@m8cb7d50be2": {
     "description": "Огонь",
@@ -1286,11 +1421,6 @@
   "m47cd7c0de1": "No release description",
   "@m47cd7c0de1": {
     "description": "Описание выпуска отсутствует",
-    "placeholders": {}
-  },
-  "m3645eb9961": "Condition description not available in this PoB version.",
-  "@m3645eb9961": {
-    "description": "Описание условия недоступно в этой версии PoB.",
     "placeholders": {}
   },
   "m0736fbba4d": "Weapons",
@@ -1338,9 +1468,9 @@
     "description": "Отключена",
     "placeholders": {}
   },
-  "me2c190631c": "Open XML with skills to select the main skill and see its calculation.",
-  "@me2c190631c": {
-    "description": "Откройте XML с умениями, чтобы выбрать основной навык и увидеть его расчёт.",
+  "ma3fbed9442": "Disabled",
+  "@ma3fbed9442": {
+    "description": "Отключён",
     "placeholders": {}
   },
   "mea1f408246": "Open",
@@ -1445,6 +1575,11 @@
     "description": "Пересчитать в Lua",
     "placeholders": {}
   },
+  "m24ad4cc4a3": "Drag the stone here or click on the icon to configure",
+  "@m24ad4cc4a3": {
+    "description": "Перетащите камень сюда или нажмите на иконку для настройки",
+    "placeholders": {}
+  },
   "m98aa5e2776": "Gloves",
   "@m98aa5e2776": {
     "description": "Перчатки",
@@ -1460,6 +1595,11 @@
     "description": "Планы, предметы, варианты развития…",
     "placeholders": {}
   },
+  "mfd0560ebbf": "Default",
+  "@mfd0560ebbf": {
+    "description": "По умолчанию",
+    "placeholders": {}
+  },
   "m5189135a61": "Repeat",
   "@m5189135a61": {
     "description": "Повторить",
@@ -1468,6 +1608,11 @@
   "madb0c613d6": "Repeat action",
   "@madb0c613d6": {
     "description": "Повторить действие",
+    "placeholders": {}
+  },
+  "m298e41327f": "Retry download",
+  "@m298e41327f": {
+    "description": "Повторить загрузку",
     "placeholders": {}
   },
   "m3c320d7fe3": "Save again",
@@ -1493,6 +1638,11 @@
   "m538d913ee0": "Connect Lua",
   "@m538d913ee0": {
     "description": "Подключить Lua",
+    "placeholders": {}
+  },
+  "m5f5155bb1f": "Matching supports",
+  "@m5f5155bb1f": {
+    "description": "Подходящие поддержки",
     "placeholders": {}
   },
   "mbf3c9df646": "Indicators",
@@ -1538,6 +1688,11 @@
   "m2ffaee13bd": "Taken Phys dmg",
   "@m2ffaee13bd": {
     "description": "Получаемый физический урон",
+    "placeholders": {}
+  },
+  "m8c0ef0f511": "Custom modifiers",
+  "@m8c0ef0f511": {
+    "description": "Пользовательские модификаторы",
     "placeholders": {}
   },
   "md90da4d82c": "Try recalculating the assembly.",
@@ -1806,6 +1961,11 @@
     "description": "Расчёты",
     "placeholders": {}
   },
+  "m1e135b51f1": "Calculation…",
+  "@m1e135b51f1": {
+    "description": "Расчёт…",
+    "placeholders": {}
+  },
   "m8d7bd9deb6": "Health regeneration",
   "@m8d7bd9deb6": {
     "description": "Регенерация здоровья",
@@ -1880,6 +2040,16 @@
     "description": "Свои…",
     "placeholders": {}
   },
+  "m7434b2e81b": "Move left",
+  "@m7434b2e81b": {
+    "description": "Сдвинуть влево",
+    "placeholders": {}
+  },
+  "m63a2484f1c": "Move right",
+  "@m63a2484f1c": {
+    "description": "Сдвинуть вправо",
+    "placeholders": {}
+  },
   "m32bb1c680f": "Session closed",
   "@m32bb1c680f": {
     "description": "Сессия закрыта",
@@ -1938,6 +2108,11 @@
   "mc2fd3c5d27": "Equipment",
   "@mc2fd3c5d27": {
     "description": "Снаряжение",
+    "placeholders": {}
+  },
+  "m59b50cc146": "Remove support stones first",
+  "@m59b50cc146": {
+    "description": "Сначала уберите камни поддержки",
     "placeholders": {}
   },
   "ma386719073": "Install both components first",
@@ -2034,6 +2209,11 @@
     "description": "Тип противника",
     "placeholders": {}
   },
+  "m0472e6790c": "Condition type is not yet supported",
+  "@m0472e6790c": {
+    "description": "Тип условия пока не поддерживается",
+    "placeholders": {}
+  },
   "m1eecfcaa7b": "Dark",
   "@m1eecfcaa7b": {
     "description": "Тёмная",
@@ -2042,6 +2222,11 @@
   "m2ec842e2f5": "Redirect has no address",
   "@m2ec842e2f5": {
     "description": "У перенаправления нет адреса",
+    "placeholders": {}
+  },
+  "m94fde688e0": "Remove gem",
+  "@m94fde688e0": {
+    "description": "Убрать камень",
     "placeholders": {}
   },
   "mcfa3d536f8": "Remove combination",
@@ -2125,6 +2310,11 @@
       }
     }
   },
+  "mbb0ceac2d1": "Level and quality must be integers",
+  "@mbb0ceac2d1": {
+    "description": "Уровень и качество должны быть целыми числами",
+    "placeholders": {}
+  },
   "mecb350422f": "Enemy level",
   "@mecb350422f": {
     "description": "Уровень противника",
@@ -2143,6 +2333,11 @@
   "m908b6d3a83": "Configuration",
   "@m908b6d3a83": {
     "description": "Условия",
+    "placeholders": {}
+  },
+  "m288545991b": "Conditions not found",
+  "@m288545991b": {
+    "description": "Условия не найдены",
     "placeholders": {}
   },
   "m7186793dd5": "Calculation conditions",
@@ -2285,6 +2480,11 @@
   "m2b2c6df514": "This copy was launched without an installer or from a non-writable directory. Install the new version from the releases page.",
   "@m2b2c6df514": {
     "description": "Эта копия запущена без установщика или из каталога без права записи. Установите новую версию со страницы выпусков.",
+    "placeholders": {}
+  },
+  "m902b19aeea": "This support does not match the selected skill",
+  "@m902b19aeea": {
+    "description": "Эта поддержка не подходит выбранному умению",
     "placeholders": {}
   },
   "mca16b5fe71": "These settings affect build performance",

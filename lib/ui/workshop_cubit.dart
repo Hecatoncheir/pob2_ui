@@ -17,6 +17,8 @@ import '../domain/component.dart';
 import 'workshop_state.dart';
 import '../domain/tree_allocation_mode.dart';
 import '../data/xml_file_service.dart';
+import '../data/game_catalog_repository.dart';
+import '../domain/build_edit_result.dart';
 
 typedef _BuildSnapshot = ({String xml, String title});
 
@@ -37,6 +39,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
   final SessionRepository session;
   final BuildLibrary library;
   final XmlFileService files;
+  late final catalogs = GameCatalogRepository(engine);
   late final treeIcons = TreeIconRepository(
     root: Directory.fromUri(components.store.root.uri.resolve('tree-cache/')),
   );
@@ -192,6 +195,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
   Future<void> _connect() async {
     engine.onDisconnected = _lostConnection;
     await engine.connect(components.active);
+    catalogs.clear();
     final result = await engine.call('pob_catalog', {'kind': 'classes'});
     final classes = switch (result) {
       {'entries': final List<dynamic> entries} =>
@@ -524,29 +528,44 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     await engine.call('pob_select_main_skill', {'control': control, 'id': id});
   });
 
-  Future<void> setCondition(String key, dynamic value) =>
+  Future<BuildEditResult> addSkillGroup(String label, List<JsonMap> gems) =>
+      _changeBuild(() async {
+        await engine.call('pob_add_skill_group', {
+          'label': label,
+          'gems': gems,
+        });
+      });
+
+  Future<BuildEditResult> setCondition(String key, dynamic value) =>
       _changeBuild(() async {
         await engine.call('pob_set_config', {
           'values': {key: value},
         });
       });
 
-  Future<void> _changeBuild(Future<void> Function() action) => _run(() async {
-    final before = await _currentXml();
-    _markStale();
-    await action();
-    await _rememberUndo(before);
-    await _readReport();
-  });
-
-  Future<void> _rememberUndo(String before) async {
-    try {
-      if (await _currentXml() == before) return;
-    } catch (_) {
-      _pushUndo(before);
-      rethrow;
-    }
-    _pushUndo(before);
+  Future<BuildEditResult> _changeBuild(Future<void> Function() action) async {
+    var committed = false;
+    await _run(() async {
+      final document = state.document;
+      if (document == null) return;
+      final builds = state.library;
+      final before = await _currentXml();
+      _markStale();
+      try {
+        await action();
+        final changed = await _currentXml() != before;
+        await _readReport();
+        if (changed) _pushUndo(before);
+        committed = true;
+      } catch (_) {
+        await _restoreWorking(before, document, builds);
+        rethrow;
+      }
+    });
+    return (
+      committed: committed,
+      error: committed ? null : state.error ?? 'Действие недоступно',
+    );
   }
 
   void _pushUndo(String xml, {String? title}) {
@@ -635,6 +654,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
 
   Future<void> _disconnect() async {
     await engine.close();
+    catalogs.clear();
     _update(state.copyWith(classes: [], clearReport: true));
     _clearHistory();
   }

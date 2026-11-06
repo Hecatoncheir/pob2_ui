@@ -28,6 +28,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m0c63e733f9 => 'Lua 未傳回所有圖標';
 
   @override
+  String get m88beda68f0 => 'Lua 傳回不完整的目錄';
+
+  @override
   String get m774193669c => 'Lua 回傳一棵空樹';
 
   @override
@@ -37,6 +40,12 @@ class AppLocalizationsZh extends AppLocalizations {
   String get ma83268a520 => 'Lua 未回傳類別目錄';
 
   @override
+  String get me9dd147860 => 'Lua 未回傳石頭的描述';
+
+  @override
+  String get m59e00dc2d6 => 'Lua 未回傳條件描述';
+
+  @override
   String get m198b0a77f8 => 'Lua 未回傳建置報告';
 
   @override
@@ -44,6 +53,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m1f463483a4 => 'Lua 未回傳節點資訊';
+
+  @override
+  String get m35f86d9c5e => 'Lua 未回傳石頭相容性';
 
   @override
   String get mecc0fe5cd1 => 'Lua 未回傳特徵';
@@ -145,10 +157,13 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m65d05ab17f => '你的下一個版本';
 
   @override
-  String get m14183afd77 => '輸入有效值';
+  String get mbce24a2108 => '輸入名稱';
 
   @override
-  String get mbce24a2108 => '輸入名稱';
+  String get mdd0a89ad92 => '輸入一個整數';
+
+  @override
+  String get m005a65ad56 => '輸入號碼';
 
   @override
   String get m73cac6c239 => '返回點';
@@ -158,9 +173,6 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m495763fa3e => '返回節點';
-
-  @override
-  String get m386f7451f1 => '頂級老闆';
 
   @override
   String get m4d1d43042e => '已啟用';
@@ -214,6 +226,18 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m5b1968a662 => '一切為了工作';
 
   @override
+  String get m33813b1d8e => '選擇值';
+
+  @override
+  String get mcc8443a04f => '從目錄中選擇一個值';
+
+  @override
+  String get m55a2cd1b28 => '選擇技能寶石';
+
+  @override
+  String get mef96629088 => '為小組選擇寶石';
+
+  @override
   String get m2ac910bfb3 => '選出班級';
 
   @override
@@ -224,6 +248,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m350c155b79 => '目前可以透過 XML 選擇掌握效果。';
+
+  @override
+  String get m9cf249e2a8 => '已選擇';
 
   @override
   String get m19a610ab93 => '已選擇';
@@ -259,6 +286,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get ma755f360c2 => '兩個組件。在您的計算機上進行計算。';
+
+  @override
+  String get me3c3ea3a85 => '操作不可用';
 
   @override
   String get me1daa9e250 => '樹';
@@ -301,10 +331,13 @@ class AppLocalizationsZh extends AppLocalizations {
   }
 
   @override
-  String get mab04eae138 => '等待目前操作完成';
+  String get ma11b26e5e9 => '新增並計算';
 
   @override
-  String get m1ae52aaad7 => '附加條款與條件';
+  String get mbc10505bdf => '增加一組石頭以獲得技能計算。';
+
+  @override
+  String get mab04eae138 => '等待目前操作完成';
 
   @override
   String m10b5bc7e91(String p0) {
@@ -322,6 +355,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get mf9a38201c0 => '日誌和詳細信息';
+
+  @override
+  String get m0f98334ad1 => '在關閉應用程式之前完成編輯';
 
   @override
   String get m230ebdecca => '自動下載更新';
@@ -350,6 +386,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String m7ac5d410c5(String p0) {
     return '載入中：HTTP $p0';
   }
+
+  @override
+  String get m09fef6d0df => '已配置';
 
   @override
   String get m540fb030a9 => '緊固指示器';
@@ -394,6 +433,12 @@ class AppLocalizationsZh extends AppLocalizations {
   String get mdcd4c2c384 => '法術避免幾率';
 
   @override
+  String get md5a9ca934e => '未找到石頭圖像';
+
+  @override
+  String get m1ccb8777b8 => '石頭圖像不可用';
+
+  @override
   String get m2c72186c20 => '導入元件';
 
   @override
@@ -412,6 +457,21 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m95cbeda583 => '原始報告';
+
+  @override
+  String get mfc105fdc07 => '啟用 Gem';
+
+  @override
+  String get m05b721e615 => '沒有找到石頭';
+
+  @override
+  String get m566d4d32d7 => '支撐石';
+
+  @override
+  String get md0ef3540b0 => '目錄';
+
+  @override
+  String get m74189f93c7 => '質量，%';
 
   @override
   String get m1711aecef4 => '類別';
@@ -491,10 +551,16 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m0918b4ba92 => '標題';
 
   @override
+  String get md45e66ab55 => '群組名稱';
+
+  @override
   String get m51233393a5 => 'Название сборки';
 
   @override
   String get mbe6156b8e4 => '查找';
+
+  @override
+  String get m7d4ff2d217 => '搜尋寶石';
 
   @override
   String get m302605cf87 => 'Найти сборку';
@@ -675,6 +741,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m2469d9f2a8 => '樹節點 Lua 無效';
 
   @override
+  String get mf6d959d4c7 => '可選';
+
+  @override
   String get m5f5263f78b => '不明確的校驗和 Lua 運行時';
 
   @override
@@ -702,6 +771,12 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m323494c6da => '當翻譯不可用時顯示原始文本';
 
   @override
+  String get mc9fd9fc0e5 => '新組';
+
+  @override
+  String get mbfea4c6fd4 => '新技能組';
+
+  @override
   String get m282cf4ee16 => '新版本';
 
   @override
@@ -709,6 +784,15 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get md72a4c2675 => '我們需要一個像0.2.0這樣的穩定版本';
+
+  @override
+  String get m616c984fe4 => '更新 MCP 以取得石材目錄和相容性';
+
+  @override
+  String get m648c9e0082 => '更新 MCP 以取得原始圖示和相容性';
+
+  @override
+  String get md423f03f4f => '更新原始石頭圖示的 MCP';
 
   @override
   String get m603e460bf5 => '更新';
@@ -734,9 +818,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get mc006d459af => '一般傷害與防禦圖。對於列表，選擇單一指標。';
 
   @override
-  String get m64c3dce838 => '普通敵人';
-
-  @override
   String get m8cb7d50be2 => '火';
 
   @override
@@ -750,9 +831,6 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m47cd7c0de1 => '無發布說明';
-
-  @override
-  String get m3645eb9961 => '此 PoB 版本中不提供條件描述。';
 
   @override
   String get m0736fbba4d => '武器';
@@ -782,7 +860,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m5bd2e464d0 => '已停用';
 
   @override
-  String get me2c190631c => '用技能開啟XML選擇主技能並查看其計算。';
+  String get ma3fbed9442 => '已停用';
 
   @override
   String get mea1f408246 => '打開';
@@ -845,6 +923,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m79ab5f1286 => '轉換為 Lua';
 
   @override
+  String get m24ad4cc4a3 => '將石頭拖曳到此處或點擊圖示進行配置';
+
+  @override
   String get m98aa5e2776 => '手套';
 
   @override
@@ -854,10 +935,16 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m1474fac529 => '計劃、專案、開發選項...';
 
   @override
+  String get mfd0560ebbf => '默認';
+
+  @override
   String get m5189135a61 => '重複';
 
   @override
   String get madb0c613d6 => '重複操作';
+
+  @override
+  String get m298e41327f => '重試下載';
 
   @override
   String get m3c320d7fe3 => '再次儲存';
@@ -873,6 +960,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m538d913ee0 => '連接 Lua';
+
+  @override
+  String get m5f5155bb1f => '匹配支持';
 
   @override
   String get mbf3c9df646 => '指標';
@@ -900,6 +990,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m2ffaee13bd => '物理傷害';
+
+  @override
+  String get m8c0ef0f511 => '自訂修飾符';
 
   @override
   String get md90da4d82c => '嘗試重新計算組件。';
@@ -1058,6 +1151,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m9b9370223c => '計算';
 
   @override
+  String get m1e135b51f1 => '計算...';
+
+  @override
   String get m8d7bd9deb6 => '健康再生';
 
   @override
@@ -1102,6 +1198,12 @@ class AppLocalizationsZh extends AppLocalizations {
   String get ma50190234a => '自己的...';
 
   @override
+  String get m7434b2e81b => '向左移動';
+
+  @override
+  String get m63a2484f1c => '向右移動';
+
+  @override
   String get m32bb1c680f => '會議已結束';
 
   @override
@@ -1136,6 +1238,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get mc2fd3c5d27 => '設備';
+
+  @override
+  String get m59b50cc146 => '先移除支撐石';
 
   @override
   String get ma386719073 => '先安裝兩個組件';
@@ -1194,10 +1299,16 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m7242065c34 => '敵人類型';
 
   @override
+  String get m0472e6790c => '尚不支援條件類型';
+
+  @override
   String get m1eecfcaa7b => '黑暗';
 
   @override
   String get m2ec842e2f5 => '重定向沒有位址';
+
+  @override
+  String get m94fde688e0 => '刪除寶石';
 
   @override
   String get mcfa3d536f8 => '刪除組合';
@@ -1246,6 +1357,9 @@ class AppLocalizationsZh extends AppLocalizations {
   }
 
   @override
+  String get mbb0ceac2d1 => '等級和品質必須是整數';
+
+  @override
   String get mecb350422f => '敵人等級';
 
   @override
@@ -1256,6 +1370,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m908b6d3a83 => '配置';
+
+  @override
+  String get m288545991b => '未找到條件';
 
   @override
   String get m7186793dd5 => '計算條件';
@@ -1340,6 +1457,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m2b2c6df514 => '此副本是在沒有安裝程式的情況下或從不可寫入目錄啟動的。從發布頁面安裝新版本。';
+
+  @override
+  String get m902b19aeea => '此支援與所選技能不匹配';
 
   @override
   String get mca16b5fe71 => '這些設定會影響建置效能';
@@ -1394,6 +1514,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m0c63e733f9 => 'Lua 未傳回所有圖標';
 
   @override
+  String get m88beda68f0 => 'Lua 傳回不完整的目錄';
+
+  @override
   String get m774193669c => 'Lua 回傳一棵空樹';
 
   @override
@@ -1403,6 +1526,12 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get ma83268a520 => 'Lua 未回傳類別目錄';
 
   @override
+  String get me9dd147860 => 'Lua 未回傳石頭的描述';
+
+  @override
+  String get m59e00dc2d6 => 'Lua 未回傳條件描述';
+
+  @override
   String get m198b0a77f8 => 'Lua 未回傳建置報告';
 
   @override
@@ -1410,6 +1539,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m1f463483a4 => 'Lua 未回傳節點資訊';
+
+  @override
+  String get m35f86d9c5e => 'Lua 未回傳石頭相容性';
 
   @override
   String get mecc0fe5cd1 => 'Lua 未回傳特徵';
@@ -1511,10 +1643,13 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m65d05ab17f => '你的下一個版本';
 
   @override
-  String get m14183afd77 => '輸入有效值';
+  String get mbce24a2108 => '輸入名稱';
 
   @override
-  String get mbce24a2108 => '輸入名稱';
+  String get mdd0a89ad92 => '輸入一個整數';
+
+  @override
+  String get m005a65ad56 => '輸入號碼';
 
   @override
   String get m73cac6c239 => '返回點';
@@ -1524,9 +1659,6 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m495763fa3e => '返回節點';
-
-  @override
-  String get m386f7451f1 => '頂級老闆';
 
   @override
   String get m4d1d43042e => '已啟用';
@@ -1580,6 +1712,18 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m5b1968a662 => '一切為了工作';
 
   @override
+  String get m33813b1d8e => '選擇值';
+
+  @override
+  String get mcc8443a04f => '從目錄中選擇一個值';
+
+  @override
+  String get m55a2cd1b28 => '選擇技能寶石';
+
+  @override
+  String get mef96629088 => '為小組選擇寶石';
+
+  @override
   String get m2ac910bfb3 => '選出班級';
 
   @override
@@ -1590,6 +1734,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m350c155b79 => '目前可以透過 XML 選擇掌握效果。';
+
+  @override
+  String get m9cf249e2a8 => '已選擇';
 
   @override
   String get m19a610ab93 => '已選擇';
@@ -1625,6 +1772,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get ma755f360c2 => '兩個組件。在您的計算機上進行計算。';
+
+  @override
+  String get me3c3ea3a85 => '操作不可用';
 
   @override
   String get me1daa9e250 => '樹';
@@ -1667,10 +1817,13 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   }
 
   @override
-  String get mab04eae138 => '等待目前操作完成';
+  String get ma11b26e5e9 => '新增並計算';
 
   @override
-  String get m1ae52aaad7 => '附加條款與條件';
+  String get mbc10505bdf => '增加一組石頭以獲得技能計算。';
+
+  @override
+  String get mab04eae138 => '等待目前操作完成';
 
   @override
   String m10b5bc7e91(String p0) {
@@ -1688,6 +1841,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get mf9a38201c0 => '日誌和詳細信息';
+
+  @override
+  String get m0f98334ad1 => '在關閉應用程式之前完成編輯';
 
   @override
   String get m230ebdecca => '自動下載更新';
@@ -1716,6 +1872,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String m7ac5d410c5(String p0) {
     return '載入中：HTTP $p0';
   }
+
+  @override
+  String get m09fef6d0df => '已配置';
 
   @override
   String get m540fb030a9 => '緊固指示器';
@@ -1760,6 +1919,12 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get mdcd4c2c384 => '法術避免幾率';
 
   @override
+  String get md5a9ca934e => '未找到石頭圖像';
+
+  @override
+  String get m1ccb8777b8 => '石頭圖像不可用';
+
+  @override
   String get m2c72186c20 => '導入元件';
 
   @override
@@ -1778,6 +1943,21 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m95cbeda583 => '原始報告';
+
+  @override
+  String get mfc105fdc07 => '啟用 Gem';
+
+  @override
+  String get m05b721e615 => '沒有找到石頭';
+
+  @override
+  String get m566d4d32d7 => '支撐石';
+
+  @override
+  String get md0ef3540b0 => '目錄';
+
+  @override
+  String get m74189f93c7 => '質量，%';
 
   @override
   String get m1711aecef4 => '類別';
@@ -1857,10 +2037,16 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m0918b4ba92 => '標題';
 
   @override
+  String get md45e66ab55 => '群組名稱';
+
+  @override
   String get m51233393a5 => 'Название сборки';
 
   @override
   String get mbe6156b8e4 => '查找';
+
+  @override
+  String get m7d4ff2d217 => '搜尋寶石';
 
   @override
   String get m302605cf87 => 'Найти сборку';
@@ -2041,6 +2227,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m2469d9f2a8 => '樹節點 Lua 無效';
 
   @override
+  String get mf6d959d4c7 => '可選';
+
+  @override
   String get m5f5263f78b => '不明確的校驗和 Lua 運行時';
 
   @override
@@ -2068,6 +2257,12 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m323494c6da => '當翻譯不可用時顯示原始文本';
 
   @override
+  String get mc9fd9fc0e5 => '新組';
+
+  @override
+  String get mbfea4c6fd4 => '新技能組';
+
+  @override
   String get m282cf4ee16 => '新版本';
 
   @override
@@ -2075,6 +2270,15 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get md72a4c2675 => '我們需要一個像0.2.0這樣的穩定版本';
+
+  @override
+  String get m616c984fe4 => '更新 MCP 以取得石材目錄和相容性';
+
+  @override
+  String get m648c9e0082 => '更新 MCP 以取得原始圖示和相容性';
+
+  @override
+  String get md423f03f4f => '更新原始石頭圖示的 MCP';
 
   @override
   String get m603e460bf5 => '更新';
@@ -2100,9 +2304,6 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get mc006d459af => '一般傷害與防禦圖。對於列表，選擇單一指標。';
 
   @override
-  String get m64c3dce838 => '普通敵人';
-
-  @override
   String get m8cb7d50be2 => '火';
 
   @override
@@ -2116,9 +2317,6 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m47cd7c0de1 => '無發布說明';
-
-  @override
-  String get m3645eb9961 => '此 PoB 版本中不提供條件描述。';
 
   @override
   String get m0736fbba4d => '武器';
@@ -2148,7 +2346,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m5bd2e464d0 => '已停用';
 
   @override
-  String get me2c190631c => '用技能開啟XML選擇主技能並查看其計算。';
+  String get ma3fbed9442 => '已停用';
 
   @override
   String get mea1f408246 => '打開';
@@ -2211,6 +2409,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m79ab5f1286 => '轉換為 Lua';
 
   @override
+  String get m24ad4cc4a3 => '將石頭拖曳到此處或點擊圖示進行配置';
+
+  @override
   String get m98aa5e2776 => '手套';
 
   @override
@@ -2220,10 +2421,16 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m1474fac529 => '計劃、專案、開發選項...';
 
   @override
+  String get mfd0560ebbf => '默認';
+
+  @override
   String get m5189135a61 => '重複';
 
   @override
   String get madb0c613d6 => '重複操作';
+
+  @override
+  String get m298e41327f => '重試下載';
 
   @override
   String get m3c320d7fe3 => '再次儲存';
@@ -2239,6 +2446,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m538d913ee0 => '連接 Lua';
+
+  @override
+  String get m5f5155bb1f => '匹配支持';
 
   @override
   String get mbf3c9df646 => '指標';
@@ -2266,6 +2476,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m2ffaee13bd => '物理傷害';
+
+  @override
+  String get m8c0ef0f511 => '自訂修飾符';
 
   @override
   String get md90da4d82c => '嘗試重新計算組件。';
@@ -2424,6 +2637,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m9b9370223c => '計算';
 
   @override
+  String get m1e135b51f1 => '計算...';
+
+  @override
   String get m8d7bd9deb6 => '健康再生';
 
   @override
@@ -2468,6 +2684,12 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get ma50190234a => '自己的...';
 
   @override
+  String get m7434b2e81b => '向左移動';
+
+  @override
+  String get m63a2484f1c => '向右移動';
+
+  @override
   String get m32bb1c680f => '會議已結束';
 
   @override
@@ -2502,6 +2724,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get mc2fd3c5d27 => '設備';
+
+  @override
+  String get m59b50cc146 => '先移除支撐石';
 
   @override
   String get ma386719073 => '先安裝兩個組件';
@@ -2560,10 +2785,16 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m7242065c34 => '敵人類型';
 
   @override
+  String get m0472e6790c => '尚不支援條件類型';
+
+  @override
   String get m1eecfcaa7b => '黑暗';
 
   @override
   String get m2ec842e2f5 => '重定向沒有位址';
+
+  @override
+  String get m94fde688e0 => '刪除寶石';
 
   @override
   String get mcfa3d536f8 => '刪除組合';
@@ -2612,6 +2843,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   }
 
   @override
+  String get mbb0ceac2d1 => '等級和品質必須是整數';
+
+  @override
   String get mecb350422f => '敵人等級';
 
   @override
@@ -2622,6 +2856,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m908b6d3a83 => '配置';
+
+  @override
+  String get m288545991b => '未找到條件';
 
   @override
   String get m7186793dd5 => '計算條件';
@@ -2706,6 +2943,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m2b2c6df514 => '此副本是在沒有安裝程式的情況下或從不可寫入目錄啟動的。從發布頁面安裝新版本。';
+
+  @override
+  String get m902b19aeea => '此支援與所選技能不匹配';
 
   @override
   String get mca16b5fe71 => '這些設定會影響建置效能';

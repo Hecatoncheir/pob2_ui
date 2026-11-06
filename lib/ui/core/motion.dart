@@ -34,23 +34,25 @@ class SoftSwitch extends StatelessWidget {
   );
 }
 
-Future<T?> sparkDialog<T>(BuildContext context, Widget child) =>
-    showGeneralDialog<T>(
-      context: context,
-      barrierDismissible: true,
-      barrierLabel: 'Закрыть',
-      barrierColor: Spark.ink.withValues(alpha: .25),
-      transitionDuration: motionDuration(context, milliseconds: 300),
-      pageBuilder: (context, animation, secondary) => child,
-      transitionBuilder: (context, animation, secondary, child) =>
-          FadeTransition(
-            opacity: animation,
-            child: ScaleTransition(
-              scale: Tween(
-                begin: .97,
-                end: 1.0,
-              ).animate(CurvedAnimation(parent: animation, curve: Spark.curve)),
-              child: child,
-            ),
-          ),
-    );
+Future<T?> sparkDialog<T>(
+  BuildContext context,
+  Widget child, {
+  bool barrierDismissible = true,
+}) => showGeneralDialog<T>(
+  context: context,
+  barrierDismissible: barrierDismissible,
+  barrierLabel: 'Закрыть',
+  barrierColor: Spark.ink.withValues(alpha: .25),
+  transitionDuration: motionDuration(context, milliseconds: 300),
+  pageBuilder: (context, animation, secondary) => child,
+  transitionBuilder: (context, animation, secondary, child) => FadeTransition(
+    opacity: animation,
+    child: ScaleTransition(
+      scale: Tween(
+        begin: .97,
+        end: 1.0,
+      ).animate(CurvedAnimation(parent: animation, curve: Spark.curve)),
+      child: child,
+    ),
+  ),
+);
