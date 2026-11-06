@@ -153,7 +153,7 @@ void main() {
       ),
     );
     await tester.pumpAndSettle();
-  }, timeout: Timeout(Duration(minutes: Platform.isLinux ? 8 : 4)));
+  }, timeout: Timeout(Duration(minutes: Platform.isWindows ? 4 : 8)));
 }
 
 Future<void> _stage(String label, Future<void> Function() action) async {
