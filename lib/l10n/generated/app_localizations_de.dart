@@ -248,6 +248,10 @@ class AppLocalizationsDe extends AppLocalizations {
   String get m2ac910bfb3 => 'Klasse auswählen';
 
   @override
+  String get m0513479f74 =>
+      'Wählen Sie eine Fertigkeit aus, um Unterstützung auszuwählen';
+
+  @override
   String get m2749913680 =>
       'Wählen Sie ein Merkmal aus und klicken Sie auf Suchen.';
 
@@ -292,7 +296,13 @@ class AppLocalizationsDe extends AppLocalizations {
   String get mef05d57959 => 'Fertig';
 
   @override
-  String get ma3ade41d93 => 'Steingruppen aus Ihrer Versammlung';
+  String get m8eb6bbb41e => 'Die Gruppe existiert nicht mehr';
+
+  @override
+  String get m1adc0797f0 => 'Die Gruppe kann nicht bearbeitet werden';
+
+  @override
+  String get mcd8c587351 => 'Gruppen';
 
   @override
   String get ma755f360c2 =>
@@ -697,6 +707,9 @@ class AppLocalizationsDe extends AppLocalizations {
   }
 
   @override
+  String get m409f34eb59 => 'Die Gruppe konnte nicht gespeichert werden';
+
+  @override
   String get mef9d01550d => 'Maßstab konnte nicht gespeichert werden.';
 
   @override
@@ -706,6 +719,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String m62f5b562c1(String p0) {
     return 'Entwurf XML konnte nicht gespeichert werden: $p0';
   }
+
+  @override
+  String get m0dc255f974 => 'Fertigkeit konnte nicht entfernt werden';
 
   @override
   String get m45c78389e9 => 'Unsichere Update-Adresse';
@@ -820,6 +836,13 @@ class AppLocalizationsDe extends AppLocalizations {
   String get md423f03f4f => 'Update MCP für Original-Steinsymbole';
 
   @override
+  String get m2788a17cac =>
+      'Aktualisieren Sie MCP, um die Gruppe zu bearbeiten';
+
+  @override
+  String get m124cd4a205 => 'Aktualisieren Sie MCP, um den Skill zu entfernen';
+
+  @override
   String get m603e460bf5 => 'Update';
 
   @override
@@ -884,12 +907,6 @@ class AppLocalizationsDe extends AppLocalizations {
   String get m8e6a41ecd0 => 'Herauszoomen';
 
   @override
-  String get m5bd2e464d0 => 'Deaktiviert';
-
-  @override
-  String get ma3fbed9442 => 'Deaktiviert';
-
-  @override
   String get mea1f408246 => 'Offen';
 
   @override
@@ -945,6 +962,10 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get m79a3312d3b => 'Neu starten und aktualisieren';
+
+  @override
+  String get m9af13a3399 =>
+      'Durch Verschieben in die Liste wird Unterstützung hinzugefügt, durch Zurückbewegen wird sie entfernt';
 
   @override
   String get m79ab5f1286 => 'Konvertieren in Lua';
@@ -1194,6 +1215,16 @@ class AppLocalizationsDe extends AppLocalizations {
   String get m40c71efeca => 'Manaregeneration';
 
   @override
+  String get mcd085a0260 => 'Gruppe bearbeiten';
+
+  @override
+  String get m11dc0e7d04 => 'Fertigkeitsgruppeneditor';
+
+  @override
+  String get mf35834d767 =>
+      'Der Editor unterstützt einen aktiven Skill pro Gruppe';
+
+  @override
   String get m3826292e79 => 'Seltenheit der gefundenen Gegenstände';
 
   @override
@@ -1300,6 +1331,10 @@ class AppLocalizationsDe extends AppLocalizations {
   String get m62bb423bd3 => 'Widerstände';
 
   @override
+  String get mcd4e66880d =>
+      'Die Zusammensetzung der Gruppe hat sich geändert; Wiederholen Sie die Übertragung';
+
+  @override
   String get mbd97450c85 => 'Speichern…';
 
   @override
@@ -1307,6 +1342,9 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get mb4d30cae52 => 'Speichern';
+
+  @override
+  String get m9af7509a85 => 'Speichern und berechnen';
 
   @override
   String md7dfb40adb(String p0) {
@@ -1351,6 +1389,9 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get mcacf1f7fd0 => 'Schnittstelle vergrößern';
+
+  @override
+  String get m1c89558239 => 'Fertigkeit entfernen';
 
   @override
   String get m97ac4c501c => 'Installation bereits im Gange';

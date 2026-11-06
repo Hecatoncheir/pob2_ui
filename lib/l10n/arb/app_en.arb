@@ -411,6 +411,11 @@
     "description": "Выберите класс",
     "placeholders": {}
   },
+  "m0513479f74": "Select a skill to select supports",
+  "@m0513479f74": {
+    "description": "Выберите умение для подбора поддержек",
+    "placeholders": {}
+  },
   "m2749913680": "Select a characteristic and click Find.",
   "@m2749913680": {
     "description": "Выберите характеристику и нажмите «Найти».",
@@ -480,9 +485,19 @@
     "description": "Готово",
     "placeholders": {}
   },
-  "ma3ade41d93": "Groups of stones from your assembly",
-  "@ma3ade41d93": {
-    "description": "Группы камней из вашей сборки",
+  "m8eb6bbb41e": "The group no longer exists",
+  "@m8eb6bbb41e": {
+    "description": "Группа больше не существует",
+    "placeholders": {}
+  },
+  "m1adc0797f0": "Group is not editable",
+  "@m1adc0797f0": {
+    "description": "Группа недоступна для редактирования",
+    "placeholders": {}
+  },
+  "mcd8c587351": "Groups",
+  "@mcd8c587351": {
+    "description": "Группы",
     "placeholders": {}
   },
   "ma755f360c2": "Two components. Calculations on your computer.",
@@ -1156,6 +1171,11 @@
       }
     }
   },
+  "m409f34eb59": "Failed to save group",
+  "@m409f34eb59": {
+    "description": "Не удалось сохранить группу",
+    "placeholders": {}
+  },
   "mef9d01550d": "Failed to save scale.",
   "@mef9d01550d": {
     "description": "Не удалось сохранить масштаб.",
@@ -1174,6 +1194,11 @@
         "type": "String"
       }
     }
+  },
+  "m0dc255f974": "Failed to remove skill",
+  "@m0dc255f974": {
+    "description": "Не удалось удалить умение",
+    "placeholders": {}
   },
   "m45c78389e9": "Insecure update address",
   "@m45c78389e9": {
@@ -1359,6 +1384,16 @@
     "description": "Обновите MCP для оригинальных иконок камней",
     "placeholders": {}
   },
+  "m2788a17cac": "Update MCP to edit group",
+  "@m2788a17cac": {
+    "description": "Обновите MCP для редактирования группы",
+    "placeholders": {}
+  },
+  "m124cd4a205": "Update MCP to remove skill",
+  "@m124cd4a205": {
+    "description": "Обновите MCP для удаления умения",
+    "placeholders": {}
+  },
   "m603e460bf5": "Update",
   "@m603e460bf5": {
     "description": "Обновить",
@@ -1463,16 +1498,6 @@
     "description": "Отдалить",
     "placeholders": {}
   },
-  "m5bd2e464d0": "Disabled",
-  "@m5bd2e464d0": {
-    "description": "Отключена",
-    "placeholders": {}
-  },
-  "ma3fbed9442": "Disabled",
-  "@ma3fbed9442": {
-    "description": "Отключён",
-    "placeholders": {}
-  },
   "mea1f408246": "Open",
   "@mea1f408246": {
     "description": "Открыть",
@@ -1568,6 +1593,11 @@
   "m79a3312d3b": "Restart and update",
   "@m79a3312d3b": {
     "description": "Перезапустить и обновить",
+    "placeholders": {}
+  },
+  "m9af13a3399": "Moving to the list adds support, moving back removes it",
+  "@m9af13a3399": {
+    "description": "Перенос в список добавляет поддержку, обратно — убирает",
     "placeholders": {}
   },
   "m79ab5f1286": "Convert to Lua",
@@ -1976,6 +2006,21 @@
     "description": "Регенерация маны",
     "placeholders": {}
   },
+  "mcd085a0260": "Edit group",
+  "@mcd085a0260": {
+    "description": "Редактировать группу",
+    "placeholders": {}
+  },
+  "m11dc0e7d04": "Skill group editor",
+  "@m11dc0e7d04": {
+    "description": "Редактор группы умений",
+    "placeholders": {}
+  },
+  "mf35834d767": "The editor supports one active skill per group",
+  "@mf35834d767": {
+    "description": "Редактор поддерживает одно активное умение в группе",
+    "placeholders": {}
+  },
   "m3826292e79": "Rarity of Items found",
   "@m3826292e79": {
     "description": "Редкость найденных предметов",
@@ -2150,6 +2195,11 @@
     "description": "Сопротивления",
     "placeholders": {}
   },
+  "mcd4e66880d": "The composition of the group has changed; repeat the transfer",
+  "@mcd4e66880d": {
+    "description": "Состав группы изменился; повторите перенос",
+    "placeholders": {}
+  },
   "mbd97450c85": "Saving…",
   "@mbd97450c85": {
     "description": "Сохранение…",
@@ -2163,6 +2213,11 @@
   "mb4d30cae52": "Save",
   "@mb4d30cae52": {
     "description": "Сохранить",
+    "placeholders": {}
+  },
+  "m9af7509a85": "Save and calculate",
+  "@m9af7509a85": {
+    "description": "Сохранить и рассчитать",
     "placeholders": {}
   },
   "md7dfb40adb": "Combination already in use: {p0}",
@@ -2237,6 +2292,11 @@
   "mcacf1f7fd0": "Enlarge interface",
   "@mcacf1f7fd0": {
     "description": "Увеличить интерфейс",
+    "placeholders": {}
+  },
+  "m1c89558239": "Remove skill",
+  "@m1c89558239": {
+    "description": "Удалить умение",
     "placeholders": {}
   },
   "m97ac4c501c": "Installation already in progress",

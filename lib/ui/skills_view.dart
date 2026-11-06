@@ -1,147 +1,220 @@
-import 'package:flutter/material.dart';
+import 'dart:ui' show AppExitResponse;
 
-import '../data/game_catalog_repository.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../domain/build_report.dart';
 import 'core/app_text.dart';
 import 'core/panels.dart';
-import 'core/spark_art.dart';
 import 'core/spark_theme.dart';
-import 'report_views.dart';
 import 'skill_group_dialog.dart';
-import 'gem_medallion.dart';
+import 'skill_group_list_row.dart';
+import 'skill_workspace_cubit.dart';
 import 'workshop_cubit.dart';
 
-class SkillsView extends StatelessWidget {
+class SkillsView extends StatefulWidget {
   const SkillsView({super.key, required this.model});
   final WorkshopCubit model;
   @override
-  Widget build(BuildContext context) {
-    final report = model.state.report!;
-    return ListView(
-      padding: const EdgeInsets.all(22),
-      children: [
-        SectionHeading(
-          'Умения',
-          subtitle: 'Группы камней из вашей сборки',
-          action: FilledButton.icon(
-            key: const Key('add-skill-group'),
-            onPressed: model.state.busy || !model.engine.connected
-                ? null
-                : () => showSkillGroupEditor(context, model),
-            icon: const Icon(Icons.add, size: 18),
-            label: const AppText('Новая группа'),
+  State<SkillsView> createState() => _SkillsViewState();
+}
+
+class _SkillsViewState extends State<SkillsView> {
+  late final workspace = SkillWorkspaceCubit(widget.model);
+  late final AppLifecycleListener exitListener;
+  @override
+  void initState() {
+    super.initState();
+    exitListener = AppLifecycleListener(
+      onExitRequested: () async =>
+          workspace.state.busy ? AppExitResponse.cancel : AppExitResponse.exit,
+    );
+    workspace.initialize();
+  }
+
+  @override
+  void dispose() {
+    exitListener.dispose();
+    workspace.close();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) =>
+      BlocBuilder<SkillWorkspaceCubit, SkillWorkspaceState>(
+        bloc: workspace,
+        builder: (context, state) => Padding(
+          padding: const EdgeInsets.all(22),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  if (state.busy)
+                    const Padding(
+                      padding: EdgeInsets.only(right: 12),
+                      child: SizedBox(
+                        width: 20,
+                        height: 20,
+                        child: CircularProgressIndicator(strokeWidth: 2),
+                      ),
+                    ),
+                  FilledButton.icon(
+                    key: const Key('add-skill-group'),
+                    onPressed: _busy
+                        ? null
+                        : () => showSkillGroupEditor(context, widget.model),
+                    icon: const Icon(Icons.add, size: 18),
+                    label: const AppText('Новая группа'),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 14),
+              if (state.error case final error?)
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 12),
+                  child: AppText(
+                    error,
+                    style: TextStyle(color: Spark.of(context).danger),
+                  ),
+                ),
+              Expanded(
+                child: LayoutBuilder(
+                  builder: (context, constraints) {
+                    final groups = _groups(state);
+                    final library = _library(state);
+                    if (constraints.maxWidth >= 620)
+                      return Row(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          Expanded(flex: 3, child: groups),
+                          const SizedBox(width: 18),
+                          Expanded(flex: 2, child: library),
+                        ],
+                      );
+                    return DefaultTabController(
+                      length: 2,
+                      child: Column(
+                        children: [
+                          const TabBar(
+                            tabs: [
+                              Tab(child: AppText('Группы')),
+                              Tab(child: AppText('Камни поддержки')),
+                            ],
+                          ),
+                          const SizedBox(height: 12),
+                          Expanded(
+                            child: TabBarView(children: [groups, library]),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ],
           ),
         ),
-        if (report.groups.isEmpty)
-          const EmptyPanel(
-            title: 'Умения ещё не добавлены',
-            message: 'Добавьте группу камней, чтобы получить расчёт умения.',
-            art: 'gem',
-          ),
-        if (report.groups.isNotEmpty)
-          ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: 380),
-            child: SkillSelectors(model: model),
-          ),
-        const SizedBox(height: 22),
-        ...report.groups.map(
-          (group) => Padding(
-            padding: const EdgeInsets.only(bottom: 16),
-            child: _SkillGroup(group, model.catalogs),
-          ),
-        ),
-      ],
+      );
+
+  bool get _busy =>
+      workspace.state.busy ||
+      widget.model.state.busy ||
+      !widget.model.engine.connected;
+
+  Widget _groups(SkillWorkspaceState state) {
+    final groups = widget.model.state.report!.groups;
+    if (groups.isEmpty)
+      return const EmptyPanel(
+        title: 'Умения ещё не добавлены',
+        message: 'Добавьте группу камней, чтобы получить расчёт умения.',
+        art: 'gem',
+      );
+    return ListView.separated(
+      key: const Key('skill-groups-list'),
+      itemCount: groups.length,
+      separatorBuilder: (_, _) => const SizedBox(height: 12),
+      itemBuilder: (context, index) {
+        final group = groups[index];
+        final id = group['id'] as int;
+        return SkillGroupListRow(
+          key: ValueKey('skill-group-$id'),
+          group: group,
+          repository: widget.model.catalogs,
+          selected: state.groupId == id,
+          main: widget.model.state.report!.groupSelector['selected'] == id,
+          busy: _busy,
+          select: () => workspace.select(id),
+          edit: () => _edit(group),
+          chooseMain: () => _chooseMain(id),
+          add: (data) => workspace.add(id, data),
+          remove: () => workspace.delete(id),
+        );
+      },
     );
   }
-}
 
-class _SkillGroup extends StatelessWidget {
-  const _SkillGroup(this.group, this.repository);
-  final JsonMap group;
-  final GameCatalogRepository repository;
-  @override
-  Widget build(BuildContext context) => SurfacePanel(
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
-          children: [
-            const SparkArt('icons/gem', width: 21),
-            const SizedBox(width: 10),
-            Expanded(
-              child: AppText(
-                '${group['label']}',
-                game: true,
-                style: Theme.of(context).textTheme.titleMedium,
+  Future<void> _edit(JsonMap group) async {
+    await workspace.select(group['id'] as int);
+    if (mounted)
+      await showSkillGroupEditor(context, widget.model, group: group);
+  }
+
+  Future<void> _chooseMain(int id) async {
+    await workspace.select(id);
+    await widget.model.selectMain('groups', id);
+  }
+
+  Widget _library(SkillWorkspaceState state) {
+    final editor = workspace.editor;
+    if (editor == null || state.draft == null)
+      return const SurfacePanel(
+        child: Center(child: AppText('Выберите умение для подбора поддержек')),
+      );
+    return SurfacePanel(
+      key: const Key('skills-support-library'),
+      padding: const EdgeInsets.all(14),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          const AppText(
+            'Камни поддержки',
+            style: TextStyle(fontWeight: FontWeight.w700),
+          ),
+          const SizedBox(height: 5),
+          AppText(
+            editor.state.gems.first.gem.name,
+            game: true,
+            style: TextStyle(fontSize: 12, color: Spark.of(context).muted),
+          ),
+          const SizedBox(height: 12),
+          Expanded(
+            child: AbsorbPointer(
+              absorbing: _busy,
+              child: SkillGemCatalog(
+                editor,
+                state.draft!,
+                key: ValueKey('group-catalog-${state.groupId}'),
+                supportsOnly: true,
+                searchKey: const Key('support-search'),
+                onAdd: (gem) => workspace.add(state.groupId!, (
+                  gem: gem,
+                  draftKey: null,
+                  groupId: null,
+                  sourceIndex: null,
+                )),
+                onReturn: workspace.remove,
               ),
             ),
-            if (group['enabled'] != true)
-              AppText(
-                'Отключена',
-                style: TextStyle(color: Spark.of(context).muted),
-              ),
-          ],
-        ),
-        const SizedBox(height: 18),
-        SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: jsonRows(group['gems'])
-                .map((gem) => _GemRow(gem, repository))
-                .toList(),
-          ),
-        ),
-      ],
-    ),
-  );
-}
-
-class _GemRow extends StatelessWidget {
-  const _GemRow(this.gem, this.repository);
-  final JsonMap gem;
-  final GameCatalogRepository repository;
-  @override
-  Widget build(BuildContext context) => SizedBox(
-    width: 122,
-    child: Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8),
-      child: Column(
-        children: [
-          GemMedallion(
-            size: gem['support'] == true ? 54 : 70,
-            enabled: gem['enabled'] != false,
-            id: gem['id'] as String?,
-            repository: repository,
           ),
           const SizedBox(height: 10),
-          AppText(
-            '${gem['name']}',
-            game: true,
-            textAlign: TextAlign.center,
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
-            style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 12),
+          const AppText(
+            'Перенос в список добавляет поддержку, обратно — убирает',
+            style: TextStyle(fontSize: 11),
           ),
-          AppText(
-            'Уровень ${gem['level']} · качество ${gem['quality']} %',
-            textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.bodySmall,
-          ),
-          if (gem['enabled'] == false)
-            AppText(
-              'Отключён',
-              style: TextStyle(color: Spark.of(context).muted, fontSize: 12),
-            ),
-          if (gem['error'] case final String error when error.isNotEmpty)
-            AppText(
-              error,
-              textAlign: TextAlign.center,
-              style: TextStyle(color: Spark.of(context).danger, fontSize: 12),
-            ),
         ],
       ),
-    ),
-  );
+    );
+  }
 }

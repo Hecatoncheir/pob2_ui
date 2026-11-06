@@ -536,6 +536,12 @@ abstract class AppLocalizations {
   /// **'Select class'**
   String get m2ac910bfb3;
 
+  /// Выберите умение для подбора поддержек
+  ///
+  /// In en, this message translates to:
+  /// **'Select a skill to select supports'**
+  String get m0513479f74;
+
   /// Выберите характеристику и нажмите «Найти».
   ///
   /// In en, this message translates to:
@@ -614,11 +620,23 @@ abstract class AppLocalizations {
   /// **'Done'**
   String get mef05d57959;
 
-  /// Группы камней из вашей сборки
+  /// Группа больше не существует
   ///
   /// In en, this message translates to:
-  /// **'Groups of stones from your assembly'**
-  String get ma3ade41d93;
+  /// **'The group no longer exists'**
+  String get m8eb6bbb41e;
+
+  /// Группа недоступна для редактирования
+  ///
+  /// In en, this message translates to:
+  /// **'Group is not editable'**
+  String get m1adc0797f0;
+
+  /// Группы
+  ///
+  /// In en, this message translates to:
+  /// **'Groups'**
+  String get mcd8c587351;
 
   /// Два компонента. Расчёты на вашем компьютере.
   ///
@@ -1299,6 +1317,12 @@ abstract class AppLocalizations {
   /// **'Failed to read node: {p0}'**
   String mbefc941808(String p0);
 
+  /// Не удалось сохранить группу
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to save group'**
+  String get m409f34eb59;
+
   /// Не удалось сохранить масштаб.
   ///
   /// In en, this message translates to:
@@ -1316,6 +1340,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Failed to save draft XML: {p0}'**
   String m62f5b562c1(String p0);
+
+  /// Не удалось удалить умение
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to remove skill'**
+  String get m0dc255f974;
 
   /// Небезопасный адрес обновления
   ///
@@ -1533,6 +1563,18 @@ abstract class AppLocalizations {
   /// **'Update MCP for original stone icons'**
   String get md423f03f4f;
 
+  /// Обновите MCP для редактирования группы
+  ///
+  /// In en, this message translates to:
+  /// **'Update MCP to edit group'**
+  String get m2788a17cac;
+
+  /// Обновите MCP для удаления умения
+  ///
+  /// In en, this message translates to:
+  /// **'Update MCP to remove skill'**
+  String get m124cd4a205;
+
   /// Обновить
   ///
   /// In en, this message translates to:
@@ -1653,18 +1695,6 @@ abstract class AppLocalizations {
   /// **'Zoom out'**
   String get m8e6a41ecd0;
 
-  /// Отключена
-  ///
-  /// In en, this message translates to:
-  /// **'Disabled'**
-  String get m5bd2e464d0;
-
-  /// Отключён
-  ///
-  /// In en, this message translates to:
-  /// **'Disabled'**
-  String get ma3fbed9442;
-
   /// Открыть
   ///
   /// In en, this message translates to:
@@ -1766,6 +1796,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Restart and update'**
   String get m79a3312d3b;
+
+  /// Перенос в список добавляет поддержку, обратно — убирает
+  ///
+  /// In en, this message translates to:
+  /// **'Moving to the list adds support, moving back removes it'**
+  String get m9af13a3399;
 
   /// Пересчитать в Lua
   ///
@@ -2211,6 +2247,24 @@ abstract class AppLocalizations {
   /// **'Mana regeneration'**
   String get m40c71efeca;
 
+  /// Редактировать группу
+  ///
+  /// In en, this message translates to:
+  /// **'Edit group'**
+  String get mcd085a0260;
+
+  /// Редактор группы умений
+  ///
+  /// In en, this message translates to:
+  /// **'Skill group editor'**
+  String get m11dc0e7d04;
+
+  /// Редактор поддерживает одно активное умение в группе
+  ///
+  /// In en, this message translates to:
+  /// **'The editor supports one active skill per group'**
+  String get mf35834d767;
+
   /// Редкость найденных предметов
   ///
   /// In en, this message translates to:
@@ -2415,6 +2469,12 @@ abstract class AppLocalizations {
   /// **'Resistances'**
   String get m62bb423bd3;
 
+  /// Состав группы изменился; повторите перенос
+  ///
+  /// In en, this message translates to:
+  /// **'The composition of the group has changed; repeat the transfer'**
+  String get mcd4e66880d;
+
   /// Сохранение…
   ///
   /// In en, this message translates to:
@@ -2432,6 +2492,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Save'**
   String get mb4d30cae52;
+
+  /// Сохранить и рассчитать
+  ///
+  /// In en, this message translates to:
+  /// **'Save and calculate'**
+  String get m9af7509a85;
 
   /// Сочетание уже используется: {p0}
   ///
@@ -2516,6 +2582,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Enlarge interface'**
   String get mcacf1f7fd0;
+
+  /// Удалить умение
+  ///
+  /// In en, this message translates to:
+  /// **'Remove skill'**
+  String get m1c89558239;
 
   /// Уже выполняется установка
   ///

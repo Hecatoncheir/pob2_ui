@@ -246,6 +246,10 @@ class AppLocalizationsFr extends AppLocalizations {
   String get m2ac910bfb3 => 'Sélectionner une classe';
 
   @override
+  String get m0513479f74 =>
+      'Sélectionnez une compétence pour sélectionner les supports';
+
+  @override
   String get m2749913680 =>
       'Sélectionnez une caractéristique et cliquez sur Rechercher.';
 
@@ -289,7 +293,13 @@ class AppLocalizationsFr extends AppLocalizations {
   String get mef05d57959 => 'Terminé';
 
   @override
-  String get ma3ade41d93 => 'Groupes de pierres de votre assemblage';
+  String get m8eb6bbb41e => 'Le groupe n\'existe plus';
+
+  @override
+  String get m1adc0797f0 => 'Le groupe n\'est pas modifiable';
+
+  @override
+  String get mcd8c587351 => 'Groupes';
 
   @override
   String get ma755f360c2 => 'Deux composants. Calculs sur votre ordinateur.';
@@ -692,6 +702,9 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
+  String get m409f34eb59 => 'Échec de la sauvegarde du groupe';
+
+  @override
   String get mef9d01550d => 'Échec de l\'enregistrement de l\'échelle.';
 
   @override
@@ -701,6 +714,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String m62f5b562c1(String p0) {
     return 'Échec de l\'enregistrement du brouillon XML : $p0';
   }
+
+  @override
+  String get m0dc255f974 => 'Échec de la suppression de la compétence';
 
   @override
   String get m45c78389e9 => 'Adresse de mise à jour non sécurisée';
@@ -820,6 +836,12 @@ class AppLocalizationsFr extends AppLocalizations {
       'Mise à jour MCP pour les icônes de pierre originales';
 
   @override
+  String get m2788a17cac => 'Mettre à jour MCP pour modifier le groupe';
+
+  @override
+  String get m124cd4a205 => 'Mettre à jour MCP pour supprimer la compétence';
+
+  @override
   String get m603e460bf5 => 'Mise à jour';
 
   @override
@@ -884,12 +906,6 @@ class AppLocalizationsFr extends AppLocalizations {
   String get m8e6a41ecd0 => 'Zoom arrière';
 
   @override
-  String get m5bd2e464d0 => 'Désactivé';
-
-  @override
-  String get ma3fbed9442 => 'Désactivé';
-
-  @override
   String get mea1f408246 => 'Ouvrir';
 
   @override
@@ -945,6 +961,10 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get m79a3312d3b => 'Redémarrer et mettre à jour';
+
+  @override
+  String get m9af13a3399 =>
+      'Passer à la liste ajoute le support, revenir en arrière le supprime';
 
   @override
   String get m79ab5f1286 => 'Convertir en Lua';
@@ -1194,6 +1214,16 @@ class AppLocalizationsFr extends AppLocalizations {
   String get m40c71efeca => 'Régénération du mana';
 
   @override
+  String get mcd085a0260 => 'Modifier le groupe';
+
+  @override
+  String get m11dc0e7d04 => 'Editeur de groupe de compétences';
+
+  @override
+  String get mf35834d767 =>
+      'L\'éditeur prend en charge une compétence active par groupe';
+
+  @override
   String get m3826292e79 => 'Rareté des objets trouvés';
 
   @override
@@ -1301,6 +1331,10 @@ class AppLocalizationsFr extends AppLocalizations {
   String get m62bb423bd3 => 'Résistances';
 
   @override
+  String get mcd4e66880d =>
+      'La composition du groupe a changé ; répéter le transfert';
+
+  @override
   String get mbd97450c85 => 'Enregistrement…';
 
   @override
@@ -1308,6 +1342,9 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get mb4d30cae52 => 'Enregistrer';
+
+  @override
+  String get m9af7509a85 => 'Enregistrer et calculer';
 
   @override
   String md7dfb40adb(String p0) {
@@ -1353,6 +1390,9 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get mcacf1f7fd0 => 'Agrandir l\'interface';
+
+  @override
+  String get m1c89558239 => 'Supprimer la compétence';
 
   @override
   String get m97ac4c501c => 'Installation déjà en cours';

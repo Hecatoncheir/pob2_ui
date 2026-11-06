@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -68,9 +69,27 @@ class SkillGroupState {
 }
 
 class SkillGroupCubit extends Cubit<SkillGroupState> {
-  SkillGroupCubit(this.repository, this.commit) : super(SkillGroupState());
+  SkillGroupCubit(
+    this.repository,
+    this.commit, {
+    List<GemDraft> initial = const [],
+    String label = '',
+    this.groupId,
+  }) : super(
+         SkillGroupState(
+           gems: initial,
+           label: label,
+           selectedKey: initial.firstOrNull?.key,
+         ),
+       ) {
+    _nextKey = initial.length;
+    _original = _signature();
+  }
   final GameCatalogRepository repository;
   final SaveSkillGroup commit;
+  final int? groupId;
+  late String _original;
+  bool get dirty => _signature() != _original;
   int _nextKey = 0;
   Timer? _timer;
   int _generation = 0, _checkedGeneration = -1;
@@ -78,7 +97,7 @@ class SkillGroupCubit extends Cubit<SkillGroupState> {
 
   bool mayExit() {
     if (state.saving) return false;
-    if (state.gems.isEmpty && state.label.trim().isEmpty) return true;
+    if (!dirty) return true;
     emit(
       state.copyWith(
         error: 'Завершите редактирование перед закрытием приложения',
@@ -94,8 +113,12 @@ class SkillGroupCubit extends Cubit<SkillGroupState> {
         throw const FormatException(
           'Обновите MCP для оригинальных иконок и совместимости',
         );
+      if (groupId != null &&
+          !repository.engine.tools.contains('pob_update_skill_group'))
+        throw const FormatException('Обновите MCP для редактирования группы');
       final entries = await repository.gems();
       if (!isClosed) emit(state.copyWith(catalog: entries, loading: false));
+      if (!isClosed && state.gems.isNotEmpty) refreshSupports();
     } catch (error) {
       if (!isClosed)
         emit(
@@ -150,6 +173,7 @@ class SkillGroupCubit extends Cubit<SkillGroupState> {
       level: '1',
       quality: '0',
       enabled: true,
+      sourceIndex: null,
     ));
     emit(
       state.copyWith(
@@ -192,6 +216,7 @@ class SkillGroupCubit extends Cubit<SkillGroupState> {
                   level: level ?? draft.level,
                   quality: quality ?? draft.quality,
                   enabled: enabled ?? draft.enabled,
+                  sourceIndex: draft.sourceIndex,
                 )
               : draft,
         )
@@ -219,6 +244,7 @@ class SkillGroupCubit extends Cubit<SkillGroupState> {
     try {
       final ids = await repository.supports(
         state.gems.map(gemRequest).toList(),
+        groupId: groupId,
       );
       _applySupport(generation, (loading: false, ids: ids, error: null));
     } catch (error) {
@@ -251,7 +277,10 @@ class SkillGroupCubit extends Cubit<SkillGroupState> {
         state.label.trim(),
         state.gems.map(gemRequest).toList(),
       );
-      if (!isClosed) emit(state.copyWith(saving: false, error: result.error));
+      if (!isClosed) {
+        if (result.committed) _acknowledge();
+        emit(state.copyWith(saving: false, error: result.error));
+      }
       return result.committed;
     } catch (error) {
       if (!isClosed)
@@ -270,5 +299,39 @@ class SkillGroupCubit extends Cubit<SkillGroupState> {
     _timer?.cancel();
     _generation++;
     await super.close();
+  }
+
+  String _signature() => jsonEncode({
+    'label': state.label,
+    'gems': state.gems
+        .map(
+          (draft) => {
+            'id': draft.gem.id,
+            'level': draft.level,
+            'quality': draft.quality,
+            'enabled': draft.enabled,
+            'sourceIndex': draft.sourceIndex,
+          },
+        )
+        .toList(),
+  });
+
+  void _acknowledge() {
+    if (groupId != null) {
+      final gems = state.gems.indexed
+          .map(
+            (entry) => (
+              key: entry.$2.key,
+              gem: entry.$2.gem,
+              level: entry.$2.level,
+              quality: entry.$2.quality,
+              enabled: entry.$2.enabled,
+              sourceIndex: entry.$1 + 1,
+            ),
+          )
+          .toList();
+      emit(state.copyWith(gems: gems));
+    }
+    _original = _signature();
   }
 }

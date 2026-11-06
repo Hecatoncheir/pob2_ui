@@ -67,6 +67,7 @@ void main() {
       await tester.pumpAndSettle();
       await _addGroup(tester, model);
       await _previewDraft(tester, model);
+      await _workspaceEditing(tester, model);
       await _setCondition(tester, model);
       final stats = model.state.report!.stats;
       final groups = model.state.report!.groups;
@@ -243,6 +244,129 @@ Future<void> _setCondition(WidgetTester tester, WorkshopCubit model) async {
   await model.redo();
   expect(model.state.report!.config['conditionEnemyMoving'], isTrue);
   debugPrint('Готово: условие, Undo и Redo');
+}
+
+Future<void> _workspaceEditing(WidgetTester tester, WorkshopCubit model) async {
+  debugPrint(
+    'Начало: список групп, основной навык и переносы поддержек в обе стороны',
+  );
+  final ice = (await model.catalogs.gems()).firstWhere(
+    (gem) => gem.name == 'Ice Nova',
+  );
+  final created = await model.addSkillGroup('Ледяная группа', [
+    {'id': ice.id, 'level': 5},
+  ]);
+  expect(created.committed, isTrue);
+  await tester.pumpAndSettle();
+  final id = model.state.report!.groups.last['id'] as int;
+  final checkbox = find.byKey(ValueKey('main-skill-group-$id'));
+  await tester.ensureVisible(checkbox);
+  await tester.pumpAndSettle();
+  await tester.tap(checkbox);
+  await _wait(
+    tester,
+    () =>
+        model.state.report!.groupSelector['selected'] == id &&
+        !model.state.busy,
+  );
+  final search = find.byKey(const Key('support-search'));
+  await _wait(tester, () => search.evaluate().isNotEmpty);
+  await tester.tap(search);
+  await tester.pumpAndSettle();
+  await tester.enterText(search, 'Controlled Destruction');
+  await tester.pumpAndSettle();
+  final support = (await model.catalogs.gems()).firstWhere(
+    (gem) => gem.name == 'Controlled Destruction',
+  );
+  final tile = find.byKey(ValueKey('catalog-gem-${support.id}'));
+  await _wait(tester, () => tile.evaluate().isNotEmpty);
+  final row = find.byKey(ValueKey('skill-group-drop-$id'));
+  await tester.dragFrom(
+    tester.getCenter(tile),
+    tester.getCenter(row) - tester.getCenter(tile),
+  );
+  await _wait(
+    tester,
+    () =>
+        jsonRows(model.state.report!.groups.last['gems']).length == 2 &&
+        !model.state.busy,
+  );
+  await _workspaceReady(tester);
+  final added = find.byKey(ValueKey('group-gem-$id-2'));
+  await tester.ensureVisible(added);
+  final target = find.byKey(const Key('gem-return-target'));
+  await tester.dragFrom(
+    tester.getCenter(added),
+    tester.getCenter(target) - tester.getCenter(added),
+  );
+  await _wait(
+    tester,
+    () =>
+        jsonRows(model.state.report!.groups.last['gems']).length == 1 &&
+        !model.state.busy,
+  );
+  expect(model.state.report!.groups, hasLength(2));
+  await model.undo();
+  expect(jsonRows(model.state.report!.groups.last['gems']), hasLength(2));
+  await model.redo();
+  expect(jsonRows(model.state.report!.groups.last['gems']), hasLength(1));
+  await _workspaceReady(tester);
+  final group = find.byKey(ValueKey('skill-group-$id'));
+  final edit = find.descendant(
+    of: group,
+    matching: find.byTooltip('Редактировать группу'),
+  );
+  await tester.ensureVisible(edit);
+  await tester.tap(edit);
+  await tester.pumpAndSettle();
+  expect(find.text('Редактор группы умений'), findsOneWidget);
+  await tester.enterText(find.byKey(const ValueKey('gem-level-0')), '7');
+  await _submitGroup(tester);
+  await _wait(
+    tester,
+    () => find.byKey(const Key('skill-group-save')).evaluate().isEmpty,
+  );
+  expect(model.state.report!.groups, hasLength(2));
+  expect(jsonRows(model.state.report!.groups.last['gems']).first['level'], 7);
+  expect(model.state.report!.groupSelector['selected'], id);
+  await _workspaceReady(tester);
+  await tester.tap(search);
+  await tester.pumpAndSettle();
+  await tester.enterText(search, '');
+  await tester.pumpAndSettle();
+  await _capture(tester, '-workspace');
+  await tester.tap(find.byKey(ValueKey('delete-skill-group-$id')));
+  await _wait(tester, () => model.state.report!.groups.length == 1);
+  await _workspaceReady(tester);
+  expect(model.state.error, isNull);
+  await tester.tap(find.byKey(const ValueKey('delete-skill-group-1')));
+  await _wait(tester, () => model.state.report!.groups.isEmpty);
+  await _workspaceReady(tester);
+  expect(model.state.error, isNull);
+  await model.undo();
+  expect(model.state.report!.groups, hasLength(1));
+  await model.undo();
+  expect(model.state.report!.groups, hasLength(2));
+  await model.redo();
+  expect(model.state.report!.groups, hasLength(1));
+  await model.undo();
+  expect(model.state.report!.groups, hasLength(2));
+  await _workspaceReady(tester);
+  debugPrint(
+    'Готово: список, галочка, двусторонний перенос, редактор, удаление, Undo/Redo',
+  );
+}
+
+Future<void> _workspaceReady(WidgetTester tester) async {
+  await _wait(
+    tester,
+    () =>
+        tester
+            .widget<FilledButton>(find.byKey(const Key('add-skill-group')))
+            .onPressed !=
+        null,
+  );
+  await tester.pumpAndSettle();
 }
 
 Future<void> _submitGroup(WidgetTester tester) async {

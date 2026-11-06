@@ -536,6 +536,22 @@ class WorkshopCubit extends Cubit<WorkshopState> {
         });
       });
 
+  Future<BuildEditResult> updateSkillGroup(
+    int id,
+    String label,
+    List<JsonMap> gems,
+  ) => _changeBuild(() async {
+    await engine.call('pob_update_skill_group', {
+      'groupId': id,
+      'label': label,
+      'gems': gems,
+    });
+  });
+
+  Future<BuildEditResult> deleteSkillGroup(int id) => _changeBuild(() async {
+    await engine.call('pob_delete_skill_group', {'groupId': id});
+  });
+
   Future<BuildEditResult> setCondition(String key, dynamic value) =>
       _changeBuild(() async {
         await engine.call('pob_set_config', {

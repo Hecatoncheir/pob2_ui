@@ -24,7 +24,7 @@ class SkillGemCatalogTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => DraggableGem(
-    data: (gem: gem, draftKey: null),
+    data: (gem: gem, draftKey: null, groupId: null, sourceIndex: null),
     saving: saving,
     repository: repository,
     child: Material(

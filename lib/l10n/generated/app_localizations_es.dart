@@ -242,6 +242,10 @@ class AppLocalizationsEs extends AppLocalizations {
   String get m2ac910bfb3 => 'Seleccionar clase';
 
   @override
+  String get m0513479f74 =>
+      'Selecciona una habilidad para seleccionar soportes';
+
+  @override
   String get m2749913680 =>
       'Seleccione una característica y haga clic en Buscar.';
 
@@ -285,7 +289,13 @@ class AppLocalizationsEs extends AppLocalizations {
   String get mef05d57959 => 'Hecho';
 
   @override
-  String get ma3ade41d93 => 'Grupos de piedras de tu montaje.';
+  String get m8eb6bbb41e => 'El grupo ya no existe';
+
+  @override
+  String get m1adc0797f0 => 'El grupo no es editable';
+
+  @override
+  String get mcd8c587351 => 'Grupos';
 
   @override
   String get ma755f360c2 => 'Dos componentes. Cálculos en tu computadora.';
@@ -686,6 +696,9 @@ class AppLocalizationsEs extends AppLocalizations {
   }
 
   @override
+  String get m409f34eb59 => 'No se pudo guardar el grupo';
+
+  @override
   String get mef9d01550d => 'No se pudo guardar la escala.';
 
   @override
@@ -695,6 +708,9 @@ class AppLocalizationsEs extends AppLocalizations {
   String m62f5b562c1(String p0) {
     return 'No se pudo guardar el borrador XML: $p0';
   }
+
+  @override
+  String get m0dc255f974 => 'No se pudo eliminar la habilidad';
 
   @override
   String get m45c78389e9 => 'Dirección de actualización insegura';
@@ -815,6 +831,12 @@ class AppLocalizationsEs extends AppLocalizations {
       'Actualización MCP para íconos de piedra originales';
 
   @override
+  String get m2788a17cac => 'Actualización MCP para editar grupo';
+
+  @override
+  String get m124cd4a205 => 'Actualización MCP para eliminar la habilidad';
+
+  @override
   String get m603e460bf5 => 'Actualización';
 
   @override
@@ -879,12 +901,6 @@ class AppLocalizationsEs extends AppLocalizations {
   String get m8e6a41ecd0 => 'Alejar';
 
   @override
-  String get m5bd2e464d0 => 'Deshabilitado';
-
-  @override
-  String get ma3fbed9442 => 'Deshabilitado';
-
-  @override
   String get mea1f408246 => 'Abrir';
 
   @override
@@ -940,6 +956,10 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get m79a3312d3b => 'Reiniciar y actualizar';
+
+  @override
+  String get m9af13a3399 =>
+      'Moverse a la lista agrega soporte, retroceder lo elimina';
 
   @override
   String get m79ab5f1286 => 'Convertir a Lua';
@@ -1189,6 +1209,15 @@ class AppLocalizationsEs extends AppLocalizations {
   String get m40c71efeca => 'Regeneración de maná';
 
   @override
+  String get mcd085a0260 => 'Editar grupo';
+
+  @override
+  String get m11dc0e7d04 => 'Editor de grupos de habilidades';
+
+  @override
+  String get mf35834d767 => 'El editor admite una habilidad activa por grupo';
+
+  @override
   String get m3826292e79 => 'Rareza de los artículos encontrados';
 
   @override
@@ -1296,6 +1325,10 @@ class AppLocalizationsEs extends AppLocalizations {
   String get m62bb423bd3 => 'Resistencias';
 
   @override
+  String get mcd4e66880d =>
+      'La composición del grupo ha cambiado; repetir la transferencia';
+
+  @override
   String get mbd97450c85 => 'Guardando…';
 
   @override
@@ -1303,6 +1336,9 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get mb4d30cae52 => 'Guardar';
+
+  @override
+  String get m9af7509a85 => 'Guardar y calcular';
 
   @override
   String md7dfb40adb(String p0) {
@@ -1347,6 +1383,9 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get mcacf1f7fd0 => 'Ampliar interfaz';
+
+  @override
+  String get m1c89558239 => 'Quitar habilidad';
 
   @override
   String get m97ac4c501c => 'Instalación ya en progreso';

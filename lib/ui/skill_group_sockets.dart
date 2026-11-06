@@ -74,7 +74,12 @@ class SkillGroupSockets extends StatelessWidget {
     return _target(
       index,
       (hovered) => DraggableGem(
-        data: (gem: draft.gem, draftKey: draft.key),
+        data: (
+          gem: draft.gem,
+          draftKey: draft.key,
+          groupId: editor.groupId,
+          sourceIndex: draft.sourceIndex,
+        ),
         saving: state.saving || !draft.gem.support,
         repository: editor.repository,
         child: SizedBox(

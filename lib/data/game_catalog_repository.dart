@@ -23,12 +23,15 @@ class GameCatalogRepository {
     _icons.clear();
   }
 
-  Future<Set<String>> supports(List<JsonMap> gems) async {
+  Future<Set<String>> supports(List<JsonMap> gems, {int? groupId}) async {
     if (!hasGemEditor)
       throw const FormatException(
         'Обновите MCP для каталога камней и совместимости',
       );
-    final result = await engine.call('pob_gem_supports', {'gems': gems});
+    final result = await engine.call('pob_gem_supports', {
+      'gems': gems,
+      if (groupId != null) 'groupId': groupId,
+    });
     return switch (result) {
       {'source': 'original-lua', 'supportIds': final List<dynamic> ids} =>
         Set.unmodifiable(ids.cast<String>()),

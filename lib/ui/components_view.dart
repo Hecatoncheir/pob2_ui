@@ -160,15 +160,42 @@ class _Component extends StatelessWidget {
             ],
           ),
           if (installed != null)
-            ExpansionTile(
-              tilePadding: EdgeInsets.zero,
-              title: const AppText('Источник', style: TextStyle(fontSize: 11)),
-              children: [
-                SelectableText(
-                  '${component.url}\n${installed.commit}\n${installed.directory}',
-                  style: Spark.mono.copyWith(fontSize: 10),
+            Padding(
+              padding: const EdgeInsets.only(top: 16),
+              child: ExpansionTile(
+                key: ValueKey('component-source-${component.name}'),
+                tilePadding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 2,
                 ),
-              ],
+                childrenPadding: const EdgeInsets.fromLTRB(12, 0, 12, 12),
+                clipBehavior: Clip.antiAlias,
+                collapsedBackgroundColor: Theme.of(context)
+                    .colorScheme
+                    .surfaceContainerHigh,
+                backgroundColor: Color.alphaBlend(
+                  Theme.of(context).colorScheme.primary.withValues(alpha: .06),
+                  Theme.of(context).colorScheme.surfaceContainerHigh,
+                ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(14),
+                  side: BorderSide(color: Spark.of(context).line),
+                ),
+                collapsedShape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(14),
+                  side: BorderSide(color: Spark.of(context).line),
+                ),
+                title: const AppText(
+                  'Источник',
+                  style: TextStyle(fontSize: 11),
+                ),
+                children: [
+                  SelectableText(
+                    '${component.url}\n${installed.commit}\n${installed.directory}',
+                    style: Spark.mono.copyWith(fontSize: 11),
+                  ),
+                ],
+              ),
             ),
         ],
       ),

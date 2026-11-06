@@ -242,6 +242,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m2ac910bfb3 => 'Выберите класс';
 
   @override
+  String get m0513479f74 => 'Выберите умение для подбора поддержек';
+
+  @override
   String get m2749913680 => 'Выберите характеристику и нажмите «Найти».';
 
   @override
@@ -283,7 +286,13 @@ class AppLocalizationsRu extends AppLocalizations {
   String get mef05d57959 => 'Готово';
 
   @override
-  String get ma3ade41d93 => 'Группы камней из вашей сборки';
+  String get m8eb6bbb41e => 'Группа больше не существует';
+
+  @override
+  String get m1adc0797f0 => 'Группа недоступна для редактирования';
+
+  @override
+  String get mcd8c587351 => 'Группы';
 
   @override
   String get ma755f360c2 => 'Два компонента. Расчёты на вашем компьютере.';
@@ -681,6 +690,9 @@ class AppLocalizationsRu extends AppLocalizations {
   }
 
   @override
+  String get m409f34eb59 => 'Не удалось сохранить группу';
+
+  @override
   String get mef9d01550d => 'Не удалось сохранить масштаб.';
 
   @override
@@ -690,6 +702,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String m62f5b562c1(String p0) {
     return 'Не удалось сохранить черновик XML: $p0';
   }
+
+  @override
+  String get m0dc255f974 => 'Не удалось удалить умение';
 
   @override
   String get m45c78389e9 => 'Небезопасный адрес обновления';
@@ -804,6 +819,12 @@ class AppLocalizationsRu extends AppLocalizations {
   String get md423f03f4f => 'Обновите MCP для оригинальных иконок камней';
 
   @override
+  String get m2788a17cac => 'Обновите MCP для редактирования группы';
+
+  @override
+  String get m124cd4a205 => 'Обновите MCP для удаления умения';
+
+  @override
   String get m603e460bf5 => 'Обновить';
 
   @override
@@ -868,12 +889,6 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m8e6a41ecd0 => 'Отдалить';
 
   @override
-  String get m5bd2e464d0 => 'Отключена';
-
-  @override
-  String get ma3fbed9442 => 'Отключён';
-
-  @override
   String get mea1f408246 => 'Открыть';
 
   @override
@@ -929,6 +944,10 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get m79a3312d3b => 'Перезапустить и обновить';
+
+  @override
+  String get m9af13a3399 =>
+      'Перенос в список добавляет поддержку, обратно — убирает';
 
   @override
   String get m79ab5f1286 => 'Пересчитать в Lua';
@@ -1175,6 +1194,16 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m40c71efeca => 'Регенерация маны';
 
   @override
+  String get mcd085a0260 => 'Редактировать группу';
+
+  @override
+  String get m11dc0e7d04 => 'Редактор группы умений';
+
+  @override
+  String get mf35834d767 =>
+      'Редактор поддерживает одно активное умение в группе';
+
+  @override
   String get m3826292e79 => 'Редкость найденных предметов';
 
   @override
@@ -1281,6 +1310,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m62bb423bd3 => 'Сопротивления';
 
   @override
+  String get mcd4e66880d => 'Состав группы изменился; повторите перенос';
+
+  @override
   String get mbd97450c85 => 'Сохранение…';
 
   @override
@@ -1288,6 +1320,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get mb4d30cae52 => 'Сохранить';
+
+  @override
+  String get m9af7509a85 => 'Сохранить и рассчитать';
 
   @override
   String md7dfb40adb(String p0) {
@@ -1332,6 +1367,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get mcacf1f7fd0 => 'Увеличить интерфейс';
+
+  @override
+  String get m1c89558239 => 'Удалить умение';
 
   @override
   String get m97ac4c501c => 'Уже выполняется установка';

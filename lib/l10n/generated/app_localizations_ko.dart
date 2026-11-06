@@ -241,6 +241,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m2ac910bfb3 => '수업 선택';
 
   @override
+  String get m0513479f74 => '지원을 선택하려면 스킬을 선택하세요.';
+
+  @override
   String get m2749913680 => '특성을 선택하고 찾기를 클릭합니다.';
 
   @override
@@ -282,7 +285,13 @@ class AppLocalizationsKo extends AppLocalizations {
   String get mef05d57959 => '완료';
 
   @override
-  String get ma3ade41d93 => '어셈블리의 돌 그룹';
+  String get m8eb6bbb41e => '그룹이 더 이상 존재하지 않습니다.';
+
+  @override
+  String get m1adc0797f0 => '그룹을 편집할 수 없습니다.';
+
+  @override
+  String get mcd8c587351 => '그룹';
 
   @override
   String get ma755f360c2 => '두 가지 구성요소. 컴퓨터에서의 계산.';
@@ -675,6 +684,9 @@ class AppLocalizationsKo extends AppLocalizations {
   }
 
   @override
+  String get m409f34eb59 => '그룹을 저장하지 못했습니다.';
+
+  @override
   String get mef9d01550d => '스케일을 저장하지 못했습니다.';
 
   @override
@@ -684,6 +696,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String m62f5b562c1(String p0) {
     return '임시 저장 실패 XML: $p0';
   }
+
+  @override
+  String get m0dc255f974 => '스킬 삭제 실패';
 
   @override
   String get m45c78389e9 => '안전하지 않은 업데이트 주소';
@@ -796,6 +811,12 @@ class AppLocalizationsKo extends AppLocalizations {
   String get md423f03f4f => '원본 돌 아이콘 업데이트 MCP';
 
   @override
+  String get m2788a17cac => '그룹을 수정하려면 MCP을 업데이트하세요.';
+
+  @override
+  String get m124cd4a205 => '스킬을 제거하려면 MCP을 업데이트하세요.';
+
+  @override
   String get m603e460bf5 => '업데이트';
 
   @override
@@ -858,12 +879,6 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m8e6a41ecd0 => '축소';
 
   @override
-  String get m5bd2e464d0 => '비활성화됨';
-
-  @override
-  String get ma3fbed9442 => '비활성화됨';
-
-  @override
   String get mea1f408246 => '열기';
 
   @override
@@ -919,6 +934,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m79a3312d3b => '다시 시작 및 업데이트';
+
+  @override
+  String get m9af13a3399 => '목록으로 이동하면 지원이 추가되고 뒤로 이동하면 제거됩니다.';
 
   @override
   String get m79ab5f1286 => 'Lua로 변환';
@@ -1161,6 +1179,15 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m40c71efeca => '마나 재생';
 
   @override
+  String get mcd085a0260 => '그룹 편집';
+
+  @override
+  String get m11dc0e7d04 => '스킬 그룹 편집자';
+
+  @override
+  String get mf35834d767 => '편집기는 그룹당 하나의 활성 스킬을 지원합니다.';
+
+  @override
   String get m3826292e79 => '희귀한 아이템 발견';
 
   @override
@@ -1267,6 +1294,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m62bb423bd3 => '저항';
 
   @override
+  String get mcd4e66880d => '그룹 구성이 변경되었습니다. 전송을 반복하다';
+
+  @override
   String get mbd97450c85 => '저장 중…';
 
   @override
@@ -1274,6 +1304,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get mb4d30cae52 => '저장';
+
+  @override
+  String get m9af7509a85 => '저장 및 계산';
 
   @override
   String md7dfb40adb(String p0) {
@@ -1318,6 +1351,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get mcacf1f7fd0 => '인터페이스 확대';
+
+  @override
+  String get m1c89558239 => '스킬 삭제';
 
   @override
   String get m97ac4c501c => '이미 설치가 진행 중입니다.';

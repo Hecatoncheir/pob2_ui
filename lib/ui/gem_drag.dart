@@ -6,7 +6,12 @@ import 'core/app_text.dart';
 import 'core/panels.dart';
 import 'gem_medallion.dart';
 
-typedef GemDrag = ({SkillGem gem, int? draftKey});
+typedef GemDrag = ({
+  SkillGem gem,
+  int? draftKey,
+  int? groupId,
+  int? sourceIndex,
+});
 
 class DraggableGem extends StatelessWidget {
   const DraggableGem({

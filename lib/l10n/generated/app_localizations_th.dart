@@ -241,6 +241,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m2ac910bfb3 => 'เลือกคลาส';
 
   @override
+  String get m0513479f74 => 'เลือกทักษะเพื่อเลือกการสนับสนุน';
+
+  @override
   String get m2749913680 => 'เลือกคุณสมบัติแล้วคลิกค้นหา';
 
   @override
@@ -283,7 +286,13 @@ class AppLocalizationsTh extends AppLocalizations {
   String get mef05d57959 => 'เสร็จแล้ว';
 
   @override
-  String get ma3ade41d93 => 'กลุ่มหินจากการชุมนุมของคุณ';
+  String get m8eb6bbb41e => 'กลุ่มนี้ไม่มีอยู่แล้ว';
+
+  @override
+  String get m1adc0797f0 => 'กลุ่มไม่สามารถแก้ไขได้';
+
+  @override
+  String get mcd8c587351 => 'กลุ่ม';
 
   @override
   String get ma755f360c2 => 'สองส่วนประกอบ การคำนวณบนคอมพิวเตอร์ของคุณ';
@@ -678,6 +687,9 @@ class AppLocalizationsTh extends AppLocalizations {
   }
 
   @override
+  String get m409f34eb59 => 'ไม่สามารถบันทึกกลุ่ม';
+
+  @override
   String get mef9d01550d => 'ไม่สามารถบันทึกมาตราส่วนได้';
 
   @override
@@ -687,6 +699,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String m62f5b562c1(String p0) {
     return 'ไม่สามารถบันทึกแบบร่าง XML: $p0';
   }
+
+  @override
+  String get m0dc255f974 => 'ไม่สามารถลบทักษะได้';
 
   @override
   String get m45c78389e9 => 'ที่อยู่การอัปเดตที่ไม่ปลอดภัย';
@@ -799,6 +814,12 @@ class AppLocalizationsTh extends AppLocalizations {
   String get md423f03f4f => 'อัปเดต MCP สำหรับไอคอนหินดั้งเดิม';
 
   @override
+  String get m2788a17cac => 'อัปเดต MCP เพื่อแก้ไขกลุ่ม';
+
+  @override
+  String get m124cd4a205 => 'อัปเดต MCP เพื่อลบทักษะ';
+
+  @override
   String get m603e460bf5 => 'อัปเดต';
 
   @override
@@ -863,12 +884,6 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m8e6a41ecd0 => 'ซูมออก';
 
   @override
-  String get m5bd2e464d0 => 'ปิดการใช้งาน';
-
-  @override
-  String get ma3fbed9442 => 'ปิดการใช้งาน';
-
-  @override
   String get mea1f408246 => 'เปิด';
 
   @override
@@ -924,6 +939,10 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m79a3312d3b => 'รีสตาร์ทและอัปเดต';
+
+  @override
+  String get m9af13a3399 =>
+      'การย้ายไปยังรายการจะเพิ่มการสนับสนุน การย้อนกลับจะเป็นการลบออก';
 
   @override
   String get m79ab5f1286 => 'แปลงเป็น Lua';
@@ -1167,6 +1186,15 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m40c71efeca => 'Mana regeneration';
 
   @override
+  String get mcd085a0260 => 'แก้ไขกลุ่ม';
+
+  @override
+  String get m11dc0e7d04 => 'เครื่องมือแก้ไขกลุ่มทักษะ';
+
+  @override
+  String get mf35834d767 => 'ตัวแก้ไขสนับสนุนทักษะการใช้งานหนึ่งทักษะต่อกลุ่ม';
+
+  @override
   String get m3826292e79 => 'พบความหายากของไอเทม';
 
   @override
@@ -1273,6 +1301,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m62bb423bd3 => 'แนวต้าน';
 
   @override
+  String get mcd4e66880d => 'องค์ประกอบของกลุ่มมีการเปลี่ยนแปลง ทำซ้ำการโอน';
+
+  @override
   String get mbd97450c85 => 'กำลังบันทึก...';
 
   @override
@@ -1280,6 +1311,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get mb4d30cae52 => 'บันทึก';
+
+  @override
+  String get m9af7509a85 => 'บันทึกและคำนวณ';
 
   @override
   String md7dfb40adb(String p0) {
@@ -1324,6 +1358,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get mcacf1f7fd0 => 'ขยายอินเทอร์เฟซ';
+
+  @override
+  String get m1c89558239 => 'ลบสกิล';
 
   @override
   String get m97ac4c501c => 'การติดตั้งอยู่ในระหว่างดำเนินการ';

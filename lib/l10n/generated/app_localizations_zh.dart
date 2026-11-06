@@ -241,6 +241,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m2ac910bfb3 => '選出班級';
 
   @override
+  String get m0513479f74 => '選擇技能選擇支援';
+
+  @override
   String get m2749913680 => '選擇一個特徵並按一下「尋找」。';
 
   @override
@@ -282,7 +285,13 @@ class AppLocalizationsZh extends AppLocalizations {
   String get mef05d57959 => '完成';
 
   @override
-  String get ma3ade41d93 => '你的集合中的石頭組';
+  String get m8eb6bbb41e => '該組不再存在';
+
+  @override
+  String get m1adc0797f0 => '群組不可編輯';
+
+  @override
+  String get mcd8c587351 => '組';
 
   @override
   String get ma755f360c2 => '兩個組件。在您的計算機上進行計算。';
@@ -674,6 +683,9 @@ class AppLocalizationsZh extends AppLocalizations {
   }
 
   @override
+  String get m409f34eb59 => '無法保存群組';
+
+  @override
   String get mef9d01550d => '無法保存比例。';
 
   @override
@@ -683,6 +695,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String m62f5b562c1(String p0) {
     return '無法儲存草稿 XML：$p0';
   }
+
+  @override
+  String get m0dc255f974 => '刪除技能失敗';
 
   @override
   String get m45c78389e9 => '不安全的更新位址';
@@ -795,6 +810,12 @@ class AppLocalizationsZh extends AppLocalizations {
   String get md423f03f4f => '更新原始石頭圖示的 MCP';
 
   @override
+  String get m2788a17cac => '更新 MCP 以編輯群組';
+
+  @override
+  String get m124cd4a205 => '更新 MCP 以刪除技能';
+
+  @override
   String get m603e460bf5 => '更新';
 
   @override
@@ -857,12 +878,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m8e6a41ecd0 => '縮小';
 
   @override
-  String get m5bd2e464d0 => '已停用';
-
-  @override
-  String get ma3fbed9442 => '已停用';
-
-  @override
   String get mea1f408246 => '打開';
 
   @override
@@ -918,6 +933,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m79a3312d3b => '重啟並更新';
+
+  @override
+  String get m9af13a3399 => '移動到列表會添加支持，向後移動會刪除它';
 
   @override
   String get m79ab5f1286 => '轉換為 Lua';
@@ -1160,6 +1178,15 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m40c71efeca => '法力恢復';
 
   @override
+  String get mcd085a0260 => '編輯組';
+
+  @override
+  String get m11dc0e7d04 => '技能組編輯器';
+
+  @override
+  String get mf35834d767 => '編輯器支援每組一項主動技能';
+
+  @override
   String get m3826292e79 => '發現物品的稀有度';
 
   @override
@@ -1264,6 +1291,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m62bb423bd3 => '抵抗';
 
   @override
+  String get mcd4e66880d => '團體的組成發生了變化；重複傳輸';
+
+  @override
   String get mbd97450c85 => '正在儲存...';
 
   @override
@@ -1271,6 +1301,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get mb4d30cae52 => '保存';
+
+  @override
+  String get m9af7509a85 => '儲存並計算';
 
   @override
   String md7dfb40adb(String p0) {
@@ -1315,6 +1348,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get mcacf1f7fd0 => '放大介面';
+
+  @override
+  String get m1c89558239 => '刪除技能';
 
   @override
   String get m97ac4c501c => '安裝已在進行中';
@@ -1727,6 +1763,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m2ac910bfb3 => '選出班級';
 
   @override
+  String get m0513479f74 => '選擇技能選擇支援';
+
+  @override
   String get m2749913680 => '選擇一個特徵並按一下「尋找」。';
 
   @override
@@ -1768,7 +1807,13 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get mef05d57959 => '完成';
 
   @override
-  String get ma3ade41d93 => '你的集合中的石頭組';
+  String get m8eb6bbb41e => '該組不再存在';
+
+  @override
+  String get m1adc0797f0 => '群組不可編輯';
+
+  @override
+  String get mcd8c587351 => '組';
 
   @override
   String get ma755f360c2 => '兩個組件。在您的計算機上進行計算。';
@@ -2160,6 +2205,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   }
 
   @override
+  String get m409f34eb59 => '無法保存群組';
+
+  @override
   String get mef9d01550d => '無法保存比例。';
 
   @override
@@ -2169,6 +2217,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String m62f5b562c1(String p0) {
     return '無法儲存草稿 XML：$p0';
   }
+
+  @override
+  String get m0dc255f974 => '刪除技能失敗';
 
   @override
   String get m45c78389e9 => '不安全的更新位址';
@@ -2281,6 +2332,12 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get md423f03f4f => '更新原始石頭圖示的 MCP';
 
   @override
+  String get m2788a17cac => '更新 MCP 以編輯群組';
+
+  @override
+  String get m124cd4a205 => '更新 MCP 以刪除技能';
+
+  @override
   String get m603e460bf5 => '更新';
 
   @override
@@ -2343,12 +2400,6 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m8e6a41ecd0 => '縮小';
 
   @override
-  String get m5bd2e464d0 => '已停用';
-
-  @override
-  String get ma3fbed9442 => '已停用';
-
-  @override
   String get mea1f408246 => '打開';
 
   @override
@@ -2404,6 +2455,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m79a3312d3b => '重啟並更新';
+
+  @override
+  String get m9af13a3399 => '移動到列表會添加支持，向後移動會刪除它';
 
   @override
   String get m79ab5f1286 => '轉換為 Lua';
@@ -2646,6 +2700,15 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m40c71efeca => '法力恢復';
 
   @override
+  String get mcd085a0260 => '編輯組';
+
+  @override
+  String get m11dc0e7d04 => '技能組編輯器';
+
+  @override
+  String get mf35834d767 => '編輯器支援每組一項主動技能';
+
+  @override
   String get m3826292e79 => '發現物品的稀有度';
 
   @override
@@ -2750,6 +2813,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m62bb423bd3 => '抵抗';
 
   @override
+  String get mcd4e66880d => '團體的組成發生了變化；重複傳輸';
+
+  @override
   String get mbd97450c85 => '正在儲存...';
 
   @override
@@ -2757,6 +2823,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get mb4d30cae52 => '保存';
+
+  @override
+  String get m9af7509a85 => '儲存並計算';
 
   @override
   String md7dfb40adb(String p0) {
@@ -2801,6 +2870,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get mcacf1f7fd0 => '放大介面';
+
+  @override
+  String get m1c89558239 => '刪除技能';
 
   @override
   String get m97ac4c501c => '安裝已在進行中';

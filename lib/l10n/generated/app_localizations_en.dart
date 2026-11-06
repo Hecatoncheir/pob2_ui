@@ -242,6 +242,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m2ac910bfb3 => 'Select class';
 
   @override
+  String get m0513479f74 => 'Select a skill to select supports';
+
+  @override
   String get m2749913680 => 'Select a characteristic and click Find.';
 
   @override
@@ -284,7 +287,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get mef05d57959 => 'Done';
 
   @override
-  String get ma3ade41d93 => 'Groups of stones from your assembly';
+  String get m8eb6bbb41e => 'The group no longer exists';
+
+  @override
+  String get m1adc0797f0 => 'Group is not editable';
+
+  @override
+  String get mcd8c587351 => 'Groups';
 
   @override
   String get ma755f360c2 => 'Two components. Calculations on your computer.';
@@ -680,6 +689,9 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String get m409f34eb59 => 'Failed to save group';
+
+  @override
   String get mef9d01550d => 'Failed to save scale.';
 
   @override
@@ -689,6 +701,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String m62f5b562c1(String p0) {
     return 'Failed to save draft XML: $p0';
   }
+
+  @override
+  String get m0dc255f974 => 'Failed to remove skill';
 
   @override
   String get m45c78389e9 => 'Insecure update address';
@@ -803,6 +818,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get md423f03f4f => 'Update MCP for original stone icons';
 
   @override
+  String get m2788a17cac => 'Update MCP to edit group';
+
+  @override
+  String get m124cd4a205 => 'Update MCP to remove skill';
+
+  @override
   String get m603e460bf5 => 'Update';
 
   @override
@@ -867,12 +888,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m8e6a41ecd0 => 'Zoom out';
 
   @override
-  String get m5bd2e464d0 => 'Disabled';
-
-  @override
-  String get ma3fbed9442 => 'Disabled';
-
-  @override
   String get mea1f408246 => 'Open';
 
   @override
@@ -928,6 +943,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get m79a3312d3b => 'Restart and update';
+
+  @override
+  String get m9af13a3399 =>
+      'Moving to the list adds support, moving back removes it';
 
   @override
   String get m79ab5f1286 => 'Convert to Lua';
@@ -1173,6 +1192,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m40c71efeca => 'Mana regeneration';
 
   @override
+  String get mcd085a0260 => 'Edit group';
+
+  @override
+  String get m11dc0e7d04 => 'Skill group editor';
+
+  @override
+  String get mf35834d767 => 'The editor supports one active skill per group';
+
+  @override
   String get m3826292e79 => 'Rarity of Items found';
 
   @override
@@ -1279,6 +1307,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m62bb423bd3 => 'Resistances';
 
   @override
+  String get mcd4e66880d =>
+      'The composition of the group has changed; repeat the transfer';
+
+  @override
   String get mbd97450c85 => 'Saving…';
 
   @override
@@ -1286,6 +1318,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get mb4d30cae52 => 'Save';
+
+  @override
+  String get m9af7509a85 => 'Save and calculate';
 
   @override
   String md7dfb40adb(String p0) {
@@ -1330,6 +1365,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get mcacf1f7fd0 => 'Enlarge interface';
+
+  @override
+  String get m1c89558239 => 'Remove skill';
 
   @override
   String get m97ac4c501c => 'Installation already in progress';

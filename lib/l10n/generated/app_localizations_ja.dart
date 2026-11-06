@@ -241,6 +241,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m2ac910bfb3 => 'クラスの選択';
 
   @override
+  String get m0513479f74 => 'スキルを選択してサポートを選択してください';
+
+  @override
   String get m2749913680 => '特性を選択し、「検索」をクリックします。';
 
   @override
@@ -282,7 +285,13 @@ class AppLocalizationsJa extends AppLocalizations {
   String get mef05d57959 => 'Done';
 
   @override
-  String get ma3ade41d93 => 'アセンブリからの石のグループ';
+  String get m8eb6bbb41e => 'グループはもう存在しません';
+
+  @override
+  String get m1adc0797f0 => 'グループは編集できません';
+
+  @override
+  String get mcd8c587351 => 'グループ';
 
   @override
   String get ma755f360c2 => '2 つのコンポーネント。コンピューター上での計算。';
@@ -675,6 +684,9 @@ class AppLocalizationsJa extends AppLocalizations {
   }
 
   @override
+  String get m409f34eb59 => 'グループの保存に失敗しました';
+
+  @override
   String get mef9d01550d => 'スケールの保存に失敗しました。';
 
   @override
@@ -684,6 +696,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String m62f5b562c1(String p0) {
     return '下書き XML を保存できませんでした: $p0';
   }
+
+  @override
+  String get m0dc255f974 => 'スキルの削除に失敗しました';
 
   @override
   String get m45c78389e9 => '安全でない更新アドレス';
@@ -796,6 +811,12 @@ class AppLocalizationsJa extends AppLocalizations {
   String get md423f03f4f => 'オリジナルの石アイコンの MCP を更新';
 
   @override
+  String get m2788a17cac => 'MCP を編集グループに更新します';
+
+  @override
+  String get m124cd4a205 => 'MCP を更新してスキルを削除します';
+
+  @override
   String get m603e460bf5 => 'アップデート';
 
   @override
@@ -858,12 +879,6 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m8e6a41ecd0 => 'ズームアウト';
 
   @override
-  String get m5bd2e464d0 => '無効';
-
-  @override
-  String get ma3fbed9442 => '無効です';
-
-  @override
   String get mea1f408246 => '開く';
 
   @override
@@ -919,6 +934,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m79a3312d3b => '再起動とアップデート';
+
+  @override
+  String get m9af13a3399 => 'リストに移動するとサポートが追加され、リストに戻るとサポートが削除されます';
 
   @override
   String get m79ab5f1286 => 'Lua に変換します';
@@ -1161,6 +1179,15 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m40c71efeca => 'マナ再生';
 
   @override
+  String get mcd085a0260 => 'グループの編集';
+
+  @override
+  String get m11dc0e7d04 => 'スキル グループ エディター';
+
+  @override
+  String get mf35834d767 => 'エディターはグループごとに 1 つのアクティブなスキルをサポートします';
+
+  @override
   String get m3826292e79 => '見つかったアイテムのレア度';
 
   @override
@@ -1267,6 +1294,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m62bb423bd3 => '抵抗';
 
   @override
+  String get mcd4e66880d => 'グループの構成が変更されました。転送を繰り返す';
+
+  @override
   String get mbd97450c85 => '保存中…';
 
   @override
@@ -1274,6 +1304,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get mb4d30cae52 => '保存';
+
+  @override
+  String get m9af7509a85 => '保存して計算する';
 
   @override
   String md7dfb40adb(String p0) {
@@ -1318,6 +1351,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get mcacf1f7fd0 => 'インターフェースを拡大する';
+
+  @override
+  String get m1c89558239 => 'スキルを削除します';
 
   @override
   String get m97ac4c501c => 'インストールはすでに進行中です';

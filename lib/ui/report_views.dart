@@ -179,11 +179,6 @@ class SkillSelectors extends StatelessWidget {
       const SizedBox(height: 4),
       _Selector(
         model: model,
-        control: 'groups',
-        data: model.state.report!.groupSelector,
-      ),
-      _Selector(
-        model: model,
         control: 'skills',
         data: model.state.report!.skillSelector,
       ),
@@ -207,6 +202,12 @@ class _Selector extends StatelessWidget {
       return const AppText(
         'Умение не выбрано',
         style: TextStyle(fontWeight: FontWeight.w700),
+      );
+    if (entries.length == 1)
+      return AppText(
+        '${entries.single['label']}',
+        game: true,
+        style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 12),
       );
     return DropdownButton<int>(
       value: data['selected'] as int?,

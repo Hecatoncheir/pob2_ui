@@ -34,7 +34,12 @@ const boss = {
 
 class EditorCatalogEngine extends McpClient {
   EditorCatalogEngine({this.gemEntries = const [fireball]}) {
-    tools = {'pob_gem_icons', 'pob_gem_supports'};
+    tools = {
+      'pob_gem_icons',
+      'pob_gem_supports',
+      'pob_update_skill_group',
+      'pob_delete_skill_group',
+    };
   }
   final List<JsonMap> gemEntries;
   final iconRequests = <List<dynamic>>[];
@@ -92,6 +97,9 @@ class EditorWorkshop extends WorkshopCubit {
   BuildEditResult result = (committed: true, error: null);
   List<JsonMap>? savedGems;
   String? savedLabel;
+  int? savedGroupId;
+  int? deletedGroupId;
+  (String, int)? selectedMain;
   (String, Object)? savedCondition;
   @override
   Future<BuildEditResult> addSkillGroup(
@@ -108,4 +116,89 @@ class EditorWorkshop extends WorkshopCubit {
     savedCondition = (key, value as Object);
     return result;
   }
+
+  @override
+  Future<BuildEditResult> updateSkillGroup(
+    int id,
+    String label,
+    List<JsonMap> gems,
+  ) async {
+    savedGroupId = id;
+    savedGems = gems;
+    savedLabel = label;
+    if (result.committed) {
+      final catalog = (engine as EditorCatalogEngine).gemEntries;
+      final groups = state.report!.groups
+          .map(
+            (group) => group['id'] != id
+                ? group
+                : {
+                    ...group,
+                    'customLabel': label,
+                    'gems': gems.indexed
+                        .map(
+                          (entry) => {
+                            ...entry.$2,
+                            'name': catalog.firstWhere(
+                              (gem) => gem['id'] == entry.$2['id'],
+                            )['name'],
+                            'support':
+                                catalog.firstWhere(
+                                  (gem) => gem['id'] == entry.$2['id'],
+                                )['support'] ==
+                                true,
+                            'sourceIndex': entry.$1 + 1,
+                          },
+                        )
+                        .toList(),
+                  },
+          )
+          .toList();
+      _report({...state.report!.raw, 'groups': groups});
+    }
+    return result;
+  }
+
+  @override
+  Future<BuildEditResult> deleteSkillGroup(int id) async {
+    deletedGroupId = id;
+    if (!result.committed) return result;
+    final groups = state.report!.groups
+        .where((group) => group['id'] != id)
+        .indexed
+        .map((entry) => {...entry.$2, 'id': entry.$1 + 1})
+        .toList();
+    _report({...state.report!.raw, 'groups': groups});
+    if (groups.isNotEmpty) await selectMain('groups', 1);
+    return result;
+  }
+
+  @override
+  Future<void> selectMain(String control, int id) async {
+    selectedMain = (control, id);
+    final raw = state.report!.raw;
+    final snapshot = jsonMap(raw['snapshot']);
+    final info = jsonMap(snapshot['buildInfo']);
+    _report({
+      ...raw,
+      'snapshot': {
+        ...snapshot,
+        'buildInfo': {
+          ...info,
+          'groups': {...jsonMap(info['groups']), 'selected': id},
+        },
+      },
+    });
+  }
+
+  void _report(JsonMap raw) => emit(
+    state.copyWith(
+      document: (
+        report: BuildReport.fromJson(raw),
+        tree: state.document!.tree,
+        stale: false,
+        treeError: null,
+      ),
+    ),
+  );
 }
