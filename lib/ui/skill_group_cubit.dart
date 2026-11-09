@@ -41,10 +41,9 @@ class SkillGroupState {
   GemDraft? get selected =>
       gems.where((gem) => gem.key == selectedKey).firstOrNull;
   bool get canSave =>
-      !loading &&
       !saving &&
       !support.loading &&
-      support.error == null &&
+      (!locksPrimary || (!loading && support.error == null)) &&
       gems.isNotEmpty &&
       gems
           .skip(1)

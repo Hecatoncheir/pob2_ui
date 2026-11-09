@@ -136,7 +136,10 @@ class _SkillGroupDialogState extends State<_SkillGroupDialog> {
               ),
               FilledButton(
                 key: const Key('skill-group-save'),
-                onPressed: editor.dirty && state.canSave ? _save : null,
+                onPressed:
+                    state.canSave && (!editor.locksPrimary || editor.dirty)
+                    ? _save
+                    : null,
                 child: AppText(_saveLabel(state)),
               ),
             ],
