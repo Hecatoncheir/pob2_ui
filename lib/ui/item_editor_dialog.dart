@@ -5,10 +5,13 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../data/equipment_repository.dart';
+import '../data/item_art_catalog.dart';
+import '../domain/build_report.dart';
 import 'core/app_text.dart';
 import 'core/motion.dart';
 import 'core/spark_theme.dart';
 import 'equipment_presentation.dart';
+import 'item_artwork_image.dart';
 import 'item_description.dart';
 import 'item_comparison_panel.dart';
 import 'item_editor_cubit.dart';
@@ -179,18 +182,14 @@ class _ItemEditorDialogState extends State<_ItemEditorDialog> {
         initialValue: state.itemId,
         isExpanded: true,
         decoration: const InputDecoration(label: AppText('Предмет из сборки')),
-        items: items
-            .map(
-              (item) => DropdownMenuItem(
-                value: item['id'] as int,
-                child: AppText(
-                  '${item['name']}',
-                  game: true,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ),
-            )
-            .toList(),
+        selectedItemBuilder: (context) => items.map(_itemLabel).toList(),
+        items: [
+          for (final item in items)
+            DropdownMenuItem(
+              value: item['id'] as int,
+              child: _itemOption(item),
+            ),
+        ],
         onChanged: state.saving
             ? null
             : (id) {
@@ -199,6 +198,28 @@ class _ItemEditorDialogState extends State<_ItemEditorDialog> {
       ),
     );
   }
+
+  Widget _itemLabel(JsonMap item) =>
+      AppText('${item['name']}', game: true, overflow: TextOverflow.ellipsis);
+
+  Widget _itemOption(JsonMap item) => Row(
+    children: [
+      SizedBox.square(
+        dimension: 28,
+        child: FutureBuilder<ItemArtCatalog>(
+          future: ItemArtCatalog.shared,
+          builder: (context, snapshot) {
+            final url = snapshot.data?.imageForReport(item);
+            return url == null
+                ? const SizedBox.shrink()
+                : ItemArtworkImage(url: url);
+          },
+        ),
+      ),
+      const SizedBox(width: 8),
+      Expanded(child: _itemLabel(item)),
+    ],
+  );
 
   Widget _preview(ItemEditorState state) => Column(
     crossAxisAlignment: CrossAxisAlignment.stretch,

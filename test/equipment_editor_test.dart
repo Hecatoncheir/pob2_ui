@@ -3,11 +3,14 @@ import 'dart:ui' show PointerDeviceKind;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:pob2_ui/data/item_art_catalog.dart';
 import 'package:pob2_ui/data/mcp_error_message.dart';
 import 'package:pob2_ui/domain/build_report.dart';
 import 'package:pob2_ui/domain/equipment_item.dart';
 import 'package:pob2_ui/ui/equipment_view.dart';
 import 'package:pob2_ui/ui/equipment_board.dart';
+import 'package:pob2_ui/ui/core/pob_text.dart';
+import 'package:pob2_ui/ui/item_description.dart';
 import 'package:pob2_ui/ui/item_editor_cubit.dart';
 
 import 'editor_widget_test.dart' show application;
@@ -84,6 +87,58 @@ class EquipmentWorkshop extends EditorWorkshop {
 }
 
 void main() {
+  TestWidgetsFlutterBinding.ensureInitialized();
+
+  test('Изображение подбирается по уникальному предмету и базе', () async {
+    final catalog = await ItemArtCatalog.shared;
+    final coil = EquipmentItem.fromJson({
+      'name': 'Liminal Coil, Twisted Wand',
+      'base': 'Twisted Wand',
+      'rarity': 'UNIQUE',
+      'raw': '',
+    });
+    expect(catalog.imageFor(coil), endsWith('/Uniques/CoilOfUndoing.webp'));
+    expect(catalog.imageFor(inspection().item), endsWith('/LazuliRing.webp'));
+    expect(
+      catalog.imageForReport({
+        'name': 'The Adorned',
+        'base': 'Diamond',
+        'rarity': 'UNIQUE',
+      }),
+      endsWith('/Jewels/TrialmasterJewel.webp'),
+    );
+  });
+
+  testWidgets('Изображение рядом с описанием и над ним в узкой колонке', (
+    tester,
+  ) async {
+    await tester.runAsync(() async => ItemArtCatalog.shared);
+    for (final width in [480.0, 300.0]) {
+      await tester.pumpWidget(
+        application(
+          Scaffold(
+            body: Center(
+              child: SizedBox(
+                width: width,
+                child: ItemDescription(inspection()),
+              ),
+            ),
+          ),
+        ),
+      );
+      await tester.runAsync(() async => ItemArtCatalog.shared);
+      await tester.pumpAndSettle();
+      final art = tester.getRect(find.byKey(const Key('item-artwork')));
+      final text = tester.getRect(find.byType(PoBText).first);
+      if (width > 340) {
+        expect(art.right, lessThan(text.left));
+      } else {
+        expect(art.bottom, lessThan(text.top));
+      }
+    }
+    expect(tester.takeException(), isNull);
+  });
+
   testWidgets('Название оберега видно только при наведении', (tester) async {
     await tester.binding.setSurfaceSize(const Size(600, 800));
     addTearDown(() => tester.binding.setSurfaceSize(null));

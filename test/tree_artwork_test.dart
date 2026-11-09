@@ -3,9 +3,15 @@ import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:pob2_ui/data/item_art_catalog.dart';
+import 'package:pob2_ui/domain/build_report.dart';
 import 'package:pob2_ui/domain/original_tree_scene.dart';
+import 'package:pob2_ui/domain/tree_geometry.dart';
 import 'package:pob2_ui/ui/attribute_picker.dart';
+import 'package:pob2_ui/ui/item_artwork_image.dart';
 import 'package:pob2_ui/ui/original_tree_artwork.dart';
+import 'package:pob2_ui/ui/tree_canvas.dart';
+import 'package:pob2_ui/ui/tree_jewel_artwork.dart';
 
 Future<ui.Image> _whiteImage() async {
   final recorder = ui.PictureRecorder();
@@ -27,6 +33,73 @@ Map<String, dynamic> _rectangle(double start, double end, List<double> color) =>
     };
 
 void main() {
+  testWidgets('Миниатюра следует за самоцветом при смене гнезда', (
+    tester,
+  ) async {
+    await tester.runAsync(() async => ItemArtCatalog.shared);
+    final scene = TreeScene(
+      TreeGeometry.fromJson({
+        'nodes': [
+          for (final id in [1, 2])
+            {
+              'id': id,
+              'x': id * 70,
+              'y': 80,
+              'name': 'Jewel Socket',
+              'type': 'Socket',
+              'allocated': true,
+            },
+        ],
+        'edges': [],
+        'scene': {'scale': 1, 'offsetX': 0, 'offsetY': 0, 'commands': []},
+      }),
+    );
+    Future<void> show(int node) async {
+      await tester.pumpWidget(
+        Directionality(
+          textDirection: TextDirection.ltr,
+          child: TreeJewelArtwork(
+            scene: scene,
+            report: BuildReport.fromJson({
+              'source': 'original-lua',
+              'items': [
+                {
+                  'id': 42,
+                  'name': 'Red Spark',
+                  'base': 'Ruby',
+                  'rarity': 'RARE',
+                },
+              ],
+              'slots': [
+                for (final id in [1, 2])
+                  {'nodeId': id, 'itemId': id == node ? 42 : 0},
+              ],
+            }),
+            child: const SizedBox(width: 240, height: 180),
+          ),
+        ),
+      );
+      await tester.runAsync(() async => ItemArtCatalog.shared);
+      await tester.pumpAndSettle();
+    }
+
+    await show(1);
+    final first = find.byKey(const ValueKey('tree-jewel-1'));
+    expect(
+      tester.widget<ItemArtworkImage>(first).url,
+      endsWith('/RubyJewel.webp'),
+    );
+    expect(tester.getCenter(first), const Offset(70, 80));
+    await show(2);
+    expect(first, findsNothing);
+    expect(
+      tester.getCenter(find.byKey(const ValueKey('tree-jewel-2'))),
+      const Offset(140, 80),
+    );
+    await show(0);
+    expect(find.byType(ItemArtworkImage), findsNothing);
+  });
+
   testWidgets('Фон сцены прозрачен, остальные команды PoB сохранены', (
     tester,
   ) async {

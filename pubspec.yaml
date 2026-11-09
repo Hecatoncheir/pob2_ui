@@ -1,7 +1,7 @@
 name: pob2_ui
 description: "Независимый интерфейс PoB PoE2 с исходными расчётами Lua"
 publish_to: 'none'
-version: 0.1.8+9
+version: 0.1.9+10
 
 environment:
   sdk: ^3.13.7
@@ -27,6 +27,7 @@ flutter:
   generate: true
   uses-material-design: true
   assets:
+    - assets/item_art.json
     - docs/assets/brand/app-icon.svg
     - docs/assets/fonts/OFL-nunito.txt
     - docs/assets/fonts/OFL-nunitosans.txt

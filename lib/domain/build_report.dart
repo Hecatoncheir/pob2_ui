@@ -27,6 +27,7 @@ class BuildReport {
       groups.where((group) => group['slotSupports'] != true);
   List<JsonMap> get items => jsonRows(raw['items']);
   List<JsonMap> get slots => jsonRows(raw['slots']);
+  late final Map<int, JsonMap> socketedItems = _socketedItems();
   String get name => character['name'] as String? ?? 'Сборка';
   String get characterClass => character['class'] as String? ?? '—';
   int get level => character['level'] as int? ?? 0;
@@ -41,6 +42,15 @@ class BuildReport {
             .map((entry) => '${entry['label']}')
             .firstOrNull ??
         'Умение не выбрано';
+  }
+
+  Map<int, JsonMap> _socketedItems() {
+    final byId = {for (final item in items) item['id']: item};
+    return Map.unmodifiable({
+      for (final slot in slots)
+        if (slot case {'nodeId': final int nodeId, 'itemId': final int itemId})
+          if (byId[itemId] case final item?) nodeId: item,
+    });
   }
 
   List<String> get warnings =>

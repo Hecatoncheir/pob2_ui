@@ -21,6 +21,7 @@ import 'core/spark_art.dart';
 import 'core/spark_theme.dart';
 import 'workshop_cubit.dart';
 import 'tree_canvas.dart';
+import 'tree_jewel_artwork.dart';
 import 'original_tree_artwork.dart';
 import 'attribute_picker.dart';
 import 'tree_point_counters.dart';
@@ -286,20 +287,24 @@ class _TreeViewState extends State<TreeView>
                         minScale: .08,
                         maxScale: 12,
                         boundaryMargin: const EdgeInsets.all(500),
-                        child: CustomPaint(
-                          size: const Size(1800, 1800),
-                          isComplex: true,
-                          painter: TreePainter(
-                            scene,
-                            selected,
-                            hovered,
-                            query,
-                            icons,
-                            transform,
-                            size,
-                            powerArtwork?.artwork.picture ?? artwork?.picture,
-                            hoverArtwork?.picture,
-                            matches: _matchedIds(),
+                        child: TreeJewelArtwork(
+                          scene: scene,
+                          report: widget.model.state.report!,
+                          child: CustomPaint(
+                            size: const Size(1800, 1800),
+                            isComplex: true,
+                            painter: TreePainter(
+                              scene,
+                              selected,
+                              hovered,
+                              query,
+                              icons,
+                              transform,
+                              size,
+                              powerArtwork?.artwork.picture ?? artwork?.picture,
+                              hoverArtwork?.picture,
+                              matches: _matchedIds(),
+                            ),
                           ),
                         ),
                       ),
