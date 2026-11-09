@@ -363,6 +363,9 @@ class AppLocalizationsTh extends AppLocalizations {
       'การติดตั้งต้องใช้ Git และ Python 3.11+ 64 บิต หลังจากโหลดส่วนประกอบแล้ว การคำนวณจะทำงานโดยไม่มีเครือข่าย';
 
   @override
+  String get m659973f49f => 'ไม่สามารถเพิ่มเจมเสริมให้สกิลนี้ได้';
+
+  @override
   String get ma2ab6a340a => 'ไม่มี Service Pack สำหรับแพลตฟอร์มนี้';
 
   @override
@@ -1095,6 +1098,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m52d7142d18 => 'รองรับ Windows x64, Linux x64 และ macOS arm64';
 
   @override
+  String get mc2fd54cfce => 'สกิลในช่องอุปกรณ์นี้ใช้เจมเสริมร่วมกัน';
+
+  @override
   String get m67f5d8880e => 'เชื่อมต่อ Lua';
 
   @override
@@ -1362,6 +1368,9 @@ class AppLocalizationsTh extends AppLocalizations {
   }
 
   @override
+  String get m187a481844 => 'ลบบิลด์แล้ว';
+
+  @override
   String get m407f871778 => 'รีเซ็ต';
 
   @override
@@ -1526,6 +1535,15 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get mcacf1f7fd0 => 'ขยายอินเทอร์เฟซ';
+
+  @override
+  String get mbe99b13612 => 'ลบ';
+
+  @override
+  String get m9ba95f357c => 'ลบบิลด์';
+
+  @override
+  String get mb3157cbf2b => 'ลบบิลด์นี้ใช่ไหม';
 
   @override
   String get m1c89558239 => 'ลบสกิล';

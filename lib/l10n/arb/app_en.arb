@@ -609,6 +609,11 @@
     "description": "Для установки нужны Git и 64-битный Python 3.11+. После загрузки компонентов расчёты работают без сети.",
     "placeholders": {}
   },
+  "m659973f49f": "This skill cannot be supported",
+  "@m659973f49f": {
+    "description": "Для этого умения нельзя добавить поддержки",
+    "placeholders": {}
+  },
   "ma2ab6a340a": "There is no service pack for this platform",
   "@ma2ab6a340a": {
     "description": "Для этой платформы нет пакета обновления",
@@ -1850,6 +1855,11 @@
     "description": "Поддерживаются Windows x64, Linux x64 и macOS arm64",
     "placeholders": {}
   },
+  "mc2fd54cfce": "Skills in this equipment slot share supports",
+  "@mc2fd54cfce": {
+    "description": "Поддержки общие для умений этого слота",
+    "placeholders": {}
+  },
   "m67f5d8880e": "Connect Lua",
   "@m67f5d8880e": {
     "description": "Подключите Lua",
@@ -2300,6 +2310,11 @@
       }
     }
   },
+  "m187a481844": "Build deleted",
+  "@m187a481844": {
+    "description": "Сборка удалена",
+    "placeholders": {}
+  },
   "m407f871778": "Reset",
   "@m407f871778": {
     "description": "Сбросить",
@@ -2572,6 +2587,21 @@
   "mcacf1f7fd0": "Enlarge interface",
   "@mcacf1f7fd0": {
     "description": "Увеличить интерфейс",
+    "placeholders": {}
+  },
+  "mbe99b13612": "Delete",
+  "@mbe99b13612": {
+    "description": "Удалить",
+    "placeholders": {}
+  },
+  "m9ba95f357c": "Delete build",
+  "@m9ba95f357c": {
+    "description": "Удалить сборку",
+    "placeholders": {}
+  },
+  "mb3157cbf2b": "Delete this build?",
+  "@mb3157cbf2b": {
+    "description": "Удалить сборку?",
     "placeholders": {}
   },
   "m1c89558239": "Remove skill",

@@ -31,7 +31,7 @@ class SkillWorkspaceCubit extends Cubit<SkillWorkspaceState> {
 
   Future<void> initialize() async {
     _lastReport = model.state.report;
-    final group = model.state.report?.groups.firstOrNull;
+    final group = model.state.report?.skillGroups.firstOrNull;
     if (group != null) await select(group['id'] as int);
   }
 
@@ -62,6 +62,7 @@ class SkillWorkspaceCubit extends Cubit<SkillWorkspaceState> {
       model.catalogs,
       (label, gems) => model.updateSkillGroup(id, label, gems),
       groupId: id,
+      group: group,
       initial: initial,
       label: group['customLabel'] as String? ?? '',
     );
@@ -114,12 +115,13 @@ class SkillWorkspaceCubit extends Cubit<SkillWorkspaceState> {
     final result = await model.deleteSkillGroup(id);
     if (!result.committed)
       throw FormatException(result.error ?? 'Не удалось удалить умение');
-    final groups = model.state.report!.groups;
+    final groups = model.state.report!.skillGroups;
     if (groups.isEmpty) {
       await _clear();
     } else {
       final main = model.state.report!.groupSelector['selected'] as int?;
-      await _replace(main ?? groups.first['id'] as int);
+      final next = groups.where((group) => group['id'] == main).firstOrNull;
+      await _replace((next ?? groups.first)['id'] as int);
     }
   });
 
@@ -170,7 +172,7 @@ class SkillWorkspaceCubit extends Cubit<SkillWorkspaceState> {
     if (state.busy || state.report == _lastReport) return;
     _lastReport = state.report;
     if (this.state.busy || _closing) return;
-    final groups = state.report?.groups ?? const <JsonMap>[];
+    final groups = state.report?.skillGroups ?? const <JsonMap>[];
     final group =
         groups.where((group) => group['id'] == editor?.groupId).firstOrNull ??
         groups.firstOrNull;

@@ -30,6 +30,9 @@ typedef GemDraft = ({
   int? sourceIndex,
 });
 
+bool isGrantedSkillGroup(JsonMap? group) =>
+    (group?['source'] as String?)?.isNotEmpty ?? false;
+
 JsonMap gemRequest(GemDraft draft) {
   final level = int.tryParse(draft.level.trim());
   final quality = int.tryParse(draft.quality.trim());
@@ -53,7 +56,7 @@ List<GemDraft> groupGemDrafts(JsonMap group) {
       .map(
         (entry) => (
           key: entry.$1,
-          gem: SkillGem.fromJson(entry.$2),
+          gem: _groupGem(group, entry.$2),
           level: '${entry.$2['level']}',
           quality: '${entry.$2['quality']}',
           enabled: entry.$2['enabled'] == true,
@@ -70,4 +73,11 @@ List<GemDraft> groupGemDrafts(JsonMap group) {
     ...active,
     ...result.where((gem) => gem.gem.support),
   ]);
+}
+
+SkillGem _groupGem(JsonMap group, JsonMap gem) {
+  if (isGrantedSkillGroup(group) && gem['id'] == null) {
+    return SkillGem.fromJson({...gem, 'id': gem['skillId']});
+  }
+  return SkillGem.fromJson(gem);
 }

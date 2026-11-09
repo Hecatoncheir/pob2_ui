@@ -137,18 +137,15 @@ class EditorWorkshop extends WorkshopCubit {
                     'customLabel': label,
                     'gems': gems.indexed
                         .map(
-                          (entry) => {
-                            ...entry.$2,
-                            'name': catalog.firstWhere(
-                              (gem) => gem['id'] == entry.$2['id'],
-                            )['name'],
-                            'support':
-                                catalog.firstWhere(
-                                  (gem) => gem['id'] == entry.$2['id'],
-                                )['support'] ==
-                                true,
-                            'sourceIndex': entry.$1 + 1,
-                          },
+                          (entry) => entry.$1 == 0 && group['source'] != null
+                              ? jsonRows(group['gems']).first
+                              : {
+                                  ...catalog.firstWhere(
+                                    (gem) => gem['id'] == entry.$2['id'],
+                                  ),
+                                  ...entry.$2,
+                                  'sourceIndex': entry.$1 + 1,
+                                },
                         )
                         .toList(),
                   },

@@ -60,6 +60,15 @@ abstract final class Spark {
         bodySmall: TextStyle(fontSize: 11, height: 1.5, color: secondaryText),
       ),
       dividerTheme: DividerThemeData(color: border, thickness: 1, space: 1),
+      switchTheme: SwitchThemeData(
+        thumbColor: WidgetStateProperty.resolveWith((states) {
+          if (states.contains(WidgetState.disabled))
+            return scheme.onSurface.withValues(alpha: .55);
+          return states.contains(WidgetState.selected)
+              ? scheme.onPrimary
+              : secondaryText;
+        }),
+      ),
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),

@@ -372,6 +372,9 @@ class AppLocalizationsFr extends AppLocalizations {
       'L\'installation nécessite Git et Python 3.11+ 64 bits. Après chargement des composants, les calculs fonctionnent sans réseau.';
 
   @override
+  String get m659973f49f => 'Cette compétence ne peut pas être soutenue';
+
+  @override
   String get ma2ab6a340a =>
       'Il n\'y a pas de service pack pour cette plateforme';
 
@@ -1119,6 +1122,10 @@ class AppLocalizationsFr extends AppLocalizations {
       'Windows x64, Linux x64 et macOS arm64 pris en charge';
 
   @override
+  String get mc2fd54cfce =>
+      'Les compétences de cet emplacement partagent les soutiens';
+
+  @override
   String get m67f5d8880e => 'Connectez-vous Lua';
 
   @override
@@ -1393,6 +1400,9 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
+  String get m187a481844 => 'Construction supprimée';
+
+  @override
   String get m407f871778 => 'Réinitialiser';
 
   @override
@@ -1560,6 +1570,15 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get mcacf1f7fd0 => 'Agrandir l\'interface';
+
+  @override
+  String get mbe99b13612 => 'Supprimer';
+
+  @override
+  String get m9ba95f357c => 'Supprimer la version';
+
+  @override
+  String get mb3157cbf2b => 'Supprimer cette version ?';
 
   @override
   String get m1c89558239 => 'Supprimer la compétence';

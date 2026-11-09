@@ -360,6 +360,9 @@ class AppLocalizationsJa extends AppLocalizations {
       'インストールには Git および 64 ビット Python 3.11 以降が必要です。コンポーネントをロードすると、計算はネットワークなしで機能します。';
 
   @override
+  String get m659973f49f => 'このスキルにはサポートを追加できません';
+
+  @override
   String get ma2ab6a340a => 'このプラットフォームにはサービス パックがありません';
 
   @override
@@ -1089,6 +1092,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m52d7142d18 => 'Windows x64、Linux x64、および macOS arm64 をサポート';
 
   @override
+  String get mc2fd54cfce => 'この装備スロットのスキルはサポートを共有します';
+
+  @override
   String get m67f5d8880e => 'Lua に接続します';
 
   @override
@@ -1355,6 +1361,9 @@ class AppLocalizationsJa extends AppLocalizations {
   }
 
   @override
+  String get m187a481844 => 'ビルドが削除されました';
+
+  @override
   String get m407f871778 => 'リセット';
 
   @override
@@ -1519,6 +1528,15 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get mcacf1f7fd0 => 'インターフェースを拡大する';
+
+  @override
+  String get mbe99b13612 => '削除';
+
+  @override
+  String get m9ba95f357c => 'ビルドを削除';
+
+  @override
+  String get mb3157cbf2b => 'このビルドを削除しますか?';
 
   @override
   String get m1c89558239 => 'スキルを削除します';

@@ -363,6 +363,9 @@ class AppLocalizationsEn extends AppLocalizations {
       'Installation requires Git and 64-bit Python 3.11+. After loading the components, calculations work without a network.';
 
   @override
+  String get m659973f49f => 'This skill cannot be supported';
+
+  @override
   String get ma2ab6a340a => 'There is no service pack for this platform';
 
   @override
@@ -1100,6 +1103,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m52d7142d18 => 'Windows x64, Linux x64 and macOS arm64 supported';
 
   @override
+  String get mc2fd54cfce => 'Skills in this equipment slot share supports';
+
+  @override
   String get m67f5d8880e => 'Connect Lua';
 
   @override
@@ -1368,6 +1374,9 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String get m187a481844 => 'Build deleted';
+
+  @override
   String get m407f871778 => 'Reset';
 
   @override
@@ -1533,6 +1542,15 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get mcacf1f7fd0 => 'Enlarge interface';
+
+  @override
+  String get mbe99b13612 => 'Delete';
+
+  @override
+  String get m9ba95f357c => 'Delete build';
+
+  @override
+  String get mb3157cbf2b => 'Delete this build?';
 
   @override
   String get m1c89558239 => 'Remove skill';

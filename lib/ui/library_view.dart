@@ -3,6 +3,7 @@ import 'core/app_text.dart';
 import 'package:flutter/material.dart';
 
 import '../domain/library_entry.dart';
+import 'core/motion.dart';
 import 'core/panels.dart';
 import 'core/spark_art.dart';
 import 'core/spark_theme.dart';
@@ -108,6 +109,14 @@ class _BuildCard extends StatelessWidget {
                 color: Spark.of(context).muted,
               ),
             ),
+            ArtIconButton(
+              'trash',
+              key: ValueKey('delete-build-${entry.id}'),
+              label: 'Удалить сборку',
+              onPressed: model.state.busy
+                  ? null
+                  : () => _confirmDelete(context),
+            ),
           ],
         ),
         const SizedBox(height: 16),
@@ -152,4 +161,32 @@ class _BuildCard extends StatelessWidget {
       ],
     ),
   );
+
+  Future<void> _confirmDelete(BuildContext context) async {
+    final colors = Theme.of(context).colorScheme;
+    final confirmed = await sparkDialog<bool>(
+      context,
+      AlertDialog(
+        title: const AppText('Удалить сборку?'),
+        content: AppText(entry.title, localize: false),
+        actions: [
+          TextButton(
+            autofocus: true,
+            onPressed: () => Navigator.of(context).pop(false),
+            child: const AppText('Отмена'),
+          ),
+          FilledButton(
+            key: const Key('confirm-delete-build'),
+            style: FilledButton.styleFrom(
+              backgroundColor: colors.error,
+              foregroundColor: colors.onError,
+            ),
+            onPressed: () => Navigator.of(context).pop(true),
+            child: const AppText('Удалить'),
+          ),
+        ],
+      ),
+    );
+    if (confirmed == true && context.mounted) await model.deleteBuild(entry.id);
+  }
 }

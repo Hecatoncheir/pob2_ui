@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../data/game_catalog_repository.dart';
+import '../data/mcp_error_message.dart';
 import '../domain/build_report.dart';
 import '../domain/build_edit_result.dart';
 import '../domain/skill_gem.dart';
@@ -24,6 +25,7 @@ class SkillGroupState {
     this.saving = false,
     this.error,
     this.showSupports = false,
+    this.locksPrimary = false,
     this.support = (loading: false, ids: const {}, error: null),
     this.selectedKey,
   }) : catalog = List.unmodifiable(catalog),
@@ -33,16 +35,24 @@ class SkillGroupState {
   final String query, label;
   final bool loading, saving;
   final String? error;
-  final bool showSupports;
+  final bool showSupports, locksPrimary;
   final SupportSelection support;
   final int? selectedKey;
   GemDraft? get selected =>
       gems.where((gem) => gem.key == selectedKey).firstOrNull;
   bool get canSave =>
+      !loading &&
       !saving &&
       !support.loading &&
+      support.error == null &&
       gems.isNotEmpty &&
-      gems.skip(1).every((gem) => support.ids.contains(gem.gem.id));
+      gems
+          .skip(1)
+          .every(
+            (gem) =>
+                (locksPrimary && gem.sourceIndex != null) ||
+                support.ids.contains(gem.gem.id),
+          );
   SkillGroupState copyWith({
     List<SkillGem>? catalog,
     List<GemDraft>? gems,
@@ -63,6 +73,7 @@ class SkillGroupState {
     saving: saving ?? this.saving,
     error: error,
     showSupports: showSupports ?? this.showSupports,
+    locksPrimary: locksPrimary,
     support: support ?? this.support,
     selectedKey: selectedKey ?? this.selectedKey,
   );
@@ -75,10 +86,13 @@ class SkillGroupCubit extends Cubit<SkillGroupState> {
     List<GemDraft> initial = const [],
     String label = '',
     this.groupId,
+    this.group,
   }) : super(
          SkillGroupState(
            gems: initial,
            label: label,
+           showSupports: isGrantedSkillGroup(group),
+           locksPrimary: isGrantedSkillGroup(group),
            selectedKey: initial.firstOrNull?.key,
          ),
        ) {
@@ -88,6 +102,9 @@ class SkillGroupCubit extends Cubit<SkillGroupState> {
   final GameCatalogRepository repository;
   final SaveSkillGroup commit;
   final int? groupId;
+  final JsonMap? group;
+  bool get locksPrimary => state.locksPrimary;
+  String? get supportScope => group?['supportScope'] as String?;
   late String _original;
   bool get dirty => _signature() != _original;
   int _nextKey = 0;
@@ -109,24 +126,28 @@ class SkillGroupCubit extends Cubit<SkillGroupState> {
   Future<void> load() async {
     emit(state.copyWith(loading: true));
     try {
-      if (!repository.hasGemEditor)
-        throw const FormatException(
-          'Обновите MCP для оригинальных иконок и совместимости',
-        );
-      if (groupId != null &&
-          !repository.engine.tools.contains('pob_update_skill_group'))
-        throw const FormatException('Обновите MCP для редактирования группы');
+      _checkEditorAvailable();
       final entries = await repository.gems();
       if (!isClosed) emit(state.copyWith(catalog: entries, loading: false));
       if (!isClosed && state.gems.isNotEmpty) refreshSupports();
     } catch (error) {
       if (!isClosed)
-        emit(
-          state.copyWith(
-            loading: false,
-            error: error is FormatException ? error.message : '$error',
-          ),
-        );
+        emit(state.copyWith(loading: false, error: mcpErrorMessage(error)));
+    }
+  }
+
+  void _checkEditorAvailable() {
+    if (!repository.hasGemEditor) {
+      throw const FormatException(
+        'Обновите MCP для оригинальных иконок и совместимости',
+      );
+    }
+    final canUpdate = repository.engine.tools.contains(
+      'pob_update_skill_group',
+    );
+    if ((groupId != null && !canUpdate) ||
+        (locksPrimary && supportScope == null)) {
+      throw const FormatException('Обновите MCP для редактирования группы');
     }
   }
 
@@ -135,11 +156,11 @@ class SkillGroupCubit extends Cubit<SkillGroupState> {
   }
 
   void label(String value) {
-    if (!state.saving) emit(state.copyWith(label: value));
+    if (!state.saving && !locksPrimary) emit(state.copyWith(label: value));
   }
 
   void chooseSupports(bool value) {
-    if (!state.saving && value != state.showSupports)
+    if (!state.saving && !locksPrimary && value != state.showSupports)
       emit(state.copyWith(showSupports: value, query: ''));
   }
 
@@ -156,11 +177,12 @@ class SkillGroupCubit extends Cubit<SkillGroupState> {
 
   bool accepts(SkillGem gem, int index) =>
       !state.saving &&
+      supportScope != 'none' &&
       (gem.support
           ? index > 0 &&
                 state.gems.isNotEmpty &&
                 state.support.ids.contains(gem.id)
-          : index == 0);
+          : index == 0 && !locksPrimary);
 
   void insert(SkillGem gem, int index) {
     if (!accepts(gem, index)) return;
@@ -198,7 +220,9 @@ class SkillGroupCubit extends Cubit<SkillGroupState> {
 
   void remove(int key) {
     if (state.saving) return;
-    if (state.gems.firstOrNull?.key == key && state.gems.length > 1) return;
+    if (state.gems.firstOrNull?.key == key &&
+        (locksPrimary || state.gems.length > 1))
+      return;
     emit(
       state.copyWith(gems: state.gems.where((gem) => gem.key != key).toList()),
     );
@@ -207,6 +231,7 @@ class SkillGroupCubit extends Cubit<SkillGroupState> {
 
   void change(int key, {String? level, String? quality, bool? enabled}) {
     if (state.saving) return;
+    if (locksPrimary && state.gems.first.key == key) return;
     final gems = state.gems
         .map(
           (draft) => draft.key == key
@@ -226,6 +251,7 @@ class SkillGroupCubit extends Cubit<SkillGroupState> {
   }
 
   void refreshSupports() {
+    if (supportScope == 'none') return;
     _timer?.cancel();
     final generation = ++_generation;
     emit(
@@ -242,16 +268,13 @@ class SkillGroupCubit extends Cubit<SkillGroupState> {
     _checking = true;
     _checkedGeneration = generation;
     try {
-      final ids = await repository.supports(
-        state.gems.map(gemRequest).toList(),
-        groupId: groupId,
-      );
+      final ids = await repository.supports(_gemRequests(), groupId: groupId);
       _applySupport(generation, (loading: false, ids: ids, error: null));
     } catch (error) {
       _applySupport(generation, (
         loading: false,
         ids: const {},
-        error: '$error',
+        error: mcpErrorMessage(error),
       ));
     } finally {
       _checking = false;
@@ -270,13 +293,10 @@ class SkillGroupCubit extends Cubit<SkillGroupState> {
   }
 
   Future<bool> save() async {
-    if (!state.canSave) return false;
+    if (!state.canSave || supportScope == 'none') return false;
     emit(state.copyWith(saving: true));
     try {
-      final result = await commit(
-        state.label.trim(),
-        state.gems.map(gemRequest).toList(),
-      );
+      final result = await commit(state.label.trim(), _gemRequests());
       if (!isClosed) {
         if (result.committed) _acknowledge();
         emit(state.copyWith(saving: false, error: result.error));
@@ -292,6 +312,15 @@ class SkillGroupCubit extends Cubit<SkillGroupState> {
         );
       return false;
     }
+  }
+
+  List<JsonMap> _gemRequests() {
+    if (!locksPrimary) return state.gems.map(gemRequest).toList();
+    final primary = jsonRows(group!['gems']).first;
+    return [
+      {'id': primary['skillId'] ?? primary['id'], 'sourceIndex': 1},
+      ...state.gems.skip(1).map(gemRequest),
+    ];
   }
 
   @override

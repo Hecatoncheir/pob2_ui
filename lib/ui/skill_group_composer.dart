@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../domain/build_report.dart';
 import 'core/app_text.dart';
 import 'core/panels.dart';
 import 'gem_medallion.dart';
@@ -30,6 +31,7 @@ class SkillGroupComposer extends StatelessWidget {
               LayoutBuilder(
                 builder: (context, constraints) {
                   final primary = _primary();
+                  if (editor.supportScope == 'none') return primary;
                   final supports = _supports();
                   if (constraints.maxWidth >= 620)
                     return Row(
@@ -64,6 +66,22 @@ class SkillGroupComposer extends StatelessWidget {
 
   Widget _primary() {
     final primary = state.gems.first;
+    if (editor.locksPrimary) {
+      final gem = jsonRows(editor.group!['gems']).first;
+      return Row(
+        children: [
+          GemMedallion(
+            size: 70,
+            id: gem['id'] as String?,
+            repository: editor.repository,
+            groupId: editor.groupId,
+            sourceIndex: 1,
+          ),
+          const SizedBox(width: 12),
+          Expanded(child: AppText(primary.gem.name, game: true)),
+        ],
+      );
+    }
     final image = GemSocketTarget(
       editor: editor,
       index: 0,

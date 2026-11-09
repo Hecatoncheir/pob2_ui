@@ -111,9 +111,9 @@ class WorkshopCubit extends Cubit<WorkshopState> {
 
   Future<void> initialize() => _run(() async {
     await components.load();
-    final saved = await session.exists();
-    final draft = await session.readDraft();
     final builds = await library.load();
+    final saved = !builds.skipSessionRecovery && await session.exists();
+    final draft = await session.readDraft();
     _update(
       state.copyWith(
         sessionSaved: saved,
@@ -167,6 +167,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     if (!ready) return;
     await _connect();
     if (await _resumeLibrary()) return;
+    if (state.library.skipSessionRecovery) return;
     if (await session.exists()) {
       await _loadXml(await session.read());
       await _readReport(
@@ -287,11 +288,13 @@ class WorkshopCubit extends Cubit<WorkshopState> {
   });
 
   Future<void> refreshReport() => _run(() async {
+    if (state.report == null) return;
     _markStale();
     await _readReport();
   });
 
   Future<void> restoreSession() => _run(() async {
+    if (state.library.skipSessionRecovery) return;
     await _switchBuild(
       () async => _loadXml(await session.read()),
       target: state.library,
@@ -397,6 +400,20 @@ class WorkshopCubit extends Cubit<WorkshopState> {
       () => _loadXml(xml),
       target: LibraryState(entries: state.library.entries, activeId: id),
     );
+  });
+
+  Future<void> deleteBuild(String id) => _run(() async {
+    final removedActive = state.library.activeId == id;
+    final builds = await library.remove(state.library, id);
+    _update(
+      state.copyWith(
+        library: builds,
+        clearReport: removedActive,
+        sessionSaved: removedActive ? false : null,
+        status: 'Сборка удалена',
+      ),
+    );
+    if (removedActive) _clearHistory();
   });
 
   Future<void> _switchBuild(
@@ -681,6 +698,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
   Future<String?> exportXml() async {
     String? xml;
     await _run(() async {
+      if (state.report == null) return;
       xml = await _currentXml();
     });
     return xml;

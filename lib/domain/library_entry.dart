@@ -40,10 +40,14 @@ class LibraryEntry {
 }
 
 class LibraryState {
-  LibraryState({List<LibraryEntry> entries = const [], this.activeId})
-    : entries = List.unmodifiable(entries);
+  LibraryState({
+    List<LibraryEntry> entries = const [],
+    this.activeId,
+    this.skipSessionRecovery = false,
+  }) : entries = List.unmodifiable(entries);
   final List<LibraryEntry> entries;
   final String? activeId;
+  final bool skipSessionRecovery;
   LibraryEntry? get active =>
       entries.where((entry) => entry.id == activeId).firstOrNull;
 }

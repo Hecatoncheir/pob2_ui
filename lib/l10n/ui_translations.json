@@ -108,6 +108,7 @@
     "m130a0abbfa": "Для оригинальных иконок обновите MCP до 0.6.0.",
     "m6f9519e788": "Для поиска по характеристике обновите MCP до 0.9.0 в разделе «Компоненты».",
     "m3e069d1fae": "Для установки нужны Git и 64-битный Python 3.11+. После загрузки компонентов расчёты работают без сети.",
+    "m659973f49f": "Для этого умения нельзя добавить поддержки",
     "ma2ab6a340a": "Для этой платформы нет пакета обновления",
     "mc0259d55bc": "Для этой платформы пока нет установщика",
     "m08afe540b9": "До узла",
@@ -331,6 +332,7 @@
     "m3c320d7fe3": "Повторить сохранение",
     "mbcc0fdbe14": "Подавление урона чар",
     "m52d7142d18": "Поддерживаются Windows x64, Linux x64 и macOS arm64",
+    "mc2fd54cfce": "Поддержки общие для умений этого слота",
     "m67f5d8880e": "Подключите Lua",
     "m538d913ee0": "Подключить Lua",
     "m5f5155bb1f": "Подходящие поддержки",
@@ -413,6 +415,7 @@
     "m5c8bb47697": "Сборка не найдена",
     "mc27d8aad03": "Сборка рассчитана исходным Lua",
     "mae943799b7": "Сборка сохранена в библиотеке, но копия восстановления недоступна: {p0}",
+    "m187a481844": "Сборка удалена",
     "m407f871778": "Сбросить",
     "mde7b2b9b0d": "Сбросить сочетания",
     "m87b737d42c": "Свернуть панель",
@@ -467,6 +470,9 @@
     "m94fde688e0": "Убрать камень",
     "mcfa3d536f8": "Убрать сочетание",
     "mcacf1f7fd0": "Увеличить интерфейс",
+    "mbe99b13612": "Удалить",
+    "m9ba95f357c": "Удалить сборку",
+    "mb3157cbf2b": "Удалить сборку?",
     "m1c89558239": "Удалить умение",
     "m97ac4c501c": "Уже выполняется установка",
     "m39e5ccc0fa": "Узел · {p0}",
@@ -1053,7 +1059,13 @@
     "m612d4e1470": "Explicit properties",
     "mb1f4f27181": "Search the market",
     "m48626fbe0c": "Update MCP for market search",
-    "m885946a42e": "Market search"
+    "m885946a42e": "Market search",
+    "m187a481844": "Build deleted",
+    "mbe99b13612": "Delete",
+    "m9ba95f357c": "Delete build",
+    "mb3157cbf2b": "Delete this build?",
+    "m659973f49f": "This skill cannot be supported",
+    "mc2fd54cfce": "Skills in this equipment slot share supports"
   },
   "fr": {
     "m0c63e733f9": "Lua n'a pas renvoyé toutes les icônes",
@@ -1581,7 +1593,13 @@
     "m612d4e1470": "Propriétés explicites",
     "mb1f4f27181": "Rechercher sur le marché",
     "m48626fbe0c": "Mise à jour MCP pour la recherche de marché",
-    "m885946a42e": "Recherche de marché"
+    "m885946a42e": "Recherche de marché",
+    "m187a481844": "Construction supprimée",
+    "mbe99b13612": "Supprimer",
+    "m9ba95f357c": "Supprimer la version",
+    "mb3157cbf2b": "Supprimer cette version ?",
+    "m659973f49f": "Cette compétence ne peut pas être soutenue",
+    "mc2fd54cfce": "Les compétences de cet emplacement partagent les soutiens"
   },
   "de": {
     "m0c63e733f9": "Lua hat nicht alle Symbole zurückgegeben",
@@ -2109,7 +2127,13 @@
     "m612d4e1470": "Explizite Eigenschaften",
     "mb1f4f27181": "Durchsuchen Sie den Markt",
     "m48626fbe0c": "Update MCP für die Marktsuche",
-    "m885946a42e": "Marktsuche"
+    "m885946a42e": "Marktsuche",
+    "m187a481844": "Build gelöscht",
+    "mbe99b13612": "Löschen",
+    "m9ba95f357c": "Build löschen",
+    "mb3157cbf2b": "Diesen Build löschen?",
+    "m659973f49f": "Diese Fertigkeit kann nicht unterstützt werden",
+    "mc2fd54cfce": "Fertigkeiten dieses Ausrüstungsplatzes teilen sich Unterstützungen"
   },
   "es": {
     "m0c63e733f9": "Lua no devolvió todos los íconos",
@@ -2637,7 +2661,13 @@
     "m612d4e1470": "Propiedades explícitas",
     "mb1f4f27181": "Buscar en el mercado",
     "m48626fbe0c": "Actualización MCP para búsqueda de mercado",
-    "m885946a42e": "Búsqueda de mercado"
+    "m885946a42e": "Búsqueda de mercado",
+    "m187a481844": "Compilación eliminada",
+    "mbe99b13612": "Eliminar",
+    "m9ba95f357c": "Eliminar compilación",
+    "mb3157cbf2b": "¿Eliminar esta compilación?",
+    "m659973f49f": "Esta habilidad no admite asistencias",
+    "mc2fd54cfce": "Las habilidades de este espacio comparten asistencias"
   },
   "pt_BR": {
     "m0c63e733f9": "Lua não retornou todos os ícones",
@@ -3165,7 +3195,13 @@
     "m612d4e1470": "Propriedades explícitas",
     "mb1f4f27181": "Pesquise no mercado",
     "m48626fbe0c": "Atualização MCP para pesquisa de mercado",
-    "m885946a42e": "Pesquisa de mercado"
+    "m885946a42e": "Pesquisa de mercado",
+    "m187a481844": "Versão excluída",
+    "mbe99b13612": "Excluir",
+    "m9ba95f357c": "Excluir compilação",
+    "mb3157cbf2b": "Excluir esta compilação?",
+    "m659973f49f": "Esta habilidade não aceita suportes",
+    "mc2fd54cfce": "As habilidades deste espaço de equipamento compartilham suportes"
   },
   "ja": {
     "m0c63e733f9": "Lua はすべてのアイコンを返しませんでした",
@@ -3693,7 +3729,13 @@
     "m612d4e1470": "明示的なプロパティ",
     "mb1f4f27181": "マーケットを検索する",
     "m48626fbe0c": "マーケット検索用の MCP を更新します",
-    "m885946a42e": "マーケット検索"
+    "m885946a42e": "マーケット検索",
+    "m187a481844": "ビルドが削除されました",
+    "mbe99b13612": "削除",
+    "m9ba95f357c": "ビルドを削除",
+    "mb3157cbf2b": "このビルドを削除しますか?",
+    "m659973f49f": "このスキルにはサポートを追加できません",
+    "mc2fd54cfce": "この装備スロットのスキルはサポートを共有します"
   },
   "ko": {
     "m0c63e733f9": "Lua이 모든 아이콘을 반환하지 않았습니다.",
@@ -4221,7 +4263,13 @@
     "m612d4e1470": "명시적 속성",
     "mb1f4f27181": "시장 검색",
     "m48626fbe0c": "시장 검색을 위한 업데이트 MCP",
-    "m885946a42e": "시장 검색"
+    "m885946a42e": "시장 검색",
+    "m187a481844": "빌드가 삭제되었습니다.",
+    "mbe99b13612": "삭제",
+    "m9ba95f357c": "빌드 삭제",
+    "mb3157cbf2b": "이 빌드를 삭제하시겠습니까?",
+    "m659973f49f": "이 스킬에는 보조 젬을 추가할 수 없습니다",
+    "mc2fd54cfce": "이 장비 슬롯의 스킬은 보조 젬을 공유합니다"
   },
   "th": {
     "m0c63e733f9": "Lua ไม่ได้ส่งคืนไอคอนทั้งหมด",
@@ -4749,7 +4797,13 @@
     "m612d4e1470": "คุณสมบัติที่ชัดเจน",
     "mb1f4f27181": "ค้นหาตลาด",
     "m48626fbe0c": "อัปเดต MCP สำหรับการค้นหาตลาด",
-    "m885946a42e": "ค้นหาตลาด"
+    "m885946a42e": "ค้นหาตลาด",
+    "m187a481844": "ลบบิลด์แล้ว",
+    "mbe99b13612": "ลบ",
+    "m9ba95f357c": "ลบบิลด์",
+    "mb3157cbf2b": "ลบบิลด์นี้ใช่ไหม",
+    "m659973f49f": "ไม่สามารถเพิ่มเจมเสริมให้สกิลนี้ได้",
+    "mc2fd54cfce": "สกิลในช่องอุปกรณ์นี้ใช้เจมเสริมร่วมกัน"
   },
   "zh_Hant": {
     "m0c63e733f9": "Lua 未傳回所有圖標",
@@ -5277,6 +5331,12 @@
     "m612d4e1470": "顯式屬性",
     "mb1f4f27181": "搜尋市場",
     "m48626fbe0c": "更新市集搜尋的 MCP",
-    "m885946a42e": "市場搜索"
+    "m885946a42e": "市場搜索",
+    "m187a481844": "建置已刪除",
+    "mbe99b13612": "刪除",
+    "m9ba95f357c": "刪除構建",
+    "mb3157cbf2b": "刪除此版本？",
+    "m659973f49f": "此技能無法加入輔助寶石",
+    "mc2fd54cfce": "此裝備欄位的技能共用輔助寶石"
   }
 }

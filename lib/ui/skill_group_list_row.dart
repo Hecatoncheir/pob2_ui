@@ -32,7 +32,10 @@ class SkillGroupListRow extends StatelessWidget {
   Widget build(BuildContext context) => DragTarget<GemDrag>(
     key: ValueKey('skill-group-drop-${group['id']}'),
     onWillAcceptWithDetails: (details) =>
-        !busy && details.data.gem.support && details.data.groupId == null,
+        !busy &&
+        group['supportScope'] != 'none' &&
+        details.data.gem.support &&
+        details.data.groupId == null,
     onAcceptWithDetails: (details) => add(details.data),
     builder: (context, candidates, _) => Material(
       color: candidates.isEmpty
@@ -102,12 +105,13 @@ class SkillGroupListRow extends StatelessWidget {
         onPressed: busy ? null : edit,
         icon: const Icon(Icons.tune, size: 18),
       ),
-      IconButton(
-        key: ValueKey('delete-skill-group-${group['id']}'),
-        tooltip: 'Удалить умение',
-        onPressed: busy ? null : remove,
-        icon: const Icon(Icons.delete_outline, size: 18),
-      ),
+      if (!isGrantedSkillGroup(group))
+        IconButton(
+          key: ValueKey('delete-skill-group-${group['id']}'),
+          tooltip: 'Удалить умение',
+          onPressed: busy ? null : remove,
+          icon: const Icon(Icons.delete_outline, size: 18),
+        ),
     ],
   );
 

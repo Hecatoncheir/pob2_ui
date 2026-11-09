@@ -54,6 +54,7 @@ class BuildLibrary {
     return LibraryState(
       entries: entries,
       activeId: json['activeId'] as String?,
+      skipSessionRecovery: json['skipSessionRecovery'] == true,
     );
   }
 
@@ -80,7 +81,11 @@ class BuildLibrary {
       entries.add(next);
       if (next.revision != entry.revision) migrated = true;
     }
-    final next = LibraryState(entries: entries, activeId: state.activeId);
+    final next = LibraryState(
+      entries: entries,
+      activeId: state.activeId,
+      skipSessionRecovery: state.skipSessionRecovery,
+    );
     if (migrated) {
       await writeIndex(next);
     }
@@ -104,6 +109,7 @@ class BuildLibrary {
       jsonEncode({
         'schema': 1,
         'activeId': state.activeId,
+        if (state.skipSessionRecovery) 'skipSessionRecovery': true,
         'entries': state.entries.map((entry) => entry.toJson()).toList(),
       }),
       backup: backup,
@@ -130,6 +136,20 @@ class BuildLibrary {
     final next = LibraryState(
       activeId: id,
       entries: [entry, ...state.entries.where((item) => item.id != id)],
+    );
+    await writeIndex(next);
+    return next;
+  }
+
+  Future<LibraryState> remove(LibraryState state, String id) async {
+    final entries = state.entries.where((entry) => entry.id != id).toList();
+    if (entries.length == state.entries.length)
+      throw const FormatException('Сборка не найдена');
+    final removedActive = state.activeId == id;
+    final next = LibraryState(
+      entries: entries,
+      activeId: removedActive ? null : state.activeId,
+      skipSessionRecovery: removedActive || state.skipSessionRecovery,
     );
     await writeIndex(next);
     return next;

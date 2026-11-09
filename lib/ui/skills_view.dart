@@ -124,7 +124,7 @@ class _SkillsViewState extends State<SkillsView> {
       !widget.model.engine.connected;
 
   Widget _groups(SkillWorkspaceState state) {
-    final groups = widget.model.state.report!.groups;
+    final groups = widget.model.state.report!.skillGroups.toList();
     if (groups.isEmpty)
       return const EmptyPanel(
         title: 'Умения ещё не добавлены',

@@ -377,6 +377,9 @@ class AppLocalizationsDe extends AppLocalizations {
       'Die Installation erfordert Git und 64-Bit-Python 3.11+. Nach dem Laden der Komponenten funktionieren Berechnungen ohne Netzwerk.';
 
   @override
+  String get m659973f49f => 'Diese Fertigkeit kann nicht unterstützt werden';
+
+  @override
   String get ma2ab6a340a => 'Für diese Plattform gibt es kein Service Pack';
 
   @override
@@ -1121,6 +1124,10 @@ class AppLocalizationsDe extends AppLocalizations {
       'Windows x64, Linux x64 und macOS arm64 werden unterstützt';
 
   @override
+  String get mc2fd54cfce =>
+      'Fertigkeiten dieses Ausrüstungsplatzes teilen sich Unterstützungen';
+
+  @override
   String get m67f5d8880e => 'Verbinden Lua';
 
   @override
@@ -1396,6 +1403,9 @@ class AppLocalizationsDe extends AppLocalizations {
   }
 
   @override
+  String get m187a481844 => 'Build gelöscht';
+
+  @override
   String get m407f871778 => 'Zurücksetzen';
 
   @override
@@ -1562,6 +1572,15 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get mcacf1f7fd0 => 'Schnittstelle vergrößern';
+
+  @override
+  String get mbe99b13612 => 'Löschen';
+
+  @override
+  String get m9ba95f357c => 'Build löschen';
+
+  @override
+  String get mb3157cbf2b => 'Diesen Build löschen?';
 
   @override
   String get m1c89558239 => 'Fertigkeit entfernen';

@@ -360,6 +360,9 @@ class AppLocalizationsKo extends AppLocalizations {
       '설치에는 Git 및 64비트 Python 3.11 이상이 필요합니다. 구성 요소를 로드한 후에는 네트워크 없이 계산이 수행됩니다.';
 
   @override
+  String get m659973f49f => '이 스킬에는 보조 젬을 추가할 수 없습니다';
+
+  @override
   String get ma2ab6a340a => '이 플랫폼에는 서비스 팩이 없습니다.';
 
   @override
@@ -1089,6 +1092,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m52d7142d18 => 'Windows x64, Linux x64, macOS arm64 지원';
 
   @override
+  String get mc2fd54cfce => '이 장비 슬롯의 스킬은 보조 젬을 공유합니다';
+
+  @override
   String get m67f5d8880e => '연결 Lua';
 
   @override
@@ -1355,6 +1361,9 @@ class AppLocalizationsKo extends AppLocalizations {
   }
 
   @override
+  String get m187a481844 => '빌드가 삭제되었습니다.';
+
+  @override
   String get m407f871778 => '재설정';
 
   @override
@@ -1519,6 +1528,15 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get mcacf1f7fd0 => '인터페이스 확대';
+
+  @override
+  String get mbe99b13612 => '삭제';
+
+  @override
+  String get m9ba95f357c => '빌드 삭제';
+
+  @override
+  String get mb3157cbf2b => '이 빌드를 삭제하시겠습니까?';
 
   @override
   String get m1c89558239 => '스킬 삭제';

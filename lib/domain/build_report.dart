@@ -23,6 +23,8 @@ class BuildReport {
   JsonMap get character => jsonMap(snapshot['buildInfo']);
   JsonMap get config => jsonMap(raw['config']);
   List<JsonMap> get groups => jsonRows(raw['groups']);
+  Iterable<JsonMap> get skillGroups =>
+      groups.where((group) => group['slotSupports'] != true);
   List<JsonMap> get items => jsonRows(raw['items']);
   List<JsonMap> get slots => jsonRows(raw['slots']);
   String get name => character['name'] as String? ?? 'Сборка';

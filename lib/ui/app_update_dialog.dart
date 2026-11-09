@@ -90,7 +90,7 @@ class _UpdateContent extends StatelessWidget {
             style: TextStyle(color: Theme.of(context).colorScheme.error),
           ),
         ),
-      SwitchListTile.adaptive(
+      SwitchListTile(
         contentPadding: EdgeInsets.zero,
         title: const AppText('Загружать обновления автоматически'),
         subtitle: const AppText('Перезапуск — только по вашей команде'),

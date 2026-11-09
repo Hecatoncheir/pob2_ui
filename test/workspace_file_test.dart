@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:pob2_ui/data/build_library.dart';
 import 'package:pob2_ui/data/component_repository.dart';
@@ -7,7 +8,9 @@ import 'package:pob2_ui/data/installation_store.dart';
 import 'package:pob2_ui/data/mcp_client.dart';
 import 'package:pob2_ui/data/session_repository.dart';
 import 'package:pob2_ui/data/xml_file_service.dart';
+import 'package:pob2_ui/domain/component.dart';
 import 'package:pob2_ui/domain/library_entry.dart';
+import 'package:pob2_ui/ui/app.dart';
 import 'package:pob2_ui/ui/workshop_cubit.dart';
 import 'package:pob2_ui/ui/workshop_state.dart';
 
@@ -18,6 +21,8 @@ import 'support/workshop_fixture.dart';
 class FileEngine extends McpClient {
   int value = 1;
   @override
+  Future<void> connect(Installations pair) async {}
+  @override
   bool get connected => true;
   @override
   Future<Map<String, dynamic>> call(
@@ -25,6 +30,8 @@ class FileEngine extends McpClient {
     Map<String, dynamic> arguments = const {},
   ]) async {
     switch (name) {
+      case 'pob_catalog':
+        return {'entries': <dynamic>[]};
       case 'pob_export_xml':
         return {'xml': '<build value="$value"/>'};
       case 'pob_import_xml':
@@ -55,6 +62,13 @@ class FileEngine extends McpClient {
         throw StateError(name);
     }
   }
+}
+
+class MemoryLibrary extends BuildLibrary {
+  MemoryLibrary(super.data);
+
+  @override
+  Future<void> writeIndex(LibraryState state, {bool backup = true}) async {}
 }
 
 void main() {
@@ -93,6 +107,93 @@ void main() {
     storage.failName = null;
     await model.close();
     await removeTemporaryDirectory(root);
+  });
+
+  test('Удаление активной сборки не восстанавливает её при запуске', () async {
+    final kept = model.state.library.activeId!;
+    await model.importXml('<build value="2"/>');
+    final removed = model.state.library.activeId!;
+    await model.renameBuild('Лишняя сборка');
+    expect(model.state.undoCount, 1);
+    await model.session.saveNotes(kept, 'Сохранённая заметка');
+    await model.deleteBuild(removed);
+
+    expect(model.state.report, isNull);
+    expect(model.state.undoCount, 0);
+    expect(await model.session.readNotes(kept), 'Сохранённая заметка');
+    await expectLater(model.library.read(removed), throwsFormatException);
+    await model.checkpoint();
+
+    final store = InstallationStore(root);
+    await store.save({
+      for (final component in Component.values)
+        component: Installation(
+          tag: 'test',
+          commit: 'test',
+          directory: root.path,
+        ),
+    }, {});
+    final reopened = WorkshopCubit(
+      ComponentRepository(store: store),
+      FileEngine(),
+    );
+    addTearDown(reopened.close);
+    await reopened.initialize();
+    expect(reopened.state.error, isNull);
+    expect(reopened.state.library.entries.map((entry) => entry.id), [kept]);
+    expect(reopened.state.sessionSaved, isFalse);
+    await reopened.restoreSession();
+    await reopened.refreshReport();
+    expect(await reopened.exportXml(), isNull);
+    expect(reopened.state.report, isNull);
+    await reopened.openBuild(kept);
+    expect(await reopened.exportXml(), '<build value="1"/>');
+  });
+
+  test('Сбой записи не удаляет рабочую сборку и её историю', () async {
+    final id = model.state.library.activeId!;
+    await model.renameBuild('Рабочая переименована');
+    storage.failName = 'index.json';
+    await model.deleteBuild(id);
+    expect(model.state.error, contains('Нет места на диске'));
+    expect(model.state.report, isNotNull);
+    expect(model.state.undoCount, 1);
+    expect(model.state.library.activeId, id);
+    expect((await model.library.load()).activeId, id);
+  });
+
+  testWidgets('Корзина ждёт подтверждения и удаляет только выбранную сборку', (
+    tester,
+  ) async {
+    final removed = model.state.library.activeId!;
+    await tester.runAsync(() => model.importXml('<build value="2"/>'));
+    final kept = model.state.library.activeId!;
+    final widgetModel = WorkshopCubit(
+      model.components,
+      engine,
+      initialState: model.state,
+      library: MemoryLibrary(root),
+    );
+    addTearDown(widgetModel.close);
+    await tester.pumpWidget(PobApp(model: widgetModel));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byKey(const ValueKey('page-library')));
+    await tester.pumpAndSettle();
+    final button = find.byKey(ValueKey('delete-build-$removed'));
+    await tester.tap(button);
+    await tester.pumpAndSettle();
+    expect(find.text('Удалить сборку?'), findsOneWidget);
+    await tester.tap(find.text('Отмена'));
+    await tester.pumpAndSettle();
+    expect(button, findsOneWidget);
+    await tester.tap(button);
+    await tester.pumpAndSettle();
+    await tester.tap(find.byKey(const Key('confirm-delete-build')));
+    await tester.pumpAndSettle();
+    expect(button, findsNothing);
+    expect(find.byKey(ValueKey('delete-build-$kept')), findsOneWidget);
+    expect(widgetModel.state.library.activeId, kept);
+    expect(await widgetModel.exportXml(), '<build value="2"/>');
   });
 
   test(

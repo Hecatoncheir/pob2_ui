@@ -152,6 +152,74 @@ void main() {
     },
   );
 
+  testWidgets('Умение от предмета принимает поддержку и сохраняет источник', (
+    tester,
+  ) async {
+    await tester.binding.setSurfaceSize(const Size(1300, 950));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+    final primary = {
+      'skillId': 'CoilingBoltsPlayer',
+      'name': 'Coiling Bolts',
+      'sourceIndex': 1,
+      'level': 20,
+      'quality': 0,
+      'enabled': true,
+    };
+    final report = BuildReport.fromJson({
+      ...workspaceReport().raw,
+      'groups': [
+        {'id': 1, 'slotSupports': true, 'gems': []},
+        {
+          'id': 2,
+          'label': 'Coiling Bolts',
+          'source': 'Item:1:Liminal Coil',
+          'supportScope': 'slot',
+          'gems': [primary],
+        },
+      ],
+    });
+    final model = EditorWorkshop(
+      EditorCatalogEngine(gemEntries: const [fireball, support]),
+      report: report,
+    );
+    addTearDown(model.close);
+    await tester.pumpWidget(application(SkillsView(model: model)));
+    await settle(tester);
+    expect(find.byKey(const ValueKey('skill-group-drop-1')), findsNothing);
+    expect(find.byKey(const ValueKey('delete-skill-group-2')), findsNothing);
+
+    final tile = find.byKey(const ValueKey('catalog-gem-support'));
+    final group = find.byKey(const ValueKey('skill-group-drop-2'));
+    await tester.dragFrom(
+      tester.getCenter(tile),
+      tester.getCenter(group) - tester.getCenter(tile),
+    );
+    await settle(tester);
+    expect(model.savedGroupId, 2);
+    expect(model.savedGems!.first, {
+      'id': 'CoilingBoltsPlayer',
+      'sourceIndex': 1,
+    });
+    expect(model.state.report!.groups.last['gems'], hasLength(2));
+
+    final added = find.byKey(const ValueKey('group-gem-2-2'));
+    final library = find.byKey(const Key('gem-return-target'));
+    await tester.dragFrom(
+      tester.getCenter(added),
+      tester.getCenter(library) - tester.getCenter(added),
+    );
+    await settle(tester);
+    expect(model.state.report!.groups.last['gems'], [primary]);
+    await tester.tap(find.byTooltip('Редактировать группу'));
+    await settle(tester);
+    expect(find.text('Редактор группы умений'), findsOneWidget);
+    expect(find.byKey(const ValueKey('gem-level-0')), findsNothing);
+    expect(find.byKey(const Key('skill-group-label')), findsNothing);
+    expect(tester.takeException(), isNull);
+    await tester.pumpWidget(const SizedBox.shrink());
+    await settle(tester);
+  });
+
   testWidgets('Показатели не повторяют одинаковое название группы и умения', (
     tester,
   ) async {

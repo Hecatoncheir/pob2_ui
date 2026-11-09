@@ -764,6 +764,12 @@ abstract class AppLocalizations {
   /// **'Installation requires Git and 64-bit Python 3.11+. After loading the components, calculations work without a network.'**
   String get m3e069d1fae;
 
+  /// Для этого умения нельзя добавить поддержки
+  ///
+  /// In en, this message translates to:
+  /// **'This skill cannot be supported'**
+  String get m659973f49f;
+
   /// Для этой платформы нет пакета обновления
   ///
   /// In en, this message translates to:
@@ -2103,6 +2109,12 @@ abstract class AppLocalizations {
   /// **'Windows x64, Linux x64 and macOS arm64 supported'**
   String get m52d7142d18;
 
+  /// Поддержки общие для умений этого слота
+  ///
+  /// In en, this message translates to:
+  /// **'Skills in this equipment slot share supports'**
+  String get mc2fd54cfce;
+
   /// Подключите Lua
   ///
   /// In en, this message translates to:
@@ -2595,6 +2607,12 @@ abstract class AppLocalizations {
   /// **'The build is saved in the library, but the recovery copy is not available: {p0}'**
   String mae943799b7(String p0);
 
+  /// Сборка удалена
+  ///
+  /// In en, this message translates to:
+  /// **'Build deleted'**
+  String get m187a481844;
+
   /// Сбросить
   ///
   /// In en, this message translates to:
@@ -2918,6 +2936,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Enlarge interface'**
   String get mcacf1f7fd0;
+
+  /// Удалить
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get mbe99b13612;
+
+  /// Удалить сборку
+  ///
+  /// In en, this message translates to:
+  /// **'Delete build'**
+  String get m9ba95f357c;
+
+  /// Удалить сборку?
+  ///
+  /// In en, this message translates to:
+  /// **'Delete this build?'**
+  String get mb3157cbf2b;
 
   /// Удалить умение
   ///

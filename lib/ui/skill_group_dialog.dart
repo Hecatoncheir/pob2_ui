@@ -66,6 +66,7 @@ class _SkillGroupDialogState extends State<_SkillGroupDialog> {
             gems,
           ),
     groupId: widget.group?['id'] as int?,
+    group: widget.group,
     initial: widget.initial,
     label: widget.group?['customLabel'] as String? ?? '',
   );
@@ -100,17 +101,19 @@ class _SkillGroupDialogState extends State<_SkillGroupDialog> {
               height: (MediaQuery.sizeOf(context).height * .65).clamp(250, 570),
               child: Column(
                 children: [
-                  TextFormField(
-                    key: const Key('skill-group-label'),
-                    initialValue: state.label,
-                    enabled: !state.saving,
-                    onChanged: editor.label,
-                    decoration: const InputDecoration(
-                      label: AppText('Название группы'),
-                      hint: AppText('Необязательно'),
+                  if (!editor.locksPrimary) ...[
+                    TextFormField(
+                      key: const Key('skill-group-label'),
+                      initialValue: state.label,
+                      enabled: !state.saving,
+                      onChanged: editor.label,
+                      decoration: const InputDecoration(
+                        label: AppText('Название группы'),
+                        hint: AppText('Необязательно'),
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 16),
+                    const SizedBox(height: 16),
+                  ],
                   Expanded(child: _GemPanes(editor, state)),
                   if (state.error != null)
                     Padding(
@@ -133,7 +136,7 @@ class _SkillGroupDialogState extends State<_SkillGroupDialog> {
               ),
               FilledButton(
                 key: const Key('skill-group-save'),
-                onPressed: state.canSave ? _save : null,
+                onPressed: editor.dirty && state.canSave ? _save : null,
                 child: AppText(_saveLabel(state)),
               ),
             ],
@@ -238,6 +241,11 @@ class SkillGemCatalog extends StatelessWidget {
   );
 
   Widget _catalog(BuildContext context) {
+    if (editor.supportScope == 'none') {
+      return const Center(
+        child: AppText('Для этого умения нельзя добавить поддержки'),
+      );
+    }
     final query = state.query.trim().toLowerCase();
     final entries = state.catalog
         .where(
@@ -250,7 +258,12 @@ class SkillGemCatalog extends StatelessWidget {
         .toList();
     return Column(
       children: [
-        if (!supportsOnly)
+        if (editor.supportScope == 'slot')
+          const AppText(
+            'Поддержки общие для умений этого слота',
+            style: TextStyle(fontSize: 11),
+          ),
+        if (!supportsOnly && !editor.locksPrimary)
           Wrap(
             spacing: 6,
             children: [

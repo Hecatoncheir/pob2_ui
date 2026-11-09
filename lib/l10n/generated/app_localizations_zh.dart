@@ -359,6 +359,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m3e069d1fae => '安裝需要 Git 和 64 位元 Python 3.11+。載入組件後，無需網路即可進行計算。';
 
   @override
+  String get m659973f49f => '此技能無法加入輔助寶石';
+
+  @override
   String get ma2ab6a340a => '該平台沒有服務包';
 
   @override
@@ -1088,6 +1091,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m52d7142d18 => '支援 Windows x64、Linux x64 和 macOS arm64';
 
   @override
+  String get mc2fd54cfce => '此裝備欄位的技能共用輔助寶石';
+
+  @override
   String get m67f5d8880e => '連接 Lua';
 
   @override
@@ -1354,6 +1360,9 @@ class AppLocalizationsZh extends AppLocalizations {
   }
 
   @override
+  String get m187a481844 => '建置已刪除';
+
+  @override
   String get m407f871778 => '重置';
 
   @override
@@ -1516,6 +1525,15 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get mcacf1f7fd0 => '放大介面';
+
+  @override
+  String get mbe99b13612 => '刪除';
+
+  @override
+  String get m9ba95f357c => '刪除構建';
+
+  @override
+  String get mb3157cbf2b => '刪除此版本？';
 
   @override
   String get m1c89558239 => '刪除技能';
@@ -2061,6 +2079,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m3e069d1fae => '安裝需要 Git 和 64 位元 Python 3.11+。載入組件後，無需網路即可進行計算。';
 
   @override
+  String get m659973f49f => '此技能無法加入輔助寶石';
+
+  @override
   String get ma2ab6a340a => '該平台沒有服務包';
 
   @override
@@ -2790,6 +2811,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m52d7142d18 => '支援 Windows x64、Linux x64 和 macOS arm64';
 
   @override
+  String get mc2fd54cfce => '此裝備欄位的技能共用輔助寶石';
+
+  @override
   String get m67f5d8880e => '連接 Lua';
 
   @override
@@ -3056,6 +3080,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   }
 
   @override
+  String get m187a481844 => '建置已刪除';
+
+  @override
   String get m407f871778 => '重置';
 
   @override
@@ -3218,6 +3245,15 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get mcacf1f7fd0 => '放大介面';
+
+  @override
+  String get mbe99b13612 => '刪除';
+
+  @override
+  String get m9ba95f357c => '刪除構建';
+
+  @override
+  String get mb3157cbf2b => '刪除此版本？';
 
   @override
   String get m1c89558239 => '刪除技能';

@@ -367,6 +367,9 @@ class AppLocalizationsEs extends AppLocalizations {
       'La instalación requiere Git y Python 3.11+ de 64 bits. Después de cargar los componentes, los cálculos funcionan sin red.';
 
   @override
+  String get m659973f49f => 'Esta habilidad no admite asistencias';
+
+  @override
   String get ma2ab6a340a =>
       'No hay ningún paquete de servicio para esta plataforma';
 
@@ -1113,6 +1116,10 @@ class AppLocalizationsEs extends AppLocalizations {
   String get m52d7142d18 => 'Windows x64, Linux x64 y macOS arm64 compatibles';
 
   @override
+  String get mc2fd54cfce =>
+      'Las habilidades de este espacio comparten asistencias';
+
+  @override
   String get m67f5d8880e => 'Conectar Lua';
 
   @override
@@ -1387,6 +1394,9 @@ class AppLocalizationsEs extends AppLocalizations {
   }
 
   @override
+  String get m187a481844 => 'Compilación eliminada';
+
+  @override
   String get m407f871778 => 'Restablecer';
 
   @override
@@ -1553,6 +1563,15 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get mcacf1f7fd0 => 'Ampliar interfaz';
+
+  @override
+  String get mbe99b13612 => 'Eliminar';
+
+  @override
+  String get m9ba95f357c => 'Eliminar compilación';
+
+  @override
+  String get mb3157cbf2b => '¿Eliminar esta compilación?';
 
   @override
   String get m1c89558239 => 'Quitar habilidad';

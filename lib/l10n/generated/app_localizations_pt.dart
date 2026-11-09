@@ -366,6 +366,9 @@ class AppLocalizationsPt extends AppLocalizations {
       'A instalação requer Git e Python 3.11+ de 64 bits. Após carregar os componentes, os cálculos funcionam sem rede.';
 
   @override
+  String get m659973f49f => 'Esta habilidade não aceita suportes';
+
+  @override
   String get ma2ab6a340a => 'Não há service pack para esta plataforma';
 
   @override
@@ -1109,6 +1112,10 @@ class AppLocalizationsPt extends AppLocalizations {
   String get m52d7142d18 => 'Windows x64, Linux x64 e macOS arm64 compatíveis';
 
   @override
+  String get mc2fd54cfce =>
+      'As habilidades deste espaço de equipamento compartilham suportes';
+
+  @override
   String get m67f5d8880e => 'Conectar Lua';
 
   @override
@@ -1383,6 +1390,9 @@ class AppLocalizationsPt extends AppLocalizations {
   }
 
   @override
+  String get m187a481844 => 'Versão excluída';
+
+  @override
   String get m407f871778 => 'Redefinir';
 
   @override
@@ -1548,6 +1558,15 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get mcacf1f7fd0 => 'Ampliar interface';
+
+  @override
+  String get mbe99b13612 => 'Excluir';
+
+  @override
+  String get m9ba95f357c => 'Excluir compilação';
+
+  @override
+  String get mb3157cbf2b => 'Excluir esta compilação?';
 
   @override
   String get m1c89558239 => 'Remover habilidade';
@@ -2106,6 +2125,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
       'A instalação requer Git e Python 3.11+ de 64 bits. Após carregar os componentes, os cálculos funcionam sem rede.';
 
   @override
+  String get m659973f49f => 'Esta habilidade não aceita suportes';
+
+  @override
   String get ma2ab6a340a => 'Não há service pack para esta plataforma';
 
   @override
@@ -2849,6 +2871,10 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get m52d7142d18 => 'Windows x64, Linux x64 e macOS arm64 compatíveis';
 
   @override
+  String get mc2fd54cfce =>
+      'As habilidades deste espaço de equipamento compartilham suportes';
+
+  @override
   String get m67f5d8880e => 'Conectar Lua';
 
   @override
@@ -3123,6 +3149,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   }
 
   @override
+  String get m187a481844 => 'Versão excluída';
+
+  @override
   String get m407f871778 => 'Redefinir';
 
   @override
@@ -3288,6 +3317,15 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get mcacf1f7fd0 => 'Ampliar interface';
+
+  @override
+  String get mbe99b13612 => 'Excluir';
+
+  @override
+  String get m9ba95f357c => 'Excluir compilação';
+
+  @override
+  String get mb3157cbf2b => 'Excluir esta compilação?';
 
   @override
   String get m1c89558239 => 'Remover habilidade';

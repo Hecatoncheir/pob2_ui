@@ -29,6 +29,10 @@ SEEDS.update({'Полный DPS': 'Full DPS', 'Суммарный DPS': 'Combine
 
 
 SEEDS.update({
+    'Удалить сборку': 'Delete build',
+    'Удалить сборку?': 'Delete this build?',
+    'Удалить': 'Delete',
+    'Сборка удалена': 'Build deleted',
     'Примерка': 'Preview',
     'Искать на рынке': 'Search the market',
     'Поиск на рынке': 'Market search',
@@ -43,6 +47,8 @@ SEEDS.update({
     'Выберите камни для группы': 'Choose gems for the group',
     'Качество, %': 'Quality, %', 'Камень включён': 'Gem enabled',
     'Убрать камень': 'Remove gem',
+    'Для этого умения нельзя добавить поддержки': 'This skill cannot be supported',
+    'Поддержки общие для умений этого слота': 'Skills in this equipment slot share supports',
 })
 
 def quoted(text, start, found):

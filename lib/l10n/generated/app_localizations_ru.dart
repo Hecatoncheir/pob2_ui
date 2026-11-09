@@ -363,6 +363,9 @@ class AppLocalizationsRu extends AppLocalizations {
       'Для установки нужны Git и 64-битный Python 3.11+. После загрузки компонентов расчёты работают без сети.';
 
   @override
+  String get m659973f49f => 'Для этого умения нельзя добавить поддержки';
+
+  @override
   String get ma2ab6a340a => 'Для этой платформы нет пакета обновления';
 
   @override
@@ -1102,6 +1105,9 @@ class AppLocalizationsRu extends AppLocalizations {
       'Поддерживаются Windows x64, Linux x64 и macOS arm64';
 
   @override
+  String get mc2fd54cfce => 'Поддержки общие для умений этого слота';
+
+  @override
   String get m67f5d8880e => 'Подключите Lua';
 
   @override
@@ -1372,6 +1378,9 @@ class AppLocalizationsRu extends AppLocalizations {
   }
 
   @override
+  String get m187a481844 => 'Сборка удалена';
+
+  @override
   String get m407f871778 => 'Сбросить';
 
   @override
@@ -1536,6 +1545,15 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get mcacf1f7fd0 => 'Увеличить интерфейс';
+
+  @override
+  String get mbe99b13612 => 'Удалить';
+
+  @override
+  String get m9ba95f357c => 'Удалить сборку';
+
+  @override
+  String get mb3157cbf2b => 'Удалить сборку?';
 
   @override
   String get m1c89558239 => 'Удалить умение';
