@@ -41,7 +41,7 @@ class _ItemEditorDialogState extends State<_ItemEditorDialog> {
   late final repository = EquipmentRepository(widget.model.engine);
   late final editor = ItemEditorCubit(
     ({raw, itemId}) => repository.inspect(
-      widget.slot,
+      slot: widget.slot,
       raw: raw,
       itemId: itemId,
       compare: true,

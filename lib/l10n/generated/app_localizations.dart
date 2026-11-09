@@ -2577,6 +2577,12 @@ abstract class AppLocalizations {
   /// **'Runes'**
   String get m9c7a204d54;
 
+  /// Самоцветы
+  ///
+  /// In en, this message translates to:
+  /// **'Jewels'**
+  String get m49db3482db;
+
   /// Сборка
   ///
   /// In en, this message translates to:

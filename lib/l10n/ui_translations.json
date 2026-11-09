@@ -410,6 +410,7 @@
     "meba267d9f8": "Ресурсы",
     "ma735c975e0": "Руническая защита",
     "m9c7a204d54": "Руны",
+    "m49db3482db": "Самоцветы",
     "m8c39bb691b": "Сборка",
     "m544bec7909": "Сборка изменится после нажатия «Применить»",
     "m5c8bb47697": "Сборка не найдена",
@@ -1065,7 +1066,8 @@
     "m9ba95f357c": "Delete build",
     "mb3157cbf2b": "Delete this build?",
     "m659973f49f": "This skill cannot be supported",
-    "mc2fd54cfce": "Skills in this equipment slot share supports"
+    "mc2fd54cfce": "Skills in this equipment slot share supports",
+    "m49db3482db": "Jewels"
   },
   "fr": {
     "m0c63e733f9": "Lua n'a pas renvoyé toutes les icônes",
@@ -1599,7 +1601,8 @@
     "m9ba95f357c": "Supprimer la version",
     "mb3157cbf2b": "Supprimer cette version ?",
     "m659973f49f": "Cette compétence ne peut pas être soutenue",
-    "mc2fd54cfce": "Les compétences de cet emplacement partagent les soutiens"
+    "mc2fd54cfce": "Les compétences de cet emplacement partagent les soutiens",
+    "m49db3482db": "Joyaux"
   },
   "de": {
     "m0c63e733f9": "Lua hat nicht alle Symbole zurückgegeben",
@@ -2133,7 +2136,8 @@
     "m9ba95f357c": "Build löschen",
     "mb3157cbf2b": "Diesen Build löschen?",
     "m659973f49f": "Diese Fertigkeit kann nicht unterstützt werden",
-    "mc2fd54cfce": "Fertigkeiten dieses Ausrüstungsplatzes teilen sich Unterstützungen"
+    "mc2fd54cfce": "Fertigkeiten dieses Ausrüstungsplatzes teilen sich Unterstützungen",
+    "m49db3482db": "Juwelen"
   },
   "es": {
     "m0c63e733f9": "Lua no devolvió todos los íconos",
@@ -2667,7 +2671,8 @@
     "m9ba95f357c": "Eliminar compilación",
     "mb3157cbf2b": "¿Eliminar esta compilación?",
     "m659973f49f": "Esta habilidad no admite asistencias",
-    "mc2fd54cfce": "Las habilidades de este espacio comparten asistencias"
+    "mc2fd54cfce": "Las habilidades de este espacio comparten asistencias",
+    "m49db3482db": "Joyas"
   },
   "pt_BR": {
     "m0c63e733f9": "Lua não retornou todos os ícones",
@@ -3201,7 +3206,8 @@
     "m9ba95f357c": "Excluir compilação",
     "mb3157cbf2b": "Excluir esta compilação?",
     "m659973f49f": "Esta habilidade não aceita suportes",
-    "mc2fd54cfce": "As habilidades deste espaço de equipamento compartilham suportes"
+    "mc2fd54cfce": "As habilidades deste espaço de equipamento compartilham suportes",
+    "m49db3482db": "Joias"
   },
   "ja": {
     "m0c63e733f9": "Lua はすべてのアイコンを返しませんでした",
@@ -3735,7 +3741,8 @@
     "m9ba95f357c": "ビルドを削除",
     "mb3157cbf2b": "このビルドを削除しますか?",
     "m659973f49f": "このスキルにはサポートを追加できません",
-    "mc2fd54cfce": "この装備スロットのスキルはサポートを共有します"
+    "mc2fd54cfce": "この装備スロットのスキルはサポートを共有します",
+    "m49db3482db": "ジュエル"
   },
   "ko": {
     "m0c63e733f9": "Lua이 모든 아이콘을 반환하지 않았습니다.",
@@ -4269,7 +4276,8 @@
     "m9ba95f357c": "빌드 삭제",
     "mb3157cbf2b": "이 빌드를 삭제하시겠습니까?",
     "m659973f49f": "이 스킬에는 보조 젬을 추가할 수 없습니다",
-    "mc2fd54cfce": "이 장비 슬롯의 스킬은 보조 젬을 공유합니다"
+    "mc2fd54cfce": "이 장비 슬롯의 스킬은 보조 젬을 공유합니다",
+    "m49db3482db": "주얼"
   },
   "th": {
     "m0c63e733f9": "Lua ไม่ได้ส่งคืนไอคอนทั้งหมด",
@@ -4803,7 +4811,8 @@
     "m9ba95f357c": "ลบบิลด์",
     "mb3157cbf2b": "ลบบิลด์นี้ใช่ไหม",
     "m659973f49f": "ไม่สามารถเพิ่มเจมเสริมให้สกิลนี้ได้",
-    "mc2fd54cfce": "สกิลในช่องอุปกรณ์นี้ใช้เจมเสริมร่วมกัน"
+    "mc2fd54cfce": "สกิลในช่องอุปกรณ์นี้ใช้เจมเสริมร่วมกัน",
+    "m49db3482db": "จิวเวล"
   },
   "zh_Hant": {
     "m0c63e733f9": "Lua 未傳回所有圖標",
@@ -5337,6 +5346,7 @@
     "m9ba95f357c": "刪除構建",
     "mb3157cbf2b": "刪除此版本？",
     "m659973f49f": "此技能無法加入輔助寶石",
-    "mc2fd54cfce": "此裝備欄位的技能共用輔助寶石"
+    "mc2fd54cfce": "此裝備欄位的技能共用輔助寶石",
+    "m49db3482db": "珠寶"
   }
 }

@@ -1361,6 +1361,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m9c7a204d54 => 'Руны';
 
   @override
+  String get m49db3482db => 'Самоцветы';
+
+  @override
   String get m8c39bb691b => 'Сборка';
 
   @override

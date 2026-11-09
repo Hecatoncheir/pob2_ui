@@ -8,6 +8,7 @@ import 'core/panels.dart';
 import 'core/spark_theme.dart';
 import 'equipment_board.dart';
 import 'equipment_cubit.dart';
+import 'equipment_jewels.dart';
 import 'equipment_presentation.dart';
 import 'item_description.dart';
 import 'item_editor_dialog.dart';
@@ -36,19 +37,33 @@ class _ItemsViewState extends State<ItemsView> {
         bloc: equipment,
         builder: (context, state) => LayoutBuilder(
           builder: (context, constraints) {
-            final board = SurfacePanel(
-              child: Column(
-                children: [
-                  _weapons(),
-                  const SizedBox(height: 12),
-                  EquipmentBoard(
-                    report: widget.model.state.report!,
-                    selected: state.slot,
-                    select: equipment.select,
-                    busy: widget.model.state.busy,
+            final report = widget.model.state.report!;
+            final busy = widget.model.state.busy;
+            final board = Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                SurfacePanel(
+                  child: Column(
+                    children: [
+                      _weapons(),
+                      const SizedBox(height: 12),
+                      EquipmentBoard(
+                        report: report,
+                        selected: state.slot,
+                        select: equipment.select,
+                        busy: busy,
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+                if (report.items.isNotEmpty)
+                  EquipmentJewels(
+                    report: report,
+                    bases: widget.model.catalogs.itemBases(),
+                    repository: equipment.repository,
+                    busy: busy,
+                  ),
+              ],
             );
             final details = _details(state);
             if (constraints.maxWidth >= 640)

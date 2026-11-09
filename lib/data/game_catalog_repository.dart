@@ -125,6 +125,7 @@ class GameCatalogRepository {
   }
 
   Future<List<SkillGem>> gems() => _typed('gems', SkillGem.fromJson);
+  Future<List<JsonMap>> itemBases() => _load('bases');
 
   Future<List<ConditionDefinition>> conditions() =>
       _typed('config', ConditionDefinition.fromJson);

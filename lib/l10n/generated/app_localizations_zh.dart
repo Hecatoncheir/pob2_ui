@@ -1343,6 +1343,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m9c7a204d54 => '符文';
 
   @override
+  String get m49db3482db => '珠寶';
+
+  @override
   String get m8c39bb691b => '裝配';
 
   @override
@@ -3061,6 +3064,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m9c7a204d54 => '符文';
+
+  @override
+  String get m49db3482db => '珠寶';
 
   @override
   String get m8c39bb691b => '裝配';

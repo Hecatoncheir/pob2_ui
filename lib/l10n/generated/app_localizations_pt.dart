@@ -1372,6 +1372,9 @@ class AppLocalizationsPt extends AppLocalizations {
   String get m9c7a204d54 => 'Runas';
 
   @override
+  String get m49db3482db => 'Joias';
+
+  @override
   String get m8c39bb691b => 'Montagem';
 
   @override
@@ -3129,6 +3132,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get m9c7a204d54 => 'Runas';
+
+  @override
+  String get m49db3482db => 'Joias';
 
   @override
   String get m8c39bb691b => 'Montagem';

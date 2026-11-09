@@ -39,7 +39,7 @@ class EquipmentCubit extends Cubit<EquipmentState> {
     emit((slot: slot, preview: null, loading: id != 0, error: null));
     if (id == 0) return;
     try {
-      final preview = await repository.inspect(slot, itemId: id);
+      final preview = await repository.inspect(slot: slot, itemId: id);
       if (_current(generation))
         emit((slot: slot, preview: preview, loading: false, error: null));
     } catch (error) {

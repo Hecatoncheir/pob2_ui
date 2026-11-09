@@ -1344,6 +1344,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m9c7a204d54 => 'ルーン';
 
   @override
+  String get m49db3482db => 'ジュエル';
+
+  @override
   String get m8c39bb691b => 'アセンブリ';
 
   @override

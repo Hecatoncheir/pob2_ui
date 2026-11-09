@@ -2281,6 +2281,11 @@
     "description": "Руны",
     "placeholders": {}
   },
+  "m49db3482db": "Jewels",
+  "@m49db3482db": {
+    "description": "Самоцветы",
+    "placeholders": {}
+  },
   "m8c39bb691b": "Assembly",
   "@m8c39bb691b": {
     "description": "Сборка",

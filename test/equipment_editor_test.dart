@@ -10,6 +10,7 @@ import 'package:pob2_ui/domain/equipment_item.dart';
 import 'package:pob2_ui/ui/equipment_view.dart';
 import 'package:pob2_ui/ui/equipment_board.dart';
 import 'package:pob2_ui/ui/core/pob_text.dart';
+import 'package:pob2_ui/ui/item_artwork_image.dart';
 import 'package:pob2_ui/ui/item_description.dart';
 import 'package:pob2_ui/ui/item_editor_cubit.dart';
 
@@ -83,6 +84,48 @@ class EquipmentWorkshop extends EditorWorkshop {
   }) async {
     equipped = (slot: slot, raw: raw, id: itemId);
     return result;
+  }
+}
+
+class JewelEngine extends EquipmentEngine {
+  static const ruby = {
+    'id': 21,
+    'name': 'Test Ruby',
+    'base': 'Ruby',
+    'rarity': 'RARE',
+  };
+  static const diamond = {
+    'id': 22,
+    'name': 'The Adorned',
+    'base': 'Diamond',
+    'rarity': 'UNIQUE',
+    'raw': 'Rarity: Unique\nThe Adorned\nDiamond',
+  };
+  JsonMap? inspected;
+
+  @override
+  Future<JsonMap> call(String name, [JsonMap arguments = const {}]) async {
+    if (name == 'pob_catalog' && arguments['kind'] == 'bases') {
+      return {
+        'total': 3,
+        'entries': [
+          {'id': 'Ruby', 'type': 'Jewel'},
+          {'id': 'Diamond', 'type': 'Jewel'},
+          {'id': 'Lazuli Ring', 'type': 'Ring'},
+        ],
+      };
+    }
+    if (name == 'pob_inspect_item' && arguments['itemId'] == 22) {
+      inspected = arguments;
+      return {
+        'source': 'original-lua',
+        'item': diamond,
+        'lines': [
+          {'text': 'Test modifier from Lua'},
+        ],
+      };
+    }
+    return super.call(name, arguments);
   }
 }
 
@@ -171,6 +214,61 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text('Оберег I'), findsOneWidget);
   });
+
+  for (final width in [360.0, 1280.0]) {
+    testWidgets('В предметах видны самоцветы и их описание: $width', (
+      tester,
+    ) async {
+      await tester.binding.setSurfaceSize(Size(width, 800));
+      addTearDown(() => tester.binding.setSurfaceSize(null));
+      final engine = JewelEngine();
+      final model = EditorWorkshop(
+        engine,
+        report: BuildReport.fromJson({
+          ...fixture.raw,
+          'items': [
+            JewelEngine.ruby,
+            JewelEngine.diamond,
+            {'id': 23, 'name': 'Other item', 'base': 'Lazuli Ring'},
+          ],
+          'slots': [
+            ...fixture.slots,
+            {'nodeId': 123, 'itemId': 21},
+          ],
+        }),
+      );
+      addTearDown(model.close);
+      await tester.runAsync(() async => ItemArtCatalog.shared);
+      await tester.pumpWidget(application(ItemsView(model: model)));
+      await tester.pump();
+      await tester.runAsync(() async => ItemArtCatalog.shared);
+      await tester.pumpAndSettle();
+
+      final ruby = find.byKey(const ValueKey('equipment-jewel-21'));
+      final diamond = find.byKey(const ValueKey('equipment-jewel-22'));
+      final thumbnail = find.descendant(
+        of: diamond,
+        matching: find.byType(ItemArtworkImage),
+      );
+      expect(ruby, findsOneWidget);
+      expect(find.byKey(const ValueKey('equipment-jewel-23')), findsNothing);
+      expect(
+        tester.widget<ItemArtworkImage>(thumbnail).url,
+        endsWith('/Jewels/TrialmasterJewel.webp'),
+      );
+
+      await tester.ensureVisible(diamond);
+      await tester.tap(diamond);
+      await tester.pumpAndSettle();
+      await tester.runAsync(() async => ItemArtCatalog.shared);
+      await tester.pumpAndSettle();
+      expect(engine.inspected, {'itemId': 22});
+      expect(find.text('Test modifier from Lua'), findsOneWidget);
+      expect(find.byKey(const Key('item-artwork')), findsOneWidget);
+      expect(tester.takeException(), isNull);
+    });
+  }
+
   test('Сообщение Lua показывается без служебного JSON', () {
     expect(
       mcpErrorMessage(

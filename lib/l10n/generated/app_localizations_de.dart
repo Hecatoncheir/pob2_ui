@@ -1385,6 +1385,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get m9c7a204d54 => 'Runen';
 
   @override
+  String get m49db3482db => 'Juwelen';
+
+  @override
   String get m8c39bb691b => 'Versammlung';
 
   @override

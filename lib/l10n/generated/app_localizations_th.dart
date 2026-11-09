@@ -1351,6 +1351,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m9c7a204d54 => 'รูน';
 
   @override
+  String get m49db3482db => 'จิวเวล';
+
+  @override
   String get m8c39bb691b => 'การประกอบ';
 
   @override
