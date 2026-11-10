@@ -88,6 +88,12 @@ class AppLocalizationsKo extends AppLocalizations {
   String get mcdf95e40cd => 'PoB II · 워크숍';
 
   @override
+  String get mebbddaaf16 => 'PoB에서 잘못된 문자 데이터를 반환했습니다.';
+
+  @override
+  String get m16a6aabd6a => 'PoB가 잘못된 문자 목록을 반환했습니다.';
+
+  @override
   String get m5a8756b562 => 'PoB가 아직 열려 있습니다. 빌드를 저장하고 PoB를 닫으세요.';
 
   @override
@@ -168,6 +174,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String m7daed90e2c(String p0, String p1) {
     return '$p0에 $p1이 없습니다. 0.4.0 이상이 필요합니다.';
   }
+
+  @override
+  String get m2b96f1cb20 => '계정에 사용 가능한 캐릭터가 없습니다.';
 
   @override
   String m1163ee245e(String p0) {
@@ -536,10 +545,19 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m1ccb8777b8 => '스톤 이미지를 사용할 수 없습니다.';
 
   @override
+  String get medafd2f9d8 => 'PoB에서 캐릭터 가져오기';
+
+  @override
   String get m2c72186c20 => '가져온 어셈블리';
 
   @override
+  String get m848ed36881 => '가져오기';
+
+  @override
   String get mdb8bc611c3 => 'PoB에서 가져오기';
+
+  @override
+  String get mcaa43cf432 => '캐릭터 가져오기';
 
   @override
   String get ma8f8e11f0c => '지능';
@@ -965,6 +983,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m4a1afe7893 => '아뮬렛III';
 
   @override
+  String get md65eeeeaab => '구성요소 섹션에서 MCP를 업데이트하세요.';
+
+  @override
   String get m616c984fe4 => '석재 카탈로그 및 호환성 업데이트 MCP';
 
   @override
@@ -1117,6 +1138,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get mcaceac98e9 => '다시 시작 - 명령에 의해서만 가능';
 
   @override
+  String get mfd5aca9906 => 'Wine을 통해 PoB를 다시 시작하고 \"Test Ping\"을 클릭합니다.';
+
+  @override
   String get m46fe82b8cc => 'PoB 다시 시작';
 
   @override
@@ -1166,6 +1190,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m67f5d8880e => '연결 Lua';
+
+  @override
+  String get m0d8b14b475 => '브리지를 다시 연결하고 PoB를 다시 시작하세요.';
 
   @override
   String get m538d913ee0 => '연결 Lua';
@@ -1467,10 +1494,10 @@ class AppLocalizationsKo extends AppLocalizations {
   String get ma50190234a => '나만의...';
 
   @override
-  String get mfc68d94f44 => 'PoB 연결을 확인했습니다. 가져올 빌드를 여세요.';
+  String get m02578f2b24 => 'PoB 연결 확인됨';
 
   @override
-  String get ma59f85739f => '열려 있는 PoB 빌드와의 연결을 확인했습니다';
+  String get mfc68d94f44 => 'PoB 연결을 확인했습니다. 가져올 빌드를 여세요.';
 
   @override
   String get m7434b2e81b => '왼쪽으로 이동';

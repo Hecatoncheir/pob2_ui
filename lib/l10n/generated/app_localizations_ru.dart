@@ -88,6 +88,12 @@ class AppLocalizationsRu extends AppLocalizations {
   String get mcdf95e40cd => 'PoB II · Мастерская';
 
   @override
+  String get mebbddaaf16 => 'PoB вернул неверные данные персонажа.';
+
+  @override
+  String get m16a6aabd6a => 'PoB вернул неверный список персонажей.';
+
+  @override
   String get m5a8756b562 =>
       'PoB ещё открыт. Сохраните сборку и завершите закрытие в PoB.';
 
@@ -170,6 +176,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String m7daed90e2c(String p0, String p1) {
     return 'В $p0 нет $p1; требуется MCP 0.4.0 или новее';
   }
+
+  @override
+  String get m2b96f1cb20 => 'В аккаунте нет доступных персонажей.';
 
   @override
   String m1163ee245e(String p0) {
@@ -547,10 +556,19 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m1ccb8777b8 => 'Изображение камня недоступно';
 
   @override
+  String get medafd2f9d8 => 'Импорт персонажа из PoB';
+
+  @override
   String get m2c72186c20 => 'Импортированная сборка';
 
   @override
+  String get m848ed36881 => 'Импортировать';
+
+  @override
   String get mdb8bc611c3 => 'Импортировать из PoB';
+
+  @override
+  String get mcaa43cf432 => 'Импортировать персонажа';
 
   @override
   String get ma8f8e11f0c => 'Интеллект';
@@ -979,6 +997,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m4a1afe7893 => 'Оберег III';
 
   @override
+  String get md65eeeeaab => 'Обновите MCP в разделе «Компоненты».';
+
+  @override
   String get m616c984fe4 => 'Обновите MCP для каталога камней и совместимости';
 
   @override
@@ -1134,6 +1155,10 @@ class AppLocalizationsRu extends AppLocalizations {
   String get mcaceac98e9 => 'Перезапуск — только по вашей команде';
 
   @override
+  String get mfd5aca9906 =>
+      'Перезапустите PoB через Wine и нажмите «Проверить связь».';
+
+  @override
   String get m46fe82b8cc => 'Перезапустить PoB';
 
   @override
@@ -1186,6 +1211,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get m67f5d8880e => 'Подключите Lua';
+
+  @override
+  String get m0d8b14b475 => 'Подключите мост заново и перезапустите PoB.';
 
   @override
   String get m538d913ee0 => 'Подключить Lua';
@@ -1491,11 +1519,11 @@ class AppLocalizationsRu extends AppLocalizations {
   String get ma50190234a => 'Свои…';
 
   @override
-  String get mfc68d94f44 =>
-      'Связь с PoB подтверждена. Откройте сборку для импорта.';
+  String get m02578f2b24 => 'Связь с PoB подтверждена';
 
   @override
-  String get ma59f85739f => 'Связь с открытой сборкой PoB подтверждена';
+  String get mfc68d94f44 =>
+      'Связь с PoB подтверждена. Откройте сборку для импорта.';
 
   @override
   String get m7434b2e81b => 'Сдвинуть влево';

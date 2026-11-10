@@ -259,6 +259,21 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     await _importCopy(xml);
   });
 
+  Future<void> importPobCharacter(String name) => _run(() async {
+    if (!engine.tools.contains('pob_import_character')) {
+      throw StateError('Обновите MCP в разделе «Компоненты».');
+    }
+    final character = await pobWindow.readCharacter(components.active, name);
+    await _switchBuild(
+      () async {
+        await engine.call('pob_import_character', {'character': character});
+        await _restoreTreeMode();
+      },
+      target: LibraryState(entries: state.library.entries),
+      title: name,
+    );
+  });
+
   Future<void> _importCopy(String xml) => _switchBuild(
     () => _loadXml(xml),
     target: LibraryState(entries: state.library.entries),

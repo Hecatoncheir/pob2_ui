@@ -10,6 +10,7 @@ typedef PobBridgeState = ({
   bool busy,
   bool needsRestart,
   String? message,
+  String? buildsPath,
   String? error,
 });
 
@@ -20,6 +21,7 @@ class PobBridgeCubit extends Cubit<PobBridgeState> {
         busy: false,
         needsRestart: false,
         message: null,
+        buildsPath: null,
         error: null,
       ));
 
@@ -47,7 +49,9 @@ class PobBridgeCubit extends Cubit<PobBridgeState> {
 
   Future<void> install() => _withDirectory((directory) async {
     await repository.installBridge(mcp, directory);
-    return 'Мост установлен. Перезапустите PoB для проверки связи.';
+    return repository.canRestart
+        ? 'Мост установлен. Перезапустите PoB для проверки связи.'
+        : 'Перезапустите PoB через Wine и нажмите «Проверить связь».';
   }, needsRestart: true);
 
   Future<void> restart() => _withDirectory(
@@ -59,9 +63,17 @@ class PobBridgeCubit extends Cubit<PobBridgeState> {
     progress: 'Если PoB попросит сохранить сборку, ответьте в его окне.',
   );
 
-  Future<void> check() => _withDirectory((directory) async {
-    await repository.checkBridge(mcp, directory);
-    return 'Связь с открытой сборкой PoB подтверждена';
+  Future<void> check() => _run(() async {
+    final target = state.target;
+    final directory = target.directory;
+    if (directory == null) return;
+    final buildsPath = await repository.checkBridge(mcp, directory);
+    _show(
+      target,
+      message: 'Связь с PoB подтверждена',
+      buildsPath: buildsPath,
+      needsRestart: false,
+    );
   });
 
   Future<void> _withDirectory(
@@ -97,6 +109,7 @@ class PobBridgeCubit extends Cubit<PobBridgeState> {
     bool busy = false,
     bool? needsRestart,
     String? message,
+    String? buildsPath,
     String? error,
   }) {
     if (!isClosed) {
@@ -105,6 +118,7 @@ class PobBridgeCubit extends Cubit<PobBridgeState> {
         busy: busy,
         needsRestart: needsRestart ?? state.needsRestart,
         message: message,
+        buildsPath: buildsPath,
         error: error,
       ));
     }

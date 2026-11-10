@@ -88,6 +88,12 @@ class AppLocalizationsZh extends AppLocalizations {
   String get mcdf95e40cd => 'PoB II · 研討會';
 
   @override
+  String get mebbddaaf16 => 'PoB 回傳了錯誤的字元資料。';
+
+  @override
+  String get m16a6aabd6a => 'PoB 傳回了錯誤的字元清單。';
+
+  @override
   String get m5a8756b562 => 'PoB 仍然開啟。請儲存流派並完成關閉 PoB。';
 
   @override
@@ -168,6 +174,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String m7daed90e2c(String p0, String p1) {
     return '$p0 中沒有 $p1；需要 MCP 0.4.0 或更高版本';
   }
+
+  @override
+  String get m2b96f1cb20 => '帳戶上沒有可用的字元。';
 
   @override
   String m1163ee245e(String p0) {
@@ -535,10 +544,19 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m1ccb8777b8 => '石頭圖像不可用';
 
   @override
+  String get medafd2f9d8 => '從 PoB 導入角色';
+
+  @override
   String get m2c72186c20 => '導入元件';
 
   @override
+  String get m848ed36881 => '導入';
+
+  @override
   String get mdb8bc611c3 => '從 PoB 匯入';
+
+  @override
+  String get mcaa43cf432 => '導入角色';
 
   @override
   String get ma8f8e11f0c => '情報';
@@ -963,6 +981,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m4a1afe7893 => '護身符 III';
 
   @override
+  String get md65eeeeaab => '更新「元件」部分中的 MCP。';
+
+  @override
   String get m616c984fe4 => '更新 MCP 以取得石材目錄和相容性';
 
   @override
@@ -1115,6 +1136,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get mcaceac98e9 => '重新啟動 - 僅根據您的命令';
 
   @override
+  String get mfd5aca9906 => '透過 Wine 重新啟動 PoB 並點選「測試 Ping」。';
+
+  @override
   String get m46fe82b8cc => '重新啟動 PoB';
 
   @override
@@ -1164,6 +1188,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m67f5d8880e => '連接 Lua';
+
+  @override
+  String get m0d8b14b475 => '重新連接橋接器並重新啟動 PoB。';
 
   @override
   String get m538d913ee0 => '連接 Lua';
@@ -1465,10 +1492,10 @@ class AppLocalizationsZh extends AppLocalizations {
   String get ma50190234a => '自己的...';
 
   @override
-  String get mfc68d94f44 => '已確認連線至 PoB。請開啟要匯入的流派。';
+  String get m02578f2b24 => 'PoB 連線已確認';
 
   @override
-  String get ma59f85739f => '已確認連線至 PoB 中開啟的流派';
+  String get mfc68d94f44 => '已確認連線至 PoB。請開啟要匯入的流派。';
 
   @override
   String get m7434b2e81b => '向左移動';
@@ -1907,6 +1934,12 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get mcdf95e40cd => 'PoB II · 研討會';
 
   @override
+  String get mebbddaaf16 => 'PoB 回傳了錯誤的字元資料。';
+
+  @override
+  String get m16a6aabd6a => 'PoB 傳回了錯誤的字元清單。';
+
+  @override
   String get m5a8756b562 => 'PoB 仍然開啟。請儲存流派並完成關閉 PoB。';
 
   @override
@@ -1987,6 +2020,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String m7daed90e2c(String p0, String p1) {
     return '$p0 中沒有 $p1；需要 MCP 0.4.0 或更高版本';
   }
+
+  @override
+  String get m2b96f1cb20 => '帳戶上沒有可用的字元。';
 
   @override
   String m1163ee245e(String p0) {
@@ -2354,10 +2390,19 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m1ccb8777b8 => '石頭圖像不可用';
 
   @override
+  String get medafd2f9d8 => '從 PoB 導入角色';
+
+  @override
   String get m2c72186c20 => '導入元件';
 
   @override
+  String get m848ed36881 => '導入';
+
+  @override
   String get mdb8bc611c3 => '從 PoB 匯入';
+
+  @override
+  String get mcaa43cf432 => '導入角色';
 
   @override
   String get ma8f8e11f0c => '情報';
@@ -2782,6 +2827,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m4a1afe7893 => '護身符 III';
 
   @override
+  String get md65eeeeaab => '更新「元件」部分中的 MCP。';
+
+  @override
   String get m616c984fe4 => '更新 MCP 以取得石材目錄和相容性';
 
   @override
@@ -2934,6 +2982,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get mcaceac98e9 => '重新啟動 - 僅根據您的命令';
 
   @override
+  String get mfd5aca9906 => '透過 Wine 重新啟動 PoB 並點選「測試 Ping」。';
+
+  @override
   String get m46fe82b8cc => '重新啟動 PoB';
 
   @override
@@ -2983,6 +3034,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m67f5d8880e => '連接 Lua';
+
+  @override
+  String get m0d8b14b475 => '重新連接橋接器並重新啟動 PoB。';
 
   @override
   String get m538d913ee0 => '連接 Lua';
@@ -3284,10 +3338,10 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get ma50190234a => '自己的...';
 
   @override
-  String get mfc68d94f44 => '已確認連線至 PoB。請開啟要匯入的流派。';
+  String get m02578f2b24 => 'PoB 連線已確認';
 
   @override
-  String get ma59f85739f => '已確認連線至 PoB 中開啟的流派';
+  String get mfc68d94f44 => '已確認連線至 PoB。請開啟要匯入的流派。';
 
   @override
   String get m7434b2e81b => '向左移動';

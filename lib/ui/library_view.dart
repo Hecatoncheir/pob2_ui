@@ -7,6 +7,7 @@ import 'core/motion.dart';
 import 'core/panels.dart';
 import 'core/spark_art.dart';
 import 'core/spark_theme.dart';
+import 'pob_character_dialog.dart';
 import 'shell_cubit.dart';
 import 'workshop_cubit.dart';
 import 'build_notes_dialog.dart';
@@ -45,13 +46,20 @@ class _LibraryViewState extends State<LibraryView> {
                   subtitle: 'Идеи, к которым хочется вернуться',
                 ),
                 if (model.pobWindow.supported) ...[
-                  OutlinedButton.icon(
-                    key: const Key('import-from-pob'),
-                    onPressed: model.state.busy || !model.engine.connected
-                        ? null
-                        : model.importFromPob,
-                    icon: const SparkArt('icons/upload', width: 16),
-                    label: const AppText('Импортировать из PoB'),
+                  Wrap(
+                    spacing: 10,
+                    runSpacing: 8,
+                    children: [
+                      OutlinedButton.icon(
+                        key: const Key('import-from-pob'),
+                        onPressed: model.state.busy || !model.engine.connected
+                            ? null
+                            : model.importFromPob,
+                        icon: const SparkArt('icons/upload', width: 16),
+                        label: const AppText('Импортировать из PoB'),
+                      ),
+                      PobCharacterImportButton(model),
+                    ],
                   ),
                   const SizedBox(height: 12),
                 ],

@@ -260,6 +260,18 @@ abstract class AppLocalizations {
   /// **'PoB II · Workshop'**
   String get mcdf95e40cd;
 
+  /// PoB вернул неверные данные персонажа.
+  ///
+  /// In en, this message translates to:
+  /// **'PoB returned incorrect character data.'**
+  String get mebbddaaf16;
+
+  /// PoB вернул неверный список персонажей.
+  ///
+  /// In en, this message translates to:
+  /// **'PoB returned incorrect character list.'**
+  String get m16a6aabd6a;
+
   /// PoB ещё открыт. Сохраните сборку и завершите закрытие в PoB.
   ///
   /// In en, this message translates to:
@@ -397,6 +409,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'There is no {p1} in {p0}; requires MCP 0.4.0 or later'**
   String m7daed90e2c(String p0, String p1);
+
+  /// В аккаунте нет доступных персонажей.
+  ///
+  /// In en, this message translates to:
+  /// **'There are no characters available on the account.'**
+  String get m2b96f1cb20;
 
   /// В компоненте отсутствует {p0}. Рабочая версия сохранена.
   ///
@@ -1088,17 +1106,35 @@ abstract class AppLocalizations {
   /// **'Stone image unavailable'**
   String get m1ccb8777b8;
 
+  /// Импорт персонажа из PoB
+  ///
+  /// In en, this message translates to:
+  /// **'Importing a character from PoB'**
+  String get medafd2f9d8;
+
   /// Импортированная сборка
   ///
   /// In en, this message translates to:
   /// **'Imported assembly'**
   String get m2c72186c20;
 
+  /// Импортировать
+  ///
+  /// In en, this message translates to:
+  /// **'Import'**
+  String get m848ed36881;
+
   /// Импортировать из PoB
   ///
   /// In en, this message translates to:
   /// **'Import from PoB'**
   String get mdb8bc611c3;
+
+  /// Импортировать персонажа
+  ///
+  /// In en, this message translates to:
+  /// **'Import character'**
+  String get mcaa43cf432;
 
   /// Интеллект
   ///
@@ -1869,6 +1905,12 @@ abstract class AppLocalizations {
   /// **'Amulet III'**
   String get m4a1afe7893;
 
+  /// Обновите MCP в разделе «Компоненты».
+  ///
+  /// In en, this message translates to:
+  /// **'Update MCP in the Components section.'**
+  String get md65eeeeaab;
+
   /// Обновите MCP для каталога камней и совместимости
   ///
   /// In en, this message translates to:
@@ -2157,6 +2199,12 @@ abstract class AppLocalizations {
   /// **'Restart - only at your command'**
   String get mcaceac98e9;
 
+  /// Перезапустите PoB через Wine и нажмите «Проверить связь».
+  ///
+  /// In en, this message translates to:
+  /// **'Restart PoB via Wine and click \"Test Ping\".'**
+  String get mfd5aca9906;
+
   /// Перезапустить PoB
   ///
   /// In en, this message translates to:
@@ -2258,6 +2306,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Connect Lua'**
   String get m67f5d8880e;
+
+  /// Подключите мост заново и перезапустите PoB.
+  ///
+  /// In en, this message translates to:
+  /// **'Reconnect the bridge and restart PoB.'**
+  String get m0d8b14b475;
 
   /// Подключить Lua
   ///
@@ -2817,17 +2871,17 @@ abstract class AppLocalizations {
   /// **'Own...'**
   String get ma50190234a;
 
+  /// Связь с PoB подтверждена
+  ///
+  /// In en, this message translates to:
+  /// **'PoB connection confirmed'**
+  String get m02578f2b24;
+
   /// Связь с PoB подтверждена. Откройте сборку для импорта.
   ///
   /// In en, this message translates to:
   /// **'PoB connection verified. Open a build to import it.'**
   String get mfc68d94f44;
-
-  /// Связь с открытой сборкой PoB подтверждена
-  ///
-  /// In en, this message translates to:
-  /// **'Connected to the open PoB build'**
-  String get ma59f85739f;
 
   /// Сдвинуть влево
   ///

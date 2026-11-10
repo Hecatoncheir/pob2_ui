@@ -11,6 +11,7 @@ import 'package:pob2_ui/data/session_repository.dart';
 import 'package:pob2_ui/data/xml_file_service.dart';
 import 'package:pob2_ui/domain/component.dart';
 import 'package:pob2_ui/domain/library_entry.dart';
+import 'package:pob2_ui/domain/pob_character.dart';
 import 'package:pob2_ui/ui/app.dart';
 import 'package:pob2_ui/ui/workshop_cubit.dart';
 import 'package:pob2_ui/ui/workshop_state.dart';
@@ -40,6 +41,10 @@ class FileEngine extends McpClient {
         value = xml.contains('bad')
             ? 999
             : int.parse(RegExp(r'\d+').firstMatch(xml)![0]!);
+        return {};
+      case 'pob_import_character':
+        expect(arguments['character'], {'name': 'Героиня'});
+        value = 42;
         return {};
       case 'pob_check_build':
         if (value == 999) throw StateError('Lua отклонил XML');
@@ -79,6 +84,17 @@ class WindowSource extends PobWindowRepository {
   bool get supported => true;
 
   @override
+  Future<List<PobCharacter>> listCharacters(Installations components) async => [
+    (name: 'Героиня', characterClass: 'Witch', level: 90, league: null),
+  ];
+
+  @override
+  Future<Map<String, dynamic>> readCharacter(
+    Installations components,
+    String name,
+  ) async => {'name': name};
+
+  @override
   Future<String> readXml(Installations components) async =>
       xml ??
       (throw StateError(
@@ -95,9 +111,14 @@ class ImportButtonWorkshop extends WorkshopCubit {
   });
 
   int requests = 0;
+  String? importedCharacter;
 
   @override
   Future<void> importFromPob() async => requests++;
+
+  @override
+  Future<void> importPobCharacter(String name) async =>
+      importedCharacter = name;
 }
 
 void main() {
@@ -188,6 +209,38 @@ void main() {
     expect(model.state.report!.stats['Life'], 142);
     expect(await model.library.read(previous), '<build value="1"/>');
     expect(await model.library.read(copy), window.xml);
+  });
+
+  testWidgets('В библиотеке можно выбрать персонажа из PoB', (tester) async {
+    final widgetModel = ImportButtonWorkshop(
+      model.components,
+      engine,
+      initialState: model.state,
+      pobWindow: window,
+    );
+    addTearDown(widgetModel.close);
+    await tester.pumpWidget(PobApp(model: widgetModel));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byKey(const ValueKey('page-library')));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Импортировать персонажа'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Героиня'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Импортировать'));
+    await tester.pumpAndSettle();
+    expect(widgetModel.importedCharacter, 'Героиня');
+  });
+
+  test('Импорт персонажа сохраняет новую сборку отдельно', () async {
+    engine.tools = {'pob_import_character'};
+    final previous = model.state.library.activeId!;
+    await model.importPobCharacter('Героиня');
+    expect(model.state.error, isNull);
+    expect(model.state.library.active!.title, 'Героиня');
+    expect(model.state.library.entries, hasLength(2));
+    expect(model.state.report!.stats['Life'], 142);
+    expect(await model.library.read(previous), '<build value="1"/>');
   });
 
   test('Отказ моста сохраняет рабочую сборку и историю', () async {

@@ -46,7 +46,8 @@ class _PobBridgeDialog extends StatelessWidget {
                   onPressed: ready ? cubit.check : null,
                   child: const AppText('Проверить связь'),
                 ),
-                _primaryAction(cubit, ready, state.needsRestart),
+                if (!state.needsRestart || cubit.repository.canRestart)
+                  _primaryAction(cubit, ready, state.needsRestart),
               ],
             ),
           );
@@ -84,6 +85,7 @@ class _BridgeContent extends StatelessWidget {
             message,
             style: TextStyle(color: state.busy ? colors.muted : colors.green),
           ),
+        if (state.buildsPath case final path?) SelectableText(path),
         if (state.error case final error?)
           AppText(error, style: TextStyle(color: colors.danger)),
       ],

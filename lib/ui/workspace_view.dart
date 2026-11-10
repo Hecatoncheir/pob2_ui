@@ -13,6 +13,7 @@ import 'core/spark_art.dart';
 import 'core/spark_theme.dart';
 import 'mcp_editor_cubit.dart';
 import 'mcp_editor_dialog.dart';
+import 'pob_character_dialog.dart';
 import 'report_views.dart';
 import 'shell_cubit.dart';
 import 'tree_view.dart';
@@ -104,6 +105,7 @@ class WorkspaceView extends StatelessWidget {
             onPressed: model.state.busy ? null : model.importFromPob,
             child: const AppText('Импортировать из PoB'),
           ),
+        if (model.pobWindow.supported) PobCharacterImportButton(model),
       ],
     );
   }
@@ -232,6 +234,12 @@ class _BuildMenu extends StatelessWidget {
           value: 'import-pob',
           child: const AppText('Импортировать из PoB'),
         ),
+      if (model.pobWindow.supported)
+        PopupMenuItem(
+          enabled: model.engine.connected,
+          value: 'import-character',
+          child: const AppText('Импортировать персонажа'),
+        ),
       const PopupMenuItem(value: 'paste', child: AppText('Вставить XML')),
       const PopupMenuItem(value: 'xml', child: AppText('Скопировать XML')),
       const PopupMenuItem(value: 'copy', child: AppText('Создать копию')),
@@ -247,6 +255,8 @@ class _BuildMenu extends StatelessWidget {
         showXmlPaste(context, model);
       case 'import-pob':
         model.importFromPob();
+      case 'import-character':
+        showPobCharacterImport(context, model);
       case 'xml':
         showXmlCopy(context, model);
       case 'copy':

@@ -1,7 +1,9 @@
 import 'dart:convert';
 import 'dart:io';
 
+import '../domain/build_report.dart';
 import '../domain/component.dart';
+import '../domain/pob_character.dart';
 import 'mcp_client.dart';
 import 'process_service.dart';
 
@@ -11,7 +13,8 @@ class PobWindowRepository {
   final _launched = <String, _LaunchedPob>{};
   bool _windowBusy = false;
 
-  bool get supported => Platform.isWindows;
+  bool get supported => Platform.isWindows || Platform.isLinux;
+  bool get canRestart => Platform.isWindows;
 
   Future<List<String>> findInstallations(Installation mcp) async {
     final output = await _run(mcp, ['-c', _discovery]);
@@ -20,13 +23,12 @@ class PobWindowRepository {
   }
 
   Future<void> installBridge(Installation mcp, String directory) async {
-    final executable = await _executable(directory);
-    await _run(mcp, [
-      'run.py',
-      'install-bridge',
-      '--pob-dir',
-      executable.parent.path,
-    ]);
+    if (Platform.isLinux) {
+      await _run(mcp, ['-c', _installLinuxBridge, directory]);
+      return;
+    }
+    await _executable(directory);
+    await _run(mcp, ['run.py', 'install-bridge', '--pob-dir', directory]);
   }
 
   Future<void> restartAndCheckBridge(Installation mcp, String directory) =>
@@ -40,7 +42,7 @@ class PobWindowRepository {
     final status = await _run(mcp, [
       '-c',
       _waitForBridge,
-      executable.parent.path,
+      directory,
     ], timeout: const Duration(seconds: 60));
     if (status != 'ready') {
       throw StateError(
@@ -75,14 +77,13 @@ class PobWindowRepository {
   }
 
   Future<File> _executable(String directory) async {
-    final executable = File.fromUri(
-      Directory(directory).absolute.uri
-          .resolve(Uri.encodeComponent('Path of Building-PoE2.exe')),
-    );
-    if (!await executable.exists()) {
-      throw const FormatException('Выберите папку с приложением PoB для PoE 2');
-    }
-    return executable;
+    final root = Directory(directory).absolute.uri;
+    final name = Uri.encodeComponent('Path of Building-PoE2.exe');
+    final executable = File.fromUri(root.resolve(name));
+    if (await executable.exists()) return executable;
+    final runtime = File.fromUri(root.resolve('runtime/$name'));
+    if (await runtime.exists()) return runtime;
+    throw const FormatException('Выберите папку с приложением PoB для PoE 2');
   }
 
   Future<_LaunchedPob> _restartWindow(File executable, String path) async {
@@ -125,8 +126,9 @@ class PobWindowRepository {
     script,
   ], environment: environment);
 
-  Future<void> checkBridge(Installation mcp, String directory) async {
-    await _exportXml(mcp, directory: directory);
+  Future<String?> checkBridge(Installation mcp, String directory) async {
+    final result = await _run(mcp, ['-c', _checkBridge, directory]);
+    return jsonDecode(result) as String?;
   }
 
   Future<String> readXml(Installations components) async {
@@ -135,11 +137,62 @@ class PobWindowRepository {
     return _exportXml(mcp);
   }
 
-  Future<String> _exportXml(Installation mcp, {String? directory}) async {
+  Future<List<PobCharacter>> listCharacters(Installations components) async {
+    final response = await _windowTool(components, 'pob_list_characters');
+    if (response case {'characters': final List<Object?> characters}) {
+      return List.unmodifiable(
+        characters.map(readPobCharacter).toList()..sort(
+          (first, second) =>
+              first.name.toLowerCase().compareTo(second.name.toLowerCase()),
+        ),
+      );
+    }
+    throw const FormatException('PoB вернул неверный список персонажей.');
+  }
+
+  Future<JsonMap> readCharacter(Installations components, String name) async {
+    final response = await _windowTool(components, 'pob_get_character', {
+      'name': name,
+    });
+    return switch (response) {
+      {'character': final JsonMap character} => character,
+      _ => throw const FormatException('PoB вернул неверные данные персонажа.'),
+    };
+  }
+
+  Future<JsonMap> _windowTool(
+    Installations components,
+    String tool, [
+    JsonMap arguments = const {},
+  ]) async {
+    final mcp = components[Component.mcp];
+    if (mcp == null) throw StateError('Подключите Lua');
+    return _withWindow(mcp, (client) async {
+      if (!client.tools.contains(tool)) {
+        throw StateError('Обновите MCP в разделе «Компоненты».');
+      }
+      try {
+        return await client.call(tool, arguments);
+      } on StateError catch (error) {
+        if ('${error.message}'.contains('"UNKNOWN_METHOD"')) {
+          throw StateError('Подключите мост заново и перезапустите PoB.');
+        }
+        rethrow;
+      }
+    });
+  }
+
+  Future<String> _exportXml(Installation mcp) =>
+      _withWindow(mcp, (client) => client.exportBuildXml());
+
+  Future<T> _withWindow<T>(
+    Installation mcp,
+    Future<T> Function(McpClient) action,
+  ) async {
     final client = McpClient();
     try {
-      await client.connectToPobWindow(mcp, directory: directory);
-      return await client.exportBuildXml();
+      await client.connectToPobWindow(mcp);
+      return await action(client);
     } finally {
       await client.close();
     }
@@ -160,6 +213,9 @@ class PobWindowRepository {
         timeout: timeout,
       );
     } on ProcessException catch (error) {
+      if (error.message.trim() == 'POB_WINE_UNSUPPORTED') {
+        throw StateError('Обновите MCP в разделе «Компоненты».');
+      }
       throw StateError(error.message.trim());
     }
   }
@@ -170,22 +226,55 @@ const _closePending =
 
 const _discovery = '''
 import json
+import sys
 from pathlib import Path
 
-from pob_poe2_mcp.bridge import load_config
-from pob_poe2_mcp.engine import engine_layout, installed_engine_dirs
-from pob_poe2_mcp.transport import bridge_state_dir
+from pob_poe2_mcp import bridge
 
-paths = installed_engine_dirs()
-saved = load_config(bridge_state_dir()).get("installDir")
-if isinstance(saved, str):
-    path = Path(saved).resolve()
-    if engine_layout(path) and path not in paths:
-        paths.append(path)
+if hasattr(bridge, "installed_bridge_dirs"):
+    paths = bridge.installed_bridge_dirs()
+elif sys.platform == "win32":
+    from pob_poe2_mcp.engine import engine_layout, installed_engine_dirs
+    from pob_poe2_mcp.transport import bridge_state_dir
+    paths = installed_engine_dirs()
+    saved = bridge.load_config(bridge_state_dir()).get("installDir")
+    if isinstance(saved, str):
+        path = Path(saved).resolve()
+        if engine_layout(path) and path not in paths:
+            paths.append(path)
+    paths = [path for path in paths if (path / "Path of Building-PoE2.exe").is_file()]
+else:
+    sys.exit("POB_WINE_UNSUPPORTED")
+print(json.dumps([str(path) for path in paths]))
+''';
 
-print(json.dumps([
-    str(path) for path in paths if (path / "Path of Building-PoE2.exe").is_file()
-]))
+const _installLinuxBridge = '''
+import sys
+from pob_poe2_mcp import bridge
+from pob_poe2_mcp.errors import EngineError
+
+if not hasattr(bridge, "installed_bridge_dirs"):
+    sys.exit("POB_WINE_UNSUPPORTED")
+try:
+    bridge.install_bridge(sys.argv[1])
+except (EngineError, OSError) as error:
+    sys.exit(str(error))
+''';
+
+const _checkBridge = '''
+import json
+import sys
+from pob_poe2_mcp.api import BuildAPI
+from pob_poe2_mcp.errors import EngineError
+
+try:
+    with BuildAPI(mode="app", pob_dir=sys.argv[1], timeout=5) as api:
+        path = None
+        if "getBuildDirectory" in api.capabilities.get("methods", []):
+            path = api.call("getBuildDirectory")["directory"]
+        print(json.dumps(path))
+except (EngineError, OSError) as error:
+    sys.exit(str(error))
 ''';
 
 const _windowApi = r'''

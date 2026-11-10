@@ -88,6 +88,12 @@ class AppLocalizationsPt extends AppLocalizations {
   String get mcdf95e40cd => 'PoB II · Oficina';
 
   @override
+  String get mebbddaaf16 => 'PoB retornou dados de caracteres incorretos.';
+
+  @override
+  String get m16a6aabd6a => 'PoB retornou uma lista de caracteres incorreta.';
+
+  @override
   String get m5a8756b562 =>
       'O PoB ainda está aberto. Salve a build e conclua o fechamento do PoB.';
 
@@ -171,6 +177,9 @@ class AppLocalizationsPt extends AppLocalizations {
   String m7daed90e2c(String p0, String p1) {
     return 'Não há $p1 em $p0; requer MCP 0.4.0 ou posterior';
   }
+
+  @override
+  String get m2b96f1cb20 => 'Não há personagens disponíveis na conta.';
 
   @override
   String m1163ee245e(String p0) {
@@ -551,10 +560,19 @@ class AppLocalizationsPt extends AppLocalizations {
   String get m1ccb8777b8 => 'Imagem de pedra indisponível';
 
   @override
+  String get medafd2f9d8 => 'Importando um personagem do PoB';
+
+  @override
   String get m2c72186c20 => 'Montagem importada';
 
   @override
+  String get m848ed36881 => 'Importar';
+
+  @override
   String get mdb8bc611c3 => 'Importar do PoB';
+
+  @override
+  String get mcaa43cf432 => 'Importar caractere';
 
   @override
   String get ma8f8e11f0c => 'Inteligência';
@@ -988,6 +1006,9 @@ class AppLocalizationsPt extends AppLocalizations {
   String get m4a1afe7893 => 'Amuleto III';
 
   @override
+  String get md65eeeeaab => 'Atualização MCP na seção Componentes.';
+
+  @override
   String get m616c984fe4 =>
       'Atualização MCP para catálogo de pedras e compatibilidade';
 
@@ -1144,6 +1165,10 @@ class AppLocalizationsPt extends AppLocalizations {
   String get mcaceac98e9 => 'Reinicie - somente sob seu comando';
 
   @override
+  String get mfd5aca9906 =>
+      'Reinicie o PoB via Wine e clique em \"Test Ping\".';
+
+  @override
   String get m46fe82b8cc => 'Reiniciar PoB';
 
   @override
@@ -1196,6 +1221,9 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get m67f5d8880e => 'Conectar Lua';
+
+  @override
+  String get m0d8b14b475 => 'Reconecte a ponte e reinicie o PoB.';
 
   @override
   String get m538d913ee0 => 'Conectar Lua';
@@ -1505,11 +1533,11 @@ class AppLocalizationsPt extends AppLocalizations {
   String get ma50190234a => 'Próprio...';
 
   @override
-  String get mfc68d94f44 =>
-      'Conexão com o PoB confirmada. Abra uma build para importá-la.';
+  String get m02578f2b24 => 'Conexão PoB confirmada';
 
   @override
-  String get ma59f85739f => 'Conexão com a build aberta no PoB confirmada';
+  String get mfc68d94f44 =>
+      'Conexão com o PoB confirmada. Abra uma build para importá-la.';
 
   @override
   String get m7434b2e81b => 'Mover para a esquerda';
@@ -1958,6 +1986,12 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get mcdf95e40cd => 'PoB II · Oficina';
 
   @override
+  String get mebbddaaf16 => 'PoB retornou dados de caracteres incorretos.';
+
+  @override
+  String get m16a6aabd6a => 'PoB retornou uma lista de caracteres incorreta.';
+
+  @override
   String get m5a8756b562 =>
       'O PoB ainda está aberto. Salve a build e conclua o fechamento do PoB.';
 
@@ -2041,6 +2075,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String m7daed90e2c(String p0, String p1) {
     return 'Não há $p1 em $p0; requer MCP 0.4.0 ou posterior';
   }
+
+  @override
+  String get m2b96f1cb20 => 'Não há personagens disponíveis na conta.';
 
   @override
   String m1163ee245e(String p0) {
@@ -2421,10 +2458,19 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get m1ccb8777b8 => 'Imagem de pedra indisponível';
 
   @override
+  String get medafd2f9d8 => 'Importando um personagem do PoB';
+
+  @override
   String get m2c72186c20 => 'Montagem importada';
 
   @override
+  String get m848ed36881 => 'Importar';
+
+  @override
   String get mdb8bc611c3 => 'Importar do PoB';
+
+  @override
+  String get mcaa43cf432 => 'Importar caractere';
 
   @override
   String get ma8f8e11f0c => 'Inteligência';
@@ -2858,6 +2904,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get m4a1afe7893 => 'Amuleto III';
 
   @override
+  String get md65eeeeaab => 'Atualização MCP na seção Componentes.';
+
+  @override
   String get m616c984fe4 =>
       'Atualização MCP para catálogo de pedras e compatibilidade';
 
@@ -3014,6 +3063,10 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get mcaceac98e9 => 'Reinicie - somente sob seu comando';
 
   @override
+  String get mfd5aca9906 =>
+      'Reinicie o PoB via Wine e clique em \"Test Ping\".';
+
+  @override
   String get m46fe82b8cc => 'Reiniciar PoB';
 
   @override
@@ -3066,6 +3119,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get m67f5d8880e => 'Conectar Lua';
+
+  @override
+  String get m0d8b14b475 => 'Reconecte a ponte e reinicie o PoB.';
 
   @override
   String get m538d913ee0 => 'Conectar Lua';
@@ -3375,11 +3431,11 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get ma50190234a => 'Próprio...';
 
   @override
-  String get mfc68d94f44 =>
-      'Conexão com o PoB confirmada. Abra uma build para importá-la.';
+  String get m02578f2b24 => 'Conexão PoB confirmada';
 
   @override
-  String get ma59f85739f => 'Conexão com a build aberta no PoB confirmada';
+  String get mfc68d94f44 =>
+      'Conexão com o PoB confirmada. Abra uma build para importá-la.';
 
   @override
   String get m7434b2e81b => 'Mover para a esquerda';

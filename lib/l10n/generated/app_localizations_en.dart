@@ -88,6 +88,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get mcdf95e40cd => 'PoB II · Workshop';
 
   @override
+  String get mebbddaaf16 => 'PoB returned incorrect character data.';
+
+  @override
+  String get m16a6aabd6a => 'PoB returned incorrect character list.';
+
+  @override
   String get m5a8756b562 =>
       'PoB is still open. Save the build and finish closing PoB.';
 
@@ -170,6 +176,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String m7daed90e2c(String p0, String p1) {
     return 'There is no $p1 in $p0; requires MCP 0.4.0 or later';
   }
+
+  @override
+  String get m2b96f1cb20 => 'There are no characters available on the account.';
 
   @override
   String m1163ee245e(String p0) {
@@ -545,10 +554,19 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m1ccb8777b8 => 'Stone image unavailable';
 
   @override
+  String get medafd2f9d8 => 'Importing a character from PoB';
+
+  @override
   String get m2c72186c20 => 'Imported assembly';
 
   @override
+  String get m848ed36881 => 'Import';
+
+  @override
   String get mdb8bc611c3 => 'Import from PoB';
+
+  @override
+  String get mcaa43cf432 => 'Import character';
 
   @override
   String get ma8f8e11f0c => 'Intelligence';
@@ -979,6 +997,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m4a1afe7893 => 'Amulet III';
 
   @override
+  String get md65eeeeaab => 'Update MCP in the Components section.';
+
+  @override
   String get m616c984fe4 => 'Update MCP for stone catalog and compatibility';
 
   @override
@@ -1133,6 +1154,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get mcaceac98e9 => 'Restart - only at your command';
 
   @override
+  String get mfd5aca9906 => 'Restart PoB via Wine and click \"Test Ping\".';
+
+  @override
   String get m46fe82b8cc => 'Restart PoB';
 
   @override
@@ -1184,6 +1208,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get m67f5d8880e => 'Connect Lua';
+
+  @override
+  String get m0d8b14b475 => 'Reconnect the bridge and restart PoB.';
 
   @override
   String get m538d913ee0 => 'Connect Lua';
@@ -1487,11 +1514,11 @@ class AppLocalizationsEn extends AppLocalizations {
   String get ma50190234a => 'Own...';
 
   @override
-  String get mfc68d94f44 =>
-      'PoB connection verified. Open a build to import it.';
+  String get m02578f2b24 => 'PoB connection confirmed';
 
   @override
-  String get ma59f85739f => 'Connected to the open PoB build';
+  String get mfc68d94f44 =>
+      'PoB connection verified. Open a build to import it.';
 
   @override
   String get m7434b2e81b => 'Move left';

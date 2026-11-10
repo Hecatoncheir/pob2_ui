@@ -132,6 +132,16 @@
     "description": "PoB II · Мастерская",
     "placeholders": {}
   },
+  "mebbddaaf16": "PoB returned incorrect character data.",
+  "@mebbddaaf16": {
+    "description": "PoB вернул неверные данные персонажа.",
+    "placeholders": {}
+  },
+  "m16a6aabd6a": "PoB returned incorrect character list.",
+  "@m16a6aabd6a": {
+    "description": "PoB вернул неверный список персонажей.",
+    "placeholders": {}
+  },
   "m5a8756b562": "PoB is still open. Save the build and finish closing PoB.",
   "@m5a8756b562": {
     "description": "PoB ещё открыт. Сохраните сборку и завершите закрытие в PoB.",
@@ -291,6 +301,11 @@
         "type": "String"
       }
     }
+  },
+  "m2b96f1cb20": "There are no characters available on the account.",
+  "@m2b96f1cb20": {
+    "description": "В аккаунте нет доступных персонажей.",
+    "placeholders": {}
   },
   "m1163ee245e": "The component is missing {p0}. The working version has been saved.",
   "@m1163ee245e": {
@@ -913,14 +928,29 @@
     "description": "Изображение камня недоступно",
     "placeholders": {}
   },
+  "medafd2f9d8": "Importing a character from PoB",
+  "@medafd2f9d8": {
+    "description": "Импорт персонажа из PoB",
+    "placeholders": {}
+  },
   "m2c72186c20": "Imported assembly",
   "@m2c72186c20": {
     "description": "Импортированная сборка",
     "placeholders": {}
   },
+  "m848ed36881": "Import",
+  "@m848ed36881": {
+    "description": "Импортировать",
+    "placeholders": {}
+  },
   "mdb8bc611c3": "Import from PoB",
   "@mdb8bc611c3": {
     "description": "Импортировать из PoB",
+    "placeholders": {}
+  },
+  "mcaa43cf432": "Import character",
+  "@mcaa43cf432": {
+    "description": "Импортировать персонажа",
     "placeholders": {}
   },
   "ma8f8e11f0c": "Intelligence",
@@ -1639,6 +1669,11 @@
     "description": "Оберег III",
     "placeholders": {}
   },
+  "md65eeeeaab": "Update MCP in the Components section.",
+  "@md65eeeeaab": {
+    "description": "Обновите MCP в разделе «Компоненты».",
+    "placeholders": {}
+  },
   "m616c984fe4": "Update MCP for stone catalog and compatibility",
   "@m616c984fe4": {
     "description": "Обновите MCP для каталога камней и совместимости",
@@ -1895,6 +1930,11 @@
     "description": "Перезапуск — только по вашей команде",
     "placeholders": {}
   },
+  "mfd5aca9906": "Restart PoB via Wine and click \"Test Ping\".",
+  "@mfd5aca9906": {
+    "description": "Перезапустите PoB через Wine и нажмите «Проверить связь».",
+    "placeholders": {}
+  },
   "m46fe82b8cc": "Restart PoB",
   "@m46fe82b8cc": {
     "description": "Перезапустить PoB",
@@ -1978,6 +2018,11 @@
   "m67f5d8880e": "Connect Lua",
   "@m67f5d8880e": {
     "description": "Подключите Lua",
+    "placeholders": {}
+  },
+  "m0d8b14b475": "Reconnect the bridge and restart PoB.",
+  "@m0d8b14b475": {
+    "description": "Подключите мост заново и перезапустите PoB.",
     "placeholders": {}
   },
   "m538d913ee0": "Connect Lua",
@@ -2485,14 +2530,14 @@
     "description": "Свои…",
     "placeholders": {}
   },
+  "m02578f2b24": "PoB connection confirmed",
+  "@m02578f2b24": {
+    "description": "Связь с PoB подтверждена",
+    "placeholders": {}
+  },
   "mfc68d94f44": "PoB connection verified. Open a build to import it.",
   "@mfc68d94f44": {
     "description": "Связь с PoB подтверждена. Откройте сборку для импорта.",
-    "placeholders": {}
-  },
-  "ma59f85739f": "Connected to the open PoB build",
-  "@ma59f85739f": {
-    "description": "Связь с открытой сборкой PoB подтверждена",
     "placeholders": {}
   },
   "m7434b2e81b": "Move left",

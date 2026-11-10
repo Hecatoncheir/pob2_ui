@@ -88,6 +88,12 @@ class AppLocalizationsTh extends AppLocalizations {
   String get mcdf95e40cd => 'PoB II · เวิร์กช็อป';
 
   @override
+  String get mebbddaaf16 => 'PoB ส่งคืนข้อมูลอักขระที่ไม่ถูกต้อง';
+
+  @override
+  String get m16a6aabd6a => 'PoB ส่งคืนรายการอักขระที่ไม่ถูกต้อง';
+
+  @override
   String get m5a8756b562 => 'PoB ยังเปิดอยู่ บันทึกบิลด์และปิด PoB ให้เสร็จ';
 
   @override
@@ -169,6 +175,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String m7daed90e2c(String p0, String p1) {
     return 'ไม่มี $p1 ใน $p0; ต้องใช้ MCP 0.4.0 หรือใหม่กว่า';
   }
+
+  @override
+  String get m2b96f1cb20 => 'ไม่มีอักขระในบัญชี';
 
   @override
   String m1163ee245e(String p0) {
@@ -542,10 +551,19 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m1ccb8777b8 => 'ไม่มีรูปหิน';
 
   @override
+  String get medafd2f9d8 => 'การนำเข้าตัวละครจาก PoB';
+
+  @override
   String get m2c72186c20 => 'ชุดประกอบนำเข้า';
 
   @override
+  String get m848ed36881 => 'นำเข้า';
+
+  @override
   String get mdb8bc611c3 => 'นำเข้าจาก PoB';
+
+  @override
+  String get mcaa43cf432 => 'นำเข้าอักขระ';
 
   @override
   String get ma8f8e11f0c => 'ความฉลาด';
@@ -972,6 +990,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m4a1afe7893 => 'พระเครื่อง III';
 
   @override
+  String get md65eeeeaab => 'อัปเดต MCP ในส่วนส่วนประกอบ';
+
+  @override
   String get m616c984fe4 => 'อัปเดต MCP สำหรับแคตตาล็อกหินและความเข้ากันได้';
 
   @override
@@ -1126,6 +1147,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get mcaceac98e9 => 'รีสตาร์ท - ตามคำสั่งของคุณเท่านั้น';
 
   @override
+  String get mfd5aca9906 => 'รีสตาร์ท PoB ผ่าน Wine แล้วคลิก \"ทดสอบ Ping\"';
+
+  @override
   String get m46fe82b8cc => 'เริ่ม PoB ใหม่';
 
   @override
@@ -1176,6 +1200,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m67f5d8880e => 'เชื่อมต่อ Lua';
+
+  @override
+  String get m0d8b14b475 => 'เชื่อมต่อบริดจ์อีกครั้งและรีสตาร์ท PoB';
 
   @override
   String get m538d913ee0 => 'เชื่อมต่อ Lua';
@@ -1478,10 +1505,10 @@ class AppLocalizationsTh extends AppLocalizations {
   String get ma50190234a => 'เป็นเจ้าของ...';
 
   @override
-  String get mfc68d94f44 => 'ยืนยันการเชื่อมต่อ PoB แล้ว เปิดบิลด์เพื่อนำเข้า';
+  String get m02578f2b24 => 'ยืนยันการเชื่อมต่อ PoB แล้ว';
 
   @override
-  String get ma59f85739f => 'ยืนยันการเชื่อมต่อกับบิลด์ที่เปิดใน PoB แล้ว';
+  String get mfc68d94f44 => 'ยืนยันการเชื่อมต่อ PoB แล้ว เปิดบิลด์เพื่อนำเข้า';
 
   @override
   String get m7434b2e81b => 'เลื่อนไปทางซ้าย';

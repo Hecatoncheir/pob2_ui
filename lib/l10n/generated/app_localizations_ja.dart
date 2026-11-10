@@ -88,6 +88,12 @@ class AppLocalizationsJa extends AppLocalizations {
   String get mcdf95e40cd => 'PoB II · ワークショップ';
 
   @override
+  String get mebbddaaf16 => 'PoB が間違った文字データを返しました。';
+
+  @override
+  String get m16a6aabd6a => 'PoB が間違った文字リストを返しました。';
+
+  @override
   String get m5a8756b562 => 'PoBはまだ開いています。ビルドを保存してPoBを閉じてください。';
 
   @override
@@ -168,6 +174,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String m7daed90e2c(String p0, String p1) {
     return '$p0 には $p1 がありません。 MCP 0.4.0 以降が必要です';
   }
+
+  @override
+  String get m2b96f1cb20 => 'アカウントに使用できるキャラクターがありません。';
 
   @override
   String m1163ee245e(String p0) {
@@ -536,10 +545,19 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m1ccb8777b8 => '石の画像が利用できません';
 
   @override
+  String get medafd2f9d8 => 'PoB からキャラクターをインポートする';
+
+  @override
   String get m2c72186c20 => 'インポートされたアセンブリ';
 
   @override
+  String get m848ed36881 => 'インポート';
+
+  @override
   String get mdb8bc611c3 => 'PoBからインポート';
+
+  @override
+  String get mcaa43cf432 => 'キャラクターをインポート';
 
   @override
   String get ma8f8e11f0c => 'インテリジェンス';
@@ -965,6 +983,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m4a1afe7893 => 'アミュレットⅢ';
 
   @override
+  String get md65eeeeaab => 'コンポーネント セクションの MCP を更新します。';
+
+  @override
   String get m616c984fe4 => '石のカタログと互換性に関する MCP の更新';
 
   @override
@@ -1117,6 +1138,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get mcaceac98e9 => '再起動 - あなたのコマンドでのみ';
 
   @override
+  String get mfd5aca9906 => 'Wine経由でPoBを再起動し、「Test Ping」をクリックします。';
+
+  @override
   String get m46fe82b8cc => 'PoBを再起動';
 
   @override
@@ -1166,6 +1190,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m67f5d8880e => 'Lua に接続します';
+
+  @override
+  String get m0d8b14b475 => 'ブリッジを再接続し、PoB を再開します。';
 
   @override
   String get m538d913ee0 => 'Lua に接続します';
@@ -1467,10 +1494,10 @@ class AppLocalizationsJa extends AppLocalizations {
   String get ma50190234a => '自分の...';
 
   @override
-  String get mfc68d94f44 => 'PoBへの接続を確認しました。インポートするビルドを開いてください。';
+  String get m02578f2b24 => 'PoB接続を確認しました';
 
   @override
-  String get ma59f85739f => '開いているPoBビルドへの接続を確認しました';
+  String get mfc68d94f44 => 'PoBへの接続を確認しました。インポートするビルドを開いてください。';
 
   @override
   String get m7434b2e81b => '左に移動';
