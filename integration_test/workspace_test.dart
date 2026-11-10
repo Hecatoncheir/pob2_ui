@@ -33,6 +33,7 @@ import 'package:pob2_ui/ui/interface_scale_cubit.dart';
 import 'package:pob2_ui/domain/tree_allocation_mode.dart';
 import 'package:pob2_ui/data/xml_file_service.dart';
 import 'package:pob2_ui/ui/exit_protection.dart';
+import 'package:pob2_ui/ui/library_view.dart';
 
 class SelectedXmlFiles implements XmlFileDialogs {
   String? path;
@@ -86,6 +87,7 @@ void main() {
       90,
       name: 'Проверка интерфейса Lua',
     );
+    final originalId = model.state.library.activeId!;
     await _addRealSkill(model);
     final life = model.state.report!.stats['Life'];
     expect(life, greaterThan(0));
@@ -152,9 +154,7 @@ void main() {
     await tester.tap(find.byKey(const ValueKey('page-components')));
     await tester.pumpAndSettle();
     await _capture(tester, suffix: '-components');
-    await tester.tap(find.byKey(const ValueKey('page-library')));
-    await tester.pumpAndSettle();
-    expect(find.text('Проверка интерфейса Lua'), findsWidgets);
+    await _verifyLibraryCard(tester, model, originalId);
     debugPrint('Готово: компоненты и библиотека');
     await tester.pumpWidget(
       RepaintBoundary(
@@ -164,6 +164,29 @@ void main() {
     );
     await tester.pumpAndSettle();
   }, timeout: Timeout(Duration(minutes: Platform.isWindows ? 6 : 8)));
+}
+
+Future<void> _verifyLibraryCard(
+  WidgetTester tester,
+  WorkshopCubit model,
+  String id,
+) async {
+  await tester.tap(find.byKey(const ValueKey('page-library')));
+  await tester.pumpAndSettle();
+  await _waitForIdle(tester, model);
+  await tester.pumpAndSettle();
+  final page = find.byType(LibraryView);
+  expect(page, findsOneWidget);
+  expect(model.state.library.entries.map((entry) => entry.id), contains(id));
+  final card = find.byKey(ValueKey('delete-build-$id'));
+  await tester.scrollUntilVisible(
+    card,
+    160,
+    scrollable: find
+        .descendant(of: page, matching: find.byType(Scrollable))
+        .first,
+  );
+  expect(card, findsOneWidget);
 }
 
 Future<void> _stage(String label, Future<void> Function() action) async {
