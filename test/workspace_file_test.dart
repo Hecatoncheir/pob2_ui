@@ -158,6 +158,26 @@ void main() {
     expect(widgetModel.requests, 1);
   });
 
+  testWidgets('Кнопка в «Моих сборках» запускает импорт из PoB', (
+    tester,
+  ) async {
+    final widgetModel = ImportButtonWorkshop(
+      model.components,
+      engine,
+      initialState: model.state,
+      pobWindow: window,
+    );
+    addTearDown(widgetModel.close);
+    await tester.pumpWidget(PobApp(model: widgetModel));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byKey(const ValueKey('page-library')));
+    await tester.pumpAndSettle();
+    expect(find.text('Импортировать из PoB'), findsOneWidget);
+    await tester.tap(find.byKey(const Key('import-from-pob')));
+    await tester.pumpAndSettle();
+    expect(widgetModel.requests, 1);
+  });
+
   test('Импорт из PoB открывает отдельную копию', () async {
     final previous = model.state.library.activeId!;
     await model.importFromPob();

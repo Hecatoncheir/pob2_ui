@@ -436,6 +436,10 @@ final uiExactTranslations = <String, String Function(AppLocalizations)>{
   "Failed to enable edits via MCP. Check that the updated MCP is installed.": (
     l,
   ) => l.ma2cd5e5b0a,
+  "Не удалось закрыть PoB.": (l) => l.m6f37ba2ab7,
+  "Could not close PoB.": (l) => l.m6f37ba2ab7,
+  "Не удалось запустить PoB.": (l) => l.m46ed8403b7,
+  "Could not start PoB.": (l) => l.m46ed8403b7,
   "Не удалось защитить каталог подключения MCP": (l) => l.m6dc7d664a3,
   "Failed to protect connection directory MCP": (l) => l.m6dc7d664a3,
   "Не удалось получить SHA256SUMS": (l) => l.mcb5613d7e6,

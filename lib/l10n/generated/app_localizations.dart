@@ -1496,6 +1496,18 @@ abstract class AppLocalizations {
   /// **'Failed to load translation: {p0}'**
   String m4b1c83eb15(String p0);
 
+  /// Не удалось закрыть PoB.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not close PoB.'**
+  String get m6f37ba2ab7;
+
+  /// Не удалось запустить PoB.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not start PoB.'**
+  String get m46ed8403b7;
+
   /// Не удалось защитить каталог подключения MCP
   ///
   /// In en, this message translates to:

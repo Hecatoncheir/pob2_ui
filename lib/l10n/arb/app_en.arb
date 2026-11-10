@@ -1273,6 +1273,16 @@
       }
     }
   },
+  "m6f37ba2ab7": "Could not close PoB.",
+  "@m6f37ba2ab7": {
+    "description": "Не удалось закрыть PoB.",
+    "placeholders": {}
+  },
+  "m46ed8403b7": "Could not start PoB.",
+  "@m46ed8403b7": {
+    "description": "Не удалось запустить PoB.",
+    "placeholders": {}
+  },
   "m6dc7d664a3": "Failed to protect connection directory MCP",
   "@m6dc7d664a3": {
     "description": "Не удалось защитить каталог подключения MCP",

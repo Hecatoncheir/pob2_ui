@@ -230,6 +230,8 @@
     "ma2cd5e5b0a": "Не удалось включить правки через MCP. Проверьте, что установлен обновлённый MCP.",
     "mcf4205d2e9": "Не удалось восстановить состояние после ошибки: {p0}",
     "m4b1c83eb15": "Не удалось загрузить перевод: {p0}",
+    "m6f37ba2ab7": "Не удалось закрыть PoB.",
+    "m46ed8403b7": "Не удалось запустить PoB.",
     "m6dc7d664a3": "Не удалось защитить каталог подключения MCP",
     "m725605a944": "Не удалось открыть браузер: {p0}",
     "m189f5a7238": "Не удалось открыть или сохранить заметки.\n{p0}",
@@ -1127,7 +1129,9 @@
     "m13601ffe54": "Allow edits via MCP",
     "mb5f6678c99": "Editor PoB II did not complete the command.",
     "m99e87c373f": "Copy Codex connection command",
-    "m70a5cadc50": "First get the latest build report via pob_check_build."
+    "m70a5cadc50": "First get the latest build report via pob_check_build.",
+    "m46ed8403b7": "Could not start PoB.",
+    "m6f37ba2ab7": "Could not close PoB."
   },
   "fr": {
     "m0c63e733f9": "Lua n'a pas renvoyé toutes les icônes",
@@ -1692,7 +1696,9 @@
     "m13601ffe54": "Autoriser les modifications via MCP",
     "mb5f6678c99": "L'éditeur PoB II n'a pas terminé la commande.",
     "m99e87c373f": "Copier la commande de connexion Codex",
-    "m70a5cadc50": "Obtenez d'abord le dernier rapport de build via pob_check_build."
+    "m70a5cadc50": "Obtenez d'abord le dernier rapport de build via pob_check_build.",
+    "m46ed8403b7": "Impossible de démarrer PoB.",
+    "m6f37ba2ab7": "Impossible de fermer PoB."
   },
   "de": {
     "m0c63e733f9": "Lua hat nicht alle Symbole zurückgegeben",
@@ -2257,7 +2263,9 @@
     "m13601ffe54": "Bearbeitungen über MCP zulassen",
     "mb5f6678c99": "Editor PoB II hat den Befehl nicht abgeschlossen.",
     "m99e87c373f": "Codex-Verbindungsbefehl kopieren",
-    "m70a5cadc50": "Holen Sie sich zunächst den neuesten Build-Bericht über pob_check_build."
+    "m70a5cadc50": "Holen Sie sich zunächst den neuesten Build-Bericht über pob_check_build.",
+    "m46ed8403b7": "PoB konnte nicht gestartet werden.",
+    "m6f37ba2ab7": "PoB konnte nicht geschlossen werden."
   },
   "es": {
     "m0c63e733f9": "Lua no devolvió todos los íconos",
@@ -2822,7 +2830,9 @@
     "m13601ffe54": "Permitir ediciones a través de MCP",
     "mb5f6678c99": "El editor PoB II no completó el comando.",
     "m99e87c373f": "Copiar comando de conexión del Codex",
-    "m70a5cadc50": "Primero obtenga el último informe de compilación a través de pob_check_build."
+    "m70a5cadc50": "Primero obtenga el último informe de compilación a través de pob_check_build.",
+    "m46ed8403b7": "No se pudo iniciar PoB.",
+    "m6f37ba2ab7": "No se pudo cerrar PoB."
   },
   "pt_BR": {
     "m0c63e733f9": "Lua não retornou todos os ícones",
@@ -3387,7 +3397,9 @@
     "m13601ffe54": "Permitir edições via MCP",
     "mb5f6678c99": "O editor PoB II não concluiu o comando.",
     "m99e87c373f": "Copiar comando de conexão Codex",
-    "m70a5cadc50": "Primeiro, obtenha o relatório de compilação mais recente via pob_check_build."
+    "m70a5cadc50": "Primeiro, obtenha o relatório de compilação mais recente via pob_check_build.",
+    "m46ed8403b7": "Não foi possível iniciar o PoB.",
+    "m6f37ba2ab7": "Não foi possível fechar o PoB."
   },
   "ja": {
     "m0c63e733f9": "Lua はすべてのアイコンを返しませんでした",
@@ -3952,7 +3964,9 @@
     "m13601ffe54": "MCP 経由での編集を許可します",
     "mb5f6678c99": "編集者 PoB II がコマンドを完了できませんでした。",
     "m99e87c373f": "Codex 接続コマンドのコピー",
-    "m70a5cadc50": "まず、pob_check_build 経由で最新のビルド レポートを取得します。"
+    "m70a5cadc50": "まず、pob_check_build 経由で最新のビルド レポートを取得します。",
+    "m46ed8403b7": "PoB を起動できませんでした。",
+    "m6f37ba2ab7": "PoB を閉じられませんでした。"
   },
   "ko": {
     "m0c63e733f9": "Lua이 모든 아이콘을 반환하지 않았습니다.",
@@ -4517,7 +4531,9 @@
     "m13601ffe54": "MCP을 통한 편집 허용",
     "mb5f6678c99": "편집기 PoB II가 명령을 완료하지 못했습니다.",
     "m99e87c373f": "Codex 연결 명령 복사",
-    "m70a5cadc50": "먼저 pob_check_build를 통해 최신 빌드 보고서를 받으세요."
+    "m70a5cadc50": "먼저 pob_check_build를 통해 최신 빌드 보고서를 받으세요.",
+    "m46ed8403b7": "PoB를 시작할 수 없습니다.",
+    "m6f37ba2ab7": "PoB를 닫을 수 없습니다."
   },
   "th": {
     "m0c63e733f9": "Lua ไม่ได้ส่งคืนไอคอนทั้งหมด",
@@ -5082,7 +5098,9 @@
     "m13601ffe54": "อนุญาตให้แก้ไขผ่าน MCP",
     "mb5f6678c99": "ตัวแก้ไข PoB II ดำเนินการคำสั่งไม่เสร็จสมบูรณ์",
     "m99e87c373f": "คัดลอกคำสั่งการเชื่อมต่อ Codex",
-    "m70a5cadc50": "ก่อนอื่นให้รับรายงานบิลด์ล่าสุดผ่าน pob_check_build"
+    "m70a5cadc50": "ก่อนอื่นให้รับรายงานบิลด์ล่าสุดผ่าน pob_check_build",
+    "m46ed8403b7": "ไม่สามารถเปิด PoB ได้",
+    "m6f37ba2ab7": "ไม่สามารถปิด PoB ได้"
   },
   "zh_Hant": {
     "m0c63e733f9": "Lua 未傳回所有圖標",
@@ -5647,6 +5665,8 @@
     "m13601ffe54": "允许通过 MCP 进行编辑",
     "mb5f6678c99": "編輯器 PoB II 未完成此指令。",
     "m99e87c373f": "复制Codex连接命令",
-    "m70a5cadc50": "首先透過pob_check_build取得最新的建置報告。"
+    "m70a5cadc50": "首先透過pob_check_build取得最新的建置報告。",
+    "m46ed8403b7": "無法啟動 PoB。",
+    "m6f37ba2ab7": "無法關閉 PoB。"
   }
 }

@@ -230,6 +230,8 @@
   "ma2cd5e5b0a": "Falha ao ativar edições via MCP. Verifique se o MCP atualizado está instalado.",
   "mcf4205d2e9": "Falha ao restaurar o estado após erro: {p0}",
   "m4b1c83eb15": "Falha ao carregar a tradução: {p0}",
+  "m6f37ba2ab7": "Não foi possível fechar o PoB.",
+  "m46ed8403b7": "Não foi possível iniciar o PoB.",
   "m6dc7d664a3": "Falha ao proteger o diretório de conexão MCP",
   "m725605a944": "Falha ao abrir o navegador: {p0}",
   "m189f5a7238": "Falha ao abrir ou salvar notas.\n{p0}",

@@ -230,6 +230,8 @@
   "ma2cd5e5b0a": "No se pudieron habilitar las ediciones a través de MCP. Comprueba que el MCP actualizado esté instalado.",
   "mcf4205d2e9": "No se pudo restaurar el estado después del error: {p0}",
   "m4b1c83eb15": "No se pudo cargar la traducción: {p0}",
+  "m6f37ba2ab7": "No se pudo cerrar PoB.",
+  "m46ed8403b7": "No se pudo iniciar PoB.",
   "m6dc7d664a3": "No se pudo proteger el directorio de conexión MCP",
   "m725605a944": "No se pudo abrir el navegador: {p0}",
   "m189f5a7238": "No se pudieron abrir ni guardar notas.\n{p0}",

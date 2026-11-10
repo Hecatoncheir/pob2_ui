@@ -24,7 +24,8 @@ class _LibraryViewState extends State<LibraryView> {
   String query = '';
   @override
   Widget build(BuildContext context) {
-    final entries = widget.model.state.library.entries
+    final model = widget.model;
+    final entries = model.state.library.entries
         .where(
           (entry) => '${entry.title} ${entry.characterClass}'
               .toLowerCase()
@@ -43,6 +44,17 @@ class _LibraryViewState extends State<LibraryView> {
                   'Мои сборки',
                   subtitle: 'Идеи, к которым хочется вернуться',
                 ),
+                if (model.pobWindow.supported) ...[
+                  OutlinedButton.icon(
+                    key: const Key('import-from-pob'),
+                    onPressed: model.state.busy || !model.engine.connected
+                        ? null
+                        : model.importFromPob,
+                    icon: const SparkArt('icons/upload', width: 16),
+                    label: const AppText('Импортировать из PoB'),
+                  ),
+                  const SizedBox(height: 12),
+                ],
                 TextField(
                   onChanged: (value) => setState(() => query = value),
                   decoration: const InputDecoration(
@@ -78,7 +90,7 @@ class _LibraryViewState extends State<LibraryView> {
               ),
               itemCount: entries.length,
               itemBuilder: (context, index) =>
-                  _BuildCard(entries[index], widget.model, widget.shell),
+                  _BuildCard(entries[index], model, widget.shell),
             ),
           ),
         ),

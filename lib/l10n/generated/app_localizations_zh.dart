@@ -749,6 +749,12 @@ class AppLocalizationsZh extends AppLocalizations {
   }
 
   @override
+  String get m6f37ba2ab7 => '無法關閉 PoB。';
+
+  @override
+  String get m46ed8403b7 => '無法啟動 PoB。';
+
+  @override
   String get m6dc7d664a3 => '无法保护连接目录 MCP';
 
   @override
@@ -2560,6 +2566,12 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String m4b1c83eb15(String p0) {
     return '無法載入翻譯：$p0';
   }
+
+  @override
+  String get m6f37ba2ab7 => '無法關閉 PoB。';
+
+  @override
+  String get m46ed8403b7 => '無法啟動 PoB。';
 
   @override
   String get m6dc7d664a3 => '无法保护连接目录 MCP';

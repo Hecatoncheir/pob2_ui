@@ -758,6 +758,12 @@ class AppLocalizationsTh extends AppLocalizations {
   }
 
   @override
+  String get m6f37ba2ab7 => 'ไม่สามารถปิด PoB ได้';
+
+  @override
+  String get m46ed8403b7 => 'ไม่สามารถเปิด PoB ได้';
+
+  @override
   String get m6dc7d664a3 => 'ไม่สามารถป้องกันไดเร็กทอรีการเชื่อมต่อ MCP';
 
   @override

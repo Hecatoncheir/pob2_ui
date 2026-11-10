@@ -763,6 +763,12 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String get m6f37ba2ab7 => 'Could not close PoB.';
+
+  @override
+  String get m46ed8403b7 => 'Could not start PoB.';
+
+  @override
   String get m6dc7d664a3 => 'Failed to protect connection directory MCP';
 
   @override

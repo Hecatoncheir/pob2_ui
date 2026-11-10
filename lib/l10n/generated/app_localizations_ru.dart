@@ -764,6 +764,12 @@ class AppLocalizationsRu extends AppLocalizations {
   }
 
   @override
+  String get m6f37ba2ab7 => 'Не удалось закрыть PoB.';
+
+  @override
+  String get m46ed8403b7 => 'Не удалось запустить PoB.';
+
+  @override
   String get m6dc7d664a3 => 'Не удалось защитить каталог подключения MCP';
 
   @override

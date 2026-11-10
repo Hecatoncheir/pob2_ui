@@ -34,10 +34,11 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     SessionRepository? session,
     BuildLibrary? library,
     XmlFileService? files,
-    this.pobWindow = const PobWindowRepository(),
+    PobWindowRepository? pobWindow,
   }) : session = session ?? SessionRepository(components.store.root),
        library = library ?? BuildLibrary(components.store.root),
        files = files ?? XmlFileService(),
+       pobWindow = pobWindow ?? PobWindowRepository(),
        super(initialState ?? WorkshopState());
   final ComponentRepository components;
   final McpClient engine;
@@ -764,13 +765,21 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     addLog('$error');
   }
 
-  Future<void> checkpoint() async {
+  Future<void> checkpoint({bool closePob = false}) => _protectExit(() async {
+    await session.saveDraft(state.draftXml);
+    await session.flushText();
+    await _checkpointBuild();
+    if (closePob) await pobWindow.closeLaunchedWindows();
+  });
+
+  Future<void> closeLaunchedPob() =>
+      _protectExit(pobWindow.closeLaunchedWindows);
+
+  Future<void> _protectExit(Future<void> Function() action) async {
     if (state.busy) throw StateError('Дождитесь завершения текущей операции');
     _update(state.copyWith(operation: (busy: true, error: state.error)));
     try {
-      await session.saveDraft(state.draftXml);
-      await session.flushText();
-      await _checkpointBuild();
+      await action();
     } finally {
       _update(state.copyWith(operation: (busy: false, error: state.error)));
     }

@@ -230,6 +230,8 @@
   "ma2cd5e5b0a": "Échec de l''activation des modifications via MCP. Vérifiez que la version mise à jour est installée.",
   "mcf4205d2e9": "Échec de la restauration de l''état après une erreur : {p0}",
   "m4b1c83eb15": "Échec du chargement de la traduction : {p0}",
+  "m6f37ba2ab7": "Impossible de fermer PoB.",
+  "m46ed8403b7": "Impossible de démarrer PoB.",
   "m6dc7d664a3": "Échec de la protection du répertoire de connexion MCP",
   "m725605a944": "Échec de l''ouverture du navigateur : {p0}",
   "m189f5a7238": "Échec de l''ouverture ou de l''enregistrement des notes.\n{p0}",

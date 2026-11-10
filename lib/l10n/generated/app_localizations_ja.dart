@@ -751,6 +751,12 @@ class AppLocalizationsJa extends AppLocalizations {
   }
 
   @override
+  String get m6f37ba2ab7 => 'PoB を閉じられませんでした。';
+
+  @override
+  String get m46ed8403b7 => 'PoB を起動できませんでした。';
+
+  @override
   String get m6dc7d664a3 => '接続ディレクトリ MCP を保護できませんでした';
 
   @override

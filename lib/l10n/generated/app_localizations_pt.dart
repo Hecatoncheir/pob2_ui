@@ -770,6 +770,12 @@ class AppLocalizationsPt extends AppLocalizations {
   }
 
   @override
+  String get m6f37ba2ab7 => 'Não foi possível fechar o PoB.';
+
+  @override
+  String get m46ed8403b7 => 'Não foi possível iniciar o PoB.';
+
+  @override
   String get m6dc7d664a3 => 'Falha ao proteger o diretório de conexão MCP';
 
   @override
@@ -2632,6 +2638,12 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String m4b1c83eb15(String p0) {
     return 'Falha ao carregar a tradução: $p0';
   }
+
+  @override
+  String get m6f37ba2ab7 => 'Não foi possível fechar o PoB.';
+
+  @override
+  String get m46ed8403b7 => 'Não foi possível iniciar o PoB.';
 
   @override
   String get m6dc7d664a3 => 'Falha ao proteger o diretório de conexão MCP';

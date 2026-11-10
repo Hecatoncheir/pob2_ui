@@ -157,7 +157,8 @@ class _RestartButton extends StatelessWidget {
   Future<void> _restart(BuildContext context) async {
     final updates = context.read<AppUpdateCubit>();
     final workshop = context.read<WorkshopCubit>();
-    if (!await updates.install(workshop.checkpoint)) return;
+    if (!await updates.install(() => workshop.checkpoint(closePob: true)))
+      return;
     await workshop.close();
     exit(0);
   }

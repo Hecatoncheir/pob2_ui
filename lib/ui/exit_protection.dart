@@ -3,6 +3,7 @@ import 'dart:ui' show AppExitResponse;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../data/mcp_error_message.dart';
 import 'workshop_cubit.dart';
 
 class ExitProtection extends StatefulWidget {
@@ -35,8 +36,15 @@ class _ExitProtectionState extends State<ExitProtection> {
 
   Future<bool> _windowRequest(MethodCall call) async {
     if (call.method != 'requestClose') throw MissingPluginException();
-    return await WidgetsBinding.instance.handleRequestAppExit() ==
-        AppExitResponse.exit;
+    final response = await WidgetsBinding.instance.handleRequestAppExit();
+    if (response != AppExitResponse.exit) return false;
+    try {
+      await widget.model.closeLaunchedPob();
+      return true;
+    } catch (error) {
+      widget.model.reportPersistenceError(mcpErrorMessage(error));
+      return false;
+    }
   }
 
   Future<AppExitResponse> _exit() async {

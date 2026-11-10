@@ -5,8 +5,11 @@ import '../domain/component.dart';
 import 'mcp_client.dart';
 import 'process_service.dart';
 
+typedef _LaunchedPob = ({String path, int pid, int started});
+
 class PobWindowRepository {
-  const PobWindowRepository();
+  final _launched = <String, _LaunchedPob>{};
+  bool _windowBusy = false;
 
   bool get supported => Platform.isWindows;
 
@@ -26,15 +29,14 @@ class PobWindowRepository {
     ]);
   }
 
-  Future<void> restartAndCheckBridge(Installation mcp, String directory) async {
+  Future<void> restartAndCheckBridge(Installation mcp, String directory) =>
+      _windowOperation(() => _restartAndCheck(mcp, directory));
+
+  Future<void> _restartAndCheck(Installation mcp, String directory) async {
     final executable = await _executable(directory);
-    await _closeWindow(await executable.resolveSymbolicLinks());
-    await Process.start(
-      executable.path,
-      const [],
-      workingDirectory: executable.parent.path,
-      mode: ProcessStartMode.detached,
-    );
+    final path = await executable.resolveSymbolicLinks();
+    final window = await _restartWindow(executable, path);
+    _launched[path.toLowerCase()] = window;
     final status = await _run(mcp, [
       '-c',
       _waitForBridge,
@@ -44,6 +46,31 @@ class PobWindowRepository {
       throw StateError(
         'PoB запущен, но мост пока не отвечает. Проверьте связь ещё раз.',
       );
+    }
+    await _runForWindow(_minimizePobWindow, window);
+  }
+
+  Future<void> closeLaunchedWindows() => _windowOperation(() async {
+    for (final key in _launched.keys.toList()) {
+      final result = await _runForWindow(_closeLaunchedPob, _launched[key]!);
+      switch (result.exitCode) {
+        case 0:
+          _launched.remove(key);
+        case 2:
+          throw StateError(_closePending);
+        default:
+          throw StateError('Не удалось закрыть PoB.');
+      }
+    }
+  });
+
+  Future<void> _windowOperation(Future<void> Function() action) async {
+    if (_windowBusy) throw StateError('Дождитесь завершения текущей операции');
+    _windowBusy = true;
+    try {
+      await action();
+    } finally {
+      _windowBusy = false;
     }
   }
 
@@ -58,23 +85,45 @@ class PobWindowRepository {
     return executable;
   }
 
-  Future<void> _closeWindow(String executable) async {
-    final result = await Process.run(
-      'powershell.exe',
-      ['-NoProfile', '-NonInteractive', '-Command', _closePobWindow],
-      environment: {'POB2_RESTART_EXE': executable},
-    );
+  Future<_LaunchedPob> _restartWindow(File executable, String path) async {
+    final result = await _windowScript(_restartPobWindow, {
+      'POB2_WINDOW_EXE': path,
+      'POB2_LAUNCH_EXE': executable.path,
+    });
     switch (result.exitCode) {
       case 0:
-        return;
+        if (jsonDecode(result.stdout as String) case {
+          'pid': final int pid,
+          'started': final int started,
+        }) {
+          return (path: path, pid: pid, started: started);
+        }
+        throw StateError('Не удалось запустить PoB.');
       case 2:
-        throw StateError(
-          'PoB ещё открыт. Сохраните сборку и завершите закрытие в PoB.',
-        );
+        throw StateError(_closePending);
+      case 4:
+        throw StateError('Не удалось запустить PoB.');
       default:
         throw StateError('Закройте выбранный PoB вручную и повторите запуск.');
     }
   }
+
+  Future<ProcessResult> _runForWindow(String script, _LaunchedPob window) =>
+      _windowScript(_findLaunchedPob + script, {
+        'POB2_WINDOW_EXE': window.path,
+        'POB2_WINDOW_PID': '${window.pid}',
+        'POB2_WINDOW_STARTED': '${window.started}',
+      });
+
+  Future<ProcessResult> _windowScript(
+    String script,
+    Map<String, String> environment,
+  ) => Process.run('powershell.exe', [
+    '-NoProfile',
+    '-NonInteractive',
+    '-Command',
+    script,
+  ], environment: environment);
 
   Future<void> checkBridge(Installation mcp, String directory) async {
     await _exportXml(mcp, directory: directory);
@@ -116,6 +165,9 @@ class PobWindowRepository {
   }
 }
 
+const _closePending =
+    'PoB ещё открыт. Сохраните сборку и завершите закрытие в PoB.';
+
 const _discovery = '''
 import json
 from pathlib import Path
@@ -136,9 +188,43 @@ print(json.dumps([
 ]))
 ''';
 
-const _closePobWindow = r'''
+const _windowApi = r'''
+function Show-PobWindow($handle, $command) {
+    Add-Type -Name PobWindow -Namespace Pob -MemberDefinition @'
+    [System.Runtime.InteropServices.DllImport("user32.dll")]
+    public static extern bool ShowWindowAsync(System.IntPtr window, int command);
+'@
+    [void][Pob.PobWindow]::ShowWindowAsync($handle, $command)
+}
+''';
+
+// Если PoB ждёт ответа на запрос сохранения, окно нужно развернуть.
+const _closeWindow =
+    _windowApi +
+    r'''
+function Close-PobWindow($window) {
+    try {
+        if (!$window.HasExited -and $window.CloseMainWindow()) {
+            if ($window.WaitForExit(1000)) { return }
+            try {
+                $window.Refresh()
+                $restore = 9
+                Show-PobWindow $window.MainWindowHandle $restore
+            } catch {}
+            [void]$window.WaitForExit(44000)
+        }
+    } catch {
+        if (!$window.HasExited) { exit 2 }
+    }
+    if (!$window.HasExited) { exit 2 }
+}
+''';
+
+const _restartPobWindow =
+    _closeWindow +
+    r'''
 $ErrorActionPreference = 'Stop'
-$target = $env:POB2_RESTART_EXE
+$target = $env:POB2_WINDOW_EXE
 $name = [IO.Path]::GetFileNameWithoutExtension($target)
 $session = [Diagnostics.Process]::GetCurrentProcess().SessionId
 $windows = @()
@@ -155,16 +241,56 @@ foreach ($process in [Diagnostics.Process]::GetProcessesByName($name)) {
     }
 }
 if ($windows.Count -gt 1) { exit 3 }
-if ($windows.Count -eq 0) { exit 0 }
-$window = $windows[0]
+if ($windows.Count -eq 1) { Close-PobWindow $windows[0] }
 try {
-    if (!$window.HasExited -and $window.CloseMainWindow()) {
-        [void]$window.WaitForExit(45000)
-    }
+    $launch = $env:POB2_LAUNCH_EXE
+    $started = Start-Process -FilePath $launch -WorkingDirectory ([IO.Path]::GetDirectoryName($launch)) -WindowStyle Minimized -PassThru
+    @{pid = $started.Id; started = $started.StartTime.ToUniversalTime().Ticks} | ConvertTo-Json -Compress
 } catch {
-    if (!$window.HasExited) { exit 2 }
+    exit 4
 }
-if (!$window.HasExited) { exit 2 }
+exit 0
+''';
+
+const _findLaunchedPob = r'''
+$ErrorActionPreference = 'Stop'
+try {
+    $window = [Diagnostics.Process]::GetProcessById([int]$env:POB2_WINDOW_PID)
+} catch [ArgumentException] {
+    exit 0
+}
+try {
+    if ($window.HasExited -or $window.StartTime.ToUniversalTime().Ticks -ne [long]$env:POB2_WINDOW_STARTED) { exit 0 }
+    if (![string]::Equals($window.MainModule.FileName, $env:POB2_WINDOW_EXE, [StringComparison]::OrdinalIgnoreCase)) { exit 0 }
+} catch {
+    if ($window.HasExited) { exit 0 }
+    exit 3
+}
+''';
+
+const _closeLaunchedPob =
+    _closeWindow +
+    r'''
+Close-PobWindow $window
+exit 0
+''';
+
+// PoB может закрыться между проверкой моста и сворачиванием.
+const _minimizePobWindow =
+    _windowApi +
+    r'''
+try {
+    $timer = [Diagnostics.Stopwatch]::StartNew()
+    $minimizeWithoutActivation = 7
+    while (!$window.HasExited -and $timer.ElapsedMilliseconds -lt 5000) {
+        $window.Refresh()
+        if ($window.MainWindowHandle -ne [IntPtr]::Zero) {
+            Show-PobWindow $window.MainWindowHandle $minimizeWithoutActivation
+            break
+        }
+        Start-Sleep -Milliseconds 50
+    }
+} catch {}
 exit 0
 ''';
 

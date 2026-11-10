@@ -751,6 +751,12 @@ class AppLocalizationsKo extends AppLocalizations {
   }
 
   @override
+  String get m6f37ba2ab7 => 'PoB를 닫을 수 없습니다.';
+
+  @override
+  String get m46ed8403b7 => 'PoB를 시작할 수 없습니다.';
+
+  @override
   String get m6dc7d664a3 => '연결 디렉터리를 보호하지 못했습니다. MCP';
 
   @override
