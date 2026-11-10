@@ -215,6 +215,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m4d1d43042e => 'เปิดใช้งานแล้ว';
 
   @override
+  String get m054b7819ac => 'เปิดใช้งานการแก้ไขผ่าน MCP สำหรับบิลด์แบบเปิด';
+
+  @override
   String get m66b96db6c1 => 'ตรวจพบลิงก์แทนที่จะดาวน์โหลดไฟล์';
 
   @override
@@ -417,6 +420,13 @@ class AppLocalizationsTh extends AppLocalizations {
   String get mf0216281b8 => 'เซลล์เพิ่มเติม';
 
   @override
+  String get m4122860034 =>
+      'การเข้าถึงถูกต้องสำหรับรุ่นปัจจุบัน การแก้ไขสามารถยกเลิกได้';
+
+  @override
+  String get m549a4c810c => 'การเข้าถึงตัวแก้ไข PoB II ถูกปิดใช้งาน';
+
+  @override
   String m10b5bc7e91(String p0) {
     return 'เวอร์ชัน $p0 พร้อมใช้งาน';
   }
@@ -438,6 +448,10 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m0f98334ad1 => 'แก้ไขให้เสร็จสิ้นก่อนปิดแอปพลิเคชัน';
+
+  @override
+  String get me1d20330c5 =>
+      'ดำเนินการปัจจุบันให้เสร็จสิ้นหรือปิดกล่องโต้ตอบ PoB II';
 
   @override
   String get m230ebdecca => 'ดาวน์โหลดอัพเดตอัตโนมัติ';
@@ -579,6 +593,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m9ca9ef70fe => 'แหวน III';
+
+  @override
+  String get m4d1b5babac => 'คำสั่งไม่พร้อมใช้งานในตัวแก้ไข PoB II';
 
   @override
   String get m1e8466ebeb => 'ส่วนประกอบ';
@@ -727,6 +744,10 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m3427d6812f => 'ไม่รู้จัก Lua';
 
   @override
+  String get ma2cd5e5b0a =>
+      'ไม่สามารถเปิดใช้งานการแก้ไขผ่าน MCP ตรวจสอบว่ามีการติดตั้ง MCP ที่อัปเดตแล้ว';
+
+  @override
   String mcf4205d2e9(String p0) {
     return 'ไม่สามารถกู้คืนสถานะหลังจากข้อผิดพลาด: $p0';
   }
@@ -735,6 +756,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String m4b1c83eb15(String p0) {
     return 'ไม่สามารถโหลดการแปล: $p0';
   }
+
+  @override
+  String get m6dc7d664a3 => 'ไม่สามารถป้องกันไดเร็กทอรีการเชื่อมต่อ MCP';
 
   @override
   String m725605a944(String p0) {
@@ -850,6 +874,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get mf3a3cbeee9 => 'ไอคอนไม่ถูกต้อง Lua';
+
+  @override
+  String get me967307c68 => 'คำสั่งตัวแก้ไขไม่ถูกต้อง PoB II';
 
   @override
   String get mf1703df170 => 'ลิงก์ต้นไม้ไม่ถูกต้อง Lua';
@@ -1225,6 +1252,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m51d2753a44 => 'เข็มขัด';
 
   @override
+  String get m50c39b8e33 => 'แก้ไขผ่าน MCP';
+
+  @override
   String m1a132e5834(String p0) {
     return 'รันไทม์เกิน $p0';
   }
@@ -1354,6 +1384,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get meabbc96d71 => 'ขนาดศัตรู';
 
   @override
+  String get m13601ffe54 => 'อนุญาตให้แก้ไขผ่าน MCP';
+
+  @override
   String get mde6527a5fe => 'Distance to node';
 
   @override
@@ -1378,6 +1411,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get mcd085a0260 => 'แก้ไขกลุ่ม';
+
+  @override
+  String get mb5f6678c99 => 'ตัวแก้ไข PoB II ดำเนินการคำสั่งไม่เสร็จสมบูรณ์';
 
   @override
   String get m11dc0e7d04 => 'เครื่องมือแก้ไขกลุ่มทักษะ';
@@ -1466,6 +1502,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m332899f398 => 'คัดลอก XML';
 
   @override
+  String get m99e87c373f => 'คัดลอกคำสั่งการเชื่อมต่อ Codex';
+
+  @override
   String get m8d81013698 => 'คัดลอกลิงก์';
 
   @override
@@ -1485,6 +1524,10 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m126aa994ee => 'มีการเปลี่ยนเส้นทางมากเกินไป';
+
+  @override
+  String get m70a5cadc50 =>
+      'ก่อนอื่นให้รับรายงานบิลด์ล่าสุดผ่าน pob_check_build';
 
   @override
   String get m59b50cc146 => 'ถอดหินรองรับออกก่อน';

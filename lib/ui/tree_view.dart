@@ -30,6 +30,7 @@ import 'node_power_cubit.dart';
 import 'node_power_panel.dart';
 import 'loaded_tree_artwork.dart';
 import 'workshop_state.dart';
+import 'mcp_editor_cubit.dart';
 import 'core/language_scope.dart';
 
 class TreeView extends StatefulWidget {
@@ -204,6 +205,15 @@ class _TreeViewState extends State<TreeView>
 
   @override
   Widget build(BuildContext context) =>
+      BlocListener<McpEditorCubit, McpEditorState>(
+        bloc: widget.model.mcpEditor,
+        listenWhen: (before, after) =>
+            before.change != after.change && after.change?.node != null,
+        listener: (context, state) => _scheduleMcpFocus(state.change!.node!),
+        child: _treeListeners(context),
+      );
+
+  Widget _treeListeners(BuildContext context) =>
       BlocListener<WorkshopCubit, WorkshopState>(
         bloc: widget.model,
         listenWhen: (before, after) =>
@@ -397,6 +407,15 @@ class _TreeViewState extends State<TreeView>
     setState(() => selected = id);
     _center(point, 8);
   }
+
+  void _scheduleMcpFocus(int id) =>
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (!mounted || viewport == null) return;
+        final point = scene.points[id];
+        if (point == null) return;
+        setState(() => selected = id);
+        _center(point, math.max(3, transform.value.getMaxScaleOnAxis()));
+      });
 
   void _powerChanged(BuildContext context, NodePowerState state) {
     final generation = ++powerGeneration;

@@ -214,6 +214,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m4d1d43042e => '有効';
 
   @override
+  String get m054b7819ac => 'オープン ビルドの MCP による編集を有効にします。';
+
+  @override
   String get m66b96db6c1 => 'ダウンロード ファイルの代わりにリンクが検出されました';
 
   @override
@@ -413,6 +416,12 @@ class AppLocalizationsJa extends AppLocalizations {
   String get mf0216281b8 => '追加のセル';
 
   @override
+  String get m4122860034 => 'アクセスは現在のビルドに対して有効です。編集は元に戻すことができます。';
+
+  @override
+  String get m549a4c810c => 'PoB II エディタへのアクセスが無効になりました。';
+
+  @override
   String m10b5bc7e91(String p0) {
     return 'バージョン $p0 が利用可能です';
   }
@@ -434,6 +443,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m0f98334ad1 => 'アプリケーションを閉じる前に編集を完了してください';
+
+  @override
+  String get me1d20330c5 => '現在の操作を完了するか、PoB II ダイアログを閉じます。';
 
   @override
   String get m230ebdecca => 'アップデートを自動的にダウンロードする';
@@ -575,6 +587,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m9ca9ef70fe => 'リングIII';
+
+  @override
+  String get m4d1b5babac => 'このコマンドは PoB II エディタでは使用できません。';
 
   @override
   String get m1e8466ebeb => 'コンポーネント';
@@ -722,6 +737,10 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m3427d6812f => '認識されません Lua';
 
   @override
+  String get ma2cd5e5b0a =>
+      'MCP による編集を有効にできませんでした。更新されたものがインストールされていることを確認します。';
+
+  @override
   String mcf4205d2e9(String p0) {
     return 'エラーの後、状態を復元できませんでした: $p0';
   }
@@ -730,6 +749,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String m4b1c83eb15(String p0) {
     return '翻訳をロードできませんでした: $p0';
   }
+
+  @override
+  String get m6dc7d664a3 => '接続ディレクトリ MCP を保護できませんでした';
 
   @override
   String m725605a944(String p0) {
@@ -845,6 +867,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get mf3a3cbeee9 => '間違ったアイコン Lua';
+
+  @override
+  String get me967307c68 => 'エディター コマンド PoB II が正しくありません。';
 
   @override
   String get mf1703df170 => 'ツリー リンクが正しくありません Lua';
@@ -1217,6 +1242,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m51d2753a44 => 'ベルト';
 
   @override
+  String get m50c39b8e33 => 'MCP 経由で編集します';
+
+  @override
   String m1a132e5834(String p0) {
     return 'ランタイムが $p0 を超えました';
   }
@@ -1345,6 +1373,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get meabbc96d71 => '敵のサイズ';
 
   @override
+  String get m13601ffe54 => 'MCP 経由での編集を許可します';
+
+  @override
   String get mde6527a5fe => 'ノードまでの距離';
 
   @override
@@ -1369,6 +1400,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get mcd085a0260 => 'グループの編集';
+
+  @override
+  String get mb5f6678c99 => '編集者 PoB II がコマンドを完了できませんでした。';
 
   @override
   String get m11dc0e7d04 => 'スキル グループ エディター';
@@ -1457,6 +1491,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m332899f398 => 'コピー XML';
 
   @override
+  String get m99e87c373f => 'Codex 接続コマンドのコピー';
+
+  @override
   String get m8d81013698 => 'リンクをコピー';
 
   @override
@@ -1476,6 +1513,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m126aa994ee => 'リダイレクトが多すぎます';
+
+  @override
+  String get m70a5cadc50 => 'まず、pob_check_build 経由で最新のビルド レポートを取得します。';
 
   @override
   String get m59b50cc146 => 'まずサポートストーンを取り外します';

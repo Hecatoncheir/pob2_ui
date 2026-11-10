@@ -214,6 +214,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m4d1d43042e => '已啟用';
 
   @override
+  String get m054b7819ac => '透過 MCP 啟用開放建置的編輯。';
+
+  @override
   String get m66b96db6c1 => '偵測到連結而不是下載文件';
 
   @override
@@ -412,6 +415,12 @@ class AppLocalizationsZh extends AppLocalizations {
   String get mf0216281b8 => '其他單元格';
 
   @override
+  String get m4122860034 => '存取權限對目前版本有效。編輯可以撤銷。';
+
+  @override
+  String get m549a4c810c => '對 PoB II 編輯器的存取已被停用。';
+
+  @override
   String m10b5bc7e91(String p0) {
     return '版本 $p0 可用';
   }
@@ -433,6 +442,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m0f98334ad1 => '在關閉應用程式之前完成編輯';
+
+  @override
+  String get me1d20330c5 => '完成目前操作或關閉 PoB II 對話方塊。';
 
   @override
   String get m230ebdecca => '自動下載更新';
@@ -574,6 +586,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m9ca9ef70fe => '環 III';
+
+  @override
+  String get m4d1b5babac => '此指令在 PoB II 編輯器中不可用。';
 
   @override
   String get m1e8466ebeb => '組件';
@@ -721,6 +736,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m3427d6812f => '無法辨識Lua';
 
   @override
+  String get ma2cd5e5b0a => '无法通过 MCP 启用编辑。检查是否已安装更新的 MCP。';
+
+  @override
   String mcf4205d2e9(String p0) {
     return '發生錯誤後無法恢復狀態：$p0';
   }
@@ -729,6 +747,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String m4b1c83eb15(String p0) {
     return '無法載入翻譯：$p0';
   }
+
+  @override
+  String get m6dc7d664a3 => '无法保护连接目录 MCP';
 
   @override
   String m725605a944(String p0) {
@@ -844,6 +865,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get mf3a3cbeee9 => '圖示不正確 Lua';
+
+  @override
+  String get me967307c68 => '编辑器命令 PoB II 不正确。';
 
   @override
   String get mf1703df170 => '樹連結不正確 Lua';
@@ -1216,6 +1240,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m51d2753a44 => '腰帶';
 
   @override
+  String get m50c39b8e33 => '通过 MCP 进行编辑';
+
+  @override
   String m1a132e5834(String p0) {
     return '運行時間超出 $p0';
   }
@@ -1344,6 +1371,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get meabbc96d71 => '敵人大小';
 
   @override
+  String get m13601ffe54 => '允许通过 MCP 进行编辑';
+
+  @override
   String get mde6527a5fe => '到節點的距離';
 
   @override
@@ -1368,6 +1398,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get mcd085a0260 => '編輯組';
+
+  @override
+  String get mb5f6678c99 => '編輯器 PoB II 未完成此指令。';
 
   @override
   String get m11dc0e7d04 => '技能組編輯器';
@@ -1456,6 +1489,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m332899f398 => '複製 XML';
 
   @override
+  String get m99e87c373f => '复制Codex连接命令';
+
+  @override
   String get m8d81013698 => '複製鏈接';
 
   @override
@@ -1475,6 +1511,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m126aa994ee => '重定向太多';
+
+  @override
+  String get m70a5cadc50 => '首先透過pob_check_build取得最新的建置報告。';
 
   @override
   String get m59b50cc146 => '先移除支撐石';
@@ -1988,6 +2027,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m4d1d43042e => '已啟用';
 
   @override
+  String get m054b7819ac => '透過 MCP 啟用開放建置的編輯。';
+
+  @override
   String get m66b96db6c1 => '偵測到連結而不是下載文件';
 
   @override
@@ -2186,6 +2228,12 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get mf0216281b8 => '其他單元格';
 
   @override
+  String get m4122860034 => '存取權限對目前版本有效。編輯可以撤銷。';
+
+  @override
+  String get m549a4c810c => '對 PoB II 編輯器的存取已被停用。';
+
+  @override
   String m10b5bc7e91(String p0) {
     return '版本 $p0 可用';
   }
@@ -2207,6 +2255,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m0f98334ad1 => '在關閉應用程式之前完成編輯';
+
+  @override
+  String get me1d20330c5 => '完成目前操作或關閉 PoB II 對話方塊。';
 
   @override
   String get m230ebdecca => '自動下載更新';
@@ -2348,6 +2399,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m9ca9ef70fe => '環 III';
+
+  @override
+  String get m4d1b5babac => '此指令在 PoB II 編輯器中不可用。';
 
   @override
   String get m1e8466ebeb => '組件';
@@ -2495,6 +2549,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m3427d6812f => '無法辨識Lua';
 
   @override
+  String get ma2cd5e5b0a => '无法通过 MCP 启用编辑。检查是否已安装更新的 MCP。';
+
+  @override
   String mcf4205d2e9(String p0) {
     return '發生錯誤後無法恢復狀態：$p0';
   }
@@ -2503,6 +2560,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String m4b1c83eb15(String p0) {
     return '無法載入翻譯：$p0';
   }
+
+  @override
+  String get m6dc7d664a3 => '无法保护连接目录 MCP';
 
   @override
   String m725605a944(String p0) {
@@ -2618,6 +2678,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get mf3a3cbeee9 => '圖示不正確 Lua';
+
+  @override
+  String get me967307c68 => '编辑器命令 PoB II 不正确。';
 
   @override
   String get mf1703df170 => '樹連結不正確 Lua';
@@ -2990,6 +3053,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m51d2753a44 => '腰帶';
 
   @override
+  String get m50c39b8e33 => '通过 MCP 进行编辑';
+
+  @override
   String m1a132e5834(String p0) {
     return '運行時間超出 $p0';
   }
@@ -3118,6 +3184,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get meabbc96d71 => '敵人大小';
 
   @override
+  String get m13601ffe54 => '允许通过 MCP 进行编辑';
+
+  @override
   String get mde6527a5fe => '到節點的距離';
 
   @override
@@ -3142,6 +3211,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get mcd085a0260 => '編輯組';
+
+  @override
+  String get mb5f6678c99 => '編輯器 PoB II 未完成此指令。';
 
   @override
   String get m11dc0e7d04 => '技能組編輯器';
@@ -3230,6 +3302,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m332899f398 => '複製 XML';
 
   @override
+  String get m99e87c373f => '复制Codex连接命令';
+
+  @override
   String get m8d81013698 => '複製鏈接';
 
   @override
@@ -3249,6 +3324,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m126aa994ee => '重定向太多';
+
+  @override
+  String get m70a5cadc50 => '首先透過pob_check_build取得最新的建置報告。';
 
   @override
   String get m59b50cc146 => '先移除支撐石';

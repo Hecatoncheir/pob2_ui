@@ -5,6 +5,7 @@ import 'dart:typed_data';
 
 import '../data/component_repository.dart';
 import '../data/mcp_client.dart';
+import '../data/mcp_editor_gateway.dart';
 import '../data/mcp_error_message.dart';
 import '../data/pob_window_repository.dart';
 import '../data/session_repository.dart';
@@ -17,6 +18,7 @@ import '../domain/node_preview.dart';
 import '../domain/library_entry.dart';
 import '../domain/component.dart';
 import 'workshop_state.dart';
+import 'mcp_editor_cubit.dart';
 import '../domain/tree_allocation_mode.dart';
 import '../data/xml_file_service.dart';
 import '../data/game_catalog_repository.dart';
@@ -43,6 +45,8 @@ class WorkshopCubit extends Cubit<WorkshopState> {
   final BuildLibrary library;
   final XmlFileService files;
   final PobWindowRepository pobWindow;
+  McpEditorCubit? _mcpEditor;
+  McpEditorCubit get mcpEditor => _mcpEditor ??= McpEditorCubit(this);
   late final catalogs = GameCatalogRepository(engine);
   late final treeIcons = TreeIconRepository(
     root: Directory.fromUri(components.store.root.uri.resolve('tree-cache/')),
@@ -88,7 +92,9 @@ class WorkshopCubit extends Cubit<WorkshopState> {
       components.store.previous.length == Component.values.length;
 
   void _update(WorkshopState next) {
-    if (!isClosed) emit(next);
+    if (isClosed) return;
+    emit(next);
+    _mcpEditor?.checkBuild();
   }
 
   void addLog(String value) {
@@ -604,6 +610,28 @@ class WorkshopCubit extends Cubit<WorkshopState> {
         });
       });
 
+  Future<JsonMap> executeMcpEditorTool(
+    String tool,
+    JsonMap arguments, {
+    required bool edit,
+  }) async {
+    JsonMap? response;
+    Future<void> execute() async =>
+        response = await engine.call(tool, arguments);
+    if (edit) {
+      final result = await _changeBuild(execute);
+      if (!result.committed)
+        throw McpEditorFault('EDITOR_EDIT_FAILED', result.error!);
+    } else {
+      await _run(execute);
+    }
+    return response ??
+        (throw McpEditorFault(
+          'EDITOR_FAILED',
+          state.error ?? 'Действие недоступно',
+        ));
+  }
+
   Future<BuildEditResult> _changeBuild(Future<void> Function() action) async {
     var committed = false;
     await _run(() async {
@@ -711,6 +739,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
   }
 
   Future<void> _disconnect() async {
+    await _mcpEditor?.disable();
     await engine.close();
     catalogs.clear();
     _update(state.copyWith(classes: [], clearReport: true));
@@ -757,6 +786,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
 
   @override
   Future<void> close() async {
+    await _mcpEditor?.close();
     await session.flushText();
     await engine.close();
     await super.close();

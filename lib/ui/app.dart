@@ -111,6 +111,28 @@ class _MaterialApp extends StatefulWidget {
 class _MaterialAppState extends State<_MaterialApp> {
   final navigator = GlobalKey<NavigatorState>();
   @override
+  void initState() {
+    super.initState();
+    widget.model.mcpEditor.modalOpen = _modalOpen;
+  }
+
+  @override
+  void didUpdateWidget(_MaterialApp oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.model == widget.model) return;
+    oldWidget.model.mcpEditor.modalOpen = null;
+    widget.model.mcpEditor.modalOpen = _modalOpen;
+  }
+
+  @override
+  void dispose() {
+    widget.model.mcpEditor.modalOpen = null;
+    super.dispose();
+  }
+
+  bool _modalOpen() => navigator.currentState?.canPop() ?? false;
+
+  @override
   Widget build(BuildContext context) =>
       BlocBuilder<LanguageCubit, LanguageState>(
         builder: (context, language) => LanguageScope(

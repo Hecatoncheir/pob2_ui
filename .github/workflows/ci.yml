@@ -156,6 +156,16 @@ jobs:
         if: runner.os == 'Windows'
         shell: bash
         run: python tool/check_windows_engine.py --flutter-root "$RUNNER_TEMP/flutter"
+      - name: Правки открытой сборки через MCP и Undo/Redo
+        if: runner.os != 'Linux'
+        env:
+          POB2_UI_HOME: ${{ runner.temp }}/pob2-lua-smoke
+        run: flutter test integration_test/mcp_editor_test.dart -d ${{ matrix.platform }} --no-pub
+      - name: Правки открытой сборки через MCP и Undo/Redo
+        if: runner.os == 'Linux'
+        env:
+          POB2_UI_HOME: ${{ runner.temp }}/pob2-lua-smoke
+        run: xvfb-run -a flutter test integration_test/mcp_editor_test.dart -d linux --no-pub
       - name: Проверить сохранение окна
         if: runner.os == 'Windows'
         run: python -X utf8 tool/check_window_state.py

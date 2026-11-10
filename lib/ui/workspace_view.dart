@@ -11,6 +11,8 @@ import 'core/motion.dart';
 import 'core/panels.dart';
 import 'core/spark_art.dart';
 import 'core/spark_theme.dart';
+import 'mcp_editor_cubit.dart';
+import 'mcp_editor_dialog.dart';
 import 'report_views.dart';
 import 'shell_cubit.dart';
 import 'tree_view.dart';
@@ -31,6 +33,16 @@ class WorkspaceView extends StatelessWidget {
             : 'Установите компоненты, чтобы открыть сборку и получить настоящий расчёт.',
         action: _emptyActions(context),
       );
+    return BlocListener<McpEditorCubit, McpEditorState>(
+      bloc: model.mcpEditor,
+      listenWhen: (before, after) =>
+          before.change != after.change && after.change != null,
+      listener: (context, state) => shell.tab(state.change!.tab),
+      child: _workspace(context),
+    );
+  }
+
+  Widget _workspace(BuildContext context) {
     return Padding(
       padding: EdgeInsets.all(MediaQuery.sizeOf(context).width < 650 ? 14 : 24),
       child: Column(
@@ -124,6 +136,7 @@ class _WorkspaceHeading extends StatelessWidget {
             ),
             const SizedBox(width: 8),
             _historyButtons(context, model),
+            McpEditorButton(model),
             ArtIconButton(
               'upload',
               label: 'Открыть XML',

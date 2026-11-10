@@ -214,6 +214,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m4d1d43042e => '활성화됨';
 
   @override
+  String get m054b7819ac => '오픈 빌드에 대해 MCP을 통해 편집을 활성화합니다.';
+
+  @override
   String get m66b96db6c1 => '다운로드 파일 대신 링크가 감지되었습니다.';
 
   @override
@@ -413,6 +416,12 @@ class AppLocalizationsKo extends AppLocalizations {
   String get mf0216281b8 => '추가 셀';
 
   @override
+  String get m4122860034 => '현재 빌드에 대한 액세스가 유효합니다. 편집 내용은 취소할 수 있습니다.';
+
+  @override
+  String get m549a4c810c => 'PoB II 편집기에 대한 액세스가 비활성화되었습니다.';
+
+  @override
   String m10b5bc7e91(String p0) {
     return '버전 $p0 사용 가능';
   }
@@ -434,6 +443,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m0f98334ad1 => '애플리케이션을 닫기 전에 편집을 완료하세요.';
+
+  @override
+  String get me1d20330c5 => '현재 작업을 완료하거나 PoB II 대화상자를 닫으세요.';
 
   @override
   String get m230ebdecca => '자동으로 업데이트 다운로드';
@@ -575,6 +587,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m9ca9ef70fe => '링III';
+
+  @override
+  String get m4d1b5babac => '이 명령은 PoB II 편집기에서 사용할 수 없습니다.';
 
   @override
   String get m1e8466ebeb => '구성요소';
@@ -722,6 +737,10 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m3427d6812f => '인식되지 않습니다. Lua';
 
   @override
+  String get ma2cd5e5b0a =>
+      'MCP을(를) 통해 편집을 활성화하지 못했습니다. 업데이트된 버전이 설치되었는지 확인하세요.';
+
+  @override
   String mcf4205d2e9(String p0) {
     return '오류 후 상태를 복원하지 못했습니다: $p0';
   }
@@ -730,6 +749,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String m4b1c83eb15(String p0) {
     return '번역을 로드하지 못했습니다: $p0';
   }
+
+  @override
+  String get m6dc7d664a3 => '연결 디렉터리를 보호하지 못했습니다. MCP';
 
   @override
   String m725605a944(String p0) {
@@ -845,6 +867,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get mf3a3cbeee9 => '잘못된 아이콘 Lua';
+
+  @override
+  String get me967307c68 => '잘못된 편집기 명령 PoB II입니다.';
 
   @override
   String get mf1703df170 => '잘못된 트리 링크 Lua';
@@ -1217,6 +1242,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m51d2753a44 => '벨트';
 
   @override
+  String get m50c39b8e33 => 'MCP을 통한 수정';
+
+  @override
   String m1a132e5834(String p0) {
     return '런타임이 $p0을(를) 초과했습니다.';
   }
@@ -1345,6 +1373,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get meabbc96d71 => '적의 크기';
 
   @override
+  String get m13601ffe54 => 'MCP을 통한 편집 허용';
+
+  @override
   String get mde6527a5fe => '노드까지의 거리';
 
   @override
@@ -1369,6 +1400,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get mcd085a0260 => '그룹 편집';
+
+  @override
+  String get mb5f6678c99 => '편집기 PoB II가 명령을 완료하지 못했습니다.';
 
   @override
   String get m11dc0e7d04 => '스킬 그룹 편집자';
@@ -1457,6 +1491,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m332899f398 => '복사 XML';
 
   @override
+  String get m99e87c373f => 'Codex 연결 명령 복사';
+
+  @override
   String get m8d81013698 => '링크 복사';
 
   @override
@@ -1476,6 +1513,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m126aa994ee => '리디렉션이 너무 많습니다.';
+
+  @override
+  String get m70a5cadc50 => '먼저 pob_check_build를 통해 최신 빌드 보고서를 받으세요.';
 
   @override
   String get m59b50cc146 => '받침돌을 먼저 제거하세요';

@@ -217,6 +217,10 @@ class AppLocalizationsPt extends AppLocalizations {
   String get m4d1d43042e => 'Habilitado';
 
   @override
+  String get m054b7819ac =>
+      'Habilite edições por meio de MCP para build aberto.';
+
+  @override
   String get m66b96db6c1 => 'Link detectado em vez de arquivo de download';
 
   @override
@@ -423,6 +427,13 @@ class AppLocalizationsPt extends AppLocalizations {
   String get mf0216281b8 => 'Células adicionais';
 
   @override
+  String get m4122860034 =>
+      'O acesso é válido para a compilação atual. As edições podem ser desfeitas.';
+
+  @override
+  String get m549a4c810c => 'O acesso ao editor PoB II foi desativado.';
+
+  @override
   String m10b5bc7e91(String p0) {
     return 'Versão $p0 disponível';
   }
@@ -445,6 +456,10 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get m0f98334ad1 => 'Conclua a edição antes de fechar o aplicativo';
+
+  @override
+  String get me1d20330c5 =>
+      'Conclua a operação atual ou feche a caixa de diálogo PoB II.';
 
   @override
   String get m230ebdecca => 'Baixe atualizações automaticamente';
@@ -587,6 +602,9 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get m9ca9ef70fe => 'Anel III';
+
+  @override
+  String get m4d1b5babac => 'O comando não está disponível no editor PoB II.';
 
   @override
   String get m1e8466ebeb => 'Componentes';
@@ -738,6 +756,10 @@ class AppLocalizationsPt extends AppLocalizations {
   String get m3427d6812f => 'Não reconhecido Lua';
 
   @override
+  String get ma2cd5e5b0a =>
+      'Falha ao ativar edições via MCP. Verifique se o MCP atualizado está instalado.';
+
+  @override
   String mcf4205d2e9(String p0) {
     return 'Falha ao restaurar o estado após erro: $p0';
   }
@@ -746,6 +768,9 @@ class AppLocalizationsPt extends AppLocalizations {
   String m4b1c83eb15(String p0) {
     return 'Falha ao carregar a tradução: $p0';
   }
+
+  @override
+  String get m6dc7d664a3 => 'Falha ao proteger o diretório de conexão MCP';
 
   @override
   String m725605a944(String p0) {
@@ -862,6 +887,9 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get mf3a3cbeee9 => 'Ícone incorreto Lua';
+
+  @override
+  String get me967307c68 => 'Comando do editor incorreto PoB II.';
 
   @override
   String get mf1703df170 => 'Link de árvore incorreto Lua';
@@ -1244,6 +1272,9 @@ class AppLocalizationsPt extends AppLocalizations {
   String get m51d2753a44 => 'Cinto';
 
   @override
+  String get m50c39b8e33 => 'Edições via MCP';
+
+  @override
   String m1a132e5834(String p0) {
     return 'Tempo de execução excedido $p0';
   }
@@ -1378,6 +1409,9 @@ class AppLocalizationsPt extends AppLocalizations {
   String get meabbc96d71 => 'Tamanho do inimigo';
 
   @override
+  String get m13601ffe54 => 'Permitir edições via MCP';
+
+  @override
   String get mde6527a5fe => 'Distância até o nó';
 
   @override
@@ -1402,6 +1436,9 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get mcd085a0260 => 'Editar grupo';
+
+  @override
+  String get mb5f6678c99 => 'O editor PoB II não concluiu o comando.';
 
   @override
   String get m11dc0e7d04 => 'Editor de grupo de habilidades';
@@ -1493,6 +1530,9 @@ class AppLocalizationsPt extends AppLocalizations {
   String get m332899f398 => 'Copiar XML';
 
   @override
+  String get m99e87c373f => 'Copiar comando de conexão Codex';
+
+  @override
   String get m8d81013698 => 'Copiar link';
 
   @override
@@ -1512,6 +1552,10 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get m126aa994ee => 'Muitos redirecionamentos';
+
+  @override
+  String get m70a5cadc50 =>
+      'Primeiro, obtenha o relatório de compilação mais recente via pob_check_build.';
 
   @override
   String get m59b50cc146 => 'Remova primeiro as pedras de suporte';
@@ -2037,6 +2081,10 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get m4d1d43042e => 'Habilitado';
 
   @override
+  String get m054b7819ac =>
+      'Habilite edições por meio de MCP para build aberto.';
+
+  @override
   String get m66b96db6c1 => 'Link detectado em vez de arquivo de download';
 
   @override
@@ -2243,6 +2291,13 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get mf0216281b8 => 'Células adicionais';
 
   @override
+  String get m4122860034 =>
+      'O acesso é válido para a compilação atual. As edições podem ser desfeitas.';
+
+  @override
+  String get m549a4c810c => 'O acesso ao editor PoB II foi desativado.';
+
+  @override
   String m10b5bc7e91(String p0) {
     return 'Versão $p0 disponível';
   }
@@ -2265,6 +2320,10 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get m0f98334ad1 => 'Conclua a edição antes de fechar o aplicativo';
+
+  @override
+  String get me1d20330c5 =>
+      'Conclua a operação atual ou feche a caixa de diálogo PoB II.';
 
   @override
   String get m230ebdecca => 'Baixe atualizações automaticamente';
@@ -2407,6 +2466,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get m9ca9ef70fe => 'Anel III';
+
+  @override
+  String get m4d1b5babac => 'O comando não está disponível no editor PoB II.';
 
   @override
   String get m1e8466ebeb => 'Componentes';
@@ -2558,6 +2620,10 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get m3427d6812f => 'Não reconhecido Lua';
 
   @override
+  String get ma2cd5e5b0a =>
+      'Falha ao ativar edições via MCP. Verifique se o MCP atualizado está instalado.';
+
+  @override
   String mcf4205d2e9(String p0) {
     return 'Falha ao restaurar o estado após erro: $p0';
   }
@@ -2566,6 +2632,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String m4b1c83eb15(String p0) {
     return 'Falha ao carregar a tradução: $p0';
   }
+
+  @override
+  String get m6dc7d664a3 => 'Falha ao proteger o diretório de conexão MCP';
 
   @override
   String m725605a944(String p0) {
@@ -2682,6 +2751,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get mf3a3cbeee9 => 'Ícone incorreto Lua';
+
+  @override
+  String get me967307c68 => 'Comando do editor incorreto PoB II.';
 
   @override
   String get mf1703df170 => 'Link de árvore incorreto Lua';
@@ -3064,6 +3136,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get m51d2753a44 => 'Cinto';
 
   @override
+  String get m50c39b8e33 => 'Edições via MCP';
+
+  @override
   String m1a132e5834(String p0) {
     return 'Tempo de execução excedido $p0';
   }
@@ -3198,6 +3273,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get meabbc96d71 => 'Tamanho do inimigo';
 
   @override
+  String get m13601ffe54 => 'Permitir edições via MCP';
+
+  @override
   String get mde6527a5fe => 'Distância até o nó';
 
   @override
@@ -3222,6 +3300,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get mcd085a0260 => 'Editar grupo';
+
+  @override
+  String get mb5f6678c99 => 'O editor PoB II não concluiu o comando.';
 
   @override
   String get m11dc0e7d04 => 'Editor de grupo de habilidades';
@@ -3313,6 +3394,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get m332899f398 => 'Copiar XML';
 
   @override
+  String get m99e87c373f => 'Copiar comando de conexão Codex';
+
+  @override
   String get m8d81013698 => 'Copiar link';
 
   @override
@@ -3332,6 +3416,10 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get m126aa994ee => 'Muitos redirecionamentos';
+
+  @override
+  String get m70a5cadc50 =>
+      'Primeiro, obtenha o relatório de compilação mais recente via pob_check_build.';
 
   @override
   String get m59b50cc146 => 'Remova primeiro as pedras de suporte';

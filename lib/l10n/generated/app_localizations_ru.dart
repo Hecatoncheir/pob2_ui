@@ -216,6 +216,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m4d1d43042e => 'Включено';
 
   @override
+  String get m054b7819ac => 'Включите правки через MCP для открытой сборки.';
+
+  @override
   String get m66b96db6c1 => 'Вместо файла загрузки обнаружена ссылка';
 
   @override
@@ -419,6 +422,13 @@ class AppLocalizationsRu extends AppLocalizations {
   String get mf0216281b8 => 'Дополнительные ячейки';
 
   @override
+  String get m4122860034 =>
+      'Доступ действует для текущей сборки. Правки можно отменить.';
+
+  @override
+  String get m549a4c810c => 'Доступ к редактору PoB II отключён.';
+
+  @override
   String m10b5bc7e91(String p0) {
     return 'Доступна версия $p0';
   }
@@ -442,6 +452,10 @@ class AppLocalizationsRu extends AppLocalizations {
   @override
   String get m0f98334ad1 =>
       'Завершите редактирование перед закрытием приложения';
+
+  @override
+  String get me1d20330c5 =>
+      'Завершите текущую операцию или закройте диалог PoB II.';
 
   @override
   String get m230ebdecca => 'Загружать обновления автоматически';
@@ -584,6 +598,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get m9ca9ef70fe => 'Кольцо III';
+
+  @override
+  String get m4d1b5babac => 'Команда недоступна в редакторе PoB II.';
 
   @override
   String get m1e8466ebeb => 'Компоненты';
@@ -733,6 +750,10 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m3427d6812f => 'Не распознано Lua';
 
   @override
+  String get ma2cd5e5b0a =>
+      'Не удалось включить правки через MCP. Проверьте, что установлен обновлённый MCP.';
+
+  @override
   String mcf4205d2e9(String p0) {
     return 'Не удалось восстановить состояние после ошибки: $p0';
   }
@@ -741,6 +762,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String m4b1c83eb15(String p0) {
     return 'Не удалось загрузить перевод: $p0';
   }
+
+  @override
+  String get m6dc7d664a3 => 'Не удалось защитить каталог подключения MCP';
 
   @override
   String m725605a944(String p0) {
@@ -856,6 +880,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get mf3a3cbeee9 => 'Некорректная иконка Lua';
+
+  @override
+  String get me967307c68 => 'Некорректная команда редактора PoB II.';
 
   @override
   String get mf1703df170 => 'Некорректная связь дерева Lua';
@@ -1235,6 +1262,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m51d2753a44 => 'Пояс';
 
   @override
+  String get m50c39b8e33 => 'Правки через MCP';
+
+  @override
   String m1a132e5834(String p0) {
     return 'Превышено время выполнения $p0';
   }
@@ -1366,6 +1396,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get meabbc96d71 => 'Размер противника';
 
   @override
+  String get m13601ffe54 => 'Разрешить правки через MCP';
+
+  @override
   String get mde6527a5fe => 'Расстояние до узла';
 
   @override
@@ -1390,6 +1423,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get mcd085a0260 => 'Редактировать группу';
+
+  @override
+  String get mb5f6678c99 => 'Редактор PoB II не выполнил команду.';
 
   @override
   String get m11dc0e7d04 => 'Редактор группы умений';
@@ -1480,6 +1516,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m332899f398 => 'Скопировать XML';
 
   @override
+  String get m99e87c373f => 'Скопировать команду подключения Codex';
+
+  @override
   String get m8d81013698 => 'Скопировать ссылку';
 
   @override
@@ -1499,6 +1538,10 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get m126aa994ee => 'Слишком много перенаправлений';
+
+  @override
+  String get m70a5cadc50 =>
+      'Сначала получите актуальный отчёт сборки через pob_check_build.';
 
   @override
   String get m59b50cc146 => 'Сначала уберите камни поддержки';

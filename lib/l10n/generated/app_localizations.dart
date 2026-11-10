@@ -482,6 +482,12 @@ abstract class AppLocalizations {
   /// **'Enabled'**
   String get m4d1d43042e;
 
+  /// Включите правки через MCP для открытой сборки.
+  ///
+  /// In en, this message translates to:
+  /// **'Enable edits via MCP for open build.'**
+  String get m054b7819ac;
+
   /// Вместо файла загрузки обнаружена ссылка
   ///
   /// In en, this message translates to:
@@ -866,6 +872,18 @@ abstract class AppLocalizations {
   /// **'Additional cells'**
   String get mf0216281b8;
 
+  /// Доступ действует для текущей сборки. Правки можно отменить.
+  ///
+  /// In en, this message translates to:
+  /// **'Access is valid for the current build. Edits can be undone.'**
+  String get m4122860034;
+
+  /// Доступ к редактору PoB II отключён.
+  ///
+  /// In en, this message translates to:
+  /// **'Access to the PoB II editor has been disabled.'**
+  String get m549a4c810c;
+
   /// Доступна версия {p0}
   ///
   /// In en, this message translates to:
@@ -907,6 +925,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Complete editing before closing the application'**
   String get m0f98334ad1;
+
+  /// Завершите текущую операцию или закройте диалог PoB II.
+  ///
+  /// In en, this message translates to:
+  /// **'Complete the current operation or close the PoB II dialog.'**
+  String get me1d20330c5;
 
   /// Загружать обновления автоматически
   ///
@@ -1165,6 +1189,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Ring III'**
   String get m9ca9ef70fe;
+
+  /// Команда недоступна в редакторе PoB II.
+  ///
+  /// In en, this message translates to:
+  /// **'The command is not available in the PoB II editor.'**
+  String get m4d1b5babac;
 
   /// Компоненты
   ///
@@ -1448,6 +1478,12 @@ abstract class AppLocalizations {
   /// **'Not recognized Lua'**
   String get m3427d6812f;
 
+  /// Не удалось включить правки через MCP. Проверьте, что установлен обновлённый MCP.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to enable edits via MCP. Check that the updated MCP is installed.'**
+  String get ma2cd5e5b0a;
+
   /// Не удалось восстановить состояние после ошибки: {p0}
   ///
   /// In en, this message translates to:
@@ -1459,6 +1495,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Failed to load translation: {p0}'**
   String m4b1c83eb15(String p0);
+
+  /// Не удалось защитить каталог подключения MCP
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to protect connection directory MCP'**
+  String get m6dc7d664a3;
 
   /// Не удалось открыть браузер: {p0}
   ///
@@ -1634,6 +1676,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Incorrect icon Lua'**
   String get mf3a3cbeee9;
+
+  /// Некорректная команда редактора PoB II.
+  ///
+  /// In en, this message translates to:
+  /// **'Incorrect editor command PoB II.'**
+  String get me967307c68;
 
   /// Некорректная связь дерева Lua
   ///
@@ -2355,6 +2403,12 @@ abstract class AppLocalizations {
   /// **'Belt'**
   String get m51d2753a44;
 
+  /// Правки через MCP
+  ///
+  /// In en, this message translates to:
+  /// **'Edits via MCP'**
+  String get m50c39b8e33;
+
   /// Превышено время выполнения {p0}
   ///
   /// In en, this message translates to:
@@ -2583,6 +2637,12 @@ abstract class AppLocalizations {
   /// **'Enemy size'**
   String get meabbc96d71;
 
+  /// Разрешить правки через MCP
+  ///
+  /// In en, this message translates to:
+  /// **'Allow edits via MCP'**
+  String get m13601ffe54;
+
   /// Расстояние до узла
   ///
   /// In en, this message translates to:
@@ -2630,6 +2690,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Edit group'**
   String get mcd085a0260;
+
+  /// Редактор PoB II не выполнил команду.
+  ///
+  /// In en, this message translates to:
+  /// **'Editor PoB II did not complete the command.'**
+  String get mb5f6678c99;
 
   /// Редактор группы умений
   ///
@@ -2799,6 +2865,12 @@ abstract class AppLocalizations {
   /// **'Copy XML'**
   String get m332899f398;
 
+  /// Скопировать команду подключения Codex
+  ///
+  /// In en, this message translates to:
+  /// **'Copy Codex connection command'**
+  String get m99e87c373f;
+
   /// Скопировать ссылку
   ///
   /// In en, this message translates to:
@@ -2840,6 +2912,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Too many redirects'**
   String get m126aa994ee;
+
+  /// Сначала получите актуальный отчёт сборки через pob_check_build.
+  ///
+  /// In en, this message translates to:
+  /// **'First get the latest build report via pob_check_build.'**
+  String get m70a5cadc50;
 
   /// Сначала уберите камни поддержки
   ///
