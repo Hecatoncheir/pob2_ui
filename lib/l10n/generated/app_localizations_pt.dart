@@ -91,6 +91,10 @@ class AppLocalizationsPt extends AppLocalizations {
   String get mb8ddc14d08 => 'PoB não retornou o link de pesquisa correto';
 
   @override
+  String get m62db50eb37 =>
+      'PoB não foi encontrado. Escolha a pasta do aplicativo.';
+
+  @override
   String get m3127345008 => 'XML mais de 16 MB';
 
   @override
@@ -275,7 +279,13 @@ class AppLocalizationsPt extends AppLocalizations {
   String get m2ac910bfb3 => 'Selecionar turma';
 
   @override
+  String get m25511c66c8 => 'Escolha a pasta do PoB para PoE 2';
+
+  @override
   String get m0513479f74 => 'Selecione uma habilidade para selecionar suportes';
+
+  @override
+  String get m5d67586b4c => 'Escolha uma instalação do PoB';
 
   @override
   String get m2749913680 =>
@@ -299,6 +309,9 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get m38aa0ac1ff => 'Selecione';
+
+  @override
+  String get m88d4b06d56 => 'Escolher pasta';
 
   @override
   String get m4cb6a01a0e => 'Escolha um caminho';
@@ -589,6 +602,9 @@ class AppLocalizationsPt extends AppLocalizations {
   String get m5da5bd2f47 => 'Conexão de interface local com cálculos';
 
   @override
+  String get mba18ba5922 => 'Ponte local do PoB';
+
+  @override
   String get mab7d96eb1a => 'Qualquer base';
 
   @override
@@ -620,6 +636,10 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get m16d1252699 => 'Relâmpago';
+
+  @override
+  String get m4519c7e6f1 =>
+      'Ponte instalada. Reinicie o PoB, abra uma build e verifique a conexão.';
 
   @override
   String get m204751ca09 => 'RECENTE';
@@ -674,6 +694,9 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get m8823a786b9 => 'Configurar componentes';
+
+  @override
+  String get m9a92ce1cef => 'Configurar a ponte do PoB';
 
   @override
   String get m985b5e0f2c => 'Configurações';
@@ -1125,6 +1148,9 @@ class AppLocalizationsPt extends AppLocalizations {
   String get m538d913ee0 => 'Conectar Lua';
 
   @override
+  String get m80cc1bdb9b => 'Conectar a ponte';
+
+  @override
   String get m5f5155bb1f => 'Suportes correspondentes';
 
   @override
@@ -1274,6 +1300,9 @@ class AppLocalizationsPt extends AppLocalizations {
   String get me269e51359 => 'Verificar item';
 
   @override
+  String get m87cb1172f2 => 'Verificar conexão';
+
+  @override
   String get mfa4af9bbe7 => 'Verifique a compatibilidade';
 
   @override
@@ -1412,6 +1441,9 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get ma50190234a => 'Próprio...';
+
+  @override
+  String get ma59f85739f => 'Conexão com a build aberta no PoB confirmada';
 
   @override
   String get m7434b2e81b => 'Mover para a esquerda';
@@ -1856,6 +1888,10 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get mb8ddc14d08 => 'PoB não retornou o link de pesquisa correto';
 
   @override
+  String get m62db50eb37 =>
+      'PoB não foi encontrado. Escolha a pasta do aplicativo.';
+
+  @override
   String get m3127345008 => 'XML mais de 16 MB';
 
   @override
@@ -2040,7 +2076,13 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get m2ac910bfb3 => 'Selecionar turma';
 
   @override
+  String get m25511c66c8 => 'Escolha a pasta do PoB para PoE 2';
+
+  @override
   String get m0513479f74 => 'Selecione uma habilidade para selecionar suportes';
+
+  @override
+  String get m5d67586b4c => 'Escolha uma instalação do PoB';
 
   @override
   String get m2749913680 =>
@@ -2064,6 +2106,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get m38aa0ac1ff => 'Selecione';
+
+  @override
+  String get m88d4b06d56 => 'Escolher pasta';
 
   @override
   String get m4cb6a01a0e => 'Escolha um caminho';
@@ -2354,6 +2399,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get m5da5bd2f47 => 'Conexão de interface local com cálculos';
 
   @override
+  String get mba18ba5922 => 'Ponte local do PoB';
+
+  @override
   String get mab7d96eb1a => 'Qualquer base';
 
   @override
@@ -2385,6 +2433,10 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get m16d1252699 => 'Relâmpago';
+
+  @override
+  String get m4519c7e6f1 =>
+      'Ponte instalada. Reinicie o PoB, abra uma build e verifique a conexão.';
 
   @override
   String get m204751ca09 => 'RECENTE';
@@ -2439,6 +2491,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get m8823a786b9 => 'Configurar componentes';
+
+  @override
+  String get m9a92ce1cef => 'Configurar a ponte do PoB';
 
   @override
   String get m985b5e0f2c => 'Configurações';
@@ -2890,6 +2945,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get m538d913ee0 => 'Conectar Lua';
 
   @override
+  String get m80cc1bdb9b => 'Conectar a ponte';
+
+  @override
   String get m5f5155bb1f => 'Suportes correspondentes';
 
   @override
@@ -3039,6 +3097,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get me269e51359 => 'Verificar item';
 
   @override
+  String get m87cb1172f2 => 'Verificar conexão';
+
+  @override
   String get mfa4af9bbe7 => 'Verifique a compatibilidade';
 
   @override
@@ -3177,6 +3238,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get ma50190234a => 'Próprio...';
+
+  @override
+  String get ma59f85739f => 'Conexão com a build aberta no PoB confirmada';
 
   @override
   String get m7434b2e81b => 'Mover para a esquerda';

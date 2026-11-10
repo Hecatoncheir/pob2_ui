@@ -266,6 +266,12 @@ abstract class AppLocalizations {
   /// **'PoB did not return the correct search link'**
   String get mb8ddc14d08;
 
+  /// PoB не найден. Выберите папку с приложением.
+  ///
+  /// In en, this message translates to:
+  /// **'PoB was not found. Choose its application folder.'**
+  String get m62db50eb37;
+
   /// XML больше 16 МБ
   ///
   /// In en, this message translates to:
@@ -602,11 +608,23 @@ abstract class AppLocalizations {
   /// **'Select class'**
   String get m2ac910bfb3;
 
+  /// Выберите папку с приложением PoB для PoE 2
+  ///
+  /// In en, this message translates to:
+  /// **'Choose the PoB application folder for PoE 2'**
+  String get m25511c66c8;
+
   /// Выберите умение для подбора поддержек
   ///
   /// In en, this message translates to:
   /// **'Select a skill to select supports'**
   String get m0513479f74;
+
+  /// Выберите установку PoB
+  ///
+  /// In en, this message translates to:
+  /// **'Choose a PoB installation'**
+  String get m5d67586b4c;
 
   /// Выберите характеристику и нажмите «Найти».
   ///
@@ -649,6 +667,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Select'**
   String get m38aa0ac1ff;
+
+  /// Выбрать папку
+  ///
+  /// In en, this message translates to:
+  /// **'Choose folder'**
+  String get m88d4b06d56;
 
   /// Выбрать путь
   ///
@@ -1172,6 +1196,12 @@ abstract class AppLocalizations {
   /// **'Local interface connection with calculations'**
   String get m5da5bd2f47;
 
+  /// Локальный мост PoB
+  ///
+  /// In en, this message translates to:
+  /// **'Local PoB bridge'**
+  String get mba18ba5922;
+
   /// Любая база
   ///
   /// In en, this message translates to:
@@ -1237,6 +1267,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Lightning'**
   String get m16d1252699;
+
+  /// Мост установлен. Перезапустите PoB, откройте сборку и проверьте связь.
+  ///
+  /// In en, this message translates to:
+  /// **'Bridge installed. Restart PoB, open a build and check the connection.'**
+  String get m4519c7e6f1;
 
   /// НЕДАВНИЕ
   ///
@@ -1339,6 +1375,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Configure components'**
   String get m8823a786b9;
+
+  /// Настроить мост PoB
+  ///
+  /// In en, this message translates to:
+  /// **'Set up PoB bridge'**
+  String get m9a92ce1cef;
 
   /// Настройки
   ///
@@ -2133,6 +2175,12 @@ abstract class AppLocalizations {
   /// **'Connect Lua'**
   String get m538d913ee0;
 
+  /// Подключить мост
+  ///
+  /// In en, this message translates to:
+  /// **'Connect bridge'**
+  String get m80cc1bdb9b;
+
   /// Подходящие поддержки
   ///
   /// In en, this message translates to:
@@ -2403,6 +2451,12 @@ abstract class AppLocalizations {
   /// **'Check item'**
   String get me269e51359;
 
+  /// Проверить связь
+  ///
+  /// In en, this message translates to:
+  /// **'Check connection'**
+  String get m87cb1172f2;
+
   /// Проверить совместимость
   ///
   /// In en, this message translates to:
@@ -2654,6 +2708,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Own...'**
   String get ma50190234a;
+
+  /// Связь с открытой сборкой PoB подтверждена
+  ///
+  /// In en, this message translates to:
+  /// **'Connected to the open PoB build'**
+  String get ma59f85739f;
 
   /// Сдвинуть влево
   ///

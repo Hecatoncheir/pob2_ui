@@ -91,6 +91,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get mb8ddc14d08 => 'PoB가 올바른 검색 링크를 반환하지 않았습니다.';
 
   @override
+  String get m62db50eb37 => 'PoB를 찾을 수 없습니다. 앱 폴더를 선택하세요.';
+
+  @override
   String get m3127345008 => 'XML 16MB 이상';
 
   @override
@@ -274,7 +277,13 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m2ac910bfb3 => '수업 선택';
 
   @override
+  String get m25511c66c8 => 'PoE 2용 PoB 폴더를 선택하세요';
+
+  @override
   String get m0513479f74 => '지원을 선택하려면 스킬을 선택하세요.';
+
+  @override
+  String get m5d67586b4c => 'PoB 설치 경로 선택';
 
   @override
   String get m2749913680 => '특성을 선택하고 찾기를 클릭합니다.';
@@ -296,6 +305,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m38aa0ac1ff => '선택';
+
+  @override
+  String get m88d4b06d56 => '폴더 선택';
 
   @override
   String get m4cb6a01a0e => '경로 선택';
@@ -580,6 +592,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m5da5bd2f47 => '계산을 통한 로컬 인터페이스 연결';
 
   @override
+  String get mba18ba5922 => 'PoB 로컬 브리지';
+
+  @override
   String get mab7d96eb1a => '모든 베이스';
 
   @override
@@ -611,6 +626,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m16d1252699 => '번개';
+
+  @override
+  String get m4519c7e6f1 => '브리지를 설치했습니다. PoB를 다시 시작하고 빌드를 연 뒤 연결을 확인하세요.';
 
   @override
   String get m204751ca09 => '최근';
@@ -664,6 +682,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m8823a786b9 => '구성 요소 구성';
+
+  @override
+  String get m9a92ce1cef => 'PoB 브리지 설정';
 
   @override
   String get m985b5e0f2c => '설정';
@@ -1104,6 +1125,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m538d913ee0 => '연결 Lua';
 
   @override
+  String get m80cc1bdb9b => '브리지 연결';
+
+  @override
   String get m5f5155bb1f => '매칭 지원';
 
   @override
@@ -1251,6 +1275,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get me269e51359 => '항목 확인';
 
   @override
+  String get m87cb1172f2 => '연결 확인';
+
+  @override
   String get mfa4af9bbe7 => '호환성 확인';
 
   @override
@@ -1383,6 +1410,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get ma50190234a => '나만의...';
+
+  @override
+  String get ma59f85739f => '열려 있는 PoB 빌드와의 연결을 확인했습니다';
 
   @override
   String get m7434b2e81b => '왼쪽으로 이동';

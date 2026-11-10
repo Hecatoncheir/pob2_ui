@@ -1,5 +1,5 @@
-const appVersion = '0.1.11';
-const appBuild = 12;
+const appVersion = '0.1.12';
+const appBuild = 13;
 const appName = 'PoB II';
 const appId = 'dev.hecatoncheir.pob2Ui';
 const appRepository = 'Hecatoncheir/pob2_ui';

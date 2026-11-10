@@ -91,6 +91,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get mb8ddc14d08 => 'PoB が正しい検索リンクを返しませんでした';
 
   @override
+  String get m62db50eb37 => 'PoBが見つかりません。アプリのフォルダーを選択してください。';
+
+  @override
   String get m3127345008 => 'XML 16 MB 以上';
 
   @override
@@ -274,7 +277,13 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m2ac910bfb3 => 'クラスの選択';
 
   @override
+  String get m25511c66c8 => 'PoE 2用のPoBフォルダーを選択してください';
+
+  @override
   String get m0513479f74 => 'スキルを選択してサポートを選択してください';
+
+  @override
+  String get m5d67586b4c => 'PoBのインストール先を選択';
 
   @override
   String get m2749913680 => '特性を選択し、「検索」をクリックします。';
@@ -296,6 +305,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m38aa0ac1ff => 'Select';
+
+  @override
+  String get m88d4b06d56 => 'フォルダーを選択';
 
   @override
   String get m4cb6a01a0e => 'パスを選択してください';
@@ -580,6 +592,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m5da5bd2f47 => '計算を使用したローカル インターフェイス接続';
 
   @override
+  String get mba18ba5922 => 'PoBローカルブリッジ';
+
+  @override
   String get mab7d96eb1a => '任意の塩基';
 
   @override
@@ -611,6 +626,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m16d1252699 => 'ライトニング';
+
+  @override
+  String get m4519c7e6f1 => 'ブリッジをインストールしました。PoBを再起動し、ビルドを開いて接続を確認してください。';
 
   @override
   String get m204751ca09 => '最近';
@@ -664,6 +682,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m8823a786b9 => 'コンポーネントの構成';
+
+  @override
+  String get m9a92ce1cef => 'PoBブリッジを設定';
 
   @override
   String get m985b5e0f2c => '設定';
@@ -1104,6 +1125,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m538d913ee0 => 'Lua に接続します';
 
   @override
+  String get m80cc1bdb9b => 'ブリッジを接続';
+
+  @override
   String get m5f5155bb1f => 'マッチングサポート';
 
   @override
@@ -1251,6 +1275,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get me269e51359 => 'チェック項目';
 
   @override
+  String get m87cb1172f2 => '接続を確認';
+
+  @override
   String get mfa4af9bbe7 => '互換性を確認する';
 
   @override
@@ -1383,6 +1410,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get ma50190234a => '自分の...';
+
+  @override
+  String get ma59f85739f => '開いているPoBビルドへの接続を確認しました';
 
   @override
   String get m7434b2e81b => '左に移動';

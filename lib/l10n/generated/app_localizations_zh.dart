@@ -91,6 +91,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get mb8ddc14d08 => 'PoB 未返回正確的搜尋鏈接';
 
   @override
+  String get m62db50eb37 => '找不到 PoB。請選擇應用程式資料夾。';
+
+  @override
   String get m3127345008 => 'XML 超過 16 MB';
 
   @override
@@ -274,7 +277,13 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m2ac910bfb3 => '選出班級';
 
   @override
+  String get m25511c66c8 => '請選擇 PoE 2 的 PoB 應用程式資料夾';
+
+  @override
   String get m0513479f74 => '選擇技能選擇支援';
+
+  @override
+  String get m5d67586b4c => '選擇 PoB 安裝位置';
 
   @override
   String get m2749913680 => '選擇一個特徵並按一下「尋找」。';
@@ -296,6 +305,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m38aa0ac1ff => '選擇';
+
+  @override
+  String get m88d4b06d56 => '選擇資料夾';
 
   @override
   String get m4cb6a01a0e => '選擇路徑';
@@ -579,6 +591,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m5da5bd2f47 => '本地介面連線與運算';
 
   @override
+  String get mba18ba5922 => 'PoB 本機橋接';
+
+  @override
   String get mab7d96eb1a => '任何鹼基';
 
   @override
@@ -610,6 +625,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m16d1252699 => '閃電';
+
+  @override
+  String get m4519c7e6f1 => '已安裝橋接。請重新啟動 PoB，開啟流派並檢查連線。';
 
   @override
   String get m204751ca09 => '最近';
@@ -663,6 +681,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m8823a786b9 => '配置組件';
+
+  @override
+  String get m9a92ce1cef => '設定 PoB 橋接';
 
   @override
   String get m985b5e0f2c => '設定';
@@ -1103,6 +1124,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m538d913ee0 => '連接 Lua';
 
   @override
+  String get m80cc1bdb9b => '連接橋接';
+
+  @override
   String get m5f5155bb1f => '匹配支持';
 
   @override
@@ -1250,6 +1274,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get me269e51359 => '檢查項目';
 
   @override
+  String get m87cb1172f2 => '檢查連線';
+
+  @override
   String get mfa4af9bbe7 => '檢查相容性';
 
   @override
@@ -1382,6 +1409,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get ma50190234a => '自己的...';
+
+  @override
+  String get ma59f85739f => '已確認連線至 PoB 中開啟的流派';
 
   @override
   String get m7434b2e81b => '向左移動';
@@ -1817,6 +1847,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get mb8ddc14d08 => 'PoB 未返回正確的搜尋鏈接';
 
   @override
+  String get m62db50eb37 => '找不到 PoB。請選擇應用程式資料夾。';
+
+  @override
   String get m3127345008 => 'XML 超過 16 MB';
 
   @override
@@ -2000,7 +2033,13 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m2ac910bfb3 => '選出班級';
 
   @override
+  String get m25511c66c8 => '請選擇 PoE 2 的 PoB 應用程式資料夾';
+
+  @override
   String get m0513479f74 => '選擇技能選擇支援';
+
+  @override
+  String get m5d67586b4c => '選擇 PoB 安裝位置';
 
   @override
   String get m2749913680 => '選擇一個特徵並按一下「尋找」。';
@@ -2022,6 +2061,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m38aa0ac1ff => '選擇';
+
+  @override
+  String get m88d4b06d56 => '選擇資料夾';
 
   @override
   String get m4cb6a01a0e => '選擇路徑';
@@ -2305,6 +2347,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m5da5bd2f47 => '本地介面連線與運算';
 
   @override
+  String get mba18ba5922 => 'PoB 本機橋接';
+
+  @override
   String get mab7d96eb1a => '任何鹼基';
 
   @override
@@ -2336,6 +2381,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m16d1252699 => '閃電';
+
+  @override
+  String get m4519c7e6f1 => '已安裝橋接。請重新啟動 PoB，開啟流派並檢查連線。';
 
   @override
   String get m204751ca09 => '最近';
@@ -2389,6 +2437,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m8823a786b9 => '配置組件';
+
+  @override
+  String get m9a92ce1cef => '設定 PoB 橋接';
 
   @override
   String get m985b5e0f2c => '設定';
@@ -2829,6 +2880,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m538d913ee0 => '連接 Lua';
 
   @override
+  String get m80cc1bdb9b => '連接橋接';
+
+  @override
   String get m5f5155bb1f => '匹配支持';
 
   @override
@@ -2976,6 +3030,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get me269e51359 => '檢查項目';
 
   @override
+  String get m87cb1172f2 => '檢查連線';
+
+  @override
   String get mfa4af9bbe7 => '檢查相容性';
 
   @override
@@ -3108,6 +3165,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get ma50190234a => '自己的...';
+
+  @override
+  String get ma59f85739f => '已確認連線至 PoB 中開啟的流派';
 
   @override
   String get m7434b2e81b => '向左移動';

@@ -137,6 +137,11 @@
     "description": "PoB не вернул корректную ссылку поиска",
     "placeholders": {}
   },
+  "m62db50eb37": "PoB was not found. Choose its application folder.",
+  "@m62db50eb37": {
+    "description": "PoB не найден. Выберите папку с приложением.",
+    "placeholders": {}
+  },
   "m3127345008": "XML more than 16 MB",
   "@m3127345008": {
     "description": "XML больше 16 МБ",
@@ -466,9 +471,19 @@
     "description": "Выберите класс",
     "placeholders": {}
   },
+  "m25511c66c8": "Choose the PoB application folder for PoE 2",
+  "@m25511c66c8": {
+    "description": "Выберите папку с приложением PoB для PoE 2",
+    "placeholders": {}
+  },
   "m0513479f74": "Select a skill to select supports",
   "@m0513479f74": {
     "description": "Выберите умение для подбора поддержек",
+    "placeholders": {}
+  },
+  "m5d67586b4c": "Choose a PoB installation",
+  "@m5d67586b4c": {
+    "description": "Выберите установку PoB",
     "placeholders": {}
   },
   "m2749913680": "Select a characteristic and click Find.",
@@ -504,6 +519,11 @@
   "m38aa0ac1ff": "Select",
   "@m38aa0ac1ff": {
     "description": "Выбрать",
+    "placeholders": {}
+  },
+  "m88d4b06d56": "Choose folder",
+  "@m88d4b06d56": {
+    "description": "Выбрать папку",
     "placeholders": {}
   },
   "m4cb6a01a0e": "Choose a path",
@@ -987,6 +1007,11 @@
     "description": "Локальная связь интерфейса с расчётами",
     "placeholders": {}
   },
+  "mba18ba5922": "Local PoB bridge",
+  "@mba18ba5922": {
+    "description": "Локальный мост PoB",
+    "placeholders": {}
+  },
   "mab7d96eb1a": "Any base",
   "@mab7d96eb1a": {
     "description": "Любая база",
@@ -1040,6 +1065,11 @@
   "m16d1252699": "Lightning",
   "@m16d1252699": {
     "description": "Молния",
+    "placeholders": {}
+  },
+  "m4519c7e6f1": "Bridge installed. Restart PoB, open a build and check the connection.",
+  "@m4519c7e6f1": {
+    "description": "Мост установлен. Перезапустите PoB, откройте сборку и проверьте связь.",
     "placeholders": {}
   },
   "m204751ca09": "RECENT",
@@ -1129,6 +1159,11 @@
   "m8823a786b9": "Configure components",
   "@m8823a786b9": {
     "description": "Настроить компоненты",
+    "placeholders": {}
+  },
+  "m9a92ce1cef": "Set up PoB bridge",
+  "@m9a92ce1cef": {
+    "description": "Настроить мост PoB",
     "placeholders": {}
   },
   "m985b5e0f2c": "Settings",
@@ -1875,6 +1910,11 @@
     "description": "Подключить Lua",
     "placeholders": {}
   },
+  "m80cc1bdb9b": "Connect bridge",
+  "@m80cc1bdb9b": {
+    "description": "Подключить мост",
+    "placeholders": {}
+  },
   "m5f5155bb1f": "Matching supports",
   "@m5f5155bb1f": {
     "description": "Подходящие поддержки",
@@ -2124,6 +2164,11 @@
     "description": "Проверить предмет",
     "placeholders": {}
   },
+  "m87cb1172f2": "Check connection",
+  "@m87cb1172f2": {
+    "description": "Проверить связь",
+    "placeholders": {}
+  },
   "mfa4af9bbe7": "Check compatibility",
   "@mfa4af9bbe7": {
     "description": "Проверить совместимость",
@@ -2348,6 +2393,11 @@
   "ma50190234a": "Own...",
   "@ma50190234a": {
     "description": "Свои…",
+    "placeholders": {}
+  },
+  "ma59f85739f": "Connected to the open PoB build",
+  "@ma59f85739f": {
+    "description": "Связь с открытой сборкой PoB подтверждена",
     "placeholders": {}
   },
   "m7434b2e81b": "Move left",

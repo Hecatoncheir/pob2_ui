@@ -97,6 +97,10 @@ class AppLocalizationsDe extends AppLocalizations {
       'PoB hat nicht den richtigen Suchlink zurückgegeben';
 
   @override
+  String get m62db50eb37 =>
+      'PoB wurde nicht gefunden. Wählen Sie den Anwendungsordner.';
+
+  @override
   String get m3127345008 => 'XML mehr als 16 MB';
 
   @override
@@ -282,8 +286,14 @@ class AppLocalizationsDe extends AppLocalizations {
   String get m2ac910bfb3 => 'Klasse auswählen';
 
   @override
+  String get m25511c66c8 => 'Wählen Sie den PoB-Anwendungsordner für PoE 2';
+
+  @override
   String get m0513479f74 =>
       'Wählen Sie eine Fertigkeit aus, um Unterstützung auszuwählen';
+
+  @override
+  String get m5d67586b4c => 'PoB-Installation auswählen';
 
   @override
   String get m2749913680 =>
@@ -308,6 +318,9 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get m38aa0ac1ff => 'Auswählen';
+
+  @override
+  String get m88d4b06d56 => 'Ordner auswählen';
 
   @override
   String get m4cb6a01a0e => 'Wählen Sie einen Pfad';
@@ -602,6 +615,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get m5da5bd2f47 => 'Lokale Schnittstellenverbindung mit Berechnungen';
 
   @override
+  String get mba18ba5922 => 'Lokale PoB-Verbindung';
+
+  @override
   String get mab7d96eb1a => 'Jede Basis';
 
   @override
@@ -633,6 +649,10 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get m16d1252699 => 'Blitz';
+
+  @override
+  String get m4519c7e6f1 =>
+      'Verbindung eingerichtet. Starten Sie PoB neu, öffnen Sie einen Build und prüfen Sie die Verbindung.';
 
   @override
   String get m204751ca09 => 'AKTUELL';
@@ -688,6 +708,9 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get m8823a786b9 => 'Komponenten konfigurieren';
+
+  @override
+  String get m9a92ce1cef => 'PoB-Verbindung einrichten';
 
   @override
   String get m985b5e0f2c => 'Einstellungen';
@@ -1137,6 +1160,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get m538d913ee0 => 'Verbinden Lua';
 
   @override
+  String get m80cc1bdb9b => 'PoB verbinden';
+
+  @override
   String get m5f5155bb1f => 'Passende Stützen';
 
   @override
@@ -1286,6 +1312,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get me269e51359 => 'Artikel prüfen';
 
   @override
+  String get m87cb1172f2 => 'Verbindung prüfen';
+
+  @override
   String get mfa4af9bbe7 => 'Kompatibilität prüfen';
 
   @override
@@ -1425,6 +1454,9 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get ma50190234a => 'Eigene...';
+
+  @override
+  String get ma59f85739f => 'Verbindung mit dem geöffneten PoB-Build bestätigt';
 
   @override
   String get m7434b2e81b => 'Nach links bewegen';

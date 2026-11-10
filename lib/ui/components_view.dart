@@ -6,6 +6,7 @@ import '../domain/component.dart';
 import 'core/panels.dart';
 import 'core/spark_art.dart';
 import 'core/spark_theme.dart';
+import 'pob_bridge_dialog.dart';
 import 'workshop_cubit.dart';
 
 class ComponentsView extends StatelessWidget {
@@ -66,6 +67,7 @@ class ComponentsView extends StatelessWidget {
                 : model.rollback,
             child: const AppText('Вернуть предыдущую пару'),
           ),
+          if (model.pobWindow.supported) _BridgeSetupButton(model),
         ],
       ),
       const SizedBox(height: 24),
@@ -93,6 +95,22 @@ class ComponentsView extends StatelessWidget {
       ),
     ],
   );
+}
+
+class _BridgeSetupButton extends StatelessWidget {
+  const _BridgeSetupButton(this.model);
+  final WorkshopCubit model;
+
+  @override
+  Widget build(BuildContext context) {
+    final mcp = model.components.active[Component.mcp];
+    return OutlinedButton(
+      onPressed: model.state.busy || mcp == null
+          ? null
+          : () => showPobBridgeSetup(context, model.pobWindow, mcp),
+      child: const AppText('Настроить мост PoB'),
+    );
+  }
 }
 
 class _Component extends StatelessWidget {

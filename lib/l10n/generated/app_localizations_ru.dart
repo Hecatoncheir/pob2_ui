@@ -91,6 +91,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get mb8ddc14d08 => 'PoB не вернул корректную ссылку поиска';
 
   @override
+  String get m62db50eb37 => 'PoB не найден. Выберите папку с приложением.';
+
+  @override
   String get m3127345008 => 'XML больше 16 МБ';
 
   @override
@@ -275,7 +278,13 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m2ac910bfb3 => 'Выберите класс';
 
   @override
+  String get m25511c66c8 => 'Выберите папку с приложением PoB для PoE 2';
+
+  @override
   String get m0513479f74 => 'Выберите умение для подбора поддержек';
+
+  @override
+  String get m5d67586b4c => 'Выберите установку PoB';
 
   @override
   String get m2749913680 => 'Выберите характеристику и нажмите «Найти».';
@@ -297,6 +306,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get m38aa0ac1ff => 'Выбрать';
+
+  @override
+  String get m88d4b06d56 => 'Выбрать папку';
 
   @override
   String get m4cb6a01a0e => 'Выбрать путь';
@@ -585,6 +597,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m5da5bd2f47 => 'Локальная связь интерфейса с расчётами';
 
   @override
+  String get mba18ba5922 => 'Локальный мост PoB';
+
+  @override
   String get mab7d96eb1a => 'Любая база';
 
   @override
@@ -616,6 +631,10 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get m16d1252699 => 'Молния';
+
+  @override
+  String get m4519c7e6f1 =>
+      'Мост установлен. Перезапустите PoB, откройте сборку и проверьте связь.';
 
   @override
   String get m204751ca09 => 'НЕДАВНИЕ';
@@ -670,6 +689,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get m8823a786b9 => 'Настроить компоненты';
+
+  @override
+  String get m9a92ce1cef => 'Настроить мост PoB';
 
   @override
   String get m985b5e0f2c => 'Настройки';
@@ -1117,6 +1139,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m538d913ee0 => 'Подключить Lua';
 
   @override
+  String get m80cc1bdb9b => 'Подключить мост';
+
+  @override
   String get m5f5155bb1f => 'Подходящие поддержки';
 
   @override
@@ -1265,6 +1290,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get me269e51359 => 'Проверить предмет';
 
   @override
+  String get m87cb1172f2 => 'Проверить связь';
+
+  @override
   String get mfa4af9bbe7 => 'Проверить совместимость';
 
   @override
@@ -1400,6 +1428,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get ma50190234a => 'Свои…';
+
+  @override
+  String get ma59f85739f => 'Связь с открытой сборкой PoB подтверждена';
 
   @override
   String get m7434b2e81b => 'Сдвинуть влево';

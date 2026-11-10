@@ -16,11 +16,16 @@ class McpClient {
   void Function(Object)? onDisconnected;
 
   Future<void> connect(Installations pair) =>
-      _connect(pair[Component.mcp]!, pob: pair[Component.pob]!);
+      _connect(pair[Component.mcp]!, 'engine', pair[Component.pob]!.directory);
 
-  Future<void> connectToPobWindow(Installation mcp) => _connect(mcp);
+  Future<void> connectToPobWindow(Installation mcp, {String? directory}) =>
+      _connect(mcp, 'app', directory);
 
-  Future<void> _connect(Installation mcp, {Installation? pob}) async {
+  Future<void> _connect(
+    Installation mcp,
+    String mode,
+    String? pobDirectory,
+  ) async {
     await close();
     final python = await ProcessService().python();
     final process = await Process.start(python, [
@@ -29,8 +34,8 @@ class McpClient {
       'run.py',
       'serve',
       '--mode',
-      pob == null ? 'app' : 'engine',
-      if (pob != null) ...['--pob-dir', pob.directory],
+      mode,
+      if (pobDirectory != null) ...['--pob-dir', pobDirectory],
     ], workingDirectory: mcp.directory);
     _process = process;
     diagnostics.clear();

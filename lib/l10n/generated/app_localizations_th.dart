@@ -91,6 +91,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get mb8ddc14d08 => 'PoB ไม่ได้ส่งคืนลิงก์การค้นหาที่ถูกต้อง';
 
   @override
+  String get m62db50eb37 => 'ไม่พบ PoB โปรดเลือกโฟลเดอร์แอป';
+
+  @override
   String get m3127345008 => 'XML มากกว่า 16 MB';
 
   @override
@@ -274,7 +277,13 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m2ac910bfb3 => 'เลือกคลาส';
 
   @override
+  String get m25511c66c8 => 'เลือกโฟลเดอร์ PoB สำหรับ PoE 2';
+
+  @override
   String get m0513479f74 => 'เลือกทักษะเพื่อเลือกการสนับสนุน';
+
+  @override
+  String get m5d67586b4c => 'เลือกการติดตั้ง PoB';
 
   @override
   String get m2749913680 => 'เลือกคุณสมบัติแล้วคลิกค้นหา';
@@ -297,6 +306,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m38aa0ac1ff => 'เลือก';
+
+  @override
+  String get m88d4b06d56 => 'เลือกโฟลเดอร์';
 
   @override
   String get m4cb6a01a0e => 'เลือกเส้นทาง';
@@ -583,6 +595,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m5da5bd2f47 => 'การเชื่อมต่ออินเทอร์เฟซท้องถิ่นพร้อมการคำนวณ';
 
   @override
+  String get mba18ba5922 => 'บริดจ์ PoB ในเครื่อง';
+
+  @override
   String get mab7d96eb1a => 'ฐานใดก็ได้';
 
   @override
@@ -614,6 +629,10 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m16d1252699 => 'สายฟ้า';
+
+  @override
+  String get m4519c7e6f1 =>
+      'ติดตั้งบริดจ์แล้ว เริ่ม PoB ใหม่ เปิดบิลด์แล้วตรวจสอบการเชื่อมต่อ';
 
   @override
   String get m204751ca09 => 'ล่าสุด';
@@ -667,6 +686,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m8823a786b9 => 'กำหนดค่าส่วนประกอบ';
+
+  @override
+  String get m9a92ce1cef => 'ตั้งค่าบริดจ์ PoB';
 
   @override
   String get m985b5e0f2c => 'การตั้งค่า';
@@ -1110,6 +1132,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m538d913ee0 => 'เชื่อมต่อ Lua';
 
   @override
+  String get m80cc1bdb9b => 'เชื่อมต่อบริดจ์';
+
+  @override
   String get m5f5155bb1f => 'รองรับการจับคู่';
 
   @override
@@ -1257,6 +1282,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get me269e51359 => 'ตรวจสอบรายการ';
 
   @override
+  String get m87cb1172f2 => 'ตรวจสอบการเชื่อมต่อ';
+
+  @override
   String get mfa4af9bbe7 => 'ตรวจสอบความเข้ากันได้';
 
   @override
@@ -1390,6 +1418,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get ma50190234a => 'เป็นเจ้าของ...';
+
+  @override
+  String get ma59f85739f => 'ยืนยันการเชื่อมต่อกับบิลด์ที่เปิดใน PoB แล้ว';
 
   @override
   String get m7434b2e81b => 'เลื่อนไปทางซ้าย';

@@ -91,6 +91,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get mb8ddc14d08 => 'PoB did not return the correct search link';
 
   @override
+  String get m62db50eb37 => 'PoB was not found. Choose its application folder.';
+
+  @override
   String get m3127345008 => 'XML more than 16 MB';
 
   @override
@@ -275,7 +278,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m2ac910bfb3 => 'Select class';
 
   @override
+  String get m25511c66c8 => 'Choose the PoB application folder for PoE 2';
+
+  @override
   String get m0513479f74 => 'Select a skill to select supports';
+
+  @override
+  String get m5d67586b4c => 'Choose a PoB installation';
 
   @override
   String get m2749913680 => 'Select a characteristic and click Find.';
@@ -298,6 +307,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get m38aa0ac1ff => 'Select';
+
+  @override
+  String get m88d4b06d56 => 'Choose folder';
 
   @override
   String get m4cb6a01a0e => 'Choose a path';
@@ -584,6 +596,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m5da5bd2f47 => 'Local interface connection with calculations';
 
   @override
+  String get mba18ba5922 => 'Local PoB bridge';
+
+  @override
   String get mab7d96eb1a => 'Any base';
 
   @override
@@ -615,6 +630,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get m16d1252699 => 'Lightning';
+
+  @override
+  String get m4519c7e6f1 =>
+      'Bridge installed. Restart PoB, open a build and check the connection.';
 
   @override
   String get m204751ca09 => 'RECENT';
@@ -669,6 +688,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get m8823a786b9 => 'Configure components';
+
+  @override
+  String get m9a92ce1cef => 'Set up PoB bridge';
 
   @override
   String get m985b5e0f2c => 'Settings';
@@ -1115,6 +1137,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m538d913ee0 => 'Connect Lua';
 
   @override
+  String get m80cc1bdb9b => 'Connect bridge';
+
+  @override
   String get m5f5155bb1f => 'Matching supports';
 
   @override
@@ -1263,6 +1288,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get me269e51359 => 'Check item';
 
   @override
+  String get m87cb1172f2 => 'Check connection';
+
+  @override
   String get mfa4af9bbe7 => 'Check compatibility';
 
   @override
@@ -1396,6 +1424,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get ma50190234a => 'Own...';
+
+  @override
+  String get ma59f85739f => 'Connected to the open PoB build';
 
   @override
   String get m7434b2e81b => 'Move left';

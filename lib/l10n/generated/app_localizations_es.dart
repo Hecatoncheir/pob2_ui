@@ -91,6 +91,10 @@ class AppLocalizationsEs extends AppLocalizations {
   String get mb8ddc14d08 => 'PoB no devolvió el enlace de búsqueda correcto';
 
   @override
+  String get m62db50eb37 =>
+      'No se encontró PoB. Elige la carpeta de la aplicación.';
+
+  @override
   String get m3127345008 => 'XML más de 16 MB';
 
   @override
@@ -275,8 +279,14 @@ class AppLocalizationsEs extends AppLocalizations {
   String get m2ac910bfb3 => 'Seleccionar clase';
 
   @override
+  String get m25511c66c8 => 'Elige la carpeta de PoB para PoE 2';
+
+  @override
   String get m0513479f74 =>
       'Selecciona una habilidad para seleccionar soportes';
+
+  @override
+  String get m5d67586b4c => 'Elige una instalación de PoB';
 
   @override
   String get m2749913680 =>
@@ -300,6 +310,9 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get m38aa0ac1ff => 'Seleccionar';
+
+  @override
+  String get m88d4b06d56 => 'Elegir carpeta';
 
   @override
   String get m4cb6a01a0e => 'Elige una ruta';
@@ -591,6 +604,9 @@ class AppLocalizationsEs extends AppLocalizations {
   String get m5da5bd2f47 => 'Conexión de interfaz local con cálculos';
 
   @override
+  String get mba18ba5922 => 'Puente local de PoB';
+
+  @override
   String get mab7d96eb1a => 'Cualquier base';
 
   @override
@@ -622,6 +638,10 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get m16d1252699 => 'Rayo';
+
+  @override
+  String get m4519c7e6f1 =>
+      'Puente instalado. Reinicia PoB, abre una configuración y comprueba la conexión.';
 
   @override
   String get m204751ca09 => 'RECIENTE';
@@ -676,6 +696,9 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get m8823a786b9 => 'Configurar componentes';
+
+  @override
+  String get m9a92ce1cef => 'Configurar el puente de PoB';
 
   @override
   String get m985b5e0f2c => 'Configuración';
@@ -1129,6 +1152,9 @@ class AppLocalizationsEs extends AppLocalizations {
   String get m538d913ee0 => 'Conectar Lua';
 
   @override
+  String get m80cc1bdb9b => 'Conectar el puente';
+
+  @override
   String get m5f5155bb1f => 'Soportes a juego';
 
   @override
@@ -1278,6 +1304,9 @@ class AppLocalizationsEs extends AppLocalizations {
   String get me269e51359 => 'Verificar artículo';
 
   @override
+  String get m87cb1172f2 => 'Comprobar conexión';
+
+  @override
   String get mfa4af9bbe7 => 'Comprobar compatibilidad';
 
   @override
@@ -1416,6 +1445,10 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get ma50190234a => 'Propia...';
+
+  @override
+  String get ma59f85739f =>
+      'Conexión confirmada con la configuración abierta en PoB';
 
   @override
   String get m7434b2e81b => 'Mover a la izquierda';
