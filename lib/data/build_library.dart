@@ -6,7 +6,20 @@ import '../domain/build_report.dart';
 import '../domain/library_entry.dart';
 import 'atomic_text_file.dart';
 
-class BuildLibrary {
+abstract interface class BuildStorage {
+  String newId();
+  Future<LibraryState> load();
+  Future<LibraryState> save(
+    LibraryState state,
+    BuildReport report,
+    String xml, {
+    String? title,
+  });
+  Future<LibraryState> remove(LibraryState state, String id);
+  Future<String> read(String id);
+}
+
+class BuildLibrary implements BuildStorage {
   BuildLibrary(Directory data, {AtomicTextFile? files})
     : root = Directory.fromUri(data.uri.resolve('builds/')),
       files = files ?? AtomicTextFile();

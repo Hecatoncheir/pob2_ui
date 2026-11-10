@@ -7,7 +7,7 @@ typedef NotesState = ({String text, bool loading, bool saving, String? error});
 class NotesCubit extends Cubit<NotesState> {
   NotesCubit(this.repository, this.id)
     : super((text: '', loading: true, saving: false, error: null));
-  final SessionRepository repository;
+  final BuildNotesStorage repository;
   final String id;
   int _generation = 0;
   bool _loaded = false;

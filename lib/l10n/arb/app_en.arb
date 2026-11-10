@@ -162,6 +162,11 @@
     "description": "PoB не найден. Выберите папку с приложением.",
     "placeholders": {}
   },
+  "m917bb579d9": "PoB did not report the path to the assembly folder.",
+  "@m917bb579d9": {
+    "description": "PoB не сообщил путь к папке сборок.",
+    "placeholders": {}
+  },
   "m3127345008": "XML more than 16 MB",
   "@m3127345008": {
     "description": "XML больше 16 МБ",
@@ -506,6 +511,16 @@
     "description": "Выберите папку с приложением PoB для PoE 2",
     "placeholders": {}
   },
+  "m4a02239801": "Select the Path of Building build folder.",
+  "@m4a02239801": {
+    "description": "Выберите папку сборок Path of Building.",
+    "placeholders": {}
+  },
+  "mb5cf5f66bc": "Select the same build folder as specified in the Path of Building.",
+  "@mb5cf5f66bc": {
+    "description": "Выберите ту же папку сборок, которая указана в Path of Building.",
+    "placeholders": {}
+  },
   "m0513479f74": "Select a skill to select supports",
   "@m0513479f74": {
     "description": "Выберите умение для подбора поддержек",
@@ -554,6 +569,11 @@
   "m88d4b06d56": "Choose folder",
   "@m88d4b06d56": {
     "description": "Выбрать папку",
+    "placeholders": {}
+  },
+  "md22f8aaed2": "Select PoB build folder",
+  "@md22f8aaed2": {
+    "description": "Выбрать папку сборок PoB",
     "placeholders": {}
   },
   "m4cb6a01a0e": "Choose a path",
@@ -1211,6 +1231,11 @@
     "description": "Найти камень",
     "placeholders": {}
   },
+  "m5f0d49d480": "Find folder across bridge",
+  "@m5f0d49d480": {
+    "description": "Найти папку через мост",
+    "placeholders": {}
+  },
   "m302605cf87": "Найти сборку",
   "@m302605cf87": {
     "description": "Найти сборку",
@@ -1559,6 +1584,11 @@
     "description": "Некорректный ключ кеша дерева",
     "placeholders": {}
   },
+  "mbfa40c4fb1": "Incorrect path to PoB assembly.",
+  "@mbfa40c4fb1": {
+    "description": "Некорректный путь к сборке PoB.",
+    "placeholders": {}
+  },
   "m4e15785017": "Incorrect size Lua runtime",
   "@m4e15785017": {
     "description": "Некорректный размер Lua runtime",
@@ -1724,6 +1754,11 @@
     "description": "Обновить",
     "placeholders": {}
   },
+  "m3d7df93803": "Update build list",
+  "@m3d7df93803": {
+    "description": "Обновить список сборок",
+    "placeholders": {}
+  },
   "mb2712dc98b": "Update PoB II",
   "@mb2712dc98b": {
     "description": "Обновление PoB II",
@@ -1771,6 +1806,11 @@
   "mdda947ef31": "Expected item description from Lua",
   "@mdda947ef31": {
     "description": "Ожидалось описание предмета из Lua",
+    "placeholders": {}
+  },
+  "mc3bde350c7": "Expected XML Path of Building builds for PoE 2.",
+  "@mc3bde350c7": {
+    "description": "Ожидался XML сборки Path of Building для PoE 2.",
     "placeholders": {}
   },
   "mbb08ba5f85": "Expected report from original Lua",
@@ -1900,6 +1940,20 @@
   "@m7352f28e7e": {
     "description": "Пакет больше ожидаемого размера",
     "placeholders": {}
+  },
+  "mcaef3568a0": "The PoB build folder has changed.",
+  "@mcaef3568a0": {
+    "description": "Папка сборок PoB изменилась.",
+    "placeholders": {}
+  },
+  "md9960887f8": "PoB build folder unavailable: {p0}",
+  "@md9960887f8": {
+    "description": "Папка сборок PoB недоступна: {p0}",
+    "placeholders": {
+      "p0": {
+        "type": "String"
+      }
+    }
   },
   "m1971cfb84c": "Passive",
   "@m1971cfb84c": {
@@ -2476,6 +2530,16 @@
     "description": "Сборка",
     "placeholders": {}
   },
+  "m15d7545f05": "PoB build is no longer available. Update the build list.",
+  "@m15d7545f05": {
+    "description": "Сборка PoB больше недоступна. Обновите список сборок.",
+    "placeholders": {}
+  },
+  "ma7f9ff6c14": "Build changed in PoB. Open it again to download the changes.",
+  "@ma7f9ff6c14": {
+    "description": "Сборка изменена в PoB. Откройте её заново, чтобы загрузить изменения.",
+    "placeholders": {}
+  },
   "m544bec7909": "The build will change after clicking \"Apply\"",
   "@m544bec7909": {
     "description": "Сборка изменится после нажатия «Применить»",
@@ -2489,6 +2553,11 @@
   "mc27d8aad03": "Assembly calculated by original Lua",
   "@mc27d8aad03": {
     "description": "Сборка рассчитана исходным Lua",
+    "placeholders": {}
+  },
+  "med0b7c459c": "An assembly with the same name already exists.",
+  "@med0b7c459c": {
+    "description": "Сборка с таким именем уже существует.",
     "placeholders": {}
   },
   "mae943799b7": "The build is saved in the library, but the recovery copy is not available: {p0}",
@@ -3080,6 +3149,11 @@
   "m902b19aeea": "This support does not match the selected skill",
   "@m902b19aeea": {
     "description": "Эта поддержка не подходит выбранному умению",
+    "placeholders": {}
+  },
+  "mdfa94e9fd6": "This assembly is already in the PoB library. Choose a different name for the copy.",
+  "@mdfa94e9fd6": {
+    "description": "Эта сборка уже есть в библиотеке PoB. Выберите другое имя для копии.",
     "placeholders": {}
   },
   "mca16b5fe71": "These settings affect build performance",

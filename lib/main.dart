@@ -9,6 +9,7 @@ import 'ui/app_update_cubit.dart';
 import 'data/component_repository.dart';
 import 'data/installation_store.dart';
 import 'data/mcp_client.dart';
+import 'data/pob_build_library.dart';
 import 'ui/app.dart';
 import 'ui/workshop_cubit.dart';
 import 'data/language_preferences.dart';
@@ -22,11 +23,11 @@ import 'ui/exit_protection.dart';
 
 Future<void> main(List<String> arguments) async {
   WidgetsFlutterBinding.ensureInitialized();
+  final root = InstallationStore.defaultRoot();
   final model = WorkshopCubit(
-    ComponentRepository(
-      store: InstallationStore(InstallationStore.defaultRoot()),
-    ),
+    ComponentRepository(store: InstallationStore(root)),
     McpClient(),
+    library: PobBuildLibrary(root),
   );
   final updates = AppUpdateCubit(root: model.components.store.root);
   final preferences = AppearanceRepository(model.components.store.root);

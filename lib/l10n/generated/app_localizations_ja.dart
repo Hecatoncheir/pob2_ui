@@ -106,6 +106,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m62db50eb37 => 'PoBが見つかりません。アプリのフォルダーを選択してください。';
 
   @override
+  String get m917bb579d9 => 'PoB はアセンブリ フォルダーへのパスを報告しませんでした。';
+
+  @override
   String get m3127345008 => 'XML 16 MB 以上';
 
   @override
@@ -298,6 +301,12 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m25511c66c8 => 'PoE 2用のPoBフォルダーを選択してください';
 
   @override
+  String get m4a02239801 => 'ビルド フォルダーのパスを選択します。';
+
+  @override
+  String get mb5cf5f66bc => 'ビルドのパスで指定したものと同じビルド フォルダーを選択します。';
+
+  @override
   String get m0513479f74 => 'スキルを選択してサポートを選択してください';
 
   @override
@@ -326,6 +335,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m88d4b06d56 => 'フォルダーを選択';
+
+  @override
+  String get md22f8aaed2 => 'PoB ビルド フォルダーの選択';
 
   @override
   String get m4cb6a01a0e => 'パスを選択してください';
@@ -714,6 +726,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m7d4ff2d217 => '宝石を検索';
 
   @override
+  String get m5f0d49d480 => '橋を渡ってフォルダを探す';
+
+  @override
   String get m302605cf87 => 'Найти сборку';
 
   @override
@@ -917,6 +932,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m7021e46018 => 'ツリー キャッシュ キーが正しくありません';
 
   @override
+  String get mbfa40c4fb1 => 'PoB アセンブリへのパスが正しくありません。';
+
+  @override
   String get m4e15785017 => 'サイズ Lua ランタイムが正しくありません';
 
   @override
@@ -1016,6 +1034,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m603e460bf5 => 'アップデート';
 
   @override
+  String get m3d7df93803 => 'ビルドリストを更新';
+
+  @override
   String get mb2712dc98b => 'アップデート PoB II';
 
   @override
@@ -1043,6 +1064,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get mdda947ef31 => 'Lua からのアイテム説明が必要です\n【m7ba6aa7f66】組立品';
+
+  @override
+  String get mc3bde350c7 => 'PoE 2 用のビルドの XML パスが予想されます。';
 
   @override
   String get mbb08ba5f85 => '元の Lua からの予想されるレポート';
@@ -1119,6 +1143,14 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m7352f28e7e => 'パケットが予想サイズより大きい';
+
+  @override
+  String get mcaef3568a0 => 'PoB ビルド フォルダーが変更されました。';
+
+  @override
+  String md9960887f8(String p0) {
+    return 'PoB ビルド フォルダーが利用できません: $p0';
+  }
 
   @override
   String get m1971cfb84c => 'パッシブ';
@@ -1462,6 +1494,12 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m8c39bb691b => 'アセンブリ';
 
   @override
+  String get m15d7545f05 => 'PoB ビルドは利用できなくなりました。ビルドリストを更新します。';
+
+  @override
+  String get ma7f9ff6c14 => 'PoB でビルドが変更されました。再度開いて変更をダウンロードします。';
+
+  @override
   String get m544bec7909 => '「適用」をクリックするとビルドが変更されます';
 
   @override
@@ -1469,6 +1507,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get mc27d8aad03 => 'オリジナルの Lua によって計算されたアセンブリ';
+
+  @override
+  String get med0b7c459c => '同じ名前のアセンブリがすでに存在します。';
 
   @override
   String mae943799b7(String p0) {
@@ -1822,6 +1863,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m902b19aeea => 'このサポートは選択されたスキルと一致しません';
+
+  @override
+  String get mdfa94e9fd6 => 'このアセンブリはすでに PoB ライブラリにあります。コピーに別の名前を選択します。';
 
   @override
   String get mca16b5fe71 => 'これらの設定はビルドのパフォーマンスに影響します';

@@ -6,9 +6,12 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
+import 'package:path/path.dart' as path;
+import 'package:xml/xml.dart';
 import 'package:pob2_ui/data/component_repository.dart';
 import 'package:pob2_ui/data/installation_store.dart';
 import 'package:pob2_ui/data/mcp_client.dart';
+import 'package:pob2_ui/data/pob_build_library.dart';
 import 'package:pob2_ui/data/appearance_repository.dart';
 import 'package:pob2_ui/domain/appearance.dart';
 import 'package:pob2_ui/domain/build_report.dart';
@@ -51,9 +54,15 @@ void main() {
       );
     }
     final dialogs = SelectedXmlFiles();
+    final builds = await Directory.fromUri(
+      root.uri.resolve('integration-pob-builds/'),
+    ).create();
+    final library = PobBuildLibrary(root);
+    await library.configure(builds.path);
     final model = WorkshopCubit(
       ComponentRepository(store: InstallationStore(root)),
       McpClient(),
+      library: library,
       files: XmlFileService(dialogs: dialogs),
     );
     addTearDown(model.close);
@@ -81,8 +90,8 @@ void main() {
     final life = model.state.report!.stats['Life'];
     expect(life, greaterThan(0));
     expect(model.state.document!.tree!.nodes.length, greaterThan(1000));
-    expect(model.state.document!.tree!.icons.length, greaterThan(100));
     expect(model.state.document!.tree!.iconError, isNull);
+    expect(model.state.document!.tree!.icons.length, greaterThan(100));
     await tester.pumpWidget(
       RepaintBoundary(
         key: const Key('review-image'),
@@ -119,6 +128,7 @@ void main() {
       'Файлы XML, отказ импорта и заметки',
       () => _fileWorkflow(model, dialogs, root),
     );
+    await _stage('Общая папка PoB', () => _sharedFolderWorkflow(model, builds));
     for (final tab in [
       'items',
       'skills',
@@ -170,7 +180,8 @@ Future<void> _fileWorkflow(
 ) async {
   final id = model.state.library.activeId!;
   final stats = model.state.report!.stats;
-  await model.session.saveNotes(id, 'Проверка заметок с настоящим Lua');
+  await model.buildNotes.readNotes(id);
+  await model.buildNotes.saveNotes(id, 'Проверка заметок с настоящим Lua');
   final file = File.fromUri(root.uri.resolve('Проверка файлового XML.xml'));
   dialogs.path = file.path;
   await model.saveXmlFile();
@@ -183,10 +194,48 @@ Future<void> _fileWorkflow(
   expect(model.state.error, isNull);
   expect(model.state.report!.stats, stats);
   expect(model.state.library.active!.title, 'Проверка файлового XML');
-  expect(await model.session.readNotes(id), 'Проверка заметок с настоящим Lua');
+  expect(
+    await model.buildNotes.readNotes(id),
+    'Проверка заметок с настоящим Lua',
+  );
+  expect(
+    await model.buildNotes.readNotes(model.state.library.activeId!),
+    'Проверка заметок с настоящим Lua',
+  );
+  final before = model.state.library.entries.length;
+  final active = model.state.library.activeId!;
+  dialogs.path = path.join(model.sharedLibrary!.directory!, active);
+  await model.openXmlFile();
+  expect(model.state.library.activeId, active);
+  expect(model.state.library.entries.length, before);
   await model.openBuild(id);
   await model.checkpoint();
   expect(model.state.report!.stats, stats);
+}
+
+Future<void> _sharedFolderWorkflow(
+  WorkshopCubit model,
+  Directory builds,
+) async {
+  final id = model.state.library.activeId!;
+  final original = File(path.join(builds.path, id));
+  final xml = await original.readAsString();
+  final document = XmlDocument.parse(xml);
+  document.rootElement.getElement('Build')!.setAttribute('level', '89');
+  final external = document.toXmlString();
+  await original.writeAsString(external, flush: true);
+  await model.refreshPobBuilds();
+  await model.renameBuild('Другая сборка');
+  expect(model.state.error, contains('Сборка изменена в PoB'));
+  expect(await original.readAsString(), external);
+  await model.openBuild(id);
+  expect(model.state.error, isNull);
+  expect(model.state.report!.level, 89);
+  expect(await original.readAsString(), external);
+  await model.buildNotes.readNotes(id);
+  await model.buildNotes.saveNotes(id, 'Заметка в общей папке');
+  expect(await original.readAsString(), contains('Заметка в общей папке'));
+  expect(model.state.library.activeId, id);
 }
 
 Future<void> _rejectBadFile(
@@ -634,6 +683,10 @@ Future<void> _searchAndAllocate(
     'limit': 50,
   });
   final target = jsonRows(candidates['entries']).first['id'] as int;
+  final file = File(
+    path.join(model.sharedLibrary!.directory!, model.state.library.activeId!),
+  );
+  final original = await file.readAsString();
   final node = tree.nodes.firstWhere((node) => node.id == target);
   await tester.enterText(find.byKey(const Key('tree-search')), '${node.id}');
   await tester.testTextInput.receiveAction(TextInputAction.done);
@@ -667,8 +720,15 @@ Future<void> _searchAndAllocate(
         .allocated,
     isTrue,
   );
+  expect(await file.readAsString(), isNot(original));
   await tester.tap(find.byKey(const Key('undo-build')));
   await _waitForIdle(tester, model);
+  expect(
+    XmlDocument.parse(await file.readAsString()).rootElement
+        .getElement('Tree')!
+        .toXmlString(),
+    XmlDocument.parse(original).rootElement.getElement('Tree')!.toXmlString(),
+  );
   expect(
     model.state.document!.tree!.nodes
         .firstWhere((entry) => entry.id == target)
@@ -677,6 +737,7 @@ Future<void> _searchAndAllocate(
   );
   await tester.tapAt(center);
   await _waitForIdle(tester, model);
+  await tester.pumpAndSettle();
   await tester.sendKeyDownEvent(LogicalKeyboardKey.controlLeft);
   await tester.sendKeyEvent(LogicalKeyboardKey.keyZ);
   await tester.sendKeyUpEvent(LogicalKeyboardKey.controlLeft);
@@ -734,4 +795,5 @@ Future<void> _waitForIdle(WidgetTester tester, WorkshopCubit model) async {
     await tester.pump(const Duration(milliseconds: 100));
   }
   expect(model.state.busy, isFalse);
+  expect(model.state.error, isNull);
 }

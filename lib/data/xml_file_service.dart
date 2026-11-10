@@ -34,7 +34,7 @@ class XmlFileService {
   final XmlFileDialogs dialogs;
   final AtomicTextFile files;
 
-  Future<({String xml, String title})?> open() async {
+  Future<({String xml, String title, String path})?> open() async {
     final path = await dialogs.open();
     if (path == null) return null;
     final file = File(path);
@@ -47,13 +47,19 @@ class XmlFileService {
     final title = name.toLowerCase().endsWith('.xml')
         ? name.substring(0, name.length - 4)
         : name;
-    return (xml: xml, title: title);
+    return (xml: xml, title: title, path: path);
   }
 
-  Future<String?> save(String xml, String title) async {
+  Future<String?> save(
+    String xml,
+    String title, {
+    Future<void> Function(File)? beforeSave,
+  }) async {
     final path = await dialogs.save(_suggestedName(title));
     if (path == null) return null;
-    await files.write(File(path), xml);
+    final file = File(path);
+    await beforeSave?.call(file);
+    await files.write(file, xml);
     return path;
   }
 

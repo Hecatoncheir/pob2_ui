@@ -1,7 +1,15 @@
 import 'dart:io';
 
 class AtomicTextFile {
-  Future<void> write(File target, String text, {bool backup = false}) async {
+  Future<void> write(File target, String text, {bool backup = false}) =>
+      writeChecked(target, text, backup: backup);
+
+  Future<void> writeChecked(
+    File target,
+    String text, {
+    bool backup = false,
+    Future<void> Function()? beforeReplace,
+  }) async {
     await target.parent.create(recursive: true);
     final temporary = File(
       '${target.path}.$pid-${DateTime.now().microsecondsSinceEpoch}.tmp',
@@ -11,6 +19,7 @@ class AtomicTextFile {
       if (backup && await target.exists()) {
         await target.copy('${target.path}.bak');
       }
+      await beforeReplace?.call();
       await temporary.rename(target.path);
     } finally {
       if (await temporary.exists()) await temporary.delete();

@@ -112,6 +112,10 @@ class AppLocalizationsFr extends AppLocalizations {
   String get m62db50eb37 => 'PoB est introuvable. Choisissez son dossier.';
 
   @override
+  String get m917bb579d9 =>
+      'PoB n\'a pas signalé le chemin d\'accès au dossier d\'assemblage.';
+
+  @override
   String get m3127345008 => 'XML plus de 16 Mo';
 
   @override
@@ -308,6 +312,14 @@ class AppLocalizationsFr extends AppLocalizations {
   String get m25511c66c8 => 'Choisissez le dossier de PoB pour PoE 2';
 
   @override
+  String get m4a02239801 =>
+      'Sélectionnez le dossier de construction Chemin du bâtiment.';
+
+  @override
+  String get mb5cf5f66bc =>
+      'Sélectionnez le même dossier de build que celui spécifié dans le chemin de construction.';
+
+  @override
   String get m0513479f74 =>
       'Sélectionnez une compétence pour sélectionner les supports';
 
@@ -339,6 +351,9 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get m88d4b06d56 => 'Choisir un dossier';
+
+  @override
+  String get md22f8aaed2 => 'Sélectionnez le dossier de construction PoB';
 
   @override
   String get m4cb6a01a0e => 'Choisissez un chemin';
@@ -743,6 +758,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get m7d4ff2d217 => 'Rechercher des gemmes';
 
   @override
+  String get m5f0d49d480 => 'Rechercher un dossier sur le pont';
+
+  @override
   String get m302605cf87 => 'Найти сборку';
 
   @override
@@ -947,6 +965,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get m7021e46018 => 'Clé de cache d\'arborescence incorrecte';
 
   @override
+  String get mbfa40c4fb1 => 'Chemin d\'accès incorrect à l\'assemblage PoB.';
+
+  @override
   String get m4e15785017 => 'Taille d\'exécution Lua incorrecte';
 
   @override
@@ -1053,6 +1074,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get m603e460bf5 => 'Mise à jour';
 
   @override
+  String get m3d7df93803 => 'Mettre à jour la liste de builds';
+
+  @override
   String get mb2712dc98b => 'Mise à jour PoB II';
 
   @override
@@ -1082,6 +1106,9 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get mdda947ef31 => 'Description de l\'élément attendue de Lua';
+
+  @override
+  String get mc3bde350c7 => 'Chemin de construction XML attendu pour PoE 2.';
 
   @override
   String get mbb08ba5f85 => 'Rapport attendu de l\'original Lua';
@@ -1158,6 +1185,14 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get m7352f28e7e => 'Paquet plus grand que la taille prévue';
+
+  @override
+  String get mcaef3568a0 => 'Le dossier de build PoB a changé.';
+
+  @override
+  String md9960887f8(String p0) {
+    return 'Dossier de build PoB indisponible : $p0';
+  }
 
   @override
   String get m1971cfb84c => 'Passif';
@@ -1513,6 +1548,14 @@ class AppLocalizationsFr extends AppLocalizations {
   String get m8c39bb691b => 'Assemblage';
 
   @override
+  String get m15d7545f05 =>
+      'La version PoB n\'est plus disponible. Mettez à jour la liste de build.';
+
+  @override
+  String get ma7f9ff6c14 =>
+      'Build modifié dans PoB. Ouvrez-le à nouveau pour télécharger les modifications.';
+
+  @override
   String get m544bec7909 =>
       'La build changera après avoir cliqué sur \"Appliquer\"';
 
@@ -1521,6 +1564,9 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get mc27d8aad03 => 'Assemblage calculé par l\'original Lua';
+
+  @override
+  String get med0b7c459c => 'Un assembly portant le même nom existe déjà.';
 
   @override
   String mae943799b7(String p0) {
@@ -1883,6 +1929,10 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get m902b19aeea =>
       'Ce support ne correspond pas à la compétence sélectionnée';
+
+  @override
+  String get mdfa94e9fd6 =>
+      'Cet assembly est déjà dans la bibliothèque PoB. Choisissez un autre nom pour la copie.';
 
   @override
   String get mca16b5fe71 =>

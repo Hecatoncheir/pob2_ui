@@ -3,7 +3,13 @@ import 'dart:io';
 import 'atomic_text_file.dart';
 import 'text_draft_store.dart';
 
-class SessionRepository {
+abstract interface class BuildNotesStorage {
+  Future<String> readNotes(String id);
+  Future<void> saveNotes(String id, String text);
+  Future<void> flushText();
+}
+
+class SessionRepository implements BuildNotesStorage {
   SessionRepository(this.root, {AtomicTextFile? files})
     : files = files ?? AtomicTextFile(),
       drafts = TextDraftStore(root, files: files);

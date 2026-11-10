@@ -14,6 +14,7 @@ import 'core/spark_theme.dart';
 import 'mcp_editor_cubit.dart';
 import 'mcp_editor_dialog.dart';
 import 'pob_character_dialog.dart';
+import 'pob_build_folder_actions.dart';
 import 'report_views.dart';
 import 'shell_cubit.dart';
 import 'tree_view.dart';
@@ -29,9 +30,7 @@ class WorkspaceView extends StatelessWidget {
     if (model.state.report == null)
       return EmptyPanel(
         title: 'Ваша следующая сборка',
-        message: model.engine.connected
-            ? 'Создайте персонажа или откройте XML из PoB. Все показатели рассчитает Lua.'
-            : 'Установите компоненты, чтобы открыть сборку и получить настоящий расчёт.',
+        message: _emptyMessage,
         action: _emptyActions(context),
       );
     return BlocListener<McpEditorCubit, McpEditorState>(
@@ -74,7 +73,16 @@ class WorkspaceView extends StatelessWidget {
     );
   }
 
+  String get _emptyMessage {
+    if (!model.buildFolderReady)
+      return 'Выберите ту же папку сборок, которая указана в Path of Building.';
+    return model.engine.connected
+        ? 'Создайте персонажа или откройте XML из PoB. Все показатели рассчитает Lua.'
+        : 'Установите компоненты, чтобы открыть сборку и получить настоящий расчёт.';
+  }
+
   Widget _emptyActions(BuildContext context) {
+    if (!model.buildFolderReady) return PobBuildFolderActions(model);
     if (!model.engine.connected)
       return FilledButton(
         onPressed: model.state.busy

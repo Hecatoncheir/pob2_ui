@@ -1,12 +1,13 @@
 name: pob2_ui
 description: "Независимый интерфейс PoB PoE2 с исходными расчётами Lua"
 publish_to: 'none'
-version: 0.1.16+17
+version: 0.1.17+18
 
 environment:
   sdk: ^3.13.7
 
 dependencies:
+  crypto: ^3.0.8
   file_selector: 1.1.0
   flutter:
     sdk: flutter
@@ -14,6 +15,8 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   intl: ^0.20.3
+  path: 1.9.1
+  xml: 7.1.0
 
 dev_dependencies:
   integration_test:

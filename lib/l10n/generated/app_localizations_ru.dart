@@ -108,6 +108,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m62db50eb37 => 'PoB не найден. Выберите папку с приложением.';
 
   @override
+  String get m917bb579d9 => 'PoB не сообщил путь к папке сборок.';
+
+  @override
   String get m3127345008 => 'XML больше 16 МБ';
 
   @override
@@ -301,6 +304,13 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m25511c66c8 => 'Выберите папку с приложением PoB для PoE 2';
 
   @override
+  String get m4a02239801 => 'Выберите папку сборок Path of Building.';
+
+  @override
+  String get mb5cf5f66bc =>
+      'Выберите ту же папку сборок, которая указана в Path of Building.';
+
+  @override
   String get m0513479f74 => 'Выберите умение для подбора поддержек';
 
   @override
@@ -329,6 +339,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get m88d4b06d56 => 'Выбрать папку';
+
+  @override
+  String get md22f8aaed2 => 'Выбрать папку сборок PoB';
 
   @override
   String get m4cb6a01a0e => 'Выбрать путь';
@@ -727,6 +740,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m7d4ff2d217 => 'Найти камень';
 
   @override
+  String get m5f0d49d480 => 'Найти папку через мост';
+
+  @override
   String get m302605cf87 => 'Найти сборку';
 
   @override
@@ -930,6 +946,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m7021e46018 => 'Некорректный ключ кеша дерева';
 
   @override
+  String get mbfa40c4fb1 => 'Некорректный путь к сборке PoB.';
+
+  @override
   String get m4e15785017 => 'Некорректный размер Lua runtime';
 
   @override
@@ -1031,6 +1050,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m603e460bf5 => 'Обновить';
 
   @override
+  String get m3d7df93803 => 'Обновить список сборок';
+
+  @override
   String get mb2712dc98b => 'Обновление PoB II';
 
   @override
@@ -1060,6 +1082,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get mdda947ef31 => 'Ожидалось описание предмета из Lua';
+
+  @override
+  String get mc3bde350c7 => 'Ожидался XML сборки Path of Building для PoE 2.';
 
   @override
   String get mbb08ba5f85 => 'Ожидался отчёт исходного Lua';
@@ -1136,6 +1161,14 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get m7352f28e7e => 'Пакет больше ожидаемого размера';
+
+  @override
+  String get mcaef3568a0 => 'Папка сборок PoB изменилась.';
+
+  @override
+  String md9960887f8(String p0) {
+    return 'Папка сборок PoB недоступна: $p0';
+  }
 
   @override
   String get m1971cfb84c => 'Пассивные';
@@ -1487,6 +1520,14 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m8c39bb691b => 'Сборка';
 
   @override
+  String get m15d7545f05 =>
+      'Сборка PoB больше недоступна. Обновите список сборок.';
+
+  @override
+  String get ma7f9ff6c14 =>
+      'Сборка изменена в PoB. Откройте её заново, чтобы загрузить изменения.';
+
+  @override
   String get m544bec7909 => 'Сборка изменится после нажатия «Применить»';
 
   @override
@@ -1494,6 +1535,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get mc27d8aad03 => 'Сборка рассчитана исходным Lua';
+
+  @override
+  String get med0b7c459c => 'Сборка с таким именем уже существует.';
 
   @override
   String mae943799b7(String p0) {
@@ -1851,6 +1895,10 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get m902b19aeea => 'Эта поддержка не подходит выбранному умению';
+
+  @override
+  String get mdfa94e9fd6 =>
+      'Эта сборка уже есть в библиотеке PoB. Выберите другое имя для копии.';
 
   @override
   String get mca16b5fe71 => 'Эти настройки влияют на показатели сборки';

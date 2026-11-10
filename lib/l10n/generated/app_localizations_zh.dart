@@ -106,6 +106,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m62db50eb37 => '找不到 PoB。請選擇應用程式資料夾。';
 
   @override
+  String get m917bb579d9 => 'PoB 未報告組件資料夾的路徑。';
+
+  @override
   String get m3127345008 => 'XML 超過 16 MB';
 
   @override
@@ -298,6 +301,12 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m25511c66c8 => '請選擇 PoE 2 的 PoB 應用程式資料夾';
 
   @override
+  String get m4a02239801 => '選擇建置建置資料夾的路徑。';
+
+  @override
+  String get mb5cf5f66bc => '選擇與建置路徑中指定的相同建置資料夾。';
+
+  @override
   String get m0513479f74 => '選擇技能選擇支援';
 
   @override
@@ -326,6 +335,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m88d4b06d56 => '選擇資料夾';
+
+  @override
+  String get md22f8aaed2 => '選擇 PoB 建置資料夾';
 
   @override
   String get m4cb6a01a0e => '選擇路徑';
@@ -713,6 +725,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m7d4ff2d217 => '搜尋寶石';
 
   @override
+  String get m5f0d49d480 => '跨橋查找資料夾';
+
+  @override
   String get m302605cf87 => 'Найти сборку';
 
   @override
@@ -915,6 +930,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m7021e46018 => '樹快取鍵不正確';
 
   @override
+  String get mbfa40c4fb1 => 'PoB 組件的路徑不正確。';
+
+  @override
   String get m4e15785017 => '大小 Lua 運行時不正確';
 
   @override
@@ -1014,6 +1032,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m603e460bf5 => '更新';
 
   @override
+  String get m3d7df93803 => '更新建置列表';
+
+  @override
   String get mb2712dc98b => '更新PoB II';
 
   @override
@@ -1041,6 +1062,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get mdda947ef31 => '預期來自 Lua 的項目描述';
+
+  @override
+  String get mc3bde350c7 => '預計為 PoE 2 所建構的建置路徑為 XML。';
 
   @override
   String get mbb08ba5f85 => '原始 Lua 的預期報告';
@@ -1117,6 +1141,14 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m7352f28e7e => '封包大於預期大小';
+
+  @override
+  String get mcaef3568a0 => 'PoB 建置資料夾已變更。';
+
+  @override
+  String md9960887f8(String p0) {
+    return 'PoB 建置資料夾不可用：$p0';
+  }
 
   @override
   String get m1971cfb84c => '被動';
@@ -1460,6 +1492,12 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m8c39bb691b => '裝配';
 
   @override
+  String get m15d7545f05 => 'PoB 建置不再可用。更新建置清單。';
+
+  @override
+  String get ma7f9ff6c14 => 'PoB 中的建置已變更。再次打開它以下載更改。';
+
+  @override
   String get m544bec7909 => '點選「應用」後建置將會發生變化';
 
   @override
@@ -1467,6 +1505,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get mc27d8aad03 => '由原始 Lua 計算的程序集';
+
+  @override
+  String get med0b7c459c => '已存在同名的組件。';
 
   @override
   String mae943799b7(String p0) {
@@ -1817,6 +1858,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m902b19aeea => '此支援與所選技能不匹配';
+
+  @override
+  String get mdfa94e9fd6 => '該組件已在 PoB 庫中。為副本選擇不同的名稱。';
 
   @override
   String get mca16b5fe71 => '這些設定會影響建置效能';
@@ -1952,6 +1996,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m62db50eb37 => '找不到 PoB。請選擇應用程式資料夾。';
 
   @override
+  String get m917bb579d9 => 'PoB 未報告組件資料夾的路徑。';
+
+  @override
   String get m3127345008 => 'XML 超過 16 MB';
 
   @override
@@ -2144,6 +2191,12 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m25511c66c8 => '請選擇 PoE 2 的 PoB 應用程式資料夾';
 
   @override
+  String get m4a02239801 => '選擇建置建置資料夾的路徑。';
+
+  @override
+  String get mb5cf5f66bc => '選擇與建置路徑中指定的相同建置資料夾。';
+
+  @override
   String get m0513479f74 => '選擇技能選擇支援';
 
   @override
@@ -2172,6 +2225,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m88d4b06d56 => '選擇資料夾';
+
+  @override
+  String get md22f8aaed2 => '選擇 PoB 建置資料夾';
 
   @override
   String get m4cb6a01a0e => '選擇路徑';
@@ -2559,6 +2615,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m7d4ff2d217 => '搜尋寶石';
 
   @override
+  String get m5f0d49d480 => '跨橋查找資料夾';
+
+  @override
   String get m302605cf87 => 'Найти сборку';
 
   @override
@@ -2761,6 +2820,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m7021e46018 => '樹快取鍵不正確';
 
   @override
+  String get mbfa40c4fb1 => 'PoB 組件的路徑不正確。';
+
+  @override
   String get m4e15785017 => '大小 Lua 運行時不正確';
 
   @override
@@ -2860,6 +2922,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m603e460bf5 => '更新';
 
   @override
+  String get m3d7df93803 => '更新建置列表';
+
+  @override
   String get mb2712dc98b => '更新PoB II';
 
   @override
@@ -2887,6 +2952,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get mdda947ef31 => '預期來自 Lua 的項目描述';
+
+  @override
+  String get mc3bde350c7 => '預計為 PoE 2 所建構的建置路徑為 XML。';
 
   @override
   String get mbb08ba5f85 => '原始 Lua 的預期報告';
@@ -2963,6 +3031,14 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m7352f28e7e => '封包大於預期大小';
+
+  @override
+  String get mcaef3568a0 => 'PoB 建置資料夾已變更。';
+
+  @override
+  String md9960887f8(String p0) {
+    return 'PoB 建置資料夾不可用：$p0';
+  }
 
   @override
   String get m1971cfb84c => '被動';
@@ -3306,6 +3382,12 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m8c39bb691b => '裝配';
 
   @override
+  String get m15d7545f05 => 'PoB 建置不再可用。更新建置清單。';
+
+  @override
+  String get ma7f9ff6c14 => 'PoB 中的建置已變更。再次打開它以下載更改。';
+
+  @override
   String get m544bec7909 => '點選「應用」後建置將會發生變化';
 
   @override
@@ -3313,6 +3395,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get mc27d8aad03 => '由原始 Lua 計算的程序集';
+
+  @override
+  String get med0b7c459c => '已存在同名的組件。';
 
   @override
   String mae943799b7(String p0) {
@@ -3663,6 +3748,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m902b19aeea => '此支援與所選技能不匹配';
+
+  @override
+  String get mdfa94e9fd6 => '該組件已在 PoB 庫中。為副本選擇不同的名稱。';
 
   @override
   String get mca16b5fe71 => '這些設定會影響建置效能';

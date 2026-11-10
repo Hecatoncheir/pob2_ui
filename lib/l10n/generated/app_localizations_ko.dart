@@ -106,6 +106,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m62db50eb37 => 'PoB를 찾을 수 없습니다. 앱 폴더를 선택하세요.';
 
   @override
+  String get m917bb579d9 => 'PoB가 어셈블리 폴더 경로를 보고하지 않았습니다.';
+
+  @override
   String get m3127345008 => 'XML 16MB 이상';
 
   @override
@@ -298,6 +301,12 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m25511c66c8 => 'PoE 2용 PoB 폴더를 선택하세요';
 
   @override
+  String get m4a02239801 => '빌드 빌드 폴더 경로를 선택합니다.';
+
+  @override
+  String get mb5cf5f66bc => '빌드 경로에 지정된 것과 동일한 빌드 폴더를 선택합니다.';
+
+  @override
   String get m0513479f74 => '지원을 선택하려면 스킬을 선택하세요.';
 
   @override
@@ -326,6 +335,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m88d4b06d56 => '폴더 선택';
+
+  @override
+  String get md22f8aaed2 => 'PoB 빌드 폴더 선택';
 
   @override
   String get m4cb6a01a0e => '경로 선택';
@@ -714,6 +726,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m7d4ff2d217 => '보석 검색';
 
   @override
+  String get m5f0d49d480 => '다리 건너 폴더 찾기';
+
+  @override
   String get m302605cf87 => '나이티 сборку';
 
   @override
@@ -917,6 +932,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m7021e46018 => '잘못된 트리 캐시 키';
 
   @override
+  String get mbfa40c4fb1 => 'PoB 어셈블리 경로가 잘못되었습니다.';
+
+  @override
   String get m4e15785017 => '잘못된 크기의 Lua 런타임';
 
   @override
@@ -1016,6 +1034,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m603e460bf5 => '업데이트';
 
   @override
+  String get m3d7df93803 => '빌드 목록 업데이트';
+
+  @override
   String get mb2712dc98b => '업데이트 PoB II';
 
   @override
@@ -1043,6 +1064,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get mdda947ef31 => 'Lua에서 예상되는 항목 설명';
+
+  @override
+  String get mc3bde350c7 => 'PoE 2용 빌드 빌드의 예상 경로입니다.';
 
   @override
   String get mbb08ba5f85 => '원본에서 예상되는 보고서 Lua';
@@ -1119,6 +1143,14 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m7352f28e7e => '예상 크기보다 큰 패킷';
+
+  @override
+  String get mcaef3568a0 => 'PoB 빌드 폴더가 변경되었습니다.';
+
+  @override
+  String md9960887f8(String p0) {
+    return 'PoB 빌드 폴더를 사용할 수 없습니다: $p0';
+  }
 
   @override
   String get m1971cfb84c => '패시브';
@@ -1462,6 +1494,12 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m8c39bb691b => '조립';
 
   @override
+  String get m15d7545f05 => 'PoB 빌드를 더 이상 사용할 수 없습니다. 빌드 목록을 업데이트합니다.';
+
+  @override
+  String get ma7f9ff6c14 => 'PoB에서 빌드가 변경되었습니다. 다시 열어 변경 사항을 다운로드하세요.';
+
+  @override
   String get m544bec7909 => '\"적용\"을 클릭하면 빌드가 변경됩니다.';
 
   @override
@@ -1469,6 +1507,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get mc27d8aad03 => '원본으로 계산된 어셈블리 Lua';
+
+  @override
+  String get med0b7c459c => '동일한 이름의 어셈블리가 이미 존재합니다.';
 
   @override
   String mae943799b7(String p0) {
@@ -1822,6 +1863,10 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m902b19aeea => '이 지원은 선택한 스킬과 일치하지 않습니다.';
+
+  @override
+  String get mdfa94e9fd6 =>
+      '이 어셈블리는 이미 PoB 라이브러리에 있습니다. 복사본에 대해 다른 이름을 선택하십시오.';
 
   @override
   String get mca16b5fe71 => '이러한 설정은 빌드 성능에 영향을 미칩니다.';

@@ -12,6 +12,7 @@ import 'shell_cubit.dart';
 import 'workshop_cubit.dart';
 import 'build_notes_dialog.dart';
 import 'core/ui_translation.dart';
+import 'pob_build_folder_actions.dart';
 
 class LibraryView extends StatefulWidget {
   const LibraryView({super.key, required this.model, required this.shell});
@@ -23,6 +24,16 @@ class LibraryView extends StatefulWidget {
 
 class _LibraryViewState extends State<LibraryView> {
   String query = '';
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted && widget.model.sharedLibrary?.directory != null) {
+        widget.model.refreshPobBuilds();
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final model = widget.model;
@@ -45,7 +56,20 @@ class _LibraryViewState extends State<LibraryView> {
                   'Мои сборки',
                   subtitle: 'Идеи, к которым хочется вернуться',
                 ),
-                if (model.pobWindow.supported) ...[
+                if (widget.model.sharedLibrary != null) ...[
+                  PobBuildFolderActions(widget.model),
+                  if (widget.model.sharedLibrary?.directory
+                      case final directory?) ...[
+                    const SizedBox(height: 6),
+                    AppText(
+                      directory,
+                      localize: false,
+                      style: Theme.of(context).textTheme.bodySmall,
+                    ),
+                  ],
+                  const SizedBox(height: 12),
+                ],
+                if (model.buildFolderReady && model.pobWindow.supported) ...[
                   Wrap(
                     spacing: 10,
                     runSpacing: 8,
@@ -78,11 +102,13 @@ class _LibraryViewState extends State<LibraryView> {
           ),
         ),
         if (entries.isEmpty)
-          const SliverFillRemaining(
+          SliverFillRemaining(
             hasScrollBody: false,
             child: EmptyPanel(
               title: 'Здесь будут ваши сборки',
-              message: 'Создайте персонажа или откройте XML из PoB. Успешные расчёты сохраняются автоматически.',
+              message: widget.model.buildFolderReady
+                  ? 'Создайте персонажа или откройте XML из PoB. Успешные расчёты сохраняются автоматически.'
+                  : 'Выберите ту же папку сборок, которая указана в Path of Building.',
               art: 'components',
             ),
           ),

@@ -107,6 +107,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m62db50eb37 => 'ไม่พบ PoB โปรดเลือกโฟลเดอร์แอป';
 
   @override
+  String get m917bb579d9 => 'PoB ไม่ได้รายงานเส้นทางไปยังโฟลเดอร์แอสเซมบลี';
+
+  @override
   String get m3127345008 => 'XML มากกว่า 16 MB';
 
   @override
@@ -299,6 +302,13 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m25511c66c8 => 'เลือกโฟลเดอร์ PoB สำหรับ PoE 2';
 
   @override
+  String get m4a02239801 => 'เลือกโฟลเดอร์เส้นทางการสร้างอาคาร';
+
+  @override
+  String get mb5cf5f66bc =>
+      'เลือกโฟลเดอร์ build เดียวกันกับที่ระบุไว้ใน Path of Building';
+
+  @override
   String get m0513479f74 => 'เลือกทักษะเพื่อเลือกการสนับสนุน';
 
   @override
@@ -328,6 +338,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m88d4b06d56 => 'เลือกโฟลเดอร์';
+
+  @override
+  String get md22f8aaed2 => 'เลือกโฟลเดอร์บิลด์ PoB';
 
   @override
   String get m4cb6a01a0e => 'เลือกเส้นทาง';
@@ -721,6 +734,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m7d4ff2d217 => 'ค้นหาอัญมณี';
 
   @override
+  String get m5f0d49d480 => 'ค้นหาโฟลเดอร์ข้ามบริดจ์';
+
+  @override
   String get m302605cf87 => 'ไม่เป็นไร';
 
   @override
@@ -924,6 +940,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m7021e46018 => 'คีย์แคชแผนผังไม่ถูกต้อง';
 
   @override
+  String get mbfa40c4fb1 => 'เส้นทางไม่ถูกต้องไปยังชุดประกอบ PoB';
+
+  @override
   String get m4e15785017 => 'ขนาดรันไทม์ Lua ไม่ถูกต้อง';
 
   @override
@@ -1023,6 +1042,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m603e460bf5 => 'อัปเดต';
 
   @override
+  String get m3d7df93803 => 'อัปเดตรายการบิลด์';
+
+  @override
   String get mb2712dc98b => 'อัปเดต PoB II';
 
   @override
@@ -1052,6 +1074,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get mdda947ef31 => 'คำอธิบายรายการที่คาดหวังจาก Lua';
+
+  @override
+  String get mc3bde350c7 => 'คาดว่า XML Path of Building builds สำหรับ PoE 2';
 
   @override
   String get mbb08ba5f85 => 'รายงานที่คาดหวังจากต้นฉบับ Lua';
@@ -1128,6 +1153,14 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m7352f28e7e => 'แพ็กเก็ตมีขนาดใหญ่กว่าขนาดที่คาดไว้';
+
+  @override
+  String get mcaef3568a0 => 'โฟลเดอร์บิลด์ PoB มีการเปลี่ยนแปลง';
+
+  @override
+  String md9960887f8(String p0) {
+    return 'โฟลเดอร์บิลด์ PoB ไม่พร้อมใช้งาน: $p0';
+  }
 
   @override
   String get m1971cfb84c => 'เฉยๆ';
@@ -1473,6 +1506,14 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m8c39bb691b => 'การประกอบ';
 
   @override
+  String get m15d7545f05 =>
+      'PoB build ไม่พร้อมใช้งานอีกต่อไป อัพเดตรายการจัดสร้าง.';
+
+  @override
+  String get ma7f9ff6c14 =>
+      'บิลด์มีการเปลี่ยนแปลงใน PoB เปิดอีกครั้งเพื่อดาวน์โหลดการเปลี่ยนแปลง';
+
+  @override
   String get m544bec7909 => 'โครงสร้างจะเปลี่ยนไปหลังจากคลิก \"นำไปใช้\"';
 
   @override
@@ -1480,6 +1521,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get mc27d8aad03 => 'การประกอบคำนวณโดยต้นฉบับ Lua';
+
+  @override
+  String get med0b7c459c => 'มีแอสเซมบลีที่มีชื่อเดียวกันอยู่แล้ว';
 
   @override
   String mae943799b7(String p0) {
@@ -1835,6 +1879,10 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m902b19aeea => 'การสนับสนุนนี้ไม่ตรงกับทักษะที่เลือก';
+
+  @override
+  String get mdfa94e9fd6 =>
+      'แอสเซมบลีนี้มีอยู่ในไลบรารี PoB แล้ว เลือกชื่ออื่นสำหรับสำเนา';
 
   @override
   String get mca16b5fe71 => 'การตั้งค่าเหล่านี้ส่งผลต่อประสิทธิภาพของบิลด์';

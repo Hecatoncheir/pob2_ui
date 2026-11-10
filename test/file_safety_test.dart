@@ -40,6 +40,7 @@ void main() {
     await files.save('<build>Привет</build>', 'Сборка λ');
     dialogs.openPath = target.path;
     expect(await files.open(), (
+      path: target.path,
       xml: '<build>Привет</build>',
       title: 'Сборка λ',
     ));

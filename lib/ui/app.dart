@@ -269,7 +269,7 @@ class _KeyboardActions extends StatelessWidget {
   }
 
   void _import(BuildContext context) {
-    if (model.engine.connected && !model.state.busy)
+    if (model.engine.connected && model.buildFolderReady && !model.state.busy)
       showXmlImport(context, model);
   }
 
@@ -281,6 +281,10 @@ class _KeyboardActions extends StatelessWidget {
 
 void _new(BuildContext context, WorkshopCubit model, ShellCubit shell) {
   if (model.state.busy) return;
+  if (!model.buildFolderReady) {
+    shell.page(AppPage.library);
+    return;
+  }
   if (!model.engine.connected) {
     shell.page(AppPage.components);
     return;

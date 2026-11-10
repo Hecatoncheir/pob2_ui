@@ -160,6 +160,15 @@ class PobWindowRepository {
     };
   }
 
+  Future<String> buildDirectory(Installations components) async {
+    final response = await _windowTool(components, 'pob_get_build_directory');
+    return switch (response) {
+      {'directory': final String directory} when directory.isNotEmpty =>
+        directory,
+      _ => throw const FormatException('PoB не сообщил путь к папке сборок.'),
+    };
+  }
+
   Future<JsonMap> _windowTool(
     Installations components,
     String tool, [

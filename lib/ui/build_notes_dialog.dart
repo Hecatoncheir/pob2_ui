@@ -23,7 +23,7 @@ class _BuildNotesDialog extends StatefulWidget {
 }
 
 class _BuildNotesDialogState extends State<_BuildNotesDialog> {
-  late final notes = NotesCubit(widget.model.session, widget.id);
+  late final notes = NotesCubit(widget.model.buildNotes, widget.id);
   final controller = TextEditingController();
   bool _allowClose = false;
   bool _closing = false;
@@ -91,6 +91,11 @@ class _BuildNotesDialogState extends State<_BuildNotesDialog> {
           ),
         ),
         actions: [
+          if (state.error != null && widget.model.sharedLibrary != null)
+            TextButton(
+              onPressed: _discardAndClose,
+              child: const AppText('Отмена'),
+            ),
           TextButton(
             onPressed: () =>
                 Clipboard.setData(ClipboardData(text: controller.text)),
@@ -121,7 +126,18 @@ class _BuildNotesDialogState extends State<_BuildNotesDialog> {
     _closing = true;
     final saved = !notes.canEdit || await notes.flush();
     _closing = false;
-    if (!saved || !mounted) return;
+    if (saved) _closeDialog();
+  }
+
+  Future<void> _discardAndClose() async {
+    if (_closing) return;
+    _closing = true;
+    await widget.model.sharedLibrary!.discardNotes(widget.id);
+    _closeDialog();
+  }
+
+  void _closeDialog() {
+    if (!mounted) return;
     setState(() => _allowClose = true);
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (mounted) Navigator.of(context).pop();

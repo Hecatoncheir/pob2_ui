@@ -8,6 +8,7 @@ import '../data/mcp_client.dart';
 import '../data/mcp_editor_gateway.dart';
 import '../data/mcp_error_message.dart';
 import '../data/pob_window_repository.dart';
+import '../data/pob_build_library.dart';
 import '../data/session_repository.dart';
 import '../data/build_library.dart';
 import '../data/tree_icon_repository.dart';
@@ -32,7 +33,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     this.engine, {
     WorkshopState? initialState,
     SessionRepository? session,
-    BuildLibrary? library,
+    BuildStorage? library,
     XmlFileService? files,
     PobWindowRepository? pobWindow,
   }) : session = session ?? SessionRepository(components.store.root),
@@ -43,7 +44,13 @@ class WorkshopCubit extends Cubit<WorkshopState> {
   final ComponentRepository components;
   final McpClient engine;
   final SessionRepository session;
-  final BuildLibrary library;
+  final BuildStorage library;
+  PobBuildLibrary? get sharedLibrary =>
+      library is PobBuildLibrary ? library as PobBuildLibrary : null;
+  BuildNotesStorage get buildNotes =>
+      sharedLibrary ?? session as BuildNotesStorage;
+  bool get buildFolderReady =>
+      sharedLibrary == null || sharedLibrary?.directory != null;
   final XmlFileService files;
   final PobWindowRepository pobWindow;
   McpEditorCubit? _mcpEditor;
@@ -123,7 +130,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
 
   Future<void> initialize() => _run(() async {
     await components.load();
-    final builds = await library.load();
+    final builds = await _loadLibrary();
     final saved = !builds.skipSessionRecovery && await session.exists();
     final draft = await session.readDraft();
     _update(
@@ -138,6 +145,63 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     );
     await _resume();
   });
+
+  Future<LibraryState> _loadLibrary() async {
+    try {
+      return await library.load();
+    } on FileSystemException catch (error) {
+      if (sharedLibrary == null) rethrow;
+      addLog('Папка сборок PoB недоступна: $error');
+      return LibraryState(skipSessionRecovery: true);
+    }
+  }
+
+  Future<void> selectPobBuildFolder(String folder) =>
+      _run(() => _usePobBuildFolder(folder));
+
+  Future<void> detectPobBuildFolder() => _run(() async {
+    await _usePobBuildFolder(await pobWindow.buildDirectory(components.active));
+  });
+
+  Future<void> _usePobBuildFolder(String folder) async {
+    final shared = sharedLibrary;
+    if (shared == null) return;
+    await buildNotes.flushText();
+    final previous = shared.directory;
+    final builds = await shared.configure(folder);
+    final changed = previous != shared.directory;
+    _setSharedLibrary(builds, changingFolder: changed);
+    if (changed && engine.connected) await _resumeLibrary();
+  }
+
+  Future<void> refreshPobBuilds() => _run(() async {
+    final shared = sharedLibrary;
+    if (shared != null) _setSharedLibrary(await shared.scan());
+  });
+
+  void _setSharedLibrary(LibraryState scanned, {bool changingFolder = false}) {
+    final opened = changingFolder || state.report == null
+        ? null
+        : state.library.active;
+    final builds = opened == null
+        ? scanned
+        : LibraryState(
+            entries: [
+              opened,
+              ...scanned.entries.where((entry) => entry.id != opened.id),
+            ],
+            activeId: opened.id,
+            skipSessionRecovery: true,
+          );
+    _update(
+      state.copyWith(
+        library: builds,
+        clearReport: changingFolder,
+        sessionSaved: builds.active != null,
+      ),
+    );
+    if (changingFolder) _clearHistory();
+  }
 
   Future<void> checkUpdates() => _run(() async {
     final releases = <Component, Release>{};
@@ -179,7 +243,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     if (!ready) return;
     await _connect();
     if (await _resumeLibrary()) return;
-    if (state.library.skipSessionRecovery) return;
+    if (sharedLibrary != null || state.library.skipSessionRecovery) return;
     if (await session.exists()) {
       await _loadXml(await session.read());
       await _readReport(
@@ -194,8 +258,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     final active = state.library.active;
     if (active == null) return false;
     try {
-      await _loadXml(await library.read(active.id));
-      await _readReport();
+      await _openBuild(active.id);
       return true;
     } catch (error) {
       addLog(
@@ -283,6 +346,10 @@ class WorkshopCubit extends Cubit<WorkshopState> {
   Future<void> openXmlFile() => _run(() async {
     final selected = await files.open();
     if (selected == null) return;
+    if (sharedLibrary?.idForPath(selected.path) case final id?) {
+      await _openBuild(id);
+      return;
+    }
     await _switchBuild(
       () => _loadXml(selected.xml),
       target: LibraryState(entries: state.library.entries),
@@ -292,10 +359,11 @@ class WorkshopCubit extends Cubit<WorkshopState> {
 
   Future<void> saveXmlFile() => _run(() async {
     if (state.report == null) return;
-    await session.flushText();
+    await _flushText();
     final path = await files.save(
-      await _currentXml(),
+      await _savedXml(),
       state.library.active?.title ?? state.report!.name,
+      beforeSave: sharedLibrary?.checkExport,
     );
     if (path != null) _update(state.copyWith(status: 'XML сохранён'));
   });
@@ -322,10 +390,14 @@ class WorkshopCubit extends Cubit<WorkshopState> {
   Future<void> refreshReport() => _run(() async {
     if (state.report == null) return;
     _markStale();
-    await _readReport();
+    await _readReport(persist: sharedLibrary == null);
   });
 
   Future<void> restoreSession() => _run(() async {
+    if (sharedLibrary != null) {
+      await _resumeLibrary();
+      return;
+    }
     if (state.library.skipSessionRecovery) return;
     await _switchBuild(
       () async => _loadXml(await session.read()),
@@ -344,16 +416,24 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     return (report: report, xml: await _currentXml());
   }
 
-  Future<void> _readReport({LibraryState? target, String? title}) async {
+  Future<void> _readReport({
+    LibraryState? target,
+    String? title,
+    bool persist = true,
+  }) async {
     final (:report, :xml) = await _readResult();
     final (:tree, :error) = await _readTree();
-    final builds = await library.save(
-      target ?? state.library,
-      report,
-      xml,
-      title: title ?? _nextTitle,
-    );
-    final saved = await _saveRecovery(xml);
+    final builds = persist
+        ? await library.save(
+            target ?? state.library,
+            report,
+            xml,
+            title: title ?? _nextTitle,
+          )
+        : target ?? state.library;
+    final saved = sharedLibrary != null
+        ? builds.active != null
+        : await _saveRecovery(xml);
     _nextTitle = null;
     _update(
       state.copyWith(
@@ -426,15 +506,36 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     }
   }
 
-  Future<void> openBuild(String id) => _run(() async {
+  Future<void> openBuild(String id) => _run(() => _openBuild(id));
+
+  Future<void> _openBuild(String id) async {
+    final shared = sharedLibrary;
+    if (shared != null) {
+      final (:xml, :entry) = await shared.open(id);
+      await _switchBuild(
+        () => _loadXml(xml),
+        target: LibraryState(
+          entries: [
+            entry,
+            ...state.library.entries.where((item) => item.id != id),
+          ],
+          activeId: id,
+          skipSessionRecovery: true,
+        ),
+        persist: false,
+      );
+      await shared.activate(id);
+      return;
+    }
     final xml = await library.read(id);
     await _switchBuild(
       () => _loadXml(xml),
       target: LibraryState(entries: state.library.entries, activeId: id),
     );
-  });
+  }
 
   Future<void> deleteBuild(String id) => _run(() async {
+    await _flushText();
     final removedActive = state.library.activeId == id;
     final builds = await library.remove(state.library, id);
     _update(
@@ -452,15 +553,16 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     Future<void> Function() action, {
     required LibraryState target,
     String? title,
+    bool persist = true,
   }) async {
-    await session.flushText();
+    await _flushText();
     final previous = state.document;
     final previousLibrary = state.library;
     final xml = previous == null ? null : await _currentXml();
     _markStale();
     try {
       await action();
-      await _readReport(target: target, title: title);
+      await _readReport(target: target, title: title, persist: persist);
       _clearHistory();
     } catch (_) {
       _nextTitle = null;
@@ -498,9 +600,18 @@ class WorkshopCubit extends Cubit<WorkshopState> {
 
   Future<void> copyBuild() => _run(() async {
     if (state.report == null) return;
-    final xml = await _currentXml();
     final title =
         '${state.library.active?.title ?? state.report!.name} · копия';
+    if (sharedLibrary != null) {
+      final xml = await _savedXml();
+      await _switchBuild(
+        () => _loadXml(xml),
+        target: LibraryState(entries: state.library.entries),
+        title: title,
+      );
+      return;
+    }
+    final xml = await _currentXml();
     final id = library.newId();
     if (state.library.activeId case final source?) {
       await session.saveNotes(id, await session.readNotes(source));
@@ -736,7 +847,12 @@ class WorkshopCubit extends Cubit<WorkshopState> {
 
   Future<void> _recoverSnapshot(_BuildSnapshot snapshot) async {
     try {
-      await _restoreSnapshot(snapshot);
+      if (sharedLibrary != null) {
+        await _loadXml(snapshot.xml);
+        await _readReport(persist: false);
+      } else {
+        await _restoreSnapshot(snapshot);
+      }
     } catch (error) {
       _markStale();
       addLog('Не удалось восстановить состояние после ошибки: $error');
@@ -745,11 +861,19 @@ class WorkshopCubit extends Cubit<WorkshopState> {
 
   Future<String> _currentXml() => engine.exportBuildXml();
 
+  Future<String> _savedXml() async {
+    final xml = await _currentXml();
+    final id = state.library.activeId;
+    if (sharedLibrary case final shared? when id != null)
+      return shared.withCurrentNotes(id, xml);
+    return xml;
+  }
+
   Future<String?> exportXml() async {
     String? xml;
     await _run(() async {
       if (state.report == null) return;
-      xml = await _currentXml();
+      xml = await _savedXml();
     });
     return xml;
   }
@@ -782,7 +906,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
 
   Future<void> checkpoint({bool closePob = false}) => _protectExit(() async {
     await session.saveDraft(state.draftXml);
-    await session.flushText();
+    await _flushText();
     await _checkpointBuild();
     if (closePob) await pobWindow.closeLaunchedWindows();
   });
@@ -801,6 +925,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
   }
 
   Future<void> _checkpointBuild() async {
+    if (sharedLibrary != null) return;
     if (!engine.connected || state.report == null) return;
     if (state.document?.stale == true) {
       await _readReport();
@@ -808,10 +933,15 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     await session.save(await _currentXml());
   }
 
+  Future<void> _flushText() async {
+    await session.flushText();
+    if (sharedLibrary case final shared?) await shared.flushText();
+  }
+
   @override
   Future<void> close() async {
     await _mcpEditor?.close();
-    await session.flushText();
+    await _flushText();
     await engine.close();
     await super.close();
   }

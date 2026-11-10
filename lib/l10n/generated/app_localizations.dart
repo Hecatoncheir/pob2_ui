@@ -296,6 +296,12 @@ abstract class AppLocalizations {
   /// **'PoB was not found. Choose its application folder.'**
   String get m62db50eb37;
 
+  /// PoB не сообщил путь к папке сборок.
+  ///
+  /// In en, this message translates to:
+  /// **'PoB did not report the path to the assembly folder.'**
+  String get m917bb579d9;
+
   /// XML больше 16 МБ
   ///
   /// In en, this message translates to:
@@ -650,6 +656,18 @@ abstract class AppLocalizations {
   /// **'Choose the PoB application folder for PoE 2'**
   String get m25511c66c8;
 
+  /// Выберите папку сборок Path of Building.
+  ///
+  /// In en, this message translates to:
+  /// **'Select the Path of Building build folder.'**
+  String get m4a02239801;
+
+  /// Выберите ту же папку сборок, которая указана в Path of Building.
+  ///
+  /// In en, this message translates to:
+  /// **'Select the same build folder as specified in the Path of Building.'**
+  String get mb5cf5f66bc;
+
   /// Выберите умение для подбора поддержек
   ///
   /// In en, this message translates to:
@@ -709,6 +727,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Choose folder'**
   String get m88d4b06d56;
+
+  /// Выбрать папку сборок PoB
+  ///
+  /// In en, this message translates to:
+  /// **'Select PoB build folder'**
+  String get md22f8aaed2;
 
   /// Выбрать путь
   ///
@@ -1436,6 +1460,12 @@ abstract class AppLocalizations {
   /// **'Search gems'**
   String get m7d4ff2d217;
 
+  /// Найти папку через мост
+  ///
+  /// In en, this message translates to:
+  /// **'Find folder across bridge'**
+  String get m5f0d49d480;
+
   /// Найти сборку
   ///
   /// In en, this message translates to:
@@ -1773,6 +1803,12 @@ abstract class AppLocalizations {
   /// **'Incorrect tree cache key'**
   String get m7021e46018;
 
+  /// Некорректный путь к сборке PoB.
+  ///
+  /// In en, this message translates to:
+  /// **'Incorrect path to PoB assembly.'**
+  String get mbfa40c4fb1;
+
   /// Некорректный размер Lua runtime
   ///
   /// In en, this message translates to:
@@ -1971,6 +2007,12 @@ abstract class AppLocalizations {
   /// **'Update'**
   String get m603e460bf5;
 
+  /// Обновить список сборок
+  ///
+  /// In en, this message translates to:
+  /// **'Update build list'**
+  String get m3d7df93803;
+
   /// Обновление PoB II
   ///
   /// In en, this message translates to:
@@ -2024,6 +2066,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Expected item description from Lua'**
   String get mdda947ef31;
+
+  /// Ожидался XML сборки Path of Building для PoE 2.
+  ///
+  /// In en, this message translates to:
+  /// **'Expected XML Path of Building builds for PoE 2.'**
+  String get mc3bde350c7;
 
   /// Ожидался отчёт исходного Lua
   ///
@@ -2168,6 +2216,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Packet larger than expected size'**
   String get m7352f28e7e;
+
+  /// Папка сборок PoB изменилась.
+  ///
+  /// In en, this message translates to:
+  /// **'The PoB build folder has changed.'**
+  String get mcaef3568a0;
+
+  /// Папка сборок PoB недоступна: {p0}
+  ///
+  /// In en, this message translates to:
+  /// **'PoB build folder unavailable: {p0}'**
+  String md9960887f8(String p0);
 
   /// Пассивные
   ///
@@ -2811,6 +2871,18 @@ abstract class AppLocalizations {
   /// **'Assembly'**
   String get m8c39bb691b;
 
+  /// Сборка PoB больше недоступна. Обновите список сборок.
+  ///
+  /// In en, this message translates to:
+  /// **'PoB build is no longer available. Update the build list.'**
+  String get m15d7545f05;
+
+  /// Сборка изменена в PoB. Откройте её заново, чтобы загрузить изменения.
+  ///
+  /// In en, this message translates to:
+  /// **'Build changed in PoB. Open it again to download the changes.'**
+  String get ma7f9ff6c14;
+
   /// Сборка изменится после нажатия «Применить»
   ///
   /// In en, this message translates to:
@@ -2828,6 +2900,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Assembly calculated by original Lua'**
   String get mc27d8aad03;
+
+  /// Сборка с таким именем уже существует.
+  ///
+  /// In en, this message translates to:
+  /// **'An assembly with the same name already exists.'**
+  String get med0b7c459c;
 
   /// Сборка сохранена в библиотеке, но копия восстановления недоступна: {p0}
   ///
@@ -3500,6 +3578,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'This support does not match the selected skill'**
   String get m902b19aeea;
+
+  /// Эта сборка уже есть в библиотеке PoB. Выберите другое имя для копии.
+  ///
+  /// In en, this message translates to:
+  /// **'This assembly is already in the PoB library. Choose a different name for the copy.'**
+  String get mdfa94e9fd6;
 
   /// Эти настройки влияют на показатели сборки
   ///
