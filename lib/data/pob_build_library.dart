@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:crypto/crypto.dart';
 import 'package:path/path.dart' as path;
 import 'package:xml/xml.dart';
 
@@ -11,19 +12,29 @@ import 'build_library.dart';
 import 'pob_build_document.dart';
 import 'session_repository.dart';
 
-typedef _StoredBuild = ({
+typedef PobBuildVersion = ({
   LibraryEntry entry,
   String xml,
   PobBuildDocument document,
 });
 
+class PobBuildSaveConflict extends StateError {
+  PobBuildSaveConflict(this.copy)
+    : super(
+        'Сборка изменена в PoB. Правки PoB II сохранены отдельно: ${copy.title}',
+      );
+  final LibraryEntry copy;
+}
+
 class PobBuildLibrary implements BuildStorage, BuildNotesStorage {
   PobBuildLibrary(Directory profile)
     : _settings = File(path.join(profile.path, 'pob-builds.json')),
+      _recovery = Directory(path.join(profile.path, 'pob-build-recovery')),
       _legacy = BuildLibrary(profile),
       _legacySession = SessionRepository(profile);
 
   final File _settings;
+  final Directory _recovery;
   final BuildLibrary _legacy;
   final SessionRepository _legacySession;
   final _files = AtomicTextFile();
@@ -124,11 +135,16 @@ class PobBuildLibrary implements BuildStorage, BuildNotesStorage {
       throw FileSystemException('Папка сборок PoB изменилась.', root.path);
   }
 
-  Future<File> _file(Directory root, String id) async {
+  File _buildPath(Directory root, String id) {
     final file = File(path.normalize(path.join(root.path, id)));
     if (!_isBuild(file.path) || !path.isWithin(root.path, file.path)) {
       throw const FormatException('Некорректный путь к сборке PoB.');
     }
+    return file;
+  }
+
+  Future<File> _file(Directory root, String id) async {
+    final file = _buildPath(root, id);
     final parent = await file.parent.resolveSymbolicLinks();
     if (!path.equals(file.parent.path, parent)) {
       throw const FormatException('Некорректный путь к сборке PoB.');
@@ -140,8 +156,14 @@ class PobBuildLibrary implements BuildStorage, BuildNotesStorage {
     return file;
   }
 
-  Future<_StoredBuild> _readFile(Directory root, File file) async {
-    final xml = await file.readAsString();
+  Future<PobBuildVersion> _readFile(Directory root, File file) async =>
+      _version(root, file, await file.readAsString());
+
+  Future<PobBuildVersion> _version(
+    Directory root,
+    File file,
+    String xml,
+  ) async {
     final document = PobBuildDocument(xml);
     return (
       xml: xml,
@@ -164,10 +186,80 @@ class PobBuildLibrary implements BuildStorage, BuildNotesStorage {
     revision: document.revision,
   );
 
-  Future<({String xml, LibraryEntry entry})> open(String id) async {
+  Future<PobBuildVersion> open(String id) async {
     final root = _root;
-    final build = await _readFile(root, await _file(root, id));
-    return (xml: build.xml, entry: build.entry);
+    return _readFile(root, await _file(root, id));
+  }
+
+  Stream<FileSystemEvent> watchBuild(String id) async* {
+    if (!FileSystemEntity.isWatchSupported) return;
+    final file = _buildPath(_root, id);
+    yield* file.parent.watch().where((event) => _isBuildEvent(file, event));
+  }
+
+  bool _isBuildEvent(File file, FileSystemEvent event) {
+    if (path.equals(event.path, file.path)) return true;
+    if (path.equals(event.path, file.parent.path)) return true;
+    if (event case FileSystemMoveEvent(destination: final destination?)) {
+      return path.equals(destination, file.path);
+    }
+    return false;
+  }
+
+  Future<PobBuildVersion?> changed(String id, String? seenXml) async {
+    final root = _root;
+    try {
+      final file = await _file(root, id);
+      final xml = await file.readAsString();
+      return xml == seenXml ? null : await _version(root, file, xml);
+    } on FileSystemException {
+      return null;
+    } on StateError {
+      return null;
+    } on FormatException {
+      return null;
+    } on XmlException {
+      return null;
+    }
+  }
+
+  Future<LibraryEntry?> preserveLocal(PobBuildVersion disk) => _write(() async {
+    final file = await _file(_root, disk.entry.id);
+    return _preserveLocal(file, disk);
+  });
+
+  File _recoveryFile(File file) {
+    final key = sha256.convert(utf8.encode(path.canonicalize(file.path)));
+    return File(path.join(_recovery.path, '$key.xml'));
+  }
+
+  Future<LibraryEntry?> _preserveLocal(File file, PobBuildVersion disk) async {
+    final saved = _recoveryFile(file);
+    if (!await saved.exists()) return null;
+    final xml = await saved.readAsString();
+    final document = PobBuildDocument(xml);
+    if (document.revision == disk.entry.revision &&
+        document.notes == disk.document.notes) {
+      return null;
+    }
+    final copy = await _recoveryCopy(disk.entry, xml, document);
+    await saved.delete();
+    return copy;
+  }
+
+  Future<LibraryEntry> _recoveryCopy(
+    LibraryEntry source,
+    String xml,
+    PobBuildDocument document,
+  ) async {
+    final root = _root;
+    await _checkRoot(root);
+    final file = await _create(
+      root,
+      _stem('${source.title} · правки PoB II'),
+      xml,
+    );
+    return _entry(root, file, document, DateTime.now());
   }
 
   @override
@@ -264,9 +356,12 @@ class PobBuildLibrary implements BuildStorage, BuildNotesStorage {
     String xml,
     String? title,
   ) async {
-    final file = await _file(root, previous.id);
-    final current = await _readFile(root, file);
-    if (current.entry.revision != previous.revision) throw _conflict();
+    final file = _buildPath(root, previous.id);
+    final current = await changed(previous.id, null);
+    if (current == null || current.entry.revision != previous.revision) {
+      await _preserveAttempt(file, previous, xml, document);
+      throw _conflict();
+    }
     final updated = current.document.notes == document.notes
         ? xml
         : document.withNotes(current.document.notes);
@@ -274,9 +369,33 @@ class PobBuildLibrary implements BuildStorage, BuildNotesStorage {
       return _rename(file, current.xml, _stem(title), updated);
     }
     if (current.entry.revision != document.revision) {
-      await _replace(file, current.xml, updated);
+      await _saveLocal(file, current, updated);
     }
     return file;
+  }
+
+  Future<void> _preserveAttempt(
+    File file,
+    LibraryEntry previous,
+    String xml,
+    PobBuildDocument document,
+  ) async {
+    if (document.revision == previous.revision) return;
+    final saved = _recoveryFile(file);
+    final notes = await saved.exists()
+        ? PobBuildDocument(await saved.readAsString()).notes
+        : document.notes;
+    final contents = notes == document.notes ? xml : document.withNotes(notes);
+    throw PobBuildSaveConflict(
+      await _recoveryCopy(previous, contents, document),
+    );
+  }
+
+  Future<void> _saveLocal(File file, PobBuildVersion before, String xml) async {
+    await _preserveLocal(file, before);
+    // PoB может заменить общий XML сразу после нашей записи.
+    await _files.write(_recoveryFile(file), xml);
+    await _replace(file, before.xml, xml);
   }
 
   Future<File> _rename(
@@ -356,9 +475,8 @@ class PobBuildLibrary implements BuildStorage, BuildNotesStorage {
     if (await file.readAsString() != before) throw _conflict();
   }
 
-  StateError _conflict() => StateError(
-    'Сборка изменена в PoB. Откройте её заново, чтобы загрузить изменения.',
-  );
+  StateError _conflict() =>
+      StateError('Сборка изменилась на диске. Дождитесь обновления из PoB.');
 
   Future<void> _retire(File file, String before) async {
     await _check(file, before);
@@ -493,11 +611,16 @@ class PobBuildLibrary implements BuildStorage, BuildNotesStorage {
 
   Future<void> _saveNote(String id, String text) async {
     final file = await _file(_root, id);
-    final xml = await file.readAsString();
-    final document = PobBuildDocument(xml);
+    final current = await _readFile(_root, file);
+    final document = current.document;
     if (document.notes != _notes[id]) throw _conflict();
-    if (document.notes != text)
-      await _replace(file, xml, document.withNotes(text));
+    if (document.notes != text) {
+      await _saveLocal(
+        file,
+        current,
+        PobBuildDocument(current.xml).withNotes(text),
+      );
+    }
     _notes[id] = text;
   }
 }

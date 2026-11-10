@@ -163,7 +163,7 @@ void main() {
       ),
     );
     await tester.pumpAndSettle();
-  }, timeout: Timeout(Duration(minutes: Platform.isWindows ? 4 : 8)));
+  }, timeout: Timeout(Duration(minutes: Platform.isWindows ? 6 : 8)));
 }
 
 Future<void> _stage(String label, Future<void> Function() action) async {
@@ -223,14 +223,17 @@ Future<void> _sharedFolderWorkflow(
   final document = XmlDocument.parse(xml);
   document.rootElement.getElement('Build')!.setAttribute('level', '89');
   final external = document.toXmlString();
+  final updated = model.stream.firstWhere(
+    (state) => !state.busy && state.report?.level == 89,
+  );
   await original.writeAsString(external, flush: true);
-  await model.refreshPobBuilds();
-  await model.renameBuild('Другая сборка');
-  expect(model.state.error, contains('Сборка изменена в PoB'));
-  expect(await original.readAsString(), external);
-  await model.openBuild(id);
+  await updated.timeout(const Duration(seconds: 25));
   expect(model.state.error, isNull);
   expect(model.state.report!.level, 89);
+  final local = model.state.library.entries.singleWhere(
+    (entry) => entry.title.endsWith(' · правки PoB II'),
+  );
+  expect(await File(path.join(builds.path, local.id)).readAsString(), xml);
   expect(await original.readAsString(), external);
   await model.buildNotes.readNotes(id);
   await model.buildNotes.saveNotes(id, 'Заметка в общей папке');

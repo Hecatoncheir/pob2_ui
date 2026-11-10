@@ -350,6 +350,12 @@ abstract class AppLocalizations {
   /// **'{p0} · copy'**
   String m613198439d(String p0);
 
+  /// {p0} · правки PoB II
+  ///
+  /// In en, this message translates to:
+  /// **'{p0} · PoB II edits'**
+  String m2fb8d3ac27(String p0);
+
   /// {p0} · уровень {p1}
   ///
   /// In en, this message translates to:
@@ -2529,6 +2535,12 @@ abstract class AppLocalizations {
   /// **'Belt'**
   String get m51d2753a44;
 
+  /// Правки PoB II сохранены отдельно: {p0}
+  ///
+  /// In en, this message translates to:
+  /// **'PoB II edits saved separately: {p0}'**
+  String mdbe17974dd(String p0);
+
   /// Правки через MCP
   ///
   /// In en, this message translates to:
@@ -2877,11 +2889,17 @@ abstract class AppLocalizations {
   /// **'PoB build is no longer available. Update the build list.'**
   String get m15d7545f05;
 
-  /// Сборка изменена в PoB. Откройте её заново, чтобы загрузить изменения.
+  /// Сборка изменена в PoB. Правки PoB II сохранены отдельно: {p0}
   ///
   /// In en, this message translates to:
-  /// **'Build changed in PoB. Open it again to download the changes.'**
-  String get ma7f9ff6c14;
+  /// **'The build changed in PoB. PoB II edits saved separately: {p0}'**
+  String mee1bd6d18c(String p0);
+
+  /// Сборка изменилась на диске. Дождитесь обновления из PoB.
+  ///
+  /// In en, this message translates to:
+  /// **'The build changed on disk. Wait for the update from PoB.'**
+  String get m7806bb3683;
 
   /// Сборка изменится после нажатия «Применить»
   ///
@@ -2894,6 +2912,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Assembly not found'**
   String get m5c8bb47697;
+
+  /// Сборка обновлена из Path of Building
+  ///
+  /// In en, this message translates to:
+  /// **'Build updated from Path of Building'**
+  String get ma8f340d211;
 
   /// Сборка рассчитана исходным Lua
   ///

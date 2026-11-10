@@ -228,6 +228,15 @@
       }
     }
   },
+  "m2fb8d3ac27": "{p0} · PoB II edits",
+  "@m2fb8d3ac27": {
+    "description": "{p0} · правки PoB II",
+    "placeholders": {
+      "p0": {
+        "type": "String"
+      }
+    }
+  },
   "mbefa507d02": "{p0} · level {p1}",
   "@mbefa507d02": {
     "description": "{p0} · уровень {p1}",
@@ -2213,6 +2222,15 @@
     "description": "Пояс",
     "placeholders": {}
   },
+  "mdbe17974dd": "PoB II edits saved separately: {p0}",
+  "@mdbe17974dd": {
+    "description": "Правки PoB II сохранены отдельно: {p0}",
+    "placeholders": {
+      "p0": {
+        "type": "String"
+      }
+    }
+  },
   "m50c39b8e33": "Edits via MCP",
   "@m50c39b8e33": {
     "description": "Правки через MCP",
@@ -2535,9 +2553,18 @@
     "description": "Сборка PoB больше недоступна. Обновите список сборок.",
     "placeholders": {}
   },
-  "ma7f9ff6c14": "Build changed in PoB. Open it again to download the changes.",
-  "@ma7f9ff6c14": {
-    "description": "Сборка изменена в PoB. Откройте её заново, чтобы загрузить изменения.",
+  "mee1bd6d18c": "The build changed in PoB. PoB II edits saved separately: {p0}",
+  "@mee1bd6d18c": {
+    "description": "Сборка изменена в PoB. Правки PoB II сохранены отдельно: {p0}",
+    "placeholders": {
+      "p0": {
+        "type": "String"
+      }
+    }
+  },
+  "m7806bb3683": "The build changed on disk. Wait for the update from PoB.",
+  "@m7806bb3683": {
+    "description": "Сборка изменилась на диске. Дождитесь обновления из PoB.",
     "placeholders": {}
   },
   "m544bec7909": "The build will change after clicking \"Apply\"",
@@ -2548,6 +2575,11 @@
   "m5c8bb47697": "Assembly not found",
   "@m5c8bb47697": {
     "description": "Сборка не найдена",
+    "placeholders": {}
+  },
+  "ma8f340d211": "Build updated from Path of Building",
+  "@ma8f340d211": {
+    "description": "Сборка обновлена из Path of Building",
     "placeholders": {}
   },
   "mc27d8aad03": "Assembly calculated by original Lua",

@@ -140,6 +140,11 @@ class AppLocalizationsKo extends AppLocalizations {
   }
 
   @override
+  String m2fb8d3ac27(String p0) {
+    return '$p0 · PoB II 편집 내용';
+  }
+
+  @override
   String mbefa507d02(String p0, String p1) {
     return '$p0 · 레벨 $p1';
   }
@@ -1307,6 +1312,11 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m51d2753a44 => '벨트';
 
   @override
+  String mdbe17974dd(String p0) {
+    return 'PoB II 편집 내용을 별도로 저장했습니다: $p0';
+  }
+
+  @override
   String get m50c39b8e33 => 'MCP을 통한 수정';
 
   @override
@@ -1497,13 +1507,21 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m15d7545f05 => 'PoB 빌드를 더 이상 사용할 수 없습니다. 빌드 목록을 업데이트합니다.';
 
   @override
-  String get ma7f9ff6c14 => 'PoB에서 빌드가 변경되었습니다. 다시 열어 변경 사항을 다운로드하세요.';
+  String mee1bd6d18c(String p0) {
+    return 'PoB에서 빌드가 변경되었습니다. PoB II 편집 내용을 별도로 저장했습니다: $p0';
+  }
+
+  @override
+  String get m7806bb3683 => '디스크의 빌드가 변경되었습니다. PoB에서 업데이트될 때까지 기다리세요.';
 
   @override
   String get m544bec7909 => '\"적용\"을 클릭하면 빌드가 변경됩니다.';
 
   @override
   String get m5c8bb47697 => '어셈블리를 찾을 수 없습니다.';
+
+  @override
+  String get ma8f340d211 => 'Path of Building에서 빌드를 업데이트했습니다';
 
   @override
   String get mc27d8aad03 => '원본으로 계산된 어셈블리 Lua';

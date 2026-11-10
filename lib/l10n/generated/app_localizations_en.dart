@@ -143,6 +143,11 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String m2fb8d3ac27(String p0) {
+    return '$p0 · PoB II edits';
+  }
+
+  @override
   String mbefa507d02(String p0, String p1) {
     return '$p0 · level $p1';
   }
@@ -1327,6 +1332,11 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m51d2753a44 => 'Belt';
 
   @override
+  String mdbe17974dd(String p0) {
+    return 'PoB II edits saved separately: $p0';
+  }
+
+  @override
   String get m50c39b8e33 => 'Edits via MCP';
 
   @override
@@ -1520,14 +1530,22 @@ class AppLocalizationsEn extends AppLocalizations {
       'PoB build is no longer available. Update the build list.';
 
   @override
-  String get ma7f9ff6c14 =>
-      'Build changed in PoB. Open it again to download the changes.';
+  String mee1bd6d18c(String p0) {
+    return 'The build changed in PoB. PoB II edits saved separately: $p0';
+  }
+
+  @override
+  String get m7806bb3683 =>
+      'The build changed on disk. Wait for the update from PoB.';
 
   @override
   String get m544bec7909 => 'The build will change after clicking \"Apply\"';
 
   @override
   String get m5c8bb47697 => 'Assembly not found';
+
+  @override
+  String get ma8f340d211 => 'Build updated from Path of Building';
 
   @override
   String get mc27d8aad03 => 'Assembly calculated by original Lua';

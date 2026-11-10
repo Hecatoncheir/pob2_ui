@@ -147,6 +147,11 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
+  String m2fb8d3ac27(String p0) {
+    return '$p0 · modifications PoB II';
+  }
+
+  @override
   String mbefa507d02(String p0, String p1) {
     return '$p0 · niveau $p1';
   }
@@ -1354,6 +1359,11 @@ class AppLocalizationsFr extends AppLocalizations {
   String get m51d2753a44 => 'Ceinture';
 
   @override
+  String mdbe17974dd(String p0) {
+    return 'Modifications de PoB II enregistrées séparément : $p0';
+  }
+
+  @override
   String get m50c39b8e33 => 'Modifications via MCP';
 
   @override
@@ -1552,8 +1562,13 @@ class AppLocalizationsFr extends AppLocalizations {
       'La version PoB n\'est plus disponible. Mettez à jour la liste de build.';
 
   @override
-  String get ma7f9ff6c14 =>
-      'Build modifié dans PoB. Ouvrez-le à nouveau pour télécharger les modifications.';
+  String mee1bd6d18c(String p0) {
+    return 'Le build a changé dans PoB. Modifications de PoB II enregistrées séparément : $p0';
+  }
+
+  @override
+  String get m7806bb3683 =>
+      'Le build a changé sur le disque. Attendez la mise à jour depuis PoB.';
 
   @override
   String get m544bec7909 =>
@@ -1561,6 +1576,9 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get m5c8bb47697 => 'Assemblage introuvable';
+
+  @override
+  String get ma8f340d211 => 'Build mis à jour depuis Path of Building';
 
   @override
   String get mc27d8aad03 => 'Assemblage calculé par l\'original Lua';

@@ -142,6 +142,11 @@ class AppLocalizationsRu extends AppLocalizations {
   }
 
   @override
+  String m2fb8d3ac27(String p0) {
+    return '$p0 · правки PoB II';
+  }
+
+  @override
   String mbefa507d02(String p0, String p1) {
     return '$p0 · уровень $p1';
   }
@@ -1329,6 +1334,11 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m51d2753a44 => 'Пояс';
 
   @override
+  String mdbe17974dd(String p0) {
+    return 'Правки PoB II сохранены отдельно: $p0';
+  }
+
+  @override
   String get m50c39b8e33 => 'Правки через MCP';
 
   @override
@@ -1524,14 +1534,22 @@ class AppLocalizationsRu extends AppLocalizations {
       'Сборка PoB больше недоступна. Обновите список сборок.';
 
   @override
-  String get ma7f9ff6c14 =>
-      'Сборка изменена в PoB. Откройте её заново, чтобы загрузить изменения.';
+  String mee1bd6d18c(String p0) {
+    return 'Сборка изменена в PoB. Правки PoB II сохранены отдельно: $p0';
+  }
+
+  @override
+  String get m7806bb3683 =>
+      'Сборка изменилась на диске. Дождитесь обновления из PoB.';
 
   @override
   String get m544bec7909 => 'Сборка изменится после нажатия «Применить»';
 
   @override
   String get m5c8bb47697 => 'Сборка не найдена';
+
+  @override
+  String get ma8f340d211 => 'Сборка обновлена из Path of Building';
 
   @override
   String get mc27d8aad03 => 'Сборка рассчитана исходным Lua';

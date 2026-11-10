@@ -140,6 +140,11 @@ class AppLocalizationsZh extends AppLocalizations {
   }
 
   @override
+  String m2fb8d3ac27(String p0) {
+    return '$p0 · PoB II 的編輯';
+  }
+
+  @override
   String mbefa507d02(String p0, String p1) {
     return '$p0 · 級別 $p1';
   }
@@ -1305,6 +1310,11 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m51d2753a44 => '腰帶';
 
   @override
+  String mdbe17974dd(String p0) {
+    return 'PoB II 的編輯已另外儲存：$p0';
+  }
+
+  @override
   String get m50c39b8e33 => '通过 MCP 进行编辑';
 
   @override
@@ -1495,13 +1505,21 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m15d7545f05 => 'PoB 建置不再可用。更新建置清單。';
 
   @override
-  String get ma7f9ff6c14 => 'PoB 中的建置已變更。再次打開它以下載更改。';
+  String mee1bd6d18c(String p0) {
+    return '配置已在 PoB 中變更。PoB II 的編輯已另外儲存：$p0';
+  }
+
+  @override
+  String get m7806bb3683 => '磁碟上的配置已變更。請等待 PoB 的更新。';
 
   @override
   String get m544bec7909 => '點選「應用」後建置將會發生變化';
 
   @override
   String get m5c8bb47697 => '找不到程序集';
+
+  @override
+  String get ma8f340d211 => '已從 Path of Building 更新配置';
 
   @override
   String get mc27d8aad03 => '由原始 Lua 計算的程序集';
@@ -2030,6 +2048,11 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   }
 
   @override
+  String m2fb8d3ac27(String p0) {
+    return '$p0 · PoB II 的編輯';
+  }
+
+  @override
   String mbefa507d02(String p0, String p1) {
     return '$p0 · 級別 $p1';
   }
@@ -3195,6 +3218,11 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m51d2753a44 => '腰帶';
 
   @override
+  String mdbe17974dd(String p0) {
+    return 'PoB II 的編輯已另外儲存：$p0';
+  }
+
+  @override
   String get m50c39b8e33 => '通过 MCP 进行编辑';
 
   @override
@@ -3385,13 +3413,21 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m15d7545f05 => 'PoB 建置不再可用。更新建置清單。';
 
   @override
-  String get ma7f9ff6c14 => 'PoB 中的建置已變更。再次打開它以下載更改。';
+  String mee1bd6d18c(String p0) {
+    return '配置已在 PoB 中變更。PoB II 的編輯已另外儲存：$p0';
+  }
+
+  @override
+  String get m7806bb3683 => '磁碟上的配置已變更。請等待 PoB 的更新。';
 
   @override
   String get m544bec7909 => '點選「應用」後建置將會發生變化';
 
   @override
   String get m5c8bb47697 => '找不到程序集';
+
+  @override
+  String get ma8f340d211 => '已從 Path of Building 更新配置';
 
   @override
   String get mc27d8aad03 => '由原始 Lua 計算的程序集';

@@ -857,15 +857,16 @@ final uiExactTranslations = <String, String Function(AppLocalizations)>{
   "Сборка PoB больше недоступна. Обновите список сборок.": (l) => l.m15d7545f05,
   "PoB build is no longer available. Update the build list.": (l) =>
       l.m15d7545f05,
-  "Сборка изменена в PoB. Откройте её заново, чтобы загрузить изменения.": (
-    l,
-  ) => l.ma7f9ff6c14,
-  "Build changed in PoB. Open it again to download the changes.": (l) =>
-      l.ma7f9ff6c14,
+  "Сборка изменилась на диске. Дождитесь обновления из PoB.": (l) =>
+      l.m7806bb3683,
+  "The build changed on disk. Wait for the update from PoB.": (l) =>
+      l.m7806bb3683,
   "Сборка изменится после нажатия «Применить»": (l) => l.m544bec7909,
   "The build will change after clicking \"Apply\"": (l) => l.m544bec7909,
   "Сборка не найдена": (l) => l.m5c8bb47697,
   "Assembly not found": (l) => l.m5c8bb47697,
+  "Сборка обновлена из Path of Building": (l) => l.ma8f340d211,
+  "Build updated from Path of Building": (l) => l.ma8f340d211,
   "Сборка рассчитана исходным Lua": (l) => l.mc27d8aad03,
   "Assembly calculated by original Lua": (l) => l.mc27d8aad03,
   "Сборка с таким именем уже существует.": (l) => l.med0b7c459c,
@@ -1141,6 +1142,14 @@ final uiPatternTranslations = <UiRule>[
     (l, args) => l.mfc401e8783(args[0]),
   ),
   UiRule(
+    "Сборка изменена в PoB. Правки PoB II сохранены отдельно: {p0}",
+    (l, args) => l.mee1bd6d18c(args[0]),
+  ),
+  UiRule(
+    "The build changed in PoB. PoB II edits saved separately: {p0}",
+    (l, args) => l.mee1bd6d18c(args[0]),
+  ),
+  UiRule(
     "Рабочая сборка сохранена; не удалось восстановить Lua: {p0}",
     (l, args) => l.m0964e41783(args[0]),
   ),
@@ -1225,6 +1234,10 @@ final uiPatternTranslations = <UiRule>[
     (l, args) => l.m65a1b960c7(args[0]),
   ),
   UiRule(
+    "Правки PoB II сохранены отдельно: {p0}",
+    (l, args) => l.mdbe17974dd(args[0]),
+  ),
+  UiRule(
     "Не удалось прочитать изображения: {p0}",
     (l, args) => l.mfdddf71553(args[0]),
   ),
@@ -1255,6 +1268,10 @@ final uiPatternTranslations = <UiRule>[
   UiRule(
     "Source Lua connected · {p0} classes",
     (l, args) => l.m8b48ab31e9(args[0]),
+  ),
+  UiRule(
+    "PoB II edits saved separately: {p0}",
+    (l, args) => l.mdbe17974dd(args[0]),
   ),
   UiRule(
     "Не удалось прочитать каталог: {p0}",
@@ -1369,9 +1386,11 @@ final uiPatternTranslations = <UiRule>[
   UiRule("Runtime exceeded {p0}", (l, args) => l.m1a132e5834(args[0])),
   UiRule("Предупреждения: {p0}", (l, args) => l.m28ba7365b1(args[0])),
   UiRule("Доступна версия {p0}", (l, args) => l.m10b5bc7e91(args[0])),
+  UiRule("{p0} · правки PoB II", (l, args) => l.m2fb8d3ac27(args[0])),
   UiRule("MCP завершился. {p0}", (l, args) => l.m12e8f27f62(args[0])),
   UiRule("Загрузка: HTTP {p0}", (l, args) => l.m7ac5d410c5(args[0])),
   UiRule("До узла: {p0} очков", (l, args) => l.m8997ad5a89(args[0])),
+  UiRule("{p0} · PoB II edits", (l, args) => l.m2fb8d3ac27(args[0])),
   UiRule("{p0} points to node", (l, args) => l.m8997ad5a89(args[0])),
   UiRule("MCP has ended. {p0}", (l, args) => l.m12e8f27f62(args[0])),
   UiRule("Расчёт Lua · {p0}%", (l, args) => l.m33a38de9ff(args[0])),

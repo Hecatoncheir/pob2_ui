@@ -150,6 +150,11 @@ class AppLocalizationsDe extends AppLocalizations {
   }
 
   @override
+  String m2fb8d3ac27(String p0) {
+    return '$p0 · Änderungen aus PoB II';
+  }
+
+  @override
   String mbefa507d02(String p0, String p1) {
     return '$p0 · Level $p1';
   }
@@ -1356,6 +1361,11 @@ class AppLocalizationsDe extends AppLocalizations {
   String get m51d2753a44 => 'Gürtel';
 
   @override
+  String mdbe17974dd(String p0) {
+    return 'Änderungen aus PoB II separat gespeichert: $p0';
+  }
+
+  @override
   String get m50c39b8e33 => 'Bearbeitungen über MCP';
 
   @override
@@ -1554,8 +1564,13 @@ class AppLocalizationsDe extends AppLocalizations {
       'PoB-Build ist nicht mehr verfügbar. Aktualisieren Sie die Build-Liste.';
 
   @override
-  String get ma7f9ff6c14 =>
-      'Build in PoB geändert. Öffnen Sie es erneut, um die Änderungen herunterzuladen.';
+  String mee1bd6d18c(String p0) {
+    return 'Der Build wurde in PoB geändert. Änderungen aus PoB II separat gespeichert: $p0';
+  }
+
+  @override
+  String get m7806bb3683 =>
+      'Der Build wurde auf dem Datenträger geändert. Warte auf die Aktualisierung aus PoB.';
 
   @override
   String get m544bec7909 =>
@@ -1563,6 +1578,9 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get m5c8bb47697 => 'Baugruppe nicht gefunden';
+
+  @override
+  String get ma8f340d211 => 'Build aus Path of Building aktualisiert';
 
   @override
   String get mc27d8aad03 => 'Von Original Lua berechnete Baugruppe';

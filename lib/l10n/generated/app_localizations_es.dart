@@ -144,6 +144,11 @@ class AppLocalizationsEs extends AppLocalizations {
   }
 
   @override
+  String m2fb8d3ac27(String p0) {
+    return '$p0 · cambios de PoB II';
+  }
+
+  @override
   String mbefa507d02(String p0, String p1) {
     return '$p0 · nivel $p1';
   }
@@ -1347,6 +1352,11 @@ class AppLocalizationsEs extends AppLocalizations {
   String get m51d2753a44 => 'Cinturón';
 
   @override
+  String mdbe17974dd(String p0) {
+    return 'Cambios de PoB II guardados por separado: $p0';
+  }
+
+  @override
   String get m50c39b8e33 => 'Ediciones a través de MCP';
 
   @override
@@ -1545,8 +1555,13 @@ class AppLocalizationsEs extends AppLocalizations {
       'La compilación PoB ya no está disponible. Actualice la lista de compilación.';
 
   @override
-  String get ma7f9ff6c14 =>
-      'Compilación modificada en PoB. Ábralo nuevamente para descargar los cambios.';
+  String mee1bd6d18c(String p0) {
+    return 'La configuración cambió en PoB. Cambios de PoB II guardados por separado: $p0';
+  }
+
+  @override
+  String get m7806bb3683 =>
+      'La configuración cambió en el disco. Espera a que se actualice desde PoB.';
 
   @override
   String get m544bec7909 =>
@@ -1554,6 +1569,9 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get m5c8bb47697 => 'Conjunto no encontrado';
+
+  @override
+  String get ma8f340d211 => 'Configuración actualizada desde Path of Building';
 
   @override
   String get mc27d8aad03 => 'Ensamblaje calculado por el Lua original';

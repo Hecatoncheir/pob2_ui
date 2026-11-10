@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'dart:async';
 import 'dart:io';
 import 'dart:typed_data';
 
@@ -60,6 +61,14 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     root: Directory.fromUri(components.store.root.uri.resolve('tree-cache/')),
   );
   String? _nextTitle;
+  Timer? _buildChangeDelay;
+  StreamSubscription<FileSystemEvent>? _buildChanges;
+  ({String directory, String id})? _watchedBuild;
+  bool _closing = false;
+  String? _seenBuildXml;
+  bool _checkingBuild = false;
+  bool _buildSyncPending = false;
+  bool Function()? modalOpen;
   final List<_BuildSnapshot> _undoHistory = [];
   final List<_BuildSnapshot> _redoHistory = [];
 
@@ -101,8 +110,11 @@ class WorkshopCubit extends Cubit<WorkshopState> {
 
   void _update(WorkshopState next) {
     if (isClosed) return;
+    final wasBusy = state.busy;
     emit(next);
     _mcpEditor?.checkBuild();
+    _watchOpenBuild();
+    if (wasBusy && !next.busy) resumeBuildSync();
   }
 
   void addLog(String value) {
@@ -120,6 +132,9 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     try {
       await action();
     } catch (failure) {
+      if (failure is PobBuildSaveConflict) {
+        _update(state.copyWith(library: _withEntry(failure.copy)));
+      }
       final message = mcpErrorMessage(failure);
       _update(state.copyWith(operation: (busy: true, error: message)));
       addLog('Ошибка: $failure');
@@ -176,7 +191,10 @@ class WorkshopCubit extends Cubit<WorkshopState> {
 
   Future<void> refreshPobBuilds() => _run(() async {
     final shared = sharedLibrary;
-    if (shared != null) _setSharedLibrary(await shared.scan());
+    if (shared != null) {
+      _setSharedLibrary(await shared.scan());
+      requestBuildSync();
+    }
   });
 
   void _setSharedLibrary(LibraryState scanned, {bool changingFolder = false}) {
@@ -511,20 +529,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
   Future<void> _openBuild(String id) async {
     final shared = sharedLibrary;
     if (shared != null) {
-      final (:xml, :entry) = await shared.open(id);
-      await _switchBuild(
-        () => _loadXml(xml),
-        target: LibraryState(
-          entries: [
-            entry,
-            ...state.library.entries.where((item) => item.id != id),
-          ],
-          activeId: id,
-          skipSessionRecovery: true,
-        ),
-        persist: false,
-      );
-      await shared.activate(id);
+      await _openShared(shared, await shared.open(id));
       return;
     }
     final xml = await library.read(id);
@@ -532,6 +537,109 @@ class WorkshopCubit extends Cubit<WorkshopState> {
       () => _loadXml(xml),
       target: LibraryState(entries: state.library.entries, activeId: id),
     );
+  }
+
+  LibraryState _withEntry(LibraryEntry entry, {String? activeId}) =>
+      LibraryState(
+        entries: [
+          entry,
+          ...state.library.entries.where((item) => item.id != entry.id),
+        ],
+        activeId: activeId ?? state.library.activeId,
+        skipSessionRecovery: true,
+      );
+
+  Future<void> _openShared(
+    PobBuildLibrary shared,
+    PobBuildVersion disk, {
+    bool automatic = false,
+  }) async {
+    final copy = await shared.preserveLocal(disk);
+    if (copy != null) _update(state.copyWith(library: _withEntry(copy)));
+    _seenBuildXml = disk.xml;
+    final entry = disk.entry;
+    if (!automatic || entry.revision != state.library.active?.revision) {
+      await _switchBuild(
+        () => _loadXml(disk.xml),
+        target: _withEntry(entry, activeId: entry.id),
+        persist: false,
+      );
+      await shared.activate(entry.id);
+      if (automatic) {
+        _update(state.copyWith(status: 'Сборка обновлена из Path of Building'));
+      }
+    }
+    if (copy != null) {
+      final message = 'Правки PoB II сохранены отдельно: ${copy.title}';
+      _update(state.copyWith(status: message));
+      addLog(message);
+    }
+  }
+
+  void _watchOpenBuild() {
+    if (_closing) return;
+    final shared = sharedLibrary;
+    final directory = shared?.directory;
+    final id = state.library.activeId;
+    final target = state.report == null || directory == null || id == null
+        ? null
+        : (directory: directory, id: id);
+    if (target == _watchedBuild) return;
+    unawaited(_buildChanges?.cancel());
+    _buildChangeDelay?.cancel();
+    _watchedBuild = target;
+    _buildChanges = target == null
+        ? null
+        : shared!
+              .watchBuild(target.id)
+              .listen((_) => requestBuildSync(), onError: (Object _) {});
+    if (target != null) requestBuildSync();
+  }
+
+  void requestBuildSync() {
+    if (_watchedBuild == null) return;
+    _buildSyncPending = true;
+    resumeBuildSync();
+  }
+
+  void resumeBuildSync() {
+    if (!_buildSyncPending || _checkingBuild || !_canSyncBuild) return;
+    _buildChangeDelay?.cancel();
+    _buildChangeDelay = Timer(
+      const Duration(milliseconds: 120),
+      () => unawaited(syncOpenBuild()),
+    );
+  }
+
+  bool get _canSyncBuild =>
+      !_closing &&
+      !isClosed &&
+      !state.busy &&
+      engine.connected &&
+      state.report != null &&
+      modalOpen?.call() != true;
+
+  Future<void> syncOpenBuild() async {
+    final shared = sharedLibrary;
+    final active = state.library.active;
+    if (shared == null || active == null) return;
+    _buildSyncPending = true;
+    if (_checkingBuild || !_canSyncBuild) return;
+    _buildSyncPending = false;
+    _buildChangeDelay?.cancel();
+    _checkingBuild = true;
+    try {
+      final disk = await shared.changed(active.id, _seenBuildXml);
+      if (disk == null) return;
+      if (!_canSyncBuild || state.library.active != active) {
+        _buildSyncPending = true;
+        return;
+      }
+      await _run(() => _openShared(shared, disk, automatic: true));
+    } finally {
+      _checkingBuild = false;
+      resumeBuildSync();
+    }
   }
 
   Future<void> deleteBuild(String id) => _run(() async {
@@ -940,6 +1048,9 @@ class WorkshopCubit extends Cubit<WorkshopState> {
 
   @override
   Future<void> close() async {
+    _closing = true;
+    _buildChangeDelay?.cancel();
+    await _buildChanges?.cancel();
     await _mcpEditor?.close();
     await _flushText();
     await engine.close();

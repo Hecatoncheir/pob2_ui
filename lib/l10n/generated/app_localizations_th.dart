@@ -141,6 +141,11 @@ class AppLocalizationsTh extends AppLocalizations {
   }
 
   @override
+  String m2fb8d3ac27(String p0) {
+    return '$p0 · การแก้ไขใน PoB II';
+  }
+
+  @override
   String mbefa507d02(String p0, String p1) {
     return '$p0 · ระดับ $p1';
   }
@@ -1318,6 +1323,11 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m51d2753a44 => 'เข็มขัด';
 
   @override
+  String mdbe17974dd(String p0) {
+    return 'บันทึกการแก้ไขใน PoB II แยกต่างหากแล้ว: $p0';
+  }
+
+  @override
   String get m50c39b8e33 => 'แก้ไขผ่าน MCP';
 
   @override
@@ -1510,14 +1520,22 @@ class AppLocalizationsTh extends AppLocalizations {
       'PoB build ไม่พร้อมใช้งานอีกต่อไป อัพเดตรายการจัดสร้าง.';
 
   @override
-  String get ma7f9ff6c14 =>
-      'บิลด์มีการเปลี่ยนแปลงใน PoB เปิดอีกครั้งเพื่อดาวน์โหลดการเปลี่ยนแปลง';
+  String mee1bd6d18c(String p0) {
+    return 'บิลด์ถูกแก้ไขใน PoB บันทึกการแก้ไขใน PoB II แยกต่างหากแล้ว: $p0';
+  }
+
+  @override
+  String get m7806bb3683 =>
+      'บิลด์บนดิสก์มีการเปลี่ยนแปลง โปรดรอการอัปเดตจาก PoB';
 
   @override
   String get m544bec7909 => 'โครงสร้างจะเปลี่ยนไปหลังจากคลิก \"นำไปใช้\"';
 
   @override
   String get m5c8bb47697 => 'ไม่พบชุดประกอบ';
+
+  @override
+  String get ma8f340d211 => 'อัปเดตบิลด์จาก Path of Building แล้ว';
 
   @override
   String get mc27d8aad03 => 'การประกอบคำนวณโดยต้นฉบับ Lua';

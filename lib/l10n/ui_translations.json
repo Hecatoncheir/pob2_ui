@@ -39,6 +39,7 @@
     "m9cde7cfc3f": "{p0} {p1} готов. Git: {p2}",
     "m606849adbd": "{p0} {p1} установлен",
     "m613198439d": "{p0} · копия",
+    "m2fb8d3ac27": "{p0} · правки PoB II",
     "mbefa507d02": "{p0} · уровень {p1}",
     "mb7b217c429": "{p0}: потрачено {p1} из {p2} очков",
     "mbd1c099ba2": "Актуальная версия",
@@ -402,6 +403,7 @@
     "m3e7c000702": "Похищение маны",
     "m6ec2f2eff4": "Похищение энергощита",
     "m51d2753a44": "Пояс",
+    "mdbe17974dd": "Правки PoB II сохранены отдельно: {p0}",
     "m50c39b8e33": "Правки через MCP",
     "m1a132e5834": "Превышено время выполнения {p0}",
     "m7ba6aa7f66": "Предмет из сборки",
@@ -460,9 +462,11 @@
     "m49db3482db": "Самоцветы",
     "m8c39bb691b": "Сборка",
     "m15d7545f05": "Сборка PoB больше недоступна. Обновите список сборок.",
-    "ma7f9ff6c14": "Сборка изменена в PoB. Откройте её заново, чтобы загрузить изменения.",
+    "mee1bd6d18c": "Сборка изменена в PoB. Правки PoB II сохранены отдельно: {p0}",
+    "m7806bb3683": "Сборка изменилась на диске. Дождитесь обновления из PoB.",
     "m544bec7909": "Сборка изменится после нажатия «Применить»",
     "m5c8bb47697": "Сборка не найдена",
+    "ma8f340d211": "Сборка обновлена из Path of Building",
     "mc27d8aad03": "Сборка рассчитана исходным Lua",
     "med0b7c459c": "Сборка с таким именем уже существует.",
     "mae943799b7": "Сборка сохранена в библиотеке, но копия восстановления недоступна: {p0}",
@@ -1173,11 +1177,15 @@
     "mc3bde350c7": "Expected XML Path of Building builds for PoE 2.",
     "md9960887f8": "PoB build folder unavailable: {p0}",
     "m15d7545f05": "PoB build is no longer available. Update the build list.",
-    "ma7f9ff6c14": "Build changed in PoB. Open it again to download the changes.",
     "med0b7c459c": "An assembly with the same name already exists.",
     "m917bb579d9": "PoB did not report the path to the assembly folder.",
     "mcaef3568a0": "The PoB build folder has changed.",
-    "mdfa94e9fd6": "This assembly is already in the PoB library. Choose a different name for the copy."
+    "mdfa94e9fd6": "This assembly is already in the PoB library. Choose a different name for the copy.",
+    "m2fb8d3ac27": "{p0} · PoB II edits",
+    "mdbe17974dd": "PoB II edits saved separately: {p0}",
+    "mee1bd6d18c": "The build changed in PoB. PoB II edits saved separately: {p0}",
+    "m7806bb3683": "The build changed on disk. Wait for the update from PoB.",
+    "ma8f340d211": "Build updated from Path of Building"
   },
   "fr": {
     "m0c63e733f9": "Lua n'a pas renvoyé toutes les icônes",
@@ -1763,11 +1771,15 @@
     "mc3bde350c7": "Chemin de construction XML attendu pour PoE 2.",
     "md9960887f8": "Dossier de build PoB indisponible : {p0}",
     "m15d7545f05": "La version PoB n'est plus disponible. Mettez à jour la liste de build.",
-    "ma7f9ff6c14": "Build modifié dans PoB. Ouvrez-le à nouveau pour télécharger les modifications.",
     "med0b7c459c": "Un assembly portant le même nom existe déjà.",
     "m917bb579d9": "PoB n'a pas signalé le chemin d'accès au dossier d'assemblage.",
     "mcaef3568a0": "Le dossier de build PoB a changé.",
-    "mdfa94e9fd6": "Cet assembly est déjà dans la bibliothèque PoB. Choisissez un autre nom pour la copie."
+    "mdfa94e9fd6": "Cet assembly est déjà dans la bibliothèque PoB. Choisissez un autre nom pour la copie.",
+    "m2fb8d3ac27": "{p0} · modifications PoB II",
+    "mdbe17974dd": "Modifications de PoB II enregistrées séparément : {p0}",
+    "mee1bd6d18c": "Le build a changé dans PoB. Modifications de PoB II enregistrées séparément : {p0}",
+    "m7806bb3683": "Le build a changé sur le disque. Attendez la mise à jour depuis PoB.",
+    "ma8f340d211": "Build mis à jour depuis Path of Building"
   },
   "de": {
     "m0c63e733f9": "Lua hat nicht alle Symbole zurückgegeben",
@@ -2353,11 +2365,15 @@
     "mc3bde350c7": "Erwartete XML Path of Building-Builds für PoE 2.",
     "md9960887f8": "PoB-Build-Ordner nicht verfügbar: {p0}",
     "m15d7545f05": "PoB-Build ist nicht mehr verfügbar. Aktualisieren Sie die Build-Liste.",
-    "ma7f9ff6c14": "Build in PoB geändert. Öffnen Sie es erneut, um die Änderungen herunterzuladen.",
     "med0b7c459c": "Eine Assembly mit demselben Namen ist bereits vorhanden.",
     "m917bb579d9": "PoB hat den Pfad zum Assembly-Ordner nicht gemeldet.",
     "mcaef3568a0": "Der PoB-Build-Ordner hat sich geändert.",
-    "mdfa94e9fd6": "Diese Assembly befindet sich bereits in der PoB-Bibliothek. Wählen Sie einen anderen Namen für die Kopie."
+    "mdfa94e9fd6": "Diese Assembly befindet sich bereits in der PoB-Bibliothek. Wählen Sie einen anderen Namen für die Kopie.",
+    "m2fb8d3ac27": "{p0} · Änderungen aus PoB II",
+    "mdbe17974dd": "Änderungen aus PoB II separat gespeichert: {p0}",
+    "mee1bd6d18c": "Der Build wurde in PoB geändert. Änderungen aus PoB II separat gespeichert: {p0}",
+    "m7806bb3683": "Der Build wurde auf dem Datenträger geändert. Warte auf die Aktualisierung aus PoB.",
+    "ma8f340d211": "Build aus Path of Building aktualisiert"
   },
   "es": {
     "m0c63e733f9": "Lua no devolvió todos los íconos",
@@ -2943,11 +2959,15 @@
     "mc3bde350c7": "Se esperaban XML compilaciones de ruta de construcción para PoE 2.",
     "md9960887f8": "La carpeta de compilación PoB no está disponible: {p0}",
     "m15d7545f05": "La compilación PoB ya no está disponible. Actualice la lista de compilación.",
-    "ma7f9ff6c14": "Compilación modificada en PoB. Ábralo nuevamente para descargar los cambios.",
     "med0b7c459c": "Ya existe un ensamblado con el mismo nombre.",
     "m917bb579d9": "PoB no informó la ruta a la carpeta del ensamblado.",
     "mcaef3568a0": "La carpeta de compilación de PoB ha cambiado.",
-    "mdfa94e9fd6": "Este ensamblado ya se encuentra en la biblioteca PoB. Elija un nombre diferente para la copia."
+    "mdfa94e9fd6": "Este ensamblado ya se encuentra en la biblioteca PoB. Elija un nombre diferente para la copia.",
+    "m2fb8d3ac27": "{p0} · cambios de PoB II",
+    "mdbe17974dd": "Cambios de PoB II guardados por separado: {p0}",
+    "mee1bd6d18c": "La configuración cambió en PoB. Cambios de PoB II guardados por separado: {p0}",
+    "m7806bb3683": "La configuración cambió en el disco. Espera a que se actualice desde PoB.",
+    "ma8f340d211": "Configuración actualizada desde Path of Building"
   },
   "pt_BR": {
     "m0c63e733f9": "Lua não retornou todos os ícones",
@@ -3533,11 +3553,15 @@
     "mc3bde350c7": "Caminho de construção de XML esperado para PoE 2.",
     "md9960887f8": "Pasta de compilação PoB indisponível: {p0}",
     "m15d7545f05": "A compilação PoB não está mais disponível. Atualize a lista de construção.",
-    "ma7f9ff6c14": "Versão alterada no PoB. Abra-o novamente para baixar as alterações.",
     "med0b7c459c": "Já existe um assembly com o mesmo nome.",
     "m917bb579d9": "PoB não informou o caminho para a pasta assembly.",
     "mcaef3568a0": "A pasta de compilação do PoB foi alterada.",
-    "mdfa94e9fd6": "Este assembly já está na biblioteca PoB. Escolha um nome diferente para a cópia."
+    "mdfa94e9fd6": "Este assembly já está na biblioteca PoB. Escolha um nome diferente para a cópia.",
+    "m2fb8d3ac27": "{p0} · alterações do PoB II",
+    "mdbe17974dd": "Alterações do PoB II salvas separadamente: {p0}",
+    "mee1bd6d18c": "A build mudou no PoB. Alterações do PoB II salvas separadamente: {p0}",
+    "m7806bb3683": "A build mudou no disco. Aguarde a atualização do PoB.",
+    "ma8f340d211": "Build atualizada a partir do Path of Building"
   },
   "ja": {
     "m0c63e733f9": "Lua はすべてのアイコンを返しませんでした",
@@ -4123,11 +4147,15 @@
     "mc3bde350c7": "PoE 2 用のビルドの XML パスが予想されます。",
     "md9960887f8": "PoB ビルド フォルダーが利用できません: {p0}",
     "m15d7545f05": "PoB ビルドは利用できなくなりました。ビルドリストを更新します。",
-    "ma7f9ff6c14": "PoB でビルドが変更されました。再度開いて変更をダウンロードします。",
     "med0b7c459c": "同じ名前のアセンブリがすでに存在します。",
     "m917bb579d9": "PoB はアセンブリ フォルダーへのパスを報告しませんでした。",
     "mcaef3568a0": "PoB ビルド フォルダーが変更されました。",
-    "mdfa94e9fd6": "このアセンブリはすでに PoB ライブラリにあります。コピーに別の名前を選択します。"
+    "mdfa94e9fd6": "このアセンブリはすでに PoB ライブラリにあります。コピーに別の名前を選択します。",
+    "m2fb8d3ac27": "{p0} · PoB II の編集",
+    "mdbe17974dd": "PoB II の編集内容を別のビルドに保存しました: {p0}",
+    "mee1bd6d18c": "PoB でビルドが変更されました。PoB II の編集内容を別のビルドに保存しました: {p0}",
+    "m7806bb3683": "ディスク上のビルドが変更されました。PoB からの更新をお待ちください。",
+    "ma8f340d211": "Path of Building からビルドを更新しました"
   },
   "ko": {
     "m0c63e733f9": "Lua이 모든 아이콘을 반환하지 않았습니다.",
@@ -4713,11 +4741,15 @@
     "mc3bde350c7": "PoE 2용 빌드 빌드의 예상 경로입니다.",
     "md9960887f8": "PoB 빌드 폴더를 사용할 수 없습니다: {p0}",
     "m15d7545f05": "PoB 빌드를 더 이상 사용할 수 없습니다. 빌드 목록을 업데이트합니다.",
-    "ma7f9ff6c14": "PoB에서 빌드가 변경되었습니다. 다시 열어 변경 사항을 다운로드하세요.",
     "med0b7c459c": "동일한 이름의 어셈블리가 이미 존재합니다.",
     "m917bb579d9": "PoB가 어셈블리 폴더 경로를 보고하지 않았습니다.",
     "mcaef3568a0": "PoB 빌드 폴더가 변경되었습니다.",
-    "mdfa94e9fd6": "이 어셈블리는 이미 PoB 라이브러리에 있습니다. 복사본에 대해 다른 이름을 선택하십시오."
+    "mdfa94e9fd6": "이 어셈블리는 이미 PoB 라이브러리에 있습니다. 복사본에 대해 다른 이름을 선택하십시오.",
+    "m2fb8d3ac27": "{p0} · PoB II 편집 내용",
+    "mdbe17974dd": "PoB II 편집 내용을 별도로 저장했습니다: {p0}",
+    "mee1bd6d18c": "PoB에서 빌드가 변경되었습니다. PoB II 편집 내용을 별도로 저장했습니다: {p0}",
+    "m7806bb3683": "디스크의 빌드가 변경되었습니다. PoB에서 업데이트될 때까지 기다리세요.",
+    "ma8f340d211": "Path of Building에서 빌드를 업데이트했습니다"
   },
   "th": {
     "m0c63e733f9": "Lua ไม่ได้ส่งคืนไอคอนทั้งหมด",
@@ -5303,11 +5335,15 @@
     "mc3bde350c7": "คาดว่า XML Path of Building builds สำหรับ PoE 2",
     "md9960887f8": "โฟลเดอร์บิลด์ PoB ไม่พร้อมใช้งาน: {p0}",
     "m15d7545f05": "PoB build ไม่พร้อมใช้งานอีกต่อไป อัพเดตรายการจัดสร้าง.",
-    "ma7f9ff6c14": "บิลด์มีการเปลี่ยนแปลงใน PoB เปิดอีกครั้งเพื่อดาวน์โหลดการเปลี่ยนแปลง",
     "med0b7c459c": "มีแอสเซมบลีที่มีชื่อเดียวกันอยู่แล้ว",
     "m917bb579d9": "PoB ไม่ได้รายงานเส้นทางไปยังโฟลเดอร์แอสเซมบลี",
     "mcaef3568a0": "โฟลเดอร์บิลด์ PoB มีการเปลี่ยนแปลง",
-    "mdfa94e9fd6": "แอสเซมบลีนี้มีอยู่ในไลบรารี PoB แล้ว เลือกชื่ออื่นสำหรับสำเนา"
+    "mdfa94e9fd6": "แอสเซมบลีนี้มีอยู่ในไลบรารี PoB แล้ว เลือกชื่ออื่นสำหรับสำเนา",
+    "m2fb8d3ac27": "{p0} · การแก้ไขใน PoB II",
+    "mdbe17974dd": "บันทึกการแก้ไขใน PoB II แยกต่างหากแล้ว: {p0}",
+    "mee1bd6d18c": "บิลด์ถูกแก้ไขใน PoB บันทึกการแก้ไขใน PoB II แยกต่างหากแล้ว: {p0}",
+    "m7806bb3683": "บิลด์บนดิสก์มีการเปลี่ยนแปลง โปรดรอการอัปเดตจาก PoB",
+    "ma8f340d211": "อัปเดตบิลด์จาก Path of Building แล้ว"
   },
   "zh_Hant": {
     "m0c63e733f9": "Lua 未傳回所有圖標",
@@ -5893,10 +5929,14 @@
     "mc3bde350c7": "預計為 PoE 2 所建構的建置路徑為 XML。",
     "md9960887f8": "PoB 建置資料夾不可用：{p0}",
     "m15d7545f05": "PoB 建置不再可用。更新建置清單。",
-    "ma7f9ff6c14": "PoB 中的建置已變更。再次打開它以下載更改。",
     "med0b7c459c": "已存在同名的組件。",
     "m917bb579d9": "PoB 未報告組件資料夾的路徑。",
     "mcaef3568a0": "PoB 建置資料夾已變更。",
-    "mdfa94e9fd6": "該組件已在 PoB 庫中。為副本選擇不同的名稱。"
+    "mdfa94e9fd6": "該組件已在 PoB 庫中。為副本選擇不同的名稱。",
+    "m2fb8d3ac27": "{p0} · PoB II 的編輯",
+    "mdbe17974dd": "PoB II 的編輯已另外儲存：{p0}",
+    "mee1bd6d18c": "配置已在 PoB 中變更。PoB II 的編輯已另外儲存：{p0}",
+    "m7806bb3683": "磁碟上的配置已變更。請等待 PoB 的更新。",
+    "ma8f340d211": "已從 Path of Building 更新配置"
   }
 }

@@ -110,23 +110,35 @@ class _MaterialApp extends StatefulWidget {
 
 class _MaterialAppState extends State<_MaterialApp> {
   final navigator = GlobalKey<NavigatorState>();
+  late final AppLifecycleListener _lifecycle;
+  late final _BuildSyncNavigatorObserver _navigation;
+
   @override
   void initState() {
     super.initState();
-    widget.model.mcpEditor.modalOpen = _modalOpen;
+    widget.model.modalOpen = _modalOpen;
+    _lifecycle = AppLifecycleListener(
+      onResume: () => widget.model.requestBuildSync(),
+    );
+    _navigation = _BuildSyncNavigatorObserver(() {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted) widget.model.resumeBuildSync();
+      });
+    });
   }
 
   @override
   void didUpdateWidget(_MaterialApp oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.model == widget.model) return;
-    oldWidget.model.mcpEditor.modalOpen = null;
-    widget.model.mcpEditor.modalOpen = _modalOpen;
+    oldWidget.model.modalOpen = null;
+    widget.model.modalOpen = _modalOpen;
   }
 
   @override
   void dispose() {
-    widget.model.mcpEditor.modalOpen = null;
+    _lifecycle.dispose();
+    widget.model.modalOpen = null;
     super.dispose();
   }
 
@@ -151,6 +163,7 @@ class _MaterialAppState extends State<_MaterialApp> {
   ) => BlocBuilder<ShellCubit, ShellState>(
     builder: (context, state) => MaterialApp(
       navigatorKey: navigator,
+      navigatorObservers: [_navigation],
       title: 'PoB II · Мастерская',
       locale: languageLocale(language.language),
       localizationsDelegates: AppLocalizations.localizationsDelegates,
@@ -233,6 +246,16 @@ class _Shell extends StatelessWidget {
         AppPage.workspace => WorkspaceView(model: model, shell: shell),
         AppPage.components => ComponentsView(model: model),
       };
+}
+
+class _BuildSyncNavigatorObserver extends NavigatorObserver {
+  _BuildSyncNavigatorObserver(this.onChanged);
+  final VoidCallback onChanged;
+
+  @override
+  void didChangeTop(Route<dynamic> topRoute, Route<dynamic>? previousTopRoute) {
+    onChanged();
+  }
 }
 
 class _KeyboardActions extends StatelessWidget {

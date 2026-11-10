@@ -140,6 +140,11 @@ class AppLocalizationsJa extends AppLocalizations {
   }
 
   @override
+  String m2fb8d3ac27(String p0) {
+    return '$p0 · PoB II の編集';
+  }
+
+  @override
   String mbefa507d02(String p0, String p1) {
     return '$p0 · レベル $p1';
   }
@@ -1307,6 +1312,11 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m51d2753a44 => 'ベルト';
 
   @override
+  String mdbe17974dd(String p0) {
+    return 'PoB II の編集内容を別のビルドに保存しました: $p0';
+  }
+
+  @override
   String get m50c39b8e33 => 'MCP 経由で編集します';
 
   @override
@@ -1497,13 +1507,21 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m15d7545f05 => 'PoB ビルドは利用できなくなりました。ビルドリストを更新します。';
 
   @override
-  String get ma7f9ff6c14 => 'PoB でビルドが変更されました。再度開いて変更をダウンロードします。';
+  String mee1bd6d18c(String p0) {
+    return 'PoB でビルドが変更されました。PoB II の編集内容を別のビルドに保存しました: $p0';
+  }
+
+  @override
+  String get m7806bb3683 => 'ディスク上のビルドが変更されました。PoB からの更新をお待ちください。';
 
   @override
   String get m544bec7909 => '「適用」をクリックするとビルドが変更されます';
 
   @override
   String get m5c8bb47697 => 'アセンブリが見つかりません';
+
+  @override
+  String get ma8f340d211 => 'Path of Building からビルドを更新しました';
 
   @override
   String get mc27d8aad03 => 'オリジナルの Lua によって計算されたアセンブリ';

@@ -46,7 +46,6 @@ class McpEditorCubit extends Cubit<McpEditorState> {
   final WorkshopCubit model;
   final McpEditorGateway _gateway;
   Future<void>? _starting;
-  bool Function()? modalOpen;
   bool _closing = false;
   String? _buildId;
   BuildReport? _report;
@@ -183,7 +182,7 @@ class McpEditorCubit extends Cubit<McpEditorState> {
         'Включите правки через MCP для открытой сборки.',
       );
     }
-    if (model.state.busy || modalOpen?.call() == true) {
+    if (model.state.busy || model.modalOpen?.call() == true) {
       throw const McpEditorFault(
         'APP_BUSY',
         'Завершите текущую операцию или закройте диалог PoB II.',

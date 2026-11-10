@@ -143,6 +143,11 @@ class AppLocalizationsPt extends AppLocalizations {
   }
 
   @override
+  String m2fb8d3ac27(String p0) {
+    return '$p0 · alterações do PoB II';
+  }
+
+  @override
   String mbefa507d02(String p0, String p1) {
     return '$p0 · nível $p1';
   }
@@ -1339,6 +1344,11 @@ class AppLocalizationsPt extends AppLocalizations {
   String get m51d2753a44 => 'Cinto';
 
   @override
+  String mdbe17974dd(String p0) {
+    return 'Alterações do PoB II salvas separadamente: $p0';
+  }
+
+  @override
   String get m50c39b8e33 => 'Edições via MCP';
 
   @override
@@ -1537,8 +1547,13 @@ class AppLocalizationsPt extends AppLocalizations {
       'A compilação PoB não está mais disponível. Atualize a lista de construção.';
 
   @override
-  String get ma7f9ff6c14 =>
-      'Versão alterada no PoB. Abra-o novamente para baixar as alterações.';
+  String mee1bd6d18c(String p0) {
+    return 'A build mudou no PoB. Alterações do PoB II salvas separadamente: $p0';
+  }
+
+  @override
+  String get m7806bb3683 =>
+      'A build mudou no disco. Aguarde a atualização do PoB.';
 
   @override
   String get m544bec7909 =>
@@ -1546,6 +1561,9 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get m5c8bb47697 => 'Montagem não encontrada';
+
+  @override
+  String get ma8f340d211 => 'Build atualizada a partir do Path of Building';
 
   @override
   String get mc27d8aad03 => 'Montagem calculada pelo original Lua';
@@ -2089,6 +2107,11 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   }
 
   @override
+  String m2fb8d3ac27(String p0) {
+    return '$p0 · alterações do PoB II';
+  }
+
+  @override
   String mbefa507d02(String p0, String p1) {
     return '$p0 · nível $p1';
   }
@@ -3285,6 +3308,11 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get m51d2753a44 => 'Cinto';
 
   @override
+  String mdbe17974dd(String p0) {
+    return 'Alterações do PoB II salvas separadamente: $p0';
+  }
+
+  @override
   String get m50c39b8e33 => 'Edições via MCP';
 
   @override
@@ -3483,8 +3511,13 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
       'A compilação PoB não está mais disponível. Atualize a lista de construção.';
 
   @override
-  String get ma7f9ff6c14 =>
-      'Versão alterada no PoB. Abra-o novamente para baixar as alterações.';
+  String mee1bd6d18c(String p0) {
+    return 'A build mudou no PoB. Alterações do PoB II salvas separadamente: $p0';
+  }
+
+  @override
+  String get m7806bb3683 =>
+      'A build mudou no disco. Aguarde a atualização do PoB.';
 
   @override
   String get m544bec7909 =>
@@ -3492,6 +3525,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get m5c8bb47697 => 'Montagem não encontrada';
+
+  @override
+  String get ma8f340d211 => 'Build atualizada a partir do Path of Building';
 
   @override
   String get mc27d8aad03 => 'Montagem calculada pelo original Lua';
