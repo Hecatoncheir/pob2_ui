@@ -6,6 +6,7 @@ import 'package:pob2_ui/data/build_library.dart';
 import 'package:pob2_ui/data/component_repository.dart';
 import 'package:pob2_ui/data/installation_store.dart';
 import 'package:pob2_ui/data/mcp_client.dart';
+import 'package:pob2_ui/data/pob_window_repository.dart';
 import 'package:pob2_ui/data/session_repository.dart';
 import 'package:pob2_ui/data/xml_file_service.dart';
 import 'package:pob2_ui/domain/component.dart';
@@ -71,17 +72,47 @@ class MemoryLibrary extends BuildLibrary {
   Future<void> writeIndex(LibraryState state, {bool backup = true}) async {}
 }
 
+class WindowSource extends PobWindowRepository {
+  String? xml = '<build value="42"/>';
+
+  @override
+  bool get supported => true;
+
+  @override
+  Future<String> readXml(Installations components) async =>
+      xml ??
+      (throw StateError(
+        '{"code":"BRIDGE_NOT_RUNNING","message":"Нет связи с окном PoB"}',
+      ));
+}
+
+class ImportButtonWorkshop extends WorkshopCubit {
+  ImportButtonWorkshop(
+    super.components,
+    super.engine, {
+    super.initialState,
+    super.pobWindow,
+  });
+
+  int requests = 0;
+
+  @override
+  Future<void> importFromPob() async => requests++;
+}
+
 void main() {
   late Directory root;
   late FailingTextFiles storage;
   late SelectPaths dialogs;
   late FileEngine engine;
+  late WindowSource window;
   late WorkshopCubit model;
   setUp(() async {
     root = await Directory.systemTemp.createTemp('pob2-workspace-file-');
     storage = FailingTextFiles();
     dialogs = SelectPaths();
     engine = FileEngine();
+    window = WindowSource();
     final library = BuildLibrary(root, files: storage);
     final initial = await library.save(
       LibraryState(),
@@ -97,6 +128,7 @@ void main() {
       library: library,
       session: session,
       files: XmlFileService(dialogs: dialogs),
+      pobWindow: window,
       initialState: WorkshopState(
         library: initial,
         document: (report: fixture, tree: tree, stale: false, treeError: null),
@@ -107,6 +139,48 @@ void main() {
     storage.failName = null;
     await model.close();
     await removeTemporaryDirectory(root);
+  });
+
+  testWidgets('Меню сборки запускает импорт из PoB', (tester) async {
+    final widgetModel = ImportButtonWorkshop(
+      model.components,
+      engine,
+      initialState: model.state,
+      pobWindow: window,
+    );
+    addTearDown(widgetModel.close);
+    await tester.pumpWidget(PobApp(model: widgetModel));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byTooltip('Ещё'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byKey(const Key('import-from-pob')));
+    await tester.pumpAndSettle();
+    expect(widgetModel.requests, 1);
+  });
+
+  test('Импорт из PoB открывает отдельную копию', () async {
+    final previous = model.state.library.activeId!;
+    await model.importFromPob();
+    expect(model.state.error, isNull);
+    final copy = model.state.library.activeId!;
+    expect(copy, isNot(previous));
+    expect(model.state.library.entries, hasLength(2));
+    expect(model.state.report!.stats['Life'], 142);
+    expect(await model.library.read(previous), '<build value="1"/>');
+    expect(await model.library.read(copy), window.xml);
+  });
+
+  test('Отказ моста сохраняет рабочую сборку и историю', () async {
+    await model.treeAction(1, false);
+    final before = model.state;
+    window.xml = null;
+    await model.importFromPob();
+    expect(model.state.error, 'Нет связи с окном PoB');
+    expect(model.state.document, same(before.document));
+    expect(model.state.library, same(before.library));
+    expect(model.state.history, before.history);
+    expect(engine.value, 2);
+    expect(await model.session.read(), '<build value="2"/>');
   });
 
   test('Удаление активной сборки не восстанавливает её при запуске', () async {

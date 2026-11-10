@@ -5,6 +5,8 @@ import 'dart:typed_data';
 
 import '../data/component_repository.dart';
 import '../data/mcp_client.dart';
+import '../data/mcp_error_message.dart';
+import '../data/pob_window_repository.dart';
 import '../data/session_repository.dart';
 import '../data/build_library.dart';
 import '../data/tree_icon_repository.dart';
@@ -30,6 +32,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     SessionRepository? session,
     BuildLibrary? library,
     XmlFileService? files,
+    this.pobWindow = const PobWindowRepository(),
   }) : session = session ?? SessionRepository(components.store.root),
        library = library ?? BuildLibrary(components.store.root),
        files = files ?? XmlFileService(),
@@ -39,6 +42,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
   final SessionRepository session;
   final BuildLibrary library;
   final XmlFileService files;
+  final PobWindowRepository pobWindow;
   late final catalogs = GameCatalogRepository(engine);
   late final treeIcons = TreeIconRepository(
     root: Directory.fromUri(components.store.root.uri.resolve('tree-cache/')),
@@ -102,7 +106,8 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     try {
       await action();
     } catch (failure) {
-      _update(state.copyWith(operation: (busy: true, error: '$failure')));
+      final message = mcpErrorMessage(failure);
+      _update(state.copyWith(operation: (busy: true, error: message)));
       addLog('Ошибка: $failure');
     } finally {
       _update(state.copyWith(operation: (busy: false, error: state.error)));
@@ -240,13 +245,18 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     addLog(state.status);
   });
 
-  Future<void> importXml(String xml) => _run(() async {
-    await _switchBuild(
-      () => _loadXml(xml),
-      target: LibraryState(entries: state.library.entries),
-      title: 'Импортированная сборка',
-    );
+  Future<void> importXml(String xml) => _run(() => _importCopy(xml));
+
+  Future<void> importFromPob() => _run(() async {
+    final xml = await pobWindow.readXml(components.active);
+    await _importCopy(xml);
   });
+
+  Future<void> _importCopy(String xml) => _switchBuild(
+    () => _loadXml(xml),
+    target: LibraryState(entries: state.library.entries),
+    title: 'Импортированная сборка',
+  );
 
   Future<void> openXmlFile() => _run(() async {
     final selected = await files.open();
@@ -689,11 +699,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     }
   }
 
-  Future<String> _currentXml() async =>
-      switch (await engine.call('pob_export_xml')) {
-        {'xml': final String xml} => xml,
-        _ => throw const FormatException('Lua не вернул XML сборки'),
-      };
+  Future<String> _currentXml() => engine.exportBuildXml();
 
   Future<String?> exportXml() async {
     String? xml;

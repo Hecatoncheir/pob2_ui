@@ -86,6 +86,12 @@ class WorkspaceView extends StatelessWidget {
               : () => showXmlImport(context, model),
           child: const AppText('Открыть XML'),
         ),
+        if (model.pobWindow.supported)
+          OutlinedButton(
+            key: const Key('import-from-pob'),
+            onPressed: model.state.busy ? null : model.importFromPob,
+            child: const AppText('Импортировать из PoB'),
+          ),
       ],
     );
   }
@@ -204,11 +210,18 @@ class _BuildMenu extends StatelessWidget {
     tooltip: translateUi(context, 'Ещё'),
     enabled: !model.state.busy,
     icon: const Icon(Icons.more_horiz, size: 20),
-    itemBuilder: (_) => const [
-      PopupMenuItem(value: 'notes', child: AppText('Заметки к сборке')),
-      PopupMenuItem(value: 'paste', child: AppText('Вставить XML')),
-      PopupMenuItem(value: 'xml', child: AppText('Скопировать XML')),
-      PopupMenuItem(value: 'copy', child: AppText('Создать копию')),
+    itemBuilder: (_) => [
+      const PopupMenuItem(value: 'notes', child: AppText('Заметки к сборке')),
+      if (model.pobWindow.supported)
+        PopupMenuItem(
+          key: const Key('import-from-pob'),
+          enabled: model.engine.connected,
+          value: 'import-pob',
+          child: const AppText('Импортировать из PoB'),
+        ),
+      const PopupMenuItem(value: 'paste', child: AppText('Вставить XML')),
+      const PopupMenuItem(value: 'xml', child: AppText('Скопировать XML')),
+      const PopupMenuItem(value: 'copy', child: AppText('Создать копию')),
     ],
     onSelected: (value) => _select(context, value),
   );
@@ -219,6 +232,8 @@ class _BuildMenu extends StatelessWidget {
         if (id != null) showBuildNotes(context, model, id);
       case 'paste':
         showXmlPaste(context, model);
+      case 'import-pob':
+        model.importFromPob();
       case 'xml':
         showXmlCopy(context, model);
       case 'copy':

@@ -510,6 +510,9 @@ class AppLocalizationsPt extends AppLocalizations {
   String get m2c72186c20 => 'Montagem importada';
 
   @override
+  String get mdb8bc611c3 => 'Importar do PoB';
+
+  @override
   String get ma8f8e11f0c => 'Inteligência';
 
   @override
@@ -2270,6 +2273,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get m2c72186c20 => 'Montagem importada';
+
+  @override
+  String get mdb8bc611c3 => 'Importar do PoB';
 
   @override
   String get ma8f8e11f0c => 'Inteligência';

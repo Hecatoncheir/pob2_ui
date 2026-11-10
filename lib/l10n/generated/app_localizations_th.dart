@@ -506,6 +506,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m2c72186c20 => 'ชุดประกอบนำเข้า';
 
   @override
+  String get mdb8bc611c3 => 'นำเข้าจาก PoB';
+
+  @override
   String get ma8f8e11f0c => 'ความฉลาด';
 
   @override

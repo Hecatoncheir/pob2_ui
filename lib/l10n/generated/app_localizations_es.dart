@@ -512,6 +512,9 @@ class AppLocalizationsEs extends AppLocalizations {
   String get m2c72186c20 => 'Conjunto importado';
 
   @override
+  String get mdb8bc611c3 => 'Importar desde PoB';
+
+  @override
   String get ma8f8e11f0c => 'Inteligencia';
 
   @override

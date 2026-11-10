@@ -858,6 +858,11 @@
     "description": "Импортированная сборка",
     "placeholders": {}
   },
+  "mdb8bc611c3": "Import from PoB",
+  "@mdb8bc611c3": {
+    "description": "Импортировать из PoB",
+    "placeholders": {}
+  },
   "ma8f8e11f0c": "Intelligence",
   "@ma8f8e11f0c": {
     "description": "Интеллект",

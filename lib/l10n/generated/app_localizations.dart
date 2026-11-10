@@ -1022,6 +1022,12 @@ abstract class AppLocalizations {
   /// **'Imported assembly'**
   String get m2c72186c20;
 
+  /// Импортировать из PoB
+  ///
+  /// In en, this message translates to:
+  /// **'Import from PoB'**
+  String get mdb8bc611c3;
+
   /// Интеллект
   ///
   /// In en, this message translates to:

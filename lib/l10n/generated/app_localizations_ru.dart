@@ -508,6 +508,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m2c72186c20 => 'Импортированная сборка';
 
   @override
+  String get mdb8bc611c3 => 'Импортировать из PoB';
+
+  @override
   String get ma8f8e11f0c => 'Интеллект';
 
   @override

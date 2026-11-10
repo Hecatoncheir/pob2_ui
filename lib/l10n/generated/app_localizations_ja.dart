@@ -503,6 +503,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m2c72186c20 => 'インポートされたアセンブリ';
 
   @override
+  String get mdb8bc611c3 => 'PoBからインポート';
+
+  @override
   String get ma8f8e11f0c => 'インテリジェンス';
 
   @override

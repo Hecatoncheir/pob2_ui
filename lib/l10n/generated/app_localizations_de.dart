@@ -524,6 +524,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get m2c72186c20 => 'Importierte Baugruppe';
 
   @override
+  String get mdb8bc611c3 => 'Aus PoB importieren';
+
+  @override
   String get ma8f8e11f0c => 'Intelligenz';
 
   @override

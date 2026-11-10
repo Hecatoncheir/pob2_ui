@@ -519,6 +519,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get m2c72186c20 => 'Imported assembly';
 
   @override
+  String get mdb8bc611c3 => 'Importer depuis PoB';
+
+  @override
   String get ma8f8e11f0c => 'Intelligence';
 
   @override

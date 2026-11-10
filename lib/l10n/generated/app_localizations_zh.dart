@@ -502,6 +502,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m2c72186c20 => '導入元件';
 
   @override
+  String get mdb8bc611c3 => '從 PoB 匯入';
+
+  @override
   String get ma8f8e11f0c => '情報';
 
   @override
@@ -2223,6 +2226,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m2c72186c20 => '導入元件';
+
+  @override
+  String get mdb8bc611c3 => '從 PoB 匯入';
 
   @override
   String get ma8f8e11f0c => '情報';

@@ -37,6 +37,8 @@ def window_for(process):
 
 
 def start(binary, root):
+    # Проверка окна использует локальный английский интерфейс без загрузки игровых переводов.
+    (root / 'language.json').write_text('{"schema":1,"language":"en"}', encoding='utf-8')
     process = subprocess.Popen([str(binary)], env={**os.environ, 'POB2_UI_HOME': str(root)}, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     for _ in range(200):
         window = window_for(process)

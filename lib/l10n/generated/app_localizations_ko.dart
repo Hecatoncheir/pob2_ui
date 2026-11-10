@@ -503,6 +503,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m2c72186c20 => '가져온 어셈블리';
 
   @override
+  String get mdb8bc611c3 => 'PoB에서 가져오기';
+
+  @override
   String get ma8f8e11f0c => '지능';
 
   @override

@@ -15,7 +15,12 @@ class McpClient {
   Set<String> tools = const {};
   void Function(Object)? onDisconnected;
 
-  Future<void> connect(Installations pair) async {
+  Future<void> connect(Installations pair) =>
+      _connect(pair[Component.mcp]!, pob: pair[Component.pob]!);
+
+  Future<void> connectToPobWindow(Installation mcp) => _connect(mcp);
+
+  Future<void> _connect(Installation mcp, {Installation? pob}) async {
     await close();
     final python = await ProcessService().python();
     final process = await Process.start(python, [
@@ -24,10 +29,9 @@ class McpClient {
       'run.py',
       'serve',
       '--mode',
-      'engine',
-      '--pob-dir',
-      pair[Component.pob]!.directory,
-    ], workingDirectory: pair[Component.mcp]!.directory);
+      pob == null ? 'app' : 'engine',
+      if (pob != null) ...['--pob-dir', pob.directory],
+    ], workingDirectory: mcp.directory);
     _process = process;
     diagnostics.clear();
     _subscriptions.add(
@@ -148,6 +152,12 @@ class McpClient {
     return (jsonDecode(text) as Map<String, dynamic>)['result']
         as Map<String, dynamic>;
   }
+
+  Future<String> exportBuildXml() async =>
+      switch (await call('pob_export_xml')) {
+        {'xml': final String xml} when xml.trim().isNotEmpty => xml,
+        _ => throw const FormatException('Lua не вернул XML сборки'),
+      };
 
   Future<void> close() async {
     final process = _process;
