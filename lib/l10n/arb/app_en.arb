@@ -132,6 +132,16 @@
     "description": "PoB II · Мастерская",
     "placeholders": {}
   },
+  "m5a8756b562": "PoB is still open. Save the build and finish closing PoB.",
+  "@m5a8756b562": {
+    "description": "PoB ещё открыт. Сохраните сборку и завершите закрытие в PoB.",
+    "placeholders": {}
+  },
+  "m16298d522f": "PoB started, but the bridge has not responded yet. Check the connection again.",
+  "@m16298d522f": {
+    "description": "PoB запущен, но мост пока не отвечает. Проверьте связь ещё раз.",
+    "placeholders": {}
+  },
   "mb8ddc14d08": "PoB did not return the correct search link",
   "@mb8ddc14d08": {
     "description": "PoB не вернул корректную ссылку поиска",
@@ -702,6 +712,11 @@
     "description": "Дух",
     "placeholders": {}
   },
+  "m974eae850c": "If PoB asks you to save the build, respond in its window.",
+  "@m974eae850c": {
+    "description": "Если PoB попросит сохранить сборку, ответьте в его окне.",
+    "placeholders": {}
+  },
   "mcefa1c56a5": "There is an update",
   "@mcefa1c56a5": {
     "description": "Есть обновление",
@@ -786,6 +801,11 @@
   "m540fb030a9": "Fasten indicators",
   "@m540fb030a9": {
     "description": "Закрепить показатели",
+    "placeholders": {}
+  },
+  "m7ab4920661": "Close the selected PoB manually and try again.",
+  "@m7ab4920661": {
+    "description": "Закройте выбранный PoB вручную и повторите запуск.",
     "placeholders": {}
   },
   "ma7a4033657": "Close",
@@ -1067,9 +1087,9 @@
     "description": "Молния",
     "placeholders": {}
   },
-  "m4519c7e6f1": "Bridge installed. Restart PoB, open a build and check the connection.",
-  "@m4519c7e6f1": {
-    "description": "Мост установлен. Перезапустите PoB, откройте сборку и проверьте связь.",
+  "mf8c37fc77b": "Bridge installed. Restart PoB to check the connection.",
+  "@mf8c37fc77b": {
+    "description": "Мост установлен. Перезапустите PoB для проверки связи.",
     "placeholders": {}
   },
   "m204751ca09": "RECENT",
@@ -1825,6 +1845,11 @@
     "description": "Перезапуск — только по вашей команде",
     "placeholders": {}
   },
+  "m46fe82b8cc": "Restart PoB",
+  "@m46fe82b8cc": {
+    "description": "Перезапустить PoB",
+    "placeholders": {}
+  },
   "m79a3312d3b": "Restart and update",
   "@m79a3312d3b": {
     "description": "Перезапустить и обновить",
@@ -2393,6 +2418,11 @@
   "ma50190234a": "Own...",
   "@ma50190234a": {
     "description": "Свои…",
+    "placeholders": {}
+  },
+  "mfc68d94f44": "PoB connection verified. Open a build to import it.",
+  "@mfc68d94f44": {
+    "description": "Связь с PoB подтверждена. Откройте сборку для импорта.",
     "placeholders": {}
   },
   "ma59f85739f": "Connected to the open PoB build",

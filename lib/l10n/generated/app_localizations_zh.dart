@@ -88,6 +88,12 @@ class AppLocalizationsZh extends AppLocalizations {
   String get mcdf95e40cd => 'PoB II · 研討會';
 
   @override
+  String get m5a8756b562 => 'PoB 仍然開啟。請儲存流派並完成關閉 PoB。';
+
+  @override
+  String get m16298d522f => 'PoB 已啟動，但橋接尚未回應。請再檢查一次連線。';
+
+  @override
   String get mb8ddc14d08 => 'PoB 未返回正確的搜尋鏈接';
 
   @override
@@ -414,6 +420,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m41a4fa8b6a => '精神';
 
   @override
+  String get m974eae850c => '如果 PoB 詢問是否儲存流派，請在它的視窗中回應。';
+
+  @override
   String get mcefa1c56a5 => '有更新';
 
   @override
@@ -458,6 +467,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m540fb030a9 => '緊固指示器';
+
+  @override
+  String get m7ab4920661 => '請手動關閉所選的 PoB，然後重試。';
 
   @override
   String get ma7a4033657 => '關閉';
@@ -627,7 +639,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m16d1252699 => '閃電';
 
   @override
-  String get m4519c7e6f1 => '已安裝橋接。請重新啟動 PoB，開啟流派並檢查連線。';
+  String get mf8c37fc77b => '已安裝橋接。請重新啟動 PoB 以檢查連線。';
 
   @override
   String get m204751ca09 => '最近';
@@ -1073,6 +1085,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get mcaceac98e9 => '重新啟動 - 僅根據您的命令';
 
   @override
+  String get m46fe82b8cc => '重新啟動 PoB';
+
+  @override
   String get m79a3312d3b => '重啟並更新';
 
   @override
@@ -1409,6 +1424,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get ma50190234a => '自己的...';
+
+  @override
+  String get mfc68d94f44 => '已確認連線至 PoB。請開啟要匯入的流派。';
 
   @override
   String get ma59f85739f => '已確認連線至 PoB 中開啟的流派';
@@ -1844,6 +1862,12 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get mcdf95e40cd => 'PoB II · 研討會';
 
   @override
+  String get m5a8756b562 => 'PoB 仍然開啟。請儲存流派並完成關閉 PoB。';
+
+  @override
+  String get m16298d522f => 'PoB 已啟動，但橋接尚未回應。請再檢查一次連線。';
+
+  @override
   String get mb8ddc14d08 => 'PoB 未返回正確的搜尋鏈接';
 
   @override
@@ -2170,6 +2194,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m41a4fa8b6a => '精神';
 
   @override
+  String get m974eae850c => '如果 PoB 詢問是否儲存流派，請在它的視窗中回應。';
+
+  @override
   String get mcefa1c56a5 => '有更新';
 
   @override
@@ -2214,6 +2241,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m540fb030a9 => '緊固指示器';
+
+  @override
+  String get m7ab4920661 => '請手動關閉所選的 PoB，然後重試。';
 
   @override
   String get ma7a4033657 => '關閉';
@@ -2383,7 +2413,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m16d1252699 => '閃電';
 
   @override
-  String get m4519c7e6f1 => '已安裝橋接。請重新啟動 PoB，開啟流派並檢查連線。';
+  String get mf8c37fc77b => '已安裝橋接。請重新啟動 PoB 以檢查連線。';
 
   @override
   String get m204751ca09 => '最近';
@@ -2829,6 +2859,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get mcaceac98e9 => '重新啟動 - 僅根據您的命令';
 
   @override
+  String get m46fe82b8cc => '重新啟動 PoB';
+
+  @override
   String get m79a3312d3b => '重啟並更新';
 
   @override
@@ -3165,6 +3198,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get ma50190234a => '自己的...';
+
+  @override
+  String get mfc68d94f44 => '已確認連線至 PoB。請開啟要匯入的流派。';
 
   @override
   String get ma59f85739f => '已確認連線至 PoB 中開啟的流派';

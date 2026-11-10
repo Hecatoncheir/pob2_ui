@@ -93,6 +93,14 @@ class AppLocalizationsDe extends AppLocalizations {
   String get mcdf95e40cd => 'PoB II · Workshop';
 
   @override
+  String get m5a8756b562 =>
+      'PoB ist noch geöffnet. Speichern Sie den Build und schließen Sie PoB.';
+
+  @override
+  String get m16298d522f =>
+      'PoB wurde gestartet, aber die Verbindung antwortet noch nicht. Prüfen Sie sie erneut.';
+
+  @override
   String get mb8ddc14d08 =>
       'PoB hat nicht den richtigen Suchlink zurückgegeben';
 
@@ -436,6 +444,10 @@ class AppLocalizationsDe extends AppLocalizations {
   String get m41a4fa8b6a => 'Geist';
 
   @override
+  String get m974eae850c =>
+      'Falls PoB nach dem Speichern fragt, antworten Sie im PoB-Fenster.';
+
+  @override
   String get mcefa1c56a5 => 'Es gibt ein Update';
 
   @override
@@ -481,6 +493,10 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get m540fb030a9 => 'Blinker befestigen';
+
+  @override
+  String get m7ab4920661 =>
+      'Schließen Sie die ausgewählte PoB-Instanz manuell und versuchen Sie es erneut.';
 
   @override
   String get ma7a4033657 => 'Schließen';
@@ -651,8 +667,8 @@ class AppLocalizationsDe extends AppLocalizations {
   String get m16d1252699 => 'Blitz';
 
   @override
-  String get m4519c7e6f1 =>
-      'Verbindung eingerichtet. Starten Sie PoB neu, öffnen Sie einen Build und prüfen Sie die Verbindung.';
+  String get mf8c37fc77b =>
+      'Verbindung eingerichtet. Starten Sie PoB neu, um sie zu prüfen.';
 
   @override
   String get m204751ca09 => 'AKTUELL';
@@ -1105,6 +1121,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get mcaceac98e9 => 'Neustart – nur auf Ihren Befehl';
 
   @override
+  String get m46fe82b8cc => 'PoB neu starten';
+
+  @override
   String get m79a3312d3b => 'Neu starten und aktualisieren';
 
   @override
@@ -1454,6 +1473,10 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get ma50190234a => 'Eigene...';
+
+  @override
+  String get mfc68d94f44 =>
+      'Verbindung mit PoB bestätigt. Öffnen Sie einen Build zum Importieren.';
 
   @override
   String get ma59f85739f => 'Verbindung mit dem geöffneten PoB-Build bestätigt';

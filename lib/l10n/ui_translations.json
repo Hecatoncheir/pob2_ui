@@ -24,6 +24,8 @@
     "mbf7bbb22e3": "Lua подключён",
     "m12e8f27f62": "MCP завершился. {p0}",
     "mcdf95e40cd": "PoB II · Мастерская",
+    "m5a8756b562": "PoB ещё открыт. Сохраните сборку и завершите закрытие в PoB.",
+    "m16298d522f": "PoB запущен, но мост пока не отвечает. Проверьте связь ещё раз.",
     "mb8ddc14d08": "PoB не вернул корректную ссылку поиска",
     "m62db50eb37": "PoB не найден. Выберите папку с приложением.",
     "m3127345008": "XML больше 16 МБ",
@@ -125,6 +127,7 @@
     "mf0216281b8": "Дополнительные ячейки",
     "m10b5bc7e91": "Доступна версия {p0}",
     "m41a4fa8b6a": "Дух",
+    "m974eae850c": "Если PoB попросит сохранить сборку, ответьте в его окне.",
     "mcefa1c56a5": "Есть обновление",
     "m2071fb9905": "Ещё",
     "mf9a38201c0": "Журнал и подробности",
@@ -137,6 +140,7 @@
     "m7ac5d410c5": "Загрузка: HTTP {p0}",
     "m09fef6d0df": "Заданные",
     "m540fb030a9": "Закрепить показатели",
+    "m7ab4920661": "Закройте выбранный PoB вручную и повторите запуск.",
     "ma7a4033657": "Закрыть",
     "mbfc7b67eb5": "Заменить предмет",
     "mdc4baf32ac": "Заметки к сборке",
@@ -192,7 +196,7 @@
     "m22e1e2c7ad": "Множитель критического удара",
     "m13e9f80144": "Мои сборки",
     "m16d1252699": "Молния",
-    "m4519c7e6f1": "Мост установлен. Перезапустите PoB, откройте сборку и проверьте связь.",
+    "mf8c37fc77b": "Мост установлен. Перезапустите PoB для проверки связи.",
     "m204751ca09": "НЕДАВНИЕ",
     "me113ee319c": "На очко",
     "m1d32e63718": "На очко: {p0}",
@@ -326,6 +330,7 @@
     "m46c64e6832": "Перевод: HTTP {p0}",
     "md3c6b76bfd": "Передвижение",
     "mcaceac98e9": "Перезапуск — только по вашей команде",
+    "m46fe82b8cc": "Перезапустить PoB",
     "m79a3312d3b": "Перезапустить и обновить",
     "m9af13a3399": "Перенос в список добавляет поддержку, обратно — убирает",
     "m79ab5f1286": "Пересчитать в Lua",
@@ -432,6 +437,7 @@
     "m87b737d42c": "Свернуть панель",
     "mf0cd3a6033": "Светлая",
     "ma50190234a": "Свои…",
+    "mfc68d94f44": "Связь с PoB подтверждена. Откройте сборку для импорта.",
     "ma59f85739f": "Связь с открытой сборкой PoB подтверждена",
     "m7434b2e81b": "Сдвинуть влево",
     "m63a2484f1c": "Сдвинуть вправо",
@@ -1088,8 +1094,14 @@
     "m5d67586b4c": "Choose a PoB installation",
     "m62db50eb37": "PoB was not found. Choose its application folder.",
     "m25511c66c8": "Choose the PoB application folder for PoE 2",
-    "m4519c7e6f1": "Bridge installed. Restart PoB, open a build and check the connection.",
-    "ma59f85739f": "Connected to the open PoB build"
+    "ma59f85739f": "Connected to the open PoB build",
+    "m46fe82b8cc": "Restart PoB",
+    "mf8c37fc77b": "Bridge installed. Restart PoB to check the connection.",
+    "mfc68d94f44": "PoB connection verified. Open a build to import it.",
+    "m974eae850c": "If PoB asks you to save the build, respond in its window.",
+    "m16298d522f": "PoB started, but the bridge has not responded yet. Check the connection again.",
+    "m5a8756b562": "PoB is still open. Save the build and finish closing PoB.",
+    "m7ab4920661": "Close the selected PoB manually and try again."
   },
   "fr": {
     "m0c63e733f9": "Lua n'a pas renvoyé toutes les icônes",
@@ -1634,8 +1646,14 @@
     "m5d67586b4c": "Choisissez une installation de PoB",
     "m62db50eb37": "PoB est introuvable. Choisissez son dossier.",
     "m25511c66c8": "Choisissez le dossier de PoB pour PoE 2",
-    "m4519c7e6f1": "Pont installé. Redémarrez PoB, ouvrez un build et vérifiez la connexion.",
-    "ma59f85739f": "Connexion au build ouvert dans PoB confirmée"
+    "ma59f85739f": "Connexion au build ouvert dans PoB confirmée",
+    "m46fe82b8cc": "Redémarrer PoB",
+    "mf8c37fc77b": "Pont installé. Redémarrez PoB pour vérifier la connexion.",
+    "mfc68d94f44": "Connexion à PoB confirmée. Ouvrez un build pour l’importer.",
+    "m974eae850c": "Si PoB vous demande d’enregistrer le build, répondez dans sa fenêtre.",
+    "m16298d522f": "PoB a démarré, mais le pont ne répond pas encore. Vérifiez de nouveau la connexion.",
+    "m5a8756b562": "PoB est encore ouvert. Enregistrez le build et terminez la fermeture.",
+    "m7ab4920661": "Fermez le PoB sélectionné manuellement, puis réessayez."
   },
   "de": {
     "m0c63e733f9": "Lua hat nicht alle Symbole zurückgegeben",
@@ -2180,8 +2198,14 @@
     "m5d67586b4c": "PoB-Installation auswählen",
     "m62db50eb37": "PoB wurde nicht gefunden. Wählen Sie den Anwendungsordner.",
     "m25511c66c8": "Wählen Sie den PoB-Anwendungsordner für PoE 2",
-    "m4519c7e6f1": "Verbindung eingerichtet. Starten Sie PoB neu, öffnen Sie einen Build und prüfen Sie die Verbindung.",
-    "ma59f85739f": "Verbindung mit dem geöffneten PoB-Build bestätigt"
+    "ma59f85739f": "Verbindung mit dem geöffneten PoB-Build bestätigt",
+    "m46fe82b8cc": "PoB neu starten",
+    "mf8c37fc77b": "Verbindung eingerichtet. Starten Sie PoB neu, um sie zu prüfen.",
+    "mfc68d94f44": "Verbindung mit PoB bestätigt. Öffnen Sie einen Build zum Importieren.",
+    "m974eae850c": "Falls PoB nach dem Speichern fragt, antworten Sie im PoB-Fenster.",
+    "m16298d522f": "PoB wurde gestartet, aber die Verbindung antwortet noch nicht. Prüfen Sie sie erneut.",
+    "m5a8756b562": "PoB ist noch geöffnet. Speichern Sie den Build und schließen Sie PoB.",
+    "m7ab4920661": "Schließen Sie die ausgewählte PoB-Instanz manuell und versuchen Sie es erneut."
   },
   "es": {
     "m0c63e733f9": "Lua no devolvió todos los íconos",
@@ -2726,8 +2750,14 @@
     "m5d67586b4c": "Elige una instalación de PoB",
     "m62db50eb37": "No se encontró PoB. Elige la carpeta de la aplicación.",
     "m25511c66c8": "Elige la carpeta de PoB para PoE 2",
-    "m4519c7e6f1": "Puente instalado. Reinicia PoB, abre una configuración y comprueba la conexión.",
-    "ma59f85739f": "Conexión confirmada con la configuración abierta en PoB"
+    "ma59f85739f": "Conexión confirmada con la configuración abierta en PoB",
+    "m46fe82b8cc": "Reiniciar PoB",
+    "mf8c37fc77b": "Puente instalado. Reinicia PoB para comprobar la conexión.",
+    "mfc68d94f44": "Conexión con PoB confirmada. Abre una configuración para importarla.",
+    "m974eae850c": "Si PoB pide guardar la configuración, responde en su ventana.",
+    "m16298d522f": "PoB se inició, pero el puente aún no responde. Comprueba la conexión otra vez.",
+    "m5a8756b562": "PoB sigue abierto. Guarda la configuración y termina de cerrar PoB.",
+    "m7ab4920661": "Cierra el PoB seleccionado manualmente y vuelve a intentarlo."
   },
   "pt_BR": {
     "m0c63e733f9": "Lua não retornou todos os ícones",
@@ -3272,8 +3302,14 @@
     "m5d67586b4c": "Escolha uma instalação do PoB",
     "m62db50eb37": "PoB não foi encontrado. Escolha a pasta do aplicativo.",
     "m25511c66c8": "Escolha a pasta do PoB para PoE 2",
-    "m4519c7e6f1": "Ponte instalada. Reinicie o PoB, abra uma build e verifique a conexão.",
-    "ma59f85739f": "Conexão com a build aberta no PoB confirmada"
+    "ma59f85739f": "Conexão com a build aberta no PoB confirmada",
+    "m46fe82b8cc": "Reiniciar PoB",
+    "mf8c37fc77b": "Ponte instalada. Reinicie o PoB para verificar a conexão.",
+    "mfc68d94f44": "Conexão com o PoB confirmada. Abra uma build para importá-la.",
+    "m974eae850c": "Se o PoB pedir para salvar a build, responda na janela dele.",
+    "m16298d522f": "O PoB foi iniciado, mas a ponte ainda não responde. Verifique a conexão novamente.",
+    "m5a8756b562": "O PoB ainda está aberto. Salve a build e conclua o fechamento do PoB.",
+    "m7ab4920661": "Feche o PoB selecionado manualmente e tente novamente."
   },
   "ja": {
     "m0c63e733f9": "Lua はすべてのアイコンを返しませんでした",
@@ -3818,8 +3854,14 @@
     "m5d67586b4c": "PoBのインストール先を選択",
     "m62db50eb37": "PoBが見つかりません。アプリのフォルダーを選択してください。",
     "m25511c66c8": "PoE 2用のPoBフォルダーを選択してください",
-    "m4519c7e6f1": "ブリッジをインストールしました。PoBを再起動し、ビルドを開いて接続を確認してください。",
-    "ma59f85739f": "開いているPoBビルドへの接続を確認しました"
+    "ma59f85739f": "開いているPoBビルドへの接続を確認しました",
+    "m46fe82b8cc": "PoBを再起動",
+    "mf8c37fc77b": "ブリッジをインストールしました。PoBを再起動して接続を確認してください。",
+    "mfc68d94f44": "PoBへの接続を確認しました。インポートするビルドを開いてください。",
+    "m974eae850c": "PoBに保存を求められたら、PoBのウィンドウで操作してください。",
+    "m16298d522f": "PoBは起動しましたが、ブリッジがまだ応答していません。接続を再確認してください。",
+    "m5a8756b562": "PoBはまだ開いています。ビルドを保存してPoBを閉じてください。",
+    "m7ab4920661": "選択したPoBを手動で閉じてから、もう一度起動してください。"
   },
   "ko": {
     "m0c63e733f9": "Lua이 모든 아이콘을 반환하지 않았습니다.",
@@ -4364,8 +4406,14 @@
     "m5d67586b4c": "PoB 설치 경로 선택",
     "m62db50eb37": "PoB를 찾을 수 없습니다. 앱 폴더를 선택하세요.",
     "m25511c66c8": "PoE 2용 PoB 폴더를 선택하세요",
-    "m4519c7e6f1": "브리지를 설치했습니다. PoB를 다시 시작하고 빌드를 연 뒤 연결을 확인하세요.",
-    "ma59f85739f": "열려 있는 PoB 빌드와의 연결을 확인했습니다"
+    "ma59f85739f": "열려 있는 PoB 빌드와의 연결을 확인했습니다",
+    "m46fe82b8cc": "PoB 다시 시작",
+    "mf8c37fc77b": "브리지를 설치했습니다. PoB를 다시 시작하여 연결을 확인하세요.",
+    "mfc68d94f44": "PoB 연결을 확인했습니다. 가져올 빌드를 여세요.",
+    "m974eae850c": "PoB가 빌드 저장을 요청하면 해당 창에서 응답하세요.",
+    "m16298d522f": "PoB가 시작됐지만 브리지가 아직 응답하지 않습니다. 연결을 다시 확인하세요.",
+    "m5a8756b562": "PoB가 아직 열려 있습니다. 빌드를 저장하고 PoB를 닫으세요.",
+    "m7ab4920661": "선택한 PoB를 직접 닫고 다시 실행하세요."
   },
   "th": {
     "m0c63e733f9": "Lua ไม่ได้ส่งคืนไอคอนทั้งหมด",
@@ -4910,8 +4958,14 @@
     "m5d67586b4c": "เลือกการติดตั้ง PoB",
     "m62db50eb37": "ไม่พบ PoB โปรดเลือกโฟลเดอร์แอป",
     "m25511c66c8": "เลือกโฟลเดอร์ PoB สำหรับ PoE 2",
-    "m4519c7e6f1": "ติดตั้งบริดจ์แล้ว เริ่ม PoB ใหม่ เปิดบิลด์แล้วตรวจสอบการเชื่อมต่อ",
-    "ma59f85739f": "ยืนยันการเชื่อมต่อกับบิลด์ที่เปิดใน PoB แล้ว"
+    "ma59f85739f": "ยืนยันการเชื่อมต่อกับบิลด์ที่เปิดใน PoB แล้ว",
+    "m46fe82b8cc": "เริ่ม PoB ใหม่",
+    "mf8c37fc77b": "ติดตั้งบริดจ์แล้ว เริ่ม PoB ใหม่เพื่อตรวจสอบการเชื่อมต่อ",
+    "mfc68d94f44": "ยืนยันการเชื่อมต่อ PoB แล้ว เปิดบิลด์เพื่อนำเข้า",
+    "m974eae850c": "หาก PoB ขอให้บันทึกบิลด์ ให้ตอบในหน้าต่าง PoB",
+    "m16298d522f": "PoB เริ่มแล้ว แต่บริดจ์ยังไม่ตอบสนอง โปรดตรวจสอบการเชื่อมต่ออีกครั้ง",
+    "m5a8756b562": "PoB ยังเปิดอยู่ บันทึกบิลด์และปิด PoB ให้เสร็จ",
+    "m7ab4920661": "ปิด PoB ที่เลือกด้วยตนเองแล้วลองเริ่มอีกครั้ง"
   },
   "zh_Hant": {
     "m0c63e733f9": "Lua 未傳回所有圖標",
@@ -5456,7 +5510,13 @@
     "m5d67586b4c": "選擇 PoB 安裝位置",
     "m62db50eb37": "找不到 PoB。請選擇應用程式資料夾。",
     "m25511c66c8": "請選擇 PoE 2 的 PoB 應用程式資料夾",
-    "m4519c7e6f1": "已安裝橋接。請重新啟動 PoB，開啟流派並檢查連線。",
-    "ma59f85739f": "已確認連線至 PoB 中開啟的流派"
+    "ma59f85739f": "已確認連線至 PoB 中開啟的流派",
+    "m46fe82b8cc": "重新啟動 PoB",
+    "mf8c37fc77b": "已安裝橋接。請重新啟動 PoB 以檢查連線。",
+    "mfc68d94f44": "已確認連線至 PoB。請開啟要匯入的流派。",
+    "m974eae850c": "如果 PoB 詢問是否儲存流派，請在它的視窗中回應。",
+    "m16298d522f": "PoB 已啟動，但橋接尚未回應。請再檢查一次連線。",
+    "m5a8756b562": "PoB 仍然開啟。請儲存流派並完成關閉 PoB。",
+    "m7ab4920661": "請手動關閉所選的 PoB，然後重試。"
   }
 }

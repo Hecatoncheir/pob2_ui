@@ -88,6 +88,14 @@ class AppLocalizationsEn extends AppLocalizations {
   String get mcdf95e40cd => 'PoB II · Workshop';
 
   @override
+  String get m5a8756b562 =>
+      'PoB is still open. Save the build and finish closing PoB.';
+
+  @override
+  String get m16298d522f =>
+      'PoB started, but the bridge has not responded yet. Check the connection again.';
+
+  @override
   String get mb8ddc14d08 => 'PoB did not return the correct search link';
 
   @override
@@ -419,6 +427,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m41a4fa8b6a => 'Spirit';
 
   @override
+  String get m974eae850c =>
+      'If PoB asks you to save the build, respond in its window.';
+
+  @override
   String get mcefa1c56a5 => 'There is an update';
 
   @override
@@ -463,6 +475,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get m540fb030a9 => 'Fasten indicators';
+
+  @override
+  String get m7ab4920661 => 'Close the selected PoB manually and try again.';
 
   @override
   String get ma7a4033657 => 'Close';
@@ -632,8 +647,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m16d1252699 => 'Lightning';
 
   @override
-  String get m4519c7e6f1 =>
-      'Bridge installed. Restart PoB, open a build and check the connection.';
+  String get mf8c37fc77b =>
+      'Bridge installed. Restart PoB to check the connection.';
 
   @override
   String get m204751ca09 => 'RECENT';
@@ -1084,6 +1099,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get mcaceac98e9 => 'Restart - only at your command';
 
   @override
+  String get m46fe82b8cc => 'Restart PoB';
+
+  @override
   String get m79a3312d3b => 'Restart and update';
 
   @override
@@ -1424,6 +1442,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get ma50190234a => 'Own...';
+
+  @override
+  String get mfc68d94f44 =>
+      'PoB connection verified. Open a build to import it.';
 
   @override
   String get ma59f85739f => 'Connected to the open PoB build';

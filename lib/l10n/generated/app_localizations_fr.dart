@@ -91,6 +91,14 @@ class AppLocalizationsFr extends AppLocalizations {
   String get mcdf95e40cd => 'PoB II · Atelier';
 
   @override
+  String get m5a8756b562 =>
+      'PoB est encore ouvert. Enregistrez le build et terminez la fermeture.';
+
+  @override
+  String get m16298d522f =>
+      'PoB a démarré, mais le pont ne répond pas encore. Vérifiez de nouveau la connexion.';
+
+  @override
   String get mb8ddc14d08 => 'PoB n\'a pas renvoyé le lien de recherche correct';
 
   @override
@@ -430,6 +438,10 @@ class AppLocalizationsFr extends AppLocalizations {
   String get m41a4fa8b6a => 'Esprit';
 
   @override
+  String get m974eae850c =>
+      'Si PoB vous demande d’enregistrer le build, répondez dans sa fenêtre.';
+
+  @override
   String get mcefa1c56a5 => 'Il y a une mise à jour';
 
   @override
@@ -475,6 +487,10 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get m540fb030a9 => 'Fasten indicators';
+
+  @override
+  String get m7ab4920661 =>
+      'Fermez le PoB sélectionné manuellement, puis réessayez.';
 
   @override
   String get ma7a4033657 => 'Close';
@@ -645,8 +661,8 @@ class AppLocalizationsFr extends AppLocalizations {
   String get m16d1252699 => 'Foudre';
 
   @override
-  String get m4519c7e6f1 =>
-      'Pont installé. Redémarrez PoB, ouvrez un build et vérifiez la connexion.';
+  String get mf8c37fc77b =>
+      'Pont installé. Redémarrez PoB pour vérifier la connexion.';
 
   @override
   String get m204751ca09 => 'RÉCENT';
@@ -1102,6 +1118,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get mcaceac98e9 => 'Redémarrer - uniquement sur votre commande';
 
   @override
+  String get m46fe82b8cc => 'Redémarrer PoB';
+
+  @override
   String get m79a3312d3b => 'Redémarrer et mettre à jour';
 
   @override
@@ -1450,6 +1469,10 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get ma50190234a => 'Propre...';
+
+  @override
+  String get mfc68d94f44 =>
+      'Connexion à PoB confirmée. Ouvrez un build pour l’importer.';
 
   @override
   String get ma59f85739f => 'Connexion au build ouvert dans PoB confirmée';

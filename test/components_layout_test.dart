@@ -51,6 +51,7 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text('C:/PoB'), findsOneWidget);
     expect(repository.installed, isNull);
+    expect(find.text('Перезапустить PoB'), findsNothing);
     await tester.tap(find.text('Подключить мост'));
     await tester.pumpAndSettle();
     expect(repository.installed, 'C:/PoB');
@@ -62,6 +63,18 @@ void main() {
       find.text('Связь с открытой сборкой PoB подтверждена'),
       findsOneWidget,
     );
+    final restart = find.text('Перезапустить PoB');
+    repository.rejectRestart = true;
+    await tester.tap(restart);
+    await tester.pumpAndSettle();
+    expect(find.text('PoB ещё открыт'), findsOneWidget);
+    expect(restart, findsOneWidget);
+    repository.rejectRestart = false;
+    await tester.tap(restart);
+    await tester.pumpAndSettle();
+    expect(repository.restarted, 'C:/PoB');
+    expect(find.textContaining('Связь с PoB подтверждена'), findsOneWidget);
+    expect(restart, findsNothing);
     expect(tester.takeException(), isNull);
   });
 
@@ -106,6 +119,8 @@ class _WindowRepository extends PobWindowRepository {
   final List<String> directories;
   String? installed;
   String? checked;
+  String? restarted;
+  bool rejectRestart = false;
 
   @override
   bool get supported => true;
@@ -121,5 +136,11 @@ class _WindowRepository extends PobWindowRepository {
   @override
   Future<void> checkBridge(Installation mcp, String directory) async {
     checked = directory;
+  }
+
+  @override
+  Future<void> restartAndCheckBridge(Installation mcp, String directory) async {
+    if (rejectRestart) throw StateError('PoB ещё открыт');
+    restarted = directory;
   }
 }

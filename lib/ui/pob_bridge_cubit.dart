@@ -8,6 +8,7 @@ typedef PobBridgeTarget = ({List<String> candidates, String? directory});
 typedef PobBridgeState = ({
   PobBridgeTarget target,
   bool busy,
+  bool needsRestart,
   String? message,
   String? error,
 });
@@ -17,6 +18,7 @@ class PobBridgeCubit extends Cubit<PobBridgeState> {
     : super((
         target: (candidates: const [], directory: null),
         busy: false,
+        needsRestart: false,
         message: null,
         error: null,
       ));
@@ -40,13 +42,22 @@ class PobBridgeCubit extends Cubit<PobBridgeState> {
           ? candidates
           : List.unmodifiable([...candidates, directory]),
       directory: directory,
-    ));
+    ), needsRestart: false);
   }
 
   Future<void> install() => _withDirectory((directory) async {
     await repository.installBridge(mcp, directory);
-    return 'Мост установлен. Перезапустите PoB, откройте сборку и проверьте связь.';
-  });
+    return 'Мост установлен. Перезапустите PoB для проверки связи.';
+  }, needsRestart: true);
+
+  Future<void> restart() => _withDirectory(
+    (directory) async {
+      await repository.restartAndCheckBridge(mcp, directory);
+      return 'Связь с PoB подтверждена. Откройте сборку для импорта.';
+    },
+    needsRestart: false,
+    progress: 'Если PoB попросит сохранить сборку, ответьте в его окне.',
+  );
 
   Future<void> check() => _withDirectory((directory) async {
     await repository.checkBridge(mcp, directory);
@@ -54,17 +65,26 @@ class PobBridgeCubit extends Cubit<PobBridgeState> {
   });
 
   Future<void> _withDirectory(
-    Future<String> Function(String directory) action,
-  ) async {
+    Future<String> Function(String directory) action, {
+    bool? needsRestart,
+    String? progress,
+  }) async {
     final target = state.target;
     final directory = target.directory;
     if (directory == null) return;
-    await _run(() async => _show(target, message: await action(directory)));
+    await _run(
+      () async => _show(
+        target,
+        message: await action(directory),
+        needsRestart: needsRestart,
+      ),
+      progress: progress,
+    );
   }
 
-  Future<void> _run(Future<void> Function() action) async {
+  Future<void> _run(Future<void> Function() action, {String? progress}) async {
     if (isClosed || state.busy) return;
-    _show(state.target, busy: true);
+    _show(state.target, busy: true, message: progress);
     try {
       await action();
     } catch (error) {
@@ -75,11 +95,18 @@ class PobBridgeCubit extends Cubit<PobBridgeState> {
   void _show(
     PobBridgeTarget target, {
     bool busy = false,
+    bool? needsRestart,
     String? message,
     String? error,
   }) {
     if (!isClosed) {
-      emit((target: target, busy: busy, message: message, error: error));
+      emit((
+        target: target,
+        busy: busy,
+        needsRestart: needsRestart ?? state.needsRestart,
+        message: message,
+        error: error,
+      ));
     }
   }
 }

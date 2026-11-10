@@ -46,15 +46,20 @@ class _PobBridgeDialog extends StatelessWidget {
                   onPressed: ready ? cubit.check : null,
                   child: const AppText('Проверить связь'),
                 ),
-                FilledButton(
-                  onPressed: ready ? cubit.install : null,
-                  child: const AppText('Подключить мост'),
-                ),
+                _primaryAction(cubit, ready, state.needsRestart),
               ],
             ),
           );
         },
       );
+
+  Widget _primaryAction(PobBridgeCubit cubit, bool enabled, bool restart) {
+    final action = restart ? cubit.restart : cubit.install;
+    return FilledButton(
+      onPressed: enabled ? action : null,
+      child: AppText(restart ? 'Перезапустить PoB' : 'Подключить мост'),
+    );
+  }
 }
 
 class _BridgeContent extends StatelessWidget {
@@ -75,7 +80,10 @@ class _BridgeContent extends StatelessWidget {
         ),
         if (state.busy) const LinearProgressIndicator(),
         if (state.message case final message?)
-          AppText(message, style: TextStyle(color: colors.green)),
+          AppText(
+            message,
+            style: TextStyle(color: state.busy ? colors.muted : colors.green),
+          ),
         if (state.error case final error?)
           AppText(error, style: TextStyle(color: colors.danger)),
       ],

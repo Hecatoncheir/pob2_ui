@@ -88,6 +88,14 @@ class AppLocalizationsPt extends AppLocalizations {
   String get mcdf95e40cd => 'PoB II · Oficina';
 
   @override
+  String get m5a8756b562 =>
+      'O PoB ainda está aberto. Salve a build e conclua o fechamento do PoB.';
+
+  @override
+  String get m16298d522f =>
+      'O PoB foi iniciado, mas a ponte ainda não responde. Verifique a conexão novamente.';
+
+  @override
   String get mb8ddc14d08 => 'PoB não retornou o link de pesquisa correto';
 
   @override
@@ -423,6 +431,10 @@ class AppLocalizationsPt extends AppLocalizations {
   String get m41a4fa8b6a => 'Espírito';
 
   @override
+  String get m974eae850c =>
+      'Se o PoB pedir para salvar a build, responda na janela dele.';
+
+  @override
   String get mcefa1c56a5 => 'Há uma atualização';
 
   @override
@@ -467,6 +479,10 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get m540fb030a9 => 'Fixar indicadores';
+
+  @override
+  String get m7ab4920661 =>
+      'Feche o PoB selecionado manualmente e tente novamente.';
 
   @override
   String get ma7a4033657 => 'Fechar';
@@ -638,8 +654,8 @@ class AppLocalizationsPt extends AppLocalizations {
   String get m16d1252699 => 'Relâmpago';
 
   @override
-  String get m4519c7e6f1 =>
-      'Ponte instalada. Reinicie o PoB, abra uma build e verifique a conexão.';
+  String get mf8c37fc77b =>
+      'Ponte instalada. Reinicie o PoB para verificar a conexão.';
 
   @override
   String get m204751ca09 => 'RECENTE';
@@ -1094,6 +1110,9 @@ class AppLocalizationsPt extends AppLocalizations {
   String get mcaceac98e9 => 'Reinicie - somente sob seu comando';
 
   @override
+  String get m46fe82b8cc => 'Reiniciar PoB';
+
+  @override
   String get m79a3312d3b => 'Reinicie e atualize';
 
   @override
@@ -1441,6 +1460,10 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get ma50190234a => 'Próprio...';
+
+  @override
+  String get mfc68d94f44 =>
+      'Conexão com o PoB confirmada. Abra uma build para importá-la.';
 
   @override
   String get ma59f85739f => 'Conexão com a build aberta no PoB confirmada';
@@ -1885,6 +1908,14 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get mcdf95e40cd => 'PoB II · Oficina';
 
   @override
+  String get m5a8756b562 =>
+      'O PoB ainda está aberto. Salve a build e conclua o fechamento do PoB.';
+
+  @override
+  String get m16298d522f =>
+      'O PoB foi iniciado, mas a ponte ainda não responde. Verifique a conexão novamente.';
+
+  @override
   String get mb8ddc14d08 => 'PoB não retornou o link de pesquisa correto';
 
   @override
@@ -2220,6 +2251,10 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get m41a4fa8b6a => 'Espírito';
 
   @override
+  String get m974eae850c =>
+      'Se o PoB pedir para salvar a build, responda na janela dele.';
+
+  @override
   String get mcefa1c56a5 => 'Há uma atualização';
 
   @override
@@ -2264,6 +2299,10 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get m540fb030a9 => 'Fixar indicadores';
+
+  @override
+  String get m7ab4920661 =>
+      'Feche o PoB selecionado manualmente e tente novamente.';
 
   @override
   String get ma7a4033657 => 'Fechar';
@@ -2435,8 +2474,8 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get m16d1252699 => 'Relâmpago';
 
   @override
-  String get m4519c7e6f1 =>
-      'Ponte instalada. Reinicie o PoB, abra uma build e verifique a conexão.';
+  String get mf8c37fc77b =>
+      'Ponte instalada. Reinicie o PoB para verificar a conexão.';
 
   @override
   String get m204751ca09 => 'RECENTE';
@@ -2891,6 +2930,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get mcaceac98e9 => 'Reinicie - somente sob seu comando';
 
   @override
+  String get m46fe82b8cc => 'Reiniciar PoB';
+
+  @override
   String get m79a3312d3b => 'Reinicie e atualize';
 
   @override
@@ -3238,6 +3280,10 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get ma50190234a => 'Próprio...';
+
+  @override
+  String get mfc68d94f44 =>
+      'Conexão com o PoB confirmada. Abra uma build para importá-la.';
 
   @override
   String get ma59f85739f => 'Conexão com a build aberta no PoB confirmada';

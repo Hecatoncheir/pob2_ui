@@ -88,6 +88,14 @@ class AppLocalizationsRu extends AppLocalizations {
   String get mcdf95e40cd => 'PoB II · Мастерская';
 
   @override
+  String get m5a8756b562 =>
+      'PoB ещё открыт. Сохраните сборку и завершите закрытие в PoB.';
+
+  @override
+  String get m16298d522f =>
+      'PoB запущен, но мост пока не отвечает. Проверьте связь ещё раз.';
+
+  @override
   String get mb8ddc14d08 => 'PoB не вернул корректную ссылку поиска';
 
   @override
@@ -419,6 +427,10 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m41a4fa8b6a => 'Дух';
 
   @override
+  String get m974eae850c =>
+      'Если PoB попросит сохранить сборку, ответьте в его окне.';
+
+  @override
   String get mcefa1c56a5 => 'Есть обновление';
 
   @override
@@ -464,6 +476,10 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get m540fb030a9 => 'Закрепить показатели';
+
+  @override
+  String get m7ab4920661 =>
+      'Закройте выбранный PoB вручную и повторите запуск.';
 
   @override
   String get ma7a4033657 => 'Закрыть';
@@ -633,8 +649,8 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m16d1252699 => 'Молния';
 
   @override
-  String get m4519c7e6f1 =>
-      'Мост установлен. Перезапустите PoB, откройте сборку и проверьте связь.';
+  String get mf8c37fc77b =>
+      'Мост установлен. Перезапустите PoB для проверки связи.';
 
   @override
   String get m204751ca09 => 'НЕДАВНИЕ';
@@ -1085,6 +1101,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get mcaceac98e9 => 'Перезапуск — только по вашей команде';
 
   @override
+  String get m46fe82b8cc => 'Перезапустить PoB';
+
+  @override
   String get m79a3312d3b => 'Перезапустить и обновить';
 
   @override
@@ -1428,6 +1447,10 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get ma50190234a => 'Свои…';
+
+  @override
+  String get mfc68d94f44 =>
+      'Связь с PoB подтверждена. Откройте сборку для импорта.';
 
   @override
   String get ma59f85739f => 'Связь с открытой сборкой PoB подтверждена';

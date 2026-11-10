@@ -260,6 +260,18 @@ abstract class AppLocalizations {
   /// **'PoB II · Workshop'**
   String get mcdf95e40cd;
 
+  /// PoB ещё открыт. Сохраните сборку и завершите закрытие в PoB.
+  ///
+  /// In en, this message translates to:
+  /// **'PoB is still open. Save the build and finish closing PoB.'**
+  String get m5a8756b562;
+
+  /// PoB запущен, но мост пока не отвечает. Проверьте связь ещё раз.
+  ///
+  /// In en, this message translates to:
+  /// **'PoB started, but the bridge has not responded yet. Check the connection again.'**
+  String get m16298d522f;
+
   /// PoB не вернул корректную ссылку поиска
   ///
   /// In en, this message translates to:
@@ -866,6 +878,12 @@ abstract class AppLocalizations {
   /// **'Spirit'**
   String get m41a4fa8b6a;
 
+  /// Если PoB попросит сохранить сборку, ответьте в его окне.
+  ///
+  /// In en, this message translates to:
+  /// **'If PoB asks you to save the build, respond in its window.'**
+  String get m974eae850c;
+
   /// Есть обновление
   ///
   /// In en, this message translates to:
@@ -937,6 +955,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Fasten indicators'**
   String get m540fb030a9;
+
+  /// Закройте выбранный PoB вручную и повторите запуск.
+  ///
+  /// In en, this message translates to:
+  /// **'Close the selected PoB manually and try again.'**
+  String get m7ab4920661;
 
   /// Закрыть
   ///
@@ -1268,11 +1292,11 @@ abstract class AppLocalizations {
   /// **'Lightning'**
   String get m16d1252699;
 
-  /// Мост установлен. Перезапустите PoB, откройте сборку и проверьте связь.
+  /// Мост установлен. Перезапустите PoB для проверки связи.
   ///
   /// In en, this message translates to:
-  /// **'Bridge installed. Restart PoB, open a build and check the connection.'**
-  String get m4519c7e6f1;
+  /// **'Bridge installed. Restart PoB to check the connection.'**
+  String get mf8c37fc77b;
 
   /// НЕДАВНИЕ
   ///
@@ -2073,6 +2097,12 @@ abstract class AppLocalizations {
   /// **'Restart - only at your command'**
   String get mcaceac98e9;
 
+  /// Перезапустить PoB
+  ///
+  /// In en, this message translates to:
+  /// **'Restart PoB'**
+  String get m46fe82b8cc;
+
   /// Перезапустить и обновить
   ///
   /// In en, this message translates to:
@@ -2708,6 +2738,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Own...'**
   String get ma50190234a;
+
+  /// Связь с PoB подтверждена. Откройте сборку для импорта.
+  ///
+  /// In en, this message translates to:
+  /// **'PoB connection verified. Open a build to import it.'**
+  String get mfc68d94f44;
 
   /// Связь с открытой сборкой PoB подтверждена
   ///

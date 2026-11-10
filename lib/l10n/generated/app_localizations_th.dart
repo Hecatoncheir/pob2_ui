@@ -88,6 +88,13 @@ class AppLocalizationsTh extends AppLocalizations {
   String get mcdf95e40cd => 'PoB II · เวิร์กช็อป';
 
   @override
+  String get m5a8756b562 => 'PoB ยังเปิดอยู่ บันทึกบิลด์และปิด PoB ให้เสร็จ';
+
+  @override
+  String get m16298d522f =>
+      'PoB เริ่มแล้ว แต่บริดจ์ยังไม่ตอบสนอง โปรดตรวจสอบการเชื่อมต่ออีกครั้ง';
+
+  @override
   String get mb8ddc14d08 => 'PoB ไม่ได้ส่งคืนลิงก์การค้นหาที่ถูกต้อง';
 
   @override
@@ -418,6 +425,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m41a4fa8b6a => 'วิญญาณ';
 
   @override
+  String get m974eae850c => 'หาก PoB ขอให้บันทึกบิลด์ ให้ตอบในหน้าต่าง PoB';
+
+  @override
   String get mcefa1c56a5 => 'มีอัพเดตครับ';
 
   @override
@@ -462,6 +472,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m540fb030a9 => 'ติดไฟแสดง';
+
+  @override
+  String get m7ab4920661 => 'ปิด PoB ที่เลือกด้วยตนเองแล้วลองเริ่มอีกครั้ง';
 
   @override
   String get ma7a4033657 => 'ปิด';
@@ -631,8 +644,8 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m16d1252699 => 'สายฟ้า';
 
   @override
-  String get m4519c7e6f1 =>
-      'ติดตั้งบริดจ์แล้ว เริ่ม PoB ใหม่ เปิดบิลด์แล้วตรวจสอบการเชื่อมต่อ';
+  String get mf8c37fc77b =>
+      'ติดตั้งบริดจ์แล้ว เริ่ม PoB ใหม่เพื่อตรวจสอบการเชื่อมต่อ';
 
   @override
   String get m204751ca09 => 'ล่าสุด';
@@ -1080,6 +1093,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get mcaceac98e9 => 'รีสตาร์ท - ตามคำสั่งของคุณเท่านั้น';
 
   @override
+  String get m46fe82b8cc => 'เริ่ม PoB ใหม่';
+
+  @override
   String get m79a3312d3b => 'รีสตาร์ทและอัปเดต';
 
   @override
@@ -1418,6 +1434,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get ma50190234a => 'เป็นเจ้าของ...';
+
+  @override
+  String get mfc68d94f44 => 'ยืนยันการเชื่อมต่อ PoB แล้ว เปิดบิลด์เพื่อนำเข้า';
 
   @override
   String get ma59f85739f => 'ยืนยันการเชื่อมต่อกับบิลด์ที่เปิดใน PoB แล้ว';

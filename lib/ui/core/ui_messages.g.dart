@@ -45,6 +45,14 @@ final uiExactTranslations = <String, String Function(AppLocalizations)>{
   "Lua connected": (l) => l.mbf7bbb22e3,
   "PoB II · Мастерская": (l) => l.mcdf95e40cd,
   "PoB II · Workshop": (l) => l.mcdf95e40cd,
+  "PoB ещё открыт. Сохраните сборку и завершите закрытие в PoB.": (l) =>
+      l.m5a8756b562,
+  "PoB is still open. Save the build and finish closing PoB.": (l) =>
+      l.m5a8756b562,
+  "PoB запущен, но мост пока не отвечает. Проверьте связь ещё раз.": (l) =>
+      l.m16298d522f,
+  "PoB started, but the bridge has not responded yet. Check the connection again.":
+      (l) => l.m16298d522f,
   "PoB не вернул корректную ссылку поиска": (l) => l.mb8ddc14d08,
   "PoB did not return the correct search link": (l) => l.mb8ddc14d08,
   "PoB не найден. Выберите папку с приложением.": (l) => l.m62db50eb37,
@@ -233,6 +241,10 @@ final uiExactTranslations = <String, String Function(AppLocalizations)>{
   "Additional cells": (l) => l.mf0216281b8,
   "Дух": (l) => l.m41a4fa8b6a,
   "Spirit": (l) => l.m41a4fa8b6a,
+  "Если PoB попросит сохранить сборку, ответьте в его окне.": (l) =>
+      l.m974eae850c,
+  "If PoB asks you to save the build, respond in its window.": (l) =>
+      l.m974eae850c,
   "Есть обновление": (l) => l.mcefa1c56a5,
   "There is an update": (l) => l.mcefa1c56a5,
   "Ещё": (l) => l.m2071fb9905,
@@ -247,6 +259,8 @@ final uiExactTranslations = <String, String Function(AppLocalizations)>{
   "Configured": (l) => l.m09fef6d0df,
   "Закрепить показатели": (l) => l.m540fb030a9,
   "Fasten indicators": (l) => l.m540fb030a9,
+  "Закройте выбранный PoB вручную и повторите запуск.": (l) => l.m7ab4920661,
+  "Close the selected PoB manually and try again.": (l) => l.m7ab4920661,
   "Закрыть": (l) => l.ma7a4033657,
   "Close": (l) => l.ma7a4033657,
   "Заменить предмет": (l) => l.mbfc7b67eb5,
@@ -355,12 +369,10 @@ final uiExactTranslations = <String, String Function(AppLocalizations)>{
   "My builds": (l) => l.m13e9f80144,
   "Молния": (l) => l.m16d1252699,
   "Lightning": (l) => l.m16d1252699,
-  "Мост установлен. Перезапустите PoB, откройте сборку и проверьте связь.": (
-    l,
-  ) => l.m4519c7e6f1,
-  "Bridge installed. Restart PoB, open a build and check the connection.": (
-    l,
-  ) => l.m4519c7e6f1,
+  "Мост установлен. Перезапустите PoB для проверки связи.": (l) =>
+      l.mf8c37fc77b,
+  "Bridge installed. Restart PoB to check the connection.": (l) =>
+      l.mf8c37fc77b,
   "НЕДАВНИЕ": (l) => l.m204751ca09,
   "RECENT": (l) => l.m204751ca09,
   "На очко": (l) => l.me113ee319c,
@@ -588,6 +600,8 @@ final uiExactTranslations = <String, String Function(AppLocalizations)>{
   "Movement": (l) => l.md3c6b76bfd,
   "Перезапуск — только по вашей команде": (l) => l.mcaceac98e9,
   "Restart - only at your command": (l) => l.mcaceac98e9,
+  "Перезапустить PoB": (l) => l.m46fe82b8cc,
+  "Restart PoB": (l) => l.m46fe82b8cc,
   "Перезапустить и обновить": (l) => l.m79a3312d3b,
   "Restart and update": (l) => l.m79a3312d3b,
   "Перенос в список добавляет поддержку, обратно — убирает": (l) =>
@@ -786,6 +800,9 @@ final uiExactTranslations = <String, String Function(AppLocalizations)>{
   "Light": (l) => l.mf0cd3a6033,
   "Свои…": (l) => l.ma50190234a,
   "Own...": (l) => l.ma50190234a,
+  "Связь с PoB подтверждена. Откройте сборку для импорта.": (l) =>
+      l.mfc68d94f44,
+  "PoB connection verified. Open a build to import it.": (l) => l.mfc68d94f44,
   "Связь с открытой сборкой PoB подтверждена": (l) => l.ma59f85739f,
   "Connected to the open PoB build": (l) => l.ma59f85739f,
   "Сдвинуть влево": (l) => l.m7434b2e81b,

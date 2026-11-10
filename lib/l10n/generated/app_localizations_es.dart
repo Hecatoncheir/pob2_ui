@@ -88,6 +88,14 @@ class AppLocalizationsEs extends AppLocalizations {
   String get mcdf95e40cd => 'PoB II · Taller';
 
   @override
+  String get m5a8756b562 =>
+      'PoB sigue abierto. Guarda la configuración y termina de cerrar PoB.';
+
+  @override
+  String get m16298d522f =>
+      'PoB se inició, pero el puente aún no responde. Comprueba la conexión otra vez.';
+
+  @override
   String get mb8ddc14d08 => 'PoB no devolvió el enlace de búsqueda correcto';
 
   @override
@@ -425,6 +433,10 @@ class AppLocalizationsEs extends AppLocalizations {
   String get m41a4fa8b6a => 'Espíritu';
 
   @override
+  String get m974eae850c =>
+      'Si PoB pide guardar la configuración, responde en su ventana.';
+
+  @override
   String get mcefa1c56a5 => 'Hay una actualización';
 
   @override
@@ -469,6 +481,10 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get m540fb030a9 => 'Fijar indicadores';
+
+  @override
+  String get m7ab4920661 =>
+      'Cierra el PoB seleccionado manualmente y vuelve a intentarlo.';
 
   @override
   String get ma7a4033657 => 'Cerrar';
@@ -640,8 +656,8 @@ class AppLocalizationsEs extends AppLocalizations {
   String get m16d1252699 => 'Rayo';
 
   @override
-  String get m4519c7e6f1 =>
-      'Puente instalado. Reinicia PoB, abre una configuración y comprueba la conexión.';
+  String get mf8c37fc77b =>
+      'Puente instalado. Reinicia PoB para comprobar la conexión.';
 
   @override
   String get m204751ca09 => 'RECIENTE';
@@ -1098,6 +1114,9 @@ class AppLocalizationsEs extends AppLocalizations {
   String get mcaceac98e9 => 'Reiniciar - solo cuando usted lo ordene';
 
   @override
+  String get m46fe82b8cc => 'Reiniciar PoB';
+
+  @override
   String get m79a3312d3b => 'Reiniciar y actualizar';
 
   @override
@@ -1445,6 +1464,10 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get ma50190234a => 'Propia...';
+
+  @override
+  String get mfc68d94f44 =>
+      'Conexión con PoB confirmada. Abre una configuración para importarla.';
 
   @override
   String get ma59f85739f =>

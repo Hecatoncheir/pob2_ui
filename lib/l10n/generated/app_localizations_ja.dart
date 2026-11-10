@@ -88,6 +88,12 @@ class AppLocalizationsJa extends AppLocalizations {
   String get mcdf95e40cd => 'PoB II · ワークショップ';
 
   @override
+  String get m5a8756b562 => 'PoBはまだ開いています。ビルドを保存してPoBを閉じてください。';
+
+  @override
+  String get m16298d522f => 'PoBは起動しましたが、ブリッジがまだ応答していません。接続を再確認してください。';
+
+  @override
   String get mb8ddc14d08 => 'PoB が正しい検索リンクを返しませんでした';
 
   @override
@@ -415,6 +421,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m41a4fa8b6a => 'スピリット';
 
   @override
+  String get m974eae850c => 'PoBに保存を求められたら、PoBのウィンドウで操作してください。';
+
+  @override
   String get mcefa1c56a5 => 'アップデートがあります';
 
   @override
@@ -459,6 +468,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m540fb030a9 => 'インジケーターを締める';
+
+  @override
+  String get m7ab4920661 => '選択したPoBを手動で閉じてから、もう一度起動してください。';
 
   @override
   String get ma7a4033657 => '閉じる';
@@ -628,7 +640,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m16d1252699 => 'ライトニング';
 
   @override
-  String get m4519c7e6f1 => 'ブリッジをインストールしました。PoBを再起動し、ビルドを開いて接続を確認してください。';
+  String get mf8c37fc77b => 'ブリッジをインストールしました。PoBを再起動して接続を確認してください。';
 
   @override
   String get m204751ca09 => '最近';
@@ -1074,6 +1086,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get mcaceac98e9 => '再起動 - あなたのコマンドでのみ';
 
   @override
+  String get m46fe82b8cc => 'PoBを再起動';
+
+  @override
   String get m79a3312d3b => '再起動とアップデート';
 
   @override
@@ -1410,6 +1425,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get ma50190234a => '自分の...';
+
+  @override
+  String get mfc68d94f44 => 'PoBへの接続を確認しました。インポートするビルドを開いてください。';
 
   @override
   String get ma59f85739f => '開いているPoBビルドへの接続を確認しました';

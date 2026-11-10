@@ -88,6 +88,12 @@ class AppLocalizationsKo extends AppLocalizations {
   String get mcdf95e40cd => 'PoB II · 워크숍';
 
   @override
+  String get m5a8756b562 => 'PoB가 아직 열려 있습니다. 빌드를 저장하고 PoB를 닫으세요.';
+
+  @override
+  String get m16298d522f => 'PoB가 시작됐지만 브리지가 아직 응답하지 않습니다. 연결을 다시 확인하세요.';
+
+  @override
   String get mb8ddc14d08 => 'PoB가 올바른 검색 링크를 반환하지 않았습니다.';
 
   @override
@@ -415,6 +421,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m41a4fa8b6a => '영혼';
 
   @override
+  String get m974eae850c => 'PoB가 빌드 저장을 요청하면 해당 창에서 응답하세요.';
+
+  @override
   String get mcefa1c56a5 => '업데이트가 있습니다';
 
   @override
@@ -459,6 +468,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m540fb030a9 => '표시기를 고정하세요';
+
+  @override
+  String get m7ab4920661 => '선택한 PoB를 직접 닫고 다시 실행하세요.';
 
   @override
   String get ma7a4033657 => '닫기';
@@ -628,7 +640,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m16d1252699 => '번개';
 
   @override
-  String get m4519c7e6f1 => '브리지를 설치했습니다. PoB를 다시 시작하고 빌드를 연 뒤 연결을 확인하세요.';
+  String get mf8c37fc77b => '브리지를 설치했습니다. PoB를 다시 시작하여 연결을 확인하세요.';
 
   @override
   String get m204751ca09 => '최근';
@@ -1074,6 +1086,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get mcaceac98e9 => '다시 시작 - 명령에 의해서만 가능';
 
   @override
+  String get m46fe82b8cc => 'PoB 다시 시작';
+
+  @override
   String get m79a3312d3b => '다시 시작 및 업데이트';
 
   @override
@@ -1410,6 +1425,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get ma50190234a => '나만의...';
+
+  @override
+  String get mfc68d94f44 => 'PoB 연결을 확인했습니다. 가져올 빌드를 여세요.';
 
   @override
   String get ma59f85739f => '열려 있는 PoB 빌드와의 연결을 확인했습니다';
