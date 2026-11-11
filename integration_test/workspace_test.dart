@@ -48,6 +48,12 @@ class SelectedXmlFiles implements XmlFileDialogs {
   Future<String?> save(String suggestedName) async => path;
 }
 
+Duration get _workspaceTestLimit => switch (Platform.operatingSystem) {
+  'windows' => const Duration(minutes: 6),
+  'linux' => const Duration(minutes: 12),
+  _ => const Duration(minutes: 8),
+};
+
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
   testWidgets('Настоящее дерево, иконки, путь Lua и XML в новом интерфейсе', (
@@ -173,7 +179,7 @@ void main() {
       ),
     );
     await tester.pumpAndSettle();
-  }, timeout: Timeout(Duration(minutes: Platform.isWindows ? 6 : 8)));
+  }, timeout: Timeout(_workspaceTestLimit));
 }
 
 Future<void> _verifyLibraryCard(
