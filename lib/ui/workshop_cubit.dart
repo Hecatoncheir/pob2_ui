@@ -70,7 +70,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
   ({String directory, String id})? _watchedBuild;
   bool _closing = false;
   String? _seenBuildXml;
-  bool _checkingBuild = false;
+  Completer<void>? _buildSync;
   bool _buildSyncPending = false;
   bool Function()? modalOpen;
   final List<_BuildSnapshot> _undoHistory = [];
@@ -669,7 +669,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
   }
 
   void resumeBuildSync() {
-    if (!_buildSyncPending || _checkingBuild || !_canSyncBuild) return;
+    if (!_buildSyncPending || _buildSync != null || !_canSyncBuild) return;
     _buildChangeDelay?.cancel();
     _buildChangeDelay = Timer(
       const Duration(milliseconds: 120),
@@ -690,10 +690,10 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     final active = state.library.active;
     if (shared == null || active == null) return;
     _buildSyncPending = true;
-    if (_checkingBuild || !_canSyncBuild) return;
+    if (_buildSync != null || !_canSyncBuild) return;
     _buildSyncPending = false;
     _buildChangeDelay?.cancel();
-    _checkingBuild = true;
+    final sync = _buildSync = Completer<void>();
     try {
       final disk = await shared.changed(active.id, _seenBuildXml);
       if (disk == null) return;
@@ -703,7 +703,8 @@ class WorkshopCubit extends Cubit<WorkshopState> {
       }
       await _run(() => _openShared(shared, disk, automatic: true));
     } finally {
-      _checkingBuild = false;
+      _buildSync = null;
+      sync.complete();
       resumeBuildSync();
     }
   }
@@ -1117,6 +1118,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     _closing = true;
     _buildChangeDelay?.cancel();
     await _buildChanges?.cancel();
+    await _buildSync?.future;
     await _mcpEditor?.close();
     await _flushText();
     await engine.close();

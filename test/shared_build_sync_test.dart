@@ -9,6 +9,7 @@ import 'package:pob2_ui/data/mcp_client.dart';
 import 'package:pob2_ui/data/pob_build_document.dart';
 import 'package:pob2_ui/data/pob_build_library.dart';
 import 'package:pob2_ui/domain/build_report.dart';
+import 'package:pob2_ui/domain/library_entry.dart';
 import 'package:pob2_ui/ui/workshop_cubit.dart';
 
 import 'support/temporary_directory.dart';
@@ -55,11 +56,24 @@ class _SyncEngine extends McpClient {
   }
 }
 
+class _SyncLibrary extends PobBuildLibrary {
+  _SyncLibrary(super.profile);
+
+  Completer<void>? preserveStarted, resumePreserve;
+
+  @override
+  Future<LibraryEntry?> preserveLocal(PobBuildVersion disk) async {
+    preserveStarted?.complete();
+    await resumePreserve?.future;
+    return super.preserveLocal(disk);
+  }
+}
+
 void main() {
   const id = 'Общая.xml';
   late Directory root, profile, builds;
   late File original;
-  late PobBuildLibrary library;
+  late _SyncLibrary library;
   late _SyncEngine engine;
   late WorkshopCubit model;
 
@@ -69,7 +83,7 @@ void main() {
     builds = await Directory(path.join(root.path, 'builds')).create();
     original = await File(path.join(builds.path, id))
         .writeAsString(buildXml(40));
-    library = PobBuildLibrary(profile);
+    library = _SyncLibrary(profile);
     await library.configure(builds.path);
     engine = _SyncEngine();
     model = WorkshopCubit(
@@ -151,6 +165,31 @@ void main() {
     expect(await reopened.readNotes(copy.id), 'Мой план');
     expect(await original.readAsString(), buildXml(48, notes: 'План из PoB'));
     expect(await reopened.preserveLocal(disk), isNull);
+  });
+
+  test('Закрытие ждёт сохранения копии при синхронизации', () async {
+    await model.treeAction(10, false);
+    final started = library.preserveStarted = Completer<void>();
+    final resume = library.resumePreserve = Completer<void>();
+    await original.writeAsString(buildXml(55));
+    final sync = model.syncOpenBuild();
+    await started.future.timeout(const Duration(seconds: 5));
+    final closed = Completer<void>();
+    final closing = model.close().then((_) => closed.complete());
+    try {
+      await expectLater(
+        closed.future.timeout(const Duration(milliseconds: 50)),
+        throwsA(isA<TimeoutException>()),
+      );
+    } finally {
+      resume.complete();
+      await sync;
+      await closing;
+    }
+    final reopened = PobBuildLibrary(profile);
+    final builds = await reopened.load();
+    final copy = builds.entries.singleWhere((entry) => entry.id != id);
+    expect(await reopened.read(copy.id), buildXml(41));
   });
 
   test(
