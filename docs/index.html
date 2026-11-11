@@ -28,11 +28,11 @@
         <p class="hero-lead">Дерево, умения и экипировка в одном месте.<br>Понятный интерфейс. Исходные расчёты PoB.</p>
         <div class="hero-actions"><a class="button" href="gallery.html">Посмотреть приложение <span data-icon="arrow"></span></a><button class="text-button" data-dialog="how">Как это работает <span aria-hidden="true">↗</span></button></div>
         <section id="download" class="downloads" aria-label="Скачать приложение">
-          <div class="downloads-heading"><span>Скачать для компьютера</span><a data-release-version href="https://github.com/Hecatoncheir/pob2_ui/releases/tag/v0.1.6">v0.1.6 ↗</a></div>
+          <div class="downloads-heading"><span>Скачать для компьютера</span><a data-release-version href="https://github.com/Hecatoncheir/pob2_ui/releases/tag/v0.1.20">v0.1.20 ↗</a></div>
           <div class="download-links">
-            <a class="download-link" data-download="windows" href="https://github.com/Hecatoncheir/pob2_ui/releases/download/v0.1.6/pob2-ui-0.1.6-windows-x64-setup.exe"><img src="assets/platforms/windows.svg" alt="" width="22" height="22"><span><strong>Windows</strong><small>x64 · .exe</small></span></a>
-            <a class="download-link" data-download="macos" href="https://github.com/Hecatoncheir/pob2_ui/releases/download/v0.1.6/pob2-ui-0.1.6-macos-arm64.dmg"><img src="assets/platforms/macos.svg" alt="" width="22" height="22"><span><strong>macOS</strong><small>Apple Silicon · .dmg</small></span></a>
-            <a class="download-link" data-download="linux" href="https://github.com/Hecatoncheir/pob2_ui/releases/download/v0.1.6/pob2-ui-0.1.6-linux-x64.run"><img src="assets/platforms/linux.svg" alt="" width="22" height="22"><span><strong>Linux</strong><small>x64 · .run</small></span></a>
+            <a class="download-link" data-download="windows" href="https://github.com/Hecatoncheir/pob2_ui/releases/download/v0.1.20/pob2-ui-0.1.20-windows-x64-setup.exe"><img src="assets/platforms/windows.svg" alt="" width="22" height="22"><span><strong>Windows</strong><small>x64 · .exe</small></span></a>
+            <a class="download-link" data-download="macos" href="https://github.com/Hecatoncheir/pob2_ui/releases/download/v0.1.20/pob2-ui-0.1.20-macos-arm64.dmg"><img src="assets/platforms/macos.svg" alt="" width="22" height="22"><span><strong>macOS</strong><small>Apple Silicon · .dmg</small></span></a>
+            <a class="download-link" data-download="linux" href="https://github.com/Hecatoncheir/pob2_ui/releases/download/v0.1.20/pob2-ui-0.1.20-linux-x64.run"><img src="assets/platforms/linux.svg" alt="" width="22" height="22"><span><strong>Linux</strong><small>x64 · .run</small></span></a>
           </div>
         </section>
         <div class="hero-facts"><span><span data-icon="shield"></span>Локально</span><span><span data-icon="code"></span>Открытый код</span><span><span data-icon="tree"></span>Исходный Lua</span></div>
@@ -47,7 +47,22 @@
     </main>
     <footer class="site-footer"><p>Меньше шума. Больше пространства для идей.</p><div><a href="gallery.html">Скриншоты приложения ↗</a><a href="brand.html">Логотип и иконки ↗</a></div></footer>
   </div>
-  <dialog id="about"><div class="dialog-head"><h2>О приложении</h2><button class="icon-button" data-close aria-label="Закрыть" data-icon="close"></button></div><p>PoB II — приложение для планирования персонажей Path of Exile 2 на Windows, macOS и Linux. Интерфейс написан на Flutter, а игровые данные, правила и расчёты получает из исходного Lua Path of Building через локальный MCP.</p><p>В опубликованной версии доступны оригинальное дерево с подсказками и поиском узлов, группы умений с перетаскиванием камней и проверкой совместимости, редактор экипировки, условия и показатели сборки. В v0.1.6 добавлены примерка «Было → Стало» и поиск на рынке с возвратом предмета в редактор.</p><p>Сборки и заметки хранятся на вашем компьютере. Есть открытие и сохранение XML, Undo/Redo, светлая и тёмная темы, выбор языка, масштаба и горячих клавиш. Компоненты устанавливаются отдельно и обновляются с проверкой Lua и возможностью отката.</p><p>Для первоначальной установки компонентов нужны интернет, Git и 64-битный Python 3.11+. После загрузки расчёты работают локально. Независимый открытый проект, не официальный продукт Grinding Gear Games.</p><a class="button" href="gallery.html">Посмотреть скриншоты <span data-icon="arrow"></span></a></dialog>
-  <dialog id="how"><div class="dialog-head"><h2>От идеи к сборке</h2><button class="icon-button" data-close aria-label="Закрыть" data-icon="close"></button></div><ol class="how-list"><li><strong>Установите приложение</strong><span>Выберите свою ОС. В разделе «Компоненты» загрузите PoB и MCP.</span></li><li><strong>Соберите персонажа</strong><span>Создайте сборку или откройте XML, выберите узлы дерева, умения и предметы.</span></li><li><strong>Проверьте изменения</strong><span>Исходный Lua рассчитывает показатели. Undo/Redo позволяет вернуться к предыдущему решению.</span></li></ol><p>Галерея показывает работающий Flutter-интерфейс с настоящими данными PoB. Примерка и поиск на рынке доступны в v0.1.6.</p><a class="button" href="gallery.html">В галерею <span data-icon="arrow"></span></a></dialog>
+  <dialog id="about">
+    <div class="dialog-head"><h2>О приложении</h2><button class="icon-button" data-close aria-label="Закрыть" data-icon="close"></button></div>
+    <p>PoB II — приложение для планирования персонажей Path of Exile 2 на Windows, macOS и Linux. Интерфейс написан на Flutter. Игровые данные, правила и расчёты предоставляет исходный Lua Path of Building через локальный MCP.</p>
+    <p>В дереве можно искать пассивные умения по характеристике и сворачивать список результатов, сохраняя подсветку. В редакторе умений можно подбирать совместимые камни поддержки, а в экипировке — сравнивать предметы перед заменой и переходить к поиску на официальном рынке.</p>
+    <p>PoB II открывает и сохраняет XML в общей папке Path of Building. Сборки и заметки хранятся на вашем компьютере. Доступны Undo/Redo, светлая и тёмная темы, выбор языка, масштаб и горячие клавиши.</p>
+    <p>Для первоначальной загрузки компонентов нужны интернет, Git и 64-битный Python 3.11+. После загрузки расчёты работают локально. PoB II — независимый проект с открытым исходным кодом.</p>
+    <a class="button" href="gallery.html">Посмотреть скриншоты <span data-icon="arrow"></span></a>
+  </dialog>
+  <dialog id="how">
+    <div class="dialog-head"><h2>От идеи к сборке</h2><button class="icon-button" data-close aria-label="Закрыть" data-icon="close"></button></div>
+    <ol class="how-list">
+      <li><strong>Подготовьте PoB II</strong><span>Скачайте установщик для своей ОС. При первом запуске нажмите «Подготовить PoB II», чтобы загрузить недостающие компоненты.</span></li>
+      <li><strong>Подключите папку сборок</strong><span>Выберите папку Path of Building. Затем создайте сборку, откройте XML или импортируйте сборку из PoB.</span></li>
+      <li><strong>Сравните варианты</strong><span>Меняйте узлы, умения и предметы. Lua пересчитает показатели, а Undo/Redo позволит вернуться к предыдущему варианту.</span></li>
+    </ol>
+    <a class="button" href="gallery.html">В галерею <span data-icon="arrow"></span></a>
+  </dialog>
 </body>
 </html>

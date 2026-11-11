@@ -1,22 +1,22 @@
 {
-  "tag_name": "v0.1.6",
-  "html_url": "https://github.com/Hecatoncheir/pob2_ui/releases/tag/v0.1.6",
+  "tag_name": "v0.1.20",
+  "html_url": "https://github.com/Hecatoncheir/pob2_ui/releases/tag/v0.1.20",
   "assets": [
     {
-      "name": "pob2-ui-0.1.6-linux-x64.run",
-      "browser_download_url": "https://github.com/Hecatoncheir/pob2_ui/releases/download/v0.1.6/pob2-ui-0.1.6-linux-x64.run"
+      "name": "pob2-ui-0.1.20-linux-x64.run",
+      "browser_download_url": "https://github.com/Hecatoncheir/pob2_ui/releases/download/v0.1.20/pob2-ui-0.1.20-linux-x64.run"
     },
     {
-      "name": "pob2-ui-0.1.6-macos-arm64.dmg",
-      "browser_download_url": "https://github.com/Hecatoncheir/pob2_ui/releases/download/v0.1.6/pob2-ui-0.1.6-macos-arm64.dmg"
+      "name": "pob2-ui-0.1.20-macos-arm64.dmg",
+      "browser_download_url": "https://github.com/Hecatoncheir/pob2_ui/releases/download/v0.1.20/pob2-ui-0.1.20-macos-arm64.dmg"
     },
     {
-      "name": "pob2-ui-0.1.6-windows-x64-setup.exe",
-      "browser_download_url": "https://github.com/Hecatoncheir/pob2_ui/releases/download/v0.1.6/pob2-ui-0.1.6-windows-x64-setup.exe"
+      "name": "pob2-ui-0.1.20-windows-x64-setup.exe",
+      "browser_download_url": "https://github.com/Hecatoncheir/pob2_ui/releases/download/v0.1.20/pob2-ui-0.1.20-windows-x64-setup.exe"
     },
     {
       "name": "SHA256SUMS",
-      "browser_download_url": "https://github.com/Hecatoncheir/pob2_ui/releases/download/v0.1.6/SHA256SUMS"
+      "browser_download_url": "https://github.com/Hecatoncheir/pob2_ui/releases/download/v0.1.20/SHA256SUMS"
     }
   ]
 }

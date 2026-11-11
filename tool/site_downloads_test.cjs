@@ -21,11 +21,17 @@ test('Ссылки без JavaScript и оригиналы галереи вкл
   const html = readFileSync(resolve(__dirname, '../docs/index.html'), 'utf8');
   for (const url of Object.values(releaseDownloads(release).downloads)) assert.ok(html.includes(url));
   const gallery = readFileSync(resolve(__dirname, '../docs/gallery.html'), 'utf8');
-  const originals = [...gallery.matchAll(/<a target="_blank" rel="noopener" href="(assets\/screenshots\/[^\"]+\.png)" data-gallery/g)];
-  assert.equal(originals.length, 8);
-  for (const [, path] of originals) {
+  const originals = [...gallery.matchAll(
+    /<a target="_blank" rel="noopener" href="(assets\/screenshots\/[^"]+\.png)" data-gallery[^>]*><img src="([^"]+)" width="(\d+)" height="(\d+)"/g,
+  )];
+  assert.equal(originals.length, 11);
+  assert.equal(new Set(originals.map(([, path]) => path)).size, originals.length);
+  for (const [, path, preview, width, height] of originals) {
+    assert.equal(preview, path);
     const image = readFileSync(resolve(__dirname, '../docs', path));
     assert.equal(image.subarray(1, 4).toString(), 'PNG');
     assert.ok(image.length > 10000);
+    assert.equal(image.readUInt32BE(16), Number(width));
+    assert.equal(image.readUInt32BE(20), Number(height));
   }
 });

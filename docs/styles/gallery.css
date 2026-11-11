@@ -14,8 +14,7 @@
 .screenshot-card figcaption { padding: 20px 24px }
 .screenshot-card h3 { font-size: 19px; margin-bottom: 6px }
 .screenshot-card p { font-size: 13px; color: var(--muted) }
-.upcoming-heading { margin-top: 64px }
-.upcoming-heading .eyebrow { margin-bottom: 10px }
+.screenshot-grid + .gallery-section-heading { margin-top: 64px }
 .upcoming { border-style: dashed }
 .gallery-note { display: flex; align-items: flex-start; gap: 12px; margin: 36px 0 50px; font-size: 12px; color: var(--muted); max-width: 840px }
 .gallery-note>.icon { flex-shrink: 0; margin-top: 2px }
