@@ -24,7 +24,7 @@ test('Ссылки без JavaScript и оригиналы галереи вкл
   const originals = [...gallery.matchAll(
     /<a target="_blank" rel="noopener" href="(assets\/screenshots\/[^"]+\.png)" data-gallery[^>]*><img src="([^"]+)" width="(\d+)" height="(\d+)"/g,
   )];
-  assert.equal(originals.length, 31);
+  assert.equal(originals.length, 35);
   assert.equal(new Set(originals.map(([, path]) => path)).size, originals.length);
   for (const [, path, preview, width, height] of originals) {
     assert.equal(preview, path);
