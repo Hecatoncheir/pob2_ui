@@ -138,8 +138,15 @@ class SetupWorkshop extends WorkshopCubit {
   bool get ready => prepared;
 
   @override
+  bool get luaReady => prepared;
+
+  @override
   Future<void> prepareComponents() async {
     prepared = true;
+    components.active = {
+      for (final component in Component.values)
+        component: Installation(tag: 'test', commit: 'test', directory: folder),
+    };
     emit(state.copyWith(status: 'Готово'));
   }
 
@@ -278,6 +285,50 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.byKey(const Key('build-folder-path')), findsOneWidget);
     expect(find.text(folder, findRichText: true), findsOneWidget);
+  });
+
+  testWidgets('Мастер из настроек ведёт до библиотеки и помнит готовые шаги', (
+    tester,
+  ) async {
+    final widgetModel = SetupWorkshop(
+      model.components,
+      engine,
+      folder: root.path,
+      library: SetupLibrary(root),
+      pobWindow: window,
+    );
+    addTearDown(widgetModel.close);
+    await tester.pumpWidget(PobApp(model: widgetModel));
+    await tester.pumpAndSettle();
+
+    Finder inWizard(String label) => find.descendant(
+      of: find.byType(AlertDialog),
+      matching: find.text(label),
+    );
+
+    Future<void> openSetup() async {
+      await tester.tap(find.byKey(const Key('appearance-settings')));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Запустить подготовку'));
+      await tester.pumpAndSettle();
+      expect(find.text('Подготовка PoB II'), findsOneWidget);
+    }
+
+    await openSetup();
+    expect(find.text('Скачать Path of Building'), findsOneWidget);
+    await tester.tap(find.text('Установить компоненты'));
+    await tester.pumpAndSettle();
+    expect(find.text('Найти папку PoB'), findsOneWidget);
+    await tester.tap(find.text('Найти папку PoB'));
+    await tester.pumpAndSettle();
+    expect(find.text(root.path, findRichText: true), findsOneWidget);
+    expect(inWizard('Импортировать персонажа'), findsOneWidget);
+    await tester.tap(inWizard('Готово'));
+    await tester.pumpAndSettle();
+    expect(find.byKey(const Key('library-search')), findsOneWidget);
+    await openSetup();
+    expect(find.text('Установить компоненты'), findsNothing);
+    expect(inWizard('Открыть XML'), findsOneWidget);
   });
 
   test('Импорт из PoB открывает отдельную копию', () async {

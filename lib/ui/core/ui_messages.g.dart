@@ -45,6 +45,10 @@ final uiExactTranslations = <String, String Function(AppLocalizations)>{
   "Lua connected": (l) => l.mbf7bbb22e3,
   "PoB II · Мастерская": (l) => l.mcdf95e40cd,
   "PoB II · Workshop": (l) => l.mcdf95e40cd,
+  "PoB II при необходимости запустит PoB свёрнутым и запросит путь к сборкам.":
+      (l) => l.m24093f50af,
+  "PoB II will start PoB minimized if needed and ask it for the builds folder.":
+      (l) => l.m24093f50af,
   "PoB вернул неверные данные персонажа.": (l) => l.mebbddaaf16,
   "PoB returned incorrect character data.": (l) => l.mebbddaaf16,
   "PoB вернул неверный список персонажей.": (l) => l.m16a6aabd6a,
@@ -307,6 +311,8 @@ final uiExactTranslations = <String, String Function(AppLocalizations)>{
   "Build notes": (l) => l.mdc4baf32ac,
   "Заметки сохраняются автоматически": (l) => l.mbdb05f34ee,
   "Notes are saved automatically": (l) => l.mbdb05f34ee,
+  "Запустить подготовку": (l) => l.ma2d2d73bb5,
+  "Start setup": (l) => l.ma2d2d73bb5,
   "Зачарования": (l) => l.m1107806954,
   "Enchantments": (l) => l.m1107806954,
   "Защита": (l) => l.m792acb40e4,
@@ -436,6 +442,9 @@ final uiExactTranslations = <String, String Function(AppLocalizations)>{
   "Название группы": (l) => l.md45e66ab55,
   "Group name": (l) => l.md45e66ab55,
   "Название сборки": (l) => l.m51233393a5,
+  "Найдено несколько папок PoB. Выберите нужную вручную.": (l) => l.m0bf71e1c90,
+  "Several PoB folders were found. Choose the one you use.": (l) =>
+      l.m0bf71e1c90,
   "Найти": (l) => l.mbe6156b8e4,
   "Find": (l) => l.mbe6156b8e4,
   "Найти камень": (l) => l.m7d4ff2d217,
@@ -647,6 +656,8 @@ final uiExactTranslations = <String, String Function(AppLocalizations)>{
   "Open XML from PoB": (l) => l.m38ec738ed2,
   "Открыть и рассчитать": (l) => l.m589c35aaa6,
   "Open and calculate": (l) => l.m589c35aaa6,
+  "Открыть или создать сборку": (l) => l.m5ba3edc059,
+  "Open or create a build": (l) => l.m5ba3edc059,
   "Открыть поиск": (l) => l.mcfc22a4611,
   "Open search": (l) => l.mcfc22a4611,
   "Отмена": (l) => l.m8fbe9b75cb,
@@ -665,6 +676,8 @@ final uiExactTranslations = <String, String Function(AppLocalizations)>{
   "Builds folder": (l) => l.m8ce1a3f4ee,
   "Папка сборок PoB изменилась.": (l) => l.mcaef3568a0,
   "The PoB build folder has changed.": (l) => l.mcaef3568a0,
+  "Папка сборок из настроек PoB недоступна.": (l) => l.med31458051,
+  "The builds folder set in PoB is unavailable.": (l) => l.med31458051,
   "Пассивные": (l) => l.m1971cfb84c,
   "Passive": (l) => l.m1971cfb84c,
   "Перевод больше ожидаемого размера": (l) => l.m8188a57c48,
@@ -709,10 +722,13 @@ final uiExactTranslations = <String, String Function(AppLocalizations)>{
   "Spell Suppression Chance": (l) => l.mbcc0fdbe14,
   "Подготовить PoB II": (l) => l.mb66419affe,
   "Set up PoB II": (l) => l.mb66419affe,
+  "Подготовка PoB II": (l) => l.mc1b2f9e3a6,
   "Поддерживаются Windows x64, Linux x64 и macOS arm64": (l) => l.m52d7142d18,
   "Windows x64, Linux x64 and macOS arm64 supported": (l) => l.m52d7142d18,
   "Поддержки общие для умений этого слота": (l) => l.mc2fd54cfce,
   "Skills in this equipment slot share supports": (l) => l.mc2fd54cfce,
+  "Подключена стандартная папка PoB": (l) => l.m54ab473017,
+  "Default PoB folder connected": (l) => l.m54ab473017,
   "Подключите Lua": (l) => l.m67f5d8880e,
   "Connect Lua": (l) => l.m67f5d8880e,
   "Подключите мост заново и перезапустите PoB.": (l) => l.m0d8b14b475,
@@ -724,6 +740,8 @@ final uiExactTranslations = <String, String Function(AppLocalizations)>{
   "Connect builds folder": (l) => l.m929d292c0e,
   "Подходящие поддержки": (l) => l.m5f5155bb1f,
   "Matching supports": (l) => l.m5f5155bb1f,
+  "Позже": (l) => l.m7996f71149,
+  "Later": (l) => l.m7996f71149,
   "Поиск": (l) => l.m180f58ab97,
   "Search": (l) => l.m180f58ab97,
   "Поиск на рынке": (l) => l.m885946a42e,
@@ -891,6 +909,10 @@ final uiExactTranslations = <String, String Function(AppLocalizations)>{
   "An assembly with the same name already exists.": (l) => l.med0b7c459c,
   "Сборка удалена": (l) => l.m187a481844,
   "Build deleted": (l) => l.m187a481844,
+  "Сборки из подключённой папки уже доступны в разделе «Мои сборки».": (l) =>
+      l.m9027890a7b,
+  "Builds in the connected folder are available in My Builds.": (l) =>
+      l.m9027890a7b,
   "Сбросить": (l) => l.m407f871778,
   "Reset": (l) => l.m407f871778,
   "Сбросить сочетания": (l) => l.mde7b2b9b0d,
@@ -918,6 +940,10 @@ final uiExactTranslations = <String, String Function(AppLocalizations)>{
   "Strength": (l) => l.m69c1590a47,
   "Системное уменьшение движения имеет приоритет": (l) => l.m9ea191ae12,
   "System motion reduction takes priority": (l) => l.m9ea191ae12,
+  "Скачать Path of Building": (l) => l.me7d43ecc6d,
+  "Download Path of Building": (l) => l.me7d43ecc6d,
+  "Скачать PoB MCP": (l) => l.m0c90d97433,
+  "Download PoB MCP": (l) => l.m0c90d97433,
   "Скачать обновление": (l) => l.m0a8113a0b9,
   "Download update": (l) => l.m0a8113a0b9,
   "Скопировать": (l) => l.mf02956c165,
@@ -987,6 +1013,10 @@ final uiExactTranslations = <String, String Function(AppLocalizations)>{
   "No stable releases yet": (l) => l.m91d6208508,
   "Стало": (l) => l.md3ae3e1986,
   "After": (l) => l.md3ae3e1986,
+  "Стандартная папка PoB не найдена. Выберите папку вручную.": (l) =>
+      l.mabdae6b126,
+  "The default PoB folder was not found. Choose a folder manually.": (l) =>
+      l.mabdae6b126,
   "Страница выпусков": (l) => l.mf7eaffec2f,
   "Issues page": (l) => l.mf7eaffec2f,
   "Суммарные свойства": (l) => l.m4ef88e033d,
@@ -1024,12 +1054,22 @@ final uiExactTranslations = <String, String Function(AppLocalizations)>{
   "Remove skill": (l) => l.m1c89558239,
   "Уже выполняется установка": (l) => l.m97ac4c501c,
   "Installation already in progress": (l) => l.m97ac4c501c,
+  "Уже открыта другая установка PoB. Подключите её в разделе «Компоненты».": (
+    l,
+  ) => l.m2748676635,
+  "Another PoB installation is already open. Connect it in Components.": (l) =>
+      l.m2748676635,
   "Узел": (l) => l.me77a383ee5,
   "Node": (l) => l.me77a383ee5,
   "Узел не изменит показатели.": (l) => l.m8cf5c33b30,
   "No changes.": (l) => l.m8cf5c33b30,
   "Узлы": (l) => l.mf3a46c2f2b,
   "Nodes": (l) => l.mf3a46c2f2b,
+  "Укажите папку PoB вручную или попробуйте найти её по стандартному пути.": (
+    l,
+  ) => l.mb68ab7d79e,
+  "Choose the PoB folder manually or look in the default location.": (l) =>
+      l.mb68ab7d79e,
   "Укажите число от 1 до 200": (l) => l.mdba310a980,
   "Specify a number from 1 to 200": (l) => l.mdba310a980,
   "Уклонение": (l) => l.mdf00fd3d66,
@@ -1058,6 +1098,12 @@ final uiExactTranslations = <String, String Function(AppLocalizations)>{
   "Conditions not found": (l) => l.m288545991b,
   "Условия расчёта": (l) => l.m7186793dd5,
   "Calculation conditions": (l) => l.m7186793dd5,
+  "Установите 64-битный Python 3.11+ и перезапустите PoB II.": (l) =>
+      l.m0a3fddcd95,
+  "Install 64-bit Python 3.11 or newer and restart PoB II.": (l) =>
+      l.m0a3fddcd95,
+  "Установите Git и перезапустите PoB II.": (l) => l.mdccbb9341b,
+  "Install Git and restart PoB II.": (l) => l.mdccbb9341b,
   "Установите компоненты и подключите Lua": (l) => l.m720408ab97,
   "Install components and connect Lua": (l) => l.m720408ab97,
   "Установите компоненты, чтобы открыть сборку и получить настоящий расчёт.": (
@@ -1068,6 +1114,8 @@ final uiExactTranslations = <String, String Function(AppLocalizations)>{
   ) => l.m4d9acf3506,
   "Установить": (l) => l.mb7cd6fae08,
   "Install": (l) => l.mb7cd6fae08,
+  "Установить компоненты": (l) => l.mfdeaa71380,
+  "Install components": (l) => l.mfdeaa71380,
   "Установлена актуальная версия": (l) => l.mfcb7c67f91,
   "Current version installed": (l) => l.mfcb7c67f91,
   "Файл обновления не имеет проверяемой контрольной суммы": (l) =>
@@ -1188,6 +1236,10 @@ final uiPatternTranslations = <UiRule>[
     (l, args) => l.mf01de15993(args[0]),
   ),
   UiRule(
+    "Could not get the folder through the PoB bridge: {p0}",
+    (l, args) => l.m4a86054c42(args[0]),
+  ),
+  UiRule(
     "Не удалось восстановить состояние после ошибки: {p0}",
     (l, args) => l.mcf4205d2e9(args[0]),
   ),
@@ -1206,6 +1258,10 @@ final uiPatternTranslations = <UiRule>[
   UiRule(
     "The application remains open to save data: {p0}",
     (l, args) => l.md25ca8974f(args[0]),
+  ),
+  UiRule(
+    "Не удалось получить папку через мост PoB: {p0}",
+    (l, args) => l.m4a86054c42(args[0]),
   ),
   UiRule(
     "Не удалось открыть или сохранить заметки.\n{p0}",

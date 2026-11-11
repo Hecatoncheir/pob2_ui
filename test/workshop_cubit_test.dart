@@ -82,7 +82,11 @@ class _SetupEngine extends McpClient {
   Future<Map<String, dynamic>> call(
     String name, [
     Map<String, dynamic> arguments = const {},
-  ]) async => {'entries': <dynamic>[]};
+  ]) async => {
+    'entries': [
+      {'id': 1, 'name': 'Witch'},
+    ],
+  };
 }
 
 void main() {

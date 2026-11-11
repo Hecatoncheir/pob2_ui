@@ -88,6 +88,10 @@ class AppLocalizationsPt extends AppLocalizations {
   String get mcdf95e40cd => 'PoB II · Oficina';
 
   @override
+  String get m24093f50af =>
+      'Se necessário, o PoB II iniciará o PoB minimizado e pedirá a pasta de builds.';
+
+  @override
   String get mebbddaaf16 => 'PoB retornou dados de caracteres incorretos.';
 
   @override
@@ -551,6 +555,9 @@ class AppLocalizationsPt extends AppLocalizations {
   String get mbdb05f34ee => 'As notas são salvas automaticamente';
 
   @override
+  String get ma2d2d73bb5 => 'Iniciar configuração';
+
+  @override
   String get m1107806954 => 'Encantamentos';
 
   @override
@@ -757,6 +764,10 @@ class AppLocalizationsPt extends AppLocalizations {
   String get m51233393a5 => 'Novas bolas';
 
   @override
+  String get m0bf71e1c90 =>
+      'Foram encontradas várias pastas do PoB. Escolha a que você usa.';
+
+  @override
   String mbfd148a7e8(String p0) {
     return 'Nós encontrados: $p0';
   }
@@ -866,6 +877,11 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get m57c6abe340 => 'Falha ao obter resposta do servidor';
+
+  @override
+  String m4a86054c42(String p0) {
+    return 'Não foi possível obter a pasta pela ponte do PoB: $p0';
+  }
 
   @override
   String mcd252d5275(String p0) {
@@ -1164,6 +1180,9 @@ class AppLocalizationsPt extends AppLocalizations {
   String get m589c35aaa6 => 'Abrir e calcular';
 
   @override
+  String get m5ba3edc059 => 'Abrir ou criar uma build';
+
+  @override
   String get mcfc22a4611 => 'Abrir pesquisa';
 
   @override
@@ -1204,6 +1223,10 @@ class AppLocalizationsPt extends AppLocalizations {
   String md9960887f8(String p0) {
     return 'Pasta de compilação PoB indisponível: $p0';
   }
+
+  @override
+  String get med31458051 =>
+      'A pasta de builds configurada no PoB não está disponível.';
 
   @override
   String get m1971cfb84c => 'Passivo';
@@ -1274,11 +1297,17 @@ class AppLocalizationsPt extends AppLocalizations {
   String get mb66419affe => 'Configurar PoB II';
 
   @override
+  String get mc1b2f9e3a6 => 'Configurar o PoB II';
+
+  @override
   String get m52d7142d18 => 'Windows x64, Linux x64 e macOS arm64 compatíveis';
 
   @override
   String get mc2fd54cfce =>
       'As habilidades deste espaço de equipamento compartilham suportes';
+
+  @override
+  String get m54ab473017 => 'Pasta padrão do PoB conectada';
 
   @override
   String get m67f5d8880e => 'Conectar Lua';
@@ -1297,6 +1326,9 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get m5f5155bb1f => 'Suportes correspondentes';
+
+  @override
+  String get m7996f71149 => 'Mais tarde';
 
   @override
   String get m180f58ab97 => 'Pesquisa';
@@ -1609,6 +1641,10 @@ class AppLocalizationsPt extends AppLocalizations {
   String get m187a481844 => 'Versão excluída';
 
   @override
+  String get m9027890a7b =>
+      'As builds da pasta conectada estão em “Minhas builds”.';
+
+  @override
   String get m407f871778 => 'Redefinir';
 
   @override
@@ -1647,6 +1683,12 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get m9ea191ae12 => 'A redução de movimento do sistema tem prioridade';
+
+  @override
+  String get me7d43ecc6d => 'Baixar o Path of Building';
+
+  @override
+  String get m0c90d97433 => 'Baixar o PoB MCP';
 
   @override
   String get m0a8113a0b9 => 'Baixar atualização';
@@ -1751,6 +1793,10 @@ class AppLocalizationsPt extends AppLocalizations {
   String get md3ae3e1986 => 'Tornou-se';
 
   @override
+  String get mabdae6b126 =>
+      'A pasta padrão do PoB não foi encontrada. Escolha uma pasta manualmente.';
+
+  @override
   String get mf7eaffec2f => 'Página de problemas';
 
   @override
@@ -1808,6 +1854,10 @@ class AppLocalizationsPt extends AppLocalizations {
   String get m97ac4c501c => 'Instalação já em andamento';
 
   @override
+  String get m2748676635 =>
+      'Outra instalação do PoB já está aberta. Conecte-a em “Componentes”.';
+
+  @override
   String get me77a383ee5 => 'Nó';
 
   @override
@@ -1815,6 +1865,10 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get mf3a46c2f2b => 'Nós';
+
+  @override
+  String get mb68ab7d79e =>
+      'Escolha a pasta do PoB manualmente ou procure no local padrão.';
 
   @override
   String get mdba310a980 => 'Especifique um número de 1 a 200';
@@ -1864,6 +1918,13 @@ class AppLocalizationsPt extends AppLocalizations {
   String get m7186793dd5 => 'Condições de cálculo';
 
   @override
+  String get m0a3fddcd95 =>
+      'Instale o Python 3.11 ou mais recente de 64 bits e reinicie o PoB II.';
+
+  @override
+  String get mdccbb9341b => 'Instale o Git e reinicie o PoB II.';
+
+  @override
   String get m720408ab97 => 'Instalar componentes e conectar Lua';
 
   @override
@@ -1872,6 +1933,9 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get mb7cd6fae08 => 'Instalar';
+
+  @override
+  String get mfdeaa71380 => 'Instalar componentes';
 
   @override
   String get mfcb7c67f91 => 'Versão atual instalada';
@@ -2082,6 +2146,10 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get mcdf95e40cd => 'PoB II · Oficina';
 
   @override
+  String get m24093f50af =>
+      'Se necessário, o PoB II iniciará o PoB minimizado e pedirá a pasta de builds.';
+
+  @override
   String get mebbddaaf16 => 'PoB retornou dados de caracteres incorretos.';
 
   @override
@@ -2545,6 +2613,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get mbdb05f34ee => 'As notas são salvas automaticamente';
 
   @override
+  String get ma2d2d73bb5 => 'Iniciar configuração';
+
+  @override
   String get m1107806954 => 'Encantamentos';
 
   @override
@@ -2751,6 +2822,10 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get m51233393a5 => 'Novas bolas';
 
   @override
+  String get m0bf71e1c90 =>
+      'Foram encontradas várias pastas do PoB. Escolha a que você usa.';
+
+  @override
   String mbfd148a7e8(String p0) {
     return 'Nós encontrados: $p0';
   }
@@ -2860,6 +2935,11 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get m57c6abe340 => 'Falha ao obter resposta do servidor';
+
+  @override
+  String m4a86054c42(String p0) {
+    return 'Não foi possível obter a pasta pela ponte do PoB: $p0';
+  }
 
   @override
   String mcd252d5275(String p0) {
@@ -3158,6 +3238,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get m589c35aaa6 => 'Abrir e calcular';
 
   @override
+  String get m5ba3edc059 => 'Abrir ou criar uma build';
+
+  @override
   String get mcfc22a4611 => 'Abrir pesquisa';
 
   @override
@@ -3198,6 +3281,10 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String md9960887f8(String p0) {
     return 'Pasta de compilação PoB indisponível: $p0';
   }
+
+  @override
+  String get med31458051 =>
+      'A pasta de builds configurada no PoB não está disponível.';
 
   @override
   String get m1971cfb84c => 'Passivo';
@@ -3268,11 +3355,17 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get mb66419affe => 'Configurar PoB II';
 
   @override
+  String get mc1b2f9e3a6 => 'Configurar o PoB II';
+
+  @override
   String get m52d7142d18 => 'Windows x64, Linux x64 e macOS arm64 compatíveis';
 
   @override
   String get mc2fd54cfce =>
       'As habilidades deste espaço de equipamento compartilham suportes';
+
+  @override
+  String get m54ab473017 => 'Pasta padrão do PoB conectada';
 
   @override
   String get m67f5d8880e => 'Conectar Lua';
@@ -3291,6 +3384,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get m5f5155bb1f => 'Suportes correspondentes';
+
+  @override
+  String get m7996f71149 => 'Mais tarde';
 
   @override
   String get m180f58ab97 => 'Pesquisa';
@@ -3603,6 +3699,10 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get m187a481844 => 'Versão excluída';
 
   @override
+  String get m9027890a7b =>
+      'As builds da pasta conectada estão em “Minhas builds”.';
+
+  @override
   String get m407f871778 => 'Redefinir';
 
   @override
@@ -3641,6 +3741,12 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get m9ea191ae12 => 'A redução de movimento do sistema tem prioridade';
+
+  @override
+  String get me7d43ecc6d => 'Baixar o Path of Building';
+
+  @override
+  String get m0c90d97433 => 'Baixar o PoB MCP';
 
   @override
   String get m0a8113a0b9 => 'Baixar atualização';
@@ -3745,6 +3851,10 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get md3ae3e1986 => 'Tornou-se';
 
   @override
+  String get mabdae6b126 =>
+      'A pasta padrão do PoB não foi encontrada. Escolha uma pasta manualmente.';
+
+  @override
   String get mf7eaffec2f => 'Página de problemas';
 
   @override
@@ -3802,6 +3912,10 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get m97ac4c501c => 'Instalação já em andamento';
 
   @override
+  String get m2748676635 =>
+      'Outra instalação do PoB já está aberta. Conecte-a em “Componentes”.';
+
+  @override
   String get me77a383ee5 => 'Nó';
 
   @override
@@ -3809,6 +3923,10 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get mf3a46c2f2b => 'Nós';
+
+  @override
+  String get mb68ab7d79e =>
+      'Escolha a pasta do PoB manualmente ou procure no local padrão.';
 
   @override
   String get mdba310a980 => 'Especifique um número de 1 a 200';
@@ -3858,6 +3976,13 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get m7186793dd5 => 'Condições de cálculo';
 
   @override
+  String get m0a3fddcd95 =>
+      'Instale o Python 3.11 ou mais recente de 64 bits e reinicie o PoB II.';
+
+  @override
+  String get mdccbb9341b => 'Instale o Git e reinicie o PoB II.';
+
+  @override
   String get m720408ab97 => 'Instalar componentes e conectar Lua';
 
   @override
@@ -3866,6 +3991,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get mb7cd6fae08 => 'Instalar';
+
+  @override
+  String get mfdeaa71380 => 'Instalar componentes';
 
   @override
   String get mfcb7c67f91 => 'Versão atual instalada';

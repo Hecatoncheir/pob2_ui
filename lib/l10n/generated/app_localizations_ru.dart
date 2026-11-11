@@ -88,6 +88,10 @@ class AppLocalizationsRu extends AppLocalizations {
   String get mcdf95e40cd => 'PoB II · Мастерская';
 
   @override
+  String get m24093f50af =>
+      'PoB II при необходимости запустит PoB свёрнутым и запросит путь к сборкам.';
+
+  @override
   String get mebbddaaf16 => 'PoB вернул неверные данные персонажа.';
 
   @override
@@ -547,6 +551,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get mbdb05f34ee => 'Заметки сохраняются автоматически';
 
   @override
+  String get ma2d2d73bb5 => 'Запустить подготовку';
+
+  @override
   String get m1107806954 => 'Зачарования';
 
   @override
@@ -751,6 +758,10 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m51233393a5 => 'Название сборки';
 
   @override
+  String get m0bf71e1c90 =>
+      'Найдено несколько папок PoB. Выберите нужную вручную.';
+
+  @override
   String mbfd148a7e8(String p0) {
     return 'Найдено узлов: $p0';
   }
@@ -860,6 +871,11 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get m57c6abe340 => 'Не удалось получить ответ сервера';
+
+  @override
+  String m4a86054c42(String p0) {
+    return 'Не удалось получить папку через мост PoB: $p0';
+  }
 
   @override
   String mcd252d5275(String p0) {
@@ -1154,6 +1170,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m589c35aaa6 => 'Открыть и рассчитать';
 
   @override
+  String get m5ba3edc059 => 'Открыть или создать сборку';
+
+  @override
   String get mcfc22a4611 => 'Открыть поиск';
 
   @override
@@ -1194,6 +1213,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String md9960887f8(String p0) {
     return 'Папка сборок PoB недоступна: $p0';
   }
+
+  @override
+  String get med31458051 => 'Папка сборок из настроек PoB недоступна.';
 
   @override
   String get m1971cfb84c => 'Пассивные';
@@ -1264,11 +1286,17 @@ class AppLocalizationsRu extends AppLocalizations {
   String get mb66419affe => 'Подготовить PoB II';
 
   @override
+  String get mc1b2f9e3a6 => 'Подготовка PoB II';
+
+  @override
   String get m52d7142d18 =>
       'Поддерживаются Windows x64, Linux x64 и macOS arm64';
 
   @override
   String get mc2fd54cfce => 'Поддержки общие для умений этого слота';
+
+  @override
+  String get m54ab473017 => 'Подключена стандартная папка PoB';
 
   @override
   String get m67f5d8880e => 'Подключите Lua';
@@ -1287,6 +1315,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get m5f5155bb1f => 'Подходящие поддержки';
+
+  @override
+  String get m7996f71149 => 'Позже';
 
   @override
   String get m180f58ab97 => 'Поиск';
@@ -1595,6 +1626,10 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m187a481844 => 'Сборка удалена';
 
   @override
+  String get m9027890a7b =>
+      'Сборки из подключённой папки уже доступны в разделе «Мои сборки».';
+
+  @override
   String get m407f871778 => 'Сбросить';
 
   @override
@@ -1633,6 +1668,12 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get m9ea191ae12 => 'Системное уменьшение движения имеет приоритет';
+
+  @override
+  String get me7d43ecc6d => 'Скачать Path of Building';
+
+  @override
+  String get m0c90d97433 => 'Скачать PoB MCP';
 
   @override
   String get m0a8113a0b9 => 'Скачать обновление';
@@ -1736,6 +1777,10 @@ class AppLocalizationsRu extends AppLocalizations {
   String get md3ae3e1986 => 'Стало';
 
   @override
+  String get mabdae6b126 =>
+      'Стандартная папка PoB не найдена. Выберите папку вручную.';
+
+  @override
   String get mf7eaffec2f => 'Страница выпусков';
 
   @override
@@ -1793,6 +1838,10 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m97ac4c501c => 'Уже выполняется установка';
 
   @override
+  String get m2748676635 =>
+      'Уже открыта другая установка PoB. Подключите её в разделе «Компоненты».';
+
+  @override
   String get me77a383ee5 => 'Узел';
 
   @override
@@ -1800,6 +1849,10 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get mf3a46c2f2b => 'Узлы';
+
+  @override
+  String get mb68ab7d79e =>
+      'Укажите папку PoB вручную или попробуйте найти её по стандартному пути.';
 
   @override
   String get mdba310a980 => 'Укажите число от 1 до 200';
@@ -1849,6 +1902,13 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m7186793dd5 => 'Условия расчёта';
 
   @override
+  String get m0a3fddcd95 =>
+      'Установите 64-битный Python 3.11+ и перезапустите PoB II.';
+
+  @override
+  String get mdccbb9341b => 'Установите Git и перезапустите PoB II.';
+
+  @override
   String get m720408ab97 => 'Установите компоненты и подключите Lua';
 
   @override
@@ -1857,6 +1917,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get mb7cd6fae08 => 'Установить';
+
+  @override
+  String get mfdeaa71380 => 'Установить компоненты';
 
   @override
   String get mfcb7c67f91 => 'Установлена актуальная версия';

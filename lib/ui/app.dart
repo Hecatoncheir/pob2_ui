@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'core/dialog_close_button.dart';
 import 'core/app_text.dart';
 
@@ -7,6 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../domain/app_info.dart';
 import '../domain/appearance.dart';
 import '../data/appearance_repository.dart';
+import '../data/setup_preferences.dart';
 import 'appearance_bloc.dart';
 import 'appearance_picker.dart';
 import '../data/language_preferences.dart';
@@ -41,6 +44,7 @@ import 'workspace_preferences_bloc.dart';
 import 'keyboard_bindings.dart';
 import 'shortcut_settings.dart';
 import 'resizable_sidebar.dart';
+import 'setup_wizard.dart';
 import 'core/ui_translation.dart';
 
 class PobApp extends StatelessWidget {
@@ -52,6 +56,7 @@ class PobApp extends StatelessWidget {
     this.language,
     this.interfaceScale,
     this.workspacePreferences,
+    this.initialization,
   });
   final WorkshopCubit model;
   final AppUpdateCubit? updates;
@@ -59,9 +64,11 @@ class PobApp extends StatelessWidget {
   final LanguageBloc? language;
   final InterfaceScaleBloc? interfaceScale;
   final WorkspacePreferencesBloc? workspacePreferences;
+  final Future<void>? initialization;
   @override
   Widget build(BuildContext context) => MultiBlocProvider(
     providers: [
+      BlocProvider<WorkshopCubit>.value(value: model),
       BlocProvider(create: (_) => ShellBloc()),
       if (workspacePreferences case final preferences?)
         BlocProvider<WorkspacePreferencesBloc>.value(value: preferences)
@@ -96,14 +103,15 @@ class PobApp extends StatelessWidget {
               AppearanceBloc(AppearanceRepository(model.components.store.root)),
         ),
     ],
-    child: _MaterialApp(model, updates),
+    child: _MaterialApp(model, updates, initialization),
   );
 }
 
 class _MaterialApp extends StatefulWidget {
-  const _MaterialApp(this.model, this.updates);
+  const _MaterialApp(this.model, this.updates, this.initialization);
   final WorkshopCubit model;
   final AppUpdateCubit? updates;
+  final Future<void>? initialization;
   @override
   State<_MaterialApp> createState() => _MaterialAppState();
 }
@@ -125,6 +133,27 @@ class _MaterialAppState extends State<_MaterialApp> {
         if (mounted) widget.model.resumeBuildSync();
       });
     });
+    if (widget.initialization case final initialization?) {
+      WidgetsBinding.instance.addPostFrameCallback((_) async {
+        await initialization;
+        if (mounted) await _showFirstSetup();
+      });
+    }
+  }
+
+  Future<void> _showFirstSetup() async {
+    final model = widget.model;
+    if (model.ready && model.buildFolderReady) return;
+    final preferences = SetupPreferences(model.components.store.root);
+    if (await preferences.wasShown() || !mounted || _modalOpen()) return;
+    final dialogContext = navigator.currentContext;
+    if (dialogContext == null || !dialogContext.mounted) return;
+    await showSetupWizard(dialogContext, model);
+    try {
+      await preferences.markShown();
+    } on FileSystemException catch (error) {
+      model.reportPersistenceError(error);
+    }
   }
 
   @override
@@ -758,9 +787,10 @@ class _SettingsButton extends StatelessWidget {
       ],
     ),
   );
-  void _show(BuildContext context) {
+  Future<void> _show(BuildContext context) async {
     final shell = context.read<ShellBloc>();
-    sparkDialog<void>(
+    final model = context.read<WorkshopCubit>();
+    final openSetup = await sparkDialog<bool>(
       context,
       AlertDialog(
         title: const AppText('Настройки'),
@@ -795,9 +825,20 @@ class _SettingsButton extends StatelessWidget {
             ),
           ),
         ),
-        actions: [const DialogCloseButton(label: 'Готово')],
+        actions: [
+          Builder(
+            builder: (context) => OutlinedButton(
+              onPressed: () => Navigator.pop(context, true),
+              child: const AppText('Запустить подготовку'),
+            ),
+          ),
+          const DialogCloseButton(label: 'Готово'),
+        ],
       ),
     );
+    if (openSetup == true && context.mounted) {
+      await showSetupWizard(context, model);
+    }
   }
 }
 

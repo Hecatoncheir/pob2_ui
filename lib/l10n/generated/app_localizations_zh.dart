@@ -88,6 +88,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get mcdf95e40cd => 'PoB II · 研討會';
 
   @override
+  String get m24093f50af => '必要時，PoB II 會以最小化方式啟動 PoB 並取得流派資料夾。';
+
+  @override
   String get mebbddaaf16 => 'PoB 回傳了錯誤的字元資料。';
 
   @override
@@ -531,6 +534,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get mbdb05f34ee => '筆記自動儲存';
 
   @override
+  String get ma2d2d73bb5 => '開始設定';
+
+  @override
   String get m1107806954 => '結界';
 
   @override
@@ -733,6 +739,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m51233393a5 => 'Название сборки';
 
   @override
+  String get m0bf71e1c90 => '找到多個 PoB 資料夾。請選擇您使用的資料夾。';
+
+  @override
   String mbfd148a7e8(String p0) {
     return '找到的節點：$p0';
   }
@@ -841,6 +850,11 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m57c6abe340 => '無法取得伺服器回應';
+
+  @override
+  String m4a86054c42(String p0) {
+    return '無法透過 PoB 橋接取得資料夾：$p0';
+  }
 
   @override
   String mcd252d5275(String p0) {
@@ -1131,6 +1145,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m589c35aaa6 => '開啟並計算';
 
   @override
+  String get m5ba3edc059 => '開啟或建立流派';
+
+  @override
   String get mcfc22a4611 => '開啟搜尋';
 
   @override
@@ -1171,6 +1188,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String md9960887f8(String p0) {
     return 'PoB 建置資料夾不可用：$p0';
   }
+
+  @override
+  String get med31458051 => '無法存取 PoB 設定中的流派資料夾。';
 
   @override
   String get m1971cfb84c => '被動';
@@ -1238,10 +1258,16 @@ class AppLocalizationsZh extends AppLocalizations {
   String get mb66419affe => '設定 PoB II';
 
   @override
+  String get mc1b2f9e3a6 => '設定 PoB II';
+
+  @override
   String get m52d7142d18 => '支援 Windows x64、Linux x64 和 macOS arm64';
 
   @override
   String get mc2fd54cfce => '此裝備欄位的技能共用輔助寶石';
+
+  @override
+  String get m54ab473017 => '已連接 PoB 預設資料夾';
 
   @override
   String get m67f5d8880e => '連接 Lua';
@@ -1260,6 +1286,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m5f5155bb1f => '匹配支持';
+
+  @override
+  String get m7996f71149 => '稍後';
 
   @override
   String get m180f58ab97 => '搜索';
@@ -1562,6 +1591,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m187a481844 => '建置已刪除';
 
   @override
+  String get m9027890a7b => '已連接資料夾中的流派可在「我的流派」查看。';
+
+  @override
   String get m407f871778 => '重置';
 
   @override
@@ -1599,6 +1631,12 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m9ea191ae12 => '系統運動減少優先';
+
+  @override
+  String get me7d43ecc6d => '下載 Path of Building';
+
+  @override
+  String get m0c90d97433 => '下載 PoB MCP';
 
   @override
   String get m0a8113a0b9 => '下載更新';
@@ -1699,6 +1737,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get md3ae3e1986 => '成為';
 
   @override
+  String get mabdae6b126 => '找不到 PoB 預設資料夾。請手動選擇資料夾。';
+
+  @override
   String get mf7eaffec2f => '問題頁面';
 
   @override
@@ -1756,6 +1797,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m97ac4c501c => '安裝已在進行中';
 
   @override
+  String get m2748676635 => '已開啟另一個 PoB 安裝。請在「元件」中連接。';
+
+  @override
   String get me77a383ee5 => '節點';
 
   @override
@@ -1763,6 +1807,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get mf3a46c2f2b => '節點';
+
+  @override
+  String get mb68ab7d79e => '手動選擇 PoB 資料夾，或嘗試從預設位置尋找。';
 
   @override
   String get mdba310a980 => '指定 1 到 200 之間的數字';
@@ -1812,6 +1859,12 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m7186793dd5 => '計算條件';
 
   @override
+  String get m0a3fddcd95 => '安裝 64 位元 Python 3.11 或更新版本，再重新啟動 PoB II。';
+
+  @override
+  String get mdccbb9341b => '安裝 Git，再重新啟動 PoB II。';
+
+  @override
   String get m720408ab97 => '安裝組件並連接 Lua';
 
   @override
@@ -1819,6 +1872,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get mb7cd6fae08 => '安裝';
+
+  @override
+  String get mfdeaa71380 => '安裝元件';
 
   @override
   String get mfcb7c67f91 => '安裝的目前版本';
@@ -2023,6 +2079,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get mcdf95e40cd => 'PoB II · 研討會';
 
   @override
+  String get m24093f50af => '必要時，PoB II 會以最小化方式啟動 PoB 並取得流派資料夾。';
+
+  @override
   String get mebbddaaf16 => 'PoB 回傳了錯誤的字元資料。';
 
   @override
@@ -2466,6 +2525,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get mbdb05f34ee => '筆記自動儲存';
 
   @override
+  String get ma2d2d73bb5 => '開始設定';
+
+  @override
   String get m1107806954 => '結界';
 
   @override
@@ -2668,6 +2730,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m51233393a5 => 'Название сборки';
 
   @override
+  String get m0bf71e1c90 => '找到多個 PoB 資料夾。請選擇您使用的資料夾。';
+
+  @override
   String mbfd148a7e8(String p0) {
     return '找到的節點：$p0';
   }
@@ -2776,6 +2841,11 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m57c6abe340 => '無法取得伺服器回應';
+
+  @override
+  String m4a86054c42(String p0) {
+    return '無法透過 PoB 橋接取得資料夾：$p0';
+  }
 
   @override
   String mcd252d5275(String p0) {
@@ -3066,6 +3136,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m589c35aaa6 => '開啟並計算';
 
   @override
+  String get m5ba3edc059 => '開啟或建立流派';
+
+  @override
   String get mcfc22a4611 => '開啟搜尋';
 
   @override
@@ -3106,6 +3179,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String md9960887f8(String p0) {
     return 'PoB 建置資料夾不可用：$p0';
   }
+
+  @override
+  String get med31458051 => '無法存取 PoB 設定中的流派資料夾。';
 
   @override
   String get m1971cfb84c => '被動';
@@ -3173,10 +3249,16 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get mb66419affe => '設定 PoB II';
 
   @override
+  String get mc1b2f9e3a6 => '設定 PoB II';
+
+  @override
   String get m52d7142d18 => '支援 Windows x64、Linux x64 和 macOS arm64';
 
   @override
   String get mc2fd54cfce => '此裝備欄位的技能共用輔助寶石';
+
+  @override
+  String get m54ab473017 => '已連接 PoB 預設資料夾';
 
   @override
   String get m67f5d8880e => '連接 Lua';
@@ -3195,6 +3277,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m5f5155bb1f => '匹配支持';
+
+  @override
+  String get m7996f71149 => '稍後';
 
   @override
   String get m180f58ab97 => '搜索';
@@ -3497,6 +3582,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m187a481844 => '建置已刪除';
 
   @override
+  String get m9027890a7b => '已連接資料夾中的流派可在「我的流派」查看。';
+
+  @override
   String get m407f871778 => '重置';
 
   @override
@@ -3534,6 +3622,12 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m9ea191ae12 => '系統運動減少優先';
+
+  @override
+  String get me7d43ecc6d => '下載 Path of Building';
+
+  @override
+  String get m0c90d97433 => '下載 PoB MCP';
 
   @override
   String get m0a8113a0b9 => '下載更新';
@@ -3634,6 +3728,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get md3ae3e1986 => '成為';
 
   @override
+  String get mabdae6b126 => '找不到 PoB 預設資料夾。請手動選擇資料夾。';
+
+  @override
   String get mf7eaffec2f => '問題頁面';
 
   @override
@@ -3691,6 +3788,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m97ac4c501c => '安裝已在進行中';
 
   @override
+  String get m2748676635 => '已開啟另一個 PoB 安裝。請在「元件」中連接。';
+
+  @override
   String get me77a383ee5 => '節點';
 
   @override
@@ -3698,6 +3798,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get mf3a46c2f2b => '節點';
+
+  @override
+  String get mb68ab7d79e => '手動選擇 PoB 資料夾，或嘗試從預設位置尋找。';
 
   @override
   String get mdba310a980 => '指定 1 到 200 之間的數字';
@@ -3747,6 +3850,12 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m7186793dd5 => '計算條件';
 
   @override
+  String get m0a3fddcd95 => '安裝 64 位元 Python 3.11 或更新版本，再重新啟動 PoB II。';
+
+  @override
+  String get mdccbb9341b => '安裝 Git，再重新啟動 PoB II。';
+
+  @override
   String get m720408ab97 => '安裝組件並連接 Lua';
 
   @override
@@ -3754,6 +3863,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get mb7cd6fae08 => '安裝';
+
+  @override
+  String get mfdeaa71380 => '安裝元件';
 
   @override
   String get mfcb7c67f91 => '安裝的目前版本';

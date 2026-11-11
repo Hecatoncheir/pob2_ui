@@ -21,16 +21,23 @@ Future<void> showPobBuildFolder(
     case _FolderAction.detect:
       await model.detectPobBuildFolder();
     case _FolderAction.choose:
-      final directory = await getDirectoryPath(
-        initialDirectory: model.sharedLibrary?.directory,
-      );
-      if (directory != null && context.mounted && !model.isClosed) {
-        await model.selectPobBuildFolder(directory);
-      }
+      await choosePobBuildFolder(context, model);
     case _FolderAction.refresh:
       await model.refreshPobBuilds();
     case null:
       break;
+  }
+}
+
+Future<void> choosePobBuildFolder(
+  BuildContext context,
+  WorkshopCubit model,
+) async {
+  final directory = await getDirectoryPath(
+    initialDirectory: model.sharedLibrary?.directory,
+  );
+  if (directory != null && context.mounted && !model.isClosed) {
+    await model.selectPobBuildFolder(directory);
   }
 }
 
@@ -62,7 +69,7 @@ class _BuildFolderDialog extends StatelessWidget {
         onPressed: () => Navigator.pop(context, _FolderAction.choose),
         child: const AppText('Выбрать папку сборок PoB'),
       ),
-      if (model.pobWindow.supported && model.ready)
+      if (model.ready)
         FilledButton(
           onPressed: () => Navigator.pop(context, _FolderAction.detect),
           child: const AppText('Найти папку PoB'),

@@ -88,6 +88,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get mcdf95e40cd => 'PoB II · Workshop';
 
   @override
+  String get m24093f50af =>
+      'PoB II will start PoB minimized if needed and ask it for the builds folder.';
+
+  @override
   String get mebbddaaf16 => 'PoB returned incorrect character data.';
 
   @override
@@ -546,6 +550,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get mbdb05f34ee => 'Notes are saved automatically';
 
   @override
+  String get ma2d2d73bb5 => 'Start setup';
+
+  @override
   String get m1107806954 => 'Enchantments';
 
   @override
@@ -751,6 +758,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m51233393a5 => 'Название сборки';
 
   @override
+  String get m0bf71e1c90 =>
+      'Several PoB folders were found. Choose the one you use.';
+
+  @override
   String mbfd148a7e8(String p0) {
     return 'Nodes found: $p0';
   }
@@ -860,6 +871,11 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get m57c6abe340 => 'Failed to get server response';
+
+  @override
+  String m4a86054c42(String p0) {
+    return 'Could not get the folder through the PoB bridge: $p0';
+  }
 
   @override
   String mcd252d5275(String p0) {
@@ -1154,6 +1170,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m589c35aaa6 => 'Open and calculate';
 
   @override
+  String get m5ba3edc059 => 'Open or create a build';
+
+  @override
   String get mcfc22a4611 => 'Open search';
 
   @override
@@ -1194,6 +1213,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String md9960887f8(String p0) {
     return 'PoB build folder unavailable: $p0';
   }
+
+  @override
+  String get med31458051 => 'The builds folder set in PoB is unavailable.';
 
   @override
   String get m1971cfb84c => 'Passive';
@@ -1263,10 +1285,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String get mb66419affe => 'Set up PoB II';
 
   @override
+  String get mc1b2f9e3a6 => 'Set up PoB II';
+
+  @override
   String get m52d7142d18 => 'Windows x64, Linux x64 and macOS arm64 supported';
 
   @override
   String get mc2fd54cfce => 'Skills in this equipment slot share supports';
+
+  @override
+  String get m54ab473017 => 'Default PoB folder connected';
 
   @override
   String get m67f5d8880e => 'Connect Lua';
@@ -1285,6 +1313,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get m5f5155bb1f => 'Matching supports';
+
+  @override
+  String get m7996f71149 => 'Later';
 
   @override
   String get m180f58ab97 => 'Search';
@@ -1591,6 +1622,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m187a481844 => 'Build deleted';
 
   @override
+  String get m9027890a7b =>
+      'Builds in the connected folder are available in My Builds.';
+
+  @override
   String get m407f871778 => 'Reset';
 
   @override
@@ -1629,6 +1664,12 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get m9ea191ae12 => 'System motion reduction takes priority';
+
+  @override
+  String get me7d43ecc6d => 'Download Path of Building';
+
+  @override
+  String get m0c90d97433 => 'Download PoB MCP';
 
   @override
   String get m0a8113a0b9 => 'Download update';
@@ -1733,6 +1774,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get md3ae3e1986 => 'After';
 
   @override
+  String get mabdae6b126 =>
+      'The default PoB folder was not found. Choose a folder manually.';
+
+  @override
   String get mf7eaffec2f => 'Issues page';
 
   @override
@@ -1790,6 +1835,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m97ac4c501c => 'Installation already in progress';
 
   @override
+  String get m2748676635 =>
+      'Another PoB installation is already open. Connect it in Components.';
+
+  @override
   String get me77a383ee5 => 'Node';
 
   @override
@@ -1797,6 +1846,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get mf3a46c2f2b => 'Nodes';
+
+  @override
+  String get mb68ab7d79e =>
+      'Choose the PoB folder manually or look in the default location.';
 
   @override
   String get mdba310a980 => 'Specify a number from 1 to 200';
@@ -1846,6 +1899,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m7186793dd5 => 'Calculation conditions';
 
   @override
+  String get m0a3fddcd95 =>
+      'Install 64-bit Python 3.11 or newer and restart PoB II.';
+
+  @override
+  String get mdccbb9341b => 'Install Git and restart PoB II.';
+
+  @override
   String get m720408ab97 => 'Install components and connect Lua';
 
   @override
@@ -1854,6 +1914,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get mb7cd6fae08 => 'Install';
+
+  @override
+  String get mfdeaa71380 => 'Install components';
 
   @override
   String get mfcb7c67f91 => 'Current version installed';

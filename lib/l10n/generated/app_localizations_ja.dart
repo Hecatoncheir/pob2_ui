@@ -88,6 +88,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get mcdf95e40cd => 'PoB II · ワークショップ';
 
   @override
+  String get m24093f50af => '必要に応じて PoB II が PoB を最小化して起動し、ビルドフォルダーを取得します。';
+
+  @override
   String get mebbddaaf16 => 'PoB が間違った文字データを返しました。';
 
   @override
@@ -532,6 +535,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get mbdb05f34ee => 'メモは自動的に保存されます';
 
   @override
+  String get ma2d2d73bb5 => 'セットアップを開始';
+
+  @override
   String get m1107806954 => 'エンチャント';
 
   @override
@@ -734,6 +740,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m51233393a5 => 'Название сборки';
 
   @override
+  String get m0bf71e1c90 => 'PoB フォルダーが複数見つかりました。使用するフォルダーを選択してください。';
+
+  @override
   String mbfd148a7e8(String p0) {
     return '見つかったノード: $p0';
   }
@@ -843,6 +852,11 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m57c6abe340 => 'サーバー応答の取得に失敗しました';
+
+  @override
+  String m4a86054c42(String p0) {
+    return 'PoB ブリッジ経由でフォルダーを取得できませんでした: $p0';
+  }
 
   @override
   String mcd252d5275(String p0) {
@@ -1133,6 +1147,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m589c35aaa6 => '開いて計算してください';
 
   @override
+  String get m5ba3edc059 => 'ビルドを開くか作成';
+
+  @override
   String get mcfc22a4611 => '検索を開く';
 
   @override
@@ -1173,6 +1190,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String md9960887f8(String p0) {
     return 'PoB ビルド フォルダーが利用できません: $p0';
   }
+
+  @override
+  String get med31458051 => 'PoB で設定されたビルドフォルダーを利用できません。';
 
   @override
   String get m1971cfb84c => 'パッシブ';
@@ -1240,10 +1260,16 @@ class AppLocalizationsJa extends AppLocalizations {
   String get mb66419affe => 'PoB II をセットアップ';
 
   @override
+  String get mc1b2f9e3a6 => 'PoB II のセットアップ';
+
+  @override
   String get m52d7142d18 => 'Windows x64、Linux x64、および macOS arm64 をサポート';
 
   @override
   String get mc2fd54cfce => 'この装備スロットのスキルはサポートを共有します';
+
+  @override
+  String get m54ab473017 => 'PoB の既定フォルダーに接続しました';
 
   @override
   String get m67f5d8880e => 'Lua に接続します';
@@ -1262,6 +1288,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m5f5155bb1f => 'マッチングサポート';
+
+  @override
+  String get m7996f71149 => '後で';
 
   @override
   String get m180f58ab97 => '検索';
@@ -1564,6 +1593,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m187a481844 => 'ビルドが削除されました';
 
   @override
+  String get m9027890a7b => '接続したフォルダーのビルドは「マイビルド」で利用できます。';
+
+  @override
   String get m407f871778 => 'リセット';
 
   @override
@@ -1601,6 +1633,12 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m9ea191ae12 => 'システムモーションの軽減が優先されます';
+
+  @override
+  String get me7d43ecc6d => 'Path of Building をダウンロード';
+
+  @override
+  String get m0c90d97433 => 'PoB MCP をダウンロード';
 
   @override
   String get m0a8113a0b9 => 'アップデートのダウンロード';
@@ -1703,6 +1741,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get md3ae3e1986 => 'になりました';
 
   @override
+  String get mabdae6b126 => 'PoB の既定フォルダーが見つかりません。フォルダーを手動で選択してください。';
+
+  @override
   String get mf7eaffec2f => '問題ページ';
 
   @override
@@ -1760,6 +1801,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m97ac4c501c => 'インストールはすでに進行中です';
 
   @override
+  String get m2748676635 => '別の PoB が開いています。「コンポーネント」で接続してください。';
+
+  @override
   String get me77a383ee5 => 'ノード';
 
   @override
@@ -1767,6 +1811,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get mf3a46c2f2b => 'ノード';
+
+  @override
+  String get mb68ab7d79e => 'PoB フォルダーを手動で選択するか、既定の場所を探します。';
 
   @override
   String get mdba310a980 => '1～200の数値を指定してください';
@@ -1816,6 +1863,13 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m7186793dd5 => '計算条件';
 
   @override
+  String get m0a3fddcd95 =>
+      '64 ビット版の Python 3.11 以降をインストールし、PoB II を再起動してください。';
+
+  @override
+  String get mdccbb9341b => 'Git をインストールし、PoB II を再起動してください。';
+
+  @override
   String get m720408ab97 => 'コンポーネントをインストールして接続 Lua';
 
   @override
@@ -1823,6 +1877,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get mb7cd6fae08 => 'インストール';
+
+  @override
+  String get mfdeaa71380 => 'コンポーネントをインストール';
 
   @override
   String get mfcb7c67f91 => '現在のバージョンがインストールされています';

@@ -88,6 +88,10 @@ class AppLocalizationsTh extends AppLocalizations {
   String get mcdf95e40cd => 'PoB II · เวิร์กช็อป';
 
   @override
+  String get m24093f50af =>
+      'PoB II จะเปิด PoB แบบย่อหน้าต่างเมื่อจำเป็นและขอตำแหน่งโฟลเดอร์บิลด์';
+
+  @override
   String get mebbddaaf16 => 'PoB ส่งคืนข้อมูลอักขระที่ไม่ถูกต้อง';
 
   @override
@@ -541,6 +545,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get mbdb05f34ee => 'บันทึกย่อจะถูกบันทึกโดยอัตโนมัติ';
 
   @override
+  String get ma2d2d73bb5 => 'เริ่มการตั้งค่า';
+
+  @override
   String get m1107806954 => 'มนต์เสน่ห์';
 
   @override
@@ -744,6 +751,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m51233393a5 => 'สโมสรฟุตบอล';
 
   @override
+  String get m0bf71e1c90 => 'พบหลายโฟลเดอร์ของ PoB โปรดเลือกโฟลเดอร์ที่ใช้';
+
+  @override
   String mbfd148a7e8(String p0) {
     return 'พบโหนด: $p0';
   }
@@ -853,6 +863,11 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m57c6abe340 => 'ไม่สามารถรับการตอบสนองของเซิร์ฟเวอร์';
+
+  @override
+  String m4a86054c42(String p0) {
+    return 'ไม่สามารถรับตำแหน่งโฟลเดอร์ผ่านบริดจ์ PoB: $p0';
+  }
 
   @override
   String mcd252d5275(String p0) {
@@ -1145,6 +1160,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m589c35aaa6 => 'เปิดและคำนวณ';
 
   @override
+  String get m5ba3edc059 => 'เปิดหรือสร้างบิลด์';
+
+  @override
   String get mcfc22a4611 => 'เปิดการค้นหา';
 
   @override
@@ -1185,6 +1203,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String md9960887f8(String p0) {
     return 'โฟลเดอร์บิลด์ PoB ไม่พร้อมใช้งาน: $p0';
   }
+
+  @override
+  String get med31458051 => 'ไม่สามารถเข้าถึงโฟลเดอร์บิลด์ที่ตั้งไว้ใน PoB';
 
   @override
   String get m1971cfb84c => 'เฉยๆ';
@@ -1253,10 +1274,16 @@ class AppLocalizationsTh extends AppLocalizations {
   String get mb66419affe => 'ตั้งค่า PoB II';
 
   @override
+  String get mc1b2f9e3a6 => 'ตั้งค่า PoB II';
+
+  @override
   String get m52d7142d18 => 'รองรับ Windows x64, Linux x64 และ macOS arm64';
 
   @override
   String get mc2fd54cfce => 'สกิลในช่องอุปกรณ์นี้ใช้เจมเสริมร่วมกัน';
+
+  @override
+  String get m54ab473017 => 'เชื่อมต่อโฟลเดอร์เริ่มต้นของ PoB แล้ว';
 
   @override
   String get m67f5d8880e => 'เชื่อมต่อ Lua';
@@ -1275,6 +1302,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m5f5155bb1f => 'รองรับการจับคู่';
+
+  @override
+  String get m7996f71149 => 'ไว้ทีหลัง';
 
   @override
   String get m180f58ab97 => 'ค้นหา';
@@ -1580,6 +1610,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m187a481844 => 'ลบบิลด์แล้ว';
 
   @override
+  String get m9027890a7b => 'บิลด์ในโฟลเดอร์ที่เชื่อมต่ออยู่ใน «บิลด์ของฉัน»';
+
+  @override
   String get m407f871778 => 'รีเซ็ต';
 
   @override
@@ -1617,6 +1650,12 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m9ea191ae12 => 'การลดการเคลื่อนไหวของระบบมีความสำคัญ';
+
+  @override
+  String get me7d43ecc6d => 'ดาวน์โหลด Path of Building';
+
+  @override
+  String get m0c90d97433 => 'ดาวน์โหลด PoB MCP';
 
   @override
   String get m0a8113a0b9 => 'ดาวน์โหลดอัปเดต';
@@ -1720,6 +1759,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get md3ae3e1986 => 'กลายเป็น';
 
   @override
+  String get mabdae6b126 => 'ไม่พบโฟลเดอร์เริ่มต้นของ PoB โปรดเลือกโฟลเดอร์เอง';
+
+  @override
   String get mf7eaffec2f => 'หน้าปัญหา';
 
   @override
@@ -1777,6 +1819,10 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m97ac4c501c => 'การติดตั้งอยู่ในระหว่างดำเนินการ';
 
   @override
+  String get m2748676635 =>
+      'PoB อีกชุดกำลังเปิดอยู่ ให้เชื่อมต่อใน «ส่วนประกอบ»';
+
+  @override
   String get me77a383ee5 => 'โหนด';
 
   @override
@@ -1784,6 +1830,10 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get mf3a46c2f2b => 'โหนด';
+
+  @override
+  String get mb68ab7d79e =>
+      'เลือกโฟลเดอร์ PoB เองหรือลองค้นหาในตำแหน่งเริ่มต้น';
 
   @override
   String get mdba310a980 => 'ระบุตัวเลขตั้งแต่ 1 ถึง 200';
@@ -1833,6 +1883,13 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m7186793dd5 => 'เงื่อนไขการคำนวณ';
 
   @override
+  String get m0a3fddcd95 =>
+      'ติดตั้ง Python 3.11 ขึ้นไปแบบ 64 บิต แล้วเปิด PoB II ใหม่';
+
+  @override
+  String get mdccbb9341b => 'ติดตั้ง Git แล้วเปิด PoB II ใหม่';
+
+  @override
   String get m720408ab97 => 'ติดตั้งส่วนประกอบและเชื่อมต่อ Lua';
 
   @override
@@ -1841,6 +1898,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get mb7cd6fae08 => 'ติดตั้ง';
+
+  @override
+  String get mfdeaa71380 => 'ติดตั้งส่วนประกอบ';
 
   @override
   String get mfcb7c67f91 => 'ติดตั้งเวอร์ชันปัจจุบันแล้ว';

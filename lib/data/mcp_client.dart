@@ -88,7 +88,7 @@ class McpClient {
       final pending = _pending.remove(message['id']);
       if (pending == null) return;
       if (message['error'] != null) {
-        pending.completeError(StateError('${message['error']}'));
+        pending.completeError(StateError(jsonEncode(message['error'])));
         return;
       }
       pending.complete(message['result'] as Map<String, dynamic>);

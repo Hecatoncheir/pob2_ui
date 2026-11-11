@@ -93,6 +93,10 @@ class AppLocalizationsDe extends AppLocalizations {
   String get mcdf95e40cd => 'PoB II · Workshop';
 
   @override
+  String get m24093f50af =>
+      'PoB II startet PoB bei Bedarf minimiert und fragt den Build-Ordner ab.';
+
+  @override
   String get mebbddaaf16 => 'PoB hat falsche Zeichendaten zurückgegeben.';
 
   @override
@@ -567,6 +571,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get mbdb05f34ee => 'Notizen werden automatisch gespeichert';
 
   @override
+  String get ma2d2d73bb5 => 'Einrichtung starten';
+
+  @override
   String get m1107806954 => 'Verzauberungen';
 
   @override
@@ -773,6 +780,10 @@ class AppLocalizationsDe extends AppLocalizations {
   String get m51233393a5 => 'Название сборки';
 
   @override
+  String get m0bf71e1c90 =>
+      'Mehrere PoB-Ordner gefunden. Wählen Sie den richtigen aus.';
+
+  @override
   String mbfd148a7e8(String p0) {
     return 'Gefundene Knoten: $p0';
   }
@@ -883,6 +894,11 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get m57c6abe340 => 'Serverantwort konnte nicht abgerufen werden';
+
+  @override
+  String m4a86054c42(String p0) {
+    return 'Ordner konnte nicht über die PoB-Brücke ermittelt werden: $p0';
+  }
 
   @override
   String mcd252d5275(String p0) {
@@ -1178,6 +1194,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get m589c35aaa6 => 'Öffnen und berechnen';
 
   @override
+  String get m5ba3edc059 => 'Build öffnen oder erstellen';
+
+  @override
   String get mcfc22a4611 => 'Suche öffnen';
 
   @override
@@ -1218,6 +1237,10 @@ class AppLocalizationsDe extends AppLocalizations {
   String md9960887f8(String p0) {
     return 'PoB-Build-Ordner nicht verfügbar: $p0';
   }
+
+  @override
+  String get med31458051 =>
+      'Der in PoB eingestellte Build-Ordner ist nicht verfügbar.';
 
   @override
   String get m1971cfb84c => 'Passiv';
@@ -1288,12 +1311,18 @@ class AppLocalizationsDe extends AppLocalizations {
   String get mb66419affe => 'PoB II einrichten';
 
   @override
+  String get mc1b2f9e3a6 => 'PoB II einrichten';
+
+  @override
   String get m52d7142d18 =>
       'Windows x64, Linux x64 und macOS arm64 werden unterstützt';
 
   @override
   String get mc2fd54cfce =>
       'Fertigkeiten dieses Ausrüstungsplatzes teilen sich Unterstützungen';
+
+  @override
+  String get m54ab473017 => 'Standardordner von PoB verbunden';
 
   @override
   String get m67f5d8880e => 'Verbinden Lua';
@@ -1313,6 +1342,9 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get m5f5155bb1f => 'Passende Stützen';
+
+  @override
+  String get m7996f71149 => 'Später';
 
   @override
   String get m180f58ab97 => 'Suchen';
@@ -1627,6 +1659,10 @@ class AppLocalizationsDe extends AppLocalizations {
   String get m187a481844 => 'Build gelöscht';
 
   @override
+  String get m9027890a7b =>
+      'Builds aus dem verbundenen Ordner sind unter „Meine Builds“ verfügbar.';
+
+  @override
   String get m407f871778 => 'Zurücksetzen';
 
   @override
@@ -1665,6 +1701,12 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get m9ea191ae12 => 'Die Reduzierung der Systembewegung hat Priorität';
+
+  @override
+  String get me7d43ecc6d => 'Path of Building herunterladen';
+
+  @override
+  String get m0c90d97433 => 'PoB MCP herunterladen';
 
   @override
   String get m0a8113a0b9 => 'Update herunterladen';
@@ -1770,6 +1812,10 @@ class AppLocalizationsDe extends AppLocalizations {
   String get md3ae3e1986 => 'Wurde';
 
   @override
+  String get mabdae6b126 =>
+      'Der Standardordner von PoB wurde nicht gefunden. Wählen Sie einen Ordner manuell aus.';
+
+  @override
   String get mf7eaffec2f => 'Seite „Probleme“.';
 
   @override
@@ -1827,6 +1873,10 @@ class AppLocalizationsDe extends AppLocalizations {
   String get m97ac4c501c => 'Installation bereits im Gange';
 
   @override
+  String get m2748676635 =>
+      'Eine andere PoB-Installation ist bereits geöffnet. Verbinden Sie sie unter „Komponenten“.';
+
+  @override
   String get me77a383ee5 => 'Knoten';
 
   @override
@@ -1834,6 +1884,10 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get mf3a46c2f2b => 'Knoten';
+
+  @override
+  String get mb68ab7d79e =>
+      'Wählen Sie den PoB-Ordner manuell aus oder suchen Sie am Standardspeicherort.';
 
   @override
   String get mdba310a980 => 'Geben Sie eine Zahl von 1 bis 200 an';
@@ -1883,6 +1937,13 @@ class AppLocalizationsDe extends AppLocalizations {
   String get m7186793dd5 => 'Berechnungsbedingungen';
 
   @override
+  String get m0a3fddcd95 =>
+      'Installieren Sie Python 3.11 oder neuer (64 Bit) und starten Sie PoB II neu.';
+
+  @override
+  String get mdccbb9341b => 'Installieren Sie Git und starten Sie PoB II neu.';
+
+  @override
   String get m720408ab97 => 'Komponenten installieren und verbinden Lua';
 
   @override
@@ -1891,6 +1952,9 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get mb7cd6fae08 => 'Installieren';
+
+  @override
+  String get mfdeaa71380 => 'Komponenten installieren';
 
   @override
   String get mfcb7c67f91 => 'Aktuelle Version installiert';

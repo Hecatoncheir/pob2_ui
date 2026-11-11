@@ -88,6 +88,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get mcdf95e40cd => 'PoB II · 워크숍';
 
   @override
+  String get m24093f50af => '필요하면 PoB II가 PoB를 최소화 상태로 실행하고 빌드 폴더를 확인합니다.';
+
+  @override
   String get mebbddaaf16 => 'PoB에서 잘못된 문자 데이터를 반환했습니다.';
 
   @override
@@ -532,6 +535,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get mbdb05f34ee => '메모가 자동으로 저장됩니다.';
 
   @override
+  String get ma2d2d73bb5 => '설정 시작';
+
+  @override
   String get m1107806954 => '마법';
 
   @override
@@ -734,6 +740,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m51233393a5 => 'Название сборки';
 
   @override
+  String get m0bf71e1c90 => 'PoB 폴더가 여러 개 발견되었습니다. 사용하는 폴더를 선택하세요.';
+
+  @override
   String mbfd148a7e8(String p0) {
     return '찾은 노드: $p0';
   }
@@ -843,6 +852,11 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m57c6abe340 => '서버 응답을 가져오지 못했습니다.';
+
+  @override
+  String m4a86054c42(String p0) {
+    return 'PoB 브리지를 통해 폴더를 찾지 못했습니다: $p0';
+  }
 
   @override
   String mcd252d5275(String p0) {
@@ -1133,6 +1147,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m589c35aaa6 => '열기 및 계산';
 
   @override
+  String get m5ba3edc059 => '빌드 열기 또는 만들기';
+
+  @override
   String get mcfc22a4611 => '검색 열기';
 
   @override
@@ -1173,6 +1190,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String md9960887f8(String p0) {
     return 'PoB 빌드 폴더를 사용할 수 없습니다: $p0';
   }
+
+  @override
+  String get med31458051 => 'PoB에서 설정한 빌드 폴더를 사용할 수 없습니다.';
 
   @override
   String get m1971cfb84c => '패시브';
@@ -1240,10 +1260,16 @@ class AppLocalizationsKo extends AppLocalizations {
   String get mb66419affe => 'PoB II 설정';
 
   @override
+  String get mc1b2f9e3a6 => 'PoB II 설정';
+
+  @override
   String get m52d7142d18 => 'Windows x64, Linux x64, macOS arm64 지원';
 
   @override
   String get mc2fd54cfce => '이 장비 슬롯의 스킬은 보조 젬을 공유합니다';
+
+  @override
+  String get m54ab473017 => 'PoB 기본 폴더에 연결됨';
 
   @override
   String get m67f5d8880e => '연결 Lua';
@@ -1262,6 +1288,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m5f5155bb1f => '매칭 지원';
+
+  @override
+  String get m7996f71149 => '나중에';
 
   @override
   String get m180f58ab97 => '검색';
@@ -1564,6 +1593,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m187a481844 => '빌드가 삭제되었습니다.';
 
   @override
+  String get m9027890a7b => '연결된 폴더의 빌드는 ‘내 빌드’에서 볼 수 있습니다.';
+
+  @override
   String get m407f871778 => '재설정';
 
   @override
@@ -1601,6 +1633,12 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m9ea191ae12 => '시스템 모션 감소가 우선입니다.';
+
+  @override
+  String get me7d43ecc6d => 'Path of Building 다운로드';
+
+  @override
+  String get m0c90d97433 => 'PoB MCP 다운로드';
 
   @override
   String get m0a8113a0b9 => '업데이트 다운로드';
@@ -1703,6 +1741,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get md3ae3e1986 => '되었다';
 
   @override
+  String get mabdae6b126 => 'PoB 기본 폴더를 찾을 수 없습니다. 폴더를 직접 선택하세요.';
+
+  @override
   String get mf7eaffec2f => '문제 페이지';
 
   @override
@@ -1760,6 +1801,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m97ac4c501c => '이미 설치가 진행 중입니다.';
 
   @override
+  String get m2748676635 => '다른 PoB 설치가 이미 열려 있습니다. ‘구성 요소’에서 연결하세요.';
+
+  @override
   String get me77a383ee5 => '노드';
 
   @override
@@ -1767,6 +1811,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get mf3a46c2f2b => '노드';
+
+  @override
+  String get mb68ab7d79e => 'PoB 폴더를 직접 선택하거나 기본 경로에서 찾으세요.';
 
   @override
   String get mdba310a980 => '1~200 사이의 숫자를 지정하세요.';
@@ -1816,6 +1863,12 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m7186793dd5 => '계산 조건';
 
   @override
+  String get m0a3fddcd95 => '64비트 Python 3.11 이상을 설치하고 PoB II를 다시 시작하세요.';
+
+  @override
+  String get mdccbb9341b => 'Git을 설치하고 PoB II를 다시 시작하세요.';
+
+  @override
   String get m720408ab97 => '구성요소 설치 및 연결 Lua';
 
   @override
@@ -1823,6 +1876,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get mb7cd6fae08 => '설치';
+
+  @override
+  String get mfdeaa71380 => '구성 요소 설치';
 
   @override
   String get mfcb7c67f91 => '현재 버전이 설치됨';

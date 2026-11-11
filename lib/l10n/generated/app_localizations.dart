@@ -260,6 +260,12 @@ abstract class AppLocalizations {
   /// **'PoB II · Workshop'**
   String get mcdf95e40cd;
 
+  /// PoB II при необходимости запустит PoB свёрнутым и запросит путь к сборкам.
+  ///
+  /// In en, this message translates to:
+  /// **'PoB II will start PoB minimized if needed and ask it for the builds folder.'**
+  String get m24093f50af;
+
   /// PoB вернул неверные данные персонажа.
   ///
   /// In en, this message translates to:
@@ -1076,6 +1082,12 @@ abstract class AppLocalizations {
   /// **'Notes are saved automatically'**
   String get mbdb05f34ee;
 
+  /// Запустить подготовку
+  ///
+  /// In en, this message translates to:
+  /// **'Start setup'**
+  String get ma2d2d73bb5;
+
   /// Зачарования
   ///
   /// In en, this message translates to:
@@ -1472,6 +1484,12 @@ abstract class AppLocalizations {
   /// **'Название сборки'**
   String get m51233393a5;
 
+  /// Найдено несколько папок PoB. Выберите нужную вручную.
+  ///
+  /// In en, this message translates to:
+  /// **'Several PoB folders were found. Choose the one you use.'**
+  String get m0bf71e1c90;
+
   /// Найдено узлов: {p0}
   ///
   /// In en, this message translates to:
@@ -1652,6 +1670,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Failed to get server response'**
   String get m57c6abe340;
+
+  /// Не удалось получить папку через мост PoB: {p0}
+  ///
+  /// In en, this message translates to:
+  /// **'Could not get the folder through the PoB bridge: {p0}'**
+  String m4a86054c42(String p0);
 
   /// Не удалось получить подсказку: {p0}
   ///
@@ -2193,6 +2217,12 @@ abstract class AppLocalizations {
   /// **'Open and calculate'**
   String get m589c35aaa6;
 
+  /// Открыть или создать сборку
+  ///
+  /// In en, this message translates to:
+  /// **'Open or create a build'**
+  String get m5ba3edc059;
+
   /// Открыть поиск
   ///
   /// In en, this message translates to:
@@ -2264,6 +2294,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'PoB build folder unavailable: {p0}'**
   String md9960887f8(String p0);
+
+  /// Папка сборок из настроек PoB недоступна.
+  ///
+  /// In en, this message translates to:
+  /// **'The builds folder set in PoB is unavailable.'**
+  String get med31458051;
 
   /// Пассивные
   ///
@@ -2391,6 +2427,12 @@ abstract class AppLocalizations {
   /// **'Set up PoB II'**
   String get mb66419affe;
 
+  /// Подготовка PoB II
+  ///
+  /// In en, this message translates to:
+  /// **'Set up PoB II'**
+  String get mc1b2f9e3a6;
+
   /// Поддерживаются Windows x64, Linux x64 и macOS arm64
   ///
   /// In en, this message translates to:
@@ -2402,6 +2444,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Skills in this equipment slot share supports'**
   String get mc2fd54cfce;
+
+  /// Подключена стандартная папка PoB
+  ///
+  /// In en, this message translates to:
+  /// **'Default PoB folder connected'**
+  String get m54ab473017;
 
   /// Подключите Lua
   ///
@@ -2438,6 +2486,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Matching supports'**
   String get m5f5155bb1f;
+
+  /// Позже
+  ///
+  /// In en, this message translates to:
+  /// **'Later'**
+  String get m7996f71149;
 
   /// Поиск
   ///
@@ -2991,6 +3045,12 @@ abstract class AppLocalizations {
   /// **'Build deleted'**
   String get m187a481844;
 
+  /// Сборки из подключённой папки уже доступны в разделе «Мои сборки».
+  ///
+  /// In en, this message translates to:
+  /// **'Builds in the connected folder are available in My Builds.'**
+  String get m9027890a7b;
+
   /// Сбросить
   ///
   /// In en, this message translates to:
@@ -3068,6 +3128,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'System motion reduction takes priority'**
   String get m9ea191ae12;
+
+  /// Скачать Path of Building
+  ///
+  /// In en, this message translates to:
+  /// **'Download Path of Building'**
+  String get me7d43ecc6d;
+
+  /// Скачать PoB MCP
+  ///
+  /// In en, this message translates to:
+  /// **'Download PoB MCP'**
+  String get m0c90d97433;
 
   /// Скачать обновление
   ///
@@ -3261,6 +3333,12 @@ abstract class AppLocalizations {
   /// **'After'**
   String get md3ae3e1986;
 
+  /// Стандартная папка PoB не найдена. Выберите папку вручную.
+  ///
+  /// In en, this message translates to:
+  /// **'The default PoB folder was not found. Choose a folder manually.'**
+  String get mabdae6b126;
+
   /// Страница выпусков
   ///
   /// In en, this message translates to:
@@ -3375,6 +3453,12 @@ abstract class AppLocalizations {
   /// **'Installation already in progress'**
   String get m97ac4c501c;
 
+  /// Уже открыта другая установка PoB. Подключите её в разделе «Компоненты».
+  ///
+  /// In en, this message translates to:
+  /// **'Another PoB installation is already open. Connect it in Components.'**
+  String get m2748676635;
+
   /// Узел
   ///
   /// In en, this message translates to:
@@ -3392,6 +3476,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Nodes'**
   String get mf3a46c2f2b;
+
+  /// Укажите папку PoB вручную или попробуйте найти её по стандартному пути.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose the PoB folder manually or look in the default location.'**
+  String get mb68ab7d79e;
 
   /// Укажите число от 1 до 200
   ///
@@ -3483,6 +3573,18 @@ abstract class AppLocalizations {
   /// **'Calculation conditions'**
   String get m7186793dd5;
 
+  /// Установите 64-битный Python 3.11+ и перезапустите PoB II.
+  ///
+  /// In en, this message translates to:
+  /// **'Install 64-bit Python 3.11 or newer and restart PoB II.'**
+  String get m0a3fddcd95;
+
+  /// Установите Git и перезапустите PoB II.
+  ///
+  /// In en, this message translates to:
+  /// **'Install Git and restart PoB II.'**
+  String get mdccbb9341b;
+
   /// Установите компоненты и подключите Lua
   ///
   /// In en, this message translates to:
@@ -3500,6 +3602,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Install'**
   String get mb7cd6fae08;
+
+  /// Установить компоненты
+  ///
+  /// In en, this message translates to:
+  /// **'Install components'**
+  String get mfdeaa71380;
 
   /// Установлена актуальная версия
   ///

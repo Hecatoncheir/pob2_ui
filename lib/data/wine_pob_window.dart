@@ -17,7 +17,7 @@ class WinePobWindow {
   final String _token;
   bool _exited = false;
 
-  static Future<WinePobWindow> start(
+  static Future<WinePobWindow?> start(
     File executable,
     String prefix, {
     required Future<void> Function() prepareBridge,
@@ -33,9 +33,8 @@ class WinePobWindow {
       case 0:
         break;
       case 2:
-        throw StateError(
-          'PoB уже открыт без связи с мостом. Перезапустите его один раз.',
-        );
+        await prepareBridge();
+        return null;
       default:
         throw StateError(
           'Для управления окном PoB через Wine нужен X11 или XWayland.',

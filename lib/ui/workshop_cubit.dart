@@ -10,6 +10,7 @@ import '../data/mcp_editor_gateway.dart';
 import '../data/mcp_error_message.dart';
 import '../data/pob_window_repository.dart';
 import '../data/pob_build_library.dart';
+import '../data/pob_build_locations.dart';
 import '../data/session_repository.dart';
 import '../data/build_library.dart';
 import '../data/tree_icon_repository.dart';
@@ -37,10 +38,12 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     BuildStorage? library,
     XmlFileService? files,
     PobWindowRepository? pobWindow,
+    PobBuildLocations? buildLocations,
   }) : session = session ?? SessionRepository(components.store.root),
        library = library ?? BuildLibrary(components.store.root),
        files = files ?? XmlFileService(),
        pobWindow = pobWindow ?? PobWindowRepository(),
+       buildLocations = buildLocations ?? PobBuildLocations(),
        super(initialState ?? WorkshopState());
   final ComponentRepository components;
   final McpClient engine;
@@ -54,6 +57,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
       sharedLibrary == null || sharedLibrary?.directory != null;
   final XmlFileService files;
   final PobWindowRepository pobWindow;
+  final PobBuildLocations buildLocations;
   McpEditorCubit? _mcpEditor;
   McpEditorCubit get mcpEditor => _mcpEditor ??= McpEditorCubit(this);
   late final catalogs = GameCatalogRepository(engine);
@@ -73,6 +77,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
   final List<_BuildSnapshot> _redoHistory = [];
 
   bool get ready => components.active.length == Component.values.length;
+  bool get luaReady => engine.connected && state.classes.isNotEmpty;
   String get _componentSource =>
       Component.values.map((key) => components.active[key]!.commit).join('-');
 
@@ -175,8 +180,34 @@ class WorkshopCubit extends Cubit<WorkshopState> {
       _run(() => _usePobBuildFolder(folder));
 
   Future<void> detectPobBuildFolder() => _run(() async {
-    await _usePobBuildFolder(await pobWindow.buildDirectory(components.active));
+    final live = await _liveBuildDirectory();
+    if (live != null) {
+      await _usePobBuildFolder(live);
+      return;
+    }
+    if (sharedLibrary?.directory != null) return;
+    final directory = await buildLocations.find();
+    if (directory == null) {
+      throw StateError(
+        'Стандартная папка PoB не найдена. Выберите папку вручную.',
+      );
+    }
+    await _usePobBuildFolder(directory);
+    _update(state.copyWith(status: 'Подключена стандартная папка PoB'));
   });
+
+  Future<String?> _liveBuildDirectory() async {
+    if (!pobWindow.supported || !ready) return null;
+    try {
+      final directory = await pobWindow.buildDirectory(components.active);
+      if (await Directory(directory).exists()) return directory;
+      throw StateError('Папка сборок из настроек PoB недоступна.');
+    } catch (error) {
+      if (buildFolderReady) rethrow;
+      addLog('Не удалось получить папку через мост PoB: $error');
+      return null;
+    }
+  }
 
   Future<void> _usePobBuildFolder(String folder) async {
     final shared = sharedLibrary;
@@ -223,14 +254,11 @@ class WorkshopCubit extends Cubit<WorkshopState> {
 
   Future<void> prepareComponents() => _run(() async {
     if (!ready) await _installMissingComponents();
-    if (!engine.connected) await _resume();
+    if (!luaReady) await _resume();
   });
 
   Future<void> _installMissingComponents() async {
-    await components.processes.python();
-    await components.processes.run('git', [
-      '--version',
-    ], timeout: const Duration(seconds: 10));
+    await _checkInstallationTools();
     for (final component in Component.values) {
       if (components.active.containsKey(component)) continue;
       final release = await components.github.latest(component);
@@ -238,6 +266,23 @@ class WorkshopCubit extends Cubit<WorkshopState> {
         state.copyWith(releases: {...state.releases, component: release}),
       );
       await components.install(component, release, addLog);
+    }
+  }
+
+  Future<void> _checkInstallationTools() async {
+    try {
+      await components.processes.python();
+    } on ProcessException {
+      throw StateError(
+        'Установите 64-битный Python 3.11+ и перезапустите PoB II.',
+      );
+    }
+    try {
+      await components.processes.run('git', [
+        '--version',
+      ], timeout: const Duration(seconds: 10));
+    } on ProcessException {
+      throw StateError('Установите Git и перезапустите PoB II.');
     }
   }
 
@@ -307,6 +352,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
   }
 
   Future<void> _connect() async {
+    _update(state.copyWith(classes: []));
     engine.onDisconnected = _lostConnection;
     await engine.connect(components.active);
     catalogs.clear();

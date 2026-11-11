@@ -88,6 +88,10 @@ class AppLocalizationsEs extends AppLocalizations {
   String get mcdf95e40cd => 'PoB II · Taller';
 
   @override
+  String get m24093f50af =>
+      'Si hace falta, PoB II iniciará PoB minimizado y le pedirá la carpeta de configuraciones.';
+
+  @override
   String get mebbddaaf16 => 'PoB devolvió datos de caracteres incorrectos.';
 
   @override
@@ -555,6 +559,9 @@ class AppLocalizationsEs extends AppLocalizations {
   String get mbdb05f34ee => 'Las notas se guardan automáticamente';
 
   @override
+  String get ma2d2d73bb5 => 'Iniciar la configuración';
+
+  @override
   String get m1107806954 => 'Encantamientos';
 
   @override
@@ -762,6 +769,10 @@ class AppLocalizationsEs extends AppLocalizations {
   String get m51233393a5 => 'Название сборки';
 
   @override
+  String get m0bf71e1c90 =>
+      'Se encontraron varias carpetas de PoB. Elige la que usas.';
+
+  @override
   String mbfd148a7e8(String p0) {
     return 'Nodos encontrados: $p0';
   }
@@ -871,6 +882,11 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get m57c6abe340 => 'No se pudo obtener la respuesta del servidor';
+
+  @override
+  String m4a86054c42(String p0) {
+    return 'No se pudo obtener la carpeta mediante el puente de PoB: $p0';
+  }
 
   @override
   String mcd252d5275(String p0) {
@@ -1172,6 +1188,9 @@ class AppLocalizationsEs extends AppLocalizations {
   String get m589c35aaa6 => 'Abrir y calcular';
 
   @override
+  String get m5ba3edc059 => 'Abrir o crear una configuración';
+
+  @override
   String get mcfc22a4611 => 'Abrir búsqueda';
 
   @override
@@ -1212,6 +1231,9 @@ class AppLocalizationsEs extends AppLocalizations {
   String md9960887f8(String p0) {
     return 'La carpeta de compilación PoB no está disponible: $p0';
   }
+
+  @override
+  String get med31458051 => 'La carpeta configurada en PoB no está disponible.';
 
   @override
   String get m1971cfb84c => 'Pasivo';
@@ -1282,11 +1304,17 @@ class AppLocalizationsEs extends AppLocalizations {
   String get mb66419affe => 'Configurar PoB II';
 
   @override
+  String get mc1b2f9e3a6 => 'Configurar PoB II';
+
+  @override
   String get m52d7142d18 => 'Windows x64, Linux x64 y macOS arm64 compatibles';
 
   @override
   String get mc2fd54cfce =>
       'Las habilidades de este espacio comparten asistencias';
+
+  @override
+  String get m54ab473017 => 'Carpeta predeterminada de PoB conectada';
 
   @override
   String get m67f5d8880e => 'Conectar Lua';
@@ -1305,6 +1333,9 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get m5f5155bb1f => 'Soportes a juego';
+
+  @override
+  String get m7996f71149 => 'Más tarde';
 
   @override
   String get m180f58ab97 => 'Buscar';
@@ -1617,6 +1648,10 @@ class AppLocalizationsEs extends AppLocalizations {
   String get m187a481844 => 'Compilación eliminada';
 
   @override
+  String get m9027890a7b =>
+      'Las configuraciones de la carpeta conectada están en «Mis configuraciones».';
+
+  @override
   String get m407f871778 => 'Restablecer';
 
   @override
@@ -1656,6 +1691,12 @@ class AppLocalizationsEs extends AppLocalizations {
   @override
   String get m9ea191ae12 =>
       'La reducción de movimiento del sistema tiene prioridad';
+
+  @override
+  String get me7d43ecc6d => 'Descargar Path of Building';
+
+  @override
+  String get m0c90d97433 => 'Descargar PoB MCP';
 
   @override
   String get m0a8113a0b9 => 'Descargar actualización';
@@ -1760,6 +1801,10 @@ class AppLocalizationsEs extends AppLocalizations {
   String get md3ae3e1986 => 'Se convirtió';
 
   @override
+  String get mabdae6b126 =>
+      'No se encontró la carpeta predeterminada de PoB. Elige una carpeta manualmente.';
+
+  @override
   String get mf7eaffec2f => 'Página de problemas';
 
   @override
@@ -1817,6 +1862,10 @@ class AppLocalizationsEs extends AppLocalizations {
   String get m97ac4c501c => 'Instalación ya en progreso';
 
   @override
+  String get m2748676635 =>
+      'Ya hay otra instalación de PoB abierta. Conéctala en «Componentes».';
+
+  @override
   String get me77a383ee5 => 'Nodo';
 
   @override
@@ -1824,6 +1873,10 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get mf3a46c2f2b => 'Nodos';
+
+  @override
+  String get mb68ab7d79e =>
+      'Elige la carpeta de PoB manualmente o busca en la ubicación predeterminada.';
 
   @override
   String get mdba310a980 => 'Especifique un número del 1 al 200';
@@ -1873,6 +1926,13 @@ class AppLocalizationsEs extends AppLocalizations {
   String get m7186793dd5 => 'Condiciones de cálculo';
 
   @override
+  String get m0a3fddcd95 =>
+      'Instala Python 3.11 o posterior de 64 bits y reinicia PoB II.';
+
+  @override
+  String get mdccbb9341b => 'Instala Git y reinicia PoB II.';
+
+  @override
   String get m720408ab97 => 'Instalar componentes y conectar Lua';
 
   @override
@@ -1881,6 +1941,9 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get mb7cd6fae08 => 'Instalar';
+
+  @override
+  String get mfdeaa71380 => 'Instalar componentes';
 
   @override
   String get mfcb7c67f91 => 'Versión actual instalada';

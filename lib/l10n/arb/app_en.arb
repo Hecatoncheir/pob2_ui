@@ -132,6 +132,11 @@
     "description": "PoB II · Мастерская",
     "placeholders": {}
   },
+  "m24093f50af": "PoB II will start PoB minimized if needed and ask it for the builds folder.",
+  "@m24093f50af": {
+    "description": "PoB II при необходимости запустит PoB свёрнутым и запросит путь к сборкам.",
+    "placeholders": {}
+  },
   "mebbddaaf16": "PoB returned incorrect character data.",
   "@mebbddaaf16": {
     "description": "PoB вернул неверные данные персонажа.",
@@ -907,6 +912,11 @@
     "description": "Заметки сохраняются автоматически",
     "placeholders": {}
   },
+  "ma2d2d73bb5": "Start setup",
+  "@ma2d2d73bb5": {
+    "description": "Запустить подготовку",
+    "placeholders": {}
+  },
   "m1107806954": "Enchantments",
   "@m1107806954": {
     "description": "Зачарования",
@@ -1245,6 +1255,11 @@
     "description": "Название сборки",
     "placeholders": {}
   },
+  "m0bf71e1c90": "Several PoB folders were found. Choose the one you use.",
+  "@m0bf71e1c90": {
+    "description": "Найдено несколько папок PoB. Выберите нужную вручную.",
+    "placeholders": {}
+  },
   "mbfd148a7e8": "Nodes found: {p0}",
   "@mbfd148a7e8": {
     "description": "Найдено узлов: {p0}",
@@ -1434,6 +1449,15 @@
   "@m57c6abe340": {
     "description": "Не удалось получить ответ сервера",
     "placeholders": {}
+  },
+  "m4a86054c42": "Could not get the folder through the PoB bridge: {p0}",
+  "@m4a86054c42": {
+    "description": "Не удалось получить папку через мост PoB: {p0}",
+    "placeholders": {
+      "p0": {
+        "type": "String"
+      }
+    }
   },
   "mcd252d5275": "Failed to get hint: {p0}",
   "@mcd252d5275": {
@@ -1921,6 +1945,11 @@
     "description": "Открыть и рассчитать",
     "placeholders": {}
   },
+  "m5ba3edc059": "Open or create a build",
+  "@m5ba3edc059": {
+    "description": "Открыть или создать сборку",
+    "placeholders": {}
+  },
   "mcfc22a4611": "Open search",
   "@mcfc22a4611": {
     "description": "Открыть поиск",
@@ -1992,6 +2021,11 @@
         "type": "String"
       }
     }
+  },
+  "med31458051": "The builds folder set in PoB is unavailable.",
+  "@med31458051": {
+    "description": "Папка сборок из настроек PoB недоступна.",
+    "placeholders": {}
   },
   "m1971cfb84c": "Passive",
   "@m1971cfb84c": {
@@ -2102,6 +2136,11 @@
     "description": "Подготовить PoB II",
     "placeholders": {}
   },
+  "mc1b2f9e3a6": "Set up PoB II",
+  "@mc1b2f9e3a6": {
+    "description": "Подготовка PoB II",
+    "placeholders": {}
+  },
   "m52d7142d18": "Windows x64, Linux x64 and macOS arm64 supported",
   "@m52d7142d18": {
     "description": "Поддерживаются Windows x64, Linux x64 и macOS arm64",
@@ -2110,6 +2149,11 @@
   "mc2fd54cfce": "Skills in this equipment slot share supports",
   "@mc2fd54cfce": {
     "description": "Поддержки общие для умений этого слота",
+    "placeholders": {}
+  },
+  "m54ab473017": "Default PoB folder connected",
+  "@m54ab473017": {
+    "description": "Подключена стандартная папка PoB",
     "placeholders": {}
   },
   "m67f5d8880e": "Connect Lua",
@@ -2140,6 +2184,11 @@
   "m5f5155bb1f": "Matching supports",
   "@m5f5155bb1f": {
     "description": "Подходящие поддержки",
+    "placeholders": {}
+  },
+  "m7996f71149": "Later",
+  "@m7996f71149": {
+    "description": "Позже",
     "placeholders": {}
   },
   "m180f58ab97": "Search",
@@ -2650,6 +2699,11 @@
     "description": "Сборка удалена",
     "placeholders": {}
   },
+  "m9027890a7b": "Builds in the connected folder are available in My Builds.",
+  "@m9027890a7b": {
+    "description": "Сборки из подключённой папки уже доступны в разделе «Мои сборки».",
+    "placeholders": {}
+  },
   "m407f871778": "Reset",
   "@m407f871778": {
     "description": "Сбросить",
@@ -2713,6 +2767,16 @@
   "m9ea191ae12": "System motion reduction takes priority",
   "@m9ea191ae12": {
     "description": "Системное уменьшение движения имеет приоритет",
+    "placeholders": {}
+  },
+  "me7d43ecc6d": "Download Path of Building",
+  "@me7d43ecc6d": {
+    "description": "Скачать Path of Building",
+    "placeholders": {}
+  },
+  "m0c90d97433": "Download PoB MCP",
+  "@m0c90d97433": {
+    "description": "Скачать PoB MCP",
     "placeholders": {}
   },
   "m0a8113a0b9": "Download update",
@@ -2879,6 +2943,11 @@
     "description": "Стало",
     "placeholders": {}
   },
+  "mabdae6b126": "The default PoB folder was not found. Choose a folder manually.",
+  "@mabdae6b126": {
+    "description": "Стандартная папка PoB не найдена. Выберите папку вручную.",
+    "placeholders": {}
+  },
   "mf7eaffec2f": "Issues page",
   "@mf7eaffec2f": {
     "description": "Страница выпусков",
@@ -2974,6 +3043,11 @@
     "description": "Уже выполняется установка",
     "placeholders": {}
   },
+  "m2748676635": "Another PoB installation is already open. Connect it in Components.",
+  "@m2748676635": {
+    "description": "Уже открыта другая установка PoB. Подключите её в разделе «Компоненты».",
+    "placeholders": {}
+  },
   "me77a383ee5": "Node",
   "@me77a383ee5": {
     "description": "Узел",
@@ -2987,6 +3061,11 @@
   "mf3a46c2f2b": "Nodes",
   "@mf3a46c2f2b": {
     "description": "Узлы",
+    "placeholders": {}
+  },
+  "mb68ab7d79e": "Choose the PoB folder manually or look in the default location.",
+  "@mb68ab7d79e": {
+    "description": "Укажите папку PoB вручную или попробуйте найти её по стандартному пути.",
     "placeholders": {}
   },
   "mdba310a980": "Specify a number from 1 to 200",
@@ -3071,6 +3150,16 @@
     "description": "Условия расчёта",
     "placeholders": {}
   },
+  "m0a3fddcd95": "Install 64-bit Python 3.11 or newer and restart PoB II.",
+  "@m0a3fddcd95": {
+    "description": "Установите 64-битный Python 3.11+ и перезапустите PoB II.",
+    "placeholders": {}
+  },
+  "mdccbb9341b": "Install Git and restart PoB II.",
+  "@mdccbb9341b": {
+    "description": "Установите Git и перезапустите PoB II.",
+    "placeholders": {}
+  },
   "m720408ab97": "Install components and connect Lua",
   "@m720408ab97": {
     "description": "Установите компоненты и подключите Lua",
@@ -3084,6 +3173,11 @@
   "mb7cd6fae08": "Install",
   "@mb7cd6fae08": {
     "description": "Установить",
+    "placeholders": {}
+  },
+  "mfdeaa71380": "Install components",
+  "@mfdeaa71380": {
+    "description": "Установить компоненты",
     "placeholders": {}
   },
   "mfcb7c67f91": "Current version installed",

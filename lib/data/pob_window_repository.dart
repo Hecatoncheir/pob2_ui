@@ -63,22 +63,28 @@ class PobWindowRepository {
     required bool restart,
   }) async {
     final key = path.toLowerCase();
-    if (!restart && _launched.containsKey(key)) await _closeOwned(key);
     final window = await _startWindow(executable, path, restart: restart);
-    _launched[key] = window;
-    await _waitUntilReady(mcp, directory);
-    await _runForWindow(_minimizePobWindow, window);
+    if (window != null) _launched[key] = window;
+    await _waitUntilReady(mcp, directory, alreadyOpen: window == null);
+    if (window != null) await _runForWindow(_minimizePobWindow, window);
   }
 
-  Future<void> _waitUntilReady(Installation mcp, String directory) async {
+  Future<void> _waitUntilReady(
+    Installation mcp,
+    String directory, {
+    required bool alreadyOpen,
+  }) async {
     final status = await _run(mcp, [
       '-c',
       _waitForBridge,
       directory,
+      alreadyOpen ? '5' : '45',
     ], timeout: const Duration(seconds: 60));
     if (status != 'ready') {
       throw StateError(
-        'PoB запущен, но мост пока не отвечает. Проверьте связь ещё раз.',
+        alreadyOpen
+            ? 'PoB уже открыт без связи с мостом. Перезапустите его один раз.'
+            : 'PoB запущен, но мост пока не отвечает. Проверьте связь ещё раз.',
       );
     }
   }
@@ -88,7 +94,6 @@ class PobWindowRepository {
     String directory,
     File executable,
   ) async {
-    await _closeWine();
     final prefix = await _run(mcp, ['-c', _winePrefix, directory]);
     final window = await WinePobWindow.start(
       executable,
@@ -97,9 +102,9 @@ class PobWindowRepository {
         await _run(mcp, ['-c', _ensureBridge, directory]);
       },
     );
-    _wineWindow = window;
-    await _waitUntilReady(mcp, directory);
-    await window.minimize();
+    if (window != null) _wineWindow = window;
+    await _waitUntilReady(mcp, directory, alreadyOpen: window == null);
+    await window?.minimize();
   }
 
   Future<void> _closeWine() async {
@@ -151,16 +156,15 @@ class PobWindowRepository {
     throw const FormatException('Выберите папку с приложением PoB для PoE 2');
   }
 
-  Future<_LaunchedPob> _startWindow(
+  Future<_LaunchedPob?> _startWindow(
     File executable,
     String path, {
     required bool restart,
   }) async {
-    final result = await _windowScript(_restartPobWindow, {
-      'POB2_WINDOW_EXE': path,
-      'POB2_LAUNCH_EXE': executable.path,
-      'POB2_WINDOW_RESTART': restart ? '1' : '0',
-    });
+    final result = await _windowScript(
+      _restartPobWindow,
+      _launchEnvironment(executable, path, restart: restart),
+    );
     switch (result.exitCode) {
       case 0:
         if (jsonDecode(result.stdout as String) case {
@@ -175,13 +179,24 @@ class PobWindowRepository {
       case 4:
         throw StateError('Не удалось запустить PoB.');
       case 5:
-        throw StateError(
-          'PoB уже открыт без связи с мостом. Перезапустите его один раз.',
-        );
+        return null;
+      case 6:
+        throw StateError(_anotherWindow);
       default:
         throw StateError('Закройте выбранный PoB вручную и повторите запуск.');
     }
   }
+
+  Map<String, String> _launchEnvironment(
+    File executable,
+    String path, {
+    required bool restart,
+  }) => {
+    'POB2_WINDOW_EXE': path,
+    'POB2_LAUNCH_EXE': executable.path,
+    'POB2_WINDOW_RESTART': restart ? '1' : '0',
+    'POB2_WINDOW_PROBE': '0',
+  };
 
   Future<ProcessResult> _runForWindow(String script, _LaunchedPob window) =>
       _windowScript(_findLaunchedPob + script, {
@@ -287,6 +302,14 @@ class PobWindowRepository {
       return;
     }
     final path = await executable.resolveSymbolicLinks();
+    final probe = await _windowScript(_restartPobWindow, {
+      ..._launchEnvironment(executable, path, restart: false),
+      'POB2_WINDOW_PROBE': '1',
+    });
+    if (probe.exitCode == 6) throw StateError(_anotherWindow);
+    if (probe.exitCode != 0 && probe.exitCode != 5) {
+      throw StateError('Закройте выбранный PoB вручную и повторите запуск.');
+    }
     await _run(mcp, ['-c', _ensureBridge, directory]);
     await _startAndCheck(mcp, directory, executable, path, restart: false);
   }
@@ -294,7 +317,15 @@ class PobWindowRepository {
   bool _bridgeUnavailable(StateError error) {
     try {
       return switch (jsonDecode(error.message.toString())) {
-        {'code': 'BRIDGE_NOT_RUNNING' || 'BRIDGE_RESTART_REQUIRED'} => true,
+        {
+          'code':
+              'BRIDGE_NOT_RUNNING' ||
+              'BRIDGE_RESTART_REQUIRED' ||
+              'ENGINE_STOPPED',
+        } =>
+          true,
+        {'code': -32603, 'message': final String message} =>
+          _connectionLost.hasMatch(message),
         _ => false,
       };
     } on FormatException {
@@ -344,8 +375,15 @@ class PobWindowRepository {
   }
 }
 
+final _connectionLost = RegExp(
+  r'WinError 1005[34]|WinError 10061|Errno 104|Errno 111|Connection reset by peer',
+  caseSensitive: false,
+);
+
 const _closePending =
     'PoB ещё открыт. Сохраните сборку и завершите закрытие в PoB.';
+const _anotherWindow =
+    'Уже открыта другая установка PoB. Подключите её в разделе «Компоненты».';
 
 const _discovery = '''
 import json
@@ -481,19 +519,25 @@ $target = $env:POB2_WINDOW_EXE
 $name = [IO.Path]::GetFileNameWithoutExtension($target)
 $session = [Diagnostics.Process]::GetCurrentProcess().SessionId
 $windows = @()
-foreach ($process in [Diagnostics.Process]::GetProcessesByName($name)) {
+$restart = $env:POB2_WINDOW_RESTART -eq '1'
+$names = if ($restart) { @($name) } else { @($name, 'Path of Building-PoE2', 'Path{space}of{space}Building-PoE2') | Select-Object -Unique }
+$processes = $names | ForEach-Object { [Diagnostics.Process]::GetProcessesByName($_) }
+foreach ($process in $processes) {
     try {
         if ($process.HasExited -or $process.SessionId -ne $session) { continue }
         $path = $process.MainModule.FileName
         if (!$path) { exit 3 }
         if ([string]::Equals($path, $target, [StringComparison]::OrdinalIgnoreCase)) {
             $windows += $process
+        } elseif (!$restart) {
+            exit 6
         }
     } catch {
         if (!$process.HasExited) { exit 3 }
     }
 }
-if ($windows.Count -gt 0 -and $env:POB2_WINDOW_RESTART -ne '1') { exit 5 }
+if ($windows.Count -gt 0 -and !$restart) { exit 5 }
+if ($env:POB2_WINDOW_PROBE -eq '1') { exit 0 }
 if ($windows.Count -gt 1) { exit 3 }
 if ($windows.Count -eq 1) { Close-PobWindow $windows[0] }
 try {
@@ -555,7 +599,7 @@ import time
 from pob_poe2_mcp.api import BuildAPI
 from pob_poe2_mcp.errors import EngineError
 
-deadline = time.monotonic() + 45
+deadline = time.monotonic() + int(sys.argv[2])
 while time.monotonic() < deadline:
     try:
         with BuildAPI(mode="app", pob_dir=sys.argv[1], timeout=4):

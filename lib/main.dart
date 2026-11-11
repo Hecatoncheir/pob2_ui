@@ -55,6 +55,7 @@ Future<void> main(List<String> arguments) async {
     workspaceRepository,
     initial: await workspaceRepository.load(),
   );
+  final initialization = model.initialize();
   runApp(
     ExitProtection(
       model: model,
@@ -65,6 +66,7 @@ Future<void> main(List<String> arguments) async {
         language: language,
         interfaceScale: interfaceScale,
         workspacePreferences: workspacePreferences,
+        initialization: initialization,
       ),
     ),
   );
@@ -72,6 +74,5 @@ Future<void> main(List<String> arguments) async {
     await markStartupHealthy(arguments);
     await updates.initialize();
   });
-  model.initialize();
   language.add(const LanguageLoadRequested());
 }
