@@ -1019,6 +1019,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get m81df0c01a4 => 'Ungültiger Build-Baum';
 
   @override
+  String get m07d242c77f => 'Ungültige Etappendaten';
+
+  @override
   String get m571195d148 => 'Falsche PoB-Koordinaten';
 
   @override
@@ -1972,6 +1975,9 @@ class AppLocalizationsDe extends AppLocalizations {
   }
 
   @override
+  String get m2ef9d59a72 => 'Stufe und Passivbaum';
+
+  @override
   String get mbb0ceac2d1 => 'Level und Qualität müssen ganze Zahlen sein';
 
   @override
@@ -2056,6 +2062,9 @@ class AppLocalizationsDe extends AppLocalizations {
   }
 
   @override
+  String get m2b7ec4a283 => 'Was soll aus der Etappe angewendet werden?';
+
+  @override
   String get mbc55227299 => 'Blockchance';
 
   @override
@@ -2084,6 +2093,9 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get me43836c564 => 'Widerstandsstrafe';
+
+  @override
+  String get m0b5051e1b2 => 'Ausrüstung';
 
   @override
   String get mae1df2993a => 'Exportieren XML';

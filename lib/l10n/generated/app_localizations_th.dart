@@ -988,6 +988,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m81df0c01a4 => 'ต้นไม้ของบิลด์ไม่ถูกต้อง';
 
   @override
+  String get m07d242c77f => 'ข้อมูลขั้นตอนไม่ถูกต้อง';
+
+  @override
   String get m571195d148 => 'พิกัด PoB ไม่ถูกต้อง';
 
   @override
@@ -1918,6 +1921,9 @@ class AppLocalizationsTh extends AppLocalizations {
   }
 
   @override
+  String get m2ef9d59a72 => 'เลเวลและผังพาสซีฟ';
+
+  @override
   String get mbb0ceac2d1 => 'ระดับและคุณภาพต้องเป็นจำนวนเต็ม';
 
   @override
@@ -2001,6 +2007,9 @@ class AppLocalizationsTh extends AppLocalizations {
   }
 
   @override
+  String get m2b7ec4a283 => 'ต้องการใช้ส่วนใดจากขั้นตอนนี้?';
+
+  @override
   String get mbc55227299 => 'โอกาสบล็อค';
 
   @override
@@ -2029,6 +2038,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get me43836c564 => 'การลงโทษความต้านทาน';
+
+  @override
+  String get m0b5051e1b2 => 'อุปกรณ์';
 
   @override
   String get mae1df2993a => 'ส่งออก XML';

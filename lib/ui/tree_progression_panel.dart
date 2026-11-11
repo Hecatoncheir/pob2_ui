@@ -23,7 +23,8 @@ class TreeProgressionPanel extends StatelessWidget {
   final bool enabled;
   final ValueChanged<int> onFocus;
   final Future<TreeProgressionStep?> Function() onCapture;
-  final Future<void> Function(TreeProgressionStep) onApply;
+  final Future<void> Function(TreeProgressionStep, Set<ProgressionPart>)
+  onApply;
 
   @override
   Widget build(BuildContext context) =>
@@ -134,7 +135,7 @@ class TreeProgressionPanel extends StatelessWidget {
           padding: const EdgeInsets.only(bottom: 8),
           child: FilledButton.tonalIcon(
             key: const Key('apply-progression-stage'),
-            onPressed: enabled ? () => onApply(step) : null,
+            onPressed: enabled ? () => _apply(context, step) : null,
             icon: const Icon(Icons.check, size: 18),
             label: const AppText('Применить этап'),
           ),
@@ -201,18 +202,20 @@ class TreeProgressionPanel extends StatelessWidget {
       _ProgressionStepDialog(captured.details),
     );
     if (result == null || !context.mounted) return;
-    final (level: stepLevel, :title, :note) = result;
     context.read<TreeProgressionBloc>().add(
-      TreeProgressionRecorded(
-        TreeProgressionStep(
-          stepLevel,
-          captured.nodes,
-          title: title,
-          note: note,
-          allocation: captured.allocation,
-        ),
-      ),
+      TreeProgressionRecorded(captured.withDetails(result)),
     );
+  }
+
+  Future<void> _apply(BuildContext context, TreeProgressionStep step) async {
+    final available = step.parts;
+    final parts = available.length == 1
+        ? available
+        : await sparkDialog<Set<ProgressionPart>>(
+            context,
+            _ApplyProgressionDialog(available),
+          );
+    if (parts != null && context.mounted) await onApply(step, parts);
   }
 
   Future<void> _edit(BuildContext context, TreeProgressionStep step) async {
@@ -225,6 +228,62 @@ class TreeProgressionPanel extends StatelessWidget {
       TreeProgressionEdited(step, result),
     );
   }
+}
+
+class _ApplyProgressionDialog extends StatefulWidget {
+  const _ApplyProgressionDialog(this.available);
+  final Set<ProgressionPart> available;
+
+  @override
+  State<_ApplyProgressionDialog> createState() =>
+      _ApplyProgressionDialogState();
+}
+
+class _ApplyProgressionDialogState extends State<_ApplyProgressionDialog> {
+  final selected = {ProgressionPart.tree};
+
+  @override
+  Widget build(BuildContext context) => AlertDialog(
+    title: const AppText('Что применить из этапа?'),
+    scrollable: true,
+    content: SizedBox(
+      width: 300,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          for (final part in widget.available)
+            CheckboxListTile(
+              contentPadding: EdgeInsets.zero,
+              value: selected.contains(part),
+              title: AppText(switch (part) {
+                ProgressionPart.tree => 'Уровень и дерево',
+                ProgressionPart.skills => 'Умения',
+                ProgressionPart.equipment => 'Экипировка',
+              }),
+              onChanged: (value) => setState(() {
+                if (value == true) {
+                  selected.add(part);
+                } else {
+                  selected.remove(part);
+                }
+              }),
+            ),
+        ],
+      ),
+    ),
+    actions: [
+      TextButton(
+        onPressed: () => Navigator.pop(context),
+        child: const AppText('Отмена'),
+      ),
+      FilledButton(
+        onPressed: selected.isEmpty
+            ? null
+            : () => Navigator.pop(context, Set<ProgressionPart>.of(selected)),
+        child: const AppText('Применить этап'),
+      ),
+    ],
+  );
 }
 
 class _ProgressionMilestone extends StatelessWidget {

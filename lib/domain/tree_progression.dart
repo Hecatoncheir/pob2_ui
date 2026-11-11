@@ -18,6 +18,8 @@ class TreeProgressionStep {
     this.title = '',
     this.note = '',
     this.allocation,
+    this.skills,
+    this.equipment,
   }) : nodes = Set.unmodifiable(nodes);
 
   final int level;
@@ -25,10 +27,31 @@ class TreeProgressionStep {
   final String title;
   final String note;
   final String? allocation;
+  final String? skills;
+  final String? equipment;
+
+  Set<ProgressionPart> get parts => {
+    ProgressionPart.tree,
+    if (skills != null) ProgressionPart.skills,
+    if (equipment != null) ProgressionPart.equipment,
+  };
 
   TreeProgressionDetails get details =>
       (level: level, title: title, note: note);
+
+  TreeProgressionStep withDetails(TreeProgressionDetails details) =>
+      TreeProgressionStep(
+        details.level,
+        nodes,
+        title: details.title,
+        note: details.note,
+        allocation: allocation,
+        skills: skills,
+        equipment: equipment,
+      );
 }
+
+enum ProgressionPart { tree, skills, equipment }
 
 bool isProgressionNode(String kind) =>
     kind != 'ClassStart' && kind != 'AscendClassStart';

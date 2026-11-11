@@ -977,6 +977,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m81df0c01a4 => 'ビルドのツリーが無効です';
 
   @override
+  String get m07d242c77f => '段階のデータが無効です';
+
+  @override
   String get m571195d148 => '間違った PoB 座標';
 
   @override
@@ -1898,6 +1901,9 @@ class AppLocalizationsJa extends AppLocalizations {
   }
 
   @override
+  String get m2ef9d59a72 => 'レベルとパッシブツリー';
+
+  @override
   String get mbb0ceac2d1 => 'レベルと品質は整数でなければなりません';
 
   @override
@@ -1980,6 +1986,9 @@ class AppLocalizationsJa extends AppLocalizations {
   }
 
   @override
+  String get m2b7ec4a283 => 'この段階から何を適用しますか？';
+
+  @override
   String get mbc55227299 => 'ブロックチャンス';
 
   @override
@@ -2008,6 +2017,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get me43836c564 => '耐性ペナルティ';
+
+  @override
+  String get m0b5051e1b2 => '装備';
 
   @override
   String get mae1df2993a => 'エクスポート XML';

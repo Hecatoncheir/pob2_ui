@@ -1661,6 +1661,11 @@
     "description": "Некорректное дерево сборки",
     "placeholders": {}
   },
+  "m07d242c77f": "Invalid milestone data",
+  "@m07d242c77f": {
+    "description": "Некорректные данные этапа",
+    "placeholders": {}
+  },
   "m571195d148": "Incorrect PoB coordinates",
   "@m571195d148": {
     "description": "Некорректные координаты PoB",
@@ -3209,6 +3214,11 @@
       }
     }
   },
+  "m2ef9d59a72": "Level and passive tree",
+  "@m2ef9d59a72": {
+    "description": "Уровень и дерево",
+    "placeholders": {}
+  },
   "mbb0ceac2d1": "Level and quality must be integers",
   "@mbb0ceac2d1": {
     "description": "Уровень и качество должны быть целыми числами",
@@ -3346,6 +3356,11 @@
       }
     }
   },
+  "m2b7ec4a283": "What should this milestone apply?",
+  "@m2b7ec4a283": {
+    "description": "Что применить из этапа?",
+    "placeholders": {}
+  },
   "mbc55227299": "Block Chance",
   "@mbc55227299": {
     "description": "Шанс блока",
@@ -3394,6 +3409,11 @@
   "me43836c564": "Resistance penalty",
   "@me43836c564": {
     "description": "Штраф сопротивлений",
+    "placeholders": {}
+  },
+  "m0b5051e1b2": "Equipment",
+  "@m0b5051e1b2": {
+    "description": "Экипировка",
     "placeholders": {}
   },
   "mae1df2993a": "Export XML",

@@ -1003,6 +1003,9 @@ class AppLocalizationsPt extends AppLocalizations {
   String get m81df0c01a4 => 'Árvore da configuração inválida';
 
   @override
+  String get m07d242c77f => 'Dados da etapa inválidos';
+
+  @override
   String get m571195d148 => 'Coordenadas PoB incorretas';
 
   @override
@@ -1953,6 +1956,9 @@ class AppLocalizationsPt extends AppLocalizations {
   }
 
   @override
+  String get m2ef9d59a72 => 'Nível e árvore de passivas';
+
+  @override
   String get mbb0ceac2d1 => 'O nível e a qualidade devem ser números inteiros';
 
   @override
@@ -2037,6 +2043,9 @@ class AppLocalizationsPt extends AppLocalizations {
   }
 
   @override
+  String get m2b7ec4a283 => 'O que aplicar desta etapa?';
+
+  @override
   String get mbc55227299 => 'Chance de bloqueio';
 
   @override
@@ -2065,6 +2074,9 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get me43836c564 => 'Penalidade de resistência';
+
+  @override
+  String get m0b5051e1b2 => 'Equipamento';
 
   @override
   String get mae1df2993a => 'Exportar XML';
@@ -3117,6 +3129,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get m81df0c01a4 => 'Árvore da configuração inválida';
 
   @override
+  String get m07d242c77f => 'Dados da etapa inválidos';
+
+  @override
   String get m571195d148 => 'Coordenadas PoB incorretas';
 
   @override
@@ -4067,6 +4082,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   }
 
   @override
+  String get m2ef9d59a72 => 'Nível e árvore de passivas';
+
+  @override
   String get mbb0ceac2d1 => 'O nível e a qualidade devem ser números inteiros';
 
   @override
@@ -4151,6 +4169,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   }
 
   @override
+  String get m2b7ec4a283 => 'O que aplicar desta etapa?';
+
+  @override
   String get mbc55227299 => 'Chance de bloqueio';
 
   @override
@@ -4179,6 +4200,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get me43836c564 => 'Penalidade de resistência';
+
+  @override
+  String get m0b5051e1b2 => 'Equipamento';
 
   @override
   String get mae1df2993a => 'Exportar XML';

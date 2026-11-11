@@ -977,6 +977,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m81df0c01a4 => '잘못된 빌드 트리';
 
   @override
+  String get m07d242c77f => '단계 데이터가 올바르지 않습니다';
+
+  @override
   String get m571195d148 => '잘못된 PoB 좌표';
 
   @override
@@ -1898,6 +1901,9 @@ class AppLocalizationsKo extends AppLocalizations {
   }
 
   @override
+  String get m2ef9d59a72 => '레벨 및 패시브 트리';
+
+  @override
   String get mbb0ceac2d1 => '레벨과 품질은 정수여야 합니다.';
 
   @override
@@ -1979,6 +1985,9 @@ class AppLocalizationsKo extends AppLocalizations {
   }
 
   @override
+  String get m2b7ec4a283 => '이 단계에서 무엇을 적용할까요?';
+
+  @override
   String get mbc55227299 => '차단확률';
 
   @override
@@ -2007,6 +2016,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get me43836c564 => '저항 패널티';
+
+  @override
+  String get m0b5051e1b2 => '장비';
 
   @override
   String get mae1df2993a => '내보내기 XML';

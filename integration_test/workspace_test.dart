@@ -280,6 +280,7 @@ Future<void> _applyProgression(
     await tester.ensureVisible(apply);
     await tester.tap(apply);
     await tester.pumpAndSettle();
+    await _confirmProgression(tester);
     await _waitForIdle(tester, model);
     expect(model.state.error, isNull);
     expect(model.state.report!.level, step.level);
@@ -297,6 +298,72 @@ Future<void> _applyProgression(
   expect(model.state.report!.level, before.level);
   expect(model.state.report!.stats, before.stats);
   await tester.pumpAndSettle();
+  await _reviewProgressionLoadout(tester, model);
+}
+
+Future<void> _confirmProgression(WidgetTester tester) async {
+  final dialog = find.byType(AlertDialog).last;
+  await tester.tap(
+    find.descendant(of: dialog, matching: find.text('Применить этап')),
+  );
+  await tester.pumpAndSettle();
+}
+
+Future<void> _reviewProgressionLoadout(
+  WidgetTester tester,
+  WorkshopCubit model,
+) async {
+  final original = model.state.report!;
+  final nodes = _selectedProgressionNodes(model);
+  const ring =
+      'Item Class: Rings\nRarity: Rare\nTide Loop\nLazuli Ring\n'
+      '--------\nItem Level: 80\n--------\n+50 to maximum Life\n';
+  expect((await model.equipItem('Ring 1', raw: ring)).committed, isTrue);
+  final lifeWithRing = model.state.report!.stats['Life'] as num;
+  expect(lifeWithRing, greaterThan(original.stats['Life'] as num));
+  final ice = (await model.catalogs.gems()).firstWhere(
+    (gem) => gem.name == 'Ice Nova',
+  );
+  expect(
+    (await model.addSkillGroup('Ледяная группа', [
+      {'id': ice.id, 'level': 5},
+    ])).committed,
+    isTrue,
+  );
+  await tester.pumpAndSettle();
+  await _applyLoadoutPart(tester, model, 'Умения');
+  expect(model.state.report!.groups.length, original.groups.length);
+  expect(model.state.report!.stats['Life'], lifeWithRing);
+  await model.undo();
+  expect(model.state.report!.groups.length, original.groups.length + 1);
+  await tester.pumpAndSettle();
+  await _applyLoadoutPart(tester, model, 'Экипировка');
+  expect(model.state.report!.stats['Life'], original.stats['Life']);
+  expect(model.state.report!.groups.length, original.groups.length + 1);
+  expect(model.state.report!.level, original.level);
+  expect(_selectedProgressionNodes(model), nodes);
+  await model.undo();
+  expect(model.state.report!.stats['Life'], lifeWithRing);
+  await model.undo();
+  await model.undo();
+  expect(model.state.report!.stats, original.stats);
+  await tester.pumpAndSettle();
+}
+
+Future<void> _applyLoadoutPart(
+  WidgetTester tester,
+  WorkshopCubit model,
+  String label,
+) async {
+  final apply = find.byKey(const Key('apply-progression-stage'));
+  await tester.ensureVisible(apply);
+  await tester.tap(apply);
+  await tester.pumpAndSettle();
+  await tester.tap(find.widgetWithText(CheckboxListTile, 'Уровень и дерево'));
+  await tester.tap(find.widgetWithText(CheckboxListTile, label));
+  await tester.pumpAndSettle();
+  await _confirmProgression(tester);
+  await _waitForIdle(tester, model);
 }
 
 Set<int> _selectedProgressionNodes(WorkshopCubit model) => {

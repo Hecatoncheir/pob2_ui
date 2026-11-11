@@ -996,6 +996,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m81df0c01a4 => 'Invalid build tree';
 
   @override
+  String get m07d242c77f => 'Invalid milestone data';
+
+  @override
   String get m571195d148 => 'Incorrect PoB coordinates';
 
   @override
@@ -1934,6 +1937,9 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String get m2ef9d59a72 => 'Level and passive tree';
+
+  @override
   String get mbb0ceac2d1 => 'Level and quality must be integers';
 
   @override
@@ -2018,6 +2024,9 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String get m2b7ec4a283 => 'What should this milestone apply?';
+
+  @override
   String get mbc55227299 => 'Block Chance';
 
   @override
@@ -2046,6 +2055,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get me43836c564 => 'Resistance penalty';
+
+  @override
+  String get m0b5051e1b2 => 'Equipment';
 
   @override
   String get mae1df2993a => 'Export XML';

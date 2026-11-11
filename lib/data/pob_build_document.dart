@@ -4,6 +4,7 @@ import 'package:crypto/crypto.dart';
 import 'package:xml/xml.dart';
 
 import '../domain/tree_progression.dart';
+import 'pob_progression_loadout.dart';
 
 const _invalidTree = FormatException('Некорректное дерево сборки');
 const _allocationAttributes = [
@@ -46,7 +47,26 @@ class PobBuildDocument {
     return snapshot.toXmlString();
   }
 
-  String withProgression(TreeProgressionStep step) {
+  String get progressionSkills => captureProgressionSkills(_xml.rootElement);
+  String get progressionEquipment =>
+      captureProgressionEquipment(_xml.rootElement, _activeSpec);
+
+  String withProgression(
+    TreeProgressionStep step, {
+    Set<ProgressionPart> parts = const {ProgressionPart.tree},
+  }) {
+    final root = _xml.rootElement;
+    if (parts.contains(ProgressionPart.tree)) _applyTree(step);
+    if (parts.contains(ProgressionPart.skills)) {
+      applyProgressionSkills(root, step.skills!);
+    }
+    if (parts.contains(ProgressionPart.equipment)) {
+      applyProgressionEquipment(root, _activeSpec, step.equipment!);
+    }
+    return _xml.toXmlString();
+  }
+
+  void _applyTree(TreeProgressionStep step) {
     final build = _build!;
     final spec = _activeSpec;
     build.setAttribute('level', '${step.level}');
@@ -59,7 +79,6 @@ class PobBuildDocument {
       _copyAllocation(snapshot, spec);
     }
     _trimAllocation(spec, nodes);
-    return _xml.toXmlString();
   }
 
   String get characterClass => _build?.getAttribute('className') ?? '';

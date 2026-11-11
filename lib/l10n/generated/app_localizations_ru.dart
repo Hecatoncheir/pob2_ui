@@ -996,6 +996,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m81df0c01a4 => 'Некорректное дерево сборки';
 
   @override
+  String get m07d242c77f => 'Некорректные данные этапа';
+
+  @override
   String get m571195d148 => 'Некорректные координаты PoB';
 
   @override
@@ -1937,6 +1940,9 @@ class AppLocalizationsRu extends AppLocalizations {
   }
 
   @override
+  String get m2ef9d59a72 => 'Уровень и дерево';
+
+  @override
   String get mbb0ceac2d1 => 'Уровень и качество должны быть целыми числами';
 
   @override
@@ -2021,6 +2027,9 @@ class AppLocalizationsRu extends AppLocalizations {
   }
 
   @override
+  String get m2b7ec4a283 => 'Что применить из этапа?';
+
+  @override
   String get mbc55227299 => 'Шанс блока';
 
   @override
@@ -2049,6 +2058,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get me43836c564 => 'Штраф сопротивлений';
+
+  @override
+  String get m0b5051e1b2 => 'Экипировка';
 
   @override
   String get mae1df2993a => 'Экспорт XML';

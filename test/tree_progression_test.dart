@@ -31,6 +31,63 @@ const _key = (
 );
 
 void main() {
+  test('Экипировка этапа переносит предметы и самоцветы без конфликта ID', () {
+    const saved = '''
+<PathOfBuilding2>
+  <Build level="25"/>
+  <Tree><Spec nodes="11"><Sockets><Socket nodeId="11" itemId="2"/></Sockets></Spec></Tree>
+  <Items activeItemSet="2">
+    <Item id="1">Кольцо этапа</Item><Item id="2">Самоцвет этапа</Item>
+    <Item id="3">Лишний предмет</Item>
+    <ItemSet id="1"/><ItemSet id="2" useSecondWeaponSet="true"><Slot name="Ring 1" itemId="1"/></ItemSet>
+  </Items>
+</PathOfBuilding2>
+''';
+    const current = '''
+<PathOfBuilding2>
+  <Build level="90"/>
+  <Tree><Spec nodes="11,15"><Sockets/></Spec></Tree>
+  <Items activeItemSet="1">
+    <Item id="1">Текущее кольцо</Item>
+    <ItemSet id="1"><Slot name="Ring 1" itemId="1"/></ItemSet>
+    <ItemSet id="2"><Slot name="Ring 2" itemId="1"/></ItemSet>
+  </Items>
+  <Skills><SkillSet id="1"><Skill label="Текущее умение"/></SkillSet></Skills>
+</PathOfBuilding2>
+''';
+    final step = TreeProgressionStep(25, [
+      11,
+    ], equipment: PobBuildDocument(saved).progressionEquipment);
+    final changed = PobBuildDocument(current)
+        .withProgression(step, parts: {ProgressionPart.equipment});
+    final root = XmlDocument.parse(changed).rootElement;
+    final items = root.getElement('Items')!;
+    final sets = items.findElements('ItemSet').toList();
+    final inventory = {
+      for (final item in items.findElements('Item'))
+        item.getAttribute('id'): item.innerText,
+    };
+    final ring = sets.first.getElement('Slot')!.getAttribute('itemId');
+    final socket = root
+        .getElement('Tree')!
+        .getElement('Spec')!
+        .getElement('Sockets')!
+        .getElement('Socket')!;
+    expect(inventory[ring], 'Кольцо этапа');
+    expect(inventory[socket.getAttribute('itemId')], 'Самоцвет этапа');
+    expect(inventory, hasLength(3));
+    expect(sets.first.getAttribute('useSecondWeaponSet'), 'true');
+    expect(sets.last.getElement('Slot')!.getAttribute('itemId'), '1');
+    expect(PobBuildDocument(changed).allocatedNodes, {11, 15});
+    expect(PobBuildDocument(changed).level, 90);
+    expect(changed, contains('Текущее умение'));
+    expect(
+      PobBuildDocument(changed)
+          .withProgression(step, parts: {ProgressionPart.equipment}),
+      changed,
+    );
+  });
+
   test('Этап заменяет только выбор в активном дереве и уровень', () {
     const xml = '''
 <PathOfBuilding2>
@@ -85,6 +142,8 @@ void main() {
             title: 'Акт 2',
             note: 'Новые камни\nПроверить сопротивления',
             allocation: '<Spec masteryEffects=""/>',
+            skills: '<SkillSet/>',
+            equipment: '<Equipment/>',
           ),
         ],
       );
@@ -203,7 +262,10 @@ void main() {
               enabled: true,
               onFocus: (id) => focused = id,
               onCapture: () async => TreeProgressionStep(90, []),
-              onApply: (step) async => applied = step,
+              onApply: (step, parts) async {
+                expect(parts, {ProgressionPart.tree});
+                applied = step;
+              },
             ),
           ),
         ),

@@ -61,6 +61,8 @@ List<Map<String, Object>> encodeProgressionSteps(
       if (step.title.isNotEmpty) 'title': step.title,
       if (step.note.isNotEmpty) 'note': step.note,
       if (step.allocation case final allocation?) 'allocation': allocation,
+      if (step.skills case final skills?) 'skills': skills,
+      if (step.equipment case final equipment?) 'equipment': equipment,
     },
 ];
 
@@ -83,15 +85,21 @@ TreeProgressionStep _decodeStep(Object? entry) {
         final String note,
       )
       when level >= 1 && level <= 100 && nodes.every((node) => node is int)) {
-    final allocation = entry['allocation'];
-    if (allocation != null && allocation is! String) throw _invalidPlan;
     return TreeProgressionStep(
       level,
       nodes.cast<int>(),
       title: title,
       note: note,
-      allocation: allocation as String?,
+      allocation: _optionalXml(entry['allocation']),
+      skills: _optionalXml(entry['skills']),
+      equipment: _optionalXml(entry['equipment']),
     );
   }
   throw _invalidPlan;
 }
+
+String? _optionalXml(Object? value) => switch (value) {
+  null => null,
+  String() => value,
+  _ => throw _invalidPlan,
+};

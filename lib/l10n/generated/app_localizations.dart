@@ -1881,6 +1881,12 @@ abstract class AppLocalizations {
   /// **'Invalid build tree'**
   String get m81df0c01a4;
 
+  /// Некорректные данные этапа
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid milestone data'**
+  String get m07d242c77f;
+
   /// Некорректные координаты PoB
   ///
   /// In en, this message translates to:
@@ -3639,6 +3645,12 @@ abstract class AppLocalizations {
   /// **'Level {p0} · quality {p1} %'**
   String m88f6fabbe9(String p0, String p1);
 
+  /// Уровень и дерево
+  ///
+  /// In en, this message translates to:
+  /// **'Level and passive tree'**
+  String get m2ef9d59a72;
+
   /// Уровень и качество должны быть целыми числами
   ///
   /// In en, this message translates to:
@@ -3789,6 +3801,12 @@ abstract class AppLocalizations {
   /// **'Some icons are unavailable: {p0}'**
   String m913d7f855b(String p0);
 
+  /// Что применить из этапа?
+  ///
+  /// In en, this message translates to:
+  /// **'What should this milestone apply?'**
+  String get m2b7ec4a283;
+
   /// Шанс блока
   ///
   /// In en, this message translates to:
@@ -3848,6 +3866,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Resistance penalty'**
   String get me43836c564;
+
+  /// Экипировка
+  ///
+  /// In en, this message translates to:
+  /// **'Equipment'**
+  String get m0b5051e1b2;
 
   /// Экспорт XML
   ///

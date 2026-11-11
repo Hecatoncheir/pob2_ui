@@ -975,6 +975,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m81df0c01a4 => '流派天賦樹無效';
 
   @override
+  String get m07d242c77f => '階段資料無效';
+
+  @override
   String get m571195d148 => 'PoB 座標不正確';
 
   @override
@@ -1894,6 +1897,9 @@ class AppLocalizationsZh extends AppLocalizations {
   }
 
   @override
+  String get m2ef9d59a72 => '等級和天賦樹';
+
+  @override
   String get mbb0ceac2d1 => '等級和品質必須是整數';
 
   @override
@@ -1975,6 +1981,9 @@ class AppLocalizationsZh extends AppLocalizations {
   }
 
   @override
+  String get m2b7ec4a283 => '要套用此階段的哪些內容？';
+
+  @override
   String get mbc55227299 => '阻止機會';
 
   @override
@@ -2003,6 +2012,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get me43836c564 => '抵抗懲罰';
+
+  @override
+  String get m0b5051e1b2 => '裝備';
 
   @override
   String get mae1df2993a => '導出 XML';
@@ -3022,6 +3034,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m81df0c01a4 => '流派天賦樹無效';
 
   @override
+  String get m07d242c77f => '階段資料無效';
+
+  @override
   String get m571195d148 => 'PoB 座標不正確';
 
   @override
@@ -3941,6 +3956,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   }
 
   @override
+  String get m2ef9d59a72 => '等級和天賦樹';
+
+  @override
   String get mbb0ceac2d1 => '等級和品質必須是整數';
 
   @override
@@ -4022,6 +4040,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   }
 
   @override
+  String get m2b7ec4a283 => '要套用此階段的哪些內容？';
+
+  @override
   String get mbc55227299 => '阻止機會';
 
   @override
@@ -4050,6 +4071,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get me43836c564 => '抵抗懲罰';
+
+  @override
+  String get m0b5051e1b2 => '裝備';
 
   @override
   String get mae1df2993a => '導出 XML';

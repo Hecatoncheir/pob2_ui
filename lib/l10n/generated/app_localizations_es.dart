@@ -1007,6 +1007,9 @@ class AppLocalizationsEs extends AppLocalizations {
   String get m81df0c01a4 => 'Árbol de la configuración no válido';
 
   @override
+  String get m07d242c77f => 'Datos de etapa no válidos';
+
+  @override
   String get m571195d148 => 'Coordenadas PoB incorrectas';
 
   @override
@@ -1961,6 +1964,9 @@ class AppLocalizationsEs extends AppLocalizations {
   }
 
   @override
+  String get m2ef9d59a72 => 'Nivel y árbol de pasivas';
+
+  @override
   String get mbb0ceac2d1 => 'El nivel y la calidad deben ser números enteros';
 
   @override
@@ -2045,6 +2051,9 @@ class AppLocalizationsEs extends AppLocalizations {
   }
 
   @override
+  String get m2b7ec4a283 => '¿Qué quieres aplicar de esta etapa?';
+
+  @override
   String get mbc55227299 => 'Oportunidad de bloqueo';
 
   @override
@@ -2073,6 +2082,9 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get me43836c564 => 'Penalización de resistencia';
+
+  @override
+  String get m0b5051e1b2 => 'Equipo';
 
   @override
   String get mae1df2993a => 'Exportar XML';

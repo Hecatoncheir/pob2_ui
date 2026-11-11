@@ -98,6 +98,8 @@ class WorkshopCubit extends Cubit<WorkshopState> {
         build.level,
         build.allocatedNodes.difference(_progressionStarts),
         allocation: build.progressionAllocation,
+        skills: build.progressionSkills,
+        equipment: build.progressionEquipment,
       );
     });
     return step;
@@ -105,14 +107,21 @@ class WorkshopCubit extends Cubit<WorkshopState> {
 
   Future<void> applyProgression(
     TreeProgressionKey key,
-    TreeProgressionStep step,
-  ) async {
+    TreeProgressionStep step, {
+    Set<ProgressionPart> parts = const {ProgressionPart.tree},
+  }) async {
     if (key != progressionKey || state.document!.stale) return;
+    if (parts.isEmpty || !step.parts.containsAll(parts)) return;
     final starts = _progressionStarts;
-    await _changeBuild(() async {
-      final build = PobBuildDocument(await _currentXml());
-      await _loadXml(build.withProgression(step));
-    }, validate: (xml) => _verifyAppliedProgression(xml, step, starts));
+    await _changeBuild(
+      () async {
+        final build = PobBuildDocument(await _currentXml());
+        await _loadXml(build.withProgression(step, parts: parts));
+      },
+      validate: parts.contains(ProgressionPart.tree)
+          ? (xml) => _verifyAppliedProgression(xml, step, starts)
+          : null,
+    );
   }
 
   void _verifyAppliedProgression(

@@ -119,18 +119,12 @@ class TreeProgressionBloc
     TreeProgressionStep step,
     TreeProgressionDetails details,
   ) async {
-    final (:level, :title, :note) = details;
+    final level = details.level;
     if (details == step.details || level < 1 || level > 100) return;
     final steps = [...state.steps];
     final index = steps.indexOf(step);
     if (index < 0) return;
-    final edited = TreeProgressionStep(
-      level,
-      step.nodes,
-      title: title,
-      note: note,
-      allocation: step.allocation,
-    );
+    final edited = step.withDetails(details);
     if (level != step.level) {
       steps.removeAt(index);
       await _insert(emit, steps, edited);

@@ -94,8 +94,8 @@ class WorkspaceInspector extends StatelessWidget {
       nodes: {for (final node in tree.nodes) node.id: node},
       enabled: key != null && !model.state.busy && !document.stale,
       onCapture: () async => key == null ? null : model.captureProgression(key),
-      onApply: (step) async {
-        if (key != null) await model.applyProgression(key, step);
+      onApply: (step, parts) async {
+        if (key != null) await model.applyProgression(key, step, parts: parts);
       },
       onFocus: (id) {
         plan.add(TreeProgressionFocusRequested(id));
