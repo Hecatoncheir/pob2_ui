@@ -114,6 +114,9 @@ void main() {
     expect(model.state.document!.tree!.original, isNotNull);
     await _capture(tester);
     expect(find.byType(TreeView), findsOneWidget);
+    await _showProgression(tester);
+    await _recordProgressionStep(tester, '1');
+    await _showParameters(tester);
     await _stage('Путь, Undo и Redo', () => _searchAndAllocate(tester, model));
     await tester.pumpAndSettle();
     await _stage('Смена атрибута', () => _selectAttribute(tester, model));
@@ -194,6 +197,77 @@ Future<void> _stage(String label, Future<void> Function() action) async {
   debugPrint('Начало: $label');
   await action();
   debugPrint('Готово: $label (${watch.elapsed.inSeconds} с)');
+}
+
+Future<void> _recordProgressionStep(WidgetTester tester, String level) async {
+  await tester.pumpAndSettle();
+  final add = find.byTooltip('Сохранить этап');
+  await _waitForProgression(tester, () {
+    if (add.evaluate().isEmpty) return false;
+    final button = find.ancestor(of: add, matching: find.byType(IconButton));
+    return tester.widget<IconButton>(button).onPressed != null;
+  });
+  await tester.tap(add);
+  await tester.pumpAndSettle();
+  final dialog = find.byType(AlertDialog);
+  await tester.enterText(
+    find.descendant(of: dialog, matching: find.byType(TextFormField)),
+    level,
+  );
+  await tester.tap(
+    find.descendant(of: dialog, matching: find.text('Сохранить')),
+  );
+  final stage = find.text('Уровень $level');
+  await _waitForProgression(tester, () => stage.evaluate().isNotEmpty);
+}
+
+Future<void> _reviewProgression(
+  WidgetTester tester,
+  WorkshopCubit model,
+) async {
+  final xml = await model.exportXml();
+  final tree = find.byKey(const Key('passive-tree'));
+  final bounds = tester.getRect(tree);
+  await _showProgression(tester);
+  expect(tester.getRect(tree), bounds);
+  await _recordProgressionStep(tester, '10');
+  expect(find.byType(ActionChip), findsWidgets);
+  await _capture(tester, suffix: '-progression');
+  await tester.tap(find.text('Уровень 1'));
+  await tester.pumpAndSettle();
+  expect(await model.exportXml(), xml);
+  await _showParameters(tester);
+}
+
+Future<void> _showProgression(WidgetTester tester) async {
+  final inspector = find.byKey(const Key('open-statistics'));
+  if (inspector.evaluate().isNotEmpty) {
+    await tester.tap(inspector);
+    await tester.pumpAndSettle();
+  }
+  await tester.tap(find.byKey(const Key('inspector-plan')));
+  await tester.pumpAndSettle();
+}
+
+Future<void> _showParameters(WidgetTester tester) async {
+  await tester.tap(find.byKey(const Key('inspector-parameters')));
+  final dialog = find.byType(Dialog);
+  if (dialog.evaluate().isNotEmpty) {
+    Navigator.pop(tester.element(dialog));
+  }
+  await tester.pumpAndSettle();
+}
+
+Future<void> _waitForProgression(
+  WidgetTester tester,
+  bool Function() ready,
+) async {
+  for (var attempt = 0; attempt < 30 && !ready(); attempt++) {
+    await Future<void>.delayed(const Duration(milliseconds: 30));
+    await tester.pump(const Duration(milliseconds: 100));
+  }
+  expect(ready(), isTrue);
+  await tester.pumpAndSettle();
 }
 
 Future<void> _fileWorkflow(
@@ -805,6 +879,10 @@ Future<void> _searchAndAllocate(
     isTrue,
   );
   expect(model.state.report!.stats, restoredStats);
+  await _stage(
+    'План прокачки на дереве Lua',
+    () => _reviewProgression(tester, model),
+  );
   await model.undo();
   await mouse.removePointer();
 }

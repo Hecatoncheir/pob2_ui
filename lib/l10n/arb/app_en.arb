@@ -375,6 +375,11 @@
     "description": "Введите название",
     "placeholders": {}
   },
+  "m7dbeae99bf": "Enter a level from 1 to 100",
+  "@m7dbeae99bf": {
+    "description": "Введите уровень от 1 до 100",
+    "placeholders": {}
+  },
   "mdd0a89ad92": "Enter an integer",
   "@mdd0a89ad92": {
     "description": "Введите целое число",
@@ -538,6 +543,11 @@
   "mb5cf5f66bc": "Select the same build folder as specified in the Path of Building.",
   "@mb5cf5f66bc": {
     "description": "Выберите ту же папку сборок, которая указана в Path of Building.",
+    "placeholders": {}
+  },
+  "md97721c61e": "Allocate nodes and save your first step.",
+  "@md97721c61e": {
+    "description": "Выберите узлы и сохраните первый этап.",
     "placeholders": {}
   },
   "m0513479f74": "Select a skill to select supports",
@@ -972,6 +982,11 @@
     "description": "Избежание чар",
     "placeholders": {}
   },
+  "m0094a04edd": "Edit milestone level",
+  "@m0094a04edd": {
+    "description": "Изменить уровень этапа",
+    "placeholders": {}
+  },
   "md5a9ca934e": "Stone image not found",
   "@md5a9ca934e": {
     "description": "Изображение камня не найдено",
@@ -1404,6 +1419,11 @@
       }
     }
   },
+  "m58ddf479f1": "Could not open the leveling plan",
+  "@m58ddf479f1": {
+    "description": "Не удалось открыть план прокачки",
+    "placeholders": {}
+  },
   "mfc401e8783": "Could not open the latest build, check the recovery copy: {p0}",
   "@mfc401e8783": {
     "description": "Не удалось открыть последнюю сборку, проверяем копию восстановления: {p0}",
@@ -1528,6 +1548,11 @@
     "description": "Не удалось сохранить масштаб.",
     "placeholders": {}
   },
+  "mdc2f51b827": "Could not save the leveling plan",
+  "@mdc2f51b827": {
+    "description": "Не удалось сохранить план прокачки",
+    "placeholders": {}
+  },
   "m92233abcc1": "Failed to save topic.",
   "@m92233abcc1": {
     "description": "Не удалось сохранить тему.",
@@ -1634,6 +1659,11 @@
   "m7021e46018": "Incorrect tree cache key",
   "@m7021e46018": {
     "description": "Некорректный ключ кеша дерева",
+    "placeholders": {}
+  },
+  "mac487ef90b": "Invalid leveling plan",
+  "@mac487ef90b": {
+    "description": "Некорректный план прокачки",
     "placeholders": {}
   },
   "mbfa40c4fb1": "Incorrect path to PoB assembly.",
@@ -2027,6 +2057,11 @@
     "description": "Папка сборок из настроек PoB недоступна.",
     "placeholders": {}
   },
+  "m75160b86a8": "Parameters",
+  "@m75160b86a8": {
+    "description": "Параметры",
+    "placeholders": {}
+  },
   "m1971cfb84c": "Passive",
   "@m1971cfb84c": {
     "description": "Пассивные",
@@ -2094,6 +2129,16 @@
   "m95121a4cc0": "Smooth animations",
   "@m95121a4cc0": {
     "description": "Плавные анимации",
+    "placeholders": {}
+  },
+  "m610d4c2115": "Plan",
+  "@m610d4c2115": {
+    "description": "План",
+    "placeholders": {}
+  },
+  "m48d5bea474": "Leveling plan",
+  "@m48d5bea474": {
+    "description": "План прокачки",
     "placeholders": {}
   },
   "m1474fac529": "Plans, items, development options...",
@@ -2914,6 +2959,11 @@
     "description": "Сохранить и рассчитать",
     "placeholders": {}
   },
+  "mfca5aabf85": "Save step",
+  "@mfca5aabf85": {
+    "description": "Сохранить этап",
+    "placeholders": {}
+  },
   "md7dfb40adb": "Combination already in use: {p0}",
   "@md7dfb40adb": {
     "description": "Сочетание уже используется: {p0}",
@@ -3038,6 +3088,11 @@
     "description": "Удалить умение",
     "placeholders": {}
   },
+  "md9dc2e9ec2": "Delete step",
+  "@md9dc2e9ec2": {
+    "description": "Удалить этап",
+    "placeholders": {}
+  },
   "m97ac4c501c": "Installation already in progress",
   "@m97ac4c501c": {
     "description": "Уже выполняется установка",
@@ -3061,6 +3116,11 @@
   "mf3a46c2f2b": "Nodes",
   "@mf3a46c2f2b": {
     "description": "Узлы",
+    "placeholders": {}
+  },
+  "m66e6ee7733": "No node changes",
+  "@m66e6ee7733": {
+    "description": "Узлы без изменений",
     "placeholders": {}
   },
   "mb68ab7d79e": "Choose the PoB folder manually or look in the default location.",
@@ -3102,6 +3162,15 @@
   "@m7f67af3d6c": {
     "description": "Уровень",
     "placeholders": {}
+  },
+  "m7ae0591157": "Level {p0}",
+  "@m7ae0591157": {
+    "description": "Уровень {p0}",
+    "placeholders": {
+      "p0": {
+        "type": "String"
+      }
+    }
   },
   "m88f6fabbe9": "Level {p0} · quality {p1} %",
   "@m88f6fabbe9": {

@@ -225,6 +225,9 @@ class AppLocalizationsEs extends AppLocalizations {
   String get mbce24a2108 => 'Introduzca un nombre';
 
   @override
+  String get m7dbeae99bf => 'Introduce un nivel del 1 al 100';
+
+  @override
   String get mdd0a89ad92 => 'Ingrese un número entero';
 
   @override
@@ -326,6 +329,9 @@ class AppLocalizationsEs extends AppLocalizations {
   @override
   String get mb5cf5f66bc =>
       'Seleccione la misma carpeta de compilación especificada en la Ruta de compilación.';
+
+  @override
+  String get md97721c61e => 'Asigna nodos y guarda el primer paso.';
 
   @override
   String get m0513479f74 =>
@@ -595,6 +601,9 @@ class AppLocalizationsEs extends AppLocalizations {
   String get mdcd4c2c384 => 'Hechizo para evitar el azar';
 
   @override
+  String get m0094a04edd => 'Cambiar el nivel de la etapa';
+
+  @override
   String get md5a9ca934e => 'Imagen de piedra no encontrada';
 
   @override
@@ -858,6 +867,9 @@ class AppLocalizationsEs extends AppLocalizations {
   }
 
   @override
+  String get m58ddf479f1 => 'No se pudo abrir el plan de progresión';
+
+  @override
   String mfc401e8783(String p0) {
     return 'No se pudo abrir la última versión, verifique la copia de recuperación: $p0';
   }
@@ -928,6 +940,9 @@ class AppLocalizationsEs extends AppLocalizations {
   String get mef9d01550d => 'No se pudo guardar la escala.';
 
   @override
+  String get mdc2f51b827 => 'No se pudo guardar el plan de progresión';
+
+  @override
   String get m92233abcc1 => 'No se pudo guardar el tema.';
 
   @override
@@ -990,6 +1005,9 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get m7021e46018 => 'Clave de caché de árbol incorrecta';
+
+  @override
+  String get mac487ef90b => 'Plan de progresión no válido';
 
   @override
   String get mbfa40c4fb1 => 'Ruta incorrecta al ensamblaje PoB.';
@@ -1236,6 +1254,9 @@ class AppLocalizationsEs extends AppLocalizations {
   String get med31458051 => 'La carpeta configurada en PoB no está disponible.';
 
   @override
+  String get m75160b86a8 => 'Parámetros';
+
+  @override
   String get m1971cfb84c => 'Pasivo';
 
   @override
@@ -1278,6 +1299,12 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get m95121a4cc0 => 'Animaciones fluidas';
+
+  @override
+  String get m610d4c2115 => 'Plan';
+
+  @override
+  String get m48d5bea474 => 'Plan de progresión';
 
   @override
   String get m1474fac529 => 'Planos, partidas, opciones de desarrollo...';
@@ -1784,6 +1811,9 @@ class AppLocalizationsEs extends AppLocalizations {
   String get m9af7509a85 => 'Guardar y calcular';
 
   @override
+  String get mfca5aabf85 => 'Guardar paso';
+
+  @override
   String md7dfb40adb(String p0) {
     return 'Combinación ya en uso: $p0';
   }
@@ -1859,6 +1889,9 @@ class AppLocalizationsEs extends AppLocalizations {
   String get m1c89558239 => 'Quitar habilidad';
 
   @override
+  String get md9dc2e9ec2 => 'Eliminar paso';
+
+  @override
   String get m97ac4c501c => 'Instalación ya en progreso';
 
   @override
@@ -1873,6 +1906,9 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get mf3a46c2f2b => 'Nodos';
+
+  @override
+  String get m66e6ee7733 => 'Sin cambios en los nodos';
 
   @override
   String get mb68ab7d79e =>
@@ -1898,6 +1934,11 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get m7f67af3d6c => 'Nivel';
+
+  @override
+  String m7ae0591157(String p0) {
+    return 'Nivel $p0';
+  }
 
   @override
   String m88f6fabbe9(String p0, String p1) {

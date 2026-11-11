@@ -224,6 +224,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get mbce24a2108 => 'Enter a name';
 
   @override
+  String get m7dbeae99bf => 'Enter a level from 1 to 100';
+
+  @override
   String get mdd0a89ad92 => 'Enter an integer';
 
   @override
@@ -323,6 +326,9 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get mb5cf5f66bc =>
       'Select the same build folder as specified in the Path of Building.';
+
+  @override
+  String get md97721c61e => 'Allocate nodes and save your first step.';
 
   @override
   String get m0513479f74 => 'Select a skill to select supports';
@@ -586,6 +592,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get mdcd4c2c384 => 'Spell avoid chance';
 
   @override
+  String get m0094a04edd => 'Edit milestone level';
+
+  @override
   String get md5a9ca934e => 'Stone image not found';
 
   @override
@@ -847,6 +856,9 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String get m58ddf479f1 => 'Could not open the leveling plan';
+
+  @override
   String mfc401e8783(String p0) {
     return 'Could not open the latest build, check the recovery copy: $p0';
   }
@@ -917,6 +929,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get mef9d01550d => 'Failed to save scale.';
 
   @override
+  String get mdc2f51b827 => 'Could not save the leveling plan';
+
+  @override
   String get m92233abcc1 => 'Failed to save topic.';
 
   @override
@@ -979,6 +994,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get m7021e46018 => 'Incorrect tree cache key';
+
+  @override
+  String get mac487ef90b => 'Invalid leveling plan';
 
   @override
   String get mbfa40c4fb1 => 'Incorrect path to PoB assembly.';
@@ -1218,6 +1236,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get med31458051 => 'The builds folder set in PoB is unavailable.';
 
   @override
+  String get m75160b86a8 => 'Parameters';
+
+  @override
   String get m1971cfb84c => 'Passive';
 
   @override
@@ -1259,6 +1280,12 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get m95121a4cc0 => 'Smooth animations';
+
+  @override
+  String get m610d4c2115 => 'Plan';
+
+  @override
+  String get m48d5bea474 => 'Leveling plan';
 
   @override
   String get m1474fac529 => 'Plans, items, development options...';
@@ -1757,6 +1784,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m9af7509a85 => 'Save and calculate';
 
   @override
+  String get mfca5aabf85 => 'Save step';
+
+  @override
   String md7dfb40adb(String p0) {
     return 'Combination already in use: $p0';
   }
@@ -1832,6 +1862,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m1c89558239 => 'Remove skill';
 
   @override
+  String get md9dc2e9ec2 => 'Delete step';
+
+  @override
   String get m97ac4c501c => 'Installation already in progress';
 
   @override
@@ -1846,6 +1879,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get mf3a46c2f2b => 'Nodes';
+
+  @override
+  String get m66e6ee7733 => 'No node changes';
 
   @override
   String get mb68ab7d79e =>
@@ -1871,6 +1907,11 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get m7f67af3d6c => 'Level';
+
+  @override
+  String m7ae0591157(String p0) {
+    return 'Level $p0';
+  }
 
   @override
   String m88f6fabbe9(String p0, String p1) {

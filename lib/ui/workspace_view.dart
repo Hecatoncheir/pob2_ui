@@ -5,6 +5,7 @@ import 'core/ui_translation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../data/tree_progression_repository.dart';
 import 'build_dialogs.dart';
 import 'build_setup.dart';
 import 'build_sections.dart';
@@ -18,6 +19,8 @@ import 'pob_character_dialog.dart';
 import 'report_views.dart';
 import 'shell_bloc.dart';
 import 'tree_view.dart';
+import 'tree_progression_bloc.dart';
+import 'workspace_inspector.dart';
 import 'workshop_cubit.dart';
 import 'workshop_state.dart';
 import 'build_notes_dialog.dart';
@@ -44,7 +47,27 @@ class WorkspaceView extends StatelessWidget {
           before.change != after.change && after.change != null,
       listener: (context, state) =>
           shell.add(WorkshopTabSelected(state.change!.tab)),
-      child: _workspace(context),
+      child: _withPlan(_workspace(context)),
+    );
+  }
+
+  Widget _withPlan(Widget child) {
+    final document = model.state.document!;
+    final id = model.state.library.activeId;
+    final tree = document.tree;
+    if (id == null || tree == null) return child;
+    final key = (
+      folder: model.sharedLibrary?.directory ?? '',
+      build: id,
+      version: tree.version,
+      characterClass: document.report.characterClass,
+    );
+    return BlocProvider(
+      key: ValueKey(key),
+      create: (_) => TreeProgressionBloc(
+        TreeProgressionRepository(model.components.store.root, key),
+      )..add(const TreeProgressionOpened()),
+      child: child,
     );
   }
 
@@ -68,7 +91,7 @@ class WorkspaceView extends StatelessWidget {
                   const SizedBox(width: 20),
                   SizedBox(
                     width: 284,
-                    child: StatisticsPanel(model: model, shell: shell),
+                    child: WorkspaceInspector(model: model, shell: shell),
                   ),
                 ],
               ],
@@ -295,21 +318,23 @@ class _Tabs extends StatelessWidget {
   );
 
   Widget _statisticsButton(BuildContext context) {
-    void open() => sparkDialog<void>(
-      context,
-      Dialog(
-        child: SizedBox(
-          width: 330,
-          height: MediaQuery.sizeOf(context).height * .75,
-          child: BlocBuilder<WorkshopCubit, WorkshopState>(
-            bloc: model,
-            builder: (context, state) => state.report == null
-                ? const SizedBox.shrink()
-                : StatisticsPanel(model: model, shell: shell),
+    final plan = context.read<TreeProgressionBloc?>();
+    Future<void> open() async {
+      await sparkDialog<void>(
+        context,
+        Dialog(
+          child: SizedBox(
+            width: 330,
+            height: MediaQuery.sizeOf(context).height * .75,
+            child: _dialogInspector(plan),
           ),
         ),
-      ),
-    );
+      );
+      if (plan != null && !plan.isClosed) {
+        plan.add(const TreeProgressionNodeHovered(null));
+      }
+    }
+
     const icon = Icons.leaderboard_outlined;
     const key = Key('open-statistics');
     if (MediaQuery.sizeOf(context).width >= 650) {
@@ -326,6 +351,18 @@ class _Tabs extends StatelessWidget {
       label: 'Показатели',
       onPressed: open,
     );
+  }
+
+  Widget _dialogInspector(TreeProgressionBloc? plan) {
+    final inspector = BlocBuilder<WorkshopCubit, WorkshopState>(
+      bloc: model,
+      builder: (context, state) => state.report == null
+          ? const SizedBox.shrink()
+          : WorkspaceInspector(model: model, shell: shell, inDialog: true),
+    );
+    return plan == null
+        ? inspector
+        : BlocProvider.value(value: plan, child: inspector);
   }
 }
 

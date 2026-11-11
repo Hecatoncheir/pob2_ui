@@ -223,6 +223,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get mbce24a2108 => 'Введите название';
 
   @override
+  String get m7dbeae99bf => 'Введите уровень от 1 до 100';
+
+  @override
   String get mdd0a89ad92 => 'Введите целое число';
 
   @override
@@ -322,6 +325,9 @@ class AppLocalizationsRu extends AppLocalizations {
   @override
   String get mb5cf5f66bc =>
       'Выберите ту же папку сборок, которая указана в Path of Building.';
+
+  @override
+  String get md97721c61e => 'Выберите узлы и сохраните первый этап.';
 
   @override
   String get m0513479f74 => 'Выберите умение для подбора поддержек';
@@ -587,6 +593,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get mdcd4c2c384 => 'Избежание чар';
 
   @override
+  String get m0094a04edd => 'Изменить уровень этапа';
+
+  @override
   String get md5a9ca934e => 'Изображение камня не найдено';
 
   @override
@@ -847,6 +856,9 @@ class AppLocalizationsRu extends AppLocalizations {
   }
 
   @override
+  String get m58ddf479f1 => 'Не удалось открыть план прокачки';
+
+  @override
   String mfc401e8783(String p0) {
     return 'Не удалось открыть последнюю сборку, проверяем копию восстановления: $p0';
   }
@@ -917,6 +929,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get mef9d01550d => 'Не удалось сохранить масштаб.';
 
   @override
+  String get mdc2f51b827 => 'Не удалось сохранить план прокачки';
+
+  @override
   String get m92233abcc1 => 'Не удалось сохранить тему.';
 
   @override
@@ -979,6 +994,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get m7021e46018 => 'Некорректный ключ кеша дерева';
+
+  @override
+  String get mac487ef90b => 'Некорректный план прокачки';
 
   @override
   String get mbfa40c4fb1 => 'Некорректный путь к сборке PoB.';
@@ -1218,6 +1236,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get med31458051 => 'Папка сборок из настроек PoB недоступна.';
 
   @override
+  String get m75160b86a8 => 'Параметры';
+
+  @override
   String get m1971cfb84c => 'Пассивные';
 
   @override
@@ -1260,6 +1281,12 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get m95121a4cc0 => 'Плавные анимации';
+
+  @override
+  String get m610d4c2115 => 'План';
+
+  @override
+  String get m48d5bea474 => 'План прокачки';
 
   @override
   String get m1474fac529 => 'Планы, предметы, варианты развития…';
@@ -1760,6 +1787,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m9af7509a85 => 'Сохранить и рассчитать';
 
   @override
+  String get mfca5aabf85 => 'Сохранить этап';
+
+  @override
   String md7dfb40adb(String p0) {
     return 'Сочетание уже используется: $p0';
   }
@@ -1835,6 +1865,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m1c89558239 => 'Удалить умение';
 
   @override
+  String get md9dc2e9ec2 => 'Удалить этап';
+
+  @override
   String get m97ac4c501c => 'Уже выполняется установка';
 
   @override
@@ -1849,6 +1882,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get mf3a46c2f2b => 'Узлы';
+
+  @override
+  String get m66e6ee7733 => 'Узлы без изменений';
 
   @override
   String get mb68ab7d79e =>
@@ -1874,6 +1910,11 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get m7f67af3d6c => 'Уровень';
+
+  @override
+  String m7ae0591157(String p0) {
+    return 'Уровень $p0';
+  }
 
   @override
   String m88f6fabbe9(String p0, String p1) {

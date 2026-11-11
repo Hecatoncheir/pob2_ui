@@ -224,6 +224,9 @@ class AppLocalizationsPt extends AppLocalizations {
   String get mbce24a2108 => 'Insira um nome';
 
   @override
+  String get m7dbeae99bf => 'Informe um nível de 1 a 100';
+
+  @override
   String get mdd0a89ad92 => 'Insira um número inteiro';
 
   @override
@@ -324,6 +327,9 @@ class AppLocalizationsPt extends AppLocalizations {
   @override
   String get mb5cf5f66bc =>
       'Selecione a mesma pasta de construção especificada no Caminho da construção.';
+
+  @override
+  String get md97721c61e => 'Aloque nós e salve a primeira etapa.';
 
   @override
   String get m0513479f74 => 'Selecione uma habilidade para selecionar suportes';
@@ -591,6 +597,9 @@ class AppLocalizationsPt extends AppLocalizations {
   String get mdcd4c2c384 => 'Feitiço para evitar o acaso';
 
   @override
+  String get m0094a04edd => 'Alterar o nível da etapa';
+
+  @override
   String get md5a9ca934e => 'Imagem de pedra não encontrada';
 
   @override
@@ -853,6 +862,9 @@ class AppLocalizationsPt extends AppLocalizations {
   }
 
   @override
+  String get m58ddf479f1 => 'Não foi possível abrir o plano de evolução';
+
+  @override
   String mfc401e8783(String p0) {
     return 'Não foi possível abrir a versão mais recente. Verifique a cópia de recuperação: $p0';
   }
@@ -923,6 +935,9 @@ class AppLocalizationsPt extends AppLocalizations {
   String get mef9d01550d => 'Falha ao salvar escala.';
 
   @override
+  String get mdc2f51b827 => 'Não foi possível salvar o plano de evolução';
+
+  @override
   String get m92233abcc1 => 'Falha ao salvar o tópico.';
 
   @override
@@ -986,6 +1001,9 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get m7021e46018 => 'Chave de cache de árvore incorreta';
+
+  @override
+  String get mac487ef90b => 'Plano de evolução inválido';
 
   @override
   String get mbfa40c4fb1 => 'Caminho incorreto para montagem PoB.';
@@ -1229,6 +1247,9 @@ class AppLocalizationsPt extends AppLocalizations {
       'A pasta de builds configurada no PoB não está disponível.';
 
   @override
+  String get m75160b86a8 => 'Parâmetros';
+
+  @override
   String get m1971cfb84c => 'Passivo';
 
   @override
@@ -1271,6 +1292,12 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get m95121a4cc0 => 'Animações suaves';
+
+  @override
+  String get m610d4c2115 => 'Plano';
+
+  @override
+  String get m48d5bea474 => 'Plano de evolução';
 
   @override
   String get m1474fac529 => 'Planos, itens, opções de desenvolvimento...';
@@ -1776,6 +1803,9 @@ class AppLocalizationsPt extends AppLocalizations {
   String get m9af7509a85 => 'Salvar e calcular';
 
   @override
+  String get mfca5aabf85 => 'Salvar etapa';
+
+  @override
   String md7dfb40adb(String p0) {
     return 'Combinação já em uso: $p0';
   }
@@ -1851,6 +1881,9 @@ class AppLocalizationsPt extends AppLocalizations {
   String get m1c89558239 => 'Remover habilidade';
 
   @override
+  String get md9dc2e9ec2 => 'Excluir etapa';
+
+  @override
   String get m97ac4c501c => 'Instalação já em andamento';
 
   @override
@@ -1865,6 +1898,9 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get mf3a46c2f2b => 'Nós';
+
+  @override
+  String get m66e6ee7733 => 'Sem alterações nos nós';
 
   @override
   String get mb68ab7d79e =>
@@ -1890,6 +1926,11 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get m7f67af3d6c => 'Nível';
+
+  @override
+  String m7ae0591157(String p0) {
+    return 'Nível $p0';
+  }
 
   @override
   String m88f6fabbe9(String p0, String p1) {
@@ -2282,6 +2323,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get mbce24a2108 => 'Insira um nome';
 
   @override
+  String get m7dbeae99bf => 'Informe um nível de 1 a 100';
+
+  @override
   String get mdd0a89ad92 => 'Insira um número inteiro';
 
   @override
@@ -2382,6 +2426,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   @override
   String get mb5cf5f66bc =>
       'Selecione a mesma pasta de construção especificada no Caminho da construção.';
+
+  @override
+  String get md97721c61e => 'Aloque nós e salve a primeira etapa.';
 
   @override
   String get m0513479f74 => 'Selecione uma habilidade para selecionar suportes';
@@ -2649,6 +2696,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get mdcd4c2c384 => 'Feitiço para evitar o acaso';
 
   @override
+  String get m0094a04edd => 'Alterar o nível da etapa';
+
+  @override
   String get md5a9ca934e => 'Imagem de pedra não encontrada';
 
   @override
@@ -2911,6 +2961,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   }
 
   @override
+  String get m58ddf479f1 => 'Não foi possível abrir o plano de evolução';
+
+  @override
   String mfc401e8783(String p0) {
     return 'Não foi possível abrir a versão mais recente. Verifique a cópia de recuperação: $p0';
   }
@@ -2981,6 +3034,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get mef9d01550d => 'Falha ao salvar escala.';
 
   @override
+  String get mdc2f51b827 => 'Não foi possível salvar o plano de evolução';
+
+  @override
   String get m92233abcc1 => 'Falha ao salvar o tópico.';
 
   @override
@@ -3044,6 +3100,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get m7021e46018 => 'Chave de cache de árvore incorreta';
+
+  @override
+  String get mac487ef90b => 'Plano de evolução inválido';
 
   @override
   String get mbfa40c4fb1 => 'Caminho incorreto para montagem PoB.';
@@ -3287,6 +3346,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
       'A pasta de builds configurada no PoB não está disponível.';
 
   @override
+  String get m75160b86a8 => 'Parâmetros';
+
+  @override
   String get m1971cfb84c => 'Passivo';
 
   @override
@@ -3329,6 +3391,12 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get m95121a4cc0 => 'Animações suaves';
+
+  @override
+  String get m610d4c2115 => 'Plano';
+
+  @override
+  String get m48d5bea474 => 'Plano de evolução';
 
   @override
   String get m1474fac529 => 'Planos, itens, opções de desenvolvimento...';
@@ -3834,6 +3902,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get m9af7509a85 => 'Salvar e calcular';
 
   @override
+  String get mfca5aabf85 => 'Salvar etapa';
+
+  @override
   String md7dfb40adb(String p0) {
     return 'Combinação já em uso: $p0';
   }
@@ -3909,6 +3980,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get m1c89558239 => 'Remover habilidade';
 
   @override
+  String get md9dc2e9ec2 => 'Excluir etapa';
+
+  @override
   String get m97ac4c501c => 'Instalação já em andamento';
 
   @override
@@ -3923,6 +3997,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get mf3a46c2f2b => 'Nós';
+
+  @override
+  String get m66e6ee7733 => 'Sem alterações nos nós';
 
   @override
   String get mb68ab7d79e =>
@@ -3948,6 +4025,11 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get m7f67af3d6c => 'Nível';
+
+  @override
+  String m7ae0591157(String p0) {
+    return 'Nível $p0';
+  }
 
   @override
   String m88f6fabbe9(String p0, String p1) {

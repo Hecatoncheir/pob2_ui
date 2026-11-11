@@ -4,6 +4,7 @@ import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 
 import '../domain/tree_geometry.dart';
+import '../domain/tree_progression.dart';
 import 'core/spark_theme.dart';
 
 class TreeScene {
@@ -54,6 +55,8 @@ class TreePainter extends CustomPainter {
     this.artwork,
     this.hoverArtwork, {
     this.matches,
+    this.progression,
+    this.planHovered,
   }) : super(repaint: transform);
   final TreeScene scene;
   final int? selected;
@@ -65,6 +68,8 @@ class TreePainter extends CustomPainter {
   final ui.Picture? artwork;
   final ui.Picture? hoverArtwork;
   final Set<int>? matches;
+  final TreeProgressionChange? progression;
+  final int? planHovered;
   late double zoom;
   late Rect visible;
   @override
@@ -76,6 +81,22 @@ class TreePainter extends CustomPainter {
     ).inflate(100 / zoom);
     _art(canvas);
     if (hoverArtwork case final picture?) canvas.drawPicture(picture);
+    _paintPlanHover(canvas);
+  }
+
+  void _paintPlanHover(Canvas canvas) {
+    final node = scene.nodes[planHovered];
+    if (node == null) return;
+    final point = scene.points[node.id]!;
+    if (!visible.contains(point)) return;
+    canvas.drawCircle(
+      point,
+      _radius(node) + 11 / zoom,
+      Paint()
+        ..color = Spark.paper
+        ..strokeWidth = 3 / zoom
+        ..style = PaintingStyle.stroke,
+    );
   }
 
   void _art(Canvas canvas) {
@@ -89,7 +110,33 @@ class TreePainter extends CustomPainter {
         _node(canvas, node);
       else
         _highlight(canvas, node);
+      if (progression case final change?)
+        _progressionRing(canvas, node, change);
     }
+  }
+
+  void _progressionRing(
+    Canvas canvas,
+    TreeNode node,
+    TreeProgressionChange change,
+  ) {
+    final color = switch ((
+      change.added.contains(node.id),
+      change.removed.contains(node.id),
+    )) {
+      (true, _) => const Color(0xFFB8E383),
+      (_, true) => const Color(0xFFFF8265),
+      _ => null,
+    };
+    if (color == null) return;
+    canvas.drawCircle(
+      scene.points[node.id]!,
+      _radius(node) + 6 / zoom,
+      Paint()
+        ..color = color
+        ..strokeWidth = 2.5 / zoom
+        ..style = PaintingStyle.stroke,
+    );
   }
 
   void _highlight(Canvas canvas, TreeNode node) {

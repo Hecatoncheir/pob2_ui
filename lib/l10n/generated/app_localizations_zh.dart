@@ -219,6 +219,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get mbce24a2108 => '輸入名稱';
 
   @override
+  String get m7dbeae99bf => '請輸入 1 到 100 的等級';
+
+  @override
   String get mdd0a89ad92 => '輸入一個整數';
 
   @override
@@ -316,6 +319,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get mb5cf5f66bc => '選擇與建置路徑中指定的相同建置資料夾。';
+
+  @override
+  String get md97721c61e => '分配天賦點並儲存第一個階段。';
 
   @override
   String get m0513479f74 => '選擇技能選擇支援';
@@ -568,6 +574,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get mdcd4c2c384 => '法術避免幾率';
+
+  @override
+  String get m0094a04edd => '編輯階段等級';
 
   @override
   String get md5a9ca934e => '未找到石頭圖像';
@@ -826,6 +835,9 @@ class AppLocalizationsZh extends AppLocalizations {
   }
 
   @override
+  String get m58ddf479f1 => '無法開啟練等計畫';
+
+  @override
   String mfc401e8783(String p0) {
     return '無法開啟最新版本，請檢查復原副本：$p0';
   }
@@ -896,6 +908,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get mef9d01550d => '無法保存比例。';
 
   @override
+  String get mdc2f51b827 => '無法儲存練等計畫';
+
+  @override
   String get m92233abcc1 => '無法儲存主體。';
 
   @override
@@ -958,6 +973,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m7021e46018 => '樹快取鍵不正確';
+
+  @override
+  String get mac487ef90b => '無效的練等計畫';
 
   @override
   String get mbfa40c4fb1 => 'PoB 組件的路徑不正確。';
@@ -1193,6 +1211,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get med31458051 => '無法存取 PoB 設定中的流派資料夾。';
 
   @override
+  String get m75160b86a8 => '參數';
+
+  @override
   String get m1971cfb84c => '被動';
 
   @override
@@ -1232,6 +1253,12 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m95121a4cc0 => '流暢的動畫';
+
+  @override
+  String get m610d4c2115 => '計畫';
+
+  @override
+  String get m48d5bea474 => '練等計畫';
 
   @override
   String get m1474fac529 => '計劃、專案、開發選項...';
@@ -1720,6 +1747,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m9af7509a85 => '儲存並計算';
 
   @override
+  String get mfca5aabf85 => '儲存階段';
+
+  @override
   String md7dfb40adb(String p0) {
     return '組合已在使用：$p0';
   }
@@ -1794,6 +1824,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m1c89558239 => '刪除技能';
 
   @override
+  String get md9dc2e9ec2 => '刪除階段';
+
+  @override
   String get m97ac4c501c => '安裝已在進行中';
 
   @override
@@ -1807,6 +1840,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get mf3a46c2f2b => '節點';
+
+  @override
+  String get m66e6ee7733 => '天賦節點沒有變更';
 
   @override
   String get mb68ab7d79e => '手動選擇 PoB 資料夾，或嘗試從預設位置尋找。';
@@ -1831,6 +1867,11 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m7f67af3d6c => '等級';
+
+  @override
+  String m7ae0591157(String p0) {
+    return '等級 $p0';
+  }
 
   @override
   String m88f6fabbe9(String p0, String p1) {
@@ -2210,6 +2251,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get mbce24a2108 => '輸入名稱';
 
   @override
+  String get m7dbeae99bf => '請輸入 1 到 100 的等級';
+
+  @override
   String get mdd0a89ad92 => '輸入一個整數';
 
   @override
@@ -2307,6 +2351,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get mb5cf5f66bc => '選擇與建置路徑中指定的相同建置資料夾。';
+
+  @override
+  String get md97721c61e => '分配天賦點並儲存第一個階段。';
 
   @override
   String get m0513479f74 => '選擇技能選擇支援';
@@ -2559,6 +2606,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get mdcd4c2c384 => '法術避免幾率';
+
+  @override
+  String get m0094a04edd => '編輯階段等級';
 
   @override
   String get md5a9ca934e => '未找到石頭圖像';
@@ -2817,6 +2867,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   }
 
   @override
+  String get m58ddf479f1 => '無法開啟練等計畫';
+
+  @override
   String mfc401e8783(String p0) {
     return '無法開啟最新版本，請檢查復原副本：$p0';
   }
@@ -2887,6 +2940,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get mef9d01550d => '無法保存比例。';
 
   @override
+  String get mdc2f51b827 => '無法儲存練等計畫';
+
+  @override
   String get m92233abcc1 => '無法儲存主體。';
 
   @override
@@ -2949,6 +3005,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m7021e46018 => '樹快取鍵不正確';
+
+  @override
+  String get mac487ef90b => '無效的練等計畫';
 
   @override
   String get mbfa40c4fb1 => 'PoB 組件的路徑不正確。';
@@ -3184,6 +3243,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get med31458051 => '無法存取 PoB 設定中的流派資料夾。';
 
   @override
+  String get m75160b86a8 => '參數';
+
+  @override
   String get m1971cfb84c => '被動';
 
   @override
@@ -3223,6 +3285,12 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m95121a4cc0 => '流暢的動畫';
+
+  @override
+  String get m610d4c2115 => '計畫';
+
+  @override
+  String get m48d5bea474 => '練等計畫';
 
   @override
   String get m1474fac529 => '計劃、專案、開發選項...';
@@ -3711,6 +3779,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m9af7509a85 => '儲存並計算';
 
   @override
+  String get mfca5aabf85 => '儲存階段';
+
+  @override
   String md7dfb40adb(String p0) {
     return '組合已在使用：$p0';
   }
@@ -3785,6 +3856,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m1c89558239 => '刪除技能';
 
   @override
+  String get md9dc2e9ec2 => '刪除階段';
+
+  @override
   String get m97ac4c501c => '安裝已在進行中';
 
   @override
@@ -3798,6 +3872,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get mf3a46c2f2b => '節點';
+
+  @override
+  String get m66e6ee7733 => '天賦節點沒有變更';
 
   @override
   String get mb68ab7d79e => '手動選擇 PoB 資料夾，或嘗試從預設位置尋找。';
@@ -3822,6 +3899,11 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m7f67af3d6c => '等級';
+
+  @override
+  String m7ae0591157(String p0) {
+    return '等級 $p0';
+  }
 
   @override
   String m88f6fabbe9(String p0, String p1) {

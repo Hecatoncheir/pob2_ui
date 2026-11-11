@@ -488,6 +488,12 @@ abstract class AppLocalizations {
   /// **'Enter a name'**
   String get mbce24a2108;
 
+  /// Введите уровень от 1 до 100
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a level from 1 to 100'**
+  String get m7dbeae99bf;
+
   /// Введите целое число
   ///
   /// In en, this message translates to:
@@ -685,6 +691,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Select the same build folder as specified in the Path of Building.'**
   String get mb5cf5f66bc;
+
+  /// Выберите узлы и сохраните первый этап.
+  ///
+  /// In en, this message translates to:
+  /// **'Allocate nodes and save your first step.'**
+  String get md97721c61e;
 
   /// Выберите умение для подбора поддержек
   ///
@@ -1153,6 +1165,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Spell avoid chance'**
   String get mdcd4c2c384;
+
+  /// Изменить уровень этапа
+  ///
+  /// In en, this message translates to:
+  /// **'Edit milestone level'**
+  String get m0094a04edd;
 
   /// Изображение камня не найдено
   ///
@@ -1635,6 +1653,12 @@ abstract class AppLocalizations {
   /// **'Failed to open or save notes.\n{p0}'**
   String m189f5a7238(String p0);
 
+  /// Не удалось открыть план прокачки
+  ///
+  /// In en, this message translates to:
+  /// **'Could not open the leveling plan'**
+  String get m58ddf479f1;
+
   /// Не удалось открыть последнюю сборку, проверяем копию восстановления: {p0}
   ///
   /// In en, this message translates to:
@@ -1730,6 +1754,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Failed to save scale.'**
   String get mef9d01550d;
+
+  /// Не удалось сохранить план прокачки
+  ///
+  /// In en, this message translates to:
+  /// **'Could not save the leveling plan'**
+  String get mdc2f51b827;
 
   /// Не удалось сохранить тему.
   ///
@@ -1850,6 +1880,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Incorrect tree cache key'**
   String get m7021e46018;
+
+  /// Некорректный план прокачки
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid leveling plan'**
+  String get mac487ef90b;
 
   /// Некорректный путь к сборке PoB.
   ///
@@ -2301,6 +2337,12 @@ abstract class AppLocalizations {
   /// **'The builds folder set in PoB is unavailable.'**
   String get med31458051;
 
+  /// Параметры
+  ///
+  /// In en, this message translates to:
+  /// **'Parameters'**
+  String get m75160b86a8;
+
   /// Пассивные
   ///
   /// In en, this message translates to:
@@ -2378,6 +2420,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Smooth animations'**
   String get m95121a4cc0;
+
+  /// План
+  ///
+  /// In en, this message translates to:
+  /// **'Plan'**
+  String get m610d4c2115;
+
+  /// План прокачки
+  ///
+  /// In en, this message translates to:
+  /// **'Leveling plan'**
+  String get m48d5bea474;
 
   /// Планы, предметы, варианты развития…
   ///
@@ -3303,6 +3357,12 @@ abstract class AppLocalizations {
   /// **'Save and calculate'**
   String get m9af7509a85;
 
+  /// Сохранить этап
+  ///
+  /// In en, this message translates to:
+  /// **'Save step'**
+  String get mfca5aabf85;
+
   /// Сочетание уже используется: {p0}
   ///
   /// In en, this message translates to:
@@ -3447,6 +3507,12 @@ abstract class AppLocalizations {
   /// **'Remove skill'**
   String get m1c89558239;
 
+  /// Удалить этап
+  ///
+  /// In en, this message translates to:
+  /// **'Delete step'**
+  String get md9dc2e9ec2;
+
   /// Уже выполняется установка
   ///
   /// In en, this message translates to:
@@ -3476,6 +3542,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Nodes'**
   String get mf3a46c2f2b;
+
+  /// Узлы без изменений
+  ///
+  /// In en, this message translates to:
+  /// **'No node changes'**
+  String get m66e6ee7733;
 
   /// Укажите папку PoB вручную или попробуйте найти её по стандартному пути.
   ///
@@ -3524,6 +3596,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Level'**
   String get m7f67af3d6c;
+
+  /// Уровень {p0}
+  ///
+  /// In en, this message translates to:
+  /// **'Level {p0}'**
+  String m7ae0591157(String p0);
 
   /// Уровень {p0} · качество {p1} %
   ///

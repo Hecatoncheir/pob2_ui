@@ -219,6 +219,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get mbce24a2108 => '이름을 입력하세요';
 
   @override
+  String get m7dbeae99bf => '1에서 100 사이의 레벨을 입력하세요';
+
+  @override
   String get mdd0a89ad92 => '정수를 입력하세요.';
 
   @override
@@ -316,6 +319,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get mb5cf5f66bc => '빌드 경로에 지정된 것과 동일한 빌드 폴더를 선택합니다.';
+
+  @override
+  String get md97721c61e => '노드를 할당하고 첫 단계를 저장하세요.';
 
   @override
   String get m0513479f74 => '지원을 선택하려면 스킬을 선택하세요.';
@@ -569,6 +575,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get mdcd4c2c384 => '주문 회피 확률';
+
+  @override
+  String get m0094a04edd => '단계 레벨 변경';
 
   @override
   String get md5a9ca934e => '스톤 이미지를 찾을 수 없습니다.';
@@ -828,6 +837,9 @@ class AppLocalizationsKo extends AppLocalizations {
   }
 
   @override
+  String get m58ddf479f1 => '레벨링 계획을 열 수 없습니다';
+
+  @override
   String mfc401e8783(String p0) {
     return '최신 빌드를 열 수 없습니다. 복구 복사본을 확인하세요. $p0';
   }
@@ -898,6 +910,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get mef9d01550d => '스케일을 저장하지 못했습니다.';
 
   @override
+  String get mdc2f51b827 => '레벨링 계획을 저장할 수 없습니다';
+
+  @override
   String get m92233abcc1 => '주제를 저장하지 못했습니다.';
 
   @override
@@ -960,6 +975,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m7021e46018 => '잘못된 트리 캐시 키';
+
+  @override
+  String get mac487ef90b => '잘못된 레벨링 계획';
 
   @override
   String get mbfa40c4fb1 => 'PoB 어셈블리 경로가 잘못되었습니다.';
@@ -1195,6 +1213,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get med31458051 => 'PoB에서 설정한 빌드 폴더를 사용할 수 없습니다.';
 
   @override
+  String get m75160b86a8 => '능력치';
+
+  @override
   String get m1971cfb84c => '패시브';
 
   @override
@@ -1234,6 +1255,12 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m95121a4cc0 => '부드러운 애니메이션';
+
+  @override
+  String get m610d4c2115 => '계획';
+
+  @override
+  String get m48d5bea474 => '레벨링 계획';
 
   @override
   String get m1474fac529 => '계획, 아이템, 개발 옵션...';
@@ -1724,6 +1751,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m9af7509a85 => '저장 및 계산';
 
   @override
+  String get mfca5aabf85 => '단계 저장';
+
+  @override
   String md7dfb40adb(String p0) {
     return '이미 사용 중인 조합: $p0';
   }
@@ -1798,6 +1828,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m1c89558239 => '스킬 삭제';
 
   @override
+  String get md9dc2e9ec2 => '단계 삭제';
+
+  @override
   String get m97ac4c501c => '이미 설치가 진행 중입니다.';
 
   @override
@@ -1811,6 +1844,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get mf3a46c2f2b => '노드';
+
+  @override
+  String get m66e6ee7733 => '노드 변경 없음';
 
   @override
   String get mb68ab7d79e => 'PoB 폴더를 직접 선택하거나 기본 경로에서 찾으세요.';
@@ -1835,6 +1871,11 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m7f67af3d6c => '레벨';
+
+  @override
+  String m7ae0591157(String p0) {
+    return '레벨 $p0';
+  }
 
   @override
   String m88f6fabbe9(String p0, String p1) {

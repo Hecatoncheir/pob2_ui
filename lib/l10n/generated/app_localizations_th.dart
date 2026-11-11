@@ -222,6 +222,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get mbce24a2108 => 'ป้อนชื่อ';
 
   @override
+  String get m7dbeae99bf => 'กรอกเลเวลตั้งแต่ 1 ถึง 100';
+
+  @override
   String get mdd0a89ad92 => 'ป้อนจำนวนเต็ม';
 
   @override
@@ -320,6 +323,9 @@ class AppLocalizationsTh extends AppLocalizations {
   @override
   String get mb5cf5f66bc =>
       'เลือกโฟลเดอร์ build เดียวกันกับที่ระบุไว้ใน Path of Building';
+
+  @override
+  String get md97721c61e => 'เลือกโหนดแล้วบันทึกขั้นแรก';
 
   @override
   String get m0513479f74 => 'เลือกทักษะเพื่อเลือกการสนับสนุน';
@@ -581,6 +587,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get mdcd4c2c384 => 'คาถาหลีกเลี่ยงโอกาส';
 
   @override
+  String get m0094a04edd => 'แก้ไขเลเวลของขั้น';
+
+  @override
   String get md5a9ca934e => 'ไม่พบรูปหิน';
 
   @override
@@ -839,6 +848,9 @@ class AppLocalizationsTh extends AppLocalizations {
   }
 
   @override
+  String get m58ddf479f1 => 'เปิดแผนการอัปเลเวลไม่ได้';
+
+  @override
   String mfc401e8783(String p0) {
     return 'ไม่สามารถเปิดบิลด์ล่าสุดได้ ตรวจสอบสำเนาการกู้คืน: $p0';
   }
@@ -909,6 +921,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get mef9d01550d => 'ไม่สามารถบันทึกมาตราส่วนได้';
 
   @override
+  String get mdc2f51b827 => 'บันทึกแผนการอัปเลเวลไม่ได้';
+
+  @override
   String get m92233abcc1 => 'ไม่สามารถบันทึกหัวข้อ';
 
   @override
@@ -971,6 +986,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m7021e46018 => 'คีย์แคชแผนผังไม่ถูกต้อง';
+
+  @override
+  String get mac487ef90b => 'แผนการอัปเลเวลไม่ถูกต้อง';
 
   @override
   String get mbfa40c4fb1 => 'เส้นทางไม่ถูกต้องไปยังชุดประกอบ PoB';
@@ -1208,6 +1226,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get med31458051 => 'ไม่สามารถเข้าถึงโฟลเดอร์บิลด์ที่ตั้งไว้ใน PoB';
 
   @override
+  String get m75160b86a8 => 'ค่าสถานะ';
+
+  @override
   String get m1971cfb84c => 'เฉยๆ';
 
   @override
@@ -1248,6 +1269,12 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m95121a4cc0 => 'แอนิเมชั่นที่ราบรื่น';
+
+  @override
+  String get m610d4c2115 => 'แผน';
+
+  @override
+  String get m48d5bea474 => 'แผนการอัปเลเวล';
 
   @override
   String get m1474fac529 => 'แผน รายการ ทางเลือกการพัฒนา...';
@@ -1742,6 +1769,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m9af7509a85 => 'บันทึกและคำนวณ';
 
   @override
+  String get mfca5aabf85 => 'บันทึกขั้น';
+
+  @override
   String md7dfb40adb(String p0) {
     return 'ชุดค่าผสมถูกใช้แล้ว: $p0';
   }
@@ -1816,6 +1846,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m1c89558239 => 'ลบสกิล';
 
   @override
+  String get md9dc2e9ec2 => 'ลบขั้น';
+
+  @override
   String get m97ac4c501c => 'การติดตั้งอยู่ในระหว่างดำเนินการ';
 
   @override
@@ -1830,6 +1863,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get mf3a46c2f2b => 'โหนด';
+
+  @override
+  String get m66e6ee7733 => 'ไม่มีการเปลี่ยนแปลงโหนด';
 
   @override
   String get mb68ab7d79e =>
@@ -1855,6 +1891,11 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m7f67af3d6c => 'ระดับ';
+
+  @override
+  String m7ae0591157(String p0) {
+    return 'เลเวล $p0';
+  }
 
   @override
   String m88f6fabbe9(String p0, String p1) {

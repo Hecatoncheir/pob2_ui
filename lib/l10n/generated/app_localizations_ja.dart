@@ -219,6 +219,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get mbce24a2108 => '名前を入力してください';
 
   @override
+  String get m7dbeae99bf => '1から100までのレベルを入力してください';
+
+  @override
   String get mdd0a89ad92 => 'Enter an integer';
 
   @override
@@ -316,6 +319,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get mb5cf5f66bc => 'ビルドのパスで指定したものと同じビルド フォルダーを選択します。';
+
+  @override
+  String get md97721c61e => 'ノードを割り当てて最初の段階を保存してください。';
 
   @override
   String get m0513479f74 => 'スキルを選択してサポートを選択してください';
@@ -569,6 +575,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get mdcd4c2c384 => 'スペル回避チャンス';
+
+  @override
+  String get m0094a04edd => '段階のレベルを変更';
 
   @override
   String get md5a9ca934e => '石の画像が見つかりません';
@@ -828,6 +837,9 @@ class AppLocalizationsJa extends AppLocalizations {
   }
 
   @override
+  String get m58ddf479f1 => '育成プランを開けませんでした';
+
+  @override
   String mfc401e8783(String p0) {
     return '最新のビルドを開けませんでした。リカバリ コピーを確認してください: $p0';
   }
@@ -898,6 +910,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get mef9d01550d => 'スケールの保存に失敗しました。';
 
   @override
+  String get mdc2f51b827 => '育成プランを保存できませんでした';
+
+  @override
   String get m92233abcc1 => 'トピックの保存に失敗しました。';
 
   @override
@@ -960,6 +975,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m7021e46018 => 'ツリー キャッシュ キーが正しくありません';
+
+  @override
+  String get mac487ef90b => '無効な育成プラン';
 
   @override
   String get mbfa40c4fb1 => 'PoB アセンブリへのパスが正しくありません。';
@@ -1195,6 +1213,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get med31458051 => 'PoB で設定されたビルドフォルダーを利用できません。';
 
   @override
+  String get m75160b86a8 => 'パラメーター';
+
+  @override
   String get m1971cfb84c => 'パッシブ';
 
   @override
@@ -1234,6 +1255,12 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m95121a4cc0 => 'スムーズなアニメーション';
+
+  @override
+  String get m610d4c2115 => '計画';
+
+  @override
+  String get m48d5bea474 => '育成プラン';
 
   @override
   String get m1474fac529 => '計画、項目、開発オプション...';
@@ -1724,6 +1751,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m9af7509a85 => '保存して計算する';
 
   @override
+  String get mfca5aabf85 => '段階を保存';
+
+  @override
   String md7dfb40adb(String p0) {
     return '組み合わせはすでに使用されています: $p0';
   }
@@ -1798,6 +1828,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m1c89558239 => 'スキルを削除します';
 
   @override
+  String get md9dc2e9ec2 => '段階を削除';
+
+  @override
   String get m97ac4c501c => 'インストールはすでに進行中です';
 
   @override
@@ -1811,6 +1844,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get mf3a46c2f2b => 'ノード';
+
+  @override
+  String get m66e6ee7733 => 'ノードの変更なし';
 
   @override
   String get mb68ab7d79e => 'PoB フォルダーを手動で選択するか、既定の場所を探します。';
@@ -1835,6 +1871,11 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m7f67af3d6c => 'レベル';
+
+  @override
+  String m7ae0591157(String p0) {
+    return 'レベル $p0';
+  }
 
   @override
   String m88f6fabbe9(String p0, String p1) {

@@ -231,6 +231,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get mbce24a2108 => 'Geben Sie einen Namen ein';
 
   @override
+  String get m7dbeae99bf => 'Gib eine Stufe von 1 bis 100 ein';
+
+  @override
   String get mdd0a89ad92 => 'Geben Sie eine Ganzzahl ein';
 
   @override
@@ -332,6 +335,9 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get mb5cf5f66bc =>
       'Wählen Sie denselben Build-Ordner aus, der im Pfad des Builds angegeben ist.';
+
+  @override
+  String get md97721c61e => 'Wähle Knoten und speichere den ersten Schritt.';
 
   @override
   String get m0513479f74 =>
@@ -607,6 +613,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get mdcd4c2c384 => 'Chance zur Zaubervermeidung';
 
   @override
+  String get m0094a04edd => 'Stufenlevel ändern';
+
+  @override
   String get md5a9ca934e => 'Steinbild nicht gefunden';
 
   @override
@@ -870,6 +879,9 @@ class AppLocalizationsDe extends AppLocalizations {
   }
 
   @override
+  String get m58ddf479f1 => 'Stufenplan konnte nicht geöffnet werden';
+
+  @override
   String mfc401e8783(String p0) {
     return 'Der neueste Build konnte nicht geöffnet werden. Überprüfen Sie die Wiederherstellungskopie: $p0';
   }
@@ -940,6 +952,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get mef9d01550d => 'Maßstab konnte nicht gespeichert werden.';
 
   @override
+  String get mdc2f51b827 => 'Stufenplan konnte nicht gespeichert werden';
+
+  @override
   String get m92233abcc1 => 'Thema konnte nicht gespeichert werden.';
 
   @override
@@ -1002,6 +1017,9 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get m7021e46018 => 'Falscher Baum-Cache-Schlüssel';
+
+  @override
+  String get mac487ef90b => 'Ungültiger Stufenplan';
 
   @override
   String get mbfa40c4fb1 => 'Falscher Pfad zur PoB-Assembly.';
@@ -1243,6 +1261,9 @@ class AppLocalizationsDe extends AppLocalizations {
       'Der in PoB eingestellte Build-Ordner ist nicht verfügbar.';
 
   @override
+  String get m75160b86a8 => 'Parameter';
+
+  @override
   String get m1971cfb84c => 'Passiv';
 
   @override
@@ -1285,6 +1306,12 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get m95121a4cc0 => 'Reibungslose Animationen';
+
+  @override
+  String get m610d4c2115 => 'Plan';
+
+  @override
+  String get m48d5bea474 => 'Stufenplan';
 
   @override
   String get m1474fac529 => 'Pläne, Gegenstände, Entwicklungsmöglichkeiten...';
@@ -1795,6 +1822,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get m9af7509a85 => 'Speichern und berechnen';
 
   @override
+  String get mfca5aabf85 => 'Schritt speichern';
+
+  @override
   String md7dfb40adb(String p0) {
     return 'Kombination bereits verwendet: $p0';
   }
@@ -1870,6 +1900,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get m1c89558239 => 'Fertigkeit entfernen';
 
   @override
+  String get md9dc2e9ec2 => 'Schritt löschen';
+
+  @override
   String get m97ac4c501c => 'Installation bereits im Gange';
 
   @override
@@ -1884,6 +1917,9 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get mf3a46c2f2b => 'Knoten';
+
+  @override
+  String get m66e6ee7733 => 'Keine Knotenänderungen';
 
   @override
   String get mb68ab7d79e =>
@@ -1909,6 +1945,11 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get m7f67af3d6c => 'Niveau';
+
+  @override
+  String m7ae0591157(String p0) {
+    return 'Stufe $p0';
+  }
 
   @override
   String m88f6fabbe9(String p0, String p1) {
