@@ -8,17 +8,32 @@ import '../domain/tree_progression.dart';
 import 'core/app_text.dart';
 import 'core/ui_translation.dart';
 import 'progression_comparison_bloc.dart';
+import 'progression_loadout_view.dart';
+
+String progressionPartLabel(ProgressionPart part) => switch (part) {
+  ProgressionPart.tree => 'Уровень и дерево',
+  ProgressionPart.skills => 'Умения',
+  ProgressionPart.equipment => 'Экипировка',
+};
 
 class ProgressionApplyDialog extends StatelessWidget {
-  const ProgressionApplyDialog(this.available, this.nodes, {super.key});
+  const ProgressionApplyDialog(
+    this.available,
+    this.nodes, {
+    super.key,
+    this.stages,
+  });
   final Set<ProgressionPart> available;
   final Map<int, TreeNode> nodes;
+  final ({TreeProgressionStep before, TreeProgressionStep after})? stages;
 
   @override
   Widget build(BuildContext context) =>
       BlocBuilder<ProgressionComparisonBloc, ProgressionComparisonState>(
         builder: (context, state) => AlertDialog(
-          title: const AppText('Что применить из этапа?'),
+          title: AppText(
+            stages == null ? 'Что применить из этапа?' : 'Сравнение этапов',
+          ),
           scrollable: true,
           content: SizedBox(
             width: 540,
@@ -26,7 +41,8 @@ class ProgressionApplyDialog extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                if (available.length > 1)
+                if (stages case final pair?) _stageLabels(context, pair),
+                if (stages == null && available.length > 1)
                   for (final part in available) _checkbox(context, state, part),
                 _comparison(context, state),
               ],
@@ -35,17 +51,45 @@ class ProgressionApplyDialog extends StatelessWidget {
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(context),
-              child: const AppText('Отмена'),
+              child: AppText(stages == null ? 'Отмена' : 'Закрыть'),
             ),
-            FilledButton(
-              onPressed: state.comparison != null
-                  ? () => Navigator.pop(context, state.parts)
-                  : null,
-              child: const AppText('Применить этап'),
-            ),
+            if (stages == null)
+              FilledButton(
+                onPressed: state.comparison != null
+                    ? () => Navigator.pop(context, state.parts)
+                    : null,
+                child: const AppText('Применить этап'),
+              ),
           ],
         ),
       );
+
+  Widget _stageLabels(
+    BuildContext context,
+    ({TreeProgressionStep before, TreeProgressionStep after}) pair,
+  ) => Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      _stageLabel(context, 'Было', pair.before),
+      _stageLabel(context, 'Стало', pair.after),
+      if (pair.before.parts.length < 3 || pair.after.parts.length < 3)
+        const AppText(
+          'Для частей, которых нет в этапе, используются данные текущей сборки.',
+        ),
+    ],
+  );
+
+  Widget _stageLabel(
+    BuildContext context,
+    String label,
+    TreeProgressionStep step,
+  ) {
+    final level = step.level;
+    final name = step.title.isEmpty
+        ? translateUi(context, 'Уровень $level')
+        : step.title;
+    return Text('${translateUi(context, label)} · $name');
+  }
 
   Widget _checkbox(
     BuildContext context,
@@ -54,11 +98,7 @@ class ProgressionApplyDialog extends StatelessWidget {
   ) => CheckboxListTile(
     contentPadding: EdgeInsets.zero,
     value: state.parts.contains(part),
-    title: AppText(switch (part) {
-      ProgressionPart.tree => 'Уровень и дерево',
-      ProgressionPart.skills => 'Умения',
-      ProgressionPart.equipment => 'Экипировка',
-    }),
+    title: AppText(progressionPartLabel(part)),
     onChanged: (checked) {
       final next = {...state.parts};
       if (checked == true) {
@@ -120,6 +160,7 @@ class _ComparisonDetails extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
+        ProgressionWarnings(comparison),
         const Divider(),
         if (change.added.isEmpty && change.removed.isEmpty)
           const AppText('Узлы без изменений'),
@@ -139,39 +180,43 @@ class _ComparisonDetails extends StatelessWidget {
             colors.error,
             change.removed,
           ),
+        ProgressionLoadoutView(comparison),
         const SizedBox(height: 12),
-        Table(
-          columnWidths: const {
-            0: FlexColumnWidth(2),
-            1: FlexColumnWidth(),
-            2: FlexColumnWidth(),
-            3: FlexColumnWidth(),
-          },
-          defaultVerticalAlignment: TableCellVerticalAlignment.middle,
-          children: [
-            const TableRow(
-              children: [
-                AppText('Показатель'),
-                AppText('Было', textAlign: TextAlign.end),
-                AppText('Стало', textAlign: TextAlign.end),
-                AppText('Разница', textAlign: TextAlign.end),
-              ],
-            ),
-            _row(context, 'Уровень', before.level, after.level),
-            for (final metric in progressionMetrics)
-              if (before.stats[metric] is num || after.stats[metric] is num)
-                _row(
-                  context,
-                  statLabel(metric),
-                  before.stats[metric],
-                  after.stats[metric],
-                  percent: metric.endsWith('Resist') || metric == 'BlockChance',
-                ),
-          ],
-        ),
+        _stats(context, before, after),
       ],
     );
   }
+
+  Widget _stats(BuildContext context, BuildReport before, BuildReport after) =>
+      Table(
+        columnWidths: const {
+          0: FlexColumnWidth(2),
+          1: FlexColumnWidth(),
+          2: FlexColumnWidth(),
+          3: FlexColumnWidth(),
+        },
+        defaultVerticalAlignment: TableCellVerticalAlignment.middle,
+        children: [
+          const TableRow(
+            children: [
+              AppText('Показатель'),
+              AppText('Было', textAlign: TextAlign.end),
+              AppText('Стало', textAlign: TextAlign.end),
+              AppText('Разница', textAlign: TextAlign.end),
+            ],
+          ),
+          _row(context, 'Уровень', before.level, after.level),
+          for (final metric in progressionMetrics)
+            if (before.stats[metric] is num || after.stats[metric] is num)
+              _row(
+                context,
+                statLabel(metric),
+                before.stats[metric],
+                after.stats[metric],
+                percent: metric.endsWith('Resist') || metric == 'BlockChance',
+              ),
+        ],
+      );
 
   Widget _nodeList(
     BuildContext context,

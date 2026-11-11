@@ -291,6 +291,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get m51651958c6 => 'Toutes les caractéristiques';
 
   @override
+  String get mcc4d85dabf => 'Toutes les étapes sont terminées';
+
+  @override
   String get m6fd7c8e4f1 => 'Vie totale';
 
   @override
@@ -453,6 +456,10 @@ class AppLocalizationsFr extends AppLocalizations {
       'L\'installation nécessite Git et Python 3.11+ 64 bits. Après chargement des composants, les calculs fonctionnent sans réseau.';
 
   @override
+  String get m34279a696f =>
+      'Les parties manquantes utilisent les données du build actuel.';
+
+  @override
   String get m659973f49f => 'Cette compétence ne peut pas être soutenue';
 
   @override
@@ -561,6 +568,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get m09fef6d0df => 'Configuré';
 
   @override
+  String get m3ac5ed5a45 => 'Tâches de l’étape';
+
+  @override
   String get m540fb030a9 => 'Fasten indicators';
 
   @override
@@ -617,6 +627,12 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get mdcd4c2c384 => 'Sort éviter le hasard';
+
+  @override
+  String get m7b447f3126 => 'Changements de compétences';
+
+  @override
+  String get m3c043ffe87 => 'Changements d’équipement';
 
   @override
   String get med931b5f06 => 'Modifier l’étape';
@@ -1152,6 +1168,12 @@ class AppLocalizationsFr extends AppLocalizations {
   String get m3d7df93803 => 'Mettre à jour la liste de builds';
 
   @override
+  String get m634649d9fe => 'Mettre à jour l’étape';
+
+  @override
+  String get ma70d25bf80 => 'Mettre à jour depuis le build';
+
+  @override
   String get mb2712dc98b => 'Mise à jour PoB II';
 
   @override
@@ -1175,6 +1197,9 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get m8cb7d50be2 => 'Feu';
+
+  @override
+  String get m5791044c7e => 'Une tâche par ligne';
 
   @override
   String get m480c4531b2 => 'En attente de calcul';
@@ -1220,6 +1245,9 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get m8e6a41ecd0 => 'Zoom arrière';
+
+  @override
+  String get m3e95800065 => 'Désactivé';
 
   @override
   String get mea1f408246 => 'Ouvrir';
@@ -1662,6 +1690,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get m3826292e79 => 'Rareté des objets trouvés';
 
   @override
+  String get mcc5183e960 => 'Suivre le plan';
+
+  @override
   String get meba267d9f8 => 'Ressources';
 
   @override
@@ -1669,6 +1700,9 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get m9c7a204d54 => 'Runes';
+
+  @override
+  String get maa7d8fe68c => 'Avec quelle étape comparer ?';
 
   @override
   String get m49db3482db => 'Joyaux';
@@ -1795,6 +1829,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get mf99463341e => 'Vitesse de déplacement';
 
   @override
+  String get m601663f0e2 => 'Étape suivante';
+
+  @override
   String get m09b17c9d35 => 'L\'icône est trop grande';
 
   @override
@@ -1862,6 +1899,12 @@ class AppLocalizationsFr extends AppLocalizations {
   String md7dfb40adb(String p0) {
     return 'Combinaison déjà utilisée : $p0';
   }
+
+  @override
+  String get m868f6bf490 => 'Comparer les étapes';
+
+  @override
+  String get m42098f4d60 => 'Comparer avec une autre étape';
 
   @override
   String get mc4268e6843 => 'Coup moyen';
@@ -2132,6 +2175,9 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get mdfa94e9fd6 =>
       'Cet assembly est déjà dans la bibliothèque PoB. Choisissez un autre nom pour la copie.';
+
+  @override
+  String get mf6a53b4da2 => 'Étape terminée';
 
   @override
   String get mca16b5fe71 =>

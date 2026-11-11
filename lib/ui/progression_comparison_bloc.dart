@@ -1,5 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../domain/build_report.dart';
+import '../domain/equipment_item.dart';
 import '../domain/progression_comparison.dart';
 import '../domain/tree_progression.dart';
 
@@ -18,14 +20,22 @@ class ProgressionPartsSelected {
 
 class ProgressionComparisonBloc
     extends Bloc<ProgressionPartsSelected, ProgressionComparisonState> {
-  ProgressionComparisonBloc(this._compare, this._dispose)
-    : super((parts: const {}, comparison: null, failed: false)) {
+  ProgressionComparisonBloc(
+    this._compare,
+    this._dispose, {
+    Set<ProgressionPart> initial = const {ProgressionPart.tree},
+    this.describeGem,
+    this.describeItem,
+  }) : super((parts: const {}, comparison: null, failed: false)) {
     on<ProgressionPartsSelected>(_choose);
-    add(ProgressionPartsSelected(const {ProgressionPart.tree}));
+    add(ProgressionPartsSelected(initial));
   }
 
   final Future<ProgressionComparison> Function(Set<ProgressionPart>) _compare;
   final Future<void> Function() _dispose;
+  final Future<List<JsonMap>> Function(String id, int level, int quality)?
+  describeGem;
+  final Future<ItemInspection> Function(String raw)? describeItem;
   Future<void> _worker = Future.value();
 
   Future<void> _choose(

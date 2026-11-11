@@ -279,6 +279,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m51651958c6 => '모든 특성';
 
   @override
+  String get mcc4d85dabf => '모든 단계 완료';
+
+  @override
   String get m6fd7c8e4f1 => '총 수명';
 
   @override
@@ -428,6 +431,9 @@ class AppLocalizationsKo extends AppLocalizations {
       '설치에는 Git 및 64비트 Python 3.11 이상이 필요합니다. 구성 요소를 로드한 후에는 네트워크 없이 계산이 수행됩니다.';
 
   @override
+  String get m34279a696f => '단계에 없는 부분은 현재 빌드의 데이터를 사용합니다.';
+
+  @override
   String get m659973f49f => '이 스킬에는 보조 젬을 추가할 수 없습니다';
 
   @override
@@ -529,6 +535,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m09fef6d0df => '구성됨';
 
   @override
+  String get m3ac5ed5a45 => '단계 할 일';
+
+  @override
   String get m540fb030a9 => '표시기를 고정하세요';
 
   @override
@@ -584,6 +593,12 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get mdcd4c2c384 => '주문 회피 확률';
+
+  @override
+  String get m7b447f3126 => '스킬 변경';
+
+  @override
+  String get m3c043ffe87 => '장비 변경';
 
   @override
   String get med931b5f06 => '단계 편집';
@@ -1106,6 +1121,12 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m3d7df93803 => '빌드 목록 업데이트';
 
   @override
+  String get m634649d9fe => '단계 업데이트';
+
+  @override
+  String get ma70d25bf80 => '빌드에서 단계 업데이트';
+
+  @override
   String get mb2712dc98b => '업데이트 PoB II';
 
   @override
@@ -1127,6 +1148,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m8cb7d50be2 => '불';
+
+  @override
+  String get m5791044c7e => '한 줄에 할 일 하나';
 
   @override
   String get m480c4531b2 => '계산 대기 중';
@@ -1172,6 +1196,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m8e6a41ecd0 => '축소';
+
+  @override
+  String get m3e95800065 => '비활성화';
 
   @override
   String get mea1f408246 => '열기';
@@ -1601,6 +1628,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m3826292e79 => '희귀한 아이템 발견';
 
   @override
+  String get mcc5183e960 => '계획 따라가기';
+
+  @override
   String get meba267d9f8 => '리소스';
 
   @override
@@ -1608,6 +1638,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m9c7a204d54 => '룬';
+
+  @override
+  String get maa7d8fe68c => '어느 단계와 비교할까요?';
 
   @override
   String get m49db3482db => '주얼';
@@ -1728,6 +1761,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get mf99463341e => '이동 속도';
 
   @override
+  String get m601663f0e2 => '다음 단계';
+
+  @override
   String get m09b17c9d35 => '아이콘이 너무 큽니다.';
 
   @override
@@ -1793,6 +1829,12 @@ class AppLocalizationsKo extends AppLocalizations {
   String md7dfb40adb(String p0) {
     return '이미 사용 중인 조합: $p0';
   }
+
+  @override
+  String get m868f6bf490 => '단계 비교';
+
+  @override
+  String get m42098f4d60 => '다른 단계와 비교';
 
   @override
   String get mc4268e6843 => '평균 적중률';
@@ -2054,6 +2096,9 @@ class AppLocalizationsKo extends AppLocalizations {
   @override
   String get mdfa94e9fd6 =>
       '이 어셈블리는 이미 PoB 라이브러리에 있습니다. 복사본에 대해 다른 이름을 선택하십시오.';
+
+  @override
+  String get mf6a53b4da2 => '단계 완료';
 
   @override
   String get mca16b5fe71 => '이러한 설정은 빌드 성능에 영향을 미칩니다.';

@@ -279,6 +279,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m51651958c6 => 'すべての特性';
 
   @override
+  String get mcc4d85dabf => 'すべてのステージが完了しました';
+
+  @override
   String get m6fd7c8e4f1 => '総寿命';
 
   @override
@@ -428,6 +431,9 @@ class AppLocalizationsJa extends AppLocalizations {
       'インストールには Git および 64 ビット Python 3.11 以降が必要です。コンポーネントをロードすると、計算はネットワークなしで機能します。';
 
   @override
+  String get m34279a696f => 'ステージにない項目は現在のビルドのデータを使用します。';
+
+  @override
   String get m659973f49f => 'このスキルにはサポートを追加できません';
 
   @override
@@ -529,6 +535,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m09fef6d0df => '設定済み';
 
   @override
+  String get m3ac5ed5a45 => 'ステージのタスク';
+
+  @override
   String get m540fb030a9 => 'インジケーターを締める';
 
   @override
@@ -584,6 +593,12 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get mdcd4c2c384 => 'スペル回避チャンス';
+
+  @override
+  String get m7b447f3126 => 'スキルの変更';
+
+  @override
+  String get m3c043ffe87 => '装備の変更';
 
   @override
   String get med931b5f06 => '段階を編集';
@@ -1106,6 +1121,12 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m3d7df93803 => 'ビルドリストを更新';
 
   @override
+  String get m634649d9fe => 'ステージを更新';
+
+  @override
+  String get ma70d25bf80 => 'ビルドからステージを更新';
+
+  @override
   String get mb2712dc98b => 'アップデート PoB II';
 
   @override
@@ -1127,6 +1148,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m8cb7d50be2 => '火事';
+
+  @override
+  String get m5791044c7e => '1行に1タスク';
 
   @override
   String get m480c4531b2 => '計算待ち';
@@ -1172,6 +1196,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m8e6a41ecd0 => 'ズームアウト';
+
+  @override
+  String get m3e95800065 => '無効';
 
   @override
   String get mea1f408246 => '開く';
@@ -1601,6 +1628,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m3826292e79 => '見つかったアイテムのレア度';
 
   @override
+  String get mcc5183e960 => 'プランに沿って進む';
+
+  @override
   String get meba267d9f8 => 'リソース';
 
   @override
@@ -1608,6 +1638,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m9c7a204d54 => 'ルーン';
+
+  @override
+  String get maa7d8fe68c => 'どのステージと比較しますか？';
 
   @override
   String get m49db3482db => 'ジュエル';
@@ -1728,6 +1761,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get mf99463341e => '移動速度';
 
   @override
+  String get m601663f0e2 => '次のステージ';
+
+  @override
   String get m09b17c9d35 => 'アイコンが大きすぎます';
 
   @override
@@ -1793,6 +1829,12 @@ class AppLocalizationsJa extends AppLocalizations {
   String md7dfb40adb(String p0) {
     return '組み合わせはすでに使用されています: $p0';
   }
+
+  @override
+  String get m868f6bf490 => 'ステージを比較';
+
+  @override
+  String get m42098f4d60 => '別のステージと比較';
 
   @override
   String get mc4268e6843 => '平均ヒット';
@@ -2054,6 +2096,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get mdfa94e9fd6 => 'このアセンブリはすでに PoB ライブラリにあります。コピーに別の名前を選択します。';
+
+  @override
+  String get mf6a53b4da2 => 'ステージ完了';
 
   @override
   String get mca16b5fe71 => 'これらの設定はビルドのパフォーマンスに影響します';

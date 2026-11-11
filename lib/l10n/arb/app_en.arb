@@ -475,6 +475,11 @@
     "description": "Все характеристики",
     "placeholders": {}
   },
+  "mcc4d85dabf": "All milestones completed",
+  "@mcc4d85dabf": {
+    "description": "Все этапы завершены",
+    "placeholders": {}
+  },
   "m6fd7c8e4f1": "Total Life",
   "@m6fd7c8e4f1": {
     "description": "Всего здоровья",
@@ -723,6 +728,11 @@
     "description": "Для установки нужны Git и 64-битный Python 3.11+. После загрузки компонентов расчёты работают без сети.",
     "placeholders": {}
   },
+  "m34279a696f": "Missing milestone parts use data from the current build.",
+  "@m34279a696f": {
+    "description": "Для частей, которых нет в этапе, используются данные текущей сборки.",
+    "placeholders": {}
+  },
   "m659973f49f": "This skill cannot be supported",
   "@m659973f49f": {
     "description": "Для этого умения нельзя добавить поддержки",
@@ -902,6 +912,11 @@
     "description": "Заданные",
     "placeholders": {}
   },
+  "m3ac5ed5a45": "Milestone tasks",
+  "@m3ac5ed5a45": {
+    "description": "Задачи этапа",
+    "placeholders": {}
+  },
   "m540fb030a9": "Fasten indicators",
   "@m540fb030a9": {
     "description": "Закрепить показатели",
@@ -995,6 +1010,16 @@
   "mdcd4c2c384": "Spell avoid chance",
   "@mdcd4c2c384": {
     "description": "Избежание чар",
+    "placeholders": {}
+  },
+  "m7b447f3126": "Skill changes",
+  "@m7b447f3126": {
+    "description": "Изменения умений",
+    "placeholders": {}
+  },
+  "m3c043ffe87": "Equipment changes",
+  "@m3c043ffe87": {
+    "description": "Изменения экипировки",
     "placeholders": {}
   },
   "med931b5f06": "Edit milestone",
@@ -1876,6 +1901,16 @@
     "description": "Обновить список сборок",
     "placeholders": {}
   },
+  "m634649d9fe": "Update milestone",
+  "@m634649d9fe": {
+    "description": "Обновить этап",
+    "placeholders": {}
+  },
+  "ma70d25bf80": "Update milestone from build",
+  "@ma70d25bf80": {
+    "description": "Обновить этап из сборки",
+    "placeholders": {}
+  },
   "mb2712dc98b": "Update PoB II",
   "@mb2712dc98b": {
     "description": "Обновление PoB II",
@@ -1913,6 +1948,11 @@
   "m8cb7d50be2": "Fire",
   "@m8cb7d50be2": {
     "description": "Огонь",
+    "placeholders": {}
+  },
+  "m5791044c7e": "One task per line",
+  "@m5791044c7e": {
+    "description": "Одна задача на строку",
     "placeholders": {}
   },
   "m480c4531b2": "Awaiting calculation",
@@ -1988,6 +2028,11 @@
   "m8e6a41ecd0": "Zoom out",
   "@m8e6a41ecd0": {
     "description": "Отдалить",
+    "placeholders": {}
+  },
+  "m3e95800065": "Disabled",
+  "@m3e95800065": {
+    "description": "Отключено",
     "placeholders": {}
   },
   "mea1f408246": "Open",
@@ -2711,6 +2756,11 @@
     "description": "Редкость найденных предметов",
     "placeholders": {}
   },
+  "mcc5183e960": "Follow plan",
+  "@mcc5183e960": {
+    "description": "Режим прохождения",
+    "placeholders": {}
+  },
   "meba267d9f8": "Resources",
   "@meba267d9f8": {
     "description": "Ресурсы",
@@ -2724,6 +2774,11 @@
   "m9c7a204d54": "Runes",
   "@m9c7a204d54": {
     "description": "Руны",
+    "placeholders": {}
+  },
+  "maa7d8fe68c": "Which milestone should be compared?",
+  "@maa7d8fe68c": {
+    "description": "С каким этапом сравнить?",
     "placeholders": {}
   },
   "m49db3482db": "Jewels",
@@ -2924,6 +2979,11 @@
     "description": "Скорость передвижения",
     "placeholders": {}
   },
+  "m601663f0e2": "Next milestone",
+  "@m601663f0e2": {
+    "description": "Следующий этап",
+    "placeholders": {}
+  },
   "m09b17c9d35": "Icon is too big",
   "@m09b17c9d35": {
     "description": "Слишком большая иконка",
@@ -3032,6 +3092,16 @@
         "type": "String"
       }
     }
+  },
+  "m868f6bf490": "Compare milestones",
+  "@m868f6bf490": {
+    "description": "Сравнение этапов",
+    "placeholders": {}
+  },
+  "m42098f4d60": "Compare with another milestone",
+  "@m42098f4d60": {
+    "description": "Сравнить с другим этапом",
+    "placeholders": {}
   },
   "mc4268e6843": "Average Hit",
   "@mc4268e6843": {
@@ -3469,6 +3539,11 @@
   "mdfa94e9fd6": "This assembly is already in the PoB library. Choose a different name for the copy.",
   "@mdfa94e9fd6": {
     "description": "Эта сборка уже есть в библиотеке PoB. Выберите другое имя для копии.",
+    "placeholders": {}
+  },
+  "mf6a53b4da2": "Milestone completed",
+  "@mf6a53b4da2": {
+    "description": "Этап завершён",
     "placeholders": {}
   },
   "mca16b5fe71": "These settings affect build performance",

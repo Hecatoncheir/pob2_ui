@@ -284,6 +284,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m51651958c6 => 'Total Attributes';
 
   @override
+  String get mcc4d85dabf => 'All milestones completed';
+
+  @override
   String get m6fd7c8e4f1 => 'Total Life';
 
   @override
@@ -439,6 +442,10 @@ class AppLocalizationsEn extends AppLocalizations {
       'Installation requires Git and 64-bit Python 3.11+. After loading the components, calculations work without a network.';
 
   @override
+  String get m34279a696f =>
+      'Missing milestone parts use data from the current build.';
+
+  @override
   String get m659973f49f => 'This skill cannot be supported';
 
   @override
@@ -544,6 +551,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m09fef6d0df => 'Configured';
 
   @override
+  String get m3ac5ed5a45 => 'Milestone tasks';
+
+  @override
   String get m540fb030a9 => 'Fasten indicators';
 
   @override
@@ -599,6 +609,12 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get mdcd4c2c384 => 'Spell avoid chance';
+
+  @override
+  String get m7b447f3126 => 'Skill changes';
+
+  @override
+  String get m3c043ffe87 => 'Equipment changes';
 
   @override
   String get med931b5f06 => 'Edit milestone';
@@ -1127,6 +1143,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m3d7df93803 => 'Update build list';
 
   @override
+  String get m634649d9fe => 'Update milestone';
+
+  @override
+  String get ma70d25bf80 => 'Update milestone from build';
+
+  @override
   String get mb2712dc98b => 'Update PoB II';
 
   @override
@@ -1150,6 +1172,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get m8cb7d50be2 => 'Fire';
+
+  @override
+  String get m5791044c7e => 'One task per line';
 
   @override
   String get m480c4531b2 => 'Awaiting calculation';
@@ -1195,6 +1220,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get m8e6a41ecd0 => 'Zoom out';
+
+  @override
+  String get m3e95800065 => 'Disabled';
 
   @override
   String get mea1f408246 => 'Open';
@@ -1628,6 +1656,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m3826292e79 => 'Rarity of Items found';
 
   @override
+  String get mcc5183e960 => 'Follow plan';
+
+  @override
   String get meba267d9f8 => 'Resources';
 
   @override
@@ -1635,6 +1666,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get m9c7a204d54 => 'Runes';
+
+  @override
+  String get maa7d8fe68c => 'Which milestone should be compared?';
 
   @override
   String get m49db3482db => 'Jewels';
@@ -1759,6 +1793,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get mf99463341e => 'Move speed';
 
   @override
+  String get m601663f0e2 => 'Next milestone';
+
+  @override
   String get m09b17c9d35 => 'Icon is too big';
 
   @override
@@ -1826,6 +1863,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String md7dfb40adb(String p0) {
     return 'Combination already in use: $p0';
   }
+
+  @override
+  String get m868f6bf490 => 'Compare milestones';
+
+  @override
+  String get m42098f4d60 => 'Compare with another milestone';
 
   @override
   String get mc4268e6843 => 'Average Hit';
@@ -2093,6 +2136,9 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get mdfa94e9fd6 =>
       'This assembly is already in the PoB library. Choose a different name for the copy.';
+
+  @override
+  String get mf6a53b4da2 => 'Milestone completed';
 
   @override
   String get mca16b5fe71 => 'These settings affect build performance';

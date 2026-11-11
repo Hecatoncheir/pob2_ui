@@ -282,6 +282,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m51651958c6 => 'ทุกลักษณะ';
 
   @override
+  String get mcc4d85dabf => 'เสร็จสิ้นทุกขั้นแล้ว';
+
+  @override
   String get m6fd7c8e4f1 => 'ชีวิตทั้งหมด';
 
   @override
@@ -436,6 +439,9 @@ class AppLocalizationsTh extends AppLocalizations {
       'การติดตั้งต้องใช้ Git และ Python 3.11+ 64 บิต หลังจากโหลดส่วนประกอบแล้ว การคำนวณจะทำงานโดยไม่มีเครือข่าย';
 
   @override
+  String get m34279a696f => 'ส่วนที่ไม่มีในขั้นจะใช้ข้อมูลจากบิลด์ปัจจุบัน';
+
+  @override
   String get m659973f49f => 'ไม่สามารถเพิ่มเจมเสริมให้สกิลนี้ได้';
 
   @override
@@ -539,6 +545,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m09fef6d0df => 'กำหนดค่าแล้ว';
 
   @override
+  String get m3ac5ed5a45 => 'งานของขั้น';
+
+  @override
   String get m540fb030a9 => 'ติดไฟแสดง';
 
   @override
@@ -594,6 +603,12 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get mdcd4c2c384 => 'คาถาหลีกเลี่ยงโอกาส';
+
+  @override
+  String get m7b447f3126 => 'การเปลี่ยนแปลงสกิล';
+
+  @override
+  String get m3c043ffe87 => 'การเปลี่ยนแปลงอุปกรณ์';
 
   @override
   String get med931b5f06 => 'แก้ไขขั้น';
@@ -1117,6 +1132,12 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m3d7df93803 => 'อัปเดตรายการบิลด์';
 
   @override
+  String get m634649d9fe => 'อัปเดตขั้น';
+
+  @override
+  String get ma70d25bf80 => 'อัปเดตขั้นจากบิลด์';
+
+  @override
   String get mb2712dc98b => 'อัปเดต PoB II';
 
   @override
@@ -1140,6 +1161,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m8cb7d50be2 => 'ไฟไหม้';
+
+  @override
+  String get m5791044c7e => 'หนึ่งงานต่อบรรทัด';
 
   @override
   String get m480c4531b2 => 'รอการคำนวณ';
@@ -1185,6 +1209,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m8e6a41ecd0 => 'ซูมออก';
+
+  @override
+  String get m3e95800065 => 'ปิดใช้งาน';
 
   @override
   String get mea1f408246 => 'เปิด';
@@ -1616,6 +1643,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m3826292e79 => 'พบความหายากของไอเทม';
 
   @override
+  String get mcc5183e960 => 'ติดตามแผน';
+
+  @override
   String get meba267d9f8 => 'แหล่งข้อมูล';
 
   @override
@@ -1623,6 +1653,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m9c7a204d54 => 'รูน';
+
+  @override
+  String get maa7d8fe68c => 'เปรียบเทียบกับขั้นไหน?';
 
   @override
   String get m49db3482db => 'จิวเวล';
@@ -1745,6 +1778,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get mf99463341e => 'ความเร็วในการเคลื่อนที่';
 
   @override
+  String get m601663f0e2 => 'ขั้นถัดไป';
+
+  @override
   String get m09b17c9d35 => 'ไอคอนใหญ่เกินไป';
 
   @override
@@ -1811,6 +1847,12 @@ class AppLocalizationsTh extends AppLocalizations {
   String md7dfb40adb(String p0) {
     return 'ชุดค่าผสมถูกใช้แล้ว: $p0';
   }
+
+  @override
+  String get m868f6bf490 => 'เปรียบเทียบขั้น';
+
+  @override
+  String get m42098f4d60 => 'เปรียบเทียบกับขั้นอื่น';
 
   @override
   String get mc4268e6843 => 'การเข้าชมเฉลี่ย';
@@ -2076,6 +2118,9 @@ class AppLocalizationsTh extends AppLocalizations {
   @override
   String get mdfa94e9fd6 =>
       'แอสเซมบลีนี้มีอยู่ในไลบรารี PoB แล้ว เลือกชื่ออื่นสำหรับสำเนา';
+
+  @override
+  String get mf6a53b4da2 => 'ขั้นเสร็จสิ้นแล้ว';
 
   @override
   String get mca16b5fe71 => 'การตั้งค่าเหล่านี้ส่งผลต่อประสิทธิภาพของบิลด์';

@@ -608,6 +608,12 @@ abstract class AppLocalizations {
   /// **'Total Attributes'**
   String get m51651958c6;
 
+  /// Все этапы завершены
+  ///
+  /// In en, this message translates to:
+  /// **'All milestones completed'**
+  String get mcc4d85dabf;
+
   /// Всего здоровья
   ///
   /// In en, this message translates to:
@@ -896,6 +902,12 @@ abstract class AppLocalizations {
   /// **'Installation requires Git and 64-bit Python 3.11+. After loading the components, calculations work without a network.'**
   String get m3e069d1fae;
 
+  /// Для частей, которых нет в этапе, используются данные текущей сборки.
+  ///
+  /// In en, this message translates to:
+  /// **'Missing milestone parts use data from the current build.'**
+  String get m34279a696f;
+
   /// Для этого умения нельзя добавить поддержки
   ///
   /// In en, this message translates to:
@@ -1070,6 +1082,12 @@ abstract class AppLocalizations {
   /// **'Configured'**
   String get m09fef6d0df;
 
+  /// Задачи этапа
+  ///
+  /// In en, this message translates to:
+  /// **'Milestone tasks'**
+  String get m3ac5ed5a45;
+
   /// Закрепить показатели
   ///
   /// In en, this message translates to:
@@ -1183,6 +1201,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Spell avoid chance'**
   String get mdcd4c2c384;
+
+  /// Изменения умений
+  ///
+  /// In en, this message translates to:
+  /// **'Skill changes'**
+  String get m7b447f3126;
+
+  /// Изменения экипировки
+  ///
+  /// In en, this message translates to:
+  /// **'Equipment changes'**
+  String get m3c043ffe87;
 
   /// Изменить этап
   ///
@@ -2139,6 +2169,18 @@ abstract class AppLocalizations {
   /// **'Update build list'**
   String get m3d7df93803;
 
+  /// Обновить этап
+  ///
+  /// In en, this message translates to:
+  /// **'Update milestone'**
+  String get m634649d9fe;
+
+  /// Обновить этап из сборки
+  ///
+  /// In en, this message translates to:
+  /// **'Update milestone from build'**
+  String get ma70d25bf80;
+
   /// Обновление PoB II
   ///
   /// In en, this message translates to:
@@ -2180,6 +2222,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Fire'**
   String get m8cb7d50be2;
+
+  /// Одна задача на строку
+  ///
+  /// In en, this message translates to:
+  /// **'One task per line'**
+  String get m5791044c7e;
 
   /// Ожидает расчёта
   ///
@@ -2270,6 +2318,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Zoom out'**
   String get m8e6a41ecd0;
+
+  /// Отключено
+  ///
+  /// In en, this message translates to:
+  /// **'Disabled'**
+  String get m3e95800065;
 
   /// Открыть
   ///
@@ -3069,6 +3123,12 @@ abstract class AppLocalizations {
   /// **'Rarity of Items found'**
   String get m3826292e79;
 
+  /// Режим прохождения
+  ///
+  /// In en, this message translates to:
+  /// **'Follow plan'**
+  String get mcc5183e960;
+
   /// Ресурсы
   ///
   /// In en, this message translates to:
@@ -3086,6 +3146,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Runes'**
   String get m9c7a204d54;
+
+  /// С каким этапом сравнить?
+  ///
+  /// In en, this message translates to:
+  /// **'Which milestone should be compared?'**
+  String get maa7d8fe68c;
 
   /// Самоцветы
   ///
@@ -3315,6 +3381,12 @@ abstract class AppLocalizations {
   /// **'Move speed'**
   String get mf99463341e;
 
+  /// Следующий этап
+  ///
+  /// In en, this message translates to:
+  /// **'Next milestone'**
+  String get m601663f0e2;
+
   /// Слишком большая иконка
   ///
   /// In en, this message translates to:
@@ -3440,6 +3512,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Combination already in use: {p0}'**
   String md7dfb40adb(String p0);
+
+  /// Сравнение этапов
+  ///
+  /// In en, this message translates to:
+  /// **'Compare milestones'**
+  String get m868f6bf490;
+
+  /// Сравнить с другим этапом
+  ///
+  /// In en, this message translates to:
+  /// **'Compare with another milestone'**
+  String get m42098f4d60;
 
   /// Средний удар
   ///
@@ -3938,6 +4022,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'This assembly is already in the PoB library. Choose a different name for the copy.'**
   String get mdfa94e9fd6;
+
+  /// Этап завершён
+  ///
+  /// In en, this message translates to:
+  /// **'Milestone completed'**
+  String get mf6a53b4da2;
 
   /// Эти настройки влияют на показатели сборки
   ///

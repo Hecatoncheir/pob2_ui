@@ -63,8 +63,17 @@ List<Map<String, Object>> encodeProgressionSteps(
       if (step.allocation case final allocation?) 'allocation': allocation,
       if (step.skills case final skills?) 'skills': skills,
       if (step.equipment case final equipment?) 'equipment': equipment,
+      ..._encodeProgress(step),
     },
 ];
+
+Map<String, Object> _encodeProgress(TreeProgressionStep step) => {
+  if (step.completed) 'completed': true,
+  if (step.tasks.isNotEmpty)
+    'tasks': [
+      for (final task in step.tasks) {'text': task.text, 'done': task.done},
+    ],
+};
 
 List<TreeProgressionStep> decodeProgressionSteps(List<Object?> entries) =>
     List.unmodifiable(entries.map(_decodeStep));
@@ -93,6 +102,8 @@ TreeProgressionStep _decodeStep(Object? entry) {
       allocation: _optionalXml(entry['allocation']),
       skills: _optionalXml(entry['skills']),
       equipment: _optionalXml(entry['equipment']),
+      completed: _completion(entry['completed']),
+      tasks: _tasks(entry['tasks']),
     );
   }
   throw _invalidPlan;
@@ -101,5 +112,24 @@ TreeProgressionStep _decodeStep(Object? entry) {
 String? _optionalXml(Object? value) => switch (value) {
   null => null,
   String() => value,
+  _ => throw _invalidPlan,
+};
+
+bool _completion(Object? value) => switch (value) {
+  null => false,
+  bool() => value,
+  _ => throw _invalidPlan,
+};
+
+List<ProgressionTask> _tasks(Object? value) => switch (value) {
+  null => const [],
+  List<Object?>() => value.map(_task).toList(),
+  _ => throw _invalidPlan,
+};
+
+ProgressionTask _task(Object? value) => switch (value) {
+  {'text': final String text, 'done': final bool done}
+      when text.trim().isNotEmpty =>
+    (text: text, done: done),
   _ => throw _invalidPlan,
 };

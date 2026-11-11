@@ -279,6 +279,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m51651958c6 => '所有特徵';
 
   @override
+  String get mcc4d85dabf => '所有階段皆已完成';
+
+  @override
   String get m6fd7c8e4f1 => '總壽命';
 
   @override
@@ -427,6 +430,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m3e069d1fae => '安裝需要 Git 和 64 位元 Python 3.11+。載入組件後，無需網路即可進行計算。';
 
   @override
+  String get m34279a696f => '階段中缺少的部分使用目前流派的資料。';
+
+  @override
   String get m659973f49f => '此技能無法加入輔助寶石';
 
   @override
@@ -528,6 +534,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m09fef6d0df => '已配置';
 
   @override
+  String get m3ac5ed5a45 => '階段任務';
+
+  @override
   String get m540fb030a9 => '緊固指示器';
 
   @override
@@ -583,6 +592,12 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get mdcd4c2c384 => '法術避免幾率';
+
+  @override
+  String get m7b447f3126 => '技能變更';
+
+  @override
+  String get m3c043ffe87 => '裝備變更';
 
   @override
   String get med931b5f06 => '編輯階段';
@@ -1104,6 +1119,12 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m3d7df93803 => '更新建置列表';
 
   @override
+  String get m634649d9fe => '更新階段';
+
+  @override
+  String get ma70d25bf80 => '從流派更新階段';
+
+  @override
   String get mb2712dc98b => '更新PoB II';
 
   @override
@@ -1125,6 +1146,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m8cb7d50be2 => '火';
+
+  @override
+  String get m5791044c7e => '每行一項任務';
 
   @override
   String get m480c4531b2 => '等待計算';
@@ -1170,6 +1194,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m8e6a41ecd0 => '縮小';
+
+  @override
+  String get m3e95800065 => '已停用';
 
   @override
   String get mea1f408246 => '打開';
@@ -1599,6 +1626,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m3826292e79 => '發現物品的稀有度';
 
   @override
+  String get mcc5183e960 => '依計畫進行';
+
+  @override
   String get meba267d9f8 => '資源';
 
   @override
@@ -1606,6 +1636,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m9c7a204d54 => '符文';
+
+  @override
+  String get maa7d8fe68c => '要和哪個階段比較？';
 
   @override
   String get m49db3482db => '珠寶';
@@ -1726,6 +1759,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get mf99463341e => '移動速度';
 
   @override
+  String get m601663f0e2 => '下一階段';
+
+  @override
   String get m09b17c9d35 => '圖示太大';
 
   @override
@@ -1789,6 +1825,12 @@ class AppLocalizationsZh extends AppLocalizations {
   String md7dfb40adb(String p0) {
     return '組合已在使用：$p0';
   }
+
+  @override
+  String get m868f6bf490 => '比較階段';
+
+  @override
+  String get m42098f4d60 => '與其他階段比較';
 
   @override
   String get mc4268e6843 => '平均命中';
@@ -2048,6 +2090,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get mdfa94e9fd6 => '該組件已在 PoB 庫中。為副本選擇不同的名稱。';
+
+  @override
+  String get mf6a53b4da2 => '階段已完成';
 
   @override
   String get mca16b5fe71 => '這些設定會影響建置效能';
@@ -2356,6 +2401,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m51651958c6 => '所有特徵';
 
   @override
+  String get mcc4d85dabf => '所有階段皆已完成';
+
+  @override
   String get m6fd7c8e4f1 => '總壽命';
 
   @override
@@ -2504,6 +2552,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m3e069d1fae => '安裝需要 Git 和 64 位元 Python 3.11+。載入組件後，無需網路即可進行計算。';
 
   @override
+  String get m34279a696f => '階段中缺少的部分使用目前流派的資料。';
+
+  @override
   String get m659973f49f => '此技能無法加入輔助寶石';
 
   @override
@@ -2605,6 +2656,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m09fef6d0df => '已配置';
 
   @override
+  String get m3ac5ed5a45 => '階段任務';
+
+  @override
   String get m540fb030a9 => '緊固指示器';
 
   @override
@@ -2660,6 +2714,12 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get mdcd4c2c384 => '法術避免幾率';
+
+  @override
+  String get m7b447f3126 => '技能變更';
+
+  @override
+  String get m3c043ffe87 => '裝備變更';
 
   @override
   String get med931b5f06 => '編輯階段';
@@ -3181,6 +3241,12 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m3d7df93803 => '更新建置列表';
 
   @override
+  String get m634649d9fe => '更新階段';
+
+  @override
+  String get ma70d25bf80 => '從流派更新階段';
+
+  @override
   String get mb2712dc98b => '更新PoB II';
 
   @override
@@ -3202,6 +3268,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m8cb7d50be2 => '火';
+
+  @override
+  String get m5791044c7e => '每行一項任務';
 
   @override
   String get m480c4531b2 => '等待計算';
@@ -3247,6 +3316,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m8e6a41ecd0 => '縮小';
+
+  @override
+  String get m3e95800065 => '已停用';
 
   @override
   String get mea1f408246 => '打開';
@@ -3676,6 +3748,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m3826292e79 => '發現物品的稀有度';
 
   @override
+  String get mcc5183e960 => '依計畫進行';
+
+  @override
   String get meba267d9f8 => '資源';
 
   @override
@@ -3683,6 +3758,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m9c7a204d54 => '符文';
+
+  @override
+  String get maa7d8fe68c => '要和哪個階段比較？';
 
   @override
   String get m49db3482db => '珠寶';
@@ -3803,6 +3881,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get mf99463341e => '移動速度';
 
   @override
+  String get m601663f0e2 => '下一階段';
+
+  @override
   String get m09b17c9d35 => '圖示太大';
 
   @override
@@ -3866,6 +3947,12 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String md7dfb40adb(String p0) {
     return '組合已在使用：$p0';
   }
+
+  @override
+  String get m868f6bf490 => '比較階段';
+
+  @override
+  String get m42098f4d60 => '與其他階段比較';
 
   @override
   String get mc4268e6843 => '平均命中';
@@ -4125,6 +4212,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get mdfa94e9fd6 => '該組件已在 PoB 庫中。為副本選擇不同的名稱。';
+
+  @override
+  String get mf6a53b4da2 => '階段已完成';
 
   @override
   String get mca16b5fe71 => '這些設定會影響建置效能';

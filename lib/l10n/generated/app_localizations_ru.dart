@@ -283,6 +283,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m51651958c6 => 'Все характеристики';
 
   @override
+  String get mcc4d85dabf => 'Все этапы завершены';
+
+  @override
   String get m6fd7c8e4f1 => 'Всего здоровья';
 
   @override
@@ -438,6 +441,10 @@ class AppLocalizationsRu extends AppLocalizations {
       'Для установки нужны Git и 64-битный Python 3.11+. После загрузки компонентов расчёты работают без сети.';
 
   @override
+  String get m34279a696f =>
+      'Для частей, которых нет в этапе, используются данные текущей сборки.';
+
+  @override
   String get m659973f49f => 'Для этого умения нельзя добавить поддержки';
 
   @override
@@ -544,6 +551,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m09fef6d0df => 'Заданные';
 
   @override
+  String get m3ac5ed5a45 => 'Задачи этапа';
+
+  @override
   String get m540fb030a9 => 'Закрепить показатели';
 
   @override
@@ -600,6 +610,12 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get mdcd4c2c384 => 'Избежание чар';
+
+  @override
+  String get m7b447f3126 => 'Изменения умений';
+
+  @override
+  String get m3c043ffe87 => 'Изменения экипировки';
 
   @override
   String get med931b5f06 => 'Изменить этап';
@@ -1127,6 +1143,12 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m3d7df93803 => 'Обновить список сборок';
 
   @override
+  String get m634649d9fe => 'Обновить этап';
+
+  @override
+  String get ma70d25bf80 => 'Обновить этап из сборки';
+
+  @override
   String get mb2712dc98b => 'Обновление PoB II';
 
   @override
@@ -1150,6 +1172,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get m8cb7d50be2 => 'Огонь';
+
+  @override
+  String get m5791044c7e => 'Одна задача на строку';
 
   @override
   String get m480c4531b2 => 'Ожидает расчёта';
@@ -1195,6 +1220,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get m8e6a41ecd0 => 'Отдалить';
+
+  @override
+  String get m3e95800065 => 'Отключено';
 
   @override
   String get mea1f408246 => 'Открыть';
@@ -1632,6 +1660,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m3826292e79 => 'Редкость найденных предметов';
 
   @override
+  String get mcc5183e960 => 'Режим прохождения';
+
+  @override
   String get meba267d9f8 => 'Ресурсы';
 
   @override
@@ -1639,6 +1670,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get m9c7a204d54 => 'Руны';
+
+  @override
+  String get maa7d8fe68c => 'С каким этапом сравнить?';
 
   @override
   String get m49db3482db => 'Самоцветы';
@@ -1763,6 +1797,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get mf99463341e => 'Скорость передвижения';
 
   @override
+  String get m601663f0e2 => 'Следующий этап';
+
+  @override
   String get m09b17c9d35 => 'Слишком большая иконка';
 
   @override
@@ -1829,6 +1866,12 @@ class AppLocalizationsRu extends AppLocalizations {
   String md7dfb40adb(String p0) {
     return 'Сочетание уже используется: $p0';
   }
+
+  @override
+  String get m868f6bf490 => 'Сравнение этапов';
+
+  @override
+  String get m42098f4d60 => 'Сравнить с другим этапом';
 
   @override
   String get mc4268e6843 => 'Средний удар';
@@ -2096,6 +2139,9 @@ class AppLocalizationsRu extends AppLocalizations {
   @override
   String get mdfa94e9fd6 =>
       'Эта сборка уже есть в библиотеке PoB. Выберите другое имя для копии.';
+
+  @override
+  String get mf6a53b4da2 => 'Этап завершён';
 
   @override
   String get mca16b5fe71 => 'Эти настройки влияют на показатели сборки';

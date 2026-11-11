@@ -9,6 +9,7 @@ import 'core/motion.dart';
 import 'core/ui_translation.dart';
 import 'progression_apply_dialog.dart';
 import 'progression_comparison_bloc.dart';
+import 'progression_plan_actions.dart';
 import 'tree_progression_bloc.dart';
 
 class TreeProgressionPanel extends StatelessWidget {
@@ -28,7 +29,10 @@ class TreeProgressionPanel extends StatelessWidget {
   final Future<TreeProgressionStep?> Function() onCapture;
   final Future<void> Function(TreeProgressionStep, Set<ProgressionPart>)
   onApply;
-  final ProgressionComparisonBloc Function(TreeProgressionStep)
+  final ProgressionComparisonBloc Function(
+    TreeProgressionStep, {
+    TreeProgressionStep? baseline,
+  })
   createComparison;
 
   @override
@@ -38,7 +42,8 @@ class TreeProgressionPanel extends StatelessWidget {
             before.steps != after.steps ||
             before.selected != after.selected ||
             before.ready != after.ready ||
-            before.error != after.error,
+            before.error != after.error ||
+            before.view.following != after.view.following,
         builder: (context, state) => Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -82,15 +87,68 @@ class TreeProgressionPanel extends StatelessWidget {
   );
 
   Widget _timeline(BuildContext context, TreeProgressionState state) {
-    return ListView.builder(
+    final next = state.steps.where((step) => !step.completed).firstOrNull;
+    final nextKey = GlobalKey();
+    return SingleChildScrollView(
       padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
-      itemCount: state.steps.length + 1,
-      itemBuilder: (context, index) {
-        if (index == state.steps.length) return _status(context, state);
-        return _step(context, state, index);
-      },
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          if (state.steps.isNotEmpty) _following(context, state, next, nextKey),
+          for (var index = 0; index < state.steps.length; index++)
+            _step(
+              context,
+              state,
+              index,
+              identical(state.steps[index], next) ? nextKey : null,
+            ),
+          _status(context, state),
+        ],
+      ),
     );
   }
+
+  Widget _following(
+    BuildContext context,
+    TreeProgressionState state,
+    TreeProgressionStep? next,
+    GlobalKey nextKey,
+  ) {
+    final plan = context.read<TreeProgressionBloc>();
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SwitchListTile(
+          contentPadding: EdgeInsets.zero,
+          dense: true,
+          title: const AppText('Режим прохождения'),
+          value: state.view.following,
+          onChanged: (value) =>
+              plan.add(TreeProgressionFollowingChanged(value)),
+        ),
+        if (state.view.following)
+          next == null
+              ? const AppText('Все этапы завершены')
+              : _nextStage(plan, next, nextKey),
+      ],
+    );
+  }
+
+  Widget _nextStage(
+    TreeProgressionBloc plan,
+    TreeProgressionStep step,
+    GlobalKey nextKey,
+  ) => ListTile(
+    contentPadding: EdgeInsets.zero,
+    leading: const Icon(Icons.arrow_downward, size: 18),
+    title: const AppText('Следующий этап'),
+    subtitle: ProgressionStageName(step),
+    onTap: () {
+      plan.add(TreeProgressionSelected(step));
+      final target = nextKey.currentContext;
+      if (target != null) Scrollable.ensureVisible(target);
+    },
+  );
 
   Widget _status(BuildContext context, TreeProgressionState state) {
     if (state.error case final error?) {
@@ -105,28 +163,31 @@ class TreeProgressionPanel extends StatelessWidget {
     return const SizedBox.shrink();
   }
 
-  Widget _step(BuildContext context, TreeProgressionState state, int index) {
+  Widget _step(
+    BuildContext context,
+    TreeProgressionState state,
+    int index,
+    Key? nextKey,
+  ) {
     final step = state.steps[index];
     final selected = state.selected == index;
     return _ProgressionMilestone(
+      key: nextKey ?? ValueKey(step.identity),
       level: step.level,
       title: step.title,
       first: index == 0,
       last: index == state.steps.length - 1,
       selected: selected,
+      completed: state.view.following && step.completed,
       onTap: () => context.read<TreeProgressionBloc>().add(
         TreeProgressionSelected(selected ? null : step),
       ),
-      changes: selected ? _details(context, state.steps, index) : null,
+      changes: selected ? _details(context, state, index) : null,
     );
   }
 
-  Widget _details(
-    BuildContext context,
-    List<TreeProgressionStep> steps,
-    int index,
-  ) {
-    final step = steps[index];
+  Widget _details(BuildContext context, TreeProgressionState state, int index) {
+    final step = state.steps[index];
     final note = step.note;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -138,15 +199,82 @@ class TreeProgressionPanel extends StatelessWidget {
           ),
         Padding(
           padding: const EdgeInsets.only(bottom: 8),
-          child: FilledButton.tonalIcon(
-            key: const Key('apply-progression-stage'),
-            onPressed: enabled ? () => _apply(context, step) : null,
-            icon: const Icon(Icons.check, size: 18),
-            label: const AppText('Применить этап'),
+          child: _stepActions(context, state.steps, step),
+        ),
+        if (state.view.following) _checklist(context, step),
+        _changes(context, state.steps, index),
+      ],
+    );
+  }
+
+  Widget _stepActions(
+    BuildContext context,
+    List<TreeProgressionStep> steps,
+    TreeProgressionStep step,
+  ) => Wrap(
+    spacing: 2,
+    crossAxisAlignment: WrapCrossAlignment.center,
+    children: [
+      FilledButton.tonalIcon(
+        key: const Key('apply-progression-stage'),
+        onPressed: enabled ? () => _apply(context, step) : null,
+        icon: const Icon(Icons.check, size: 18),
+        label: const AppText('Применить этап'),
+      ),
+      IconButton(
+        tooltip: translateUi(context, 'Обновить этап из сборки'),
+        onPressed: enabled ? () => _update(context, step) : null,
+        icon: const Icon(Icons.sync, size: 18),
+      ),
+      if (steps.length > 1)
+        IconButton(
+          tooltip: translateUi(context, 'Сравнить с другим этапом'),
+          onPressed: enabled ? () => _compare(context, step, steps) : null,
+          icon: const Icon(Icons.compare_arrows, size: 18),
+        ),
+    ],
+  );
+
+  Widget _checklist(BuildContext context, TreeProgressionStep step) {
+    final plan = context.read<TreeProgressionBloc>();
+    return Column(
+      children: [
+        for (var index = 0; index < step.tasks.length; index++)
+          _task(plan, step, index),
+        CheckboxListTile(
+          dense: true,
+          contentPadding: EdgeInsets.zero,
+          title: const AppText('Этап завершён'),
+          value: step.completed,
+          onChanged: (done) => plan.add(
+            TreeProgressionUpdated(
+              step,
+              (saved) => saved.withProgress(completed: done),
+            ),
           ),
         ),
-        _changes(context, steps, index),
       ],
+    );
+  }
+
+  Widget _task(TreeProgressionBloc plan, TreeProgressionStep step, int index) {
+    final task = step.tasks[index];
+    return CheckboxListTile(
+      dense: true,
+      contentPadding: EdgeInsets.zero,
+      title: Text(task.text),
+      value: task.done,
+      onChanged: (done) => plan.add(
+        TreeProgressionUpdated(step, (saved) {
+          if (index >= saved.tasks.length ||
+              saved.tasks[index].text != task.text) {
+            return saved;
+          }
+          final tasks = [...saved.tasks];
+          tasks[index] = (text: task.text, done: done == true);
+          return saved.withProgress(tasks: tasks);
+        }),
+      ),
     );
   }
 
@@ -202,13 +330,18 @@ class TreeProgressionPanel extends StatelessWidget {
   Future<void> _record(BuildContext context) async {
     final captured = await onCapture();
     if (captured == null || !context.mounted) return;
-    final result = await sparkDialog<TreeProgressionDetails>(
+    final result = await sparkDialog<_EditedStage>(
       context,
-      _ProgressionStepDialog(captured.details),
+      _ProgressionStepDialog(captured),
     );
     if (result == null || !context.mounted) return;
     context.read<TreeProgressionBloc>().add(
-      TreeProgressionRecorded(captured.withDetails(result)),
+      TreeProgressionRecorded(
+        captured.withProgress(
+          details: result.details,
+          tasks: [for (final text in result.tasks) (text: text, done: false)],
+        ),
+      ),
     );
   }
 
@@ -224,24 +357,62 @@ class TreeProgressionPanel extends StatelessWidget {
   }
 
   Future<void> _edit(BuildContext context, TreeProgressionStep step) async {
-    final result = await sparkDialog<TreeProgressionDetails>(
+    final result = await sparkDialog<_EditedStage>(
       context,
-      _ProgressionStepDialog(step.details, heading: 'Изменить этап'),
+      _ProgressionStepDialog(step, heading: 'Изменить этап'),
     );
     if (result == null || !context.mounted) return;
     context.read<TreeProgressionBloc>().add(
-      TreeProgressionEdited(step, result),
+      TreeProgressionEdited(step, result.details, tasks: result.tasks),
+    );
+  }
+
+  Future<void> _compare(
+    BuildContext context,
+    TreeProgressionStep step,
+    List<TreeProgressionStep> steps,
+  ) async {
+    final baseline = await chooseProgressionBaseline(context, step, steps);
+    if (baseline == null || !context.mounted) return;
+    await sparkDialog<void>(
+      context,
+      BlocProvider(
+        create: (_) => createComparison(step, baseline: baseline),
+        child: ProgressionApplyDialog(
+          step.parts,
+          nodes,
+          stages: (before: baseline, after: step),
+        ),
+      ),
+    );
+  }
+
+  Future<void> _update(BuildContext context, TreeProgressionStep step) async {
+    final current = await onCapture();
+    if (current == null || !context.mounted) return;
+    final parts = await sparkDialog<Set<ProgressionPart>>(
+      context,
+      UpdateProgressionPartsDialog(current.parts),
+    );
+    if (parts == null || !context.mounted) return;
+    context.read<TreeProgressionBloc>().add(
+      TreeProgressionUpdated(
+        step,
+        (saved) => saved.withPartsFrom(current, parts),
+      ),
     );
   }
 }
 
 class _ProgressionMilestone extends StatelessWidget {
   const _ProgressionMilestone({
+    super.key,
     required this.level,
     required this.title,
     required this.first,
     required this.last,
     required this.selected,
+    required this.completed,
     required this.onTap,
     this.changes,
   });
@@ -252,7 +423,7 @@ class _ProgressionMilestone extends StatelessWidget {
 
   final int level;
   final String title;
-  final bool first, last, selected;
+  final bool first, last, selected, completed;
   final VoidCallback onTap;
   final Widget? changes;
 
@@ -331,11 +502,13 @@ class _ProgressionMilestone extends StatelessWidget {
       border: Border.all(color: border, width: 2),
     ),
     alignment: Alignment.center,
-    child: Container(
-      width: selected ? 8 : 5,
-      height: selected ? 8 : 5,
-      decoration: BoxDecoration(shape: BoxShape.circle, color: border),
-    ),
+    child: completed
+        ? Icon(Icons.check, size: 13, color: colors.secondary)
+        : Container(
+            width: selected ? 8 : 5,
+            height: selected ? 8 : 5,
+            decoration: BoxDecoration(shape: BoxShape.circle, color: border),
+          ),
   );
 
   Widget _label(ColorScheme colors, Color accent) {
@@ -394,9 +567,11 @@ class _ProgressionMilestone extends StatelessWidget {
   }
 }
 
+typedef _EditedStage = ({TreeProgressionDetails details, List<String> tasks});
+
 class _ProgressionStepDialog extends StatefulWidget {
-  const _ProgressionStepDialog(this.details, {this.heading = 'Сохранить этап'});
-  final TreeProgressionDetails details;
+  const _ProgressionStepDialog(this.step, {this.heading = 'Сохранить этап'});
+  final TreeProgressionStep step;
   final String heading;
 
   @override
@@ -405,10 +580,13 @@ class _ProgressionStepDialog extends StatefulWidget {
 
 class _ProgressionStepDialogState extends State<_ProgressionStepDialog> {
   late final level = TextEditingController(
-    text: '${widget.details.level.clamp(1, 100)}',
+    text: '${widget.step.level.clamp(1, 100)}',
   );
-  late final title = TextEditingController(text: widget.details.title);
-  late final note = TextEditingController(text: widget.details.note);
+  late final title = TextEditingController(text: widget.step.title);
+  late final note = TextEditingController(text: widget.step.note);
+  late final tasks = TextEditingController(
+    text: widget.step.tasks.map((task) => task.text).join('\n'),
+  );
   final form = GlobalKey<FormState>();
 
   @override
@@ -416,6 +594,7 @@ class _ProgressionStepDialogState extends State<_ProgressionStepDialog> {
     level.dispose();
     title.dispose();
     note.dispose();
+    tasks.dispose();
     super.dispose();
   }
 
@@ -455,6 +634,17 @@ class _ProgressionStepDialogState extends State<_ProgressionStepDialog> {
               label: AppText('Заметка к этапу'),
             ),
           ),
+          const SizedBox(height: 12),
+          TextFormField(
+            key: const Key('progression-tasks'),
+            controller: tasks,
+            minLines: 2,
+            maxLines: 4,
+            decoration: const InputDecoration(
+              label: AppText('Задачи этапа'),
+              helper: AppText('Одна задача на строку'),
+            ),
+          ),
         ],
       ),
     ),
@@ -475,10 +665,19 @@ class _ProgressionStepDialogState extends State<_ProgressionStepDialog> {
 
   void _submit() {
     if (form.currentState?.validate() != true) return;
-    Navigator.pop<TreeProgressionDetails>(context, (
-      level: int.parse(level.text),
-      title: title.text.trim(),
-      note: note.text.trim(),
+    Navigator.pop<_EditedStage>(context, (
+      details: (
+        level: int.parse(level.text),
+        title: title.text.trim(),
+        note: note.text.trim(),
+      ),
+      tasks: [
+        ...tasks.text
+            .split('\n')
+            .map((line) => line.trim())
+            .where((line) => line.isNotEmpty)
+            .toSet(),
+      ],
     ));
   }
 }

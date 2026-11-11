@@ -117,13 +117,21 @@ class _GemTooltipCard extends StatelessWidget {
     if (state.error case final error?) return AppText(error);
     return SingleChildScrollView(
       key: const Key('gem-tooltip-description'),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [for (final line in state.lines) _line(line)],
-      ),
+      child: GemDescriptionLines(state.lines),
     );
   }
+}
+
+class GemDescriptionLines extends StatelessWidget {
+  const GemDescriptionLines(this.lines, {super.key});
+  final List<JsonMap> lines;
+
+  @override
+  Widget build(BuildContext context) => Column(
+    mainAxisSize: MainAxisSize.min,
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [for (final line in lines) _line(line)],
+  );
 
   Widget _line(JsonMap line) {
     if (line['separator'] == true) return const Divider(height: 20);

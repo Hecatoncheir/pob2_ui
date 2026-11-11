@@ -7,11 +7,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:pob2_ui/data/component_repository.dart';
 import 'package:pob2_ui/data/installation_store.dart';
+import 'package:pob2_ui/data/item_art_catalog.dart';
 import 'package:pob2_ui/data/mcp_client.dart';
 import 'package:pob2_ui/data/pob_build_document.dart';
 import 'package:pob2_ui/data/tree_progression_repository.dart';
 import 'package:pob2_ui/data/tree_progression_exchange.dart';
+import 'package:pob2_ui/domain/build_report.dart';
+import 'package:pob2_ui/domain/equipment_item.dart';
 import 'package:pob2_ui/domain/progression_comparison.dart';
+import 'package:pob2_ui/domain/progression_loadout_change.dart';
 import 'package:pob2_ui/domain/tree_progression.dart';
 import 'package:pob2_ui/ui/core/spark_theme.dart';
 import 'package:pob2_ui/ui/progression_comparison_bloc.dart';
@@ -147,6 +151,11 @@ void main() {
             allocation: '<Spec masteryEffects=""/>',
             skills: '<SkillSet/>',
             equipment: '<Equipment/>',
+            completed: true,
+            tasks: [
+              (text: 'Взять узел', done: true),
+              (text: 'Сменить кольцо', done: false),
+            ],
           ),
         ],
       );
@@ -161,6 +170,10 @@ void main() {
         title: '',
         note: '',
       ));
+      expect(restored.progression!.steps.first.tasks, isEmpty);
+      expect(restored.progression!.steps.first.completed, isFalse);
+      expect(restored.progression!.steps.last.tasks, plan.steps.last.tasks);
+      expect(restored.progression!.steps.last.completed, isTrue);
       expect(
         encodeProgressionSteps(restored.progression!.steps),
         encodeProgressionSteps(plan.steps),
@@ -171,6 +184,145 @@ void main() {
       );
     },
   );
+
+  testWidgets(
+    'Сравнение этапов открывает описания и предупреждения до применения',
+    (tester) async {
+      final earlier = TreeProgressionStep(12, [2], title: 'Акт 1');
+      final later = TreeProgressionStep(25, [2], title: 'Акт 2');
+      final repository = _MemoryRepository()..steps = [earlier, later];
+      final bloc = TreeProgressionBloc(repository)
+        ..add(const TreeProgressionOpened());
+      addTearDown(bloc.close);
+      await tester.runAsync(() async => ItemArtCatalog.shared);
+      final before = _loadoutReport(level: 1, itemId: 1);
+      final after = _loadoutReport(level: 5, itemId: 4, itemRaw: 'замена');
+      final comparison = (
+        before: before,
+        after: after,
+        nodes: (added: <int>{}, removed: <int>{}),
+      );
+      expect(comparison.gems.single.after!.level, 5);
+      expect(
+        comparison.equipment.single.before!.name,
+        comparison.equipment.single.after!.name,
+      );
+      expect(
+        (
+          before: before,
+          after: _loadoutReport(level: 1, itemId: 4),
+          nodes: comparison.nodes,
+        ).equipment,
+        isEmpty,
+      );
+      await _mountPlan(
+        tester,
+        bloc,
+        create: (target, {baseline}) {
+          expect(target, same(later));
+          expect(baseline, same(earlier));
+          return ProgressionComparisonBloc(
+            (_) async => comparison,
+            () async {},
+            describeGem: (id, level, quality) async => [
+              {'text': 'Описание камня $level'},
+            ],
+            describeItem: (raw) async => ItemInspection.fromJson({
+              'source': 'original-lua',
+              'item': {'name': 'Кольцо', 'base': 'Lazuli Ring', 'raw': raw},
+              'lines': [
+                {'text': 'Описание предмета $raw'},
+              ],
+            }),
+          );
+        },
+      );
+      await tester.tap(find.text('Акт 2'));
+      await tester.pumpAndSettle();
+      await tester.tap(find.byTooltip('Сравнить с другим этапом'));
+      await tester.pumpAndSettle();
+      await tester.tap(find.widgetWithText(SimpleDialogOption, 'Акт 1'));
+      await tester.pumpAndSettle();
+      final dialog = find.byType(AlertDialog);
+      expect(find.text('Сравнение этапов'), findsOneWidget);
+      expect(
+        find.descendant(of: dialog, matching: find.text('Применить этап')),
+        findsNothing,
+      );
+      expect(find.text('Недостаточно интеллекта'), findsOneWidget);
+      await _tapVisible(tester, find.text('Изменения умений · 1'));
+      await _tapVisible(
+        tester,
+        find.widgetWithText(TextButton, 'Fireball').last,
+      );
+      expect(find.text('Описание камня 5'), findsOneWidget);
+      await tester.tap(find.text('Закрыть').last);
+      await tester.pumpAndSettle();
+      await _tapVisible(tester, find.text('Изменения экипировки · 1'));
+      await _tapVisible(tester, find.widgetWithText(TextButton, 'Кольцо').last);
+      await tester.runAsync(() async => ItemArtCatalog.shared);
+      await tester.pumpAndSettle();
+      expect(find.text('Описание предмета замена'), findsOneWidget);
+      expect(find.byKey(const Key('item-artwork')), findsOneWidget);
+    },
+  );
+
+  testWidgets('Обновление одной части сохраняет план и отметки прохождения', (
+    tester,
+  ) async {
+    final earlier = TreeProgressionStep(
+      12,
+      [2],
+      title: 'Акт 1',
+      skills: 'умения этапа',
+      equipment: 'кольцо этапа',
+      tasks: [
+        (text: 'Сменить кольцо', done: false),
+        (text: 'Взять узел', done: false),
+      ],
+    );
+    final later = TreeProgressionStep(25, [2], title: 'Акт 2');
+    final repository = _MemoryRepository()..steps = [earlier, later];
+    final bloc = TreeProgressionBloc(repository)
+      ..add(const TreeProgressionOpened());
+    addTearDown(bloc.close);
+    await _mountPlan(
+      tester,
+      bloc,
+      capture: TreeProgressionStep(
+        90,
+        [7],
+        skills: 'новые умения',
+        equipment: 'новое кольцо',
+      ),
+    );
+    await tester.tap(find.text('Режим прохождения'));
+    await tester.pumpAndSettle();
+    await _tapVisible(tester, find.text('Следующий этап'));
+    expect(bloc.state.selected, 0);
+    await _tapVisible(tester, find.text('Сменить кольцо'));
+    await _tapVisible(tester, find.text('Взять узел'));
+    await _tapVisible(tester, find.text('Этап завершён'));
+    expect(repository.steps.first.completed, isTrue);
+    expect(repository.steps.first.tasks.map((task) => task.done), [true, true]);
+    expect(find.widgetWithText(ListTile, 'Акт 2'), findsOneWidget);
+    await _tapVisible(tester, find.byTooltip('Обновить этап из сборки'));
+    await _tapVisible(
+      tester,
+      find.widgetWithText(CheckboxListTile, 'Экипировка'),
+    );
+    await _tapVisible(
+      tester,
+      find.widgetWithText(FilledButton, 'Обновить этап'),
+    );
+    final saved = repository.steps.first;
+    expect(saved.level, 12);
+    expect(saved.nodes, {2});
+    expect(saved.skills, 'умения этапа');
+    expect(saved.equipment, 'новое кольцо');
+    expect(saved.completed, isTrue);
+    expect(saved.tasks.map((task) => task.done), [true, true]);
+  });
 
   test('Этапы сохраняются по уровням отдельно для каждой сборки', () async {
     final profile = await Directory.systemTemp.createTemp('pob-progression');
@@ -308,7 +460,7 @@ void main() {
               enabled: true,
               onFocus: (id) => focused = id,
               onCapture: () async => TreeProgressionStep(90, []),
-              createComparison: (_) => ProgressionComparisonBloc(
+              createComparison: (_, {baseline}) => ProgressionComparisonBloc(
                 (_) async => (
                   before: fixture.fixture,
                   after: fixture.fixture,
@@ -446,6 +598,67 @@ void main() {
     expect(tree.selected, 2);
     expect(tree.progression?.added, {1, 2});
   });
+}
+
+BuildReport _loadoutReport({
+  required int level,
+  required int itemId,
+  String itemRaw = 'исходный',
+}) => BuildReport.fromJson({
+  'source': 'original-lua',
+  'groups': [
+    {
+      'label': 'Fireball',
+      'gems': [
+        {'id': 'fireball', 'name': 'Fireball', 'level': level},
+      ],
+    },
+  ],
+  'items': [
+    {'id': itemId, 'name': 'Кольцо', 'raw': itemRaw},
+  ],
+  'slots': [
+    {'name': 'Ring 1', 'itemId': itemId},
+  ],
+  'warnings': [if (level == 5) 'Недостаточно интеллекта'],
+});
+
+Future<void> _mountPlan(
+  WidgetTester tester,
+  TreeProgressionBloc bloc, {
+  ProgressionComparisonBloc Function(
+    TreeProgressionStep, {
+    TreeProgressionStep? baseline,
+  })?
+  create,
+  TreeProgressionStep? capture,
+}) async {
+  await tester.pumpWidget(
+    MaterialApp(
+      home: Scaffold(
+        body: BlocProvider.value(
+          value: bloc,
+          child: TreeProgressionPanel(
+            nodes: const {},
+            enabled: true,
+            onFocus: (_) {},
+            onCapture: () async => capture,
+            onApply: (_, _) async => fail('Сборка не должна измениться'),
+            createComparison:
+                create ??
+                (_, {baseline}) => throw StateError('Неожиданное сравнение'),
+          ),
+        ),
+      ),
+    ),
+  );
+  await tester.pumpAndSettle();
+}
+
+Future<void> _tapVisible(WidgetTester tester, Finder finder) async {
+  await tester.ensureVisible(finder);
+  await tester.tap(finder);
+  await tester.pumpAndSettle();
 }
 
 TreePainter _treePainter(WidgetTester tester) => tester

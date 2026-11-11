@@ -13,6 +13,7 @@ typedef TreeProgressionState = ({
 
 typedef TreeProgressionView = ({
   bool visible,
+  bool following,
   TreeProgressionFocusRequested? focus,
   int? hoveredNode,
 });
@@ -46,9 +47,21 @@ final class TreeProgressionRecorded extends TreeProgressionEvent {
 }
 
 final class TreeProgressionEdited extends TreeProgressionEvent {
-  const TreeProgressionEdited(this.step, this.details);
+  const TreeProgressionEdited(this.step, this.details, {this.tasks});
   final TreeProgressionStep step;
   final TreeProgressionDetails details;
+  final List<String>? tasks;
+}
+
+final class TreeProgressionUpdated extends TreeProgressionEvent {
+  const TreeProgressionUpdated(this.step, this.update);
+  final TreeProgressionStep step;
+  final TreeProgressionStep Function(TreeProgressionStep) update;
+}
+
+final class TreeProgressionFollowingChanged extends TreeProgressionEvent {
+  const TreeProgressionFollowingChanged(this.following);
+  final bool following;
 }
 
 final class TreeProgressionSelected extends TreeProgressionEvent {
@@ -69,7 +82,12 @@ class TreeProgressionBloc
         selected: null,
         ready: false,
         error: null,
-        view: (visible: false, focus: null, hoveredNode: null),
+        view: (
+          visible: false,
+          following: false,
+          focus: null,
+          hoveredNode: null,
+        ),
       )) {
     on<TreeProgressionEvent>(
       _apply,
@@ -87,28 +105,46 @@ class TreeProgressionBloc
       case TreeProgressionOpened():
         await _open(emit);
       case TreeProgressionVisibilityChanged(:final visible):
-        _setView(emit, (visible: visible, focus: null, hoveredNode: null));
+        _setView(emit, (
+          visible: visible,
+          following: state.view.following,
+          focus: null,
+          hoveredNode: null,
+        ));
+      case TreeProgressionFollowingChanged(:final following):
+        _setView(emit, (
+          visible: state.view.visible,
+          following: following,
+          focus: state.view.focus,
+          hoveredNode: state.view.hoveredNode,
+        ));
       case TreeProgressionFocusRequested():
         _setView(emit, (
           visible: state.view.visible,
+          following: state.view.following,
           focus: event,
           hoveredNode: null,
         ));
       case TreeProgressionNodeHovered(:final id):
         _setView(emit, (
           visible: state.view.visible,
+          following: state.view.following,
           focus: state.view.focus,
           hoveredNode: id,
         ));
       case TreeProgressionRecorded(:final step) when state.ready:
         await _insert(emit, [...state.steps], step);
-      case TreeProgressionEdited(:final step, :final details) when state.ready:
-        await _edit(emit, step, details);
+      case TreeProgressionEdited() when state.ready:
+        await _edit(emit, event);
+      case TreeProgressionUpdated(:final step, :final update) when state.ready:
+        await _replace(emit, step, update);
       case TreeProgressionSelected(:final step) when state.ready:
         _select(emit, step);
       case TreeProgressionRemoved(:final step) when state.ready:
-        final steps = [...state.steps]..remove(step);
-        await _save(emit, steps, null);
+        await _save(emit, [
+          for (final entry in state.steps)
+            if (entry.identity != step.identity) entry,
+        ], null);
       default:
         break;
     }
@@ -116,16 +152,43 @@ class TreeProgressionBloc
 
   Future<void> _edit(
     Emitter<TreeProgressionState> emit,
-    TreeProgressionStep step,
-    TreeProgressionDetails details,
+    TreeProgressionEdited event,
   ) async {
-    final level = details.level;
-    if (details == step.details || level < 1 || level > 100) return;
+    final details = event.details;
+    if (details.level < 1 || details.level > 100) return;
+    await _replace(
+      emit,
+      event.step,
+      (step) => step.withProgress(
+        details: details,
+        tasks: _editTasks(step, event.tasks),
+      ),
+    );
+  }
+
+  List<ProgressionTask>? _editTasks(
+    TreeProgressionStep step,
+    List<String>? labels,
+  ) {
+    if (labels == null) return null;
+    final completed = {for (final task in step.tasks) task.text: task.done};
+    return [
+      for (final text in labels) (text: text, done: completed[text] ?? false),
+    ];
+  }
+
+  Future<void> _replace(
+    Emitter<TreeProgressionState> emit,
+    TreeProgressionStep step,
+    TreeProgressionStep Function(TreeProgressionStep) update,
+  ) async {
     final steps = [...state.steps];
-    final index = steps.indexOf(step);
+    final index = _indexOf(step);
     if (index < 0) return;
-    final edited = step.withDetails(details);
-    if (level != step.level) {
+    final previous = steps[index];
+    final edited = update(previous);
+    if (identical(previous, edited)) return;
+    if (edited.level != previous.level) {
       steps.removeAt(index);
       await _insert(emit, steps, edited);
       return;
@@ -133,6 +196,9 @@ class TreeProgressionBloc
     steps[index] = edited;
     await _save(emit, steps, index);
   }
+
+  int _indexOf(TreeProgressionStep step) =>
+      state.steps.indexWhere((entry) => entry.identity == step.identity);
 
   Future<void> _insert(
     Emitter<TreeProgressionState> emit,
@@ -169,7 +235,7 @@ class TreeProgressionBloc
       ));
 
   void _select(Emitter<TreeProgressionState> emit, TreeProgressionStep? step) {
-    final index = step == null ? -1 : state.steps.indexOf(step);
+    final index = step == null ? -1 : _indexOf(step);
     _emit(emit, state.steps, index < 0 ? null : index);
   }
 
@@ -182,7 +248,12 @@ class TreeProgressionBloc
     selected: index,
     ready: true,
     error: null,
-    view: (visible: state.view.visible, focus: null, hoveredNode: null),
+    view: (
+      visible: state.view.visible,
+      following: state.view.following,
+      focus: null,
+      hoveredNode: null,
+    ),
   ));
 
   Future<void> _save(

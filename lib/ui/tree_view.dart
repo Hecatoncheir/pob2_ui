@@ -12,7 +12,7 @@ import '../domain/node_preview.dart';
 import 'tree_hover_cubit.dart';
 import 'tree_hover_card.dart';
 
-import 'package:flutter/foundation.dart' show mapEquals;
+import 'package:flutter/foundation.dart' show mapEquals, setEquals;
 
 import '../domain/build_report.dart';
 import '../domain/tree_progression.dart';
@@ -302,7 +302,7 @@ class _TreeViewState extends State<TreeView>
       bloc: bloc,
       listenWhen: (before, after) =>
           (after.view.focus != null && before.view.focus != after.view.focus) ||
-          _selectedStage(before) != _selectedStage(after),
+          _stageMoved(_selectedStage(before), _selectedStage(after)),
       listener: (_, state) {
         if (state.view.focus case final focus?) {
           _focusTreeNode(focus.id);
@@ -328,6 +328,10 @@ class _TreeViewState extends State<TreeView>
 
   TreeProgressionStep? _selectedStage(TreeProgressionState state) =>
       state.selected == null ? null : state.steps[state.selected!];
+
+  bool _stageMoved(TreeProgressionStep? before, TreeProgressionStep? after) =>
+      before?.identity != after?.identity ||
+      !setEquals(before?.nodes, after?.nodes);
 
   Widget _treeCanvas([TreeProgressionChange? progression, int? planHovered]) =>
       ClipRRect(

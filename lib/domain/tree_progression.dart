@@ -13,14 +13,41 @@ typedef TreeProgressionTransfer = ({
 
 class TreeProgressionStep {
   TreeProgressionStep(
-    this.level,
+    int level,
     Iterable<int> nodes, {
-    this.title = '',
-    this.note = '',
+    String title = '',
+    String note = '',
+    String? allocation,
+    String? skills,
+    String? equipment,
+    bool completed = false,
+    Iterable<ProgressionTask> tasks = const [],
+  }) : this._(
+         level,
+         nodes,
+         title,
+         note,
+         allocation,
+         skills,
+         equipment,
+         completed,
+         tasks,
+         Object(),
+       );
+
+  TreeProgressionStep._(
+    this.level,
+    Iterable<int> nodes,
+    this.title,
+    this.note,
     this.allocation,
     this.skills,
     this.equipment,
-  }) : nodes = Set.unmodifiable(nodes);
+    this.completed,
+    Iterable<ProgressionTask> tasks,
+    this.identity,
+  ) : nodes = Set.unmodifiable(nodes),
+      tasks = List.unmodifiable(tasks);
 
   final int level;
   final Set<int> nodes;
@@ -29,6 +56,9 @@ class TreeProgressionStep {
   final String? allocation;
   final String? skills;
   final String? equipment;
+  final bool completed;
+  final List<ProgressionTask> tasks;
+  final Object identity;
 
   Set<ProgressionPart> get parts => {
     ProgressionPart.tree,
@@ -40,15 +70,43 @@ class TreeProgressionStep {
       (level: level, title: title, note: note);
 
   TreeProgressionStep withDetails(TreeProgressionDetails details) =>
-      TreeProgressionStep(
-        details.level,
-        nodes,
-        title: details.title,
-        note: details.note,
-        allocation: allocation,
-        skills: skills,
-        equipment: equipment,
-      );
+      withProgress(details: details);
+
+  TreeProgressionStep withProgress({
+    TreeProgressionDetails? details,
+    bool? completed,
+    Iterable<ProgressionTask>? tasks,
+  }) => TreeProgressionStep._(
+    details?.level ?? level,
+    nodes,
+    details?.title ?? title,
+    details?.note ?? note,
+    allocation,
+    skills,
+    equipment,
+    completed ?? this.completed,
+    tasks ?? this.tasks,
+    identity,
+  );
+
+  TreeProgressionStep withPartsFrom(
+    TreeProgressionStep current,
+    Set<ProgressionPart> parts,
+  ) {
+    final tree = parts.contains(ProgressionPart.tree) ? current : this;
+    return TreeProgressionStep._(
+      tree.level,
+      tree.nodes,
+      title,
+      note,
+      tree.allocation,
+      parts.contains(ProgressionPart.skills) ? current.skills : skills,
+      parts.contains(ProgressionPart.equipment) ? current.equipment : equipment,
+      completed,
+      tasks,
+      identity,
+    );
+  }
 }
 
 enum ProgressionPart { tree, skills, equipment }
@@ -69,6 +127,7 @@ bool isProgressionNode(String kind) =>
     kind != 'ClassStart' && kind != 'AscendClassStart';
 
 typedef TreeProgressionDetails = ({int level, String title, String note});
+typedef ProgressionTask = ({String text, bool done});
 
 typedef TreeProgressionChange = ({Set<int> added, Set<int> removed});
 

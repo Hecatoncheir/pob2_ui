@@ -95,11 +95,14 @@ class WorkspaceInspector extends StatelessWidget {
       nodes: {for (final node in tree.nodes) node.id: node},
       enabled: key != null && !model.state.busy && !document.stale,
       onCapture: () async => key == null ? null : model.captureProgression(key),
-      createComparison: (step) {
+      createComparison: (step, {baseline}) {
         final session = model.progressionComparison(key!);
         return ProgressionComparisonBloc(
-          (parts) => session.compare(step, parts),
+          (parts) => session.compare(step, parts, baseline: baseline),
           session.close,
+          initial: baseline == null ? const {ProgressionPart.tree} : step.parts,
+          describeGem: session.describeGem,
+          describeItem: session.describeItem,
         );
       },
       onApply: (step, parts) async {
