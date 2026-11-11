@@ -9,6 +9,7 @@ import '../data/mcp_client.dart';
 import '../data/mcp_editor_gateway.dart';
 import '../data/mcp_error_message.dart';
 import '../data/pob_window_repository.dart';
+import '../data/pob_build_document.dart';
 import '../data/pob_build_library.dart';
 import '../data/pob_build_locations.dart';
 import '../data/session_repository.dart';
@@ -80,6 +81,53 @@ class WorkshopCubit extends Cubit<WorkshopState> {
 
   TreeProgressionRepository progressionRepository(TreeProgressionKey key) =>
       TreeProgressionRepository(components.store.root, key);
+
+  Set<int> get _progressionStarts => {
+    for (final node in state.document!.tree!.nodes)
+      if (!isProgressionNode(node.kind)) node.id,
+  };
+
+  Future<TreeProgressionStep?> captureProgression(
+    TreeProgressionKey key,
+  ) async {
+    if (key != progressionKey || state.document!.stale) return null;
+    TreeProgressionStep? step;
+    await _run(() async {
+      final build = PobBuildDocument(await _currentXml());
+      step = TreeProgressionStep(
+        build.level,
+        build.allocatedNodes.difference(_progressionStarts),
+        allocation: build.progressionAllocation,
+      );
+    });
+    return step;
+  }
+
+  Future<void> applyProgression(
+    TreeProgressionKey key,
+    TreeProgressionStep step,
+  ) async {
+    if (key != progressionKey || state.document!.stale) return;
+    final starts = _progressionStarts;
+    await _changeBuild(() async {
+      final build = PobBuildDocument(await _currentXml());
+      await _loadXml(build.withProgression(step));
+    }, validate: (xml) => _verifyAppliedProgression(xml, step, starts));
+  }
+
+  void _verifyAppliedProgression(
+    String xml,
+    TreeProgressionStep step,
+    Set<int> starts,
+  ) {
+    final actual = PobBuildDocument(xml);
+    final nodes = actual.allocatedNodes.difference(starts);
+    if (actual.level != step.level ||
+        nodes.length != step.nodes.length ||
+        !nodes.containsAll(step.nodes)) {
+      throw const FormatException('Lua не смог применить этот этап');
+    }
+  }
 
   final PobWindowRepository pobWindow;
   final PobBuildLocations buildLocations;
@@ -997,7 +1045,10 @@ class WorkshopCubit extends Cubit<WorkshopState> {
         ));
   }
 
-  Future<BuildEditResult> _changeBuild(Future<void> Function() action) async {
+  Future<BuildEditResult> _changeBuild(
+    Future<void> Function() action, {
+    void Function(String xml)? validate,
+  }) async {
     var committed = false;
     await _run(() async {
       final document = state.document;
@@ -1007,9 +1058,10 @@ class WorkshopCubit extends Cubit<WorkshopState> {
       _markStale();
       try {
         await action();
-        final changed = await _currentXml() != before;
+        final after = await _currentXml();
+        validate?.call(after);
         await _readReport();
-        if (changed) _pushUndo(before);
+        if (after != before) _pushUndo(before);
         committed = true;
       } catch (_) {
         await _restoreWorking(before, document, builds);

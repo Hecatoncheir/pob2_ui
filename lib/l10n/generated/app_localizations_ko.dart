@@ -67,6 +67,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m43ddb3a975 => 'Lua 확인 실패';
 
   @override
+  String get m4358fa9bda => 'Lua에서 이 단계를 적용하지 못했습니다';
+
+  @override
   String mf01de15993(String p0) {
     return '답변 Lua개 · 클래스 $p0개 · 호환성 확인됨';
   }
@@ -971,6 +974,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m3f7db06826 => '완성된 목재의 질감이 잘못됨';
 
   @override
+  String get m81df0c01a4 => '잘못된 빌드 트리';
+
+  @override
   String get m571195d148 => '잘못된 PoB 좌표';
 
   @override
@@ -1456,6 +1462,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m84028563e4 => '적용 및 계산';
+
+  @override
+  String get m711164636a => '단계 적용';
 
   @override
   String get mae2ea1c701 => '시도 중';

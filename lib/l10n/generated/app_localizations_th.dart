@@ -67,6 +67,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m43ddb3a975 => 'Lua การตรวจสอบล้มเหลว';
 
   @override
+  String get m4358fa9bda => 'Lua ไม่สามารถใช้ขั้นตอนนี้ได้';
+
+  @override
   String mf01de15993(String p0) {
     return 'Lua คำตอบ · $p0 คลาส · ตรวจสอบความเข้ากันได้แล้ว';
   }
@@ -982,6 +985,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m3f7db06826 => 'พื้นผิวของไม้ที่เสร็จแล้วไม่ถูกต้อง';
 
   @override
+  String get m81df0c01a4 => 'ต้นไม้ของบิลด์ไม่ถูกต้อง';
+
+  @override
   String get m571195d148 => 'พิกัด PoB ไม่ถูกต้อง';
 
   @override
@@ -1470,6 +1476,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m84028563e4 => 'นำไปใช้และคำนวณ';
+
+  @override
+  String get m711164636a => 'ใช้ขั้นตอนนี้';
 
   @override
   String get mae2ea1c701 => 'กำลังพยายามอยู่';

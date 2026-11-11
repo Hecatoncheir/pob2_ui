@@ -13,15 +13,17 @@ class TreeProgressionPanel extends StatelessWidget {
   const TreeProgressionPanel({
     super.key,
     required this.nodes,
-    required this.level,
     required this.enabled,
     required this.onFocus,
+    required this.onCapture,
+    required this.onApply,
   });
 
   final Map<int, TreeNode> nodes;
-  final int level;
   final bool enabled;
   final ValueChanged<int> onFocus;
+  final Future<TreeProgressionStep?> Function() onCapture;
+  final Future<void> Function(TreeProgressionStep) onApply;
 
   @override
   Widget build(BuildContext context) =>
@@ -118,7 +120,8 @@ class TreeProgressionPanel extends StatelessWidget {
     List<TreeProgressionStep> steps,
     int index,
   ) {
-    final note = steps[index].note;
+    final step = steps[index];
+    final note = step.note;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -127,6 +130,15 @@ class TreeProgressionPanel extends StatelessWidget {
             padding: const EdgeInsets.fromLTRB(4, 3, 4, 8),
             child: Text(note, style: Theme.of(context).textTheme.bodySmall),
           ),
+        Padding(
+          padding: const EdgeInsets.only(bottom: 8),
+          child: FilledButton.tonalIcon(
+            key: const Key('apply-progression-stage'),
+            onPressed: enabled ? () => onApply(step) : null,
+            icon: const Icon(Icons.check, size: 18),
+            label: const AppText('Применить этап'),
+          ),
+        ),
         _changes(context, steps, index),
       ],
     );
@@ -182,19 +194,23 @@ class TreeProgressionPanel extends StatelessWidget {
   }
 
   Future<void> _record(BuildContext context) async {
-    final selected = nodes.values.where(
-      (node) => node.allocated && _canRecord(node),
-    );
-    final ids = selected.map((node) => node.id).toSet();
+    final captured = await onCapture();
+    if (captured == null || !context.mounted) return;
     final result = await sparkDialog<TreeProgressionDetails>(
       context,
-      _ProgressionStepDialog((level: level, title: '', note: '')),
+      _ProgressionStepDialog(captured.details),
     );
     if (result == null || !context.mounted) return;
     final (level: stepLevel, :title, :note) = result;
     context.read<TreeProgressionBloc>().add(
       TreeProgressionRecorded(
-        TreeProgressionStep(stepLevel, ids, title: title, note: note),
+        TreeProgressionStep(
+          stepLevel,
+          captured.nodes,
+          title: title,
+          note: note,
+          allocation: captured.allocation,
+        ),
       ),
     );
   }
@@ -209,9 +225,6 @@ class TreeProgressionPanel extends StatelessWidget {
       TreeProgressionEdited(step, result),
     );
   }
-
-  bool _canRecord(TreeNode node) =>
-      node.kind != 'ClassStart' && node.kind != 'AscendClassStart';
 }
 
 class _ProgressionMilestone extends StatelessWidget {

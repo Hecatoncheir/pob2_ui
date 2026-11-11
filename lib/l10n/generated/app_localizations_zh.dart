@@ -67,6 +67,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m43ddb3a975 => 'Lua 驗證失敗';
 
   @override
+  String get m4358fa9bda => 'Lua 無法套用這個階段';
+
+  @override
   String mf01de15993(String p0) {
     return 'Lua 個答案 · $p0 個類別 · 已檢查相容性';
   }
@@ -969,6 +972,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m3f7db06826 => '成品木材的紋理不正確';
 
   @override
+  String get m81df0c01a4 => '流派天賦樹無效';
+
+  @override
   String get m571195d148 => 'PoB 座標不正確';
 
   @override
@@ -1454,6 +1460,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m84028563e4 => '應用並計算';
+
+  @override
+  String get m711164636a => '套用階段';
 
   @override
   String get mae2ea1c701 => '試穿';
@@ -2105,6 +2114,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m43ddb3a975 => 'Lua 驗證失敗';
 
   @override
+  String get m4358fa9bda => 'Lua 無法套用這個階段';
+
+  @override
   String mf01de15993(String p0) {
     return 'Lua 個答案 · $p0 個類別 · 已檢查相容性';
   }
@@ -3007,6 +3019,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m3f7db06826 => '成品木材的紋理不正確';
 
   @override
+  String get m81df0c01a4 => '流派天賦樹無效';
+
+  @override
   String get m571195d148 => 'PoB 座標不正確';
 
   @override
@@ -3492,6 +3507,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m84028563e4 => '應用並計算';
+
+  @override
+  String get m711164636a => '套用階段';
 
   @override
   String get mae2ea1c701 => '試穿';

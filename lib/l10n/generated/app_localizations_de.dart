@@ -72,6 +72,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get m43ddb3a975 => 'Lua Verifizierung fehlgeschlagen';
 
   @override
+  String get m4358fa9bda => 'Lua konnte diese Etappe nicht anwenden';
+
+  @override
   String mf01de15993(String p0) {
     return 'Lua Antworten · $p0 Klassen · Kompatibilität geprüft';
   }
@@ -1013,6 +1016,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get m3f7db06826 => 'Falsche Textur des fertigen Holzes';
 
   @override
+  String get m81df0c01a4 => 'Ungültiger Build-Baum';
+
+  @override
   String get m571195d148 => 'Falsche PoB-Koordinaten';
 
   @override
@@ -1512,6 +1518,9 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get m84028563e4 => 'Anwenden und berechnen';
+
+  @override
+  String get m711164636a => 'Etappe anwenden';
 
   @override
   String get mae2ea1c701 => 'Anprobieren';

@@ -67,6 +67,9 @@ class AppLocalizationsPt extends AppLocalizations {
   String get m43ddb3a975 => 'Lua falha na verificação';
 
   @override
+  String get m4358fa9bda => 'O Lua não conseguiu aplicar esta etapa';
+
+  @override
   String mf01de15993(String p0) {
     return 'Lua respostas · $p0 classes · compatibilidade verificada';
   }
@@ -997,6 +1000,9 @@ class AppLocalizationsPt extends AppLocalizations {
   String get m3f7db06826 => 'Textura incorreta da madeira acabada';
 
   @override
+  String get m81df0c01a4 => 'Árvore da configuração inválida';
+
+  @override
   String get m571195d148 => 'Coordenadas PoB incorretas';
 
   @override
@@ -1496,6 +1502,9 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get m84028563e4 => 'Aplicar e calcular';
+
+  @override
+  String get m711164636a => 'Aplicar etapa';
 
   @override
   String get mae2ea1c701 => 'Experimentando';
@@ -2172,6 +2181,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get m43ddb3a975 => 'Lua falha na verificação';
 
   @override
+  String get m4358fa9bda => 'O Lua não conseguiu aplicar esta etapa';
+
+  @override
   String mf01de15993(String p0) {
     return 'Lua respostas · $p0 classes · compatibilidade verificada';
   }
@@ -3102,6 +3114,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get m3f7db06826 => 'Textura incorreta da madeira acabada';
 
   @override
+  String get m81df0c01a4 => 'Árvore da configuração inválida';
+
+  @override
   String get m571195d148 => 'Coordenadas PoB incorretas';
 
   @override
@@ -3601,6 +3616,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get m84028563e4 => 'Aplicar e calcular';
+
+  @override
+  String get m711164636a => 'Aplicar etapa';
 
   @override
   String get mae2ea1c701 => 'Experimentando';

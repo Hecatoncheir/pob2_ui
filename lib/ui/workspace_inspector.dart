@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../domain/tree_geometry.dart';
+import '../domain/tree_progression.dart';
 import 'core/app_text.dart';
 import 'core/panels.dart';
 import 'report_views.dart';
@@ -30,6 +31,7 @@ class WorkspaceInspector extends StatelessWidget {
         builder: (context, tab) {
           final plan = context.read<TreeProgressionBloc?>();
           final tree = model.state.document?.tree;
+          final key = model.progressionKey;
           final statistics = StatisticsPanel(model: model, shell: shell);
           if (tab != WorkshopTab.tree ||
               tree == null ||
@@ -51,7 +53,7 @@ class WorkspaceInspector extends StatelessWidget {
                     child: IndexedStack(
                       index: visible ? 1 : 0,
                       sizing: StackFit.expand,
-                      children: [statistics, _plan(context, plan, tree)],
+                      children: [statistics, _plan(context, plan, tree, key)],
                     ),
                   ),
                 ],
@@ -85,12 +87,16 @@ class WorkspaceInspector extends StatelessWidget {
     BuildContext context,
     TreeProgressionBloc plan,
     TreeGeometry tree,
+    TreeProgressionKey? key,
   ) {
     final document = model.state.document!;
     return TreeProgressionPanel(
       nodes: {for (final node in tree.nodes) node.id: node},
-      level: document.report.level,
-      enabled: !model.state.busy && !document.stale,
+      enabled: key != null && !model.state.busy && !document.stale,
+      onCapture: () async => key == null ? null : model.captureProgression(key),
+      onApply: (step) async {
+        if (key != null) await model.applyProgression(key, step);
+      },
       onFocus: (id) {
         plan.add(TreeProgressionFocusRequested(id));
         if (inDialog) Navigator.pop(context);

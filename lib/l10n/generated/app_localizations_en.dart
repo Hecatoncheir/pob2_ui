@@ -67,6 +67,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m43ddb3a975 => 'Lua failed verification';
 
   @override
+  String get m4358fa9bda => 'Lua could not apply this milestone';
+
+  @override
   String mf01de15993(String p0) {
     return 'Lua answers · $p0 classes · compatibility checked';
   }
@@ -990,6 +993,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m3f7db06826 => 'Incorrect texture of the finished wood';
 
   @override
+  String get m81df0c01a4 => 'Invalid build tree';
+
+  @override
   String get m571195d148 => 'Incorrect PoB coordinates';
 
   @override
@@ -1482,6 +1488,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get m84028563e4 => 'Apply and calculate';
+
+  @override
+  String get m711164636a => 'Apply milestone';
 
   @override
   String get mae2ea1c701 => 'Preview';

@@ -70,6 +70,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get m43ddb3a975 => 'Lua échec de la vérification';
 
   @override
+  String get m4358fa9bda => 'Lua n’a pas pu appliquer cette étape';
+
+  @override
   String mf01de15993(String p0) {
     return 'Lua réponses · $p0 classes · compatibilité vérifiée';
   }
@@ -1010,6 +1013,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get m3f7db06826 => 'Texture incorrecte du bois fini';
 
   @override
+  String get m81df0c01a4 => 'Arbre de la configuration invalide';
+
+  @override
   String get m571195d148 => 'Coordonnées PoB incorrectes';
 
   @override
@@ -1511,6 +1517,9 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get m84028563e4 => 'Appliquer et calculer';
+
+  @override
+  String get m711164636a => 'Appliquer l’étape';
 
   @override
   String get mae2ea1c701 => 'Essayer';

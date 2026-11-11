@@ -16,6 +16,7 @@ import 'package:pob2_ui/data/tree_progression_exchange.dart';
 import 'package:pob2_ui/data/appearance_repository.dart';
 import 'package:pob2_ui/domain/appearance.dart';
 import 'package:pob2_ui/domain/build_report.dart';
+import 'package:pob2_ui/domain/tree_progression.dart';
 import 'package:pob2_ui/ui/app.dart';
 import 'package:pob2_ui/ui/tree_canvas.dart';
 import 'package:pob2_ui/ui/tree_view.dart';
@@ -134,7 +135,7 @@ void main() {
     await _expectImportedPlan(model, xml);
     await _stage(
       'Файлы XML, отказ импорта и заметки',
-      () => _fileWorkflow(model, dialogs, root),
+      () => _fileWorkflow(tester, model, dialogs, root),
     );
     await _stage('Общая папка PoB', () => _sharedFolderWorkflow(model, builds));
     for (final tab in [
@@ -216,8 +217,9 @@ Future<void> _recordProgressionStep(
     return tester.widget<IconButton>(button).onPressed != null;
   });
   await tester.tap(add);
-  await tester.pumpAndSettle();
   final dialog = find.byType(AlertDialog);
+  await _waitForProgression(tester, () => dialog.evaluate().isNotEmpty);
+  await tester.pumpAndSettle();
   await tester.enterText(find.byKey(const Key('progression-level')), level);
   if (title.isNotEmpty)
     await tester.enterText(find.byKey(const Key('progression-title')), title);
@@ -258,8 +260,49 @@ Future<void> _reviewProgression(
     title: 'Акт 1',
     note: 'Взять новый камень',
   ));
+  await _applyProgression(tester, model, exported.progression!.steps);
   await _showParameters(tester);
 }
+
+Future<void> _applyProgression(
+  WidgetTester tester,
+  WorkshopCubit model,
+  List<TreeProgressionStep> steps,
+) async {
+  final before = model.state.report!;
+  final history = model.state.history.undo;
+  final apply = find.byKey(const Key('apply-progression-stage'));
+  for (final step in steps) {
+    if (step != steps.first) {
+      await tester.tap(find.text(step.title));
+      await tester.pumpAndSettle();
+    }
+    await tester.ensureVisible(apply);
+    await tester.tap(apply);
+    await tester.pumpAndSettle();
+    await _waitForIdle(tester, model);
+    expect(model.state.error, isNull);
+    expect(model.state.report!.level, step.level);
+    expect(_selectedProgressionNodes(model), step.nodes);
+    expect(model.state.report!.stats['Life'], isNot(before.stats['Life']));
+  }
+  expect(model.state.history.undo, history + 2);
+  await model.undo();
+  expect(model.state.report!.level, steps.first.level);
+  await model.redo();
+  expect(model.state.report!.level, steps.last.level);
+  expect(_selectedProgressionNodes(model), steps.last.nodes);
+  await model.undo();
+  await model.undo();
+  expect(model.state.report!.level, before.level);
+  expect(model.state.report!.stats, before.stats);
+  await tester.pumpAndSettle();
+}
+
+Set<int> _selectedProgressionNodes(WorkshopCubit model) => {
+  for (final node in model.state.document!.tree!.nodes)
+    if (node.allocated && isProgressionNode(node.kind)) node.id,
+};
 
 Future<void> _showProgression(WidgetTester tester) async {
   final inspector = find.byKey(const Key('open-statistics'));
@@ -293,6 +336,7 @@ Future<void> _waitForProgression(
 }
 
 Future<void> _fileWorkflow(
+  WidgetTester tester,
   WorkshopCubit model,
   SelectedXmlFiles dialogs,
   Directory root,
@@ -303,8 +347,10 @@ Future<void> _fileWorkflow(
   await model.buildNotes.saveNotes(id, 'Проверка заметок с настоящим Lua');
   final file = File.fromUri(root.uri.resolve('Проверка файлового XML.xml'));
   dialogs.path = file.path;
+  await _waitForIdle(tester, model);
   await model.saveXmlFile();
   expect(model.state.error, isNull);
+  expect(model.state.status, 'XML сохранён');
   final xml = await file.readAsString();
   expect(xml, contains('<PathOfBuilding'));
   await _rejectBadFile(model, dialogs, root);

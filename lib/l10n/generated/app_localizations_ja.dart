@@ -67,6 +67,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m43ddb3a975 => 'Lua 検証に失敗しました';
 
   @override
+  String get m4358fa9bda => 'Lua でこの段階を適用できませんでした';
+
+  @override
   String mf01de15993(String p0) {
     return 'Lua 個の回答 · $p0 個のクラス · 互換性をチェックしました';
   }
@@ -971,6 +974,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m3f7db06826 => '完成した木材のテクスチャが正しくありません';
 
   @override
+  String get m81df0c01a4 => 'ビルドのツリーが無効です';
+
+  @override
   String get m571195d148 => '間違った PoB 座標';
 
   @override
@@ -1456,6 +1462,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m84028563e4 => '適用して計算する';
+
+  @override
+  String get m711164636a => '段階を適用';
 
   @override
   String get mae2ea1c701 => '試着中';

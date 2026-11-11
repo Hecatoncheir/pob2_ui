@@ -95,6 +95,11 @@
     "description": "Lua не прошёл проверку",
     "placeholders": {}
   },
+  "m4358fa9bda": "Lua could not apply this milestone",
+  "@m4358fa9bda": {
+    "description": "Lua не смог применить этот этап",
+    "placeholders": {}
+  },
   "mf01de15993": "Lua answers · {p0} classes · compatibility checked",
   "@mf01de15993": {
     "description": "Lua отвечает · {p0} классов · совместимость проверена",
@@ -1651,6 +1656,11 @@
     "description": "Некорректная текстура готового дерева",
     "placeholders": {}
   },
+  "m81df0c01a4": "Invalid build tree",
+  "@m81df0c01a4": {
+    "description": "Некорректное дерево сборки",
+    "placeholders": {}
+  },
   "m571195d148": "Incorrect PoB coordinates",
   "@m571195d148": {
     "description": "Некорректные координаты PoB",
@@ -2468,6 +2478,11 @@
   "m84028563e4": "Apply and calculate",
   "@m84028563e4": {
     "description": "Применить и рассчитать",
+    "placeholders": {}
+  },
+  "m711164636a": "Apply milestone",
+  "@m711164636a": {
+    "description": "Применить этап",
     "placeholders": {}
   },
   "mae2ea1c701": "Preview",

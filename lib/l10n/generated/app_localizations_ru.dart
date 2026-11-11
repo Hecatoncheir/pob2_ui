@@ -67,6 +67,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m43ddb3a975 => 'Lua не прошёл проверку';
 
   @override
+  String get m4358fa9bda => 'Lua не смог применить этот этап';
+
+  @override
   String mf01de15993(String p0) {
     return 'Lua отвечает · $p0 классов · совместимость проверена';
   }
@@ -990,6 +993,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m3f7db06826 => 'Некорректная текстура готового дерева';
 
   @override
+  String get m81df0c01a4 => 'Некорректное дерево сборки';
+
+  @override
   String get m571195d148 => 'Некорректные координаты PoB';
 
   @override
@@ -1484,6 +1490,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get m84028563e4 => 'Применить и рассчитать';
+
+  @override
+  String get m711164636a => 'Применить этап';
 
   @override
   String get mae2ea1c701 => 'Примерка';

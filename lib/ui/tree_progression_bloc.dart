@@ -129,6 +129,7 @@ class TreeProgressionBloc
       step.nodes,
       title: title,
       note: note,
+      allocation: step.allocation,
     );
     if (level != step.level) {
       steps.removeAt(index);

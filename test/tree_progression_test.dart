@@ -7,6 +7,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:pob2_ui/data/component_repository.dart';
 import 'package:pob2_ui/data/installation_store.dart';
 import 'package:pob2_ui/data/mcp_client.dart';
+import 'package:pob2_ui/data/pob_build_document.dart';
 import 'package:pob2_ui/data/tree_progression_repository.dart';
 import 'package:pob2_ui/data/tree_progression_exchange.dart';
 import 'package:pob2_ui/domain/tree_progression.dart';
@@ -18,6 +19,7 @@ import 'package:pob2_ui/ui/tree_progression_panel.dart';
 import 'package:pob2_ui/ui/workshop_cubit.dart';
 import 'package:pob2_ui/ui/workshop_state.dart';
 import 'package:pob2_ui/ui/workspace_view.dart';
+import 'package:xml/xml.dart';
 
 import 'support/workshop_fixture.dart' as fixture;
 
@@ -29,6 +31,45 @@ const _key = (
 );
 
 void main() {
+  test('Этап заменяет только выбор в активном дереве и уровень', () {
+    const xml = '''
+<PathOfBuilding2>
+  <Build level="90" characterLevelAutoMode="true"/>
+  <Tree activeSpec="2">
+    <Spec nodes="99"/>
+    <Spec nodes="11,12" masteryEffects="{11,21},{12,22}">
+      <WeaponSet2 nodes="11,12"/>
+      <Sockets><Socket nodeId="11" itemId="2"/></Sockets>
+    </Spec>
+  </Tree>
+  <Notes>Моя заметка</Notes>
+</PathOfBuilding2>
+''';
+    final original = PobBuildDocument(xml);
+    final stage = TreeProgressionStep(25, [11]);
+    final changed = original.withProgression(stage);
+    final root = XmlDocument.parse(changed).rootElement;
+    final specs = root.getElement('Tree')!.findElements('Spec').toList();
+    expect(root.getElement('Build')!.getAttribute('level'), '25');
+    expect(
+      root.getElement('Build')!.getAttribute('characterLevelAutoMode'),
+      'false',
+    );
+    expect(specs.first.getAttribute('nodes'), '99');
+    expect(specs.last.getAttribute('nodes'), '11');
+    expect(specs.last.getAttribute('masteryEffects'), '{11,21}');
+    expect(specs.last.getElement('WeaponSet2')!.getAttribute('nodes'), '11');
+    expect(
+      specs.last
+          .getElement('Sockets')!
+          .childElements
+          .single
+          .getAttribute('itemId'),
+      '2',
+    );
+    expect(PobBuildDocument(changed).notes, 'Моя заметка');
+  });
+
   test(
     'XML переносит этапы с одинаковым уровнем и сохраняет исходную сборку',
     () {
@@ -43,6 +84,7 @@ void main() {
             [20, 30],
             title: 'Акт 2',
             note: 'Новые камни\nПроверить сопротивления',
+            allocation: '<Spec masteryEffects=""/>',
           ),
         ],
       );
@@ -149,6 +191,7 @@ void main() {
       ..add(const TreeProgressionOpened());
     addTearDown(bloc.close);
     int? focused;
+    TreeProgressionStep? applied;
     final nodes = {for (final node in fixture.tree.nodes) node.id: node};
     await tester.pumpWidget(
       MaterialApp(
@@ -157,9 +200,10 @@ void main() {
             value: bloc,
             child: TreeProgressionPanel(
               nodes: nodes,
-              level: 90,
               enabled: true,
               onFocus: (id) => focused = id,
+              onCapture: () async => TreeProgressionStep(90, []),
+              onApply: (step) async => applied = step,
             ),
           ),
         ),
@@ -171,6 +215,9 @@ void main() {
     await tester.tap(find.widgetWithText(ActionChip, 'Узел'));
     expect(focused, 2);
     expect(nodes[2]!.allocated, isFalse);
+    expect(applied, isNull);
+    await tester.tap(find.text('Применить этап'));
+    expect(applied, repository.steps.single);
 
     await tester.tap(find.byTooltip('Изменить этап'));
     await tester.pumpAndSettle();

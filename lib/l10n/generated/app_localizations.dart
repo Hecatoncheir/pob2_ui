@@ -230,6 +230,12 @@ abstract class AppLocalizations {
   /// **'Lua failed verification'**
   String get m43ddb3a975;
 
+  /// Lua не смог применить этот этап
+  ///
+  /// In en, this message translates to:
+  /// **'Lua could not apply this milestone'**
+  String get m4358fa9bda;
+
   /// Lua отвечает · {p0} классов · совместимость проверена
   ///
   /// In en, this message translates to:
@@ -1869,6 +1875,12 @@ abstract class AppLocalizations {
   /// **'Incorrect texture of the finished wood'**
   String get m3f7db06826;
 
+  /// Некорректное дерево сборки
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid build tree'**
+  String get m81df0c01a4;
+
   /// Некорректные координаты PoB
   ///
   /// In en, this message translates to:
@@ -2798,6 +2810,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Apply and calculate'**
   String get m84028563e4;
+
+  /// Применить этап
+  ///
+  /// In en, this message translates to:
+  /// **'Apply milestone'**
+  String get m711164636a;
 
   /// Примерка
   ///

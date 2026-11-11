@@ -19,6 +19,7 @@
     "mecc0fe5cd1": "Lua не вернул характеристики",
     "mddf65e8cca": "Lua не подключён",
     "m43ddb3a975": "Lua не прошёл проверку",
+    "m4358fa9bda": "Lua не смог применить этот этап",
     "mf01de15993": "Lua отвечает · {p0} классов · совместимость проверена",
     "md9540a4b84": "Lua отвечает. Классов в каталоге: {p0}",
     "mbf7bbb22e3": "Lua подключён",
@@ -292,6 +293,7 @@
     "mf1703df170": "Некорректная связь дерева Lua",
     "m57e2535a94": "Некорректная ссылка поиска",
     "m3f7db06826": "Некорректная текстура готового дерева",
+    "m81df0c01a4": "Некорректное дерево сборки",
     "m571195d148": "Некорректные координаты PoB",
     "mec07f569e3": "Некорректный идентификатор заметок",
     "mc652a6b3a8": "Некорректный идентификатор сборки",
@@ -447,6 +449,7 @@
     "md25ca8974f": "Приложение остаётся открытым, чтобы сохранить данные: {p0}",
     "me15f960d93": "Применить",
     "m84028563e4": "Применить и рассчитать",
+    "m711164636a": "Применить этап",
     "mae2ea1c701": "Примерка",
     "m6aab9e2cb4": "Приостановить",
     "m0680c9d188": "Приспешник · {p0}",
@@ -1269,7 +1272,10 @@
     "m610d4c2115": "Plan",
     "med931b5f06": "Edit milestone",
     "m378e9ed8fc": "Milestone name",
-    "md4bac1da57": "Milestone note"
+    "md4bac1da57": "Milestone note",
+    "m4358fa9bda": "Lua could not apply this milestone",
+    "m81df0c01a4": "Invalid build tree",
+    "m711164636a": "Apply milestone"
   },
   "fr": {
     "m0c63e733f9": "Lua n'a pas renvoyé toutes les icônes",
@@ -1905,7 +1911,10 @@
     "m610d4c2115": "Plan",
     "med931b5f06": "Modifier l’étape",
     "m378e9ed8fc": "Nom de l’étape",
-    "md4bac1da57": "Note de l’étape"
+    "md4bac1da57": "Note de l’étape",
+    "m4358fa9bda": "Lua n’a pas pu appliquer cette étape",
+    "m81df0c01a4": "Arbre de la configuration invalide",
+    "m711164636a": "Appliquer l’étape"
   },
   "de": {
     "m0c63e733f9": "Lua hat nicht alle Symbole zurückgegeben",
@@ -2541,7 +2550,10 @@
     "m610d4c2115": "Plan",
     "med931b5f06": "Etappe bearbeiten",
     "m378e9ed8fc": "Name der Etappe",
-    "md4bac1da57": "Notiz zur Etappe"
+    "md4bac1da57": "Notiz zur Etappe",
+    "m4358fa9bda": "Lua konnte diese Etappe nicht anwenden",
+    "m81df0c01a4": "Ungültiger Build-Baum",
+    "m711164636a": "Etappe anwenden"
   },
   "es": {
     "m0c63e733f9": "Lua no devolvió todos los íconos",
@@ -3177,7 +3189,10 @@
     "m610d4c2115": "Plan",
     "med931b5f06": "Editar etapa",
     "m378e9ed8fc": "Nombre de la etapa",
-    "md4bac1da57": "Nota de la etapa"
+    "md4bac1da57": "Nota de la etapa",
+    "m4358fa9bda": "Lua no pudo aplicar esta etapa",
+    "m81df0c01a4": "Árbol de la configuración no válido",
+    "m711164636a": "Aplicar etapa"
   },
   "pt_BR": {
     "m0c63e733f9": "Lua não retornou todos os ícones",
@@ -3813,7 +3828,10 @@
     "m610d4c2115": "Plano",
     "med931b5f06": "Editar etapa",
     "m378e9ed8fc": "Nome da etapa",
-    "md4bac1da57": "Nota da etapa"
+    "md4bac1da57": "Nota da etapa",
+    "m4358fa9bda": "O Lua não conseguiu aplicar esta etapa",
+    "m81df0c01a4": "Árvore da configuração inválida",
+    "m711164636a": "Aplicar etapa"
   },
   "ja": {
     "m0c63e733f9": "Lua はすべてのアイコンを返しませんでした",
@@ -4449,7 +4467,10 @@
     "m610d4c2115": "計画",
     "med931b5f06": "段階を編集",
     "m378e9ed8fc": "段階の名前",
-    "md4bac1da57": "段階のメモ"
+    "md4bac1da57": "段階のメモ",
+    "m4358fa9bda": "Lua でこの段階を適用できませんでした",
+    "m81df0c01a4": "ビルドのツリーが無効です",
+    "m711164636a": "段階を適用"
   },
   "ko": {
     "m0c63e733f9": "Lua이 모든 아이콘을 반환하지 않았습니다.",
@@ -5085,7 +5106,10 @@
     "m610d4c2115": "계획",
     "med931b5f06": "단계 편집",
     "m378e9ed8fc": "단계 이름",
-    "md4bac1da57": "단계 메모"
+    "md4bac1da57": "단계 메모",
+    "m4358fa9bda": "Lua에서 이 단계를 적용하지 못했습니다",
+    "m81df0c01a4": "잘못된 빌드 트리",
+    "m711164636a": "단계 적용"
   },
   "th": {
     "m0c63e733f9": "Lua ไม่ได้ส่งคืนไอคอนทั้งหมด",
@@ -5721,7 +5745,10 @@
     "m610d4c2115": "แผน",
     "med931b5f06": "แก้ไขขั้น",
     "m378e9ed8fc": "ชื่อขั้น",
-    "md4bac1da57": "บันทึกของขั้น"
+    "md4bac1da57": "บันทึกของขั้น",
+    "m4358fa9bda": "Lua ไม่สามารถใช้ขั้นตอนนี้ได้",
+    "m81df0c01a4": "ต้นไม้ของบิลด์ไม่ถูกต้อง",
+    "m711164636a": "ใช้ขั้นตอนนี้"
   },
   "zh_Hant": {
     "m0c63e733f9": "Lua 未傳回所有圖標",
@@ -6357,6 +6384,9 @@
     "m610d4c2115": "計畫",
     "med931b5f06": "編輯階段",
     "m378e9ed8fc": "階段名稱",
-    "md4bac1da57": "階段備註"
+    "md4bac1da57": "階段備註",
+    "m4358fa9bda": "Lua 無法套用這個階段",
+    "m81df0c01a4": "流派天賦樹無效",
+    "m711164636a": "套用階段"
   }
 }
