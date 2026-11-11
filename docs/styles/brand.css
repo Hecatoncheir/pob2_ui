@@ -10,6 +10,9 @@
   align-items: center;
   justify-content: space-between
 }
+.brand-header .button {
+  white-space: nowrap
+}
 .brand-heading {
   padding: 65px 0 40px
 }

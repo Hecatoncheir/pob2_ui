@@ -24,8 +24,14 @@
 .site-header nav {
   display: flex;
   align-items: center;
-  gap: 32px;
+  gap: clamp(12px, 2.4vw, 32px);
   font-size: 13px
+}
+.site-header nav > a,
+.site-header nav > button,
+.site-shell .button,
+.hero-actions .text-button {
+  white-space: nowrap
 }
 .site-header nav a:hover,.text-button:hover {
   color: var(--muted)
