@@ -485,6 +485,9 @@ class AppLocalizationsFr extends AppLocalizations {
       'Ajoutez un groupe de pierres pour obtenir le calcul des compétences.';
 
   @override
+  String get mea8da7a1c0 => 'Ajoutés';
+
+  @override
   String get mab04eae138 => 'Attendez la fin de l\'opération en cours';
 
   @override
@@ -967,6 +970,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String m62f5b562c1(String p0) {
     return 'Échec de l\'enregistrement du brouillon XML : $p0';
   }
+
+  @override
+  String get m8c3d5eab29 => 'Impossible de comparer l’étape';
 
   @override
   String get m0dc255f974 => 'Échec de la suppression de la compétence';
@@ -1608,6 +1614,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get meabbc96d71 => 'Taille de l\'ennemi';
 
   @override
+  String get m93ea4e89b1 => 'Écart';
+
+  @override
   String get m13601ffe54 => 'Autoriser les modifications via MCP';
 
   @override
@@ -1620,6 +1629,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String m33a38de9ff(String p0) {
     return 'Calcul Lua · $p0 %';
   }
+
+  @override
+  String get m30a07ea432 => 'Calcul de la comparaison…';
 
   @override
   String get m9b9370223c => 'Calculs';
@@ -1676,6 +1688,9 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get m7806bb3683 =>
       'Le build a changé sur le disque. Attendez la mise à jour depuis PoB.';
+
+  @override
+  String get m1aee4fe817 => 'Le build a changé. Rouvrez l’étape.';
 
   @override
   String get m544bec7909 =>
@@ -1794,6 +1809,9 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get ma386719073 => 'Installez d\'abord les deux composants';
+
+  @override
+  String get m5ebbc9d7a5 => 'Retirés';
 
   @override
   String get md4b51f7a04 => 'Supprimer';

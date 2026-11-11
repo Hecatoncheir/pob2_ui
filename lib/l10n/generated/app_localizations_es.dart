@@ -477,6 +477,9 @@ class AppLocalizationsEs extends AppLocalizations {
       'Agrega un grupo de piedras para obtener el cálculo de habilidades.';
 
   @override
+  String get mea8da7a1c0 => 'Se añaden';
+
+  @override
   String get mab04eae138 => 'Espere a que se complete la operación actual';
 
   @override
@@ -958,6 +961,9 @@ class AppLocalizationsEs extends AppLocalizations {
   String m62f5b562c1(String p0) {
     return 'No se pudo guardar el borrador XML: $p0';
   }
+
+  @override
+  String get m8c3d5eab29 => 'No se pudo comparar la etapa';
 
   @override
   String get m0dc255f974 => 'No se pudo eliminar la habilidad';
@@ -1600,6 +1606,9 @@ class AppLocalizationsEs extends AppLocalizations {
   String get meabbc96d71 => 'Tamaño del enemigo';
 
   @override
+  String get m93ea4e89b1 => 'Cambio';
+
+  @override
   String get m13601ffe54 => 'Permitir ediciones a través de MCP';
 
   @override
@@ -1612,6 +1621,9 @@ class AppLocalizationsEs extends AppLocalizations {
   String m33a38de9ff(String p0) {
     return 'Cálculo Lua · $p0%';
   }
+
+  @override
+  String get m30a07ea432 => 'Calculando la comparación…';
 
   @override
   String get m9b9370223c => 'Cálculos';
@@ -1667,6 +1679,9 @@ class AppLocalizationsEs extends AppLocalizations {
   @override
   String get m7806bb3683 =>
       'La configuración cambió en el disco. Espera a que se actualice desde PoB.';
+
+  @override
+  String get m1aee4fe817 => 'La build ha cambiado. Vuelve a abrir la etapa.';
 
   @override
   String get m544bec7909 =>
@@ -1785,6 +1800,9 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get ma386719073 => 'Instale ambos componentes primero';
+
+  @override
+  String get m5ebbc9d7a5 => 'Se eliminan';
 
   @override
   String get md4b51f7a04 => 'Eliminar';

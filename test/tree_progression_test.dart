@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 import 'dart:ui' show PointerDeviceKind;
 
@@ -10,8 +11,10 @@ import 'package:pob2_ui/data/mcp_client.dart';
 import 'package:pob2_ui/data/pob_build_document.dart';
 import 'package:pob2_ui/data/tree_progression_repository.dart';
 import 'package:pob2_ui/data/tree_progression_exchange.dart';
+import 'package:pob2_ui/domain/progression_comparison.dart';
 import 'package:pob2_ui/domain/tree_progression.dart';
 import 'package:pob2_ui/ui/core/spark_theme.dart';
+import 'package:pob2_ui/ui/progression_comparison_bloc.dart';
 import 'package:pob2_ui/ui/shell_bloc.dart';
 import 'package:pob2_ui/ui/tree_canvas.dart';
 import 'package:pob2_ui/ui/tree_progression_bloc.dart';
@@ -242,6 +245,49 @@ void main() {
     expect((await repository.load()).last.nodes, {2, 3, 4});
   });
 
+  test(
+    'В сравнении отображается результат последнего набора частей этапа',
+    () async {
+      final first = Completer<ProgressionComparison>();
+      final started = Completer<void>();
+      final calls = <Set<ProgressionPart>>[];
+      final initial = (
+        before: fixture.fixture,
+        after: fixture.fixture,
+        nodes: (added: {2}, removed: <int>{}),
+      );
+      final latest = (
+        before: fixture.fixture,
+        after: fixture.fixture,
+        nodes: (added: <int>{}, removed: <int>{}),
+      );
+      final bloc = ProgressionComparisonBloc((parts) async {
+        calls.add(parts);
+        if (parts.contains(ProgressionPart.tree)) {
+          started.complete();
+          return first.future;
+        }
+        return latest;
+      }, () async {});
+      addTearDown(bloc.close);
+      await started.future;
+      const parts = {ProgressionPart.equipment};
+      final results = bloc.stream.where((state) => state.comparison != null);
+      final result = results.first;
+      final selected = bloc.stream.firstWhere(
+        (state) => state.parts.contains(parts.single),
+      );
+      bloc.add(ProgressionPartsSelected(parts));
+      await selected;
+      first.complete(initial);
+      expect((await result).comparison, latest);
+      expect(calls, [
+        {ProgressionPart.tree},
+        parts,
+      ]);
+    },
+  );
+
   testWidgets('Этап открывает список изменений и позволяет перейти к узлу', (
     tester,
   ) async {
@@ -262,6 +308,14 @@ void main() {
               enabled: true,
               onFocus: (id) => focused = id,
               onCapture: () async => TreeProgressionStep(90, []),
+              createComparison: (_) => ProgressionComparisonBloc(
+                (_) async => (
+                  before: fixture.fixture,
+                  after: fixture.fixture,
+                  nodes: (added: {2}, removed: <int>{}),
+                ),
+                () async {},
+              ),
               onApply: (step, parts) async {
                 expect(parts, {ProgressionPart.tree});
                 applied = step;
@@ -279,6 +333,17 @@ void main() {
     expect(nodes[2]!.allocated, isFalse);
     expect(applied, isNull);
     await tester.tap(find.text('Применить этап'));
+    await tester.pumpAndSettle();
+    expect(applied, isNull);
+    expect(find.text('Добавятся · 1'), findsOneWidget);
+    expect(find.text('Разница'), findsOneWidget);
+    await tester.tap(find.text('Отмена'));
+    await tester.pumpAndSettle();
+    expect(applied, isNull);
+    await tester.tap(find.text('Применить этап'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.widgetWithText(FilledButton, 'Применить этап').last);
+    await tester.pumpAndSettle();
     expect(applied, repository.steps.single);
 
     await tester.tap(find.byTooltip('Изменить этап'));

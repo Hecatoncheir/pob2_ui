@@ -486,6 +486,9 @@ class AppLocalizationsDe extends AppLocalizations {
       'Fügen Sie eine Gruppe von Steinen hinzu, um die Fertigkeitsberechnung zu erhalten.';
 
   @override
+  String get mea8da7a1c0 => 'Hinzugefügt';
+
+  @override
   String get mab04eae138 =>
       'Warten Sie, bis der aktuelle Vorgang abgeschlossen ist';
 
@@ -970,6 +973,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String m62f5b562c1(String p0) {
     return 'Entwurf XML konnte nicht gespeichert werden: $p0';
   }
+
+  @override
+  String get m8c3d5eab29 => 'Etappe konnte nicht verglichen werden';
 
   @override
   String get m0dc255f974 => 'Fertigkeit konnte nicht entfernt werden';
@@ -1609,6 +1615,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get meabbc96d71 => 'Größe des Gegners';
 
   @override
+  String get m93ea4e89b1 => 'Änderung';
+
+  @override
   String get m13601ffe54 => 'Bearbeitungen über MCP zulassen';
 
   @override
@@ -1621,6 +1630,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String m33a38de9ff(String p0) {
     return 'Berechnung Lua · $p0 %';
   }
+
+  @override
+  String get m30a07ea432 => 'Vergleich wird berechnet…';
 
   @override
   String get m9b9370223c => 'Berechnungen';
@@ -1677,6 +1689,10 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get m7806bb3683 =>
       'Der Build wurde auf dem Datenträger geändert. Warte auf die Aktualisierung aus PoB.';
+
+  @override
+  String get m1aee4fe817 =>
+      'Der Build wurde geändert. Öffne die Etappe erneut.';
 
   @override
   String get m544bec7909 =>
@@ -1796,6 +1812,9 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get ma386719073 => 'Installieren Sie zuerst beide Komponenten';
+
+  @override
+  String get m5ebbc9d7a5 => 'Entfernt';
 
   @override
   String get md4b51f7a04 => 'Entfernen';

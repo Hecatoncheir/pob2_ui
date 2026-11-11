@@ -139,6 +139,7 @@
     "ma11b26e5e9": "Добавить и рассчитать",
     "m9cef26392f": "Добавить предмет",
     "mbc10505bdf": "Добавьте группу камней, чтобы получить расчёт умения.",
+    "mea8da7a1c0": "Добавятся",
     "mab04eae138": "Дождитесь завершения текущей операции",
     "mf0216281b8": "Дополнительные ячейки",
     "m4122860034": "Доступ действует для текущей сборки. Правки можно отменить.",
@@ -279,6 +280,7 @@
     "mdc2f51b827": "Не удалось сохранить план прокачки",
     "m92233abcc1": "Не удалось сохранить тему.",
     "m62f5b562c1": "Не удалось сохранить черновик XML: {p0}",
+    "m8c3d5eab29": "Не удалось сравнить этап",
     "m0dc255f974": "Не удалось удалить умение",
     "m45c78389e9": "Небезопасный адрес обновления",
     "m7a4c30c971": "Неверная запись каталога Lua",
@@ -475,10 +477,12 @@
     "m44faae47f6": "Развернуть результаты",
     "m8c8ec94283": "Размер или SHA-256 обновления не совпал",
     "meabbc96d71": "Размер противника",
+    "m93ea4e89b1": "Разница",
     "m13601ffe54": "Разрешить правки через MCP",
     "mde6527a5fe": "Расстояние до узла",
     "m7846ddb858": "Рассчитано в Lua PoB",
     "m33a38de9ff": "Расчёт Lua · {p0}%",
+    "m30a07ea432": "Расчёт сравнения…",
     "m9b9370223c": "Расчёты",
     "m1e135b51f1": "Расчёт…",
     "m8d7bd9deb6": "Регенерация здоровья",
@@ -496,6 +500,7 @@
     "m15d7545f05": "Сборка PoB больше недоступна. Обновите список сборок.",
     "mee1bd6d18c": "Сборка изменена в PoB. Правки PoB II сохранены отдельно: {p0}",
     "m7806bb3683": "Сборка изменилась на диске. Дождитесь обновления из PoB.",
+    "m1aee4fe817": "Сборка изменилась. Откройте этап снова.",
     "m544bec7909": "Сборка изменится после нажатия «Применить»",
     "m5c8bb47697": "Сборка не найдена",
     "ma8f340d211": "Сборка обновлена из Path of Building",
@@ -533,6 +538,7 @@
     "m70a5cadc50": "Сначала получите актуальный отчёт сборки через pob_check_build.",
     "m59b50cc146": "Сначала уберите камни поддержки",
     "ma386719073": "Сначала установите оба компонента",
+    "m5ebbc9d7a5": "Снимутся",
     "md4b51f7a04": "Снять",
     "mf3f1d96087": "Собственные свойства",
     "m9071a1a6f4": "Соединение с Lua прервано",
@@ -1283,7 +1289,13 @@
     "m07d242c77f": "Invalid milestone data",
     "m2ef9d59a72": "Level and passive tree",
     "m2b7ec4a283": "What should this milestone apply?",
-    "m0b5051e1b2": "Equipment"
+    "m0b5051e1b2": "Equipment",
+    "mea8da7a1c0": "Added",
+    "m5ebbc9d7a5": "Removed",
+    "m93ea4e89b1": "Change",
+    "m30a07ea432": "Calculating comparison…",
+    "m8c3d5eab29": "Could not compare the stage",
+    "m1aee4fe817": "The build changed. Open the stage again."
   },
   "fr": {
     "m0c63e733f9": "Lua n'a pas renvoyé toutes les icônes",
@@ -1926,7 +1938,13 @@
     "m07d242c77f": "Données d’étape invalides",
     "m2ef9d59a72": "Niveau et arbre passif",
     "m2b7ec4a283": "Que voulez-vous appliquer de cette étape ?",
-    "m0b5051e1b2": "Équipement"
+    "m0b5051e1b2": "Équipement",
+    "mea8da7a1c0": "Ajoutés",
+    "m5ebbc9d7a5": "Retirés",
+    "m93ea4e89b1": "Écart",
+    "m30a07ea432": "Calcul de la comparaison…",
+    "m8c3d5eab29": "Impossible de comparer l’étape",
+    "m1aee4fe817": "Le build a changé. Rouvrez l’étape."
   },
   "de": {
     "m0c63e733f9": "Lua hat nicht alle Symbole zurückgegeben",
@@ -2569,7 +2587,13 @@
     "m07d242c77f": "Ungültige Etappendaten",
     "m2ef9d59a72": "Stufe und Passivbaum",
     "m2b7ec4a283": "Was soll aus der Etappe angewendet werden?",
-    "m0b5051e1b2": "Ausrüstung"
+    "m0b5051e1b2": "Ausrüstung",
+    "mea8da7a1c0": "Hinzugefügt",
+    "m5ebbc9d7a5": "Entfernt",
+    "m93ea4e89b1": "Änderung",
+    "m30a07ea432": "Vergleich wird berechnet…",
+    "m8c3d5eab29": "Etappe konnte nicht verglichen werden",
+    "m1aee4fe817": "Der Build wurde geändert. Öffne die Etappe erneut."
   },
   "es": {
     "m0c63e733f9": "Lua no devolvió todos los íconos",
@@ -3212,7 +3236,13 @@
     "m07d242c77f": "Datos de etapa no válidos",
     "m2ef9d59a72": "Nivel y árbol de pasivas",
     "m2b7ec4a283": "¿Qué quieres aplicar de esta etapa?",
-    "m0b5051e1b2": "Equipo"
+    "m0b5051e1b2": "Equipo",
+    "mea8da7a1c0": "Se añaden",
+    "m5ebbc9d7a5": "Se eliminan",
+    "m93ea4e89b1": "Cambio",
+    "m30a07ea432": "Calculando la comparación…",
+    "m8c3d5eab29": "No se pudo comparar la etapa",
+    "m1aee4fe817": "La build ha cambiado. Vuelve a abrir la etapa."
   },
   "pt_BR": {
     "m0c63e733f9": "Lua não retornou todos os ícones",
@@ -3855,7 +3885,13 @@
     "m07d242c77f": "Dados da etapa inválidos",
     "m2ef9d59a72": "Nível e árvore de passivas",
     "m2b7ec4a283": "O que aplicar desta etapa?",
-    "m0b5051e1b2": "Equipamento"
+    "m0b5051e1b2": "Equipamento",
+    "mea8da7a1c0": "Adicionados",
+    "m5ebbc9d7a5": "Removidos",
+    "m93ea4e89b1": "Variação",
+    "m30a07ea432": "Calculando a comparação…",
+    "m8c3d5eab29": "Não foi possível comparar a etapa",
+    "m1aee4fe817": "A build mudou. Abra a etapa novamente."
   },
   "ja": {
     "m0c63e733f9": "Lua はすべてのアイコンを返しませんでした",
@@ -4498,7 +4534,13 @@
     "m07d242c77f": "段階のデータが無効です",
     "m2ef9d59a72": "レベルとパッシブツリー",
     "m2b7ec4a283": "この段階から何を適用しますか？",
-    "m0b5051e1b2": "装備"
+    "m0b5051e1b2": "装備",
+    "mea8da7a1c0": "追加",
+    "m5ebbc9d7a5": "解除",
+    "m93ea4e89b1": "差分",
+    "m30a07ea432": "比較を計算中…",
+    "m8c3d5eab29": "ステージを比較できませんでした",
+    "m1aee4fe817": "ビルドが変更されました。ステージを開き直してください。"
   },
   "ko": {
     "m0c63e733f9": "Lua이 모든 아이콘을 반환하지 않았습니다.",
@@ -5141,7 +5183,13 @@
     "m07d242c77f": "단계 데이터가 올바르지 않습니다",
     "m2ef9d59a72": "레벨 및 패시브 트리",
     "m2b7ec4a283": "이 단계에서 무엇을 적용할까요?",
-    "m0b5051e1b2": "장비"
+    "m0b5051e1b2": "장비",
+    "mea8da7a1c0": "추가",
+    "m5ebbc9d7a5": "제거",
+    "m93ea4e89b1": "변화",
+    "m30a07ea432": "비교 계산 중…",
+    "m8c3d5eab29": "단계를 비교할 수 없습니다",
+    "m1aee4fe817": "빌드가 변경되었습니다. 단계를 다시 여세요."
   },
   "th": {
     "m0c63e733f9": "Lua ไม่ได้ส่งคืนไอคอนทั้งหมด",
@@ -5784,7 +5832,13 @@
     "m07d242c77f": "ข้อมูลขั้นตอนไม่ถูกต้อง",
     "m2ef9d59a72": "เลเวลและผังพาสซีฟ",
     "m2b7ec4a283": "ต้องการใช้ส่วนใดจากขั้นตอนนี้?",
-    "m0b5051e1b2": "อุปกรณ์"
+    "m0b5051e1b2": "อุปกรณ์",
+    "mea8da7a1c0": "เพิ่ม",
+    "m5ebbc9d7a5": "นำออก",
+    "m93ea4e89b1": "ผลต่าง",
+    "m30a07ea432": "กำลังคำนวณผลเปรียบเทียบ…",
+    "m8c3d5eab29": "ไม่สามารถเปรียบเทียบขั้นได้",
+    "m1aee4fe817": "บิลด์มีการเปลี่ยนแปลง โปรดเปิดขั้นนี้อีกครั้ง"
   },
   "zh_Hant": {
     "m0c63e733f9": "Lua 未傳回所有圖標",
@@ -6427,6 +6481,12 @@
     "m07d242c77f": "階段資料無效",
     "m2ef9d59a72": "等級和天賦樹",
     "m2b7ec4a283": "要套用此階段的哪些內容？",
-    "m0b5051e1b2": "裝備"
+    "m0b5051e1b2": "裝備",
+    "mea8da7a1c0": "將配置",
+    "m5ebbc9d7a5": "將取消配置",
+    "m93ea4e89b1": "差異",
+    "m30a07ea432": "正在計算比較…",
+    "m8c3d5eab29": "無法比較此階段",
+    "m1aee4fe817": "流派已變更。請重新開啟此階段。"
   }
 }

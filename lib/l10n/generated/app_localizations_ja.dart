@@ -457,6 +457,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get mbc10505bdf => '石のグループを追加してスキル計算を取得します。';
 
   @override
+  String get mea8da7a1c0 => '追加';
+
+  @override
   String get mab04eae138 => '現在の操作が完了するまで待ちます';
 
   @override
@@ -928,6 +931,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String m62f5b562c1(String p0) {
     return '下書き XML を保存できませんでした: $p0';
   }
+
+  @override
+  String get m8c3d5eab29 => 'ステージを比較できませんでした';
 
   @override
   String get m0dc255f974 => 'スキルの削除に失敗しました';
@@ -1548,6 +1554,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get meabbc96d71 => '敵のサイズ';
 
   @override
+  String get m93ea4e89b1 => '差分';
+
+  @override
   String get m13601ffe54 => 'MCP 経由での編集を許可します';
 
   @override
@@ -1560,6 +1569,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String m33a38de9ff(String p0) {
     return '計算 Lua · $p0%';
   }
+
+  @override
+  String get m30a07ea432 => '比較を計算中…';
 
   @override
   String get m9b9370223c => '計算';
@@ -1613,6 +1625,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m7806bb3683 => 'ディスク上のビルドが変更されました。PoB からの更新をお待ちください。';
+
+  @override
+  String get m1aee4fe817 => 'ビルドが変更されました。ステージを開き直してください。';
 
   @override
   String get m544bec7909 => '「適用」をクリックするとビルドが変更されます';
@@ -1726,6 +1741,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get ma386719073 => '最初に両方のコンポーネントをインストールします';
+
+  @override
+  String get m5ebbc9d7a5 => '解除';
 
   @override
   String get md4b51f7a04 => '削除';

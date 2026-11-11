@@ -456,6 +456,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get mbc10505bdf => '增加一組石頭以獲得技能計算。';
 
   @override
+  String get mea8da7a1c0 => '將配置';
+
+  @override
   String get mab04eae138 => '等待目前操作完成';
 
   @override
@@ -926,6 +929,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String m62f5b562c1(String p0) {
     return '無法儲存草稿 XML：$p0';
   }
+
+  @override
+  String get m8c3d5eab29 => '無法比較此階段';
 
   @override
   String get m0dc255f974 => '刪除技能失敗';
@@ -1546,6 +1552,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get meabbc96d71 => '敵人大小';
 
   @override
+  String get m93ea4e89b1 => '差異';
+
+  @override
   String get m13601ffe54 => '允许通过 MCP 进行编辑';
 
   @override
@@ -1558,6 +1567,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String m33a38de9ff(String p0) {
     return '計算 Lua · $p0%';
   }
+
+  @override
+  String get m30a07ea432 => '正在計算比較…';
 
   @override
   String get m9b9370223c => '計算';
@@ -1611,6 +1623,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m7806bb3683 => '磁碟上的配置已變更。請等待 PoB 的更新。';
+
+  @override
+  String get m1aee4fe817 => '流派已變更。請重新開啟此階段。';
 
   @override
   String get m544bec7909 => '點選「應用」後建置將會發生變化';
@@ -1724,6 +1739,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get ma386719073 => '先安裝兩個組件';
+
+  @override
+  String get m5ebbc9d7a5 => '將取消配置';
 
   @override
   String get md4b51f7a04 => '刪除';
@@ -2515,6 +2533,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get mbc10505bdf => '增加一組石頭以獲得技能計算。';
 
   @override
+  String get mea8da7a1c0 => '將配置';
+
+  @override
   String get mab04eae138 => '等待目前操作完成';
 
   @override
@@ -2985,6 +3006,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String m62f5b562c1(String p0) {
     return '無法儲存草稿 XML：$p0';
   }
+
+  @override
+  String get m8c3d5eab29 => '無法比較此階段';
 
   @override
   String get m0dc255f974 => '刪除技能失敗';
@@ -3605,6 +3629,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get meabbc96d71 => '敵人大小';
 
   @override
+  String get m93ea4e89b1 => '差異';
+
+  @override
   String get m13601ffe54 => '允许通过 MCP 进行编辑';
 
   @override
@@ -3617,6 +3644,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String m33a38de9ff(String p0) {
     return '計算 Lua · $p0%';
   }
+
+  @override
+  String get m30a07ea432 => '正在計算比較…';
 
   @override
   String get m9b9370223c => '計算';
@@ -3670,6 +3700,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m7806bb3683 => '磁碟上的配置已變更。請等待 PoB 的更新。';
+
+  @override
+  String get m1aee4fe817 => '流派已變更。請重新開啟此階段。';
 
   @override
   String get m544bec7909 => '點選「應用」後建置將會發生變化';
@@ -3783,6 +3816,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get ma386719073 => '先安裝兩個組件';
+
+  @override
+  String get m5ebbc9d7a5 => '將取消配置';
 
   @override
   String get md4b51f7a04 => '刪除';

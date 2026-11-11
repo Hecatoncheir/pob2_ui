@@ -4,6 +4,7 @@ import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:path/path.dart' as path;
@@ -16,12 +17,14 @@ import 'package:pob2_ui/data/tree_progression_exchange.dart';
 import 'package:pob2_ui/data/appearance_repository.dart';
 import 'package:pob2_ui/domain/appearance.dart';
 import 'package:pob2_ui/domain/build_report.dart';
+import 'package:pob2_ui/domain/progression_comparison.dart';
 import 'package:pob2_ui/domain/tree_progression.dart';
 import 'package:pob2_ui/ui/app.dart';
 import 'package:pob2_ui/ui/tree_canvas.dart';
 import 'package:pob2_ui/ui/tree_view.dart';
 import 'package:pob2_ui/ui/tree_hover_card.dart';
 import 'package:pob2_ui/ui/workshop_cubit.dart';
+import 'package:pob2_ui/ui/progression_comparison_bloc.dart';
 import 'package:pob2_ui/ui/node_power_panel.dart';
 import 'package:pob2_ui/ui/node_power_cubit.dart';
 import 'package:pob2_ui/ui/app_update_cubit.dart';
@@ -277,14 +280,18 @@ Future<void> _applyProgression(
       await tester.tap(find.text(step.title));
       await tester.pumpAndSettle();
     }
-    await tester.ensureVisible(apply);
-    await tester.tap(apply);
-    await tester.pumpAndSettle();
+    final preview = await _previewTreeStage(tester, model, step, apply);
     await _confirmProgression(tester);
     await _waitForIdle(tester, model);
     expect(model.state.error, isNull);
     expect(model.state.report!.level, step.level);
     expect(_selectedProgressionNodes(model), step.nodes);
+    expect(model.state.report!.stats['Life'], preview.after.stats['Life']);
+    expect(model.state.report!.stats['Mana'], preview.after.stats['Mana']);
+    expect(
+      model.state.report!.stats['FullDPS'],
+      preview.after.stats['FullDPS'],
+    );
     expect(model.state.report!.stats['Life'], isNot(before.stats['Life']));
   }
   expect(model.state.history.undo, history + 2);
@@ -299,6 +306,49 @@ Future<void> _applyProgression(
   expect(model.state.report!.stats, before.stats);
   await tester.pumpAndSettle();
   await _reviewProgressionLoadout(tester, model);
+}
+
+Future<ProgressionComparison> _previewTreeStage(
+  WidgetTester tester,
+  WorkshopCubit model,
+  TreeProgressionStep step,
+  Finder apply,
+) async {
+  final live = model.state.report!;
+  final nodes = _selectedProgressionNodes(model);
+  final history = model.state.history;
+  await tester.ensureVisible(apply);
+  await tester.tap(apply);
+  final preview = await _readProgressionPreview(tester);
+  expect(preview.before, same(live));
+  expect(preview.after.level, step.level);
+  expect(preview.nodes.added, step.nodes.difference(nodes));
+  expect(preview.nodes.removed, nodes.difference(step.nodes));
+  expect(model.state.report, same(live));
+  expect(_selectedProgressionNodes(model), nodes);
+  expect(model.state.history, history);
+  return preview;
+}
+
+Future<ProgressionComparison> _readProgressionPreview(
+  WidgetTester tester,
+) async {
+  final details = find.byKey(const Key('progression-comparison'));
+  for (
+    var attempt = 0;
+    attempt < 300 && details.evaluate().isEmpty;
+    attempt++
+  ) {
+    await tester.pump(const Duration(milliseconds: 100));
+    expect(find.text('Не удалось сравнить этап'), findsNothing);
+  }
+  expect(details, findsOneWidget);
+  await tester.pumpAndSettle();
+  return tester
+      .element(details)
+      .read<ProgressionComparisonBloc>()
+      .state
+      .comparison!;
 }
 
 Future<void> _confirmProgression(WidgetTester tester) async {
@@ -358,12 +408,17 @@ Future<void> _applyLoadoutPart(
   final apply = find.byKey(const Key('apply-progression-stage'));
   await tester.ensureVisible(apply);
   await tester.tap(apply);
-  await tester.pumpAndSettle();
+  await tester.pump();
+  await tester.pump(const Duration(milliseconds: 350));
   await tester.tap(find.widgetWithText(CheckboxListTile, 'Уровень и дерево'));
+  await tester.pump();
   await tester.tap(find.widgetWithText(CheckboxListTile, label));
-  await tester.pumpAndSettle();
+  final preview = await _readProgressionPreview(tester);
+  expect(preview.nodes.added, isEmpty);
+  expect(preview.nodes.removed, isEmpty);
   await _confirmProgression(tester);
   await _waitForIdle(tester, model);
+  expect(model.state.report!.stats['Life'], preview.after.stats['Life']);
 }
 
 Set<int> _selectedProgressionNodes(WorkshopCubit model) => {

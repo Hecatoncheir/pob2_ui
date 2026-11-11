@@ -469,6 +469,9 @@ class AppLocalizationsEn extends AppLocalizations {
       'Add a group of stones to get the skill calculation.';
 
   @override
+  String get mea8da7a1c0 => 'Added';
+
+  @override
   String get mab04eae138 => 'Wait for the current operation to complete';
 
   @override
@@ -947,6 +950,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String m62f5b562c1(String p0) {
     return 'Failed to save draft XML: $p0';
   }
+
+  @override
+  String get m8c3d5eab29 => 'Could not compare the stage';
 
   @override
   String get m0dc255f974 => 'Failed to remove skill';
@@ -1575,6 +1581,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get meabbc96d71 => 'Enemy size';
 
   @override
+  String get m93ea4e89b1 => 'Change';
+
+  @override
   String get m13601ffe54 => 'Allow edits via MCP';
 
   @override
@@ -1587,6 +1596,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String m33a38de9ff(String p0) {
     return 'Calculation Lua · $p0%';
   }
+
+  @override
+  String get m30a07ea432 => 'Calculating comparison…';
 
   @override
   String get m9b9370223c => 'Calculations';
@@ -1642,6 +1654,9 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get m7806bb3683 =>
       'The build changed on disk. Wait for the update from PoB.';
+
+  @override
+  String get m1aee4fe817 => 'The build changed. Open the stage again.';
 
   @override
   String get m544bec7909 => 'The build will change after clicking \"Apply\"';
@@ -1758,6 +1773,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get ma386719073 => 'Install both components first';
+
+  @override
+  String get m5ebbc9d7a5 => 'Removed';
 
   @override
   String get md4b51f7a04 => 'Remove';

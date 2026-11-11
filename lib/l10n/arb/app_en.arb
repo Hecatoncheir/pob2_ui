@@ -772,6 +772,11 @@
     "description": "Добавьте группу камней, чтобы получить расчёт умения.",
     "placeholders": {}
   },
+  "mea8da7a1c0": "Added",
+  "@mea8da7a1c0": {
+    "description": "Добавятся",
+    "placeholders": {}
+  },
   "mab04eae138": "Wait for the current operation to complete",
   "@mab04eae138": {
     "description": "Дождитесь завершения текущей операции",
@@ -1581,6 +1586,11 @@
         "type": "String"
       }
     }
+  },
+  "m8c3d5eab29": "Could not compare the stage",
+  "@m8c3d5eab29": {
+    "description": "Не удалось сравнить этап",
+    "placeholders": {}
   },
   "m0dc255f974": "Failed to remove skill",
   "@m0dc255f974": {
@@ -2622,6 +2632,11 @@
     "description": "Размер противника",
     "placeholders": {}
   },
+  "m93ea4e89b1": "Change",
+  "@m93ea4e89b1": {
+    "description": "Разница",
+    "placeholders": {}
+  },
   "m13601ffe54": "Allow edits via MCP",
   "@m13601ffe54": {
     "description": "Разрешить правки через MCP",
@@ -2645,6 +2660,11 @@
         "type": "String"
       }
     }
+  },
+  "m30a07ea432": "Calculating comparison…",
+  "@m30a07ea432": {
+    "description": "Расчёт сравнения…",
+    "placeholders": {}
   },
   "m9b9370223c": "Calculations",
   "@m9b9370223c": {
@@ -2733,6 +2753,11 @@
   "m7806bb3683": "The build changed on disk. Wait for the update from PoB.",
   "@m7806bb3683": {
     "description": "Сборка изменилась на диске. Дождитесь обновления из PoB.",
+    "placeholders": {}
+  },
+  "m1aee4fe817": "The build changed. Open the stage again.",
+  "@m1aee4fe817": {
+    "description": "Сборка изменилась. Откройте этап снова.",
     "placeholders": {}
   },
   "m544bec7909": "The build will change after clicking \"Apply\"",
@@ -2922,6 +2947,11 @@
   "ma386719073": "Install both components first",
   "@ma386719073": {
     "description": "Сначала установите оба компонента",
+    "placeholders": {}
+  },
+  "m5ebbc9d7a5": "Removed",
+  "@m5ebbc9d7a5": {
+    "description": "Снимутся",
     "placeholders": {}
   },
   "md4b51f7a04": "Remove",

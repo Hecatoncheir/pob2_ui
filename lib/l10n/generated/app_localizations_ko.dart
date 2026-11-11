@@ -457,6 +457,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get mbc10505bdf => '스킬 계산을 위해 돌그룹을 추가합니다.';
 
   @override
+  String get mea8da7a1c0 => '추가';
+
+  @override
   String get mab04eae138 => '현재 작업이 완료될 때까지 기다립니다.';
 
   @override
@@ -928,6 +931,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String m62f5b562c1(String p0) {
     return '임시 저장 실패 XML: $p0';
   }
+
+  @override
+  String get m8c3d5eab29 => '단계를 비교할 수 없습니다';
 
   @override
   String get m0dc255f974 => '스킬 삭제 실패';
@@ -1548,6 +1554,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get meabbc96d71 => '적의 크기';
 
   @override
+  String get m93ea4e89b1 => '변화';
+
+  @override
   String get m13601ffe54 => 'MCP을 통한 편집 허용';
 
   @override
@@ -1560,6 +1569,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String m33a38de9ff(String p0) {
     return '계산 Lua · $p0%';
   }
+
+  @override
+  String get m30a07ea432 => '비교 계산 중…';
 
   @override
   String get m9b9370223c => '계산';
@@ -1613,6 +1625,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m7806bb3683 => '디스크의 빌드가 변경되었습니다. PoB에서 업데이트될 때까지 기다리세요.';
+
+  @override
+  String get m1aee4fe817 => '빌드가 변경되었습니다. 단계를 다시 여세요.';
 
   @override
   String get m544bec7909 => '\"적용\"을 클릭하면 빌드가 변경됩니다.';
@@ -1726,6 +1741,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get ma386719073 => '먼저 두 구성 요소를 모두 설치합니다.';
+
+  @override
+  String get m5ebbc9d7a5 => '제거';
 
   @override
   String get md4b51f7a04 => '제거';

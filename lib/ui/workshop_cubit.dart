@@ -10,6 +10,7 @@ import '../data/mcp_editor_gateway.dart';
 import '../data/mcp_error_message.dart';
 import '../data/pob_window_repository.dart';
 import '../data/pob_build_document.dart';
+import '../data/progression_comparison_session.dart';
 import '../data/pob_build_library.dart';
 import '../data/pob_build_locations.dart';
 import '../data/session_repository.dart';
@@ -124,18 +125,40 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     );
   }
 
+  ProgressionComparisonSession progressionComparison(TreeProgressionKey key) =>
+      ProgressionComparisonSession(() async {
+        final report = state.report;
+        if (report == null || !_canCompareProgression(key)) {
+          throw StateError('Сборка изменилась. Откройте этап снова.');
+        }
+        final xml = await _currentXml();
+        if (!_canCompareProgression(key) || state.report != report) {
+          throw StateError('Сборка изменилась. Откройте этап снова.');
+        }
+        return (
+          components: Map<Component, Installation>.unmodifiable(
+            components.active,
+          ),
+          report: report,
+          xml: xml,
+          starts: _progressionStarts,
+        );
+      });
+
+  bool _canCompareProgression(TreeProgressionKey key) =>
+      key == progressionKey && !state.busy && state.document?.stale == false;
+
   void _verifyAppliedProgression(
     String xml,
     TreeProgressionStep step,
     Set<int> starts,
   ) {
     final actual = PobBuildDocument(xml);
-    final nodes = actual.allocatedNodes.difference(starts);
-    if (actual.level != step.level ||
-        nodes.length != step.nodes.length ||
-        !nodes.containsAll(step.nodes)) {
-      throw const FormatException('Lua не смог применить этот этап');
-    }
+    verifyProgressionTree(
+      step,
+      actual.level,
+      actual.allocatedNodes.difference(starts),
+    );
   }
 
   final PobWindowRepository pobWindow;
@@ -572,12 +595,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
 
   Future<({BuildReport report, String xml})> _readResult() async {
     final result = await engine.call('pob_check_build');
-    final report = switch (result) {
-      {'report': final Map<String, dynamic> report} => BuildReport.fromJson(
-        report,
-      ),
-      _ => throw const FormatException('Lua не вернул отчёт сборки'),
-    };
+    final report = parseBuildReport(result);
     return (report: report, xml: await _currentXml());
   }
 

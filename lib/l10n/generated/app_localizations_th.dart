@@ -465,6 +465,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get mbc10505bdf => 'เพิ่มกลุ่มหินเพื่อรับการคำนวณทักษะ';
 
   @override
+  String get mea8da7a1c0 => 'เพิ่ม';
+
+  @override
   String get mab04eae138 => 'รอให้การดำเนินการปัจจุบันเสร็จสิ้น';
 
   @override
@@ -939,6 +942,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String m62f5b562c1(String p0) {
     return 'ไม่สามารถบันทึกแบบร่าง XML: $p0';
   }
+
+  @override
+  String get m8c3d5eab29 => 'ไม่สามารถเปรียบเทียบขั้นได้';
 
   @override
   String get m0dc255f974 => 'ไม่สามารถลบทักษะได้';
@@ -1563,6 +1569,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get meabbc96d71 => 'ขนาดศัตรู';
 
   @override
+  String get m93ea4e89b1 => 'ผลต่าง';
+
+  @override
   String get m13601ffe54 => 'อนุญาตให้แก้ไขผ่าน MCP';
 
   @override
@@ -1575,6 +1584,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String m33a38de9ff(String p0) {
     return 'Calculation Lua · $p0%';
   }
+
+  @override
+  String get m30a07ea432 => 'กำลังคำนวณผลเปรียบเทียบ…';
 
   @override
   String get m9b9370223c => 'Calculations';
@@ -1630,6 +1642,9 @@ class AppLocalizationsTh extends AppLocalizations {
   @override
   String get m7806bb3683 =>
       'บิลด์บนดิสก์มีการเปลี่ยนแปลง โปรดรอการอัปเดตจาก PoB';
+
+  @override
+  String get m1aee4fe817 => 'บิลด์มีการเปลี่ยนแปลง โปรดเปิดขั้นนี้อีกครั้ง';
 
   @override
   String get m544bec7909 => 'โครงสร้างจะเปลี่ยนไปหลังจากคลิก \"นำไปใช้\"';
@@ -1744,6 +1759,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get ma386719073 => 'ติดตั้งทั้งสององค์ประกอบก่อน';
+
+  @override
+  String get m5ebbc9d7a5 => 'นำออก';
 
   @override
   String get md4b51f7a04 => 'ลบ';

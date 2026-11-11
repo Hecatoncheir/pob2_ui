@@ -950,6 +950,12 @@ abstract class AppLocalizations {
   /// **'Add a group of stones to get the skill calculation.'**
   String get mbc10505bdf;
 
+  /// Добавятся
+  ///
+  /// In en, this message translates to:
+  /// **'Added'**
+  String get mea8da7a1c0;
+
   /// Дождитесь завершения текущей операции
   ///
   /// In en, this message translates to:
@@ -1790,6 +1796,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Failed to save draft XML: {p0}'**
   String m62f5b562c1(String p0);
+
+  /// Не удалось сравнить этап
+  ///
+  /// In en, this message translates to:
+  /// **'Could not compare the stage'**
+  String get m8c3d5eab29;
 
   /// Не удалось удалить умение
   ///
@@ -2967,6 +2979,12 @@ abstract class AppLocalizations {
   /// **'Enemy size'**
   String get meabbc96d71;
 
+  /// Разница
+  ///
+  /// In en, this message translates to:
+  /// **'Change'**
+  String get m93ea4e89b1;
+
   /// Разрешить правки через MCP
   ///
   /// In en, this message translates to:
@@ -2990,6 +3008,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Calculation Lua · {p0}%'**
   String m33a38de9ff(String p0);
+
+  /// Расчёт сравнения…
+  ///
+  /// In en, this message translates to:
+  /// **'Calculating comparison…'**
+  String get m30a07ea432;
 
   /// Расчёты
   ///
@@ -3092,6 +3116,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'The build changed on disk. Wait for the update from PoB.'**
   String get m7806bb3683;
+
+  /// Сборка изменилась. Откройте этап снова.
+  ///
+  /// In en, this message translates to:
+  /// **'The build changed. Open the stage again.'**
+  String get m1aee4fe817;
 
   /// Сборка изменится после нажатия «Применить»
   ///
@@ -3314,6 +3344,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Install both components first'**
   String get ma386719073;
+
+  /// Снимутся
+  ///
+  /// In en, this message translates to:
+  /// **'Removed'**
+  String get m5ebbc9d7a5;
 
   /// Снять
   ///

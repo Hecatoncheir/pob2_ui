@@ -53,6 +53,18 @@ class TreeProgressionStep {
 
 enum ProgressionPart { tree, skills, equipment }
 
+void verifyProgressionTree(
+  TreeProgressionStep step,
+  int level,
+  Set<int> nodes,
+) {
+  if (level != step.level ||
+      nodes.length != step.nodes.length ||
+      !nodes.containsAll(step.nodes)) {
+    throw const FormatException('Lua не смог применить этот этап');
+  }
+}
+
 bool isProgressionNode(String kind) =>
     kind != 'ClassStart' && kind != 'AscendClassStart';
 

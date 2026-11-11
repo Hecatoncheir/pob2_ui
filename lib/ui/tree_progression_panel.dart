@@ -7,6 +7,8 @@ import '../domain/tree_progression.dart';
 import 'core/app_text.dart';
 import 'core/motion.dart';
 import 'core/ui_translation.dart';
+import 'progression_apply_dialog.dart';
+import 'progression_comparison_bloc.dart';
 import 'tree_progression_bloc.dart';
 
 class TreeProgressionPanel extends StatelessWidget {
@@ -17,6 +19,7 @@ class TreeProgressionPanel extends StatelessWidget {
     required this.onFocus,
     required this.onCapture,
     required this.onApply,
+    required this.createComparison,
   });
 
   final Map<int, TreeNode> nodes;
@@ -25,6 +28,8 @@ class TreeProgressionPanel extends StatelessWidget {
   final Future<TreeProgressionStep?> Function() onCapture;
   final Future<void> Function(TreeProgressionStep, Set<ProgressionPart>)
   onApply;
+  final ProgressionComparisonBloc Function(TreeProgressionStep)
+  createComparison;
 
   @override
   Widget build(BuildContext context) =>
@@ -208,13 +213,13 @@ class TreeProgressionPanel extends StatelessWidget {
   }
 
   Future<void> _apply(BuildContext context, TreeProgressionStep step) async {
-    final available = step.parts;
-    final parts = available.length == 1
-        ? available
-        : await sparkDialog<Set<ProgressionPart>>(
-            context,
-            _ApplyProgressionDialog(available),
-          );
+    final parts = await sparkDialog<Set<ProgressionPart>>(
+      context,
+      BlocProvider(
+        create: (_) => createComparison(step),
+        child: ProgressionApplyDialog(step.parts, nodes),
+      ),
+    );
     if (parts != null && context.mounted) await onApply(step, parts);
   }
 
@@ -228,62 +233,6 @@ class TreeProgressionPanel extends StatelessWidget {
       TreeProgressionEdited(step, result),
     );
   }
-}
-
-class _ApplyProgressionDialog extends StatefulWidget {
-  const _ApplyProgressionDialog(this.available);
-  final Set<ProgressionPart> available;
-
-  @override
-  State<_ApplyProgressionDialog> createState() =>
-      _ApplyProgressionDialogState();
-}
-
-class _ApplyProgressionDialogState extends State<_ApplyProgressionDialog> {
-  final selected = {ProgressionPart.tree};
-
-  @override
-  Widget build(BuildContext context) => AlertDialog(
-    title: const AppText('Что применить из этапа?'),
-    scrollable: true,
-    content: SizedBox(
-      width: 300,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          for (final part in widget.available)
-            CheckboxListTile(
-              contentPadding: EdgeInsets.zero,
-              value: selected.contains(part),
-              title: AppText(switch (part) {
-                ProgressionPart.tree => 'Уровень и дерево',
-                ProgressionPart.skills => 'Умения',
-                ProgressionPart.equipment => 'Экипировка',
-              }),
-              onChanged: (value) => setState(() {
-                if (value == true) {
-                  selected.add(part);
-                } else {
-                  selected.remove(part);
-                }
-              }),
-            ),
-        ],
-      ),
-    ),
-    actions: [
-      TextButton(
-        onPressed: () => Navigator.pop(context),
-        child: const AppText('Отмена'),
-      ),
-      FilledButton(
-        onPressed: selected.isEmpty
-            ? null
-            : () => Navigator.pop(context, Set<ProgressionPart>.of(selected)),
-        child: const AppText('Применить этап'),
-      ),
-    ],
-  );
 }
 
 class _ProgressionMilestone extends StatelessWidget {

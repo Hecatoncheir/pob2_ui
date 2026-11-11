@@ -1,5 +1,10 @@
 typedef JsonMap = Map<String, dynamic>;
 
+BuildReport parseBuildReport(JsonMap result) => switch (result) {
+  {'report': final JsonMap report} => BuildReport.fromJson(report),
+  _ => throw const FormatException('Lua не вернул отчёт сборки'),
+};
+
 JsonMap jsonMap(dynamic value) => value is JsonMap ? value : const {};
 List<JsonMap> jsonRows(dynamic value) => value is List
     ? value

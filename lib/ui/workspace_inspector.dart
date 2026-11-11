@@ -5,6 +5,7 @@ import '../domain/tree_geometry.dart';
 import '../domain/tree_progression.dart';
 import 'core/app_text.dart';
 import 'core/panels.dart';
+import 'progression_comparison_bloc.dart';
 import 'report_views.dart';
 import 'shell_bloc.dart';
 import 'tree_progression_bloc.dart';
@@ -94,6 +95,13 @@ class WorkspaceInspector extends StatelessWidget {
       nodes: {for (final node in tree.nodes) node.id: node},
       enabled: key != null && !model.state.busy && !document.stale,
       onCapture: () async => key == null ? null : model.captureProgression(key),
+      createComparison: (step) {
+        final session = model.progressionComparison(key!);
+        return ProgressionComparisonBloc(
+          (parts) => session.compare(step, parts),
+          session.close,
+        );
+      },
       onApply: (step, parts) async {
         if (key != null) await model.applyProgression(key, step, parts: parts);
       },

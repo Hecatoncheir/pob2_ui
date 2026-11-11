@@ -468,6 +468,9 @@ class AppLocalizationsRu extends AppLocalizations {
       'Добавьте группу камней, чтобы получить расчёт умения.';
 
   @override
+  String get mea8da7a1c0 => 'Добавятся';
+
+  @override
   String get mab04eae138 => 'Дождитесь завершения текущей операции';
 
   @override
@@ -947,6 +950,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String m62f5b562c1(String p0) {
     return 'Не удалось сохранить черновик XML: $p0';
   }
+
+  @override
+  String get m8c3d5eab29 => 'Не удалось сравнить этап';
 
   @override
   String get m0dc255f974 => 'Не удалось удалить умение';
@@ -1578,6 +1584,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get meabbc96d71 => 'Размер противника';
 
   @override
+  String get m93ea4e89b1 => 'Разница';
+
+  @override
   String get m13601ffe54 => 'Разрешить правки через MCP';
 
   @override
@@ -1590,6 +1599,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String m33a38de9ff(String p0) {
     return 'Расчёт Lua · $p0%';
   }
+
+  @override
+  String get m30a07ea432 => 'Расчёт сравнения…';
 
   @override
   String get m9b9370223c => 'Расчёты';
@@ -1646,6 +1658,9 @@ class AppLocalizationsRu extends AppLocalizations {
   @override
   String get m7806bb3683 =>
       'Сборка изменилась на диске. Дождитесь обновления из PoB.';
+
+  @override
+  String get m1aee4fe817 => 'Сборка изменилась. Откройте этап снова.';
 
   @override
   String get m544bec7909 => 'Сборка изменится после нажатия «Применить»';
@@ -1762,6 +1777,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get ma386719073 => 'Сначала установите оба компонента';
+
+  @override
+  String get m5ebbc9d7a5 => 'Снимутся';
 
   @override
   String get md4b51f7a04 => 'Снять';
