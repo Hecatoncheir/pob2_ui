@@ -219,19 +219,8 @@ class SkillGemCatalog extends StatelessWidget {
   @override
   Widget build(BuildContext context) => DragTarget<GemDrag>(
     key: const Key('gem-return-target'),
-    onWillAcceptWithDetails: (details) =>
-        !state.saving &&
-        details.data.gem.support &&
-        (onReturn != null
-            ? details.data.groupId != null
-            : details.data.draftKey != null &&
-                  details.data.groupId == editor.groupId),
-    onAcceptWithDetails: (details) {
-      if (onReturn case final action?)
-        action(details.data);
-      else
-        editor.remove(details.data.draftKey!);
-    },
+    onWillAcceptWithDetails: (details) => _canReturn(details.data),
+    onAcceptWithDetails: (details) => _returnGem(details.data),
     builder: (context, candidates, _) => DecoratedBox(
       decoration: BoxDecoration(
         color: candidates.isEmpty
@@ -242,6 +231,20 @@ class SkillGemCatalog extends StatelessWidget {
       child: _catalog(context),
     ),
   );
+
+  bool _canReturn(GemDrag data) {
+    if (state.saving || !data.gem.support) return false;
+    if (onReturn != null) return data.groupId != null;
+    return data.draftKey != null && data.groupId == editor.groupId;
+  }
+
+  void _returnGem(GemDrag data) {
+    if (onReturn case final action?) {
+      action(data);
+    } else {
+      editor.remove(data.draftKey!);
+    }
+  }
 
   Widget _catalog(BuildContext context) {
     if (editor.supportScope == 'none') {
@@ -314,35 +317,17 @@ class SkillGemCatalog extends StatelessWidget {
   }
 
   Widget _results(BuildContext context, List<SkillGem> entries) {
-    if (state.loading) return const Center(child: CircularProgressIndicator());
-    if (supportMode && state.support.loading)
+    if (state.loading || supportMode && state.support.loading)
       return const Center(child: CircularProgressIndicator());
-    if (supportMode && state.support.error != null)
-      return Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            AppText(state.support.error!),
-            TextButton(
-              onPressed: editor.refreshSupports,
-              child: const AppText('Повторить'),
-            ),
-          ],
-        ),
+    if (supportMode && state.support.error != null) {
+      return _loadError(
+        state.support.error!,
+        'Повторить',
+        editor.refreshSupports,
       );
+    }
     if (state.catalog.isEmpty && state.error != null) {
-      return Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            AppText(state.error!),
-            TextButton(
-              onPressed: editor.load,
-              child: const AppText('Повторить загрузку'),
-            ),
-          ],
-        ),
-      );
+      return _loadError(state.error!, 'Повторить загрузку', editor.load);
     }
     if (entries.isEmpty)
       return const Center(child: AppText('Камни не найдены'));
@@ -366,6 +351,16 @@ class SkillGemCatalog extends StatelessWidget {
       itemBuilder: (context, index) => _tile(context, entries[index]),
     );
   }
+
+  Widget _loadError(String error, String label, VoidCallback retry) => Center(
+    child: Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        AppText(error),
+        TextButton(onPressed: retry, child: AppText(label)),
+      ],
+    ),
+  );
 
   Widget _tile(BuildContext context, SkillGem gem, {bool compact = false}) =>
       SkillGemCatalogTile(

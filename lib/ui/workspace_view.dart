@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'build_dialogs.dart';
+import 'build_setup.dart';
 import 'build_sections.dart';
 import 'core/motion.dart';
 import 'core/panels.dart';
@@ -14,30 +15,35 @@ import 'core/spark_theme.dart';
 import 'mcp_editor_cubit.dart';
 import 'mcp_editor_dialog.dart';
 import 'pob_character_dialog.dart';
-import 'pob_build_folder_actions.dart';
 import 'report_views.dart';
-import 'shell_cubit.dart';
+import 'shell_bloc.dart';
 import 'tree_view.dart';
 import 'workshop_cubit.dart';
+import 'workshop_state.dart';
 import 'build_notes_dialog.dart';
 
 class WorkspaceView extends StatelessWidget {
   const WorkspaceView({super.key, required this.model, required this.shell});
   final WorkshopCubit model;
-  final ShellCubit shell;
+  final ShellBloc shell;
   @override
   Widget build(BuildContext context) {
-    if (model.state.report == null)
+    if (model.state.report == null) {
+      final step = BuildSetup.pending(model);
       return EmptyPanel(
         title: 'Ваша следующая сборка',
-        message: _emptyMessage,
-        action: _emptyActions(context),
+        message: step?.message ?? 'Создайте персонажа или откройте XML из PoB. Все показатели рассчитает Lua.',
+        action: step == null
+            ? _buildActions(context)
+            : BuildSetupAction(step, model),
       );
+    }
     return BlocListener<McpEditorCubit, McpEditorState>(
       bloc: model.mcpEditor,
       listenWhen: (before, after) =>
           before.change != after.change && after.change != null,
-      listener: (context, state) => shell.tab(state.change!.tab),
+      listener: (context, state) =>
+          shell.add(WorkshopTabSelected(state.change!.tab)),
       child: _workspace(context),
     );
   }
@@ -73,47 +79,29 @@ class WorkspaceView extends StatelessWidget {
     );
   }
 
-  String get _emptyMessage {
-    if (!model.buildFolderReady)
-      return 'Выберите ту же папку сборок, которая указана в Path of Building.';
-    return model.engine.connected
-        ? 'Создайте персонажа или откройте XML из PoB. Все показатели рассчитает Lua.'
-        : 'Установите компоненты, чтобы открыть сборку и получить настоящий расчёт.';
-  }
-
-  Widget _emptyActions(BuildContext context) {
-    if (!model.buildFolderReady) return PobBuildFolderActions(model);
-    if (!model.engine.connected)
-      return FilledButton(
-        onPressed: model.state.busy
-            ? null
-            : () => shell.page(AppPage.components),
-        child: const AppText('Настроить компоненты'),
-      );
+  Widget _buildActions(BuildContext context) {
+    final busy = model.state.busy;
     return Wrap(
       spacing: 10,
       runSpacing: 10,
       alignment: WrapAlignment.center,
       children: [
         FilledButton(
-          onPressed: model.state.busy
-              ? null
-              : () => showNewBuild(context, model),
+          onPressed: busy ? null : () => showNewBuild(context, model),
           child: const AppText('Новая сборка'),
         ),
         OutlinedButton(
-          onPressed: model.state.busy
-              ? null
-              : () => showXmlImport(context, model),
+          onPressed: busy ? null : () => showXmlImport(context, model),
           child: const AppText('Открыть XML'),
         ),
-        if (model.pobWindow.supported)
+        if (model.pobWindow.supported) ...[
           OutlinedButton(
             key: const Key('import-from-pob'),
-            onPressed: model.state.busy ? null : model.importFromPob,
+            onPressed: busy ? null : model.importFromPob,
             child: const AppText('Импортировать из PoB'),
           ),
-        if (model.pobWindow.supported) PobCharacterImportButton(model),
+          PobCharacterImportButton(model),
+        ],
       ],
     );
   }
@@ -276,9 +264,9 @@ class _BuildMenu extends StatelessWidget {
 class _Tabs extends StatelessWidget {
   const _Tabs({required this.model, required this.shell});
   final WorkshopCubit model;
-  final ShellCubit shell;
+  final ShellBloc shell;
   @override
-  Widget build(BuildContext context) => BlocBuilder<ShellCubit, ShellState>(
+  Widget build(BuildContext context) => BlocBuilder<ShellBloc, ShellState>(
     bloc: shell,
     builder: (context, state) => Container(
       decoration: BoxDecoration(
@@ -300,37 +288,58 @@ class _Tabs extends StatelessWidget {
             ),
           ),
           if (MediaQuery.sizeOf(context).width < 1100)
-            ArtIconButton(
-              'chart',
-              label: 'Показатели',
-              onPressed: () => sparkDialog<void>(
-                context,
-                Dialog(
-                  child: SizedBox(
-                    width: 330,
-                    height: MediaQuery.sizeOf(context).height * .75,
-                    child: StatisticsPanel(model: model, shell: shell),
-                  ),
-                ),
-              ),
-            ),
+            _statisticsButton(context),
         ],
       ),
     ),
   );
+
+  Widget _statisticsButton(BuildContext context) {
+    void open() => sparkDialog<void>(
+      context,
+      Dialog(
+        child: SizedBox(
+          width: 330,
+          height: MediaQuery.sizeOf(context).height * .75,
+          child: BlocBuilder<WorkshopCubit, WorkshopState>(
+            bloc: model,
+            builder: (context, state) => state.report == null
+                ? const SizedBox.shrink()
+                : StatisticsPanel(model: model, shell: shell),
+          ),
+        ),
+      ),
+    );
+    const icon = Icons.leaderboard_outlined;
+    const key = Key('open-statistics');
+    if (MediaQuery.sizeOf(context).width >= 650) {
+      return TextButton.icon(
+        key: key,
+        onPressed: open,
+        icon: const Icon(icon, size: 20),
+        label: const AppText('Показатели'),
+      );
+    }
+    return ArtIconButton.material(
+      icon,
+      key: key,
+      label: 'Показатели',
+      onPressed: open,
+    );
+  }
 }
 
 class _TabButton extends StatelessWidget {
   const _TabButton(this.tab, this.shell, {required this.selected});
   final WorkshopTab tab;
-  final ShellCubit shell;
+  final ShellBloc shell;
   final bool selected;
   @override
   Widget build(BuildContext context) => Semantics(
     selected: selected,
     child: InkWell(
       key: ValueKey('tab-${tab.name}'),
-      onTap: () => shell.tab(tab),
+      onTap: () => shell.add(WorkshopTabSelected(tab)),
       child: AnimatedContainer(
         duration: motionDuration(context, milliseconds: 180),
         padding: const EdgeInsets.fromLTRB(4, 12, 18, 12),
@@ -370,7 +379,7 @@ class _TabButton extends StatelessWidget {
 class _EditorStage extends StatefulWidget {
   const _EditorStage({required this.model, required this.shell});
   final WorkshopCubit model;
-  final ShellCubit shell;
+  final ShellBloc shell;
   @override
   State<_EditorStage> createState() => _EditorStageState();
 }
@@ -385,7 +394,7 @@ class _EditorStageState extends State<_EditorStage>
   }
 
   @override
-  Widget build(BuildContext context) => BlocConsumer<ShellCubit, ShellState>(
+  Widget build(BuildContext context) => BlocConsumer<ShellBloc, ShellState>(
     bloc: widget.shell,
     listenWhen: (before, after) => before.tab != after.tab,
     listener: (context, _) {

@@ -20,6 +20,36 @@ static void first_frame_cb(MyApplication* self, FlView* view) {
   gtk_widget_show(gtk_widget_get_toplevel(GTK_WIDGET(view)));
 }
 
+// Сначала Flutter проверяет диалоги и сохраняет сборку, затем закрывает PoB.
+static void close_response_cb(GObject* channel, GAsyncResult* result,
+                              gpointer user_data) {
+  g_autoptr(GtkWidget) window = GTK_WIDGET(user_data);
+  g_object_set_data(G_OBJECT(window), "pob2-close-pending", nullptr);
+
+  g_autoptr(FlMethodResponse) response = fl_method_channel_invoke_method_finish(
+      FL_METHOD_CHANNEL(channel), result, nullptr);
+  if (!response) return;
+  FlValue* allowed = fl_method_response_get_result(response, nullptr);
+  if (allowed && fl_value_get_type(allowed) == FL_VALUE_TYPE_BOOL &&
+      fl_value_get_bool(allowed)) {
+    gtk_widget_destroy(window);
+  }
+}
+
+static gboolean request_close_cb(GtkWidget* window, GdkEvent*, FlView* view) {
+  if (g_object_get_data(G_OBJECT(window), "pob2-close-pending")) return TRUE;
+  g_object_set_data(G_OBJECT(window), "pob2-close-pending", GINT_TO_POINTER(1));
+
+  FlEngine* engine = fl_view_get_engine(view);
+  g_autoptr(FlStandardMethodCodec) codec = fl_standard_method_codec_new();
+  g_autoptr(FlMethodChannel) channel = fl_method_channel_new(
+      fl_engine_get_binary_messenger(engine), "pob2_ui/window",
+      FL_METHOD_CODEC(codec));
+  fl_method_channel_invoke_method(channel, "requestClose", nullptr, nullptr,
+                                  close_response_cb, g_object_ref(window));
+  return TRUE;
+}
+
 // Implements GApplication::activate.
 static void my_application_activate(GApplication* application) {
   MyApplication* self = MY_APPLICATION(application);
@@ -72,6 +102,7 @@ static void my_application_activate(GApplication* application) {
   // Requires the view to be realized so we can start rendering.
   g_signal_connect_swapped(view, "first-frame", G_CALLBACK(first_frame_cb),
                            self);
+  g_signal_connect(window, "delete-event", G_CALLBACK(request_close_cb), view);
   gtk_widget_realize(GTK_WIDGET(view));
 
   fl_register_plugins(FL_PLUGIN_REGISTRY(view));

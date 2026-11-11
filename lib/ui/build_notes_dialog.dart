@@ -76,17 +76,7 @@ class _BuildNotesDialogState extends State<_BuildNotesDialog> {
                 ),
               ),
               const SizedBox(height: 10),
-              if (state.error == null)
-                AppText(
-                  state.saving
-                      ? 'Сохранение…'
-                      : 'Заметки сохраняются автоматически',
-                ),
-              if (state.error != null)
-                AppText(
-                  'Не удалось открыть или сохранить заметки.\n${state.error}',
-                  style: TextStyle(color: Spark.of(context).danger),
-                ),
+              _saveStatus(context, state),
             ],
           ),
         ),
@@ -111,6 +101,18 @@ class _BuildNotesDialogState extends State<_BuildNotesDialog> {
       ),
     ),
   );
+
+  Widget _saveStatus(BuildContext context, NotesState state) {
+    if (state.error case final error?) {
+      return AppText(
+        'Не удалось открыть или сохранить заметки.\n$error',
+        style: TextStyle(color: Spark.of(context).danger),
+      );
+    }
+    return AppText(
+      state.saving ? 'Сохранение…' : 'Заметки сохраняются автоматически',
+    );
+  }
 
   Future<void> _retryOrFinish() async {
     if (!notes.canEdit) {

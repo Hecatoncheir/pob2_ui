@@ -20,18 +20,8 @@ class ComponentsView extends StatelessWidget {
         'Всё для работы',
         subtitle: 'Два компонента. Расчёты на вашем компьютере.',
       ),
-      Align(
-        alignment: Alignment.centerLeft,
-        child: FilledButton.icon(
-          onPressed: model.state.busy ? null : model.checkUpdates,
-          icon: SparkArt(
-            'icons/refresh',
-            color: Spark.of(context).paper,
-            width: 17,
-          ),
-          label: const AppText('Проверить обновления'),
-        ),
-      ),
+      _firstSetup(),
+      Align(alignment: Alignment.centerLeft, child: _updateAction(context)),
       const SizedBox(height: 24),
       LayoutBuilder(
         builder: (context, constraints) {
@@ -49,27 +39,7 @@ class ComponentsView extends StatelessWidget {
         },
       ),
       const SizedBox(height: 24),
-      Wrap(
-        spacing: 12,
-        runSpacing: 12,
-        children: [
-          OutlinedButton(
-            onPressed: model.state.busy || !model.ready ? null : model.connect,
-            child: const AppText('Подключить Lua'),
-          ),
-          TextButton(
-            onPressed: model.state.busy || !model.ready ? null : model.doctor,
-            child: const AppText('Проверить совместимость'),
-          ),
-          TextButton(
-            onPressed: model.state.busy || !model.canRollback
-                ? null
-                : model.rollback,
-            child: const AppText('Вернуть предыдущую пару'),
-          ),
-          if (model.pobWindow.supported) _BridgeSetupButton(model),
-        ],
-      ),
+      _componentActions(),
       const SizedBox(height: 24),
       AppText(
         'Для установки нужны Git и 64-битный Python 3.11+. После загрузки компонентов расчёты работают без сети.',
@@ -95,6 +65,56 @@ class ComponentsView extends StatelessWidget {
       ),
     ],
   );
+
+  Widget _updateAction(BuildContext context) {
+    final check = model.state.busy ? null : model.checkUpdates;
+    const label = AppText('Проверить обновления');
+    if (!model.ready) return TextButton(onPressed: check, child: label);
+    return FilledButton.icon(
+      onPressed: check,
+      icon: SparkArt(
+        'icons/refresh',
+        color: Spark.of(context).paper,
+        width: 17,
+      ),
+      label: label,
+    );
+  }
+
+  Widget _componentActions() {
+    final canUseComponents = model.ready && !model.state.busy;
+    final canRollback = model.canRollback && !model.state.busy;
+    return Wrap(
+      spacing: 12,
+      runSpacing: 12,
+      children: [
+        OutlinedButton(
+          onPressed: canUseComponents ? model.connect : null,
+          child: const AppText('Подключить Lua'),
+        ),
+        TextButton(
+          onPressed: canUseComponents ? model.doctor : null,
+          child: const AppText('Проверить совместимость'),
+        ),
+        TextButton(
+          onPressed: canRollback ? model.rollback : null,
+          child: const AppText('Вернуть предыдущую пару'),
+        ),
+        if (model.pobWindow.supported) _BridgeSetupButton(model),
+      ],
+    );
+  }
+
+  Widget _firstSetup() {
+    if (model.ready) return const SizedBox.shrink();
+    return Align(
+      alignment: Alignment.centerLeft,
+      child: FilledButton(
+        onPressed: model.state.busy ? null : model.prepareComponents,
+        child: const AppText('Подготовить PoB II'),
+      ),
+    );
+  }
 }
 
 class _BridgeSetupButton extends StatelessWidget {

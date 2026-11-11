@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../domain/interface_scale.dart';
-import 'interface_scale_cubit.dart';
+import 'interface_scale_bloc.dart';
 import '../domain/workspace_preferences.dart';
-import 'workspace_preferences_cubit.dart';
+import 'workspace_preferences_bloc.dart';
 import 'keyboard_bindings.dart';
 
 class InterfaceViewport extends StatelessWidget {
@@ -18,11 +18,11 @@ class InterfaceViewport extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) =>
-      BlocBuilder<InterfaceScaleCubit, InterfaceScaleState>(
+      BlocBuilder<InterfaceScaleBloc, InterfaceScaleState>(
         builder: (context, state) => CallbackShortcuts(
           bindings: _bindings(
-            context.read<InterfaceScaleCubit>(),
-            context.watch<WorkspacePreferencesCubit?>()?.state.preferences ??
+            context.read<InterfaceScaleBloc>(),
+            context.watch<WorkspacePreferencesBloc?>()?.state.preferences ??
                 WorkspacePreferences(),
           ),
           child: Focus(
@@ -36,12 +36,12 @@ class InterfaceViewport extends StatelessWidget {
       );
 
   Map<ShortcutActivator, VoidCallback> _bindings(
-    InterfaceScaleCubit scale,
+    InterfaceScaleBloc scale,
     WorkspacePreferences preferences,
   ) => commandCallbacks(preferences, {
-    AppCommand.zoomIn: () => scale.changeBy(10),
-    AppCommand.zoomOut: () => scale.changeBy(-10),
-    AppCommand.resetZoom: () => scale.setPercent(100),
+    AppCommand.zoomIn: () => scale.add(const InterfaceScaleAdjusted(10)),
+    AppCommand.zoomOut: () => scale.add(const InterfaceScaleAdjusted(-10)),
+    AppCommand.resetZoom: () => scale.add(const InterfaceScaleSet(100)),
   });
 
   Widget _layout(BuildContext context, Size viewport, double scale) {

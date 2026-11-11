@@ -110,6 +110,10 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m917bb579d9 => 'PoB ไม่ได้รายงานเส้นทางไปยังโฟลเดอร์แอสเซมบลี';
 
   @override
+  String get maaaf9e5923 =>
+      'PoB เปิดอยู่โดยไม่ได้เชื่อมต่อกับบริดจ์ โปรดเริ่มโปรแกรมใหม่หนึ่งครั้ง';
+
+  @override
   String get m3127345008 => 'XML มากกว่า 16 MB';
 
   @override
@@ -320,6 +324,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m5d67586b4c => 'เลือกการติดตั้ง PoB';
 
   @override
+  String get m39b5ac8d00 => 'เลือกการติดตั้งใน «ตั้งค่าบริดจ์ PoB»';
+
+  @override
   String get m2749913680 => 'เลือกคุณสมบัติแล้วคลิกค้นหา';
 
   @override
@@ -406,6 +413,10 @@ class AppLocalizationsTh extends AppLocalizations {
   @override
   String get m6f9519e788 =>
       'หากต้องการค้นหาตามคุณลักษณะ ให้อัปเดต MCP เป็น 0.9.0 ในส่วนส่วนประกอบ';
+
+  @override
+  String get mbd97478bba =>
+      'การควบคุมหน้าต่าง PoB ผ่าน Wine ต้องใช้ X11 หรือ XWayland';
 
   @override
   String get m3e069d1fae =>
@@ -733,13 +744,18 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m51233393a5 => 'สโมสรฟุตบอล';
 
   @override
+  String mbfd148a7e8(String p0) {
+    return 'พบโหนด: $p0';
+  }
+
+  @override
   String get mbe6156b8e4 => 'ค้นหา';
 
   @override
   String get m7d4ff2d217 => 'ค้นหาอัญมณี';
 
   @override
-  String get m5f0d49d480 => 'ค้นหาโฟลเดอร์ข้ามบริดจ์';
+  String get m85b24dddaa => 'ค้นหาโฟลเดอร์ PoB';
 
   @override
   String get m302605cf87 => 'ไม่เป็นไร';
@@ -752,9 +768,6 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get mb37bd07a8a => 'ค้นหาเงื่อนไข';
-
-  @override
-  String get m8823a786b9 => 'กำหนดค่าส่วนประกอบ';
 
   @override
   String get m9a92ce1cef => 'ตั้งค่าบริดจ์ PoB';
@@ -1144,6 +1157,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m1731619efa => 'การออกแบบ';
 
   @override
+  String get m6e1f7baa47 => 'ล้างการค้นหา';
+
+  @override
   String get m6cc0ad9655 => 'แว่น';
 
   @override
@@ -1158,6 +1174,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m7352f28e7e => 'แพ็กเก็ตมีขนาดใหญ่กว่าขนาดที่คาดไว้';
+
+  @override
+  String get m8ce1a3f4ee => 'โฟลเดอร์บิลด์';
 
   @override
   String get mcaef3568a0 => 'โฟลเดอร์บิลด์ PoB มีการเปลี่ยนแปลง';
@@ -1231,6 +1250,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get mbcc0fdbe14 => 'โอกาสในการสะกดคำ';
 
   @override
+  String get mb66419affe => 'ตั้งค่า PoB II';
+
+  @override
   String get m52d7142d18 => 'รองรับ Windows x64, Linux x64 และ macOS arm64';
 
   @override
@@ -1247,6 +1269,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m80cc1bdb9b => 'เชื่อมต่อบริดจ์';
+
+  @override
+  String get m929d292c0e => 'เชื่อมต่อโฟลเดอร์บิลด์';
 
   @override
   String get m5f5155bb1f => 'รองรับการจับคู่';
@@ -1454,6 +1479,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get mf66e719066 => 'ขยายแผง';
 
   @override
+  String get m44faae47f6 => 'ขยายผลลัพธ์';
+
+  @override
   String get m8c8ec94283 => 'ขนาดหรือการอัปเดต SHA-256 ไม่ตรงกัน';
 
   @override
@@ -1559,6 +1587,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m87b737d42c => 'แผงยุบ';
+
+  @override
+  String get mdbd753f08d => 'ย่อผลลัพธ์';
 
   @override
   String get mf0cd3a6033 => 'เบา';
@@ -1746,9 +1777,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m97ac4c501c => 'การติดตั้งอยู่ในระหว่างดำเนินการ';
 
   @override
-  String m39e5ccc0fa(String p0) {
-    return 'โหนด · $p0';
-  }
+  String get me77a383ee5 => 'โหนด';
 
   @override
   String get m8cf5c33b30 => 'ไม่มีการเปลี่ยนแปลง';

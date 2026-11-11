@@ -13,7 +13,7 @@ import 'package:pob2_ui/data/process_service.dart';
 import 'package:pob2_ui/domain/build_report.dart';
 import 'package:pob2_ui/domain/component.dart';
 import 'package:pob2_ui/ui/app.dart';
-import 'package:pob2_ui/ui/shell_cubit.dart';
+import 'package:pob2_ui/ui/shell_bloc.dart';
 import 'package:pob2_ui/ui/tree_canvas.dart';
 import 'package:pob2_ui/ui/workshop_cubit.dart';
 import 'package:pob2_ui/ui/workspace_view.dart';
@@ -41,7 +41,7 @@ void main() {
     await tester.pumpAndSettle();
     await _enable(tester);
     expect(model.mcpEditor.enabled, isTrue);
-    final shell = tester.element(find.byType(WorkspaceView)).read<ShellCubit>();
+    final shell = tester.element(find.byType(WorkspaceView)).read<ShellBloc>();
     final client = await _ExternalEditor.connect(
       root,
       components.active[Component.mcp]!,
@@ -105,10 +105,10 @@ Future<void> _checkNode(
   WidgetTester tester,
   _ExternalEditor client,
   WorkshopCubit model,
-  ShellCubit shell,
+  ShellBloc shell,
   int node,
 ) async {
-  shell.tab(WorkshopTab.items);
+  shell.add(const WorkshopTabSelected(WorkshopTab.items));
   await tester.pumpAndSettle();
   await client.success('pob_tree_action', {'id': node, 'action': 'allocate'});
   await tester.pumpAndSettle();
@@ -126,7 +126,7 @@ Future<void> _checkItem(
   WidgetTester tester,
   _ExternalEditor client,
   WorkshopCubit model,
-  ShellCubit shell,
+  ShellBloc shell,
 ) async {
   final life = model.state.report!.stats['Life'] as num;
   await client.success('pob_equip_item', {
@@ -142,7 +142,7 @@ Future<void> _checkSkills(
   WidgetTester tester,
   _ExternalEditor client,
   WorkshopCubit model,
-  ShellCubit shell,
+  ShellBloc shell,
 ) async {
   final gems = await client.success('pob_catalog', {
     'kind': 'gems',

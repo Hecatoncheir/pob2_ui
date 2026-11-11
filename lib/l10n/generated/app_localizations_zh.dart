@@ -109,6 +109,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m917bb579d9 => 'PoB 未報告組件資料夾的路徑。';
 
   @override
+  String get maaaf9e5923 => 'PoB 已開啟，但尚未連接橋接器。請重新啟動一次。';
+
+  @override
   String get m3127345008 => 'XML 超過 16 MB';
 
   @override
@@ -318,6 +321,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m5d67586b4c => '選擇 PoB 安裝位置';
 
   @override
+  String get m39b5ac8d00 => '請在「設定 PoB 橋接器」中選擇安裝位置。';
+
+  @override
   String get m2749913680 => '選擇一個特徵並按一下「尋找」。';
 
   @override
@@ -401,6 +407,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m6f9519e788 => '若要依特徵搜索，請將「組件」部分中的 MCP 更新為 0.9.0。';
+
+  @override
+  String get mbd97478bba => '透過 Wine 管理 PoB 視窗需要 X11 或 XWayland。';
 
   @override
   String get m3e069d1fae => '安裝需要 Git 和 64 位元 Python 3.11+。載入組件後，無需網路即可進行計算。';
@@ -724,13 +733,18 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m51233393a5 => 'Название сборки';
 
   @override
+  String mbfd148a7e8(String p0) {
+    return '找到的節點：$p0';
+  }
+
+  @override
   String get mbe6156b8e4 => '查找';
 
   @override
   String get m7d4ff2d217 => '搜尋寶石';
 
   @override
-  String get m5f0d49d480 => '跨橋查找資料夾';
+  String get m85b24dddaa => '尋找 PoB 資料夾';
 
   @override
   String get m302605cf87 => 'Найти сборку';
@@ -743,9 +757,6 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get mb37bd07a8a => '查找條件';
-
-  @override
-  String get m8823a786b9 => '配置組件';
 
   @override
   String get m9a92ce1cef => '設定 PoB 橋接';
@@ -1132,6 +1143,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m1731619efa => '設計';
 
   @override
+  String get m6e1f7baa47 => '清除搜尋';
+
+  @override
   String get m6cc0ad9655 => '眼鏡';
 
   @override
@@ -1146,6 +1160,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m7352f28e7e => '封包大於預期大小';
+
+  @override
+  String get m8ce1a3f4ee => '配置資料夾';
 
   @override
   String get mcaef3568a0 => 'PoB 建置資料夾已變更。';
@@ -1218,6 +1235,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get mbcc0fdbe14 => '法術抑制幾率';
 
   @override
+  String get mb66419affe => '設定 PoB II';
+
+  @override
   String get m52d7142d18 => '支援 Windows x64、Linux x64 和 macOS arm64';
 
   @override
@@ -1234,6 +1254,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m80cc1bdb9b => '連接橋接';
+
+  @override
+  String get m929d292c0e => '連接配置資料夾';
 
   @override
   String get m5f5155bb1f => '匹配支持';
@@ -1440,6 +1463,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get mf66e719066 => '展開面板';
 
   @override
+  String get m44faae47f6 => '展開結果';
+
+  @override
   String get m8c8ec94283 => '大小或 SHA-256 更新不匹配';
 
   @override
@@ -1543,6 +1569,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m87b737d42c => '折疊面板';
+
+  @override
+  String get mdbd753f08d => '收合結果';
 
   @override
   String get mf0cd3a6033 => '光';
@@ -1727,9 +1756,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m97ac4c501c => '安裝已在進行中';
 
   @override
-  String m39e5ccc0fa(String p0) {
-    return '節點·$p0';
-  }
+  String get me77a383ee5 => '節點';
 
   @override
   String get m8cf5c33b30 => '沒有變化。';
@@ -2017,6 +2044,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m917bb579d9 => 'PoB 未報告組件資料夾的路徑。';
 
   @override
+  String get maaaf9e5923 => 'PoB 已開啟，但尚未連接橋接器。請重新啟動一次。';
+
+  @override
   String get m3127345008 => 'XML 超過 16 MB';
 
   @override
@@ -2226,6 +2256,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m5d67586b4c => '選擇 PoB 安裝位置';
 
   @override
+  String get m39b5ac8d00 => '請在「設定 PoB 橋接器」中選擇安裝位置。';
+
+  @override
   String get m2749913680 => '選擇一個特徵並按一下「尋找」。';
 
   @override
@@ -2309,6 +2342,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m6f9519e788 => '若要依特徵搜索，請將「組件」部分中的 MCP 更新為 0.9.0。';
+
+  @override
+  String get mbd97478bba => '透過 Wine 管理 PoB 視窗需要 X11 或 XWayland。';
 
   @override
   String get m3e069d1fae => '安裝需要 Git 和 64 位元 Python 3.11+。載入組件後，無需網路即可進行計算。';
@@ -2632,13 +2668,18 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m51233393a5 => 'Название сборки';
 
   @override
+  String mbfd148a7e8(String p0) {
+    return '找到的節點：$p0';
+  }
+
+  @override
   String get mbe6156b8e4 => '查找';
 
   @override
   String get m7d4ff2d217 => '搜尋寶石';
 
   @override
-  String get m5f0d49d480 => '跨橋查找資料夾';
+  String get m85b24dddaa => '尋找 PoB 資料夾';
 
   @override
   String get m302605cf87 => 'Найти сборку';
@@ -2651,9 +2692,6 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get mb37bd07a8a => '查找條件';
-
-  @override
-  String get m8823a786b9 => '配置組件';
 
   @override
   String get m9a92ce1cef => '設定 PoB 橋接';
@@ -3040,6 +3078,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m1731619efa => '設計';
 
   @override
+  String get m6e1f7baa47 => '清除搜尋';
+
+  @override
   String get m6cc0ad9655 => '眼鏡';
 
   @override
@@ -3054,6 +3095,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m7352f28e7e => '封包大於預期大小';
+
+  @override
+  String get m8ce1a3f4ee => '配置資料夾';
 
   @override
   String get mcaef3568a0 => 'PoB 建置資料夾已變更。';
@@ -3126,6 +3170,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get mbcc0fdbe14 => '法術抑制幾率';
 
   @override
+  String get mb66419affe => '設定 PoB II';
+
+  @override
   String get m52d7142d18 => '支援 Windows x64、Linux x64 和 macOS arm64';
 
   @override
@@ -3142,6 +3189,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m80cc1bdb9b => '連接橋接';
+
+  @override
+  String get m929d292c0e => '連接配置資料夾';
 
   @override
   String get m5f5155bb1f => '匹配支持';
@@ -3348,6 +3398,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get mf66e719066 => '展開面板';
 
   @override
+  String get m44faae47f6 => '展開結果';
+
+  @override
   String get m8c8ec94283 => '大小或 SHA-256 更新不匹配';
 
   @override
@@ -3451,6 +3504,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m87b737d42c => '折疊面板';
+
+  @override
+  String get mdbd753f08d => '收合結果';
 
   @override
   String get mf0cd3a6033 => '光';
@@ -3635,9 +3691,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m97ac4c501c => '安裝已在進行中';
 
   @override
-  String m39e5ccc0fa(String p0) {
-    return '節點·$p0';
-  }
+  String get me77a383ee5 => '節點';
 
   @override
   String get m8cf5c33b30 => '沒有變化。';

@@ -13,11 +13,12 @@ import 'package:pob2_ui/l10n/generated/app_localizations.dart';
 import 'package:pob2_ui/ui/core/app_text.dart';
 import 'package:pob2_ui/ui/core/language_scope.dart';
 import 'package:pob2_ui/ui/core/spark_theme.dart';
-import 'package:pob2_ui/ui/language_cubit.dart';
+import 'package:pob2_ui/ui/language_bloc.dart';
 import 'package:pob2_ui/ui/language_picker.dart';
 import 'package:pob2_ui/ui/tree_hover_card.dart';
 
 import 'support/temporary_directory.dart';
+import 'support/dispose_widget_bloc.dart';
 
 class MemoryLanguages extends LanguagePreferences {
   MemoryLanguages() : super(Directory('unused-language-test'));
@@ -58,41 +59,47 @@ void main() {
   test('Запоздавшая загрузка не возвращает предыдущий язык; ошибка допускает повтор', () async {
     final preferences = MemoryLanguages();
     final dictionaries = DelayedDictionaries();
-    final cubit = LanguageCubit(preferences, dictionaries);
-    addTearDown(cubit.close);
-    final first = cubit.selectLanguage(AppLanguage.russian);
-    final last = cubit.selectLanguage(AppLanguage.english);
+    final bloc = LanguageBloc(preferences, dictionaries);
+    addTearDown(bloc.close);
+    final loaded = bloc.stream.firstWhere((state) => !state.loading);
+    bloc
+      ..add(const LanguageSelected(AppLanguage.russian))
+      ..add(const LanguageSelected(AppLanguage.english));
+    await Future<void>.delayed(Duration.zero);
     dictionaries.pending[AppLanguage.english]!.complete(
       GameDictionary.english(),
     );
-    await last;
+    await loaded;
     dictionaries.pending[AppLanguage.russian]!.complete(russianDictionary());
-    await first;
-    expect(cubit.state.language, AppLanguage.english);
-    expect(cubit.state.dictionary!.language, 'en');
+    await bloc.pendingSave;
+    expect(bloc.state.language, AppLanguage.english);
+    expect(bloc.state.dictionary!.language, 'en');
     expect(preferences.language, AppLanguage.english);
-    final failure = cubit.selectLanguage(AppLanguage.japanese);
+    final failure = bloc.stream.firstWhere((state) => state.error != null);
+    bloc.add(const LanguageSelected(AppLanguage.japanese));
+    await Future<void>.delayed(Duration.zero);
     dictionaries.pending[AppLanguage.japanese]!.completeError(
       const FormatException('offline'),
     );
-    await failure;
-    expect(cubit.state.loading, isFalse);
-    expect(cubit.state.dictionary, isNull);
-    expect(cubit.state.error, contains('offline'));
+    final failed = await failure;
+    expect(failed.loading, isFalse);
+    expect(failed.dictionary, isNull);
+    expect(failed.error, contains('offline'));
     dictionaries.pending.remove(AppLanguage.japanese);
-    final retry = cubit.load();
+    final retry = bloc.stream.firstWhere((state) => !state.loading);
+    bloc.add(const LanguageLoadRequested());
+    await Future<void>.delayed(Duration.zero);
     dictionaries.pending[AppLanguage.japanese]!.complete(
       GameDictionary('ja', {}, {}),
     );
-    await retry;
-    expect(cubit.state.error, isNull);
+    expect((await retry).error, isNull);
   });
 
   for (final language in AppLanguage.values) {
     testWidgets('Каталог и настройки без переполнения: ${language.code}', (
       tester,
     ) async {
-      final cubit = LanguageCubit(
+      final bloc = LanguageBloc(
         MemoryLanguages(),
         DelayedDictionaries(),
         initialLanguage: language,
@@ -102,7 +109,7 @@ void main() {
       addTearDown(() => tester.binding.setSurfaceSize(null));
       await tester.pumpWidget(
         BlocProvider.value(
-          value: cubit,
+          value: bloc,
           child: MaterialApp(
             locale: languageLocale(language),
             localizationsDelegates: AppLocalizations.localizationsDelegates,
@@ -131,7 +138,7 @@ void main() {
       }
       expect(tester.takeException(), isNull);
       await tester.pumpWidget(const SizedBox.shrink());
-      await cubit.close();
+      await disposeWidgetBloc(tester, bloc);
     });
   }
 

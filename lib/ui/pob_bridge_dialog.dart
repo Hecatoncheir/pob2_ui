@@ -109,29 +109,29 @@ class _InstallationChoice extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final (:candidates, :directory) = state.target;
-    if (candidates.length > 1) {
-      return DropdownButton<String>(
-        key: const Key('pob-bridge-installation'),
-        isExpanded: true,
-        value: directory,
-        hint: const AppText('Выберите установку PoB'),
-        items: [
-          for (final candidate in candidates)
-            DropdownMenuItem(
-              value: candidate,
-              child: Text(candidate, overflow: TextOverflow.ellipsis),
-            ),
-        ],
-        onChanged: state.busy
-            ? null
-            : (path) {
-                if (path != null) context.read<PobBridgeCubit>().select(path);
-              },
-      );
-    }
+    if (candidates.length > 1) return _dropdown(context);
     if (directory != null) return SelectableText(directory);
     return state.busy || state.error != null
         ? const SizedBox.shrink()
         : const AppText('PoB не найден. Выберите папку с приложением.');
+  }
+
+  Widget _dropdown(BuildContext context) => DropdownButton<String>(
+    key: const Key('pob-bridge-installation'),
+    isExpanded: true,
+    value: state.target.directory,
+    hint: const AppText('Выберите установку PoB'),
+    items: [
+      for (final candidate in state.target.candidates)
+        DropdownMenuItem(
+          value: candidate,
+          child: Text(candidate, overflow: TextOverflow.ellipsis),
+        ),
+    ],
+    onChanged: state.busy ? null : (path) => _select(context, path),
+  );
+
+  void _select(BuildContext context, String? path) {
+    if (path != null) context.read<PobBridgeCubit>().select(path);
   }
 }

@@ -1,10 +1,10 @@
 import 'package:pob2_ui/data/interface_scale_repository.dart';
-import 'package:pob2_ui/ui/interface_scale_cubit.dart';
+import 'package:pob2_ui/ui/interface_scale_bloc.dart';
 import 'package:pob2_ui/data/language_preferences.dart';
 import 'package:pob2_ui/data/game_dictionary_repository.dart';
-import 'package:pob2_ui/ui/language_cubit.dart';
+import 'package:pob2_ui/ui/language_bloc.dart';
 import 'package:pob2_ui/data/appearance_repository.dart';
-import 'package:pob2_ui/ui/appearance_cubit.dart';
+import 'package:pob2_ui/ui/appearance_bloc.dart';
 // Отладочный запуск с настоящим Lua; отдельный профиль задаётся через POB2_UI_HOME.
 import 'package:flutter/material.dart';
 import 'package:flutter_driver/driver_extension.dart';
@@ -24,12 +24,12 @@ Future<void> main() async {
     McpClient(),
   );
   final preferences = AppearanceRepository(model.components.store.root);
-  final appearance = AppearanceCubit(
+  final appearance = AppearanceBloc(
     preferences,
     initialTheme: await preferences.load(),
   );
   final languages = LanguagePreferences(model.components.store.root);
-  final language = LanguageCubit(
+  final language = LanguageBloc(
     languages,
     GameDictionaryRepository(model.components.store.root),
     initialLanguage: await languages.load(),
@@ -37,7 +37,7 @@ Future<void> main() async {
   final scalePreferences = InterfaceScaleRepository(
     model.components.store.root,
   );
-  final interfaceScale = InterfaceScaleCubit(
+  final interfaceScale = InterfaceScaleBloc(
     scalePreferences,
     initialPercent: await scalePreferences.load(),
   );
@@ -49,6 +49,6 @@ Future<void> main() async {
       interfaceScale: interfaceScale,
     ),
   );
-  language.load();
+  language.add(const LanguageLoadRequested());
   model.initialize();
 }

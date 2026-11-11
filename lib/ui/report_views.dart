@@ -11,14 +11,14 @@ import 'core/motion.dart';
 import 'core/panels.dart';
 import 'core/spark_art.dart';
 import 'core/spark_theme.dart';
-import 'shell_cubit.dart';
+import 'shell_bloc.dart';
 import 'workshop_cubit.dart';
 import 'core/frosted_surface.dart';
 
 class StatisticsPanel extends StatelessWidget {
   const StatisticsPanel({super.key, required this.model, required this.shell});
   final WorkshopCubit model;
-  final ShellCubit shell;
+  final ShellBloc shell;
   @override
   Widget build(BuildContext context) {
     final report = model.state.report!;
@@ -40,7 +40,7 @@ class StatisticsPanel extends StatelessWidget {
                   const Divider(height: 22),
                   _PrimaryStat(report),
                   const SizedBox(height: 16),
-                  BlocBuilder<ShellCubit, ShellState>(
+                  BlocBuilder<ShellBloc, ShellState>(
                     bloc: shell,
                     builder: (context, state) => Wrap(
                       spacing: 12,
@@ -107,7 +107,7 @@ class StatisticsPanel extends StatelessWidget {
 class _InspectorHeading extends StatelessWidget {
   const _InspectorHeading({required this.model, required this.shell});
   final WorkshopCubit model;
-  final ShellCubit shell;
+  final ShellBloc shell;
   @override
   Widget build(BuildContext context) => Padding(
     padding: const EdgeInsets.fromLTRB(18, 12, 8, 4),
@@ -136,14 +136,14 @@ class _InspectorHeading extends StatelessWidget {
       ],
     ),
   );
-  void _pins(BuildContext context, ShellCubit shell) => sparkDialog<void>(
+  void _pins(BuildContext context, ShellBloc shell) => sparkDialog<void>(
     context,
     AlertDialog(
       title: const AppText('Важные показатели'),
       content: SizedBox(
         width: 330,
         child: SingleChildScrollView(
-          child: BlocBuilder<ShellCubit, ShellState>(
+          child: BlocBuilder<ShellBloc, ShellState>(
             bloc: shell,
             builder: (context, state) => Column(
               mainAxisSize: MainAxisSize.min,
@@ -155,7 +155,8 @@ class _InspectorHeading extends StatelessWidget {
                       contentPadding: EdgeInsets.zero,
                       title: AppText(entry.value),
                       value: state.pins.contains(entry.key),
-                      onChanged: (_) => shell.pin(entry.key),
+                      onChanged: (_) =>
+                          shell.add(StatisticPinToggled(entry.key)),
                     ),
                   )
                   .toList(),

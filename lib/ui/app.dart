@@ -7,36 +7,37 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../domain/app_info.dart';
 import '../domain/appearance.dart';
 import '../data/appearance_repository.dart';
-import 'appearance_cubit.dart';
+import 'appearance_bloc.dart';
 import 'appearance_picker.dart';
 import '../data/language_preferences.dart';
 import '../data/game_dictionary_repository.dart';
 import '../l10n/generated/app_localizations.dart';
-import 'language_cubit.dart';
+import 'language_bloc.dart';
 import 'language_picker.dart';
 import 'core/language_scope.dart';
 import 'app_update_cubit.dart';
 import 'app_update_dialog.dart';
 import 'app_update_state.dart';
 import 'build_dialogs.dart';
+import 'build_setup.dart';
 import 'components_view.dart';
 import 'core/motion.dart';
 import 'core/panels.dart';
 import 'core/spark_art.dart';
 import 'core/spark_theme.dart';
 import 'library_view.dart';
-import 'shell_cubit.dart';
+import 'shell_bloc.dart';
 import 'workshop_cubit.dart';
 import 'workshop_state.dart';
 import 'workspace_view.dart';
 import '../data/interface_scale_repository.dart';
-import 'interface_scale_cubit.dart';
+import 'interface_scale_bloc.dart';
 import 'interface_scale_picker.dart';
 import 'interface_viewport.dart';
 import 'core/scrollable_workspace.dart';
 import '../data/workspace_preferences_repository.dart';
 import '../domain/workspace_preferences.dart';
-import 'workspace_preferences_cubit.dart';
+import 'workspace_preferences_bloc.dart';
 import 'keyboard_bindings.dart';
 import 'shortcut_settings.dart';
 import 'resizable_sidebar.dart';
@@ -54,46 +55,45 @@ class PobApp extends StatelessWidget {
   });
   final WorkshopCubit model;
   final AppUpdateCubit? updates;
-  final AppearanceCubit? appearance;
-  final LanguageCubit? language;
-  final InterfaceScaleCubit? interfaceScale;
-  final WorkspacePreferencesCubit? workspacePreferences;
+  final AppearanceBloc? appearance;
+  final LanguageBloc? language;
+  final InterfaceScaleBloc? interfaceScale;
+  final WorkspacePreferencesBloc? workspacePreferences;
   @override
   Widget build(BuildContext context) => MultiBlocProvider(
     providers: [
-      BlocProvider(create: (_) => ShellCubit()),
+      BlocProvider(create: (_) => ShellBloc()),
       if (workspacePreferences case final preferences?)
-        BlocProvider<WorkspacePreferencesCubit>.value(value: preferences)
+        BlocProvider<WorkspacePreferencesBloc>.value(value: preferences)
       else
         BlocProvider(
-          create: (_) => WorkspacePreferencesCubit(
+          create: (_) => WorkspacePreferencesBloc(
             WorkspacePreferencesRepository(model.components.store.root),
           ),
         ),
       if (interfaceScale case final settings?)
-        BlocProvider<InterfaceScaleCubit>.value(value: settings)
+        BlocProvider<InterfaceScaleBloc>.value(value: settings)
       else
         BlocProvider(
-          create: (_) => InterfaceScaleCubit(
+          create: (_) => InterfaceScaleBloc(
             InterfaceScaleRepository(model.components.store.root),
           ),
         ),
       if (language case final settings?)
-        BlocProvider<LanguageCubit>.value(value: settings)
+        BlocProvider<LanguageBloc>.value(value: settings)
       else
         BlocProvider(
-          create: (_) => LanguageCubit(
+          create: (_) => LanguageBloc(
             LanguagePreferences(model.components.store.root),
             GameDictionaryRepository(model.components.store.root),
           ),
         ),
       if (appearance case final settings?)
-        BlocProvider<AppearanceCubit>.value(value: settings)
+        BlocProvider<AppearanceBloc>.value(value: settings)
       else
         BlocProvider(
-          create: (_) => AppearanceCubit(
-            AppearanceRepository(model.components.store.root),
-          ),
+          create: (_) =>
+              AppearanceBloc(AppearanceRepository(model.components.store.root)),
         ),
     ],
     child: _MaterialApp(model, updates),
@@ -146,10 +146,10 @@ class _MaterialAppState extends State<_MaterialApp> {
 
   @override
   Widget build(BuildContext context) =>
-      BlocBuilder<LanguageCubit, LanguageState>(
+      BlocBuilder<LanguageBloc, LanguageState>(
         builder: (context, language) => LanguageScope(
           dictionary: language.dictionary,
-          child: BlocBuilder<AppearanceCubit, AppearanceState>(
+          child: BlocBuilder<AppearanceBloc, AppearanceState>(
             builder: (context, appearance) =>
                 _app(context, appearance, language),
           ),
@@ -160,7 +160,7 @@ class _MaterialAppState extends State<_MaterialApp> {
     BuildContext context,
     AppearanceState appearance,
     LanguageState language,
-  ) => BlocBuilder<ShellCubit, ShellState>(
+  ) => BlocBuilder<ShellBloc, ShellState>(
     builder: (context, state) => MaterialApp(
       navigatorKey: navigator,
       navigatorObservers: [_navigation],
@@ -176,7 +176,7 @@ class _MaterialAppState extends State<_MaterialApp> {
           : ThemeMode.light,
       builder: (context, child) => _KeyboardActions(
         model: widget.model,
-        shell: context.read<ShellCubit>(),
+        shell: context.read<ShellBloc>(),
         navigator: navigator,
         child: InterfaceViewport(child: child!, motion: state.motion),
       ),
@@ -193,9 +193,9 @@ class _Shell extends StatelessWidget {
   Widget build(BuildContext context) =>
       BlocBuilder<WorkshopCubit, WorkshopState>(
         bloc: model,
-        builder: (context, _) => BlocBuilder<ShellCubit, ShellState>(
+        builder: (context, _) => BlocBuilder<ShellBloc, ShellState>(
           builder: (context, state) {
-            final shell = context.read<ShellCubit>();
+            final shell = context.read<ShellBloc>();
             final narrow = MediaQuery.sizeOf(context).width < 650;
             return Scaffold(
               body: SafeArea(
@@ -240,7 +240,7 @@ class _Shell extends StatelessWidget {
           },
         ),
       );
-  Widget _page(AppPage page, WorkshopCubit model, ShellCubit shell) =>
+  Widget _page(AppPage page, WorkshopCubit model, ShellBloc shell) =>
       switch (page) {
         AppPage.library => LibraryView(model: model, shell: shell),
         AppPage.workspace => WorkspaceView(model: model, shell: shell),
@@ -266,12 +266,12 @@ class _KeyboardActions extends StatelessWidget {
     required this.navigator,
   });
   final WorkshopCubit model;
-  final ShellCubit shell;
+  final ShellBloc shell;
   final Widget child;
   final GlobalKey<NavigatorState> navigator;
   @override
   Widget build(BuildContext context) =>
-      BlocBuilder<WorkspacePreferencesCubit, WorkspacePreferencesState>(
+      BlocBuilder<WorkspacePreferencesBloc, WorkspacePreferencesState>(
         builder: (context, state) => CallbackShortcuts(
           bindings: commandCallbacks(state.preferences, {
             AppCommand.newBuild: () =>
@@ -302,18 +302,14 @@ class _KeyboardActions extends StatelessWidget {
   }
 }
 
-void _new(BuildContext context, WorkshopCubit model, ShellCubit shell) {
+void _new(BuildContext context, WorkshopCubit model, ShellBloc shell) {
   if (model.state.busy) return;
-  if (!model.buildFolderReady) {
-    shell.page(AppPage.library);
-    return;
-  }
-  if (!model.engine.connected) {
-    shell.page(AppPage.components);
-    return;
-  }
-  shell.page(AppPage.workspace);
-  showNewBuild(context, model);
+  final step = BuildSetup.pending(model);
+  final page = step == BuildSetup.components && model.state.report != null
+      ? AppPage.components
+      : AppPage.workspace;
+  shell.add(PageSelected(page));
+  if (step == null) showNewBuild(context, model);
 }
 
 class _Sidebar extends StatelessWidget {
@@ -322,7 +318,7 @@ class _Sidebar extends StatelessWidget {
   final AppUpdateCubit? updates;
   @override
   Widget build(BuildContext context) {
-    final shell = context.read<ShellCubit>();
+    final shell = context.read<ShellBloc>();
     return ResizableSidebar(
       builder: (compact, adjustable) => Container(
         padding: EdgeInsets.symmetric(horizontal: compact ? 12 : 18),
@@ -364,9 +360,9 @@ class _Sidebar extends StatelessWidget {
                           context,
                           compact ? 'Развернуть панель' : 'Свернуть панель',
                         ),
-                        onPressed: context
-                            .read<WorkspacePreferencesCubit>()
-                            .toggleSidebar,
+                        onPressed: () => context
+                            .read<WorkspacePreferencesBloc>()
+                            .add(const SidebarToggled()),
                         icon: Icon(
                           compact ? Icons.chevron_right : Icons.chevron_left,
                           size: 18,
@@ -440,7 +436,7 @@ class _NewButton extends StatelessWidget {
     this.compact = false,
   });
   final WorkshopCubit model;
-  final ShellCubit shell;
+  final ShellBloc shell;
   final bool compact;
   @override
   Widget build(BuildContext context) => OutlinedButton(
@@ -494,7 +490,7 @@ class _NavItem extends StatelessWidget {
   final AppPage page;
   final bool compact;
   @override
-  Widget build(BuildContext context) => BlocBuilder<ShellCubit, ShellState>(
+  Widget build(BuildContext context) => BlocBuilder<ShellBloc, ShellState>(
     builder: (context, state) {
       final selected = state.page == page;
       final scheme = Theme.of(context).colorScheme;
@@ -512,7 +508,7 @@ class _NavItem extends StatelessWidget {
             child: InkWell(
               key: ValueKey('page-${page.name}'),
               borderRadius: BorderRadius.circular(11),
-              onTap: () => context.read<ShellCubit>().page(page),
+              onTap: () => context.read<ShellBloc>().add(PageSelected(page)),
               child: Padding(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 12,
@@ -557,7 +553,7 @@ class _NavItem extends StatelessWidget {
 class _Recents extends StatelessWidget {
   const _Recents(this.model, this.shell);
   final WorkshopCubit model;
-  final ShellCubit shell;
+  final ShellBloc shell;
   @override
   Widget build(BuildContext context) => Padding(
     padding: const EdgeInsets.only(top: 30),
@@ -581,7 +577,7 @@ class _Recents extends StatelessWidget {
                     ? null
                     : () {
                         model.openBuild(entry.id);
-                        shell.page(AppPage.workspace);
+                        shell.add(const PageSelected(AppPage.workspace));
                       },
                 style: TextButton.styleFrom(
                   alignment: Alignment.centerLeft,
@@ -610,14 +606,15 @@ class _Recents extends StatelessWidget {
 class _BottomNav extends StatelessWidget {
   const _BottomNav(this.page, this.shell);
   final AppPage page;
-  final ShellCubit shell;
+  final ShellBloc shell;
   @override
   Widget build(BuildContext context) => NavigationBar(
     height: 68,
     backgroundColor: Spark.of(context).surface,
     indicatorColor: Spark.of(context).sage,
     selectedIndex: page.index,
-    onDestinationSelected: (index) => shell.page(AppPage.values[index]),
+    onDestinationSelected: (index) =>
+        shell.add(PageSelected(AppPage.values[index])),
     destinations: AppPage.values
         .map(
           (page) => NavigationDestination(
@@ -762,14 +759,14 @@ class _SettingsButton extends StatelessWidget {
     ),
   );
   void _show(BuildContext context) {
-    final shell = context.read<ShellCubit>();
+    final shell = context.read<ShellBloc>();
     sparkDialog<void>(
       context,
       AlertDialog(
         title: const AppText('Настройки'),
         content: SizedBox(
           width: 620,
-          child: BlocBuilder<ShellCubit, ShellState>(
+          child: BlocBuilder<ShellBloc, ShellState>(
             bloc: shell,
             builder: (context, state) => SingleChildScrollView(
               child: Column(
@@ -790,7 +787,8 @@ class _SettingsButton extends StatelessWidget {
                       'Системное уменьшение движения имеет приоритет',
                     ),
                     value: state.motion,
-                    onChanged: shell.motion,
+                    onChanged: (enabled) =>
+                        shell.add(ShellMotionChanged(enabled)),
                   ),
                 ],
               ),

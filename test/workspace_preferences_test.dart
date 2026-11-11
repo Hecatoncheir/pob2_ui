@@ -11,9 +11,10 @@ import 'package:pob2_ui/domain/workspace_preferences.dart';
 import 'package:pob2_ui/ui/app.dart';
 import 'package:pob2_ui/ui/keyboard_bindings.dart';
 import 'package:pob2_ui/ui/workshop_cubit.dart';
-import 'package:pob2_ui/ui/workspace_preferences_cubit.dart';
+import 'package:pob2_ui/ui/workspace_preferences_bloc.dart';
 
 import 'support/temporary_directory.dart';
+import 'support/dispose_widget_bloc.dart';
 
 class MemoryWorkspacePreferences extends WorkspacePreferencesRepository {
   MemoryWorkspacePreferences(super.root);
@@ -57,7 +58,7 @@ void main() {
     final root = await Directory.systemTemp.createTemp('pob2-redo-keys-');
     addTearDown(() => removeTemporaryDirectory(root));
     final repository = WorkspacePreferencesRepository(root);
-    final preferences = WorkspacePreferencesCubit(repository);
+    final preferences = WorkspacePreferencesBloc(repository);
     final defaultRedo = defaultBinding(AppCommand.redo);
     expect(defaultRedo.key, LogicalKeyboardKey.keyZ.keyId);
     expect(defaultRedo.control, isTrue);
@@ -73,7 +74,7 @@ void main() {
       ).last.shift,
       isTrue,
     );
-    await preferences.setBinding(AppCommand.undo, defaultRedo);
+    await _apply(preferences, ShortcutChanged(AppCommand.undo, defaultRedo));
     expect(preferences.state.error, isNotNull);
     final custom = (
       key: LogicalKeyboardKey.keyR.keyId,
@@ -82,7 +83,7 @@ void main() {
       shift: false,
       meta: false,
     );
-    await preferences.setBinding(AppCommand.redo, custom);
+    preferences.add(ShortcutChanged(AppCommand.redo, custom));
     await preferences.close();
     expect(commandBinding(await repository.load(), AppCommand.redo), custom);
   });
@@ -92,7 +93,7 @@ void main() {
     (tester) async {
       final root = Directory('unused-redo-shortcuts-test');
       final repository = MemoryWorkspacePreferences(root);
-      final preferences = WorkspacePreferencesCubit(repository);
+      final preferences = WorkspacePreferencesBloc(repository);
       final model = ShortcutWorkshop(root);
       await tester.pumpWidget(
         PobApp(model: model, workspacePreferences: preferences),
@@ -118,7 +119,7 @@ void main() {
       expect(model.undoCalls, 0);
       expect(commandBinding(repository.saved, AppCommand.redo)!.alt, isTrue);
       await tester.pumpWidget(const SizedBox.shrink());
-      await preferences.close();
+      await disposeWidgetBloc(tester, preferences);
       await model.close();
     },
   );
@@ -126,10 +127,12 @@ void main() {
     final root = await Directory.systemTemp.createTemp('pob2-preferences-');
     addTearDown(() => removeTemporaryDirectory(root));
     final repository = WorkspacePreferencesRepository(root);
-    final preferences = WorkspacePreferencesCubit(repository);
-    preferences.resizeSidebar(260);
-    await preferences.settleSidebar();
-    await preferences.toggleSidebar();
+    final preferences = WorkspacePreferencesBloc(repository);
+    preferences
+      ..add(const SidebarDragged(32))
+      ..add(const SidebarDragged(30))
+      ..add(const SidebarDragEnded())
+      ..add(const SidebarToggled());
     final custom = (
       key: LogicalKeyboardKey.keyK.keyId,
       control: true,
@@ -137,29 +140,36 @@ void main() {
       shift: true,
       meta: false,
     );
-    await preferences.setBinding(AppCommand.undo, custom);
-    await preferences.setBinding(AppCommand.exportXml, null);
+    preferences
+      ..add(ShortcutChanged(AppCommand.undo, custom))
+      ..add(const ShortcutChanged(AppCommand.exportXml, null));
     await preferences.close();
     final saved = await repository.load();
     expect(saved.sidebarWidth, 78);
     expect(saved.expandedWidth, 260);
     expect(commandBinding(saved, AppCommand.undo), custom);
     expect(commandBinding(saved, AppCommand.exportXml), isNull);
-    final next = WorkspacePreferencesCubit(repository, initial: saved);
-    await next.toggleSidebar();
+    final next = WorkspacePreferencesBloc(repository, initial: saved);
+    await _apply(next, const SidebarToggled());
     expect(next.state.preferences.sidebarWidth, 260);
-    await next.setBinding(AppCommand.undo, defaultBinding(AppCommand.zoomIn));
+    await _apply(
+      next,
+      ShortcutChanged(AppCommand.undo, defaultBinding(AppCommand.zoomIn)),
+    );
     expect(next.state.error, isNotNull);
     expect(commandBinding(next.state.preferences, AppCommand.undo), custom);
-    await next.setBinding(AppCommand.undo, (
-      key: LogicalKeyboardKey.keyN.keyId,
-      control: false,
-      alt: false,
-      shift: false,
-      meta: true,
-    ));
+    await _apply(
+      next,
+      ShortcutChanged(AppCommand.undo, (
+        key: LogicalKeyboardKey.keyN.keyId,
+        control: false,
+        alt: false,
+        shift: false,
+        meta: true,
+      )),
+    );
     expect(next.state.error, isNotNull);
-    await next.resetBindings();
+    await _apply(next, const ShortcutsReset());
     expect(
       commandBinding(next.state.preferences, AppCommand.undo),
       defaultBinding(AppCommand.undo),
@@ -175,7 +185,7 @@ void main() {
       final root = Directory('unused-sidebar-test');
       await tester.binding.setSurfaceSize(const Size(1600, 900));
       addTearDown(() => tester.binding.setSurfaceSize(null));
-      final preferences = WorkspacePreferencesCubit(
+      final preferences = WorkspacePreferencesBloc(
         MemoryWorkspacePreferences(root),
       );
       final model = WorkshopCubit(
@@ -210,7 +220,7 @@ void main() {
       expect(tester.getSize(sidebar).width, expanded);
       expect(tester.takeException(), isNull);
       await tester.pumpWidget(const SizedBox.shrink());
-      await preferences.close();
+      await disposeWidgetBloc(tester, preferences);
       await model.close();
     },
   );
@@ -220,7 +230,7 @@ void main() {
     (tester) async {
       final root = Directory('unused-shortcuts-test');
       final repository = MemoryWorkspacePreferences(root);
-      final preferences = WorkspacePreferencesCubit(repository);
+      final preferences = WorkspacePreferencesBloc(repository);
       final model = ShortcutWorkshop(root);
       await tester.pumpWidget(
         PobApp(model: model, workspacePreferences: preferences),
@@ -255,11 +265,20 @@ void main() {
       await tester.pumpAndSettle();
       expect(model.undoCalls, 1);
       await tester.pumpWidget(const SizedBox.shrink());
-      await preferences.close();
+      await disposeWidgetBloc(tester, preferences);
       await model.close();
       expect(commandBinding(repository.saved, AppCommand.undo)!.shift, isTrue);
     },
   );
+}
+
+Future<void> _apply(
+  WorkspacePreferencesBloc bloc,
+  WorkspacePreferencesEvent event,
+) async {
+  final changed = bloc.stream.first;
+  bloc.add(event);
+  await changed;
 }
 
 Future<void> _redoKeys(

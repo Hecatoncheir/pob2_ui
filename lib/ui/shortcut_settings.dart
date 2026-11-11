@@ -9,14 +9,14 @@ import 'core/motion.dart';
 import 'core/spark_theme.dart';
 import 'core/ui_translation.dart';
 import 'keyboard_bindings.dart';
-import 'workspace_preferences_cubit.dart';
+import 'workspace_preferences_bloc.dart';
 
 class ShortcutSettings extends StatelessWidget {
   const ShortcutSettings({super.key});
   @override
   Widget build(
     BuildContext context,
-  ) => BlocBuilder<WorkspacePreferencesCubit, WorkspacePreferencesState>(
+  ) => BlocBuilder<WorkspacePreferencesBloc, WorkspacePreferencesState>(
     builder: (context, state) => Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -40,7 +40,9 @@ class ShortcutSettings extends StatelessWidget {
           if (state.error case final error?)
             AppText(error, style: TextStyle(color: Spark.of(context).danger)),
           TextButton(
-            onPressed: context.read<WorkspacePreferencesCubit>().resetBindings,
+            onPressed: () => context.read<WorkspacePreferencesBloc>().add(
+              const ShortcutsReset(),
+            ),
             child: const AppText('Сбросить сочетания'),
           ),
         ],
@@ -86,9 +88,8 @@ class _ShortcutRow extends StatelessWidget {
         IconButton(
           key: ValueKey('clear-shortcut-${command.name}'),
           tooltip: translateUi(context, 'Убрать сочетание'),
-          onPressed: () => context.read<WorkspacePreferencesCubit>().setBinding(
-            command,
-            null,
+          onPressed: () => context.read<WorkspacePreferencesBloc>().add(
+            ShortcutChanged(command, null),
           ),
           icon: const Icon(Icons.backspace_outlined, size: 18),
         ),
@@ -97,13 +98,13 @@ class _ShortcutRow extends StatelessWidget {
   );
 
   Future<void> _capture(BuildContext context) async {
-    final preferences = context.read<WorkspacePreferencesCubit>();
+    final preferences = context.read<WorkspacePreferencesBloc>();
     final next = await sparkDialog<KeyBinding>(
       context,
       const _CaptureShortcut(),
     );
     if (next != null && !preferences.isClosed) {
-      await preferences.setBinding(command, next);
+      preferences.add(ShortcutChanged(command, next));
     }
   }
 }

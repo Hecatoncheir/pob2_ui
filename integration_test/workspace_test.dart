@@ -26,10 +26,10 @@ import 'package:pob2_ui/ui/app_update_cubit.dart';
 import 'package:pob2_ui/data/language_preferences.dart';
 import 'package:pob2_ui/data/game_dictionary_repository.dart';
 import 'package:pob2_ui/domain/app_language.dart';
-import 'package:pob2_ui/ui/language_cubit.dart';
+import 'package:pob2_ui/ui/language_bloc.dart';
 import 'package:pob2_ui/ui/core/spark_art.dart';
 import 'package:pob2_ui/data/interface_scale_repository.dart';
-import 'package:pob2_ui/ui/interface_scale_cubit.dart';
+import 'package:pob2_ui/ui/interface_scale_bloc.dart';
 import 'package:pob2_ui/domain/tree_allocation_mode.dart';
 import 'package:pob2_ui/data/xml_file_service.dart';
 import 'package:pob2_ui/ui/exit_protection.dart';
@@ -69,12 +69,12 @@ void main() {
     addTearDown(model.close);
     final updates = AppUpdateCubit(root: root);
     addTearDown(updates.close);
-    final language = LanguageCubit(
+    final language = LanguageBloc(
       LanguagePreferences(root),
       GameDictionaryRepository(root),
     );
     addTearDown(language.close);
-    final scale = InterfaceScaleCubit(InterfaceScaleRepository(root));
+    final scale = InterfaceScaleBloc(InterfaceScaleRepository(root));
     addTearDown(scale.close);
     await _stage('Подключение Lua', model.initialize);
     expect(model.state.error, isNull);
@@ -300,13 +300,10 @@ Future<void> _capture(WidgetTester tester, {String suffix = ''}) async {
   image.dispose();
 }
 
-Future<void> _reviewScale(
-  WidgetTester tester,
-  InterfaceScaleCubit scale,
-) async {
+Future<void> _reviewScale(WidgetTester tester, InterfaceScaleBloc scale) async {
   await tester.tap(find.byKey(const Key('appearance-settings')));
   await tester.pumpAndSettle();
-  await scale.setPercent(125);
+  scale.add(const InterfaceScaleSet(125));
   await tester.pumpAndSettle();
   await tester.sendKeyDownEvent(LogicalKeyboardKey.controlLeft);
   await tester.sendKeyEvent(LogicalKeyboardKey.equal);
@@ -340,12 +337,12 @@ Future<void> _reviewScale(
     await InterfaceScaleRepository(InstallationStore.defaultRoot()).load(),
     135,
   );
-  await scale.setPercent(200);
+  scale.add(const InterfaceScaleSet(200));
   await tester.pumpAndSettle();
   await _waitForImages(tester);
   await _capture(tester, suffix: '-scale-maximum');
   expect(tester.takeException(), isNull);
-  await scale.setPercent(100);
+  scale.add(const InterfaceScaleSet(100));
   await tester.pumpAndSettle();
   expect(tester.takeException(), isNull);
 }
@@ -444,11 +441,11 @@ ArtIconButton _powerButton(WidgetTester tester) =>
 Future<void> _localizeTree(
   WidgetTester tester,
   WorkshopCubit model,
-  LanguageCubit language,
+  LanguageBloc language,
 ) async {
   final xml = await model.exportXml();
   final stats = model.state.report!.stats;
-  await language.selectLanguage(AppLanguage.russian);
+  await _selectLanguage(language, AppLanguage.russian);
   expect(language.state.error, isNull);
   await tester.pumpAndSettle();
   await tester.tap(find.byKey(const Key('tree-search')));
@@ -479,7 +476,7 @@ Future<void> _localizeTree(
   await _capture(tester, suffix: '-ru');
   await mouse.moveTo(const Offset(4, 4));
   await mouse.removePointer();
-  await language.selectLanguage(AppLanguage.japanese);
+  await _selectLanguage(language, AppLanguage.japanese);
   expect(language.state.error, isNull);
   await tester.pumpAndSettle();
   await tester.tap(find.byKey(const Key('tree-search')));
@@ -491,13 +488,22 @@ Future<void> _localizeTree(
   await _capture(tester, suffix: '-ja');
   expect(model.state.report!.stats, stats);
   expect(await model.exportXml(), xml);
-  await language.selectLanguage(AppLanguage.russian);
+  await _selectLanguage(language, AppLanguage.russian);
   await tester.pumpAndSettle();
   expect(
     await LanguagePreferences(InstallationStore.defaultRoot()).load(),
     AppLanguage.russian,
   );
   expect(tester.takeException(), isNull);
+}
+
+Future<void> _selectLanguage(LanguageBloc bloc, AppLanguage language) async {
+  final loaded = bloc.stream.firstWhere(
+    (state) => state.language == language && !state.loading,
+  );
+  bloc.add(LanguageSelected(language));
+  await loaded;
+  await bloc.pendingSave;
 }
 
 Future<void> _selectAttribute(WidgetTester tester, WorkshopCubit model) async {

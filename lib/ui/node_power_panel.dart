@@ -7,11 +7,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../domain/build_report.dart';
 import '../domain/node_power.dart';
+import 'core/spark_art.dart';
 import 'core/spark_theme.dart';
 import 'node_power_cubit.dart';
 import 'core/ui_translation.dart';
 
-class NodePowerPanel extends StatelessWidget {
+class NodePowerPanel extends StatefulWidget {
   const NodePowerPanel({
     super.key,
     required this.model,
@@ -23,59 +24,96 @@ class NodePowerPanel extends StatelessWidget {
   final bool enabled;
 
   @override
+  State<NodePowerPanel> createState() => _NodePowerPanelState();
+}
+
+class _NodePowerPanelState extends State<NodePowerPanel> {
+  bool _expanded = true;
+  NodePowerCubit get model => widget.model;
+
+  @override
   Widget build(BuildContext context) =>
       BlocBuilder<NodePowerCubit, NodePowerState>(
         bloc: model,
         builder: (context, state) => Container(
-          padding: const EdgeInsets.all(12),
+          padding: const EdgeInsets.fromLTRB(12, 6, 12, 8),
           decoration: BoxDecoration(
             color: Spark.of(context).surface,
             borderRadius: BorderRadius.circular(14),
             border: Border.all(color: Spark.of(context).line),
           ),
           child: state.metrics.isEmpty
-              ? _loading(context, state)
+              ? SingleChildScrollView(primary: false, child: _loading(state))
               : _content(context, state),
         ),
       );
 
-  Widget _loading(BuildContext context, NodePowerState state) => Center(
+  Widget _loading(NodePowerState state) => Center(
     child: state.error == null
         ? const CircularProgressIndicator()
         : AppText(state.error!),
   );
 
-  Widget _content(BuildContext context, NodePowerState state) => Column(
-    crossAxisAlignment: CrossAxisAlignment.stretch,
-    children: [
-      LayoutBuilder(
-        builder: (context, size) =>
-            _controls(context, state, size.maxWidth < 580),
-      ),
-      const SizedBox(height: 8),
-      if (state.stale)
-        const AppText(
-          'Предыдущие результаты · пересчёт Lua',
-          style: TextStyle(fontSize: 11),
+  Widget _content(BuildContext context, NodePowerState state) => LayoutBuilder(
+    builder: (context, size) {
+      final narrow = size.maxWidth < 580;
+      final (:heading, :rows) = _results(state, wide: size.maxWidth >= 460);
+      final header = ColoredBox(
+        color: Spark.of(context).surface,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [_filters(context, state, narrow), ?heading],
         ),
-      if (state.progress case final progress?) ...[
-        LinearProgressIndicator(value: progress.clamp(0, 1)),
-        const SizedBox(height: 8),
-        AppText(
-          'Расчёт Lua · ${(progress * 100).round()}%',
-          style: const TextStyle(fontSize: 11),
-        ),
-      ],
-      if (state.error case final error?)
-        AppText(
-          error,
-          maxLines: 2,
-          overflow: TextOverflow.ellipsis,
-          style: TextStyle(color: Spark.of(context).danger, fontSize: 11),
-        ),
-      Expanded(child: _results(context, state)),
-    ],
+      );
+      return CustomScrollView(
+        primary: false,
+        shrinkWrap: true,
+        slivers: [
+          if (_canPin(state, size.maxHeight, narrow))
+            PinnedHeaderSliver(child: header)
+          else
+            SliverToBoxAdapter(child: header),
+          ...rows,
+        ],
+      );
+    },
   );
+
+  bool _canPin(NodePowerState state, double height, bool narrow) =>
+      height >= (narrow ? 174 : 128) &&
+      state.progress == null &&
+      state.error == null &&
+      !state.stale;
+
+  Widget _filters(BuildContext context, NodePowerState state, bool narrow) =>
+      Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          const SizedBox(height: 8),
+          _controls(context, state, narrow),
+          const SizedBox(height: 8),
+          if (state.stale)
+            const AppText(
+              'Предыдущие результаты · пересчёт Lua',
+              style: TextStyle(fontSize: 11),
+            ),
+          if (state.progress case final progress?) ...[
+            LinearProgressIndicator(value: progress.clamp(0, 1)),
+            const SizedBox(height: 8),
+            AppText(
+              'Расчёт Lua · ${(progress * 100).round()}%',
+              style: const TextStyle(fontSize: 11),
+            ),
+          ],
+          if (state.error case final error?)
+            AppText(
+              error,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(color: Spark.of(context).danger, fontSize: 11),
+            ),
+        ],
+      );
 
   Widget _controls(BuildContext context, NodePowerState state, bool narrow) {
     final metric = _metric(context, state);
@@ -83,7 +121,7 @@ class NodePowerPanel extends StatelessWidget {
     final allocation = _allocation(context, state);
     final action = FilledButton(
       key: const Key('node-power-calculate'),
-      onPressed: enabled
+      onPressed: widget.enabled
           ? (state.progress == null ? model.calculate : model.cancel)
           : null,
       child: AppText(state.progress == null ? 'Найти' : 'Отмена'),
@@ -272,58 +310,67 @@ class NodePowerPanel extends StatelessWidget {
         : 'Укажите число от 1 до 200';
   }
 
-  Widget _results(BuildContext context, NodePowerState state) {
+  ({Widget? heading, List<Widget> rows}) _results(
+    NodePowerState state, {
+    required bool wide,
+  }) {
     final entries = state.report?.entries;
     if (entries == null)
-      return const Center(
-        child: AppText(
-          'Выберите характеристику и нажмите «Найти».',
-          style: TextStyle(fontSize: 12),
-        ),
+      return const (
+        heading: null,
+        rows: [_ResultHint('Выберите характеристику и нажмите «Найти».')],
       );
     if (state.options.stat == 'OffenceDefence')
-      return const Center(
-        child: AppText(
-          'Общая карта урона и защиты. Для списка выберите отдельный показатель.',
-          style: TextStyle(fontSize: 12),
-        ),
+      return const (
+        heading: null,
+        rows: [
+          _ResultHint(
+            'Общая карта урона и защиты. Для списка выберите отдельный показатель.',
+          ),
+        ],
       );
     if (entries.isEmpty)
-      return const Center(
-        child: AppText(
-          'На этом расстоянии подходящих узлов нет.',
-          style: TextStyle(fontSize: 12),
-        ),
+      return const (
+        heading: null,
+        rows: [_ResultHint('На этом расстоянии подходящих узлов нет.')],
       );
-    return LayoutBuilder(
-      builder: (context, size) {
-        final wide = size.maxWidth >= 460;
-        return Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 8),
-              child: _row(
-                wide,
-                'Узел · ${entries.length}',
-                'Эффект',
-                'Очки',
-                'На очко',
-              ),
+    return (
+      heading: _resultsHeading(entries.length),
+      rows: [
+        if (_expanded) ...[
+          SliverToBoxAdapter(
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  child: _row(wide, 'Узел', 'Эффект', 'Очки', 'На очко'),
+                ),
+                const Divider(height: 8),
+              ],
             ),
-            const Divider(),
-            Expanded(
-              child: ListView.builder(
-                key: const Key('node-power-results'),
-                itemCount: entries.length,
-                itemBuilder: (context, index) =>
-                    _entry(context, entries[index], wide),
-              ),
-            ),
-          ],
-        );
-      },
+          ),
+          SliverList.builder(
+            key: const Key('node-power-results'),
+            itemCount: entries.length,
+            itemBuilder: (context, index) =>
+                _entry(context, entries[index], wide),
+          ),
+        ],
+      ],
     );
   }
+
+  Widget _resultsHeading(int count) => Row(
+    children: [
+      Expanded(child: AppText('Найдено узлов: $count')),
+      ArtIconButton.material(
+        _expanded ? Icons.expand_less : Icons.expand_more,
+        key: const Key('node-power-collapse'),
+        label: _expanded ? 'Свернуть результаты' : 'Развернуть результаты',
+        onPressed: () => setState(() => _expanded = !_expanded),
+      ),
+    ],
+  );
 
   Widget _entry(BuildContext context, JsonMap entry, bool wide) => AppTooltip(
     game: true,
@@ -336,7 +383,7 @@ class NodePowerPanel extends StatelessWidget {
       color: Colors.transparent,
       child: InkWell(
         key: ValueKey('power-node-${entry['id']}'),
-        onTap: () => onFocus(entry['id'] as int),
+        onTap: () => widget.onFocus(entry['id'] as int),
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 9, horizontal: 8),
           child: _row(
@@ -394,5 +441,15 @@ class NodePowerPanel extends StatelessWidget {
           ),
         ),
     ],
+  );
+}
+
+class _ResultHint extends StatelessWidget {
+  const _ResultHint(this.text);
+  final String text;
+
+  @override
+  Widget build(BuildContext context) => SliverToBoxAdapter(
+    child: Center(child: AppText(text, style: const TextStyle(fontSize: 12))),
   );
 }

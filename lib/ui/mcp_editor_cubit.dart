@@ -8,7 +8,7 @@ import '../data/mcp_editor_gateway.dart';
 import '../data/process_service.dart';
 import '../domain/build_report.dart';
 import '../domain/component.dart';
-import 'shell_cubit.dart';
+import 'shell_bloc.dart';
 import 'workshop_cubit.dart';
 
 typedef McpEditorChange = ({WorkshopTab tab, int? node, int revision});

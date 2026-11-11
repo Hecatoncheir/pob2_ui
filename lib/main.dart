@@ -1,5 +1,5 @@
 import 'data/appearance_repository.dart';
-import 'ui/appearance_cubit.dart';
+import 'ui/appearance_bloc.dart';
 
 import 'package:flutter/material.dart';
 
@@ -14,11 +14,11 @@ import 'ui/app.dart';
 import 'ui/workshop_cubit.dart';
 import 'data/language_preferences.dart';
 import 'data/game_dictionary_repository.dart';
-import 'ui/language_cubit.dart';
+import 'ui/language_bloc.dart';
 import 'data/interface_scale_repository.dart';
-import 'ui/interface_scale_cubit.dart';
+import 'ui/interface_scale_bloc.dart';
 import 'data/workspace_preferences_repository.dart';
-import 'ui/workspace_preferences_cubit.dart';
+import 'ui/workspace_preferences_bloc.dart';
 import 'ui/exit_protection.dart';
 
 Future<void> main(List<String> arguments) async {
@@ -31,12 +31,12 @@ Future<void> main(List<String> arguments) async {
   );
   final updates = AppUpdateCubit(root: model.components.store.root);
   final preferences = AppearanceRepository(model.components.store.root);
-  final appearance = AppearanceCubit(
+  final appearance = AppearanceBloc(
     preferences,
     initialTheme: await preferences.load(),
   );
   final languagePreferences = LanguagePreferences(model.components.store.root);
-  final language = LanguageCubit(
+  final language = LanguageBloc(
     languagePreferences,
     GameDictionaryRepository(model.components.store.root),
     initialLanguage: await languagePreferences.load(),
@@ -44,14 +44,14 @@ Future<void> main(List<String> arguments) async {
   final scalePreferences = InterfaceScaleRepository(
     model.components.store.root,
   );
-  final interfaceScale = InterfaceScaleCubit(
+  final interfaceScale = InterfaceScaleBloc(
     scalePreferences,
     initialPercent: await scalePreferences.load(),
   );
   final workspaceRepository = WorkspacePreferencesRepository(
     model.components.store.root,
   );
-  final workspacePreferences = WorkspacePreferencesCubit(
+  final workspacePreferences = WorkspacePreferencesBloc(
     workspaceRepository,
     initial: await workspaceRepository.load(),
   );
@@ -73,5 +73,5 @@ Future<void> main(List<String> arguments) async {
     await updates.initialize();
   });
   model.initialize();
-  language.load();
+  language.add(const LanguageLoadRequested());
 }

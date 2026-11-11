@@ -111,6 +111,10 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m917bb579d9 => 'PoB не сообщил путь к папке сборок.';
 
   @override
+  String get maaaf9e5923 =>
+      'PoB уже открыт без связи с мостом. Перезапустите его один раз.';
+
+  @override
   String get m3127345008 => 'XML больше 16 МБ';
 
   @override
@@ -322,6 +326,10 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m5d67586b4c => 'Выберите установку PoB';
 
   @override
+  String get m39b5ac8d00 =>
+      'Выберите установку в разделе «Настроить мост PoB».';
+
+  @override
   String get m2749913680 => 'Выберите характеристику и нажмите «Найти».';
 
   @override
@@ -407,6 +415,10 @@ class AppLocalizationsRu extends AppLocalizations {
   @override
   String get m6f9519e788 =>
       'Для поиска по характеристике обновите MCP до 0.9.0 в разделе «Компоненты».';
+
+  @override
+  String get mbd97478bba =>
+      'Для управления окном PoB через Wine нужен X11 или XWayland.';
 
   @override
   String get m3e069d1fae =>
@@ -739,13 +751,18 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m51233393a5 => 'Название сборки';
 
   @override
+  String mbfd148a7e8(String p0) {
+    return 'Найдено узлов: $p0';
+  }
+
+  @override
   String get mbe6156b8e4 => 'Найти';
 
   @override
   String get m7d4ff2d217 => 'Найти камень';
 
   @override
-  String get m5f0d49d480 => 'Найти папку через мост';
+  String get m85b24dddaa => 'Найти папку PoB';
 
   @override
   String get m302605cf87 => 'Найти сборку';
@@ -758,9 +775,6 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get mb37bd07a8a => 'Найти условие';
-
-  @override
-  String get m8823a786b9 => 'Настроить компоненты';
 
   @override
   String get m9a92ce1cef => 'Настроить мост PoB';
@@ -1152,6 +1166,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m1731619efa => 'Оформление';
 
   @override
+  String get m6e1f7baa47 => 'Очистить поиск';
+
+  @override
   String get m6cc0ad9655 => 'Очки';
 
   @override
@@ -1166,6 +1183,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get m7352f28e7e => 'Пакет больше ожидаемого размера';
+
+  @override
+  String get m8ce1a3f4ee => 'Папка сборок';
 
   @override
   String get mcaef3568a0 => 'Папка сборок PoB изменилась.';
@@ -1241,6 +1261,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get mbcc0fdbe14 => 'Подавление урона чар';
 
   @override
+  String get mb66419affe => 'Подготовить PoB II';
+
+  @override
   String get m52d7142d18 =>
       'Поддерживаются Windows x64, Linux x64 и macOS arm64';
 
@@ -1258,6 +1281,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get m80cc1bdb9b => 'Подключить мост';
+
+  @override
+  String get m929d292c0e => 'Подключить папку сборок';
 
   @override
   String get m5f5155bb1f => 'Подходящие поддержки';
@@ -1467,6 +1493,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get mf66e719066 => 'Развернуть панель';
 
   @override
+  String get m44faae47f6 => 'Развернуть результаты';
+
+  @override
   String get m8c8ec94283 => 'Размер или SHA-256 обновления не совпал';
 
   @override
@@ -1573,6 +1602,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get m87b737d42c => 'Свернуть панель';
+
+  @override
+  String get mdbd753f08d => 'Свернуть результаты';
 
   @override
   String get mf0cd3a6033 => 'Светлая';
@@ -1761,9 +1793,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m97ac4c501c => 'Уже выполняется установка';
 
   @override
-  String m39e5ccc0fa(String p0) {
-    return 'Узел · $p0';
-  }
+  String get me77a383ee5 => 'Узел';
 
   @override
   String get m8cf5c33b30 => 'Узел не изменит показатели.';

@@ -6,7 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:pob2_ui/data/interface_scale_repository.dart';
-import 'package:pob2_ui/ui/interface_scale_cubit.dart';
+import 'package:pob2_ui/ui/interface_scale_bloc.dart';
 import 'package:pob2_ui/ui/interface_scale_picker.dart';
 import 'package:pob2_ui/ui/interface_viewport.dart';
 import 'package:pob2_ui/ui/core/spark_theme.dart';
@@ -17,6 +17,7 @@ import 'package:pob2_ui/ui/app.dart';
 import 'package:pob2_ui/ui/workshop_cubit.dart';
 
 import 'support/temporary_directory.dart';
+import 'support/dispose_widget_bloc.dart';
 
 class MemoryScale extends InterfaceScaleRepository {
   MemoryScale() : super(Directory('unused-scale-test'));
@@ -49,7 +50,7 @@ void main() {
     (tester) async {
       await tester.binding.setSurfaceSize(const Size(800, 600));
       addTearDown(() => tester.binding.setSurfaceSize(null));
-      final scale = InterfaceScaleCubit(MemoryScale());
+      final scale = InterfaceScaleBloc(MemoryScale());
       final model = WorkshopCubit(
         ComponentRepository(
           store: InstallationStore(Directory('unused-scale-test')),
@@ -63,7 +64,7 @@ void main() {
       );
       await tester.tap(find.byKey(const Key('appearance-settings')));
       await tester.pumpAndSettle();
-      await scale.setPercent(135);
+      scale.add(const InterfaceScaleSet(135));
       await tester.pumpAndSettle();
       expect(opener.mounted, isFalse);
       await tester.tap(find.text('Готово'));
@@ -71,7 +72,7 @@ void main() {
       expect(find.byType(AlertDialog), findsNothing);
       expect(tester.takeException(), isNull);
       await tester.pumpWidget(const SizedBox.shrink());
-      await scale.close();
+      await disposeWidgetBloc(tester, scale);
       await model.close();
     },
   );
@@ -79,23 +80,25 @@ void main() {
     final root = await Directory.systemTemp.createTemp('pob2-scale-');
     addTearDown(() => removeTemporaryDirectory(root));
     final repository = DelayedScale(root);
-    final scale = InterfaceScaleCubit(repository);
-    final first = scale.setPercent(125);
-    final last = scale.setPercent(150);
+    final scale = InterfaceScaleBloc(repository);
+    scale
+      ..add(const InterfaceScaleSet(125))
+      ..add(const InterfaceScaleAdjusted(10))
+      ..add(const InterfaceScaleAdjusted(15));
     await Future<void>.delayed(Duration.zero);
     repository.first.complete();
-    await Future.wait([first, last]);
     await scale.close();
     expect(await InterfaceScaleRepository(root).load(), 150);
-    final next = InterfaceScaleCubit(
+    final next = InterfaceScaleBloc(
       InterfaceScaleRepository(root),
       initialPercent: await repository.load(),
     );
     expect(next.state.percent, 150);
-    await next.setPercent(999);
-    expect(next.state.percent, 200);
-    await next.setPercent(-20);
-    expect(next.state.percent, 75);
+    final changes = next.stream.take(2).map((state) => state.percent).toList();
+    next
+      ..add(const InterfaceScaleSet(999))
+      ..add(const InterfaceScaleSet(-20));
+    expect(await changes, [200, 75]);
     await next.close();
     await repository.file.writeAsString('{broken');
     expect(await repository.load(), 100);
@@ -107,7 +110,7 @@ void main() {
       await tester.binding.setSurfaceSize(const Size(1200, 800));
       addTearDown(() => tester.binding.setSurfaceSize(null));
       final repository = MemoryScale();
-      final scale = InterfaceScaleCubit(repository);
+      final scale = InterfaceScaleBloc(repository);
       final input = TextEditingController(text: 'unchanged');
       var taps = 0;
       const marker = Key('scale-marker');
@@ -172,7 +175,7 @@ void main() {
       expect(repository.percent, 100);
       expect(tester.takeException(), isNull);
       await tester.pumpWidget(const SizedBox.shrink());
-      await scale.close();
+      await disposeWidgetBloc(tester, scale);
       input.dispose();
     },
   );

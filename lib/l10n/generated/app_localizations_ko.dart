@@ -109,6 +109,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m917bb579d9 => 'PoB가 어셈블리 폴더 경로를 보고하지 않았습니다.';
 
   @override
+  String get maaaf9e5923 => 'PoB가 브리지에 연결되지 않은 상태로 열려 있습니다. 한 번 다시 시작하세요.';
+
+  @override
   String get m3127345008 => 'XML 16MB 이상';
 
   @override
@@ -318,6 +321,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m5d67586b4c => 'PoB 설치 경로 선택';
 
   @override
+  String get m39b5ac8d00 => '「PoB 브리지 설정」에서 설치를 선택하세요.';
+
+  @override
   String get m2749913680 => '특성을 선택하고 찾기를 클릭합니다.';
 
   @override
@@ -401,6 +407,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m6f9519e788 => '특성으로 검색하려면 구성 요소 섹션에서 MCP을 0.9.0으로 업데이트하세요.';
+
+  @override
+  String get mbd97478bba => 'Wine에서 PoB 창을 제어하려면 X11 또는 XWayland가 필요합니다.';
 
   @override
   String get m3e069d1fae =>
@@ -725,13 +734,18 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m51233393a5 => 'Название сборки';
 
   @override
+  String mbfd148a7e8(String p0) {
+    return '찾은 노드: $p0';
+  }
+
+  @override
   String get mbe6156b8e4 => '찾기';
 
   @override
   String get m7d4ff2d217 => '보석 검색';
 
   @override
-  String get m5f0d49d480 => '다리 건너 폴더 찾기';
+  String get m85b24dddaa => 'PoB 폴더 찾기';
 
   @override
   String get m302605cf87 => '나이티 сборку';
@@ -744,9 +758,6 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get mb37bd07a8a => '조건 찾기';
-
-  @override
-  String get m8823a786b9 => '구성 요소 구성';
 
   @override
   String get m9a92ce1cef => 'PoB 브리지 설정';
@@ -1134,6 +1145,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m1731619efa => '디자인';
 
   @override
+  String get m6e1f7baa47 => '검색 지우기';
+
+  @override
   String get m6cc0ad9655 => '안경';
 
   @override
@@ -1148,6 +1162,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m7352f28e7e => '예상 크기보다 큰 패킷';
+
+  @override
+  String get m8ce1a3f4ee => '빌드 폴더';
 
   @override
   String get mcaef3568a0 => 'PoB 빌드 폴더가 변경되었습니다.';
@@ -1220,6 +1237,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get mbcc0fdbe14 => '주문 억제 확률';
 
   @override
+  String get mb66419affe => 'PoB II 설정';
+
+  @override
   String get m52d7142d18 => 'Windows x64, Linux x64, macOS arm64 지원';
 
   @override
@@ -1236,6 +1256,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m80cc1bdb9b => '브리지 연결';
+
+  @override
+  String get m929d292c0e => '빌드 폴더 연결';
 
   @override
   String get m5f5155bb1f => '매칭 지원';
@@ -1442,6 +1465,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get mf66e719066 => '패널 확장';
 
   @override
+  String get m44faae47f6 => '결과 펼치기';
+
+  @override
   String get m8c8ec94283 => '크기 또는 SHA-256 업데이트가 일치하지 않습니다.';
 
   @override
@@ -1545,6 +1571,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m87b737d42c => '패널 축소';
+
+  @override
+  String get mdbd753f08d => '결과 접기';
 
   @override
   String get mf0cd3a6033 => '빛';
@@ -1731,9 +1760,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m97ac4c501c => '이미 설치가 진행 중입니다.';
 
   @override
-  String m39e5ccc0fa(String p0) {
-    return '노드 · $p0';
-  }
+  String get me77a383ee5 => '노드';
 
   @override
   String get m8cf5c33b30 => '변경사항이 없습니다.';

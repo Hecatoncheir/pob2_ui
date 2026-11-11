@@ -1,12 +1,21 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:pob2_ui/data/component_repository.dart';
+import 'package:pob2_ui/data/installation_store.dart';
 import 'package:pob2_ui/data/mcp_client.dart';
 import 'package:pob2_ui/domain/build_report.dart';
+import 'package:pob2_ui/domain/component.dart';
+import 'package:pob2_ui/ui/app.dart';
 import 'package:pob2_ui/ui/core/spark_theme.dart';
 import 'package:pob2_ui/ui/node_power_cubit.dart';
 import 'package:pob2_ui/ui/node_power_panel.dart';
+import 'package:pob2_ui/ui/workshop_cubit.dart';
+import 'package:pob2_ui/ui/workshop_state.dart';
+
+import 'support/workshop_fixture.dart';
 
 class PowerEngine extends McpClient {
   PowerEngine() {
@@ -185,6 +194,16 @@ void main() {
         await tester.pumpAndSettle();
         await tester.tap(find.byKey(const ValueKey('power-node-1')));
         expect(focused, 1);
+        final report = model.state.report;
+        final collapse = find.byKey(const Key('node-power-collapse'));
+        await tester.tap(collapse);
+        await tester.pumpAndSettle();
+        expect(find.byKey(const Key('node-power-results')), findsNothing);
+        expect(find.byKey(const Key('node-power-stat')), findsOneWidget);
+        expect(model.state.report, same(report));
+        await tester.tap(collapse);
+        await tester.pumpAndSettle();
+        expect(find.byKey(const ValueKey('power-node-1')), findsOneWidget);
         await tester.tap(find.byKey(const Key('node-power-stat')));
         await tester.pumpAndSettle();
         final menuText = find.text('Здоровье').last;
@@ -213,4 +232,80 @@ void main() {
       },
     );
   }
+
+  testWidgets('Длинный список оставляет место дереву; значки различаются', (
+    tester,
+  ) async {
+    await tester.binding.setSurfaceSize(const Size(1028, 681));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+    final engine = PowerEngine()
+      ..tools = {'pob_node_power', 'pob_tree_textures'};
+    engine.result['entries'] = [
+      for (var id = 1; id <= 50; id++)
+        {...jsonRows(_report()['entries']).single, 'id': id},
+    ];
+    final root = Directory('unused-node-power-test');
+    final components = ComponentRepository(store: InstallationStore(root))
+      ..active = {
+        for (final component in Component.values)
+          component: Installation(
+            tag: 'test',
+            commit: 'test',
+            directory: root.path,
+          ),
+      };
+    final model = WorkshopCubit(
+      components,
+      engine,
+      initialState: WorkshopState(
+        document: (report: fixture, tree: tree, stale: false, treeError: null),
+      ),
+    );
+    addTearDown(model.close);
+    await tester.pumpWidget(PobApp(model: model));
+    await tester.pumpAndSettle();
+    final treeCanvas = find.byKey(const Key('passive-tree'));
+    final originalHeight = tester.getSize(treeCanvas).height;
+    expect(find.byIcon(Icons.manage_search_rounded), findsOneWidget);
+    expect(find.byIcon(Icons.leaderboard_outlined), findsOneWidget);
+    await tester.tap(find.byKey(const Key('node-power-toggle')));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byKey(const Key('node-power-calculate')));
+    await tester.pumpAndSettle();
+    final panel = find.byKey(const Key('node-power-panel'));
+    final scroll = find.descendant(
+      of: panel,
+      matching: find.byType(Scrollable),
+    );
+    expect(
+      tester.getTopLeft(find.text('Характеристика')).dy,
+      greaterThanOrEqualTo(tester.getTopLeft(scroll).dy),
+    );
+    expect(find.byKey(const ValueKey('power-node-1')), findsOneWidget);
+    expect(tester.getSize(panel).height, lessThanOrEqualTo(210));
+    expect(tester.getSize(treeCanvas).height, greaterThan(originalHeight * .4));
+    await tester.drag(
+      find.byKey(const ValueKey('power-node-1')),
+      const Offset(0, -80),
+    );
+    await tester.pumpAndSettle();
+    expect(
+      tester.state<ScrollableState>(scroll).position.pixels,
+      greaterThan(0),
+    );
+    expect(
+      find.byKey(const Key('node-power-stat')).hitTestable(),
+      findsOneWidget,
+    );
+    final expandedHeight = tester.getSize(treeCanvas).height;
+    await tester.tap(find.byKey(const Key('node-power-collapse')));
+    await tester.pumpAndSettle();
+    expect(tester.getSize(treeCanvas).height, greaterThan(expandedHeight));
+    await tester.tap(find.byKey(const ValueKey('tab-conditions')));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byKey(const Key('open-statistics')));
+    await tester.pumpAndSettle();
+    expect(find.byKey(const Key('statistics-header')), findsOneWidget);
+    expect(tester.takeException(), isNull);
+  });
 }

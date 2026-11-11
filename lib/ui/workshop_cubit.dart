@@ -221,6 +221,26 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     if (changingFolder) _clearHistory();
   }
 
+  Future<void> prepareComponents() => _run(() async {
+    if (!ready) await _installMissingComponents();
+    if (!engine.connected) await _resume();
+  });
+
+  Future<void> _installMissingComponents() async {
+    await components.processes.python();
+    await components.processes.run('git', [
+      '--version',
+    ], timeout: const Duration(seconds: 10));
+    for (final component in Component.values) {
+      if (components.active.containsKey(component)) continue;
+      final release = await components.github.latest(component);
+      _update(
+        state.copyWith(releases: {...state.releases, component: release}),
+      );
+      await components.install(component, release, addLog);
+    }
+  }
+
   Future<void> checkUpdates() => _run(() async {
     final releases = <Component, Release>{};
     for (final component in Component.values) {

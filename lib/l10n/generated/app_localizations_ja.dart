@@ -109,6 +109,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m917bb579d9 => 'PoB はアセンブリ フォルダーへのパスを報告しませんでした。';
 
   @override
+  String get maaaf9e5923 => 'PoB がブリッジに接続せずに起動しています。一度再起動してください。';
+
+  @override
   String get m3127345008 => 'XML 16 MB 以上';
 
   @override
@@ -318,6 +321,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m5d67586b4c => 'PoBのインストール先を選択';
 
   @override
+  String get m39b5ac8d00 => '「PoB ブリッジを設定」でインストール先を選択してください。';
+
+  @override
   String get m2749913680 => '特性を選択し、「検索」をクリックします。';
 
   @override
@@ -401,6 +407,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m6f9519e788 => '特性で検索するには、「コンポーネント」セクションで MCP を 0.9.0 に更新します。';
+
+  @override
+  String get mbd97478bba => 'Wine で PoB のウィンドウを操作するには X11 または XWayland が必要です。';
 
   @override
   String get m3e069d1fae =>
@@ -725,13 +734,18 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m51233393a5 => 'Название сборки';
 
   @override
+  String mbfd148a7e8(String p0) {
+    return '見つかったノード: $p0';
+  }
+
+  @override
   String get mbe6156b8e4 => '検索';
 
   @override
   String get m7d4ff2d217 => '宝石を検索';
 
   @override
-  String get m5f0d49d480 => '橋を渡ってフォルダを探す';
+  String get m85b24dddaa => 'PoB フォルダーを探す';
 
   @override
   String get m302605cf87 => 'Найти сборку';
@@ -744,9 +758,6 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get mb37bd07a8a => '検索条件';
-
-  @override
-  String get m8823a786b9 => 'コンポーネントの構成';
 
   @override
   String get m9a92ce1cef => 'PoBブリッジを設定';
@@ -1134,6 +1145,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m1731619efa => 'デザイン';
 
   @override
+  String get m6e1f7baa47 => '検索をクリア';
+
+  @override
   String get m6cc0ad9655 => 'メガネ';
 
   @override
@@ -1148,6 +1162,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m7352f28e7e => 'パケットが予想サイズより大きい';
+
+  @override
+  String get m8ce1a3f4ee => 'ビルドフォルダー';
 
   @override
   String get mcaef3568a0 => 'PoB ビルド フォルダーが変更されました。';
@@ -1220,6 +1237,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get mbcc0fdbe14 => 'スペル抑制チャンス';
 
   @override
+  String get mb66419affe => 'PoB II をセットアップ';
+
+  @override
   String get m52d7142d18 => 'Windows x64、Linux x64、および macOS arm64 をサポート';
 
   @override
@@ -1236,6 +1256,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m80cc1bdb9b => 'ブリッジを接続';
+
+  @override
+  String get m929d292c0e => 'ビルドフォルダーを接続';
 
   @override
   String get m5f5155bb1f => 'マッチングサポート';
@@ -1442,6 +1465,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get mf66e719066 => 'パネルを展開します';
 
   @override
+  String get m44faae47f6 => '結果を展開';
+
+  @override
   String get m8c8ec94283 => 'サイズまたは SHA-256 アップデートが一致しませんでした';
 
   @override
@@ -1545,6 +1571,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m87b737d42c => 'パネルを折りたたむ';
+
+  @override
+  String get mdbd753f08d => '結果を折りたたむ';
 
   @override
   String get mf0cd3a6033 => 'ライト';
@@ -1731,9 +1760,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m97ac4c501c => 'インストールはすでに進行中です';
 
   @override
-  String m39e5ccc0fa(String p0) {
-    return 'ノード · $p0';
-  }
+  String get me77a383ee5 => 'ノード';
 
   @override
   String get m8cf5c33b30 => '変更はありません。';

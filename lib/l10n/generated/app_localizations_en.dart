@@ -112,6 +112,10 @@ class AppLocalizationsEn extends AppLocalizations {
       'PoB did not report the path to the assembly folder.';
 
   @override
+  String get maaaf9e5923 =>
+      'PoB is open without a bridge connection. Restart it once.';
+
+  @override
   String get m3127345008 => 'XML more than 16 MB';
 
   @override
@@ -323,6 +327,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m5d67586b4c => 'Choose a PoB installation';
 
   @override
+  String get m39b5ac8d00 =>
+      'Select an installation under “Configure PoB bridge”.';
+
+  @override
   String get m2749913680 => 'Select a characteristic and click Find.';
 
   @override
@@ -408,6 +416,10 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get m6f9519e788 =>
       'To search by characteristic, update MCP to 0.9.0 in the Components section.';
+
+  @override
+  String get mbd97478bba =>
+      'Managing the PoB window through Wine requires X11 or XWayland.';
 
   @override
   String get m3e069d1fae =>
@@ -739,13 +751,18 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m51233393a5 => 'Название сборки';
 
   @override
+  String mbfd148a7e8(String p0) {
+    return 'Nodes found: $p0';
+  }
+
+  @override
   String get mbe6156b8e4 => 'Find';
 
   @override
   String get m7d4ff2d217 => 'Search gems';
 
   @override
-  String get m5f0d49d480 => 'Find folder across bridge';
+  String get m85b24dddaa => 'Find PoB folder';
 
   @override
   String get m302605cf87 => 'Найти сборку';
@@ -758,9 +775,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get mb37bd07a8a => 'Find condition';
-
-  @override
-  String get m8823a786b9 => 'Configure components';
 
   @override
   String get m9a92ce1cef => 'Set up PoB bridge';
@@ -1152,6 +1166,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m1731619efa => 'Appearance';
 
   @override
+  String get m6e1f7baa47 => 'Clear search';
+
+  @override
   String get m6cc0ad9655 => 'Glasses';
 
   @override
@@ -1166,6 +1183,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get m7352f28e7e => 'Packet larger than expected size';
+
+  @override
+  String get m8ce1a3f4ee => 'Builds folder';
 
   @override
   String get mcaef3568a0 => 'The PoB build folder has changed.';
@@ -1240,6 +1260,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get mbcc0fdbe14 => 'Spell Suppression Chance';
 
   @override
+  String get mb66419affe => 'Set up PoB II';
+
+  @override
   String get m52d7142d18 => 'Windows x64, Linux x64 and macOS arm64 supported';
 
   @override
@@ -1256,6 +1279,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get m80cc1bdb9b => 'Connect bridge';
+
+  @override
+  String get m929d292c0e => 'Connect builds folder';
 
   @override
   String get m5f5155bb1f => 'Matching supports';
@@ -1464,6 +1490,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get mf66e719066 => 'Expand panel';
 
   @override
+  String get m44faae47f6 => 'Expand results';
+
+  @override
   String get m8c8ec94283 => 'Size or SHA-256 update did not match';
 
   @override
@@ -1569,6 +1598,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get m87b737d42c => 'Collapse panel';
+
+  @override
+  String get mdbd753f08d => 'Collapse results';
 
   @override
   String get mf0cd3a6033 => 'Light';
@@ -1758,9 +1790,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m97ac4c501c => 'Installation already in progress';
 
   @override
-  String m39e5ccc0fa(String p0) {
-    return 'Node · $p0';
-  }
+  String get me77a383ee5 => 'Node';
 
   @override
   String get m8cf5c33b30 => 'No changes.';

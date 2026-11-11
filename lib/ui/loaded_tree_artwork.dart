@@ -18,7 +18,7 @@ class LoadedTreeArtwork {
     try {
       for (final entry in bytes.entries) {
         images[entry.key] =
-            existing[entry.key]?.clone() ?? await _decode(entry.value);
+            existing[entry.key]?.clone() ?? await decodeTreeImage(entry.value);
       }
       return LoadedTreeArtwork._(OriginalTreeArtwork(scene, images), images);
     } catch (_) {
@@ -29,19 +29,19 @@ class LoadedTreeArtwork {
     }
   }
 
-  static Future<ui.Image> _decode(Uint8List bytes) async {
-    final codec = await ui.instantiateImageCodec(bytes);
-    try {
-      return (await codec.getNextFrame()).image;
-    } finally {
-      codec.dispose();
-    }
-  }
-
   void dispose() {
     artwork.dispose();
     for (final image in images.values) {
       image.dispose();
     }
+  }
+}
+
+Future<ui.Image> decodeTreeImage(Uint8List bytes) async {
+  final codec = await ui.instantiateImageCodec(bytes);
+  try {
+    return (await codec.getNextFrame()).image;
+  } finally {
+    codec.dispose();
   }
 }

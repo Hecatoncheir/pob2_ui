@@ -147,12 +147,7 @@ class _TreeViewState extends State<TreeView>
     final cached = icons[entry.key];
     if (cached != null && identical(decodedBytes[entry.key], entry.value))
       return cached.clone();
-    final codec = await ui.instantiateImageCodec(entry.value);
-    try {
-      return (await codec.getNextFrame()).image;
-    } finally {
-      codec.dispose();
-    }
+    return decodeTreeImage(entry.value);
   }
 
   void _acceptIcons(int generation, Map<String, ui.Image> loaded) {
@@ -245,86 +240,7 @@ class _TreeViewState extends State<TreeView>
       children: [
         _toolbar(),
         const SizedBox(height: 12),
-        if (powerVisible)
-          Padding(
-            padding: const EdgeInsets.only(bottom: 10),
-            child: SizedBox(
-              height: MediaQuery.sizeOf(context).width < 650 ? 230 : 210,
-              child: NodePowerPanel(
-                model: powerModel,
-                onFocus: _focusPowerNode,
-                enabled:
-                    !widget.model.state.busy &&
-                    widget.model.state.document?.stale == false,
-              ),
-            ),
-          ),
-        Expanded(
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(18),
-            child: ColoredBox(
-              color: Spark.of(context).treeBackground,
-              child: LayoutBuilder(
-                builder: (context, constraints) {
-                  final size = Size(
-                    constraints.maxWidth,
-                    constraints.maxHeight,
-                  );
-                  if (viewport == null) {
-                    viewport = size;
-                    WidgetsBinding.instance.addPostFrameCallback((_) {
-                      if (mounted) _focusAllocated();
-                    });
-                  }
-                  viewport = size;
-                  return MouseRegion(
-                    onHover: (event) =>
-                        _hover(event.localPosition, event.position),
-                    onExit: (_) => hoverModel.clear(),
-                    child: GestureDetector(
-                      onTapUp: _select,
-                      onLongPressStart: (event) =>
-                          _detailsAt(event.localPosition),
-                      child: InteractiveViewer(
-                        key: const Key('passive-tree'),
-                        transformationController: transform,
-                        onInteractionStart: (_) {
-                          editorFocus.requestFocus();
-                          zoomAnimation.stop();
-                          hoverModel.clear();
-                        },
-                        constrained: false,
-                        minScale: .08,
-                        maxScale: 12,
-                        boundaryMargin: const EdgeInsets.all(500),
-                        child: TreeJewelArtwork(
-                          scene: scene,
-                          report: widget.model.state.report!,
-                          child: CustomPaint(
-                            size: const Size(1800, 1800),
-                            isComplex: true,
-                            painter: TreePainter(
-                              scene,
-                              selected,
-                              hovered,
-                              query,
-                              icons,
-                              transform,
-                              size,
-                              powerArtwork?.artwork.picture ?? artwork?.picture,
-                              hoverArtwork?.picture,
-                              matches: _matchedIds(),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  );
-                },
-              ),
-            ),
-          ),
-        ),
+        Expanded(child: _treeArea()),
         if (decodeError case final error?)
           AppText(
             error,
@@ -351,6 +267,91 @@ class _TreeViewState extends State<TreeView>
       ],
     ),
   );
+
+  Widget _treeArea() => LayoutBuilder(
+    builder: (context, constraints) => Column(
+      children: [
+        if (powerVisible)
+          ConstrainedBox(
+            constraints: BoxConstraints(
+              maxHeight: math.min(210, constraints.maxHeight * .55),
+            ),
+            child: NodePowerPanel(
+              key: const Key('node-power-panel'),
+              model: powerModel,
+              onFocus: _focusPowerNode,
+              enabled:
+                  !widget.model.state.busy &&
+                  widget.model.state.document?.stale == false,
+            ),
+          ),
+        if (powerVisible && constraints.maxHeight >= 40)
+          const SizedBox(height: 8),
+        Expanded(child: _treeCanvas()),
+      ],
+    ),
+  );
+
+  Widget _treeCanvas() => ClipRRect(
+    borderRadius: BorderRadius.circular(18),
+    child: ColoredBox(
+      color: Spark.of(context).treeBackground,
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          final size = Size(constraints.maxWidth, constraints.maxHeight);
+          if (viewport == null) {
+            viewport = size;
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              if (mounted) _focusAllocated();
+            });
+          }
+          viewport = size;
+          return MouseRegion(
+            onHover: (event) => _hover(event.localPosition, event.position),
+            onExit: (_) => hoverModel.clear(),
+            child: GestureDetector(
+              onTapUp: _select,
+              onLongPressStart: (event) => _detailsAt(event.localPosition),
+              child: InteractiveViewer(
+                key: const Key('passive-tree'),
+                transformationController: transform,
+                onInteractionStart: (_) {
+                  editorFocus.requestFocus();
+                  zoomAnimation.stop();
+                  hoverModel.clear();
+                },
+                constrained: false,
+                minScale: .08,
+                maxScale: 12,
+                boundaryMargin: const EdgeInsets.all(500),
+                child: TreeJewelArtwork(
+                  scene: scene,
+                  report: widget.model.state.report!,
+                  child: CustomPaint(
+                    size: const Size(1800, 1800),
+                    isComplex: true,
+                    painter: TreePainter(
+                      scene,
+                      selected,
+                      hovered,
+                      query,
+                      icons,
+                      transform,
+                      size,
+                      powerArtwork?.artwork.picture ?? artwork?.picture,
+                      hoverArtwork?.picture,
+                      matches: _matchedIds(),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          );
+        },
+      ),
+    ),
+  );
+
   Widget _pointCounters() => TreePointCounters(
     widget.model.state.report!.points,
     mode: widget.model.state.treeMode,
@@ -378,8 +379,8 @@ class _TreeViewState extends State<TreeView>
         ),
       ),
       const SizedBox(width: 6),
-      ArtIconButton(
-        'chart',
+      ArtIconButton.material(
+        Icons.manage_search_rounded,
         key: const Key('node-power-toggle'),
         label: 'Найти узлы по характеристике',
         selected: powerVisible,
@@ -610,10 +611,8 @@ class _TreeViewState extends State<TreeView>
       for (final entry in preview.images.entries) {
         if (icons.containsKey(entry.key) || extraImages.containsKey(entry.key))
           continue;
-        final codec = await ui.instantiateImageCodec(entry.value);
-        final image = (await codec.getNextFrame()).image;
-        codec.dispose();
-        if (!mounted || generation != previewGeneration) {
+        final image = await decodeTreeImage(entry.value);
+        if (!_previewIsCurrent(generation)) {
           image.dispose();
           return;
         }
@@ -621,20 +620,20 @@ class _TreeViewState extends State<TreeView>
       }
       _recordPreview(preview, generation);
     } catch (error) {
-      if (mounted)
+      if (_previewIsCurrent(generation))
         setState(() => decodeError = 'Не удалось показать подсветку: $error');
     }
   }
 
+  bool _previewIsCurrent(int generation) =>
+      mounted && generation == previewGeneration;
+
   void _recordPreview(NodePreview preview, int generation) {
-    if (!mounted || generation != previewGeneration || preview.scene == null)
-      return;
+    final scene = preview.scene;
+    if (!_previewIsCurrent(generation) || scene == null) return;
     setState(() {
       hoverArtwork?.dispose();
-      hoverArtwork = OriginalTreeArtwork(preview.scene!, {
-        ...icons,
-        ...extraImages,
-      });
+      hoverArtwork = OriginalTreeArtwork(scene, {...icons, ...extraImages});
     });
   }
 

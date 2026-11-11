@@ -47,6 +47,7 @@ class _NewBuildDialogState extends State<_NewBuildDialog> {
 
   @override
   Widget build(BuildContext context) => AlertDialog(
+    scrollable: true,
     title: const AppText('Новая сборка'),
     content: SizedBox(
       width: 380,
@@ -69,25 +70,7 @@ class _NewBuildDialogState extends State<_NewBuildDialog> {
               ),
             ),
             const SizedBox(height: 16),
-            DropdownButtonFormField<int>(
-              key: const Key('build-class'),
-              initialValue: classId,
-              isExpanded: true,
-              decoration: const InputDecoration(label: AppText('Класс')),
-              items: widget.model.state.classes
-                  .map(
-                    (entry) => DropdownMenuItem(
-                      value: entry['id'] as int,
-                      child: AppText('${entry['name']}', game: true),
-                    ),
-                  )
-                  .toList(),
-              onChanged: (value) => classId = value,
-              validator: (value) => translateUiError(
-                context,
-                value == null ? 'Выберите класс' : null,
-              ),
-            ),
+            _classPicker(context),
             const SizedBox(height: 16),
             TextFormField(
               controller: level,
@@ -105,6 +88,52 @@ class _NewBuildDialogState extends State<_NewBuildDialog> {
       FilledButton(onPressed: _create, child: const AppText('Создать сборку')),
     ],
   );
+  Widget _classPicker(BuildContext context) => FormField<int>(
+    key: const Key('build-class'),
+    validator: (value) =>
+        translateUiError(context, value == null ? 'Выберите класс' : null),
+    builder: (field) => InputDecorator(
+      decoration: InputDecoration(
+        label: const AppText('Класс'),
+        errorText: field.errorText,
+      ),
+      child: Wrap(
+        spacing: 8,
+        runSpacing: 4,
+        children: [
+          for (final entry in widget.model.state.classes)
+            _classChoice(field, entry['id'] as int, '${entry['name']}'),
+        ],
+      ),
+    ),
+  );
+
+  Widget _classChoice(FormFieldState<int> field, int id, String name) =>
+      ChoiceChip(
+        key: ValueKey('build-class-$id'),
+        avatar: Icon(_classIcon(name), size: 18),
+        label: AppText(name, game: true),
+        selected: field.value == id,
+        showCheckmark: false,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        onSelected: (_) {
+          field.didChange(id);
+          classId = id;
+        },
+      );
+
+  IconData _classIcon(String name) => switch (name) {
+    'Warrior' => Icons.gavel_rounded,
+    'Witch' => Icons.dark_mode_outlined,
+    'Ranger' => Icons.gps_fixed_rounded,
+    'Mercenary' => Icons.shield_outlined,
+    'Monk' => Icons.self_improvement_rounded,
+    'Sorceress' => Icons.bolt_rounded,
+    'Huntress' => Icons.near_me_outlined,
+    'Druid' => Icons.park_outlined,
+    _ => Icons.person_outline_rounded,
+  };
+
   String? _levelError(String? value) {
     final number = int.tryParse(value ?? '');
     return number == null || number < 1 || number > 100 ? 'От 1 до 100' : null;

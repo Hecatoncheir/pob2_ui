@@ -116,6 +116,10 @@ class AppLocalizationsFr extends AppLocalizations {
       'PoB n\'a pas signalé le chemin d\'accès au dossier d\'assemblage.';
 
   @override
+  String get maaaf9e5923 =>
+      'PoB est ouvert sans connexion au pont. Redémarrez-le une fois.';
+
+  @override
   String get m3127345008 => 'XML plus de 16 Mo';
 
   @override
@@ -332,6 +336,10 @@ class AppLocalizationsFr extends AppLocalizations {
   String get m5d67586b4c => 'Choisissez une installation de PoB';
 
   @override
+  String get m39b5ac8d00 =>
+      'Choisissez une installation dans « Configurer le pont PoB ».';
+
+  @override
   String get m2749913680 =>
       'Sélectionnez une caractéristique et cliquez sur Rechercher.';
 
@@ -421,6 +429,10 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get m6f9519e788 =>
       'Pour effectuer une recherche par caractéristique, mettez à jour MCP vers 0.9.0 dans la section Composants.';
+
+  @override
+  String get mbd97478bba =>
+      'La gestion de la fenêtre PoB via Wine nécessite X11 ou XWayland.';
 
   @override
   String get m3e069d1fae =>
@@ -757,13 +769,18 @@ class AppLocalizationsFr extends AppLocalizations {
   String get m51233393a5 => 'Название сборки';
 
   @override
+  String mbfd148a7e8(String p0) {
+    return 'Nœuds trouvés : $p0';
+  }
+
+  @override
   String get mbe6156b8e4 => 'Rechercher';
 
   @override
   String get m7d4ff2d217 => 'Rechercher des gemmes';
 
   @override
-  String get m5f0d49d480 => 'Rechercher un dossier sur le pont';
+  String get m85b24dddaa => 'Trouver le dossier PoB';
 
   @override
   String get m302605cf87 => 'Найти сборку';
@@ -776,9 +793,6 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get mb37bd07a8a => 'Rechercher la condition';
-
-  @override
-  String get m8823a786b9 => 'Configurer les composants';
 
   @override
   String get m9a92ce1cef => 'Configurer le pont PoB';
@@ -1176,6 +1190,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get m1731619efa => 'Conception';
 
   @override
+  String get m6e1f7baa47 => 'Effacer la recherche';
+
+  @override
   String get m6cc0ad9655 => 'Lunettes';
 
   @override
@@ -1190,6 +1207,9 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get m7352f28e7e => 'Paquet plus grand que la taille prévue';
+
+  @override
+  String get m8ce1a3f4ee => 'Dossier des builds';
 
   @override
   String get mcaef3568a0 => 'Le dossier de build PoB a changé.';
@@ -1265,6 +1285,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get mbcc0fdbe14 => 'Chances de suppression des sorts';
 
   @override
+  String get mb66419affe => 'Configurer PoB II';
+
+  @override
   String get m52d7142d18 =>
       'Windows x64, Linux x64 et macOS arm64 pris en charge';
 
@@ -1283,6 +1306,9 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get m80cc1bdb9b => 'Connecter le pont';
+
+  @override
+  String get m929d292c0e => 'Connecter le dossier des builds';
 
   @override
   String get m5f5155bb1f => 'Supports correspondants';
@@ -1494,6 +1520,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get mf66e719066 => 'Agrandir le panneau';
 
   @override
+  String get m44faae47f6 => 'Développer les résultats';
+
+  @override
   String get m8c8ec94283 =>
       'La taille ou la mise à jour SHA-256 ne correspondent pas';
 
@@ -1602,6 +1631,9 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get m87b737d42c => 'Réduire le panneau';
+
+  @override
+  String get mdbd753f08d => 'Réduire les résultats';
 
   @override
   String get mf0cd3a6033 => 'Lumière';
@@ -1793,9 +1825,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get m97ac4c501c => 'Installation déjà en cours';
 
   @override
-  String m39e5ccc0fa(String p0) {
-    return 'Nœud · $p0';
-  }
+  String get me77a383ee5 => 'Nœud';
 
   @override
   String get m8cf5c33b30 => 'Aucun changement.';

@@ -64,35 +64,45 @@ class _VectorPainter extends CustomPainter {
 
 class ArtIconButton extends StatelessWidget {
   const ArtIconButton(
-    this.icon, {
+    String this.icon, {
     super.key,
     required this.label,
     this.onPressed,
     this.selected = false,
-  });
-  final String icon;
+  }) : materialIcon = null;
+  const ArtIconButton.material(
+    IconData this.materialIcon, {
+    super.key,
+    required this.label,
+    this.onPressed,
+    this.selected = false,
+  }) : icon = null;
+  final String? icon;
+  final IconData? materialIcon;
   final String label;
   final VoidCallback? onPressed;
   final bool selected;
   @override
-  Widget build(BuildContext context) => IconButton(
-    isSelected: selected,
-    style: IconButton.styleFrom(
-      backgroundColor: selected ? Spark.of(context).sage : null,
-      side: selected
-          ? BorderSide(color: Theme.of(context).colorScheme.primary)
-          : null,
-    ),
-    tooltip: translateUi(context, label),
-    onPressed: onPressed,
-    icon: SparkArt(
-      'icons/$icon',
-      width: 19,
-      color: onPressed == null
-          ? Spark.of(context).muted
-          : selected
-          ? Theme.of(context).colorScheme.primary
-          : Spark.of(context).ink,
-    ),
-  );
+  Widget build(BuildContext context) {
+    final colors = Spark.of(context);
+    final color = onPressed == null
+        ? colors.muted
+        : selected
+        ? Theme.of(context).colorScheme.primary
+        : colors.ink;
+    return IconButton(
+      isSelected: selected,
+      style: IconButton.styleFrom(
+        backgroundColor: selected ? Spark.of(context).sage : null,
+        side: selected
+            ? BorderSide(color: Theme.of(context).colorScheme.primary)
+            : null,
+      ),
+      tooltip: translateUi(context, label),
+      onPressed: onPressed,
+      icon: materialIcon == null
+          ? SparkArt('icons/$icon', width: 19, color: color)
+          : Icon(materialIcon, size: 20, color: color),
+    );
+  }
 }

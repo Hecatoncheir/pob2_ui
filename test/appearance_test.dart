@@ -10,7 +10,7 @@ import 'package:pob2_ui/data/mcp_client.dart';
 import 'package:pob2_ui/domain/appearance.dart';
 import 'package:pob2_ui/domain/node_preview.dart';
 import 'package:pob2_ui/ui/app.dart';
-import 'package:pob2_ui/ui/appearance_cubit.dart';
+import 'package:pob2_ui/ui/appearance_bloc.dart';
 import 'package:pob2_ui/ui/appearance_picker.dart';
 import 'package:pob2_ui/ui/core/panels.dart';
 import 'package:pob2_ui/ui/core/spark_theme.dart';
@@ -20,6 +20,7 @@ import 'package:pob2_ui/ui/tree_hover_card.dart';
 import 'package:pob2_ui/ui/workshop_cubit.dart';
 
 import 'support/temporary_directory.dart';
+import 'support/dispose_widget_bloc.dart';
 
 class DelayedPreferences extends AppearanceRepository {
   DelayedPreferences(super.root);
@@ -50,17 +51,17 @@ void main() {
     () async {
       final root = await Directory.systemTemp.createTemp('pob2-appearance-');
       addTearDown(() => removeTemporaryDirectory(root));
-      final appearance = AppearanceCubit(AppearanceRepository(root));
-      await appearance.selectTheme(AppTheme.dark);
+      final appearance = AppearanceBloc(AppearanceRepository(root));
+      appearance.add(const ThemeSelected(AppTheme.dark));
       await appearance.close();
       final repository = AppearanceRepository(root);
-      final restored = AppearanceCubit(
+      final restored = AppearanceBloc(
         repository,
         initialTheme: await repository.load(),
       );
-      addTearDown(restored.close);
       expect(restored.state.theme, AppTheme.dark);
-      await restored.selectTheme(AppTheme.light);
+      restored.add(const ThemeSelected(AppTheme.light));
+      await restored.close();
       expect(await AppearanceRepository(root).load(), AppTheme.light);
     },
   );
@@ -69,13 +70,13 @@ void main() {
     final root = await Directory.systemTemp.createTemp('pob2-appearance-');
     addTearDown(() => removeTemporaryDirectory(root));
     final repository = DelayedPreferences(root);
-    final appearance = AppearanceCubit(repository);
-    final first = appearance.selectTheme(AppTheme.dark);
-    final last = appearance.selectTheme(AppTheme.light);
+    final appearance = AppearanceBloc(repository);
+    appearance
+      ..add(const ThemeSelected(AppTheme.dark))
+      ..add(const ThemeSelected(AppTheme.light));
     await Future<void>.delayed(Duration.zero);
     expect(repository.writes, [AppTheme.dark]);
     repository.first.complete();
-    await Future.wait([first, last]);
     await appearance.close();
     expect(await repository.load(), AppTheme.light);
     await repository.file.writeAsString('{broken');
@@ -95,7 +96,7 @@ void main() {
         );
         addTearDown(model.close);
         final preferences = MemoryPreferences(root);
-        final appearance = AppearanceCubit(preferences);
+        final appearance = AppearanceBloc(preferences);
         await tester.pumpWidget(PobApp(model: model, appearance: appearance));
         await tester.pumpAndSettle();
         await tester.tap(find.byKey(const Key('appearance-settings')));
@@ -116,9 +117,9 @@ void main() {
           Spark.theme(brightness: Brightness.dark).scaffoldBackgroundColor,
         );
         await tester.pumpWidget(const SizedBox.shrink());
-        await appearance.close();
+        await disposeWidgetBloc(tester, appearance);
         final restored = await preferences.load();
-        final next = AppearanceCubit(preferences, initialTheme: restored);
+        final next = AppearanceBloc(preferences, initialTheme: restored);
         await tester.pumpWidget(PobApp(model: model, appearance: next));
         await tester.pump();
         expect(
@@ -131,7 +132,7 @@ void main() {
         );
         expect(tester.takeException(), isNull);
         await tester.pumpWidget(const SizedBox.shrink());
-        await next.close();
+        await disposeWidgetBloc(tester, next);
       },
     );
   }

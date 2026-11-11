@@ -302,6 +302,12 @@ abstract class AppLocalizations {
   /// **'PoB did not report the path to the assembly folder.'**
   String get m917bb579d9;
 
+  /// PoB уже открыт без связи с мостом. Перезапустите его один раз.
+  ///
+  /// In en, this message translates to:
+  /// **'PoB is open without a bridge connection. Restart it once.'**
+  String get maaaf9e5923;
+
   /// XML больше 16 МБ
   ///
   /// In en, this message translates to:
@@ -686,6 +692,12 @@ abstract class AppLocalizations {
   /// **'Choose a PoB installation'**
   String get m5d67586b4c;
 
+  /// Выберите установку в разделе «Настроить мост PoB».
+  ///
+  /// In en, this message translates to:
+  /// **'Select an installation under “Configure PoB bridge”.'**
+  String get m39b5ac8d00;
+
   /// Выберите характеристику и нажмите «Найти».
   ///
   /// In en, this message translates to:
@@ -847,6 +859,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'To search by characteristic, update MCP to 0.9.0 in the Components section.'**
   String get m6f9519e788;
+
+  /// Для управления окном PoB через Wine нужен X11 или XWayland.
+  ///
+  /// In en, this message translates to:
+  /// **'Managing the PoB window through Wine requires X11 or XWayland.'**
+  String get mbd97478bba;
 
   /// Для установки нужны Git и 64-битный Python 3.11+. После загрузки компонентов расчёты работают без сети.
   ///
@@ -1454,6 +1472,12 @@ abstract class AppLocalizations {
   /// **'Название сборки'**
   String get m51233393a5;
 
+  /// Найдено узлов: {p0}
+  ///
+  /// In en, this message translates to:
+  /// **'Nodes found: {p0}'**
+  String mbfd148a7e8(String p0);
+
   /// Найти
   ///
   /// In en, this message translates to:
@@ -1466,11 +1490,11 @@ abstract class AppLocalizations {
   /// **'Search gems'**
   String get m7d4ff2d217;
 
-  /// Найти папку через мост
+  /// Найти папку PoB
   ///
   /// In en, this message translates to:
-  /// **'Find folder across bridge'**
-  String get m5f0d49d480;
+  /// **'Find PoB folder'**
+  String get m85b24dddaa;
 
   /// Найти сборку
   ///
@@ -1495,12 +1519,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Find condition'**
   String get mb37bd07a8a;
-
-  /// Настроить компоненты
-  ///
-  /// In en, this message translates to:
-  /// **'Configure components'**
-  String get m8823a786b9;
 
   /// Настроить мост PoB
   ///
@@ -2199,6 +2217,12 @@ abstract class AppLocalizations {
   /// **'Appearance'**
   String get m1731619efa;
 
+  /// Очистить поиск
+  ///
+  /// In en, this message translates to:
+  /// **'Clear search'**
+  String get m6e1f7baa47;
+
   /// Очки
   ///
   /// In en, this message translates to:
@@ -2222,6 +2246,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Packet larger than expected size'**
   String get m7352f28e7e;
+
+  /// Папка сборок
+  ///
+  /// In en, this message translates to:
+  /// **'Builds folder'**
+  String get m8ce1a3f4ee;
 
   /// Папка сборок PoB изменилась.
   ///
@@ -2355,6 +2385,12 @@ abstract class AppLocalizations {
   /// **'Spell Suppression Chance'**
   String get mbcc0fdbe14;
 
+  /// Подготовить PoB II
+  ///
+  /// In en, this message translates to:
+  /// **'Set up PoB II'**
+  String get mb66419affe;
+
   /// Поддерживаются Windows x64, Linux x64 и macOS arm64
   ///
   /// In en, this message translates to:
@@ -2390,6 +2426,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Connect bridge'**
   String get m80cc1bdb9b;
+
+  /// Подключить папку сборок
+  ///
+  /// In en, this message translates to:
+  /// **'Connect builds folder'**
+  String get m929d292c0e;
 
   /// Подходящие поддержки
   ///
@@ -2763,6 +2805,12 @@ abstract class AppLocalizations {
   /// **'Expand panel'**
   String get mf66e719066;
 
+  /// Развернуть результаты
+  ///
+  /// In en, this message translates to:
+  /// **'Expand results'**
+  String get m44faae47f6;
+
   /// Размер или SHA-256 обновления не совпал
   ///
   /// In en, this message translates to:
@@ -2960,6 +3008,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Collapse panel'**
   String get m87b737d42c;
+
+  /// Свернуть результаты
+  ///
+  /// In en, this message translates to:
+  /// **'Collapse results'**
+  String get mdbd753f08d;
 
   /// Светлая
   ///
@@ -3321,11 +3375,11 @@ abstract class AppLocalizations {
   /// **'Installation already in progress'**
   String get m97ac4c501c;
 
-  /// Узел · {p0}
+  /// Узел
   ///
   /// In en, this message translates to:
-  /// **'Node · {p0}'**
-  String m39e5ccc0fa(String p0);
+  /// **'Node'**
+  String get me77a383ee5;
 
   /// Узел не изменит показатели.
   ///

@@ -12,7 +12,7 @@ import 'package:pob2_ui/domain/build_report.dart';
 import 'package:pob2_ui/ui/app.dart';
 import 'package:pob2_ui/ui/exit_protection.dart';
 import 'package:pob2_ui/ui/workshop_cubit.dart';
-import 'package:pob2_ui/ui/appearance_cubit.dart';
+import 'package:pob2_ui/ui/appearance_bloc.dart';
 import 'package:pob2_ui/ui/gem_medallion.dart';
 import 'package:pob2_ui/ui/core/frosted_surface.dart';
 import 'package:pob2_ui/data/appearance_repository.dart';
@@ -33,7 +33,7 @@ void main() {
         McpClient(),
       );
       addTearDown(model.close);
-      final appearance = AppearanceCubit(
+      final appearance = AppearanceBloc(
         AppearanceRepository(model.components.store.root),
         initialTheme: AppTheme.dark,
       );

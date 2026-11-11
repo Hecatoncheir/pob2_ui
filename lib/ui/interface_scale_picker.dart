@@ -5,15 +5,15 @@ import '../domain/interface_scale.dart';
 import 'core/app_text.dart';
 import 'core/spark_art.dart';
 import 'core/spark_theme.dart';
-import 'interface_scale_cubit.dart';
+import 'interface_scale_bloc.dart';
 
 class InterfaceScalePicker extends StatelessWidget {
   const InterfaceScalePicker({super.key});
   @override
   Widget build(BuildContext context) =>
-      BlocBuilder<InterfaceScaleCubit, InterfaceScaleState>(
+      BlocBuilder<InterfaceScaleBloc, InterfaceScaleState>(
         builder: (context, state) {
-          final scale = context.read<InterfaceScaleCubit>();
+          final scale = context.read<InterfaceScaleBloc>();
           return Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisSize: MainAxisSize.min,
@@ -29,7 +29,7 @@ class InterfaceScalePicker extends StatelessWidget {
                     'minus',
                     label: 'Уменьшить интерфейс',
                     onPressed: state.percent > minimumInterfaceScale
-                        ? () => scale.changeBy(-10)
+                        ? () => scale.add(const InterfaceScaleAdjusted(-10))
                         : null,
                   ),
                   Expanded(
@@ -40,14 +40,15 @@ class InterfaceScalePicker extends StatelessWidget {
                       max: 200,
                       divisions: 25,
                       label: '${state.percent}%',
-                      onChanged: (value) => scale.setPercent(value.round()),
+                      onChanged: (value) =>
+                          scale.add(InterfaceScaleSet(value.round())),
                     ),
                   ),
                   ArtIconButton(
                     'plus',
                     label: 'Увеличить интерфейс',
                     onPressed: state.percent < maximumInterfaceScale
-                        ? () => scale.changeBy(10)
+                        ? () => scale.add(const InterfaceScaleAdjusted(10))
                         : null,
                   ),
                   SizedBox(
@@ -64,7 +65,7 @@ class InterfaceScalePicker extends StatelessWidget {
                 children: [
                   const Spacer(),
                   TextButton(
-                    onPressed: () => scale.setPercent(100),
+                    onPressed: () => scale.add(const InterfaceScaleSet(100)),
                     child: const AppText('Сбросить'),
                   ),
                 ],

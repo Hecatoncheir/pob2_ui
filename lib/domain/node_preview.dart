@@ -19,8 +19,10 @@ class NodePreview {
   final List<int> path;
   final OriginalTreeScene? scene;
   final Map<String, Uint8List> images;
-  static bool _information(JsonMap line) =>
-      !cleanPoB('${line['text'] ?? ''}').startsWith('Tip:');
+  static bool _hasText(JsonMap line) {
+    final text = cleanPoB('${line['text'] ?? ''}');
+    return text.isNotEmpty && !text.startsWith('Tip:');
+  }
 
   static Iterable<JsonMap> _normalize(List<JsonMap> lines) sync* {
     var content = false;
@@ -30,8 +32,7 @@ class NodePreview {
         separator = line;
         continue;
       }
-      if (!_information(line) || cleanPoB('${line['text'] ?? ''}').isEmpty)
-        continue;
+      if (!_hasText(line)) continue;
       if (content && separator != null) yield separator;
       separator = null;
       content = true;

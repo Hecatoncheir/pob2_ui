@@ -3,14 +3,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'core/app_text.dart';
 import 'core/spark_theme.dart';
-import 'workspace_preferences_cubit.dart';
+import 'workspace_preferences_bloc.dart';
 
 class ResizableSidebar extends StatelessWidget {
   const ResizableSidebar({super.key, required this.builder});
   final Widget Function(bool compact, bool adjustable) builder;
   @override
   Widget build(BuildContext context) =>
-      BlocBuilder<WorkspacePreferencesCubit, WorkspacePreferencesState>(
+      BlocBuilder<WorkspacePreferencesBloc, WorkspacePreferencesState>(
         builder: (context, state) {
           final adjustable = MediaQuery.sizeOf(context).width >= 1250;
           final width = adjustable ? state.preferences.sidebarWidth : 78.0;
@@ -33,7 +33,7 @@ class _ResizeHandle extends StatelessWidget {
   const _ResizeHandle();
   @override
   Widget build(BuildContext context) {
-    final preferences = context.read<WorkspacePreferencesCubit>();
+    final preferences = context.read<WorkspacePreferencesBloc>();
     return AppTooltip(
       message: 'Потяните, чтобы изменить ширину панели',
       child: MouseRegion(
@@ -41,12 +41,12 @@ class _ResizeHandle extends StatelessWidget {
         child: GestureDetector(
           key: const Key('sidebar-resize'),
           behavior: HitTestBehavior.opaque,
-          onHorizontalDragUpdate: (details) => preferences.resizeSidebar(
-            preferences.state.preferences.sidebarWidth + details.delta.dx,
-          ),
-          onHorizontalDragEnd: (_) => preferences.settleSidebar(),
-          onHorizontalDragCancel: preferences.settleSidebar,
-          onDoubleTap: preferences.toggleSidebar,
+          onHorizontalDragUpdate: (details) =>
+              preferences.add(SidebarDragged(details.delta.dx)),
+          onHorizontalDragEnd: (_) => preferences.add(const SidebarDragEnded()),
+          onHorizontalDragCancel: () =>
+              preferences.add(const SidebarDragEnded()),
+          onDoubleTap: () => preferences.add(const SidebarToggled()),
           child: SizedBox(
             width: 6,
             child: Center(

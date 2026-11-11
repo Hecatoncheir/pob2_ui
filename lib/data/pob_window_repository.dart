@@ -6,20 +6,35 @@ import '../domain/component.dart';
 import '../domain/pob_character.dart';
 import 'mcp_client.dart';
 import 'process_service.dart';
+import 'wine_pob_window.dart';
 
 typedef _LaunchedPob = ({String path, int pid, int started});
 
 class PobWindowRepository {
   final _launched = <String, _LaunchedPob>{};
+  WinePobWindow? _wineWindow;
   bool _windowBusy = false;
 
   bool get supported => Platform.isWindows || Platform.isLinux;
   bool get canRestart => Platform.isWindows;
 
   Future<List<String>> findInstallations(Installation mcp) async {
-    final output = await _run(mcp, ['-c', _discovery]);
-    final paths = (jsonDecode(output) as List).cast<String>();
-    return List.unmodifiable(paths);
+    final result = await _discover(mcp);
+    return List.unmodifiable((result['paths'] as List).cast<String>());
+  }
+
+  Future<JsonMap> _discover(Installation mcp) async =>
+      jsonDecode(await _run(mcp, ['-c', _discovery])) as JsonMap;
+
+  Future<String> _launchDirectory(Installations components) async {
+    final result = await _discover(components[Component.mcp]!);
+    if (result['preferred'] case final String preferred) return preferred;
+    final paths = (result['paths'] as List).cast<String>();
+    if (paths.length == 1) return paths.single;
+    final pob = components[Component.pob];
+    if (Platform.isWindows && paths.isEmpty && pob != null)
+      return pob.directory;
+    throw StateError('Выберите установку в разделе «Настроить мост PoB».');
   }
 
   Future<void> installBridge(Installation mcp, String directory) async {
@@ -37,8 +52,25 @@ class PobWindowRepository {
   Future<void> _restartAndCheck(Installation mcp, String directory) async {
     final executable = await _executable(directory);
     final path = await executable.resolveSymbolicLinks();
-    final window = await _restartWindow(executable, path);
-    _launched[path.toLowerCase()] = window;
+    await _startAndCheck(mcp, directory, executable, path, restart: true);
+  }
+
+  Future<void> _startAndCheck(
+    Installation mcp,
+    String directory,
+    File executable,
+    String path, {
+    required bool restart,
+  }) async {
+    final key = path.toLowerCase();
+    if (!restart && _launched.containsKey(key)) await _closeOwned(key);
+    final window = await _startWindow(executable, path, restart: restart);
+    _launched[key] = window;
+    await _waitUntilReady(mcp, directory);
+    await _runForWindow(_minimizePobWindow, window);
+  }
+
+  Future<void> _waitUntilReady(Installation mcp, String directory) async {
     final status = await _run(mcp, [
       '-c',
       _waitForBridge,
@@ -49,28 +81,56 @@ class PobWindowRepository {
         'PoB запущен, но мост пока не отвечает. Проверьте связь ещё раз.',
       );
     }
-    await _runForWindow(_minimizePobWindow, window);
+  }
+
+  Future<void> _startWine(
+    Installation mcp,
+    String directory,
+    File executable,
+  ) async {
+    await _closeWine();
+    final prefix = await _run(mcp, ['-c', _winePrefix, directory]);
+    final window = await WinePobWindow.start(
+      executable,
+      prefix,
+      prepareBridge: () async {
+        await _run(mcp, ['-c', _ensureBridge, directory]);
+      },
+    );
+    _wineWindow = window;
+    await _waitUntilReady(mcp, directory);
+    await window.minimize();
+  }
+
+  Future<void> _closeWine() async {
+    await _wineWindow?.close();
+    _wineWindow = null;
   }
 
   Future<void> closeLaunchedWindows() => _windowOperation(() async {
+    await _closeWine();
     for (final key in _launched.keys.toList()) {
-      final result = await _runForWindow(_closeLaunchedPob, _launched[key]!);
-      switch (result.exitCode) {
-        case 0:
-          _launched.remove(key);
-        case 2:
-          throw StateError(_closePending);
-        default:
-          throw StateError('Не удалось закрыть PoB.');
-      }
+      await _closeOwned(key);
     }
   });
 
-  Future<void> _windowOperation(Future<void> Function() action) async {
+  Future<void> _closeOwned(String key) async {
+    final result = await _runForWindow(_closeLaunchedPob, _launched[key]!);
+    switch (result.exitCode) {
+      case 0:
+        _launched.remove(key);
+      case 2:
+        throw StateError(_closePending);
+      default:
+        throw StateError('Не удалось закрыть PoB.');
+    }
+  }
+
+  Future<T> _windowOperation<T>(Future<T> Function() action) async {
     if (_windowBusy) throw StateError('Дождитесь завершения текущей операции');
     _windowBusy = true;
     try {
-      await action();
+      return await action();
     } finally {
       _windowBusy = false;
     }
@@ -78,18 +138,28 @@ class PobWindowRepository {
 
   Future<File> _executable(String directory) async {
     final root = Directory(directory).absolute.uri;
-    final name = Uri.encodeComponent('Path of Building-PoE2.exe');
-    final executable = File.fromUri(root.resolve(name));
-    if (await executable.exists()) return executable;
-    final runtime = File.fromUri(root.resolve('runtime/$name'));
-    if (await runtime.exists()) return runtime;
+    const name = 'Path of Building-PoE2.exe';
+    const devName = 'Path{space}of{space}Building-PoE2.exe';
+    for (final candidate in [
+      Uri.encodeComponent(name),
+      'runtime/${Uri.encodeComponent(name)}',
+      'runtime/${Uri.encodeComponent(devName)}',
+    ]) {
+      final executable = File.fromUri(root.resolve(candidate));
+      if (await executable.exists()) return executable;
+    }
     throw const FormatException('Выберите папку с приложением PoB для PoE 2');
   }
 
-  Future<_LaunchedPob> _restartWindow(File executable, String path) async {
+  Future<_LaunchedPob> _startWindow(
+    File executable,
+    String path, {
+    required bool restart,
+  }) async {
     final result = await _windowScript(_restartPobWindow, {
       'POB2_WINDOW_EXE': path,
       'POB2_LAUNCH_EXE': executable.path,
+      'POB2_WINDOW_RESTART': restart ? '1' : '0',
     });
     switch (result.exitCode) {
       case 0:
@@ -104,6 +174,10 @@ class PobWindowRepository {
         throw StateError(_closePending);
       case 4:
         throw StateError('Не удалось запустить PoB.');
+      case 5:
+        throw StateError(
+          'PoB уже открыт без связи с мостом. Перезапустите его один раз.',
+        );
       default:
         throw StateError('Закройте выбранный PoB вручную и повторите запуск.');
     }
@@ -131,11 +205,8 @@ class PobWindowRepository {
     return jsonDecode(result) as String?;
   }
 
-  Future<String> readXml(Installations components) async {
-    final mcp = components[Component.mcp];
-    if (mcp == null) throw StateError('Подключите Lua');
-    return _exportXml(mcp);
-  }
+  Future<String> readXml(Installations components) =>
+      _withWindow(components, (client) => client.exportBuildXml());
 
   Future<List<PobCharacter>> listCharacters(Installations components) async {
     final response = await _windowTool(components, 'pob_list_characters');
@@ -174,9 +245,7 @@ class PobWindowRepository {
     String tool, [
     JsonMap arguments = const {},
   ]) async {
-    final mcp = components[Component.mcp];
-    if (mcp == null) throw StateError('Подключите Lua');
-    return _withWindow(mcp, (client) async {
+    return _withWindow(components, (client) async {
       if (!client.tools.contains(tool)) {
         throw StateError('Обновите MCP в разделе «Компоненты».');
       }
@@ -191,16 +260,56 @@ class PobWindowRepository {
     });
   }
 
-  Future<String> _exportXml(Installation mcp) =>
-      _withWindow(mcp, (client) => client.exportBuildXml());
-
   Future<T> _withWindow<T>(
-    Installation mcp,
+    Installations components,
     Future<T> Function(McpClient) action,
+  ) => _windowOperation(() async {
+    final mcp = components[Component.mcp];
+    if (mcp == null) throw StateError('Подключите Lua');
+    try {
+      return await _readWindow(mcp, action);
+    } on StateError catch (error) {
+      if (!_bridgeUnavailable(error) || !supported) rethrow;
+    }
+    final directory = await _launchDirectory(components);
+    final executable = await _executable(directory);
+    await _startAutomatically(mcp, directory, executable);
+    return _readWindow(mcp, action, directory: directory);
+  });
+
+  Future<void> _startAutomatically(
+    Installation mcp,
+    String directory,
+    File executable,
   ) async {
+    if (Platform.isLinux) {
+      await _startWine(mcp, directory, executable);
+      return;
+    }
+    final path = await executable.resolveSymbolicLinks();
+    await _run(mcp, ['-c', _ensureBridge, directory]);
+    await _startAndCheck(mcp, directory, executable, path, restart: false);
+  }
+
+  bool _bridgeUnavailable(StateError error) {
+    try {
+      return switch (jsonDecode(error.message.toString())) {
+        {'code': 'BRIDGE_NOT_RUNNING' || 'BRIDGE_RESTART_REQUIRED'} => true,
+        _ => false,
+      };
+    } on FormatException {
+      return false;
+    }
+  }
+
+  Future<T> _readWindow<T>(
+    Installation mcp,
+    Future<T> Function(McpClient) action, {
+    String? directory,
+  }) async {
     final client = McpClient();
     try {
-      await client.connectToPobWindow(mcp);
+      await client.connectToPobWindow(mcp, directory: directory);
       return await action(client);
     } finally {
       await client.close();
@@ -225,6 +334,11 @@ class PobWindowRepository {
       if (error.message.trim() == 'POB_WINE_UNSUPPORTED') {
         throw StateError('Обновите MCP в разделе «Компоненты».');
       }
+      if (error.message.trim() == 'POB_BRIDGE_TARGET_INVALID') {
+        throw const FormatException(
+          'Выберите папку с приложением PoB для PoE 2',
+        );
+      }
       throw StateError(error.message.trim());
     }
   }
@@ -235,16 +349,18 @@ const _closePending =
 
 const _discovery = '''
 import json
+import os
 import sys
 from pathlib import Path
 
 from pob_poe2_mcp import bridge
+from pob_poe2_mcp.engine import engine_layout
+from pob_poe2_mcp.transport import bridge_state_dir
 
 if hasattr(bridge, "installed_bridge_dirs"):
     paths = bridge.installed_bridge_dirs()
 elif sys.platform == "win32":
-    from pob_poe2_mcp.engine import engine_layout, installed_engine_dirs
-    from pob_poe2_mcp.transport import bridge_state_dir
+    from pob_poe2_mcp.engine import installed_engine_dirs
     paths = installed_engine_dirs()
     saved = bridge.load_config(bridge_state_dir()).get("installDir")
     if isinstance(saved, str):
@@ -254,7 +370,46 @@ elif sys.platform == "win32":
     paths = [path for path in paths if (path / "Path of Building-PoE2.exe").is_file()]
 else:
     sys.exit("POB_WINE_UNSUPPORTED")
-print(json.dumps([str(path) for path in paths]))
+preferred = None
+for candidate in [os.environ.get("POB_DIR"), bridge.load_config(bridge_state_dir()).get("installDir")]:
+    layout = engine_layout(Path(candidate).expanduser().resolve()) if isinstance(candidate, str) and candidate else None
+    dev = layout and sys.platform == "win32" and (layout.runtime / "Path{space}of{space}Building-PoE2.exe").is_file()
+    if layout and (layout.root in paths or dev):
+        preferred = str(layout.root)
+        if layout.root not in paths:
+            paths.insert(0, layout.root)
+        break
+print(json.dumps({"paths": [str(path) for path in paths], "preferred": preferred}))
+''';
+
+const _ensureBridge = """
+import sys
+from pob_poe2_mcp import bridge
+from pob_poe2_mcp.engine import engine_layout
+from pob_poe2_mcp.errors import EngineError
+from pob_poe2_mcp.transport import bridge_state_dir
+
+try:
+    layout = engine_layout(sys.argv[1])
+    if layout is None:
+        sys.exit("POB_BRIDGE_TARGET_INVALID")
+    state = bridge_state_dir().resolve()
+    config = bridge.load_config(state)
+    source = (layout.scripts / "Launch.lua").read_text(encoding="utf-8")
+    installed = (config.get("installDir") == str(layout.root)
+        and bool(config.get("token"))
+        and bridge.BEGIN in source and bridge.END in source
+        and (state / "lua/gui_bridge.lua").is_file())
+    if not installed:
+        bridge.install_bridge(sys.argv[1])
+except (EngineError, OSError) as error:
+    sys.exit(str(error))
+""";
+
+const _winePrefix = '''
+import sys
+from pob_poe2_mcp.wine_paths import wine_prefix
+print(wine_prefix(sys.argv[1]).resolve())
 ''';
 
 const _installLinuxBridge = '''
@@ -338,6 +493,7 @@ foreach ($process in [Diagnostics.Process]::GetProcessesByName($name)) {
         if (!$process.HasExited) { exit 3 }
     }
 }
+if ($windows.Count -gt 0 -and $env:POB2_WINDOW_RESTART -ne '1') { exit 5 }
 if ($windows.Count -gt 1) { exit 3 }
 if ($windows.Count -eq 1) { Close-PobWindow $windows[0] }
 try {

@@ -4,13 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'core/app_text.dart';
 import 'core/language_scope.dart';
 import 'core/motion.dart';
+import 'core/search_query_bloc.dart';
 
 typedef TradePickerChoice = ({String id, String label, String? detail});
-
-class _SearchCubit extends Cubit<String> {
-  _SearchCubit() : super('');
-  void search(String value) => emit(value.trim().toLowerCase());
-}
 
 Future<String?> showTradeChoice(
   BuildContext context,
@@ -19,7 +15,7 @@ Future<String?> showTradeChoice(
 ) => sparkDialog<String>(
   context,
   BlocProvider(
-    create: (_) => _SearchCubit(),
+    create: (_) => SearchQueryBloc(),
     child: _ChoiceDialog(title, choices),
   ),
 );
@@ -43,11 +39,13 @@ class _ChoiceDialog extends StatelessWidget {
               label: AppText('Поиск'),
               prefixIcon: Icon(Icons.search),
             ),
-            onChanged: context.read<_SearchCubit>().search,
+            onChanged: (value) => context.read<SearchQueryBloc>().add(
+              SearchQueryChanged(value.trim()),
+            ),
           ),
           const SizedBox(height: 10),
           Expanded(
-            child: BlocBuilder<_SearchCubit, String>(
+            child: BlocBuilder<SearchQueryBloc, String>(
               builder: (context, query) => _results(context, query),
             ),
           ),

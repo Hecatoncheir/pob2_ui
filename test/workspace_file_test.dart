@@ -6,6 +6,7 @@ import 'package:pob2_ui/data/build_library.dart';
 import 'package:pob2_ui/data/component_repository.dart';
 import 'package:pob2_ui/data/installation_store.dart';
 import 'package:pob2_ui/data/mcp_client.dart';
+import 'package:pob2_ui/data/pob_build_library.dart';
 import 'package:pob2_ui/data/pob_window_repository.dart';
 import 'package:pob2_ui/data/session_repository.dart';
 import 'package:pob2_ui/data/xml_file_service.dart';
@@ -121,6 +122,50 @@ class ImportButtonWorkshop extends WorkshopCubit {
       importedCharacter = name;
 }
 
+class SetupWorkshop extends WorkshopCubit {
+  SetupWorkshop(
+    super.components,
+    super.engine, {
+    required this.folder,
+    super.library,
+    super.pobWindow,
+  });
+
+  final String folder;
+  bool prepared = false;
+
+  @override
+  bool get ready => prepared;
+
+  @override
+  Future<void> prepareComponents() async {
+    prepared = true;
+    emit(state.copyWith(status: 'Готово'));
+  }
+
+  @override
+  Future<void> detectPobBuildFolder() => selectPobBuildFolder(folder);
+}
+
+class SetupLibrary extends PobBuildLibrary {
+  SetupLibrary(super.profile);
+
+  @override
+  String? directory;
+
+  @override
+  Future<LibraryState> configure(String folder) async {
+    directory = folder;
+    return scan();
+  }
+
+  @override
+  Future<LibraryState> scan() async => LibraryState(skipSessionRecovery: true);
+
+  @override
+  Future<void> flushText() async {}
+}
+
 void main() {
   late Directory root;
   late FailingTextFiles storage;
@@ -197,6 +242,42 @@ void main() {
     await tester.tap(find.byKey(const Key('import-from-pob')));
     await tester.pumpAndSettle();
     expect(widgetModel.requests, 1);
+  });
+
+  testWidgets('Первый запуск показывает один шаг, путь доступен в окне папки', (
+    tester,
+  ) async {
+    final folder = '${root.path}/PoB Builds';
+    final widgetModel = SetupWorkshop(
+      model.components,
+      engine,
+      folder: folder,
+      library: SetupLibrary(root),
+      pobWindow: window,
+    );
+    addTearDown(widgetModel.close);
+    await tester.pumpWidget(PobApp(model: widgetModel));
+    await tester.pumpAndSettle();
+    expect(find.text('Подготовить PoB II'), findsOneWidget);
+    expect(find.text('Подключить папку сборок'), findsNothing);
+    await tester.tap(find.text('Подготовить PoB II'));
+    await tester.pumpAndSettle();
+    expect(find.text('Подготовить PoB II'), findsNothing);
+    expect(find.text('Открыть XML'), findsNothing);
+    await tester.tap(find.text('Подключить папку сборок'));
+    await tester.pumpAndSettle();
+    final detect = find.text('Найти папку PoB');
+    expect(detect, findsOneWidget);
+    await tester.tap(detect);
+    await tester.pumpAndSettle();
+    expect(find.text('Открыть XML'), findsOneWidget);
+    await tester.tap(find.byKey(const ValueKey('page-library')));
+    await tester.pumpAndSettle();
+    expect(find.text(folder), findsNothing);
+    await tester.tap(find.byKey(const Key('build-folder-menu')));
+    await tester.pumpAndSettle();
+    expect(find.byKey(const Key('build-folder-path')), findsOneWidget);
+    expect(find.text(folder, findRichText: true), findsOneWidget);
   });
 
   test('Импорт из PoB открывает отдельную копию', () async {
@@ -327,6 +408,19 @@ void main() {
     await tester.tap(find.byKey(const ValueKey('page-library')));
     await tester.pumpAndSettle();
     final button = find.byKey(ValueKey('delete-build-$removed'));
+    final search = find.byKey(const Key('library-search'));
+    await tester.enterText(search, 'Такой сборки нет');
+    await tester.pump();
+    expect(button, findsNothing);
+    expect(find.text('Ничего не найдено'), findsOneWidget);
+    await tester.tap(find.text('Очистить поиск'));
+    await tester.pumpAndSettle();
+    expect(tester.widget<TextField>(search).controller!.text, isEmpty);
+    expect(button, findsOneWidget);
+    await tester.enterText(search, fixture.characterClass.toUpperCase());
+    await tester.pump();
+    expect(button, findsOneWidget);
+
     await tester.tap(button);
     await tester.pumpAndSettle();
     expect(find.text('Удалить сборку?'), findsOneWidget);

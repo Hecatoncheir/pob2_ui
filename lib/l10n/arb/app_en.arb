@@ -167,6 +167,11 @@
     "description": "PoB не сообщил путь к папке сборок.",
     "placeholders": {}
   },
+  "maaaf9e5923": "PoB is open without a bridge connection. Restart it once.",
+  "@maaaf9e5923": {
+    "description": "PoB уже открыт без связи с мостом. Перезапустите его один раз.",
+    "placeholders": {}
+  },
   "m3127345008": "XML more than 16 MB",
   "@m3127345008": {
     "description": "XML больше 16 МБ",
@@ -540,6 +545,11 @@
     "description": "Выберите установку PoB",
     "placeholders": {}
   },
+  "m39b5ac8d00": "Select an installation under “Configure PoB bridge”.",
+  "@m39b5ac8d00": {
+    "description": "Выберите установку в разделе «Настроить мост PoB».",
+    "placeholders": {}
+  },
   "m2749913680": "Select a characteristic and click Find.",
   "@m2749913680": {
     "description": "Выберите характеристику и нажмите «Найти».",
@@ -681,6 +691,11 @@
   "m6f9519e788": "To search by characteristic, update MCP to 0.9.0 in the Components section.",
   "@m6f9519e788": {
     "description": "Для поиска по характеристике обновите MCP до 0.9.0 в разделе «Компоненты».",
+    "placeholders": {}
+  },
+  "mbd97478bba": "Managing the PoB window through Wine requires X11 or XWayland.",
+  "@mbd97478bba": {
+    "description": "Для управления окном PoB через Wine нужен X11 или XWayland.",
     "placeholders": {}
   },
   "m3e069d1fae": "Installation requires Git and 64-bit Python 3.11+. After loading the components, calculations work without a network.",
@@ -1230,6 +1245,15 @@
     "description": "Название сборки",
     "placeholders": {}
   },
+  "mbfd148a7e8": "Nodes found: {p0}",
+  "@mbfd148a7e8": {
+    "description": "Найдено узлов: {p0}",
+    "placeholders": {
+      "p0": {
+        "type": "String"
+      }
+    }
+  },
   "mbe6156b8e4": "Find",
   "@mbe6156b8e4": {
     "description": "Найти",
@@ -1240,9 +1264,9 @@
     "description": "Найти камень",
     "placeholders": {}
   },
-  "m5f0d49d480": "Find folder across bridge",
-  "@m5f0d49d480": {
-    "description": "Найти папку через мост",
+  "m85b24dddaa": "Find PoB folder",
+  "@m85b24dddaa": {
+    "description": "Найти папку PoB",
     "placeholders": {}
   },
   "m302605cf87": "Найти сборку",
@@ -1263,11 +1287,6 @@
   "mb37bd07a8a": "Find condition",
   "@mb37bd07a8a": {
     "description": "Найти условие",
-    "placeholders": {}
-  },
-  "m8823a786b9": "Configure components",
-  "@m8823a786b9": {
-    "description": "Настроить компоненты",
     "placeholders": {}
   },
   "m9a92ce1cef": "Set up PoB bridge",
@@ -1922,6 +1941,11 @@
     "description": "Оформление",
     "placeholders": {}
   },
+  "m6e1f7baa47": "Clear search",
+  "@m6e1f7baa47": {
+    "description": "Очистить поиск",
+    "placeholders": {}
+  },
   "m6cc0ad9655": "Glasses",
   "@m6cc0ad9655": {
     "description": "Очки",
@@ -1948,6 +1972,11 @@
   "m7352f28e7e": "Packet larger than expected size",
   "@m7352f28e7e": {
     "description": "Пакет больше ожидаемого размера",
+    "placeholders": {}
+  },
+  "m8ce1a3f4ee": "Builds folder",
+  "@m8ce1a3f4ee": {
+    "description": "Папка сборок",
     "placeholders": {}
   },
   "mcaef3568a0": "The PoB build folder has changed.",
@@ -2068,6 +2097,11 @@
     "description": "Подавление урона чар",
     "placeholders": {}
   },
+  "mb66419affe": "Set up PoB II",
+  "@mb66419affe": {
+    "description": "Подготовить PoB II",
+    "placeholders": {}
+  },
   "m52d7142d18": "Windows x64, Linux x64 and macOS arm64 supported",
   "@m52d7142d18": {
     "description": "Поддерживаются Windows x64, Linux x64 и macOS arm64",
@@ -2096,6 +2130,11 @@
   "m80cc1bdb9b": "Connect bridge",
   "@m80cc1bdb9b": {
     "description": "Подключить мост",
+    "placeholders": {}
+  },
+  "m929d292c0e": "Connect builds folder",
+  "@m929d292c0e": {
+    "description": "Подключить папку сборок",
     "placeholders": {}
   },
   "m5f5155bb1f": "Matching supports",
@@ -2444,6 +2483,11 @@
     "description": "Развернуть панель",
     "placeholders": {}
   },
+  "m44faae47f6": "Expand results",
+  "@m44faae47f6": {
+    "description": "Развернуть результаты",
+    "placeholders": {}
+  },
   "m8c8ec94283": "Size or SHA-256 update did not match",
   "@m8c8ec94283": {
     "description": "Размер или SHA-256 обновления не совпал",
@@ -2619,6 +2663,11 @@
   "m87b737d42c": "Collapse panel",
   "@m87b737d42c": {
     "description": "Свернуть панель",
+    "placeholders": {}
+  },
+  "mdbd753f08d": "Collapse results",
+  "@mdbd753f08d": {
+    "description": "Свернуть результаты",
     "placeholders": {}
   },
   "mf0cd3a6033": "Light",
@@ -2925,14 +2974,10 @@
     "description": "Уже выполняется установка",
     "placeholders": {}
   },
-  "m39e5ccc0fa": "Node · {p0}",
-  "@m39e5ccc0fa": {
-    "description": "Узел · {p0}",
-    "placeholders": {
-      "p0": {
-        "type": "String"
-      }
-    }
+  "me77a383ee5": "Node",
+  "@me77a383ee5": {
+    "description": "Узел",
+    "placeholders": {}
   },
   "m8cf5c33b30": "No changes.",
   "@m8cf5c33b30": {

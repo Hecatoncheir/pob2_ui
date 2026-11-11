@@ -7,11 +7,12 @@ import 'package:pob2_ui/data/installation_store.dart';
 import 'package:pob2_ui/data/mcp_client.dart';
 import 'package:pob2_ui/ui/core/spark_theme.dart';
 import 'package:pob2_ui/ui/report_views.dart';
-import 'package:pob2_ui/ui/shell_cubit.dart';
+import 'package:pob2_ui/ui/shell_bloc.dart';
 import 'package:pob2_ui/ui/workshop_cubit.dart';
 import 'package:pob2_ui/ui/workshop_state.dart';
 
 import 'support/workshop_fixture.dart';
+import 'support/dispose_widget_bloc.dart';
 
 void main() {
   for (final brightness in Brightness.values) {
@@ -32,7 +33,7 @@ void main() {
             ),
           ),
         );
-        final shell = ShellCubit();
+        final shell = ShellBloc();
         await tester.pumpWidget(
           MaterialApp(
             theme: Spark.theme(brightness: brightness),
@@ -92,7 +93,7 @@ void main() {
         expect(tester.getRect(header), before);
         expect(tester.takeException(), isNull);
         await tester.pumpWidget(const SizedBox.shrink());
-        await shell.close();
+        await disposeWidgetBloc(tester, shell);
         await model.close();
       },
     );
