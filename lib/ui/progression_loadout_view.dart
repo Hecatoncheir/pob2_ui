@@ -14,8 +14,13 @@ import 'item_description.dart';
 import 'progression_comparison_bloc.dart';
 
 class ProgressionLoadoutView extends StatelessWidget {
-  const ProgressionLoadoutView(this.comparison, {super.key});
+  const ProgressionLoadoutView(
+    this.comparison, {
+    super.key,
+    this.initiallyExpanded = false,
+  });
   final ProgressionComparison comparison;
+  final bool initiallyExpanded;
 
   @override
   Widget build(BuildContext context) {
@@ -53,6 +58,7 @@ class ProgressionLoadoutView extends StatelessWidget {
   ) {
     if (rows.isEmpty) return const SizedBox.shrink();
     return ExpansionTile(
+      initiallyExpanded: initiallyExpanded,
       tilePadding: EdgeInsets.zero,
       expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
       leading: Icon(icon),

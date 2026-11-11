@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../domain/build_report.dart';
 import '../domain/progression_comparison.dart';
+import '../domain/progression_loadout_change.dart';
 import '../domain/tree_geometry.dart';
 import '../domain/tree_progression.dart';
 import 'core/app_text.dart';
@@ -22,18 +23,26 @@ class ProgressionApplyDialog extends StatelessWidget {
     this.nodes, {
     super.key,
     this.stages,
+    this.remaining,
   });
   final Set<ProgressionPart> available;
   final Map<int, TreeNode> nodes;
   final ({TreeProgressionStep before, TreeProgressionStep after})? stages;
+  final TreeProgressionStep? remaining;
+
+  bool get _canApply => stages == null && remaining == null;
+
+  String get _title => switch ((stages, remaining)) {
+    (_, TreeProgressionStep()) => 'Что осталось до следующего этапа?',
+    (null, _) => 'Что применить из этапа?',
+    _ => 'Сравнение этапов',
+  };
 
   @override
   Widget build(BuildContext context) =>
       BlocBuilder<ProgressionComparisonBloc, ProgressionComparisonState>(
         builder: (context, state) => AlertDialog(
-          title: AppText(
-            stages == null ? 'Что применить из этапа?' : 'Сравнение этапов',
-          ),
+          title: AppText(_title),
           scrollable: true,
           content: SizedBox(
             width: 540,
@@ -42,7 +51,9 @@ class ProgressionApplyDialog extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 if (stages case final pair?) _stageLabels(context, pair),
-                if (stages == null && available.length > 1)
+                if (remaining case final step?)
+                  _stageLabel(context, 'Следующий этап', step),
+                if (_canApply && available.length > 1)
                   for (final part in available) _checkbox(context, state, part),
                 _comparison(context, state),
               ],
@@ -51,9 +62,9 @@ class ProgressionApplyDialog extends StatelessWidget {
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(context),
-              child: AppText(stages == null ? 'Отмена' : 'Закрыть'),
+              child: AppText(_canApply ? 'Отмена' : 'Закрыть'),
             ),
-            if (stages == null)
+            if (_canApply)
               FilledButton(
                 onPressed: state.comparison != null
                     ? () => Navigator.pop(context, state.parts)
@@ -115,6 +126,9 @@ class ProgressionApplyDialog extends StatelessWidget {
   Widget _comparison(BuildContext context, ProgressionComparisonState state) {
     if (state.parts.isEmpty) return const SizedBox.shrink();
     if (state.comparison case final comparison?) {
+      if (remaining case final step?) {
+        return _RemainingActions(step, comparison, nodes);
+      }
       return _ComparisonDetails(
         comparison,
         nodes,
@@ -146,6 +160,80 @@ class ProgressionApplyDialog extends StatelessWidget {
       ),
     );
   }
+}
+
+class _RemainingActions extends StatelessWidget {
+  const _RemainingActions(this.step, this.comparison, this.nodes);
+  final TreeProgressionStep step;
+  final ProgressionComparison comparison;
+  final Map<int, TreeNode> nodes;
+
+  @override
+  Widget build(BuildContext context) {
+    final (:added, :removed) = comparison.nodes;
+    final tasks = step.tasks.where((task) => !task.done);
+    final missingLevel = comparison.before.level < step.level;
+    final hasChanges =
+        added.isNotEmpty ||
+        removed.isNotEmpty ||
+        comparison.gems.isNotEmpty ||
+        comparison.equipment.isNotEmpty ||
+        comparison.before.raw['weaponSet'] != comparison.after.raw['weaponSet'];
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        if (missingLevel) _level(),
+        if (added.isNotEmpty)
+          _nodes(context, 'Добавятся', Icons.add, {
+            ...step.keyNodes.where(added.contains),
+            ...added,
+          }),
+        if (removed.isNotEmpty)
+          _nodes(context, 'Снимутся', Icons.remove, removed),
+        ProgressionLoadoutView(comparison, initiallyExpanded: true),
+        for (final task in tasks)
+          ListTile(
+            contentPadding: EdgeInsets.zero,
+            leading: const Icon(Icons.check_box_outline_blank),
+            title: Text(task.text),
+          ),
+        if (!missingLevel && !hasChanges && tasks.isEmpty)
+          const AppText('Все действия для этапа выполнены'),
+        ProgressionWarnings(comparison),
+      ],
+    );
+  }
+
+  Widget _level() => ListTile(
+    contentPadding: EdgeInsets.zero,
+    leading: const Icon(Icons.trending_up),
+    title: AppText('Достичь уровня ${step.level}'),
+    subtitle: AppText('Уровень ${comparison.before.level}'),
+  );
+
+  Widget _nodes(
+    BuildContext context,
+    String title,
+    IconData icon,
+    Set<int> ids,
+  ) => ExpansionTile(
+    tilePadding: EdgeInsets.zero,
+    initiallyExpanded: ids.length <= 5,
+    leading: Icon(icon),
+    title: AppText(title),
+    trailing: Text('${ids.length}'),
+    children: [
+      for (final id in ids)
+        ListTile(
+          dense: true,
+          title: AppText(nodes[id]?.name ?? '#$id', game: true),
+          trailing: const Icon(Icons.my_location, size: 16),
+          onTap: nodes.containsKey(id)
+              ? () => Navigator.pop(context, id)
+              : null,
+        ),
+    ],
+  );
 }
 
 class _ComparisonDetails extends StatelessWidget {

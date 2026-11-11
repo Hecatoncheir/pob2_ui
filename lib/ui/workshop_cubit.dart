@@ -208,6 +208,17 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     );
   }
 
+  Future<List<int>> progressionPath(int id) async {
+    final report = state.report;
+    final result = await engine.call('pob_node_tooltip', {
+      'id': id,
+      'compare': false,
+    });
+    if (state.report != report || state.busy) return const [];
+    final path = NodePreview(tooltip: result).path;
+    return path.firstOrNull == id ? List.unmodifiable(path.reversed) : const [];
+  }
+
   Future<Map<String, Uint8List>> loadTreeSceneImages(OriginalTreeScene scene) =>
       treeIcons.overlay(
         state.document!.tree!.withScene(scene),

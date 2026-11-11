@@ -22,6 +22,7 @@ class TreeProgressionStep {
     String? equipment,
     bool completed = false,
     Iterable<ProgressionTask> tasks = const [],
+    Iterable<int> keyNodes = const [],
   }) : this._(
          level,
          nodes,
@@ -32,6 +33,7 @@ class TreeProgressionStep {
          equipment,
          completed,
          tasks,
+         keyNodes,
          Object(),
        );
 
@@ -45,9 +47,14 @@ class TreeProgressionStep {
     this.equipment,
     this.completed,
     Iterable<ProgressionTask> tasks,
+    Iterable<int> keyNodes,
     this.identity,
   ) : nodes = Set.unmodifiable(nodes),
-      tasks = List.unmodifiable(tasks);
+      tasks = List.unmodifiable(tasks) {
+    this.keyNodes = List.unmodifiable(
+      keyNodes.where(this.nodes.contains).toSet(),
+    );
+  }
 
   final int level;
   final Set<int> nodes;
@@ -58,6 +65,7 @@ class TreeProgressionStep {
   final String? equipment;
   final bool completed;
   final List<ProgressionTask> tasks;
+  late final List<int> keyNodes;
   final Object identity;
 
   Set<ProgressionPart> get parts => {
@@ -76,6 +84,7 @@ class TreeProgressionStep {
     TreeProgressionDetails? details,
     bool? completed,
     Iterable<ProgressionTask>? tasks,
+    Iterable<int>? keyNodes,
   }) => TreeProgressionStep._(
     details?.level ?? level,
     nodes,
@@ -86,6 +95,7 @@ class TreeProgressionStep {
     equipment,
     completed ?? this.completed,
     tasks ?? this.tasks,
+    keyNodes ?? this.keyNodes,
     identity,
   );
 
@@ -104,6 +114,7 @@ class TreeProgressionStep {
       parts.contains(ProgressionPart.equipment) ? current.equipment : equipment,
       completed,
       tasks,
+      keyNodes,
       identity,
     );
   }

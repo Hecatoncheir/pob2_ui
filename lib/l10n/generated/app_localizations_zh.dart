@@ -112,6 +112,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m62db50eb37 => '找不到 PoB。請選擇應用程式資料夾。';
 
   @override
+  String get m7610c788c5 => 'PoB 找不到通往此天賦節點的路徑';
+
+  @override
   String get m917bb579d9 => 'PoB 未報告組件資料夾的路徑。';
 
   @override
@@ -273,6 +276,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m215816bf42 => '全部';
 
   @override
+  String get mf532889a61 => '已完成此階段的所有事項';
+
+  @override
   String get m4cd169b3d5 => '所有指標 Lua';
 
   @override
@@ -375,6 +381,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m903bd09e68 => '正在執行操作...';
 
   @override
+  String get m357ccc3e75 => '上移';
+
+  @override
   String get m13b0a5cc9a => '熱鍵';
 
   @override
@@ -424,6 +433,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m6f9519e788 => '若要依特徵搜索，請將「組件」部分中的 MCP 更新為 0.9.0。';
 
   @override
+  String get m9a923fd47c => '接下來的階段無需購買任何物品';
+
+  @override
   String get mbd97478bba => '透過 Wine 管理 PoB 視窗需要 X11 或 XWayland。';
 
   @override
@@ -456,6 +468,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get ma11b26e5e9 => '新增並計算';
 
   @override
+  String get me598ae02b1 => '新增關鍵天賦節點';
+
+  @override
   String get m9cef26392f => '新增項目';
 
   @override
@@ -469,6 +484,11 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get mf0216281b8 => '其他單元格';
+
+  @override
+  String m9719fefc91(String p0) {
+    return '達到等級 $p0';
+  }
 
   @override
   String get m4122860034 => '存取權限對目前版本有效。編輯可以撤銷。';
@@ -1056,6 +1076,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m323494c6da => '當翻譯不可用時顯示原始文本';
 
   @override
+  String get m443c49da2a => '下移';
+
+  @override
   String get m480fae1c4b => '沒有找到任何內容';
 
   @override
@@ -1324,6 +1347,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m298e41327f => '重試下載';
 
   @override
+  String get m6a2417f3ec => '重新計算階段';
+
+  @override
   String get m3c320d7fe3 => '再次儲存';
 
   @override
@@ -1412,6 +1438,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get md90da4d82c => '嘗試重新計算組件。';
+
+  @override
+  String get mce98e63b90 => '關鍵天賦節點順序';
 
   @override
   String m032a431609(String p0) {
@@ -1554,6 +1583,12 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m62ed32eb22 => '正在檢查中...';
+
+  @override
+  String get m1dc35191c6 => 'PoB 的路徑經過此階段以外的天賦節點';
+
+  @override
+  String get m886e1844ee => '通往下一個天賦節點的路徑';
 
   @override
   String get m913b373c85 => '在應用程式視窗中工作。單擊組合即可更改它。';
@@ -1827,6 +1862,9 @@ class AppLocalizationsZh extends AppLocalizations {
   }
 
   @override
+  String get m651f75da98 => '購物清單';
+
+  @override
   String get m868f6bf490 => '比較階段';
 
   @override
@@ -2039,6 +2077,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String m913d7f855b(String p0) {
     return '某些圖示不可用：$p0';
   }
+
+  @override
+  String get me24055fecd => '離下一階段還差什麼？';
 
   @override
   String get m2b7ec4a283 => '要套用此階段的哪些內容？';
@@ -2234,6 +2275,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m62db50eb37 => '找不到 PoB。請選擇應用程式資料夾。';
 
   @override
+  String get m7610c788c5 => 'PoB 找不到通往此天賦節點的路徑';
+
+  @override
   String get m917bb579d9 => 'PoB 未報告組件資料夾的路徑。';
 
   @override
@@ -2395,6 +2439,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m215816bf42 => '全部';
 
   @override
+  String get mf532889a61 => '已完成此階段的所有事項';
+
+  @override
   String get m4cd169b3d5 => '所有指標 Lua';
 
   @override
@@ -2497,6 +2544,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m903bd09e68 => '正在執行操作...';
 
   @override
+  String get m357ccc3e75 => '上移';
+
+  @override
   String get m13b0a5cc9a => '熱鍵';
 
   @override
@@ -2546,6 +2596,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m6f9519e788 => '若要依特徵搜索，請將「組件」部分中的 MCP 更新為 0.9.0。';
 
   @override
+  String get m9a923fd47c => '接下來的階段無需購買任何物品';
+
+  @override
   String get mbd97478bba => '透過 Wine 管理 PoB 視窗需要 X11 或 XWayland。';
 
   @override
@@ -2578,6 +2631,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get ma11b26e5e9 => '新增並計算';
 
   @override
+  String get me598ae02b1 => '新增關鍵天賦節點';
+
+  @override
   String get m9cef26392f => '新增項目';
 
   @override
@@ -2591,6 +2647,11 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get mf0216281b8 => '其他單元格';
+
+  @override
+  String m9719fefc91(String p0) {
+    return '達到等級 $p0';
+  }
 
   @override
   String get m4122860034 => '存取權限對目前版本有效。編輯可以撤銷。';
@@ -3178,6 +3239,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m323494c6da => '當翻譯不可用時顯示原始文本';
 
   @override
+  String get m443c49da2a => '下移';
+
+  @override
   String get m480fae1c4b => '沒有找到任何內容';
 
   @override
@@ -3446,6 +3510,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m298e41327f => '重試下載';
 
   @override
+  String get m6a2417f3ec => '重新計算階段';
+
+  @override
   String get m3c320d7fe3 => '再次儲存';
 
   @override
@@ -3534,6 +3601,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get md90da4d82c => '嘗試重新計算組件。';
+
+  @override
+  String get mce98e63b90 => '關鍵天賦節點順序';
 
   @override
   String m032a431609(String p0) {
@@ -3676,6 +3746,12 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m62ed32eb22 => '正在檢查中...';
+
+  @override
+  String get m1dc35191c6 => 'PoB 的路徑經過此階段以外的天賦節點';
+
+  @override
+  String get m886e1844ee => '通往下一個天賦節點的路徑';
 
   @override
   String get m913b373c85 => '在應用程式視窗中工作。單擊組合即可更改它。';
@@ -3949,6 +4025,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   }
 
   @override
+  String get m651f75da98 => '購物清單';
+
+  @override
   String get m868f6bf490 => '比較階段';
 
   @override
@@ -4161,6 +4240,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String m913d7f855b(String p0) {
     return '某些圖示不可用：$p0';
   }
+
+  @override
+  String get me24055fecd => '離下一階段還差什麼？';
 
   @override
   String get m2b7ec4a283 => '要套用此階段的哪些內容？';

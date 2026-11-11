@@ -24,6 +24,102 @@ typedef ProgressionGemChange = ({
   ProgressionGem? after,
 });
 
+typedef ProgressionPurchase = ({
+  String name,
+  String? slot,
+  String? base,
+  int count,
+});
+
+List<List<ProgressionPurchase>> progressionShopping(
+  BuildReport current,
+  List<BuildReport> stages,
+) {
+  final owned = _shoppingEntries(
+    current,
+    includeStored: true,
+  ).map((key, entry) => MapEntry(key, entry.count));
+  return [
+    for (final stage in stages) _newPurchases(owned, _shoppingEntries(stage)),
+  ];
+}
+
+List<ProgressionPurchase> _newPurchases(
+  Map<String, int> owned,
+  Map<String, ProgressionPurchase> entries,
+) => [
+  for (final entry in entries.entries)
+    if (_recordPurchase(owned, entry.key, entry.value) case final purchase?)
+      purchase,
+];
+
+ProgressionPurchase? _recordPurchase(
+  Map<String, int> owned,
+  String key,
+  ProgressionPurchase entry,
+) {
+  final count = entry.count - (owned[key] ?? 0);
+  if (count <= 0) return null;
+  owned[key] = entry.count;
+  return (name: entry.name, slot: entry.slot, base: entry.base, count: count);
+}
+
+Map<String, ProgressionPurchase> _shoppingEntries(
+  BuildReport report, {
+  bool includeStored = false,
+}) {
+  final entries = <String, ProgressionPurchase>{};
+  for (final gem in _purchasableGems(report)) {
+    if (gem case {'id': final String id, 'name': final String name}) {
+      _countPurchase(entries, 'gem:$id', cleanPoB(name));
+    }
+  }
+  final slots = {
+    for (final slot in report.slots)
+      if (slot['itemId'] is int) slot['itemId']: slot,
+  };
+  for (final item in report.items) {
+    final slot = slots[item['id']];
+    if (slot == null && !includeStored) continue;
+    _countPurchase(
+      entries,
+      'item:${item['raw']}',
+      cleanPoB('${item['name']}'),
+      slot: _marketSlot(slot),
+      base: item['base'] as String?,
+    );
+  }
+  return entries;
+}
+
+String? _marketSlot(JsonMap? slot) => switch (slot) {
+  {'name': final String name} when slot['nodeId'] == null => name,
+  _ => null,
+};
+
+Iterable<JsonMap> _purchasableGems(BuildReport report) sync* {
+  for (final group in report.groups) {
+    if (group['supportScope'] == 'slot') continue;
+    final gems = jsonRows(group['gems']);
+    final source = group['source'];
+    final granted = source is String && source.isNotEmpty;
+    yield* granted ? gems.skip(1) : gems;
+  }
+}
+
+void _countPurchase(
+  Map<String, ProgressionPurchase> entries,
+  String key,
+  String name, {
+  String? slot,
+  String? base,
+}) => entries[key] = (
+  name: name,
+  slot: slot,
+  base: base,
+  count: (entries[key]?.count ?? 0) + 1,
+);
+
 extension ProgressionLoadoutChange on ProgressionComparison {
   List<ProgressionGemChange> get gems {
     final old = _gems(before);

@@ -122,6 +122,9 @@ class AppLocalizationsDe extends AppLocalizations {
       'PoB wurde nicht gefunden. Wählen Sie den Anwendungsordner.';
 
   @override
+  String get m7610c788c5 => 'PoB hat keinen Pfad zu diesem Knoten gefunden';
+
+  @override
   String get m917bb579d9 =>
       'PoB hat den Pfad zum Assembly-Ordner nicht gemeldet.';
 
@@ -287,6 +290,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get m215816bf42 => 'Alle';
 
   @override
+  String get mf532889a61 => 'Alle Aufgaben der Etappe sind erledigt';
+
+  @override
   String get m4cd169b3d5 => 'Alle Indikatoren Lua';
 
   @override
@@ -396,6 +402,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get m903bd09e68 => 'Der Vorgang wird ausgeführt...';
 
   @override
+  String get m357ccc3e75 => 'Nach oben';
+
+  @override
   String get m13b0a5cc9a => 'Hotkeys';
 
   @override
@@ -450,6 +459,9 @@ class AppLocalizationsDe extends AppLocalizations {
       'Um nach Merkmalen zu suchen, aktualisieren Sie MCP im Abschnitt „Komponenten“ auf 0.9.0.';
 
   @override
+  String get m9a923fd47c => 'Für die nächsten Etappen sind keine Käufe nötig';
+
+  @override
   String get mbd97478bba =>
       'Die Steuerung des PoB-Fensters über Wine benötigt X11 oder XWayland.';
 
@@ -486,6 +498,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get ma11b26e5e9 => 'Addiere und berechne';
 
   @override
+  String get me598ae02b1 => 'Schlüsselknoten hinzufügen';
+
+  @override
   String get m9cef26392f => 'Element hinzufügen';
 
   @override
@@ -501,6 +516,11 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get mf0216281b8 => 'Zusätzliche Zellen';
+
+  @override
+  String m9719fefc91(String p0) {
+    return 'Stufe $p0 erreichen';
+  }
 
   @override
   String get m4122860034 =>
@@ -1103,6 +1123,9 @@ class AppLocalizationsDe extends AppLocalizations {
       'Der Originaltext wird angezeigt, wenn keine Übersetzung verfügbar ist';
 
   @override
+  String get m443c49da2a => 'Nach unten';
+
+  @override
   String get m480fae1c4b => 'Nichts gefunden';
 
   @override
@@ -1378,6 +1401,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get m298e41327f => 'Wiederholen Sie den Download';
 
   @override
+  String get m6a2417f3ec => 'Etappen erneut berechnen';
+
+  @override
   String get m3c320d7fe3 => 'Erneut speichern';
 
   @override
@@ -1470,6 +1496,9 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get md90da4d82c => 'Versuchen Sie, die Baugruppe neu zu berechnen.';
+
+  @override
+  String get mce98e63b90 => 'Reihenfolge der Schlüsselknoten';
 
   @override
   String m032a431609(String p0) {
@@ -1617,6 +1646,13 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get m62ed32eb22 => 'Überprüfung...';
+
+  @override
+  String get m1dc35191c6 =>
+      'Der PoB-Pfad enthält Knoten außerhalb dieser Etappe';
+
+  @override
+  String get m886e1844ee => 'Pfad zum nächsten Knoten';
 
   @override
   String get m913b373c85 =>
@@ -1904,6 +1940,9 @@ class AppLocalizationsDe extends AppLocalizations {
   }
 
   @override
+  String get m651f75da98 => 'Einkaufsliste';
+
+  @override
   String get m868f6bf490 => 'Etappen vergleichen';
 
   @override
@@ -2122,6 +2161,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String m913d7f855b(String p0) {
     return 'Einige Symbole sind nicht verfügbar: $p0';
   }
+
+  @override
+  String get me24055fecd => 'Was fehlt bis zur nächsten Etappe?';
 
   @override
   String get m2b7ec4a283 => 'Was soll aus der Etappe angewendet werden?';

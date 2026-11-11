@@ -116,6 +116,9 @@ class AppLocalizationsPt extends AppLocalizations {
       'PoB não foi encontrado. Escolha a pasta do aplicativo.';
 
   @override
+  String get m7610c788c5 => 'O PoB não encontrou um caminho até este nó';
+
+  @override
   String get m917bb579d9 => 'PoB não informou o caminho para a pasta assembly.';
 
   @override
@@ -279,6 +282,9 @@ class AppLocalizationsPt extends AppLocalizations {
   String get m215816bf42 => 'Todos';
 
   @override
+  String get mf532889a61 => 'Todas as ações desta etapa foram concluídas';
+
+  @override
   String get m4cd169b3d5 => 'Todos os indicadores Lua';
 
   @override
@@ -386,6 +392,9 @@ class AppLocalizationsPt extends AppLocalizations {
   String get m903bd09e68 => 'Executando a operação...';
 
   @override
+  String get m357ccc3e75 => 'Mover para cima';
+
+  @override
   String get m13b0a5cc9a => 'Teclas de atalho';
 
   @override
@@ -438,6 +447,10 @@ class AppLocalizationsPt extends AppLocalizations {
       'Para pesquisar por característica, atualize MCP para 0.9.0 na seção Componentes.';
 
   @override
+  String get m9a923fd47c =>
+      'Nenhuma compra é necessária para as próximas etapas';
+
+  @override
   String get mbd97478bba =>
       'Para controlar a janela do PoB pelo Wine, é necessário X11 ou XWayland.';
 
@@ -472,6 +485,9 @@ class AppLocalizationsPt extends AppLocalizations {
   String get ma11b26e5e9 => 'Adicionar e calcular';
 
   @override
+  String get me598ae02b1 => 'Adicionar um nó-chave';
+
+  @override
   String get m9cef26392f => 'Adicionar item';
 
   @override
@@ -486,6 +502,11 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get mf0216281b8 => 'Células adicionais';
+
+  @override
+  String m9719fefc91(String p0) {
+    return 'Alcançar o nível $p0';
+  }
 
   @override
   String get m4122860034 =>
@@ -1087,6 +1108,9 @@ class AppLocalizationsPt extends AppLocalizations {
       'O texto original é mostrado quando uma tradução não está disponível';
 
   @override
+  String get m443c49da2a => 'Mover para baixo';
+
+  @override
   String get m480fae1c4b => 'Nada encontrado';
 
   @override
@@ -1363,6 +1387,9 @@ class AppLocalizationsPt extends AppLocalizations {
   String get m298e41327f => 'Tentar baixar novamente';
 
   @override
+  String get m6a2417f3ec => 'Recalcular as etapas';
+
+  @override
   String get m3c320d7fe3 => 'Salve novamente';
 
   @override
@@ -1452,6 +1479,9 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get md90da4d82c => 'Tente recalcular a montagem.';
+
+  @override
+  String get mce98e63b90 => 'Ordem dos nós-chave';
 
   @override
   String m032a431609(String p0) {
@@ -1599,6 +1629,12 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get m62ed32eb22 => 'Verificando...';
+
+  @override
+  String get m1dc35191c6 => 'O caminho do PoB passa por nós fora desta etapa';
+
+  @override
+  String get m886e1844ee => 'Caminho até o próximo nó';
 
   @override
   String get m913b373c85 =>
@@ -1883,6 +1919,9 @@ class AppLocalizationsPt extends AppLocalizations {
   }
 
   @override
+  String get m651f75da98 => 'Lista de compras';
+
+  @override
   String get m868f6bf490 => 'Comparar etapas';
 
   @override
@@ -2101,6 +2140,9 @@ class AppLocalizationsPt extends AppLocalizations {
   String m913d7f855b(String p0) {
     return 'Alguns ícones não estão disponíveis: $p0';
   }
+
+  @override
+  String get me24055fecd => 'O que falta para a próxima etapa?';
 
   @override
   String get m2b7ec4a283 => 'O que aplicar desta etapa?';
@@ -2305,6 +2347,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
       'PoB não foi encontrado. Escolha a pasta do aplicativo.';
 
   @override
+  String get m7610c788c5 => 'O PoB não encontrou um caminho até este nó';
+
+  @override
   String get m917bb579d9 => 'PoB não informou o caminho para a pasta assembly.';
 
   @override
@@ -2468,6 +2513,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get m215816bf42 => 'Todos';
 
   @override
+  String get mf532889a61 => 'Todas as ações desta etapa foram concluídas';
+
+  @override
   String get m4cd169b3d5 => 'Todos os indicadores Lua';
 
   @override
@@ -2575,6 +2623,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get m903bd09e68 => 'Executando a operação...';
 
   @override
+  String get m357ccc3e75 => 'Mover para cima';
+
+  @override
   String get m13b0a5cc9a => 'Teclas de atalho';
 
   @override
@@ -2627,6 +2678,10 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
       'Para pesquisar por característica, atualize MCP para 0.9.0 na seção Componentes.';
 
   @override
+  String get m9a923fd47c =>
+      'Nenhuma compra é necessária para as próximas etapas';
+
+  @override
   String get mbd97478bba =>
       'Para controlar a janela do PoB pelo Wine, é necessário X11 ou XWayland.';
 
@@ -2661,6 +2716,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get ma11b26e5e9 => 'Adicionar e calcular';
 
   @override
+  String get me598ae02b1 => 'Adicionar um nó-chave';
+
+  @override
   String get m9cef26392f => 'Adicionar item';
 
   @override
@@ -2675,6 +2733,11 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get mf0216281b8 => 'Células adicionais';
+
+  @override
+  String m9719fefc91(String p0) {
+    return 'Alcançar o nível $p0';
+  }
 
   @override
   String get m4122860034 =>
@@ -3276,6 +3339,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
       'O texto original é mostrado quando uma tradução não está disponível';
 
   @override
+  String get m443c49da2a => 'Mover para baixo';
+
+  @override
   String get m480fae1c4b => 'Nada encontrado';
 
   @override
@@ -3552,6 +3618,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get m298e41327f => 'Tentar baixar novamente';
 
   @override
+  String get m6a2417f3ec => 'Recalcular as etapas';
+
+  @override
   String get m3c320d7fe3 => 'Salve novamente';
 
   @override
@@ -3641,6 +3710,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get md90da4d82c => 'Tente recalcular a montagem.';
+
+  @override
+  String get mce98e63b90 => 'Ordem dos nós-chave';
 
   @override
   String m032a431609(String p0) {
@@ -3788,6 +3860,12 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get m62ed32eb22 => 'Verificando...';
+
+  @override
+  String get m1dc35191c6 => 'O caminho do PoB passa por nós fora desta etapa';
+
+  @override
+  String get m886e1844ee => 'Caminho até o próximo nó';
 
   @override
   String get m913b373c85 =>
@@ -4072,6 +4150,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   }
 
   @override
+  String get m651f75da98 => 'Lista de compras';
+
+  @override
   String get m868f6bf490 => 'Comparar etapas';
 
   @override
@@ -4290,6 +4371,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String m913d7f855b(String p0) {
     return 'Alguns ícones não estão disponíveis: $p0';
   }
+
+  @override
+  String get me24055fecd => 'O que falta para a próxima etapa?';
 
   @override
   String get m2b7ec4a283 => 'O que aplicar desta etapa?';

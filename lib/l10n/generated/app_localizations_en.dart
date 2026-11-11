@@ -115,6 +115,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m62db50eb37 => 'PoB was not found. Choose its application folder.';
 
   @override
+  String get m7610c788c5 => 'PoB found no path to this node';
+
+  @override
   String get m917bb579d9 =>
       'PoB did not report the path to the assembly folder.';
 
@@ -278,6 +281,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m215816bf42 => 'All';
 
   @override
+  String get mf532889a61 => 'All stage actions are complete';
+
+  @override
   String get m4cd169b3d5 => 'All indicators Lua';
 
   @override
@@ -384,6 +390,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m903bd09e68 => 'Performing the operation...';
 
   @override
+  String get m357ccc3e75 => 'Move up';
+
+  @override
   String get m13b0a5cc9a => 'Hotkeys';
 
   @override
@@ -434,6 +443,9 @@ class AppLocalizationsEn extends AppLocalizations {
       'To search by characteristic, update MCP to 0.9.0 in the Components section.';
 
   @override
+  String get m9a923fd47c => 'No purchases needed for upcoming stages';
+
+  @override
   String get mbd97478bba =>
       'Managing the PoB window through Wine requires X11 or XWayland.';
 
@@ -469,6 +481,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get ma11b26e5e9 => 'Add and calculate';
 
   @override
+  String get me598ae02b1 => 'Add a key node';
+
+  @override
   String get m9cef26392f => 'Add item';
 
   @override
@@ -483,6 +498,11 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get mf0216281b8 => 'Additional cells';
+
+  @override
+  String m9719fefc91(String p0) {
+    return 'Reach level $p0';
+  }
 
   @override
   String get m4122860034 =>
@@ -1080,6 +1100,9 @@ class AppLocalizationsEn extends AppLocalizations {
       'Original text is shown when a translation is unavailable';
 
   @override
+  String get m443c49da2a => 'Move down';
+
+  @override
   String get m480fae1c4b => 'Nothing found';
 
   @override
@@ -1352,6 +1375,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m298e41327f => 'Retry download';
 
   @override
+  String get m6a2417f3ec => 'Retry stage calculations';
+
+  @override
   String get m3c320d7fe3 => 'Save again';
 
   @override
@@ -1440,6 +1466,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get md90da4d82c => 'Try recalculating the assembly.';
+
+  @override
+  String get mce98e63b90 => 'Key node order';
 
   @override
   String m032a431609(String p0) {
@@ -1583,6 +1612,12 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get m62ed32eb22 => 'Checking...';
+
+  @override
+  String get m1dc35191c6 => 'The PoB path includes nodes outside this stage';
+
+  @override
+  String get m886e1844ee => 'Path to the next node';
 
   @override
   String get m913b373c85 =>
@@ -1865,6 +1900,9 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String get m651f75da98 => 'Shopping list';
+
+  @override
   String get m868f6bf490 => 'Compare milestones';
 
   @override
@@ -2083,6 +2121,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String m913d7f855b(String p0) {
     return 'Some icons are unavailable: $p0';
   }
+
+  @override
+  String get me24055fecd => 'What remains before the next stage?';
 
   @override
   String get m2b7ec4a283 => 'What should this milestone apply?';

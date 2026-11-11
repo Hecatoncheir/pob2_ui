@@ -69,6 +69,7 @@ List<Map<String, Object>> encodeProgressionSteps(
 
 Map<String, Object> _encodeProgress(TreeProgressionStep step) => {
   if (step.completed) 'completed': true,
+  if (step.keyNodes.isNotEmpty) 'keyNodes': step.keyNodes,
   if (step.tasks.isNotEmpty)
     'tasks': [
       for (final task in step.tasks) {'text': task.text, 'done': task.done},
@@ -104,6 +105,7 @@ TreeProgressionStep _decodeStep(Object? entry) {
       equipment: _optionalXml(entry['equipment']),
       completed: _completion(entry['completed']),
       tasks: _tasks(entry['tasks']),
+      keyNodes: _keyNodes(entry['keyNodes']),
     );
   }
   throw _invalidPlan;
@@ -124,6 +126,12 @@ bool _completion(Object? value) => switch (value) {
 List<ProgressionTask> _tasks(Object? value) => switch (value) {
   null => const [],
   List<Object?>() => value.map(_task).toList(),
+  _ => throw _invalidPlan,
+};
+
+Iterable<int> _keyNodes(Object? value) => switch (value) {
+  null => const [],
+  List<Object?>() when value.every((id) => id is int) => value.cast<int>(),
   _ => throw _invalidPlan,
 };
 

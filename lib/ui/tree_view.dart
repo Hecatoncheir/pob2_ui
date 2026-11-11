@@ -49,6 +49,7 @@ class _TreeViewState extends State<TreeView>
   final transform = TransformationController();
   late TreeScene scene = TreeScene(widget.tree);
   int? selected;
+  List<int> _planPath = const [];
   String query = '';
   Size? viewport;
   late final zoomAnimation = AnimationController(vsync: this)
@@ -86,6 +87,7 @@ class _TreeViewState extends State<TreeView>
   void didUpdateWidget(TreeView old) {
     super.didUpdateWidget(old);
     if (old.tree == widget.tree) return;
+    _planPath = const [];
     WidgetsBinding.instance.addPostFrameCallback((_) => _refreshPower());
     scene = TreeScene(widget.tree);
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -305,7 +307,7 @@ class _TreeViewState extends State<TreeView>
           _stageMoved(_selectedStage(before), _selectedStage(after)),
       listener: (_, state) {
         if (state.view.focus case final focus?) {
-          _focusTreeNode(focus.id);
+          _focusPlanNode(focus);
         } else if (_selectedStage(state) case final stage?) {
           _focusStage(stage.nodes);
         }
@@ -385,6 +387,7 @@ class _TreeViewState extends State<TreeView>
                           matches: _matchedIds(),
                           progression: progression,
                           planHovered: planHovered,
+                          planPath: _planPath,
                         ),
                       ),
                     ),
@@ -449,8 +452,23 @@ class _TreeViewState extends State<TreeView>
     editorFocus.requestFocus();
     final point = scene.points[id];
     if (point == null || viewport == null) return;
-    setState(() => selected = id);
+    setState(() {
+      selected = id;
+      _planPath = const [];
+    });
     _center(point, 8);
+  }
+
+  void _focusPlanNode(TreeProgressionFocusRequested focus) {
+    if (focus.path.isEmpty) {
+      _focusTreeNode(focus.id);
+      return;
+    }
+    _focusStage(focus.path.toSet());
+    setState(() {
+      selected = focus.id;
+      _planPath = focus.path;
+    });
   }
 
   void _focusStage(Set<int> ids) {
@@ -468,7 +486,10 @@ class _TreeViewState extends State<TreeView>
       size.height / math.max(1.0, bounds.height),
     );
     hoverModel.clear();
-    setState(() => selected = null);
+    setState(() {
+      selected = null;
+      _planPath = const [];
+    });
     _center(bounds.center, math.min(8.0, scale * .8));
   }
 

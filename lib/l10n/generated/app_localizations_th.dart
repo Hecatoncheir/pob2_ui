@@ -114,6 +114,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m62db50eb37 => 'ไม่พบ PoB โปรดเลือกโฟลเดอร์แอป';
 
   @override
+  String get m7610c788c5 => 'PoB ไม่พบเส้นทางไปยังโหนดนี้';
+
+  @override
   String get m917bb579d9 => 'PoB ไม่ได้รายงานเส้นทางไปยังโฟลเดอร์แอสเซมบลี';
 
   @override
@@ -276,6 +279,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m215816bf42 => 'ทั้งหมด';
 
   @override
+  String get mf532889a61 => 'ทำทุกอย่างในขั้นนี้ครบแล้ว';
+
+  @override
   String get m4cd169b3d5 => 'ตัวบ่งชี้ทั้งหมด Lua';
 
   @override
@@ -380,6 +386,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m903bd09e68 => 'กำลังดำเนินการ...';
 
   @override
+  String get m357ccc3e75 => 'เลื่อนขึ้น';
+
+  @override
   String get m13b0a5cc9a => 'ปุ่มลัด';
 
   @override
@@ -431,6 +440,9 @@ class AppLocalizationsTh extends AppLocalizations {
       'หากต้องการค้นหาตามคุณลักษณะ ให้อัปเดต MCP เป็น 0.9.0 ในส่วนส่วนประกอบ';
 
   @override
+  String get m9a923fd47c => 'ไม่ต้องซื้ออะไรสำหรับขั้นถัดไป';
+
+  @override
   String get mbd97478bba =>
       'การควบคุมหน้าต่าง PoB ผ่าน Wine ต้องใช้ X11 หรือ XWayland';
 
@@ -465,6 +477,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get ma11b26e5e9 => 'บวกและคำนวณ';
 
   @override
+  String get me598ae02b1 => 'เพิ่มโหนดสำคัญ';
+
+  @override
   String get m9cef26392f => 'เพิ่มรายการ';
 
   @override
@@ -478,6 +493,11 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get mf0216281b8 => 'เซลล์เพิ่มเติม';
+
+  @override
+  String m9719fefc91(String p0) {
+    return 'ไปให้ถึงเลเวล $p0';
+  }
 
   @override
   String get m4122860034 =>
@@ -1069,6 +1089,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m323494c6da => 'ข้อความต้นฉบับจะแสดงขึ้นเมื่อการแปลไม่พร้อมใช้งาน';
 
   @override
+  String get m443c49da2a => 'เลื่อนลง';
+
+  @override
   String get m480fae1c4b => 'ไม่พบสิ่งใด';
 
   @override
@@ -1340,6 +1363,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m298e41327f => 'ลองดาวน์โหลดอีกครั้ง';
 
   @override
+  String get m6a2417f3ec => 'ลองคำนวณขั้นต่าง ๆ อีกครั้ง';
+
+  @override
   String get m3c320d7fe3 => 'บันทึกอีกครั้ง';
 
   @override
@@ -1428,6 +1454,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get md90da4d82c => 'ลองคำนวณแอสเซมบลีใหม่';
+
+  @override
+  String get mce98e63b90 => 'ลำดับโหนดสำคัญ';
 
   @override
   String m032a431609(String p0) {
@@ -1570,6 +1599,12 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m62ed32eb22 => 'กำลังตรวจสอบ...';
+
+  @override
+  String get m1dc35191c6 => 'เส้นทางของ PoB ผ่านโหนดที่ไม่อยู่ในขั้นนี้';
+
+  @override
+  String get m886e1844ee => 'เส้นทางไปยังโหนดถัดไป';
 
   @override
   String get m913b373c85 =>
@@ -1849,6 +1884,9 @@ class AppLocalizationsTh extends AppLocalizations {
   }
 
   @override
+  String get m651f75da98 => 'รายการซื้อ';
+
+  @override
   String get m868f6bf490 => 'เปรียบเทียบขั้น';
 
   @override
@@ -2065,6 +2103,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String m913d7f855b(String p0) {
     return 'บางไอคอนไม่พร้อมใช้งาน: $p0';
   }
+
+  @override
+  String get me24055fecd => 'เหลืออะไรบ้างก่อนถึงขั้นถัดไป?';
 
   @override
   String get m2b7ec4a283 => 'ต้องการใช้ส่วนใดจากขั้นตอนนี้?';

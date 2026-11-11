@@ -308,6 +308,12 @@ abstract class AppLocalizations {
   /// **'PoB was not found. Choose its application folder.'**
   String get m62db50eb37;
 
+  /// PoB не нашёл путь к узлу
+  ///
+  /// In en, this message translates to:
+  /// **'PoB found no path to this node'**
+  String get m7610c788c5;
+
   /// PoB не сообщил путь к папке сборок.
   ///
   /// In en, this message translates to:
@@ -596,6 +602,12 @@ abstract class AppLocalizations {
   /// **'All'**
   String get m215816bf42;
 
+  /// Все действия для этапа выполнены
+  ///
+  /// In en, this message translates to:
+  /// **'All stage actions are complete'**
+  String get mf532889a61;
+
   /// Все показатели Lua
   ///
   /// In en, this message translates to:
@@ -800,6 +812,12 @@ abstract class AppLocalizations {
   /// **'Performing the operation...'**
   String get m903bd09e68;
 
+  /// Выше
+  ///
+  /// In en, this message translates to:
+  /// **'Move up'**
+  String get m357ccc3e75;
+
   /// Горячие клавиши
   ///
   /// In en, this message translates to:
@@ -890,6 +908,12 @@ abstract class AppLocalizations {
   /// **'To search by characteristic, update MCP to 0.9.0 in the Components section.'**
   String get m6f9519e788;
 
+  /// Для следующих этапов покупки не нужны
+  ///
+  /// In en, this message translates to:
+  /// **'No purchases needed for upcoming stages'**
+  String get m9a923fd47c;
+
   /// Для управления окном PoB через Wine нужен X11 или XWayland.
   ///
   /// In en, this message translates to:
@@ -950,6 +974,12 @@ abstract class AppLocalizations {
   /// **'Add and calculate'**
   String get ma11b26e5e9;
 
+  /// Добавить ключевой узел
+  ///
+  /// In en, this message translates to:
+  /// **'Add a key node'**
+  String get me598ae02b1;
+
   /// Добавить предмет
   ///
   /// In en, this message translates to:
@@ -979,6 +1009,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Additional cells'**
   String get mf0216281b8;
+
+  /// Достичь уровня {p0}
+  ///
+  /// In en, this message translates to:
+  /// **'Reach level {p0}'**
+  String m9719fefc91(String p0);
 
   /// Доступ действует для текущей сборки. Правки можно отменить.
   ///
@@ -2043,6 +2079,12 @@ abstract class AppLocalizations {
   /// **'Original text is shown when a translation is unavailable'**
   String get m323494c6da;
 
+  /// Ниже
+  ///
+  /// In en, this message translates to:
+  /// **'Move down'**
+  String get m443c49da2a;
+
   /// Ничего не найдено
   ///
   /// In en, this message translates to:
@@ -2559,6 +2601,12 @@ abstract class AppLocalizations {
   /// **'Retry download'**
   String get m298e41327f;
 
+  /// Повторить расчёт этапов
+  ///
+  /// In en, this message translates to:
+  /// **'Retry stage calculations'**
+  String get m6a2417f3ec;
+
   /// Повторить сохранение
   ///
   /// In en, this message translates to:
@@ -2738,6 +2786,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Try recalculating the assembly.'**
   String get md90da4d82c;
+
+  /// Порядок ключевых узлов
+  ///
+  /// In en, this message translates to:
+  /// **'Key node order'**
+  String get mce98e63b90;
 
   /// Последняя: {p0}
   ///
@@ -2990,6 +3044,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Checking...'**
   String get m62ed32eb22;
+
+  /// Путь PoB проходит через узлы вне этапа
+  ///
+  /// In en, this message translates to:
+  /// **'The PoB path includes nodes outside this stage'**
+  String get m1dc35191c6;
+
+  /// Путь к следующему узлу
+  ///
+  /// In en, this message translates to:
+  /// **'Path to the next node'**
+  String get m886e1844ee;
 
   /// Работают в окне приложения. Нажмите на сочетание, чтобы изменить его.
   ///
@@ -3513,6 +3579,12 @@ abstract class AppLocalizations {
   /// **'Combination already in use: {p0}'**
   String md7dfb40adb(String p0);
 
+  /// Список покупок
+  ///
+  /// In en, this message translates to:
+  /// **'Shopping list'**
+  String get m651f75da98;
+
   /// Сравнение этапов
   ///
   /// In en, this message translates to:
@@ -3920,6 +3992,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Some icons are unavailable: {p0}'**
   String m913d7f855b(String p0);
+
+  /// Что осталось до следующего этапа?
+  ///
+  /// In en, this message translates to:
+  /// **'What remains before the next stage?'**
+  String get me24055fecd;
 
   /// Что применить из этапа?
   ///

@@ -37,6 +37,19 @@ const _key = (
   characterClass: 'Witch',
 );
 
+BuildReport _reportWith({
+  JsonMap stats = const {},
+  List<JsonMap> groups = const [],
+  List<JsonMap> items = const [],
+  List<JsonMap> slots = const [],
+}) => BuildReport.fromJson({
+  'source': 'original-lua',
+  'stats': stats,
+  'groups': groups,
+  'items': items,
+  'slots': slots,
+});
+
 void main() {
   test('Экипировка этапа переносит предметы и самоцветы без конфликта ID', () {
     const saved = '''
@@ -151,6 +164,7 @@ void main() {
             allocation: '<Spec masteryEffects=""/>',
             skills: '<SkillSet/>',
             equipment: '<Equipment/>',
+            keyNodes: [30, 20, 30, 10],
             completed: true,
             tasks: [
               (text: 'Взять узел', done: true),
@@ -171,6 +185,15 @@ void main() {
         note: '',
       ));
       expect(restored.progression!.steps.first.tasks, isEmpty);
+      expect(restored.progression!.steps.first.keyNodes, isEmpty);
+      expect(restored.progression!.steps.last.keyNodes, [30, 20]);
+      expect(
+        restored.progression!.steps.last.withPartsFrom(
+          TreeProgressionStep(12, [20]),
+          {ProgressionPart.tree},
+        ).keyNodes,
+        [20],
+      );
       expect(restored.progression!.steps.first.completed, isFalse);
       expect(restored.progression!.steps.last.tasks, plan.steps.last.tasks);
       expect(restored.progression!.steps.last.completed, isTrue);
@@ -184,6 +207,107 @@ void main() {
       );
     },
   );
+
+  test('На шкале видны два заметных изменения без повторения DPS', () {
+    final before = _reportWith(
+      stats: {
+        'FullDPS': 0,
+        'TotalDPS': 10,
+        'Life': 100,
+        'Mana': 200,
+        'Armour': 10,
+      },
+    );
+    final after = _reportWith(
+      stats: {
+        'FullDPS': 0,
+        'TotalDPS': 20,
+        'Life': 80,
+        'Mana': 200,
+        'Armour': double.infinity,
+      },
+    );
+    expect(progressionHighlights(before, after), [
+      (metric: 'TotalDPS', delta: 10),
+      (metric: 'Life', delta: -20),
+    ]);
+  });
+
+  test('Покупки учитывают сохранённые предметы и повторные камни', () {
+    const gem = {'id': 'GemA', 'name': 'Gem A', 'level': 1};
+    const ring = {
+      'id': 1,
+      'name': 'Ember Loop',
+      'raw': 'raw',
+      'base': 'Lazuli Ring',
+    };
+    const boots = {
+      'id': 2,
+      'name': 'Boots',
+      'raw': 'boots',
+      'base': 'Iron Greaves',
+    };
+    const ringSlot = {'name': 'Ring 1', 'itemId': 1};
+    const bootsSlot = {'name': 'Boots', 'itemId': 2};
+    final current = _reportWith(
+      items: [ring],
+      groups: [
+        {
+          'gems': [gem],
+        },
+      ],
+    );
+    final first = _reportWith(
+      items: [ring],
+      slots: [ringSlot],
+      groups: [
+        {
+          'gems': [
+            {...gem, 'level': 3},
+          ],
+        },
+        {
+          'gems': [gem],
+        },
+        {
+          'source': 'Item',
+          'supportScope': 'slot',
+          'gems': [gem],
+        },
+      ],
+    );
+    final second = _reportWith(
+      items: [ring, boots],
+      slots: [ringSlot, bootsSlot],
+      groups: first.groups,
+    );
+    expect(progressionShopping(current, [first, second, second]), [
+      [(name: 'Gem A', count: 1, slot: null, base: null)],
+      [(name: 'Boots', count: 1, slot: 'Boots', base: 'Iron Greaves')],
+      [],
+    ]);
+  });
+
+  testWidgets('Порядок ключевых узлов меняется и сохраняется из панели', (
+    tester,
+  ) async {
+    final repository = _MemoryRepository()
+      ..steps = [
+        TreeProgressionStep(12, [2, 3, 4], keyNodes: [2, 3]),
+      ];
+    final bloc = TreeProgressionBloc(repository)
+      ..add(const TreeProgressionOpened());
+    addTearDown(bloc.close);
+    await _mountPlan(tester, bloc);
+    await _tapVisible(tester, find.text('Уровень 12'));
+    await _tapVisible(tester, find.byKey(const Key('progression-node-order')));
+    await _tapVisible(tester, find.byTooltip('Выше').last);
+    await _tapVisible(tester, find.byTooltip('Удалить').last);
+    await _tapVisible(tester, find.byIcon(Icons.arrow_drop_down));
+    await _tapVisible(tester, find.text('#4 · #4').last);
+    await _tapVisible(tester, find.text('Сохранить'));
+    expect(repository.steps.single.keyNodes, [3, 4]);
+  });
 
   testWidgets(
     'Сравнение этапов открывает описания и предупреждения до применения',

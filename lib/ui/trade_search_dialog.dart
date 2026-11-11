@@ -34,16 +34,36 @@ Future<void> showTradeSearch(
     await showItemEditor(context, model, slot, initial: value?.text ?? '');
 }
 
+Future<void> showProgressionTrade(
+  BuildContext context,
+  WorkshopCubit model,
+  String slot,
+  String? base,
+) => sparkDialog<void>(
+  context,
+  TradeSearchDialog(
+    repository: TradeSearchRepository(model.engine),
+    slot: slot,
+    openBrowser: TradeBrowser().open,
+    initialBase: base,
+    searchOnly: true,
+  ),
+);
+
 class TradeSearchDialog extends StatefulWidget {
   const TradeSearchDialog({
     super.key,
     required this.repository,
     required this.slot,
     required this.openBrowser,
+    this.initialBase,
+    this.searchOnly = false,
   });
   final TradeSearchRepository repository;
   final String slot;
   final Future<void> Function(Uri) openBrowser;
+  final String? initialBase;
+  final bool searchOnly;
   @override
   State<TradeSearchDialog> createState() => _TradeSearchDialogState();
 }
@@ -53,6 +73,7 @@ class _TradeSearchDialogState extends State<TradeSearchDialog> {
     widget.repository,
     widget.slot,
     widget.openBrowser,
+    initialBase: widget.initialBase,
   )..load();
   @override
   void dispose() {
@@ -80,11 +101,14 @@ class _TradeSearchDialogState extends State<TradeSearchDialog> {
               onPressed: () => Navigator.pop(context),
               child: const AppText('Закрыть'),
             ),
-            TextButton(
-              key: const Key('trade-import'),
-              onPressed: state.busy ? null : () => Navigator.pop(context, true),
-              child: const AppText('Вставить найденный предмет'),
-            ),
+            if (!widget.searchOnly)
+              TextButton(
+                key: const Key('trade-import'),
+                onPressed: state.busy
+                    ? null
+                    : () => Navigator.pop(context, true),
+                child: const AppText('Вставить найденный предмет'),
+              ),
             OutlinedButton(
               key: const Key('trade-copy'),
               onPressed: _enabled(state) ? _copy : null,

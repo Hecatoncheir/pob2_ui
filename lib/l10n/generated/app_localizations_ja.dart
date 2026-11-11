@@ -112,6 +112,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m62db50eb37 => 'PoBが見つかりません。アプリのフォルダーを選択してください。';
 
   @override
+  String get m7610c788c5 => 'PoB がこのノードへの経路を見つけられませんでした';
+
+  @override
   String get m917bb579d9 => 'PoB はアセンブリ フォルダーへのパスを報告しませんでした。';
 
   @override
@@ -273,6 +276,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m215816bf42 => 'すべて';
 
   @override
+  String get mf532889a61 => 'この段階の作業はすべて完了しました';
+
+  @override
   String get m4cd169b3d5 => 'すべてのインジケーター Lua';
 
   @override
@@ -375,6 +381,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m903bd09e68 => '操作を実行しています...';
 
   @override
+  String get m357ccc3e75 => '上に移動';
+
+  @override
   String get m13b0a5cc9a => 'ホットキー';
 
   @override
@@ -424,6 +433,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m6f9519e788 => '特性で検索するには、「コンポーネント」セクションで MCP を 0.9.0 に更新します。';
 
   @override
+  String get m9a923fd47c => '今後の段階に必要な購入品はありません';
+
+  @override
   String get mbd97478bba => 'Wine で PoB のウィンドウを操作するには X11 または XWayland が必要です。';
 
   @override
@@ -457,6 +469,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get ma11b26e5e9 => 'Add and calculate';
 
   @override
+  String get me598ae02b1 => '重要なノードを追加';
+
+  @override
   String get m9cef26392f => 'アイテムを追加';
 
   @override
@@ -470,6 +485,11 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get mf0216281b8 => '追加のセル';
+
+  @override
+  String m9719fefc91(String p0) {
+    return 'レベル $p0 に到達';
+  }
 
   @override
   String get m4122860034 => 'アクセスは現在のビルドに対して有効です。編集は元に戻すことができます。';
@@ -1058,6 +1078,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m323494c6da => '翻訳が利用できない場合は元のテキストが表示されます';
 
   @override
+  String get m443c49da2a => '下に移動';
+
+  @override
   String get m480fae1c4b => '何も見つかりませんでした';
 
   @override
@@ -1326,6 +1349,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m298e41327f => 'ダウンロードを再試行します';
 
   @override
+  String get m6a2417f3ec => '段階の計算を再試行';
+
+  @override
   String get m3c320d7fe3 => '再度保存します';
 
   @override
@@ -1414,6 +1440,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get md90da4d82c => 'アセンブリを再計算してみてください。';
+
+  @override
+  String get mce98e63b90 => '重要なノードの順序';
 
   @override
   String m032a431609(String p0) {
@@ -1556,6 +1585,12 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m62ed32eb22 => 'チェック中...';
+
+  @override
+  String get m1dc35191c6 => 'PoB の経路にはこの段階に含まれないノードがあります';
+
+  @override
+  String get m886e1844ee => '次のノードへの経路';
 
   @override
   String get m913b373c85 => 'アプリケーションウィンドウで作業します。組み合わせをクリックして変更します。';
@@ -1831,6 +1866,9 @@ class AppLocalizationsJa extends AppLocalizations {
   }
 
   @override
+  String get m651f75da98 => '購入リスト';
+
+  @override
   String get m868f6bf490 => 'ステージを比較';
 
   @override
@@ -2044,6 +2082,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String m913d7f855b(String p0) {
     return '一部のアイコンは使用できません: $p0';
   }
+
+  @override
+  String get me24055fecd => '次の段階までに何が必要ですか？';
 
   @override
   String get m2b7ec4a283 => 'この段階から何を適用しますか？';

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../data/trade_search_repository.dart';
 import '../domain/tree_geometry.dart';
 import '../domain/tree_progression.dart';
 import 'core/app_text.dart';
@@ -10,6 +11,7 @@ import 'report_views.dart';
 import 'shell_bloc.dart';
 import 'tree_progression_bloc.dart';
 import 'tree_progression_panel.dart';
+import 'trade_search_dialog.dart';
 import 'workshop_cubit.dart';
 
 class WorkspaceInspector extends StatelessWidget {
@@ -94,24 +96,59 @@ class WorkspaceInspector extends StatelessWidget {
     return TreeProgressionPanel(
       nodes: {for (final node in tree.nodes) node.id: node},
       enabled: key != null && !model.state.busy && !document.stale,
+      report: document.report,
       onCapture: () async => key == null ? null : model.captureProgression(key),
-      createComparison: (step, {baseline}) {
-        final session = model.progressionComparison(key!);
-        return ProgressionComparisonBloc(
-          (parts) => session.compare(step, parts, baseline: baseline),
-          session.close,
-          initial: baseline == null ? const {ProgressionPart.tree} : step.parts,
-          describeGem: session.describeGem,
-          describeItem: session.describeItem,
-        );
-      },
+      createComparison: (step, {baseline}) =>
+          _comparison(key!, step, baseline: baseline),
+      createRemaining: (step) => _comparison(key!, step, allParts: true),
+      loadReports: key == null
+          ? null
+          : (steps) async {
+              final session = model.progressionComparison(key);
+              try {
+                return await session.reports(steps);
+              } finally {
+                await session.close();
+              }
+            },
+      findPath: model.progressionPath,
+      onPath: (id, path) => _focus(context, plan, id, path: path),
+      search: TradeSearchRepository(model.engine).available
+          ? (context, slot, base) =>
+                showProgressionTrade(context, model, slot, base)
+          : null,
       onApply: (step, parts) async {
         if (key != null) await model.applyProgression(key, step, parts: parts);
       },
-      onFocus: (id) {
-        plan.add(TreeProgressionFocusRequested(id));
-        if (inDialog) Navigator.pop(context);
-      },
+      onFocus: (id) => _focus(context, plan, id),
+    );
+  }
+
+  void _focus(
+    BuildContext context,
+    TreeProgressionBloc plan,
+    int id, {
+    List<int> path = const [],
+  }) {
+    plan.add(TreeProgressionFocusRequested(id, path: path));
+    if (inDialog) Navigator.pop(context);
+  }
+
+  ProgressionComparisonBloc _comparison(
+    TreeProgressionKey key,
+    TreeProgressionStep step, {
+    TreeProgressionStep? baseline,
+    bool allParts = false,
+  }) {
+    final session = model.progressionComparison(key);
+    return ProgressionComparisonBloc(
+      (parts) => session.compare(step, parts, baseline: baseline),
+      session.close,
+      initial: allParts || baseline != null
+          ? step.parts
+          : const {ProgressionPart.tree},
+      describeGem: session.describeGem,
+      describeItem: session.describeItem,
     );
   }
 }

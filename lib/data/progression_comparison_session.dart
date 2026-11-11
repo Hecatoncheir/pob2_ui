@@ -48,6 +48,20 @@ class ProgressionComparisonSession {
     );
   }
 
+  Future<({BuildReport current, List<BuildReport> stages})> reports(
+    List<TreeProgressionStep> steps,
+  ) async {
+    final source = await readSource();
+    await _engine.connect(source.components);
+    return (
+      current: source.report,
+      stages: [
+        for (final step in steps)
+          (await _calculate(source, step, step.parts)).report,
+      ],
+    );
+  }
+
   Future<({BuildReport report, Set<int> nodes})> _calculate(
     ProgressionComparisonSource source,
     TreeProgressionStep step,

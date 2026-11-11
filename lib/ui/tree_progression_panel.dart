@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../domain/build_report.dart';
+import '../domain/progression_comparison.dart';
 import '../domain/tree_geometry.dart';
 import '../domain/tree_progression.dart';
 import 'core/app_text.dart';
@@ -9,7 +11,10 @@ import 'core/motion.dart';
 import 'core/ui_translation.dart';
 import 'progression_apply_dialog.dart';
 import 'progression_comparison_bloc.dart';
+import 'progression_node_order_dialog.dart';
 import 'progression_plan_actions.dart';
+import 'progression_shopping_dialog.dart';
+import 'progression_timeline_reports.dart';
 import 'tree_progression_bloc.dart';
 
 class TreeProgressionPanel extends StatelessWidget {
@@ -21,6 +26,12 @@ class TreeProgressionPanel extends StatelessWidget {
     required this.onCapture,
     required this.onApply,
     required this.createComparison,
+    this.createRemaining,
+    this.loadReports,
+    this.report,
+    this.findPath,
+    this.onPath,
+    this.search,
   });
 
   final Map<int, TreeNode> nodes;
@@ -34,6 +45,13 @@ class TreeProgressionPanel extends StatelessWidget {
     TreeProgressionStep? baseline,
   })
   createComparison;
+  final ProgressionComparisonBloc Function(TreeProgressionStep)?
+  createRemaining;
+  final ProgressionReportsLoader? loadReports;
+  final BuildReport? report;
+  final Future<List<int>> Function(int)? findPath;
+  final void Function(int, List<int>)? onPath;
+  final void Function(BuildContext, String, String?)? search;
 
   @override
   Widget build(BuildContext context) =>
@@ -43,12 +61,22 @@ class TreeProgressionPanel extends StatelessWidget {
             before.selected != after.selected ||
             before.ready != after.ready ||
             before.error != after.error ||
-            before.view.following != after.view.following,
+            before.view.following != after.view.following ||
+            before.view.visible != after.view.visible,
         builder: (context, state) => Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _header(context, state),
-            Expanded(child: _timeline(context, state)),
+            Expanded(
+              child: ProgressionTimelineReports(
+                steps: state.steps,
+                load: loadReports,
+                source: report,
+                enabled: enabled && state.view.visible,
+                builder: (summaries, status) =>
+                    _timeline(context, state, summaries, status),
+              ),
+            ),
           ],
         ),
       );
@@ -86,7 +114,12 @@ class TreeProgressionPanel extends StatelessWidget {
     ),
   );
 
-  Widget _timeline(BuildContext context, TreeProgressionState state) {
+  Widget _timeline(
+    BuildContext context,
+    TreeProgressionState state,
+    Map<Object, List<ProgressionHighlight>> summaries,
+    Widget? summaryStatus,
+  ) {
     final next = state.steps.where((step) => !step.completed).firstOrNull;
     final nextKey = GlobalKey();
     return SingleChildScrollView(
@@ -95,12 +128,14 @@ class TreeProgressionPanel extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           if (state.steps.isNotEmpty) _following(context, state, next, nextKey),
+          if (summaryStatus != null) summaryStatus,
           for (var index = 0; index < state.steps.length; index++)
             _step(
               context,
               state,
               index,
               identical(state.steps[index], next) ? nextKey : null,
+              summaries[state.steps[index].identity] ?? const [],
             ),
           _status(context, state),
         ],
@@ -129,10 +164,107 @@ class TreeProgressionPanel extends StatelessWidget {
         if (state.view.following)
           next == null
               ? const AppText('Все этапы завершены')
-              : _nextStage(plan, next, nextKey),
+              : _followActions(context, plan, state.steps, next, nextKey),
       ],
     );
   }
+
+  Widget _followActions(
+    BuildContext context,
+    TreeProgressionBloc plan,
+    List<TreeProgressionStep> steps,
+    TreeProgressionStep next,
+    GlobalKey nextKey,
+  ) => Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      _nextStage(plan, next, nextKey),
+      if (createRemaining != null)
+        TextButton.icon(
+          key: const Key('progression-remaining'),
+          onPressed: enabled ? () => _remaining(context, next) : null,
+          icon: const Icon(Icons.checklist, size: 18),
+          label: const AppText('Что осталось до следующего этапа?'),
+        ),
+      if (next.keyNodes.where((id) => nodes[id]?.allocated == false).firstOrNull
+          case final id?)
+        _nextPath(context, next, id),
+      if (loadReports != null)
+        TextButton.icon(
+          key: const Key('progression-shopping'),
+          onPressed: enabled ? () => _shopping(context, steps) : null,
+          icon: const Icon(Icons.shopping_bag_outlined, size: 18),
+          label: const AppText('Список покупок'),
+        ),
+      const SizedBox(height: 8),
+    ],
+  );
+
+  Widget _nextPath(BuildContext context, TreeProgressionStep step, int id) =>
+      ListTile(
+        contentPadding: EdgeInsets.zero,
+        dense: true,
+        leading: const Icon(Icons.route_outlined, size: 18),
+        title: const AppText('Путь к следующему узлу'),
+        subtitle: AppText(nodes[id]!.name, game: true),
+        onTap: enabled && findPath != null
+            ? () => _showPath(context, step, id)
+            : null,
+      );
+
+  Future<void> _showPath(
+    BuildContext context,
+    TreeProgressionStep step,
+    int id,
+  ) async {
+    List<int> path;
+    try {
+      path = await findPath!(id);
+    } catch (_) {
+      path = const [];
+    }
+    if (!context.mounted) return;
+    if (path.isEmpty) {
+      _pathNotice(context, 'PoB не нашёл путь к узлу');
+      return;
+    }
+    if (path.any(
+      (id) => !step.nodes.contains(id) && nodes[id]?.allocated == false,
+    )) {
+      _pathNotice(context, 'Путь PoB проходит через узлы вне этапа');
+    }
+    onPath?.call(id, path);
+  }
+
+  void _pathNotice(BuildContext context, String text) =>
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: AppText(text)));
+
+  Future<void> _remaining(
+    BuildContext context,
+    TreeProgressionStep step,
+  ) async {
+    final id = await sparkDialog<int>(
+      context,
+      BlocProvider(
+        create: (_) => createRemaining!(step),
+        child: ProgressionApplyDialog(step.parts, nodes, remaining: step),
+      ),
+    );
+    if (id != null && context.mounted) onFocus(id);
+  }
+
+  Future<void> _shopping(
+    BuildContext context,
+    List<TreeProgressionStep> steps,
+  ) => sparkDialog<void>(
+    context,
+    ProgressionShoppingDialog(
+      steps.where((step) => !step.completed).toList(),
+      loadReports!,
+      search,
+    ),
+  );
 
   Widget _nextStage(
     TreeProgressionBloc plan,
@@ -168,6 +300,7 @@ class TreeProgressionPanel extends StatelessWidget {
     TreeProgressionState state,
     int index,
     Key? nextKey,
+    List<ProgressionHighlight> highlights,
   ) {
     final step = state.steps[index];
     final selected = state.selected == index;
@@ -183,6 +316,7 @@ class TreeProgressionPanel extends StatelessWidget {
         TreeProgressionSelected(selected ? null : step),
       ),
       changes: selected ? _details(context, state, index) : null,
+      highlights: highlights,
     );
   }
 
@@ -226,6 +360,13 @@ class TreeProgressionPanel extends StatelessWidget {
         onPressed: enabled ? () => _update(context, step) : null,
         icon: const Icon(Icons.sync, size: 18),
       ),
+      if (step.nodes.isNotEmpty)
+        IconButton(
+          key: const Key('progression-node-order'),
+          tooltip: translateUi(context, 'Порядок ключевых узлов'),
+          onPressed: () => _editOrder(context, step),
+          icon: const Icon(Icons.format_list_numbered, size: 18),
+        ),
       if (steps.length > 1)
         IconButton(
           tooltip: translateUi(context, 'Сравнить с другим этапом'),
@@ -367,6 +508,23 @@ class TreeProgressionPanel extends StatelessWidget {
     );
   }
 
+  Future<void> _editOrder(
+    BuildContext context,
+    TreeProgressionStep step,
+  ) async {
+    final order = await sparkDialog<List<int>>(
+      context,
+      ProgressionNodeOrderDialog(step, nodes),
+    );
+    if (order == null || !context.mounted) return;
+    context.read<TreeProgressionBloc>().add(
+      TreeProgressionUpdated(
+        step,
+        (saved) => saved.withProgress(keyNodes: order),
+      ),
+    );
+  }
+
   Future<void> _compare(
     BuildContext context,
     TreeProgressionStep step,
@@ -415,6 +573,7 @@ class _ProgressionMilestone extends StatelessWidget {
     required this.completed,
     required this.onTap,
     this.changes,
+    required this.highlights,
   });
 
   static const _axisCenter = 9.0;
@@ -426,6 +585,7 @@ class _ProgressionMilestone extends StatelessWidget {
   final bool first, last, selected, completed;
   final VoidCallback onTap;
   final Widget? changes;
+  final List<ProgressionHighlight> highlights;
 
   @override
   Widget build(BuildContext context) {
@@ -532,7 +692,14 @@ class _ProgressionMilestone extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
               child: Align(
                 alignment: AlignmentDirectional.centerStart,
-                child: _caption(colors, accent),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    _caption(colors, accent),
+                    if (highlights.isNotEmpty)
+                      ProgressionTimelineHighlights(highlights),
+                  ],
+                ),
               ),
             ),
           ),

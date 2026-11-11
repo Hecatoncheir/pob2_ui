@@ -57,6 +57,7 @@ class TreePainter extends CustomPainter {
     this.matches,
     this.progression,
     this.planHovered,
+    this.planPath = const [],
   }) : super(repaint: transform);
   final TreeScene scene;
   final int? selected;
@@ -70,6 +71,7 @@ class TreePainter extends CustomPainter {
   final Set<int>? matches;
   final TreeProgressionChange? progression;
   final int? planHovered;
+  final List<int> planPath;
   late double zoom;
   late Rect visible;
   @override
@@ -81,7 +83,27 @@ class TreePainter extends CustomPainter {
     ).inflate(100 / zoom);
     _art(canvas);
     if (hoverArtwork case final picture?) canvas.drawPicture(picture);
+    _paintPlanPath(canvas);
     _paintPlanHover(canvas);
+  }
+
+  void _paintPlanPath(Canvas canvas) {
+    if (planPath.isEmpty) return;
+    final color = const Color(0xFFFFC85A);
+    final paint = Paint()
+      ..color = color
+      ..strokeWidth = 3 / zoom
+      ..style = PaintingStyle.stroke;
+    for (var index = 1; index < planPath.length; index++) {
+      final start = scene.points[planPath[index - 1]];
+      final end = scene.points[planPath[index]];
+      if (start != null && end != null) canvas.drawLine(start, end, paint);
+    }
+    for (final id in planPath) {
+      if (scene.nodes[id] case final node?) {
+        canvas.drawCircle(scene.points[id]!, _radius(node) + 5 / zoom, paint);
+      }
+    }
   }
 
   void _paintPlanHover(Canvas canvas) {

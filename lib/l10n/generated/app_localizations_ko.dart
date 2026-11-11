@@ -112,6 +112,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m62db50eb37 => 'PoB를 찾을 수 없습니다. 앱 폴더를 선택하세요.';
 
   @override
+  String get m7610c788c5 => 'PoB가 이 노드로 가는 경로를 찾지 못했습니다';
+
+  @override
   String get m917bb579d9 => 'PoB가 어셈블리 폴더 경로를 보고하지 않았습니다.';
 
   @override
@@ -273,6 +276,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m215816bf42 => '모두';
 
   @override
+  String get mf532889a61 => '이 단계의 모든 작업을 완료했습니다';
+
+  @override
   String get m4cd169b3d5 => '모든 지표 Lua';
 
   @override
@@ -375,6 +381,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m903bd09e68 => '작업을 수행하는 중...';
 
   @override
+  String get m357ccc3e75 => '위로 이동';
+
+  @override
   String get m13b0a5cc9a => '단축키';
 
   @override
@@ -424,6 +433,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m6f9519e788 => '특성으로 검색하려면 구성 요소 섹션에서 MCP을 0.9.0으로 업데이트하세요.';
 
   @override
+  String get m9a923fd47c => '다음 단계에 구매할 항목이 없습니다';
+
+  @override
   String get mbd97478bba => 'Wine에서 PoB 창을 제어하려면 X11 또는 XWayland가 필요합니다.';
 
   @override
@@ -457,6 +469,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get ma11b26e5e9 => '추가 및 계산';
 
   @override
+  String get me598ae02b1 => '핵심 노드 추가';
+
+  @override
   String get m9cef26392f => '항목 추가';
 
   @override
@@ -470,6 +485,11 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get mf0216281b8 => '추가 셀';
+
+  @override
+  String m9719fefc91(String p0) {
+    return '레벨 $p0 달성';
+  }
 
   @override
   String get m4122860034 => '현재 빌드에 대한 액세스가 유효합니다. 편집 내용은 취소할 수 있습니다.';
@@ -1058,6 +1078,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m323494c6da => '번역을 사용할 수 없는 경우 원본 텍스트가 표시됩니다.';
 
   @override
+  String get m443c49da2a => '아래로 이동';
+
+  @override
   String get m480fae1c4b => '아무것도 발견되지 않았습니다';
 
   @override
@@ -1326,6 +1349,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m298e41327f => '다운로드 다시 시도';
 
   @override
+  String get m6a2417f3ec => '단계 계산 다시 시도';
+
+  @override
   String get m3c320d7fe3 => '다시 저장하세요';
 
   @override
@@ -1414,6 +1440,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get md90da4d82c => '어셈블리를 다시 계산해 보세요.';
+
+  @override
+  String get mce98e63b90 => '핵심 노드 순서';
 
   @override
   String m032a431609(String p0) {
@@ -1556,6 +1585,12 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m62ed32eb22 => '확인 중...';
+
+  @override
+  String get m1dc35191c6 => 'PoB 경로에 이 단계에 없는 노드가 포함됩니다';
+
+  @override
+  String get m886e1844ee => '다음 노드로 가는 경로';
 
   @override
   String get m913b373c85 => '응용프로그램 창에서 작업합니다. 변경하려면 조합을 클릭하세요.';
@@ -1831,6 +1866,9 @@ class AppLocalizationsKo extends AppLocalizations {
   }
 
   @override
+  String get m651f75da98 => '구매 목록';
+
+  @override
   String get m868f6bf490 => '단계 비교';
 
   @override
@@ -2043,6 +2081,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String m913d7f855b(String p0) {
     return '일부 아이콘을 사용할 수 없습니다: $p0';
   }
+
+  @override
+  String get me24055fecd => '다음 단계까지 무엇이 남았나요?';
 
   @override
   String get m2b7ec4a283 => '이 단계에서 무엇을 적용할까요?';

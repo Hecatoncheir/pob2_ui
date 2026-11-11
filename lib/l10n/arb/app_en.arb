@@ -172,6 +172,11 @@
     "description": "PoB не найден. Выберите папку с приложением.",
     "placeholders": {}
   },
+  "m7610c788c5": "PoB found no path to this node",
+  "@m7610c788c5": {
+    "description": "PoB не нашёл путь к узлу",
+    "placeholders": {}
+  },
   "m917bb579d9": "PoB did not report the path to the assembly folder.",
   "@m917bb579d9": {
     "description": "PoB не сообщил путь к папке сборок.",
@@ -465,6 +470,11 @@
     "description": "Все",
     "placeholders": {}
   },
+  "mf532889a61": "All stage actions are complete",
+  "@mf532889a61": {
+    "description": "Все действия для этапа выполнены",
+    "placeholders": {}
+  },
   "m4cd169b3d5": "All indicators Lua",
   "@m4cd169b3d5": {
     "description": "Все показатели Lua",
@@ -635,6 +645,11 @@
     "description": "Выполняем операцию…",
     "placeholders": {}
   },
+  "m357ccc3e75": "Move up",
+  "@m357ccc3e75": {
+    "description": "Выше",
+    "placeholders": {}
+  },
   "m13b0a5cc9a": "Hotkeys",
   "@m13b0a5cc9a": {
     "description": "Горячие клавиши",
@@ -718,6 +733,11 @@
     "description": "Для поиска по характеристике обновите MCP до 0.9.0 в разделе «Компоненты».",
     "placeholders": {}
   },
+  "m9a923fd47c": "No purchases needed for upcoming stages",
+  "@m9a923fd47c": {
+    "description": "Для следующих этапов покупки не нужны",
+    "placeholders": {}
+  },
   "mbd97478bba": "Managing the PoB window through Wine requires X11 or XWayland.",
   "@mbd97478bba": {
     "description": "Для управления окном PoB через Wine нужен X11 или XWayland.",
@@ -772,6 +792,11 @@
     "description": "Добавить и рассчитать",
     "placeholders": {}
   },
+  "me598ae02b1": "Add a key node",
+  "@me598ae02b1": {
+    "description": "Добавить ключевой узел",
+    "placeholders": {}
+  },
   "m9cef26392f": "Add item",
   "@m9cef26392f": {
     "description": "Добавить предмет",
@@ -796,6 +821,15 @@
   "@mf0216281b8": {
     "description": "Дополнительные ячейки",
     "placeholders": {}
+  },
+  "m9719fefc91": "Reach level {p0}",
+  "@m9719fefc91": {
+    "description": "Достичь уровня {p0}",
+    "placeholders": {
+      "p0": {
+        "type": "String"
+      }
+    }
   },
   "m4122860034": "Access is valid for the current build. Edits can be undone.",
   "@m4122860034": {
@@ -1796,6 +1830,11 @@
     "description": "Нет перевода — показываем оригинал",
     "placeholders": {}
   },
+  "m443c49da2a": "Move down",
+  "@m443c49da2a": {
+    "description": "Ниже",
+    "placeholders": {}
+  },
   "m480fae1c4b": "Nothing found",
   "@m480fae1c4b": {
     "description": "Ничего не найдено",
@@ -2246,6 +2285,11 @@
     "description": "Повторить загрузку",
     "placeholders": {}
   },
+  "m6a2417f3ec": "Retry stage calculations",
+  "@m6a2417f3ec": {
+    "description": "Повторить расчёт этапов",
+    "placeholders": {}
+  },
   "m3c320d7fe3": "Save again",
   "@m3c320d7fe3": {
     "description": "Повторить сохранение",
@@ -2394,6 +2438,11 @@
   "md90da4d82c": "Try recalculating the assembly.",
   "@md90da4d82c": {
     "description": "Попробуйте пересчитать сборку.",
+    "placeholders": {}
+  },
+  "mce98e63b90": "Key node order",
+  "@mce98e63b90": {
+    "description": "Порядок ключевых узлов",
     "placeholders": {}
   },
   "m032a431609": "Last: {p0}",
@@ -2636,6 +2685,16 @@
   "m62ed32eb22": "Checking...",
   "@m62ed32eb22": {
     "description": "Проверяем…",
+    "placeholders": {}
+  },
+  "m1dc35191c6": "The PoB path includes nodes outside this stage",
+  "@m1dc35191c6": {
+    "description": "Путь PoB проходит через узлы вне этапа",
+    "placeholders": {}
+  },
+  "m886e1844ee": "Path to the next node",
+  "@m886e1844ee": {
+    "description": "Путь к следующему узлу",
     "placeholders": {}
   },
   "m913b373c85": "Work in the application window. Click on a combination to change it.",
@@ -3093,6 +3152,11 @@
       }
     }
   },
+  "m651f75da98": "Shopping list",
+  "@m651f75da98": {
+    "description": "Список покупок",
+    "placeholders": {}
+  },
   "m868f6bf490": "Compare milestones",
   "@m868f6bf490": {
     "description": "Сравнение этапов",
@@ -3455,6 +3519,11 @@
         "type": "String"
       }
     }
+  },
+  "me24055fecd": "What remains before the next stage?",
+  "@me24055fecd": {
+    "description": "Что осталось до следующего этапа?",
+    "placeholders": {}
   },
   "m2b7ec4a283": "What should this milestone apply?",
   "@m2b7ec4a283": {

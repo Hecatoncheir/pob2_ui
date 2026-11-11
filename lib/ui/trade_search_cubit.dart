@@ -22,25 +22,30 @@ typedef TradeSearchState = ({
 });
 
 class TradeSearchCubit extends Cubit<TradeSearchState> {
-  TradeSearchCubit(this.repository, this.slot, this.openBrowser)
-    : super((
-        catalog: null,
-        form: (
-          league: 'Standard',
-          price: '',
-          base: null,
-          currency: null,
-          online: true,
-          filters: const [],
-        ),
-        loading: true,
-        busy: false,
-        url: null,
-        error: null,
-      ));
+  TradeSearchCubit(
+    this.repository,
+    this.slot,
+    this.openBrowser, {
+    this.initialBase,
+  }) : super((
+         catalog: null,
+         form: (
+           league: 'Standard',
+           price: '',
+           base: null,
+           currency: null,
+           online: true,
+           filters: const [],
+         ),
+         loading: true,
+         busy: false,
+         url: null,
+         error: null,
+       ));
   final TradeSearchRepository repository;
   final String slot;
   final Future<void> Function(Uri) openBrowser;
+  final String? initialBase;
 
   Future<void> load() async {
     try {
@@ -54,7 +59,10 @@ class TradeSearchCubit extends Cubit<TradeSearchState> {
         url: null,
         error: null,
       ));
-      update(currency: catalog.currencies.firstOrNull?.id);
+      update(
+        base: catalog.bases.contains(initialBase) ? initialBase : null,
+        currency: catalog.currencies.firstOrNull?.id,
+      );
     } catch (error) {
       _emit(loading: false, error: mcpErrorMessage(error));
     }

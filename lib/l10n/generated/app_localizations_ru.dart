@@ -115,6 +115,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m62db50eb37 => 'PoB не найден. Выберите папку с приложением.';
 
   @override
+  String get m7610c788c5 => 'PoB не нашёл путь к узлу';
+
+  @override
   String get m917bb579d9 => 'PoB не сообщил путь к папке сборок.';
 
   @override
@@ -277,6 +280,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m215816bf42 => 'Все';
 
   @override
+  String get mf532889a61 => 'Все действия для этапа выполнены';
+
+  @override
   String get m4cd169b3d5 => 'Все показатели Lua';
 
   @override
@@ -382,6 +388,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m903bd09e68 => 'Выполняем операцию…';
 
   @override
+  String get m357ccc3e75 => 'Выше';
+
+  @override
   String get m13b0a5cc9a => 'Горячие клавиши';
 
   @override
@@ -433,6 +442,9 @@ class AppLocalizationsRu extends AppLocalizations {
       'Для поиска по характеристике обновите MCP до 0.9.0 в разделе «Компоненты».';
 
   @override
+  String get m9a923fd47c => 'Для следующих этапов покупки не нужны';
+
+  @override
   String get mbd97478bba =>
       'Для управления окном PoB через Wine нужен X11 или XWayland.';
 
@@ -468,6 +480,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get ma11b26e5e9 => 'Добавить и рассчитать';
 
   @override
+  String get me598ae02b1 => 'Добавить ключевой узел';
+
+  @override
   String get m9cef26392f => 'Добавить предмет';
 
   @override
@@ -482,6 +497,11 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get mf0216281b8 => 'Дополнительные ячейки';
+
+  @override
+  String m9719fefc91(String p0) {
+    return 'Достичь уровня $p0';
+  }
 
   @override
   String get m4122860034 =>
@@ -1079,6 +1099,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m323494c6da => 'Нет перевода — показываем оригинал';
 
   @override
+  String get m443c49da2a => 'Ниже';
+
+  @override
   String get m480fae1c4b => 'Ничего не найдено';
 
   @override
@@ -1353,6 +1376,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m298e41327f => 'Повторить загрузку';
 
   @override
+  String get m6a2417f3ec => 'Повторить расчёт этапов';
+
+  @override
   String get m3c320d7fe3 => 'Повторить сохранение';
 
   @override
@@ -1442,6 +1468,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get md90da4d82c => 'Попробуйте пересчитать сборку.';
+
+  @override
+  String get mce98e63b90 => 'Порядок ключевых узлов';
 
   @override
   String m032a431609(String p0) {
@@ -1586,6 +1615,12 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get m62ed32eb22 => 'Проверяем…';
+
+  @override
+  String get m1dc35191c6 => 'Путь PoB проходит через узлы вне этапа';
+
+  @override
+  String get m886e1844ee => 'Путь к следующему узлу';
 
   @override
   String get m913b373c85 =>
@@ -1868,6 +1903,9 @@ class AppLocalizationsRu extends AppLocalizations {
   }
 
   @override
+  String get m651f75da98 => 'Список покупок';
+
+  @override
   String get m868f6bf490 => 'Сравнение этапов';
 
   @override
@@ -2086,6 +2124,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String m913d7f855b(String p0) {
     return 'Часть иконок недоступна: $p0';
   }
+
+  @override
+  String get me24055fecd => 'Что осталось до следующего этапа?';
 
   @override
   String get m2b7ec4a283 => 'Что применить из этапа?';

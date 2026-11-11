@@ -32,8 +32,9 @@ final class TreeProgressionVisibilityChanged extends TreeProgressionEvent {
 }
 
 final class TreeProgressionFocusRequested extends TreeProgressionEvent {
-  TreeProgressionFocusRequested(this.id);
+  TreeProgressionFocusRequested(this.id, {this.path = const []});
   final int id;
+  final List<int> path;
 }
 
 final class TreeProgressionNodeHovered extends TreeProgressionEvent {
