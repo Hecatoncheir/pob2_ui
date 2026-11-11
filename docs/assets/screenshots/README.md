@@ -6,6 +6,7 @@
 - `skills`: сценарий `integration_test/editors_test.dart`.
 - `equipment`, `comparison`, `trade`: сценарий `integration_test/equipment_test.dart`.
 - `setup-wizard`, `library`, `tree-light`, `settings`: отдельный локальный прогон той же ревизии. Мастер снят с пустым профилем. Для дерева, библиотеки и настроек использованы тестовые XML из сквозной проверки.
+- `setup-lua`, `setup-builds`: мастер после подключения настоящего Lua и после поиска через мост отдельного экземпляра Path of Building. Путь ведёт к демонстрационной папке.
 
 Снимки сценариев выпуска доступны в артефакте `ui-windows-x64`. [Проверки выпуска v0.1.22](https://github.com/Hecatoncheir/pob2_ui/actions/runs/43002582595)
 
