@@ -5,13 +5,20 @@ let currentScreenshot = 0;
 function showScreenshot(index) {
   currentScreenshot = (index + screenshots.length) % screenshots.length;
   const link = screenshots[currentScreenshot];
-  const image = document.getElementById('viewer-image');
-  image.src = link.getAttribute('href');
-  image.alt = link.querySelector('img').alt;
-  document.getElementById('viewer-title').textContent = link.dataset.title;
-  document.getElementById('viewer-description').textContent = link.dataset.description;
+  document.getElementById('viewer-image').src = link.getAttribute('href');
+  updateScreenshotText();
   document.getElementById('viewer-count').textContent = `${currentScreenshot + 1} / ${screenshots.length}`;
 }
+
+function updateScreenshotText() {
+  const link = screenshots[currentScreenshot];
+  document.getElementById('viewer-image').alt = link.querySelector('img').alt;
+  document.getElementById('viewer-title').textContent = link.dataset.title;
+  document.getElementById('viewer-description').textContent = link.dataset.description;
+}
+document.addEventListener('site-language-change', () => {
+  if (viewer.open) updateScreenshotText();
+});
 screenshots.forEach((link, index) => link.addEventListener('click', event => {
   if (window.matchMedia('(max-width: 640px)').matches) return;
   event.preventDefault();

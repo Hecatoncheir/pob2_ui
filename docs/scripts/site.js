@@ -26,6 +26,8 @@ function setSiteTheme(dark) {
   document.body.classList.toggle('dark', dark);
   if (!themeToggle) return;
   themeToggle.innerHTML = uiIcon(dark ? 'sun' : 'moon');
-  themeToggle.setAttribute('aria-label', dark ? 'Включить светлую тему' : 'Включить тёмную тему');
+  const label = dark ? 'lightTheme' : 'darkTheme';
+  themeToggle.dataset.i18nAriaLabel = label;
+  if (window.pobSiteLanguage) themeToggle.setAttribute('aria-label', window.pobSiteLanguage.text(label));
 }
 try { setSiteTheme(localStorage.getItem('pob-site-theme') === 'dark'); } catch (_) { /* Тема работает и без сохранения. */ }

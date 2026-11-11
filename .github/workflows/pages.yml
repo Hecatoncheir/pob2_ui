@@ -7,6 +7,7 @@ on:
       - 'docs/**'
       - 'tool/design_state_test.cjs'
       - 'tool/site_downloads_test.cjs'
+      - 'tool/site_language_test.cjs'
       - 'tool/update_site_release.cjs'
       - '.github/workflows/pages.yml'
   workflow_dispatch:
@@ -48,6 +49,7 @@ jobs:
         run: |
           node --test tool/design_state_test.cjs
           node --test tool/site_downloads_test.cjs
+          node --test tool/site_language_test.cjs
           for script in docs/scripts/*.js; do
             node --check "$script"
           done

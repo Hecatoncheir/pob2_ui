@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#f2efe5">
-  <meta name="description" content="PoB II — мастерская сборок для Path of Exile 2. Новый интерфейс, оригинальные расчёты Path of Building.">
-  <title>PoB II — ваша сборка, всё под рукой</title>
+  <meta name="description" content="PoB II — мастерская сборок для Path of Exile 2. Новый интерфейс, оригинальные расчёты Path of Building." data-i18n-content="homeDescription">
+  <title data-i18n="homeTitle">PoB II — ваша сборка, всё под рукой</title>
   <link rel="icon" href="assets/brand/app-icon.svg" type="image/svg+xml">
   <link rel="preload" href="assets/fonts/nunito-800.ttf" as="font" type="font/ttf" crossorigin>
   <link rel="stylesheet" href="styles/base.css">
@@ -13,56 +13,64 @@
   <script src="scripts/icons.js" defer></script>
   <script src="scripts/downloads.js" defer></script>
   <script src="scripts/site.js" defer></script>
+  <link rel="stylesheet" href="styles/language.css">
+  <script src="scripts/site-strings.js" defer></script>
+  <script src="scripts/site-language.js" defer></script>
 </head>
 <body>
-  <a class="skip" href="#main">К содержимому</a>
+  <a class="skip" href="#main" data-i18n="skip">К содержимому</a>
   <div class="site-shell">
     <header class="site-header">
-      <a class="brand" href="./" aria-label="PoB II — главная"><img src="assets/brand/mark.svg" alt=""><span><strong>PoB <span class="brand-ii">II</span></strong><small>МАСТЕРСКАЯ СБОРОК</small></span></a>
-      <nav aria-label="Основные ссылки"><button class="text-button" data-dialog="about">О приложении</button><a href="https://github.com/Hecatoncheir/pob2_ui" target="_blank" rel="noopener">GitHub <span aria-hidden="true">↗</span></a><button class="icon-button" id="theme-toggle" aria-label="Включить тёмную тему" data-icon="moon"></button></nav>
+      <a class="brand" href="./" aria-label="PoB II — главная" data-i18n-aria-label="homeLabel"><img src="assets/brand/mark.svg" alt=""><span><strong>PoB <span class="brand-ii">II</span></strong><small data-i18n="wordmark">МАСТЕРСКАЯ СБОРОК</small></span></a>
+      <nav aria-label="Основные ссылки" data-i18n-aria-label="mainNavigation"><button class="text-button" data-dialog="about" data-i18n="about">О приложении</button><a href="https://github.com/Hecatoncheir/pob2_ui" target="_blank" rel="noopener">GitHub <span aria-hidden="true">↗</span></a><select class="site-language" data-site-language data-i18n-aria-label="language" aria-label="Язык сайта" hidden>
+        <option value="auto" data-i18n="automatic">Авто</option>
+        <option value="ru" lang="ru">Русский</option>
+        <option value="zh-Hans" lang="zh-Hans">简体中文</option>
+        <option value="en" lang="en">English</option>
+      </select><button class="icon-button" id="theme-toggle" aria-label="Включить тёмную тему" data-icon="moon" data-i18n-aria-label="darkTheme"></button></nav>
     </header>
     <main id="main" class="hero">
       <div class="hero-copy reveal">
-        <p class="eyebrow"><span class="dot"></span> ДЛЯ PATH OF EXILE 2</p>
-        <h1>Ваша сборка.<br>Всё <span class="spark-word">под рукой.<svg viewBox="0 0 360 20" aria-hidden="true"><path d="M5 14C100-1 225-1 350 7"/></svg></span></h1>
-        <p class="hero-lead">Дерево, умения и экипировка в одном месте.<br>Понятный интерфейс. Исходные расчёты PoB.</p>
-        <div class="hero-actions"><a class="button" href="gallery.html">Посмотреть приложение <span data-icon="arrow"></span></a><button class="text-button" data-dialog="how">Как это работает <span aria-hidden="true">↗</span></button></div>
-        <section id="download" class="downloads" aria-label="Скачать приложение">
-          <div class="downloads-heading"><span>Скачать для компьютера</span><a data-release-version href="https://github.com/Hecatoncheir/pob2_ui/releases/tag/v0.1.20">v0.1.20 ↗</a></div>
+        <p class="eyebrow"><span class="dot"></span> <span data-i18n="heroEyebrow">ДЛЯ PATH OF EXILE 2</span></p>
+        <h1><span data-i18n="heroLineOne">Ваша сборка.</span><br><span data-i18n="heroLineTwo">Всё</span> <span class="spark-word"><span data-i18n="heroUnderline">под рукой.</span><svg viewBox="0 0 360 20" aria-hidden="true"><path d="M5 14C100-1 225-1 350 7"/></svg></span></h1>
+        <p class="hero-lead"><span data-i18n="heroLead">Дерево, умения и экипировка в одном месте.</span><br> <span data-i18n="heroDetails">Понятный интерфейс. Исходные расчёты PoB.</span></p>
+        <div class="hero-actions"><a class="button" href="gallery.html"><span data-i18n="viewApp">Посмотреть приложение</span> <span data-icon="arrow"></span></a><button class="text-button" data-dialog="how"><span data-i18n="how">Как это работает</span> <span aria-hidden="true">↗</span></button></div>
+        <section id="download" class="downloads" aria-label="Скачать приложение" data-i18n-aria-label="downloadApp">
+          <div class="downloads-heading"><span data-i18n="downloadDesktop">Скачать для компьютера</span><a data-release-version href="https://github.com/Hecatoncheir/pob2_ui/releases/tag/v0.1.20">v0.1.20 ↗</a></div>
           <div class="download-links">
             <a class="download-link" data-download="windows" href="https://github.com/Hecatoncheir/pob2_ui/releases/download/v0.1.20/pob2-ui-0.1.20-windows-x64-setup.exe"><img src="assets/platforms/windows.svg" alt="" width="22" height="22"><span><strong>Windows</strong><small>x64 · .exe</small></span></a>
             <a class="download-link" data-download="macos" href="https://github.com/Hecatoncheir/pob2_ui/releases/download/v0.1.20/pob2-ui-0.1.20-macos-arm64.dmg"><img src="assets/platforms/macos.svg" alt="" width="22" height="22"><span><strong>macOS</strong><small>Apple Silicon · .dmg</small></span></a>
             <a class="download-link" data-download="linux" href="https://github.com/Hecatoncheir/pob2_ui/releases/download/v0.1.20/pob2-ui-0.1.20-linux-x64.run"><img src="assets/platforms/linux.svg" alt="" width="22" height="22"><span><strong>Linux</strong><small>x64 · .run</small></span></a>
           </div>
         </section>
-        <div class="hero-facts"><span><span data-icon="shield"></span>Локально</span><span><span data-icon="code"></span>Открытый код</span><span><span data-icon="tree"></span>Исходный Lua</span></div>
+        <div class="hero-facts"><span><span data-icon="shield"></span><span data-i18n="local">Локально</span></span><span><span data-icon="code"></span><span data-i18n="openSource">Открытый код</span></span><span><span data-icon="tree"></span><span data-i18n="originalLua">Исходный Lua</span></span></div>
       </div>
       <div class="hero-art reveal">
-        <div class="art-top"><span class="eyebrow">01 / ОТ ИДЕИ К ПЕРСОНАЖУ</span><span class="tag">PoB × PoE 2</span></div>
-        <img class="emblem" src="assets/brand/emblem.svg" alt="Пламя с ветвями дерева умений, окружённое камнем и кубом">
-        <div class="floating-label label-tree"><span data-icon="tree"></span><span>Своя ветка развития</span></div>
-        <div class="floating-label label-gem"><span data-icon="gem"></span><span>Своя комбинация</span></div>
-        <div class="art-bottom"><span class="mono">ИДЕЯ → СБОРКА → РАСЧЁТ</span><span class="small-star" aria-hidden="true">✳</span></div>
+        <div class="art-top"><span class="eyebrow" data-i18n="artEyebrow">01 / ОТ ИДЕИ К ПЕРСОНАЖУ</span><span class="tag">PoB × PoE 2</span></div>
+        <img class="emblem" src="assets/brand/emblem.svg" alt="Пламя с ветвями дерева умений, окружённое камнем и кубом" data-i18n-alt="emblemAlt">
+        <div class="floating-label label-tree"><span data-icon="tree"></span><span data-i18n="artTree">Своя ветка развития</span></div>
+        <div class="floating-label label-gem"><span data-icon="gem"></span><span data-i18n="artGems">Своя комбинация</span></div>
+        <div class="art-bottom"><span class="mono" data-i18n="artCaption">ИДЕЯ → СБОРКА → РАСЧЁТ</span><span class="small-star" aria-hidden="true">✳</span></div>
       </div>
     </main>
-    <footer class="site-footer"><p>Меньше шума. Больше пространства для идей.</p><div><a href="gallery.html">Скриншоты приложения ↗</a><a href="brand.html">Логотип и иконки ↗</a></div></footer>
+    <footer class="site-footer"><p data-i18n="footerMotto">Меньше шума. Больше пространства для идей.</p><div><a href="gallery.html" data-i18n="screenshotsLink">Скриншоты приложения ↗</a><a href="brand.html" data-i18n="brandLink">Логотип и иконки ↗</a></div></footer>
   </div>
   <dialog id="about">
-    <div class="dialog-head"><h2>О приложении</h2><button class="icon-button" data-close aria-label="Закрыть" data-icon="close"></button></div>
-    <p>PoB II — приложение для планирования персонажей Path of Exile 2 на Windows, macOS и Linux. Интерфейс написан на Flutter. Игровые данные, правила и расчёты предоставляет исходный Lua Path of Building через локальный MCP.</p>
-    <p>В дереве можно искать пассивные умения по характеристике и сворачивать список результатов, сохраняя подсветку. В редакторе умений можно подбирать совместимые камни поддержки, а в экипировке — сравнивать предметы перед заменой и переходить к поиску на официальном рынке.</p>
-    <p>PoB II открывает и сохраняет XML в общей папке Path of Building. Сборки и заметки хранятся на вашем компьютере. Доступны Undo/Redo, светлая и тёмная темы, выбор языка, масштаб и горячие клавиши.</p>
-    <p>Для первоначальной загрузки компонентов нужны интернет, Git и 64-битный Python 3.11+. После загрузки расчёты работают локально. PoB II — независимый проект с открытым исходным кодом.</p>
-    <a class="button" href="gallery.html">Посмотреть скриншоты <span data-icon="arrow"></span></a>
+    <div class="dialog-head"><h2 data-i18n="about">О приложении</h2><button class="icon-button" data-close aria-label="Закрыть" data-icon="close" data-i18n-aria-label="close"></button></div>
+    <p data-i18n="aboutIntro">PoB II — приложение для планирования персонажей Path of Exile 2 на Windows, macOS и Linux. Интерфейс написан на Flutter. Игровые данные, правила и расчёты предоставляет исходный Lua Path of Building через локальный MCP.</p>
+    <p data-i18n="aboutEditor">В дереве можно искать пассивные умения по характеристике и сворачивать список результатов, сохраняя подсветку. В редакторе умений можно подбирать совместимые камни поддержки, а в экипировке — сравнивать предметы перед заменой и переходить к поиску на официальном рынке.</p>
+    <p data-i18n="aboutStorage">PoB II открывает и сохраняет XML в общей папке Path of Building. Сборки и заметки хранятся на вашем компьютере. Доступны Undo/Redo, светлая и тёмная темы, выбор языка, масштаб и горячие клавиши.</p>
+    <p data-i18n="aboutRequirements">Для первоначальной загрузки компонентов нужны интернет, Git и 64-битный Python 3.11+. После загрузки расчёты работают локально. PoB II — независимый проект с открытым исходным кодом.</p>
+    <a class="button" href="gallery.html"><span data-i18n="viewScreenshots">Посмотреть скриншоты</span> <span data-icon="arrow"></span></a>
   </dialog>
   <dialog id="how">
-    <div class="dialog-head"><h2>От идеи к сборке</h2><button class="icon-button" data-close aria-label="Закрыть" data-icon="close"></button></div>
+    <div class="dialog-head"><h2 data-i18n="howTitle">От идеи к сборке</h2><button class="icon-button" data-close aria-label="Закрыть" data-icon="close" data-i18n-aria-label="close"></button></div>
     <ol class="how-list">
-      <li><strong>Подготовьте PoB II</strong><span>Скачайте установщик для своей ОС. При первом запуске нажмите «Подготовить PoB II», чтобы загрузить недостающие компоненты.</span></li>
-      <li><strong>Подключите папку сборок</strong><span>Выберите папку Path of Building. Затем создайте сборку, откройте XML или импортируйте сборку из PoB.</span></li>
-      <li><strong>Сравните варианты</strong><span>Меняйте узлы, умения и предметы. Lua пересчитает показатели, а Undo/Redo позволит вернуться к предыдущему варианту.</span></li>
+      <li><strong data-i18n="howSetup">Подготовьте PoB II</strong><span data-i18n="howSetupText">Скачайте установщик для своей ОС. При первом запуске нажмите «Подготовить PoB II», чтобы загрузить недостающие компоненты.</span></li>
+      <li><strong data-i18n="howFolder">Подключите папку сборок</strong><span data-i18n="howFolderText">Выберите папку Path of Building. Затем создайте сборку, откройте XML или импортируйте сборку из PoB.</span></li>
+      <li><strong data-i18n="howCompare">Сравните варианты</strong><span data-i18n="howCompareText">Меняйте узлы, умения и предметы. Lua пересчитает показатели, а Undo/Redo позволит вернуться к предыдущему варианту.</span></li>
     </ol>
-    <a class="button" href="gallery.html">В галерею <span data-icon="arrow"></span></a>
+    <a class="button" href="gallery.html"><span data-i18n="toGallery">В галерею</span> <span data-icon="arrow"></span></a>
   </dialog>
 </body>
 </html>

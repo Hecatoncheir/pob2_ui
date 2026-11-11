@@ -1,0 +1,38 @@
+.site-language {
+  min-height: 36px;
+  padding: 5px 8px;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: var(--surface);
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.brand-nav {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+:lang(zh-Hans) .hero h1,
+:lang(zh-Hans) .gallery-heading h1,
+:lang(zh-Hans) .brand-heading h1,
+:lang(zh-Hans) .eyebrow {
+  letter-spacing: normal;
+}
+
+@media (max-width: 460px) {
+  .site-header, .brand-header {
+    height: auto;
+    min-height: 104px;
+    padding: 12px 0;
+    flex-wrap: wrap;
+    gap: 8px 12px;
+  }
+
+  .site-header nav, .brand-nav {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
