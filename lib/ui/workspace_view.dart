@@ -5,7 +5,6 @@ import 'core/ui_translation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../data/tree_progression_repository.dart';
 import 'build_dialogs.dart';
 import 'build_setup.dart';
 import 'build_sections.dart';
@@ -52,21 +51,13 @@ class WorkspaceView extends StatelessWidget {
   }
 
   Widget _withPlan(Widget child) {
-    final document = model.state.document!;
-    final id = model.state.library.activeId;
-    final tree = document.tree;
-    if (id == null || tree == null) return child;
-    final key = (
-      folder: model.sharedLibrary?.directory ?? '',
-      build: id,
-      version: tree.version,
-      characterClass: document.report.characterClass,
-    );
+    final key = model.progressionKey;
+    if (key == null) return child;
     return BlocProvider(
       key: ValueKey(key),
-      create: (_) => TreeProgressionBloc(
-        TreeProgressionRepository(model.components.store.root, key),
-      )..add(const TreeProgressionOpened()),
+      create: (_) =>
+          TreeProgressionBloc(model.progressionRepository(key))
+            ..add(const TreeProgressionOpened()),
       child: child,
     );
   }

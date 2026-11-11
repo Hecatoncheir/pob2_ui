@@ -545,6 +545,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get mbfc7b67eb5 => 'เปลี่ยนรายการ';
 
   @override
+  String get md4bac1da57 => 'บันทึกของขั้น';
+
+  @override
   String get mdc4baf32ac => 'บันทึกการสร้าง';
 
   @override
@@ -587,7 +590,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get mdcd4c2c384 => 'คาถาหลีกเลี่ยงโอกาส';
 
   @override
-  String get m0094a04edd => 'แก้ไขเลเวลของขั้น';
+  String get med931b5f06 => 'แก้ไขขั้น';
 
   @override
   String get md5a9ca934e => 'ไม่พบรูปหิน';
@@ -758,6 +761,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m51233393a5 => 'สโมสรฟุตบอล';
+
+  @override
+  String get m378e9ed8fc => 'ชื่อขั้น';
 
   @override
   String get m0bf71e1c90 => 'พบหลายโฟลเดอร์ของ PoB โปรดเลือกโฟลเดอร์ที่ใช้';

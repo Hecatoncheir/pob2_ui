@@ -550,6 +550,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get mbfc7b67eb5 => 'Replace item';
 
   @override
+  String get md4bac1da57 => 'Milestone note';
+
+  @override
   String get mdc4baf32ac => 'Build notes';
 
   @override
@@ -592,7 +595,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get mdcd4c2c384 => 'Spell avoid chance';
 
   @override
-  String get m0094a04edd => 'Edit milestone level';
+  String get med931b5f06 => 'Edit milestone';
 
   @override
   String get md5a9ca934e => 'Stone image not found';
@@ -765,6 +768,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get m51233393a5 => 'Название сборки';
+
+  @override
+  String get m378e9ed8fc => 'Milestone name';
 
   @override
   String get m0bf71e1c90 =>

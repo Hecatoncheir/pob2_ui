@@ -568,6 +568,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get mbfc7b67eb5 => 'Remplacer l\'élément';
 
   @override
+  String get md4bac1da57 => 'Note de l’étape';
+
+  @override
   String get mdc4baf32ac => 'Notes de construction';
 
   @override
@@ -610,7 +613,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get mdcd4c2c384 => 'Sort éviter le hasard';
 
   @override
-  String get m0094a04edd => 'Modifier le niveau de l’étape';
+  String get med931b5f06 => 'Modifier l’étape';
 
   @override
   String get md5a9ca934e => 'Image de pierre introuvable';
@@ -784,6 +787,9 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get m51233393a5 => 'Название сборки';
+
+  @override
+  String get m378e9ed8fc => 'Nom de l’étape';
 
   @override
   String get m0bf71e1c90 =>

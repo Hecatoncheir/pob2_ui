@@ -555,6 +555,9 @@ class AppLocalizationsPt extends AppLocalizations {
   String get mbfc7b67eb5 => 'Substituir item';
 
   @override
+  String get md4bac1da57 => 'Nota da etapa';
+
+  @override
   String get mdc4baf32ac => 'Notas de construção';
 
   @override
@@ -597,7 +600,7 @@ class AppLocalizationsPt extends AppLocalizations {
   String get mdcd4c2c384 => 'Feitiço para evitar o acaso';
 
   @override
-  String get m0094a04edd => 'Alterar o nível da etapa';
+  String get med931b5f06 => 'Editar etapa';
 
   @override
   String get md5a9ca934e => 'Imagem de pedra não encontrada';
@@ -771,6 +774,9 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get m51233393a5 => 'Novas bolas';
+
+  @override
+  String get m378e9ed8fc => 'Nome da etapa';
 
   @override
   String get m0bf71e1c90 =>
@@ -2654,6 +2660,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get mbfc7b67eb5 => 'Substituir item';
 
   @override
+  String get md4bac1da57 => 'Nota da etapa';
+
+  @override
   String get mdc4baf32ac => 'Notas de construção';
 
   @override
@@ -2696,7 +2705,7 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get mdcd4c2c384 => 'Feitiço para evitar o acaso';
 
   @override
-  String get m0094a04edd => 'Alterar o nível da etapa';
+  String get med931b5f06 => 'Editar etapa';
 
   @override
   String get md5a9ca934e => 'Imagem de pedra não encontrada';
@@ -2870,6 +2879,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get m51233393a5 => 'Novas bolas';
+
+  @override
+  String get m378e9ed8fc => 'Nome da etapa';
 
   @override
   String get m0bf71e1c90 =>

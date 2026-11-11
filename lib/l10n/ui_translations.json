@@ -161,6 +161,7 @@
     "m7ab4920661": "Закройте выбранный PoB вручную и повторите запуск.",
     "ma7a4033657": "Закрыть",
     "mbfc7b67eb5": "Заменить предмет",
+    "md4bac1da57": "Заметка к этапу",
     "mdc4baf32ac": "Заметки к сборке",
     "mbdb05f34ee": "Заметки сохраняются автоматически",
     "ma2d2d73bb5": "Запустить подготовку",
@@ -175,7 +176,7 @@
     "ma48353b7b1": "Избежание атак вблизи",
     "m8a055d1e48": "Избежание снарядов",
     "mdcd4c2c384": "Избежание чар",
-    "m0094a04edd": "Изменить уровень этапа",
+    "med931b5f06": "Изменить этап",
     "md5a9ca934e": "Изображение камня не найдено",
     "m1ccb8777b8": "Изображение камня недоступно",
     "medafd2f9d8": "Импорт персонажа из PoB",
@@ -231,6 +232,7 @@
     "m0918b4ba92": "Название",
     "md45e66ab55": "Название группы",
     "m51233393a5": "Название сборки",
+    "m378e9ed8fc": "Название этапа",
     "m0bf71e1c90": "Найдено несколько папок PoB. Выберите нужную вручную.",
     "mbfd148a7e8": "Найдено узлов: {p0}",
     "mbe6156b8e4": "Найти",
@@ -1265,7 +1267,9 @@
     "m7ae0591157": "Level {p0}",
     "m75160b86a8": "Parameters",
     "m610d4c2115": "Plan",
-    "m0094a04edd": "Edit milestone level"
+    "med931b5f06": "Edit milestone",
+    "m378e9ed8fc": "Milestone name",
+    "md4bac1da57": "Milestone note"
   },
   "fr": {
     "m0c63e733f9": "Lua n'a pas renvoyé toutes les icônes",
@@ -1899,7 +1903,9 @@
     "m7ae0591157": "Niveau {p0}",
     "m75160b86a8": "Paramètres",
     "m610d4c2115": "Plan",
-    "m0094a04edd": "Modifier le niveau de l’étape"
+    "med931b5f06": "Modifier l’étape",
+    "m378e9ed8fc": "Nom de l’étape",
+    "md4bac1da57": "Note de l’étape"
   },
   "de": {
     "m0c63e733f9": "Lua hat nicht alle Symbole zurückgegeben",
@@ -2533,7 +2539,9 @@
     "m7ae0591157": "Stufe {p0}",
     "m75160b86a8": "Parameter",
     "m610d4c2115": "Plan",
-    "m0094a04edd": "Stufenlevel ändern"
+    "med931b5f06": "Etappe bearbeiten",
+    "m378e9ed8fc": "Name der Etappe",
+    "md4bac1da57": "Notiz zur Etappe"
   },
   "es": {
     "m0c63e733f9": "Lua no devolvió todos los íconos",
@@ -3167,7 +3175,9 @@
     "m7ae0591157": "Nivel {p0}",
     "m75160b86a8": "Parámetros",
     "m610d4c2115": "Plan",
-    "m0094a04edd": "Cambiar el nivel de la etapa"
+    "med931b5f06": "Editar etapa",
+    "m378e9ed8fc": "Nombre de la etapa",
+    "md4bac1da57": "Nota de la etapa"
   },
   "pt_BR": {
     "m0c63e733f9": "Lua não retornou todos os ícones",
@@ -3801,7 +3811,9 @@
     "m7ae0591157": "Nível {p0}",
     "m75160b86a8": "Parâmetros",
     "m610d4c2115": "Plano",
-    "m0094a04edd": "Alterar o nível da etapa"
+    "med931b5f06": "Editar etapa",
+    "m378e9ed8fc": "Nome da etapa",
+    "md4bac1da57": "Nota da etapa"
   },
   "ja": {
     "m0c63e733f9": "Lua はすべてのアイコンを返しませんでした",
@@ -4435,7 +4447,9 @@
     "m7ae0591157": "レベル {p0}",
     "m75160b86a8": "パラメーター",
     "m610d4c2115": "計画",
-    "m0094a04edd": "段階のレベルを変更"
+    "med931b5f06": "段階を編集",
+    "m378e9ed8fc": "段階の名前",
+    "md4bac1da57": "段階のメモ"
   },
   "ko": {
     "m0c63e733f9": "Lua이 모든 아이콘을 반환하지 않았습니다.",
@@ -5069,7 +5083,9 @@
     "m7ae0591157": "레벨 {p0}",
     "m75160b86a8": "능력치",
     "m610d4c2115": "계획",
-    "m0094a04edd": "단계 레벨 변경"
+    "med931b5f06": "단계 편집",
+    "m378e9ed8fc": "단계 이름",
+    "md4bac1da57": "단계 메모"
   },
   "th": {
     "m0c63e733f9": "Lua ไม่ได้ส่งคืนไอคอนทั้งหมด",
@@ -5703,7 +5719,9 @@
     "m7ae0591157": "เลเวล {p0}",
     "m75160b86a8": "ค่าสถานะ",
     "m610d4c2115": "แผน",
-    "m0094a04edd": "แก้ไขเลเวลของขั้น"
+    "med931b5f06": "แก้ไขขั้น",
+    "m378e9ed8fc": "ชื่อขั้น",
+    "md4bac1da57": "บันทึกของขั้น"
   },
   "zh_Hant": {
     "m0c63e733f9": "Lua 未傳回所有圖標",
@@ -6337,6 +6355,8 @@
     "m7ae0591157": "等級 {p0}",
     "m75160b86a8": "參數",
     "m610d4c2115": "計畫",
-    "m0094a04edd": "編輯階段等級"
+    "med931b5f06": "編輯階段",
+    "m378e9ed8fc": "階段名稱",
+    "md4bac1da57": "階段備註"
   }
 }

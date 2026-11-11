@@ -551,6 +551,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get mbfc7b67eb5 => 'Заменить предмет';
 
   @override
+  String get md4bac1da57 => 'Заметка к этапу';
+
+  @override
   String get mdc4baf32ac => 'Заметки к сборке';
 
   @override
@@ -593,7 +596,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get mdcd4c2c384 => 'Избежание чар';
 
   @override
-  String get m0094a04edd => 'Изменить уровень этапа';
+  String get med931b5f06 => 'Изменить этап';
 
   @override
   String get md5a9ca934e => 'Изображение камня не найдено';
@@ -765,6 +768,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get m51233393a5 => 'Название сборки';
+
+  @override
+  String get m378e9ed8fc => 'Название этапа';
 
   @override
   String get m0bf71e1c90 =>

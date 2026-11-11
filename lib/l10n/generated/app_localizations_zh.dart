@@ -534,6 +534,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get mbfc7b67eb5 => '替換項目';
 
   @override
+  String get md4bac1da57 => '階段備註';
+
+  @override
   String get mdc4baf32ac => '建構說明';
 
   @override
@@ -576,7 +579,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get mdcd4c2c384 => '法術避免幾率';
 
   @override
-  String get m0094a04edd => '編輯階段等級';
+  String get med931b5f06 => '編輯階段';
 
   @override
   String get md5a9ca934e => '未找到石頭圖像';
@@ -746,6 +749,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m51233393a5 => 'Название сборки';
+
+  @override
+  String get m378e9ed8fc => '階段名稱';
 
   @override
   String get m0bf71e1c90 => '找到多個 PoB 資料夾。請選擇您使用的資料夾。';
@@ -2566,6 +2572,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get mbfc7b67eb5 => '替換項目';
 
   @override
+  String get md4bac1da57 => '階段備註';
+
+  @override
   String get mdc4baf32ac => '建構說明';
 
   @override
@@ -2608,7 +2617,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get mdcd4c2c384 => '法術避免幾率';
 
   @override
-  String get m0094a04edd => '編輯階段等級';
+  String get med931b5f06 => '編輯階段';
 
   @override
   String get md5a9ca934e => '未找到石頭圖像';
@@ -2778,6 +2787,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m51233393a5 => 'Название сборки';
+
+  @override
+  String get m378e9ed8fc => '階段名稱';
 
   @override
   String get m0bf71e1c90 => '找到多個 PoB 資料夾。請選擇您使用的資料夾。';

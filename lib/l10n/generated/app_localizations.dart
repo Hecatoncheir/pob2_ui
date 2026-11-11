@@ -1082,6 +1082,12 @@ abstract class AppLocalizations {
   /// **'Replace item'**
   String get mbfc7b67eb5;
 
+  /// Заметка к этапу
+  ///
+  /// In en, this message translates to:
+  /// **'Milestone note'**
+  String get md4bac1da57;
+
   /// Заметки к сборке
   ///
   /// In en, this message translates to:
@@ -1166,11 +1172,11 @@ abstract class AppLocalizations {
   /// **'Spell avoid chance'**
   String get mdcd4c2c384;
 
-  /// Изменить уровень этапа
+  /// Изменить этап
   ///
   /// In en, this message translates to:
-  /// **'Edit milestone level'**
-  String get m0094a04edd;
+  /// **'Edit milestone'**
+  String get med931b5f06;
 
   /// Изображение камня не найдено
   ///
@@ -1501,6 +1507,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Название сборки'**
   String get m51233393a5;
+
+  /// Название этапа
+  ///
+  /// In en, this message translates to:
+  /// **'Milestone name'**
+  String get m378e9ed8fc;
 
   /// Найдено несколько папок PoB. Выберите нужную вручную.
   ///

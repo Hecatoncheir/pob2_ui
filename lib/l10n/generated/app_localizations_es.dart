@@ -559,6 +559,9 @@ class AppLocalizationsEs extends AppLocalizations {
   String get mbfc7b67eb5 => 'Reemplazar elemento';
 
   @override
+  String get md4bac1da57 => 'Nota de la etapa';
+
+  @override
   String get mdc4baf32ac => 'Notas de compilación';
 
   @override
@@ -601,7 +604,7 @@ class AppLocalizationsEs extends AppLocalizations {
   String get mdcd4c2c384 => 'Hechizo para evitar el azar';
 
   @override
-  String get m0094a04edd => 'Cambiar el nivel de la etapa';
+  String get med931b5f06 => 'Editar etapa';
 
   @override
   String get md5a9ca934e => 'Imagen de piedra no encontrada';
@@ -776,6 +779,9 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get m51233393a5 => 'Название сборки';
+
+  @override
+  String get m378e9ed8fc => 'Nombre de la etapa';
 
   @override
   String get m0bf71e1c90 =>

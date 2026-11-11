@@ -5,13 +5,30 @@ typedef TreeProgressionKey = ({
   String characterClass,
 });
 
+typedef TreeProgressionTransfer = ({
+  String version,
+  String characterClass,
+  List<TreeProgressionStep> steps,
+});
+
 class TreeProgressionStep {
-  TreeProgressionStep(this.level, Iterable<int> nodes)
-    : nodes = Set.unmodifiable(nodes);
+  TreeProgressionStep(
+    this.level,
+    Iterable<int> nodes, {
+    this.title = '',
+    this.note = '',
+  }) : nodes = Set.unmodifiable(nodes);
 
   final int level;
   final Set<int> nodes;
+  final String title;
+  final String note;
+
+  TreeProgressionDetails get details =>
+      (level: level, title: title, note: note);
 }
+
+typedef TreeProgressionDetails = ({int level, String title, String note});
 
 typedef TreeProgressionChange = ({Set<int> added, Set<int> removed});
 

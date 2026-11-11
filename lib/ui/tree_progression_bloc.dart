@@ -45,10 +45,10 @@ final class TreeProgressionRecorded extends TreeProgressionEvent {
   final TreeProgressionStep step;
 }
 
-final class TreeProgressionLevelChanged extends TreeProgressionEvent {
-  const TreeProgressionLevelChanged(this.step, this.level);
+final class TreeProgressionEdited extends TreeProgressionEvent {
+  const TreeProgressionEdited(this.step, this.details);
   final TreeProgressionStep step;
-  final int level;
+  final TreeProgressionDetails details;
 }
 
 final class TreeProgressionSelected extends TreeProgressionEvent {
@@ -102,9 +102,8 @@ class TreeProgressionBloc
         ));
       case TreeProgressionRecorded(:final step) when state.ready:
         await _insert(emit, [...state.steps], step);
-      case TreeProgressionLevelChanged(:final step, :final level)
-          when state.ready:
-        await _changeLevel(emit, step, level);
+      case TreeProgressionEdited(:final step, :final details) when state.ready:
+        await _edit(emit, step, details);
       case TreeProgressionSelected(:final step) when state.ready:
         _select(emit, step);
       case TreeProgressionRemoved(:final step) when state.ready:
@@ -115,15 +114,29 @@ class TreeProgressionBloc
     }
   }
 
-  Future<void> _changeLevel(
+  Future<void> _edit(
     Emitter<TreeProgressionState> emit,
     TreeProgressionStep step,
-    int level,
+    TreeProgressionDetails details,
   ) async {
-    if (level == step.level || level < 1 || level > 100) return;
+    final (:level, :title, :note) = details;
+    if (details == step.details || level < 1 || level > 100) return;
     final steps = [...state.steps];
-    if (!steps.remove(step)) return;
-    await _insert(emit, steps, TreeProgressionStep(level, step.nodes));
+    final index = steps.indexOf(step);
+    if (index < 0) return;
+    final edited = TreeProgressionStep(
+      level,
+      step.nodes,
+      title: title,
+      note: note,
+    );
+    if (level != step.level) {
+      steps.removeAt(index);
+      await _insert(emit, steps, edited);
+      return;
+    }
+    steps[index] = edited;
+    await _save(emit, steps, index);
   }
 
   Future<void> _insert(

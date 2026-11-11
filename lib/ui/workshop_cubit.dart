@@ -14,8 +14,11 @@ import '../data/pob_build_locations.dart';
 import '../data/session_repository.dart';
 import '../data/build_library.dart';
 import '../data/tree_icon_repository.dart';
+import '../data/tree_progression_exchange.dart';
+import '../data/tree_progression_repository.dart';
 import '../domain/build_report.dart';
 import '../domain/tree_geometry.dart';
+import '../domain/tree_progression.dart';
 import '../domain/original_tree_scene.dart';
 import '../domain/node_preview.dart';
 import '../domain/library_entry.dart';
@@ -56,6 +59,28 @@ class WorkshopCubit extends Cubit<WorkshopState> {
   bool get buildFolderReady =>
       sharedLibrary == null || sharedLibrary?.directory != null;
   final XmlFileService files;
+  TreeProgressionKey? get progressionKey {
+    final id = state.library.activeId;
+    final document = state.document;
+    final tree = document?.tree;
+    if (id == null || tree == null) return null;
+    return _progressionKey(id, tree.version, document!.report.characterClass);
+  }
+
+  TreeProgressionKey _progressionKey(
+    String id,
+    String version,
+    String characterClass,
+  ) => (
+    folder: sharedLibrary?.directory ?? '',
+    build: id,
+    version: version,
+    characterClass: characterClass,
+  );
+
+  TreeProgressionRepository progressionRepository(TreeProgressionKey key) =>
+      TreeProgressionRepository(components.store.root, key);
+
   final PobWindowRepository pobWindow;
   final PobBuildLocations buildLocations;
   McpEditorCubit? _mcpEditor;
@@ -421,10 +446,13 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     );
   });
 
-  Future<void> _importCopy(String xml) => _switchBuild(
-    () => _loadXml(xml),
+  Future<void> _importCopy(
+    String xml, {
+    String title = 'Импортированная сборка',
+  }) => _switchXml(
+    xml,
     target: LibraryState(entries: state.library.entries),
-    title: 'Импортированная сборка',
+    title: title,
   );
 
   Future<void> openXmlFile() => _run(() async {
@@ -434,18 +462,14 @@ class WorkshopCubit extends Cubit<WorkshopState> {
       await _openBuild(id);
       return;
     }
-    await _switchBuild(
-      () => _loadXml(selected.xml),
-      target: LibraryState(entries: state.library.entries),
-      title: selected.title,
-    );
+    await _importCopy(selected.xml, title: selected.title);
   });
 
   Future<void> saveXmlFile() => _run(() async {
     if (state.report == null) return;
     await _flushText();
     final path = await files.save(
-      await _savedXml(),
+      await _exportedXml(),
       state.library.active?.title ?? state.report!.name,
       beforeSave: sharedLibrary?.checkExport,
     );
@@ -504,17 +528,23 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     LibraryState? target,
     String? title,
     bool persist = true,
+    TreeProgressionTransfer? progression,
   }) async {
     final (:report, :xml) = await _readResult();
     final (:tree, :error) = await _readTree();
+    if (progression != null) _checkProgression(progression, report, tree);
     final builds = persist
         ? await library.save(
             target ?? state.library,
             report,
-            xml,
+            attachTreeProgression(xml, progression),
             title: title ?? _nextTitle,
           )
         : target ?? state.library;
+    if ((progression, builds.activeId) case (final plan?, final id?)) {
+      final key = _progressionKey(id, plan.version, plan.characterClass);
+      await progressionRepository(key).restoreIfMissing(plan.steps);
+    }
     final saved = sharedLibrary != null
         ? builds.active != null
         : await _saveRecovery(xml);
@@ -528,6 +558,17 @@ class WorkshopCubit extends Cubit<WorkshopState> {
       ),
     );
     addLog(state.status);
+  }
+
+  void _checkProgression(
+    TreeProgressionTransfer plan,
+    BuildReport report,
+    TreeGeometry? tree,
+  ) {
+    if (plan.characterClass != report.characterClass ||
+        (tree != null && tree.version != plan.version)) {
+      throw const FormatException('Некорректный план прокачки');
+    }
   }
 
   Future<bool> _saveRecovery(String xml) async {
@@ -599,8 +640,8 @@ class WorkshopCubit extends Cubit<WorkshopState> {
       return;
     }
     final xml = await library.read(id);
-    await _switchBuild(
-      () => _loadXml(xml),
+    await _switchXml(
+      xml,
       target: LibraryState(entries: state.library.entries, activeId: id),
     );
   }
@@ -625,8 +666,8 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     _seenBuildXml = disk.xml;
     final entry = disk.entry;
     if (!automatic || entry.revision != state.library.active?.revision) {
-      await _switchBuild(
-        () => _loadXml(disk.xml),
+      await _switchXml(
+        disk.xml,
         target: _withEntry(entry, activeId: entry.id),
         persist: false,
       );
@@ -724,11 +765,28 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     if (removedActive) _clearHistory();
   });
 
+  Future<void> _switchXml(
+    String source, {
+    required LibraryState target,
+    String? title,
+    bool persist = true,
+  }) {
+    final (:xml, :progression) = splitTreeProgression(source);
+    return _switchBuild(
+      () => _loadXml(xml),
+      target: target,
+      title: title,
+      persist: persist,
+      progression: progression,
+    );
+  }
+
   Future<void> _switchBuild(
     Future<void> Function() action, {
     required LibraryState target,
     String? title,
     bool persist = true,
+    TreeProgressionTransfer? progression,
   }) async {
     await _flushText();
     final previous = state.document;
@@ -737,7 +795,12 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     _markStale();
     try {
       await action();
-      await _readReport(target: target, title: title, persist: persist);
+      await _readReport(
+        target: target,
+        title: title,
+        persist: persist,
+        progression: progression,
+      );
       _clearHistory();
     } catch (_) {
       _nextTitle = null;
@@ -1048,9 +1111,20 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     String? xml;
     await _run(() async {
       if (state.report == null) return;
-      xml = await _savedXml();
+      xml = await _exportedXml();
     });
     return xml;
+  }
+
+  Future<String> _exportedXml() async {
+    final xml = await _savedXml();
+    final key = progressionKey;
+    if (key == null) return xml;
+    return attachTreeProgression(xml, (
+      version: key.version,
+      characterClass: key.characterClass,
+      steps: await progressionRepository(key).load(),
+    ));
   }
 
   Future<void> _disconnect() async {

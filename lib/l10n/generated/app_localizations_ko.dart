@@ -535,6 +535,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get mbfc7b67eb5 => '항목 교체';
 
   @override
+  String get md4bac1da57 => '단계 메모';
+
+  @override
   String get mdc4baf32ac => '빌드 노트';
 
   @override
@@ -577,7 +580,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get mdcd4c2c384 => '주문 회피 확률';
 
   @override
-  String get m0094a04edd => '단계 레벨 변경';
+  String get med931b5f06 => '단계 편집';
 
   @override
   String get md5a9ca934e => '스톤 이미지를 찾을 수 없습니다.';
@@ -747,6 +750,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m51233393a5 => 'Название сборки';
+
+  @override
+  String get m378e9ed8fc => '단계 이름';
 
   @override
   String get m0bf71e1c90 => 'PoB 폴더가 여러 개 발견되었습니다. 사용하는 폴더를 선택하세요.';

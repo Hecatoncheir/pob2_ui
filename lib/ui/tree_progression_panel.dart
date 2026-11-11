@@ -52,8 +52,8 @@ class TreeProgressionPanel extends StatelessWidget {
         ),
         if (state.selected case final index?) ...[
           IconButton(
-            tooltip: translateUi(context, 'Изменить уровень этапа'),
-            onPressed: () => _editLevel(context, state.steps[index]),
+            tooltip: translateUi(context, 'Изменить этап'),
+            onPressed: () => _edit(context, state.steps[index]),
             icon: const Icon(Icons.edit_outlined, size: 18),
           ),
           IconButton(
@@ -102,13 +102,33 @@ class TreeProgressionPanel extends StatelessWidget {
     final selected = state.selected == index;
     return _ProgressionMilestone(
       level: step.level,
+      title: step.title,
       first: index == 0,
       last: index == state.steps.length - 1,
       selected: selected,
       onTap: () => context.read<TreeProgressionBloc>().add(
         TreeProgressionSelected(selected ? null : step),
       ),
-      changes: selected ? _changes(context, state.steps, index) : null,
+      changes: selected ? _details(context, state.steps, index) : null,
+    );
+  }
+
+  Widget _details(
+    BuildContext context,
+    List<TreeProgressionStep> steps,
+    int index,
+  ) {
+    final note = steps[index].note;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        if (note.isNotEmpty)
+          Padding(
+            padding: const EdgeInsets.fromLTRB(4, 3, 4, 8),
+            child: Text(note, style: Theme.of(context).textTheme.bodySmall),
+          ),
+        _changes(context, steps, index),
+      ],
     );
   }
 
@@ -166,27 +186,27 @@ class TreeProgressionPanel extends StatelessWidget {
       (node) => node.allocated && _canRecord(node),
     );
     final ids = selected.map((node) => node.id).toSet();
-    final result = await sparkDialog<int>(
+    final result = await sparkDialog<TreeProgressionDetails>(
       context,
-      _ProgressionLevelDialog(level),
+      _ProgressionStepDialog((level: level, title: '', note: '')),
     );
     if (result == null || !context.mounted) return;
+    final (level: stepLevel, :title, :note) = result;
     context.read<TreeProgressionBloc>().add(
-      TreeProgressionRecorded(TreeProgressionStep(result, ids)),
+      TreeProgressionRecorded(
+        TreeProgressionStep(stepLevel, ids, title: title, note: note),
+      ),
     );
   }
 
-  Future<void> _editLevel(
-    BuildContext context,
-    TreeProgressionStep step,
-  ) async {
-    final result = await sparkDialog<int>(
+  Future<void> _edit(BuildContext context, TreeProgressionStep step) async {
+    final result = await sparkDialog<TreeProgressionDetails>(
       context,
-      _ProgressionLevelDialog(step.level, title: 'Изменить уровень этапа'),
+      _ProgressionStepDialog(step.details, heading: 'Изменить этап'),
     );
     if (result == null || !context.mounted) return;
     context.read<TreeProgressionBloc>().add(
-      TreeProgressionLevelChanged(step, result),
+      TreeProgressionEdited(step, result),
     );
   }
 
@@ -197,6 +217,7 @@ class TreeProgressionPanel extends StatelessWidget {
 class _ProgressionMilestone extends StatelessWidget {
   const _ProgressionMilestone({
     required this.level,
+    required this.title,
     required this.first,
     required this.last,
     required this.selected,
@@ -209,6 +230,7 @@ class _ProgressionMilestone extends StatelessWidget {
   static const _inset = 28.0;
 
   final int level;
+  final String title;
   final bool first, last, selected;
   final VoidCallback onTap;
   final Widget? changes;
@@ -316,13 +338,7 @@ class _ProgressionMilestone extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
               child: Align(
                 alignment: AlignmentDirectional.centerStart,
-                child: AppText(
-                  'Уровень $level',
-                  style: TextStyle(
-                    fontWeight: FontWeight.w700,
-                    color: selected ? accent : colors.onSurface,
-                  ),
-                ),
+                child: _caption(colors, accent),
               ),
             ),
           ),
@@ -330,43 +346,95 @@ class _ProgressionMilestone extends StatelessWidget {
       ),
     );
   }
+
+  Widget _caption(ColorScheme colors, Color accent) {
+    final heading = TextStyle(
+      fontWeight: FontWeight.w700,
+      color: selected ? accent : colors.onSurface,
+    );
+    if (title.isEmpty) return AppText('Уровень $level', style: heading);
+    return Wrap(
+      spacing: 8,
+      runSpacing: 2,
+      crossAxisAlignment: WrapCrossAlignment.center,
+      children: [
+        Text(
+          title,
+          maxLines: 2,
+          overflow: TextOverflow.ellipsis,
+          style: heading,
+        ),
+        AppText(
+          'Уровень $level',
+          style: TextStyle(fontSize: 11, color: colors.onSurfaceVariant),
+        ),
+      ],
+    );
+  }
 }
 
-class _ProgressionLevelDialog extends StatefulWidget {
-  const _ProgressionLevelDialog(this.level, {this.title = 'Сохранить этап'});
-  final int level;
-  final String title;
+class _ProgressionStepDialog extends StatefulWidget {
+  const _ProgressionStepDialog(this.details, {this.heading = 'Сохранить этап'});
+  final TreeProgressionDetails details;
+  final String heading;
 
   @override
-  State<_ProgressionLevelDialog> createState() =>
-      _ProgressionLevelDialogState();
+  State<_ProgressionStepDialog> createState() => _ProgressionStepDialogState();
 }
 
-class _ProgressionLevelDialogState extends State<_ProgressionLevelDialog> {
-  late final controller = TextEditingController(
-    text: '${widget.level.clamp(1, 100)}',
+class _ProgressionStepDialogState extends State<_ProgressionStepDialog> {
+  late final level = TextEditingController(
+    text: '${widget.details.level.clamp(1, 100)}',
   );
+  late final title = TextEditingController(text: widget.details.title);
+  late final note = TextEditingController(text: widget.details.note);
   final form = GlobalKey<FormState>();
 
   @override
   void dispose() {
-    controller.dispose();
+    level.dispose();
+    title.dispose();
+    note.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) => AlertDialog(
-    title: AppText(widget.title),
+    title: AppText(widget.heading),
+    scrollable: true,
     content: Form(
       key: form,
-      child: TextFormField(
-        controller: controller,
-        autofocus: true,
-        keyboardType: TextInputType.number,
-        inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-        decoration: const InputDecoration(label: AppText('Уровень')),
-        validator: _validateLevel,
-        onFieldSubmitted: (_) => _submit(),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          TextFormField(
+            key: const Key('progression-level'),
+            controller: level,
+            autofocus: true,
+            keyboardType: TextInputType.number,
+            inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+            decoration: const InputDecoration(label: AppText('Уровень')),
+            validator: _validateLevel,
+            onFieldSubmitted: (_) => _submit(),
+          ),
+          const SizedBox(height: 12),
+          TextFormField(
+            key: const Key('progression-title'),
+            controller: title,
+            decoration: const InputDecoration(label: AppText('Название этапа')),
+          ),
+          const SizedBox(height: 12),
+          TextFormField(
+            key: const Key('progression-note'),
+            controller: note,
+            minLines: 2,
+            maxLines: 4,
+            keyboardType: TextInputType.multiline,
+            decoration: const InputDecoration(
+              label: AppText('Заметка к этапу'),
+            ),
+          ),
+        ],
       ),
     ),
     actions: [
@@ -386,6 +454,10 @@ class _ProgressionLevelDialogState extends State<_ProgressionLevelDialog> {
 
   void _submit() {
     if (form.currentState?.validate() != true) return;
-    Navigator.pop(context, int.parse(controller.text));
+    Navigator.pop<TreeProgressionDetails>(context, (
+      level: int.parse(level.text),
+      title: title.text.trim(),
+      note: note.text.trim(),
+    ));
   }
 }

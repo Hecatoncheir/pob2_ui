@@ -535,6 +535,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get mbfc7b67eb5 => 'アイテムを置き換える';
 
   @override
+  String get md4bac1da57 => '段階のメモ';
+
+  @override
   String get mdc4baf32ac => 'ビルドノート';
 
   @override
@@ -577,7 +580,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get mdcd4c2c384 => 'スペル回避チャンス';
 
   @override
-  String get m0094a04edd => '段階のレベルを変更';
+  String get med931b5f06 => '段階を編集';
 
   @override
   String get md5a9ca934e => '石の画像が見つかりません';
@@ -747,6 +750,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m51233393a5 => 'Название сборки';
+
+  @override
+  String get m378e9ed8fc => '段階の名前';
 
   @override
   String get m0bf71e1c90 => 'PoB フォルダーが複数見つかりました。使用するフォルダーを選択してください。';

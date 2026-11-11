@@ -571,6 +571,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get mbfc7b67eb5 => 'Artikel ersetzen';
 
   @override
+  String get md4bac1da57 => 'Notiz zur Etappe';
+
+  @override
   String get mdc4baf32ac => 'Build-Notizen';
 
   @override
@@ -613,7 +616,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get mdcd4c2c384 => 'Chance zur Zaubervermeidung';
 
   @override
-  String get m0094a04edd => 'Stufenlevel ändern';
+  String get med931b5f06 => 'Etappe bearbeiten';
 
   @override
   String get md5a9ca934e => 'Steinbild nicht gefunden';
@@ -787,6 +790,9 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get m51233393a5 => 'Название сборки';
+
+  @override
+  String get m378e9ed8fc => 'Name der Etappe';
 
   @override
   String get m0bf71e1c90 =>

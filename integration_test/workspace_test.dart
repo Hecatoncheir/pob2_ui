@@ -12,6 +12,7 @@ import 'package:pob2_ui/data/component_repository.dart';
 import 'package:pob2_ui/data/installation_store.dart';
 import 'package:pob2_ui/data/mcp_client.dart';
 import 'package:pob2_ui/data/pob_build_library.dart';
+import 'package:pob2_ui/data/tree_progression_exchange.dart';
 import 'package:pob2_ui/data/appearance_repository.dart';
 import 'package:pob2_ui/domain/appearance.dart';
 import 'package:pob2_ui/domain/build_report.dart';
@@ -128,7 +129,9 @@ void main() {
     final xml = await model.exportXml();
     final stats = model.state.report!.stats;
     await model.importXml(xml!);
+    expect(model.state.error, isNull);
     expect(model.state.report!.stats, stats);
+    await _expectImportedPlan(model, xml);
     await _stage(
       'Файлы XML, отказ импорта и заметки',
       () => _fileWorkflow(model, dialogs, root),
@@ -199,7 +202,12 @@ Future<void> _stage(String label, Future<void> Function() action) async {
   debugPrint('Готово: $label (${watch.elapsed.inSeconds} с)');
 }
 
-Future<void> _recordProgressionStep(WidgetTester tester, String level) async {
+Future<void> _recordProgressionStep(
+  WidgetTester tester,
+  String level, {
+  String title = '',
+  String note = '',
+}) async {
   await tester.pumpAndSettle();
   final add = find.byTooltip('Сохранить этап');
   await _waitForProgression(tester, () {
@@ -210,10 +218,11 @@ Future<void> _recordProgressionStep(WidgetTester tester, String level) async {
   await tester.tap(add);
   await tester.pumpAndSettle();
   final dialog = find.byType(AlertDialog);
-  await tester.enterText(
-    find.descendant(of: dialog, matching: find.byType(TextFormField)),
-    level,
-  );
+  await tester.enterText(find.byKey(const Key('progression-level')), level);
+  if (title.isNotEmpty)
+    await tester.enterText(find.byKey(const Key('progression-title')), title);
+  if (note.isNotEmpty)
+    await tester.enterText(find.byKey(const Key('progression-note')), note);
   await tester.tap(
     find.descendant(of: dialog, matching: find.text('Сохранить')),
   );
@@ -225,17 +234,30 @@ Future<void> _reviewProgression(
   WidgetTester tester,
   WorkshopCubit model,
 ) async {
-  final xml = await model.exportXml();
+  final before = splitTreeProgression((await model.exportXml())!).xml;
   final tree = find.byKey(const Key('passive-tree'));
   final bounds = tester.getRect(tree);
   await _showProgression(tester);
   expect(tester.getRect(tree), bounds);
-  await _recordProgressionStep(tester, '10');
+  await _recordProgressionStep(
+    tester,
+    '10',
+    title: 'Акт 1',
+    note: 'Взять новый камень',
+  );
+  expect(find.text('Взять новый камень'), findsOneWidget);
   expect(find.byType(ActionChip), findsWidgets);
   await _capture(tester, suffix: '-progression');
   await tester.tap(find.text('Уровень 1'));
   await tester.pumpAndSettle();
-  expect(await model.exportXml(), xml);
+  final exported = splitTreeProgression((await model.exportXml())!);
+  expect(exported.xml, before);
+  expect(exported.progression!.steps.map((step) => step.level), [1, 10]);
+  expect(exported.progression!.steps.last.details, (
+    level: 10,
+    title: 'Акт 1',
+    note: 'Взять новый камень',
+  ));
   await _showParameters(tester);
 }
 
@@ -290,6 +312,7 @@ Future<void> _fileWorkflow(
   await model.openXmlFile();
   expect(model.state.error, isNull);
   expect(model.state.report!.stats, stats);
+  await _expectImportedPlan(model, xml);
   expect(model.state.library.active!.title, 'Проверка файлового XML');
   expect(
     await model.buildNotes.readNotes(id),
@@ -308,6 +331,20 @@ Future<void> _fileWorkflow(
   await model.openBuild(id);
   await model.checkpoint();
   expect(model.state.report!.stats, stats);
+}
+
+Future<void> _expectImportedPlan(WorkshopCubit model, String xml) async {
+  final expected = splitTreeProgression(xml).progression!;
+  final key = model.progressionKey!;
+  expect(
+    (key.version, key.characterClass),
+    (expected.version, expected.characterClass),
+  );
+  final restored = await model.progressionRepository(key).load();
+  expect(
+    encodeProgressionSteps(restored),
+    encodeProgressionSteps(expected.steps),
+  );
 }
 
 Future<void> _sharedFolderWorkflow(

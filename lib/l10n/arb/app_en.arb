@@ -912,6 +912,11 @@
     "description": "Заменить предмет",
     "placeholders": {}
   },
+  "md4bac1da57": "Milestone note",
+  "@md4bac1da57": {
+    "description": "Заметка к этапу",
+    "placeholders": {}
+  },
   "mdc4baf32ac": "Build notes",
   "@mdc4baf32ac": {
     "description": "Заметки к сборке",
@@ -982,9 +987,9 @@
     "description": "Избежание чар",
     "placeholders": {}
   },
-  "m0094a04edd": "Edit milestone level",
-  "@m0094a04edd": {
-    "description": "Изменить уровень этапа",
+  "med931b5f06": "Edit milestone",
+  "@med931b5f06": {
+    "description": "Изменить этап",
     "placeholders": {}
   },
   "md5a9ca934e": "Stone image not found",
@@ -1268,6 +1273,11 @@
   "m51233393a5": "Название сборки",
   "@m51233393a5": {
     "description": "Название сборки",
+    "placeholders": {}
+  },
+  "m378e9ed8fc": "Milestone name",
+  "@m378e9ed8fc": {
+    "description": "Название этапа",
     "placeholders": {}
   },
   "m0bf71e1c90": "Several PoB folders were found. Choose the one you use.",

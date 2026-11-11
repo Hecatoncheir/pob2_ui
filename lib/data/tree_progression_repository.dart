@@ -5,6 +5,7 @@ import 'package:crypto/crypto.dart';
 
 import '../domain/tree_progression.dart';
 import 'atomic_text_file.dart';
+import 'tree_progression_exchange.dart';
 
 class TreeProgressionRepository {
   TreeProgressionRepository(Directory profile, TreeProgressionKey key)
@@ -26,25 +27,15 @@ class TreeProgressionRepository {
   Future<List<TreeProgressionStep>> load() async {
     final json = jsonDecode(await _files.read(_file, missing: '{"steps":[]}'));
     return switch (json) {
-      {'steps': final List<dynamic> entries} => entries.map(_decode).toList(),
+      {'steps': final List<Object?> entries} => decodeProgressionSteps(entries),
       _ => throw const FormatException('Некорректный план прокачки'),
     };
   }
 
-  TreeProgressionStep _decode(Object? value) => switch (value) {
-    {'level': final int level, 'nodes': final List<dynamic> nodes}
-        when level >= 1 && level <= 100 =>
-      TreeProgressionStep(level, nodes.cast<int>()),
-    _ => throw const FormatException('Некорректный план прокачки'),
-  };
+  Future<void> restoreIfMissing(List<TreeProgressionStep> steps) async {
+    if (!await _file.exists()) await save(steps);
+  }
 
-  Future<void> save(List<TreeProgressionStep> steps) => _files.write(
-    _file,
-    jsonEncode({
-      'steps': [
-        for (final step in steps)
-          {'level': step.level, 'nodes': step.nodes.toList()},
-      ],
-    }),
-  );
+  Future<void> save(List<TreeProgressionStep> steps) =>
+      _files.write(_file, jsonEncode({'steps': encodeProgressionSteps(steps)}));
 }
