@@ -204,6 +204,8 @@ dart run tool/smoke.dart --install
 
 `python tool/check_complexity.py` использует закреплённые ревизии [treesitter_cyclomatic_complexity](https://github.com/Hecatoncheir/treesitter_cyclomatic_complexity) и грамматики Dart. Проверяется `lib/` и запускатель; вложенные замыкания учитываются в родительской функции. Предел когнитивной сложности — 10. Нужны Neovim 0.11+, Git и CMake с компилятором C; грамматика собирается только в `build/`. Отчёт — `build/complexity/report.json`. Эта метрика дополняет чтение кода, анализ и тесты.
 
+В GitHub Actions сложность сравнивается с базой pull request или предыдущей ревизией ветки. Сводка показывает COG до и после, а предупреждения указывают на функции, которые стали сложнее. Превышение 10 останавливает проверку. Полный отчёт и список изменений доступны в артефакте `complexity-report`. Для такого же сравнения локально используйте `python tool/check_complexity.py --base origin/main`.
+
 Официальный [Dart and Flutter](https://github.com/flutter/agent-plugins) версии 1.0.7 уже установлен в рабочем окружении: используются его навыки архитектуры, patterns, анализа и MCP. Сторонние исходники инструментов не входят в Git приложения.
 
 
