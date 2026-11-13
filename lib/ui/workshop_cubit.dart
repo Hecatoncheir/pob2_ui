@@ -284,7 +284,13 @@ class WorkshopCubit extends Cubit<WorkshopState> {
 
   Future<LibraryState> _loadLibrary() async {
     try {
-      return await library.load();
+      final builds = await library.load();
+      final shared = sharedLibrary;
+      if (shared == null || shared.directory != null) return builds;
+      final folder = await buildLocations.defaultWithoutWine();
+      if (folder == null) return builds;
+      await folder.create(recursive: true);
+      return await shared.configure(folder.path);
     } on FileSystemException catch (error) {
       if (sharedLibrary == null) rethrow;
       addLog('Папка сборок PoB недоступна: $error');

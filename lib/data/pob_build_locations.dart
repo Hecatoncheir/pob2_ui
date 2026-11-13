@@ -9,15 +9,39 @@ class PobBuildLocations {
     String? system,
     Map<String, String>? environment,
     Future<String> Function()? windowsDocuments,
+    ProcessService? processes,
   }) : _system = system ?? Platform.operatingSystem,
        _environment = environment ?? Platform.environment,
-       _windowsDocuments = windowsDocuments ?? _knownWindowsDocuments;
+       _windowsDocuments = windowsDocuments ?? _knownWindowsDocuments,
+       _processes = processes ?? ProcessService();
 
   final String _system;
   final Map<String, String> _environment;
   final Future<String> Function() _windowsDocuments;
+  final ProcessService _processes;
 
   static const _pob = 'Path of Building (PoE2)';
+
+  Future<Directory?> defaultWithoutWine() async {
+    if (_system != 'linux' && _system != 'macos') return null;
+    final home = _environment['HOME'];
+    if (home == null || !path.isAbsolute(home)) return null;
+    if (await _hasWine('wine') || await _hasWine('wine64')) return null;
+    return Directory(path.join(home, 'Documents', 'PoE2'));
+  }
+
+  Future<bool> _hasWine(String executable) async {
+    try {
+      await _processes.run(executable, [
+        '--version',
+      ], timeout: const Duration(seconds: 3));
+      return true;
+    } on ProcessException {
+      return false;
+    } on StateError {
+      return true;
+    }
+  }
 
   Future<String?> find() async {
     final found = <String>{};
