@@ -3,7 +3,7 @@ import 'dart:io';
 import 'core/dialog_close_button.dart';
 import 'core/app_text.dart';
 
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../domain/app_info.dart';
@@ -195,7 +195,10 @@ class _MaterialAppState extends State<_MaterialApp> {
       navigatorObservers: [_navigation],
       title: 'PoB II · Мастерская',
       locale: languageLocale(language.language),
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      localizationsDelegates: const [
+        AppLocalizations.delegate,
+        ...GlobalMaterialLocalizations.delegates,
+      ],
       supportedLocales: AppLocalizations.supportedLocales,
       debugShowCheckedModeBanner: false,
       theme: Spark.theme(),

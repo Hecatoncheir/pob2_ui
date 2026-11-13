@@ -6,7 +6,7 @@ import 'package:pob2_ui/ui/language_bloc.dart';
 import 'package:pob2_ui/data/appearance_repository.dart';
 import 'package:pob2_ui/ui/appearance_bloc.dart';
 // Отладочный запуск с настоящим Lua; отдельный профиль задаётся через POB2_UI_HOME.
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_driver/driver_extension.dart';
 import 'package:pob2_ui/data/component_repository.dart';
 import 'package:pob2_ui/data/installation_store.dart';

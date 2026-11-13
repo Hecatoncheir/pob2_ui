@@ -1,7 +1,7 @@
 import 'data/appearance_repository.dart';
 import 'ui/appearance_bloc.dart';
 
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 import 'data/startup_health.dart';
 import 'ui/app_update_cubit.dart';

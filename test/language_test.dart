@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:pob2_ui/data/game_dictionary_repository.dart';
@@ -112,7 +112,10 @@ void main() {
           value: bloc,
           child: MaterialApp(
             locale: languageLocale(language),
-            localizationsDelegates: AppLocalizations.localizationsDelegates,
+            localizationsDelegates: const [
+              AppLocalizations.delegate,
+              ...GlobalMaterialLocalizations.delegates,
+            ],
             supportedLocales: AppLocalizations.supportedLocales,
             theme: Spark.theme(),
             home: const Scaffold(
@@ -160,7 +163,10 @@ void main() {
         dictionary: russianDictionary(),
         child: MaterialApp(
           locale: const Locale('ru'),
-          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          localizationsDelegates: const [
+            AppLocalizations.delegate,
+            ...GlobalMaterialLocalizations.delegates,
+          ],
           supportedLocales: AppLocalizations.supportedLocales,
           theme: Spark.theme(),
           home: Scaffold(

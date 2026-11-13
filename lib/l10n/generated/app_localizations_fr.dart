@@ -1,3 +1,6 @@
+// Flutter 3.50 генерирует список делегатов со старыми API Material и Cupertino.
+// ignore_for_file: deprecated_member_use
+
 // ignore: unused_import
 import 'package:intl/intl.dart' as intl;
 

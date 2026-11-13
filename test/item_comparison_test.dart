@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:pob2_ui/domain/equipment_item.dart';
 import 'package:pob2_ui/ui/core/spark_theme.dart';

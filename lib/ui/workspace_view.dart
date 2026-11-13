@@ -2,7 +2,7 @@ import 'core/app_text.dart';
 import 'core/language_scope.dart';
 import 'core/ui_translation.dart';
 
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'build_dialogs.dart';

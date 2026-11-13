@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class ScrollableWorkspace extends StatelessWidget {
   const ScrollableWorkspace({super.key, required this.child});

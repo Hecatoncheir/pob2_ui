@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:pob2_ui/domain/game_dictionary.dart';
 import 'package:pob2_ui/domain/node_preview.dart';

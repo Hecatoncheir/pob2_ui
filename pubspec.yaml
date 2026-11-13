@@ -4,7 +4,8 @@ publish_to: 'none'
 version: 0.1.30+31
 
 environment:
-  sdk: ^3.13.7
+  sdk: ^3.14.0
+  flutter: '>=3.50.0'
 
 dependencies:
   crypto: ^3.0.8
@@ -15,6 +16,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   intl: ^0.20.3
+  material_ui: ^1.11.0
   path: 1.9.1
   xml: 7.1.0
 

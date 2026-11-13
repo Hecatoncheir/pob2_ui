@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 // Палитра morhetz/gruvbox: https://github.com/morhetz/gruvbox
 abstract final class Gruvbox {

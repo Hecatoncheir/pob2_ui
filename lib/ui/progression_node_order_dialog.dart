@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 import '../domain/tree_geometry.dart';
 import '../domain/tree_progression.dart';

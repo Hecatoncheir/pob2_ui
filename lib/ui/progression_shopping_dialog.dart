@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 import '../domain/progression_loadout_change.dart';
 import '../domain/tree_progression.dart';
