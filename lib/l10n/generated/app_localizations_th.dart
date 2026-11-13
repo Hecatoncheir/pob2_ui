@@ -1780,6 +1780,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m69c1590a47 => 'ความแรง';
 
   @override
+  String get m3860f59770 => 'ตามระบบ';
+
+  @override
   String get m9ea191ae12 => 'การลดการเคลื่อนไหวของระบบมีความสำคัญ';
 
   @override

@@ -1833,6 +1833,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get m69c1590a47 => 'Stärke';
 
   @override
+  String get m3860f59770 => 'System';
+
+  @override
   String get m9ea191ae12 => 'Die Reduzierung der Systembewegung hat Priorität';
 
   @override

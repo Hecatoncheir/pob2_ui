@@ -543,6 +543,7 @@
     "m63a2484f1c": "Сдвинуть вправо",
     "m32bb1c680f": "Сессия закрыта",
     "m69c1590a47": "Сила",
+    "m3860f59770": "Системная",
     "m9ea191ae12": "Системное уменьшение движения имеет приоритет",
     "me7d43ecc6d": "Скачать Path of Building",
     "m0c90d97433": "Скачать PoB MCP",
@@ -1353,7 +1354,8 @@
     "me24055fecd": "What remains before the next stage?",
     "m8a7e5686b9": "MCP can create builds and edit the current build. Switching builds manually turns off access.",
     "m79741659f7": "Enable editing through MCP.",
-    "m19d9e93773": "Create or open a build first."
+    "m19d9e93773": "Create or open a build first.",
+    "m3860f59770": "System"
   },
   "fr": {
     "m0c63e733f9": "Lua n'a pas renvoyé toutes les icônes",
@@ -2031,7 +2033,8 @@
     "me24055fecd": "Que reste-t-il à faire avant la prochaine étape ?",
     "m8a7e5686b9": "MCP peut créer des builds et modifier le build actif. Changer de build manuellement désactive l’accès.",
     "m79741659f7": "Activez les modifications via MCP.",
-    "m19d9e93773": "Créez ou ouvrez d’abord un build."
+    "m19d9e93773": "Créez ou ouvrez d’abord un build.",
+    "m3860f59770": "Système"
   },
   "de": {
     "m0c63e733f9": "Lua hat nicht alle Symbole zurückgegeben",
@@ -2709,7 +2712,8 @@
     "me24055fecd": "Was fehlt bis zur nächsten Etappe?",
     "m8a7e5686b9": "MCP kann Builds erstellen und den aktuellen Build bearbeiten. Beim manuellen Wechsel wird der Zugriff deaktiviert.",
     "m79741659f7": "Aktiviere die Bearbeitung über MCP.",
-    "m19d9e93773": "Erstelle oder öffne zuerst einen Build."
+    "m19d9e93773": "Erstelle oder öffne zuerst einen Build.",
+    "m3860f59770": "System"
   },
   "es": {
     "m0c63e733f9": "Lua no devolvió todos los íconos",
@@ -3387,7 +3391,8 @@
     "me24055fecd": "¿Qué falta para la próxima etapa?",
     "m8a7e5686b9": "MCP puede crear builds y editar la actual. Si cambias de build manualmente, el acceso se desactiva.",
     "m79741659f7": "Activa la edición mediante MCP.",
-    "m19d9e93773": "Primero crea o abre una build."
+    "m19d9e93773": "Primero crea o abre una build.",
+    "m3860f59770": "Sistema"
   },
   "pt_BR": {
     "m0c63e733f9": "Lua não retornou todos os ícones",
@@ -4065,7 +4070,8 @@
     "me24055fecd": "O que falta para a próxima etapa?",
     "m8a7e5686b9": "O MCP pode criar builds e editar a build atual. Trocar de build manualmente desativa o acesso.",
     "m79741659f7": "Ative a edição pelo MCP.",
-    "m19d9e93773": "Primeiro, crie ou abra uma build."
+    "m19d9e93773": "Primeiro, crie ou abra uma build.",
+    "m3860f59770": "Sistema"
   },
   "ja": {
     "m0c63e733f9": "Lua はすべてのアイコンを返しませんでした",
@@ -4743,7 +4749,8 @@
     "me24055fecd": "次の段階までに何が必要ですか？",
     "m8a7e5686b9": "MCP はビルドを作成し、現在のビルドを編集できます。手動でビルドを切り替えると、アクセスは無効になります。",
     "m79741659f7": "MCP による編集を有効にしてください。",
-    "m19d9e93773": "先にビルドを作成するか開いてください。"
+    "m19d9e93773": "先にビルドを作成するか開いてください。",
+    "m3860f59770": "システム"
   },
   "ko": {
     "m0c63e733f9": "Lua이 모든 아이콘을 반환하지 않았습니다.",
@@ -5421,7 +5428,8 @@
     "me24055fecd": "다음 단계까지 무엇이 남았나요?",
     "m8a7e5686b9": "MCP로 빌드를 생성하고 현재 빌드를 편집할 수 있습니다. 빌드를 수동으로 바꾸면 접근이 해제됩니다.",
     "m79741659f7": "MCP를 통한 편집을 허용하세요.",
-    "m19d9e93773": "먼저 빌드를 만들거나 여세요."
+    "m19d9e93773": "먼저 빌드를 만들거나 여세요.",
+    "m3860f59770": "시스템"
   },
   "th": {
     "m0c63e733f9": "Lua ไม่ได้ส่งคืนไอคอนทั้งหมด",
@@ -6099,7 +6107,8 @@
     "me24055fecd": "เหลืออะไรบ้างก่อนถึงขั้นถัดไป?",
     "m8a7e5686b9": "MCP สามารถสร้างบิลด์และแก้ไขบิลด์ปัจจุบันได้ การสลับบิลด์ด้วยตนเองจะปิดการเข้าถึง",
     "m79741659f7": "เปิดใช้งานการแก้ไขผ่าน MCP",
-    "m19d9e93773": "สร้างหรือเปิดบิลด์ก่อน"
+    "m19d9e93773": "สร้างหรือเปิดบิลด์ก่อน",
+    "m3860f59770": "ตามระบบ"
   },
   "zh_Hant": {
     "m0c63e733f9": "Lua 未傳回所有圖標",
@@ -6777,6 +6786,7 @@
     "me24055fecd": "離下一階段還差什麼？",
     "m8a7e5686b9": "MCP 可以建立流派配置並編輯目前的配置。手動切換配置會停用存取權限。",
     "m79741659f7": "請啟用透過 MCP 編輯。",
-    "m19d9e93773": "請先建立或開啟流派配置。"
+    "m19d9e93773": "請先建立或開啟流派配置。",
+    "m3860f59770": "跟隨系統"
   }
 }

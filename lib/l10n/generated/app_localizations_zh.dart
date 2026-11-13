@@ -1761,6 +1761,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m69c1590a47 => '實力';
 
   @override
+  String get m3860f59770 => '跟隨系統';
+
+  @override
   String get m9ea191ae12 => '系統運動減少優先';
 
   @override
@@ -3925,6 +3928,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m69c1590a47 => '實力';
+
+  @override
+  String get m3860f59770 => '跟隨系統';
 
   @override
   String get m9ea191ae12 => '系統運動減少優先';

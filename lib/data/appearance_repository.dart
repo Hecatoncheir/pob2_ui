@@ -11,15 +11,16 @@ class AppearanceRepository {
   Future<AppTheme> load() async {
     try {
       if (!await file.exists() || await file.length() > 4096)
-        return AppTheme.light;
+        return AppTheme.system;
       return switch (jsonDecode(await file.readAsString())) {
         {'schema': 1, 'theme': 'dark'} => AppTheme.dark,
-        _ => AppTheme.light,
+        {'schema': 1, 'theme': 'light'} => AppTheme.light,
+        _ => AppTheme.system,
       };
     } on FormatException {
-      return AppTheme.light;
+      return AppTheme.system;
     } on FileSystemException {
-      return AppTheme.light;
+      return AppTheme.system;
     }
   }
 

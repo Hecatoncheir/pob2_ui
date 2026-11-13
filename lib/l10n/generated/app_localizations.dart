@@ -3378,6 +3378,12 @@ abstract class AppLocalizations {
   /// **'Strength'**
   String get m69c1590a47;
 
+  /// Системная
+  ///
+  /// In en, this message translates to:
+  /// **'System'**
+  String get m3860f59770;
+
   /// Системное уменьшение движения имеет приоритет
   ///
   /// In en, this message translates to:

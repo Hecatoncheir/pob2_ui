@@ -51,10 +51,11 @@ void main() {
     () async {
       final root = await Directory.systemTemp.createTemp('pob2-appearance-');
       addTearDown(() => removeTemporaryDirectory(root));
-      final appearance = AppearanceBloc(AppearanceRepository(root));
+      final repository = AppearanceRepository(root);
+      expect(await repository.load(), AppTheme.system);
+      final appearance = AppearanceBloc(repository);
       appearance.add(const ThemeSelected(AppTheme.dark));
       await appearance.close();
-      final repository = AppearanceRepository(root);
       final restored = AppearanceBloc(
         repository,
         initialTheme: await repository.load(),
@@ -63,6 +64,8 @@ void main() {
       restored.add(const ThemeSelected(AppTheme.light));
       await restored.close();
       expect(await AppearanceRepository(root).load(), AppTheme.light);
+      await repository.save(AppTheme.system);
+      expect(await repository.load(), AppTheme.system);
     },
   );
 
@@ -80,7 +83,7 @@ void main() {
     await appearance.close();
     expect(await repository.load(), AppTheme.light);
     await repository.file.writeAsString('{broken');
-    expect(await repository.load(), AppTheme.light);
+    expect(await repository.load(), AppTheme.system);
   });
 
   for (final width in [360.0, 1366.0]) {
@@ -97,8 +100,20 @@ void main() {
         addTearDown(model.close);
         final preferences = MemoryPreferences(root);
         final appearance = AppearanceBloc(preferences);
+        final platform = tester.binding.platformDispatcher;
+        platform.platformBrightnessTestValue = Brightness.dark;
+        addTearDown(platform.clearPlatformBrightnessTestValue);
         await tester.pumpWidget(PobApp(model: model, appearance: appearance));
+        expect(
+          Theme.of(tester.element(find.byType(Scaffold))).brightness,
+          Brightness.dark,
+        );
+        platform.platformBrightnessTestValue = Brightness.light;
         await tester.pumpAndSettle();
+        expect(
+          Theme.of(tester.element(find.byType(Scaffold))).brightness,
+          Brightness.light,
+        );
         await tester.tap(find.byKey(const Key('appearance-settings')));
         await tester.pumpAndSettle();
         await tester.tap(find.text('Тёмная'));

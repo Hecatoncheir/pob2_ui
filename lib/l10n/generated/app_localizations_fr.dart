@@ -1830,6 +1830,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get m69c1590a47 => 'Force';
 
   @override
+  String get m3860f59770 => 'Système';
+
+  @override
   String get m9ea191ae12 =>
       'La réduction du mouvement du système est prioritaire';
 

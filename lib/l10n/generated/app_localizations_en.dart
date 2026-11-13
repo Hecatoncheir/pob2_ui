@@ -1795,6 +1795,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m69c1590a47 => 'Strength';
 
   @override
+  String get m3860f59770 => 'System';
+
+  @override
   String get m9ea191ae12 => 'System motion reduction takes priority';
 
   @override

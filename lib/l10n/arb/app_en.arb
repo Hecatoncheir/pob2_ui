@@ -2978,6 +2978,11 @@
     "description": "Сила",
     "placeholders": {}
   },
+  "m3860f59770": "System",
+  "@m3860f59770": {
+    "description": "Системная",
+    "placeholders": {}
+  },
   "m9ea191ae12": "System motion reduction takes priority",
   "@m9ea191ae12": {
     "description": "Системное уменьшение движения имеет приоритет",

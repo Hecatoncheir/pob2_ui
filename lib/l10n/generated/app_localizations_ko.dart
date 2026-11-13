@@ -1764,6 +1764,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m69c1590a47 => '힘';
 
   @override
+  String get m3860f59770 => '시스템';
+
+  @override
   String get m9ea191ae12 => '시스템 모션 감소가 우선입니다.';
 
   @override

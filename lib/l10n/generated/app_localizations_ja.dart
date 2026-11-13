@@ -1764,6 +1764,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m69c1590a47 => '強さ';
 
   @override
+  String get m3860f59770 => 'システム';
+
+  @override
   String get m9ea191ae12 => 'システムモーションの軽減が優先されます';
 
   @override

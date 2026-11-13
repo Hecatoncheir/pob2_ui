@@ -12,7 +12,7 @@ final class ThemeSelected {
 class AppearanceBloc extends Bloc<ThemeSelected, AppearanceState> {
   AppearanceBloc(
     AppearanceRepository repository, {
-    AppTheme initialTheme = AppTheme.light,
+    AppTheme initialTheme = AppTheme.system,
   }) : _writes = PreferenceWrites(repository.save),
        super((theme: initialTheme, error: null)) {
     on<ThemeSelected>(_select);

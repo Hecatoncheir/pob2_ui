@@ -37,28 +37,34 @@ class AppearancePicker extends StatelessWidget {
       ],
     ),
   );
-  Widget _selector(BuildContext context, AppearanceState state, bool icons) =>
-      SegmentedButton<AppTheme>(
-        style: SegmentedButton.styleFrom(
-          textStyle: const TextStyle(fontFamily: 'Nunito Sans', fontSize: 12),
-        ),
-        segments: [
-          ButtonSegment(
-            value: AppTheme.light,
-            label: const AppText('Светлая'),
-            icon: icons
-                ? const Icon(Icons.light_mode_outlined, size: 18)
-                : null,
-          ),
-          ButtonSegment(
-            value: AppTheme.dark,
-            label: const AppText('Тёмная'),
-            icon: icons ? const Icon(Icons.dark_mode_outlined, size: 18) : null,
-          ),
-        ],
-        selected: {state.theme},
-        showSelectedIcon: false,
-        onSelectionChanged: (values) =>
-            context.read<AppearanceBloc>().add(ThemeSelected(values.single)),
-      );
+  Widget _selector(
+    BuildContext context,
+    AppearanceState state,
+    bool icons,
+  ) => SegmentedButton<AppTheme>(
+    style: SegmentedButton.styleFrom(
+      textStyle: const TextStyle(fontFamily: 'Nunito Sans', fontSize: 12),
+    ),
+    segments: [
+      ButtonSegment(
+        value: AppTheme.system,
+        label: const AppText('Системная'),
+        icon: icons ? const Icon(Icons.settings_brightness, size: 18) : null,
+      ),
+      ButtonSegment(
+        value: AppTheme.light,
+        label: const AppText('Светлая'),
+        icon: icons ? const Icon(Icons.light_mode_outlined, size: 18) : null,
+      ),
+      ButtonSegment(
+        value: AppTheme.dark,
+        label: const AppText('Тёмная'),
+        icon: icons ? const Icon(Icons.dark_mode_outlined, size: 18) : null,
+      ),
+    ],
+    selected: {state.theme},
+    showSelectedIcon: false,
+    onSelectionChanged: (values) =>
+        context.read<AppearanceBloc>().add(ThemeSelected(values.single)),
+  );
 }

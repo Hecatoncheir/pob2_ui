@@ -1813,6 +1813,9 @@ class AppLocalizationsPt extends AppLocalizations {
   String get m69c1590a47 => 'Força';
 
   @override
+  String get m3860f59770 => 'Sistema';
+
+  @override
   String get m9ea191ae12 => 'A redução de movimento do sistema tem prioridade';
 
   @override
@@ -4044,6 +4047,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get m69c1590a47 => 'Força';
+
+  @override
+  String get m3860f59770 => 'Sistema';
 
   @override
   String get m9ea191ae12 => 'A redução de movimento do sistema tem prioridade';

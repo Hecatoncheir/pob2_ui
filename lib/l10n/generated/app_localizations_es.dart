@@ -1819,6 +1819,9 @@ class AppLocalizationsEs extends AppLocalizations {
   String get m69c1590a47 => 'Fuerza';
 
   @override
+  String get m3860f59770 => 'Sistema';
+
+  @override
   String get m9ea191ae12 =>
       'La reducción de movimiento del sistema tiene prioridad';
 

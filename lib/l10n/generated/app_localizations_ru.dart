@@ -1799,6 +1799,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m69c1590a47 => 'Сила';
 
   @override
+  String get m3860f59770 => 'Системная';
+
+  @override
   String get m9ea191ae12 => 'Системное уменьшение движения имеет приоритет';
 
   @override

@@ -203,9 +203,11 @@ class _MaterialAppState extends State<_MaterialApp> {
       debugShowCheckedModeBanner: false,
       theme: Spark.theme(),
       darkTheme: Spark.theme(brightness: Brightness.dark),
-      themeMode: appearance.theme == AppTheme.dark
-          ? ThemeMode.dark
-          : ThemeMode.light,
+      themeMode: switch (appearance.theme) {
+        AppTheme.system => ThemeMode.system,
+        AppTheme.light => ThemeMode.light,
+        AppTheme.dark => ThemeMode.dark,
+      },
       builder: (context, child) => _KeyboardActions(
         model: widget.model,
         shell: context.read<ShellBloc>(),
