@@ -91,6 +91,10 @@ class AppLocalizationsKo extends AppLocalizations {
   }
 
   @override
+  String get m8a7e5686b9 =>
+      'MCP로 빌드를 생성하고 현재 빌드를 편집할 수 있습니다. 빌드를 수동으로 바꾸면 접근이 해제됩니다.';
+
+  @override
   String get mcdf95e40cd => 'PoB II · 워크숍';
 
   @override
@@ -249,7 +253,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m4d1d43042e => '활성화됨';
 
   @override
-  String get m054b7819ac => '오픈 빌드에 대해 MCP을 통해 편집을 활성화합니다.';
+  String get m79741659f7 => 'MCP를 통한 편집을 허용하세요.';
 
   @override
   String get m66b96db6c1 => '다운로드 파일 대신 링크가 감지되었습니다.';
@@ -493,9 +497,6 @@ class AppLocalizationsKo extends AppLocalizations {
   String m9719fefc91(String p0) {
     return '레벨 $p0 달성';
   }
-
-  @override
-  String get m4122860034 => '현재 빌드에 대한 액세스가 유효합니다. 편집 내용은 취소할 수 있습니다.';
 
   @override
   String get m549a4c810c => 'PoB II 편집기에 대한 액세스가 비활성화되었습니다.';
@@ -1809,6 +1810,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m70a5cadc50 => '먼저 pob_check_build를 통해 최신 빌드 보고서를 받으세요.';
+
+  @override
+  String get m19d9e93773 => '먼저 빌드를 만들거나 여세요.';
 
   @override
   String get m59b50cc146 => '받침돌을 먼저 제거하세요';

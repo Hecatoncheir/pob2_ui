@@ -91,6 +91,10 @@ class AppLocalizationsPt extends AppLocalizations {
   }
 
   @override
+  String get m8a7e5686b9 =>
+      'O MCP pode criar builds e editar a build atual. Trocar de build manualmente desativa o acesso.';
+
+  @override
   String get mcdf95e40cd => 'PoB II · Oficina';
 
   @override
@@ -254,8 +258,7 @@ class AppLocalizationsPt extends AppLocalizations {
   String get m4d1d43042e => 'Habilitado';
 
   @override
-  String get m054b7819ac =>
-      'Habilite edições por meio de MCP para build aberto.';
+  String get m79741659f7 => 'Ative a edição pelo MCP.';
 
   @override
   String get m66b96db6c1 => 'Link detectado em vez de arquivo de download';
@@ -510,10 +513,6 @@ class AppLocalizationsPt extends AppLocalizations {
   String m9719fefc91(String p0) {
     return 'Alcançar o nível $p0';
   }
-
-  @override
-  String get m4122860034 =>
-      'O acesso é válido para a compilação atual. As edições podem ser desfeitas.';
 
   @override
   String get m549a4c810c => 'O acesso ao editor PoB II foi desativado.';
@@ -1861,6 +1860,9 @@ class AppLocalizationsPt extends AppLocalizations {
   @override
   String get m70a5cadc50 =>
       'Primeiro, obtenha o relatório de compilação mais recente via pob_check_build.';
+
+  @override
+  String get m19d9e93773 => 'Primeiro, crie ou abra uma build.';
 
   @override
   String get m59b50cc146 => 'Remova primeiro as pedras de suporte';
@@ -2322,6 +2324,10 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   }
 
   @override
+  String get m8a7e5686b9 =>
+      'O MCP pode criar builds e editar a build atual. Trocar de build manualmente desativa o acesso.';
+
+  @override
   String get mcdf95e40cd => 'PoB II · Oficina';
 
   @override
@@ -2485,8 +2491,7 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get m4d1d43042e => 'Habilitado';
 
   @override
-  String get m054b7819ac =>
-      'Habilite edições por meio de MCP para build aberto.';
+  String get m79741659f7 => 'Ative a edição pelo MCP.';
 
   @override
   String get m66b96db6c1 => 'Link detectado em vez de arquivo de download';
@@ -2741,10 +2746,6 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String m9719fefc91(String p0) {
     return 'Alcançar o nível $p0';
   }
-
-  @override
-  String get m4122860034 =>
-      'O acesso é válido para a compilação atual. As edições podem ser desfeitas.';
 
   @override
   String get m549a4c810c => 'O acesso ao editor PoB II foi desativado.';
@@ -4092,6 +4093,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   @override
   String get m70a5cadc50 =>
       'Primeiro, obtenha o relatório de compilação mais recente via pob_check_build.';
+
+  @override
+  String get m19d9e93773 => 'Primeiro, crie ou abra uma build.';
 
   @override
   String get m59b50cc146 => 'Remova primeiro as pedras de suporte';

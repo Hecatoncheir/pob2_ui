@@ -132,6 +132,11 @@
       }
     }
   },
+  "m8a7e5686b9": "MCP can create builds and edit the current build. Switching builds manually turns off access.",
+  "@m8a7e5686b9": {
+    "description": "MCP может создавать сборки и править текущую. Если вы смените сборку вручную, доступ отключится.",
+    "placeholders": {}
+  },
   "mcdf95e40cd": "PoB II · Workshop",
   "@mcdf95e40cd": {
     "description": "PoB II · Мастерская",
@@ -420,9 +425,9 @@
     "description": "Включено",
     "placeholders": {}
   },
-  "m054b7819ac": "Enable edits via MCP for open build.",
-  "@m054b7819ac": {
-    "description": "Включите правки через MCP для открытой сборки.",
+  "m79741659f7": "Enable editing through MCP.",
+  "@m79741659f7": {
+    "description": "Включите правки через MCP.",
     "placeholders": {}
   },
   "m66b96db6c1": "Link detected instead of download file",
@@ -830,11 +835,6 @@
         "type": "String"
       }
     }
-  },
-  "m4122860034": "Access is valid for the current build. Edits can be undone.",
-  "@m4122860034": {
-    "description": "Доступ действует для текущей сборки. Правки можно отменить.",
-    "placeholders": {}
   },
   "m549a4c810c": "Access to the PoB II editor has been disabled.",
   "@m549a4c810c": {
@@ -3056,6 +3056,11 @@
   "m70a5cadc50": "First get the latest build report via pob_check_build.",
   "@m70a5cadc50": {
     "description": "Сначала получите актуальный отчёт сборки через pob_check_build.",
+    "placeholders": {}
+  },
+  "m19d9e93773": "Create or open a build first.",
+  "@m19d9e93773": {
+    "description": "Сначала создайте или откройте сборку.",
     "placeholders": {}
   },
   "m59b50cc146": "Remove support stones first",

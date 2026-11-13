@@ -108,6 +108,7 @@ class WorkspaceView extends StatelessWidget {
           onPressed: busy ? null : () => showXmlImport(context, model),
           child: const AppText('Открыть XML'),
         ),
+        McpEditorButton(model, outlined: true),
         if (model.pobWindow.supported) ...[
           OutlinedButton(
             key: const Key('import-from-pob'),

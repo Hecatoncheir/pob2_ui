@@ -9,28 +9,47 @@ import 'mcp_editor_cubit.dart';
 import 'workshop_cubit.dart';
 
 class McpEditorButton extends StatelessWidget {
-  const McpEditorButton(this.model, {super.key});
+  const McpEditorButton(this.model, {this.outlined = false, super.key});
   final WorkshopCubit model;
+  final bool outlined;
 
   @override
   Widget build(BuildContext context) =>
       BlocBuilder<McpEditorCubit, McpEditorState>(
         bloc: model.mcpEditor,
-        builder: (context, state) => IconButton(
-          key: const Key('mcp-editor-settings'),
-          tooltip: translateUi(context, 'Правки через MCP'),
-          isSelected: state.command != null,
-          onPressed: model.state.busy || !model.engine.connected
-              ? null
-              : () => _show(context),
-          icon: const Icon(Icons.hub_outlined, size: 20),
-          selectedIcon: Icon(
-            Icons.hub,
-            size: 20,
-            color: Theme.of(context).colorScheme.primary,
-          ),
-        ),
+        builder: _button,
       );
+
+  Widget _button(BuildContext context, McpEditorState state) {
+    const key = Key('mcp-editor-settings');
+    final tooltip = translateUi(context, 'Правки через MCP');
+    final selected = state.command != null;
+    final onPressed = model.state.busy || !model.mcpEditor.canEnable
+        ? null
+        : () => _show(context);
+    const inactive = Icon(Icons.hub_outlined, size: 20);
+    const active = Icon(Icons.hub, size: 20);
+    if (outlined) {
+      return OutlinedButton.icon(
+        key: key,
+        onPressed: onPressed,
+        icon: selected ? active : inactive,
+        label: Text(tooltip),
+      );
+    }
+    return IconButton(
+      key: key,
+      tooltip: tooltip,
+      isSelected: selected,
+      onPressed: onPressed,
+      icon: inactive,
+      selectedIcon: Icon(
+        Icons.hub,
+        size: 20,
+        color: Theme.of(context).colorScheme.primary,
+      ),
+    );
+  }
 
   Future<void> _show(BuildContext context) =>
       sparkDialog<void>(context, _McpEditorDialog(model.mcpEditor));
@@ -58,7 +77,7 @@ class _McpEditorDialog extends StatelessWidget {
               contentPadding: EdgeInsets.zero,
               title: const AppText('Разрешить правки через MCP'),
               subtitle: const AppText(
-                'Доступ действует для текущей сборки. Правки можно отменить.',
+                'MCP может создавать сборки и править текущую. Если вы смените сборку вручную, доступ отключится.',
               ),
               value: state.command != null,
               onChanged: state.busy

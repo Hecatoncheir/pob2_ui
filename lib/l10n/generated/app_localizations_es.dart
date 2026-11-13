@@ -91,6 +91,10 @@ class AppLocalizationsEs extends AppLocalizations {
   }
 
   @override
+  String get m8a7e5686b9 =>
+      'MCP puede crear builds y editar la actual. Si cambias de build manualmente, el acceso se desactiva.';
+
+  @override
   String get mcdf95e40cd => 'PoB II · Taller';
 
   @override
@@ -255,8 +259,7 @@ class AppLocalizationsEs extends AppLocalizations {
   String get m4d1d43042e => 'Habilitado';
 
   @override
-  String get m054b7819ac =>
-      'Habilite las ediciones a través de MCP para compilación abierta.';
+  String get m79741659f7 => 'Activa la edición mediante MCP.';
 
   @override
   String get m66b96db6c1 => 'Enlace detectado en lugar de archivo de descarga';
@@ -513,10 +516,6 @@ class AppLocalizationsEs extends AppLocalizations {
   String m9719fefc91(String p0) {
     return 'Alcanzar el nivel $p0';
   }
-
-  @override
-  String get m4122860034 =>
-      'El acceso es válido para la compilación actual. Las ediciones se pueden deshacer.';
 
   @override
   String get m549a4c810c => 'Se ha deshabilitado el acceso al editor PoB II.';
@@ -1868,6 +1867,9 @@ class AppLocalizationsEs extends AppLocalizations {
   @override
   String get m70a5cadc50 =>
       'Primero obtenga el último informe de compilación a través de pob_check_build.';
+
+  @override
+  String get m19d9e93773 => 'Primero crea o abre una build.';
 
   @override
   String get m59b50cc146 => 'Retire primero las piedras de soporte';

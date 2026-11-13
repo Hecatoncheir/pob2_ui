@@ -91,6 +91,10 @@ class AppLocalizationsTh extends AppLocalizations {
   }
 
   @override
+  String get m8a7e5686b9 =>
+      'MCP สามารถสร้างบิลด์และแก้ไขบิลด์ปัจจุบันได้ การสลับบิลด์ด้วยตนเองจะปิดการเข้าถึง';
+
+  @override
   String get mcdf95e40cd => 'PoB II · เวิร์กช็อป';
 
   @override
@@ -252,7 +256,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m4d1d43042e => 'เปิดใช้งานแล้ว';
 
   @override
-  String get m054b7819ac => 'เปิดใช้งานการแก้ไขผ่าน MCP สำหรับบิลด์แบบเปิด';
+  String get m79741659f7 => 'เปิดใช้งานการแก้ไขผ่าน MCP';
 
   @override
   String get m66b96db6c1 => 'ตรวจพบลิงก์แทนที่จะดาวน์โหลดไฟล์';
@@ -501,10 +505,6 @@ class AppLocalizationsTh extends AppLocalizations {
   String m9719fefc91(String p0) {
     return 'ไปให้ถึงเลเวล $p0';
   }
-
-  @override
-  String get m4122860034 =>
-      'การเข้าถึงถูกต้องสำหรับรุ่นปัจจุบัน การแก้ไขสามารถยกเลิกได้';
 
   @override
   String get m549a4c810c => 'การเข้าถึงตัวแก้ไข PoB II ถูกปิดใช้งาน';
@@ -1827,6 +1827,9 @@ class AppLocalizationsTh extends AppLocalizations {
   @override
   String get m70a5cadc50 =>
       'ก่อนอื่นให้รับรายงานบิลด์ล่าสุดผ่าน pob_check_build';
+
+  @override
+  String get m19d9e93773 => 'สร้างหรือเปิดบิลด์ก่อน';
 
   @override
   String get m59b50cc146 => 'ถอดหินรองรับออกก่อน';

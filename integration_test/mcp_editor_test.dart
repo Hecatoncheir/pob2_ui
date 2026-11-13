@@ -9,6 +9,7 @@ import 'package:integration_test/integration_test.dart';
 import 'package:pob2_ui/data/component_repository.dart';
 import 'package:pob2_ui/data/installation_store.dart';
 import 'package:pob2_ui/data/mcp_client.dart';
+import 'package:pob2_ui/data/pob_build_library.dart';
 import 'package:pob2_ui/data/process_service.dart';
 import 'package:pob2_ui/domain/build_report.dart';
 import 'package:pob2_ui/domain/component.dart';
@@ -20,9 +21,7 @@ import 'package:pob2_ui/ui/workspace_view.dart';
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
-  testWidgets('Команды внешнего MCP меняют открытую сборку с Undo и Redo', (
-    tester,
-  ) async {
+  testWidgets('MCP создаёт и правит сборки с Undo и Redo', (tester) async {
     if (!Platform.environment.containsKey('POB2_UI_HOME')) {
       throw StateError('Для проверки нужен отдельный профиль POB2_UI_HOME.');
     }
@@ -31,10 +30,14 @@ void main() {
     await File.fromUri(profile.uri.resolve('components.json'))
         .copy(File.fromUri(root.uri.resolve('components.json')).path);
     final components = ComponentRepository(store: InstallationStore(root));
-    final model = WorkshopCubit(components, McpClient());
+    final builds = await Directory.fromUri(root.uri.resolve('builds/'))
+        .create();
+    final library = PobBuildLibrary(root);
+    await library.configure(builds.path);
+    final model = WorkshopCubit(components, McpClient(), library: library);
     addTearDown(model.close);
     await model.initialize();
-    await model.createBuild(1, 90, name: 'Правки MCP');
+    expect(model.state.report, isNull);
     expect(model.state.error, isNull);
 
     await tester.pumpWidget(PobApp(model: model));
@@ -48,6 +51,9 @@ void main() {
     );
     addTearDown(client.close);
 
+    await _createBuilds(client, model);
+    await tester.pumpAndSettle();
+    await _enableFromLibrary(tester, model, shell);
     final node = await _node(client);
     await _checkNode(tester, client, model, shell, node);
     await _checkItem(tester, client, model, shell);
@@ -62,14 +68,58 @@ void main() {
       contains('STALE_REVISION'),
     );
 
-    await model.mcpEditor.disable();
+    await model.openBuild(model.state.library.entries.last.id);
+    await tester.pumpAndSettle();
+    expect(model.mcpEditor.enabled, isFalse);
     final disabled = await client.call('pob_check_build');
     expect(disabled['isError'], isTrue);
     expect(
       jsonRows(disabled['content']).single['text'],
       contains('EDITOR_DISABLED'),
     );
-  }, timeout: const Timeout(Duration(minutes: 3)));
+  }, timeout: const Timeout(Duration(minutes: 6)));
+}
+
+Future<void> _createBuilds(_ExternalEditor client, WorkshopCubit model) async {
+  final disabledCheck = await client.call('pob_check_build');
+  expect(disabledCheck['isError'], isTrue);
+  expect(
+    jsonRows(disabledCheck['content']).single['text'],
+    contains('NO_BUILD'),
+  );
+  final classes = await client.success('pob_catalog', {'kind': 'classes'});
+  expect(jsonRows(classes['entries']).map((entry) => entry['id']), contains(1));
+
+  final first = await _create(client, 'Первая сборка MCP');
+  final second = await _create(client, 'Правки MCP');
+  expect(first['id'], isNot(second['id']));
+  expect(model.state.library.entries, hasLength(2));
+  expect(model.state.library.activeId, second['id']);
+  expect(parseBuildReport(second).level, 90);
+  final library = model.sharedLibrary!;
+  expect((await library.scan()).entries, hasLength(2));
+  expect(model.mcpEditor.enabled, isTrue);
+}
+
+Future<JsonMap> _create(_ExternalEditor client, String name) => client.success(
+  'pob_create_build',
+  {'name': name, 'classId': 1, 'level': 90},
+);
+
+Future<void> _enableFromLibrary(
+  WidgetTester tester,
+  WorkshopCubit model,
+  ShellBloc shell,
+) async {
+  await model.mcpEditor.disable();
+  shell.add(const PageSelected(AppPage.library));
+  await tester.pumpAndSettle();
+  expect(find.byKey(const Key('library-search')), findsOneWidget);
+  expect(find.text('Правки через MCP'), findsOneWidget);
+  await _enable(tester);
+  expect(model.mcpEditor.enabled, isTrue);
+  shell.add(const PageSelected(AppPage.workspace));
+  await tester.pumpAndSettle();
 }
 
 Future<void> _enable(WidgetTester tester) async {
@@ -215,10 +265,7 @@ class _ExternalEditor {
         'params': params,
       }),
     );
-    expect(
-      await _lines.moveNext().timeout(const Duration(seconds: 60)),
-      isTrue,
-    );
+    expect(await _lines.moveNext().timeout(const Duration(minutes: 3)), isTrue);
     return jsonMap(jsonMap(jsonDecode(_lines.current))['result']);
   }
 

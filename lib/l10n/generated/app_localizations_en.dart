@@ -91,6 +91,10 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String get m8a7e5686b9 =>
+      'MCP can create builds and edit the current build. Switching builds manually turns off access.';
+
+  @override
   String get mcdf95e40cd => 'PoB II · Workshop';
 
   @override
@@ -254,7 +258,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m4d1d43042e => 'Enabled';
 
   @override
-  String get m054b7819ac => 'Enable edits via MCP for open build.';
+  String get m79741659f7 => 'Enable editing through MCP.';
 
   @override
   String get m66b96db6c1 => 'Link detected instead of download file';
@@ -506,10 +510,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String m9719fefc91(String p0) {
     return 'Reach level $p0';
   }
-
-  @override
-  String get m4122860034 =>
-      'Access is valid for the current build. Edits can be undone.';
 
   @override
   String get m549a4c810c => 'Access to the PoB II editor has been disabled.';
@@ -1842,6 +1842,9 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get m70a5cadc50 =>
       'First get the latest build report via pob_check_build.';
+
+  @override
+  String get m19d9e93773 => 'Create or open a build first.';
 
   @override
   String get m59b50cc146 => 'Remove support stones first';

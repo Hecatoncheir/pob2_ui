@@ -96,6 +96,10 @@ class AppLocalizationsDe extends AppLocalizations {
   }
 
   @override
+  String get m8a7e5686b9 =>
+      'MCP kann Builds erstellen und den aktuellen Build bearbeiten. Beim manuellen Wechsel wird der Zugriff deaktiviert.';
+
+  @override
   String get mcdf95e40cd => 'PoB II · Workshop';
 
   @override
@@ -261,8 +265,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get m4d1d43042e => 'Aktiviert';
 
   @override
-  String get m054b7819ac =>
-      'Aktivieren Sie Bearbeitungen über MCP für offene Builds.';
+  String get m79741659f7 => 'Aktiviere die Bearbeitung über MCP.';
 
   @override
   String get m66b96db6c1 => 'Link statt Download-Datei erkannt';
@@ -524,10 +527,6 @@ class AppLocalizationsDe extends AppLocalizations {
   String m9719fefc91(String p0) {
     return 'Stufe $p0 erreichen';
   }
-
-  @override
-  String get m4122860034 =>
-      'Der Zugriff ist für den aktuellen Build gültig. Änderungen können rückgängig gemacht werden.';
 
   @override
   String get m549a4c810c =>
@@ -1882,6 +1881,9 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get m70a5cadc50 =>
       'Holen Sie sich zunächst den neuesten Build-Bericht über pob_check_build.';
+
+  @override
+  String get m19d9e93773 => 'Erstelle oder öffne zuerst einen Build.';
 
   @override
   String get m59b50cc146 => 'Entfernen Sie zuerst die Stützsteine';

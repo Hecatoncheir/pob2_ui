@@ -263,6 +263,12 @@ abstract class AppLocalizations {
   /// **'MCP has ended. {p0}'**
   String m12e8f27f62(String p0);
 
+  /// MCP может создавать сборки и править текущую. Если вы смените сборку вручную, доступ отключится.
+  ///
+  /// In en, this message translates to:
+  /// **'MCP can create builds and edit the current build. Switching builds manually turns off access.'**
+  String get m8a7e5686b9;
+
   /// PoB II · Мастерская
   ///
   /// In en, this message translates to:
@@ -545,11 +551,11 @@ abstract class AppLocalizations {
   /// **'Enabled'**
   String get m4d1d43042e;
 
-  /// Включите правки через MCP для открытой сборки.
+  /// Включите правки через MCP.
   ///
   /// In en, this message translates to:
-  /// **'Enable edits via MCP for open build.'**
-  String get m054b7819ac;
+  /// **'Enable editing through MCP.'**
+  String get m79741659f7;
 
   /// Вместо файла загрузки обнаружена ссылка
   ///
@@ -1018,12 +1024,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Reach level {p0}'**
   String m9719fefc91(String p0);
-
-  /// Доступ действует для текущей сборки. Правки можно отменить.
-  ///
-  /// In en, this message translates to:
-  /// **'Access is valid for the current build. Edits can be undone.'**
-  String get m4122860034;
 
   /// Доступ к редактору PoB II отключён.
   ///
@@ -3473,6 +3473,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'First get the latest build report via pob_check_build.'**
   String get m70a5cadc50;
+
+  /// Сначала создайте или откройте сборку.
+  ///
+  /// In en, this message translates to:
+  /// **'Create or open a build first.'**
+  String get m19d9e93773;
 
   /// Сначала уберите камни поддержки
   ///

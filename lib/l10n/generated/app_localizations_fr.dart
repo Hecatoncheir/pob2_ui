@@ -94,6 +94,10 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
+  String get m8a7e5686b9 =>
+      'MCP peut créer des builds et modifier le build actif. Changer de build manuellement désactive l’accès.';
+
+  @override
   String get mcdf95e40cd => 'PoB II · Atelier';
 
   @override
@@ -259,8 +263,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get m4d1d43042e => 'Activé';
 
   @override
-  String get m054b7819ac =>
-      'Activez les modifications via MCP pour la version ouverte.';
+  String get m79741659f7 => 'Activez les modifications via MCP.';
 
   @override
   String get m66b96db6c1 =>
@@ -522,10 +525,6 @@ class AppLocalizationsFr extends AppLocalizations {
   String m9719fefc91(String p0) {
     return 'Atteindre le niveau $p0';
   }
-
-  @override
-  String get m4122860034 =>
-      'L\'accès est valide pour la version actuelle. Les modifications peuvent être annulées.';
 
   @override
   String get m549a4c810c => 'L\'accès à l\'éditeur PoB II a été désactivé.';
@@ -1879,6 +1878,9 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get m70a5cadc50 =>
       'Obtenez d\'abord le dernier rapport de build via pob_check_build.';
+
+  @override
+  String get m19d9e93773 => 'Créez ou ouvrez d’abord un build.';
 
   @override
   String get m59b50cc146 => 'Retirez d\'abord les pierres de support';

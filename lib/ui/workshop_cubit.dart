@@ -577,20 +577,18 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     int classId,
     int level, {
     String name = 'Новая сборка',
-  }) => _run(() async {
-    await _switchBuild(
-      () async {
-        await engine.call('pob_create_build', {
-          'name': name,
-          'classId': classId,
-          'level': level,
-        });
-        await _restoreTreeMode();
-      },
-      target: LibraryState(entries: state.library.entries),
-      title: name,
-    );
-  });
+  }) => _run(
+    () => _createBuild({'name': name, 'classId': classId, 'level': level}),
+  );
+
+  Future<void> _createBuild(JsonMap arguments) => _switchBuild(
+    () async {
+      await engine.call('pob_create_build', arguments);
+      await _restoreTreeMode();
+    },
+    target: LibraryState(entries: state.library.entries),
+    title: arguments['name'] as String?,
+  );
 
   Future<void> refreshReport() => _run(() async {
     if (state.report == null) return;
@@ -1066,6 +1064,19 @@ class WorkshopCubit extends Cubit<WorkshopState> {
           'values': {key: value},
         });
       });
+
+  Future<JsonMap> createMcpBuild(JsonMap arguments) async {
+    JsonMap? result;
+    await _run(() async {
+      await _createBuild(arguments);
+      result = {'id': state.library.activeId, 'report': state.report!.raw};
+    });
+    return result ??
+        (throw McpEditorFault(
+          'EDITOR_EDIT_FAILED',
+          state.error ?? 'Действие недоступно',
+        ));
+  }
 
   Future<JsonMap> executeMcpEditorTool(
     String tool,

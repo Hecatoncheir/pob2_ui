@@ -10,6 +10,7 @@ import 'core/panels.dart';
 import 'core/search_query_bloc.dart';
 import 'core/spark_art.dart';
 import 'core/spark_theme.dart';
+import 'mcp_editor_dialog.dart';
 import 'pob_character_dialog.dart';
 import 'shell_bloc.dart';
 import 'workshop_cubit.dart';
@@ -103,7 +104,8 @@ class _LibraryViewState extends State<LibraryView> {
     final busy = model.state.busy;
     final hasFolder = model.sharedLibrary != null;
     final canImport = model.pobWindow.supported && step == null;
-    if (!hasFolder && !canImport) return const SizedBox.shrink();
+    final canEdit = model.mcpEditor.canEnable;
+    if (!hasFolder && !canImport && !canEdit) return const SizedBox.shrink();
     return Padding(
       padding: const EdgeInsets.only(bottom: 12),
       child: Wrap(
@@ -122,6 +124,7 @@ class _LibraryViewState extends State<LibraryView> {
             ),
             PobCharacterImportButton(model),
           ],
+          if (canEdit) McpEditorButton(model, outlined: true),
           if (hasFolder)
             OutlinedButton.icon(
               key: const Key('build-folder-menu'),

@@ -91,6 +91,10 @@ class AppLocalizationsJa extends AppLocalizations {
   }
 
   @override
+  String get m8a7e5686b9 =>
+      'MCP はビルドを作成し、現在のビルドを編集できます。手動でビルドを切り替えると、アクセスは無効になります。';
+
+  @override
   String get mcdf95e40cd => 'PoB II · ワークショップ';
 
   @override
@@ -249,7 +253,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m4d1d43042e => '有効';
 
   @override
-  String get m054b7819ac => 'オープン ビルドの MCP による編集を有効にします。';
+  String get m79741659f7 => 'MCP による編集を有効にしてください。';
 
   @override
   String get m66b96db6c1 => 'ダウンロード ファイルの代わりにリンクが検出されました';
@@ -493,9 +497,6 @@ class AppLocalizationsJa extends AppLocalizations {
   String m9719fefc91(String p0) {
     return 'レベル $p0 に到達';
   }
-
-  @override
-  String get m4122860034 => 'アクセスは現在のビルドに対して有効です。編集は元に戻すことができます。';
 
   @override
   String get m549a4c810c => 'PoB II エディタへのアクセスが無効になりました。';
@@ -1809,6 +1810,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m70a5cadc50 => 'まず、pob_check_build 経由で最新のビルド レポートを取得します。';
+
+  @override
+  String get m19d9e93773 => '先にビルドを作成するか開いてください。';
 
   @override
   String get m59b50cc146 => 'まずサポートストーンを取り外します';

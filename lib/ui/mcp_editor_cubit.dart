@@ -20,6 +20,7 @@ typedef McpEditorState = ({
 });
 
 const _off = (busy: false, command: null, error: null, change: null);
+const _create = 'pob_create_build';
 const _reads = {
   'pob_catalog',
   'pob_check_build',
@@ -47,16 +48,18 @@ class McpEditorCubit extends Cubit<McpEditorState> {
   final McpEditorGateway _gateway;
   Future<void>? _starting;
   bool _closing = false;
+  bool _creating = false;
   String? _buildId;
   BuildReport? _report;
   int _revision = 0;
 
   bool get enabled => state.command != null;
+  bool get canEnable => model.engine.connected && model.buildFolderReady;
 
   Future<void> enable() async {
     if (enabled || state.busy || _closing) return;
     final id = model.state.library.activeId;
-    if (id == null || !model.engine.connected || model.state.busy) return;
+    if (!canEnable || model.state.busy) return;
     emit((busy: true, command: null, error: null, change: null));
     final starting = _start(id);
     _starting = starting;
@@ -64,7 +67,7 @@ class McpEditorCubit extends Cubit<McpEditorState> {
     _starting = null;
   }
 
-  Future<void> _start(String id) async {
+  Future<void> _start(String? id) async {
     try {
       final command = await _connectionCommand();
       if (_closing || !_matches(id)) {
@@ -92,13 +95,14 @@ class McpEditorCubit extends Cubit<McpEditorState> {
     }
   }
 
-  bool _matches(String id) =>
-      model.engine.connected &&
+  bool _matches(String? id) =>
+      canEnable &&
       model.state.library.activeId == id &&
-      model.state.report != null;
+      (id == null || model.state.report != null);
 
   void checkBuild() {
-    if (_buildId case final id? when !_matches(id)) unawaited(disable());
+    if (!enabled || _creating && canEnable) return;
+    if (!_matches(_buildId)) unawaited(disable());
   }
 
   Future<void> disable() async {
@@ -154,6 +158,13 @@ class McpEditorCubit extends Cubit<McpEditorState> {
     int? revision,
   ) async {
     _checkAccess();
+    if (tool == _create) return _createBuild(arguments);
+    if (tool != 'pob_catalog' && model.state.report == null) {
+      throw const McpEditorFault(
+        'NO_BUILD',
+        'Сначала создайте или откройте сборку.',
+      );
+    }
     final tab = _edits[tool];
     if (tab == null && !_reads.contains(tool)) {
       throw const McpEditorFault(
@@ -174,12 +185,27 @@ class McpEditorCubit extends Cubit<McpEditorState> {
     return {'result': result, 'revision': _revision};
   }
 
+  Future<JsonMap> _createBuild(JsonMap arguments) async {
+    _creating = true;
+    try {
+      final result = await model.createMcpBuild(arguments);
+      if (enabled) {
+        _buildId = model.state.library.activeId;
+        _syncRevision();
+        _showChange(WorkshopTab.tree, const {});
+      }
+      return {'result': result, 'revision': _revision};
+    } finally {
+      _creating = false;
+      checkBuild();
+    }
+  }
+
   void _checkAccess() {
-    final id = _buildId;
-    if (id == null || !enabled || !_matches(id)) {
+    if (!enabled || !_matches(_buildId)) {
       throw const McpEditorFault(
         'EDITOR_DISABLED',
-        'Включите правки через MCP для открытой сборки.',
+        'Включите правки через MCP.',
       );
     }
     if (model.state.busy || model.modalOpen?.call() == true) {

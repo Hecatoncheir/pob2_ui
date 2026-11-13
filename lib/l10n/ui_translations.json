@@ -24,6 +24,7 @@
     "md9540a4b84": "Lua отвечает. Классов в каталоге: {p0}",
     "mbf7bbb22e3": "Lua подключён",
     "m12e8f27f62": "MCP завершился. {p0}",
+    "m8a7e5686b9": "MCP может создавать сборки и править текущую. Если вы смените сборку вручную, доступ отключится.",
     "mcdf95e40cd": "PoB II · Мастерская",
     "m24093f50af": "PoB II при необходимости запустит PoB свёрнутым и запросит путь к сборкам.",
     "mebbddaaf16": "PoB вернул неверные данные персонажа.",
@@ -71,7 +72,7 @@
     "mea2c4cbc02": "Вернуть предыдущую пару",
     "m495763fa3e": "Вернуть узел",
     "m4d1d43042e": "Включено",
-    "m054b7819ac": "Включите правки через MCP для открытой сборки.",
+    "m79741659f7": "Включите правки через MCP.",
     "m66b96db6c1": "Вместо файла загрузки обнаружена ссылка",
     "mb087f895b2": "Возврат узла изменит показатели:",
     "m25d9d4dc90": "Восстанавливаемый энергощит",
@@ -150,7 +151,6 @@
     "mab04eae138": "Дождитесь завершения текущей операции",
     "mf0216281b8": "Дополнительные ячейки",
     "m9719fefc91": "Достичь уровня {p0}",
-    "m4122860034": "Доступ действует для текущей сборки. Правки можно отменить.",
     "m549a4c810c": "Доступ к редактору PoB II отключён.",
     "m10b5bc7e91": "Доступна версия {p0}",
     "m41a4fa8b6a": "Дух",
@@ -559,6 +559,7 @@
     "m09b17c9d35": "Слишком большая иконка",
     "m126aa994ee": "Слишком много перенаправлений",
     "m70a5cadc50": "Сначала получите актуальный отчёт сборки через pob_check_build.",
+    "m19d9e93773": "Сначала создайте или откройте сборку.",
     "m59b50cc146": "Сначала уберите камни поддержки",
     "ma386719073": "Сначала установите оба компонента",
     "m5ebbc9d7a5": "Снимутся",
@@ -1224,8 +1225,6 @@
     "m16298d522f": "PoB started, but the bridge has not responded yet. Check the connection again.",
     "m5a8756b562": "PoB is still open. Save the build and finish closing PoB.",
     "m7ab4920661": "Close the selected PoB manually and try again.",
-    "m054b7819ac": "Enable edits via MCP for open build.",
-    "m4122860034": "Access is valid for the current build. Edits can be undone.",
     "m549a4c810c": "Access to the PoB II editor has been disabled.",
     "me1d20330c5": "Complete the current operation or close the PoB II dialog.",
     "m4d1b5babac": "The command is not available in the PoB II editor.",
@@ -1351,7 +1350,10 @@
     "m1dc35191c6": "The PoB path includes nodes outside this stage",
     "m886e1844ee": "Path to the next node",
     "m651f75da98": "Shopping list",
-    "me24055fecd": "What remains before the next stage?"
+    "me24055fecd": "What remains before the next stage?",
+    "m8a7e5686b9": "MCP can create builds and edit the current build. Switching builds manually turns off access.",
+    "m79741659f7": "Enable editing through MCP.",
+    "m19d9e93773": "Create or open a build first."
   },
   "fr": {
     "m0c63e733f9": "Lua n'a pas renvoyé toutes les icônes",
@@ -1901,8 +1903,6 @@
     "m16298d522f": "PoB a démarré, mais le pont ne répond pas encore. Vérifiez de nouveau la connexion.",
     "m5a8756b562": "PoB est encore ouvert. Enregistrez le build et terminez la fermeture.",
     "m7ab4920661": "Fermez le PoB sélectionné manuellement, puis réessayez.",
-    "m054b7819ac": "Activez les modifications via MCP pour la version ouverte.",
-    "m4122860034": "L'accès est valide pour la version actuelle. Les modifications peuvent être annulées.",
     "m549a4c810c": "L'accès à l'éditeur PoB II a été désactivé.",
     "me1d20330c5": "Terminez l'opération en cours ou fermez la boîte de dialogue PoB II.",
     "m4d1b5babac": "La commande n'est pas disponible dans l'éditeur PoB II.",
@@ -2028,7 +2028,10 @@
     "m1dc35191c6": "Le chemin PoB passe par des nœuds hors de cette étape",
     "m886e1844ee": "Chemin vers le prochain nœud",
     "m651f75da98": "Liste d’achats",
-    "me24055fecd": "Que reste-t-il à faire avant la prochaine étape ?"
+    "me24055fecd": "Que reste-t-il à faire avant la prochaine étape ?",
+    "m8a7e5686b9": "MCP peut créer des builds et modifier le build actif. Changer de build manuellement désactive l’accès.",
+    "m79741659f7": "Activez les modifications via MCP.",
+    "m19d9e93773": "Créez ou ouvrez d’abord un build."
   },
   "de": {
     "m0c63e733f9": "Lua hat nicht alle Symbole zurückgegeben",
@@ -2578,8 +2581,6 @@
     "m16298d522f": "PoB wurde gestartet, aber die Verbindung antwortet noch nicht. Prüfen Sie sie erneut.",
     "m5a8756b562": "PoB ist noch geöffnet. Speichern Sie den Build und schließen Sie PoB.",
     "m7ab4920661": "Schließen Sie die ausgewählte PoB-Instanz manuell und versuchen Sie es erneut.",
-    "m054b7819ac": "Aktivieren Sie Bearbeitungen über MCP für offene Builds.",
-    "m4122860034": "Der Zugriff ist für den aktuellen Build gültig. Änderungen können rückgängig gemacht werden.",
     "m549a4c810c": "Der Zugriff auf den PoB II-Editor wurde deaktiviert.",
     "me1d20330c5": "Schließen Sie den aktuellen Vorgang ab oder schließen Sie das Dialogfeld PoB II.",
     "m4d1b5babac": "Der Befehl ist im PoB II-Editor nicht verfügbar.",
@@ -2705,7 +2706,10 @@
     "m1dc35191c6": "Der PoB-Pfad enthält Knoten außerhalb dieser Etappe",
     "m886e1844ee": "Pfad zum nächsten Knoten",
     "m651f75da98": "Einkaufsliste",
-    "me24055fecd": "Was fehlt bis zur nächsten Etappe?"
+    "me24055fecd": "Was fehlt bis zur nächsten Etappe?",
+    "m8a7e5686b9": "MCP kann Builds erstellen und den aktuellen Build bearbeiten. Beim manuellen Wechsel wird der Zugriff deaktiviert.",
+    "m79741659f7": "Aktiviere die Bearbeitung über MCP.",
+    "m19d9e93773": "Erstelle oder öffne zuerst einen Build."
   },
   "es": {
     "m0c63e733f9": "Lua no devolvió todos los íconos",
@@ -3255,8 +3259,6 @@
     "m16298d522f": "PoB se inició, pero el puente aún no responde. Comprueba la conexión otra vez.",
     "m5a8756b562": "PoB sigue abierto. Guarda la configuración y termina de cerrar PoB.",
     "m7ab4920661": "Cierra el PoB seleccionado manualmente y vuelve a intentarlo.",
-    "m054b7819ac": "Habilite las ediciones a través de MCP para compilación abierta.",
-    "m4122860034": "El acceso es válido para la compilación actual. Las ediciones se pueden deshacer.",
     "m549a4c810c": "Se ha deshabilitado el acceso al editor PoB II.",
     "me1d20330c5": "Complete la operación actual o cierre el cuadro de diálogo PoB II.",
     "m4d1b5babac": "El comando no está disponible en el editor PoB II.",
@@ -3382,7 +3384,10 @@
     "m1dc35191c6": "La ruta de PoB incluye nodos fuera de esta etapa",
     "m886e1844ee": "Ruta al siguiente nodo",
     "m651f75da98": "Lista de compras",
-    "me24055fecd": "¿Qué falta para la próxima etapa?"
+    "me24055fecd": "¿Qué falta para la próxima etapa?",
+    "m8a7e5686b9": "MCP puede crear builds y editar la actual. Si cambias de build manualmente, el acceso se desactiva.",
+    "m79741659f7": "Activa la edición mediante MCP.",
+    "m19d9e93773": "Primero crea o abre una build."
   },
   "pt_BR": {
     "m0c63e733f9": "Lua não retornou todos os ícones",
@@ -3932,8 +3937,6 @@
     "m16298d522f": "O PoB foi iniciado, mas a ponte ainda não responde. Verifique a conexão novamente.",
     "m5a8756b562": "O PoB ainda está aberto. Salve a build e conclua o fechamento do PoB.",
     "m7ab4920661": "Feche o PoB selecionado manualmente e tente novamente.",
-    "m054b7819ac": "Habilite edições por meio de MCP para build aberto.",
-    "m4122860034": "O acesso é válido para a compilação atual. As edições podem ser desfeitas.",
     "m549a4c810c": "O acesso ao editor PoB II foi desativado.",
     "me1d20330c5": "Conclua a operação atual ou feche a caixa de diálogo PoB II.",
     "m4d1b5babac": "O comando não está disponível no editor PoB II.",
@@ -4059,7 +4062,10 @@
     "m1dc35191c6": "O caminho do PoB passa por nós fora desta etapa",
     "m886e1844ee": "Caminho até o próximo nó",
     "m651f75da98": "Lista de compras",
-    "me24055fecd": "O que falta para a próxima etapa?"
+    "me24055fecd": "O que falta para a próxima etapa?",
+    "m8a7e5686b9": "O MCP pode criar builds e editar a build atual. Trocar de build manualmente desativa o acesso.",
+    "m79741659f7": "Ative a edição pelo MCP.",
+    "m19d9e93773": "Primeiro, crie ou abra uma build."
   },
   "ja": {
     "m0c63e733f9": "Lua はすべてのアイコンを返しませんでした",
@@ -4609,8 +4615,6 @@
     "m16298d522f": "PoBは起動しましたが、ブリッジがまだ応答していません。接続を再確認してください。",
     "m5a8756b562": "PoBはまだ開いています。ビルドを保存してPoBを閉じてください。",
     "m7ab4920661": "選択したPoBを手動で閉じてから、もう一度起動してください。",
-    "m054b7819ac": "オープン ビルドの MCP による編集を有効にします。",
-    "m4122860034": "アクセスは現在のビルドに対して有効です。編集は元に戻すことができます。",
     "m549a4c810c": "PoB II エディタへのアクセスが無効になりました。",
     "me1d20330c5": "現在の操作を完了するか、PoB II ダイアログを閉じます。",
     "m4d1b5babac": "このコマンドは PoB II エディタでは使用できません。",
@@ -4736,7 +4740,10 @@
     "m1dc35191c6": "PoB の経路にはこの段階に含まれないノードがあります",
     "m886e1844ee": "次のノードへの経路",
     "m651f75da98": "購入リスト",
-    "me24055fecd": "次の段階までに何が必要ですか？"
+    "me24055fecd": "次の段階までに何が必要ですか？",
+    "m8a7e5686b9": "MCP はビルドを作成し、現在のビルドを編集できます。手動でビルドを切り替えると、アクセスは無効になります。",
+    "m79741659f7": "MCP による編集を有効にしてください。",
+    "m19d9e93773": "先にビルドを作成するか開いてください。"
   },
   "ko": {
     "m0c63e733f9": "Lua이 모든 아이콘을 반환하지 않았습니다.",
@@ -5286,8 +5293,6 @@
     "m16298d522f": "PoB가 시작됐지만 브리지가 아직 응답하지 않습니다. 연결을 다시 확인하세요.",
     "m5a8756b562": "PoB가 아직 열려 있습니다. 빌드를 저장하고 PoB를 닫으세요.",
     "m7ab4920661": "선택한 PoB를 직접 닫고 다시 실행하세요.",
-    "m054b7819ac": "오픈 빌드에 대해 MCP을 통해 편집을 활성화합니다.",
-    "m4122860034": "현재 빌드에 대한 액세스가 유효합니다. 편집 내용은 취소할 수 있습니다.",
     "m549a4c810c": "PoB II 편집기에 대한 액세스가 비활성화되었습니다.",
     "me1d20330c5": "현재 작업을 완료하거나 PoB II 대화상자를 닫으세요.",
     "m4d1b5babac": "이 명령은 PoB II 편집기에서 사용할 수 없습니다.",
@@ -5413,7 +5418,10 @@
     "m1dc35191c6": "PoB 경로에 이 단계에 없는 노드가 포함됩니다",
     "m886e1844ee": "다음 노드로 가는 경로",
     "m651f75da98": "구매 목록",
-    "me24055fecd": "다음 단계까지 무엇이 남았나요?"
+    "me24055fecd": "다음 단계까지 무엇이 남았나요?",
+    "m8a7e5686b9": "MCP로 빌드를 생성하고 현재 빌드를 편집할 수 있습니다. 빌드를 수동으로 바꾸면 접근이 해제됩니다.",
+    "m79741659f7": "MCP를 통한 편집을 허용하세요.",
+    "m19d9e93773": "먼저 빌드를 만들거나 여세요."
   },
   "th": {
     "m0c63e733f9": "Lua ไม่ได้ส่งคืนไอคอนทั้งหมด",
@@ -5963,8 +5971,6 @@
     "m16298d522f": "PoB เริ่มแล้ว แต่บริดจ์ยังไม่ตอบสนอง โปรดตรวจสอบการเชื่อมต่ออีกครั้ง",
     "m5a8756b562": "PoB ยังเปิดอยู่ บันทึกบิลด์และปิด PoB ให้เสร็จ",
     "m7ab4920661": "ปิด PoB ที่เลือกด้วยตนเองแล้วลองเริ่มอีกครั้ง",
-    "m054b7819ac": "เปิดใช้งานการแก้ไขผ่าน MCP สำหรับบิลด์แบบเปิด",
-    "m4122860034": "การเข้าถึงถูกต้องสำหรับรุ่นปัจจุบัน การแก้ไขสามารถยกเลิกได้",
     "m549a4c810c": "การเข้าถึงตัวแก้ไข PoB II ถูกปิดใช้งาน",
     "me1d20330c5": "ดำเนินการปัจจุบันให้เสร็จสิ้นหรือปิดกล่องโต้ตอบ PoB II",
     "m4d1b5babac": "คำสั่งไม่พร้อมใช้งานในตัวแก้ไข PoB II",
@@ -6090,7 +6096,10 @@
     "m1dc35191c6": "เส้นทางของ PoB ผ่านโหนดที่ไม่อยู่ในขั้นนี้",
     "m886e1844ee": "เส้นทางไปยังโหนดถัดไป",
     "m651f75da98": "รายการซื้อ",
-    "me24055fecd": "เหลืออะไรบ้างก่อนถึงขั้นถัดไป?"
+    "me24055fecd": "เหลืออะไรบ้างก่อนถึงขั้นถัดไป?",
+    "m8a7e5686b9": "MCP สามารถสร้างบิลด์และแก้ไขบิลด์ปัจจุบันได้ การสลับบิลด์ด้วยตนเองจะปิดการเข้าถึง",
+    "m79741659f7": "เปิดใช้งานการแก้ไขผ่าน MCP",
+    "m19d9e93773": "สร้างหรือเปิดบิลด์ก่อน"
   },
   "zh_Hant": {
     "m0c63e733f9": "Lua 未傳回所有圖標",
@@ -6640,8 +6649,6 @@
     "m16298d522f": "PoB 已啟動，但橋接尚未回應。請再檢查一次連線。",
     "m5a8756b562": "PoB 仍然開啟。請儲存流派並完成關閉 PoB。",
     "m7ab4920661": "請手動關閉所選的 PoB，然後重試。",
-    "m054b7819ac": "透過 MCP 啟用開放建置的編輯。",
-    "m4122860034": "存取權限對目前版本有效。編輯可以撤銷。",
     "m549a4c810c": "對 PoB II 編輯器的存取已被停用。",
     "me1d20330c5": "完成目前操作或關閉 PoB II 對話方塊。",
     "m4d1b5babac": "此指令在 PoB II 編輯器中不可用。",
@@ -6767,6 +6774,9 @@
     "m1dc35191c6": "PoB 的路徑經過此階段以外的天賦節點",
     "m886e1844ee": "通往下一個天賦節點的路徑",
     "m651f75da98": "購物清單",
-    "me24055fecd": "離下一階段還差什麼？"
+    "me24055fecd": "離下一階段還差什麼？",
+    "m8a7e5686b9": "MCP 可以建立流派配置並編輯目前的配置。手動切換配置會停用存取權限。",
+    "m79741659f7": "請啟用透過 MCP 編輯。",
+    "m19d9e93773": "請先建立或開啟流派配置。"
   }
 }

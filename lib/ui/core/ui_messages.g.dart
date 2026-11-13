@@ -45,6 +45,10 @@ final uiExactTranslations = <String, String Function(AppLocalizations)>{
   "Lua could not apply this milestone": (l) => l.m4358fa9bda,
   "Lua подключён": (l) => l.mbf7bbb22e3,
   "Lua connected": (l) => l.mbf7bbb22e3,
+  "MCP может создавать сборки и править текущую. Если вы смените сборку вручную, доступ отключится.":
+      (l) => l.m8a7e5686b9,
+  "MCP can create builds and edit the current build. Switching builds manually turns off access.":
+      (l) => l.m8a7e5686b9,
   "PoB II · Мастерская": (l) => l.mcdf95e40cd,
   "PoB II · Workshop": (l) => l.mcdf95e40cd,
   "PoB II при необходимости запустит PoB свёрнутым и запросит путь к сборкам.":
@@ -133,8 +137,8 @@ final uiExactTranslations = <String, String Function(AppLocalizations)>{
   "Return node": (l) => l.m495763fa3e,
   "Включено": (l) => l.m4d1d43042e,
   "Enabled": (l) => l.m4d1d43042e,
-  "Включите правки через MCP для открытой сборки.": (l) => l.m054b7819ac,
-  "Enable edits via MCP for open build.": (l) => l.m054b7819ac,
+  "Включите правки через MCP.": (l) => l.m79741659f7,
+  "Enable editing through MCP.": (l) => l.m79741659f7,
   "Вместо файла загрузки обнаружена ссылка": (l) => l.m66b96db6c1,
   "Link detected instead of download file": (l) => l.m66b96db6c1,
   "Возврат узла изменит показатели:": (l) => l.mb087f895b2,
@@ -295,10 +299,6 @@ final uiExactTranslations = <String, String Function(AppLocalizations)>{
   "Wait for the current operation to complete": (l) => l.mab04eae138,
   "Дополнительные ячейки": (l) => l.mf0216281b8,
   "Additional cells": (l) => l.mf0216281b8,
-  "Доступ действует для текущей сборки. Правки можно отменить.": (l) =>
-      l.m4122860034,
-  "Access is valid for the current build. Edits can be undone.": (l) =>
-      l.m4122860034,
   "Доступ к редактору PoB II отключён.": (l) => l.m549a4c810c,
   "Access to the PoB II editor has been disabled.": (l) => l.m549a4c810c,
   "Дух": (l) => l.m41a4fa8b6a,
@@ -1056,6 +1056,8 @@ final uiExactTranslations = <String, String Function(AppLocalizations)>{
       l.m70a5cadc50,
   "First get the latest build report via pob_check_build.": (l) =>
       l.m70a5cadc50,
+  "Сначала создайте или откройте сборку.": (l) => l.m19d9e93773,
+  "Create or open a build first.": (l) => l.m19d9e93773,
   "Сначала уберите камни поддержки": (l) => l.m59b50cc146,
   "Remove support stones first": (l) => l.m59b50cc146,
   "Сначала установите оба компонента": (l) => l.ma386719073,

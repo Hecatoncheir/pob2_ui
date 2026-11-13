@@ -91,6 +91,10 @@ class AppLocalizationsRu extends AppLocalizations {
   }
 
   @override
+  String get m8a7e5686b9 =>
+      'MCP может создавать сборки и править текущую. Если вы смените сборку вручную, доступ отключится.';
+
+  @override
   String get mcdf95e40cd => 'PoB II · Мастерская';
 
   @override
@@ -253,7 +257,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m4d1d43042e => 'Включено';
 
   @override
-  String get m054b7819ac => 'Включите правки через MCP для открытой сборки.';
+  String get m79741659f7 => 'Включите правки через MCP.';
 
   @override
   String get m66b96db6c1 => 'Вместо файла загрузки обнаружена ссылка';
@@ -505,10 +509,6 @@ class AppLocalizationsRu extends AppLocalizations {
   String m9719fefc91(String p0) {
     return 'Достичь уровня $p0';
   }
-
-  @override
-  String get m4122860034 =>
-      'Доступ действует для текущей сборки. Правки можно отменить.';
 
   @override
   String get m549a4c810c => 'Доступ к редактору PoB II отключён.';
@@ -1846,6 +1846,9 @@ class AppLocalizationsRu extends AppLocalizations {
   @override
   String get m70a5cadc50 =>
       'Сначала получите актуальный отчёт сборки через pob_check_build.';
+
+  @override
+  String get m19d9e93773 => 'Сначала создайте или откройте сборку.';
 
   @override
   String get m59b50cc146 => 'Сначала уберите камни поддержки';

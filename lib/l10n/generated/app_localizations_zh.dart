@@ -91,6 +91,9 @@ class AppLocalizationsZh extends AppLocalizations {
   }
 
   @override
+  String get m8a7e5686b9 => 'MCP 可以建立流派配置並編輯目前的配置。手動切換配置會停用存取權限。';
+
+  @override
   String get mcdf95e40cd => 'PoB II · 研討會';
 
   @override
@@ -249,7 +252,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m4d1d43042e => '已啟用';
 
   @override
-  String get m054b7819ac => '透過 MCP 啟用開放建置的編輯。';
+  String get m79741659f7 => '請啟用透過 MCP 編輯。';
 
   @override
   String get m66b96db6c1 => '偵測到連結而不是下載文件';
@@ -492,9 +495,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String m9719fefc91(String p0) {
     return '達到等級 $p0';
   }
-
-  @override
-  String get m4122860034 => '存取權限對目前版本有效。編輯可以撤銷。';
 
   @override
   String get m549a4c810c => '對 PoB II 編輯器的存取已被停用。';
@@ -1807,6 +1807,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m70a5cadc50 => '首先透過pob_check_build取得最新的建置報告。';
+
+  @override
+  String get m19d9e93773 => '請先建立或開啟流派配置。';
 
   @override
   String get m59b50cc146 => '先移除支撐石';
@@ -2254,6 +2257,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   }
 
   @override
+  String get m8a7e5686b9 => 'MCP 可以建立流派配置並編輯目前的配置。手動切換配置會停用存取權限。';
+
+  @override
   String get mcdf95e40cd => 'PoB II · 研討會';
 
   @override
@@ -2412,7 +2418,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m4d1d43042e => '已啟用';
 
   @override
-  String get m054b7819ac => '透過 MCP 啟用開放建置的編輯。';
+  String get m79741659f7 => '請啟用透過 MCP 編輯。';
 
   @override
   String get m66b96db6c1 => '偵測到連結而不是下載文件';
@@ -2655,9 +2661,6 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String m9719fefc91(String p0) {
     return '達到等級 $p0';
   }
-
-  @override
-  String get m4122860034 => '存取權限對目前版本有效。編輯可以撤銷。';
 
   @override
   String get m549a4c810c => '對 PoB II 編輯器的存取已被停用。';
@@ -3970,6 +3973,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m70a5cadc50 => '首先透過pob_check_build取得最新的建置報告。';
+
+  @override
+  String get m19d9e93773 => '請先建立或開啟流派配置。';
 
   @override
   String get m59b50cc146 => '先移除支撐石';
