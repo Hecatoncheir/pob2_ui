@@ -157,21 +157,24 @@ class TreeIconRepository {
   void _read(JsonMap result, List<String> batch, Map<String, Uint8List> cache) {
     final entries = jsonRows(result['icons']);
     for (final entry in entries) {
-      switch (entry) {
-        case {'key': final String key, 'png': final String png}
-            when batch.contains(key):
-          final bytes = base64Decode(png);
-          if (bytes.length > 1024 * 1024)
-            throw const FormatException('Слишком большая иконка');
-          cache[key] = bytes;
-        default:
-          throw FormatException(
-            '${entry['key']}: ${entry['error'] ?? 'Некорректная иконка Lua'}',
-          );
-      }
+      final (key, bytes) = _decodeIcon(entry, batch);
+      cache[key] = bytes;
     }
     if (batch.any((key) => !cache.containsKey(key))) {
       throw const FormatException('Lua вернул не все иконки');
     }
+  }
+
+  (String, Uint8List) _decodeIcon(JsonMap entry, List<String> batch) {
+    if (entry case {'key': final String key, 'png': final String png}
+        when batch.contains(key)) {
+      final bytes = base64Decode(png);
+      if (bytes.length > 1024 * 1024)
+        throw const FormatException('Слишком большая иконка');
+      return (key, bytes);
+    }
+    throw FormatException(
+      '${entry['key']}: ${entry['error'] ?? 'Некорректная иконка Lua'}',
+    );
   }
 }

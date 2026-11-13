@@ -48,22 +48,14 @@ void applyProgressionEquipment(XmlElement root, XmlElement spec, String saved) {
   final savedSet = snapshot.getElement('ItemSet');
   if (savedSet == null) throw _invalidLoadout;
   final items = root.getElement('Items')!;
-  final sockets =
-      snapshot.getElement('Sockets') ??
-      XmlElement(const XmlName.qualified('Sockets'));
-  final allocated = (spec.getAttribute('nodes') ?? '').split(',').toSet();
-  for (final socket in sockets.findElements('Socket').toList()) {
-    if (!allocated.contains(socket.getAttribute('nodeId'))) socket.remove();
-  }
-  final remap = _mergeItems(
-    items,
-    snapshot,
-    _equipmentReferences(savedSet, sockets),
-  );
-  for (final reference in _equipmentReferences(savedSet, sockets)) {
+  final sockets = _allocatedSockets(snapshot, spec);
+  final references = _equipmentReferences(savedSet, sockets).toList();
+  final remap = _mergeItems(items, snapshot, references);
+  for (final reference in references) {
     final id = _itemId(reference, 'itemId');
     if (id != 0) reference.setAttribute('itemId', '${remap[id]!}');
   }
+
   final set = _activeSet(root, 'Items', 'ItemSet');
   _replaceChildren(set, savedSet.childElements);
   final weaponSet = savedSet.getAttribute('useSecondWeaponSet');
@@ -71,6 +63,17 @@ void applyProgressionEquipment(XmlElement root, XmlElement spec, String saved) {
   items.setAttribute('useSecondWeaponSet', weaponSet);
   spec.getElement('Sockets')?.remove();
   spec.children.add(sockets.copy());
+}
+
+XmlElement _allocatedSockets(XmlElement snapshot, XmlElement spec) {
+  final sockets =
+      snapshot.getElement('Sockets') ??
+      XmlElement(const XmlName.qualified('Sockets'));
+  final allocated = (spec.getAttribute('nodes') ?? '').split(',').toSet();
+  for (final socket in sockets.findElements('Socket').toList()) {
+    if (!allocated.contains(socket.getAttribute('nodeId'))) socket.remove();
+  }
+  return sockets;
 }
 
 Map<int, int> _mergeItems(

@@ -115,14 +115,15 @@ class SkillWorkspaceCubit extends Cubit<SkillWorkspaceState> {
     final result = await model.deleteSkillGroup(id);
     if (!result.committed)
       throw FormatException(result.error ?? 'Не удалось удалить умение');
-    final groups = model.state.report!.skillGroups;
+    final report = model.state.report!;
+    final groups = report.skillGroups;
     if (groups.isEmpty) {
       await _clear();
-    } else {
-      final main = model.state.report!.groupSelector['selected'] as int?;
-      final next = groups.where((group) => group['id'] == main).firstOrNull;
-      await _replace((next ?? groups.first)['id'] as int);
+      return;
     }
+    final main = report.groupSelector['selected'] as int?;
+    final next = groups.where((group) => group['id'] == main).firstOrNull;
+    await _replace((next ?? groups.first)['id'] as int);
   });
 
   Future<void> _ready(SkillGroupCubit current) async {

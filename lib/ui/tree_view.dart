@@ -35,6 +35,12 @@ import 'mcp_editor_cubit.dart';
 import 'core/language_scope.dart';
 import 'tree_progression_bloc.dart';
 
+typedef _ProgressionCanvasState = ({
+  List<TreeProgressionStep> steps,
+  int index,
+  int? hoveredNode,
+});
+
 class TreeView extends StatefulWidget {
   const TreeView({super.key, required this.model, required this.tree});
   final WorkshopCubit model;
@@ -300,36 +306,55 @@ class _TreeViewState extends State<TreeView>
   Widget _treeCanvasWithProgression() {
     final bloc = context.read<TreeProgressionBloc?>();
     if (bloc == null) return _treeCanvas();
-    return BlocConsumer<TreeProgressionBloc, TreeProgressionState>(
+    return BlocListener<TreeProgressionBloc, TreeProgressionState>(
       bloc: bloc,
       listenWhen: (before, after) =>
           (after.view.focus != null && before.view.focus != after.view.focus) ||
           _stageMoved(_selectedStage(before), _selectedStage(after)),
-      listener: (_, state) {
-        if (state.view.focus case final focus?) {
-          _focusPlanNode(focus);
-        } else if (_selectedStage(state) case final stage?) {
-          _focusStage(stage.nodes);
-        }
-      },
-      buildWhen: (before, after) =>
-          before.view.visible != after.view.visible ||
-          before.view.hoveredNode != after.view.hoveredNode ||
-          before.selected != after.selected ||
-          before.steps != after.steps,
-      builder: (context, plan) {
-        final index = plan.selected;
-        if (!plan.view.visible || index == null) return _treeCanvas();
-        return _treeCanvas(
-          treeProgressionChange(plan.steps, index),
-          plan.view.hoveredNode,
-        );
-      },
+      listener: (_, state) => _focusProgression(state),
+      child:
+          BlocSelector<
+            TreeProgressionBloc,
+            TreeProgressionState,
+            _ProgressionCanvasState?
+          >(
+            bloc: bloc,
+            selector: _visibleProgression,
+            builder: (_, plan) => _buildProgressionCanvas(plan),
+          ),
     );
   }
 
-  TreeProgressionStep? _selectedStage(TreeProgressionState state) =>
-      state.selected == null ? null : state.steps[state.selected!];
+  void _focusProgression(TreeProgressionState state) {
+    if (state.view.focus case final focus?) {
+      _focusPlanNode(focus);
+      return;
+    }
+    if (_selectedStage(state) case final stage?) _focusStage(stage.nodes);
+  }
+
+  _ProgressionCanvasState? _visibleProgression(TreeProgressionState plan) {
+    final index = plan.selected;
+    if (!plan.view.visible || index == null) return null;
+    return (
+      steps: plan.steps,
+      index: index,
+      hoveredNode: plan.view.hoveredNode,
+    );
+  }
+
+  Widget _buildProgressionCanvas(_ProgressionCanvasState? plan) {
+    if (plan == null) return _treeCanvas();
+    return _treeCanvas(
+      treeProgressionChange(plan.steps, plan.index),
+      plan.hoveredNode,
+    );
+  }
+
+  TreeProgressionStep? _selectedStage(TreeProgressionState state) {
+    final index = state.selected;
+    return index == null ? null : state.steps[index];
+  }
 
   bool _stageMoved(TreeProgressionStep? before, TreeProgressionStep? after) =>
       before?.identity != after?.identity ||

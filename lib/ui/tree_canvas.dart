@@ -81,7 +81,7 @@ class TreePainter extends CustomPainter {
       Matrix4.inverted(transform.value),
       Offset.zero & viewport,
     ).inflate(100 / zoom);
-    _art(canvas);
+    _paintTree(canvas);
     if (hoverArtwork case final picture?) canvas.drawPicture(picture);
     _paintPlanPath(canvas);
     _paintPlanHover(canvas);
@@ -121,19 +121,26 @@ class TreePainter extends CustomPainter {
     );
   }
 
-  void _art(Canvas canvas) {
-    if (artwork case final picture?)
-      canvas.drawPicture(picture);
-    else
+  void _paintTree(Canvas canvas) {
+    final picture = artwork;
+    if (picture == null) {
       _connections(canvas);
+      _paintVisibleNodes(canvas, _node);
+    } else {
+      canvas.drawPicture(picture);
+      _paintVisibleNodes(canvas, _highlight);
+    }
+  }
+
+  void _paintVisibleNodes(
+    Canvas canvas,
+    void Function(Canvas, TreeNode) paintNode,
+  ) {
+    final change = progression;
     for (final node in scene.tree.nodes) {
       if (!visible.contains(scene.points[node.id]!)) continue;
-      if (artwork == null)
-        _node(canvas, node);
-      else
-        _highlight(canvas, node);
-      if (progression case final change?)
-        _progressionRing(canvas, node, change);
+      paintNode(canvas, node);
+      if (change != null) _progressionRing(canvas, node, change);
     }
   }
 
