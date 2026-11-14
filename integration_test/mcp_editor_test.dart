@@ -68,6 +68,9 @@ void main() {
       contains('STALE_REVISION'),
     );
 
+    if (await client.supportsSkillVariants()) {
+      await _checkSkillVariants(tester, client, model, shell);
+    }
     await model.openBuild(model.state.library.entries.last.id);
     await tester.pumpAndSettle();
     expect(model.mcpEditor.enabled, isFalse);
@@ -120,6 +123,82 @@ Future<void> _enableFromLibrary(
   expect(model.mcpEditor.enabled, isTrue);
   shell.add(const PageSelected(AppPage.workspace));
   await tester.pumpAndSettle();
+}
+
+Future<void> _checkSkillVariants(
+  WidgetTester tester,
+  _ExternalEditor client,
+  WorkshopCubit model,
+  ShellBloc shell,
+) async {
+  await client.success('pob_check_build');
+  final gems = await client.success('pob_catalog', {
+    'kind': 'gems',
+    'query': 'Ball Lightning',
+  });
+  final gem = jsonRows(gems['entries'])
+      .firstWhere((gem) => gem['name'] == 'Ball Lightning');
+  await client.success('pob_add_skill_group', {
+    'label': 'Ball Lightning',
+    'gems': [
+      {'id': gem['id'], 'level': 1},
+    ],
+  });
+  final group = model.state.report!.groups.last;
+  await client.success('pob_select_main_skill', {
+    'control': 'groups',
+    'id': group['id'],
+  });
+  final before = model.state.report!.stats['TotalDPS'];
+  await client.success('pob_select_main_skill', {
+    'control': 'statSets',
+    'id': 2,
+  });
+  await tester.pumpAndSettle();
+  expect(shell.state.tab, WorkshopTab.calculations);
+  expect(model.state.report!.stats['TotalDPS'], isNot(before));
+
+  final dropdown = find.byKey(const ValueKey('main-skill-statSets'));
+  expect(tester.widget<DropdownButton<int>>(dropdown).value, 2);
+  await tester.tap(dropdown);
+  await tester.pumpAndSettle();
+  await tester.tap(find.text('Ball Lightning').last);
+  for (var i = 0; i < 100 && model.state.busy; i++) {
+    await tester.pump(const Duration(milliseconds: 100));
+    await Future<void>.delayed(const Duration(milliseconds: 100));
+  }
+  await tester.pumpAndSettle();
+  expect(tester.widget<DropdownButton<int>>(dropdown).value, 1);
+  expect(model.state.report!.stats['TotalDPS'], before);
+
+  await _checkVariantRoundTrip(tester, client, model, dropdown);
+}
+
+Future<void> _checkVariantRoundTrip(
+  WidgetTester tester,
+  _ExternalEditor client,
+  WorkshopCubit model,
+  Finder dropdown,
+) async {
+  await client.success('pob_check_build');
+  await client.success('pob_select_main_skill', {
+    'control': 'statSets',
+    'id': 2,
+  });
+  final stats = model.state.report!.stats;
+  final mcpXml = await client.success('pob_export_xml');
+  final xml = await model.exportXml();
+  expect(xml, mcpXml['xml']);
+  final original = model.state.library.activeId;
+  await model.importXml(xml!);
+  await tester.pumpAndSettle();
+  expect(model.state.error, isNull);
+  expect(model.state.report!.stats, stats);
+  expect(tester.widget<DropdownButton<int>>(dropdown).value, 2);
+  await model.openBuild(original!);
+  await tester.pumpAndSettle();
+  await _enable(tester);
+  expect(model.mcpEditor.enabled, isTrue);
 }
 
 Future<void> _enable(WidgetTester tester) async {
@@ -249,6 +328,15 @@ class _ExternalEditor {
 
   Future<JsonMap> call(String name, [JsonMap arguments = const {}]) =>
       _rpc('tools/call', {'name': name, 'arguments': arguments});
+
+  Future<bool> supportsSkillVariants() async {
+    final tools = await _rpc('tools/list', {});
+    final tool = jsonRows(tools['tools'])
+        .firstWhere((tool) => tool['name'] == 'pob_select_main_skill');
+    final properties = jsonMap(jsonMap(tool['inputSchema'])['properties']);
+    return jsonStrings(jsonMap(properties['control'])['enum'])
+        .contains('statSets');
+  }
 
   Future<JsonMap> success(String name, [JsonMap arguments = const {}]) async {
     final result = await call(name, arguments);

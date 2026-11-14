@@ -182,7 +182,7 @@ class EditorWorkshop extends WorkshopCubit {
         ...snapshot,
         'buildInfo': {
           ...info,
-          'groups': {...jsonMap(info['groups']), 'selected': id},
+          control: {...jsonMap(info[control]), 'selected': id},
         },
       },
     });

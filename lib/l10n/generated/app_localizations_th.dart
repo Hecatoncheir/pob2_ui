@@ -37,6 +37,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m774193669c => 'Lua ส่งคืนต้นไม้ที่ว่างเปล่า';
 
   @override
+  String get m152f871d87 => 'Lua หยุดทำงานแล้ว';
+
+  @override
   String get mbb582808f3 => 'Lua ไม่ส่งคืน XML บิลด์';
 
   @override
@@ -147,13 +150,8 @@ class AppLocalizationsTh extends AppLocalizations {
       'นำเข้าระบบ, โครงสร้าง; assert sys.version_info >= (3,11) และ struct.calcsize(\"P\") == 8, \"ต้องการ Python 3.11+ แบบ 64 บิต\"';
 
   @override
-  String m9cde7cfc3f(String p0, String p1, String p2) {
-    return '$p0 $p1 พร้อมแล้ว คอมไพล์: $p2';
-  }
-
-  @override
-  String m606849adbd(String p0, String p1) {
-    return 'ติดตั้งแล้ว $p0 $p1';
+  String mad59a0d2ab(String p0, String p1, String p2) {
+    return 'ดาวน์โหลด $p0 $p1 แล้ว Git: $p2';
   }
 
   @override
@@ -175,9 +173,6 @@ class AppLocalizationsTh extends AppLocalizations {
   String mb7b217c429(String p0, String p1, String p2) {
     return '$p0: ใช้แต้มไป $p1 จาก $p2 แต้ม';
   }
-
-  @override
-  String get mbd1c099ba2 => 'เวอร์ชันปัจจุบัน';
 
   @override
   String get m63141a77bf => 'พระเครื่อง';
@@ -221,6 +216,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m84bb1ae656 => 'ตัวเลือก';
+
+  @override
+  String get m7547833b7f => 'รูปแบบสกิล';
 
   @override
   String get m65d05ab17f => 'งานสร้างครั้งต่อไปของคุณ';
@@ -433,6 +431,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m57d9f5cb7c => 'ต้นไม้ยังไม่พร้อมใช้งาน';
 
   @override
+  String get m748d0b0dbd => 'คัดลอกข้อมูลวินิจฉัยแล้ว';
+
+  @override
   String get m7c2e51e000 =>
       'สำหรับแผนผัง PoB ที่เสร็จสมบูรณ์แล้ว ให้อัปเดต MCP เป็น 0.7.0';
 
@@ -543,6 +544,12 @@ class AppLocalizationsTh extends AppLocalizations {
   String m65a1b960c7(String p0) {
     return 'กำลังโหลด LuaJIT และ lua-utf8 สำหรับ $p0...';
   }
+
+  @override
+  String get m4f87fe4ac6 => 'กำลังดาวน์โหลด Path of Building';
+
+  @override
+  String get ma3d462aeec => 'กำลังดาวน์โหลด PoB MCP';
 
   @override
   String maafcfa710b(String p0, String p1) {
@@ -882,10 +889,20 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m6f37ba2ab7 => 'ไม่สามารถปิด PoB ได้';
 
   @override
+  String m8f6df28a92(String p0) {
+    return 'ปิดเซสชัน Lua ไม่สำเร็จ: $p0';
+  }
+
+  @override
   String get m46ed8403b7 => 'ไม่สามารถเปิด PoB ได้';
 
   @override
   String get m6dc7d664a3 => 'ไม่สามารถป้องกันไดเร็กทอรีการเชื่อมต่อ MCP';
+
+  @override
+  String m8644bfa547(String p0) {
+    return 'ปิดใช้งานตัวแก้ไข MCP เดิมไม่สำเร็จ: $p0';
+  }
 
   @override
   String m725605a944(String p0) {
@@ -963,6 +980,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String mbefc941808(String p0) {
     return 'ไม่สามารถอ่านโหนด: $p0';
   }
+
+  @override
+  String get m5b0627d21c => 'ไม่สามารถคัดลอกข้อมูลวินิจฉัยได้';
 
   @override
   String get m409f34eb59 => 'ไม่สามารถบันทึกกลุ่ม';
@@ -1104,6 +1124,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get mbfea4c6fd4 => 'กลุ่มทักษะใหม่';
 
   @override
+  String get maf3cd75c2f => 'ส่วนประกอบคู่ใหม่เปลี่ยนคลาสของบิลด์ที่เปิดอยู่';
+
+  @override
   String get m282cf4ee16 => 'บิลด์ใหม่';
 
   @override
@@ -1152,7 +1175,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m124cd4a205 => 'อัปเดต MCP เพื่อลบทักษะ';
 
   @override
-  String get m603e460bf5 => 'อัปเดต';
+  String get m74e1571298 => 'อัปเดต PoB และ MCP';
 
   @override
   String get m3d7df93803 => 'อัปเดตรายการบิลด์';
@@ -1300,6 +1323,12 @@ class AppLocalizationsTh extends AppLocalizations {
   String get med31458051 => 'ไม่สามารถเข้าถึงโฟลเดอร์บิลด์ที่ตั้งไว้ใน PoB';
 
   @override
+  String get m83ffb870fe => 'อัปเดตส่วนประกอบทั้งคู่แล้ว';
+
+  @override
+  String get meed4bbd10d => 'ส่วนประกอบทั้งคู่เป็นเวอร์ชันล่าสุดแล้ว';
+
+  @override
   String get m75160b86a8 => 'ค่าสถานะ';
 
   @override
@@ -1388,6 +1417,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m54ab473017 => 'เชื่อมต่อโฟลเดอร์เริ่มต้นของ PoB แล้ว';
+
+  @override
+  String get mce1dabc47f => 'กำลังเชื่อมต่อกับ Lua';
 
   @override
   String get m67f5d8880e => 'เชื่อมต่อ Lua';
@@ -1575,9 +1607,18 @@ class AppLocalizationsTh extends AppLocalizations {
   String get mfa4af9bbe7 => 'ตรวจสอบความเข้ากันได้';
 
   @override
+  String get m34f26e6d74 => 'กำลังตรวจสอบ Git';
+
+  @override
+  String get m3cbe98277d => 'กำลังตรวจสอบ Python';
+
+  @override
   String mfeb5830ec9(String p0) {
     return 'การตรวจสอบการเปิดตัว: HTTP $p0';
   }
+
+  @override
+  String get mf0c425d946 => 'กำลังตรวจสอบรุ่นที่เผยแพร่';
 
   @override
   String get m25ee4bf0ec => 'การยืนยันการเผยแพร่เสร็จสมบูรณ์';
@@ -1587,6 +1628,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m6f4c708fbf => 'การตรวจสอบแพ็คเกจก่อนการติดตั้งล้มเหลว';
+
+  @override
+  String get m908d1b1e7c => 'กำลังตรวจสอบความเข้ากันได้กับ Lua';
 
   @override
   String get m9353cfd5f6 => 'การตรวจสอบความเข้ากันได้: ใช้งานต้นฉบับ Lua...';
@@ -1658,6 +1702,11 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m1e135b51f1 => 'การคำนวณ...';
+
+  @override
+  String m7fce31d207(String p0, String p1, String p2, String p3) {
+    return 'รีวิชันของ $p0 $p1 ไม่ตรงกัน: คาดว่าเป็น $p2 แต่ได้ $p3';
+  }
 
   @override
   String get m8d7bd9deb6 => 'Health regeneration';
@@ -1801,6 +1850,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m332899f398 => 'คัดลอก XML';
 
   @override
+  String get m1fbb2aeab9 => 'คัดลอกข้อมูลวินิจฉัย';
+
+  @override
   String get m99e87c373f => 'คัดลอกคำสั่งการเชื่อมต่อ Codex';
 
   @override
@@ -1826,6 +1878,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m126aa994ee => 'มีการเปลี่ยนเส้นทางมากเกินไป';
+
+  @override
+  String get mde2ce6f05b => 'เลือกเวอร์ชันของส่วนประกอบทั้งสองก่อน';
 
   @override
   String get m70a5cadc50 =>
@@ -2066,9 +2121,6 @@ class AppLocalizationsTh extends AppLocalizations {
       'ติดตั้งส่วนประกอบเพื่อเปิดชุดประกอบและรับการคำนวณจริง';
 
   @override
-  String get mb7cd6fae08 => 'ติดตั้ง';
-
-  @override
   String get mfdeaa71380 => 'ติดตั้งส่วนประกอบ';
 
   @override
@@ -2112,6 +2164,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String m913d7f855b(String p0) {
     return 'บางไอคอนไม่พร้อมใช้งาน: $p0';
   }
+
+  @override
+  String get mdab05cc16d => 'ส่วนของสกิล';
 
   @override
   String get me24055fecd => 'เหลืออะไรบ้างก่อนถึงขั้นถัดไป?';

@@ -13,12 +13,16 @@ Future<void> main(List<String> arguments) async {
     store: InstallationStore(InstallationStore.defaultRoot()),
   );
   await repository.load();
-  if (arguments.contains('--install')) {
-    for (final component in Component.values) {
-      final release = await repository.github.latest(component);
-      if (repository.active[component]?.tag == release.tag) continue;
-      await repository.install(component, release, stderr.writeln);
-    }
+  if (arguments case ['--install', '--lock', final path]) {
+    await repository.installPair(await _lockedReleases(path), stderr.writeln);
+  } else if (arguments case ['--install']) {
+    final releases = {
+      for (final component in Component.values)
+        component: await repository.github.latest(component),
+    };
+    await repository.installPair(releases, stderr.writeln);
+  } else if (arguments.isNotEmpty) {
+    throw const FormatException('Используйте --install [--lock <файл>]');
   }
   final client = McpClient();
   try {
@@ -88,4 +92,29 @@ Future<void> main(List<String> arguments) async {
   } finally {
     await client.close();
   }
+}
+
+Future<Map<Component, Release>> _lockedReleases(String path) async {
+  final data = jsonDecode(await File(path).readAsString());
+  if (data case {'pob': final Object? pob, 'mcp': final Object? mcp}) {
+    return {
+      Component.pob: _lockedRelease(Component.pob, pob),
+      Component.mcp: _lockedRelease(Component.mcp, mcp),
+    };
+  }
+  throw const FormatException('В манифесте нужны ревизии PoB и MCP');
+}
+
+Release _lockedRelease(Component component, Object? entry) {
+  if (entry case {'tag': final String tag, 'commit': final String commit}
+      when RegExp(r'^v\d+\.\d+\.\d+$').hasMatch(tag) &&
+          RegExp(r'^[a-f0-9]{40}$').hasMatch(commit)) {
+    return Release(
+      tag,
+      '${component.url}/releases/tag/$tag',
+      DateTime.utc(1970),
+      expectedCommit: commit,
+    );
+  }
+  throw FormatException('Некорректный тег или Git SHA для ${component.title}');
 }

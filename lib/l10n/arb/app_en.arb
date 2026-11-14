@@ -40,6 +40,11 @@
     "description": "Lua вернул пустое дерево",
     "placeholders": {}
   },
+  "m152f871d87": "Lua stopped",
+  "@m152f871d87": {
+    "description": "Lua завершился",
+    "placeholders": {}
+  },
   "mbb582808f3": "Lua did not return XML build",
   "@mbb582808f3": {
     "description": "Lua не вернул XML сборки",
@@ -217,9 +222,9 @@
     "description": "import sys, struct; assert sys.version_info >= (3,11) and struct.calcsize(\"P\") == 8, \"Нужен 64-битный Python 3.11+\"",
     "placeholders": {}
   },
-  "m9cde7cfc3f": "{p0} {p1} ready. Git: {p2}",
-  "@m9cde7cfc3f": {
-    "description": "{p0} {p1} готов. Git: {p2}",
+  "mad59a0d2ab": "Downloaded {p0} {p1}. Git: {p2}",
+  "@mad59a0d2ab": {
+    "description": "{p0} {p1} загружен. Git: {p2}",
     "placeholders": {
       "p0": {
         "type": "String"
@@ -228,18 +233,6 @@
         "type": "String"
       },
       "p2": {
-        "type": "String"
-      }
-    }
-  },
-  "m606849adbd": "{p0} {p1} installed",
-  "@m606849adbd": {
-    "description": "{p0} {p1} установлен",
-    "placeholders": {
-      "p0": {
-        "type": "String"
-      },
-      "p1": {
         "type": "String"
       }
     }
@@ -288,11 +281,6 @@
         "type": "String"
       }
     }
-  },
-  "mbd1c099ba2": "Current version",
-  "@mbd1c099ba2": {
-    "description": "Актуальная версия",
-    "placeholders": {}
   },
   "m63141a77bf": "Amulet",
   "@m63141a77bf": {
@@ -368,6 +356,11 @@
   "m84bb1ae656": "Option",
   "@m84bb1ae656": {
     "description": "Вариант",
+    "placeholders": {}
+  },
+  "m7547833b7f": "Skill variant",
+  "@m7547833b7f": {
+    "description": "Вариант умения",
     "placeholders": {}
   },
   "m65d05ab17f": "Your next build",
@@ -718,6 +711,11 @@
     "description": "Дерево пока недоступно",
     "placeholders": {}
   },
+  "m748d0b0dbd": "Diagnostics copied",
+  "@m748d0b0dbd": {
+    "description": "Диагностика скопирована",
+    "placeholders": {}
+  },
   "m7c2e51e000": "For a finished PoB tree, update MCP to 0.7.0.",
   "@m7c2e51e000": {
     "description": "Для готового дерева PoB обновите MCP до 0.7.0.",
@@ -898,6 +896,16 @@
         "type": "String"
       }
     }
+  },
+  "m4f87fe4ac6": "Downloading Path of Building",
+  "@m4f87fe4ac6": {
+    "description": "Загрузка Path of Building",
+    "placeholders": {}
+  },
+  "ma3d462aeec": "Downloading PoB MCP",
+  "@ma3d462aeec": {
+    "description": "Загрузка PoB MCP",
+    "placeholders": {}
   },
   "maafcfa710b": "Loading {p0} {p1}…",
   "@maafcfa710b": {
@@ -1470,6 +1478,15 @@
     "description": "Не удалось закрыть PoB.",
     "placeholders": {}
   },
+  "m8f6df28a92": "Could not close the Lua session: {p0}",
+  "@m8f6df28a92": {
+    "description": "Не удалось закрыть сессию Lua: {p0}",
+    "placeholders": {
+      "p0": {
+        "type": "String"
+      }
+    }
+  },
   "m46ed8403b7": "Could not start PoB.",
   "@m46ed8403b7": {
     "description": "Не удалось запустить PoB.",
@@ -1479,6 +1496,15 @@
   "@m6dc7d664a3": {
     "description": "Не удалось защитить каталог подключения MCP",
     "placeholders": {}
+  },
+  "m8644bfa547": "Could not disable the previous MCP editor: {p0}",
+  "@m8644bfa547": {
+    "description": "Не удалось отключить прежний редактор MCP: {p0}",
+    "placeholders": {
+      "p0": {
+        "type": "String"
+      }
+    }
   },
   "m725605a944": "Failed to open browser: {p0}",
   "@m725605a944": {
@@ -1616,6 +1642,11 @@
         "type": "String"
       }
     }
+  },
+  "m5b0627d21c": "Could not copy diagnostics",
+  "@m5b0627d21c": {
+    "description": "Не удалось скопировать диагностику",
+    "placeholders": {}
   },
   "m409f34eb59": "Failed to save group",
   "@m409f34eb59": {
@@ -1850,6 +1881,11 @@
     "description": "Новая группа умений",
     "placeholders": {}
   },
+  "maf3cd75c2f": "The new component pair changed the class of the open build",
+  "@maf3cd75c2f": {
+    "description": "Новая пара изменила класс открытой сборки",
+    "placeholders": {}
+  },
   "m282cf4ee16": "New build",
   "@m282cf4ee16": {
     "description": "Новая сборка",
@@ -1930,9 +1966,9 @@
     "description": "Обновите MCP для удаления умения",
     "placeholders": {}
   },
-  "m603e460bf5": "Update",
-  "@m603e460bf5": {
-    "description": "Обновить",
+  "m74e1571298": "Update PoB and MCP",
+  "@m74e1571298": {
+    "description": "Обновить PoB и MCP",
     "placeholders": {}
   },
   "m3d7df93803": "Update build list",
@@ -2176,6 +2212,16 @@
     "description": "Папка сборок из настроек PoB недоступна.",
     "placeholders": {}
   },
+  "m83ffb870fe": "Component pair updated",
+  "@m83ffb870fe": {
+    "description": "Пара компонентов обновлена",
+    "placeholders": {}
+  },
+  "meed4bbd10d": "The component pair is already up to date",
+  "@meed4bbd10d": {
+    "description": "Пара компонентов уже актуальна",
+    "placeholders": {}
+  },
   "m75160b86a8": "Parameters",
   "@m75160b86a8": {
     "description": "Параметры",
@@ -2323,6 +2369,11 @@
   "m54ab473017": "Default PoB folder connected",
   "@m54ab473017": {
     "description": "Подключена стандартная папка PoB",
+    "placeholders": {}
+  },
+  "mce1dabc47f": "Connecting to Lua",
+  "@mce1dabc47f": {
+    "description": "Подключение Lua",
     "placeholders": {}
   },
   "m67f5d8880e": "Connect Lua",
@@ -2638,6 +2689,16 @@
     "description": "Проверить совместимость",
     "placeholders": {}
   },
+  "m34f26e6d74": "Checking Git",
+  "@m34f26e6d74": {
+    "description": "Проверка Git",
+    "placeholders": {}
+  },
+  "m3cbe98277d": "Checking Python",
+  "@m3cbe98277d": {
+    "description": "Проверка Python",
+    "placeholders": {}
+  },
   "mfeb5830ec9": "Release check: HTTP {p0}",
   "@mfeb5830ec9": {
     "description": "Проверка выпуска: HTTP {p0}",
@@ -2646,6 +2707,11 @@
         "type": "String"
       }
     }
+  },
+  "mf0c425d946": "Checking releases",
+  "@mf0c425d946": {
+    "description": "Проверка выпусков",
+    "placeholders": {}
   },
   "m25ee4bf0ec": "Verification of releases completed",
   "@m25ee4bf0ec": {
@@ -2660,6 +2726,11 @@
   "m6f4c708fbf": "Package check before installation failed",
   "@m6f4c708fbf": {
     "description": "Проверка пакета перед установкой не пройдена",
+    "placeholders": {}
+  },
+  "m908d1b1e7c": "Checking Lua compatibility",
+  "@m908d1b1e7c": {
+    "description": "Проверка совместимости Lua",
     "placeholders": {}
   },
   "m9353cfd5f6": "Compatibility check: running original Lua...",
@@ -2779,6 +2850,24 @@
   "@m1e135b51f1": {
     "description": "Расчёт…",
     "placeholders": {}
+  },
+  "m7fce31d207": "Revision mismatch for {p0} {p1}: expected {p2}, got {p3}.",
+  "@m7fce31d207": {
+    "description": "Ревизия {p0} {p1} не совпадает: ожидалась {p2}, получена {p3}.",
+    "placeholders": {
+      "p0": {
+        "type": "String"
+      },
+      "p1": {
+        "type": "String"
+      },
+      "p2": {
+        "type": "String"
+      },
+      "p3": {
+        "type": "String"
+      }
+    }
   },
   "m8d7bd9deb6": "Health regeneration",
   "@m8d7bd9deb6": {
@@ -3013,6 +3102,11 @@
     "description": "Скопировать XML",
     "placeholders": {}
   },
+  "m1fbb2aeab9": "Copy diagnostics",
+  "@m1fbb2aeab9": {
+    "description": "Скопировать диагностику",
+    "placeholders": {}
+  },
   "m99e87c373f": "Copy Codex connection command",
   "@m99e87c373f": {
     "description": "Скопировать команду подключения Codex",
@@ -3056,6 +3150,11 @@
   "m126aa994ee": "Too many redirects",
   "@m126aa994ee": {
     "description": "Слишком много перенаправлений",
+    "placeholders": {}
+  },
+  "mde2ce6f05b": "Select versions for both components first",
+  "@mde2ce6f05b": {
+    "description": "Сначала выберите версии обоих компонентов",
     "placeholders": {}
   },
   "m70a5cadc50": "First get the latest build report via pob_check_build.",
@@ -3448,11 +3547,6 @@
     "description": "Установите компоненты, чтобы открыть сборку и получить настоящий расчёт.",
     "placeholders": {}
   },
-  "mb7cd6fae08": "Install",
-  "@mb7cd6fae08": {
-    "description": "Установить",
-    "placeholders": {}
-  },
   "mfdeaa71380": "Install components",
   "@mfdeaa71380": {
     "description": "Установить компоненты",
@@ -3529,6 +3623,11 @@
         "type": "String"
       }
     }
+  },
+  "mdab05cc16d": "Skill part",
+  "@mdab05cc16d": {
+    "description": "Часть умения",
+    "placeholders": {}
   },
   "me24055fecd": "What remains before the next stage?",
   "@me24055fecd": {

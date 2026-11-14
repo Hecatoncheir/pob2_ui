@@ -5,6 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:pob2_ui/data/component_repository.dart';
 import 'package:pob2_ui/data/installation_store.dart';
 import 'package:pob2_ui/data/mcp_client.dart';
+import 'package:pob2_ui/domain/build_report.dart';
 import 'package:pob2_ui/ui/core/spark_theme.dart';
 import 'package:pob2_ui/ui/report_views.dart';
 import 'package:pob2_ui/ui/shell_bloc.dart';
@@ -13,8 +14,67 @@ import 'package:pob2_ui/ui/workshop_state.dart';
 
 import 'support/workshop_fixture.dart';
 import 'support/dispose_widget_bloc.dart';
+import 'support/editor_fakes.dart';
 
 void main() {
+  testWidgets('Расчёты показывают доступные части и варианты умения', (
+    tester,
+  ) async {
+    const selection = {
+      'entries': [
+        {'id': 1, 'label': 'Первый'},
+        {'id': 2, 'label': 'Второй'},
+      ],
+      'selected': 2,
+      'enabled': true,
+    };
+    final model = EditorWorkshop(
+      EditorCatalogEngine(),
+      report: BuildReport.fromJson({
+        ...fixture.raw,
+        'snapshot': {
+          'buildInfo': {
+            ...fixture.character,
+            'parts': selection,
+            'statSets': selection,
+          },
+        },
+      }),
+    );
+    final shell = ShellBloc()
+      ..add(const WorkshopTabSelected(WorkshopTab.calculations));
+    addTearDown(() async {
+      await tester.pumpWidget(const SizedBox.shrink());
+      await disposeWidgetBloc(tester, shell);
+      await model.close();
+    });
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: CalculationsView(report: model.state.report!, model: model),
+        ),
+      ),
+    );
+    for (final control in ['parts', 'statSets']) {
+      final menu = find.byKey(ValueKey('main-skill-$control'));
+      expect(tester.widget<DropdownButton<int>>(menu).value, 2);
+      await tester.tap(menu);
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Первый').last);
+      await tester.pumpAndSettle();
+      expect(model.selectedMain, (control, 1));
+    }
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: CalculationsView(report: fixture, model: model),
+        ),
+      ),
+    );
+    expect(find.byKey(const ValueKey('main-skill-parts')), findsNothing);
+    expect(find.byKey(const ValueKey('main-skill-statSets')), findsNothing);
+  });
+
   for (final brightness in Brightness.values) {
     testWidgets(
       'Заголовок закреплён над списком, группы имеют округлую рамку: $brightness',

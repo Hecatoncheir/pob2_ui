@@ -167,6 +167,12 @@ abstract class AppLocalizations {
   /// **'Lua returned an empty tree'**
   String get m774193669c;
 
+  /// Lua завершился
+  ///
+  /// In en, this message translates to:
+  /// **'Lua stopped'**
+  String get m152f871d87;
+
   /// Lua не вернул XML сборки
   ///
   /// In en, this message translates to:
@@ -365,17 +371,11 @@ abstract class AppLocalizations {
   /// **'import sys, struct; assert sys.version_info >= (3,11) and struct.calcsize(\"P\") == 8, \"Need 64-bit Python 3.11+\"'**
   String get m0aefd8ac88;
 
-  /// {p0} {p1} готов. Git: {p2}
+  /// {p0} {p1} загружен. Git: {p2}
   ///
   /// In en, this message translates to:
-  /// **'{p0} {p1} ready. Git: {p2}'**
-  String m9cde7cfc3f(String p0, String p1, String p2);
-
-  /// {p0} {p1} установлен
-  ///
-  /// In en, this message translates to:
-  /// **'{p0} {p1} installed'**
-  String m606849adbd(String p0, String p1);
+  /// **'Downloaded {p0} {p1}. Git: {p2}'**
+  String mad59a0d2ab(String p0, String p1, String p2);
 
   /// {p0} · копия
   ///
@@ -400,12 +400,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'{p0}: {p1} of {p2} points spent'**
   String mb7b217c429(String p0, String p1, String p2);
-
-  /// Актуальная версия
-  ///
-  /// In en, this message translates to:
-  /// **'Current version'**
-  String get mbd1c099ba2;
 
   /// Амулет
   ///
@@ -484,6 +478,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Option'**
   String get m84bb1ae656;
+
+  /// Вариант умения
+  ///
+  /// In en, this message translates to:
+  /// **'Skill variant'**
+  String get m7547833b7f;
 
   /// Ваша следующая сборка
   ///
@@ -893,6 +893,12 @@ abstract class AppLocalizations {
   /// **'Tree not yet available'**
   String get m57d9f5cb7c;
 
+  /// Диагностика скопирована
+  ///
+  /// In en, this message translates to:
+  /// **'Diagnostics copied'**
+  String get m748d0b0dbd;
+
   /// Для готового дерева PoB обновите MCP до 0.7.0.
   ///
   /// In en, this message translates to:
@@ -1090,6 +1096,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Loading LuaJIT and lua-utf8 for {p0}...'**
   String m65a1b960c7(String p0);
+
+  /// Загрузка Path of Building
+  ///
+  /// In en, this message translates to:
+  /// **'Downloading Path of Building'**
+  String get m4f87fe4ac6;
+
+  /// Загрузка PoB MCP
+  ///
+  /// In en, this message translates to:
+  /// **'Downloading PoB MCP'**
+  String get ma3d462aeec;
 
   /// Загрузка {p0} {p1}…
   ///
@@ -1721,6 +1739,12 @@ abstract class AppLocalizations {
   /// **'Could not close PoB.'**
   String get m6f37ba2ab7;
 
+  /// Не удалось закрыть сессию Lua: {p0}
+  ///
+  /// In en, this message translates to:
+  /// **'Could not close the Lua session: {p0}'**
+  String m8f6df28a92(String p0);
+
   /// Не удалось запустить PoB.
   ///
   /// In en, this message translates to:
@@ -1732,6 +1756,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Failed to protect connection directory MCP'**
   String get m6dc7d664a3;
+
+  /// Не удалось отключить прежний редактор MCP: {p0}
+  ///
+  /// In en, this message translates to:
+  /// **'Could not disable the previous MCP editor: {p0}'**
+  String m8644bfa547(String p0);
 
   /// Не удалось открыть браузер: {p0}
   ///
@@ -1835,6 +1865,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Failed to read node: {p0}'**
   String mbefc941808(String p0);
+
+  /// Не удалось скопировать диагностику
+  ///
+  /// In en, this message translates to:
+  /// **'Could not copy diagnostics'**
+  String get m5b0627d21c;
 
   /// Не удалось сохранить группу
   ///
@@ -2106,6 +2142,12 @@ abstract class AppLocalizations {
   /// **'New skill group'**
   String get mbfea4c6fd4;
 
+  /// Новая пара изменила класс открытой сборки
+  ///
+  /// In en, this message translates to:
+  /// **'The new component pair changed the class of the open build'**
+  String get maf3cd75c2f;
+
   /// Новая сборка
   ///
   /// In en, this message translates to:
@@ -2202,11 +2244,11 @@ abstract class AppLocalizations {
   /// **'Update MCP to remove skill'**
   String get m124cd4a205;
 
-  /// Обновить
+  /// Обновить PoB и MCP
   ///
   /// In en, this message translates to:
-  /// **'Update'**
-  String get m603e460bf5;
+  /// **'Update PoB and MCP'**
+  String get m74e1571298;
 
   /// Обновить список сборок
   ///
@@ -2478,6 +2520,18 @@ abstract class AppLocalizations {
   /// **'The builds folder set in PoB is unavailable.'**
   String get med31458051;
 
+  /// Пара компонентов обновлена
+  ///
+  /// In en, this message translates to:
+  /// **'Component pair updated'**
+  String get m83ffb870fe;
+
+  /// Пара компонентов уже актуальна
+  ///
+  /// In en, this message translates to:
+  /// **'The component pair is already up to date'**
+  String get meed4bbd10d;
+
   /// Параметры
   ///
   /// In en, this message translates to:
@@ -2651,6 +2705,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Default PoB folder connected'**
   String get m54ab473017;
+
+  /// Подключение Lua
+  ///
+  /// In en, this message translates to:
+  /// **'Connecting to Lua'**
+  String get mce1dabc47f;
 
   /// Подключите Lua
   ///
@@ -2994,11 +3054,29 @@ abstract class AppLocalizations {
   /// **'Check compatibility'**
   String get mfa4af9bbe7;
 
+  /// Проверка Git
+  ///
+  /// In en, this message translates to:
+  /// **'Checking Git'**
+  String get m34f26e6d74;
+
+  /// Проверка Python
+  ///
+  /// In en, this message translates to:
+  /// **'Checking Python'**
+  String get m3cbe98277d;
+
   /// Проверка выпуска: HTTP {p0}
   ///
   /// In en, this message translates to:
   /// **'Release check: HTTP {p0}'**
   String mfeb5830ec9(String p0);
+
+  /// Проверка выпусков
+  ///
+  /// In en, this message translates to:
+  /// **'Checking releases'**
+  String get mf0c425d946;
 
   /// Проверка выпусков завершена
   ///
@@ -3017,6 +3095,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Package check before installation failed'**
   String get m6f4c708fbf;
+
+  /// Проверка совместимости Lua
+  ///
+  /// In en, this message translates to:
+  /// **'Checking Lua compatibility'**
+  String get m908d1b1e7c;
 
   /// Проверка совместимости: запуск исходного Lua…
   ///
@@ -3149,6 +3233,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Calculation…'**
   String get m1e135b51f1;
+
+  /// Ревизия {p0} {p1} не совпадает: ожидалась {p2}, получена {p3}.
+  ///
+  /// In en, this message translates to:
+  /// **'Revision mismatch for {p0} {p1}: expected {p2}, got {p3}.'**
+  String m7fce31d207(String p0, String p1, String p2, String p3);
 
   /// Регенерация здоровья
   ///
@@ -3420,6 +3510,12 @@ abstract class AppLocalizations {
   /// **'Copy XML'**
   String get m332899f398;
 
+  /// Скопировать диагностику
+  ///
+  /// In en, this message translates to:
+  /// **'Copy diagnostics'**
+  String get m1fbb2aeab9;
+
   /// Скопировать команду подключения Codex
   ///
   /// In en, this message translates to:
@@ -3473,6 +3569,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Too many redirects'**
   String get m126aa994ee;
+
+  /// Сначала выберите версии обоих компонентов
+  ///
+  /// In en, this message translates to:
+  /// **'Select versions for both components first'**
+  String get mde2ce6f05b;
 
   /// Сначала получите актуальный отчёт сборки через pob_check_build.
   ///
@@ -3924,12 +4026,6 @@ abstract class AppLocalizations {
   /// **'Install the components to open the assembly and get the real calculation.'**
   String get m4d9acf3506;
 
-  /// Установить
-  ///
-  /// In en, this message translates to:
-  /// **'Install'**
-  String get mb7cd6fae08;
-
   /// Установить компоненты
   ///
   /// In en, this message translates to:
@@ -4007,6 +4103,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Some icons are unavailable: {p0}'**
   String m913d7f855b(String p0);
+
+  /// Часть умения
+  ///
+  /// In en, this message translates to:
+  /// **'Skill part'**
+  String get mdab05cc16d;
 
   /// Что осталось до следующего этапа?
   ///

@@ -5,11 +5,19 @@ on:
     branches: ['**']
   pull_request:
   workflow_dispatch:
+    inputs:
+      locked_components:
+        description: 'Проверить пару из tool/components-lock.json'
+        type: boolean
+        default: false
   workflow_call:
     inputs:
       ref:
         type: string
         default: ''
+      locked_components:
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -143,16 +151,26 @@ jobs:
       - name: Собрать установщик
         run: python tool/release.py --package ${{ matrix.target }}
       - name: Проверить компоненты с настоящим Lua
+        shell: bash
         env:
           POB2_UI_HOME: ${{ runner.temp }}/pob2-lua-smoke
           POB2_GITHUB_TOKEN: ${{ github.token }}
-        run: dart run tool/smoke.dart --install
-      - name: Проверить установку и настоящий запуск
+          LOCKED_COMPONENTS: ${{ inputs.locked_components || false }}
+        run: |
+          set -o pipefail
+          mkdir -p build/review
+          args=(--install)
+          if [[ "$LOCKED_COMPONENTS" == true ]]; then
+            test -f tool/components-lock.json
+            args+=(--lock tool/components-lock.json)
+          fi
+          dart run tool/smoke.dart "${args[@]}" | tee build/review/components.json
+      - name: Проверить установку и восстановление сборки с Lua
         if: runner.os == 'Linux'
-        run: xvfb-run -a python tool/check_installer.py --target ${{ matrix.target }}
-      - name: Проверить установку и настоящий запуск
+        run: xvfb-run -a python tool/check_installer.py --target ${{ matrix.target }} --components "${{ runner.temp }}/pob2-lua-smoke/components.json"
+      - name: Проверить установку и восстановление сборки с Lua
         if: runner.os != 'Linux'
-        run: python tool/check_installer.py --target ${{ matrix.target }}
+        run: python tool/check_installer.py --target ${{ matrix.target }} --components "${{ runner.temp }}/pob2-lua-smoke/components.json"
       - name: Новый интерфейс с настоящим Lua
         if: runner.os != 'Linux'
         env:
@@ -210,7 +228,9 @@ jobs:
         if: always()
         with:
           name: ui-${{ matrix.target }}
-          path: build/review/*.png
+          path: |
+            build/review/*.png
+            build/review/components.json
           if-no-files-found: ignore
       - uses: actions/upload-artifact@v7.0.2
         with:

@@ -37,6 +37,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m774193669c => 'Lua вернул пустое дерево';
 
   @override
+  String get m152f871d87 => 'Lua завершился';
+
+  @override
   String get mbb582808f3 => 'Lua не вернул XML сборки';
 
   @override
@@ -148,13 +151,8 @@ class AppLocalizationsRu extends AppLocalizations {
       'import sys, struct; assert sys.version_info >= (3,11) and struct.calcsize(\"P\") == 8, \"Нужен 64-битный Python 3.11+\"';
 
   @override
-  String m9cde7cfc3f(String p0, String p1, String p2) {
-    return '$p0 $p1 готов. Git: $p2';
-  }
-
-  @override
-  String m606849adbd(String p0, String p1) {
-    return '$p0 $p1 установлен';
+  String mad59a0d2ab(String p0, String p1, String p2) {
+    return '$p0 $p1 загружен. Git: $p2';
   }
 
   @override
@@ -176,9 +174,6 @@ class AppLocalizationsRu extends AppLocalizations {
   String mb7b217c429(String p0, String p1, String p2) {
     return '$p0: потрачено $p1 из $p2 очков';
   }
-
-  @override
-  String get mbd1c099ba2 => 'Актуальная версия';
 
   @override
   String get m63141a77bf => 'Амулет';
@@ -222,6 +217,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get m84bb1ae656 => 'Вариант';
+
+  @override
+  String get m7547833b7f => 'Вариант умения';
 
   @override
   String get m65d05ab17f => 'Ваша следующая сборка';
@@ -435,6 +433,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m57d9f5cb7c => 'Дерево пока недоступно';
 
   @override
+  String get m748d0b0dbd => 'Диагностика скопирована';
+
+  @override
   String get m7c2e51e000 => 'Для готового дерева PoB обновите MCP до 0.7.0.';
 
   @override
@@ -549,6 +550,12 @@ class AppLocalizationsRu extends AppLocalizations {
   String m65a1b960c7(String p0) {
     return 'Загрузка LuaJIT и lua-utf8 для $p0…';
   }
+
+  @override
+  String get m4f87fe4ac6 => 'Загрузка Path of Building';
+
+  @override
+  String get ma3d462aeec => 'Загрузка PoB MCP';
 
   @override
   String maafcfa710b(String p0, String p1) {
@@ -891,10 +898,20 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m6f37ba2ab7 => 'Не удалось закрыть PoB.';
 
   @override
+  String m8f6df28a92(String p0) {
+    return 'Не удалось закрыть сессию Lua: $p0';
+  }
+
+  @override
   String get m46ed8403b7 => 'Не удалось запустить PoB.';
 
   @override
   String get m6dc7d664a3 => 'Не удалось защитить каталог подключения MCP';
+
+  @override
+  String m8644bfa547(String p0) {
+    return 'Не удалось отключить прежний редактор MCP: $p0';
+  }
 
   @override
   String m725605a944(String p0) {
@@ -972,6 +989,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String mbefc941808(String p0) {
     return 'Не удалось прочитать узел: $p0';
   }
+
+  @override
+  String get m5b0627d21c => 'Не удалось скопировать диагностику';
 
   @override
   String get m409f34eb59 => 'Не удалось сохранить группу';
@@ -1114,6 +1134,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get mbfea4c6fd4 => 'Новая группа умений';
 
   @override
+  String get maf3cd75c2f => 'Новая пара изменила класс открытой сборки';
+
+  @override
   String get m282cf4ee16 => 'Новая сборка';
 
   @override
@@ -1163,7 +1186,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m124cd4a205 => 'Обновите MCP для удаления умения';
 
   @override
-  String get m603e460bf5 => 'Обновить';
+  String get m74e1571298 => 'Обновить PoB и MCP';
 
   @override
   String get m3d7df93803 => 'Обновить список сборок';
@@ -1311,6 +1334,12 @@ class AppLocalizationsRu extends AppLocalizations {
   String get med31458051 => 'Папка сборок из настроек PoB недоступна.';
 
   @override
+  String get m83ffb870fe => 'Пара компонентов обновлена';
+
+  @override
+  String get meed4bbd10d => 'Пара компонентов уже актуальна';
+
+  @override
   String get m75160b86a8 => 'Параметры';
 
   @override
@@ -1402,6 +1431,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get m54ab473017 => 'Подключена стандартная папка PoB';
+
+  @override
+  String get mce1dabc47f => 'Подключение Lua';
 
   @override
   String get m67f5d8880e => 'Подключите Lua';
@@ -1590,9 +1622,18 @@ class AppLocalizationsRu extends AppLocalizations {
   String get mfa4af9bbe7 => 'Проверить совместимость';
 
   @override
+  String get m34f26e6d74 => 'Проверка Git';
+
+  @override
+  String get m3cbe98277d => 'Проверка Python';
+
+  @override
   String mfeb5830ec9(String p0) {
     return 'Проверка выпуска: HTTP $p0';
   }
+
+  @override
+  String get mf0c425d946 => 'Проверка выпусков';
 
   @override
   String get m25ee4bf0ec => 'Проверка выпусков завершена';
@@ -1602,6 +1643,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get m6f4c708fbf => 'Проверка пакета перед установкой не пройдена';
+
+  @override
+  String get m908d1b1e7c => 'Проверка совместимости Lua';
 
   @override
   String get m9353cfd5f6 => 'Проверка совместимости: запуск исходного Lua…';
@@ -1674,6 +1718,11 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get m1e135b51f1 => 'Расчёт…';
+
+  @override
+  String m7fce31d207(String p0, String p1, String p2, String p3) {
+    return 'Ревизия $p0 $p1 не совпадает: ожидалась $p2, получена $p3.';
+  }
 
   @override
   String get m8d7bd9deb6 => 'Регенерация здоровья';
@@ -1820,6 +1869,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m332899f398 => 'Скопировать XML';
 
   @override
+  String get m1fbb2aeab9 => 'Скопировать диагностику';
+
+  @override
   String get m99e87c373f => 'Скопировать команду подключения Codex';
 
   @override
@@ -1845,6 +1897,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get m126aa994ee => 'Слишком много перенаправлений';
+
+  @override
+  String get mde2ce6f05b => 'Сначала выберите версии обоих компонентов';
 
   @override
   String get m70a5cadc50 =>
@@ -2086,9 +2141,6 @@ class AppLocalizationsRu extends AppLocalizations {
       'Установите компоненты, чтобы открыть сборку и получить настоящий расчёт.';
 
   @override
-  String get mb7cd6fae08 => 'Установить';
-
-  @override
   String get mfdeaa71380 => 'Установить компоненты';
 
   @override
@@ -2133,6 +2185,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String m913d7f855b(String p0) {
     return 'Часть иконок недоступна: $p0';
   }
+
+  @override
+  String get mdab05cc16d => 'Часть умения';
 
   @override
   String get me24055fecd => 'Что осталось до следующего этапа?';

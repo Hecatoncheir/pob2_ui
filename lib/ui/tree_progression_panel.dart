@@ -94,14 +94,18 @@ class TreeProgressionPanel extends StatelessWidget {
         if (state.selected case final index?) ...[
           IconButton(
             tooltip: translateUi(context, 'Изменить этап'),
-            onPressed: () => _edit(context, state.steps[index]),
+            onPressed: enabled
+                ? () => _edit(context, state.steps[index])
+                : null,
             icon: const Icon(Icons.edit_outlined, size: 18),
           ),
           IconButton(
             tooltip: translateUi(context, 'Удалить этап'),
-            onPressed: () => context.read<TreeProgressionBloc>().add(
-              TreeProgressionRemoved(state.steps[index]),
-            ),
+            onPressed: enabled
+                ? () => context.read<TreeProgressionBloc>().add(
+                    TreeProgressionRemoved(state.steps[index]),
+                  )
+                : null,
             icon: const Icon(Icons.delete_outline, size: 18),
           ),
         ],
@@ -364,7 +368,7 @@ class TreeProgressionPanel extends StatelessWidget {
         IconButton(
           key: const Key('progression-node-order'),
           tooltip: translateUi(context, 'Порядок ключевых узлов'),
-          onPressed: () => _editOrder(context, step),
+          onPressed: enabled ? () => _editOrder(context, step) : null,
           icon: const Icon(Icons.format_list_numbered, size: 18),
         ),
       if (steps.length > 1)
@@ -387,12 +391,14 @@ class TreeProgressionPanel extends StatelessWidget {
           contentPadding: EdgeInsets.zero,
           title: const AppText('Этап завершён'),
           value: step.completed,
-          onChanged: (done) => plan.add(
-            TreeProgressionUpdated(
-              step,
-              (saved) => saved.withProgress(completed: done),
-            ),
-          ),
+          onChanged: enabled
+              ? (done) => plan.add(
+                  TreeProgressionUpdated(
+                    step,
+                    (saved) => saved.withProgress(completed: done),
+                  ),
+                )
+              : null,
         ),
       ],
     );
@@ -405,17 +411,19 @@ class TreeProgressionPanel extends StatelessWidget {
       contentPadding: EdgeInsets.zero,
       title: Text(task.text),
       value: task.done,
-      onChanged: (done) => plan.add(
-        TreeProgressionUpdated(step, (saved) {
-          if (index >= saved.tasks.length ||
-              saved.tasks[index].text != task.text) {
-            return saved;
-          }
-          final tasks = [...saved.tasks];
-          tasks[index] = (text: task.text, done: done == true);
-          return saved.withProgress(tasks: tasks);
-        }),
-      ),
+      onChanged: enabled
+          ? (done) => plan.add(
+              TreeProgressionUpdated(step, (saved) {
+                if (index >= saved.tasks.length ||
+                    saved.tasks[index].text != task.text) {
+                  return saved;
+                }
+                final tasks = [...saved.tasks];
+                tasks[index] = (text: task.text, done: done == true);
+                return saved.withProgress(tasks: tasks);
+              }),
+            )
+          : null,
     );
   }
 

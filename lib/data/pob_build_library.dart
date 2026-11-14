@@ -7,10 +7,12 @@ import 'package:xml/xml.dart';
 
 import '../domain/build_report.dart';
 import '../domain/library_entry.dart';
+import '../domain/tree_progression.dart';
 import 'atomic_text_file.dart';
 import 'build_library.dart';
 import 'pob_build_document.dart';
 import 'session_repository.dart';
+import 'tree_progression_repository.dart';
 
 typedef PobBuildVersion = ({
   LibraryEntry entry,
@@ -27,12 +29,13 @@ class PobBuildSaveConflict extends StateError {
 }
 
 class PobBuildLibrary implements BuildStorage, BuildNotesStorage {
-  PobBuildLibrary(Directory profile)
-    : _settings = File(path.join(profile.path, 'pob-builds.json')),
-      _recovery = Directory(path.join(profile.path, 'pob-build-recovery')),
-      _legacy = BuildLibrary(profile),
-      _legacySession = SessionRepository(profile);
+  PobBuildLibrary(this._profile)
+    : _settings = File(path.join(_profile.path, 'pob-builds.json')),
+      _recovery = Directory(path.join(_profile.path, 'pob-build-recovery')),
+      _legacy = BuildLibrary(_profile),
+      _legacySession = SessionRepository(_profile);
 
+  final Directory _profile;
   final File _settings;
   final Directory _recovery;
   final BuildLibrary _legacy;
@@ -320,21 +323,35 @@ class PobBuildLibrary implements BuildStorage, BuildNotesStorage {
     BuildReport report,
     String xml, {
     String? title,
-  }) => _write(() => _save(state, report, xml, title));
+    TreeProgressionKey? progressionSource,
+  }) => _write(() => _save(state, report, xml, title, progressionSource));
 
   Future<LibraryState> _save(
     LibraryState state,
     BuildReport report,
     String xml,
     String? title,
+    TreeProgressionKey? progressionSource,
   ) async {
     final root = _root;
     await _checkRoot(root);
     final document = PobBuildDocument(xml);
     final previous = state.active;
     final file = previous == null
-        ? await _create(root, _stem(title ?? report.name), xml)
-        : await _saveExisting(root, previous, document, xml, title);
+        ? await _create(
+            root,
+            _stem(title ?? report.name),
+            xml,
+            progressionSource: progressionSource,
+          )
+        : await _saveExisting(
+            root,
+            previous,
+            document,
+            xml,
+            title,
+            progressionSource,
+          );
     final entry = _entry(root, file, document, DateTime.now());
     await activate(entry.id);
     return LibraryState(
@@ -355,6 +372,7 @@ class PobBuildLibrary implements BuildStorage, BuildNotesStorage {
     PobBuildDocument document,
     String xml,
     String? title,
+    TreeProgressionKey? progressionSource,
   ) async {
     final file = _buildPath(root, previous.id);
     final current = await changed(previous.id, null);
@@ -366,7 +384,13 @@ class PobBuildLibrary implements BuildStorage, BuildNotesStorage {
         ? xml
         : document.withNotes(current.document.notes);
     if (title != null && title != previous.title) {
-      return _rename(file, current.xml, _stem(title), updated);
+      return _rename(
+        file,
+        current.xml,
+        _stem(title),
+        updated,
+        progressionSource,
+      );
     }
     if (current.entry.revision != document.revision) {
       await _saveLocal(file, current, updated);
@@ -403,6 +427,7 @@ class PobBuildLibrary implements BuildStorage, BuildNotesStorage {
     String before,
     String stem,
     String xml,
+    TreeProgressionKey? progressionSource,
   ) async {
     final renamed = File(path.join(source.parent.path, '$stem.xml'));
     if (path.equals(source.path, renamed.path)) {
@@ -410,24 +435,65 @@ class PobBuildLibrary implements BuildStorage, BuildNotesStorage {
       return source;
     }
     await _writeNew(renamed, xml);
+    var retired = false;
     try {
-      await _retire(source, before);
+      return await _transferProgression(
+        progressionSource,
+        renamed,
+        () async {
+          await _retire(source, before);
+          retired = true;
+          return renamed;
+        },
+        restoreSource: () async {
+          await _writeNew(source, before);
+          retired = false;
+        },
+      );
     } catch (_) {
-      if (await renamed.readAsString() == xml) await renamed.delete();
+      if (!retired && await renamed.readAsString() == xml) {
+        await renamed.delete();
+      }
       rethrow;
     }
-    return renamed;
   }
 
-  Future<File> _create(Directory root, String stem, String xml) async {
+  Future<File> _create(
+    Directory root,
+    String stem,
+    String xml, {
+    TreeProgressionKey? progressionSource,
+  }) async {
     var number = 1;
     var file = File(path.join(root.path, '$stem.xml'));
     while (await _occupied(file)) {
       number++;
       file = File(path.join(root.path, '$stem ($number).xml'));
     }
-    await _writeNew(file, xml);
-    return file;
+    return _transferProgression(progressionSource, file, () async {
+      await _writeNew(file, xml);
+      return file;
+    });
+  }
+
+  Future<File> _transferProgression(
+    TreeProgressionKey? source,
+    File target,
+    Future<File> Function() commit, {
+    Future<void> Function()? restoreSource,
+  }) {
+    if (source == null) return commit();
+    final destination = (
+      folder: _root.path,
+      build: path.relative(target.path, from: _root.path),
+      version: source.version,
+      characterClass: source.characterClass,
+    );
+    return TreeProgressionRepository(_profile, source).transferTo(
+      TreeProgressionRepository(_profile, destination),
+      commit,
+      restoreSource: restoreSource,
+    );
   }
 
   Future<bool> _occupied(File file) async =>
