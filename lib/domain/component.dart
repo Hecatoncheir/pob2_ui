@@ -18,10 +18,11 @@ enum Component {
 }
 
 class Release {
-  const Release(this.tag, this.url, this.publishedAt);
+  const Release(this.tag, this.url, this.publishedAt, {this.expectedCommit});
   final String tag;
   final String url;
   final DateTime publishedAt;
+  final String? expectedCommit;
 
   factory Release.fromJson(Map<String, dynamic> json) {
     final tag = json['tag_name'] as String;

@@ -1,10 +1,16 @@
+import 'dart:async';
+import 'dart:io';
+
+import 'package:flutter/services.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../domain/app_info.dart';
 import '../domain/component.dart';
 import 'build_dialogs.dart';
 import 'core/app_text.dart';
 import 'core/motion.dart';
+import 'core/ui_translation.dart';
 import 'pob_build_folder_actions.dart';
 import 'pob_bridge_dialog.dart';
 import 'pob_character_dialog.dart';
@@ -38,9 +44,28 @@ enum _SetupStep {
   }
 }
 
-class _SetupWizard extends StatelessWidget {
+class _SetupWizard extends StatefulWidget {
   const _SetupWizard(this.model);
   final WorkshopCubit model;
+
+  @override
+  State<_SetupWizard> createState() => _SetupWizardState();
+}
+
+class _SetupWizardState extends State<_SetupWizard> {
+  WorkshopCubit get model => widget.model;
+  Future<void> Function()? _lastAction;
+
+  Future<void> _run(Future<void> Function() action) async {
+    if (model.state.busy) return;
+    _lastAction = action;
+    try {
+      await action();
+    } catch (error) {
+      if (mounted && !model.isClosed) model.reportPersistenceError(error);
+    }
+    if (model.state.error == null) _lastAction = null;
+  }
 
   @override
   Widget build(BuildContext context) =>
@@ -48,6 +73,7 @@ class _SetupWizard extends StatelessWidget {
         bloc: model,
         builder: (context, state) {
           final step = _SetupStep.current(model);
+          final phase = state.setupStage?.label;
           return AlertDialog(
             title: const AppText('Подготовка PoB II'),
             scrollable: true,
@@ -57,11 +83,13 @@ class _SetupWizard extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  for (final item in _SetupStep.values) _StepRow(item, step),
+                  for (final item in _SetupStep.values)
+                    _StepRow(item, step, state.setupStage),
                   const SizedBox(height: 16),
                   _stepContent(context, step, state),
-                  if (state.busy) const _SetupProgress(),
-                  if (state.error case final error?) _SetupError(error),
+                  if (state.busy) _SetupProgress(phase ?? step.label),
+                  if (!state.busy && state.error != null)
+                    _failure(context, state, phase),
                 ],
               ),
             ),
@@ -86,6 +114,54 @@ class _SetupWizard extends StatelessWidget {
         },
       );
 
+  Widget _failure(BuildContext context, WorkshopState state, String? phase) =>
+      _SetupError(
+        phase: phase,
+        error: state.error!,
+        diagnostic: _diagnostic(context, state, phase),
+        retry: _retry(state),
+      );
+
+  VoidCallback? _retry(WorkshopState state) {
+    final action = state.setupStage == null
+        ? _lastAction
+        : model.prepareComponents;
+    return action == null ? null : () => unawaited(_run(action));
+  }
+
+  String _diagnostic(BuildContext context, WorkshopState state, String? phase) {
+    final lines = [
+      '$appName $appVersion · ${Platform.operatingSystem}',
+      if (phase != null) translateUi(context, phase),
+      _diagnosticReason(translateUi(context, state.error!)),
+      for (final component in Component.values)
+        _componentDiagnostic(context, state, component),
+    ];
+    return lines.join('\n');
+  }
+
+  String _diagnosticReason(String reason) => reason
+      .replaceAllMapped(
+        RegExp(r'(https?://)[^\s/@]+@', caseSensitive: false),
+        (match) => match[1]!,
+      )
+      .replaceAllMapped(
+        RegExp(r'(https?://[^\s?#]+)\?[^\s]*', caseSensitive: false),
+        (match) => match[1]!,
+      );
+
+  String _componentDiagnostic(
+    BuildContext context,
+    WorkshopState state,
+    Component component,
+  ) {
+    final installed = model.components.active[component]?.tag ?? '—';
+    final requested = state.releases[component]?.tag ?? '—';
+    final active = translateUi(context, 'Установлена: $installed');
+    final latest = translateUi(context, 'Последняя: $requested');
+    return '${component.title} · $active · $latest';
+  }
+
   Widget _stepContent(
     BuildContext context,
     _SetupStep step,
@@ -95,7 +171,7 @@ class _SetupWizard extends StatelessWidget {
       message: 'Для установки нужны Git и 64-битный Python 3.11+. После загрузки компонентов расчёты работают без сети.',
       actions: [
         FilledButton(
-          onPressed: state.busy ? null : model.prepareComponents,
+          onPressed: state.busy ? null : () => _run(model.prepareComponents),
           child: const AppText('Установить компоненты'),
         ),
       ],
@@ -103,7 +179,7 @@ class _SetupWizard extends StatelessWidget {
     _SetupStep.lua => _SetupActions(
       actions: [
         FilledButton(
-          onPressed: state.busy ? null : model.prepareComponents,
+          onPressed: state.busy ? null : () => _run(model.prepareComponents),
           child: const AppText('Подключить Lua'),
         ),
       ],
@@ -118,13 +194,13 @@ class _SetupWizard extends StatelessWidget {
         : 'Укажите папку PoB вручную или попробуйте найти её по стандартному пути.',
     actions: [
       FilledButton(
-        onPressed: state.busy ? null : model.detectPobBuildFolder,
+        onPressed: state.busy ? null : () => _run(model.detectPobBuildFolder),
         child: const AppText('Найти папку PoB'),
       ),
       OutlinedButton(
         onPressed: state.busy
             ? null
-            : () => choosePobBuildFolder(context, model),
+            : () => _run(() => choosePobBuildFolder(context, model)),
         child: const AppText('Выбрать папку сборок PoB'),
       ),
       if (state.error != null && model.pobWindow.supported)
@@ -151,12 +227,12 @@ class _SetupWizard extends StatelessWidget {
         child: const AppText('Новая сборка'),
       ),
       OutlinedButton(
-        onPressed: busy ? null : model.openXmlFile,
+        onPressed: busy ? null : () => _run(model.openXmlFile),
         child: const AppText('Открыть XML'),
       ),
       if (model.pobWindow.supported) ...[
         OutlinedButton(
-          onPressed: busy ? null : model.importFromPob,
+          onPressed: busy ? null : () => _run(model.importFromPob),
           child: const AppText('Импортировать из PoB'),
         ),
         PobCharacterImportButton(model),
@@ -166,13 +242,20 @@ class _SetupWizard extends StatelessWidget {
 }
 
 class _StepRow extends StatelessWidget {
-  const _StepRow(this.step, this.current);
+  const _StepRow(this.step, this.current, this.phase);
   final _SetupStep step, current;
+  final WorkshopSetupStage? phase;
 
   @override
   Widget build(BuildContext context) {
-    final done = step.index < current.index;
-    final active = step == current;
+    final highlighted = switch (phase) {
+      WorkshopSetupStage.pob => _SetupStep.pob,
+      WorkshopSetupStage.mcp => _SetupStep.mcp,
+      WorkshopSetupStage.compatibility => _SetupStep.lua,
+      _ => current,
+    };
+    final done = step != highlighted && step.index < current.index;
+    final active = step == highlighted;
     final colors = Theme.of(context).colorScheme;
     final color = active || done ? colors.primary : colors.onSurfaceVariant;
     return Semantics(
@@ -228,27 +311,80 @@ class _SetupActions extends StatelessWidget {
 }
 
 class _SetupProgress extends StatelessWidget {
-  const _SetupProgress();
+  const _SetupProgress(this.phase);
+  final String phase;
 
   @override
-  Widget build(BuildContext context) => const Padding(
-    padding: EdgeInsets.only(top: 16),
-    child: LinearProgressIndicator(),
+  Widget build(BuildContext context) => Padding(
+    padding: const EdgeInsets.only(top: 16),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Semantics(liveRegion: true, child: AppText(phase)),
+        const SizedBox(height: 8),
+        const LinearProgressIndicator(),
+      ],
+    ),
   );
 }
 
-class _SetupError extends StatelessWidget {
-  const _SetupError(this.error);
+class _SetupError extends StatefulWidget {
+  const _SetupError({
+    this.phase,
+    required this.error,
+    required this.diagnostic,
+    this.retry,
+  });
+  final String? phase;
+  final String diagnostic;
   final String error;
+  final VoidCallback? retry;
+
+  @override
+  State<_SetupError> createState() => _SetupErrorState();
+}
+
+class _SetupErrorState extends State<_SetupError> {
+  String? _feedback;
+
+  Future<void> _copy() async {
+    try {
+      await Clipboard.setData(ClipboardData(text: widget.diagnostic));
+      if (mounted) setState(() => _feedback = 'Диагностика скопирована');
+    } catch (_) {
+      if (mounted)
+        setState(() => _feedback = 'Не удалось скопировать диагностику');
+    }
+  }
 
   @override
   Widget build(BuildContext context) => Padding(
     padding: const EdgeInsets.only(top: 12),
-    child: AppText(
-      error,
-      maxLines: 5,
-      overflow: TextOverflow.ellipsis,
-      style: TextStyle(color: Theme.of(context).colorScheme.error),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        if (widget.phase case final phase?)
+          AppText(phase, style: Theme.of(context).textTheme.titleSmall),
+        AppText(
+          widget.error,
+          style: TextStyle(color: Theme.of(context).colorScheme.error),
+        ),
+        Wrap(
+          spacing: 8,
+          runSpacing: 8,
+          children: [
+            if (widget.retry case final retry?)
+              FilledButton(onPressed: retry, child: const AppText('Повторить')),
+            OutlinedButton.icon(
+              onPressed: _copy,
+              icon: const Icon(Icons.copy_rounded, size: 16),
+              label: const AppText('Скопировать диагностику'),
+            ),
+          ],
+        ),
+        if (_feedback case final feedback?)
+          Semantics(liveRegion: true, child: AppText(feedback)),
+      ],
     ),
   );
 }

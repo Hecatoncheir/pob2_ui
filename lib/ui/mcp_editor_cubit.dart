@@ -165,7 +165,7 @@ class McpEditorCubit extends Cubit<McpEditorState> {
         'Сначала создайте или откройте сборку.',
       );
     }
-    final tab = _edits[tool];
+    final tab = _editorTab(tool, arguments['control']);
     if (tab == null && !_reads.contains(tool)) {
       throw const McpEditorFault(
         'INVALID_REQUEST',
@@ -184,6 +184,13 @@ class McpEditorCubit extends Cubit<McpEditorState> {
     if (tab != null && enabled) _showChange(tab, clean);
     return {'result': result, 'revision': _revision};
   }
+
+  WorkshopTab? _editorTab(String tool, Object? control) =>
+      switch ((tool, control)) {
+        ('pob_select_main_skill', 'parts' || 'statSets') =>
+          WorkshopTab.calculations,
+        _ => _edits[tool],
+      };
 
   Future<JsonMap> _createBuild(JsonMap arguments) async {
     _creating = true;

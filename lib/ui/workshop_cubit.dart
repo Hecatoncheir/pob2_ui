@@ -33,25 +33,31 @@ import '../data/game_catalog_repository.dart';
 import '../domain/build_edit_result.dart';
 
 typedef _BuildSnapshot = ({String xml, String title});
+typedef _ComponentValidation = Future<void> Function(Installations);
 
 class WorkshopCubit extends Cubit<WorkshopState> {
   WorkshopCubit(
     this.components,
-    this.engine, {
+    McpClient engine, {
     WorkshopState? initialState,
     SessionRepository? session,
     BuildStorage? library,
     XmlFileService? files,
     PobWindowRepository? pobWindow,
     PobBuildLocations? buildLocations,
-  }) : session = session ?? SessionRepository(components.store.root),
+    McpClient Function()? createEngine,
+  }) : _engine = engine,
+       _createEngine = createEngine ?? McpClient.new,
+       session = session ?? SessionRepository(components.store.root),
        library = library ?? BuildLibrary(components.store.root),
        files = files ?? XmlFileService(),
        pobWindow = pobWindow ?? PobWindowRepository(),
        buildLocations = buildLocations ?? PobBuildLocations(),
        super(initialState ?? WorkshopState());
   final ComponentRepository components;
-  final McpClient engine;
+  McpClient _engine;
+  McpClient get engine => _engine;
+  final McpClient Function() _createEngine;
   final SessionRepository session;
   final BuildStorage library;
   PobBuildLibrary? get sharedLibrary =>
@@ -67,6 +73,17 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     final tree = document?.tree;
     if (id == null || tree == null) return null;
     return _progressionKey(id, tree.version, document!.report.characterClass);
+  }
+
+  TreeProgressionKey? get _storedProgressionKey {
+    if (progressionKey case final key?) return key;
+    final id = state.library.activeId;
+    final report = state.report;
+    final version = report?.treeVersion;
+    if (id == null || version == null || version.isEmpty || version == '—') {
+      return null;
+    }
+    return _progressionKey(id, version, report!.characterClass);
   }
 
   TreeProgressionKey _progressionKey(
@@ -165,17 +182,18 @@ class WorkshopCubit extends Cubit<WorkshopState> {
   final PobBuildLocations buildLocations;
   McpEditorCubit? _mcpEditor;
   McpEditorCubit get mcpEditor => _mcpEditor ??= McpEditorCubit(this);
-  late final catalogs = GameCatalogRepository(engine);
+  late GameCatalogRepository _catalogs = GameCatalogRepository(engine);
+  GameCatalogRepository get catalogs => _catalogs;
   late final treeIcons = TreeIconRepository(
     root: Directory.fromUri(components.store.root.uri.resolve('tree-cache/')),
   );
-  String? _nextTitle;
   Timer? _buildChangeDelay;
   StreamSubscription<FileSystemEvent>? _buildChanges;
   ({String directory, String id})? _watchedBuild;
   bool _closing = false;
   String? _seenBuildXml;
   Completer<void>? _buildSync;
+  Future<void>? _componentChange;
   bool _buildSyncPending = false;
   bool Function()? modalOpen;
   final List<_BuildSnapshot> _undoHistory = [];
@@ -183,8 +201,10 @@ class WorkshopCubit extends Cubit<WorkshopState> {
 
   bool get ready => components.active.length == Component.values.length;
   bool get luaReady => engine.connected && state.classes.isNotEmpty;
-  String get _componentSource =>
-      Component.values.map((key) => components.active[key]!.commit).join('-');
+  String get _componentSource => _pairSource(components.active);
+
+  String _pairSource(Installations pair) =>
+      Component.values.map((key) => pair[key]!.commit).join('-');
 
   Future<NodePreview> previewNode(int id) async {
     if (!engine.tools.contains('pob_tree_hover')) {
@@ -249,7 +269,12 @@ class WorkshopCubit extends Cubit<WorkshopState> {
 
   Future<void> _run(Future<void> Function() action) async {
     if (isClosed || state.busy) return;
-    _update(state.copyWith(operation: (busy: true, error: null)));
+    _update(
+      state.copyWith(
+        operation: (busy: true, error: null),
+        clearSetupStage: true,
+      ),
+    );
     try {
       await action();
     } catch (failure) {
@@ -260,7 +285,12 @@ class WorkshopCubit extends Cubit<WorkshopState> {
       _update(state.copyWith(operation: (busy: true, error: message)));
       addLog('Ошибка: $failure');
     } finally {
-      _update(state.copyWith(operation: (busy: false, error: state.error)));
+      _update(
+        state.copyWith(
+          operation: (busy: false, error: state.error),
+          clearSetupStage: state.error == null,
+        ),
+      );
     }
   }
 
@@ -375,23 +405,36 @@ class WorkshopCubit extends Cubit<WorkshopState> {
   }
 
   Future<void> prepareComponents() => _run(() async {
-    if (!ready) await _installMissingComponents();
-    if (!luaReady) await _resume();
+    if (!ready) await _installFirstPair();
+    if (!luaReady) {
+      _showSetupStage(WorkshopSetupStage.lua);
+      await _resume();
+      if (!luaReady) {
+        throw const FormatException('Lua не вернул каталог классов');
+      }
+    }
   });
 
-  Future<void> _installMissingComponents() async {
+  Future<void> _installFirstPair() async {
     await _checkInstallationTools();
-    for (final component in Component.values) {
-      if (components.active.containsKey(component)) continue;
-      final release = await components.github.latest(component);
-      _update(
-        state.copyWith(releases: {...state.releases, component: release}),
-      );
-      await components.install(component, release, addLog);
-    }
+    _showSetupStage(WorkshopSetupStage.releases);
+    await _checkComponentReleases();
+    await components.installPair(
+      state.releases,
+      addLog,
+      onStage: (stage) => _showSetupStage(switch (stage) {
+        ComponentInstallStage.pob => WorkshopSetupStage.pob,
+        ComponentInstallStage.mcp => WorkshopSetupStage.mcp,
+        ComponentInstallStage.compatibility => WorkshopSetupStage.compatibility,
+      }),
+    );
   }
 
+  void _showSetupStage(WorkshopSetupStage stage) =>
+      _update(state.copyWith(setupStage: stage));
+
   Future<void> _checkInstallationTools() async {
+    _showSetupStage(WorkshopSetupStage.python);
     try {
       await components.processes.python();
     } on ProcessException {
@@ -399,6 +442,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
         'Установите 64-битный Python 3.11+ и перезапустите PoB II.',
       );
     }
+    _showSetupStage(WorkshopSetupStage.git);
     try {
       await components.processes.run('git', [
         '--version',
@@ -408,7 +452,13 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     }
   }
 
-  Future<void> checkUpdates() => _run(() async {
+  bool get hasComponentUpdates => state.releases.entries.any(
+    (entry) => components.active[entry.key]?.tag != entry.value.tag,
+  );
+
+  Future<void> checkUpdates() => _run(_checkComponentReleases);
+
+  Future<void> _checkComponentReleases() async {
     final releases = <Component, Release>{};
     for (final component in Component.values) {
       releases[component] = await components.github.latest(component);
@@ -417,37 +467,171 @@ class WorkshopCubit extends Cubit<WorkshopState> {
       state.copyWith(releases: releases, status: 'Проверка выпусков завершена'),
     );
     addLog(state.status);
-  });
+  }
 
-  Future<void> install(Component component) => _run(() async {
-    await _disconnect();
-    final release =
-        state.releases[component] ?? await components.github.latest(component);
-    _update(state.copyWith(releases: {...state.releases, component: release}));
-    await components.install(component, release, addLog);
-    _update(
-      state.copyWith(status: '${component.title} ${release.tag} установлен'),
+  Future<void> updateComponents() => _runComponentChange(() async {
+    if (state.releases.length != Component.values.length) {
+      await _checkComponentReleases();
+    }
+    await _changeComponentPair(
+      (validate) =>
+          components.installPair(state.releases, addLog, validate: validate),
+      'Пара компонентов обновлена',
     );
-    await _resume();
   });
 
-  Future<void> rollback() => _run(() async {
-    await _disconnect();
-    await components.rollback();
+  Future<void> rollback() => _runComponentChange(
+    () => _changeComponentPair(
+      (validate) => components.rollback(validate: validate),
+      'Предыдущая пара восстановлена и проверена через Lua',
+    ),
+  );
+
+  Future<void> _runComponentChange(Future<void> Function() action) async {
+    if (_closing || isClosed || state.busy) return;
+    final pending = _run(action);
+    _componentChange = pending;
+    try {
+      await pending;
+    } finally {
+      _componentChange = null;
+    }
+  }
+
+  Future<void> _changeComponentPair(
+    Future<void> Function(_ComponentValidation) change,
+    String status,
+  ) async {
+    await _flushText();
+    final xml = await _componentBuildXml();
+    final candidate = _createEngine();
+    var classes = <JsonMap>[];
+    WorkshopDocument? document;
+    try {
+      await change((pair) async {
+        await candidate.connect(pair);
+        classes = await _readClasses(candidate);
+        if (classes.isEmpty) {
+          throw const FormatException('Lua не вернул каталог классов');
+        }
+        if (xml != null) {
+          document = await _checkComponentBuild(candidate, pair, xml);
+        }
+        if (!candidate.connected) throw StateError('Соединение с Lua прервано');
+      });
+    } catch (_) {
+      await _closeComponentEngine(candidate);
+      rethrow;
+    }
+    if (classes.isEmpty) {
+      await _closeComponentEngine(candidate);
+      _update(state.copyWith(status: 'Пара компонентов уже актуальна'));
+      return;
+    }
+    await _activateComponentEngine(candidate, classes, document, status);
+  }
+
+  Future<String?> _componentBuildXml() async {
+    if (engine.connected && state.document?.stale == false) return _savedXml();
+    if (state.library.activeId case final id?) {
+      return splitTreeProgression(await library.read(id)).xml;
+    }
+    if (state.document == null) return null;
+    return session.read();
+  }
+
+  Future<WorkshopDocument> _checkComponentBuild(
+    McpClient candidate,
+    Installations pair,
+    String xml,
+  ) async {
+    await candidate.call('pob_import_xml', {'xml': xml});
+    await _restoreTreeMode(candidate);
+    final result = await candidate.call('pob_check_build');
+    final report = parseBuildReport(result);
+    final exported = PobBuildDocument(await candidate.exportBuildXml());
+    if (exported.characterClass != PobBuildDocument(xml).characterClass) {
+      throw StateError('Новая пара изменила класс открытой сборки');
+    }
+    final (:tree, :error) = await _readTree(
+      candidate,
+      pair,
+      loadArtwork: false,
+    );
+    if (tree == null && state.document?.tree != null) throw StateError(error!);
+    return (report: report, tree: tree, stale: false, treeError: error);
+  }
+
+  Future<void> _activateComponentEngine(
+    McpClient candidate,
+    List<JsonMap> classes,
+    WorkshopDocument? document,
+    String status,
+  ) async {
+    final previous = engine;
+    previous.onDisconnected = null;
+    _engine = candidate;
+    candidate.onDisconnected = _lostConnection;
+    _catalogs = GameCatalogRepository(candidate);
+    treeIcons.clear();
+    _undoHistory.clear();
+    _redoHistory.clear();
     _update(
       state.copyWith(
-        status: 'Предыдущая пара восстановлена и проверена через Lua',
+        classes: classes,
+        document: document,
+        history: (undo: 0, redo: 0),
+        status: status,
       ),
     );
-    addLog(state.status);
-  });
+    if (!candidate.connected) _lostConnection(StateError('Lua завершился'));
+    addLog(status);
+    try {
+      await _mcpEditor?.disable();
+    } catch (error) {
+      addLog('Не удалось отключить прежний редактор MCP: $error');
+    }
+    await _closeComponentEngine(previous);
+    if (document != null && candidate.connected) {
+      await _loadUpdatedTree(candidate, document, status);
+    }
+  }
+
+  Future<void> _loadUpdatedTree(
+    McpClient candidate,
+    WorkshopDocument document,
+    String status,
+  ) async {
+    final (:tree, :error) = await _readTree(candidate, components.active);
+    if (!candidate.connected) return;
+    _update(
+      state.copyWith(
+        document: (
+          report: document.report,
+          tree: tree ?? document.tree,
+          stale: false,
+          treeError: error,
+        ),
+        status: status,
+      ),
+    );
+  }
+
+  Future<void> _closeComponentEngine(McpClient client) async {
+    try {
+      await client.close();
+    } catch (error) {
+      addLog('Не удалось закрыть сессию Lua: $error');
+    }
+  }
 
   Future<void> connect() => _run(_resume);
 
   Future<void> _resume() async {
     if (!ready) return;
+    if (state.document != null) _markStale();
     await _connect();
-    if (await _resumeLibrary()) return;
+    if (await _resumeLibrary(keepWorking: false)) return;
     if (sharedLibrary != null || state.library.skipSessionRecovery) return;
     if (await session.exists()) {
       await _loadXml(await session.read());
@@ -459,11 +643,11 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     }
   }
 
-  Future<bool> _resumeLibrary() async {
+  Future<bool> _resumeLibrary({bool keepWorking = true}) async {
     final active = state.library.active;
     if (active == null) return false;
     try {
-      await _openBuild(active.id);
+      await _openBuild(active.id, keepWorking: keepWorking);
       return true;
     } catch (error) {
       addLog(
@@ -478,12 +662,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     engine.onDisconnected = _lostConnection;
     await engine.connect(components.active);
     catalogs.clear();
-    final result = await engine.call('pob_catalog', {'kind': 'classes'});
-    final classes = switch (result) {
-      {'entries': final List<dynamic> entries} =>
-        entries.map(_classEntry).toList(),
-      _ => throw const FormatException('Lua не вернул каталог классов'),
-    };
+    final classes = await _readClasses(engine);
     _update(
       state.copyWith(
         classes: classes,
@@ -491,6 +670,15 @@ class WorkshopCubit extends Cubit<WorkshopState> {
       ),
     );
     addLog(state.status);
+  }
+
+  Future<List<JsonMap>> _readClasses(McpClient client) async {
+    final result = await client.call('pob_catalog', {'kind': 'classes'});
+    return switch (result) {
+      {'entries': final List<dynamic> entries} =>
+        entries.map(_classEntry).toList(),
+      _ => throw const FormatException('Lua не вернул каталог классов'),
+    };
   }
 
   void _lostConnection(Object error) {
@@ -619,16 +807,18 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     String? title,
     bool persist = true,
     TreeProgressionTransfer? progression,
+    TreeProgressionKey? progressionSource,
   }) async {
     final (:report, :xml) = await _readResult();
-    final (:tree, :error) = await _readTree();
+    final (:tree, :error) = await _readTree(engine, components.active);
     if (progression != null) _checkProgression(progression, report, tree);
     final builds = persist
-        ? await library.save(
+        ? await _saveBuild(
             target ?? state.library,
             report,
             attachTreeProgression(xml, progression),
-            title: title ?? _nextTitle,
+            title: title,
+            progressionSource: progressionSource,
           )
         : target ?? state.library;
     if ((progression, builds.activeId) case (final plan?, final id?)) {
@@ -638,7 +828,6 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     final saved = sharedLibrary != null
         ? builds.active != null
         : await _saveRecovery(xml);
-    _nextTitle = null;
     _update(
       state.copyWith(
         document: (report: report, tree: tree, stale: false, treeError: error),
@@ -649,6 +838,23 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     );
     addLog(state.status);
   }
+
+  Future<LibraryState> _saveBuild(
+    LibraryState target,
+    BuildReport report,
+    String xml, {
+    String? title,
+    TreeProgressionKey? progressionSource,
+  }) => switch (sharedLibrary) {
+    final shared? => shared.save(
+      target,
+      report,
+      xml,
+      title: title,
+      progressionSource: progressionSource,
+    ),
+    null => library.save(target, report, xml, title: title),
+  };
 
   void _checkProgression(
     TreeProgressionTransfer plan,
@@ -673,37 +879,42 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     }
   }
 
-  Future<({TreeGeometry? tree, String? error})> _readTree() async {
-    if (!engine.tools.contains('pob_get_tree'))
+  Future<({TreeGeometry? tree, String? error})> _readTree(
+    McpClient client,
+    Installations pair, {
+    bool loadArtwork = true,
+  }) async {
+    if (!client.tools.contains('pob_get_tree'))
       return (
         tree: null,
         error: 'Для дерева нужен MCP 0.5.0. Обновите компонент MCP.',
       );
     try {
       final geometry = TreeGeometry.fromJson(
-        await engine.call('pob_get_tree', {
-          if (engine.tools.contains('pob_tree_textures')) 'includeScene': true,
+        await client.call('pob_get_tree', {
+          if (loadArtwork && client.tools.contains('pob_tree_textures'))
+            'includeScene': true,
         }),
       );
-      final source = Component.values
-          .map((key) => components.active[key]!.commit)
-          .join('-');
+      if (!loadArtwork) return (tree: geometry, error: null);
       final tree = await treeIcons.load(
         geometry,
-        engine,
-        source,
-        onProgress: (loaded, total) {
-          _update(
-            state.copyWith(
-              status: 'Загрузка оригинального дерева PoB · $loaded / $total',
-            ),
-          );
-        },
+        client,
+        _pairSource(pair),
+        onProgress: _showTreeProgress,
       );
       return (tree: tree, error: null);
     } catch (error) {
       return (tree: null, error: 'Дерево недоступно: $error');
     }
+  }
+
+  void _showTreeProgress(int loaded, int total) {
+    _update(
+      state.copyWith(
+        status: 'Загрузка оригинального дерева PoB · $loaded / $total',
+      ),
+    );
   }
 
   void _markStale() {
@@ -723,16 +934,21 @@ class WorkshopCubit extends Cubit<WorkshopState> {
 
   Future<void> openBuild(String id) => _run(() => _openBuild(id));
 
-  Future<void> _openBuild(String id) async {
+  Future<void> _openBuild(String id, {bool keepWorking = true}) async {
     final shared = sharedLibrary;
     if (shared != null) {
-      await _openShared(shared, await shared.open(id));
+      await _openShared(
+        shared,
+        await shared.open(id),
+        keepWorking: keepWorking,
+      );
       return;
     }
     final xml = await library.read(id);
     await _switchXml(
       xml,
       target: LibraryState(entries: state.library.entries, activeId: id),
+      keepWorking: keepWorking,
     );
   }
 
@@ -750,6 +966,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     PobBuildLibrary shared,
     PobBuildVersion disk, {
     bool automatic = false,
+    bool keepWorking = true,
   }) async {
     final copy = await shared.preserveLocal(disk);
     if (copy != null) _update(state.copyWith(library: _withEntry(copy)));
@@ -760,6 +977,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
         disk.xml,
         target: _withEntry(entry, activeId: entry.id),
         persist: false,
+        keepWorking: keepWorking,
       );
       await shared.activate(entry.id);
       if (automatic) {
@@ -860,6 +1078,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     required LibraryState target,
     String? title,
     bool persist = true,
+    bool keepWorking = true,
   }) {
     final (:xml, :progression) = splitTreeProgression(source);
     return _switchBuild(
@@ -867,6 +1086,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
       target: target,
       title: title,
       persist: persist,
+      keepWorking: keepWorking,
       progression: progression,
     );
   }
@@ -876,10 +1096,12 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     required LibraryState target,
     String? title,
     bool persist = true,
+    bool keepWorking = true,
     TreeProgressionTransfer? progression,
+    TreeProgressionKey? progressionSource,
   }) async {
     await _flushText();
-    final previous = state.document;
+    final previous = keepWorking ? state.document : null;
     final previousLibrary = state.library;
     final xml = previous == null ? null : await _currentXml();
     _markStale();
@@ -890,10 +1112,10 @@ class WorkshopCubit extends Cubit<WorkshopState> {
         title: title,
         persist: persist,
         progression: progression,
+        progressionSource: progressionSource,
       );
       _clearHistory();
     } catch (_) {
-      _nextTitle = null;
       if (xml != null && previous != null) {
         await _restoreWorking(xml, previous, previousLibrary);
       }
@@ -928,6 +1150,8 @@ class WorkshopCubit extends Cubit<WorkshopState> {
 
   Future<void> copyBuild() => _run(() async {
     if (state.report == null) return;
+    await _flushText();
+    final source = _storedProgressionKey;
     final title =
         '${state.library.active?.title ?? state.report!.name} · копия';
     if (sharedLibrary != null) {
@@ -936,21 +1160,32 @@ class WorkshopCubit extends Cubit<WorkshopState> {
         () => _loadXml(xml),
         target: LibraryState(entries: state.library.entries),
         title: title,
+        progressionSource: source,
       );
       return;
     }
     final xml = await _currentXml();
     final id = library.newId();
-    if (state.library.activeId case final source?) {
-      await session.saveNotes(id, await session.readNotes(source));
+    if (state.library.activeId case final sourceId?) {
+      await session.saveNotes(id, await session.readNotes(sourceId));
     }
-    final builds = await library.save(
+    Future<LibraryState> saveCopy() => library.save(
       LibraryState(entries: state.library.entries, activeId: id),
       state.report!,
       xml,
       title: title,
     );
-    _nextTitle = null;
+    final builds = source == null
+        ? await saveCopy()
+        : await progressionRepository(source).transferTo(
+            progressionRepository((
+              folder: source.folder,
+              build: id,
+              version: source.version,
+              characterClass: source.characterClass,
+            )),
+            saveCopy,
+          );
     _update(state.copyWith(library: builds));
     _clearHistory();
   });
@@ -959,12 +1194,14 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     if (state.report == null || title.trim().isEmpty) return;
     final previousTitle = state.library.active?.title ?? state.report!.name;
     if (previousTitle == title.trim()) return;
+    await _flushText();
     final xml = await _currentXml();
-    final builds = await library.save(
+    final builds = await _saveBuild(
       state.library,
       state.report!,
       xml,
       title: title.trim(),
+      progressionSource: _storedProgressionKey,
     );
     _update(state.copyWith(library: builds));
     _pushUndo(xml, title: previousTitle);
@@ -1002,9 +1239,11 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     await _readReport();
   });
 
-  Future<void> _restoreTreeMode() async {
+  Future<void> _restoreTreeMode([McpClient? client]) async {
     if (state.treeMode == TreeAllocationMode.common) return;
-    await engine.call('pob_tree_options', {'mode': state.treeMode.luaValue});
+    await (client ?? engine).call('pob_tree_options', {
+      'mode': state.treeMode.luaValue,
+    });
   }
 
   Future<void> _loadXml(String xml) async {
@@ -1181,13 +1420,12 @@ class WorkshopCubit extends Cubit<WorkshopState> {
 
   Future<void> _restoreSnapshot(_BuildSnapshot snapshot) async {
     _markStale();
+    await _flushText();
     await _loadXml(snapshot.xml);
-    _nextTitle = snapshot.title;
-    try {
-      await _readReport();
-    } finally {
-      _nextTitle = null;
-    }
+    await _readReport(
+      title: snapshot.title,
+      progressionSource: _storedProgressionKey,
+    );
   }
 
   Future<void> _recoverSnapshot(_BuildSnapshot snapshot) async {
@@ -1232,14 +1470,6 @@ class WorkshopCubit extends Cubit<WorkshopState> {
       characterClass: key.characterClass,
       steps: await progressionRepository(key).load(),
     ));
-  }
-
-  Future<void> _disconnect() async {
-    await _mcpEditor?.disable();
-    await engine.close();
-    catalogs.clear();
-    _update(state.copyWith(classes: [], clearReport: true));
-    _clearHistory();
   }
 
   void editDraft(String value) {
@@ -1300,6 +1530,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     _buildChangeDelay?.cancel();
     await _buildChanges?.cancel();
     await _buildSync?.future;
+    await _componentChange;
     await _mcpEditor?.close();
     await _flushText();
     await engine.close();

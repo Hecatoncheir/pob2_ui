@@ -1,0 +1,10 @@
+{
+  "pob": {
+    "tag": "v0.23.1",
+    "commit": "7d6f530cbdab20389ff8bc6ba97a37ac27f74e41"
+  },
+  "mcp": {
+    "tag": "v0.20.0",
+    "commit": "18e97e72840c0e9d96b96ac94f1cdbe5f7770a81"
+  }
+}

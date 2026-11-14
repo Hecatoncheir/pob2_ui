@@ -40,6 +40,8 @@ class BuildReport {
   String get treeVersion => snapshot['treeVersion'] as String? ?? '—';
   JsonMap get groupSelector => jsonMap(character['groups']);
   JsonMap get skillSelector => jsonMap(character['skills']);
+  JsonMap get skillPartSelector => jsonMap(character['parts']);
+  JsonMap get skillStatSetSelector => jsonMap(character['statSets']);
   String get mainSkill {
     final selected = skillSelector['selected'];
     return jsonRows(skillSelector['entries'])

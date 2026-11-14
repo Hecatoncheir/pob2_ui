@@ -37,6 +37,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m774193669c => 'Lua returned an empty tree';
 
   @override
+  String get m152f871d87 => 'Lua stopped';
+
+  @override
   String get mbb582808f3 => 'Lua did not return XML build';
 
   @override
@@ -149,13 +152,8 @@ class AppLocalizationsEn extends AppLocalizations {
       'import sys, struct; assert sys.version_info >= (3,11) and struct.calcsize(\"P\") == 8, \"Need 64-bit Python 3.11+\"';
 
   @override
-  String m9cde7cfc3f(String p0, String p1, String p2) {
-    return '$p0 $p1 ready. Git: $p2';
-  }
-
-  @override
-  String m606849adbd(String p0, String p1) {
-    return '$p0 $p1 installed';
+  String mad59a0d2ab(String p0, String p1, String p2) {
+    return 'Downloaded $p0 $p1. Git: $p2';
   }
 
   @override
@@ -177,9 +175,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String mb7b217c429(String p0, String p1, String p2) {
     return '$p0: $p1 of $p2 points spent';
   }
-
-  @override
-  String get mbd1c099ba2 => 'Current version';
 
   @override
   String get m63141a77bf => 'Amulet';
@@ -223,6 +218,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get m84bb1ae656 => 'Option';
+
+  @override
+  String get m7547833b7f => 'Skill variant';
 
   @override
   String get m65d05ab17f => 'Your next build';
@@ -437,6 +435,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m57d9f5cb7c => 'Tree not yet available';
 
   @override
+  String get m748d0b0dbd => 'Diagnostics copied';
+
+  @override
   String get m7c2e51e000 => 'For a finished PoB tree, update MCP to 0.7.0.';
 
   @override
@@ -549,6 +550,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String m65a1b960c7(String p0) {
     return 'Loading LuaJIT and lua-utf8 for $p0...';
   }
+
+  @override
+  String get m4f87fe4ac6 => 'Downloading Path of Building';
+
+  @override
+  String get ma3d462aeec => 'Downloading PoB MCP';
 
   @override
   String maafcfa710b(String p0, String p1) {
@@ -891,10 +898,20 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m6f37ba2ab7 => 'Could not close PoB.';
 
   @override
+  String m8f6df28a92(String p0) {
+    return 'Could not close the Lua session: $p0';
+  }
+
+  @override
   String get m46ed8403b7 => 'Could not start PoB.';
 
   @override
   String get m6dc7d664a3 => 'Failed to protect connection directory MCP';
+
+  @override
+  String m8644bfa547(String p0) {
+    return 'Could not disable the previous MCP editor: $p0';
+  }
 
   @override
   String m725605a944(String p0) {
@@ -972,6 +989,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String mbefc941808(String p0) {
     return 'Failed to read node: $p0';
   }
+
+  @override
+  String get m5b0627d21c => 'Could not copy diagnostics';
 
   @override
   String get m409f34eb59 => 'Failed to save group';
@@ -1115,6 +1135,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get mbfea4c6fd4 => 'New skill group';
 
   @override
+  String get maf3cd75c2f =>
+      'The new component pair changed the class of the open build';
+
+  @override
   String get m282cf4ee16 => 'New build';
 
   @override
@@ -1163,7 +1187,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m124cd4a205 => 'Update MCP to remove skill';
 
   @override
-  String get m603e460bf5 => 'Update';
+  String get m74e1571298 => 'Update PoB and MCP';
 
   @override
   String get m3d7df93803 => 'Update build list';
@@ -1311,6 +1335,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get med31458051 => 'The builds folder set in PoB is unavailable.';
 
   @override
+  String get m83ffb870fe => 'Component pair updated';
+
+  @override
+  String get meed4bbd10d => 'The component pair is already up to date';
+
+  @override
   String get m75160b86a8 => 'Parameters';
 
   @override
@@ -1400,6 +1430,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get m54ab473017 => 'Default PoB folder connected';
+
+  @override
+  String get mce1dabc47f => 'Connecting to Lua';
 
   @override
   String get m67f5d8880e => 'Connect Lua';
@@ -1588,9 +1621,18 @@ class AppLocalizationsEn extends AppLocalizations {
   String get mfa4af9bbe7 => 'Check compatibility';
 
   @override
+  String get m34f26e6d74 => 'Checking Git';
+
+  @override
+  String get m3cbe98277d => 'Checking Python';
+
+  @override
   String mfeb5830ec9(String p0) {
     return 'Release check: HTTP $p0';
   }
+
+  @override
+  String get mf0c425d946 => 'Checking releases';
 
   @override
   String get m25ee4bf0ec => 'Verification of releases completed';
@@ -1600,6 +1642,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get m6f4c708fbf => 'Package check before installation failed';
+
+  @override
+  String get m908d1b1e7c => 'Checking Lua compatibility';
 
   @override
   String get m9353cfd5f6 => 'Compatibility check: running original Lua...';
@@ -1671,6 +1716,11 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get m1e135b51f1 => 'Calculation…';
+
+  @override
+  String m7fce31d207(String p0, String p1, String p2, String p3) {
+    return 'Revision mismatch for $p0 $p1: expected $p2, got $p3.';
+  }
 
   @override
   String get m8d7bd9deb6 => 'Health regeneration';
@@ -1816,6 +1866,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m332899f398 => 'Copy XML';
 
   @override
+  String get m1fbb2aeab9 => 'Copy diagnostics';
+
+  @override
   String get m99e87c373f => 'Copy Codex connection command';
 
   @override
@@ -1841,6 +1894,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get m126aa994ee => 'Too many redirects';
+
+  @override
+  String get mde2ce6f05b => 'Select versions for both components first';
 
   @override
   String get m70a5cadc50 =>
@@ -2083,9 +2139,6 @@ class AppLocalizationsEn extends AppLocalizations {
       'Install the components to open the assembly and get the real calculation.';
 
   @override
-  String get mb7cd6fae08 => 'Install';
-
-  @override
   String get mfdeaa71380 => 'Install components';
 
   @override
@@ -2130,6 +2183,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String m913d7f855b(String p0) {
     return 'Some icons are unavailable: $p0';
   }
+
+  @override
+  String get mdab05cc16d => 'Skill part';
 
   @override
   String get me24055fecd => 'What remains before the next stage?';

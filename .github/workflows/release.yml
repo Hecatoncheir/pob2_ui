@@ -25,12 +25,13 @@ jobs:
     runs-on: ubuntu-22.04
     outputs:
       tag: ${{ steps.version.outputs.tag }}
+      commit: ${{ steps.version.outputs.commit }}
     env:
       RELEASE_TAG: ${{ inputs.tag || github.ref_name }}
     steps:
       - uses: actions/checkout@v7.0.1
         with:
-          ref: ${{ env.RELEASE_TAG }}
+          ref: refs/tags/${{ env.RELEASE_TAG }}
       - uses: actions/setup-python@v7.1.0
         with:
           python-version: '3.13'
@@ -38,11 +39,13 @@ jobs:
         run: |
           python tool/release.py --tag "$RELEASE_TAG" --check-only
           echo "tag=$RELEASE_TAG" >> "$GITHUB_OUTPUT"
+          echo "commit=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
   checks:
     needs: metadata
     uses: ./.github/workflows/ci.yml
     with:
-      ref: ${{ needs.metadata.outputs.tag }}
+      ref: ${{ needs.metadata.outputs.commit }}
+      locked_components: true
   publish:
     needs: [metadata, checks]
     runs-on: ubuntu-22.04
@@ -51,10 +54,11 @@ jobs:
     env:
       GH_TOKEN: ${{ github.token }}
       RELEASE_TAG: ${{ needs.metadata.outputs.tag }}
+      RELEASE_COMMIT: ${{ needs.metadata.outputs.commit }}
     steps:
       - uses: actions/checkout@v7.0.1
         with:
-          ref: ${{ env.RELEASE_TAG }}
+          ref: ${{ env.RELEASE_COMMIT }}
       - uses: actions/setup-python@v7.1.0
         with:
           python-version: '3.13'
@@ -66,10 +70,18 @@ jobs:
       - name: Проверить комплект и записать SHA-256
         run: python tool/release.py --tag "$RELEASE_TAG" --artifacts build/packages
       - name: Опубликовать неизменяемый выпуск
+        shell: bash
         run: |
           if gh release view "$RELEASE_TAG" >/dev/null 2>&1; then
             echo 'Выпуск уже существует; файлы не будут заменены.'
             exit 0
+          fi
+          tag_ref="refs/tags/$RELEASE_TAG"
+          remote_commit=$(git ls-remote --exit-code origin "$tag_ref" "$tag_ref^{}" |
+            awk '$2 ~ /\^\{\}$/ {peeled=$1; next} {direct=$1} END {print peeled ? peeled : direct}')
+          if [[ "$remote_commit" != "$RELEASE_COMMIT" ]]; then
+            echo 'Тег выпуска указывает на другой коммит.' >&2
+            exit 1
           fi
           gh release create "$RELEASE_TAG" build/packages/*.exe build/packages/*.dmg build/packages/*.run build/packages/SHA256SUMS \
             --verify-tag --title "$RELEASE_TAG — PoB II" --notes-file build/packages/RELEASE_NOTES.md

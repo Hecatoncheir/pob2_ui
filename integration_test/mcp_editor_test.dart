@@ -18,6 +18,7 @@ import 'package:pob2_ui/ui/shell_bloc.dart';
 import 'package:pob2_ui/ui/tree_canvas.dart';
 import 'package:pob2_ui/ui/workshop_cubit.dart';
 import 'package:pob2_ui/ui/workspace_view.dart';
+import 'package:xml/xml.dart';
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
@@ -50,6 +51,7 @@ void main() {
       components.active[Component.mcp]!,
     );
     addTearDown(client.close);
+    final hasSkillControls = await _checkSkillControlSchema(client);
 
     await _createBuilds(client, model);
     await tester.pumpAndSettle();
@@ -68,6 +70,9 @@ void main() {
       contains('STALE_REVISION'),
     );
 
+    if (hasSkillControls) {
+      await _checkSkillVariants(tester, client, model, shell);
+    }
     await model.openBuild(model.state.library.entries.last.id);
     await tester.pumpAndSettle();
     expect(model.mcpEditor.enabled, isFalse);
@@ -121,6 +126,155 @@ Future<void> _enableFromLibrary(
   shell.add(const PageSelected(AppPage.workspace));
   await tester.pumpAndSettle();
 }
+
+Future<bool> _checkSkillControlSchema(_ExternalEditor client) async {
+  final controls = await client.mainSkillControls();
+  const required = {'parts', 'statSets'};
+  if (Platform.environment['POB2_UI_REQUIRE_SKILL_CONTROLS'] == 'true') {
+    expect(
+      controls,
+      containsAll(required),
+      reason: 'Закреплённый MCP должен поддерживать часть и вариант умения.',
+    );
+  }
+  return controls.containsAll(required);
+}
+
+Future<void> _checkSkillVariants(
+  WidgetTester tester,
+  _ExternalEditor client,
+  WorkshopCubit model,
+  ShellBloc shell,
+) async {
+  await client.success('pob_check_build');
+  final gems = await client.success('pob_catalog', {
+    'kind': 'gems',
+    'query': 'Ball Lightning',
+  });
+  final gem = jsonRows(gems['entries'])
+      .firstWhere((gem) => gem['name'] == 'Ball Lightning');
+  await client.success('pob_add_skill_group', {
+    'label': 'Ball Lightning',
+    'gems': [
+      {'id': gem['id'], 'level': 1},
+    ],
+  });
+  final group = model.state.report!.groups.last;
+  await client.success('pob_select_main_skill', {
+    'control': 'groups',
+    'id': group['id'],
+  });
+  final initial = model.state.report!;
+  final selector = initial.skillStatSetSelector;
+  final base = selector['selected'] as int;
+  final infused =
+      jsonRows(selector['entries'])
+              .singleWhere((entry) => entry['label'] == 'Fire-Infused')['id']
+          as int;
+  expect(infused, isNot(base));
+  await client.success('pob_select_main_skill', {
+    'control': 'statSets',
+    'id': infused,
+  });
+  await tester.pumpAndSettle();
+  expect(shell.state.tab, WorkshopTab.calculations);
+  final infusedStats = model.state.report!.stats;
+  expect(infusedStats['TotalDPS'], isNot(initial.stats['TotalDPS']));
+
+  final dropdown = find.byKey(const ValueKey('main-skill-statSets'));
+  expect(tester.widget<DropdownButton<int>>(dropdown).value, infused);
+  await _selectSkillOption(tester, model, dropdown, base);
+  expect(model.state.report!.stats, initial.stats);
+  await _selectSkillOption(tester, model, dropdown, infused);
+  expect(model.state.report!.stats, infusedStats);
+
+  await _checkUnavailableSkillPart(tester, client, model);
+  await _checkVariantRoundTrip(tester, client, model, dropdown, infused);
+}
+
+Future<void> _selectSkillOption(
+  WidgetTester tester,
+  WorkshopCubit model,
+  Finder dropdown,
+  int id,
+) async {
+  await tester.ensureVisible(dropdown);
+  await tester.tap(dropdown);
+  await tester.pumpAndSettle();
+  final option = find.byWidgetPredicate(
+    (widget) => widget is DropdownMenuItem<int> && widget.value == id,
+  );
+  final label = find.descendant(of: option, matching: find.byType(Text));
+  await tester.tap(label.hitTestable().last);
+  await tester.pump();
+  for (var i = 0; i < 100 && model.state.busy; i++) {
+    await tester.pump(const Duration(milliseconds: 100));
+    await Future<void>.delayed(const Duration(milliseconds: 100));
+  }
+  await tester.pumpAndSettle();
+  expect(model.state.error, isNull);
+  expect(tester.widget<DropdownButton<int>>(dropdown).value, id);
+}
+
+Future<void> _checkUnavailableSkillPart(
+  WidgetTester tester,
+  _ExternalEditor client,
+  WorkshopCubit model,
+) async {
+  expect(model.state.report!.skillPartSelector, isEmpty);
+  expect(find.byKey(const ValueKey('main-skill-parts')), findsNothing);
+  await client.success('pob_check_build');
+  final library = model.sharedLibrary!;
+  final id = model.state.library.activeId!;
+  final priorXml = await library.read(id);
+  final stats = model.state.report!.stats;
+  final unavailable = await client.call('pob_select_main_skill', {
+    'control': 'parts',
+    'id': 2,
+  });
+  expect(unavailable['isError'], isTrue);
+  expect(
+    jsonRows(unavailable['content']).single['text'],
+    contains('Выбор умения недоступен'),
+  );
+  expect(await library.read(id), priorXml);
+  expect(model.state.report!.stats, stats);
+  await tester.pumpAndSettle();
+}
+
+Future<void> _checkVariantRoundTrip(
+  WidgetTester tester,
+  _ExternalEditor client,
+  WorkshopCubit model,
+  Finder dropdown,
+  int selected,
+) async {
+  await client.success('pob_check_build');
+  final report = model.state.report!;
+  final mcpXml = await client.success('pob_export_xml');
+  final xml = (await model.exportXml())!;
+  final expected = '$selected';
+  expect(_ballLightningStatSet(mcpXml['xml'] as String), expected);
+  expect(_ballLightningStatSet(xml), expected);
+  final original = model.state.library.activeId;
+  await model.importXml(xml);
+  await tester.pumpAndSettle();
+  expect(model.state.error, isNull);
+  expect(model.state.report!.stats, report.stats);
+  expect(model.state.report!.skillStatSetSelector, report.skillStatSetSelector);
+  expect(tester.widget<DropdownButton<int>>(dropdown).value, selected);
+  await model.openBuild(original!);
+  await tester.pumpAndSettle();
+  await _enable(tester);
+  expect(model.mcpEditor.enabled, isTrue);
+}
+
+String? _ballLightningStatSet(String xml) => XmlDocument.parse(xml)
+    .findAllElements('StatSetIndex')
+    .singleWhere(
+      (entry) => entry.getAttribute('grantedEffect') == 'BallLightningPlayer',
+    )
+    .getAttribute('index');
 
 Future<void> _enable(WidgetTester tester) async {
   await tester.tap(find.byKey(const Key('mcp-editor-settings')));
@@ -249,6 +403,14 @@ class _ExternalEditor {
 
   Future<JsonMap> call(String name, [JsonMap arguments = const {}]) =>
       _rpc('tools/call', {'name': name, 'arguments': arguments});
+
+  Future<Set<String>> mainSkillControls() async {
+    final tools = await _rpc('tools/list', {});
+    final tool = jsonRows(tools['tools'])
+        .firstWhere((tool) => tool['name'] == 'pob_select_main_skill');
+    final properties = jsonMap(jsonMap(tool['inputSchema'])['properties']);
+    return jsonStrings(jsonMap(properties['control'])['enum']).toSet();
+  }
 
   Future<JsonMap> success(String name, [JsonMap arguments = const {}]) async {
     final result = await call(name, arguments);

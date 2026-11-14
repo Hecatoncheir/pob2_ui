@@ -173,17 +173,11 @@ class SkillSelectors extends StatelessWidget {
   const SkillSelectors({super.key, required this.model});
   final WorkshopCubit model;
   @override
-  Widget build(BuildContext context) => Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      AppText('Основное умение', style: Theme.of(context).textTheme.bodySmall),
-      const SizedBox(height: 4),
-      _Selector(
-        model: model,
-        control: 'skills',
-        data: model.state.report!.skillSelector,
-      ),
-    ],
+  Widget build(BuildContext context) => _Selector(
+    model: model,
+    control: 'skills',
+    data: model.state.report!.skillSelector,
+    label: 'Основное умение',
   );
 }
 
@@ -192,12 +186,23 @@ class _Selector extends StatelessWidget {
     required this.model,
     required this.control,
     required this.data,
+    required this.label,
   });
   final WorkshopCubit model;
   final String control;
   final JsonMap data;
+  final String label;
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) => Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      AppText(label, style: Theme.of(context).textTheme.bodySmall),
+      const SizedBox(height: 4),
+      _options(),
+    ],
+  );
+
+  Widget _options() {
     final entries = jsonRows(data['entries']);
     if (entries.isEmpty)
       return const AppText(
@@ -211,6 +216,7 @@ class _Selector extends StatelessWidget {
         style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 12),
       );
     return DropdownButton<int>(
+      key: ValueKey('main-skill-$control'),
       value: data['selected'] as int?,
       isExpanded: true,
       isDense: true,
@@ -456,8 +462,13 @@ void showWarnings(BuildContext context, BuildReport report) =>
     );
 
 class CalculationsView extends StatelessWidget {
-  const CalculationsView({super.key, required this.report});
+  const CalculationsView({
+    super.key,
+    required this.report,
+    required this.model,
+  });
   final BuildReport report;
+  final WorkshopCubit model;
   @override
   Widget build(BuildContext context) => LayoutBuilder(
     builder: (context, constraints) => ListView(
@@ -467,6 +478,14 @@ class CalculationsView extends StatelessWidget {
           'Расчёты',
           subtitle: 'Показатели текущего состояния сборки',
         ),
+        if (report.skillPartSelector.isNotEmpty)
+          _skillOption('parts', 'Часть умения', report.skillPartSelector),
+        if (report.skillStatSetSelector.isNotEmpty)
+          _skillOption(
+            'statSets',
+            'Вариант умения',
+            report.skillStatSetSelector,
+          ),
         Wrap(
           spacing: 20,
           runSpacing: 20,
@@ -515,6 +534,22 @@ class CalculationsView extends StatelessWidget {
           ],
         ),
       ],
+    ),
+  );
+
+  Widget _skillOption(String control, String label, JsonMap data) => Padding(
+    padding: const EdgeInsets.only(bottom: 16),
+    child: Align(
+      alignment: Alignment.centerLeft,
+      child: SizedBox(
+        width: 300,
+        child: _Selector(
+          model: model,
+          control: control,
+          data: data,
+          label: label,
+        ),
+      ),
     ),
   );
 }

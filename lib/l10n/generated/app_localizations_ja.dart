@@ -37,6 +37,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m774193669c => 'Lua は空のツリーを返しました';
 
   @override
+  String get m152f871d87 => 'Lua が終了しました';
+
+  @override
   String get mbb582808f3 => 'Lua がビルドを返しませんでしたXML';
 
   @override
@@ -144,13 +147,8 @@ class AppLocalizationsJa extends AppLocalizations {
       'インポート sys、構造体; assert sys.version_info >= (3,11) および struct.calcsize(\"P\") == 8、「64 ビット Python 3.11+ が必要」';
 
   @override
-  String m9cde7cfc3f(String p0, String p1, String p2) {
-    return '$p0 $p1 準備完了です。 Git: $p2';
-  }
-
-  @override
-  String m606849adbd(String p0, String p1) {
-    return '$p0 $p1 がインストールされました';
+  String mad59a0d2ab(String p0, String p1, String p2) {
+    return '$p0 $p1 をダウンロードしました。Git: $p2';
   }
 
   @override
@@ -172,9 +170,6 @@ class AppLocalizationsJa extends AppLocalizations {
   String mb7b217c429(String p0, String p1, String p2) {
     return '$p0: $p2 ポイント中 $p1 ポイントが消費されました';
   }
-
-  @override
-  String get mbd1c099ba2 => '現在のバージョン';
 
   @override
   String get m63141a77bf => 'アミュレット';
@@ -218,6 +213,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m84bb1ae656 => 'オプション';
+
+  @override
+  String get m7547833b7f => 'スキルのバリエーション';
 
   @override
   String get m65d05ab17f => '次のビルド';
@@ -428,6 +426,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m57d9f5cb7c => 'ツリーはまだ利用できません';
 
   @override
+  String get m748d0b0dbd => '診断情報をコピーしました';
+
+  @override
   String get m7c2e51e000 => '完成した PoB ツリーの場合、MCP を 0.7.0 に更新します。';
 
   @override
@@ -534,6 +535,12 @@ class AppLocalizationsJa extends AppLocalizations {
   String m65a1b960c7(String p0) {
     return '$p0 の LuaJIT と lua-utf8 をロードしています...';
   }
+
+  @override
+  String get m4f87fe4ac6 => 'Path of Building をダウンロード中';
+
+  @override
+  String get ma3d462aeec => 'PoB MCP をダウンロード中';
 
   @override
   String maafcfa710b(String p0, String p1) {
@@ -872,10 +879,20 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m6f37ba2ab7 => 'PoB を閉じられませんでした。';
 
   @override
+  String m8f6df28a92(String p0) {
+    return 'Lua セッションを閉じられませんでした: $p0';
+  }
+
+  @override
   String get m46ed8403b7 => 'PoB を起動できませんでした。';
 
   @override
   String get m6dc7d664a3 => '接続ディレクトリ MCP を保護できませんでした';
+
+  @override
+  String m8644bfa547(String p0) {
+    return '以前の MCP エディターを無効にできませんでした: $p0';
+  }
 
   @override
   String m725605a944(String p0) {
@@ -953,6 +970,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String mbefc941808(String p0) {
     return 'ノードの読み取りに失敗しました: $p0';
   }
+
+  @override
+  String get m5b0627d21c => '診断情報をコピーできませんでした';
 
   @override
   String get m409f34eb59 => 'グループの保存に失敗しました';
@@ -1094,6 +1114,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get mbfea4c6fd4 => '新しいスキルグループ';
 
   @override
+  String get maf3cd75c2f => '新しいコンポーネントの組み合わせで、開いているビルドのクラスが変わりました';
+
+  @override
   String get m282cf4ee16 => '新しいビルド';
 
   @override
@@ -1142,7 +1165,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m124cd4a205 => 'MCP を更新してスキルを削除します';
 
   @override
-  String get m603e460bf5 => 'アップデート';
+  String get m74e1571298 => 'PoB と MCP を更新';
 
   @override
   String get m3d7df93803 => 'ビルドリストを更新';
@@ -1288,6 +1311,12 @@ class AppLocalizationsJa extends AppLocalizations {
   String get med31458051 => 'PoB で設定されたビルドフォルダーを利用できません。';
 
   @override
+  String get m83ffb870fe => 'コンポーネントの組み合わせを更新しました';
+
+  @override
+  String get meed4bbd10d => 'コンポーネントの組み合わせはすでに最新です';
+
+  @override
   String get m75160b86a8 => 'パラメーター';
 
   @override
@@ -1375,6 +1404,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m54ab473017 => 'PoB の既定フォルダーに接続しました';
+
+  @override
+  String get mce1dabc47f => 'Lua に接続中';
 
   @override
   String get m67f5d8880e => 'Lua に接続します';
@@ -1562,9 +1594,18 @@ class AppLocalizationsJa extends AppLocalizations {
   String get mfa4af9bbe7 => '互換性を確認する';
 
   @override
+  String get m34f26e6d74 => 'Git を確認中';
+
+  @override
+  String get m3cbe98277d => 'Python を確認中';
+
+  @override
   String mfeb5830ec9(String p0) {
     return 'リリースチェック: HTTP $p0';
   }
+
+  @override
+  String get mf0c425d946 => 'リリースを確認中';
 
   @override
   String get m25ee4bf0ec => 'リリースの検証が完了しました';
@@ -1574,6 +1615,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m6f4c708fbf => 'インストール前のパッケージチェックに失敗しました';
+
+  @override
+  String get m908d1b1e7c => 'Lua の互換性を確認中';
 
   @override
   String get m9353cfd5f6 => '互換性チェック: オリジナルの Lua を実行中...';
@@ -1644,6 +1688,11 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m1e135b51f1 => '計算中…';
+
+  @override
+  String m7fce31d207(String p0, String p1, String p2, String p3) {
+    return '$p0 $p1 のリビジョンが一致しません。期待値は $p2、取得値は $p3 です。';
+  }
 
   @override
   String get m8d7bd9deb6 => '健康の再生';
@@ -1785,6 +1834,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m332899f398 => 'コピー XML';
 
   @override
+  String get m1fbb2aeab9 => '診断情報をコピー';
+
+  @override
   String get m99e87c373f => 'Codex 接続コマンドのコピー';
 
   @override
@@ -1810,6 +1862,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m126aa994ee => 'リダイレクトが多すぎます';
+
+  @override
+  String get mde2ce6f05b => '先に両方のコンポーネントのバージョンを選択してください';
 
   @override
   String get m70a5cadc50 => 'まず、pob_check_build 経由で最新のビルド レポートを取得します。';
@@ -2046,9 +2101,6 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m4d9acf3506 => 'コンポーネントをインストールしてアセンブリを開き、実際の計算を取得します。';
 
   @override
-  String get mb7cd6fae08 => 'インストール';
-
-  @override
   String get mfdeaa71380 => 'コンポーネントをインストール';
 
   @override
@@ -2092,6 +2144,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String m913d7f855b(String p0) {
     return '一部のアイコンは使用できません: $p0';
   }
+
+  @override
+  String get mdab05cc16d => 'スキルの部位';
 
   @override
   String get me24055fecd => '次の段階までに何が必要ですか？';

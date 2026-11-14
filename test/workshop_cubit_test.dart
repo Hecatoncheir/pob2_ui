@@ -28,24 +28,26 @@ class _SetupComponents extends ComponentRepository {
   _SetupComponents(InstallationStore store)
     : super(store: store, github: _SetupGitHub(), processes: _SetupProcesses());
 
-  final installed = <Component>[];
+  int attempts = 0;
   bool failMcp = true;
 
   @override
-  Future<Installation> install(
-    Component component,
-    Release release,
-    void Function(String) log,
-  ) async {
-    installed.add(component);
-    if (component == Component.mcp && failMcp) throw StateError('Нет сети');
-    final result = Installation(
-      tag: release.tag,
-      commit: 'test',
-      directory: '',
-    );
-    active = {...active, component: result};
-    return result;
+  Future<void> installPair(
+    Map<Component, Release> releases,
+    void Function(String) log, {
+    Future<void> Function(Installations)? validate,
+    void Function(ComponentInstallStage)? onStage,
+  }) async {
+    attempts++;
+    if (failMcp) throw StateError('Нет сети');
+    active = {
+      for (final entry in releases.entries)
+        entry.key: Installation(
+          tag: entry.value.tag,
+          commit: 'test',
+          directory: '',
+        ),
+    };
   }
 }
 
@@ -120,23 +122,28 @@ void main() {
     },
   );
 
-  test('Первичная настройка продолжает с недостающего компонента', () async {
-    final components = _SetupComponents(InstallationStore(root));
-    final engine = _SetupEngine();
-    final model = WorkshopCubit(components, engine);
-    addTearDown(model.close);
+  test(
+    'Первичная настройка повторяет установку полной пары после сбоя',
+    () async {
+      final components = _SetupComponents(InstallationStore(root));
+      final engine = _SetupEngine();
+      final model = WorkshopCubit(components, engine);
+      addTearDown(model.close);
 
-    await model.prepareComponents();
-    expect(model.state.error, 'Нет сети');
-    expect(engine.connections, 0);
+      await model.prepareComponents();
+      expect(model.state.error, 'Нет сети');
+      expect(components.active, isEmpty);
+      expect(engine.connections, 0);
 
-    components.failMcp = false;
-    await model.prepareComponents();
-    await model.prepareComponents();
-    expect(model.state.error, isNull);
-    expect(components.installed, [Component.pob, Component.mcp, Component.mcp]);
-    expect(engine.connections, 1);
-  });
+      components.failMcp = false;
+      await model.prepareComponents();
+      await model.prepareComponents();
+      expect(model.state.error, isNull);
+      expect(components.attempts, 2);
+      expect(components.active.keys, unorderedEquals(Component.values));
+      expect(engine.connections, 1);
+    },
+  );
 
   test('Обновление ждёт окончания операции; закрытый Cubit не получает новые состояния', () async {
     final components = DelayedComponents(InstallationStore(root));

@@ -25,6 +25,8 @@ class TreeIconRepository {
   final Directory? root;
   final _cache = <(String, String), Map<String, Uint8List>>{};
 
+  void clear() => _cache.clear();
+
   Future<TreeGeometry> load(
     TreeGeometry tree,
     McpClient engine,

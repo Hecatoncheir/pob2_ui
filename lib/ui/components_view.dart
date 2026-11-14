@@ -83,11 +83,18 @@ class ComponentsView extends StatelessWidget {
 
   Widget _componentActions() {
     final canUseComponents = model.ready && !model.state.busy;
+    final canUpdate = canUseComponents && model.hasComponentUpdates;
     final canRollback = model.canRollback && !model.state.busy;
     return Wrap(
       spacing: 12,
       runSpacing: 12,
       children: [
+        if (model.ready && model.hasComponentUpdates)
+          FilledButton.tonalIcon(
+            onPressed: canUpdate ? model.updateComponents : null,
+            icon: const SparkArt('icons/download', width: 17),
+            label: const AppText('Обновить PoB и MCP'),
+          ),
         OutlinedButton(
           onPressed: canUseComponents ? model.connect : null,
           child: const AppText('Подключить Lua'),
@@ -141,7 +148,6 @@ class _Component extends StatelessWidget {
   Widget build(BuildContext context) {
     final installed = model.components.active[component];
     final latest = model.state.releases[component];
-    final current = installed != null && installed.tag == latest?.tag;
     return SurfacePanel(
       key: ValueKey('component-card-${component.name}'),
       child: Column(
@@ -182,19 +188,6 @@ class _Component extends StatelessWidget {
                   'Последняя: ${latest.tag}',
                   style: TextStyle(color: Spark.of(context).green),
                 ),
-              FilledButton.tonalIcon(
-                onPressed: model.state.busy || current
-                    ? null
-                    : () => model.install(component),
-                icon: const SparkArt('icons/download', width: 17),
-                label: AppText(
-                  installed == null
-                      ? 'Установить'
-                      : current
-                      ? 'Актуальная версия'
-                      : 'Обновить',
-                ),
-              ),
             ],
           ),
           if (installed != null)

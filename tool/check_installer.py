@@ -98,18 +98,62 @@ def check_macos(package, base, data, environment):
     assert hashlib.sha256(executable.read_bytes()).digest() == original_digest
     stop_macos(bundle)
     print('macos-arm64: DMG, запуск, замена приложения и откат проверены')
+    return executable
 
 
-def check(target):
+def run_build_check(executable, data, environment, stage):
+    result = subprocess.run(
+        [str(executable)],
+        cwd=executable.parent,
+        env=dict(environment, POB2_UI_INSTALLER_CHECK=stage),
+        timeout=600,
+    )
+    output = data / f'installer-check-{stage}.json'
+    if not output.is_file():
+        raise RuntimeError(f'Установленное приложение не записало результат {stage}')
+    report = json.loads(output.read_text(encoding='utf-8'))
+    if result.returncode or 'error' in report:
+        raise RuntimeError(f'Проверка {stage} завершилась ошибкой: {report}')
+    return report
+
+
+def check_build(executable, base, environment, components):
+    data = base / 'build-profile'
+    builds = data / 'builds'
+    builds.mkdir(parents=True)
+    if components is not None:
+        shutil.copyfile(components, data / 'components.json')
+    (data / 'pob-builds.json').write_text(
+        json.dumps({'directory': str(builds), 'migrated': True}), encoding='utf-8',
+    )
+    environment = dict(environment, POB2_UI_HOME=str(data), PYTHONDONTWRITEBYTECODE='1')
+    saved = run_build_check(executable, data, environment, 'save')
+    assert saved['source'] == 'original-lua' and saved['level'] == 90 and saved['life'] > 0
+    files = list(builds.glob('*.xml'))
+    assert len(files) == 1 and files[0].name == saved['id']
+    original = files[0].read_bytes()
+    restored = run_build_check(executable, data, environment, 'restore')
+    assert restored == saved, (saved, restored)
+    assert files[0].read_bytes() == original, 'Повторный запуск изменил XML'
+    print('Установленный PoB II: расчёт Lua, XML и заметки восстановлены после перезапуска')
+
+
+def check(target, *, build_check=False, components=None, package=None):
     number = version()
-    package = ROOT / 'build/packages' / filename(number, target)
+    package = package or ROOT / 'build/packages' / filename(number, target)
     with tempfile.TemporaryDirectory(prefix='pob2-install-check-') as temporary:
         base = Path(temporary).resolve()
         install = base / 'PoB II'
         data = base / 'data'
         environment = dict(os.environ, POB2_UI_HOME=str(data))
+        environment.pop('POB2_UI_INSTALLER_CHECK', None)
+        if target == 'linux-x64':
+            environment['XDG_DATA_HOME'] = str(base / 'xdg-data')
+            environment['HOME'] = str(base / 'home')
         if target == 'macos-arm64':
-            check_macos(package, base, data, environment)
+            executable = check_macos(package, base, data, environment)
+            if build_check:
+                check_build(executable, base, environment, components)
             return
         if target == 'windows-x64':
             run(package, '/VERYSILENT', '/SUPPRESSMSGBOXES', '/NORESTART', '/SP-', '/RELAUNCH', '/DIR=' + str(install), env=environment)
@@ -148,10 +192,22 @@ def check(target):
         run(install / binary, '--rollback', env=environment)
         assert (install / 'active-version').read_text().strip() == number
         stop_versions(install, environment)
+        if build_check:
+            executable = install / 'versions' / number / ('pob2_ui.exe' if os.name == 'nt' else 'pob2_ui')
+            check_build(executable, base, environment, components)
     print(f'{target}: установщик и настоящий запуск проверены')
 
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--target', required=True)
-    check(parser.parse_args().target)
+    parser.add_argument('--build-check', action='store_true', help='Проверить сохранение и восстановление сборки')
+    parser.add_argument('--components', type=Path, help='Манифест уже скачанной пары для проверки сборки')
+    parser.add_argument('--package', type=Path, help='Путь к готовому установщику')
+    args = parser.parse_args()
+    check(
+        args.target,
+        build_check=args.build_check or args.components is not None,
+        components=args.components,
+        package=args.package.resolve() if args.package else None,
+    )

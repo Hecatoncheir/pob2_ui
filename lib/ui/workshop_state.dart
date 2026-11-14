@@ -14,10 +14,24 @@ typedef WorkshopDocument = ({
   String? treeError,
 });
 
+enum WorkshopSetupStage {
+  python('Проверка Python'),
+  git('Проверка Git'),
+  releases('Проверка выпусков'),
+  pob('Загрузка Path of Building'),
+  mcp('Загрузка PoB MCP'),
+  compatibility('Проверка совместимости Lua'),
+  lua('Подключение Lua');
+
+  const WorkshopSetupStage(this.label);
+  final String label;
+}
+
 class WorkshopState {
   WorkshopState({
     this.operation = (busy: false, error: null),
     this.status = 'Установите компоненты и подключите Lua',
+    this.setupStage,
     this.document,
     this.treeMode = TreeAllocationMode.common,
     this.history = (undo: 0, redo: 0),
@@ -36,6 +50,7 @@ class WorkshopState {
   bool get busy => operation.busy;
   String? get error => operation.error;
   final String status;
+  final WorkshopSetupStage? setupStage;
   final WorkshopDocument? document;
   final TreeAllocationMode treeMode;
   final HistoryCounts history;
@@ -54,6 +69,8 @@ class WorkshopState {
   WorkshopState copyWith({
     WorkshopOperation? operation,
     String? status,
+    WorkshopSetupStage? setupStage,
+    bool clearSetupStage = false,
     WorkshopDocument? document,
     TreeAllocationMode? treeMode,
     HistoryCounts? history,
@@ -67,6 +84,7 @@ class WorkshopState {
   }) => WorkshopState(
     operation: operation ?? this.operation,
     status: status ?? this.status,
+    setupStage: _nextSetupStage(setupStage, clearSetupStage),
     document: _nextDocument(document, clearReport),
     treeMode: treeMode ?? this.treeMode,
     history: history ?? this.history,
@@ -80,4 +98,7 @@ class WorkshopState {
 
   WorkshopDocument? _nextDocument(WorkshopDocument? next, bool clear) =>
       clear ? null : next ?? document;
+
+  WorkshopSetupStage? _nextSetupStage(WorkshopSetupStage? next, bool clear) =>
+      clear ? null : next ?? setupStage;
 }

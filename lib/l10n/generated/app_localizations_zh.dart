@@ -37,6 +37,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m774193669c => 'Lua 回傳一棵空樹';
 
   @override
+  String get m152f871d87 => 'Lua 已結束';
+
+  @override
   String get mbb582808f3 => 'Lua 未回傳 XML 版本';
 
   @override
@@ -143,13 +146,8 @@ class AppLocalizationsZh extends AppLocalizations {
       '導入系統，結構；斷言 sys.version_info >= (3,11) 且 struct.calcsize(\"P\") == 8, \"需要 64 位元 Python 3.11+\"';
 
   @override
-  String m9cde7cfc3f(String p0, String p1, String p2) {
-    return '$p0 $p1 準備好了。 git：$p2';
-  }
-
-  @override
-  String m606849adbd(String p0, String p1) {
-    return '已安裝 $p0 $p1';
+  String mad59a0d2ab(String p0, String p1, String p2) {
+    return '已下載 $p0 $p1。Git：$p2';
   }
 
   @override
@@ -171,9 +169,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String mb7b217c429(String p0, String p1, String p2) {
     return '$p0：花了 $p1 點，共 $p2 點';
   }
-
-  @override
-  String get mbd1c099ba2 => '目前版本';
 
   @override
   String get m63141a77bf => '護身符';
@@ -217,6 +212,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m84bb1ae656 => '選項';
+
+  @override
+  String get m7547833b7f => '技能變體';
 
   @override
   String get m65d05ab17f => '你的下一個版本';
@@ -427,6 +425,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m57d9f5cb7c => '樹尚未可用';
 
   @override
+  String get m748d0b0dbd => '已複製診斷資訊';
+
+  @override
   String get m7c2e51e000 => '對於完成的 PoB 樹，將 MCP 更新為 0.7.0。';
 
   @override
@@ -532,6 +533,12 @@ class AppLocalizationsZh extends AppLocalizations {
   String m65a1b960c7(String p0) {
     return '正在載入 $p0 的 LuaJIT 和 lua-utf8...';
   }
+
+  @override
+  String get m4f87fe4ac6 => '正在下載 Path of Building';
+
+  @override
+  String get ma3d462aeec => '正在下載 PoB MCP';
 
   @override
   String maafcfa710b(String p0, String p1) {
@@ -869,10 +876,20 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m6f37ba2ab7 => '無法關閉 PoB。';
 
   @override
+  String m8f6df28a92(String p0) {
+    return '無法關閉 Lua 工作階段：$p0';
+  }
+
+  @override
   String get m46ed8403b7 => '無法啟動 PoB。';
 
   @override
   String get m6dc7d664a3 => '无法保护连接目录 MCP';
+
+  @override
+  String m8644bfa547(String p0) {
+    return '無法停用先前的 MCP 編輯器：$p0';
+  }
 
   @override
   String m725605a944(String p0) {
@@ -950,6 +967,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String mbefc941808(String p0) {
     return '無法讀取節點：$p0';
   }
+
+  @override
+  String get m5b0627d21c => '無法複製診斷資訊';
 
   @override
   String get m409f34eb59 => '無法保存群組';
@@ -1091,6 +1111,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get mbfea4c6fd4 => '新技能組';
 
   @override
+  String get maf3cd75c2f => '新的元件組合變更了目前開啟之流派的職業';
+
+  @override
   String get m282cf4ee16 => '新版本';
 
   @override
@@ -1139,7 +1162,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m124cd4a205 => '更新 MCP 以刪除技能';
 
   @override
-  String get m603e460bf5 => '更新';
+  String get m74e1571298 => '更新 PoB 和 MCP';
 
   @override
   String get m3d7df93803 => '更新建置列表';
@@ -1285,6 +1308,12 @@ class AppLocalizationsZh extends AppLocalizations {
   String get med31458051 => '無法存取 PoB 設定中的流派資料夾。';
 
   @override
+  String get m83ffb870fe => '已更新元件組合';
+
+  @override
+  String get meed4bbd10d => '元件組合已是最新版本';
+
+  @override
   String get m75160b86a8 => '參數';
 
   @override
@@ -1372,6 +1401,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m54ab473017 => '已連接 PoB 預設資料夾';
+
+  @override
+  String get mce1dabc47f => '正在連線至 Lua';
 
   @override
   String get m67f5d8880e => '連接 Lua';
@@ -1559,9 +1591,18 @@ class AppLocalizationsZh extends AppLocalizations {
   String get mfa4af9bbe7 => '檢查相容性';
 
   @override
+  String get m34f26e6d74 => '正在檢查 Git';
+
+  @override
+  String get m3cbe98277d => '正在檢查 Python';
+
+  @override
   String mfeb5830ec9(String p0) {
     return '發布檢查：HTTP $p0';
   }
+
+  @override
+  String get mf0c425d946 => '正在檢查發行版本';
 
   @override
   String get m25ee4bf0ec => '版本驗證已完成';
@@ -1571,6 +1612,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m6f4c708fbf => '安裝前軟體包檢查失敗';
+
+  @override
+  String get m908d1b1e7c => '正在檢查 Lua 相容性';
 
   @override
   String get m9353cfd5f6 => '相容性檢查：執行原始 Lua...';
@@ -1641,6 +1685,11 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m1e135b51f1 => '計算...';
+
+  @override
+  String m7fce31d207(String p0, String p1, String p2, String p3) {
+    return '$p0 $p1 的修訂版本不符：預期為 $p2，實際為 $p3。';
+  }
 
   @override
   String get m8d7bd9deb6 => '健康再生';
@@ -1782,6 +1831,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m332899f398 => '複製 XML';
 
   @override
+  String get m1fbb2aeab9 => '複製診斷資訊';
+
+  @override
   String get m99e87c373f => '复制Codex连接命令';
 
   @override
@@ -1807,6 +1859,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m126aa994ee => '重定向太多';
+
+  @override
+  String get mde2ce6f05b => '請先選擇兩個元件的版本';
 
   @override
   String get m70a5cadc50 => '首先透過pob_check_build取得最新的建置報告。';
@@ -2040,9 +2095,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m4d9acf3506 => '安裝組件以打開組裝體並獲得真正的計算。';
 
   @override
-  String get mb7cd6fae08 => '安裝';
-
-  @override
   String get mfdeaa71380 => '安裝元件';
 
   @override
@@ -2086,6 +2138,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String m913d7f855b(String p0) {
     return '某些圖示不可用：$p0';
   }
+
+  @override
+  String get mdab05cc16d => '技能部分';
 
   @override
   String get me24055fecd => '離下一階段還差什麼？';
@@ -2206,6 +2261,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m774193669c => 'Lua 回傳一棵空樹';
 
   @override
+  String get m152f871d87 => 'Lua 已結束';
+
+  @override
   String get mbb582808f3 => 'Lua 未回傳 XML 版本';
 
   @override
@@ -2312,13 +2370,8 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
       '導入系統，結構；斷言 sys.version_info >= (3,11) 且 struct.calcsize(\"P\") == 8, \"需要 64 位元 Python 3.11+\"';
 
   @override
-  String m9cde7cfc3f(String p0, String p1, String p2) {
-    return '$p0 $p1 準備好了。 git：$p2';
-  }
-
-  @override
-  String m606849adbd(String p0, String p1) {
-    return '已安裝 $p0 $p1';
+  String mad59a0d2ab(String p0, String p1, String p2) {
+    return '已下載 $p0 $p1。Git：$p2';
   }
 
   @override
@@ -2340,9 +2393,6 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String mb7b217c429(String p0, String p1, String p2) {
     return '$p0：花了 $p1 點，共 $p2 點';
   }
-
-  @override
-  String get mbd1c099ba2 => '目前版本';
 
   @override
   String get m63141a77bf => '護身符';
@@ -2386,6 +2436,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m84bb1ae656 => '選項';
+
+  @override
+  String get m7547833b7f => '技能變體';
 
   @override
   String get m65d05ab17f => '你的下一個版本';
@@ -2596,6 +2649,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m57d9f5cb7c => '樹尚未可用';
 
   @override
+  String get m748d0b0dbd => '已複製診斷資訊';
+
+  @override
   String get m7c2e51e000 => '對於完成的 PoB 樹，將 MCP 更新為 0.7.0。';
 
   @override
@@ -2701,6 +2757,12 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String m65a1b960c7(String p0) {
     return '正在載入 $p0 的 LuaJIT 和 lua-utf8...';
   }
+
+  @override
+  String get m4f87fe4ac6 => '正在下載 Path of Building';
+
+  @override
+  String get ma3d462aeec => '正在下載 PoB MCP';
 
   @override
   String maafcfa710b(String p0, String p1) {
@@ -3038,10 +3100,20 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m6f37ba2ab7 => '無法關閉 PoB。';
 
   @override
+  String m8f6df28a92(String p0) {
+    return '無法關閉 Lua 工作階段：$p0';
+  }
+
+  @override
   String get m46ed8403b7 => '無法啟動 PoB。';
 
   @override
   String get m6dc7d664a3 => '无法保护连接目录 MCP';
+
+  @override
+  String m8644bfa547(String p0) {
+    return '無法停用先前的 MCP 編輯器：$p0';
+  }
 
   @override
   String m725605a944(String p0) {
@@ -3119,6 +3191,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String mbefc941808(String p0) {
     return '無法讀取節點：$p0';
   }
+
+  @override
+  String get m5b0627d21c => '無法複製診斷資訊';
 
   @override
   String get m409f34eb59 => '無法保存群組';
@@ -3260,6 +3335,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get mbfea4c6fd4 => '新技能組';
 
   @override
+  String get maf3cd75c2f => '新的元件組合變更了目前開啟之流派的職業';
+
+  @override
   String get m282cf4ee16 => '新版本';
 
   @override
@@ -3308,7 +3386,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m124cd4a205 => '更新 MCP 以刪除技能';
 
   @override
-  String get m603e460bf5 => '更新';
+  String get m74e1571298 => '更新 PoB 和 MCP';
 
   @override
   String get m3d7df93803 => '更新建置列表';
@@ -3454,6 +3532,12 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get med31458051 => '無法存取 PoB 設定中的流派資料夾。';
 
   @override
+  String get m83ffb870fe => '已更新元件組合';
+
+  @override
+  String get meed4bbd10d => '元件組合已是最新版本';
+
+  @override
   String get m75160b86a8 => '參數';
 
   @override
@@ -3541,6 +3625,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m54ab473017 => '已連接 PoB 預設資料夾';
+
+  @override
+  String get mce1dabc47f => '正在連線至 Lua';
 
   @override
   String get m67f5d8880e => '連接 Lua';
@@ -3728,9 +3815,18 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get mfa4af9bbe7 => '檢查相容性';
 
   @override
+  String get m34f26e6d74 => '正在檢查 Git';
+
+  @override
+  String get m3cbe98277d => '正在檢查 Python';
+
+  @override
   String mfeb5830ec9(String p0) {
     return '發布檢查：HTTP $p0';
   }
+
+  @override
+  String get mf0c425d946 => '正在檢查發行版本';
 
   @override
   String get m25ee4bf0ec => '版本驗證已完成';
@@ -3740,6 +3836,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m6f4c708fbf => '安裝前軟體包檢查失敗';
+
+  @override
+  String get m908d1b1e7c => '正在檢查 Lua 相容性';
 
   @override
   String get m9353cfd5f6 => '相容性檢查：執行原始 Lua...';
@@ -3810,6 +3909,11 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m1e135b51f1 => '計算...';
+
+  @override
+  String m7fce31d207(String p0, String p1, String p2, String p3) {
+    return '$p0 $p1 的修訂版本不符：預期為 $p2，實際為 $p3。';
+  }
 
   @override
   String get m8d7bd9deb6 => '健康再生';
@@ -3951,6 +4055,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m332899f398 => '複製 XML';
 
   @override
+  String get m1fbb2aeab9 => '複製診斷資訊';
+
+  @override
   String get m99e87c373f => '复制Codex连接命令';
 
   @override
@@ -3976,6 +4083,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m126aa994ee => '重定向太多';
+
+  @override
+  String get mde2ce6f05b => '請先選擇兩個元件的版本';
 
   @override
   String get m70a5cadc50 => '首先透過pob_check_build取得最新的建置報告。';
@@ -4209,9 +4319,6 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m4d9acf3506 => '安裝組件以打開組裝體並獲得真正的計算。';
 
   @override
-  String get mb7cd6fae08 => '安裝';
-
-  @override
   String get mfdeaa71380 => '安裝元件';
 
   @override
@@ -4255,6 +4362,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String m913d7f855b(String p0) {
     return '某些圖示不可用：$p0';
   }
+
+  @override
+  String get mdab05cc16d => '技能部分';
 
   @override
   String get me24055fecd => '離下一階段還差什麼？';

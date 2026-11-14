@@ -76,7 +76,11 @@ class WorkspaceView extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Expanded(
-                  child: _EditorStage(model: model, shell: shell),
+                  child: _EditorStage(
+                    key: ObjectKey(model.engine),
+                    model: model,
+                    shell: shell,
+                  ),
                 ),
                 if (MediaQuery.sizeOf(context).width >= 1100) ...[
                   const SizedBox(width: 20),
@@ -406,7 +410,7 @@ class _TabButton extends StatelessWidget {
 }
 
 class _EditorStage extends StatefulWidget {
-  const _EditorStage({required this.model, required this.shell});
+  const _EditorStage({super.key, required this.model, required this.shell});
   final WorkshopCubit model;
   final ShellBloc shell;
   @override
@@ -447,7 +451,7 @@ class _EditorStageState extends State<_EditorStage>
             ItemsView(model: widget.model),
             SkillsView(model: widget.model),
             ConditionsView(model: widget.model),
-            CalculationsView(report: document.report),
+            CalculationsView(report: document.report, model: widget.model),
           ],
         ),
       );

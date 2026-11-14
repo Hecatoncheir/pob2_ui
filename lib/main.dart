@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'data/appearance_repository.dart';
+import 'installer_check.dart';
 import 'ui/appearance_bloc.dart';
 
 import 'package:material_ui/material_ui.dart';
@@ -23,6 +26,7 @@ import 'ui/exit_protection.dart';
 
 Future<void> main(List<String> arguments) async {
   WidgetsFlutterBinding.ensureInitialized();
+  final check = _installerCheckStage();
   final root = InstallationStore.defaultRoot();
   final model = WorkshopCubit(
     ComponentRepository(store: InstallationStore(root)),
@@ -66,13 +70,25 @@ Future<void> main(List<String> arguments) async {
         language: language,
         interfaceScale: interfaceScale,
         workspacePreferences: workspacePreferences,
-        initialization: initialization,
+        initialization: check == null ? initialization : null,
       ),
     ),
   );
   WidgetsBinding.instance.addPostFrameCallback((_) async {
     await markStartupHealthy(arguments);
+    if (check != null) {
+      exit(await checkInstalledBuild(model, initialization, check));
+    }
     await updates.initialize();
   });
-  language.add(const LanguageLoadRequested());
+  if (check == null) language.add(const LanguageLoadRequested());
+}
+
+String? _installerCheckStage() {
+  final environment = Platform.environment;
+  if (environment['POB2_UI_HOME']?.isNotEmpty != true) return null;
+  return switch (environment['POB2_UI_INSTALLER_CHECK']) {
+    final stage? when stage == 'save' || stage == 'restore' => stage,
+    _ => null,
+  };
 }

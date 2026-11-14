@@ -2,10 +2,12 @@ import 'dart:convert';
 import 'dart:io';
 
 import '../domain/component.dart';
+import 'atomic_text_file.dart';
 
 class InstallationStore {
   InstallationStore(this.root);
   final Directory root;
+  final _files = AtomicTextFile();
   Installations previous = {};
   File get _manifest => File.fromUri(root.uri.resolve('components.json'));
 
@@ -36,13 +38,26 @@ class InstallationStore {
   }
 
   Future<Installations> load() async {
-    if (!await _manifest.exists()) return {};
+    final saved = await read();
+    previous = saved.previous;
+    return saved.active;
+  }
+
+  Future<({Installations active, Installations previous})> read() async {
+    if (!await _manifest.exists()) {
+      return (
+        active: <Component, Installation>{},
+        previous: <Component, Installation>{},
+      );
+    }
     final data =
         jsonDecode(await _manifest.readAsString()) as Map<String, dynamic>;
     if (data['schema'] != 1)
       throw const FormatException('Неизвестная версия настроек');
-    previous = _decode(data['previous'] as Map<String, dynamic>);
-    return _decode(data['active'] as Map<String, dynamic>);
+    return (
+      active: _decode(data['active'] as Map<String, dynamic>),
+      previous: _decode(data['previous'] as Map<String, dynamic>),
+    );
   }
 
   Installations _decode(Map<String, dynamic> data) => {
@@ -54,17 +69,14 @@ class InstallationStore {
   };
 
   Future<void> save(Installations active, Installations old) async {
-    await root.create(recursive: true);
-    final temporary = File.fromUri(root.uri.resolve('components.json.tmp'));
-    await temporary.writeAsString(
+    await _files.write(
+      _manifest,
       const JsonEncoder.withIndent('  ').convert({
         'schema': 1,
         'active': _encode(active),
         'previous': _encode(old),
       }),
-      flush: true,
     );
-    await temporary.rename(_manifest.path);
     previous = Map.of(old);
   }
 
