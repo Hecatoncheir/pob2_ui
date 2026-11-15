@@ -89,6 +89,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get mbf7bbb22e3 => 'Lua 已連接';
 
   @override
+  String get m3717fab485 => 'Lua 套用了不同的計算條件';
+
+  @override
   String m12e8f27f62(String p0) {
     return 'MCP 已結束。 $p0';
   }
@@ -177,6 +180,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get mc11be494c0 => '物品基礎';
 
   @override
+  String get m7d4b534b8d => '未昇華';
+
+  @override
   String get m0792a052a1 => '無限制';
 
   @override
@@ -198,6 +204,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m2b96f1cb20 => '帳戶上沒有可用的字元。';
+
+  @override
+  String get mfd96d5c7e6 => '此組別沒有主動技能';
 
   @override
   String m1163ee245e(String p0) {
@@ -313,6 +322,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m5b1968a662 => '一切為了工作';
 
   @override
+  String get m99068c6fe4 => '第二個流派';
+
+  @override
   String get m33813b1d8e => '選擇值';
 
   @override
@@ -332,6 +344,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m4a02239801 => '選擇建置建置資料夾的路徑。';
+
+  @override
+  String get m956c346c46 => '選擇一個流派';
 
   @override
   String get mb5cf5f66bc => '選擇與建置路徑中指定的相同建置資料夾。';
@@ -358,9 +373,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m8d6db8b168 => '指派此節點後沒有任何變更。';
 
   @override
-  String get m350c155b79 => '目前可以透過 XML 選擇掌握效果。';
-
-  @override
   String get m9cf249e2a8 => '已選擇';
 
   @override
@@ -368,6 +380,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m38aa0ac1ff => '選擇';
+
+  @override
+  String get m0b27387ff0 => '選擇 XML 檔案';
 
   @override
   String get m88d4b06d56 => '選擇資料夾';
@@ -441,6 +456,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m9a923fd47c => '接下來的階段無需購買任何物品';
+
+  @override
+  String get m10db96c5ff => '請先設定 PoB 和 MCP 再進行比較';
 
   @override
   String get mbd97478bba => '透過 Wine 管理 PoB 視窗需要 X11 或 XWayland。';
@@ -782,6 +800,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get mb862bf4e42 => '此距離沒有合適的節點。';
+
+  @override
+  String get me55cf2491b => '天賦樹配置';
 
   @override
   String get mf71a076c69 => '武器套裝';
@@ -1320,6 +1341,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m1971cfb84c => '被動';
 
   @override
+  String get m3e11e6ffe0 => '第一個流派';
+
+  @override
   String get m8188a57c48 => '傳輸大於預期大小';
 
   @override
@@ -1777,6 +1801,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m407f871778 => '重置';
 
   @override
+  String get mffc0a40a76 => '重置天賦樹';
+
+  @override
   String get mde7b2b9b0d => '重置組合';
 
   @override
@@ -1861,6 +1888,12 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m126aa994ee => '重定向太多';
 
   @override
+  String get md3dbbaea9b => '變更職業需要連接或重置天賦樹';
+
+  @override
+  String get mba5ec4071c => '變更職業或昇華';
+
+  @override
   String get mde2ce6f05b => '請先選擇兩個元件的版本';
 
   @override
@@ -1885,7 +1918,13 @@ class AppLocalizationsZh extends AppLocalizations {
   String get mf3f1d96087 => '自己的房產';
 
   @override
+  String get m7d3f9a98b5 => '連接可能消耗天賦點。重置會取消目前天賦樹中已分配的所有節點。';
+
+  @override
   String get m9071a1a6f4 => '與 Lua 的連接遺失';
+
+  @override
+  String get mfad90441a7 => '連接天賦樹';
 
   @override
   String get m7ab8e7349a => '建立角色或從 PoB 解鎖 XML。所有指標均由Lua計算。';
@@ -1929,10 +1968,16 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m651f75da98 => '購物清單';
 
   @override
+  String get m55e18d4647 => '流派比較';
+
+  @override
   String get m868f6bf490 => '比較階段';
 
   @override
   String get m42098f4d60 => '與其他階段比較';
+
+  @override
+  String get m9dba47b33c => '比較流派';
 
   @override
   String get mc4268e6843 => '平均命中';
@@ -1978,6 +2023,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m2ec842e2f5 => '重定向沒有位址';
+
+  @override
+  String get m906bf51bc3 => '此節點沒有可用的專精效果。';
 
   @override
   String get m07cb650874 => '刪除';
@@ -2034,6 +2082,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get mdf00fd3d66 => '躲避';
 
   @override
+  String get mdca021ee93 => '選擇要搭配輔助寶石的技能';
+
+  @override
   String get m1a92bc6899 => '未選擇技能';
 
   @override
@@ -2081,6 +2132,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m7186793dd5 => '計算條件';
+
+  @override
+  String get mec1443af90 => '計算條件與隊伍設定取自第一個流派。';
 
   @override
   String get m0a3fddcd95 => '安裝 64 位元 Python 3.11 或更新版本，再重新啟動 PoB II。';
@@ -2210,6 +2264,14 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get me39133631f => '效果';
+
+  @override
+  String m026f42945f(String p0) {
+    return '專精效果 $p0';
+  }
+
+  @override
+  String get m08658b2273 => '未儲存專精效果';
 
   @override
   String get mf83e6d742f => '有效健康';
@@ -2313,6 +2375,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get mbf7bbb22e3 => 'Lua 已連接';
 
   @override
+  String get m3717fab485 => 'Lua 套用了不同的計算條件';
+
+  @override
   String m12e8f27f62(String p0) {
     return 'MCP 已結束。 $p0';
   }
@@ -2401,6 +2466,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get mc11be494c0 => '物品基礎';
 
   @override
+  String get m7d4b534b8d => '未昇華';
+
+  @override
   String get m0792a052a1 => '無限制';
 
   @override
@@ -2422,6 +2490,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m2b96f1cb20 => '帳戶上沒有可用的字元。';
+
+  @override
+  String get mfd96d5c7e6 => '此組別沒有主動技能';
 
   @override
   String m1163ee245e(String p0) {
@@ -2537,6 +2608,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m5b1968a662 => '一切為了工作';
 
   @override
+  String get m99068c6fe4 => '第二個流派';
+
+  @override
   String get m33813b1d8e => '選擇值';
 
   @override
@@ -2556,6 +2630,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m4a02239801 => '選擇建置建置資料夾的路徑。';
+
+  @override
+  String get m956c346c46 => '選擇一個流派';
 
   @override
   String get mb5cf5f66bc => '選擇與建置路徑中指定的相同建置資料夾。';
@@ -2582,9 +2659,6 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m8d6db8b168 => '指派此節點後沒有任何變更。';
 
   @override
-  String get m350c155b79 => '目前可以透過 XML 選擇掌握效果。';
-
-  @override
   String get m9cf249e2a8 => '已選擇';
 
   @override
@@ -2592,6 +2666,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m38aa0ac1ff => '選擇';
+
+  @override
+  String get m0b27387ff0 => '選擇 XML 檔案';
 
   @override
   String get m88d4b06d56 => '選擇資料夾';
@@ -2665,6 +2742,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m9a923fd47c => '接下來的階段無需購買任何物品';
+
+  @override
+  String get m10db96c5ff => '請先設定 PoB 和 MCP 再進行比較';
 
   @override
   String get mbd97478bba => '透過 Wine 管理 PoB 視窗需要 X11 或 XWayland。';
@@ -3006,6 +3086,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get mb862bf4e42 => '此距離沒有合適的節點。';
+
+  @override
+  String get me55cf2491b => '天賦樹配置';
 
   @override
   String get mf71a076c69 => '武器套裝';
@@ -3544,6 +3627,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m1971cfb84c => '被動';
 
   @override
+  String get m3e11e6ffe0 => '第一個流派';
+
+  @override
   String get m8188a57c48 => '傳輸大於預期大小';
 
   @override
@@ -4001,6 +4087,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m407f871778 => '重置';
 
   @override
+  String get mffc0a40a76 => '重置天賦樹';
+
+  @override
   String get mde7b2b9b0d => '重置組合';
 
   @override
@@ -4085,6 +4174,12 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m126aa994ee => '重定向太多';
 
   @override
+  String get md3dbbaea9b => '變更職業需要連接或重置天賦樹';
+
+  @override
+  String get mba5ec4071c => '變更職業或昇華';
+
+  @override
   String get mde2ce6f05b => '請先選擇兩個元件的版本';
 
   @override
@@ -4109,7 +4204,13 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get mf3f1d96087 => '自己的房產';
 
   @override
+  String get m7d3f9a98b5 => '連接可能消耗天賦點。重置會取消目前天賦樹中已分配的所有節點。';
+
+  @override
   String get m9071a1a6f4 => '與 Lua 的連接遺失';
+
+  @override
+  String get mfad90441a7 => '連接天賦樹';
 
   @override
   String get m7ab8e7349a => '建立角色或從 PoB 解鎖 XML。所有指標均由Lua計算。';
@@ -4153,10 +4254,16 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m651f75da98 => '購物清單';
 
   @override
+  String get m55e18d4647 => '流派比較';
+
+  @override
   String get m868f6bf490 => '比較階段';
 
   @override
   String get m42098f4d60 => '與其他階段比較';
+
+  @override
+  String get m9dba47b33c => '比較流派';
 
   @override
   String get mc4268e6843 => '平均命中';
@@ -4202,6 +4309,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m2ec842e2f5 => '重定向沒有位址';
+
+  @override
+  String get m906bf51bc3 => '此節點沒有可用的專精效果。';
 
   @override
   String get m07cb650874 => '刪除';
@@ -4258,6 +4368,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get mdf00fd3d66 => '躲避';
 
   @override
+  String get mdca021ee93 => '選擇要搭配輔助寶石的技能';
+
+  @override
   String get m1a92bc6899 => '未選擇技能';
 
   @override
@@ -4305,6 +4418,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m7186793dd5 => '計算條件';
+
+  @override
+  String get mec1443af90 => '計算條件與隊伍設定取自第一個流派。';
 
   @override
   String get m0a3fddcd95 => '安裝 64 位元 Python 3.11 或更新版本，再重新啟動 PoB II。';
@@ -4434,6 +4550,14 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get me39133631f => '效果';
+
+  @override
+  String m026f42945f(String p0) {
+    return '專精效果 $p0';
+  }
+
+  @override
+  String get m08658b2273 => '未儲存專精效果';
 
   @override
   String get mf83e6d742f => '有效健康';

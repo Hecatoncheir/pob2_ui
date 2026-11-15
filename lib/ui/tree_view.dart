@@ -20,8 +20,11 @@ import '../domain/tree_geometry.dart';
 import 'core/motion.dart';
 import 'core/spark_art.dart';
 import 'core/spark_theme.dart';
+import 'core/ui_translation.dart';
 import 'workshop_cubit.dart';
 import 'tree_canvas.dart';
+import 'tree_class_dialog.dart';
+import 'tree_mastery_dialog.dart';
 import 'tree_jewel_artwork.dart';
 import 'original_tree_artwork.dart';
 import 'attribute_picker.dart';
@@ -451,6 +454,8 @@ class _TreeViewState extends State<TreeView>
         ),
       ),
       const SizedBox(width: 6),
+      _specPicker(),
+      TreeClassButton(widget.model),
       ArtIconButton.material(
         Icons.manage_search_rounded,
         key: const Key('node-power-toggle'),
@@ -463,6 +468,41 @@ class _TreeViewState extends State<TreeView>
       ArtIconButton('fit', label: 'Показать всё дерево', onPressed: _fit),
     ],
   );
+
+  Widget _specPicker() {
+    final state = widget.model.state;
+    final report = state.report!;
+    final specs = report.treeSpecs;
+    final selected = specs
+        .where((spec) => spec.id == report.activeTreeSpec)
+        .firstOrNull;
+    if (selected == null ||
+        specs.length < 2 ||
+        !widget.model.engine.tools.contains('pob_tree_options')) {
+      return const SizedBox.shrink();
+    }
+    return PopupMenuButton<int>(
+      key: const Key('tree-spec-picker'),
+      icon: const Icon(Icons.account_tree_outlined, size: 20),
+      tooltip:
+          '${translateUi(context, 'Набор дерева')} · ${_specTitle(selected)}',
+      enabled: !state.busy && state.document?.stale == false,
+      itemBuilder: (_) => [
+        for (final spec in specs)
+          CheckedPopupMenuItem(
+            value: spec.id,
+            checked: spec.id == selected.id,
+            enabled: spec.id != selected.id,
+            child: Text(_specTitle(spec)),
+          ),
+      ],
+      onSelected: widget.model.selectTreeSpec,
+    );
+  }
+
+  String _specTitle(({int id, String title}) spec) => spec.title.trim().isEmpty
+      ? '${translateUi(context, 'Набор дерева')} ${spec.id}'
+      : spec.title;
 
   void _togglePower() {
     setState(() => powerVisible = !powerVisible);
@@ -669,11 +709,15 @@ class _TreeViewState extends State<TreeView>
 
   Future<void> _selectNode(TreeNode node) async {
     editorFocus.requestFocus();
+    if (node.kind == 'Mastery') {
+      showTreeMastery(context, widget.model, node);
+      return;
+    }
     try {
       final attribute =
           node.isAttribute ?? await widget.model.isAttributeNode(node.id);
       if (!mounted || widget.model.state.busy) return;
-      if (attribute || node.kind == 'Mastery' && !node.allocated) {
+      if (attribute) {
         sparkDialog<void>(context, _NodeDialog(widget.model, node));
       } else {
         widget.model.treeAction(node.id, node.allocated);
@@ -688,8 +732,12 @@ class _TreeViewState extends State<TreeView>
 
   void _detailsAt(Offset point) {
     final node = scene.nodes[_hit(point)];
-    if (node != null)
+    if (node == null || widget.model.state.busy) return;
+    if (node.kind == 'Mastery') {
+      showTreeMastery(context, widget.model, node);
+    } else {
       sparkDialog<void>(context, _NodeDialog(widget.model, node));
+    }
   }
 
   void _hover(Offset local, Offset global) {
@@ -796,15 +844,8 @@ class _NodeDialogState extends State<_NodeDialog> {
       'id': widget.node.id,
       'compare': false,
     });
-    final catalog = await widget.model.engine.call('pob_catalog', {
-      'kind': 'nodes',
-      'query': '${widget.node.id}',
-      'limit': 200,
-    });
-    final node = jsonRows(catalog['entries'])
-        .where((entry) => entry['id'] == widget.node.id)
-        .firstOrNull;
-    final attributes = jsonRows(node?['attributeOptions']);
+    final node = await widget.model.readTreeNode(widget.node.id);
+    final attributes = jsonRows(node['attributeOptions']);
     final index = attributes.indexWhere(
       (option) => option['name'] == widget.node.name,
     );
@@ -837,11 +878,7 @@ class _NodeDialogState extends State<_NodeDialog> {
                 child: const AppText('Вернуть очко'),
               ),
             if (snapshot.hasData &&
-                !{
-                  'Mastery',
-                  'ClassStart',
-                  'AscendClassStart',
-                }.contains(widget.node.kind))
+                !{'ClassStart', 'AscendClassStart'}.contains(widget.node.kind))
               FilledButton(
                 onPressed: _canApply(snapshot.data!.attributes) ? _apply : null,
                 child: AppText(_actionLabel(snapshot.data!.attributes)),
@@ -875,11 +912,6 @@ class _NodeDialogState extends State<_NodeDialog> {
             options: attributes,
             value: attribute,
             onChanged: (value) => setState(() => attribute = value),
-          ),
-        if (widget.node.kind == 'Mastery')
-          AppText(
-            'Выбор эффекта мастерства пока доступен через XML.',
-            style: TextStyle(color: Spark.of(context).muted),
           ),
       ],
     );

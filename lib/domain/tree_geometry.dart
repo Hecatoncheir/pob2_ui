@@ -3,6 +3,8 @@ import 'dart:typed_data';
 import 'build_report.dart';
 import 'original_tree_scene.dart';
 
+typedef TreeMastery = ({Map<int, List<String>> effects, int? activeEffect});
+
 class TreeNode {
   const TreeNode({
     required this.id,

@@ -30,6 +30,8 @@ import 'mcp_editor_cubit.dart';
 import '../domain/tree_allocation_mode.dart';
 import '../data/xml_file_service.dart';
 import '../data/game_catalog_repository.dart';
+import '../data/saved_build_comparison.dart';
+import '../domain/build_comparison.dart';
 import '../domain/build_edit_result.dart';
 
 typedef _BuildSnapshot = ({String xml, String title});
@@ -201,6 +203,18 @@ class WorkshopCubit extends Cubit<WorkshopState> {
 
   bool get ready => components.active.length == Component.values.length;
   bool get luaReady => engine.connected && state.classes.isNotEmpty;
+
+  Future<BuildComparison> compareSavedBuilds(
+    String baselineXml,
+    String candidateXml,
+  ) async {
+    if (!ready || _closing || isClosed) {
+      throw StateError('Для сравнения подготовьте PoB и MCP');
+    }
+    final pair = Map<Component, Installation>.unmodifiable(components.active);
+    return compareSavedXml(_createEngine(), pair, baselineXml, candidateXml);
+  }
+
   String get _componentSource => _pairSource(components.active);
 
   String _pairSource(Installations pair) =>
@@ -1207,7 +1221,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     _pushUndo(xml, title: previousTitle);
   });
 
-  Future<bool> isAttributeNode(int id) async {
+  Future<JsonMap> readTreeNode(int id) async {
     final catalog = await engine.call('pob_catalog', {
       'kind': 'nodes',
       'query': '$id',
@@ -1218,17 +1232,54 @@ class WorkshopCubit extends Cubit<WorkshopState> {
         .firstOrNull;
     if (node == null)
       throw const FormatException('Lua не вернул сведения об узле');
-    return jsonRows(node['attributeOptions']).isNotEmpty;
+    return node;
   }
 
-  Future<void> treeAction(int id, bool allocated, {int? attribute}) =>
-      _changeBuild(() async {
-        await engine.call('pob_tree_action', {
-          'id': id,
-          'action': allocated && attribute == null ? 'refund' : 'allocate',
-          if (attribute != null) 'attribute': attribute,
-        });
-      });
+  Future<bool> isAttributeNode(int id) async =>
+      jsonRows((await readTreeNode(id))['attributeOptions']).isNotEmpty;
+
+  Future<TreeMastery> readTreeMastery(int id) async {
+    final node = await readTreeNode(id);
+    final document = PobBuildDocument(await _currentXml());
+    return (
+      effects: {
+        for (final entry in jsonRows(node['masteryEffects']))
+          if (entry['effect'] case final int effectId)
+            effectId: jsonStrings(entry['stats']),
+      },
+      activeEffect: document.masteryEffects[id],
+    );
+  }
+
+  Future<BuildEditResult> selectMastery(int nodeId, int effectId) =>
+      _changeBuild(
+        () async {
+          await engine.call('pob_tree_action', {
+            'id': nodeId,
+            'action': 'allocate',
+            'mastery': effectId,
+          });
+        },
+        validate: (xml) {
+          final document = PobBuildDocument(xml);
+          if (document.masteryEffects[nodeId] != effectId ||
+              !document.allocatedNodes.contains(nodeId)) {
+            throw const FormatException('Эффект мастерства не сохранён');
+          }
+        },
+      );
+
+  Future<BuildEditResult> treeAction(
+    int id,
+    bool allocated, {
+    int? attribute,
+  }) => _changeBuild(() async {
+    await engine.call('pob_tree_action', {
+      'id': id,
+      'action': allocated && attribute == null ? 'refund' : 'allocate',
+      if (attribute != null) 'attribute': attribute,
+    });
+  });
 
   Future<void> selectTreeMode(TreeAllocationMode mode) => _run(() async {
     if (state.report == null) return;
@@ -1237,6 +1288,31 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     await engine.call('pob_tree_options', {'mode': mode.luaValue});
     _update(state.copyWith(treeMode: mode));
     await _readReport();
+  });
+
+  Future<BuildEditResult> selectTreeSpec(int id) => _changeBuild(() async {
+    await engine.call('pob_tree_options', {'spec': id});
+    // MCP применяет mode к текущему набору до обработки spec.
+    await engine.call('pob_tree_options', {'mode': state.treeMode.luaValue});
+  });
+
+  Future<BuildEditResult> selectTreeClass({
+    required int classId,
+    required int ascendancyId,
+    bool connect = false,
+    bool reset = false,
+  }) => _changeBuild(() async {
+    final sameClass = state.classes.any(
+      (entry) =>
+          entry['id'] == classId &&
+          entry['name'] == state.report!.characterClass,
+    );
+    await engine.call('pob_tree_options', {
+      if (!sameClass) 'class': classId,
+      'ascendancy': ascendancyId,
+      if (connect) 'connect': true,
+      if (reset) 'reset': true,
+    });
   });
 
   Future<void> _restoreTreeMode([McpClient? client]) async {

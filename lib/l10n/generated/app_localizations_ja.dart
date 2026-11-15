@@ -89,6 +89,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get mbf7bbb22e3 => 'Lua 接続しました';
 
   @override
+  String get m3717fab485 => 'Lua による計算条件が一致しませんでした';
+
+  @override
   String m12e8f27f62(String p0) {
     return 'MCPは終了しました。 $p0';
   }
@@ -178,6 +181,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get mc11be494c0 => 'アイテムベース';
 
   @override
+  String get m7d4b534b8d => 'アセンダンシーなし';
+
+  @override
   String get m0792a052a1 => '制限なし';
 
   @override
@@ -199,6 +205,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m2b96f1cb20 => 'アカウントに使用できるキャラクターがありません。';
+
+  @override
+  String get mfd96d5c7e6 => 'グループにアクティブスキルがありません';
 
   @override
   String m1163ee245e(String p0) {
@@ -314,6 +323,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m5b1968a662 => 'すべては仕事のため';
 
   @override
+  String get m99068c6fe4 => '2つ目のビルド';
+
+  @override
   String get m33813b1d8e => 'Select value';
 
   @override
@@ -333,6 +345,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m4a02239801 => 'ビルド フォルダーのパスを選択します。';
+
+  @override
+  String get m956c346c46 => 'ビルドを選択';
 
   @override
   String get mb5cf5f66bc => 'ビルドのパスで指定したものと同じビルド フォルダーを選択します。';
@@ -359,9 +374,6 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m8d6db8b168 => 'このノードの割り当てによる変更はありません。';
 
   @override
-  String get m350c155b79 => 'マスタリー効果の選択は現在、XML を通じて利用できます。';
-
-  @override
   String get m9cf249e2a8 => '選択済み';
 
   @override
@@ -369,6 +381,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m38aa0ac1ff => 'Select';
+
+  @override
+  String get m0b27387ff0 => 'XML ファイルを選択';
 
   @override
   String get m88d4b06d56 => 'フォルダーを選択';
@@ -442,6 +457,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m9a923fd47c => '今後の段階に必要な購入品はありません';
+
+  @override
+  String get m10db96c5ff => '比較するには PoB と MCP をセットアップしてください';
 
   @override
   String get mbd97478bba => 'Wine で PoB のウィンドウを操作するには X11 または XWayland が必要です。';
@@ -784,6 +802,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get mb862bf4e42 => 'この距離には適切なノードがありません。';
+
+  @override
+  String get me55cf2491b => 'パッシブツリーセット';
 
   @override
   String get mf71a076c69 => '武器セット';
@@ -1323,6 +1344,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m1971cfb84c => 'パッシブ';
 
   @override
+  String get m3e11e6ffe0 => '1つ目のビルド';
+
+  @override
   String get m8188a57c48 => '転送サイズが予想より大きい';
 
   @override
@@ -1780,6 +1804,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m407f871778 => 'リセット';
 
   @override
+  String get mffc0a40a76 => 'ツリーをリセット';
+
+  @override
   String get mde7b2b9b0d => '組み合わせをリセット';
 
   @override
@@ -1864,6 +1891,12 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m126aa994ee => 'リダイレクトが多すぎます';
 
   @override
+  String get md3dbbaea9b => 'クラスを変更するにはツリーの接続またはリセットが必要です';
+
+  @override
+  String get mba5ec4071c => 'クラスまたはアセンダンシーを変更';
+
+  @override
   String get mde2ce6f05b => '先に両方のコンポーネントのバージョンを選択してください';
 
   @override
@@ -1888,7 +1921,14 @@ class AppLocalizationsJa extends AppLocalizations {
   String get mf3f1d96087 => '独自のプロパティ';
 
   @override
+  String get m7d3f9a98b5 =>
+      '接続にはパッシブポイントを消費する場合があります。リセットすると現在のツリーで割り当てたノードがすべて解除されます。';
+
+  @override
   String get m9071a1a6f4 => 'Lua への接続が失われました';
+
+  @override
+  String get mfad90441a7 => 'ツリーを接続';
 
   @override
   String get m7ab8e7349a =>
@@ -1934,10 +1974,16 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m651f75da98 => '購入リスト';
 
   @override
+  String get m55e18d4647 => 'ビルド比較';
+
+  @override
   String get m868f6bf490 => 'ステージを比較';
 
   @override
   String get m42098f4d60 => '別のステージと比較';
+
+  @override
+  String get m9dba47b33c => 'ビルドを比較';
 
   @override
   String get mc4268e6843 => '平均ヒット';
@@ -1983,6 +2029,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m2ec842e2f5 => 'リダイレクトにはアドレスがありません';
+
+  @override
+  String get m906bf51bc3 => 'このノードには利用可能なマスタリー効果がありません。';
 
   @override
   String get m07cb650874 => '削除';
@@ -2039,6 +2088,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get mdf00fd3d66 => '回避';
 
   @override
+  String get mdca021ee93 => 'サポート候補を表示するスキル';
+
+  @override
   String get m1a92bc6899 => 'スキルが選択されていません';
 
   @override
@@ -2086,6 +2138,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m7186793dd5 => '計算条件';
+
+  @override
+  String get mec1443af90 => '計算条件とパーティ設定は1つ目のビルドから取得します。';
 
   @override
   String get m0a3fddcd95 =>
@@ -2217,6 +2272,14 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get me39133631f => '効果';
+
+  @override
+  String m026f42945f(String p0) {
+    return 'マスタリー効果 $p0';
+  }
+
+  @override
+  String get m08658b2273 => 'マスタリー効果を保存できませんでした';
 
   @override
   String get mf83e6d742f => '効果的な健康';

@@ -263,6 +263,12 @@ abstract class AppLocalizations {
   /// **'Lua connected'**
   String get mbf7bbb22e3;
 
+  /// Lua применил разные условия расчёта
+  ///
+  /// In en, this message translates to:
+  /// **'Lua applied different calculation settings'**
+  String get m3717fab485;
+
   /// MCP завершился. {p0}
   ///
   /// In en, this message translates to:
@@ -413,6 +419,12 @@ abstract class AppLocalizations {
   /// **'Item base'**
   String get mc11be494c0;
 
+  /// Без восхождения
+  ///
+  /// In en, this message translates to:
+  /// **'No ascendancy'**
+  String get m7d4b534b8d;
+
   /// Без ограничения
   ///
   /// In en, this message translates to:
@@ -454,6 +466,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'There are no characters available on the account.'**
   String get m2b96f1cb20;
+
+  /// В группе нет активных умений
+  ///
+  /// In en, this message translates to:
+  /// **'The group has no active skills'**
+  String get mfd96d5c7e6;
 
   /// В компоненте отсутствует {p0}. Рабочая версия сохранена.
   ///
@@ -677,6 +695,12 @@ abstract class AppLocalizations {
   /// **'Everything for work'**
   String get m5b1968a662;
 
+  /// Вторая сборка
+  ///
+  /// In en, this message translates to:
+  /// **'Second build'**
+  String get m99068c6fe4;
+
   /// Выберите значение
   ///
   /// In en, this message translates to:
@@ -718,6 +742,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Select the Path of Building build folder.'**
   String get m4a02239801;
+
+  /// Выберите сборку
+  ///
+  /// In en, this message translates to:
+  /// **'Choose a build'**
+  String get m956c346c46;
 
   /// Выберите ту же папку сборок, которая указана в Path of Building.
   ///
@@ -767,12 +797,6 @@ abstract class AppLocalizations {
   /// **'No changes from allocating this node.'**
   String get m8d6db8b168;
 
-  /// Выбор эффекта мастерства пока доступен через XML.
-  ///
-  /// In en, this message translates to:
-  /// **'The choice of mastery effect is currently available through XML.'**
-  String get m350c155b79;
-
   /// Выбрано
   ///
   /// In en, this message translates to:
@@ -790,6 +814,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Select'**
   String get m38aa0ac1ff;
+
+  /// Выбрать XML-файл
+  ///
+  /// In en, this message translates to:
+  /// **'Choose XML file'**
+  String get m0b27387ff0;
 
   /// Выбрать папку
   ///
@@ -928,6 +958,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No purchases needed for upcoming stages'**
   String get m9a923fd47c;
+
+  /// Для сравнения подготовьте PoB и MCP
+  ///
+  /// In en, this message translates to:
+  /// **'Set up PoB and MCP to compare builds'**
+  String get m10db96c5ff;
 
   /// Для управления окном PoB через Wine нужен X11 или XWayland.
   ///
@@ -1570,6 +1606,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'There are no suitable nodes at this distance.'**
   String get mb862bf4e42;
+
+  /// Набор дерева
+  ///
+  /// In en, this message translates to:
+  /// **'Passive tree set'**
+  String get me55cf2491b;
 
   /// Набор оружия
   ///
@@ -2544,6 +2586,12 @@ abstract class AppLocalizations {
   /// **'Passive'**
   String get m1971cfb84c;
 
+  /// Первая сборка
+  ///
+  /// In en, this message translates to:
+  /// **'First build'**
+  String get m3e11e6ffe0;
+
   /// Перевод больше ожидаемого размера
   ///
   /// In en, this message translates to:
@@ -3402,6 +3450,12 @@ abstract class AppLocalizations {
   /// **'Reset'**
   String get m407f871778;
 
+  /// Сбросить дерево
+  ///
+  /// In en, this message translates to:
+  /// **'Reset tree'**
+  String get mffc0a40a76;
+
   /// Сбросить сочетания
   ///
   /// In en, this message translates to:
@@ -3570,6 +3624,18 @@ abstract class AppLocalizations {
   /// **'Too many redirects'**
   String get m126aa994ee;
 
+  /// Смена класса требует соединения или сброса дерева
+  ///
+  /// In en, this message translates to:
+  /// **'Changing class requires connecting or resetting the tree'**
+  String get md3dbbaea9b;
+
+  /// Сменить класс или восхождение
+  ///
+  /// In en, this message translates to:
+  /// **'Change class or ascendancy'**
+  String get mba5ec4071c;
+
   /// Сначала выберите версии обоих компонентов
   ///
   /// In en, this message translates to:
@@ -3618,11 +3684,23 @@ abstract class AppLocalizations {
   /// **'Own properties'**
   String get mf3f1d96087;
 
+  /// Соединение может потратить пассивные очки. Сброс снимет все назначенные узлы текущего дерева.
+  ///
+  /// In en, this message translates to:
+  /// **'Connecting may spend passive points. Resetting removes all allocated nodes in the current tree.'**
+  String get m7d3f9a98b5;
+
   /// Соединение с Lua прервано
   ///
   /// In en, this message translates to:
   /// **'Connection to Lua lost'**
   String get m9071a1a6f4;
+
+  /// Соединить дерево
+  ///
+  /// In en, this message translates to:
+  /// **'Connect tree'**
+  String get mfad90441a7;
 
   /// Создайте персонажа или откройте XML из PoB. Все показатели рассчитает Lua.
   ///
@@ -3702,6 +3780,12 @@ abstract class AppLocalizations {
   /// **'Shopping list'**
   String get m651f75da98;
 
+  /// Сравнение сборок
+  ///
+  /// In en, this message translates to:
+  /// **'Build comparison'**
+  String get m55e18d4647;
+
   /// Сравнение этапов
   ///
   /// In en, this message translates to:
@@ -3713,6 +3797,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Compare with another milestone'**
   String get m42098f4d60;
+
+  /// Сравнить сборки
+  ///
+  /// In en, this message translates to:
+  /// **'Compare builds'**
+  String get m9dba47b33c;
 
   /// Средний удар
   ///
@@ -3803,6 +3893,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Redirect has no address'**
   String get m2ec842e2f5;
+
+  /// У узла нет доступных эффектов мастерства.
+  ///
+  /// In en, this message translates to:
+  /// **'This node has no available mastery effects.'**
+  String get m906bf51bc3;
 
   /// Убрать
   ///
@@ -3912,6 +4008,12 @@ abstract class AppLocalizations {
   /// **'Evasion'**
   String get mdf00fd3d66;
 
+  /// Умение для подбора поддержек
+  ///
+  /// In en, this message translates to:
+  /// **'Skill for support suggestions'**
+  String get mdca021ee93;
+
   /// Умение не выбрано
   ///
   /// In en, this message translates to:
@@ -4001,6 +4103,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Calculation conditions'**
   String get m7186793dd5;
+
+  /// Условия расчёта и настройки группы берутся из первой сборки.
+  ///
+  /// In en, this message translates to:
+  /// **'Calculation settings and party settings come from the first build.'**
+  String get mec1443af90;
 
   /// Установите 64-битный Python 3.11+ и перезапустите PoB II.
   ///
@@ -4247,6 +4355,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Effect'**
   String get me39133631f;
+
+  /// Эффект мастерства {p0}
+  ///
+  /// In en, this message translates to:
+  /// **'Mastery effect {p0}'**
+  String m026f42945f(String p0);
+
+  /// Эффект мастерства не сохранён
+  ///
+  /// In en, this message translates to:
+  /// **'The mastery effect was not saved'**
+  String get m08658b2273;
 
   /// Эффективное здоровье
   ///

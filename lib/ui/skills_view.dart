@@ -182,12 +182,14 @@ class _SkillsViewState extends State<SkillsView> {
             'Камни поддержки',
             style: TextStyle(fontWeight: FontWeight.w700),
           ),
-          const SizedBox(height: 5),
-          AppText(
-            editor.state.gems.first.gem.name,
-            game: true,
-            style: TextStyle(fontSize: 12, color: Spark.of(context).muted),
-          ),
+          if (state.draft!.activeGems.length == 1) ...[
+            const SizedBox(height: 5),
+            AppText(
+              state.draft!.activeGems.single.gem.name,
+              game: true,
+              style: TextStyle(fontSize: 12, color: Spark.of(context).muted),
+            ),
+          ],
           const SizedBox(height: 12),
           Expanded(
             child: AbsorbPointer(

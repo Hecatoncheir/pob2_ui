@@ -12,6 +12,7 @@ import 'core/spark_theme.dart';
 import 'skill_group_cubit.dart';
 import 'skill_gem_catalog_tile.dart';
 import 'skill_group_composer.dart';
+import 'skill_support_target_picker.dart';
 import 'gem_drag.dart';
 import 'workshop_cubit.dart';
 
@@ -264,6 +265,12 @@ class SkillGemCatalog extends StatelessWidget {
         .toList();
     return Column(
       children: [
+        if (supportsOnly && state.activeGems.length > 1)
+          SkillSupportTargetPicker(
+            editor,
+            state,
+            key: const Key('workspace-support-target'),
+          ),
         if (editor.supportScope == 'slot')
           const AppText(
             'Поддержки общие для умений этого слота',
@@ -283,7 +290,7 @@ class SkillGemCatalog extends StatelessWidget {
               ChoiceChip(
                 label: const AppText('Подходящие поддержки'),
                 selected: state.showSupports,
-                onSelected: state.saving || state.gems.isEmpty
+                onSelected: state.saving || state.supportTarget == null
                     ? null
                     : (_) => editor.chooseSupports(true),
               ),

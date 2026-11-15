@@ -152,6 +152,66 @@ void main() {
     },
   );
 
+  testWidgets('Редактор переключает активные камни и сохраняет их вместе', (
+    tester,
+  ) async {
+    await tester.binding.setSurfaceSize(const Size(1300, 950));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+    final model = EditorWorkshop(
+      EditorCatalogEngine(gemEntries: const [fireball, support, ice]),
+      report: workspaceReport(),
+    );
+    addTearDown(model.close);
+    await tester.pumpWidget(application(SkillsView(model: model)));
+    await settle(tester);
+    await tester.tap(
+      find.descendant(
+        of: find.byKey(const ValueKey('skill-group-1')),
+        matching: find.byTooltip('Редактировать группу'),
+      ),
+    );
+    await settle(tester);
+
+    await tester.tap(find.byKey(const ValueKey('catalog-gem-ice')));
+    await settle(tester);
+    final picker = find.descendant(
+      of: find.byKey(const Key('composer-support-target')),
+      matching: find.byType(DropdownButton<int>),
+    );
+    expect(tester.widget<DropdownButton<int>>(picker).value, 1);
+    await tester.enterText(find.byKey(const ValueKey('gem-level-1')), '9');
+    await settle(tester);
+    await tester.tap(picker);
+    await tester.pumpAndSettle();
+    await tester.tap(
+      find
+          .ancestor(
+            of: find.byKey(const ValueKey('support-target-0')).last,
+            matching: find.byType(InkWell),
+          )
+          .first,
+    );
+    await settle(tester);
+    expect(tester.widget<DropdownButton<int>>(picker).value, 0);
+    expect(find.byKey(const ValueKey('gem-level-0')), findsOneWidget);
+    await tester.tap(find.byKey(const ValueKey('catalog-gem-support')).last);
+    await settle(tester);
+    await tester.tap(find.byKey(const Key('skill-group-save')));
+    await settle(tester);
+
+    expect(model.savedGroupId, 1);
+    expect(
+      model.savedGems!.map(
+        (gem) => (gem['id'], gem['level'], gem['sourceIndex']),
+      ),
+      [('gem-fireball', 5, 1), ('ice', 9, null), ('support', 1, null)],
+    );
+    expect(find.byKey(const Key('workspace-support-target')), findsOneWidget);
+    expect(tester.takeException(), isNull);
+    await tester.pumpWidget(const SizedBox.shrink());
+    await settle(tester);
+  });
+
   testWidgets('Умение от предмета принимает поддержку и сохраняет источник', (
     tester,
   ) async {

@@ -5,6 +5,7 @@ import 'package:pob2_ui/data/game_catalog_repository.dart';
 import 'package:pob2_ui/data/mcp_client.dart';
 import 'package:pob2_ui/domain/build_report.dart';
 import 'package:pob2_ui/domain/condition_definition.dart';
+import 'package:pob2_ui/domain/skill_gem.dart';
 import 'package:pob2_ui/ui/condition_editor_cubit.dart';
 import 'package:pob2_ui/ui/skill_group_cubit.dart';
 
@@ -27,6 +28,60 @@ class PagedCatalog extends McpClient {
             moving,
           ];
     return {'entries': broken ? [] : rows, 'total': 3};
+  }
+}
+
+const _iceNova = {'id': 'gem-ice-nova', 'name': 'Ice Nova'};
+const _frostBomb = {'id': 'gem-frost-bomb', 'name': 'Frost Bomb'};
+const _fireMastery = {
+  'id': 'fire-mastery',
+  'name': 'Fire Mastery',
+  'support': true,
+};
+const _coldMastery = {
+  'id': 'cold-mastery',
+  'name': 'Cold Mastery',
+  'support': true,
+};
+
+class _CompatibilityEngine extends EditorCatalogEngine {
+  _CompatibilityEngine()
+    : super(
+        gemEntries: const [
+          fireball,
+          _iceNova,
+          _frostBomb,
+          _fireMastery,
+          _coldMastery,
+        ],
+      );
+
+  final requests = <JsonMap>[];
+
+  @override
+  Future<JsonMap> call(String name, [JsonMap arguments = const {}]) async {
+    if (name != 'pob_gem_supports') return super.call(name, arguments);
+    requests.add(arguments);
+    final target = jsonRows(arguments['gems']).first;
+    return {
+      'source': 'original-lua',
+      'supportIds': [
+        target['id'] == fireball['id']
+            ? _fireMastery['id']
+            : _coldMastery['id'],
+      ],
+    };
+  }
+}
+
+Iterable<(Object?, Object?)> _gemIdentities(List<JsonMap> gems) =>
+    gems.map((gem) => (gem['id'], gem['sourceIndex']));
+
+Future<void> _waitForSupports(SkillGroupCubit editor) async {
+  if (editor.state.support.loading) {
+    await editor.stream
+        .firstWhere((state) => !state.support.loading)
+        .timeout(const Duration(seconds: 5));
   }
 }
 
@@ -129,6 +184,69 @@ void main() {
       'quality': 20,
       'enabled': false,
     });
+  });
+
+  test('Подбор зависит от выбранного камня и сохраняет всю группу', () async {
+    final engine = _CompatibilityEngine();
+    final group = {
+      'gems': [
+        for (final (index, gem) in [fireball, _fireMastery, _iceNova].indexed)
+          {
+            ...gem,
+            'sourceIndex': index + 1,
+            'level': 5,
+            'quality': 0,
+            'enabled': true,
+          },
+      ],
+    };
+    final saved = <List<JsonMap>>[];
+    final editor = SkillGroupCubit(
+      GameCatalogRepository(engine),
+      (_, gems) async {
+        saved.add(gems);
+        return (committed: true, error: null);
+      },
+      groupId: 3,
+      group: group,
+      initial: groupGemDrafts(group),
+    );
+    addTearDown(editor.close);
+    await editor.load();
+    await _waitForSupports(editor);
+    expect(editor.state.support.ids, {_fireMastery['id']});
+    expect(_gemIdentities(jsonRows(engine.requests.last['gems'])), [
+      ('gem-fireball', 1),
+      ('fire-mastery', 2),
+    ]);
+
+    editor.add(
+      editor.state.catalog.firstWhere((gem) => gem.id == _frostBomb['id']),
+    );
+    final iceNova = editor.state.activeGems.firstWhere(
+      (draft) => draft.gem.id == _iceNova['id'],
+    );
+    editor.selectSupportTarget(iceNova.key);
+    await _waitForSupports(editor);
+    expect(editor.state.support.ids, {_coldMastery['id']});
+    expect(engine.requests.last['groupId'], 3);
+    expect(_gemIdentities(jsonRows(engine.requests.last['gems'])), [
+      ('gem-ice-nova', 3),
+      ('fire-mastery', 2),
+    ]);
+
+    editor.add(
+      editor.state.catalog.firstWhere((gem) => gem.id == _coldMastery['id']),
+    );
+    await _waitForSupports(editor);
+    expect(await editor.save(), isTrue);
+    expect(_gemIdentities(saved.single), [
+      ('gem-fireball', 1),
+      ('fire-mastery', 2),
+      ('gem-ice-nova', 3),
+      ('gem-frost-bomb', null),
+      ('cold-mastery', null),
+    ]);
   });
 
   test('Повторный submit и изменение формы во время расчёта не меняют отправленный запрос', () async {

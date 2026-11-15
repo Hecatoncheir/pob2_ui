@@ -89,6 +89,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get mbf7bbb22e3 => 'Lua 연결됨';
 
   @override
+  String get m3717fab485 => 'Lua가 서로 다른 계산 조건을 적용했습니다';
+
+  @override
   String m12e8f27f62(String p0) {
     return 'MCP이 종료되었습니다. $p0';
   }
@@ -178,6 +181,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get mc11be494c0 => '아이템 베이스';
 
   @override
+  String get m7d4b534b8d => '전직 없음';
+
+  @override
   String get m0792a052a1 => '제한 없음';
 
   @override
@@ -199,6 +205,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m2b96f1cb20 => '계정에 사용 가능한 캐릭터가 없습니다.';
+
+  @override
+  String get mfd96d5c7e6 => '그룹에 활성 스킬이 없습니다';
 
   @override
   String m1163ee245e(String p0) {
@@ -314,6 +323,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m5b1968a662 => '업무를 위한 모든 것';
 
   @override
+  String get m99068c6fe4 => '두 번째 빌드';
+
+  @override
   String get m33813b1d8e => '값 선택';
 
   @override
@@ -333,6 +345,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m4a02239801 => '빌드 빌드 폴더 경로를 선택합니다.';
+
+  @override
+  String get m956c346c46 => '빌드를 선택하세요';
 
   @override
   String get mb5cf5f66bc => '빌드 경로에 지정된 것과 동일한 빌드 폴더를 선택합니다.';
@@ -359,9 +374,6 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m8d6db8b168 => '이 노드 할당으로 인해 변경된 사항은 없습니다.';
 
   @override
-  String get m350c155b79 => '마스터리 효과 선택은 현재 XML을 통해 가능합니다.';
-
-  @override
   String get m9cf249e2a8 => '선택됨';
 
   @override
@@ -369,6 +381,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m38aa0ac1ff => '선택';
+
+  @override
+  String get m0b27387ff0 => 'XML 파일 선택';
 
   @override
   String get m88d4b06d56 => '폴더 선택';
@@ -442,6 +457,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m9a923fd47c => '다음 단계에 구매할 항목이 없습니다';
+
+  @override
+  String get m10db96c5ff => '비교하려면 PoB와 MCP를 설정하세요';
 
   @override
   String get mbd97478bba => 'Wine에서 PoB 창을 제어하려면 X11 또는 XWayland가 필요합니다.';
@@ -784,6 +802,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get mb862bf4e42 => '이 거리에는 적합한 노드가 없습니다.';
+
+  @override
+  String get me55cf2491b => '패시브 트리 세트';
 
   @override
   String get mf71a076c69 => '무기 세트';
@@ -1323,6 +1344,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m1971cfb84c => '패시브';
 
   @override
+  String get m3e11e6ffe0 => '첫 번째 빌드';
+
+  @override
   String get m8188a57c48 => '전송이 예상 크기보다 큽니다.';
 
   @override
@@ -1780,6 +1804,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m407f871778 => '재설정';
 
   @override
+  String get mffc0a40a76 => '트리 초기화';
+
+  @override
   String get mde7b2b9b0d => '조합 재설정';
 
   @override
@@ -1864,6 +1891,12 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m126aa994ee => '리디렉션이 너무 많습니다.';
 
   @override
+  String get md3dbbaea9b => '클래스를 변경하려면 트리를 연결하거나 초기화해야 합니다';
+
+  @override
+  String get mba5ec4071c => '클래스 또는 전직 변경';
+
+  @override
   String get mde2ce6f05b => '먼저 두 구성 요소의 버전을 모두 선택하세요';
 
   @override
@@ -1888,7 +1921,14 @@ class AppLocalizationsKo extends AppLocalizations {
   String get mf3f1d96087 => '자신의 속성';
 
   @override
+  String get m7d3f9a98b5 =>
+      '연결 시 패시브 포인트를 사용할 수 있습니다. 초기화하면 현재 트리에서 할당된 모든 노드가 해제됩니다.';
+
+  @override
   String get m9071a1a6f4 => 'Lua에 대한 연결이 끊어졌습니다.';
+
+  @override
+  String get mfad90441a7 => '트리 연결';
 
   @override
   String get m7ab8e7349a =>
@@ -1934,10 +1974,16 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m651f75da98 => '구매 목록';
 
   @override
+  String get m55e18d4647 => '빌드 비교';
+
+  @override
   String get m868f6bf490 => '단계 비교';
 
   @override
   String get m42098f4d60 => '다른 단계와 비교';
+
+  @override
+  String get m9dba47b33c => '빌드 비교하기';
 
   @override
   String get mc4268e6843 => '평균 적중률';
@@ -1983,6 +2029,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m2ec842e2f5 => '리디렉션에 주소가 없습니다.';
+
+  @override
+  String get m906bf51bc3 => '이 노드에는 선택할 수 있는 숙련 효과가 없습니다.';
 
   @override
   String get m07cb650874 => '제거';
@@ -2039,6 +2088,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get mdf00fd3d66 => '회피';
 
   @override
+  String get mdca021ee93 => '보조 스킬을 추천할 스킬';
+
+  @override
   String get m1a92bc6899 => '스킬이 선택되지 않았습니다';
 
   @override
@@ -2086,6 +2138,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m7186793dd5 => '계산 조건';
+
+  @override
+  String get mec1443af90 => '계산 조건과 파티 설정은 첫 번째 빌드에서 가져옵니다.';
 
   @override
   String get m0a3fddcd95 => '64비트 Python 3.11 이상을 설치하고 PoB II를 다시 시작하세요.';
@@ -2217,6 +2272,14 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get me39133631f => '효과';
+
+  @override
+  String m026f42945f(String p0) {
+    return '숙련 효과 $p0';
+  }
+
+  @override
+  String get m08658b2273 => '숙련 효과가 저장되지 않았습니다';
 
   @override
   String get mf83e6d742f => '효과적인 건강';

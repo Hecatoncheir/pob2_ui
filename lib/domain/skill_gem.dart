@@ -65,12 +65,15 @@ List<GemDraft> groupGemDrafts(JsonMap group) {
       )
       .toList();
   final active = result.where((gem) => !gem.gem.support).toList();
+  if (active.isEmpty)
+    throw const FormatException('В группе нет активных умений');
+  if (!isGrantedSkillGroup(group)) return List.unmodifiable(result);
   if (active.length != 1)
     throw const FormatException(
       'Редактор поддерживает одно активное умение в группе',
     );
   return List.unmodifiable([
-    ...active,
+    active.single,
     ...result.where((gem) => gem.gem.support),
   ]);
 }

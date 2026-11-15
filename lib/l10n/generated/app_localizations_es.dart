@@ -89,6 +89,9 @@ class AppLocalizationsEs extends AppLocalizations {
   String get mbf7bbb22e3 => 'Lua conectado';
 
   @override
+  String get m3717fab485 => 'Lua aplicó condiciones de cálculo distintas';
+
+  @override
   String m12e8f27f62(String p0) {
     return 'MCP ha finalizado. $p0';
   }
@@ -184,6 +187,9 @@ class AppLocalizationsEs extends AppLocalizations {
   String get mc11be494c0 => 'Base de artículos';
 
   @override
+  String get m7d4b534b8d => 'Sin ascendencia';
+
+  @override
   String get m0792a052a1 => 'Sin límite';
 
   @override
@@ -205,6 +211,9 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get m2b96f1cb20 => 'No hay caracteres disponibles en la cuenta.';
+
+  @override
+  String get mfd96d5c7e6 => 'El grupo no tiene habilidades activas';
 
   @override
   String m1163ee245e(String p0) {
@@ -321,6 +330,9 @@ class AppLocalizationsEs extends AppLocalizations {
   String get m5b1968a662 => 'Todo para el trabajo';
 
   @override
+  String get m99068c6fe4 => 'Segunda configuración';
+
+  @override
   String get m33813b1d8e => 'Seleccionar valor';
 
   @override
@@ -341,6 +353,9 @@ class AppLocalizationsEs extends AppLocalizations {
   @override
   String get m4a02239801 =>
       'Seleccione la carpeta de compilación Ruta de construcción.';
+
+  @override
+  String get m956c346c46 => 'Elige una configuración';
 
   @override
   String get mb5cf5f66bc =>
@@ -371,10 +386,6 @@ class AppLocalizationsEs extends AppLocalizations {
   String get m8d6db8b168 => 'No hay cambios en la asignación de este nodo.';
 
   @override
-  String get m350c155b79 =>
-      'La elección del efecto de maestría está actualmente disponible a través de XML.';
-
-  @override
   String get m9cf249e2a8 => 'Seleccionado';
 
   @override
@@ -382,6 +393,9 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get m38aa0ac1ff => 'Seleccionar';
+
+  @override
+  String get m0b27387ff0 => 'Elegir archivo XML';
 
   @override
   String get m88d4b06d56 => 'Elegir carpeta';
@@ -458,6 +472,9 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get m9a923fd47c => 'No hacen falta compras para las próximas etapas';
+
+  @override
+  String get m10db96c5ff => 'Configura PoB y MCP para comparar';
 
   @override
   String get mbd97478bba =>
@@ -810,6 +827,9 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get mb862bf4e42 => 'No hay nodos adecuados a esta distancia.';
+
+  @override
+  String get me55cf2491b => 'Conjunto del árbol pasivo';
 
   @override
   String get mf71a076c69 => 'Conjunto de armas';
@@ -1363,6 +1383,9 @@ class AppLocalizationsEs extends AppLocalizations {
   String get m1971cfb84c => 'Pasivo';
 
   @override
+  String get m3e11e6ffe0 => 'Primera configuración';
+
+  @override
   String get m8188a57c48 => 'La transferencia es mayor que el tamaño esperado';
 
   @override
@@ -1835,6 +1858,9 @@ class AppLocalizationsEs extends AppLocalizations {
   String get m407f871778 => 'Restablecer';
 
   @override
+  String get mffc0a40a76 => 'Reiniciar árbol';
+
+  @override
   String get mde7b2b9b0d => 'Restablecer combinaciones';
 
   @override
@@ -1921,6 +1947,13 @@ class AppLocalizationsEs extends AppLocalizations {
   String get m126aa994ee => 'Demasiadas redirecciones';
 
   @override
+  String get md3dbbaea9b =>
+      'Para cambiar de clase hay que conectar o reiniciar el árbol';
+
+  @override
+  String get mba5ec4071c => 'Cambiar clase o ascendencia';
+
+  @override
   String get mde2ce6f05b =>
       'Selecciona primero las versiones de ambos componentes';
 
@@ -1947,7 +1980,14 @@ class AppLocalizationsEs extends AppLocalizations {
   String get mf3f1d96087 => 'Propiedades propias';
 
   @override
+  String get m7d3f9a98b5 =>
+      'Conectar el árbol puede gastar puntos pasivos. Reiniciarlo elimina todos los nodos asignados del árbol actual.';
+
+  @override
   String get m9071a1a6f4 => 'Se perdió la conexión a Lua';
+
+  @override
+  String get mfad90441a7 => 'Conectar árbol';
 
   @override
   String get m7ab8e7349a =>
@@ -1994,10 +2034,16 @@ class AppLocalizationsEs extends AppLocalizations {
   String get m651f75da98 => 'Lista de compras';
 
   @override
+  String get m55e18d4647 => 'Comparación de configuraciones';
+
+  @override
   String get m868f6bf490 => 'Comparar etapas';
 
   @override
   String get m42098f4d60 => 'Comparar con otra etapa';
+
+  @override
+  String get m9dba47b33c => 'Comparar configuraciones';
 
   @override
   String get mc4268e6843 => 'Golpe promedio';
@@ -2044,6 +2090,10 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get m2ec842e2f5 => 'El redireccionamiento no tiene dirección';
+
+  @override
+  String get m906bf51bc3 =>
+      'Este nodo no tiene efectos de maestría disponibles.';
 
   @override
   String get m07cb650874 => 'Quitar';
@@ -2102,6 +2152,9 @@ class AppLocalizationsEs extends AppLocalizations {
   String get mdf00fd3d66 => 'Evasión';
 
   @override
+  String get mdca021ee93 => 'Habilidad para sugerir apoyos';
+
+  @override
   String get m1a92bc6899 => 'Habilidad no seleccionada';
 
   @override
@@ -2149,6 +2202,10 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get m7186793dd5 => 'Condiciones de cálculo';
+
+  @override
+  String get mec1443af90 =>
+      'Las condiciones de cálculo y los ajustes del grupo se toman de la primera configuración.';
 
   @override
   String get m0a3fddcd95 =>
@@ -2286,6 +2343,14 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get me39133631f => 'Efecto';
+
+  @override
+  String m026f42945f(String p0) {
+    return 'Efecto de maestría $p0';
+  }
+
+  @override
+  String get m08658b2273 => 'No se guardó el efecto de maestría';
 
   @override
   String get mf83e6d742f => 'Salud efectiva';

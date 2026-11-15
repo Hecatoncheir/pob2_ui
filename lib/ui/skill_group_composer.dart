@@ -1,12 +1,14 @@
 import 'package:material_ui/material_ui.dart';
 
 import '../domain/build_report.dart';
+import '../domain/skill_gem.dart';
 import 'core/app_text.dart';
 import 'core/panels.dart';
 import 'gem_medallion.dart';
 import 'skill_gem_editor.dart';
 import 'skill_group_cubit.dart';
 import 'skill_group_sockets.dart';
+import 'skill_support_target_picker.dart';
 
 class SkillGroupComposer extends StatelessWidget {
   const SkillGroupComposer({
@@ -19,8 +21,8 @@ class SkillGroupComposer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (state.gems.isEmpty)
-      return SkillGroupSockets(editor: editor, state: state);
+    final primary = state.supportTarget;
+    if (primary == null) return SkillGroupSockets(editor: editor, state: state);
     return ListView(
       key: const Key('chosen-gems'),
       children: [
@@ -28,22 +30,30 @@ class SkillGroupComposer extends StatelessWidget {
           padding: const EdgeInsets.all(14),
           child: Column(
             children: [
+              if (state.activeGems.length > 1) ...[
+                SkillSupportTargetPicker(
+                  editor,
+                  state,
+                  key: const Key('composer-support-target'),
+                ),
+                const SizedBox(height: 12),
+              ],
               LayoutBuilder(
                 builder: (context, constraints) {
-                  final primary = _primary();
-                  if (editor.supportScope == 'none') return primary;
+                  final active = _primary(primary);
+                  if (editor.supportScope == 'none') return active;
                   final supports = _supports();
                   if (constraints.maxWidth >= 620)
                     return Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Expanded(flex: 5, child: primary),
+                        Expanded(flex: 5, child: active),
                         const SizedBox(width: 20),
                         Expanded(flex: 4, child: supports),
                       ],
                     );
                   return Column(
-                    children: [primary, const SizedBox(height: 18), supports],
+                    children: [active, const SizedBox(height: 18), supports],
                   );
                 },
               ),
@@ -64,8 +74,7 @@ class SkillGroupComposer extends StatelessWidget {
     );
   }
 
-  Widget _primary() {
-    final primary = state.gems.first;
+  Widget _primary(GemDraft primary) {
     if (editor.locksPrimary) {
       final gem = jsonRows(editor.group!['gems']).first;
       return Row(
@@ -82,9 +91,10 @@ class SkillGroupComposer extends StatelessWidget {
         ],
       );
     }
+    final index = state.gems.indexOf(primary);
     final image = GemSocketTarget(
       editor: editor,
-      index: 0,
+      index: index,
       builder: (hovered) => InkWell(
         onTap: () => editor.selectGem(primary.key),
         borderRadius: BorderRadius.circular(40),
@@ -104,7 +114,7 @@ class SkillGroupComposer extends StatelessWidget {
       key: ValueKey(primary.key),
       draft: primary,
       editor: editor,
-      index: 0,
+      index: index,
     );
     return LayoutBuilder(
       builder: (context, constraints) {

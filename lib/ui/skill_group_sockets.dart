@@ -50,12 +50,8 @@ class SkillGroupSockets extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          for (
-            var index = supportsOnly ? 1 : 0;
-            index < state.gems.length;
-            index++
-          )
-            _socket(index),
+          for (final (index, draft) in state.gems.indexed)
+            if (!supportsOnly || draft.gem.support) _socket(index),
           _target(
             state.gems.length,
             (hovered) => Padding(
@@ -132,8 +128,10 @@ class GemSocketTarget extends StatelessWidget {
   final Widget Function(bool hovered) builder;
   @override
   Widget build(BuildContext context) => DragTarget<GemDrag>(
-    onWillAcceptWithDetails: (details) =>
-        editor.accepts(details.data.gem, index),
+    onWillAcceptWithDetails: (details) => switch (details.data.draftKey) {
+      final int key => editor.canMoveSupport(key, index),
+      null => editor.accepts(details.data.gem, index),
+    },
     onAcceptWithDetails: (details) {
       final data = details.data;
       if (data.draftKey case final int key) {

@@ -27,6 +27,7 @@ class BuildReport {
   JsonMap get snapshot => jsonMap(raw['snapshot']);
   JsonMap get character => jsonMap(snapshot['buildInfo']);
   JsonMap get config => jsonMap(raw['config']);
+  JsonMap get configPlaceholders => jsonMap(raw['configPlaceholders']);
   List<JsonMap> get groups => jsonRows(raw['groups']);
   Iterable<JsonMap> get skillGroups =>
       groups.where((group) => group['slotSupports'] != true);
@@ -38,6 +39,15 @@ class BuildReport {
   int get level => character['level'] as int? ?? 0;
   String get points => cleanPoB(raw['pointDisplay'] as String? ?? '');
   String get treeVersion => snapshot['treeVersion'] as String? ?? '—';
+  int? get activeTreeSpec => switch (jsonMap(raw['activeSets'])['tree']) {
+    final int id => id,
+    _ => null,
+  };
+  List<({int id, String title})> get treeSpecs => [
+    for (final row in jsonRows(jsonMap(raw['sets'])['tree']))
+      if (row['id'] case final int id)
+        (id: id, title: row['title'] is String ? row['title'] as String : ''),
+  ];
   JsonMap get groupSelector => jsonMap(character['groups']);
   JsonMap get skillSelector => jsonMap(character['skills']);
   JsonMap get skillPartSelector => jsonMap(character['parts']);

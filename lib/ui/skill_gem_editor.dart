@@ -17,7 +17,7 @@ class SkillGemEditor extends StatelessWidget {
   final int index;
 
   bool get saving => editor.state.saving;
-  bool get removable => index != 0 || editor.state.gems.length == 1;
+  bool get removable => editor.canRemove(draft.key);
   bool get incompatible =>
       draft.gem.support &&
       !editor.state.support.loading &&
@@ -38,7 +38,7 @@ class SkillGemEditor extends StatelessWidget {
             ),
           ),
           IconButton(
-            tooltip: removable
+            tooltip: saving || removable
                 ? 'Убрать камень'
                 : 'Сначала уберите камни поддержки',
             onPressed: saving || !removable
@@ -95,23 +95,28 @@ class SkillGemEditor extends StatelessWidget {
     ],
   );
 
-  Widget _reorder() => Row(
-    mainAxisAlignment: MainAxisAlignment.end,
-    children: [
+  Widget _reorder() {
+    final supports = editor.state.gems.indexed.where(
+      (entry) => entry.$2.gem.support,
+    );
+    final left = supports.where((entry) => entry.$1 < index).lastOrNull;
+    final right = supports.where((entry) => entry.$1 > index).firstOrNull;
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        _moveButton('Сдвинуть влево', Icons.chevron_left, left?.$1),
+        _moveButton('Сдвинуть вправо', Icons.chevron_right, right?.$1),
+      ],
+    );
+  }
+
+  Widget _moveButton(String tooltip, IconData icon, int? destination) =>
       IconButton(
-        tooltip: 'Сдвинуть влево',
-        onPressed: saving || index <= 1
-            ? null
-            : () => editor.move(draft.key, index - 1),
-        icon: const Icon(Icons.chevron_left, size: 18),
-      ),
-      IconButton(
-        tooltip: 'Сдвинуть вправо',
-        onPressed: saving || index == editor.state.gems.length - 1
-            ? null
-            : () => editor.move(draft.key, index + 1),
-        icon: const Icon(Icons.chevron_right, size: 18),
-      ),
-    ],
-  );
+        tooltip: tooltip,
+        onPressed:
+            destination != null && editor.canMoveSupport(draft.key, destination)
+            ? () => editor.move(draft.key, destination)
+            : null,
+        icon: Icon(icon, size: 18),
+      );
 }

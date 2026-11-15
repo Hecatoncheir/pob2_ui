@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:crypto/crypto.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:path/path.dart' as path;
 import 'package:pob2_ui/data/component_repository.dart';
 import 'package:pob2_ui/data/installation_store.dart';
@@ -14,24 +15,57 @@ import 'package:pob2_ui/data/tree_progression_exchange.dart';
 import 'package:pob2_ui/domain/build_report.dart';
 import 'package:pob2_ui/domain/component.dart';
 import 'package:pob2_ui/domain/library_entry.dart';
+import 'package:pob2_ui/domain/tree_allocation_mode.dart';
 import 'package:pob2_ui/domain/tree_progression.dart';
+import 'package:pob2_ui/ui/tree_class_dialog.dart';
 import 'package:pob2_ui/ui/workshop_cubit.dart';
+import 'package:xml/xml.dart';
 
 import 'support/temporary_directory.dart';
 import 'support/workshop_fixture.dart';
 
-String buildXml(int level, {String notes = ''}) =>
-    '<PathOfBuilding2><Build className="Witch" level="$level"/><Notes>$notes</Notes></PathOfBuilding2>';
+const _masteryNode = 7;
+
+String buildXml(
+  int level, {
+  String notes = '',
+  String characterClass = 'Witch',
+  String ascendancy = '',
+  int? activeTreeSpec,
+  int? masteryEffect,
+}) {
+  final ascendancyAttribute = ascendancy.isEmpty
+      ? ''
+      : ' ascendClassName="$ascendancy"';
+  final firstSpec = masteryEffect == null
+      ? '<Spec title="Урон" nodes="1"/>'
+      : '<Spec title="Урон" nodes="1,$_masteryNode" '
+            'masteryEffects="{$_masteryNode,$masteryEffect}"/>';
+  final tree = activeTreeSpec == null
+      ? ''
+      : '<Tree activeSpec="$activeTreeSpec">$firstSpec'
+            '<Spec title="Защита" nodes="1,2"/>'
+            '</Tree>';
+  return '<PathOfBuilding2><Build className="$characterClass" level="$level"'
+      '$ascendancyAttribute/>$tree<Notes>$notes</Notes></PathOfBuilding2>';
+}
 
 class _SyncEngine extends McpClient {
   _SyncEngine() {
-    tools = {'pob_get_tree'};
+    tools = {'pob_get_tree', 'pob_tree_options'};
   }
 
   int level = 0;
   int loads = 0;
   int treeEdits = 0;
+  int? activeTreeSpec;
+  int? masteryEffect;
+  int allocationMode = 0;
   String notes = '';
+  String characterClass = 'Witch';
+  String ascendancy = '';
+  final treeOptions = <JsonMap>[];
+  final masteryActions = <JsonMap>[];
   Completer<void>? editStarted, resumeEdit;
   bool exitDuringEdit = false;
   bool _connected = true;
@@ -52,19 +86,83 @@ class _SyncEngine extends McpClient {
       case 'pob_catalog':
         return {
           'entries': [
-            {'id': 1, 'name': 'Witch'},
+            {
+              'id': 1,
+              'name': 'Witch',
+              'ascendancies': [
+                {'id': 0, 'name': 'None'},
+                {'id': 1, 'name': 'Infernalist'},
+              ],
+            },
+            {
+              'id': 2,
+              'name': 'Ranger',
+              'ascendancies': [
+                {'id': 0, 'name': 'None'},
+                {'id': 1, 'name': 'Deadeye'},
+              ],
+            },
           ],
         };
       case 'pob_import_xml':
         loads++;
-        final build = PobBuildDocument(arguments['xml'] as String);
+        final xml = arguments['xml'] as String;
+        final build = PobBuildDocument(xml);
+        final root = XmlDocument.parse(xml).rootElement;
         level = build.level;
         notes = build.notes;
+        characterClass = build.characterClass;
+        ascendancy =
+            root.getElement('Build')!.getAttribute('ascendClassName') ?? '';
+        final tree = root.getElement('Tree');
+        activeTreeSpec = int.tryParse(tree?.getAttribute('activeSpec') ?? '');
+        final selections = tree
+            ?.getElement('Spec')
+            ?.getAttribute('masteryEffects');
+        masteryEffect = int.tryParse(
+          RegExp(r'\{\d+,(\d+)\}').firstMatch(selections ?? '')?.group(1) ?? '',
+        );
+        allocationMode = 0;
         return {};
       case 'pob_export_xml':
         if (level == 0) throw StateError('Сначала загрузите сборку');
-        return {'xml': buildXml(level, notes: notes)};
+        return {
+          'xml': buildXml(
+            level,
+            notes: notes,
+            characterClass: characterClass,
+            ascendancy: ascendancy,
+            activeTreeSpec: activeTreeSpec,
+            masteryEffect: masteryEffect,
+          ),
+        };
+      case 'pob_tree_options':
+        treeOptions.add(arguments);
+        if (arguments case {'spec': final int spec}) {
+          activeTreeSpec = spec;
+          allocationMode = 0;
+          return {};
+        }
+        if (arguments case {'mode': final int mode}) {
+          allocationMode = mode;
+          return {};
+        }
+        if (arguments.containsKey('class')) {
+          if (arguments['connect'] != true && arguments['reset'] != true) {
+            throw StateError(
+              'Смена класса требует соединения или сброса дерева',
+            );
+          }
+          characterClass = 'Ranger';
+        }
+        ascendancy = characterClass == 'Ranger' ? 'Deadeye' : 'Infernalist';
+        return {};
       case 'pob_tree_action':
+        if (arguments case {'mastery': final int mastery}) {
+          masteryActions.add(arguments);
+          masteryEffect = mastery;
+          return {};
+        }
         treeEdits++;
         editStarted?.complete();
         await resumeEdit?.future;
@@ -82,9 +180,23 @@ class _SyncEngine extends McpClient {
             ...fixture.raw,
             'snapshot': {
               'treeVersion': tree.version,
-              'buildInfo': {...fixture.character, 'level': level},
+              'buildInfo': {
+                ...fixture.character,
+                'class': characterClass,
+                'ascendancy': ascendancy,
+                'level': level,
+              },
             },
-            'stats': {'Life': level * 10},
+            'stats': {'Life': level * 10 + _treeBonus},
+            if (activeTreeSpec case final active?) ...{
+              'sets': {
+                'tree': [
+                  {'id': 1, 'title': 'Урон'},
+                  {'id': 2, 'title': 'Защита'},
+                ],
+              },
+              'activeSets': {'tree': active},
+            },
           },
         };
       case 'pob_get_tree':
@@ -109,6 +221,13 @@ class _SyncEngine extends McpClient {
         throw StateError(tool);
     }
   }
+
+  int get _treeBonus => switch ((activeTreeSpec, masteryEffect)) {
+    (2, _) => 200,
+    (_, 31) => 50,
+    (_, 32) => 100,
+    _ => 0,
+  };
 }
 
 class _SyncLibrary extends PobBuildLibrary {
@@ -124,6 +243,113 @@ class _SyncLibrary extends PobBuildLibrary {
   }
 }
 
+String _comparisonXml(
+  int level,
+  String skill,
+  int partyDamage, {
+  int? enemyLevel,
+}) =>
+    '<PathOfBuilding2><Build className="Witch" level="$level"/>'
+    '<Skills><SkillSet id="1"><Skill><Gem nameSpec="$skill"/></Skill>'
+    '</SkillSet></Skills><Config activeConfigSet="2">'
+    '<ConfigSet id="1"><Input name="enemyLevel" number="50"/></ConfigSet>'
+    '<ConfigSet id="2">'
+    '${enemyLevel == null ? '' : '<Input name="enemyLevel" number="$enemyLevel"/>'}'
+    '<Placeholder name="multiplierEnemyPoisonStacks" number="$level"/>'
+    '</ConfigSet></Config><Party><ImportedBuffs name="EnemyMods">'
+    '$partyDamage% increased Damage</ImportedBuffs></Party>'
+    '<Notes>$skill</Notes></PathOfBuilding2>';
+
+class _ComparisonEngine extends McpClient {
+  String xml = '';
+  Installations? pair;
+  bool closed = false;
+  final reports = <JsonMap>[];
+  final pinnedLevels = <num>[];
+  num? _pinnedLevel;
+
+  @override
+  bool get connected => pair != null && !closed;
+
+  @override
+  Future<void> connect(Installations pair) async {
+    this.pair = pair;
+    closed = false;
+  }
+
+  @override
+  Future<void> close() async => closed = true;
+
+  @override
+  Future<JsonMap> call(String tool, [JsonMap arguments = const {}]) async {
+    if (!connected) throw StateError('Подключите Lua');
+    return switch (tool) {
+      'pob_import_xml' => _import(arguments['xml'] as String),
+      'pob_export_xml' => {'xml': xml},
+      'pob_set_config' => _setConfig(arguments),
+      'pob_check_build' => {'report': _report()},
+      _ => throw StateError(tool),
+    };
+  }
+
+  JsonMap _import(String value) {
+    xml = value;
+    _pinnedLevel = null;
+    return {};
+  }
+
+  JsonMap _setConfig(JsonMap arguments) {
+    final level = jsonMap(arguments['values'])['enemyLevel'] as num;
+    _pinnedLevel = level;
+    pinnedLevels.add(level);
+    return {};
+  }
+
+  JsonMap _report() {
+    final root = XmlDocument.parse(xml).rootElement;
+    final config = root.getElement('Config')!;
+    final selected = config.getAttribute('activeConfigSet') ?? '1';
+    final settings = config
+        .findElements('ConfigSet')
+        .singleWhere((entry) => entry.getAttribute('id') == selected);
+    final enemyLevel =
+        _pinnedLevel ??
+        int.tryParse(
+          settings.getElement('Input')?.getAttribute('number') ?? '',
+        );
+    final placeholder = int.parse(
+      settings.getElement('Placeholder')!.getAttribute('number')!,
+    );
+    final party = root.getElement('Party')!.getElement('ImportedBuffs')!;
+    final skill = root.findAllElements('Gem').single.getAttribute('nameSpec')!;
+    final level = PobBuildDocument(xml).level;
+    final defaultEnemyLevel = level == 40 ? 83 : 70;
+    final report = <String, dynamic>{
+      'source': 'original-lua',
+      'snapshot': {
+        'buildInfo': {
+          'level': level,
+          'skills': {
+            'selected': 1,
+            'entries': [
+              {'id': 1, 'label': skill},
+            ],
+          },
+        },
+      },
+      'config': {if (enemyLevel != null) 'enemyLevel': enemyLevel},
+      'configPlaceholders': {
+        'multiplierEnemyPoisonStacks': placeholder,
+        if (enemyLevel == null) 'enemyLevel': defaultEnemyLevel,
+      },
+      'stats': {'TotalDPS': level * 10 + (enemyLevel ?? defaultEnemyLevel)},
+      'party': party.innerText,
+    };
+    reports.add(report);
+    return report;
+  }
+}
+
 void main() {
   const id = 'Общая.xml';
   late Directory root, profile, builds;
@@ -132,7 +358,7 @@ void main() {
   late _SyncEngine engine;
   late WorkshopCubit model;
 
-  WorkshopCubit createWorkshop() {
+  WorkshopCubit createWorkshop({McpClient Function()? createEngine}) {
     final components = ComponentRepository(store: InstallationStore(profile));
     components.active = {
       for (final component in Component.values)
@@ -143,7 +369,12 @@ void main() {
         ),
     };
     engine = _SyncEngine();
-    return WorkshopCubit(components, engine, library: library);
+    return WorkshopCubit(
+      components,
+      engine,
+      library: library,
+      createEngine: createEngine,
+    );
   }
 
   Future<void> reopenWorkshop(String buildId) async {
@@ -189,6 +420,236 @@ void main() {
     tasks: const [(text: 'Заменить посох', done: false)],
     keyNodes: const [3, 2],
   );
+
+  test(
+    'Сравнение XML использует общие условия и сохраняет рабочую сборку',
+    () async {
+      await model.close();
+      final calculation = _ComparisonEngine();
+      model = createWorkshop(createEngine: () => calculation);
+      await original.writeAsString(buildXml(40, notes: 'Рабочая заметка'));
+      await model.openBuild(id);
+      await model.treeAction(10, false);
+      await model.treeAction(11, false);
+      await model.undo();
+      final working = await original.readAsString();
+      final workingReport = model.state.report;
+      final loads = engine.loads;
+      expect(model.state.undoCount, 1);
+      expect(model.state.redoCount, 1);
+
+      final baseline = _comparisonXml(40, 'Fireball', 83);
+      final candidate = _comparisonXml(60, 'Spark', 70, enemyLevel: 70);
+      final first = await File(path.join(builds.path, 'Первая.xml'))
+          .writeAsString(baseline);
+      final second = await File(path.join(builds.path, 'Вторая.xml'))
+          .writeAsString(candidate);
+      final result = await model.compareSavedBuilds(
+        await first.readAsString(),
+        await second.readAsString(),
+      );
+
+      expect(result.before.config, {'enemyLevel': 83});
+      expect(result.after.config, result.before.config);
+      expect(result.before.stats['TotalDPS'], 483);
+      expect(result.after.stats['TotalDPS'], 683);
+      expect(result.before.mainSkill, 'Fireball');
+      expect(result.after.mainSkill, 'Spark');
+      expect(result.components, calculation.pair);
+      expect(calculation.reports.first['config'], isEmpty);
+      expect(calculation.pinnedLevels, [83, 83]);
+      expect(calculation.reports.last['configPlaceholders'], {
+        'multiplierEnemyPoisonStacks': 40,
+      });
+      expect(calculation.reports.last['party'], '83% increased Damage');
+      expect(calculation.closed, isTrue);
+
+      expect(engine.loads, loads);
+      expect(model.state.library.activeId, id);
+      expect(model.state.report, same(workingReport));
+      expect(model.state.undoCount, 1);
+      expect(model.state.redoCount, 1);
+      expect(await library.readNotes(id), 'Рабочая заметка');
+      expect(await original.readAsString(), working);
+      expect(await first.readAsString(), baseline);
+      expect(await second.readAsString(), candidate);
+    },
+  );
+
+  test('Переключение набора дерева сохраняется в XML и отменяется', () async {
+    await original.writeAsString(
+      buildXml(40, activeTreeSpec: 1, notes: 'Заметка сборки'),
+    );
+    await model.openBuild(id);
+    final originalXml = await original.readAsString();
+    expect(model.state.report?.activeTreeSpec, 1);
+    expect(model.state.report?.treeSpecs, [
+      (id: 1, title: 'Урон'),
+      (id: 2, title: 'Защита'),
+    ]);
+    expect(model.state.report?.stats['Life'], 400);
+    await model.selectTreeMode(TreeAllocationMode.weaponTwo);
+
+    final changed = await model.selectTreeSpec(2);
+    expect(changed.committed, isTrue, reason: changed.error);
+    expect(engine.treeOptions, [
+      {'mode': 2},
+      {'spec': 2},
+      {'mode': 2},
+    ]);
+    expect(engine.allocationMode, 2);
+    expect(model.state.library.activeId, id);
+    expect(model.state.report?.activeTreeSpec, 2);
+    expect(model.state.report?.stats['Life'], 600);
+    expect(model.state.undoCount, 1);
+    final savedXml = await original.readAsString();
+    expect(savedXml, buildXml(40, activeTreeSpec: 2, notes: 'Заметка сборки'));
+
+    await model.undo();
+    expect(engine.allocationMode, 2);
+    expect(model.state.report?.activeTreeSpec, 1);
+    expect(model.state.report?.stats['Life'], 400);
+    expect(await original.readAsString(), originalXml);
+
+    await model.redo();
+    await reopenWorkshop(id);
+    expect(model.state.report?.activeTreeSpec, 2);
+    expect(model.state.report?.stats['Life'], 600);
+    expect(await original.readAsString(), savedXml);
+  });
+
+  test('Выбор и смена мастерства сохраняются в XML и отменяются', () async {
+    const notes = 'Заметка при выборе мастерства';
+    final initialXml = buildXml(40, activeTreeSpec: 1, notes: notes);
+    await original.writeAsString(initialXml);
+    await model.openBuild(id);
+    expect(model.state.report?.stats['Life'], 400);
+
+    final first = await model.selectMastery(_masteryNode, 31);
+    expect(first.committed, isTrue, reason: first.error);
+    expect(model.state.report?.stats['Life'], 450);
+    final firstXml = buildXml(
+      40,
+      activeTreeSpec: 1,
+      masteryEffect: 31,
+      notes: notes,
+    );
+    expect(await original.readAsString(), firstXml);
+
+    final second = await model.selectMastery(_masteryNode, 32);
+    expect(second.committed, isTrue, reason: second.error);
+    expect(engine.masteryActions, [
+      {'id': _masteryNode, 'action': 'allocate', 'mastery': 31},
+      {'id': _masteryNode, 'action': 'allocate', 'mastery': 32},
+    ]);
+    expect(model.state.report?.stats['Life'], 500);
+    expect(
+      await original.readAsString(),
+      buildXml(40, activeTreeSpec: 1, masteryEffect: 32, notes: notes),
+    );
+    expect(model.state.library.activeId, id);
+    expect(model.state.undoCount, 2);
+
+    await model.undo();
+    expect(model.state.report?.stats['Life'], 450);
+    expect(await original.readAsString(), firstXml);
+
+    await model.undo();
+    expect(model.state.report?.stats['Life'], 400);
+    expect(await original.readAsString(), initialXml);
+  });
+
+  test(
+    'Смена класса и восхождения сохраняется и отменяется через Undo',
+    () async {
+      await model.connect();
+      expect(model.state.error, isNull);
+      final before = await original.readAsString();
+      final blocked = await model.selectTreeClass(classId: 2, ascendancyId: 1);
+      expect(blocked.committed, isFalse);
+      expect(blocked.error, contains('Смена класса требует'));
+      expect(model.state.report?.characterClass, 'Witch');
+      expect(model.state.undoCount, 0);
+      expect(await original.readAsString(), before);
+
+      final changed = await model.selectTreeClass(
+        classId: 2,
+        ascendancyId: 1,
+        connect: true,
+      );
+      expect(changed.committed, isTrue, reason: changed.error);
+      expect(engine.treeOptions.last, {
+        'class': 2,
+        'ascendancy': 1,
+        'connect': true,
+      });
+      expect(model.state.library.activeId, id);
+      expect(model.state.report?.characterClass, 'Ranger');
+      expect(model.state.report?.character['ascendancy'], 'Deadeye');
+      expect(model.state.undoCount, 1);
+      expect(
+        await original.readAsString(),
+        buildXml(40, characterClass: 'Ranger', ascendancy: 'Deadeye'),
+      );
+
+      await model.undo();
+      expect(model.state.error, isNull);
+      expect(model.state.report?.characterClass, 'Witch');
+      expect(model.state.report?.character['ascendancy'], isEmpty);
+      expect(model.state.undoCount, 0);
+      expect(model.state.redoCount, 1);
+      expect(await original.readAsString(), before);
+
+      final onlyAscendancy = await model.selectTreeClass(
+        classId: 1,
+        ascendancyId: 1,
+      );
+      expect(onlyAscendancy.committed, isTrue, reason: onlyAscendancy.error);
+      expect(engine.treeOptions.last, {'ascendancy': 1});
+      expect(model.state.report?.characterClass, 'Witch');
+      expect(model.state.report?.character['ascendancy'], 'Infernalist');
+    },
+  );
+
+  testWidgets('Диалог смены класса оставляет дерево при отмене', (
+    tester,
+  ) async {
+    final before = await tester.runAsync(() async {
+      await model.connect();
+      return original.readAsString();
+    });
+    expect(model.state.error, isNull);
+    await tester.pumpWidget(
+      MaterialApp(home: Scaffold(body: TreeClassButton(model))),
+    );
+    await tester.tap(find.byKey(const Key('tree-class')));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byKey(const Key('tree-class-choice')));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Ranger').last);
+    await tester.pumpAndSettle();
+
+    await tester.runAsync(() async {
+      final refused = model.stream
+          .firstWhere((state) => !state.busy && state.error != null)
+          .timeout(const Duration(seconds: 10));
+      await tester.tap(find.text('Применить'));
+      await refused;
+    });
+    await tester.pumpAndSettle();
+    expect(find.text('Сбросить дерево'), findsOneWidget);
+    expect(find.text('Соединить дерево'), findsOneWidget);
+    await tester.tap(find.text('Отмена'));
+    await tester.pumpAndSettle();
+
+    expect(find.byType(AlertDialog), findsNothing);
+    expect(engine.treeOptions, [
+      {'class': 2, 'ascendancy': 0},
+    ]);
+    expect(model.state.report?.characterClass, 'Witch');
+    expect(model.state.undoCount, 0);
+    expect(await tester.runAsync(original.readAsString), before);
+  });
 
   test('План следует за сборкой при переименовании и Undo/Redo', () async {
     await model.progressionRepository(model.progressionKey!).save([step]);

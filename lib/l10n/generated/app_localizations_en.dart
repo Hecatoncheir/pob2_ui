@@ -89,6 +89,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get mbf7bbb22e3 => 'Lua connected';
 
   @override
+  String get m3717fab485 => 'Lua applied different calculation settings';
+
+  @override
   String m12e8f27f62(String p0) {
     return 'MCP has ended. $p0';
   }
@@ -183,6 +186,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get mc11be494c0 => 'Item base';
 
   @override
+  String get m7d4b534b8d => 'No ascendancy';
+
+  @override
   String get m0792a052a1 => 'No limit';
 
   @override
@@ -204,6 +210,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get m2b96f1cb20 => 'There are no characters available on the account.';
+
+  @override
+  String get mfd96d5c7e6 => 'The group has no active skills';
 
   @override
   String m1163ee245e(String p0) {
@@ -320,6 +329,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m5b1968a662 => 'Everything for work';
 
   @override
+  String get m99068c6fe4 => 'Second build';
+
+  @override
   String get m33813b1d8e => 'Select value';
 
   @override
@@ -339,6 +351,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get m4a02239801 => 'Select the Path of Building build folder.';
+
+  @override
+  String get m956c346c46 => 'Choose a build';
 
   @override
   String get mb5cf5f66bc =>
@@ -367,10 +382,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m8d6db8b168 => 'No changes from allocating this node.';
 
   @override
-  String get m350c155b79 =>
-      'The choice of mastery effect is currently available through XML.';
-
-  @override
   String get m9cf249e2a8 => 'Selected';
 
   @override
@@ -378,6 +389,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get m38aa0ac1ff => 'Select';
+
+  @override
+  String get m0b27387ff0 => 'Choose XML file';
 
   @override
   String get m88d4b06d56 => 'Choose folder';
@@ -452,6 +466,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get m9a923fd47c => 'No purchases needed for upcoming stages';
+
+  @override
+  String get m10db96c5ff => 'Set up PoB and MCP to compare builds';
 
   @override
   String get mbd97478bba =>
@@ -801,6 +818,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get mb862bf4e42 => 'There are no suitable nodes at this distance.';
+
+  @override
+  String get me55cf2491b => 'Passive tree set';
 
   @override
   String get mf71a076c69 => 'Weapon set';
@@ -1347,6 +1367,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m1971cfb84c => 'Passive';
 
   @override
+  String get m3e11e6ffe0 => 'First build';
+
+  @override
   String get m8188a57c48 => 'Transfer is larger than expected size';
 
   @override
@@ -1811,6 +1834,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m407f871778 => 'Reset';
 
   @override
+  String get mffc0a40a76 => 'Reset tree';
+
+  @override
   String get mde7b2b9b0d => 'Reset combinations';
 
   @override
@@ -1896,6 +1922,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m126aa994ee => 'Too many redirects';
 
   @override
+  String get md3dbbaea9b =>
+      'Changing class requires connecting or resetting the tree';
+
+  @override
+  String get mba5ec4071c => 'Change class or ascendancy';
+
+  @override
   String get mde2ce6f05b => 'Select versions for both components first';
 
   @override
@@ -1921,7 +1954,14 @@ class AppLocalizationsEn extends AppLocalizations {
   String get mf3f1d96087 => 'Own properties';
 
   @override
+  String get m7d3f9a98b5 =>
+      'Connecting may spend passive points. Resetting removes all allocated nodes in the current tree.';
+
+  @override
   String get m9071a1a6f4 => 'Connection to Lua lost';
+
+  @override
+  String get mfad90441a7 => 'Connect tree';
 
   @override
   String get m7ab8e7349a =>
@@ -1968,10 +2008,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m651f75da98 => 'Shopping list';
 
   @override
+  String get m55e18d4647 => 'Build comparison';
+
+  @override
   String get m868f6bf490 => 'Compare milestones';
 
   @override
   String get m42098f4d60 => 'Compare with another milestone';
+
+  @override
+  String get m9dba47b33c => 'Compare builds';
 
   @override
   String get mc4268e6843 => 'Average Hit';
@@ -2018,6 +2064,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get m2ec842e2f5 => 'Redirect has no address';
+
+  @override
+  String get m906bf51bc3 => 'This node has no available mastery effects.';
 
   @override
   String get m07cb650874 => 'Remove';
@@ -2076,6 +2125,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get mdf00fd3d66 => 'Evasion';
 
   @override
+  String get mdca021ee93 => 'Skill for support suggestions';
+
+  @override
   String get m1a92bc6899 => 'Skill not selected';
 
   @override
@@ -2123,6 +2175,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get m7186793dd5 => 'Calculation conditions';
+
+  @override
+  String get mec1443af90 =>
+      'Calculation settings and party settings come from the first build.';
 
   @override
   String get m0a3fddcd95 =>
@@ -2258,6 +2314,14 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get me39133631f => 'Effect';
+
+  @override
+  String m026f42945f(String p0) {
+    return 'Mastery effect $p0';
+  }
+
+  @override
+  String get m08658b2273 => 'The mastery effect was not saved';
 
   @override
   String get mf83e6d742f => 'Effective Hit Pool';

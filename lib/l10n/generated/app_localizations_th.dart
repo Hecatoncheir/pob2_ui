@@ -89,6 +89,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get mbf7bbb22e3 => 'เชื่อมต่อแล้ว Lua';
 
   @override
+  String get m3717fab485 => 'Lua ใช้เงื่อนไขการคำนวณที่ต่างกัน';
+
+  @override
   String m12e8f27f62(String p0) {
     return 'MCP สิ้นสุดแล้ว $p0';
   }
@@ -181,6 +184,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get mc11be494c0 => 'ฐานรายการ';
 
   @override
+  String get m7d4b534b8d => 'ไม่มีคลาสเสริม';
+
+  @override
   String get m0792a052a1 => 'ไม่มีขีดจำกัด';
 
   @override
@@ -202,6 +208,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m2b96f1cb20 => 'ไม่มีอักขระในบัญชี';
+
+  @override
+  String get mfd96d5c7e6 => 'กลุ่มนี้ไม่มีสกิลใช้งาน';
 
   @override
   String m1163ee245e(String p0) {
@@ -317,6 +326,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m5b1968a662 => 'ทุกอย่างเพื่อการทำงาน';
 
   @override
+  String get m99068c6fe4 => 'บิลด์ที่สอง';
+
+  @override
   String get m33813b1d8e => 'เลือกค่า';
 
   @override
@@ -336,6 +348,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m4a02239801 => 'เลือกโฟลเดอร์เส้นทางการสร้างอาคาร';
+
+  @override
+  String get m956c346c46 => 'เลือกบิลด์';
 
   @override
   String get mb5cf5f66bc =>
@@ -363,10 +378,6 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m8d6db8b168 => 'ไม่มีการเปลี่ยนแปลงจากการจัดสรรโหนดนี้';
 
   @override
-  String get m350c155b79 =>
-      'ขณะนี้ตัวเลือกของเอฟเฟกต์การเรียนรู้สามารถใช้ได้จนถึง XML';
-
-  @override
   String get m9cf249e2a8 => 'เลือกแล้ว';
 
   @override
@@ -374,6 +385,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m38aa0ac1ff => 'เลือก';
+
+  @override
+  String get m0b27387ff0 => 'เลือกไฟล์ XML';
 
   @override
   String get m88d4b06d56 => 'เลือกโฟลเดอร์';
@@ -449,6 +463,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m9a923fd47c => 'ไม่ต้องซื้ออะไรสำหรับขั้นถัดไป';
+
+  @override
+  String get m10db96c5ff => 'ตั้งค่า PoB และ MCP เพื่อเปรียบเทียบ';
 
   @override
   String get mbd97478bba =>
@@ -794,6 +811,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get mb862bf4e42 => 'ไม่มีโหนดที่เหมาะสมในระยะนี้';
+
+  @override
+  String get me55cf2491b => 'ชุดผังพาสซีฟ';
 
   @override
   String get mf71a076c69 => 'ชุดอาวุธ';
@@ -1335,6 +1355,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m1971cfb84c => 'เฉยๆ';
 
   @override
+  String get m3e11e6ffe0 => 'บิลด์แรก';
+
+  @override
   String get m8188a57c48 => 'การถ่ายโอนมีขนาดใหญ่กว่าขนาดที่คาดไว้';
 
   @override
@@ -1796,6 +1819,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m407f871778 => 'รีเซ็ต';
 
   @override
+  String get mffc0a40a76 => 'รีเซ็ตผัง';
+
+  @override
   String get mde7b2b9b0d => 'รีเซ็ตชุดค่าผสม';
 
   @override
@@ -1880,6 +1906,12 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m126aa994ee => 'มีการเปลี่ยนเส้นทางมากเกินไป';
 
   @override
+  String get md3dbbaea9b => 'การเปลี่ยนคลาสต้องเชื่อมหรือรีเซ็ตผังพาสซีฟ';
+
+  @override
+  String get mba5ec4071c => 'เปลี่ยนคลาสหรือคลาสเสริม';
+
+  @override
   String get mde2ce6f05b => 'เลือกเวอร์ชันของส่วนประกอบทั้งสองก่อน';
 
   @override
@@ -1905,7 +1937,14 @@ class AppLocalizationsTh extends AppLocalizations {
   String get mf3f1d96087 => 'คุณสมบัติของตัวเอง';
 
   @override
+  String get m7d3f9a98b5 =>
+      'การเชื่อมอาจใช้แต้มพาสซีฟ การรีเซ็ตจะยกเลิกโหนดที่จัดสรรทั้งหมดในผังปัจจุบัน';
+
+  @override
   String get m9071a1a6f4 => 'การเชื่อมต่อกับ Lua ขาดหายไป';
+
+  @override
+  String get mfad90441a7 => 'เชื่อมผัง';
 
   @override
   String get m7ab8e7349a =>
@@ -1951,10 +1990,16 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m651f75da98 => 'รายการซื้อ';
 
   @override
+  String get m55e18d4647 => 'การเปรียบเทียบบิลด์';
+
+  @override
   String get m868f6bf490 => 'เปรียบเทียบขั้น';
 
   @override
   String get m42098f4d60 => 'เปรียบเทียบกับขั้นอื่น';
+
+  @override
+  String get m9dba47b33c => 'เปรียบเทียบบิลด์';
 
   @override
   String get mc4268e6843 => 'การเข้าชมเฉลี่ย';
@@ -2000,6 +2045,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m2ec842e2f5 => 'การเปลี่ยนเส้นทางไม่มีที่อยู่';
+
+  @override
+  String get m906bf51bc3 => 'โหนดนี้ไม่มีเอฟเฟกต์ความเชี่ยวชาญที่เลือกได้';
 
   @override
   String get m07cb650874 => 'ลบ';
@@ -2058,6 +2106,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get mdf00fd3d66 => 'การหลบหลีก';
 
   @override
+  String get mdca021ee93 => 'สกิลสำหรับแนะนำหินเสริม';
+
+  @override
   String get m1a92bc6899 => 'ไม่ได้เลือกทักษะ';
 
   @override
@@ -2105,6 +2156,10 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m7186793dd5 => 'เงื่อนไขการคำนวณ';
+
+  @override
+  String get mec1443af90 =>
+      'ใช้เงื่อนไขการคำนวณและการตั้งค่าปาร์ตี้จากบิลด์แรก';
 
   @override
   String get m0a3fddcd95 =>
@@ -2239,6 +2294,14 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get me39133631f => 'เอฟเฟกต์';
+
+  @override
+  String m026f42945f(String p0) {
+    return 'เอฟเฟกต์ความเชี่ยวชาญ $p0';
+  }
+
+  @override
+  String get m08658b2273 => 'ไม่ได้บันทึกเอฟเฟกต์ความเชี่ยวชาญ';
 
   @override
   String get mf83e6d742f => 'สุขภาพที่มีประสิทธิภาพ';

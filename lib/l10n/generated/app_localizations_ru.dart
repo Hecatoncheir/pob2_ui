@@ -89,6 +89,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get mbf7bbb22e3 => 'Lua подключён';
 
   @override
+  String get m3717fab485 => 'Lua применил разные условия расчёта';
+
+  @override
   String m12e8f27f62(String p0) {
     return 'MCP завершился. $p0';
   }
@@ -182,6 +185,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get mc11be494c0 => 'База предмета';
 
   @override
+  String get m7d4b534b8d => 'Без восхождения';
+
+  @override
   String get m0792a052a1 => 'Без ограничения';
 
   @override
@@ -203,6 +209,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get m2b96f1cb20 => 'В аккаунте нет доступных персонажей.';
+
+  @override
+  String get mfd96d5c7e6 => 'В группе нет активных умений';
 
   @override
   String m1163ee245e(String p0) {
@@ -319,6 +328,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m5b1968a662 => 'Всё для работы';
 
   @override
+  String get m99068c6fe4 => 'Вторая сборка';
+
+  @override
   String get m33813b1d8e => 'Выберите значение';
 
   @override
@@ -338,6 +350,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get m4a02239801 => 'Выберите папку сборок Path of Building.';
+
+  @override
+  String get m956c346c46 => 'Выберите сборку';
 
   @override
   String get mb5cf5f66bc =>
@@ -366,9 +381,6 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m8d6db8b168 => 'Выбор этого узла не изменит показатели.';
 
   @override
-  String get m350c155b79 => 'Выбор эффекта мастерства пока доступен через XML.';
-
-  @override
   String get m9cf249e2a8 => 'Выбрано';
 
   @override
@@ -376,6 +388,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get m38aa0ac1ff => 'Выбрать';
+
+  @override
+  String get m0b27387ff0 => 'Выбрать XML-файл';
 
   @override
   String get m88d4b06d56 => 'Выбрать папку';
@@ -451,6 +466,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get m9a923fd47c => 'Для следующих этапов покупки не нужны';
+
+  @override
+  String get m10db96c5ff => 'Для сравнения подготовьте PoB и MCP';
 
   @override
   String get mbd97478bba =>
@@ -801,6 +819,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get mb862bf4e42 => 'На этом расстоянии подходящих узлов нет.';
+
+  @override
+  String get me55cf2491b => 'Набор дерева';
 
   @override
   String get mf71a076c69 => 'Набор оружия';
@@ -1346,6 +1367,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m1971cfb84c => 'Пассивные';
 
   @override
+  String get m3e11e6ffe0 => 'Первая сборка';
+
+  @override
   String get m8188a57c48 => 'Перевод больше ожидаемого размера';
 
   @override
@@ -1814,6 +1838,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m407f871778 => 'Сбросить';
 
   @override
+  String get mffc0a40a76 => 'Сбросить дерево';
+
+  @override
   String get mde7b2b9b0d => 'Сбросить сочетания';
 
   @override
@@ -1899,6 +1926,12 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m126aa994ee => 'Слишком много перенаправлений';
 
   @override
+  String get md3dbbaea9b => 'Смена класса требует соединения или сброса дерева';
+
+  @override
+  String get mba5ec4071c => 'Сменить класс или восхождение';
+
+  @override
   String get mde2ce6f05b => 'Сначала выберите версии обоих компонентов';
 
   @override
@@ -1924,7 +1957,14 @@ class AppLocalizationsRu extends AppLocalizations {
   String get mf3f1d96087 => 'Собственные свойства';
 
   @override
+  String get m7d3f9a98b5 =>
+      'Соединение может потратить пассивные очки. Сброс снимет все назначенные узлы текущего дерева.';
+
+  @override
   String get m9071a1a6f4 => 'Соединение с Lua прервано';
+
+  @override
+  String get mfad90441a7 => 'Соединить дерево';
 
   @override
   String get m7ab8e7349a =>
@@ -1970,10 +2010,16 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m651f75da98 => 'Список покупок';
 
   @override
+  String get m55e18d4647 => 'Сравнение сборок';
+
+  @override
   String get m868f6bf490 => 'Сравнение этапов';
 
   @override
   String get m42098f4d60 => 'Сравнить с другим этапом';
+
+  @override
+  String get m9dba47b33c => 'Сравнить сборки';
 
   @override
   String get mc4268e6843 => 'Средний удар';
@@ -2020,6 +2066,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get m2ec842e2f5 => 'У перенаправления нет адреса';
+
+  @override
+  String get m906bf51bc3 => 'У узла нет доступных эффектов мастерства.';
 
   @override
   String get m07cb650874 => 'Убрать';
@@ -2078,6 +2127,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get mdf00fd3d66 => 'Уклонение';
 
   @override
+  String get mdca021ee93 => 'Умение для подбора поддержек';
+
+  @override
   String get m1a92bc6899 => 'Умение не выбрано';
 
   @override
@@ -2125,6 +2177,10 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get m7186793dd5 => 'Условия расчёта';
+
+  @override
+  String get mec1443af90 =>
+      'Условия расчёта и настройки группы берутся из первой сборки.';
 
   @override
   String get m0a3fddcd95 =>
@@ -2259,6 +2315,14 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get me39133631f => 'Эффект';
+
+  @override
+  String m026f42945f(String p0) {
+    return 'Эффект мастерства $p0';
+  }
+
+  @override
+  String get m08658b2273 => 'Эффект мастерства не сохранён';
 
   @override
   String get mf83e6d742f => 'Эффективное здоровье';

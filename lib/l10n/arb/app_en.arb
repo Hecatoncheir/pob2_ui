@@ -128,6 +128,11 @@
     "description": "Lua подключён",
     "placeholders": {}
   },
+  "m3717fab485": "Lua applied different calculation settings",
+  "@m3717fab485": {
+    "description": "Lua применил разные условия расчёта",
+    "placeholders": {}
+  },
   "m12e8f27f62": "MCP has ended. {p0}",
   "@m12e8f27f62": {
     "description": "MCP завершился. {p0}",
@@ -292,6 +297,11 @@
     "description": "База предмета",
     "placeholders": {}
   },
+  "m7d4b534b8d": "No ascendancy",
+  "@m7d4b534b8d": {
+    "description": "Без восхождения",
+    "placeholders": {}
+  },
   "m0792a052a1": "No limit",
   "@m0792a052a1": {
     "description": "Без ограничения",
@@ -332,6 +342,11 @@
   "m2b96f1cb20": "There are no characters available on the account.",
   "@m2b96f1cb20": {
     "description": "В аккаунте нет доступных персонажей.",
+    "placeholders": {}
+  },
+  "mfd96d5c7e6": "The group has no active skills",
+  "@mfd96d5c7e6": {
+    "description": "В группе нет активных умений",
     "placeholders": {}
   },
   "m1163ee245e": "The component is missing {p0}. The working version has been saved.",
@@ -523,6 +538,11 @@
     "description": "Всё для работы",
     "placeholders": {}
   },
+  "m99068c6fe4": "Second build",
+  "@m99068c6fe4": {
+    "description": "Вторая сборка",
+    "placeholders": {}
+  },
   "m33813b1d8e": "Select value",
   "@m33813b1d8e": {
     "description": "Выберите значение",
@@ -556,6 +576,11 @@
   "m4a02239801": "Select the Path of Building build folder.",
   "@m4a02239801": {
     "description": "Выберите папку сборок Path of Building.",
+    "placeholders": {}
+  },
+  "m956c346c46": "Choose a build",
+  "@m956c346c46": {
+    "description": "Выберите сборку",
     "placeholders": {}
   },
   "mb5cf5f66bc": "Select the same build folder as specified in the Path of Building.",
@@ -598,11 +623,6 @@
     "description": "Выбор этого узла не изменит показатели.",
     "placeholders": {}
   },
-  "m350c155b79": "The choice of mastery effect is currently available through XML.",
-  "@m350c155b79": {
-    "description": "Выбор эффекта мастерства пока доступен через XML.",
-    "placeholders": {}
-  },
   "m9cf249e2a8": "Selected",
   "@m9cf249e2a8": {
     "description": "Выбрано",
@@ -616,6 +636,11 @@
   "m38aa0ac1ff": "Select",
   "@m38aa0ac1ff": {
     "description": "Выбрать",
+    "placeholders": {}
+  },
+  "m0b27387ff0": "Choose XML file",
+  "@m0b27387ff0": {
+    "description": "Выбрать XML-файл",
     "placeholders": {}
   },
   "m88d4b06d56": "Choose folder",
@@ -739,6 +764,11 @@
   "m9a923fd47c": "No purchases needed for upcoming stages",
   "@m9a923fd47c": {
     "description": "Для следующих этапов покупки не нужны",
+    "placeholders": {}
+  },
+  "m10db96c5ff": "Set up PoB and MCP to compare builds",
+  "@m10db96c5ff": {
+    "description": "Для сравнения подготовьте PoB и MCP",
     "placeholders": {}
   },
   "mbd97478bba": "Managing the PoB window through Wine requires X11 or XWayland.",
@@ -1320,6 +1350,11 @@
   "mb862bf4e42": "There are no suitable nodes at this distance.",
   "@mb862bf4e42": {
     "description": "На этом расстоянии подходящих узлов нет.",
+    "placeholders": {}
+  },
+  "me55cf2491b": "Passive tree set",
+  "@me55cf2491b": {
+    "description": "Набор дерева",
     "placeholders": {}
   },
   "mf71a076c69": "Weapon set",
@@ -2232,6 +2267,11 @@
     "description": "Пассивные",
     "placeholders": {}
   },
+  "m3e11e6ffe0": "First build",
+  "@m3e11e6ffe0": {
+    "description": "Первая сборка",
+    "placeholders": {}
+  },
   "m8188a57c48": "Transfer is larger than expected size",
   "@m8188a57c48": {
     "description": "Перевод больше ожидаемого размера",
@@ -3012,6 +3052,11 @@
     "description": "Сбросить",
     "placeholders": {}
   },
+  "mffc0a40a76": "Reset tree",
+  "@mffc0a40a76": {
+    "description": "Сбросить дерево",
+    "placeholders": {}
+  },
   "mde7b2b9b0d": "Reset combinations",
   "@mde7b2b9b0d": {
     "description": "Сбросить сочетания",
@@ -3152,6 +3197,16 @@
     "description": "Слишком много перенаправлений",
     "placeholders": {}
   },
+  "md3dbbaea9b": "Changing class requires connecting or resetting the tree",
+  "@md3dbbaea9b": {
+    "description": "Смена класса требует соединения или сброса дерева",
+    "placeholders": {}
+  },
+  "mba5ec4071c": "Change class or ascendancy",
+  "@mba5ec4071c": {
+    "description": "Сменить класс или восхождение",
+    "placeholders": {}
+  },
   "mde2ce6f05b": "Select versions for both components first",
   "@mde2ce6f05b": {
     "description": "Сначала выберите версии обоих компонентов",
@@ -3192,9 +3247,19 @@
     "description": "Собственные свойства",
     "placeholders": {}
   },
+  "m7d3f9a98b5": "Connecting may spend passive points. Resetting removes all allocated nodes in the current tree.",
+  "@m7d3f9a98b5": {
+    "description": "Соединение может потратить пассивные очки. Сброс снимет все назначенные узлы текущего дерева.",
+    "placeholders": {}
+  },
   "m9071a1a6f4": "Connection to Lua lost",
   "@m9071a1a6f4": {
     "description": "Соединение с Lua прервано",
+    "placeholders": {}
+  },
+  "mfad90441a7": "Connect tree",
+  "@mfad90441a7": {
+    "description": "Соединить дерево",
     "placeholders": {}
   },
   "m7ab8e7349a": "Create a character or unlock XML from PoB. All indicators will be calculated by Lua.",
@@ -3266,6 +3331,11 @@
     "description": "Список покупок",
     "placeholders": {}
   },
+  "m55e18d4647": "Build comparison",
+  "@m55e18d4647": {
+    "description": "Сравнение сборок",
+    "placeholders": {}
+  },
   "m868f6bf490": "Compare milestones",
   "@m868f6bf490": {
     "description": "Сравнение этапов",
@@ -3274,6 +3344,11 @@
   "m42098f4d60": "Compare with another milestone",
   "@m42098f4d60": {
     "description": "Сравнить с другим этапом",
+    "placeholders": {}
+  },
+  "m9dba47b33c": "Compare builds",
+  "@m9dba47b33c": {
+    "description": "Сравнить сборки",
     "placeholders": {}
   },
   "mc4268e6843": "Average Hit",
@@ -3349,6 +3424,11 @@
   "m2ec842e2f5": "Redirect has no address",
   "@m2ec842e2f5": {
     "description": "У перенаправления нет адреса",
+    "placeholders": {}
+  },
+  "m906bf51bc3": "This node has no available mastery effects.",
+  "@m906bf51bc3": {
+    "description": "У узла нет доступных эффектов мастерства.",
     "placeholders": {}
   },
   "m07cb650874": "Remove",
@@ -3441,6 +3521,11 @@
     "description": "Уклонение",
     "placeholders": {}
   },
+  "mdca021ee93": "Skill for support suggestions",
+  "@mdca021ee93": {
+    "description": "Умение для подбора поддержек",
+    "placeholders": {}
+  },
   "m1a92bc6899": "Skill not selected",
   "@m1a92bc6899": {
     "description": "Умение не выбрано",
@@ -3525,6 +3610,11 @@
   "m7186793dd5": "Calculation conditions",
   "@m7186793dd5": {
     "description": "Условия расчёта",
+    "placeholders": {}
+  },
+  "mec1443af90": "Calculation settings and party settings come from the first build.",
+  "@mec1443af90": {
+    "description": "Условия расчёта и настройки группы берутся из первой сборки.",
     "placeholders": {}
   },
   "m0a3fddcd95": "Install 64-bit Python 3.11 or newer and restart PoB II.",
@@ -3742,6 +3832,20 @@
   "me39133631f": "Effect",
   "@me39133631f": {
     "description": "Эффект",
+    "placeholders": {}
+  },
+  "m026f42945f": "Mastery effect {p0}",
+  "@m026f42945f": {
+    "description": "Эффект мастерства {p0}",
+    "placeholders": {
+      "p0": {
+        "type": "String"
+      }
+    }
+  },
+  "m08658b2273": "The mastery effect was not saved",
+  "@m08658b2273": {
+    "description": "Эффект мастерства не сохранён",
     "placeholders": {}
   },
   "mf83e6d742f": "Effective Hit Pool",

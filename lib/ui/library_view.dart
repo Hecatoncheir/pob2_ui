@@ -4,6 +4,7 @@ import 'package:material_ui/material_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../domain/library_entry.dart';
+import 'build_comparison_dialog.dart';
 import 'build_setup.dart';
 import 'core/motion.dart';
 import 'core/panels.dart';
@@ -59,7 +60,15 @@ class _LibraryViewState extends State<LibraryView> {
         title: 'Мои сборки',
         message: step.message,
         art: 'components',
-        action: BuildSetupAction(step, model),
+        action: Wrap(
+          alignment: WrapAlignment.center,
+          spacing: 10,
+          runSpacing: 8,
+          children: [
+            BuildSetupAction(step, model),
+            if (model.ready) BuildComparisonButton(model),
+          ],
+        ),
       );
     }
     return CustomScrollView(
@@ -105,7 +114,9 @@ class _LibraryViewState extends State<LibraryView> {
     final hasFolder = model.sharedLibrary != null;
     final canImport = model.pobWindow.supported && step == null;
     final canEdit = model.mcpEditor.canEnable;
-    if (!hasFolder && !canImport && !canEdit) return const SizedBox.shrink();
+    if (!hasFolder && !canImport && !canEdit && !model.ready) {
+      return const SizedBox.shrink();
+    }
     return Padding(
       padding: const EdgeInsets.only(bottom: 12),
       child: Wrap(
@@ -125,6 +136,7 @@ class _LibraryViewState extends State<LibraryView> {
             PobCharacterImportButton(model),
           ],
           if (canEdit) McpEditorButton(model, outlined: true),
+          if (model.ready) BuildComparisonButton(model),
           if (hasFolder)
             OutlinedButton.icon(
               key: const Key('build-folder-menu'),

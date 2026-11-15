@@ -14,6 +14,7 @@ const _allocationAttributes = [
   'masteryEffects',
 ];
 const _allocationElements = ['WeaponSet1', 'WeaponSet2', 'Overrides'];
+final _masterySelection = RegExp(r'\{(\d+),(\d+)\}');
 
 class PobBuildDocument {
   PobBuildDocument(String text) : _xml = XmlDocument.parse(text) {
@@ -41,6 +42,13 @@ class PobBuildDocument {
   Set<int> get allocatedNodes =>
       _nodeIds(_activeSpec.getAttribute('nodes') ?? '');
 
+  Map<int, int> get masteryEffects => {
+    for (final match in _masterySelection.allMatches(
+      _activeSpec.getAttribute('masteryEffects') ?? '',
+    ))
+      int.parse(match[1]!): int.parse(match[2]!),
+  };
+
   String get progressionAllocation {
     final snapshot = XmlElement(const XmlName.qualified('Spec'));
     _copyAllocation(_activeSpec, snapshot);
@@ -50,6 +58,20 @@ class PobBuildDocument {
   String get progressionSkills => captureProgressionSkills(_xml.rootElement);
   String get progressionEquipment =>
       captureProgressionEquipment(_xml.rootElement, _activeSpec);
+
+  String withCalculationConditions(PobBuildDocument source) {
+    final root = _xml.rootElement;
+    for (final section in ['Config', 'Party']) {
+      final previous = root.findElements(section).toList();
+      for (final child in previous) {
+        child.remove();
+      }
+      if (source._xml.rootElement.getElement(section) case final condition?) {
+        root.children.add(condition.copy());
+      }
+    }
+    return _xml.toXmlString();
+  }
 
   String withProgression(
     TreeProgressionStep step, {
@@ -132,7 +154,7 @@ void _trimAllocation(XmlElement spec, Set<int> nodes) {
     set?.setAttribute('nodes', retained.join(','));
   }
   final selections = spec.getAttribute('masteryEffects') ?? '';
-  final retained = RegExp(r'\{(\d+),\d+\}')
+  final retained = _masterySelection
       .allMatches(selections)
       .where((match) => nodes.contains(int.parse(match[1]!)));
   spec.setAttribute(
