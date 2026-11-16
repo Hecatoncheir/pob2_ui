@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='utf-8'?>
+<PathOfBuilding2>
+  <Build level="82" viewMode="TREE" mainSocketGroup="1" targetVersion="0_1" characterLevelAutoMode="false" className="Sorceress" ascendClassName="None">
+    <Buffs curseList="" combatList="" buffList="" />
+    <TimelessData searchListFallback="" devotionVariant1="1" devotionVariant2="1" searchList="" />
+  </Build>
+  <Tree activeSpec="1">
+    <Spec secondaryAscendClassId="nil" ascendancyInternalId="" treeVersion="0_5" nodes="54447" classId="7" masteryEffects="" ascendClassId="0" classInternalId="7">
+      <URL>
+				https://www.pathofexile.com/passive-skill-tree/AAAABgcAAAAA
+			</URL>
+      <Sockets />
+      <Overrides>
+        <AttributeOverride dexNodes="" strNodes="" intNodes="" />
+      </Overrides>
+    </Spec>
+  </Tree>
+  <Items useSecondWeaponSet="nil" activeItemSet="1" showStatDifferences="true">
+    <Item id="1">
+			Rarity: NORMAL
+Silk Robe
+Energy Shield: 64
+Quality: 0
+LevelReq: 22
+Implicits: 0
+		</Item>
+    <ItemSet id="1" title="Default" useSecondWeaponSet="nil">
+      <Slot itemId="1" itemPbURL="" name="Body Armour" />
+    </ItemSet>
+  </Items>
+  <Skills sortGemsByDPSField="CombinedDPS" showSupportGemTypes="ALL" activeSkillSet="1" defaultGemLevel="normalMaximum" showLegacyGems="false" defaultGemQuality="nil" sortGemsByDPS="true">
+    <SkillSet id="1">
+      <Skill enabled="true" mainActiveSkill="1" mainActiveSkillCalcs="1" label="Spark" includeInFullDPS="true">
+        <Gem nameSpec="Spark" enableGlobal1="true" enableGlobal2="false" gemId="Metadata/Items/Gems/SkillGemSpark" corruptLevel="0" corrupted="false" variantId="Spark" level="1" quality="0" skillId="SparkPlayer" count="1" statSetIndexCalcs="nil" enabled="true" statSetIndex="nil" />
+      </Skill>
+    </SkillSet>
+  </Skills>
+  <Config activeConfigSet="1">
+    <ConfigSet id="1">
+      <Input number="79" name="enemyLevel" />
+    </ConfigSet>
+  </Config>
+</PathOfBuilding2>

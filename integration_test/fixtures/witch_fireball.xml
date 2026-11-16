@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PathOfBuilding2>
+  <Build level="90" mainSocketGroup="1" targetVersion="0_1" characterLevelAutoMode="false" ascendClassName="None" viewMode="TREE" className="Witch"/>
+  <Tree activeSpec="1">
+    <Spec classId="1" classInternalId="1" nodes="54447" ascendClassId="0" treeVersion="0_5" masteryEffects=""/>
+  </Tree>
+  <Skills activeSkillSet="1">
+    <SkillSet id="1">
+      <Skill mainActiveSkillCalcs="1" label="Проверка поддержки" enabled="true" mainActiveSkill="2" includeInFullDPS="true">
+        <Gem skillId="FlameWallPlayer" gemId="Metadata/Items/Gems/SkillGemFlameWall" level="1" enabled="true" variantId="FlameWall" quality="0" nameSpec="Flame Wall" enableGlobal1="true" enableGlobal2="false"/>
+        <Gem skillId="FireballPlayer" gemId="Metadata/Items/Gem/SkillGemFireball" level="1" enabled="true" variantId="Fireball" quality="10" nameSpec="Fireball" enableGlobal1="true" enableGlobal2="false"/>
+        <Gem skillId="SupportRapidCastingPlayer" gemId="Metadata/Items/Gems/SupportGemArcaneTempo" level="1" enabled="true" variantId="RapidCastingSupport" quality="0" nameSpec="Rapid Casting I" enableGlobal1="true" enableGlobal2="false"/>
+      </Skill>
+    </SkillSet>
+  </Skills>
+  <Config activeConfigSet="1">
+    <ConfigSet id="1">
+      <Input name="flameWallAddedDamage" boolean="true"/>
+      <Input name="enemyIsBoss" string="None"/>
+      <Input name="enemyLevel" number="67"/>
+    </ConfigSet>
+  </Config>
+</PathOfBuilding2>

@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='utf-8'?>
+<PathOfBuilding2>
+  <Build level="75" viewMode="TREE" mainSocketGroup="1" targetVersion="0_1" characterLevelAutoMode="false" className="Warrior" ascendClassName="None">
+    <Buffs curseList="" combatList="" buffList="" />
+    <TimelessData searchListFallback="" devotionVariant1="1" devotionVariant2="1" searchList="" />
+  </Build>
+  <Tree activeSpec="1">
+    <Spec secondaryAscendClassId="nil" ascendancyInternalId="" treeVersion="0_5" nodes="47175" classId="6" masteryEffects="" ascendClassId="0" classInternalId="6">
+      <URL>
+				https://www.pathofexile.com/passive-skill-tree/AAAABgYAAAAA
+			</URL>
+      <Sockets />
+      <Overrides>
+        <AttributeOverride dexNodes="" strNodes="" intNodes="" />
+      </Overrides>
+    </Spec>
+  </Tree>
+  <Items useSecondWeaponSet="nil" activeItemSet="1" showStatDifferences="true">
+    <Item id="1">
+			Rarity: RARE
+Tide Loop
+Lazuli Ring
+Item Level: 80
+LevelReq: 0
+Implicits: 0
++50 to maximum Life
++20% to Fire Resistance
+			<ModRange id="1" range="0.5" />
+      <ModRange id="2" range="0.5" />
+    </Item>
+    <Item id="2">
+			Rarity: NORMAL
+Oak Greathammer
+Quality: 0
+LevelReq: 0
+Implicits: 0
+		</Item>
+    <ItemSet id="1" title="Default" useSecondWeaponSet="nil">
+      <Slot itemId="2" itemPbURL="" name="Weapon 1" />
+      <Slot itemId="1" itemPbURL="" name="Ring 1" />
+    </ItemSet>
+  </Items>
+  <Skills sortGemsByDPSField="CombinedDPS" showSupportGemTypes="ALL" activeSkillSet="1" defaultGemLevel="normalMaximum" showLegacyGems="false" defaultGemQuality="nil" sortGemsByDPS="true">
+    <SkillSet id="1">
+      <Skill enabled="true" mainActiveSkill="1" mainActiveSkillCalcs="1" label="Rolling Slam" includeInFullDPS="true">
+        <Gem nameSpec="Rolling Slam" enableGlobal1="true" enableGlobal2="false" gemId="Metadata/Items/Gems/SkillGemRollingSlam" corruptLevel="0" corrupted="false" variantId="RollingSlam" level="1" quality="0" skillId="RollingSlamPlayer" count="1" statSetIndexCalcs="nil" enabled="true" statSetIndex="nil" />
+      </Skill>
+    </SkillSet>
+  </Skills>
+  <Config activeConfigSet="1">
+    <ConfigSet id="1">
+      <Input number="67" name="enemyLevel" />
+      <Input string="None" name="enemyIsBoss" />
+    </ConfigSet>
+  </Config>
+</PathOfBuilding2>

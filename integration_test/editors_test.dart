@@ -8,8 +8,12 @@ import 'package:integration_test/integration_test.dart';
 import 'package:pob2_ui/data/component_repository.dart';
 import 'package:pob2_ui/data/installation_store.dart';
 import 'package:pob2_ui/data/mcp_client.dart';
+import 'package:pob2_ui/data/pob_build_library.dart';
+import 'package:pob2_ui/data/xml_file_service.dart';
 import 'package:pob2_ui/domain/build_report.dart';
 import 'package:pob2_ui/ui/app.dart';
+import 'package:pob2_ui/ui/comparison_stats_table.dart';
+import 'package:pob2_ui/ui/components_view.dart';
 import 'package:pob2_ui/ui/exit_protection.dart';
 import 'package:pob2_ui/ui/workshop_cubit.dart';
 import 'package:pob2_ui/ui/appearance_bloc.dart';
@@ -17,6 +21,10 @@ import 'package:pob2_ui/ui/gem_medallion.dart';
 import 'package:pob2_ui/ui/core/frosted_surface.dart';
 import 'package:pob2_ui/data/appearance_repository.dart';
 import 'package:pob2_ui/domain/appearance.dart';
+
+import '../test/support/file_fakes.dart';
+
+const _witchScenario = 'Ведьма из XML: предпросмотр DPS, применение и история';
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
@@ -92,6 +100,387 @@ void main() {
     },
     timeout: Timeout(Duration(minutes: Platform.isWindows ? 4 : 8)),
   );
+  testWidgets(
+    _witchScenario,
+    _witchSupportWorkflow,
+    timeout: const Timeout(Duration(minutes: 8)),
+  );
+  testWidgets(
+    'Сохранённые сборки: дерево, экипировка, сравнение и восстановление Lua',
+    _savedBuildsWorkflow,
+    timeout: const Timeout(Duration(minutes: 8)),
+  );
+}
+
+Future<({WorkshopCubit model, SelectPaths dialogs})> _prepareFileWorkshop(
+  WidgetTester tester,
+  McpClient engine,
+) async {
+  if (!Platform.environment.containsKey('POB2_UI_HOME')) {
+    throw StateError('Для проверки нужен отдельный профиль POB2_UI_HOME');
+  }
+  final profile = InstallationStore.defaultRoot();
+  final root = await profile.createTemp('file-editors-');
+  addTearDown(() => root.delete(recursive: true));
+  final manifest = File.fromUri(profile.uri.resolve('components.json'));
+  await manifest.copy(File.fromUri(root.uri.resolve('components.json')).path);
+  final dialogs = SelectPaths();
+  final library = PobBuildLibrary(root);
+  final builds = await Directory.fromUri(root.uri.resolve('builds/')).create();
+  await library.configure(builds.path);
+  final model = WorkshopCubit(
+    ComponentRepository(store: InstallationStore(root)),
+    engine,
+    library: library,
+    files: XmlFileService(dialogs: dialogs),
+  );
+  addTearDown(model.close);
+  addTearDown(() async {
+    await tester.pumpWidget(const SizedBox.shrink());
+    await tester.pumpAndSettle();
+  });
+  await model.initialize();
+  expect(model.state.error, isNull);
+  expect(model.engine.connected, isTrue);
+  await tester.pumpWidget(
+    ExitProtection(
+      model: model,
+      child: PobApp(model: model),
+    ),
+  );
+  await tester.pumpAndSettle();
+  return (model: model, dialogs: dialogs);
+}
+
+File _fixture(String name) =>
+    File('integration_test/fixtures/$name.xml').absolute;
+
+Future<void> _witchSupportWorkflow(WidgetTester tester) async {
+  final (:model, :dialogs) = await _prepareFileWorkshop(tester, McpClient());
+  expect(
+    model.engine.tools,
+    contains('pob_preview_support'),
+    reason: 'Для предпросмотра нужен PoB MCP v0.21.0 или новее',
+  );
+  final source = _fixture('witch_fireball');
+  final original = await source.readAsString();
+  final saved = File.fromUri(
+    model.components.store.root.uri.resolve('witch-with-support.xml'),
+  );
+  dialogs
+    ..openPath = source.path
+    ..savePath = saved.path;
+  await _tapEditorAction(tester, model, find.text('Открыть XML'));
+  expect(model.state.library.active!.title, 'witch_fireball');
+  _expectWitch(model, applied: false);
+  final before = (await model.exportXml())!;
+  final statsBefore = model.state.report!.stats;
+  final historyBefore = model.state.history;
+
+  final support = await _previewWitchSupport(tester, model);
+  expect(model.state.report!.stats, statsBefore);
+  expect(await model.exportXml(), before);
+  expect(model.state.history, historyBefore);
+  _expectWitch(model, applied: false);
+
+  await tester.tap(find.byKey(ValueKey('catalog-gem-$support')).hitTestable());
+  await tester.pump();
+  await _submitGroup(tester);
+  await _wait(tester, () => !model.state.busy);
+  await tester.pumpAndSettle();
+  expect(model.state.error, isNull);
+  expect(find.byKey(const Key('skill-group-save')), findsNothing);
+  _expectWitch(model, applied: true);
+  expect(model.state.history, (undo: 1, redo: 0));
+
+  final undo = find.byKey(const Key('undo-build'));
+  await _tapEditorAction(tester, model, undo);
+  _expectWitch(model, applied: false);
+  expect(model.state.history, (undo: 0, redo: 1));
+  await _tapEditorAction(tester, model, find.byKey(const Key('redo-build')));
+  _expectWitch(model, applied: true);
+  final applied = model.state.report!;
+
+  await _tapEditorAction(tester, model, find.byTooltip('Экспорт XML'));
+  expect(model.state.status, 'XML сохранён');
+  expect(await saved.readAsString(), contains('Controlled Destruction'));
+  await _tapEditorAction(tester, model, undo);
+  _expectWitch(model, applied: false);
+  dialogs.openPath = saved.path;
+  await _tapEditorAction(tester, model, find.byTooltip('Открыть XML'));
+  expect(model.state.library.active!.title, 'witch-with-support');
+  _expectWitch(model, applied: true);
+  expect(model.state.report!.stats, applied.stats);
+  expect(model.state.report!.groups, applied.groups);
+  expect(model.state.history, (undo: 0, redo: 0));
+  expect(await source.readAsString(), original);
+  expect(tester.takeException(), isNull);
+}
+
+Future<String> _previewWitchSupport(
+  WidgetTester tester,
+  WorkshopCubit model,
+) async {
+  await tester.tap(find.byKey(const ValueKey('tab-skills')));
+  await tester.pumpAndSettle();
+  await tester.tap(find.byTooltip('Редактировать группу'));
+  await tester.pumpAndSettle();
+  final target = find.descendant(
+    of: find.byKey(const Key('composer-support-target')),
+    matching: find.byType(DropdownButton<int>),
+  );
+  await tester.tap(target);
+  await tester.pumpAndSettle();
+  final fireball = find.descendant(
+    of: find.byKey(const ValueKey('support-target-1')),
+    matching: find.byType(Text),
+  );
+  await tester.tap(fireball.hitTestable().last);
+  await tester.pumpAndSettle();
+  expect(tester.widget<DropdownButton<int>>(target).value, 1);
+  await tester.tap(find.text('Подходящие поддержки'));
+  await tester.pump();
+  const name = 'Controlled Destruction';
+  await tester.enterText(find.byKey(const Key('gem-search')), name);
+  final support = (await model.catalogs.gems()).firstWhere(
+    (gem) => gem.name == name,
+  );
+  final preview = find.byKey(ValueKey('preview-support-${support.id}'));
+  await _wait(tester, () => preview.evaluate().isNotEmpty);
+  await tester.ensureVisible(preview);
+  await tester.tap(preview);
+  await _wait(tester, () => find.text('DPS до').evaluate().isNotEmpty);
+  expect(find.text('12,8177'), findsOneWidget);
+  expect(find.text('15,3333'), findsOneWidget);
+  expect(find.text('+2,5156'), findsOneWidget);
+  await tester.tap(find.text('Закрыть'));
+  await tester.pumpAndSettle();
+  return support.id;
+}
+
+Future<void> _tapEditorAction(
+  WidgetTester tester,
+  WorkshopCubit model,
+  Finder control,
+) async {
+  await tester.tap(control);
+  await _wait(tester, () => !model.state.busy);
+  await tester.pumpAndSettle();
+  expect(model.state.error, isNull);
+}
+
+Future<void> _savedBuildsWorkflow(WidgetTester tester) async {
+  final engine = _LostEditReply();
+  final (:model, :dialogs) = await _prepareFileWorkshop(tester, engine);
+  final warrior = _fixture('warrior_rolling_slam');
+  final sorceress = _fixture('sorceress_spark');
+  final warriorXml = await warrior.readAsString();
+  final sorceressXml = await sorceress.readAsString();
+
+  dialogs.openPath = warrior.path;
+  await _tapEditorAction(tester, model, find.text('Открыть XML'));
+  await _allocateWarriorNode(tester, model);
+
+  dialogs.openPath = sorceress.path;
+  await _tapEditorAction(tester, model, find.byTooltip('Открыть XML'));
+  expect(model.state.report!.mainSkill, 'Spark');
+  expect(model.state.report!.config['enemyLevel'], 79);
+  expect(model.state.report!.config['enemyIsBoss'], 'Pinnacle');
+  expect(model.state.report!.stats['EnergyShield'], 64);
+  await _selectRobe(tester);
+  await _tapEditorAction(
+    tester,
+    model,
+    find.byKey(const Key('equipment-remove')),
+  );
+  expect(model.state.report!.stats['EnergyShield'], 0);
+  await _tapEditorAction(tester, model, find.byKey(const Key('undo-build')));
+  expect(model.state.report!.stats['EnergyShield'], 64);
+
+  final active = model.state.library.activeId!;
+  const notes = 'Рабочие заметки для проверки восстановления';
+  await model.buildNotes.readNotes(active);
+  await model.buildNotes.saveNotes(active, notes);
+  final working = await model.library.read(active);
+  final report = model.state.report!;
+  final history = model.state.history;
+  expect(history, (undo: 0, redo: 1));
+  await _compareFixtures(tester, dialogs, warrior, sorceress);
+  expect(model.state.library.activeId, active);
+  expect(model.state.report, same(report));
+  expect(model.state.history, history);
+  expect(await model.library.read(active), working);
+  expect(await model.buildNotes.readNotes(active), notes);
+
+  await _recoverAfterDroppedReply(tester, model, engine);
+  expect(model.state.library.activeId, active);
+  expect(model.state.report!.stats, report.stats);
+  expect(model.state.report!.slots, report.slots);
+  expect(model.state.history, (undo: 0, redo: 0));
+  expect(await model.library.read(active), working);
+  expect(await model.buildNotes.readNotes(active), notes);
+  expect(await warrior.readAsString(), warriorXml);
+  expect(await sorceress.readAsString(), sorceressXml);
+  expect(tester.takeException(), isNull);
+}
+
+Future<void> _allocateWarriorNode(
+  WidgetTester tester,
+  WorkshopCubit model,
+) async {
+  const id = 3936;
+  final report = model.state.report!;
+  final dps = report.stats['TotalDPS'] as num;
+  expect(report.mainSkill, 'Rolling Slam');
+  expect(report.stats['Life'], 1067);
+  expect(_warriorNodeAllocated(model, id), isFalse);
+  await tester.enterText(find.byKey(const Key('tree-search')), '$id');
+  await tester.testTextInput.receiveAction(TextInputAction.done);
+  await tester.pumpAndSettle();
+  await _tapEditorAction(tester, model, find.byKey(const Key('passive-tree')));
+  expect(_warriorNodeAllocated(model, id), isTrue);
+  expect(model.state.report!.stats['TotalDPS'], greaterThan(dps));
+  await _tapEditorAction(tester, model, find.byKey(const Key('undo-build')));
+  expect(_warriorNodeAllocated(model, id), isFalse);
+  expect(model.state.report!.stats['TotalDPS'], closeTo(dps, 0.00001));
+}
+
+bool _warriorNodeAllocated(WorkshopCubit model, int id) => model
+    .state
+    .document!
+    .tree!
+    .nodes
+    .singleWhere((node) => node.id == id)
+    .allocated;
+
+Future<void> _selectRobe(WidgetTester tester) async {
+  await tester.tap(find.byKey(const ValueKey('tab-items')));
+  await tester.pumpAndSettle();
+  final slot = find.byKey(const ValueKey('equipment-slot-Body Armour'));
+  await tester.ensureVisible(slot);
+  await tester.tap(slot);
+  await tester.pumpAndSettle();
+}
+
+Future<void> _compareFixtures(
+  WidgetTester tester,
+  SelectPaths dialogs,
+  File warrior,
+  File sorceress,
+) async {
+  await tester.tap(find.byKey(const ValueKey('page-library')).hitTestable());
+  await tester.pumpAndSettle();
+  await tester.tap(find.byKey(const Key('compare-builds')));
+  await tester.pumpAndSettle();
+  await _chooseComparedFile(tester, dialogs, 'first', warrior);
+  await _chooseComparedFile(tester, dialogs, 'second', sorceress);
+  await tester.tap(find.byKey(const Key('build-comparison-run')));
+  final table = find.byType(ComparisonStatsTable);
+  await _wait(tester, () => table.evaluate().isNotEmpty);
+  final ComparisonStatsTable(:before, :after) = tester.widget(table);
+  expect(before.raw['source'], 'original-lua');
+  expect(after.raw['source'], 'original-lua');
+  expect(before.mainSkill, 'Rolling Slam');
+  expect(after.mainSkill, 'Spark');
+  expect(before.config['enemyLevel'], 67);
+  expect(before.config['enemyIsBoss'], 'None');
+  expect(after.config, before.config);
+  expect(after.stats['EnergyShield'], 64);
+  await tester.tap(find.text('Закрыть'));
+  await tester.pumpAndSettle();
+}
+
+Future<void> _chooseComparedFile(
+  WidgetTester tester,
+  SelectPaths dialogs,
+  String side,
+  File file,
+) async {
+  dialogs.openPath = file.path;
+  await tester.tap(find.byKey(ValueKey('build-comparison-$side')));
+  await tester.pumpAndSettle();
+  await tester.tap(find.byKey(ValueKey('build-comparison-file-$side')));
+  await tester.pumpAndSettle();
+}
+
+Future<void> _recoverAfterDroppedReply(
+  WidgetTester tester,
+  WorkshopCubit model,
+  _LostEditReply engine,
+) async {
+  await tester.tap(find.byKey(const ValueKey('page-workspace')).hitTestable());
+  await tester.pumpAndSettle();
+  await _selectRobe(tester);
+  final attempted = engine.equipmentEdits;
+  final history = model.state.history;
+  engine.dropNext = true;
+  await tester.tap(find.byKey(const Key('equipment-remove')));
+  await _wait(tester, () => !model.state.busy);
+  expect(engine.shieldAfterLostEdit, 0);
+  expect(engine.connected, isFalse);
+  expect(model.state.document!.stale, isTrue);
+  expect(model.state.error, contains('ответ MCP'));
+  expect(model.state.history, history);
+  await tester.tap(find.byKey(const ValueKey('page-components')).hitTestable());
+  await tester.pumpAndSettle();
+  final connect = find.text('Подключить Lua');
+  await tester.scrollUntilVisible(
+    connect,
+    150,
+    scrollable: find.descendant(
+      of: find.byType(ComponentsView),
+      matching: find.byType(Scrollable),
+    ),
+  );
+  await _tapEditorAction(tester, model, connect);
+  expect(engine.connected, isTrue);
+  expect(model.state.document!.stale, isFalse);
+  expect(engine.equipmentEdits, attempted + 1);
+}
+
+class _LostEditReply extends McpClient {
+  bool dropNext = false;
+  num? shieldAfterLostEdit;
+  int equipmentEdits = 0;
+
+  @override
+  Future<JsonMap> call(String name, [JsonMap arguments = const {}]) async {
+    final result = await super.call(name, arguments);
+    if (name != 'pob_equip_item') return result;
+    equipmentEdits++;
+    if (!dropNext) return result;
+    dropNext = false;
+    final report = parseBuildReport(await super.call('pob_check_build'));
+    shieldAfterLostEdit = report.stats['EnergyShield'] as num?;
+    // Lua применил правку. Закрываем реальную сессию до передачи ответа редактору.
+    await close();
+    final error = StateError('Потерян ответ MCP во время правки');
+    onDisconnected?.call(error);
+    throw error;
+  }
+}
+
+void _expectWitch(WorkshopCubit model, {required bool applied}) {
+  final report = model.state.report!;
+  expect(report.raw['source'], 'original-lua');
+  expect(report.characterClass, 'Witch');
+  expect(report.level, 90);
+  expect(report.mainSkill, 'Fireball');
+  expect(report.config['flameWallAddedDamage'], isTrue);
+  expect(report.config['enemyLevel'], 67);
+  expect(report.config['enemyIsBoss'], 'None');
+  expect(
+    report.stats['TotalDPS'],
+    closeTo(applied ? 15.333333 : 12.817708, 0.00001),
+  );
+  final gems = jsonRows(report.groups.single['gems']);
+  expect(gems.map((gem) => gem['name']), [
+    'Flame Wall',
+    'Fireball',
+    'Rapid Casting I',
+    if (applied) 'Controlled Destruction',
+  ]);
+  expect(gems[1]['quality'], 10);
 }
 
 Future<void> _hoverDescriptions(
