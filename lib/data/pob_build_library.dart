@@ -430,9 +430,17 @@ class PobBuildLibrary implements BuildStorage, BuildNotesStorage {
     TreeProgressionKey? progressionSource,
   ) async {
     final renamed = File(path.join(source.parent.path, '$stem.xml'));
-    if (path.equals(source.path, renamed.path)) {
+    if (source.path == renamed.path) {
       await _replace(source, before, xml);
       return source;
+    }
+    final sameName =
+        path.basename(source.path).toLowerCase() ==
+        path.basename(renamed.path).toLowerCase();
+    if (sameName &&
+        await _occupied(renamed) &&
+        await FileSystemEntity.identical(source.path, renamed.path)) {
+      return _renameCase(source, renamed, before, xml, progressionSource);
     }
     await _writeNew(renamed, xml);
     var retired = false;
@@ -456,6 +464,36 @@ class PobBuildLibrary implements BuildStorage, BuildNotesStorage {
       }
       rethrow;
     }
+  }
+
+  Future<File> _renameCase(
+    File source,
+    File renamed,
+    String before,
+    String xml,
+    TreeProgressionKey? progressionSource,
+  ) {
+    Future<void> restoreSource() => _writeNew(source, before);
+
+    return _transferProgression(
+      progressionSource,
+      renamed,
+      () async {
+        await _retire(source, before);
+        try {
+          await _writeNew(renamed, xml);
+        } catch (_) {
+          await restoreSource();
+          rethrow;
+        }
+        return renamed;
+      },
+      restoreSource: () async {
+        await _check(renamed, xml);
+        await renamed.delete();
+        await restoreSource();
+      },
+    );
   }
 
   Future<File> _create(

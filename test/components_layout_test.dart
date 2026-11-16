@@ -16,7 +16,7 @@ void main() {
   const mcp = Installation(tag: '', commit: '', directory: '');
 
   test('При нескольких установках мост ждёт явного выбора папки', () async {
-    final repository = _WindowRepository(['C:/PoB', 'D:/PoB']);
+    final repository = _WindowRepository(directories: ['C:/PoB', 'D:/PoB']);
     final cubit = PobBridgeCubit(repository, mcp);
     addTearDown(cubit.close);
     await cubit.discover();
@@ -76,6 +76,39 @@ void main() {
     expect(tester.takeException(), isNull);
   });
 
+  testWidgets('После установки моста Wine доступна проверка связи', (
+    tester,
+  ) async {
+    await tester.binding.setSurfaceSize(const Size(1200, 900));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+    final repository = _WindowRepository(
+      directories: ['/home/user/PoB'],
+      canRestart: false,
+    );
+    final components = ComponentRepository(
+      store: InstallationStore(Directory('unused-wine-bridge-test')),
+    )..active = {Component.mcp: mcp};
+    final model = WorkshopCubit(components, McpClient(), pobWindow: repository);
+    addTearDown(model.close);
+    await tester.pumpWidget(
+      MaterialApp(
+        theme: Spark.theme(),
+        home: Scaffold(body: ComponentsView(model: model)),
+      ),
+    );
+    await tester.tap(find.text('Настроить мост PoB'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Подключить мост'));
+    await tester.pumpAndSettle();
+    expect(repository.installed, '/home/user/PoB');
+    expect(find.textContaining('через Wine'), findsOneWidget);
+    expect(find.text('Перезапустить PoB'), findsNothing);
+    await tester.tap(find.text('Проверить связь'));
+    await tester.pumpAndSettle();
+    expect(repository.checked, '/home/user/PoB');
+    expect(find.text('/home/user/PoB/Builds'), findsOneWidget);
+  });
+
   for (final width in [420.0, 1200.0]) {
     testWidgets('Карточки компонентов адаптируются к ширине $width', (
       tester,
@@ -112,7 +145,10 @@ void main() {
 }
 
 class _WindowRepository extends PobWindowRepository {
-  _WindowRepository([this.directories = const ['C:/PoB']]);
+  _WindowRepository({
+    this.directories = const ['C:/PoB'],
+    this.canRestart = true,
+  });
 
   final List<String> directories;
   String? installed;
@@ -124,7 +160,7 @@ class _WindowRepository extends PobWindowRepository {
   bool get supported => true;
 
   @override
-  bool get canRestart => true;
+  final bool canRestart;
 
   @override
   Future<List<String>> findInstallations(Installation mcp) async => directories;

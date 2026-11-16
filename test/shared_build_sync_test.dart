@@ -681,6 +681,26 @@ void main() {
     await expectPlan([]);
   });
 
+  test('Смена регистра имени XML сохраняет план и заметки', () async {
+    await model.progressionRepository(model.progressionKey!).save([step]);
+    await library.readNotes(id);
+    await library.saveNotes(id, 'Заметка о сборке');
+
+    await model.renameBuild('общая');
+
+    const renamedId = 'общая.xml';
+    expect(model.state.error, isNull);
+    expect(model.state.library.activeId, renamedId);
+    expect((await library.scan()).entries.single.id, renamedId);
+    expect(await library.readNotes(renamedId), 'Заметка о сборке');
+    await expectPlan([step]);
+
+    await model.undo();
+    expect(model.state.error, isNull);
+    expect((await library.scan()).entries.single.id, id);
+    await expectPlan([step]);
+  });
+
   test(
     'Создание копии переносит план и заметки независимо от оригинала',
     () async {

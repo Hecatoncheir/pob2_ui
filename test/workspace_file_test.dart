@@ -251,6 +251,30 @@ void main() {
     expect(widgetModel.requests, 1);
   });
 
+  testWidgets('Персонажа можно выбрать в меню открытой сборки', (tester) async {
+    final widgetModel = ImportButtonWorkshop(
+      model.components,
+      engine,
+      initialState: model.state,
+      pobWindow: window,
+    );
+    addTearDown(widgetModel.close);
+    await tester.pumpWidget(PobApp(model: widgetModel));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byTooltip('Ещё'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Импортировать персонажа'));
+    await tester.pumpAndSettle();
+
+    final submit = find.widgetWithText(FilledButton, 'Импортировать');
+    expect(tester.widget<FilledButton>(submit).onPressed, isNull);
+    await tester.tap(find.text('Героиня'));
+    await tester.pumpAndSettle();
+    await tester.tap(submit);
+    await tester.pumpAndSettle();
+    expect(widgetModel.importedCharacter, 'Героиня');
+  });
+
   testWidgets('Первый запуск показывает один шаг, путь доступен в окне папки', (
     tester,
   ) async {
