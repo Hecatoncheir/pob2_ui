@@ -1,5 +1,10 @@
 {
   "@@locale": "en",
+  "m8c9a654b8c": "DPS before",
+  "@m8c9a654b8c": {
+    "description": "DPS до",
+    "placeholders": {}
+  },
   "m4577961ef0": "Bleed DPS",
   "@m4577961ef0": {
     "description": "DPS кровотечения",
@@ -13,6 +18,11 @@
   "m1f133cb415": "Ignite DPS",
   "@m1f133cb415": {
     "description": "DPS поджога",
+    "placeholders": {}
+  },
+  "m51830b0d65": "DPS after",
+  "@m51830b0d65": {
+    "description": "DPS после",
     "placeholders": {}
   },
   "m986eb99e35": "Impale + Hit DPS",
@@ -68,6 +78,11 @@
   "m198b0a77f8": "Lua did not return the build report",
   "@m198b0a77f8": {
     "description": "Lua не вернул отчёт сборки",
+    "placeholders": {}
+  },
+  "me5a8731a92": "Lua returned no support preview",
+  "@me5a8731a92": {
+    "description": "Lua не вернул оценку поддержки",
     "placeholders": {}
   },
   "m5bf96935c9": "Lua returned no warnings for this calculation.",
@@ -2190,6 +2205,11 @@
     "description": "Оформление",
     "placeholders": {}
   },
+  "m28af538cbc": "Preview support",
+  "@m28af538cbc": {
+    "description": "Оценить поддержку",
+    "placeholders": {}
+  },
   "m6e1f7baa47": "Clear search",
   "@m6e1f7baa47": {
     "description": "Очистить поиск",
@@ -2693,6 +2713,11 @@
   "m6aab9e2cb4": "Suspend",
   "@m6aab9e2cb4": {
     "description": "Приостановить",
+    "placeholders": {}
+  },
+  "ma000cd3129": "DPS change",
+  "@ma000cd3129": {
+    "description": "Прирост DPS",
     "placeholders": {}
   },
   "m0680c9d188": "Minion {p0}",

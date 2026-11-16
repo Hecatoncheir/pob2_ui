@@ -4,6 +4,7 @@ import '../domain/skill_gem.dart';
 import '../data/game_catalog_repository.dart';
 import 'core/app_text.dart';
 import 'core/spark_theme.dart';
+import 'core/ui_translation.dart';
 import 'gem_drag.dart';
 import 'gem_medallion.dart';
 
@@ -15,12 +16,14 @@ class SkillGemCatalogTile extends StatelessWidget {
     required this.add,
     required this.repository,
     this.compact = false,
+    this.preview,
   });
   final SkillGem gem;
   final bool saving;
   final VoidCallback add;
   final GameCatalogRepository repository;
   final bool compact;
+  final VoidCallback? preview;
 
   @override
   Widget build(BuildContext context) => DraggableGem(
@@ -71,6 +74,14 @@ class SkillGemCatalogTile extends StatelessWidget {
                         ),
                       ),
                     ),
+                    if (preview != null)
+                      IconButton(
+                        key: ValueKey('preview-support-${gem.id}'),
+                        tooltip: translateUi(context, 'Оценить поддержку'),
+                        onPressed: preview,
+                        icon: const Icon(Icons.bar_chart, size: 20),
+                        visualDensity: VisualDensity.compact,
+                      ),
                   ],
                 ),
         ),

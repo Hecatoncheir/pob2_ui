@@ -13,6 +13,9 @@ class AppLocalizationsDe extends AppLocalizations {
   AppLocalizationsDe([String locale = 'de']) : super(locale);
 
   @override
+  String get m8c9a654b8c => 'DPS vorher';
+
+  @override
   String get m4577961ef0 => 'Blutung DPS';
 
   @override
@@ -20,6 +23,9 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get m1f133cb415 => 'Zünde DPS';
+
+  @override
+  String get m51830b0d65 => 'DPS nachher';
 
   @override
   String get m986eb99e35 => 'Aufspießen + Schlagen DPS';
@@ -57,6 +63,10 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get m198b0a77f8 => 'Lua hat den Build-Bericht nicht zurückgegeben';
+
+  @override
+  String get me5a8731a92 =>
+      'Lua hat keine Bewertung der Unterstützung geliefert';
 
   @override
   String get m5bf96935c9 =>
@@ -1346,6 +1356,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get m1731619efa => 'Design';
 
   @override
+  String get m28af538cbc => 'Unterstützung prüfen';
+
+  @override
   String get m6e1f7baa47 => 'Suche leeren';
 
   @override
@@ -1652,6 +1665,9 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get m6aab9e2cb4 => 'Aussetzen';
+
+  @override
+  String get ma000cd3129 => 'DPS-Änderung';
 
   @override
   String m0680c9d188(String p0) {

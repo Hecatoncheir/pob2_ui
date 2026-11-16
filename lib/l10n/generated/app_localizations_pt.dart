@@ -13,6 +13,9 @@ class AppLocalizationsPt extends AppLocalizations {
   AppLocalizationsPt([String locale = 'pt']) : super(locale);
 
   @override
+  String get m8c9a654b8c => 'DPS antes';
+
+  @override
   String get m4577961ef0 => 'Sangramento DPS';
 
   @override
@@ -20,6 +23,9 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get m1f133cb415 => 'Acender DPS';
+
+  @override
+  String get m51830b0d65 => 'DPS depois';
 
   @override
   String get m986eb99e35 => 'Empalar + Golpe DPS';
@@ -53,6 +59,9 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get m198b0a77f8 => 'Lua não retornou o relatório de compilação';
+
+  @override
+  String get me5a8731a92 => 'Lua não retornou a avaliação do suporte';
 
   @override
   String get m5bf96935c9 => 'Lua não retornou nenhum aviso para este cálculo.';
@@ -1331,6 +1340,9 @@ class AppLocalizationsPt extends AppLocalizations {
   String get m1731619efa => 'Projeto';
 
   @override
+  String get m28af538cbc => 'Avaliar suporte';
+
+  @override
   String get m6e1f7baa47 => 'Limpar busca';
 
   @override
@@ -1635,6 +1647,9 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get m6aab9e2cb4 => 'Suspender';
+
+  @override
+  String get ma000cd3129 => 'Variação de DPS';
 
   @override
   String m0680c9d188(String p0) {
@@ -2370,6 +2385,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   AppLocalizationsPtBr() : super('pt_BR');
 
   @override
+  String get m8c9a654b8c => 'DPS antes';
+
+  @override
   String get m4577961ef0 => 'Sangramento DPS';
 
   @override
@@ -2377,6 +2395,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get m1f133cb415 => 'Acender DPS';
+
+  @override
+  String get m51830b0d65 => 'DPS depois';
 
   @override
   String get m986eb99e35 => 'Empalar + Golpe DPS';
@@ -2410,6 +2431,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get m198b0a77f8 => 'Lua não retornou o relatório de compilação';
+
+  @override
+  String get me5a8731a92 => 'Lua não retornou a avaliação do suporte';
 
   @override
   String get m5bf96935c9 => 'Lua não retornou nenhum aviso para este cálculo.';
@@ -3688,6 +3712,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get m1731619efa => 'Projeto';
 
   @override
+  String get m28af538cbc => 'Avaliar suporte';
+
+  @override
   String get m6e1f7baa47 => 'Limpar busca';
 
   @override
@@ -3992,6 +4019,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get m6aab9e2cb4 => 'Suspender';
+
+  @override
+  String get ma000cd3129 => 'Variação de DPS';
 
   @override
   String m0680c9d188(String p0) {

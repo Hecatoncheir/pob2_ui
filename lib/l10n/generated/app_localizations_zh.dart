@@ -13,6 +13,9 @@ class AppLocalizationsZh extends AppLocalizations {
   AppLocalizationsZh([String locale = 'zh']) : super(locale);
 
   @override
+  String get m8c9a654b8c => '加入前 DPS';
+
+  @override
   String get m4577961ef0 => '出血 DPS';
 
   @override
@@ -20,6 +23,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m1f133cb415 => '點燃 DPS';
+
+  @override
+  String get m51830b0d65 => '加入後 DPS';
 
   @override
   String get m986eb99e35 => '刺穿 + 擊中 DPS';
@@ -53,6 +59,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m198b0a77f8 => 'Lua 未回傳建置報告';
+
+  @override
+  String get me5a8731a92 => 'Lua 未傳回輔助寶石的試算結果';
 
   @override
   String get m5bf96935c9 => 'Lua 沒有針對此計算回傳任何警告。';
@@ -1296,6 +1305,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m1731619efa => '設計';
 
   @override
+  String get m28af538cbc => '評估輔助寶石';
+
+  @override
   String get m6e1f7baa47 => '清除搜尋';
 
   @override
@@ -1593,6 +1605,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m6aab9e2cb4 => '暫停';
+
+  @override
+  String get ma000cd3129 => 'DPS 變化';
 
   @override
   String m0680c9d188(String p0) {
@@ -2299,6 +2314,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   AppLocalizationsZhHant() : super('zh_Hant');
 
   @override
+  String get m8c9a654b8c => '加入前 DPS';
+
+  @override
   String get m4577961ef0 => '出血 DPS';
 
   @override
@@ -2306,6 +2324,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m1f133cb415 => '點燃 DPS';
+
+  @override
+  String get m51830b0d65 => '加入後 DPS';
 
   @override
   String get m986eb99e35 => '刺穿 + 擊中 DPS';
@@ -2339,6 +2360,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m198b0a77f8 => 'Lua 未回傳建置報告';
+
+  @override
+  String get me5a8731a92 => 'Lua 未傳回輔助寶石的試算結果';
 
   @override
   String get m5bf96935c9 => 'Lua 沒有針對此計算回傳任何警告。';
@@ -3582,6 +3606,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m1731619efa => '設計';
 
   @override
+  String get m28af538cbc => '評估輔助寶石';
+
+  @override
   String get m6e1f7baa47 => '清除搜尋';
 
   @override
@@ -3879,6 +3906,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m6aab9e2cb4 => '暫停';
+
+  @override
+  String get ma000cd3129 => 'DPS 變化';
 
   @override
   String m0680c9d188(String p0) {

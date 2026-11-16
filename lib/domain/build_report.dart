@@ -108,9 +108,11 @@ class BuildReport {
   }
 }
 
-String formatStat(dynamic value, {String suffix = ''}) {
+String formatStat(dynamic value, {String suffix = '', int? fractionDigits}) {
   if (value is! num || !value.isFinite) return '—';
-  final digits = value.abs() < 10 && value != value.roundToDouble() ? 2 : 0;
+  final digits =
+      fractionDigits ??
+      (value.abs() < 10 && value != value.roundToDouble() ? 2 : 0);
   final parts = value.toStringAsFixed(digits).split('.');
   final integer = parts.first.replaceAllMapped(
     RegExp(r'(\d)(?=(\d{3})+(?!\d))'),

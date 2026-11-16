@@ -381,6 +381,20 @@ class SkillGroupCubit extends Cubit<SkillGroupState> {
     ];
   }
 
+  bool canPreviewSupport(SkillGem gem) =>
+      repository.hasSupportPreview &&
+      gem.support &&
+      state.supportTarget?.enabled == true &&
+      accepts(gem, state.gems.length);
+
+  Future<SupportDps> previewSupport(SkillGem gem) async =>
+      repository.previewSupport(
+        _gemRequests(),
+        targetIndex: state.gems.indexOf(state.supportTarget!) + 1,
+        supportId: gem.id,
+        groupId: groupId,
+      );
+
   List<JsonMap> _supportRequests() {
     if (locksPrimary) return _gemRequests();
     // MCP принимает один активный камень для проверки в пробной сессии.

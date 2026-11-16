@@ -30,6 +30,8 @@ typedef GemDraft = ({
   int? sourceIndex,
 });
 
+typedef SupportDps = ({num? before, num? after, num? delta});
+
 bool isGrantedSkillGroup(JsonMap? group) =>
     (group?['source'] as String?)?.isNotEmpty ?? false;
 

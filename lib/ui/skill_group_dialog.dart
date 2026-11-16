@@ -12,6 +12,7 @@ import 'core/spark_theme.dart';
 import 'skill_group_cubit.dart';
 import 'skill_gem_catalog_tile.dart';
 import 'skill_group_composer.dart';
+import 'skill_support_preview.dart';
 import 'skill_support_target_picker.dart';
 import 'gem_drag.dart';
 import 'workshop_cubit.dart';
@@ -348,9 +349,9 @@ class SkillGemCatalog extends StatelessWidget {
       );
     return GridView.builder(
       key: const Key('gem-catalog'),
-      gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+      gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
         maxCrossAxisExtent: 170,
-        mainAxisExtent: 132,
+        mainAxisExtent: editor.repository.hasSupportPreview ? 158 : 132,
         mainAxisSpacing: 8,
         crossAxisSpacing: 8,
       ),
@@ -376,6 +377,14 @@ class SkillGemCatalog extends StatelessWidget {
         saving: state.saving,
         repository: editor.repository,
         compact: compact,
+        preview: editor.canPreviewSupport(gem)
+            ? () => showSkillSupportPreview(
+                context,
+                gem,
+                state.supportTarget!.gem,
+                () => editor.previewSupport(gem),
+              )
+            : null,
         add: () {
           if (onAdd case final action?)
             action(gem);

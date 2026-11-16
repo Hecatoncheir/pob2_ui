@@ -119,6 +119,12 @@ abstract class AppLocalizations {
     Locale.fromSubtags(languageCode: 'zh', scriptCode: 'Hant'),
   ];
 
+  /// DPS до
+  ///
+  /// In en, this message translates to:
+  /// **'DPS before'**
+  String get m8c9a654b8c;
+
   /// DPS кровотечения
   ///
   /// In en, this message translates to:
@@ -136,6 +142,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Ignite DPS'**
   String get m1f133cb415;
+
+  /// DPS после
+  ///
+  /// In en, this message translates to:
+  /// **'DPS after'**
+  String get m51830b0d65;
 
   /// DPS пронзания и ударов
   ///
@@ -202,6 +214,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Lua did not return the build report'**
   String get m198b0a77f8;
+
+  /// Lua не вернул оценку поддержки
+  ///
+  /// In en, this message translates to:
+  /// **'Lua returned no support preview'**
+  String get me5a8731a92;
 
   /// Lua не вернул предупреждений для этого расчёта.
   ///
@@ -2508,6 +2526,12 @@ abstract class AppLocalizations {
   /// **'Appearance'**
   String get m1731619efa;
 
+  /// Оценить поддержку
+  ///
+  /// In en, this message translates to:
+  /// **'Preview support'**
+  String get m28af538cbc;
+
   /// Очистить поиск
   ///
   /// In en, this message translates to:
@@ -3065,6 +3089,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Suspend'**
   String get m6aab9e2cb4;
+
+  /// Прирост DPS
+  ///
+  /// In en, this message translates to:
+  /// **'DPS change'**
+  String get ma000cd3129;
 
   /// Приспешник · {p0}
   ///

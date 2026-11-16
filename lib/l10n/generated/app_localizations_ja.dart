@@ -13,6 +13,9 @@ class AppLocalizationsJa extends AppLocalizations {
   AppLocalizationsJa([String locale = 'ja']) : super(locale);
 
   @override
+  String get m8c9a654b8c => '追加前のDPS';
+
+  @override
   String get m4577961ef0 => '流血DPS';
 
   @override
@@ -20,6 +23,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m1f133cb415 => 'イグナイトDPS';
+
+  @override
+  String get m51830b0d65 => '追加後のDPS';
 
   @override
   String get m986eb99e35 => '突き刺す + ヒット DPS';
@@ -53,6 +59,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m198b0a77f8 => 'Lua はビルド レポートを返しませんでした';
+
+  @override
+  String get me5a8731a92 => 'Luaがサポートの試算結果を返しませんでした';
 
   @override
   String get m5bf96935c9 => 'Lua はこの計算に対して警告を返しませんでした。';
@@ -1299,6 +1308,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m1731619efa => 'デザイン';
 
   @override
+  String get m28af538cbc => 'サポートを試算';
+
+  @override
   String get m6e1f7baa47 => '検索をクリア';
 
   @override
@@ -1596,6 +1608,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m6aab9e2cb4 => '一時停止';
+
+  @override
+  String get ma000cd3129 => 'DPSの変化';
 
   @override
   String m0680c9d188(String p0) {

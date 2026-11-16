@@ -1,8 +1,10 @@
 {
   "ru": {
+    "m8c9a654b8c": "DPS до",
     "m4577961ef0": "DPS кровотечения",
     "m702f584eba": "DPS отравления",
     "m1f133cb415": "DPS поджога",
+    "m51830b0d65": "DPS после",
     "m986eb99e35": "DPS пронзания и ударов",
     "m9ec0f47b47": "DPS ударов",
     "m0c63e733f9": "Lua вернул не все иконки",
@@ -14,6 +16,7 @@
     "me9dd147860": "Lua не вернул описание камня",
     "m59e00dc2d6": "Lua не вернул описание условия",
     "m198b0a77f8": "Lua не вернул отчёт сборки",
+    "me5a8731a92": "Lua не вернул оценку поддержки",
     "m5bf96935c9": "Lua не вернул предупреждений для этого расчёта.",
     "m1f463483a4": "Lua не вернул сведения об узле",
     "m35f86d9c5e": "Lua не вернул совместимость камней",
@@ -398,6 +401,7 @@
     "m8fbe9b75cb": "Отмена",
     "mb9b86803ad": "Отменить действие",
     "m1731619efa": "Оформление",
+    "m28af538cbc": "Оценить поддержку",
     "m6e1f7baa47": "Очистить поиск",
     "m6cc0ad9655": "Очки",
     "m07817efe16": "Очки: {p0}",
@@ -491,6 +495,7 @@
     "m711164636a": "Применить этап",
     "mae2ea1c701": "Примерка",
     "m6aab9e2cb4": "Приостановить",
+    "ma000cd3129": "Прирост DPS",
     "m0680c9d188": "Приспешник · {p0}",
     "me4424a6df6": "Проверить",
     "m93b08f7b14": "Проверить обновления",
@@ -1429,7 +1434,12 @@
     "m9dba47b33c": "Compare builds",
     "mec1443af90": "Calculation settings and party settings come from the first build.",
     "mfd96d5c7e6": "The group has no active skills",
-    "mdca021ee93": "Skill for support suggestions"
+    "mdca021ee93": "Skill for support suggestions",
+    "m8c9a654b8c": "DPS before",
+    "m51830b0d65": "DPS after",
+    "me5a8731a92": "Lua returned no support preview",
+    "m28af538cbc": "Preview support",
+    "ma000cd3129": "DPS change"
   },
   "fr": {
     "m0c63e733f9": "Lua n'a pas renvoyé toutes les icônes",
@@ -2145,7 +2155,12 @@
     "m9dba47b33c": "Comparer les builds",
     "mec1443af90": "Les conditions de calcul et les réglages de groupe proviennent du premier build.",
     "mfd96d5c7e6": "Le groupe ne contient aucune compétence active",
-    "mdca021ee93": "Compétence pour les suggestions de supports"
+    "mdca021ee93": "Compétence pour les suggestions de supports",
+    "m8c9a654b8c": "DPS avant",
+    "m51830b0d65": "DPS après",
+    "me5a8731a92": "Lua n’a renvoyé aucune prévisualisation du soutien",
+    "m28af538cbc": "Évaluer le soutien",
+    "ma000cd3129": "Variation du DPS"
   },
   "de": {
     "m0c63e733f9": "Lua hat nicht alle Symbole zurückgegeben",
@@ -2861,7 +2876,12 @@
     "m9dba47b33c": "Builds vergleichen",
     "mec1443af90": "Berechnungsbedingungen und Gruppeneinstellungen stammen aus dem ersten Build.",
     "mfd96d5c7e6": "Die Gruppe enthält keine aktiven Fertigkeiten",
-    "mdca021ee93": "Fertigkeit für Unterstützungsvorschläge"
+    "mdca021ee93": "Fertigkeit für Unterstützungsvorschläge",
+    "m8c9a654b8c": "DPS vorher",
+    "m51830b0d65": "DPS nachher",
+    "me5a8731a92": "Lua hat keine Bewertung der Unterstützung geliefert",
+    "m28af538cbc": "Unterstützung prüfen",
+    "ma000cd3129": "DPS-Änderung"
   },
   "es": {
     "m0c63e733f9": "Lua no devolvió todos los íconos",
@@ -3577,7 +3597,12 @@
     "m9dba47b33c": "Comparar configuraciones",
     "mec1443af90": "Las condiciones de cálculo y los ajustes del grupo se toman de la primera configuración.",
     "mfd96d5c7e6": "El grupo no tiene habilidades activas",
-    "mdca021ee93": "Habilidad para sugerir apoyos"
+    "mdca021ee93": "Habilidad para sugerir apoyos",
+    "m8c9a654b8c": "DPS antes",
+    "m51830b0d65": "DPS después",
+    "me5a8731a92": "Lua no devolvió la vista previa de la gema de asistencia",
+    "m28af538cbc": "Evaluar asistencia",
+    "ma000cd3129": "Cambio de DPS"
   },
   "pt_BR": {
     "m0c63e733f9": "Lua não retornou todos os ícones",
@@ -4293,7 +4318,12 @@
     "m9dba47b33c": "Comparar builds",
     "mec1443af90": "As condições de cálculo e as configurações do grupo vêm da primeira build.",
     "mfd96d5c7e6": "O grupo não tem habilidades ativas",
-    "mdca021ee93": "Habilidade para sugestões de suportes"
+    "mdca021ee93": "Habilidade para sugestões de suportes",
+    "m8c9a654b8c": "DPS antes",
+    "m51830b0d65": "DPS depois",
+    "me5a8731a92": "Lua não retornou a avaliação do suporte",
+    "m28af538cbc": "Avaliar suporte",
+    "ma000cd3129": "Variação de DPS"
   },
   "ja": {
     "m0c63e733f9": "Lua はすべてのアイコンを返しませんでした",
@@ -5009,7 +5039,12 @@
     "m9dba47b33c": "ビルドを比較",
     "mec1443af90": "計算条件とパーティ設定は1つ目のビルドから取得します。",
     "mfd96d5c7e6": "グループにアクティブスキルがありません",
-    "mdca021ee93": "サポート候補を表示するスキル"
+    "mdca021ee93": "サポート候補を表示するスキル",
+    "m8c9a654b8c": "追加前のDPS",
+    "m51830b0d65": "追加後のDPS",
+    "me5a8731a92": "Luaがサポートの試算結果を返しませんでした",
+    "m28af538cbc": "サポートを試算",
+    "ma000cd3129": "DPSの変化"
   },
   "ko": {
     "m0c63e733f9": "Lua이 모든 아이콘을 반환하지 않았습니다.",
@@ -5725,7 +5760,12 @@
     "m9dba47b33c": "빌드 비교하기",
     "mec1443af90": "계산 조건과 파티 설정은 첫 번째 빌드에서 가져옵니다.",
     "mfd96d5c7e6": "그룹에 활성 스킬이 없습니다",
-    "mdca021ee93": "보조 스킬을 추천할 스킬"
+    "mdca021ee93": "보조 스킬을 추천할 스킬",
+    "m8c9a654b8c": "추가 전 DPS",
+    "m51830b0d65": "추가 후 DPS",
+    "me5a8731a92": "Lua가 보조 젬 평가 결과를 반환하지 않았습니다",
+    "m28af538cbc": "보조 젬 평가",
+    "ma000cd3129": "DPS 변화량"
   },
   "th": {
     "m0c63e733f9": "Lua ไม่ได้ส่งคืนไอคอนทั้งหมด",
@@ -6441,7 +6481,12 @@
     "m9dba47b33c": "เปรียบเทียบบิลด์",
     "mec1443af90": "ใช้เงื่อนไขการคำนวณและการตั้งค่าปาร์ตี้จากบิลด์แรก",
     "mfd96d5c7e6": "กลุ่มนี้ไม่มีสกิลใช้งาน",
-    "mdca021ee93": "สกิลสำหรับแนะนำหินเสริม"
+    "mdca021ee93": "สกิลสำหรับแนะนำหินเสริม",
+    "m8c9a654b8c": "DPS ก่อนเพิ่ม",
+    "m51830b0d65": "DPS หลังเพิ่ม",
+    "me5a8731a92": "Lua ไม่ส่งผลประเมินหินเสริมกลับมา",
+    "m28af538cbc": "ประเมินหินเสริม",
+    "ma000cd3129": "การเปลี่ยนแปลง DPS"
   },
   "zh_Hant": {
     "m0c63e733f9": "Lua 未傳回所有圖標",
@@ -7157,6 +7202,11 @@
     "m9dba47b33c": "比較流派",
     "mec1443af90": "計算條件與隊伍設定取自第一個流派。",
     "mfd96d5c7e6": "此組別沒有主動技能",
-    "mdca021ee93": "選擇要搭配輔助寶石的技能"
+    "mdca021ee93": "選擇要搭配輔助寶石的技能",
+    "m8c9a654b8c": "加入前 DPS",
+    "m51830b0d65": "加入後 DPS",
+    "me5a8731a92": "Lua 未傳回輔助寶石的試算結果",
+    "m28af538cbc": "評估輔助寶石",
+    "ma000cd3129": "DPS 變化"
   }
 }

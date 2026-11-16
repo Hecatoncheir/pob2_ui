@@ -13,6 +13,9 @@ class AppLocalizationsTh extends AppLocalizations {
   AppLocalizationsTh([String locale = 'th']) : super(locale);
 
   @override
+  String get m8c9a654b8c => 'DPS ก่อนเพิ่ม';
+
+  @override
   String get m4577961ef0 => 'เลือดออก DPS';
 
   @override
@@ -20,6 +23,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m1f133cb415 => 'จุดชนวน DPS';
+
+  @override
+  String get m51830b0d65 => 'DPS หลังเพิ่ม';
 
   @override
   String get m986eb99e35 => 'แทง + ตี DPS';
@@ -53,6 +59,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m198b0a77f8 => 'Lua ไม่ได้ส่งคืนรายงานบิลด์';
+
+  @override
+  String get me5a8731a92 => 'Lua ไม่ส่งผลประเมินหินเสริมกลับมา';
 
   @override
   String get m5bf96935c9 => 'Lua ไม่มีคำเตือนสำหรับการคำนวณนี้';
@@ -1310,6 +1319,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m1731619efa => 'การออกแบบ';
 
   @override
+  String get m28af538cbc => 'ประเมินหินเสริม';
+
+  @override
   String get m6e1f7baa47 => 'ล้างการค้นหา';
 
   @override
@@ -1608,6 +1620,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m6aab9e2cb4 => 'Suspend';
+
+  @override
+  String get ma000cd3129 => 'การเปลี่ยนแปลง DPS';
 
   @override
   String m0680c9d188(String p0) {

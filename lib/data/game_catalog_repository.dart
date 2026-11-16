@@ -18,6 +18,8 @@ class GameCatalogRepository {
   bool get hasGemEditor =>
       engine.tools.containsAll({'pob_gem_icons', 'pob_gem_supports'});
 
+  bool get hasSupportPreview => engine.tools.contains('pob_preview_support');
+
   Future<List<JsonMap>> gemTooltip({
     required String id,
     int level = 1,
@@ -60,6 +62,35 @@ class GameCatalogRepository {
         Set.unmodifiable(ids.cast<String>()),
       _ => throw const FormatException('Lua не вернул совместимость камней'),
     };
+  }
+
+  Future<SupportDps> previewSupport(
+    List<JsonMap> gems, {
+    required int targetIndex,
+    required String supportId,
+    int? groupId,
+  }) async {
+    final result = await engine.call('pob_preview_support', {
+      'gems': gems,
+      'targetIndex': targetIndex,
+      'supportId': supportId,
+      if (groupId != null) 'groupId': groupId,
+    });
+    if (result case {
+      'source': 'original-lua',
+      'before': final num? before,
+      'after': final num? after,
+      'delta': final num? delta,
+    }) {
+      if ([
+        before,
+        after,
+        delta,
+      ].whereType<num>().every((value) => value.isFinite)) {
+        return (before: before, after: after, delta: delta);
+      }
+    }
+    throw const FormatException('Lua не вернул оценку поддержки');
   }
 
   Future<GemIcon> icon(String id) => _icons.putIfAbsent(id, () {

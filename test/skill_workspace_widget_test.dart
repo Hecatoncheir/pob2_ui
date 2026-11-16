@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:pob2_ui/domain/build_report.dart';
@@ -14,6 +16,22 @@ const support = {
   'support': true,
 };
 const ice = {'id': 'ice', 'name': 'Ice Nova', 'support': false};
+
+class _SupportPreviewEngine extends EditorCatalogEngine {
+  _SupportPreviewEngine() : super(gemEntries: const [fireball, ice, support]) {
+    tools.add('pob_preview_support');
+  }
+
+  final result = Completer<JsonMap>();
+  JsonMap? previewRequest;
+
+  @override
+  Future<JsonMap> call(String name, [JsonMap arguments = const {}]) async {
+    if (name != 'pob_preview_support') return super.call(name, arguments);
+    previewRequest = arguments;
+    return result.future;
+  }
+}
 
 BuildReport workspaceReport() => BuildReport.fromJson({
   ...fixture.raw,
@@ -207,6 +225,74 @@ void main() {
       [('gem-fireball', 5, 1), ('ice', 9, null), ('support', 1, null)],
     );
     expect(find.byKey(const Key('workspace-support-target')), findsOneWidget);
+    expect(tester.takeException(), isNull);
+    await tester.pumpWidget(const SizedBox.shrink());
+    await settle(tester);
+  });
+
+  testWidgets('Предпросмотр DPS получает полную группу и сохраняет черновик', (
+    tester,
+  ) async {
+    await tester.binding.setSurfaceSize(const Size(1300, 950));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+    final engine = _SupportPreviewEngine();
+    final model = EditorWorkshop(engine, report: workspaceReport());
+    addTearDown(model.close);
+    await tester.pumpWidget(application(SkillsView(model: model)));
+    await settle(tester);
+    await tester.tap(
+      find.descendant(
+        of: find.byKey(const ValueKey('skill-group-1')),
+        matching: find.byTooltip('Редактировать группу'),
+      ),
+    );
+    await settle(tester);
+    await tester.tap(find.byKey(const ValueKey('catalog-gem-ice')));
+    await settle(tester);
+    await tester.enterText(find.byKey(const ValueKey('gem-level-1')), '9');
+    await settle(tester);
+
+    await tester.tap(
+      find.byKey(const ValueKey('preview-support-support')).last,
+    );
+    await tester.pump();
+    expect(find.byType(LinearProgressIndicator), findsOneWidget);
+    expect(engine.previewRequest, {
+      'groupId': 1,
+      'targetIndex': 2,
+      'supportId': 'support',
+      'gems': [
+        {
+          'id': 'gem-fireball',
+          'level': 5,
+          'quality': 20,
+          'enabled': true,
+          'sourceIndex': 1,
+        },
+        {'id': 'ice', 'level': 9, 'quality': 0, 'enabled': true},
+      ],
+    });
+    engine.result.complete({
+      'source': 'original-lua',
+      'before': 12.817708333333,
+      'after': 15.333333333333,
+      'delta': 2.515625,
+    });
+    await settle(tester);
+    expect(find.text('DPS до'), findsOneWidget);
+    expect(find.text('DPS после'), findsOneWidget);
+    expect(find.text('Прирост DPS'), findsOneWidget);
+    expect(find.text('12,8177'), findsOneWidget);
+    expect(find.text('15,3333'), findsOneWidget);
+    expect(find.text('+2,5156'), findsOneWidget);
+    await tester.tap(find.text('Закрыть'));
+    await settle(tester);
+    expect(
+      find.byKey(const ValueKey('catalog-gem-support')).last,
+      findsOneWidget,
+    );
+    expect(model.savedGems, isNull);
+    expect(model.state.report!.groups.first['gems'], hasLength(1));
     expect(tester.takeException(), isNull);
     await tester.pumpWidget(const SizedBox.shrink());
     await settle(tester);

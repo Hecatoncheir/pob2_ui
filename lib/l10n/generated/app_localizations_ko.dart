@@ -13,6 +13,9 @@ class AppLocalizationsKo extends AppLocalizations {
   AppLocalizationsKo([String locale = 'ko']) : super(locale);
 
   @override
+  String get m8c9a654b8c => '추가 전 DPS';
+
+  @override
   String get m4577961ef0 => '블리드 DPS';
 
   @override
@@ -20,6 +23,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m1f133cb415 => '점화 DPS';
+
+  @override
+  String get m51830b0d65 => '추가 후 DPS';
 
   @override
   String get m986eb99e35 => '꿰뚫기 + 적중 DPS';
@@ -53,6 +59,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m198b0a77f8 => 'Lua이 빌드 보고서를 반환하지 않았습니다.';
+
+  @override
+  String get me5a8731a92 => 'Lua가 보조 젬 평가 결과를 반환하지 않았습니다';
 
   @override
   String get m5bf96935c9 => 'Lua은 이 계산에 대해 경고를 반환하지 않았습니다.';
@@ -1299,6 +1308,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m1731619efa => '디자인';
 
   @override
+  String get m28af538cbc => '보조 젬 평가';
+
+  @override
   String get m6e1f7baa47 => '검색 지우기';
 
   @override
@@ -1596,6 +1608,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m6aab9e2cb4 => '일시중지';
+
+  @override
+  String get ma000cd3129 => 'DPS 변화량';
 
   @override
   String m0680c9d188(String p0) {

@@ -13,6 +13,9 @@ class AppLocalizationsRu extends AppLocalizations {
   AppLocalizationsRu([String locale = 'ru']) : super(locale);
 
   @override
+  String get m8c9a654b8c => 'DPS до';
+
+  @override
   String get m4577961ef0 => 'DPS кровотечения';
 
   @override
@@ -20,6 +23,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get m1f133cb415 => 'DPS поджога';
+
+  @override
+  String get m51830b0d65 => 'DPS после';
 
   @override
   String get m986eb99e35 => 'DPS пронзания и ударов';
@@ -53,6 +59,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get m198b0a77f8 => 'Lua не вернул отчёт сборки';
+
+  @override
+  String get me5a8731a92 => 'Lua не вернул оценку поддержки';
 
   @override
   String get m5bf96935c9 => 'Lua не вернул предупреждений для этого расчёта.';
@@ -1322,6 +1331,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m1731619efa => 'Оформление';
 
   @override
+  String get m28af538cbc => 'Оценить поддержку';
+
+  @override
   String get m6e1f7baa47 => 'Очистить поиск';
 
   @override
@@ -1624,6 +1636,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get m6aab9e2cb4 => 'Приостановить';
+
+  @override
+  String get ma000cd3129 => 'Прирост DPS';
 
   @override
   String m0680c9d188(String p0) {
