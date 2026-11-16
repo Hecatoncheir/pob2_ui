@@ -62,6 +62,15 @@ Iterable<KeyBinding> commandBindings(
   }
 }
 
+bool usesMacXmlShortcut(WorkspacePreferences preferences, AppCommand command) =>
+    commandBindings(preferences, command).contains((
+      key: defaultBinding(command).key,
+      control: false,
+      alt: false,
+      shift: false,
+      meta: true,
+    ));
+
 Iterable<KeyBinding> _defaultAliases(
   AppCommand command,
   KeyBinding binding,

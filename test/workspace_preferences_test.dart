@@ -36,6 +36,50 @@ class ShortcutWorkshop extends WorkshopCubit {
 }
 
 void main() {
+  testWidgets('Нативные сочетания XML учитывают переназначение и отключение', (
+    tester,
+  ) async {
+    const channel = MethodChannel('pob2_ui/xml_shortcuts');
+    final messenger = tester.binding.defaultBinaryMessenger;
+    final configurations = <List<String>>[];
+    messenger.setMockMethodCallHandler(channel, (call) async {
+      expect(call.method, 'configure');
+      configurations.add((call.arguments as List).cast<String>());
+      return null;
+    });
+    addTearDown(() => messenger.setMockMethodCallHandler(channel, null));
+    final root = Directory('unused-macos-shortcuts-test');
+    final preferences = WorkspacePreferencesBloc(
+      MemoryWorkspacePreferences(root),
+    );
+    final model = ShortcutWorkshop(root);
+    await tester.pumpWidget(
+      PobApp(model: model, workspacePreferences: preferences),
+    );
+    await tester.pumpAndSettle();
+    expect(configurations.last, ['importXml', 'exportXml']);
+
+    preferences.add(
+      ShortcutChanged(
+        AppCommand.importXml,
+        defaultBinding(AppCommand.importXml),
+      ),
+    );
+    await tester.pumpAndSettle();
+    expect(configurations.last, ['exportXml']);
+
+    preferences.add(const ShortcutChanged(AppCommand.exportXml, null));
+    await tester.pumpAndSettle();
+    expect(configurations.last, isEmpty);
+
+    preferences.add(const ShortcutsReset());
+    await tester.pumpAndSettle();
+    expect(configurations.last, ['importXml', 'exportXml']);
+    await tester.pumpWidget(const SizedBox.shrink());
+    await disposeWidgetBloc(tester, preferences);
+    await model.close();
+  }, skip: !Platform.isMacOS);
+
   test('Новый Redo не перехватывает старые пользовательские Ctrl+Shift+Z и Cmd+Shift+Z', () {
     final primary = defaultBinding(AppCommand.redo);
     final legacy = WorkspacePreferences(shortcuts: {AppCommand.undo: primary});

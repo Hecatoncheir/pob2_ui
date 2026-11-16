@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'core/dialog_close_button.dart';
@@ -5,6 +6,8 @@ import 'core/app_text.dart';
 
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter/foundation.dart' show mapEquals;
+import 'package:flutter/services.dart';
 
 import '../domain/app_info.dart';
 import '../domain/appearance.dart';
@@ -292,7 +295,7 @@ class _BuildSyncNavigatorObserver extends NavigatorObserver {
   }
 }
 
-class _KeyboardActions extends StatelessWidget {
+class _KeyboardActions extends StatefulWidget {
   const _KeyboardActions({
     required this.model,
     required this.shell,
@@ -303,19 +306,76 @@ class _KeyboardActions extends StatelessWidget {
   final ShellBloc shell;
   final Widget child;
   final GlobalKey<NavigatorState> navigator;
+
+  @override
+  State<_KeyboardActions> createState() => _KeyboardActionsState();
+}
+
+class _KeyboardActionsState extends State<_KeyboardActions> {
+  static const _xmlShortcuts = OptionalMethodChannel('pob2_ui/xml_shortcuts');
+  static const _xmlCommands = [AppCommand.importXml, AppCommand.exportXml];
+
+  WorkshopCubit get model => widget.model;
+  GlobalKey<NavigatorState> get navigator => widget.navigator;
+
+  @override
+  void initState() {
+    super.initState();
+    if (!Platform.isMacOS) return;
+    _xmlShortcuts.setMethodCallHandler(_handleXmlShortcut);
+    _configureXmlShortcuts(context.read<WorkspacePreferencesBloc>().state);
+  }
+
+  @override
+  void dispose() {
+    if (Platform.isMacOS) _xmlShortcuts.setMethodCallHandler(null);
+    super.dispose();
+  }
+
+  void _configureXmlShortcuts(WorkspacePreferencesState state) {
+    if (!Platform.isMacOS) return;
+    unawaited(
+      _xmlShortcuts.invokeMethod<void>('configure', [
+        for (final command in _xmlCommands)
+          if (usesMacXmlShortcut(state.preferences, command)) command.name,
+      ]),
+    );
+  }
+
+  Future<void> _handleXmlShortcut(MethodCall call) async {
+    final preferences = context
+        .read<WorkspacePreferencesBloc>()
+        .state
+        .preferences;
+    final dialogContext = _dialogContext(context);
+    if (call.method == AppCommand.importXml.name &&
+        usesMacXmlShortcut(preferences, AppCommand.importXml)) {
+      _import(dialogContext);
+    }
+    if (call.method == AppCommand.exportXml.name &&
+        usesMacXmlShortcut(preferences, AppCommand.exportXml)) {
+      _export(dialogContext);
+    }
+  }
+
   @override
   Widget build(BuildContext context) =>
-      BlocBuilder<WorkspacePreferencesBloc, WorkspacePreferencesState>(
+      BlocConsumer<WorkspacePreferencesBloc, WorkspacePreferencesState>(
+        listenWhen: (before, after) => !mapEquals(
+          before.preferences.shortcuts,
+          after.preferences.shortcuts,
+        ),
+        listener: (context, state) => _configureXmlShortcuts(state),
         builder: (context, state) => CallbackShortcuts(
           bindings: commandCallbacks(state.preferences, {
             AppCommand.newBuild: () =>
-                _new(_dialogContext(context), model, shell),
+                _new(_dialogContext(context), model, widget.shell),
             AppCommand.importXml: () => _import(_dialogContext(context)),
             AppCommand.exportXml: () => _export(_dialogContext(context)),
             AppCommand.undo: () => _historyAction(model.undo),
             AppCommand.redo: () => _historyAction(model.redo),
           }),
-          child: child,
+          child: widget.child,
         ),
       );
   BuildContext _dialogContext(BuildContext fallback) =>
