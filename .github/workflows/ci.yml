@@ -36,11 +36,11 @@ jobs:
           fetch-depth: 0
       - uses: actions/setup-python@v7.1.0
         with:
-          python-version: '3.13'
+          python-version: '3.15'
       - uses: rhysd/action-setup-vim@febef33995d6649302e9d88dda81e071b68f16a7
         with:
           neovim: true
-          version: v0.11.5
+          version: v0.12.6
       - name: Проверить предел 10 и показать рост сложности
         shell: bash
         env:
@@ -91,10 +91,10 @@ jobs:
           ref: ${{ inputs.ref || github.ref }}
       - uses: actions/setup-python@v7.1.0
         with:
-          python-version: '3.13'
-      - uses: actions/setup-node@v6
+          python-version: '3.15'
+      - uses: actions/setup-node@v7.1.0
         with:
-          node-version: '22'
+          node-version: '26'
       - name: Подготовить Linux
         if: runner.os == 'Linux'
         shell: bash

@@ -16,7 +16,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   intl: ^0.20.3
-  material_ui: ^1.11.0
+  material_ui: ^1.11.1
   path: 1.9.1
   xml: 7.1.0
 

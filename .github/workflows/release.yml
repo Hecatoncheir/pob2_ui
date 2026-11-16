@@ -34,7 +34,7 @@ jobs:
           ref: refs/tags/${{ env.RELEASE_TAG }}
       - uses: actions/setup-python@v7.1.0
         with:
-          python-version: '3.13'
+          python-version: '3.15'
       - id: version
         run: |
           python tool/release.py --tag "$RELEASE_TAG" --check-only
@@ -61,7 +61,7 @@ jobs:
           ref: ${{ env.RELEASE_COMMIT }}
       - uses: actions/setup-python@v7.1.0
         with:
-          python-version: '3.13'
+          python-version: '3.15'
       - uses: actions/download-artifact@v8.0.2
         with:
           pattern: installer-*
