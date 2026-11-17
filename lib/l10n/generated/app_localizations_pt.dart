@@ -259,6 +259,9 @@ class AppLocalizationsPt extends AppLocalizations {
   String get mbce24a2108 => 'Insira um nome';
 
   @override
+  String get ma520dea087 => 'Insira o link de uma build no pobb.in.';
+
+  @override
   String get m7dbeae99bf => 'Informe um nível de 1 a 100';
 
   @override
@@ -713,10 +716,18 @@ class AppLocalizationsPt extends AppLocalizations {
   String get mcaa43cf432 => 'Importar caractere';
 
   @override
+  String get m4376254217 => 'Importar via link';
+
+  @override
   String get ma8f8e11f0c => 'Inteligência';
 
   @override
   String get mb1f4f27181 => 'Pesquise no mercado';
+
+  @override
+  String ma8584a8e11(String p0) {
+    return 'Usando o arquivo verificado $p0';
+  }
 
   @override
   String get m56e46960c1 => 'Fonte';
@@ -945,6 +956,9 @@ class AppLocalizationsPt extends AppLocalizations {
   String m4b1c83eb15(String p0) {
     return 'Falha ao carregar a tradução: $p0';
   }
+
+  @override
+  String get m6d9965924b => 'Não foi possível baixar a build do pobb.in.';
 
   @override
   String get m6f37ba2ab7 => 'Não foi possível fechar o PoB.';
@@ -1854,6 +1868,9 @@ class AppLocalizationsPt extends AppLocalizations {
   String get maa7d8fe68c => 'Com qual etapa comparar?';
 
   @override
+  String get m64d0c7f0a2 => 'O site pobb.in não respondeu a tempo.';
+
+  @override
   String get m49db3482db => 'Joias';
 
   @override
@@ -1884,6 +1901,9 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get ma8f340d211 => 'Build atualizada a partir do Path of Building';
+
+  @override
+  String get md16bd478bc => 'Nenhuma build foi encontrada neste link.';
 
   @override
   String get mc27d8aad03 => 'Montagem calculada pelo original Lua';
@@ -2101,6 +2121,9 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get ma775dcaa51 => 'Dano médio';
+
+  @override
+  String get m926d57bfc2 => 'Link de pobb.in';
 
   @override
   String get m91d6208508 => 'Ainda não há versões estáveis';
@@ -2667,6 +2690,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get mbce24a2108 => 'Insira um nome';
 
   @override
+  String get ma520dea087 => 'Insira o link de uma build no pobb.in.';
+
+  @override
   String get m7dbeae99bf => 'Informe um nível de 1 a 100';
 
   @override
@@ -3121,10 +3147,18 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get mcaa43cf432 => 'Importar caractere';
 
   @override
+  String get m4376254217 => 'Importar via link';
+
+  @override
   String get ma8f8e11f0c => 'Inteligência';
 
   @override
   String get mb1f4f27181 => 'Pesquise no mercado';
+
+  @override
+  String ma8584a8e11(String p0) {
+    return 'Usando o arquivo verificado $p0';
+  }
 
   @override
   String get m56e46960c1 => 'Fonte';
@@ -3353,6 +3387,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String m4b1c83eb15(String p0) {
     return 'Falha ao carregar a tradução: $p0';
   }
+
+  @override
+  String get m6d9965924b => 'Não foi possível baixar a build do pobb.in.';
 
   @override
   String get m6f37ba2ab7 => 'Não foi possível fechar o PoB.';
@@ -4262,6 +4299,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get maa7d8fe68c => 'Com qual etapa comparar?';
 
   @override
+  String get m64d0c7f0a2 => 'O site pobb.in não respondeu a tempo.';
+
+  @override
   String get m49db3482db => 'Joias';
 
   @override
@@ -4292,6 +4332,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get ma8f340d211 => 'Build atualizada a partir do Path of Building';
+
+  @override
+  String get md16bd478bc => 'Nenhuma build foi encontrada neste link.';
 
   @override
   String get mc27d8aad03 => 'Montagem calculada pelo original Lua';
@@ -4509,6 +4552,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get ma775dcaa51 => 'Dano médio';
+
+  @override
+  String get m926d57bfc2 => 'Link de pobb.in';
 
   @override
   String get m91d6208508 => 'Ainda não há versões estáveis';

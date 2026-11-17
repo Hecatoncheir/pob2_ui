@@ -234,6 +234,12 @@ class _SetupWizardState extends State<_SetupWizard> {
         onPressed: busy ? null : () => _run(() => pastePobCode(model)),
         child: const AppText('Вставить код PoB'),
       ),
+      OutlinedButton(
+        onPressed: busy
+            ? null
+            : () => _run(() => showPobLinkImport(context, model)),
+        child: const AppText('Импортировать по ссылке'),
+      ),
       if (model.pobWindow.supported) ...[
         OutlinedButton(
           onPressed: busy ? null : () => _run(model.importFromPob),

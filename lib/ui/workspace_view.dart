@@ -116,6 +116,10 @@ class WorkspaceView extends StatelessWidget {
           onPressed: busy ? null : () => pastePobCode(model),
           child: const AppText('Вставить код PoB'),
         ),
+        OutlinedButton(
+          onPressed: busy ? null : () => showPobLinkImport(context, model),
+          child: const AppText('Импортировать по ссылке'),
+        ),
         McpEditorButton(model, outlined: true),
         if (model.pobWindow.supported) ...[
           OutlinedButton(
@@ -264,6 +268,10 @@ class _BuildMenu extends StatelessWidget {
         child: AppText('Вставить код PoB'),
       ),
       const PopupMenuItem(
+        value: 'import-link',
+        child: AppText('Импортировать по ссылке'),
+      ),
+      const PopupMenuItem(
         value: 'copy-code',
         child: AppText('Скопировать код PoB'),
       ),
@@ -280,6 +288,8 @@ class _BuildMenu extends StatelessWidget {
         if (id != null) showBuildNotes(context, model, id);
       case 'paste-code':
         pastePobCode(model);
+      case 'import-link':
+        showPobLinkImport(context, model);
       case 'copy-code':
         copyPobCode(model);
       case 'paste':

@@ -10,6 +10,10 @@ on:
         description: 'Проверить пару из tool/components-lock.json'
         type: boolean
         default: false
+      cold_install:
+        description: 'Проверить скачивание архивов при первом запуске'
+        type: boolean
+        default: false
   workflow_call:
     inputs:
       ref:
@@ -159,23 +163,31 @@ jobs:
         run: |
           set -o pipefail
           mkdir -p build/review
-          args=(--install)
+          args=(--install --keep-archives)
           if [[ "$LOCKED_COMPONENTS" == true ]]; then
             test -f tool/components-lock.json
             args+=(--lock tool/components-lock.json)
           fi
           dart run tool/smoke.dart "${args[@]}" | tee build/review/components.json
-      - name: Скачать установщик v0.4.0 для проверки обновления
+      - name: Скачать установщик v0.5.0 для проверки обновления
         shell: bash
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh release download v0.4.0 --dir build/previous --pattern '*${{ matrix.target }}*'
+        run: gh release download v0.5.0 --dir build/previous --pattern '*${{ matrix.target }}*'
       - name: Проверить установку и восстановление сборки с Lua
-        if: runner.os == 'Linux'
-        run: xvfb-run -a python tool/check_installer.py --target ${{ matrix.target }} --build-check --previous build/previous
-      - name: Проверить установку и восстановление сборки с Lua
-        if: runner.os != 'Linux'
-        run: python tool/check_installer.py --target ${{ matrix.target }} --build-check --previous build/previous
+        shell: bash
+        env:
+          COLD_INSTALL: ${{ inputs.cold_install || false }}
+          LIVE_LINK: ${{ inputs.locked_components || false }}
+        run: |
+          runner=()
+          if [[ "$RUNNER_OS" == Linux ]]; then runner=(xvfb-run -a); fi
+          args=(--target ${{ matrix.target }} --build-check --previous build/previous)
+          if [[ "$COLD_INSTALL" != true ]]; then
+            args+=(--archives "$RUNNER_TEMP/pob2-lua-smoke/component-downloads")
+          fi
+          if [[ "$LIVE_LINK" == true ]]; then args+=(--verify-link); fi
+          "${runner[@]}" python tool/check_installer.py "${args[@]}"
       - name: Новый интерфейс с настоящим Lua
         if: runner.os != 'Linux'
         env:
@@ -210,6 +222,15 @@ jobs:
         env:
           POB2_UI_HOME: ${{ runner.temp }}/pob2-lua-smoke
         run: xvfb-run -a flutter test integration_test/share_codes_test.dart -d linux --no-pub
+      - name: Импорт ссылок pobb.in с настоящим Lua
+        shell: bash
+        env:
+          POB2_UI_HOME: ${{ runner.temp }}/pob2-lua-smoke
+        run: |
+          runner=()
+          if [[ "$RUNNER_OS" == Linux ]]; then runner=(xvfb-run -a); fi
+          "${runner[@]}" flutter test integration_test/share_links_test.dart -d ${{ matrix.platform }} --no-pub \
+            --dart-define=POB2_LIVE_SHARE_LINK=${{ inputs.locked_components || false }}
       - name: Редактор экипировки с настоящим Lua
         if: runner.os != 'Linux'
         env:

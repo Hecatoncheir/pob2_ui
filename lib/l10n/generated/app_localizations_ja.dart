@@ -254,6 +254,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get mbce24a2108 => '名前を入力してください';
 
   @override
+  String get ma520dea087 => 'pobb.in のビルドリンクを入力してください。';
+
+  @override
   String get m7dbeae99bf => '1から100までのレベルを入力してください';
 
   @override
@@ -695,10 +698,18 @@ class AppLocalizationsJa extends AppLocalizations {
   String get mcaa43cf432 => 'キャラクターをインポート';
 
   @override
+  String get m4376254217 => 'リンク経由でインポート';
+
+  @override
   String get ma8f8e11f0c => 'インテリジェンス';
 
   @override
   String get mb1f4f27181 => 'マーケットを検索する';
+
+  @override
+  String ma8584a8e11(String p0) {
+    return '検証済みのアーカイブ $p0 を使用します';
+  }
 
   @override
   String get m56e46960c1 => 'ソース';
@@ -922,6 +933,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String m4b1c83eb15(String p0) {
     return '翻訳をロードできませんでした: $p0';
   }
+
+  @override
+  String get m6d9965924b => 'pobb.in からビルドをダウンロードできませんでした。';
 
   @override
   String get m6f37ba2ab7 => 'PoB を閉じられませんでした。';
@@ -1810,6 +1824,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get maa7d8fe68c => 'どのステージと比較しますか？';
 
   @override
+  String get m64d0c7f0a2 => 'pobb.in サイトは時間通りに応答しませんでした。';
+
+  @override
   String get m49db3482db => 'ジュエル';
 
   @override
@@ -1837,6 +1854,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get ma8f340d211 => 'Path of Building からビルドを更新しました';
+
+  @override
+  String get md16bd478bc => 'このリンクのビルドが見つかりませんでした。';
 
   @override
   String get mc27d8aad03 => 'オリジナルの Lua によって計算されたアセンブリ';
@@ -2048,6 +2068,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get ma775dcaa51 => '平均ダメージ';
+
+  @override
+  String get m926d57bfc2 => 'pobb.in からのリンク';
 
   @override
   String get m91d6208508 => '安定リリースはまだありません';

@@ -423,6 +423,11 @@
     "description": "Введите название",
     "placeholders": {}
   },
+  "ma520dea087": "Enter a build link from pobb.in.",
+  "@ma520dea087": {
+    "description": "Введите ссылку на сборку с pobb.in.",
+    "placeholders": {}
+  },
   "m7dbeae99bf": "Enter a level from 1 to 100",
   "@m7dbeae99bf": {
     "description": "Введите уровень от 1 до 100",
@@ -1169,6 +1174,11 @@
     "description": "Импортировать персонажа",
     "placeholders": {}
   },
+  "m4376254217": "Import via link",
+  "@m4376254217": {
+    "description": "Импортировать по ссылке",
+    "placeholders": {}
+  },
   "ma8f8e11f0c": "Intelligence",
   "@ma8f8e11f0c": {
     "description": "Интеллект",
@@ -1178,6 +1188,15 @@
   "@mb1f4f27181": {
     "description": "Искать на рынке",
     "placeholders": {}
+  },
+  "ma8584a8e11": "Using verified archive {p0}",
+  "@ma8584a8e11": {
+    "description": "Используется проверенный архив {p0}",
+    "placeholders": {
+      "p0": {
+        "type": "String"
+      }
+    }
   },
   "m56e46960c1": "Source",
   "@m56e46960c1": {
@@ -1552,6 +1571,11 @@
         "type": "String"
       }
     }
+  },
+  "m6d9965924b": "Could not download the build from pobb.in.",
+  "@m6d9965924b": {
+    "description": "Не удалось загрузить сборку с pobb.in.",
+    "placeholders": {}
   },
   "m6f37ba2ab7": "Could not close PoB.",
   "@m6f37ba2ab7": {
@@ -3062,6 +3086,11 @@
     "description": "С каким этапом сравнить?",
     "placeholders": {}
   },
+  "m64d0c7f0a2": "The pobb.in site did not respond on time.",
+  "@m64d0c7f0a2": {
+    "description": "Сайт pobb.in не ответил вовремя.",
+    "placeholders": {}
+  },
   "m49db3482db": "Jewels",
   "@m49db3482db": {
     "description": "Самоцветы",
@@ -3109,6 +3138,11 @@
   "ma8f340d211": "Build updated from Path of Building",
   "@ma8f340d211": {
     "description": "Сборка обновлена из Path of Building",
+    "placeholders": {}
+  },
+  "md16bd478bc": "No build was found at this link.",
+  "@md16bd478bc": {
+    "description": "Сборка по ссылке не найдена.",
     "placeholders": {}
   },
   "mc27d8aad03": "Assembly calculated by original Lua",
@@ -3457,6 +3491,11 @@
   "ma775dcaa51": "Average damage",
   "@ma775dcaa51": {
     "description": "Средний урон",
+    "placeholders": {}
+  },
+  "m926d57bfc2": "Link from pobb.in",
+  "@m926d57bfc2": {
+    "description": "Ссылка с pobb.in",
     "placeholders": {}
   },
   "m91d6208508": "No stable releases yet",

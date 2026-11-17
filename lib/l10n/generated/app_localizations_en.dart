@@ -259,6 +259,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get mbce24a2108 => 'Enter a name';
 
   @override
+  String get ma520dea087 => 'Enter a build link from pobb.in.';
+
+  @override
   String get m7dbeae99bf => 'Enter a level from 1 to 100';
 
   @override
@@ -709,10 +712,18 @@ class AppLocalizationsEn extends AppLocalizations {
   String get mcaa43cf432 => 'Import character';
 
   @override
+  String get m4376254217 => 'Import via link';
+
+  @override
   String get ma8f8e11f0c => 'Intelligence';
 
   @override
   String get mb1f4f27181 => 'Search the market';
+
+  @override
+  String ma8584a8e11(String p0) {
+    return 'Using verified archive $p0';
+  }
 
   @override
   String get m56e46960c1 => 'Source';
@@ -940,6 +951,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String m4b1c83eb15(String p0) {
     return 'Failed to load translation: $p0';
   }
+
+  @override
+  String get m6d9965924b => 'Could not download the build from pobb.in.';
 
   @override
   String get m6f37ba2ab7 => 'Could not close PoB.';
@@ -1837,6 +1851,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get maa7d8fe68c => 'Which milestone should be compared?';
 
   @override
+  String get m64d0c7f0a2 => 'The pobb.in site did not respond on time.';
+
+  @override
   String get m49db3482db => 'Jewels';
 
   @override
@@ -1866,6 +1883,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get ma8f340d211 => 'Build updated from Path of Building';
+
+  @override
+  String get md16bd478bc => 'No build was found at this link.';
 
   @override
   String get mc27d8aad03 => 'Assembly calculated by original Lua';
@@ -2082,6 +2102,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get ma775dcaa51 => 'Average damage';
+
+  @override
+  String get m926d57bfc2 => 'Link from pobb.in';
 
   @override
   String get m91d6208508 => 'No stable releases yet';

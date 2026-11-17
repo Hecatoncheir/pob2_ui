@@ -37,7 +37,7 @@
 
 Релизный CI берёт теги и полные Git SHA из `tool/components-lock.json` на ревизии приложения. Windows, Linux и macOS проверяют одну пару, а фактические ревизии попадают в `components.json` в артефакте `ui-<платформа>`. При смене пары обновите теги и SHA в `tool/components-lock.json`. Соберите архивы через `python tool/package_components.py --output build/component-packages --cache build/component-sources`, опубликуйте комплект под отдельным тегом компонентов и закрепите в `lib/data/component_packages.dart` адрес, размер и SHA-256 каждого архива. Стабильным выпуском приложения остаётся тег вида `vX.Y.Z`. Обычный CI проверяет свежие стабильные выпуски. Локальная команда для закреплённой пары — `dart run tool/smoke.dart --install --lock tool/components-lock.json` с отдельным `POB2_UI_HOME`.
 
-Для локальной проверки передайте `python tool/check_installer.py --target linux-x64 --components /путь/к/components.json`. С флагом `--build-check` без манифеста установленное приложение загрузит компоненты в новый профиль.
+Для проверки чистого профиля в CI команда `dart run tool/smoke.dart --install --keep-archives` сохраняет проверенные архивы в `component-downloads` внутри `POB2_UI_HOME`. Передайте этот каталог через `python tool/check_installer.py --target linux-x64 --build-check --archives /путь/к/component-downloads`. Установленное приложение сверит размер и SHA-256 и распакует архивы. С одним флагом `--build-check` приложение скачает компоненты по сети. Для такого прогона в GitHub Actions запустите «Проверки и установщики» с `cold_install: true`.
 
 Для выпуска:
 

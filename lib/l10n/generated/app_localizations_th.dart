@@ -257,6 +257,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get mbce24a2108 => 'ป้อนชื่อ';
 
   @override
+  String get ma520dea087 => 'ป้อนลิงก์บิลด์จาก pobb.in';
+
+  @override
   String get m7dbeae99bf => 'กรอกเลเวลตั้งแต่ 1 ถึง 100';
 
   @override
@@ -703,10 +706,18 @@ class AppLocalizationsTh extends AppLocalizations {
   String get mcaa43cf432 => 'นำเข้าอักขระ';
 
   @override
+  String get m4376254217 => 'นำเข้าผ่านลิงก์';
+
+  @override
   String get ma8f8e11f0c => 'ความฉลาด';
 
   @override
   String get mb1f4f27181 => 'ค้นหาตลาด';
+
+  @override
+  String ma8584a8e11(String p0) {
+    return 'กำลังใช้ไฟล์เก็บถาวรที่ตรวจสอบแล้ว $p0';
+  }
 
   @override
   String get m56e46960c1 => 'ที่มา';
@@ -931,6 +942,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String m4b1c83eb15(String p0) {
     return 'ไม่สามารถโหลดการแปล: $p0';
   }
+
+  @override
+  String get m6d9965924b => 'ดาวน์โหลดบิลด์จาก pobb.in ไม่สำเร็จ';
 
   @override
   String get m6f37ba2ab7 => 'ไม่สามารถปิด PoB ได้';
@@ -1823,6 +1837,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get maa7d8fe68c => 'เปรียบเทียบกับขั้นไหน?';
 
   @override
+  String get m64d0c7f0a2 => 'ไซต์ pobb.in ไม่ตอบสนองตรงเวลา';
+
+  @override
   String get m49db3482db => 'จิวเวล';
 
   @override
@@ -1852,6 +1869,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get ma8f340d211 => 'อัปเดตบิลด์จาก Path of Building แล้ว';
+
+  @override
+  String get md16bd478bc => 'ไม่พบบิลด์ในลิงก์นี้';
 
   @override
   String get mc27d8aad03 => 'การประกอบคำนวณโดยต้นฉบับ Lua';
@@ -2064,6 +2084,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get ma775dcaa51 => 'ความเสียหายโดยเฉลี่ย';
+
+  @override
+  String get m926d57bfc2 => 'ลิงค์จาก pobb.in';
 
   @override
   String get m91d6208508 => 'ยังไม่มีการเผยแพร่ที่เสถียร';

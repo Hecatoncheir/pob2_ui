@@ -268,6 +268,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get mbce24a2108 => 'Geben Sie einen Namen ein';
 
   @override
+  String get ma520dea087 => 'Gib einen Link zu einem Build auf pobb.in ein.';
+
+  @override
   String get m7dbeae99bf => 'Gib eine Stufe von 1 bis 100 ein';
 
   @override
@@ -732,10 +735,18 @@ class AppLocalizationsDe extends AppLocalizations {
   String get mcaa43cf432 => 'Zeichen importieren';
 
   @override
+  String get m4376254217 => 'Import über Link';
+
+  @override
   String get ma8f8e11f0c => 'Intelligenz';
 
   @override
   String get mb1f4f27181 => 'Durchsuchen Sie den Markt';
+
+  @override
+  String ma8584a8e11(String p0) {
+    return 'Geprüftes Archiv $p0 wird verwendet';
+  }
 
   @override
   String get m56e46960c1 => 'Quelle';
@@ -964,6 +975,10 @@ class AppLocalizationsDe extends AppLocalizations {
   String m4b1c83eb15(String p0) {
     return 'Übersetzung konnte nicht geladen werden: $p0';
   }
+
+  @override
+  String get m6d9965924b =>
+      'Der Build konnte nicht von pobb.in heruntergeladen werden.';
 
   @override
   String get m6f37ba2ab7 => 'PoB konnte nicht geschlossen werden.';
@@ -1876,6 +1891,10 @@ class AppLocalizationsDe extends AppLocalizations {
   String get maa7d8fe68c => 'Mit welcher Etappe vergleichen?';
 
   @override
+  String get m64d0c7f0a2 =>
+      'Die Website pobb.in hat nicht rechtzeitig geantwortet.';
+
+  @override
   String get m49db3482db => 'Juwelen';
 
   @override
@@ -1907,6 +1926,9 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get ma8f340d211 => 'Build aus Path of Building aktualisiert';
+
+  @override
+  String get md16bd478bc => 'Unter diesem Link wurde kein Build gefunden.';
 
   @override
   String get mc27d8aad03 => 'Von Original Lua berechnete Baugruppe';
@@ -2126,6 +2148,9 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get ma775dcaa51 => 'Durchschnittlicher Schaden';
+
+  @override
+  String get m926d57bfc2 => 'Link von pobb.in';
 
   @override
   String get m91d6208508 => 'Noch keine stabilen Versionen';

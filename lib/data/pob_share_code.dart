@@ -9,7 +9,7 @@ import 'package:xml/xml.dart';
 import 'pob_build_document.dart';
 
 const _xmlLimit = 16 * 1024 * 1024;
-const _codeLimit = ((_xmlLimit + 2) ~/ 3) * 4;
+const pobShareCodeLimit = ((_xmlLimit + 2) ~/ 3) * 4;
 const _invalidCode = FormatException('Некорректный или обрезанный код PoB.');
 final _alphabet = RegExp(r'^[A-Za-z0-9_-]+={0,2}$');
 
@@ -22,7 +22,7 @@ Future<String> encodePobShareCode(String xml) => Isolate.run(() {
     throw const FormatException('XML больше 16 МБ');
   }
   final code = base64Url.encode(zlib.encode(bytes));
-  if (code.length > _codeLimit) {
+  if (code.length > pobShareCodeLimit) {
     throw const FormatException('Код PoB слишком велик.');
   }
   return code;
@@ -32,7 +32,7 @@ String _decode(String input) {
   final code = input.trim();
   if (code.isEmpty)
     throw const FormatException('В буфере обмена нет кода PoB.');
-  if (code.length > _codeLimit) {
+  if (code.length > pobShareCodeLimit) {
     throw const FormatException('Код PoB слишком велик.');
   }
   if (!_alphabet.hasMatch(code)) throw _invalidCode;

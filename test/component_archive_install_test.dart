@@ -166,6 +166,7 @@ class _LocalDownload extends VerifiedDownload {
     AppAsset asset,
     Directory directory, {
     required void Function(double) onProgress,
+    void Function()? onCacheHit,
   }) async {
     attempts++;
     if (interrupted) throw const SocketException('Обрыв загрузки');

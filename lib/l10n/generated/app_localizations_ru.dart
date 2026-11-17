@@ -258,6 +258,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get mbce24a2108 => 'Введите название';
 
   @override
+  String get ma520dea087 => 'Введите ссылку на сборку с pobb.in.';
+
+  @override
   String get m7dbeae99bf => 'Введите уровень от 1 до 100';
 
   @override
@@ -711,10 +714,18 @@ class AppLocalizationsRu extends AppLocalizations {
   String get mcaa43cf432 => 'Импортировать персонажа';
 
   @override
+  String get m4376254217 => 'Импортировать по ссылке';
+
+  @override
   String get ma8f8e11f0c => 'Интеллект';
 
   @override
   String get mb1f4f27181 => 'Искать на рынке';
+
+  @override
+  String ma8584a8e11(String p0) {
+    return 'Используется проверенный архив $p0';
+  }
 
   @override
   String get m56e46960c1 => 'Источник';
@@ -941,6 +952,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String m4b1c83eb15(String p0) {
     return 'Не удалось загрузить перевод: $p0';
   }
+
+  @override
+  String get m6d9965924b => 'Не удалось загрузить сборку с pobb.in.';
 
   @override
   String get m6f37ba2ab7 => 'Не удалось закрыть PoB.';
@@ -1841,6 +1855,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get maa7d8fe68c => 'С каким этапом сравнить?';
 
   @override
+  String get m64d0c7f0a2 => 'Сайт pobb.in не ответил вовремя.';
+
+  @override
   String get m49db3482db => 'Самоцветы';
 
   @override
@@ -1870,6 +1887,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get ma8f340d211 => 'Сборка обновлена из Path of Building';
+
+  @override
+  String get md16bd478bc => 'Сборка по ссылке не найдена.';
 
   @override
   String get mc27d8aad03 => 'Сборка рассчитана исходным Lua';
@@ -2084,6 +2104,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get ma775dcaa51 => 'Средний урон';
+
+  @override
+  String get m926d57bfc2 => 'Ссылка с pobb.in';
 
   @override
   String get m91d6208508 => 'Стабильных выпусков пока нет';

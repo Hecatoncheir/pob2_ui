@@ -20,6 +20,7 @@ class ComponentRepository {
     ProcessService? processes,
     NativeRuntimeInstaller? runtimeInstaller,
     VerifiedDownload? packageDownload,
+    this.keepArchives = false,
   }) : github = github ?? GitHubService(),
        processes = processes ?? ProcessService(),
        _runtimeInstaller = runtimeInstaller ?? NativeRuntimeInstaller(),
@@ -30,6 +31,7 @@ class ComponentRepository {
   final ProcessService processes;
   final NativeRuntimeInstaller _runtimeInstaller;
   final VerifiedDownload _packageDownload;
+  final bool keepArchives;
   Installations active = {};
   static final _lockedRoots = <String>{};
 
@@ -250,6 +252,7 @@ class ComponentRepository {
     final source = await _packageDownload.download(
       asset,
       cache,
+      onCacheHit: () => log('Используется проверенный архив ${asset.name}'),
       onProgress: (progress) {
         if (progress == 1) log('Проверка SHA-256 архива ${asset.name}');
       },
@@ -264,7 +267,7 @@ class ComponentRepository {
     );
     log('Проверка файлов ${component.title}');
     await _validate(component, installation);
-    await cache.delete(recursive: true);
+    if (!keepArchives) await cache.delete(recursive: true);
     return installation;
   }
 

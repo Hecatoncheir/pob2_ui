@@ -12,6 +12,9 @@ import time
 
 from release import ROOT, dart_executable, filename, version
 
+PREVIOUS_VERSION = '0.5.0'
+FIXTURES = ROOT / 'integration_test/fixtures'
+
 
 def run(*args, **kwargs):
     subprocess.run([str(value) for value in args], check=True, **kwargs)
@@ -143,11 +146,13 @@ def run_build_check(executable, data, environment, stage):
     return report
 
 
-def prepare_profile(data, components):
+def prepare_profile(data, components, archives=None):
     builds = data / 'builds'
     builds.mkdir(parents=True)
     if components is not None:
         shutil.copyfile(components, data / 'components.json')
+    if archives is not None:
+        shutil.copytree(archives, data / 'component-downloads')
     (data / 'pob-builds.json').write_text(
         json.dumps({'directory': str(builds), 'migrated': True}), encoding='utf-8',
     )
@@ -163,9 +168,9 @@ def verify_reopened(executable, data, builds, environment, saved):
     assert files[0].read_bytes() == original, 'Повторный запуск изменил XML'
 
 
-def check_build(executable, base, environment, components, target, previous):
+def check_build(executable, base, environment, target, *, components, archives, previous, verify_link):
     data = base / 'build-profile'
-    builds = prepare_profile(data, components)
+    builds = prepare_profile(data, components, archives)
     env = dict(environment, POB2_UI_HOME=str(data), PYTHONDONTWRITEBYTECODE='1')
     if components is None:
         env = archive_check_environment(env)
@@ -175,10 +180,19 @@ def check_build(executable, base, environment, components, target, previous):
     if components is None:
         active = json.loads(manifest.read_text(encoding='utf-8'))['active']
         assert all(component.get('archiveSha256') for component in active.values())
+    if archives is not None:
+        verify_archive_reuse(data, target)
     verify_reopened(executable, data, builds, env, saved)
     print('Установленный PoB II: расчёт Lua, XML и заметки восстановлены без HTTP после перезапуска')
     if previous is not None:
-        check_previous(target, previous, executable, base, env, manifest)
+        check_previous(target, previous, executable, base, env, manifest, verify_link)
+
+
+def verify_archive_reuse(data, target):
+    journal = data / 'installer-progress-save.jsonl'
+    steps = [json.loads(line)['step'] for line in journal.read_text(encoding='utf-8').splitlines()]
+    for archive in ('pob.zip', f'mcp-{target}.zip'):
+        assert f'Используется проверенный архив {archive}' in steps, steps
 
 
 def previous_executable(target, package, base, environment):
@@ -187,22 +201,28 @@ def previous_executable(target, package, base, environment):
         return mount_macos(package, base) / 'Contents/MacOS/PoB II'
     if target == 'windows-x64':
         run(package, '/VERYSILENT', '/SUPPRESSMSGBOXES', '/NORESTART', '/SP-', '/DIR=' + str(base), env=environment)
-        return base / 'versions/0.4.0/pob2_ui.exe'
+        return base / 'versions' / PREVIOUS_VERSION / 'pob2_ui.exe'
     run('/bin/sh', package, '--prefix', base, '--wait-pid', '2147483647', env=environment)
-    return base / 'versions/0.4.0/pob2_ui'
+    return base / 'versions' / PREVIOUS_VERSION / 'pob2_ui'
 
 
-def check_previous(target, package, executable, base, environment, components):
-    data = base / 'v040-profile'
+def check_previous(target, package, executable, base, environment, components, verify_link):
+    data = base / f'v{PREVIOUS_VERSION}-profile'
     builds = prepare_profile(data, components)
     env = dict(environment, POB2_UI_HOME=str(data),
-               POB2_UI_CHECK_FIXTURE=str(ROOT / 'integration_test/fixtures/witch_fireball.xml'))
+               POB2_UI_CHECK_FIXTURE=str(FIXTURES / 'witch_fireball.xml'))
     env.pop('POB2_UI_CHECK_CODE', None)
     setup_env = dict(env, PATH=os.environ.get('PATH', ''))
-    old = previous_executable(target, package, base / 'v040-installation', setup_env)
+    old = previous_executable(target, package, base / f'v{PREVIOUS_VERSION}-installation', setup_env)
     saved = run_build_check(old, data, env, 'save')
     verify_reopened(executable, data, builds, env, saved)
-    print('По итогам обновления с v0.4.0 совпали XML, заметки и отчёт Lua')
+    print(f'По итогам обновления с v{PREVIOUS_VERSION} совпали XML, заметки и отчёт Lua')
+    if verify_link:
+        link_env = dict(env, POB2_UI_CHECK_LINK=str(FIXTURES / 'witch_fireball.poblink'))
+        imported = run_build_check(executable, data, link_env, 'link')
+        assert imported['id'] != saved['id'] and imported['source'] == 'original-lua', imported
+        assert abs(imported['dps'] - 12.817708) < 0.00001, imported
+        print(f"После обновления Ведьма с pobb.in рассчитана на Lua, TotalDPS {imported['dps']}")
 
 
 def archive_check_environment(environment):
@@ -210,7 +230,7 @@ def archive_check_environment(environment):
     environment = dict(
         environment,
         PATH=system_path,
-        POB2_UI_CHECK_CODE=str(ROOT / 'integration_test/fixtures/witch_fireball.pobcode'),
+        POB2_UI_CHECK_CODE=str(FIXTURES / 'witch_fireball.pobcode'),
     )
     for key in ('POB2_UI_PYTHON', 'PYTHONHOME', 'PYTHONPATH'):
         environment.pop(key, None)
@@ -219,10 +239,11 @@ def archive_check_environment(environment):
     return environment
 
 
-def check(target, *, build_check=False, components=None, package=None, previous=None):
+def check(target, *, build_check=False, components=None, archives=None, package=None, previous=None, verify_link=False):
     number = version()
     if previous is not None and not previous.is_file():
         raise FileNotFoundError(previous)
+    options = dict(components=components, archives=archives, previous=previous, verify_link=verify_link)
     package = package or ROOT / 'build/packages' / filename(number, target)
     with tempfile.TemporaryDirectory(prefix='pob2-install-check-') as temporary:
         base = Path(temporary).resolve()
@@ -236,7 +257,7 @@ def check(target, *, build_check=False, components=None, package=None, previous=
         if target == 'macos-arm64':
             executable = check_macos(package, base, data, environment)
             if build_check:
-                check_build(executable, base, environment, components, target, previous)
+                check_build(executable, base, environment, target, **options)
             return
         if target == 'windows-x64':
             run(package, '/VERYSILENT', '/SUPPRESSMSGBOXES', '/NORESTART', '/SP-', '/RELAUNCH', '/DIR=' + str(install), env=environment)
@@ -277,7 +298,7 @@ def check(target, *, build_check=False, components=None, package=None, previous=
         stop_versions(install, environment)
         if build_check:
             executable = install / 'versions' / number / ('pob2_ui.exe' if os.name == 'nt' else 'pob2_ui')
-            check_build(executable, base, environment, components, target, previous)
+            check_build(executable, base, environment, target, **options)
     print(f'{target}: установщик и настоящий запуск проверены')
 
 
@@ -285,14 +306,21 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--target', required=True)
     parser.add_argument('--build-check', action='store_true', help='Проверить сохранение и восстановление сборки')
-    parser.add_argument('--components', type=Path, help='Манифест уже скачанной пары для проверки сборки')
+    inputs = parser.add_mutually_exclusive_group()
+    inputs.add_argument('--components', type=Path, help='Манифест уже скачанной пары для проверки сборки')
+    inputs.add_argument('--archives', type=Path, help='Каталог архивов из smoke.dart --keep-archives')
     parser.add_argument('--package', type=Path, help='Путь к готовому установщику')
-    parser.add_argument('--previous', type=Path, help='Каталог с установщиком v0.4.0 для проверки обновления')
+    parser.add_argument('--previous', type=Path, help=f'Каталог с установщиком v{PREVIOUS_VERSION} для проверки обновления')
+    parser.add_argument('--verify-link', action='store_true', help='Импортировать Ведьму с pobb.in после обновления')
     args = parser.parse_args()
+    if args.verify_link and not args.previous:
+        parser.error('--verify-link требует --previous')
     check(
         args.target,
-        build_check=args.build_check or args.components is not None,
+        build_check=args.build_check or args.components is not None or args.archives is not None or args.previous is not None,
         components=args.components,
+        archives=args.archives,
         package=args.package.resolve() if args.package else None,
-        previous=(args.previous / filename('0.4.0', args.target)).resolve() if args.previous else None,
+        previous=(args.previous / filename(PREVIOUS_VERSION, args.target)).resolve() if args.previous else None,
+        verify_link=args.verify_link,
     )

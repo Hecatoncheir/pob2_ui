@@ -254,6 +254,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get mbce24a2108 => '이름을 입력하세요';
 
   @override
+  String get ma520dea087 => 'pobb.in 빌드 링크를 입력하세요.';
+
+  @override
   String get m7dbeae99bf => '1에서 100 사이의 레벨을 입력하세요';
 
   @override
@@ -695,10 +698,18 @@ class AppLocalizationsKo extends AppLocalizations {
   String get mcaa43cf432 => '캐릭터 가져오기';
 
   @override
+  String get m4376254217 => '링크를 통해 가져오기';
+
+  @override
   String get ma8f8e11f0c => '지능';
 
   @override
   String get mb1f4f27181 => '시장 검색';
+
+  @override
+  String ma8584a8e11(String p0) {
+    return '검증된 아카이브 $p0 사용 중';
+  }
 
   @override
   String get m56e46960c1 => '소스';
@@ -922,6 +933,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String m4b1c83eb15(String p0) {
     return '번역을 로드하지 못했습니다: $p0';
   }
+
+  @override
+  String get m6d9965924b => 'pobb.in에서 빌드를 다운로드하지 못했습니다.';
 
   @override
   String get m6f37ba2ab7 => 'PoB를 닫을 수 없습니다.';
@@ -1810,6 +1824,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get maa7d8fe68c => '어느 단계와 비교할까요?';
 
   @override
+  String get m64d0c7f0a2 => 'pobb.in 사이트가 제 시간에 응답하지 않았습니다.';
+
+  @override
   String get m49db3482db => '주얼';
 
   @override
@@ -1837,6 +1854,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get ma8f340d211 => 'Path of Building에서 빌드를 업데이트했습니다';
+
+  @override
+  String get md16bd478bc => '이 링크에서 빌드를 찾을 수 없습니다.';
 
   @override
   String get mc27d8aad03 => '원본으로 계산된 어셈블리 Lua';
@@ -2048,6 +2068,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get ma775dcaa51 => '평균 데미지';
+
+  @override
+  String get m926d57bfc2 => 'pobb.in의 링크';
 
   @override
   String get m91d6208508 => '아직 안정적인 릴리스가 없습니다.';

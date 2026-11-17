@@ -92,7 +92,8 @@ String? _installerCheckStage() {
   final environment = Platform.environment;
   if (environment['POB2_UI_HOME']?.isNotEmpty != true) return null;
   return switch (environment['POB2_UI_INSTALLER_CHECK']) {
-    final stage? when stage == 'save' || stage == 'restore' => stage,
+    final stage? when const {'save', 'restore', 'link'}.contains(stage) =>
+      stage,
     _ => null,
   };
 }

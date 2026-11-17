@@ -9,28 +9,34 @@ import '../lib/domain/tree_geometry.dart';
 import '../lib/domain/component.dart';
 
 Future<void> main(List<String> arguments) async {
+  final args = [...arguments];
+  final keepArchives = args.remove('--keep-archives');
+  if (keepArchives && args.firstOrNull != '--install') {
+    throw const FormatException('--keep-archives требует --install');
+  }
   final repository = ComponentRepository(
     store: InstallationStore(InstallationStore.defaultRoot()),
+    keepArchives: keepArchives,
   );
   await repository.load();
-  if (arguments case ['--install', '--lock', final path]) {
+  if (args case ['--install', '--lock', final path]) {
     final releases = repository.availableReleases();
     await _verifyLock(path, releases);
     await repository.installPair(releases, stderr.writeln);
-  } else if (arguments case ['--install']) {
+  } else if (args case ['--install']) {
     await repository.installPair(
       repository.availableReleases(),
       stderr.writeln,
     );
-  } else if (arguments case ['--install-source']) {
+  } else if (args case ['--install-source']) {
     final releases = {
       for (final component in Component.values)
         component: await repository.github.latest(component),
     };
     await repository.installPair(releases, stderr.writeln);
-  } else if (arguments.isNotEmpty) {
+  } else if (args.isNotEmpty) {
     throw const FormatException(
-      'Используйте --install [--lock <файл>] или --install-source',
+      'Используйте --install [--lock <файл>] [--keep-archives] или --install-source',
     );
   }
   final client = McpClient();

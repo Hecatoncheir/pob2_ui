@@ -25,6 +25,60 @@ Future<void> pastePobCode(WorkshopCubit model) async {
 Future<void> copyPobCode(WorkshopCubit model) =>
     model.copyShareCode((text) => Clipboard.setData(ClipboardData(text: text)));
 
+Future<void> showPobLinkImport(
+  BuildContext context,
+  WorkshopCubit model,
+) async {
+  final link = await sparkDialog<String>(context, const _PobLinkDialog());
+  if (link != null) await model.importShareLink(link);
+}
+
+class _PobLinkDialog extends StatefulWidget {
+  const _PobLinkDialog();
+
+  @override
+  State<_PobLinkDialog> createState() => _PobLinkDialogState();
+}
+
+class _PobLinkDialogState extends State<_PobLinkDialog> {
+  final _link = TextEditingController();
+
+  @override
+  void dispose() {
+    _link.dispose();
+    super.dispose();
+  }
+
+  void _submit() => Navigator.pop(context, _link.text);
+
+  @override
+  Widget build(BuildContext context) => AlertDialog(
+    title: const AppText('Импортировать по ссылке'),
+    content: SizedBox(
+      width: 380,
+      child: TextField(
+        key: const Key('pob-link-input'),
+        controller: _link,
+        autofocus: true,
+        keyboardType: TextInputType.url,
+        decoration: const InputDecoration(
+          label: AppText('Ссылка с pobb.in'),
+          hintText: 'https://pobb.in/…',
+        ),
+        onSubmitted: (_) => _submit(),
+      ),
+    ),
+    actions: [
+      const DialogCloseButton(label: 'Отмена'),
+      FilledButton(
+        key: const Key('pob-link-submit'),
+        onPressed: _submit,
+        child: const AppText('Открыть и рассчитать'),
+      ),
+    ],
+  );
+}
+
 class _NewBuildDialog extends StatefulWidget {
   const _NewBuildDialog(this.model);
   final WorkshopCubit model;

@@ -35,6 +35,7 @@ class VerifiedDownload {
     AppAsset asset,
     Directory directory, {
     required void Function(double) onProgress,
+    void Function()? onCacheHit,
   }) async {
     if (!RegExp(r'^[a-zA-Z0-9._-]+$').hasMatch(asset.name) ||
         asset.sha256 == null) {
@@ -45,6 +46,7 @@ class VerifiedDownload {
     await directory.create(recursive: true);
     final file = File.fromUri(directory.uri.resolve(asset.name));
     if (await verify(file, asset)) {
+      onCacheHit?.call();
       onProgress(1);
       return file;
     }

@@ -11,6 +11,7 @@ import '../data/mcp_error_message.dart';
 import '../data/pob_window_repository.dart';
 import '../data/pob_build_document.dart';
 import '../data/pob_share_code.dart';
+import '../data/pob_share_links.dart';
 import '../data/progression_comparison_session.dart';
 import '../data/pob_build_library.dart';
 import '../data/pob_build_locations.dart';
@@ -48,6 +49,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     XmlFileService? files,
     PobWindowRepository? pobWindow,
     PobBuildLocations? buildLocations,
+    PobShareLinks? shareLinks,
     McpClient Function()? createEngine,
   }) : _engine = engine,
        _createEngine = createEngine ?? McpClient.new,
@@ -56,8 +58,10 @@ class WorkshopCubit extends Cubit<WorkshopState> {
        files = files ?? XmlFileService(),
        pobWindow = pobWindow ?? PobWindowRepository(),
        buildLocations = buildLocations ?? PobBuildLocations(),
+       _shareLinks = shareLinks ?? PobShareLinks(),
        super(initialState ?? WorkshopState());
   final ComponentRepository components;
+  final PobShareLinks _shareLinks;
   McpClient _engine;
   McpClient get engine => _engine;
   final McpClient Function() _createEngine;
@@ -725,6 +729,11 @@ class WorkshopCubit extends Cubit<WorkshopState> {
 
   Future<void> importShareCode(String code) =>
       _run(() async => _importCopy(await decodePobShareCode(code)));
+
+  Future<void> importShareLink(String link) => _run(() async {
+    final code = await _shareLinks.download(link);
+    await _importCopy(await decodePobShareCode(code));
+  });
 
   Future<void> copyShareCode(Future<void> Function(String) write) =>
       _run(() async {

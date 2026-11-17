@@ -253,6 +253,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get mbce24a2108 => '輸入名稱';
 
   @override
+  String get ma520dea087 => '請輸入 pobb.in 的流派連結。';
+
+  @override
   String get m7dbeae99bf => '請輸入 1 到 100 的等級';
 
   @override
@@ -693,10 +696,18 @@ class AppLocalizationsZh extends AppLocalizations {
   String get mcaa43cf432 => '導入角色';
 
   @override
+  String get m4376254217 => '透過連結導入';
+
+  @override
   String get ma8f8e11f0c => '情報';
 
   @override
   String get mb1f4f27181 => '搜尋市場';
+
+  @override
+  String ma8584a8e11(String p0) {
+    return '正在使用已驗證的封存檔 $p0';
+  }
 
   @override
   String get m56e46960c1 => '來源';
@@ -919,6 +930,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String m4b1c83eb15(String p0) {
     return '無法載入翻譯：$p0';
   }
+
+  @override
+  String get m6d9965924b => '無法從 pobb.in 下載流派。';
 
   @override
   String get m6f37ba2ab7 => '無法關閉 PoB。';
@@ -1807,6 +1821,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get maa7d8fe68c => '要和哪個階段比較？';
 
   @override
+  String get m64d0c7f0a2 => 'pobb.in 網站沒有及時回覆。';
+
+  @override
   String get m49db3482db => '珠寶';
 
   @override
@@ -1834,6 +1851,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get ma8f340d211 => '已從 Path of Building 更新配置';
+
+  @override
+  String get md16bd478bc => '在此連結找不到流派。';
 
   @override
   String get mc27d8aad03 => '由原始 Lua 計算的程序集';
@@ -2042,6 +2062,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get ma775dcaa51 => '平均傷害';
+
+  @override
+  String get m926d57bfc2 => '來自 pobb.in 的鏈接';
 
   @override
   String get m91d6208508 => '尚無穩定版本';
@@ -2591,6 +2614,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get mbce24a2108 => '輸入名稱';
 
   @override
+  String get ma520dea087 => '請輸入 pobb.in 的流派連結。';
+
+  @override
   String get m7dbeae99bf => '請輸入 1 到 100 的等級';
 
   @override
@@ -3031,10 +3057,18 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get mcaa43cf432 => '導入角色';
 
   @override
+  String get m4376254217 => '透過連結導入';
+
+  @override
   String get ma8f8e11f0c => '情報';
 
   @override
   String get mb1f4f27181 => '搜尋市場';
+
+  @override
+  String ma8584a8e11(String p0) {
+    return '正在使用已驗證的封存檔 $p0';
+  }
 
   @override
   String get m56e46960c1 => '來源';
@@ -3257,6 +3291,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String m4b1c83eb15(String p0) {
     return '無法載入翻譯：$p0';
   }
+
+  @override
+  String get m6d9965924b => '無法從 pobb.in 下載流派。';
 
   @override
   String get m6f37ba2ab7 => '無法關閉 PoB。';
@@ -4145,6 +4182,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get maa7d8fe68c => '要和哪個階段比較？';
 
   @override
+  String get m64d0c7f0a2 => 'pobb.in 網站沒有及時回覆。';
+
+  @override
   String get m49db3482db => '珠寶';
 
   @override
@@ -4172,6 +4212,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get ma8f340d211 => '已從 Path of Building 更新配置';
+
+  @override
+  String get md16bd478bc => '在此連結找不到流派。';
 
   @override
   String get mc27d8aad03 => '由原始 Lua 計算的程序集';
@@ -4380,6 +4423,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get ma775dcaa51 => '平均傷害';
+
+  @override
+  String get m926d57bfc2 => '來自 pobb.in 的鏈接';
 
   @override
   String get m91d6208508 => '尚無穩定版本';

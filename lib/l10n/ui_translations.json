@@ -73,6 +73,7 @@
     "mfc903d7f16": "Введите корректное число",
     "m6ac5360d13": "Введите корректный бюджет",
     "mbce24a2108": "Введите название",
+    "ma520dea087": "Введите ссылку на сборку с pobb.in.",
     "m7dbeae99bf": "Введите уровень от 1 до 100",
     "mdd0a89ad92": "Введите целое число",
     "m005a65ad56": "Введите число",
@@ -213,8 +214,10 @@
     "m848ed36881": "Импортировать",
     "mdb8bc611c3": "Импортировать из PoB",
     "mcaa43cf432": "Импортировать персонажа",
+    "m4376254217": "Импортировать по ссылке",
     "ma8f8e11f0c": "Интеллект",
     "mb1f4f27181": "Искать на рынке",
+    "ma8584a8e11": "Используется проверенный архив {p0}",
     "m56e46960c1": "Источник",
     "m8b48ab31e9": "Исходный Lua подключён · {p0} классов",
     "m26c6ade68e": "Исходный Lua-движок и игровые данные",
@@ -285,6 +288,7 @@
     "ma2cd5e5b0a": "Не удалось включить правки через MCP. Проверьте, что установлен обновлённый MCP.",
     "mcf4205d2e9": "Не удалось восстановить состояние после ошибки: {p0}",
     "m4b1c83eb15": "Не удалось загрузить перевод: {p0}",
+    "m6d9965924b": "Не удалось загрузить сборку с pobb.in.",
     "m6f37ba2ab7": "Не удалось закрыть PoB.",
     "m8f6df28a92": "Не удалось закрыть сессию Lua: {p0}",
     "m46ed8403b7": "Не удалось запустить PoB.",
@@ -557,6 +561,7 @@
     "ma735c975e0": "Руническая защита",
     "m9c7a204d54": "Руны",
     "maa7d8fe68c": "С каким этапом сравнить?",
+    "m64d0c7f0a2": "Сайт pobb.in не ответил вовремя.",
     "m49db3482db": "Самоцветы",
     "m8c39bb691b": "Сборка",
     "m15d7545f05": "Сборка PoB больше недоступна. Обновите список сборок.",
@@ -566,6 +571,7 @@
     "m544bec7909": "Сборка изменится после нажатия «Применить»",
     "m5c8bb47697": "Сборка не найдена",
     "ma8f340d211": "Сборка обновлена из Path of Building",
+    "md16bd478bc": "Сборка по ссылке не найдена.",
     "mc27d8aad03": "Сборка рассчитана исходным Lua",
     "med0b7c459c": "Сборка с таким именем уже существует.",
     "mae943799b7": "Сборка сохранена в библиотеке, но копия восстановления недоступна: {p0}",
@@ -634,6 +640,7 @@
     "m9dba47b33c": "Сравнить сборки",
     "mc4268e6843": "Средний удар",
     "ma775dcaa51": "Средний урон",
+    "m926d57bfc2": "Ссылка с pobb.in",
     "m91d6208508": "Стабильных выпусков пока нет",
     "md3ae3e1986": "Стало",
     "mabdae6b126": "Стандартная папка PoB не найдена. Выберите папку вручную.",
@@ -1461,7 +1468,14 @@
     "mcb69e5c81f": "Checking SHA-256 of {p0}",
     "me498367e06": "Checking {p0} files",
     "ma1af9f3f0e": "Extracting {p0}",
-    "m5dc92cdf64": "Copy PoB code"
+    "m5dc92cdf64": "Copy PoB code",
+    "ma520dea087": "Enter a build link from pobb.in.",
+    "m4376254217": "Import via link",
+    "m6d9965924b": "Could not download the build from pobb.in.",
+    "m64d0c7f0a2": "The pobb.in site did not respond on time.",
+    "md16bd478bc": "No build was found at this link.",
+    "m926d57bfc2": "Link from pobb.in",
+    "ma8584a8e11": "Using verified archive {p0}"
   },
   "fr": {
     "m0c63e733f9": "Lua n'a pas renvoyé toutes les icônes",
@@ -2193,7 +2207,14 @@
     "mcb69e5c81f": "Vérification du SHA-256 de {p0}",
     "me498367e06": "Vérification des fichiers de {p0}",
     "ma1af9f3f0e": "Extraction de {p0}",
-    "m5dc92cdf64": "Copier le code PoB"
+    "m5dc92cdf64": "Copier le code PoB",
+    "ma520dea087": "Saisissez le lien d’un build sur pobb.in.",
+    "m4376254217": "Importer via un lien",
+    "m6d9965924b": "Impossible de télécharger le build depuis pobb.in.",
+    "m64d0c7f0a2": "Le site pobb.in n'a pas répondu à temps.",
+    "md16bd478bc": "Aucun build trouvé à cette adresse.",
+    "m926d57bfc2": "Lien depuis pobb.in",
+    "ma8584a8e11": "Utilisation de l’archive vérifiée {p0}"
   },
   "de": {
     "m0c63e733f9": "Lua hat nicht alle Symbole zurückgegeben",
@@ -2925,7 +2946,14 @@
     "mcb69e5c81f": "SHA-256 von {p0} wird geprüft",
     "me498367e06": "Dateien von {p0} werden geprüft",
     "ma1af9f3f0e": "{p0} wird entpackt",
-    "m5dc92cdf64": "PoB-Code kopieren"
+    "m5dc92cdf64": "PoB-Code kopieren",
+    "ma520dea087": "Gib einen Link zu einem Build auf pobb.in ein.",
+    "m4376254217": "Import über Link",
+    "m6d9965924b": "Der Build konnte nicht von pobb.in heruntergeladen werden.",
+    "m64d0c7f0a2": "Die Website pobb.in hat nicht rechtzeitig geantwortet.",
+    "md16bd478bc": "Unter diesem Link wurde kein Build gefunden.",
+    "m926d57bfc2": "Link von pobb.in",
+    "ma8584a8e11": "Geprüftes Archiv {p0} wird verwendet"
   },
   "es": {
     "m0c63e733f9": "Lua no devolvió todos los íconos",
@@ -3657,7 +3685,14 @@
     "mcb69e5c81f": "Comprobando SHA-256 de {p0}",
     "me498367e06": "Comprobando archivos de {p0}",
     "ma1af9f3f0e": "Extrayendo {p0}",
-    "m5dc92cdf64": "Copiar código de PoB"
+    "m5dc92cdf64": "Copiar código de PoB",
+    "ma520dea087": "Introduce un enlace a una build de pobb.in.",
+    "m4376254217": "Importar mediante enlace",
+    "m6d9965924b": "No se pudo descargar la build de pobb.in.",
+    "m64d0c7f0a2": "El sitio pobb.in no respondió a tiempo.",
+    "md16bd478bc": "No se encontró una build en este enlace.",
+    "m926d57bfc2": "Enlace desde pobb.in",
+    "ma8584a8e11": "Se usa el archivo verificado {p0}"
   },
   "pt_BR": {
     "m0c63e733f9": "Lua não retornou todos os ícones",
@@ -4389,7 +4424,14 @@
     "mcb69e5c81f": "Verificando SHA-256 de {p0}",
     "me498367e06": "Verificando arquivos de {p0}",
     "ma1af9f3f0e": "Extraindo {p0}",
-    "m5dc92cdf64": "Copiar código PoB"
+    "m5dc92cdf64": "Copiar código PoB",
+    "ma520dea087": "Insira o link de uma build no pobb.in.",
+    "m4376254217": "Importar via link",
+    "m6d9965924b": "Não foi possível baixar a build do pobb.in.",
+    "m64d0c7f0a2": "O site pobb.in não respondeu a tempo.",
+    "md16bd478bc": "Nenhuma build foi encontrada neste link.",
+    "m926d57bfc2": "Link de pobb.in",
+    "ma8584a8e11": "Usando o arquivo verificado {p0}"
   },
   "ja": {
     "m0c63e733f9": "Lua はすべてのアイコンを返しませんでした",
@@ -5121,7 +5163,14 @@
     "mcb69e5c81f": "{p0} の SHA-256 を確認中",
     "me498367e06": "{p0} のファイルを確認中",
     "ma1af9f3f0e": "{p0} を展開中",
-    "m5dc92cdf64": "PoB コードをコピー"
+    "m5dc92cdf64": "PoB コードをコピー",
+    "ma520dea087": "pobb.in のビルドリンクを入力してください。",
+    "m4376254217": "リンク経由でインポート",
+    "m6d9965924b": "pobb.in からビルドをダウンロードできませんでした。",
+    "m64d0c7f0a2": "pobb.in サイトは時間通りに応答しませんでした。",
+    "md16bd478bc": "このリンクのビルドが見つかりませんでした。",
+    "m926d57bfc2": "pobb.in からのリンク",
+    "ma8584a8e11": "検証済みのアーカイブ {p0} を使用します"
   },
   "ko": {
     "m0c63e733f9": "Lua이 모든 아이콘을 반환하지 않았습니다.",
@@ -5853,7 +5902,14 @@
     "mcb69e5c81f": "{p0}의 SHA-256 확인 중",
     "me498367e06": "{p0} 파일 확인 중",
     "ma1af9f3f0e": "{p0} 압축 해제 중",
-    "m5dc92cdf64": "PoB 코드 복사"
+    "m5dc92cdf64": "PoB 코드 복사",
+    "ma520dea087": "pobb.in 빌드 링크를 입력하세요.",
+    "m4376254217": "링크를 통해 가져오기",
+    "m6d9965924b": "pobb.in에서 빌드를 다운로드하지 못했습니다.",
+    "m64d0c7f0a2": "pobb.in 사이트가 제 시간에 응답하지 않았습니다.",
+    "md16bd478bc": "이 링크에서 빌드를 찾을 수 없습니다.",
+    "m926d57bfc2": "pobb.in의 링크",
+    "ma8584a8e11": "검증된 아카이브 {p0} 사용 중"
   },
   "th": {
     "m0c63e733f9": "Lua ไม่ได้ส่งคืนไอคอนทั้งหมด",
@@ -6585,7 +6641,14 @@
     "mcb69e5c81f": "กำลังตรวจสอบ SHA-256 ของ {p0}",
     "me498367e06": "กำลังตรวจสอบไฟล์ของ {p0}",
     "ma1af9f3f0e": "กำลังแตกไฟล์ {p0}",
-    "m5dc92cdf64": "คัดลอกโค้ด PoB"
+    "m5dc92cdf64": "คัดลอกโค้ด PoB",
+    "ma520dea087": "ป้อนลิงก์บิลด์จาก pobb.in",
+    "m4376254217": "นำเข้าผ่านลิงก์",
+    "m6d9965924b": "ดาวน์โหลดบิลด์จาก pobb.in ไม่สำเร็จ",
+    "m64d0c7f0a2": "ไซต์ pobb.in ไม่ตอบสนองตรงเวลา",
+    "md16bd478bc": "ไม่พบบิลด์ในลิงก์นี้",
+    "m926d57bfc2": "ลิงค์จาก pobb.in",
+    "ma8584a8e11": "กำลังใช้ไฟล์เก็บถาวรที่ตรวจสอบแล้ว {p0}"
   },
   "zh_Hant": {
     "m0c63e733f9": "Lua 未傳回所有圖標",
@@ -7317,6 +7380,13 @@
     "mcb69e5c81f": "正在驗證 {p0} 的 SHA-256",
     "me498367e06": "正在驗證 {p0} 的檔案",
     "ma1af9f3f0e": "正在解壓縮 {p0}",
-    "m5dc92cdf64": "複製 PoB 代碼"
+    "m5dc92cdf64": "複製 PoB 代碼",
+    "ma520dea087": "請輸入 pobb.in 的流派連結。",
+    "m4376254217": "透過連結導入",
+    "m6d9965924b": "無法從 pobb.in 下載流派。",
+    "m64d0c7f0a2": "pobb.in 網站沒有及時回覆。",
+    "md16bd478bc": "在此連結找不到流派。",
+    "m926d57bfc2": "來自 pobb.in 的鏈接",
+    "ma8584a8e11": "正在使用已驗證的封存檔 {p0}"
   }
 }

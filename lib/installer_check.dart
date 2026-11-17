@@ -70,6 +70,7 @@ Future<Map<String, Object?>> _checkBuild(
   try {
     progress.record('initialize');
     await initialization;
+    if (stage == 'link') return await _checkLink(model, progress);
     if (stage == 'save') {
       progress.record('components');
       if (!model.ready) await model.prepareComponents();
@@ -92,6 +93,28 @@ Future<Map<String, Object?>> _checkBuild(
   } finally {
     await model.close();
   }
+}
+
+Future<Map<String, Object?>> _checkLink(
+  WorkshopCubit model,
+  InstallerCheckProgress progress,
+) async {
+  final path = Platform.environment['POB2_UI_CHECK_LINK'];
+  final previous = model.state.library.activeId;
+  _require(path != null && previous != null && model.luaReady, model);
+  final count = model.state.library.entries.length;
+  progress.record('open-share-link');
+  await model.importShareLink(await File(path!).readAsString());
+  _checkWitch(model);
+  final id = model.state.library.activeId;
+  _require(id != null && id != previous, model);
+  _require(model.state.library.entries.length == count + 1, model);
+  progress.record('share-link-imported');
+  return {
+    'source': model.state.report!.raw['source'],
+    'id': id,
+    'dps': model.state.report!.stats['TotalDPS'],
+  };
 }
 
 Future<void> _saveBuild(

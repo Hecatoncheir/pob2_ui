@@ -557,6 +557,12 @@ abstract class AppLocalizations {
   /// **'Enter a name'**
   String get mbce24a2108;
 
+  /// Введите ссылку на сборку с pobb.in.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a build link from pobb.in.'**
+  String get ma520dea087;
+
   /// Введите уровень от 1 до 100
   ///
   /// In en, this message translates to:
@@ -1397,6 +1403,12 @@ abstract class AppLocalizations {
   /// **'Import character'**
   String get mcaa43cf432;
 
+  /// Импортировать по ссылке
+  ///
+  /// In en, this message translates to:
+  /// **'Import via link'**
+  String get m4376254217;
+
   /// Интеллект
   ///
   /// In en, this message translates to:
@@ -1408,6 +1420,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Search the market'**
   String get mb1f4f27181;
+
+  /// Используется проверенный архив {p0}
+  ///
+  /// In en, this message translates to:
+  /// **'Using verified archive {p0}'**
+  String ma8584a8e11(String p0);
 
   /// Источник
   ///
@@ -1828,6 +1846,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Failed to load translation: {p0}'**
   String m4b1c83eb15(String p0);
+
+  /// Не удалось загрузить сборку с pobb.in.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not download the build from pobb.in.'**
+  String get m6d9965924b;
 
   /// Не удалось закрыть PoB.
   ///
@@ -3462,6 +3486,12 @@ abstract class AppLocalizations {
   /// **'Which milestone should be compared?'**
   String get maa7d8fe68c;
 
+  /// Сайт pobb.in не ответил вовремя.
+  ///
+  /// In en, this message translates to:
+  /// **'The pobb.in site did not respond on time.'**
+  String get m64d0c7f0a2;
+
   /// Самоцветы
   ///
   /// In en, this message translates to:
@@ -3515,6 +3545,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Build updated from Path of Building'**
   String get ma8f340d211;
+
+  /// Сборка по ссылке не найдена.
+  ///
+  /// In en, this message translates to:
+  /// **'No build was found at this link.'**
+  String get md16bd478bc;
 
   /// Сборка рассчитана исходным Lua
   ///
@@ -3923,6 +3959,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Average damage'**
   String get ma775dcaa51;
+
+  /// Ссылка с pobb.in
+  ///
+  /// In en, this message translates to:
+  /// **'Link from pobb.in'**
+  String get m926d57bfc2;
 
   /// Стабильных выпусков пока нет
   ///
