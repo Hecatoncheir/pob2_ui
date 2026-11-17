@@ -11,7 +11,7 @@ on:
         type: boolean
         default: false
       cold_install:
-        description: 'Проверить скачивание архивов при первом запуске'
+        description: 'Проверить первый запуск без предварительной загрузки архивов'
         type: boolean
         default: false
   workflow_call:
@@ -155,6 +155,7 @@ jobs:
       - name: Собрать установщик
         run: python tool/release.py --package ${{ matrix.target }}
       - name: Проверить компоненты с настоящим Lua
+        if: inputs.cold_install != true
         shell: bash
         env:
           POB2_UI_HOME: ${{ runner.temp }}/pob2-lua-smoke
@@ -189,40 +190,41 @@ jobs:
           if [[ "$LIVE_LINK" == true ]]; then args+=(--verify-link); fi
           "${runner[@]}" python tool/check_installer.py "${args[@]}"
       - name: Новый интерфейс с настоящим Lua
-        if: runner.os != 'Linux'
+        if: inputs.cold_install != true && runner.os != 'Linux'
         env:
           POB2_UI_HOME: ${{ runner.temp }}/pob2-lua-smoke
           POB2_UI_SCREENSHOT: ${{ github.workspace }}/build/review/flutter-${{ matrix.platform }}.png
         run: flutter test integration_test/workspace_test.dart -d ${{ matrix.platform }} --no-pub
       - name: Новый интерфейс с настоящим Lua
-        if: runner.os == 'Linux'
+        if: inputs.cold_install != true && runner.os == 'Linux'
         env:
           POB2_UI_HOME: ${{ runner.temp }}/pob2-lua-smoke
           POB2_UI_SCREENSHOT: ${{ github.workspace }}/build/review/flutter-linux.png
         run: xvfb-run -a flutter test integration_test/workspace_test.dart -d linux --no-pub
       - name: Редакторы умений и условий с настоящим Lua
-        if: runner.os != 'Linux'
+        if: inputs.cold_install != true && runner.os != 'Linux'
         env:
           POB2_UI_HOME: ${{ runner.temp }}/pob2-lua-smoke
           POB2_UI_SCREENSHOT: ${{ github.workspace }}/build/review/editors-${{ matrix.platform }}.png
         run: flutter test integration_test/editors_test.dart -d ${{ matrix.platform }} --no-pub
       - name: Редакторы умений и условий с настоящим Lua
-        if: runner.os == 'Linux'
+        if: inputs.cold_install != true && runner.os == 'Linux'
         env:
           POB2_UI_HOME: ${{ runner.temp }}/pob2-lua-smoke
           POB2_UI_SCREENSHOT: ${{ github.workspace }}/build/review/editors-linux.png
         run: xvfb-run -a flutter test integration_test/editors_test.dart -d linux --no-pub
       - name: Обмен кодами с исходным PoB
-        if: runner.os != 'Linux'
+        if: inputs.cold_install != true && runner.os != 'Linux'
         env:
           POB2_UI_HOME: ${{ runner.temp }}/pob2-lua-smoke
         run: flutter test integration_test/share_codes_test.dart -d ${{ matrix.platform }} --no-pub
       - name: Обмен кодами с исходным PoB
-        if: runner.os == 'Linux'
+        if: inputs.cold_install != true && runner.os == 'Linux'
         env:
           POB2_UI_HOME: ${{ runner.temp }}/pob2-lua-smoke
         run: xvfb-run -a flutter test integration_test/share_codes_test.dart -d linux --no-pub
       - name: Импорт ссылок pobb.in с настоящим Lua
+        if: inputs.cold_install != true
         shell: bash
         env:
           POB2_UI_HOME: ${{ runner.temp }}/pob2-lua-smoke
@@ -232,35 +234,35 @@ jobs:
           "${runner[@]}" flutter test integration_test/share_links_test.dart -d ${{ matrix.platform }} --no-pub \
             --dart-define=POB2_LIVE_SHARE_LINK=${{ inputs.locked_components || false }}
       - name: Редактор экипировки с настоящим Lua
-        if: runner.os != 'Linux'
+        if: inputs.cold_install != true && runner.os != 'Linux'
         env:
           POB2_UI_HOME: ${{ runner.temp }}/pob2-lua-smoke
           POB2_UI_SCREENSHOT: ${{ github.workspace }}/build/review/equipment-${{ matrix.platform }}.png
         run: flutter test integration_test/equipment_test.dart -d ${{ matrix.platform }} --no-pub
       - name: Редактор экипировки с настоящим Lua
-        if: runner.os == 'Linux'
+        if: inputs.cold_install != true && runner.os == 'Linux'
         env:
           POB2_UI_HOME: ${{ runner.temp }}/pob2-lua-smoke
           POB2_UI_SCREENSHOT: ${{ github.workspace }}/build/review/equipment-linux.png
         run: xvfb-run -a flutter test integration_test/equipment_test.dart -d linux --no-pub
       - name: Проверить переключение Release → Debug
-        if: runner.os == 'Windows'
+        if: inputs.cold_install != true && runner.os == 'Windows'
         shell: bash
         run: python tool/check_windows_engine.py --flutter-root "$RUNNER_TEMP/flutter"
       - name: Правки открытой сборки через MCP и Undo/Redo
-        if: runner.os != 'Linux'
+        if: inputs.cold_install != true && runner.os != 'Linux'
         env:
           POB2_UI_HOME: ${{ runner.temp }}/pob2-lua-smoke
           POB2_UI_REQUIRE_SKILL_CONTROLS: ${{ inputs.locked_components || false }}
         run: flutter test integration_test/mcp_editor_test.dart -d ${{ matrix.platform }} --no-pub
       - name: Правки открытой сборки через MCP и Undo/Redo
-        if: runner.os == 'Linux'
+        if: inputs.cold_install != true && runner.os == 'Linux'
         env:
           POB2_UI_HOME: ${{ runner.temp }}/pob2-lua-smoke
           POB2_UI_REQUIRE_SKILL_CONTROLS: ${{ inputs.locked_components || false }}
         run: xvfb-run -a flutter test integration_test/mcp_editor_test.dart -d linux --no-pub
       - name: Проверить сохранение окна
-        if: runner.os == 'Windows'
+        if: inputs.cold_install != true && runner.os == 'Windows'
         run: python -X utf8 tool/check_window_state.py
       - uses: actions/upload-artifact@v7.0.2
         if: always()
