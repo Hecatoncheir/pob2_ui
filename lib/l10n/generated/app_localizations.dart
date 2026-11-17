@@ -485,6 +485,12 @@ abstract class AppLocalizations {
   /// **'There are no characters available on the account.'**
   String get m2b96f1cb20;
 
+  /// В буфере обмена нет кода PoB.
+  ///
+  /// In en, this message translates to:
+  /// **'There is no PoB code on the clipboard.'**
+  String get m60bb05b2f1;
+
   /// В группе нет активных умений
   ///
   /// In en, this message translates to:
@@ -700,6 +706,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Insert XML'**
   String get me4c25f9a5f;
+
+  /// Вставить код PoB
+  ///
+  /// In en, this message translates to:
+  /// **'Paste PoB code'**
+  String get mdc4988d0b3;
 
   /// Вставить найденный предмет
   ///
@@ -1457,6 +1469,18 @@ abstract class AppLocalizations {
   /// **'Class'**
   String get m1711aecef4;
 
+  /// Код PoB скопирован
+  ///
+  /// In en, this message translates to:
+  /// **'PoB code copied'**
+  String get m11e0efa7e0;
+
+  /// Код PoB слишком велик.
+  ///
+  /// In en, this message translates to:
+  /// **'The PoB code is too large.'**
+  String get m1f33608c34;
+
   /// Кольцо I
   ///
   /// In en, this message translates to:
@@ -2099,6 +2123,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Incorrect assembly ID'**
   String get mc652a6b3a8;
+
+  /// Некорректный или обрезанный код PoB.
+  ///
+  /// In en, this message translates to:
+  /// **'The PoB code is invalid or incomplete.'**
+  String get me6f835a444;
 
   /// Некорректный ключ кеша дерева
   ///
@@ -3156,6 +3186,12 @@ abstract class AppLocalizations {
   /// **'Check compatibility'**
   String get mfa4af9bbe7;
 
+  /// Проверка SHA-256 архива {p0}
+  ///
+  /// In en, this message translates to:
+  /// **'Checking SHA-256 of {p0}'**
+  String mcb69e5c81f(String p0);
+
   /// Проверка выпуска: HTTP {p0}
   ///
   /// In en, this message translates to:
@@ -3197,6 +3233,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Compatibility check: running original Lua...'**
   String get m9353cfd5f6;
+
+  /// Проверка файлов {p0}
+  ///
+  /// In en, this message translates to:
+  /// **'Checking {p0} files'**
+  String me498367e06(String p0);
 
   /// Проверьте сеть и лимит запросов.
   ///
@@ -3299,6 +3341,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'The extracted file size does not match'**
   String get m221310ed98;
+
+  /// Распаковка архива {p0}
+  ///
+  /// In en, this message translates to:
+  /// **'Extracting {p0}'**
+  String ma1af9f3f0e(String p0);
 
   /// Расстояние до узла
   ///
@@ -3623,6 +3671,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Copy diagnostics'**
   String get m1fbb2aeab9;
+
+  /// Скопировать код PoB
+  ///
+  /// In en, this message translates to:
+  /// **'Copy PoB code'**
+  String get m5dc92cdf64;
 
   /// Скопировать команду подключения Codex
   ///

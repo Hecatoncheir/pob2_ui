@@ -17,6 +17,14 @@ Future<void> showXmlImport(BuildContext context, WorkshopCubit model) =>
 Future<void> showXmlPaste(BuildContext context, WorkshopCubit model) =>
     sparkDialog<void>(context, _XmlDialog(model));
 
+Future<void> pastePobCode(WorkshopCubit model) async {
+  final value = await Clipboard.getData(Clipboard.kTextPlain);
+  await model.importShareCode(value?.text ?? '');
+}
+
+Future<void> copyPobCode(WorkshopCubit model) =>
+    model.copyShareCode((text) => Clipboard.setData(ClipboardData(text: text)));
+
 class _NewBuildDialog extends StatefulWidget {
   const _NewBuildDialog(this.model);
   final WorkshopCubit model;

@@ -219,6 +219,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m2b96f1cb20 => 'ไม่มีอักขระในบัญชี';
 
   @override
+  String get m60bb05b2f1 => 'ไม่มีโค้ด PoB ในคลิปบอร์ด';
+
+  @override
   String get mfd96d5c7e6 => 'กลุ่มนี้ไม่มีสกิลใช้งาน';
 
   @override
@@ -327,6 +330,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get me4c25f9a5f => 'แทรก XML';
+
+  @override
+  String get mdc4988d0b3 => 'วางโค้ด PoB';
 
   @override
   String get md6ad11ba2b => 'แทรกรายการที่พบ';
@@ -735,6 +741,12 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m1711aecef4 => 'คลาส';
 
   @override
+  String get m11e0efa7e0 => 'คัดลอกโค้ด PoB แล้ว';
+
+  @override
+  String get m1f33608c34 => 'โค้ด PoB มีขนาดใหญ่เกินไป';
+
+  @override
   String get m209e516133 => 'แหวน I';
 
   @override
@@ -1098,6 +1110,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get mc652a6b3a8 => 'ID แอสเซมบลีไม่ถูกต้อง';
+
+  @override
+  String get me6f835a444 => 'โค้ด PoB ไม่ถูกต้องหรือไม่สมบูรณ์';
 
   @override
   String get m7021e46018 => 'คีย์แคชแผนผังไม่ถูกต้อง';
@@ -1655,6 +1670,11 @@ class AppLocalizationsTh extends AppLocalizations {
   String get mfa4af9bbe7 => 'ตรวจสอบความเข้ากันได้';
 
   @override
+  String mcb69e5c81f(String p0) {
+    return 'กำลังตรวจสอบ SHA-256 ของ $p0';
+  }
+
+  @override
   String mfeb5830ec9(String p0) {
     return 'การตรวจสอบการเปิดตัว: HTTP $p0';
   }
@@ -1676,6 +1696,11 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m9353cfd5f6 => 'การตรวจสอบความเข้ากันได้: ใช้งานต้นฉบับ Lua...';
+
+  @override
+  String me498367e06(String p0) {
+    return 'กำลังตรวจสอบไฟล์ของ $p0';
+  }
 
   @override
   String get md8164e1acb => 'ตรวจสอบเครือข่ายของคุณและขีดจำกัดคำขอ';
@@ -1730,6 +1755,11 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m221310ed98 => 'ขนาดไฟล์ที่แตกแล้วไม่ตรงกัน';
+
+  @override
+  String ma1af9f3f0e(String p0) {
+    return 'กำลังแตกไฟล์ $p0';
+  }
 
   @override
   String get mde6527a5fe => 'Distance to node';
@@ -1902,6 +1932,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m1fbb2aeab9 => 'คัดลอกข้อมูลวินิจฉัย';
+
+  @override
+  String get m5dc92cdf64 => 'คัดลอกโค้ด PoB';
 
   @override
   String get m99e87c373f => 'คัดลอกคำสั่งการเชื่อมต่อ Codex';

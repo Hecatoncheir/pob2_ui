@@ -112,6 +112,10 @@ class WorkspaceView extends StatelessWidget {
           onPressed: busy ? null : () => showXmlImport(context, model),
           child: const AppText('Открыть XML'),
         ),
+        OutlinedButton(
+          onPressed: busy ? null : () => pastePobCode(model),
+          child: const AppText('Вставить код PoB'),
+        ),
         McpEditorButton(model, outlined: true),
         if (model.pobWindow.supported) ...[
           OutlinedButton(
@@ -255,6 +259,14 @@ class _BuildMenu extends StatelessWidget {
           value: 'import-character',
           child: const AppText('Импортировать персонажа'),
         ),
+      const PopupMenuItem(
+        value: 'paste-code',
+        child: AppText('Вставить код PoB'),
+      ),
+      const PopupMenuItem(
+        value: 'copy-code',
+        child: AppText('Скопировать код PoB'),
+      ),
       const PopupMenuItem(value: 'paste', child: AppText('Вставить XML')),
       const PopupMenuItem(value: 'xml', child: AppText('Скопировать XML')),
       const PopupMenuItem(value: 'copy', child: AppText('Создать копию')),
@@ -266,6 +278,10 @@ class _BuildMenu extends StatelessWidget {
       case 'notes':
         final id = model.state.library.activeId;
         if (id != null) showBuildNotes(context, model, id);
+      case 'paste-code':
+        pastePobCode(model);
+      case 'copy-code':
+        copyPobCode(model);
       case 'paste':
         showXmlPaste(context, model);
       case 'import-pob':

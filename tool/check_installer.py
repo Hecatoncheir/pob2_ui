@@ -101,13 +101,39 @@ def check_macos(package, base, data, environment):
     return executable
 
 
+def progress_summary(journal):
+    if not journal.is_file():
+        return 'Приложение не записало начало запуска'
+    for line in reversed(journal.read_text(encoding='utf-8').splitlines()):
+        try:
+            last = json.loads(line)
+        except json.JSONDecodeError:
+            continue
+        elapsed = max(0, time.time() - last['timestampMs'] / 1000)
+        return f"Последний этап: {last['step']}, выполнялся {elapsed:.1f} с"
+    return 'Журнал запуска пуст'
+
+
+def run_with_progress(command, journal, timeout, **kwargs):
+    try:
+        return subprocess.run(command, timeout=timeout, **kwargs)
+    except subprocess.TimeoutExpired as error:
+        raise RuntimeError(f'Тайм-аут после {timeout} с. {progress_summary(journal)}') from error
+
+
 def run_build_check(executable, data, environment, stage):
-    result = subprocess.run(
-        [str(executable)],
-        cwd=executable.parent,
-        env=dict(environment, POB2_UI_INSTALLER_CHECK=stage),
-        timeout=600,
-    )
+    journal = data / f'installer-progress-{stage}.jsonl'
+    try:
+        result = run_with_progress(
+            [str(executable)], journal, 600,
+            cwd=executable.parent, env=dict(environment, POB2_UI_INSTALLER_CHECK=stage),
+        )
+    finally:
+        if journal.is_file():
+            review = ROOT / 'build/review'
+            review.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(journal, review / f'{data.name}-{journal.name}')
+            print(journal.read_text(encoding='utf-8'), end='', flush=True)
     output = data / f'installer-check-{stage}.json'
     if not output.is_file():
         raise RuntimeError(f'Установленное приложение не записало результат {stage}')
@@ -117,8 +143,7 @@ def run_build_check(executable, data, environment, stage):
     return report
 
 
-def check_build(executable, base, environment, components):
-    data = base / 'build-profile'
+def prepare_profile(data, components):
     builds = data / 'builds'
     builds.mkdir(parents=True)
     if components is not None:
@@ -126,21 +151,57 @@ def check_build(executable, base, environment, components):
     (data / 'pob-builds.json').write_text(
         json.dumps({'directory': str(builds), 'migrated': True}), encoding='utf-8',
     )
-    environment = dict(environment, POB2_UI_HOME=str(data), PYTHONDONTWRITEBYTECODE='1')
-    if components is None:
-        environment = archive_check_environment(environment)
-    saved = run_build_check(executable, data, environment, 'save')
-    assert saved['source'] == 'original-lua' and saved['level'] == 90 and saved['life'] > 0
-    if components is None:
-        active = json.loads((data / 'components.json').read_text(encoding='utf-8'))['active']
-        assert all(component.get('archiveSha256') for component in active.values())
+    return builds
+
+
+def verify_reopened(executable, data, builds, environment, saved):
     files = list(builds.glob('*.xml'))
     assert len(files) == 1 and files[0].name == saved['id']
     original = files[0].read_bytes()
     restored = run_build_check(executable, data, environment, 'restore')
     assert restored == saved, (saved, restored)
     assert files[0].read_bytes() == original, 'Повторный запуск изменил XML'
+
+
+def check_build(executable, base, environment, components, target, previous):
+    data = base / 'build-profile'
+    builds = prepare_profile(data, components)
+    env = dict(environment, POB2_UI_HOME=str(data), PYTHONDONTWRITEBYTECODE='1')
+    if components is None:
+        env = archive_check_environment(env)
+    saved = run_build_check(executable, data, env, 'save')
+    assert saved['source'] == 'original-lua' and saved['level'] == 90 and saved['life'] > 0
+    manifest = data / 'components.json'
+    if components is None:
+        active = json.loads(manifest.read_text(encoding='utf-8'))['active']
+        assert all(component.get('archiveSha256') for component in active.values())
+    verify_reopened(executable, data, builds, env, saved)
     print('Установленный PoB II: расчёт Lua, XML и заметки восстановлены без HTTP после перезапуска')
+    if previous is not None:
+        check_previous(target, previous, executable, base, env, manifest)
+
+
+def previous_executable(target, package, base, environment):
+    if target == 'macos-arm64':
+        base.mkdir()
+        return mount_macos(package, base) / 'Contents/MacOS/PoB II'
+    if target == 'windows-x64':
+        run(package, '/VERYSILENT', '/SUPPRESSMSGBOXES', '/NORESTART', '/SP-', '/DIR=' + str(base), env=environment)
+        return base / 'versions/0.4.0/pob2_ui.exe'
+    run('/bin/sh', package, '--prefix', base, '--wait-pid', '2147483647', env=environment)
+    return base / 'versions/0.4.0/pob2_ui'
+
+
+def check_previous(target, package, executable, base, environment, components):
+    data = base / 'v040-profile'
+    builds = prepare_profile(data, components)
+    env = dict(environment, POB2_UI_HOME=str(data),
+               POB2_UI_CHECK_FIXTURE=str(ROOT / 'integration_test/fixtures/witch_fireball.xml'))
+    env.pop('POB2_UI_CHECK_CODE', None)
+    old = previous_executable(target, package, base / 'v040-installation', os.environ)
+    saved = run_build_check(old, data, env, 'save')
+    verify_reopened(executable, data, builds, env, saved)
+    print('По итогам обновления с v0.4.0 совпали XML, заметки и отчёт Lua')
 
 
 def archive_check_environment(environment):
@@ -148,7 +209,7 @@ def archive_check_environment(environment):
     environment = dict(
         environment,
         PATH=system_path,
-        POB2_UI_CHECK_FIXTURE=str(ROOT / 'integration_test/fixtures/witch_fireball.xml'),
+        POB2_UI_CHECK_CODE=str(ROOT / 'integration_test/fixtures/witch_fireball.pobcode'),
     )
     for key in ('POB2_UI_PYTHON', 'PYTHONHOME', 'PYTHONPATH'):
         environment.pop(key, None)
@@ -157,8 +218,10 @@ def archive_check_environment(environment):
     return environment
 
 
-def check(target, *, build_check=False, components=None, package=None):
+def check(target, *, build_check=False, components=None, package=None, previous=None):
     number = version()
+    if previous is not None and not previous.is_file():
+        raise FileNotFoundError(previous)
     package = package or ROOT / 'build/packages' / filename(number, target)
     with tempfile.TemporaryDirectory(prefix='pob2-install-check-') as temporary:
         base = Path(temporary).resolve()
@@ -172,7 +235,7 @@ def check(target, *, build_check=False, components=None, package=None):
         if target == 'macos-arm64':
             executable = check_macos(package, base, data, environment)
             if build_check:
-                check_build(executable, base, environment, components)
+                check_build(executable, base, environment, components, target, previous)
             return
         if target == 'windows-x64':
             run(package, '/VERYSILENT', '/SUPPRESSMSGBOXES', '/NORESTART', '/SP-', '/RELAUNCH', '/DIR=' + str(install), env=environment)
@@ -213,7 +276,7 @@ def check(target, *, build_check=False, components=None, package=None):
         stop_versions(install, environment)
         if build_check:
             executable = install / 'versions' / number / ('pob2_ui.exe' if os.name == 'nt' else 'pob2_ui')
-            check_build(executable, base, environment, components)
+            check_build(executable, base, environment, components, target, previous)
     print(f'{target}: установщик и настоящий запуск проверены')
 
 
@@ -223,10 +286,12 @@ if __name__ == '__main__':
     parser.add_argument('--build-check', action='store_true', help='Проверить сохранение и восстановление сборки')
     parser.add_argument('--components', type=Path, help='Манифест уже скачанной пары для проверки сборки')
     parser.add_argument('--package', type=Path, help='Путь к готовому установщику')
+    parser.add_argument('--previous', type=Path, help='Каталог с установщиком v0.4.0 для проверки обновления')
     args = parser.parse_args()
     check(
         args.target,
         build_check=args.build_check or args.components is not None,
         components=args.components,
         package=args.package.resolve() if args.package else None,
+        previous=(args.previous / filename('0.4.0', args.target)).resolve() if args.previous else None,
     )

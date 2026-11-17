@@ -61,6 +61,7 @@
     "m84e960d40a": "Бюджет",
     "m7daed90e2c": "В {p0} нет {p1}; требуется MCP 0.4.0 или новее",
     "m2b96f1cb20": "В аккаунте нет доступных персонажей.",
+    "m60bb05b2f1": "В буфере обмена нет кода PoB.",
     "mfd96d5c7e6": "В группе нет активных умений",
     "m1163ee245e": "В компоненте отсутствует {p0}. Рабочая версия сохранена.",
     "m9bb974d2c9": "В пакете MCP отсутствует Python",
@@ -97,6 +98,7 @@
     "m8d6001a308": "Всего маны",
     "mec79f4d0c8": "Вставить",
     "me4c25f9a5f": "Вставить XML",
+    "mdc4988d0b3": "Вставить код PoB",
     "md6ad11ba2b": "Вставить найденный предмет",
     "m6bf3b12df4": "Вставьте XML сборки. Она будет проверена и рассчитана в Lua.",
     "m5b1968a662": "Всё для работы",
@@ -223,6 +225,8 @@
     "md0ef3540b0": "Каталог",
     "m74189f93c7": "Качество, %",
     "m1711aecef4": "Класс",
+    "m11e0efa7e0": "Код PoB скопирован",
+    "m1f33608c34": "Код PoB слишком велик.",
     "m209e516133": "Кольцо I",
     "m20555cd71a": "Кольцо II",
     "m9ca9ef70fe": "Кольцо III",
@@ -330,6 +334,7 @@
     "m571195d148": "Некорректные координаты PoB",
     "mec07f569e3": "Некорректный идентификатор заметок",
     "mc652a6b3a8": "Некорректный идентификатор сборки",
+    "me6f835a444": "Некорректный или обрезанный код PoB.",
     "m7021e46018": "Некорректный ключ кеша дерева",
     "mac487ef90b": "Некорректный план прокачки",
     "mbfa40c4fb1": "Некорректный путь к сборке PoB.",
@@ -506,6 +511,7 @@
     "me269e51359": "Проверить предмет",
     "m87cb1172f2": "Проверить связь",
     "mfa4af9bbe7": "Проверить совместимость",
+    "mcb69e5c81f": "Проверка SHA-256 архива {p0}",
     "mfeb5830ec9": "Проверка выпуска: HTTP {p0}",
     "mf0c425d946": "Проверка выпусков",
     "m25ee4bf0ec": "Проверка выпусков завершена",
@@ -513,6 +519,7 @@
     "m6f4c708fbf": "Проверка пакета перед установкой не пройдена",
     "m908d1b1e7c": "Проверка совместимости Lua",
     "m9353cfd5f6": "Проверка совместимости: запуск исходного Lua…",
+    "me498367e06": "Проверка файлов {p0}",
     "md8164e1acb": "Проверьте сеть и лимит запросов.",
     "m21d9ad659d": "Проверьте текст, чтобы увидеть описание и совместимость",
     "m1ea3791d9d": "Проверяем выпуски…",
@@ -530,6 +537,7 @@
     "m13601ffe54": "Разрешить правки через MCP",
     "m0449346093": "Распакованный компонент слишком велик",
     "m221310ed98": "Распакованный размер файла не совпал",
+    "ma1af9f3f0e": "Распаковка архива {p0}",
     "mde6527a5fe": "Расстояние до узла",
     "m7846ddb858": "Рассчитано в Lua PoB",
     "m33a38de9ff": "Расчёт Lua · {p0}%",
@@ -584,6 +592,7 @@
     "mf02956c165": "Скопировать",
     "m332899f398": "Скопировать XML",
     "m1fbb2aeab9": "Скопировать диагностику",
+    "m5dc92cdf64": "Скопировать код PoB",
     "m99e87c373f": "Скопировать команду подключения Codex",
     "m8d81013698": "Скопировать ссылку",
     "m052e3a8cc9": "Скопируйте предмет из игры или PoB",
@@ -1443,7 +1452,16 @@
     "m153634f023": "Invalid file type in archive",
     "m8b614efa1f": "Duplicate path in archive",
     "m0449346093": "The extracted component is too large",
-    "m221310ed98": "The extracted file size does not match"
+    "m221310ed98": "The extracted file size does not match",
+    "m60bb05b2f1": "There is no PoB code on the clipboard.",
+    "mdc4988d0b3": "Paste PoB code",
+    "m11e0efa7e0": "PoB code copied",
+    "m1f33608c34": "The PoB code is too large.",
+    "me6f835a444": "The PoB code is invalid or incomplete.",
+    "mcb69e5c81f": "Checking SHA-256 of {p0}",
+    "me498367e06": "Checking {p0} files",
+    "ma1af9f3f0e": "Extracting {p0}",
+    "m5dc92cdf64": "Copy PoB code"
   },
   "fr": {
     "m0c63e733f9": "Lua n'a pas renvoyé toutes les icônes",
@@ -2166,7 +2184,16 @@
     "m153634f023": "Type de fichier non valide dans l’archive",
     "m8b614efa1f": "Chemin en double dans l’archive",
     "m0449346093": "Le composant extrait est trop volumineux",
-    "m221310ed98": "La taille du fichier extrait ne correspond pas"
+    "m221310ed98": "La taille du fichier extrait ne correspond pas",
+    "m60bb05b2f1": "Le presse-papiers ne contient aucun code PoB.",
+    "mdc4988d0b3": "Coller le code PoB",
+    "m11e0efa7e0": "Code PoB copié",
+    "m1f33608c34": "Le code PoB est trop volumineux.",
+    "me6f835a444": "Le code PoB est invalide ou incomplet.",
+    "mcb69e5c81f": "Vérification du SHA-256 de {p0}",
+    "me498367e06": "Vérification des fichiers de {p0}",
+    "ma1af9f3f0e": "Extraction de {p0}",
+    "m5dc92cdf64": "Copier le code PoB"
   },
   "de": {
     "m0c63e733f9": "Lua hat nicht alle Symbole zurückgegeben",
@@ -2889,7 +2916,16 @@
     "m153634f023": "Ungültiger Dateityp im Archiv",
     "m8b614efa1f": "Doppelter Pfad im Archiv",
     "m0449346093": "Die entpackte Komponente ist zu groß",
-    "m221310ed98": "Die Größe der entpackten Datei stimmt nicht überein"
+    "m221310ed98": "Die Größe der entpackten Datei stimmt nicht überein",
+    "m60bb05b2f1": "Die Zwischenablage enthält keinen PoB-Code.",
+    "mdc4988d0b3": "PoB-Code einfügen",
+    "m11e0efa7e0": "PoB-Code kopiert",
+    "m1f33608c34": "Der PoB-Code ist zu groß.",
+    "me6f835a444": "Der PoB-Code ist ungültig oder unvollständig.",
+    "mcb69e5c81f": "SHA-256 von {p0} wird geprüft",
+    "me498367e06": "Dateien von {p0} werden geprüft",
+    "ma1af9f3f0e": "{p0} wird entpackt",
+    "m5dc92cdf64": "PoB-Code kopieren"
   },
   "es": {
     "m0c63e733f9": "Lua no devolvió todos los íconos",
@@ -3612,7 +3648,16 @@
     "m153634f023": "Tipo de archivo no válido en el archivo comprimido",
     "m8b614efa1f": "Ruta duplicada en el archivo",
     "m0449346093": "El componente extraído es demasiado grande",
-    "m221310ed98": "El tamaño del archivo extraído no coincide"
+    "m221310ed98": "El tamaño del archivo extraído no coincide",
+    "m60bb05b2f1": "No hay ningún código de PoB en el portapapeles.",
+    "mdc4988d0b3": "Pegar código de PoB",
+    "m11e0efa7e0": "Código de PoB copiado",
+    "m1f33608c34": "El código de PoB es demasiado grande.",
+    "me6f835a444": "El código de PoB no es válido o está incompleto.",
+    "mcb69e5c81f": "Comprobando SHA-256 de {p0}",
+    "me498367e06": "Comprobando archivos de {p0}",
+    "ma1af9f3f0e": "Extrayendo {p0}",
+    "m5dc92cdf64": "Copiar código de PoB"
   },
   "pt_BR": {
     "m0c63e733f9": "Lua não retornou todos os ícones",
@@ -4335,7 +4380,16 @@
     "m153634f023": "Tipo de arquivo inválido no pacote",
     "m8b614efa1f": "Caminho duplicado no arquivo",
     "m0449346093": "O componente extraído é grande demais",
-    "m221310ed98": "O tamanho do arquivo extraído não corresponde"
+    "m221310ed98": "O tamanho do arquivo extraído não corresponde",
+    "m60bb05b2f1": "A área de transferência não contém código PoB.",
+    "mdc4988d0b3": "Colar código PoB",
+    "m11e0efa7e0": "Código PoB copiado",
+    "m1f33608c34": "O código PoB é grande demais.",
+    "me6f835a444": "O código PoB é inválido ou está incompleto.",
+    "mcb69e5c81f": "Verificando SHA-256 de {p0}",
+    "me498367e06": "Verificando arquivos de {p0}",
+    "ma1af9f3f0e": "Extraindo {p0}",
+    "m5dc92cdf64": "Copiar código PoB"
   },
   "ja": {
     "m0c63e733f9": "Lua はすべてのアイコンを返しませんでした",
@@ -5058,7 +5112,16 @@
     "m153634f023": "アーカイブ内のファイル形式が無効です",
     "m8b614efa1f": "アーカイブ内に重複するパスがあります",
     "m0449346093": "展開後のコンポーネントが大きすぎます",
-    "m221310ed98": "展開後のファイルサイズが一致しません"
+    "m221310ed98": "展開後のファイルサイズが一致しません",
+    "m60bb05b2f1": "クリップボードに PoB コードがありません。",
+    "mdc4988d0b3": "PoB コードを貼り付け",
+    "m11e0efa7e0": "PoB コードをコピーしました",
+    "m1f33608c34": "PoB コードが大きすぎます。",
+    "me6f835a444": "PoB コードが無効か不完全です。",
+    "mcb69e5c81f": "{p0} の SHA-256 を確認中",
+    "me498367e06": "{p0} のファイルを確認中",
+    "ma1af9f3f0e": "{p0} を展開中",
+    "m5dc92cdf64": "PoB コードをコピー"
   },
   "ko": {
     "m0c63e733f9": "Lua이 모든 아이콘을 반환하지 않았습니다.",
@@ -5781,7 +5844,16 @@
     "m153634f023": "압축 파일의 파일 유형이 잘못되었습니다",
     "m8b614efa1f": "압축 파일에 중복 경로가 있습니다",
     "m0449346093": "압축을 푼 구성 요소가 너무 큽니다",
-    "m221310ed98": "압축을 푼 파일 크기가 일치하지 않습니다"
+    "m221310ed98": "압축을 푼 파일 크기가 일치하지 않습니다",
+    "m60bb05b2f1": "클립보드에 PoB 코드가 없습니다.",
+    "mdc4988d0b3": "PoB 코드 붙여넣기",
+    "m11e0efa7e0": "PoB 코드를 복사했습니다",
+    "m1f33608c34": "PoB 코드가 너무 큽니다.",
+    "me6f835a444": "PoB 코드가 잘못되었거나 불완전합니다.",
+    "mcb69e5c81f": "{p0}의 SHA-256 확인 중",
+    "me498367e06": "{p0} 파일 확인 중",
+    "ma1af9f3f0e": "{p0} 압축 해제 중",
+    "m5dc92cdf64": "PoB 코드 복사"
   },
   "th": {
     "m0c63e733f9": "Lua ไม่ได้ส่งคืนไอคอนทั้งหมด",
@@ -6504,7 +6576,16 @@
     "m153634f023": "ชนิดไฟล์ในไฟล์บีบอัดไม่ถูกต้อง",
     "m8b614efa1f": "มีพาธซ้ำในไฟล์บีบอัด",
     "m0449346093": "ส่วนประกอบที่แตกไฟล์แล้วมีขนาดใหญ่เกินไป",
-    "m221310ed98": "ขนาดไฟล์ที่แตกแล้วไม่ตรงกัน"
+    "m221310ed98": "ขนาดไฟล์ที่แตกแล้วไม่ตรงกัน",
+    "m60bb05b2f1": "ไม่มีโค้ด PoB ในคลิปบอร์ด",
+    "mdc4988d0b3": "วางโค้ด PoB",
+    "m11e0efa7e0": "คัดลอกโค้ด PoB แล้ว",
+    "m1f33608c34": "โค้ด PoB มีขนาดใหญ่เกินไป",
+    "me6f835a444": "โค้ด PoB ไม่ถูกต้องหรือไม่สมบูรณ์",
+    "mcb69e5c81f": "กำลังตรวจสอบ SHA-256 ของ {p0}",
+    "me498367e06": "กำลังตรวจสอบไฟล์ของ {p0}",
+    "ma1af9f3f0e": "กำลังแตกไฟล์ {p0}",
+    "m5dc92cdf64": "คัดลอกโค้ด PoB"
   },
   "zh_Hant": {
     "m0c63e733f9": "Lua 未傳回所有圖標",
@@ -7227,6 +7308,15 @@
     "m153634f023": "壓縮檔中的檔案類型無效",
     "m8b614efa1f": "壓縮檔中有重複路徑",
     "m0449346093": "解壓縮後的元件過大",
-    "m221310ed98": "解壓縮後的檔案大小不符"
+    "m221310ed98": "解壓縮後的檔案大小不符",
+    "m60bb05b2f1": "剪貼簿中沒有 PoB 代碼。",
+    "mdc4988d0b3": "貼上 PoB 代碼",
+    "m11e0efa7e0": "已複製 PoB 代碼",
+    "m1f33608c34": "PoB 代碼過大。",
+    "me6f835a444": "PoB 代碼無效或不完整。",
+    "mcb69e5c81f": "正在驗證 {p0} 的 SHA-256",
+    "me498367e06": "正在驗證 {p0} 的檔案",
+    "ma1af9f3f0e": "正在解壓縮 {p0}",
+    "m5dc92cdf64": "複製 PoB 代碼"
   }
 }

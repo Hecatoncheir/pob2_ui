@@ -216,6 +216,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m2b96f1cb20 => 'アカウントに使用できるキャラクターがありません。';
 
   @override
+  String get m60bb05b2f1 => 'クリップボードに PoB コードがありません。';
+
+  @override
   String get mfd96d5c7e6 => 'グループにアクティブスキルがありません';
 
   @override
@@ -324,6 +327,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get me4c25f9a5f => 'XML を挿入';
+
+  @override
+  String get mdc4988d0b3 => 'PoB コードを貼り付け';
 
   @override
   String get md6ad11ba2b => '見つかったアイテムを挿入';
@@ -727,6 +733,12 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m1711aecef4 => 'クラス';
 
   @override
+  String get m11e0efa7e0 => 'PoB コードをコピーしました';
+
+  @override
+  String get m1f33608c34 => 'PoB コードが大きすぎます。';
+
+  @override
   String get m209e516133 => 'リングI';
 
   @override
@@ -1089,6 +1101,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get mc652a6b3a8 => 'アセンブリ ID が正しくありません';
+
+  @override
+  String get me6f835a444 => 'PoB コードが無効か不完全です。';
 
   @override
   String get m7021e46018 => 'ツリー キャッシュ キーが正しくありません';
@@ -1643,6 +1658,11 @@ class AppLocalizationsJa extends AppLocalizations {
   String get mfa4af9bbe7 => '互換性を確認する';
 
   @override
+  String mcb69e5c81f(String p0) {
+    return '$p0 の SHA-256 を確認中';
+  }
+
+  @override
   String mfeb5830ec9(String p0) {
     return 'リリースチェック: HTTP $p0';
   }
@@ -1664,6 +1684,11 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m9353cfd5f6 => '互換性チェック: オリジナルの Lua を実行中...';
+
+  @override
+  String me498367e06(String p0) {
+    return '$p0 のファイルを確認中';
+  }
 
   @override
   String get md8164e1acb => 'ネットワークとリクエスト制限を確認してください。';
@@ -1717,6 +1742,11 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m221310ed98 => '展開後のファイルサイズが一致しません';
+
+  @override
+  String ma1af9f3f0e(String p0) {
+    return '$p0 を展開中';
+  }
 
   @override
   String get mde6527a5fe => 'ノードまでの距離';
@@ -1887,6 +1917,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m1fbb2aeab9 => '診断情報をコピー';
+
+  @override
+  String get m5dc92cdf64 => 'PoB コードをコピー';
 
   @override
   String get m99e87c373f => 'Codex 接続コマンドのコピー';

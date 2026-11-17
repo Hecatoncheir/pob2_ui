@@ -221,6 +221,9 @@ class AppLocalizationsPt extends AppLocalizations {
   String get m2b96f1cb20 => 'Não há personagens disponíveis na conta.';
 
   @override
+  String get m60bb05b2f1 => 'A área de transferência não contém código PoB.';
+
+  @override
   String get mfd96d5c7e6 => 'O grupo não tem habilidades ativas';
 
   @override
@@ -329,6 +332,9 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get me4c25f9a5f => 'Inserir XML';
+
+  @override
+  String get mdc4988d0b3 => 'Colar código PoB';
 
   @override
   String get md6ad11ba2b => 'Inserir item encontrado';
@@ -745,6 +751,12 @@ class AppLocalizationsPt extends AppLocalizations {
   String get m1711aecef4 => 'Classe';
 
   @override
+  String get m11e0efa7e0 => 'Código PoB copiado';
+
+  @override
+  String get m1f33608c34 => 'O código PoB é grande demais.';
+
+  @override
   String get m209e516133 => 'Anel I';
 
   @override
@@ -1113,6 +1125,9 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get mc652a6b3a8 => 'ID de montagem incorreto';
+
+  @override
+  String get me6f835a444 => 'O código PoB é inválido ou está incompleto.';
 
   @override
   String get m7021e46018 => 'Chave de cache de árvore incorreta';
@@ -1682,6 +1697,11 @@ class AppLocalizationsPt extends AppLocalizations {
   String get mfa4af9bbe7 => 'Verifique a compatibilidade';
 
   @override
+  String mcb69e5c81f(String p0) {
+    return 'Verificando SHA-256 de $p0';
+  }
+
+  @override
   String mfeb5830ec9(String p0) {
     return 'Verificação de liberação: HTTP $p0';
   }
@@ -1705,6 +1725,11 @@ class AppLocalizationsPt extends AppLocalizations {
   @override
   String get m9353cfd5f6 =>
       'Verificação de compatibilidade: executando o Lua original...';
+
+  @override
+  String me498367e06(String p0) {
+    return 'Verificando arquivos de $p0';
+  }
 
   @override
   String get md8164e1acb => 'Verifique sua rede e limite de solicitações.';
@@ -1760,6 +1785,11 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get m221310ed98 => 'O tamanho do arquivo extraído não corresponde';
+
+  @override
+  String ma1af9f3f0e(String p0) {
+    return 'Extraindo $p0';
+  }
 
   @override
   String get mde6527a5fe => 'Distância até o nó';
@@ -1936,6 +1966,9 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get m1fbb2aeab9 => 'Copiar diagnóstico';
+
+  @override
+  String get m5dc92cdf64 => 'Copiar código PoB';
 
   @override
   String get m99e87c373f => 'Copiar comando de conexão Codex';
@@ -2596,6 +2629,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get m2b96f1cb20 => 'Não há personagens disponíveis na conta.';
 
   @override
+  String get m60bb05b2f1 => 'A área de transferência não contém código PoB.';
+
+  @override
   String get mfd96d5c7e6 => 'O grupo não tem habilidades ativas';
 
   @override
@@ -2704,6 +2740,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get me4c25f9a5f => 'Inserir XML';
+
+  @override
+  String get mdc4988d0b3 => 'Colar código PoB';
 
   @override
   String get md6ad11ba2b => 'Inserir item encontrado';
@@ -3120,6 +3159,12 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get m1711aecef4 => 'Classe';
 
   @override
+  String get m11e0efa7e0 => 'Código PoB copiado';
+
+  @override
+  String get m1f33608c34 => 'O código PoB é grande demais.';
+
+  @override
   String get m209e516133 => 'Anel I';
 
   @override
@@ -3488,6 +3533,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get mc652a6b3a8 => 'ID de montagem incorreto';
+
+  @override
+  String get me6f835a444 => 'O código PoB é inválido ou está incompleto.';
 
   @override
   String get m7021e46018 => 'Chave de cache de árvore incorreta';
@@ -4057,6 +4105,11 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get mfa4af9bbe7 => 'Verifique a compatibilidade';
 
   @override
+  String mcb69e5c81f(String p0) {
+    return 'Verificando SHA-256 de $p0';
+  }
+
+  @override
   String mfeb5830ec9(String p0) {
     return 'Verificação de liberação: HTTP $p0';
   }
@@ -4080,6 +4133,11 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   @override
   String get m9353cfd5f6 =>
       'Verificação de compatibilidade: executando o Lua original...';
+
+  @override
+  String me498367e06(String p0) {
+    return 'Verificando arquivos de $p0';
+  }
 
   @override
   String get md8164e1acb => 'Verifique sua rede e limite de solicitações.';
@@ -4135,6 +4193,11 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get m221310ed98 => 'O tamanho do arquivo extraído não corresponde';
+
+  @override
+  String ma1af9f3f0e(String p0) {
+    return 'Extraindo $p0';
+  }
 
   @override
   String get mde6527a5fe => 'Distância até o nó';
@@ -4311,6 +4374,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get m1fbb2aeab9 => 'Copiar diagnóstico';
+
+  @override
+  String get m5dc92cdf64 => 'Copiar código PoB';
 
   @override
   String get m99e87c373f => 'Copiar comando de conexão Codex';

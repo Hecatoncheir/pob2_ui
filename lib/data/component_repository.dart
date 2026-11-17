@@ -198,7 +198,7 @@ class ComponentRepository {
     final candidate = await versions.createTemp('${component.name}-');
     log('Загрузка ${component.title} ${release.tag}…');
     if (release.package != null) {
-      return _downloadArchive(component, release, candidate);
+      return _downloadArchive(component, release, candidate, log);
     }
     await _git(candidate, ['init', '--quiet']);
     await _git(candidate, ['remote', 'add', 'origin', '${component.url}.git']);
@@ -233,6 +233,7 @@ class ComponentRepository {
     Component component,
     Release release,
     Directory candidate,
+    void Function(String) log,
   ) async {
     await _pendingMarker(candidate).create();
     final asset = release.package!;
@@ -249,8 +250,11 @@ class ComponentRepository {
     final source = await _packageDownload.download(
       asset,
       cache,
-      onProgress: (_) {},
+      onProgress: (progress) {
+        if (progress == 1) log('Проверка SHA-256 архива ${asset.name}');
+      },
     );
+    log('Распаковка архива ${asset.name}');
     await extractComponentArchive(source.path, candidate.path);
     final installation = Installation(
       tag: release.tag,
@@ -258,6 +262,7 @@ class ComponentRepository {
       directory: candidate.path,
       archiveSha256: digest,
     );
+    log('Проверка файлов ${component.title}');
     await _validate(component, installation);
     await cache.delete(recursive: true);
     return installation;

@@ -165,12 +165,17 @@ jobs:
             args+=(--lock tool/components-lock.json)
           fi
           dart run tool/smoke.dart "${args[@]}" | tee build/review/components.json
+      - name: Скачать установщик v0.4.0 для проверки обновления
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release download v0.4.0 --dir build/previous --pattern '*${{ matrix.target }}*'
       - name: Проверить установку и восстановление сборки с Lua
         if: runner.os == 'Linux'
-        run: xvfb-run -a python tool/check_installer.py --target ${{ matrix.target }} --build-check
+        run: xvfb-run -a python tool/check_installer.py --target ${{ matrix.target }} --build-check --previous build/previous
       - name: Проверить установку и восстановление сборки с Lua
         if: runner.os != 'Linux'
-        run: python tool/check_installer.py --target ${{ matrix.target }} --build-check
+        run: python tool/check_installer.py --target ${{ matrix.target }} --build-check --previous build/previous
       - name: Новый интерфейс с настоящим Lua
         if: runner.os != 'Linux'
         env:
@@ -195,6 +200,16 @@ jobs:
           POB2_UI_HOME: ${{ runner.temp }}/pob2-lua-smoke
           POB2_UI_SCREENSHOT: ${{ github.workspace }}/build/review/editors-linux.png
         run: xvfb-run -a flutter test integration_test/editors_test.dart -d linux --no-pub
+      - name: Обмен кодами с исходным PoB
+        if: runner.os != 'Linux'
+        env:
+          POB2_UI_HOME: ${{ runner.temp }}/pob2-lua-smoke
+        run: flutter test integration_test/share_codes_test.dart -d ${{ matrix.platform }} --no-pub
+      - name: Обмен кодами с исходным PoB
+        if: runner.os == 'Linux'
+        env:
+          POB2_UI_HOME: ${{ runner.temp }}/pob2-lua-smoke
+        run: xvfb-run -a flutter test integration_test/share_codes_test.dart -d linux --no-pub
       - name: Редактор экипировки с настоящим Lua
         if: runner.os != 'Linux'
         env:
@@ -230,13 +245,16 @@ jobs:
         if: always()
         with:
           name: ui-${{ matrix.target }}
+          overwrite: true
           path: |
             build/review/*.png
             build/review/components.json
+            build/review/*installer-progress*.jsonl
           if-no-files-found: ignore
       - uses: actions/upload-artifact@v7.0.2
         with:
           name: installer-${{ matrix.target }}
+          overwrite: true
           path: build/packages/*
           if-no-files-found: error
           retention-days: 14

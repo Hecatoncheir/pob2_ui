@@ -359,6 +359,11 @@
     "description": "В аккаунте нет доступных персонажей.",
     "placeholders": {}
   },
+  "m60bb05b2f1": "There is no PoB code on the clipboard.",
+  "@m60bb05b2f1": {
+    "description": "В буфере обмена нет кода PoB.",
+    "placeholders": {}
+  },
   "mfd96d5c7e6": "The group has no active skills",
   "@mfd96d5c7e6": {
     "description": "В группе нет активных умений",
@@ -541,6 +546,11 @@
   "me4c25f9a5f": "Insert XML",
   "@me4c25f9a5f": {
     "description": "Вставить XML",
+    "placeholders": {}
+  },
+  "mdc4988d0b3": "Paste PoB code",
+  "@mdc4988d0b3": {
+    "description": "Вставить код PoB",
     "placeholders": {}
   },
   "md6ad11ba2b": "Insert found item",
@@ -1223,6 +1233,16 @@
     "description": "Класс",
     "placeholders": {}
   },
+  "m11e0efa7e0": "PoB code copied",
+  "@m11e0efa7e0": {
+    "description": "Код PoB скопирован",
+    "placeholders": {}
+  },
+  "m1f33608c34": "The PoB code is too large.",
+  "@m1f33608c34": {
+    "description": "Код PoB слишком велик.",
+    "placeholders": {}
+  },
   "m209e516133": "Ring I",
   "@m209e516133": {
     "description": "Кольцо I",
@@ -1840,6 +1860,11 @@
   "mc652a6b3a8": "Incorrect assembly ID",
   "@mc652a6b3a8": {
     "description": "Некорректный идентификатор сборки",
+    "placeholders": {}
+  },
+  "me6f835a444": "The PoB code is invalid or incomplete.",
+  "@me6f835a444": {
+    "description": "Некорректный или обрезанный код PoB.",
     "placeholders": {}
   },
   "m7021e46018": "Incorrect tree cache key",
@@ -2770,6 +2795,15 @@
     "description": "Проверить совместимость",
     "placeholders": {}
   },
+  "mcb69e5c81f": "Checking SHA-256 of {p0}",
+  "@mcb69e5c81f": {
+    "description": "Проверка SHA-256 архива {p0}",
+    "placeholders": {
+      "p0": {
+        "type": "String"
+      }
+    }
+  },
   "mfeb5830ec9": "Release check: HTTP {p0}",
   "@mfeb5830ec9": {
     "description": "Проверка выпуска: HTTP {p0}",
@@ -2808,6 +2842,15 @@
   "@m9353cfd5f6": {
     "description": "Проверка совместимости: запуск исходного Lua…",
     "placeholders": {}
+  },
+  "me498367e06": "Checking {p0} files",
+  "@me498367e06": {
+    "description": "Проверка файлов {p0}",
+    "placeholders": {
+      "p0": {
+        "type": "String"
+      }
+    }
   },
   "md8164e1acb": "Check your network and request limit.",
   "@md8164e1acb": {
@@ -2897,6 +2940,15 @@
   "@m221310ed98": {
     "description": "Распакованный размер файла не совпал",
     "placeholders": {}
+  },
+  "ma1af9f3f0e": "Extracting {p0}",
+  "@ma1af9f3f0e": {
+    "description": "Распаковка архива {p0}",
+    "placeholders": {
+      "p0": {
+        "type": "String"
+      }
+    }
   },
   "mde6527a5fe": "Distance to node",
   "@mde6527a5fe": {
@@ -3191,6 +3243,11 @@
   "m1fbb2aeab9": "Copy diagnostics",
   "@m1fbb2aeab9": {
     "description": "Скопировать диагностику",
+    "placeholders": {}
+  },
+  "m5dc92cdf64": "Copy PoB code",
+  "@m5dc92cdf64": {
+    "description": "Скопировать код PoB",
     "placeholders": {}
   },
   "m99e87c373f": "Copy Codex connection command",

@@ -216,6 +216,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m2b96f1cb20 => '계정에 사용 가능한 캐릭터가 없습니다.';
 
   @override
+  String get m60bb05b2f1 => '클립보드에 PoB 코드가 없습니다.';
+
+  @override
   String get mfd96d5c7e6 => '그룹에 활성 스킬이 없습니다';
 
   @override
@@ -324,6 +327,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get me4c25f9a5f => '삽입 XML';
+
+  @override
+  String get mdc4988d0b3 => 'PoB 코드 붙여넣기';
 
   @override
   String get md6ad11ba2b => '찾은 항목 삽입';
@@ -727,6 +733,12 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m1711aecef4 => '클래스';
 
   @override
+  String get m11e0efa7e0 => 'PoB 코드를 복사했습니다';
+
+  @override
+  String get m1f33608c34 => 'PoB 코드가 너무 큽니다.';
+
+  @override
   String get m209e516133 => '링I';
 
   @override
@@ -1089,6 +1101,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get mc652a6b3a8 => '잘못된 어셈블리 ID';
+
+  @override
+  String get me6f835a444 => 'PoB 코드가 잘못되었거나 불완전합니다.';
 
   @override
   String get m7021e46018 => '잘못된 트리 캐시 키';
@@ -1643,6 +1658,11 @@ class AppLocalizationsKo extends AppLocalizations {
   String get mfa4af9bbe7 => '호환성 확인';
 
   @override
+  String mcb69e5c81f(String p0) {
+    return '$p0의 SHA-256 확인 중';
+  }
+
+  @override
   String mfeb5830ec9(String p0) {
     return '출시 확인: HTTP $p0';
   }
@@ -1664,6 +1684,11 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m9353cfd5f6 => '호환성 확인: 원본 Lua 실행...';
+
+  @override
+  String me498367e06(String p0) {
+    return '$p0 파일 확인 중';
+  }
 
   @override
   String get md8164e1acb => '네트워크 및 요청 제한을 확인하세요.';
@@ -1717,6 +1742,11 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m221310ed98 => '압축을 푼 파일 크기가 일치하지 않습니다';
+
+  @override
+  String ma1af9f3f0e(String p0) {
+    return '$p0 압축 해제 중';
+  }
 
   @override
   String get mde6527a5fe => '노드까지의 거리';
@@ -1887,6 +1917,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m1fbb2aeab9 => '진단 정보 복사';
+
+  @override
+  String get m5dc92cdf64 => 'PoB 코드 복사';
 
   @override
   String get m99e87c373f => 'Codex 연결 명령 복사';

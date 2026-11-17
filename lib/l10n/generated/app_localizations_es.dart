@@ -223,6 +223,9 @@ class AppLocalizationsEs extends AppLocalizations {
   String get m2b96f1cb20 => 'No hay caracteres disponibles en la cuenta.';
 
   @override
+  String get m60bb05b2f1 => 'No hay ningún código de PoB en el portapapeles.';
+
+  @override
   String get mfd96d5c7e6 => 'El grupo no tiene habilidades activas';
 
   @override
@@ -331,6 +334,9 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get me4c25f9a5f => 'Insertar XML';
+
+  @override
+  String get mdc4988d0b3 => 'Pegar código de PoB';
 
   @override
   String get md6ad11ba2b => 'Insertar elemento encontrado';
@@ -749,6 +755,12 @@ class AppLocalizationsEs extends AppLocalizations {
   String get m1711aecef4 => 'Clase';
 
   @override
+  String get m11e0efa7e0 => 'Código de PoB copiado';
+
+  @override
+  String get m1f33608c34 => 'El código de PoB es demasiado grande.';
+
+  @override
   String get m209e516133 => 'Anillo I';
 
   @override
@@ -1118,6 +1130,9 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get mc652a6b3a8 => 'ID de ensamblaje incorrecto';
+
+  @override
+  String get me6f835a444 => 'El código de PoB no es válido o está incompleto.';
 
   @override
   String get m7021e46018 => 'Clave de caché de árbol incorrecta';
@@ -1690,6 +1705,11 @@ class AppLocalizationsEs extends AppLocalizations {
   String get mfa4af9bbe7 => 'Comprobar compatibilidad';
 
   @override
+  String mcb69e5c81f(String p0) {
+    return 'Comprobando SHA-256 de $p0';
+  }
+
+  @override
   String mfeb5830ec9(String p0) {
     return 'Comprobación de versión: HTTP $p0';
   }
@@ -1713,6 +1733,11 @@ class AppLocalizationsEs extends AppLocalizations {
   @override
   String get m9353cfd5f6 =>
       'Comprobación de compatibilidad: ejecutando el Lua original...';
+
+  @override
+  String me498367e06(String p0) {
+    return 'Comprobando archivos de $p0';
+  }
 
   @override
   String get md8164e1acb => 'Verifique su red y el límite de solicitudes.';
@@ -1769,6 +1794,11 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get m221310ed98 => 'El tamaño del archivo extraído no coincide';
+
+  @override
+  String ma1af9f3f0e(String p0) {
+    return 'Extrayendo $p0';
+  }
 
   @override
   String get mde6527a5fe => 'Distancia al nodo';
@@ -1945,6 +1975,9 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get m1fbb2aeab9 => 'Copiar diagnóstico';
+
+  @override
+  String get m5dc92cdf64 => 'Copiar código de PoB';
 
   @override
   String get m99e87c373f => 'Copiar comando de conexión del Codex';

@@ -25,10 +25,12 @@ import 'ui/workspace_preferences_bloc.dart';
 import 'ui/exit_protection.dart';
 
 Future<void> main(List<String> arguments) async {
-  WidgetsFlutterBinding.ensureInitialized();
   final check = _installerCheckStage();
-  if (check == 'restore') HttpOverrides.global = OfflineInstallerCheck();
   final root = InstallationStore.defaultRoot();
+  final progress = check == null ? null : InstallerCheckProgress(root, check);
+  progress?.record('startup');
+  WidgetsFlutterBinding.ensureInitialized();
+  if (check == 'restore') HttpOverrides.global = OfflineInstallerCheck();
   final model = WorkshopCubit(
     ComponentRepository(store: InstallationStore(root)),
     McpClient(),
@@ -78,7 +80,8 @@ Future<void> main(List<String> arguments) async {
   WidgetsBinding.instance.addPostFrameCallback((_) async {
     await markStartupHealthy(arguments);
     if (check != null) {
-      exit(await checkInstalledBuild(model, initialization, check));
+      progress!.record('first-frame');
+      exit(await checkInstalledBuild(model, initialization, check, progress));
     }
     await updates.initialize();
   });

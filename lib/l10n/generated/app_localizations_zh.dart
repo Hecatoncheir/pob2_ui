@@ -215,6 +215,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m2b96f1cb20 => '帳戶上沒有可用的字元。';
 
   @override
+  String get m60bb05b2f1 => '剪貼簿中沒有 PoB 代碼。';
+
+  @override
   String get mfd96d5c7e6 => '此組別沒有主動技能';
 
   @override
@@ -323,6 +326,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get me4c25f9a5f => '插入 XML';
+
+  @override
+  String get mdc4988d0b3 => '貼上 PoB 代碼';
 
   @override
   String get md6ad11ba2b => '插入找到的項目';
@@ -725,6 +731,12 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m1711aecef4 => '類別';
 
   @override
+  String get m11e0efa7e0 => '已複製 PoB 代碼';
+
+  @override
+  String get m1f33608c34 => 'PoB 代碼過大。';
+
+  @override
   String get m209e516133 => '環 I';
 
   @override
@@ -1086,6 +1098,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get mc652a6b3a8 => '程序集 ID 不正確';
+
+  @override
+  String get me6f835a444 => 'PoB 代碼無效或不完整。';
 
   @override
   String get m7021e46018 => '樹快取鍵不正確';
@@ -1640,6 +1655,11 @@ class AppLocalizationsZh extends AppLocalizations {
   String get mfa4af9bbe7 => '檢查相容性';
 
   @override
+  String mcb69e5c81f(String p0) {
+    return '正在驗證 $p0 的 SHA-256';
+  }
+
+  @override
   String mfeb5830ec9(String p0) {
     return '發布檢查：HTTP $p0';
   }
@@ -1661,6 +1681,11 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m9353cfd5f6 => '相容性檢查：執行原始 Lua...';
+
+  @override
+  String me498367e06(String p0) {
+    return '正在驗證 $p0 的檔案';
+  }
 
   @override
   String get md8164e1acb => '檢查您的網路和請求限制。';
@@ -1714,6 +1739,11 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m221310ed98 => '解壓縮後的檔案大小不符';
+
+  @override
+  String ma1af9f3f0e(String p0) {
+    return '正在解壓縮 $p0';
+  }
 
   @override
   String get mde6527a5fe => '到節點的距離';
@@ -1884,6 +1914,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m1fbb2aeab9 => '複製診斷資訊';
+
+  @override
+  String get m5dc92cdf64 => '複製 PoB 代碼';
 
   @override
   String get m99e87c373f => '复制Codex连接命令';
@@ -2520,6 +2553,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m2b96f1cb20 => '帳戶上沒有可用的字元。';
 
   @override
+  String get m60bb05b2f1 => '剪貼簿中沒有 PoB 代碼。';
+
+  @override
   String get mfd96d5c7e6 => '此組別沒有主動技能';
 
   @override
@@ -2628,6 +2664,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get me4c25f9a5f => '插入 XML';
+
+  @override
+  String get mdc4988d0b3 => '貼上 PoB 代碼';
 
   @override
   String get md6ad11ba2b => '插入找到的項目';
@@ -3030,6 +3069,12 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m1711aecef4 => '類別';
 
   @override
+  String get m11e0efa7e0 => '已複製 PoB 代碼';
+
+  @override
+  String get m1f33608c34 => 'PoB 代碼過大。';
+
+  @override
   String get m209e516133 => '環 I';
 
   @override
@@ -3391,6 +3436,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get mc652a6b3a8 => '程序集 ID 不正確';
+
+  @override
+  String get me6f835a444 => 'PoB 代碼無效或不完整。';
 
   @override
   String get m7021e46018 => '樹快取鍵不正確';
@@ -3945,6 +3993,11 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get mfa4af9bbe7 => '檢查相容性';
 
   @override
+  String mcb69e5c81f(String p0) {
+    return '正在驗證 $p0 的 SHA-256';
+  }
+
+  @override
   String mfeb5830ec9(String p0) {
     return '發布檢查：HTTP $p0';
   }
@@ -3966,6 +4019,11 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m9353cfd5f6 => '相容性檢查：執行原始 Lua...';
+
+  @override
+  String me498367e06(String p0) {
+    return '正在驗證 $p0 的檔案';
+  }
 
   @override
   String get md8164e1acb => '檢查您的網路和請求限制。';
@@ -4019,6 +4077,11 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m221310ed98 => '解壓縮後的檔案大小不符';
+
+  @override
+  String ma1af9f3f0e(String p0) {
+    return '正在解壓縮 $p0';
+  }
 
   @override
   String get mde6527a5fe => '到節點的距離';
@@ -4189,6 +4252,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m1fbb2aeab9 => '複製診斷資訊';
+
+  @override
+  String get m5dc92cdf64 => '複製 PoB 代碼';
 
   @override
   String get m99e87c373f => '复制Codex连接命令';

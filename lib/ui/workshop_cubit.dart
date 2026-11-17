@@ -10,6 +10,7 @@ import '../data/mcp_editor_gateway.dart';
 import '../data/mcp_error_message.dart';
 import '../data/pob_window_repository.dart';
 import '../data/pob_build_document.dart';
+import '../data/pob_share_code.dart';
 import '../data/progression_comparison_session.dart';
 import '../data/pob_build_library.dart';
 import '../data/pob_build_locations.dart';
@@ -721,6 +722,17 @@ class WorkshopCubit extends Cubit<WorkshopState> {
   });
 
   Future<void> importXml(String xml) => _run(() => _importCopy(xml));
+
+  Future<void> importShareCode(String code) =>
+      _run(() async => _importCopy(await decodePobShareCode(code)));
+
+  Future<void> copyShareCode(Future<void> Function(String) write) =>
+      _run(() async {
+        if (state.report == null) return;
+        await _flushText();
+        await write(await encodePobShareCode(await _savedXml()));
+        _update(state.copyWith(status: 'Код PoB скопирован'));
+      });
 
   Future<void> importFromPob() => _run(() async {
     final xml = await pobWindow.readXml(components.active);

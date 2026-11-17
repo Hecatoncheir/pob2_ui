@@ -230,6 +230,10 @@ class _SetupWizardState extends State<_SetupWizard> {
         onPressed: busy ? null : () => _run(model.openXmlFile),
         child: const AppText('Открыть XML'),
       ),
+      OutlinedButton(
+        onPressed: busy ? null : () => _run(() => pastePobCode(model)),
+        child: const AppText('Вставить код PoB'),
+      ),
       if (model.pobWindow.supported) ...[
         OutlinedButton(
           onPressed: busy ? null : () => _run(model.importFromPob),

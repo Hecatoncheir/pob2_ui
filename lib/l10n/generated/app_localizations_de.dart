@@ -230,6 +230,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get m2b96f1cb20 => 'Auf dem Konto sind keine Charaktere verfügbar.';
 
   @override
+  String get m60bb05b2f1 => 'Die Zwischenablage enthält keinen PoB-Code.';
+
+  @override
   String get mfd96d5c7e6 => 'Die Gruppe enthält keine aktiven Fertigkeiten';
 
   @override
@@ -339,6 +342,9 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get me4c25f9a5f => 'Fügen Sie XML ein';
+
+  @override
+  String get mdc4988d0b3 => 'PoB-Code einfügen';
 
   @override
   String get md6ad11ba2b => 'Gefundenes Element einfügen';
@@ -764,6 +770,12 @@ class AppLocalizationsDe extends AppLocalizations {
   String get m1711aecef4 => 'Klasse';
 
   @override
+  String get m11e0efa7e0 => 'PoB-Code kopiert';
+
+  @override
+  String get m1f33608c34 => 'Der PoB-Code ist zu groß.';
+
+  @override
   String get m209e516133 => 'Ring I';
 
   @override
@@ -1132,6 +1144,9 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get mc652a6b3a8 => 'Falsche Assembly-ID';
+
+  @override
+  String get me6f835a444 => 'Der PoB-Code ist ungültig oder unvollständig.';
 
   @override
   String get m7021e46018 => 'Falscher Baum-Cache-Schlüssel';
@@ -1701,6 +1716,11 @@ class AppLocalizationsDe extends AppLocalizations {
   String get mfa4af9bbe7 => 'Kompatibilität prüfen';
 
   @override
+  String mcb69e5c81f(String p0) {
+    return 'SHA-256 von $p0 wird geprüft';
+  }
+
+  @override
   String mfeb5830ec9(String p0) {
     return 'Release-Check: HTTP $p0';
   }
@@ -1724,6 +1744,11 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get m9353cfd5f6 =>
       'Kompatibilitätsprüfung: Original Lua wird ausgeführt...';
+
+  @override
+  String me498367e06(String p0) {
+    return 'Dateien von $p0 werden geprüft';
+  }
 
   @override
   String get md8164e1acb =>
@@ -1782,6 +1807,11 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get m221310ed98 =>
       'Die Größe der entpackten Datei stimmt nicht überein';
+
+  @override
+  String ma1af9f3f0e(String p0) {
+    return '$p0 wird entpackt';
+  }
 
   @override
   String get mde6527a5fe => 'Entfernung zum Knoten';
@@ -1960,6 +1990,9 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get m1fbb2aeab9 => 'Diagnosedaten kopieren';
+
+  @override
+  String get m5dc92cdf64 => 'PoB-Code kopieren';
 
   @override
   String get m99e87c373f => 'Codex-Verbindungsbefehl kopieren';

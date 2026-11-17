@@ -221,6 +221,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m2b96f1cb20 => 'There are no characters available on the account.';
 
   @override
+  String get m60bb05b2f1 => 'There is no PoB code on the clipboard.';
+
+  @override
   String get mfd96d5c7e6 => 'The group has no active skills';
 
   @override
@@ -329,6 +332,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get me4c25f9a5f => 'Insert XML';
+
+  @override
+  String get mdc4988d0b3 => 'Paste PoB code';
 
   @override
   String get md6ad11ba2b => 'Insert found item';
@@ -741,6 +747,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m1711aecef4 => 'Class';
 
   @override
+  String get m11e0efa7e0 => 'PoB code copied';
+
+  @override
+  String get m1f33608c34 => 'The PoB code is too large.';
+
+  @override
   String get m209e516133 => 'Ring I';
 
   @override
@@ -1107,6 +1119,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get mc652a6b3a8 => 'Incorrect assembly ID';
+
+  @override
+  String get me6f835a444 => 'The PoB code is invalid or incomplete.';
 
   @override
   String get m7021e46018 => 'Incorrect tree cache key';
@@ -1669,6 +1684,11 @@ class AppLocalizationsEn extends AppLocalizations {
   String get mfa4af9bbe7 => 'Check compatibility';
 
   @override
+  String mcb69e5c81f(String p0) {
+    return 'Checking SHA-256 of $p0';
+  }
+
+  @override
   String mfeb5830ec9(String p0) {
     return 'Release check: HTTP $p0';
   }
@@ -1690,6 +1710,11 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get m9353cfd5f6 => 'Compatibility check: running original Lua...';
+
+  @override
+  String me498367e06(String p0) {
+    return 'Checking $p0 files';
+  }
 
   @override
   String get md8164e1acb => 'Check your network and request limit.';
@@ -1744,6 +1769,11 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get m221310ed98 => 'The extracted file size does not match';
+
+  @override
+  String ma1af9f3f0e(String p0) {
+    return 'Extracting $p0';
+  }
 
   @override
   String get mde6527a5fe => 'Distance to node';
@@ -1918,6 +1948,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get m1fbb2aeab9 => 'Copy diagnostics';
+
+  @override
+  String get m5dc92cdf64 => 'Copy PoB code';
 
   @override
   String get m99e87c373f => 'Copy Codex connection command';

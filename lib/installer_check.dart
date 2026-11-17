@@ -15,20 +15,49 @@ class OfflineInstallerCheck extends HttpOverrides {
       throw const SocketException.closed();
 }
 
+class InstallerCheckProgress {
+  InstallerCheckProgress(Directory root, String stage)
+    : _output = File.fromUri(
+        root.uri.resolve('installer-progress-$stage.jsonl'),
+      );
+
+  final File _output;
+  final _watch = Stopwatch()..start();
+
+  void record(String step) {
+    _output.parent.createSync(recursive: true);
+    final entry = jsonEncode({
+      'step': step,
+      'elapsedMs': _watch.elapsedMilliseconds,
+      'timestampMs': DateTime.now().millisecondsSinceEpoch,
+    });
+    _output.writeAsStringSync('$entry\n', mode: FileMode.append, flush: true);
+  }
+}
+
 Future<int> checkInstalledBuild(
   WorkshopCubit model,
   Future<void> initialization,
   String stage,
+  InstallerCheckProgress progress,
 ) async {
   final root = model.components.store.root;
   model.modalOpen = () => true;
+  final log = model.stream
+      .map((state) => state.log.lastOrNull)
+      .distinct()
+      .listen((message) {
+        if (message != null) progress.record(message);
+      });
   try {
-    final result = await _checkBuild(model, initialization, stage);
+    final result = await _checkBuild(model, initialization, stage, progress);
     await _writeResult(root, stage, result);
     return 0;
   } catch (error, trace) {
     await _writeResult(root, stage, {'error': '$error', 'trace': '$trace'});
     return 1;
+  } finally {
+    await log.cancel();
   }
 }
 
@@ -36,14 +65,18 @@ Future<Map<String, Object?>> _checkBuild(
   WorkshopCubit model,
   Future<void> initialization,
   String stage,
+  InstallerCheckProgress progress,
 ) async {
   try {
+    progress.record('initialize');
     await initialization;
     if (stage == 'save') {
+      progress.record('components');
       if (!model.ready) await model.prepareComponents();
       _require(model.state.error == null && model.luaReady, model);
-      await _saveBuild(model);
+      await _saveBuild(model, progress);
     }
+    progress.record(stage == 'restore' ? 'xml-reopened' : 'xml-saved');
     final report = model.state.report;
     final id = model.state.library.activeId;
     _require(model.state.error == null && model.luaReady, model);
@@ -61,9 +94,14 @@ Future<Map<String, Object?>> _checkBuild(
   }
 }
 
-Future<void> _saveBuild(WorkshopCubit model) async {
+Future<void> _saveBuild(
+  WorkshopCubit model,
+  InstallerCheckProgress progress,
+) async {
   _require(model.state.library.entries.isEmpty, model);
+  progress.record('open-build');
   await _openWitch(model);
+  progress.record('calculate-and-save');
   final before = model.state.report?.stats['Life'];
   _require(before is num && before > 0, model);
   final edited = await model.equipItem('Ring 1', raw: _ring);
@@ -76,16 +114,26 @@ Future<void> _saveBuild(WorkshopCubit model) async {
 }
 
 Future<void> _openWitch(WorkshopCubit model) async {
-  if (Platform.environment['POB2_UI_CHECK_FIXTURE'] case final path?) {
+  final environment = Platform.environment;
+  if (environment['POB2_UI_CHECK_CODE'] case final path?) {
+    await model.importShareCode(await File(path).readAsString());
+    _checkWitch(model);
+    return;
+  }
+  if (environment['POB2_UI_CHECK_FIXTURE'] case final path?) {
     await model.importXml(await File(path).readAsString());
-    final report = model.state.report;
-    _require(report?.raw['source'] == 'original-lua', model);
-    final dps = report?.stats['TotalDPS'];
-    _require(dps is num && (dps - 12.817708).abs() < 0.00001, model);
+    _checkWitch(model);
     return;
   }
   final witch = model.state.classes.firstWhere((row) => row['name'] == 'Witch');
   await model.createBuild(witch['id'] as int, 90, name: _name);
+}
+
+void _checkWitch(WorkshopCubit model) {
+  final report = model.state.report;
+  _require(report?.raw['source'] == 'original-lua', model);
+  final dps = report?.stats['TotalDPS'];
+  _require(dps is num && (dps - 12.817708).abs() < 0.00001, model);
 }
 
 void _require(bool condition, WorkshopCubit model) {

@@ -220,6 +220,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m2b96f1cb20 => 'В аккаунте нет доступных персонажей.';
 
   @override
+  String get m60bb05b2f1 => 'В буфере обмена нет кода PoB.';
+
+  @override
   String get mfd96d5c7e6 => 'В группе нет активных умений';
 
   @override
@@ -328,6 +331,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get me4c25f9a5f => 'Вставить XML';
+
+  @override
+  String get mdc4988d0b3 => 'Вставить код PoB';
 
   @override
   String get md6ad11ba2b => 'Вставить найденный предмет';
@@ -743,6 +749,12 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m1711aecef4 => 'Класс';
 
   @override
+  String get m11e0efa7e0 => 'Код PoB скопирован';
+
+  @override
+  String get m1f33608c34 => 'Код PoB слишком велик.';
+
+  @override
   String get m209e516133 => 'Кольцо I';
 
   @override
@@ -1108,6 +1120,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get mc652a6b3a8 => 'Некорректный идентификатор сборки';
+
+  @override
+  String get me6f835a444 => 'Некорректный или обрезанный код PoB.';
 
   @override
   String get m7021e46018 => 'Некорректный ключ кеша дерева';
@@ -1671,6 +1686,11 @@ class AppLocalizationsRu extends AppLocalizations {
   String get mfa4af9bbe7 => 'Проверить совместимость';
 
   @override
+  String mcb69e5c81f(String p0) {
+    return 'Проверка SHA-256 архива $p0';
+  }
+
+  @override
   String mfeb5830ec9(String p0) {
     return 'Проверка выпуска: HTTP $p0';
   }
@@ -1692,6 +1712,11 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get m9353cfd5f6 => 'Проверка совместимости: запуск исходного Lua…';
+
+  @override
+  String me498367e06(String p0) {
+    return 'Проверка файлов $p0';
+  }
 
   @override
   String get md8164e1acb => 'Проверьте сеть и лимит запросов.';
@@ -1747,6 +1772,11 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get m221310ed98 => 'Распакованный размер файла не совпал';
+
+  @override
+  String ma1af9f3f0e(String p0) {
+    return 'Распаковка архива $p0';
+  }
 
   @override
   String get mde6527a5fe => 'Расстояние до узла';
@@ -1922,6 +1952,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get m1fbb2aeab9 => 'Скопировать диагностику';
+
+  @override
+  String get m5dc92cdf64 => 'Скопировать код PoB';
 
   @override
   String get m99e87c373f => 'Скопировать команду подключения Codex';
