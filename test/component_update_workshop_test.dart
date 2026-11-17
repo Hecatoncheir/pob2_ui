@@ -83,6 +83,7 @@ class _Engine extends McpClient {
 
   final Completer<void>? importStarted, allowImport;
   final bool rejectImport;
+  bool unavailable = false;
   final imported = <String>[];
   String? tag;
   String xml = '';
@@ -92,6 +93,7 @@ class _Engine extends McpClient {
 
   @override
   Future<void> connect(Installations pair) async {
+    if (unavailable) throw StateError('Системный Python недоступен');
     tag = pair[Component.mcp]!.tag;
     tools = {
       'pob_catalog',
@@ -280,6 +282,29 @@ void main() {
     expect(model.state.report?.stats['Life'], 140);
     expect(await buildFile.readAsString(), _xml(40));
     await expectVersions(_oldTag, _previousTag);
+  });
+
+  test('Мастер переходит на архивы при недоступном системном Python', () async {
+    working.unavailable = true;
+    final candidate = _Engine();
+    final model = WorkshopCubit(
+      components,
+      working,
+      library: library,
+      createEngine: () => candidate,
+    );
+    addTearDown(model.close);
+
+    await model.initialize();
+    expect(model.state.error, contains('Системный Python'));
+    await model.prepareComponents();
+
+    expect(model.state.error, isNull);
+    expect(model.luaReady, isTrue);
+    expect(candidate.imported, contains(_xml(40)));
+    expect(model.state.library.activeId, _buildId);
+    expect(await buildFile.readAsString(), _xml(40));
+    await expectVersions(_newTag, _oldTag);
   });
 
   test('Успешное обновление и откат оставляют ту же сборку открытой', () async {

@@ -419,7 +419,12 @@ class WorkshopCubit extends Cubit<WorkshopState> {
   }
 
   Future<void> prepareComponents() => _run(() async {
-    if (!ready) await _installFirstPair();
+    if (!ready) {
+      await _installFirstPair();
+    } else if (!luaReady &&
+        components.active.values.any((item) => item.archiveSha256 == null)) {
+      await _migrateLegacyPair();
+    }
     if (!luaReady) {
       _showSetupStage(WorkshopSetupStage.lua);
       await _resume();
@@ -432,16 +437,31 @@ class WorkshopCubit extends Cubit<WorkshopState> {
   Future<void> _installFirstPair() async {
     _showSetupStage(WorkshopSetupStage.releases);
     await _checkComponentReleases();
-    await components.installPair(
-      state.releases,
-      addLog,
-      onStage: (stage) => _showSetupStage(switch (stage) {
-        ComponentInstallStage.pob => WorkshopSetupStage.pob,
-        ComponentInstallStage.mcp => WorkshopSetupStage.mcp,
-        ComponentInstallStage.compatibility => WorkshopSetupStage.compatibility,
-      }),
+    await _installSelectedPair();
+  }
+
+  Future<void> _migrateLegacyPair() async {
+    _showSetupStage(WorkshopSetupStage.releases);
+    await _checkComponentReleases();
+    if (!hasComponentUpdates) return;
+    await _changeComponentPair(
+      (validate) => _installSelectedPair(validate: validate),
+      'Пара компонентов обновлена',
     );
   }
+
+  Future<void> _installSelectedPair({_ComponentValidation? validate}) =>
+      components.installPair(
+        state.releases,
+        addLog,
+        validate: validate,
+        onStage: (stage) => _showSetupStage(switch (stage) {
+          ComponentInstallStage.pob => WorkshopSetupStage.pob,
+          ComponentInstallStage.mcp => WorkshopSetupStage.mcp,
+          ComponentInstallStage.compatibility =>
+            WorkshopSetupStage.compatibility,
+        }),
+      );
 
   void _showSetupStage(WorkshopSetupStage stage) =>
       _update(state.copyWith(setupStage: stage));

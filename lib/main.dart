@@ -27,6 +27,7 @@ import 'ui/exit_protection.dart';
 Future<void> main(List<String> arguments) async {
   WidgetsFlutterBinding.ensureInitialized();
   final check = _installerCheckStage();
+  if (check == 'restore') HttpOverrides.global = OfflineInstallerCheck();
   final root = InstallationStore.defaultRoot();
   final model = WorkshopCubit(
     ComponentRepository(store: InstallationStore(root)),

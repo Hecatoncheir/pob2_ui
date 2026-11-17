@@ -140,7 +140,7 @@ def check_build(executable, base, environment, components):
     restored = run_build_check(executable, data, environment, 'restore')
     assert restored == saved, (saved, restored)
     assert files[0].read_bytes() == original, 'Повторный запуск изменил XML'
-    print('Установленный PoB II: расчёт Lua, XML и заметки восстановлены после перезапуска')
+    print('Установленный PoB II: расчёт Lua, XML и заметки восстановлены без HTTP после перезапуска')
 
 
 def archive_check_environment(environment):

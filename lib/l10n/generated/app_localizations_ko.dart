@@ -983,11 +983,6 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m57d96c50f4 => '아이템 적용 실패';
 
   @override
-  String m3ce1fbdad2(String p0) {
-    return 'SHA-256 파일 확인 실패: $p0';
-  }
-
-  @override
   String m4d1a8400d5(String p0) {
     return '업데이트 확인 실패: $p0';
   }

@@ -9,6 +9,12 @@ const _ring =
     'Item Class: Rings\nRarity: Rare\nTide Loop\nLazuli Ring\n'
     '--------\nItem Level: 80\n--------\n+50 to maximum Life\n';
 
+class OfflineInstallerCheck extends HttpOverrides {
+  @override
+  HttpClient createHttpClient(SecurityContext? context) =>
+      throw const SocketException.closed();
+}
+
 Future<int> checkInstalledBuild(
   WorkshopCubit model,
   Future<void> initialization,

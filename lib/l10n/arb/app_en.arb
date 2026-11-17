@@ -1658,15 +1658,6 @@
     "description": "Не удалось применить предмет",
     "placeholders": {}
   },
-  "m3ce1fbdad2": "Failed to check SHA-256 file: {p0}",
-  "@m3ce1fbdad2": {
-    "description": "Не удалось проверить SHA-256 файла: {p0}",
-    "placeholders": {
-      "p0": {
-        "type": "String"
-      }
-    }
-  },
   "m4d1a8400d5": "Failed to check for updates: {p0}",
   "@m4d1a8400d5": {
     "description": "Не удалось проверить обновления: {p0}",

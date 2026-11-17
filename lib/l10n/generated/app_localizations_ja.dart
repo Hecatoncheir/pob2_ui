@@ -983,11 +983,6 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m57d96c50f4 => 'アイテムの適用に失敗しました';
 
   @override
-  String m3ce1fbdad2(String p0) {
-    return 'SHA-256 ファイルをチェックできませんでした: $p0';
-  }
-
-  @override
   String m4d1a8400d5(String p0) {
     return 'アップデートのチェックに失敗しました: $p0';
   }

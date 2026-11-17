@@ -1908,12 +1908,6 @@ abstract class AppLocalizations {
   /// **'Failed to apply item'**
   String get m57d96c50f4;
 
-  /// Не удалось проверить SHA-256 файла: {p0}
-  ///
-  /// In en, this message translates to:
-  /// **'Failed to check SHA-256 file: {p0}'**
-  String m3ce1fbdad2(String p0);
-
   /// Не удалось проверить обновления: {p0}
   ///
   /// In en, this message translates to:

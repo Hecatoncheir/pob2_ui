@@ -1011,11 +1011,6 @@ class AppLocalizationsEs extends AppLocalizations {
   String get m57d96c50f4 => 'No se pudo aplicar el elemento';
 
   @override
-  String m3ce1fbdad2(String p0) {
-    return 'No se pudo verificar el archivo SHA-256: $p0';
-  }
-
-  @override
   String m4d1a8400d5(String p0) {
     return 'No se pudieron buscar actualizaciones: $p0';
   }

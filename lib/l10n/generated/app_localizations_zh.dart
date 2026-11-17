@@ -980,11 +980,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m57d96c50f4 => '申請計畫失敗';
 
   @override
-  String m3ce1fbdad2(String p0) {
-    return '未能檢查 SHA-256 檔案：$p0';
-  }
-
-  @override
   String m4d1a8400d5(String p0) {
     return '無法檢查更新：$p0';
   }
@@ -3288,11 +3283,6 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m57d96c50f4 => '申請計畫失敗';
-
-  @override
-  String m3ce1fbdad2(String p0) {
-    return '未能檢查 SHA-256 檔案：$p0';
-  }
 
   @override
   String m4d1a8400d5(String p0) {

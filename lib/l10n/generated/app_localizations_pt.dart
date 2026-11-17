@@ -1006,11 +1006,6 @@ class AppLocalizationsPt extends AppLocalizations {
   String get m57d96c50f4 => 'Falha ao aplicar o item';
 
   @override
-  String m3ce1fbdad2(String p0) {
-    return 'Falha ao verificar o arquivo SHA-256: $p0';
-  }
-
-  @override
   String m4d1a8400d5(String p0) {
     return 'Falha ao verificar atualizações: $p0';
   }
@@ -3384,11 +3379,6 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get m57d96c50f4 => 'Falha ao aplicar o item';
-
-  @override
-  String m3ce1fbdad2(String p0) {
-    return 'Falha ao verificar o arquivo SHA-256: $p0';
-  }
 
   @override
   String m4d1a8400d5(String p0) {

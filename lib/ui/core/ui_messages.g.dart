@@ -1513,10 +1513,6 @@ final uiPatternTranslations = <UiRule>[
     (l, args) => l.mcf4205d2e9(args[0]),
   ),
   UiRule(
-    "Не удалось проверить SHA-256 файла: {p0}",
-    (l, args) => l.m3ce1fbdad2(args[0]),
-  ),
-  UiRule(
     "Не удалось показать тепловую карту: {p0}",
     (l, args) => l.ma9bd749aa5(args[0]),
   ),
@@ -1595,10 +1591,6 @@ final uiPatternTranslations = <UiRule>[
   UiRule(
     "Failed to open or save notes.\n{p0}",
     (l, args) => l.m189f5a7238(args[0]),
-  ),
-  UiRule(
-    "Failed to check SHA-256 file: {p0}",
-    (l, args) => l.m3ce1fbdad2(args[0]),
   ),
   UiRule(
     "Папка сборок PoB недоступна: {p0}",
