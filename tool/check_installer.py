@@ -198,7 +198,8 @@ def check_previous(target, package, executable, base, environment, components):
     env = dict(environment, POB2_UI_HOME=str(data),
                POB2_UI_CHECK_FIXTURE=str(ROOT / 'integration_test/fixtures/witch_fireball.xml'))
     env.pop('POB2_UI_CHECK_CODE', None)
-    old = previous_executable(target, package, base / 'v040-installation', os.environ)
+    setup_env = dict(env, PATH=os.environ.get('PATH', ''))
+    old = previous_executable(target, package, base / 'v040-installation', setup_env)
     saved = run_build_check(old, data, env, 'save')
     verify_reopened(executable, data, builds, env, saved)
     print('По итогам обновления с v0.4.0 совпали XML, заметки и отчёт Lua')
