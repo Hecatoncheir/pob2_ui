@@ -12,7 +12,7 @@ import time
 
 from release import ROOT, dart_executable, filename, version
 
-PREVIOUS_VERSION = '0.5.0'
+PREVIOUS_VERSION = '0.6.0'
 FIXTURES = ROOT / 'integration_test/fixtures'
 
 
@@ -215,14 +215,45 @@ def check_previous(target, package, executable, base, environment, components, v
     setup_env = dict(env, PATH=os.environ.get('PATH', ''))
     old = previous_executable(target, package, base / f'v{PREVIOUS_VERSION}-installation', setup_env)
     saved = run_build_check(old, data, env, 'save')
+    prepare_cleanup_profile(data)
+    before = {file.name: file.read_bytes() for file in builds.glob('*.xml')}
+    assert run_build_check(executable, data, env, 'cleanup') == saved
+    assert {file.name: file.read_bytes() for file in builds.glob('*.xml')} == before
     verify_reopened(executable, data, builds, env, saved)
-    print(f'По итогам обновления с v{PREVIOUS_VERSION} совпали XML, заметки и отчёт Lua')
+    assert any((data / 'tree-cache').rglob('*.png')), 'Кеш дерева не восстановлен из Lua'
+    print(f'После обновления с v{PREVIOUS_VERSION}, очистки и отката совпали XML, заметки и отчёт Lua')
     if verify_link:
         link_env = dict(env, POB2_UI_CHECK_LINK=str(FIXTURES / 'witch_fireball.poblink'))
         imported = run_build_check(executable, data, link_env, 'link')
         assert imported['id'] != saved['id'] and imported['source'] == 'original-lua', imported
         assert abs(imported['dps'] - 12.817708) < 0.00001, imported
         print(f"После обновления Ведьма с pobb.in рассчитана на Lua, TotalDPS {imported['dps']}")
+
+
+def _link_or_copy(source, target):
+    try:
+        return os.link(source, target)
+    except OSError:
+        return shutil.copy2(source, target)
+
+
+def prepare_cleanup_profile(data):
+    manifest = data / 'components.json'
+    state = json.loads(manifest.read_text(encoding='utf-8'))
+    versions = data / 'versions'
+    state['previous'] = {}
+    for name, install in state['active'].items():
+        directory = versions / f'{name}-rollback'
+        shutil.copytree(install['directory'], directory, symlinks=True, copy_function=_link_or_copy)
+        state['previous'][name] = dict(install, directory=str(directory))
+    manifest.write_text(json.dumps(state), encoding='utf-8')
+    obsolete = versions / 'pob-obsolete'
+    obsolete.mkdir()
+    (obsolete / '.pob2-component.json').write_text(json.dumps({
+        'schema': 1, 'component': 'pob',
+        'tag': state['active']['pob']['tag'], 'commit': state['active']['pob']['commit'],
+    }), encoding='utf-8')
+    (obsolete / 'stale.bin').write_bytes(b'old installation')
 
 
 def archive_check_environment(environment):

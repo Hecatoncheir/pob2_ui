@@ -183,6 +183,11 @@ class AppLocalizationsRu extends AppLocalizations {
   }
 
   @override
+  String m3f8bda535c(String p0) {
+    return '$p0 байт';
+  }
+
+  @override
   String mb7b217c429(String p0, String p1, String p2) {
     return '$p0: потрачено $p1 из $p2 очков';
   }
@@ -204,6 +209,11 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get mb1ff29da2c => 'Броня';
+
+  @override
+  String m968f778255(String p0) {
+    return 'Будут удалены выбранные файлы объёмом $p0 байт.';
+  }
 
   @override
   String get m4fae346e6c => 'Было';
@@ -562,6 +572,11 @@ class AppLocalizationsRu extends AppLocalizations {
   }
 
   @override
+  String m5477f7cae5(String p0) {
+    return 'Доступно для очистки: $p0 байт';
+  }
+
+  @override
   String get m41a4fa8b6a => 'Дух';
 
   @override
@@ -631,6 +646,10 @@ class AppLocalizationsRu extends AppLocalizations {
   @override
   String get m7ab4920661 =>
       'Закройте выбранный PoB вручную и повторите запуск.';
+
+  @override
+  String get m37326b558a =>
+      'Закройте другие экземпляры PoB II и повторите очистку.';
 
   @override
   String get ma7a4033657 => 'Закрыть';
@@ -1033,6 +1052,12 @@ class AppLocalizationsRu extends AppLocalizations {
   }
 
   @override
+  String get mbceeadc946 => 'Не удалось проверить папку сборок.';
+
+  @override
+  String get m33ea6a4505 => 'Не удалось проверить профиль.';
+
+  @override
   String mfdddf71553(String p0) {
     return 'Не удалось прочитать изображения: $p0';
   }
@@ -1173,6 +1198,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get m6f381f6aed => 'Нет Lua runtime для этой архитектуры';
+
+  @override
+  String get m41d413ec96 => 'Нет данных для очистки.';
 
   @override
   String get ma76f928c09 => 'Нет единственной контрольной суммы пакета';
@@ -1370,7 +1398,19 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m28af538cbc => 'Оценить поддержку';
 
   @override
+  String get m96b101de7c => 'Очистить выбранное';
+
+  @override
   String get m6e1f7baa47 => 'Очистить поиск';
+
+  @override
+  String get m8262f83278 => 'Очистить профиль?';
+
+  @override
+  String get m17b8f6c23b => 'Очистка профиля сейчас недоступна.';
+
+  @override
+  String get m27234756aa => 'Очищаем профиль…';
 
   @override
   String get m6cc0ad9655 => 'Очки';
@@ -1526,6 +1566,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m929d292c0e => 'Подключить папку сборок';
 
   @override
+  String get m6287090984 => 'Подтвердить очистку';
+
+  @override
   String get m5f5155bb1f => 'Подходящие поддержки';
 
   @override
@@ -1628,6 +1671,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m10e4fefa12 => 'Предметы';
 
   @override
+  String get mad582b726d => 'Предпросмотр очистки профиля';
+
+  @override
   String get m3c2b5cfe97 => 'Предупреждения Lua';
 
   @override
@@ -1688,6 +1734,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get me4424a6df6 => 'Проверить';
 
   @override
+  String get mf04117e11b => 'Проверить место в профиле';
+
+  @override
   String get m93b08f7b14 => 'Проверить обновления';
 
   @override
@@ -1743,13 +1792,22 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m1ea3791d9d => 'Проверяем выпуски…';
 
   @override
+  String get m1d1347fc69 => 'Проверяем профиль…';
+
+  @override
   String get m62ed32eb22 => 'Проверяем…';
+
+  @override
+  String get m006f803f7b => 'Профиль уже используется.';
 
   @override
   String get m1dc35191c6 => 'Путь PoB проходит через узлы вне этапа';
 
   @override
   String get m886e1844ee => 'Путь к следующему узлу';
+
+  @override
+  String get m9dba617454 => 'Путь профиля изменился.';
 
   @override
   String get m913b373c85 =>
@@ -2164,6 +2222,11 @@ class AppLocalizationsRu extends AppLocalizations {
   String get mcacf1f7fd0 => 'Увеличить интерфейс';
 
   @override
+  String mab4e553a75(String p0) {
+    return 'Удалено: $p0 байт';
+  }
+
+  @override
   String get mbe99b13612 => 'Удалить';
 
   @override
@@ -2287,6 +2350,9 @@ class AppLocalizationsRu extends AppLocalizations {
   }
 
   @override
+  String get mb4dd85a98a => 'Файл или папка изменились после предпросмотра.';
+
+  @override
   String get m64bd568b72 =>
       'Файл обновления не имеет проверяемой контрольной суммы';
 
@@ -2310,6 +2376,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get mb88cddfeb4 => 'ЧИСЛА И ПРАВИЛА · LUA POB';
+
+  @override
+  String get m9c8371b55d => 'Часть данных занята или недоступна.';
 
   @override
   String m913d7f855b(String p0) {

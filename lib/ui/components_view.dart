@@ -7,6 +7,7 @@ import 'core/panels.dart';
 import 'core/spark_art.dart';
 import 'core/spark_theme.dart';
 import 'pob_bridge_dialog.dart';
+import 'profile_cleanup_dialog.dart';
 import 'workshop_cubit.dart';
 
 class ComponentsView extends StatelessWidget {
@@ -21,7 +22,7 @@ class ComponentsView extends StatelessWidget {
         subtitle: 'Два компонента. Расчёты на вашем компьютере.',
       ),
       _firstSetup(),
-      Align(alignment: Alignment.centerLeft, child: _updateAction(context)),
+      _profileActions(context),
       const SizedBox(height: 24),
       LayoutBuilder(
         builder: (context, constraints) {
@@ -60,6 +61,23 @@ class ComponentsView extends StatelessWidget {
         ],
       ),
     ],
+  );
+
+  Widget _profileActions(BuildContext context) => Align(
+    alignment: Alignment.centerLeft,
+    child: Wrap(
+      spacing: 12,
+      runSpacing: 8,
+      children: [
+        _updateAction(context),
+        OutlinedButton(
+          onPressed: model.state.busy
+              ? null
+              : () => showProfileCleanup(context, model),
+          child: const AppText('Проверить место в профиле'),
+        ),
+      ],
+    ),
   );
 
   Widget _updateAction(BuildContext context) {

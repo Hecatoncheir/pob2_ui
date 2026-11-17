@@ -190,6 +190,11 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
+  String m3f8bda535c(String p0) {
+    return '$p0 octets';
+  }
+
+  @override
   String mb7b217c429(String p0, String p1, String p2) {
     return '$p0 : $p1 points sur $p2 dépensés';
   }
@@ -211,6 +216,11 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get mb1ff29da2c => 'Armure';
+
+  @override
+  String m968f778255(String p0) {
+    return 'Les fichiers sélectionnés de $p0 octets seront supprimés.';
+  }
 
   @override
   String get m4fae346e6c => 'C\'était';
@@ -579,6 +589,11 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
+  String m5477f7cae5(String p0) {
+    return 'Disponible pour le nettoyage : $p0 octets';
+  }
+
+  @override
   String get m41a4fa8b6a => 'Esprit';
 
   @override
@@ -648,6 +663,10 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get m7ab4920661 =>
       'Fermez le PoB sélectionné manuellement, puis réessayez.';
+
+  @override
+  String get m37326b558a =>
+      'Fermez les autres instances PoB II et répétez le nettoyage.';
 
   @override
   String get ma7a4033657 => 'Close';
@@ -1054,6 +1073,12 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
+  String get mbceeadc946 => 'Échec de la vérification du dossier d\'assembly.';
+
+  @override
+  String get m33ea6a4505 => 'Échec de la vérification du profil.';
+
+  @override
   String mfdddf71553(String p0) {
     return 'Échec de la lecture des images : $p0';
   }
@@ -1195,6 +1220,9 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get m6f381f6aed =>
       'Aucun environnement d\'exécution Lua pour cette architecture';
+
+  @override
+  String get m41d413ec96 => 'Aucune donnée à effacer.';
 
   @override
   String get ma76f928c09 => 'Pas de somme de contrôle de paquet unique';
@@ -1397,7 +1425,20 @@ class AppLocalizationsFr extends AppLocalizations {
   String get m28af538cbc => 'Évaluer le soutien';
 
   @override
+  String get m96b101de7c => 'Effacer la sélection';
+
+  @override
   String get m6e1f7baa47 => 'Effacer la recherche';
+
+  @override
+  String get m8262f83278 => 'Effacer le profil ?';
+
+  @override
+  String get m17b8f6c23b =>
+      'Le nettoyage du profil est actuellement indisponible.';
+
+  @override
+  String get m27234756aa => 'Effacement du profil...';
 
   @override
   String get m6cc0ad9655 => 'Lunettes';
@@ -1555,6 +1596,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get m929d292c0e => 'Connecter le dossier des builds';
 
   @override
+  String get m6287090984 => 'Confirmer le nettoyage';
+
+  @override
   String get m5f5155bb1f => 'Supports correspondants';
 
   @override
@@ -1657,6 +1701,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get m10e4fefa12 => 'Articles';
 
   @override
+  String get mad582b726d => 'Aperçu du nettoyage du profil';
+
+  @override
   String get m3c2b5cfe97 => 'Avertissements Lua';
 
   @override
@@ -1717,6 +1764,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get me4424a6df6 => 'Vérifier';
 
   @override
+  String get mf04117e11b => 'Vérifier l\'emplacement du profil';
+
+  @override
   String get m93b08f7b14 => 'Rechercher les mises à jour';
 
   @override
@@ -1774,7 +1824,13 @@ class AppLocalizationsFr extends AppLocalizations {
   String get m1ea3791d9d => 'Vérification des versions...';
 
   @override
+  String get m1d1347fc69 => 'Vérification du profil...';
+
+  @override
   String get m62ed32eb22 => 'Vérification...';
+
+  @override
+  String get m006f803f7b => 'Le profil est déjà utilisé.';
 
   @override
   String get m1dc35191c6 =>
@@ -1782,6 +1838,9 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get m886e1844ee => 'Chemin vers le prochain nœud';
+
+  @override
+  String get m9dba617454 => 'Le chemin du profil a changé.';
 
   @override
   String get m913b373c85 =>
@@ -2204,6 +2263,11 @@ class AppLocalizationsFr extends AppLocalizations {
   String get mcacf1f7fd0 => 'Agrandir l\'interface';
 
   @override
+  String mab4e553a75(String p0) {
+    return 'Supprimé : $p0 octets';
+  }
+
+  @override
   String get mbe99b13612 => 'Supprimer';
 
   @override
@@ -2328,6 +2392,10 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
+  String get mb4dd85a98a =>
+      'Le fichier ou le dossier a changé depuis l\'aperçu.';
+
+  @override
   String get m64bd568b72 =>
       'Le fichier de mise à jour n\'a pas de somme de contrôle vérifiable';
 
@@ -2351,6 +2419,9 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get mb88cddfeb4 => 'CHIFFRES ET RÈGLES · LUA POB';
+
+  @override
+  String get m9c8371b55d => 'Certaines données sont occupées ou indisponibles.';
 
   @override
   String m913d7f855b(String p0) {

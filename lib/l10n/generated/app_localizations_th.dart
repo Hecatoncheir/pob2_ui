@@ -182,6 +182,11 @@ class AppLocalizationsTh extends AppLocalizations {
   }
 
   @override
+  String m3f8bda535c(String p0) {
+    return '$p0 ไบต์';
+  }
+
+  @override
   String mb7b217c429(String p0, String p1, String p2) {
     return '$p0: ใช้แต้มไป $p1 จาก $p2 แต้ม';
   }
@@ -203,6 +208,11 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get mb1ff29da2c => 'เกราะ';
+
+  @override
+  String m968f778255(String p0) {
+    return 'ไฟล์ที่เลือกขนาด $p0 ไบต์จะถูกลบ';
+  }
 
   @override
   String get m4fae346e6c => 'มันเป็นอย่างนั้น';
@@ -557,6 +567,11 @@ class AppLocalizationsTh extends AppLocalizations {
   }
 
   @override
+  String m5477f7cae5(String p0) {
+    return 'พร้อมสำหรับการทำความสะอาด: $p0 ไบต์';
+  }
+
+  @override
   String get m41a4fa8b6a => 'วิญญาณ';
 
   @override
@@ -623,6 +638,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m7ab4920661 => 'ปิด PoB ที่เลือกด้วยตนเองแล้วลองเริ่มอีกครั้ง';
+
+  @override
+  String get m37326b558a => 'ปิดอินสแตนซ์ PoB II อื่นๆ และทำการล้างข้อมูลซ้ำ';
 
   @override
   String get ma7a4033657 => 'ปิด';
@@ -1023,6 +1041,12 @@ class AppLocalizationsTh extends AppLocalizations {
   }
 
   @override
+  String get mbceeadc946 => 'ไม่สามารถตรวจสอบโฟลเดอร์แอสเซมบลี';
+
+  @override
+  String get m33ea6a4505 => 'ไม่สามารถตรวจสอบโปรไฟล์ได้';
+
+  @override
   String mfdddf71553(String p0) {
     return 'ไม่สามารถอ่านรูปภาพ: $p0';
   }
@@ -1163,6 +1187,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m6f381f6aed => 'ไม่มี Lua รันไทม์สำหรับสถาปัตยกรรมนี้';
+
+  @override
+  String get m41d413ec96 => 'ไม่มีข้อมูลให้ล้าง';
 
   @override
   String get ma76f928c09 => 'ไม่มีการตรวจสอบแพ็คเก็ตเดี่ยว';
@@ -1358,7 +1385,19 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m28af538cbc => 'ประเมินหินเสริม';
 
   @override
+  String get m96b101de7c => 'ลบการเลือก';
+
+  @override
   String get m6e1f7baa47 => 'ล้างการค้นหา';
+
+  @override
+  String get m8262f83278 => 'ล้างโปรไฟล์?';
+
+  @override
+  String get m17b8f6c23b => 'การทำความสะอาดโปรไฟล์ไม่พร้อมใช้งานในขณะนี้';
+
+  @override
+  String get m27234756aa => 'กำลังล้างโปรไฟล์...';
 
   @override
   String get m6cc0ad9655 => 'แว่น';
@@ -1511,6 +1550,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m929d292c0e => 'เชื่อมต่อโฟลเดอร์บิลด์';
 
   @override
+  String get m6287090984 => 'ยืนยันการทำความสะอาด';
+
+  @override
   String get m5f5155bb1f => 'รองรับการจับคู่';
 
   @override
@@ -1613,6 +1655,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m10e4fefa12 => 'รายการ';
 
   @override
+  String get mad582b726d => 'ตัวอย่างการทำความสะอาดโปรไฟล์';
+
+  @override
   String get m3c2b5cfe97 => 'คำเตือน Lua';
 
   @override
@@ -1672,6 +1717,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get me4424a6df6 => 'Check';
 
   @override
+  String get mf04117e11b => 'ตรวจสอบตำแหน่งโปรไฟล์';
+
+  @override
   String get m93b08f7b14 => 'ตรวจสอบการอัปเดต';
 
   @override
@@ -1726,13 +1774,22 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m1ea3791d9d => 'กำลังตรวจสอบการเผยแพร่...';
 
   @override
+  String get m1d1347fc69 => 'กำลังตรวจสอบโปรไฟล์...';
+
+  @override
   String get m62ed32eb22 => 'กำลังตรวจสอบ...';
+
+  @override
+  String get m006f803f7b => 'โปรไฟล์นี้มีการใช้งานแล้ว';
 
   @override
   String get m1dc35191c6 => 'เส้นทางของ PoB ผ่านโหนดที่ไม่อยู่ในขั้นนี้';
 
   @override
   String get m886e1844ee => 'เส้นทางไปยังโหนดถัดไป';
+
+  @override
+  String get m9dba617454 => 'เส้นทางโปรไฟล์มีการเปลี่ยนแปลง';
 
   @override
   String get m913b373c85 =>
@@ -2143,6 +2200,11 @@ class AppLocalizationsTh extends AppLocalizations {
   String get mcacf1f7fd0 => 'ขยายอินเทอร์เฟซ';
 
   @override
+  String mab4e553a75(String p0) {
+    return 'ถูกลบแล้ว: $p0 ไบต์';
+  }
+
+  @override
   String get mbe99b13612 => 'ลบ';
 
   @override
@@ -2266,6 +2328,9 @@ class AppLocalizationsTh extends AppLocalizations {
   }
 
   @override
+  String get mb4dd85a98a => 'ไฟล์หรือโฟลเดอร์มีการเปลี่ยนแปลงตั้งแต่ดูตัวอย่าง';
+
+  @override
   String get m64bd568b72 => 'ไฟล์อัพเดตไม่มีเช็คซัมที่ตรวจสอบได้';
 
   @override
@@ -2288,6 +2353,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get mb88cddfeb4 => 'ตัวเลขและกฎเกณฑ์ · ลัวะ ปอบ';
+
+  @override
+  String get m9c8371b55d => 'ข้อมูลบางส่วนไม่ว่างหรือไม่พร้อมใช้งาน';
 
   @override
   String m913d7f855b(String p0) {

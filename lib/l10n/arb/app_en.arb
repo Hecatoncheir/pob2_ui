@@ -287,6 +287,15 @@
       }
     }
   },
+  "m3f8bda535c": "{p0} bytes",
+  "@m3f8bda535c": {
+    "description": "{p0} байт",
+    "placeholders": {
+      "p0": {
+        "type": "String"
+      }
+    }
+  },
   "mb7b217c429": "{p0}: {p1} of {p2} points spent",
   "@mb7b217c429": {
     "description": "{p0}: потрачено {p1} из {p2} очков",
@@ -331,6 +340,15 @@
   "@mb1ff29da2c": {
     "description": "Броня",
     "placeholders": {}
+  },
+  "m968f778255": "Selected files of {p0} bytes will be deleted.",
+  "@m968f778255": {
+    "description": "Будут удалены выбранные файлы объёмом {p0} байт.",
+    "placeholders": {
+      "p0": {
+        "type": "String"
+      }
+    }
   },
   "m4fae346e6c": "Before",
   "@m4fae346e6c": {
@@ -918,6 +936,15 @@
       }
     }
   },
+  "m5477f7cae5": "Available for cleaning: {p0} bytes",
+  "@m5477f7cae5": {
+    "description": "Доступно для очистки: {p0} байт",
+    "placeholders": {
+      "p0": {
+        "type": "String"
+      }
+    }
+  },
   "m41a4fa8b6a": "Spirit",
   "@m41a4fa8b6a": {
     "description": "Дух",
@@ -1037,6 +1064,11 @@
   "m7ab4920661": "Close the selected PoB manually and try again.",
   "@m7ab4920661": {
     "description": "Закройте выбранный PoB вручную и повторите запуск.",
+    "placeholders": {}
+  },
+  "m37326b558a": "Close other PoB II instances and repeat the cleanup.",
+  "@m37326b558a": {
+    "description": "Закройте другие экземпляры PoB II и повторите очистку.",
     "placeholders": {}
   },
   "ma7a4033657": "Close",
@@ -1711,6 +1743,16 @@
       }
     }
   },
+  "mbceeadc946": "Failed to check assembly folder.",
+  "@mbceeadc946": {
+    "description": "Не удалось проверить папку сборок.",
+    "placeholders": {}
+  },
+  "m33ea6a4505": "Failed to verify profile.",
+  "@m33ea6a4505": {
+    "description": "Не удалось проверить профиль.",
+    "placeholders": {}
+  },
   "mfdddf71553": "Failed to read images: {p0}",
   "@mfdddf71553": {
     "description": "Не удалось прочитать изображения: {p0}",
@@ -1949,6 +1991,11 @@
   "m6f381f6aed": "No Lua runtime for this architecture",
   "@m6f381f6aed": {
     "description": "Нет Lua runtime для этой архитектуры",
+    "placeholders": {}
+  },
+  "m41d413ec96": "No data to clear.",
+  "@m41d413ec96": {
+    "description": "Нет данных для очистки.",
     "placeholders": {}
   },
   "ma76f928c09": "No single packet checksum",
@@ -2270,9 +2317,29 @@
     "description": "Оценить поддержку",
     "placeholders": {}
   },
+  "m96b101de7c": "Clear selected",
+  "@m96b101de7c": {
+    "description": "Очистить выбранное",
+    "placeholders": {}
+  },
   "m6e1f7baa47": "Clear search",
   "@m6e1f7baa47": {
     "description": "Очистить поиск",
+    "placeholders": {}
+  },
+  "m8262f83278": "Clear profile?",
+  "@m8262f83278": {
+    "description": "Очистить профиль?",
+    "placeholders": {}
+  },
+  "m17b8f6c23b": "Profile cleaning is currently unavailable.",
+  "@m17b8f6c23b": {
+    "description": "Очистка профиля сейчас недоступна.",
+    "placeholders": {}
+  },
+  "m27234756aa": "Clearing the profile...",
+  "@m27234756aa": {
+    "description": "Очищаем профиль…",
     "placeholders": {}
   },
   "m6cc0ad9655": "Glasses",
@@ -2526,6 +2593,11 @@
     "description": "Подключить папку сборок",
     "placeholders": {}
   },
+  "m6287090984": "Confirm cleaning",
+  "@m6287090984": {
+    "description": "Подтвердить очистку",
+    "placeholders": {}
+  },
   "m5f5155bb1f": "Matching supports",
   "@m5f5155bb1f": {
     "description": "Подходящие поддержки",
@@ -2698,6 +2770,11 @@
     "description": "Предметы",
     "placeholders": {}
   },
+  "mad582b726d": "Preview of profile cleaning",
+  "@mad582b726d": {
+    "description": "Предпросмотр очистки профиля",
+    "placeholders": {}
+  },
   "m3c2b5cfe97": "Warnings Lua",
   "@m3c2b5cfe97": {
     "description": "Предупреждения Lua",
@@ -2799,6 +2876,11 @@
     "description": "Проверить",
     "placeholders": {}
   },
+  "mf04117e11b": "Check profile location",
+  "@mf04117e11b": {
+    "description": "Проверить место в профиле",
+    "placeholders": {}
+  },
   "m93b08f7b14": "Check for updates",
   "@m93b08f7b14": {
     "description": "Проверить обновления",
@@ -2891,9 +2973,19 @@
     "description": "Проверяем выпуски…",
     "placeholders": {}
   },
+  "m1d1347fc69": "Checking the profile...",
+  "@m1d1347fc69": {
+    "description": "Проверяем профиль…",
+    "placeholders": {}
+  },
   "m62ed32eb22": "Checking...",
   "@m62ed32eb22": {
     "description": "Проверяем…",
+    "placeholders": {}
+  },
+  "m006f803f7b": "The profile is already in use.",
+  "@m006f803f7b": {
+    "description": "Профиль уже используется.",
     "placeholders": {}
   },
   "m1dc35191c6": "The PoB path includes nodes outside this stage",
@@ -2904,6 +2996,11 @@
   "m886e1844ee": "Path to the next node",
   "@m886e1844ee": {
     "description": "Путь к следующему узлу",
+    "placeholders": {}
+  },
+  "m9dba617454": "The profile path has changed.",
+  "@m9dba617454": {
+    "description": "Путь профиля изменился.",
     "placeholders": {}
   },
   "m913b373c85": "Work in the application window. Click on a combination to change it.",
@@ -3588,6 +3685,15 @@
     "description": "Увеличить интерфейс",
     "placeholders": {}
   },
+  "mab4e553a75": "Removed: {p0} bytes",
+  "@mab4e553a75": {
+    "description": "Удалено: {p0} байт",
+    "placeholders": {
+      "p0": {
+        "type": "String"
+      }
+    }
+  },
   "mbe99b13612": "Delete",
   "@mbe99b13612": {
     "description": "Удалить",
@@ -3792,6 +3898,11 @@
       }
     }
   },
+  "mb4dd85a98a": "The file or folder has changed since the preview.",
+  "@mb4dd85a98a": {
+    "description": "Файл или папка изменились после предпросмотра.",
+    "placeholders": {}
+  },
   "m64bd568b72": "The update file does not have a verifiable checksum",
   "@m64bd568b72": {
     "description": "Файл обновления не имеет проверяемой контрольной суммы",
@@ -3830,6 +3941,11 @@
   "mb88cddfeb4": "NUMBERS AND RULES · LUA POB",
   "@mb88cddfeb4": {
     "description": "ЧИСЛА И ПРАВИЛА · LUA POB",
+    "placeholders": {}
+  },
+  "m9c8371b55d": "Some of the data is busy or unavailable.",
+  "@m9c8371b55d": {
+    "description": "Часть данных занята или недоступна.",
     "placeholders": {}
   },
   "m913d7f855b": "Some icons are unavailable: {p0}",

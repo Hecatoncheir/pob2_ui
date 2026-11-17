@@ -184,6 +184,11 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String m3f8bda535c(String p0) {
+    return '$p0 bytes';
+  }
+
+  @override
   String mb7b217c429(String p0, String p1, String p2) {
     return '$p0: $p1 of $p2 points spent';
   }
@@ -205,6 +210,11 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get mb1ff29da2c => 'Armour';
+
+  @override
+  String m968f778255(String p0) {
+    return 'Selected files of $p0 bytes will be deleted.';
+  }
 
   @override
   String get m4fae346e6c => 'Before';
@@ -562,6 +572,11 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String m5477f7cae5(String p0) {
+    return 'Available for cleaning: $p0 bytes';
+  }
+
+  @override
   String get m41a4fa8b6a => 'Spirit';
 
   @override
@@ -629,6 +644,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get m7ab4920661 => 'Close the selected PoB manually and try again.';
+
+  @override
+  String get m37326b558a =>
+      'Close other PoB II instances and repeat the cleanup.';
 
   @override
   String get ma7a4033657 => 'Close';
@@ -1032,6 +1051,12 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String get mbceeadc946 => 'Failed to check assembly folder.';
+
+  @override
+  String get m33ea6a4505 => 'Failed to verify profile.';
+
+  @override
   String mfdddf71553(String p0) {
     return 'Failed to read images: $p0';
   }
@@ -1172,6 +1197,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get m6f381f6aed => 'No Lua runtime for this architecture';
+
+  @override
+  String get m41d413ec96 => 'No data to clear.';
 
   @override
   String get ma76f928c09 => 'No single packet checksum';
@@ -1370,7 +1398,19 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m28af538cbc => 'Preview support';
 
   @override
+  String get m96b101de7c => 'Clear selected';
+
+  @override
   String get m6e1f7baa47 => 'Clear search';
+
+  @override
+  String get m8262f83278 => 'Clear profile?';
+
+  @override
+  String get m17b8f6c23b => 'Profile cleaning is currently unavailable.';
+
+  @override
+  String get m27234756aa => 'Clearing the profile...';
 
   @override
   String get m6cc0ad9655 => 'Glasses';
@@ -1524,6 +1564,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m929d292c0e => 'Connect builds folder';
 
   @override
+  String get m6287090984 => 'Confirm cleaning';
+
+  @override
   String get m5f5155bb1f => 'Matching supports';
 
   @override
@@ -1626,6 +1669,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m10e4fefa12 => 'Items';
 
   @override
+  String get mad582b726d => 'Preview of profile cleaning';
+
+  @override
   String get m3c2b5cfe97 => 'Warnings Lua';
 
   @override
@@ -1686,6 +1732,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get me4424a6df6 => 'Check';
 
   @override
+  String get mf04117e11b => 'Check profile location';
+
+  @override
   String get m93b08f7b14 => 'Check for updates';
 
   @override
@@ -1740,13 +1789,22 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m1ea3791d9d => 'Checking the releases...';
 
   @override
+  String get m1d1347fc69 => 'Checking the profile...';
+
+  @override
   String get m62ed32eb22 => 'Checking...';
+
+  @override
+  String get m006f803f7b => 'The profile is already in use.';
 
   @override
   String get m1dc35191c6 => 'The PoB path includes nodes outside this stage';
 
   @override
   String get m886e1844ee => 'Path to the next node';
+
+  @override
+  String get m9dba617454 => 'The profile path has changed.';
 
   @override
   String get m913b373c85 =>
@@ -2162,6 +2220,11 @@ class AppLocalizationsEn extends AppLocalizations {
   String get mcacf1f7fd0 => 'Enlarge interface';
 
   @override
+  String mab4e553a75(String p0) {
+    return 'Removed: $p0 bytes';
+  }
+
+  @override
   String get mbe99b13612 => 'Delete';
 
   @override
@@ -2285,6 +2348,9 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String get mb4dd85a98a => 'The file or folder has changed since the preview.';
+
+  @override
   String get m64bd568b72 =>
       'The update file does not have a verifiable checksum';
 
@@ -2308,6 +2374,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get mb88cddfeb4 => 'NUMBERS AND RULES · LUA POB';
+
+  @override
+  String get m9c8371b55d => 'Some of the data is busy or unavailable.';
 
   @override
   String m913d7f855b(String p0) {

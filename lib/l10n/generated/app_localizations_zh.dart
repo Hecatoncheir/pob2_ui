@@ -178,6 +178,11 @@ class AppLocalizationsZh extends AppLocalizations {
   }
 
   @override
+  String m3f8bda535c(String p0) {
+    return '$p0 位元組';
+  }
+
+  @override
   String mb7b217c429(String p0, String p1, String p2) {
     return '$p0：花了 $p1 點，共 $p2 點';
   }
@@ -199,6 +204,11 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get mb1ff29da2c => '盔甲';
+
+  @override
+  String m968f778255(String p0) {
+    return '將刪除所選的 $p0 位元組檔案。';
+  }
 
   @override
   String get m4fae346e6c => '這是';
@@ -548,6 +558,11 @@ class AppLocalizationsZh extends AppLocalizations {
   }
 
   @override
+  String m5477f7cae5(String p0) {
+    return '可用來清理：$p0 位元組';
+  }
+
+  @override
   String get m41a4fa8b6a => '精神';
 
   @override
@@ -613,6 +628,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m7ab4920661 => '請手動關閉所選的 PoB，然後重試。';
+
+  @override
+  String get m37326b558a => '關閉其他 PoB II 實例並重複清理。';
 
   @override
   String get ma7a4033657 => '關閉';
@@ -1011,6 +1029,12 @@ class AppLocalizationsZh extends AppLocalizations {
   }
 
   @override
+  String get mbceeadc946 => '無法檢查組件資料夾。';
+
+  @override
+  String get m33ea6a4505 => '無法驗證設定檔。';
+
+  @override
   String mfdddf71553(String p0) {
     return '無法讀取影像：$p0';
   }
@@ -1151,6 +1175,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m6f381f6aed => '此架構沒有 Lua 執行時期';
+
+  @override
+  String get m41d413ec96 => '沒有要清除的資料。';
 
   @override
   String get ma76f928c09 => '沒有單包校驗和';
@@ -1344,7 +1371,19 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m28af538cbc => '評估輔助寶石';
 
   @override
+  String get m96b101de7c => '清除所選內容';
+
+  @override
   String get m6e1f7baa47 => '清除搜尋';
+
+  @override
+  String get m8262f83278 => '清晰的個人資料？';
+
+  @override
+  String get m17b8f6c23b => '設定檔清理目前不可用。';
+
+  @override
+  String get m27234756aa => '正在清除個人資料...';
 
   @override
   String get m6cc0ad9655 => '眼鏡';
@@ -1496,6 +1535,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m929d292c0e => '連接配置資料夾';
 
   @override
+  String get m6287090984 => '確認清潔';
+
+  @override
   String get m5f5155bb1f => '匹配支持';
 
   @override
@@ -1598,6 +1640,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m10e4fefa12 => '物品';
 
   @override
+  String get mad582b726d => '輪廓清理預覽';
+
+  @override
   String get m3c2b5cfe97 => '警告Lua';
 
   @override
@@ -1657,6 +1702,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get me4424a6df6 => '檢查';
 
   @override
+  String get mf04117e11b => '檢查設定檔位置';
+
+  @override
   String get m93b08f7b14 => '檢查更新';
 
   @override
@@ -1711,13 +1759,22 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m1ea3791d9d => '檢查版本...';
 
   @override
+  String get m1d1347fc69 => '正在檢查個人資料...';
+
+  @override
   String get m62ed32eb22 => '正在檢查中...';
+
+  @override
+  String get m006f803f7b => '該設定檔已在使用中。';
 
   @override
   String get m1dc35191c6 => 'PoB 的路徑經過此階段以外的天賦節點';
 
   @override
   String get m886e1844ee => '通往下一個天賦節點的路徑';
+
+  @override
+  String get m9dba617454 => '設定檔路徑已更改。';
 
   @override
   String get m913b373c85 => '在應用程式視窗中工作。單擊組合即可更改它。';
@@ -2121,6 +2178,11 @@ class AppLocalizationsZh extends AppLocalizations {
   String get mcacf1f7fd0 => '放大介面';
 
   @override
+  String mab4e553a75(String p0) {
+    return '已刪除：$p0 位元組';
+  }
+
+  @override
   String get mbe99b13612 => '刪除';
 
   @override
@@ -2240,6 +2302,9 @@ class AppLocalizationsZh extends AppLocalizations {
   }
 
   @override
+  String get mb4dd85a98a => '文件或資料夾自預覽以來已更改。';
+
+  @override
   String get m64bd568b72 => '更新檔案沒有可驗證的校驗和';
 
   @override
@@ -2262,6 +2327,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get mb88cddfeb4 => '數字與規則·LUA POB';
+
+  @override
+  String get m9c8371b55d => '部分資料繁忙或無法使用。';
 
   @override
   String m913d7f855b(String p0) {
@@ -2539,6 +2607,11 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   }
 
   @override
+  String m3f8bda535c(String p0) {
+    return '$p0 位元組';
+  }
+
+  @override
   String mb7b217c429(String p0, String p1, String p2) {
     return '$p0：花了 $p1 點，共 $p2 點';
   }
@@ -2560,6 +2633,11 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get mb1ff29da2c => '盔甲';
+
+  @override
+  String m968f778255(String p0) {
+    return '將刪除所選的 $p0 位元組檔案。';
+  }
 
   @override
   String get m4fae346e6c => '這是';
@@ -2909,6 +2987,11 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   }
 
   @override
+  String m5477f7cae5(String p0) {
+    return '可用來清理：$p0 位元組';
+  }
+
+  @override
   String get m41a4fa8b6a => '精神';
 
   @override
@@ -2974,6 +3057,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m7ab4920661 => '請手動關閉所選的 PoB，然後重試。';
+
+  @override
+  String get m37326b558a => '關閉其他 PoB II 實例並重複清理。';
 
   @override
   String get ma7a4033657 => '關閉';
@@ -3372,6 +3458,12 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   }
 
   @override
+  String get mbceeadc946 => '無法檢查組件資料夾。';
+
+  @override
+  String get m33ea6a4505 => '無法驗證設定檔。';
+
+  @override
   String mfdddf71553(String p0) {
     return '無法讀取影像：$p0';
   }
@@ -3512,6 +3604,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m6f381f6aed => '此架構沒有 Lua 執行時期';
+
+  @override
+  String get m41d413ec96 => '沒有要清除的資料。';
 
   @override
   String get ma76f928c09 => '沒有單包校驗和';
@@ -3705,7 +3800,19 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m28af538cbc => '評估輔助寶石';
 
   @override
+  String get m96b101de7c => '清除所選內容';
+
+  @override
   String get m6e1f7baa47 => '清除搜尋';
+
+  @override
+  String get m8262f83278 => '清晰的個人資料？';
+
+  @override
+  String get m17b8f6c23b => '設定檔清理目前不可用。';
+
+  @override
+  String get m27234756aa => '正在清除個人資料...';
 
   @override
   String get m6cc0ad9655 => '眼鏡';
@@ -3857,6 +3964,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m929d292c0e => '連接配置資料夾';
 
   @override
+  String get m6287090984 => '確認清潔';
+
+  @override
   String get m5f5155bb1f => '匹配支持';
 
   @override
@@ -3959,6 +4069,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m10e4fefa12 => '物品';
 
   @override
+  String get mad582b726d => '輪廓清理預覽';
+
+  @override
   String get m3c2b5cfe97 => '警告Lua';
 
   @override
@@ -4018,6 +4131,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get me4424a6df6 => '檢查';
 
   @override
+  String get mf04117e11b => '檢查設定檔位置';
+
+  @override
   String get m93b08f7b14 => '檢查更新';
 
   @override
@@ -4072,13 +4188,22 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m1ea3791d9d => '檢查版本...';
 
   @override
+  String get m1d1347fc69 => '正在檢查個人資料...';
+
+  @override
   String get m62ed32eb22 => '正在檢查中...';
+
+  @override
+  String get m006f803f7b => '該設定檔已在使用中。';
 
   @override
   String get m1dc35191c6 => 'PoB 的路徑經過此階段以外的天賦節點';
 
   @override
   String get m886e1844ee => '通往下一個天賦節點的路徑';
+
+  @override
+  String get m9dba617454 => '設定檔路徑已更改。';
 
   @override
   String get m913b373c85 => '在應用程式視窗中工作。單擊組合即可更改它。';
@@ -4482,6 +4607,11 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get mcacf1f7fd0 => '放大介面';
 
   @override
+  String mab4e553a75(String p0) {
+    return '已刪除：$p0 位元組';
+  }
+
+  @override
   String get mbe99b13612 => '刪除';
 
   @override
@@ -4601,6 +4731,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   }
 
   @override
+  String get mb4dd85a98a => '文件或資料夾自預覽以來已更改。';
+
+  @override
   String get m64bd568b72 => '更新檔案沒有可驗證的校驗和';
 
   @override
@@ -4623,6 +4756,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get mb88cddfeb4 => '數字與規則·LUA POB';
+
+  @override
+  String get m9c8371b55d => '部分資料繁忙或無法使用。';
 
   @override
   String m913d7f855b(String p0) {

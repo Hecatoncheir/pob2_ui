@@ -86,6 +86,34 @@ class BuildLibrary implements BuildStorage {
     return state;
   }
 
+  Future<Set<String>?> referencedRevisions() async {
+    final protected = <String>{};
+    for (final file in [_index, File('${_index.path}.bak')]) {
+      final type = await FileSystemEntity.type(file.path, followLinks: false);
+      if (type == FileSystemEntityType.notFound && file.path != _index.path)
+        continue;
+      if (type != FileSystemEntityType.file) return null;
+      final revisions = await _indexRevisions(file);
+      if (revisions == null) return null;
+      protected.addAll(revisions);
+    }
+    return protected;
+  }
+
+  Future<Iterable<String>?> _indexRevisions(File file) async {
+    try {
+      return _decode(await file.readAsString()).entries
+          .map((entry) => entry.revision)
+          .nonNulls;
+    } on FormatException {
+      return null;
+    } on TypeError {
+      return null;
+    } on FileSystemException {
+      return null;
+    }
+  }
+
   Future<LibraryState> _migrateLegacy(LibraryState state) async {
     final entries = <LibraryEntry>[];
     var migrated = false;

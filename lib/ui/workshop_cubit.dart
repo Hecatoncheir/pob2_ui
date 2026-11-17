@@ -12,6 +12,7 @@ import '../data/pob_window_repository.dart';
 import '../data/pob_build_document.dart';
 import '../data/pob_share_code.dart';
 import '../data/pob_share_links.dart';
+import '../data/profile_cleanup.dart';
 import '../data/progression_comparison_session.dart';
 import '../data/pob_build_library.dart';
 import '../data/pob_build_locations.dart';
@@ -1591,6 +1592,15 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     if (closePob) await pobWindow.closeLaunchedWindows();
   });
 
+  Future<CleanupResult> cleanProfile(Set<CleanupEntry> selected) async {
+    late CleanupResult result;
+    await _protectExit(() async {
+      result = await components.cleanProfile(selected);
+      treeIcons.clear();
+    });
+    return result;
+  }
+
   Future<void> closeLaunchedPob() =>
       _protectExit(pobWindow.closeLaunchedWindows);
 
@@ -1628,6 +1638,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     await _mcpEditor?.close();
     await _flushText();
     await engine.close();
+    await components.profileUse?.close();
     await super.close();
   }
 }

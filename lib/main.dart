@@ -13,6 +13,7 @@ import 'data/component_repository.dart';
 import 'data/installation_store.dart';
 import 'data/mcp_client.dart';
 import 'data/pob_build_library.dart';
+import 'data/profile_use.dart';
 import 'ui/app.dart';
 import 'ui/workshop_cubit.dart';
 import 'data/language_preferences.dart';
@@ -30,9 +31,14 @@ Future<void> main(List<String> arguments) async {
   final progress = check == null ? null : InstallerCheckProgress(root, check);
   progress?.record('startup');
   WidgetsFlutterBinding.ensureInitialized();
-  if (check == 'restore') HttpOverrides.global = OfflineInstallerCheck();
+  if (check == 'restore' || check == 'cleanup') {
+    HttpOverrides.global = OfflineInstallerCheck();
+  }
   final model = WorkshopCubit(
-    ComponentRepository(store: InstallationStore(root)),
+    ComponentRepository(
+      store: InstallationStore(root),
+      profileUse: await ProfileUse.open(root),
+    ),
     McpClient(),
     library: PobBuildLibrary(root),
   );
@@ -92,7 +98,8 @@ String? _installerCheckStage() {
   final environment = Platform.environment;
   if (environment['POB2_UI_HOME']?.isNotEmpty != true) return null;
   return switch (environment['POB2_UI_INSTALLER_CHECK']) {
-    final stage? when const {'save', 'restore', 'link'}.contains(stage) =>
+    final stage?
+        when const {'save', 'restore', 'link', 'cleanup'}.contains(stage) =>
       stage,
     _ => null,
   };

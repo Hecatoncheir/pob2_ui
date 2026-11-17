@@ -419,6 +419,12 @@ abstract class AppLocalizations {
   /// **'{p0} · level {p1}'**
   String mbefa507d02(String p0, String p1);
 
+  /// {p0} байт
+  ///
+  /// In en, this message translates to:
+  /// **'{p0} bytes'**
+  String m3f8bda535c(String p0);
+
   /// {p0}: потрачено {p1} из {p2} очков
   ///
   /// In en, this message translates to:
@@ -460,6 +466,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Armour'**
   String get mb1ff29da2c;
+
+  /// Будут удалены выбранные файлы объёмом {p0} байт.
+  ///
+  /// In en, this message translates to:
+  /// **'Selected files of {p0} bytes will be deleted.'**
+  String m968f778255(String p0);
 
   /// Было
   ///
@@ -1127,6 +1139,12 @@ abstract class AppLocalizations {
   /// **'Version {p0} available'**
   String m10b5bc7e91(String p0);
 
+  /// Доступно для очистки: {p0} байт
+  ///
+  /// In en, this message translates to:
+  /// **'Available for cleaning: {p0} bytes'**
+  String m5477f7cae5(String p0);
+
   /// Дух
   ///
   /// In en, this message translates to:
@@ -1240,6 +1258,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Close the selected PoB manually and try again.'**
   String get m7ab4920661;
+
+  /// Закройте другие экземпляры PoB II и повторите очистку.
+  ///
+  /// In en, this message translates to:
+  /// **'Close other PoB II instances and repeat the cleanup.'**
+  String get m37326b558a;
 
   /// Закрыть
   ///
@@ -1962,6 +1986,18 @@ abstract class AppLocalizations {
   /// **'Failed to check for updates: {p0}'**
   String m4d1a8400d5(String p0);
 
+  /// Не удалось проверить папку сборок.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to check assembly folder.'**
+  String get mbceeadc946;
+
+  /// Не удалось проверить профиль.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to verify profile.'**
+  String get m33ea6a4505;
+
   /// Не удалось прочитать изображения: {p0}
   ///
   /// In en, this message translates to:
@@ -2225,6 +2261,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No Lua runtime for this architecture'**
   String get m6f381f6aed;
+
+  /// Нет данных для очистки.
+  ///
+  /// In en, this message translates to:
+  /// **'No data to clear.'**
+  String get m41d413ec96;
 
   /// Нет единственной контрольной суммы пакета
   ///
@@ -2604,11 +2646,35 @@ abstract class AppLocalizations {
   /// **'Preview support'**
   String get m28af538cbc;
 
+  /// Очистить выбранное
+  ///
+  /// In en, this message translates to:
+  /// **'Clear selected'**
+  String get m96b101de7c;
+
   /// Очистить поиск
   ///
   /// In en, this message translates to:
   /// **'Clear search'**
   String get m6e1f7baa47;
+
+  /// Очистить профиль?
+  ///
+  /// In en, this message translates to:
+  /// **'Clear profile?'**
+  String get m8262f83278;
+
+  /// Очистка профиля сейчас недоступна.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile cleaning is currently unavailable.'**
+  String get m17b8f6c23b;
+
+  /// Очищаем профиль…
+  ///
+  /// In en, this message translates to:
+  /// **'Clearing the profile...'**
+  String get m27234756aa;
 
   /// Очки
   ///
@@ -2892,6 +2958,12 @@ abstract class AppLocalizations {
   /// **'Connect builds folder'**
   String get m929d292c0e;
 
+  /// Подтвердить очистку
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm cleaning'**
+  String get m6287090984;
+
   /// Подходящие поддержки
   ///
   /// In en, this message translates to:
@@ -3084,6 +3156,12 @@ abstract class AppLocalizations {
   /// **'Items'**
   String get m10e4fefa12;
 
+  /// Предпросмотр очистки профиля
+  ///
+  /// In en, this message translates to:
+  /// **'Preview of profile cleaning'**
+  String get mad582b726d;
+
   /// Предупреждения Lua
   ///
   /// In en, this message translates to:
@@ -3186,6 +3264,12 @@ abstract class AppLocalizations {
   /// **'Check'**
   String get me4424a6df6;
 
+  /// Проверить место в профиле
+  ///
+  /// In en, this message translates to:
+  /// **'Check profile location'**
+  String get mf04117e11b;
+
   /// Проверить обновления
   ///
   /// In en, this message translates to:
@@ -3282,11 +3366,23 @@ abstract class AppLocalizations {
   /// **'Checking the releases...'**
   String get m1ea3791d9d;
 
+  /// Проверяем профиль…
+  ///
+  /// In en, this message translates to:
+  /// **'Checking the profile...'**
+  String get m1d1347fc69;
+
   /// Проверяем…
   ///
   /// In en, this message translates to:
   /// **'Checking...'**
   String get m62ed32eb22;
+
+  /// Профиль уже используется.
+  ///
+  /// In en, this message translates to:
+  /// **'The profile is already in use.'**
+  String get m006f803f7b;
 
   /// Путь PoB проходит через узлы вне этапа
   ///
@@ -3299,6 +3395,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Path to the next node'**
   String get m886e1844ee;
+
+  /// Путь профиля изменился.
+  ///
+  /// In en, this message translates to:
+  /// **'The profile path has changed.'**
+  String get m9dba617454;
 
   /// Работают в окне приложения. Нажмите на сочетание, чтобы изменить его.
   ///
@@ -4074,6 +4176,12 @@ abstract class AppLocalizations {
   /// **'Enlarge interface'**
   String get mcacf1f7fd0;
 
+  /// Удалено: {p0} байт
+  ///
+  /// In en, this message translates to:
+  /// **'Removed: {p0} bytes'**
+  String mab4e553a75(String p0);
+
   /// Удалить
   ///
   /// In en, this message translates to:
@@ -4296,6 +4404,12 @@ abstract class AppLocalizations {
   /// **'Installed: {p0}'**
   String mff8616cb20(String p0);
 
+  /// Файл или папка изменились после предпросмотра.
+  ///
+  /// In en, this message translates to:
+  /// **'The file or folder has changed since the preview.'**
+  String get mb4dd85a98a;
+
   /// Файл обновления не имеет проверяемой контрольной суммы
   ///
   /// In en, this message translates to:
@@ -4343,6 +4457,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'NUMBERS AND RULES · LUA POB'**
   String get mb88cddfeb4;
+
+  /// Часть данных занята или недоступна.
+  ///
+  /// In en, this message translates to:
+  /// **'Some of the data is busy or unavailable.'**
+  String get m9c8371b55d;
 
   /// Часть иконок недоступна: {p0}
   ///

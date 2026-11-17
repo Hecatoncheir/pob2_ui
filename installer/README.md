@@ -39,6 +39,8 @@
 
 Для проверки чистого профиля в CI команда `dart run tool/smoke.dart --install --keep-archives` сохраняет проверенные архивы в `component-downloads` внутри `POB2_UI_HOME`. Передайте этот каталог через `python tool/check_installer.py --target linux-x64 --build-check --archives /путь/к/component-downloads`. Установленное приложение сверит размер и SHA-256 и распакует архивы. С одним флагом `--build-check` приложение скачает компоненты по сети. Для такого прогона в GitHub Actions запустите «Проверки и установщики» с `cold_install: true`.
 
+Для проверки обновления передайте `--previous` с каталогом установщиков v0.6.0. Проверка открывает профиль предыдущего выпуска, выполняет очистку и откат к отдельной установленной паре Lua, сверяет XML, заметки и отчёт без HTTP.
+
 Для выпуска:
 
 1. Обновите `pubspec.yaml` и `lib/domain/app_info.dart` согласованно.

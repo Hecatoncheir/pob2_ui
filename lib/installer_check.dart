@@ -1,6 +1,9 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:path/path.dart' as path;
+
+import 'domain/component.dart';
 import 'ui/workshop_cubit.dart';
 
 const _name = 'Installer check';
@@ -71,13 +74,14 @@ Future<Map<String, Object?>> _checkBuild(
     progress.record('initialize');
     await initialization;
     if (stage == 'link') return await _checkLink(model, progress);
+    if (stage == 'cleanup') await _cleanAndRollback(model, progress);
     if (stage == 'save') {
       progress.record('components');
       if (!model.ready) await model.prepareComponents();
       _require(model.state.error == null && model.luaReady, model);
       await _saveBuild(model, progress);
     }
-    progress.record(stage == 'restore' ? 'xml-reopened' : 'xml-saved');
+    progress.record(stage == 'save' ? 'xml-saved' : 'xml-reopened');
     final report = model.state.report;
     final id = model.state.library.activeId;
     _require(model.state.error == null && model.luaReady, model);
@@ -93,6 +97,36 @@ Future<Map<String, Object?>> _checkBuild(
   } finally {
     await model.close();
   }
+}
+
+Future<void> _cleanAndRollback(
+  WorkshopCubit model,
+  InstallerCheckProgress progress,
+) async {
+  final repository = model.components;
+  final root = repository.store.root;
+  final original = repository.active[Component.pob]!.directory;
+  final rollback = repository.store.previous[Component.pob]!.directory;
+  _require(!path.equals(original, rollback), model);
+  _checkWitch(model);
+  final obsolete = path.join('versions', 'pob-obsolete');
+  final entries = await repository.profileCleanup.preview();
+  _require(entries.any((entry) => entry.relativePath == obsolete), model);
+  _require(
+    entries.any(
+      (entry) => path.split(entry.relativePath).first == 'tree-cache',
+    ),
+    model,
+  );
+  final result = await model.cleanProfile(entries.toSet());
+  _require(result.skipped.isEmpty && result.bytes > 0, model);
+  _require(!await Directory(path.join(root.path, obsolete)).exists(), model);
+  _checkWitch(model);
+  progress.record('profile-cleaned');
+  await model.rollback();
+  _require(repository.active[Component.pob]?.directory == rollback, model);
+  _checkWitch(model);
+  progress.record('components-rollback-checked');
 }
 
 Future<Map<String, Object?>> _checkLink(

@@ -3,6 +3,7 @@ import 'dart:io';
 
 import '../domain/component.dart';
 import 'component_archive.dart';
+import 'component_ownership.dart';
 import 'component_packages.dart';
 import 'github_service.dart';
 import 'installation_store.dart';
@@ -10,6 +11,8 @@ import 'process_service.dart';
 import 'native_runtime_installer.dart';
 import 'managed_installation.dart';
 import 'verified_download.dart';
+import 'profile_cleanup.dart';
+import 'profile_use.dart';
 
 enum ComponentInstallStage { pob, mcp, compatibility }
 
@@ -21,6 +24,7 @@ class ComponentRepository {
     NativeRuntimeInstaller? runtimeInstaller,
     VerifiedDownload? packageDownload,
     this.keepArchives = false,
+    this.profileUse,
   }) : github = github ?? GitHubService(),
        processes = processes ?? ProcessService(),
        _runtimeInstaller = runtimeInstaller ?? NativeRuntimeInstaller(),
@@ -32,6 +36,8 @@ class ComponentRepository {
   final NativeRuntimeInstaller _runtimeInstaller;
   final VerifiedDownload _packageDownload;
   final bool keepArchives;
+  final ProfileUse? profileUse;
+  late final profileCleanup = ProfileCleanup(store, active: () => active);
   Installations active = {};
   static final _lockedRoots = <String>{};
 
@@ -50,8 +56,9 @@ class ComponentRepository {
   }
 
   Future<T> _withLock<T>(
-    Future<T> Function(Installations current, Installations previous) apply,
-  ) async {
+    Future<T> Function(Installations current, Installations previous) apply, {
+    bool cleanupCandidates = true,
+  }) async {
     await store.root.create(recursive: true);
     final root = await store.root.resolveSymbolicLinks();
     if (!_lockedRoots.add(root)) throw StateError('Уже выполняется установка');
@@ -61,12 +68,15 @@ class ComponentRepository {
       try {
         await lock.lock(FileLock.exclusive);
         final saved = await store.read();
-        await _cleanupCandidates(saved.active, saved.previous);
+        if (cleanupCandidates)
+          await _cleanupCandidates(saved.active, saved.previous);
         try {
           return await apply(saved.active, saved.previous);
         } finally {
-          final stored = await store.read();
-          await _cleanupCandidates(stored.active, stored.previous);
+          if (cleanupCandidates) {
+            final stored = await store.read();
+            await _cleanupCandidates(stored.active, stored.previous);
+          }
         }
       } finally {
         await lock.close();
@@ -74,6 +84,18 @@ class ComponentRepository {
     } finally {
       _lockedRoots.remove(root);
     }
+  }
+
+  Future<CleanupResult> cleanProfile(Set<CleanupEntry> selected) async {
+    final use = profileUse;
+    if (use == null) throw StateError('Очистка профиля сейчас недоступна.');
+    return use.exclusively(
+      store.root,
+      () => _withLock(
+        (_, _) => profileCleanup.apply(selected),
+        cleanupCandidates: false,
+      ),
+    );
   }
 
   void _checkTarget() {
@@ -227,6 +249,7 @@ class ComponentRepository {
       directory: candidate.path,
     );
     await _validate(component, installation);
+    await recordComponent(candidate, component, installation);
     log('${component.title} ${release.tag} загружен. Git: $commit');
     return installation;
   }
@@ -267,6 +290,7 @@ class ComponentRepository {
     );
     log('Проверка файлов ${component.title}');
     await _validate(component, installation);
+    await recordComponent(candidate, component, installation);
     if (!keepArchives) await cache.delete(recursive: true);
     return installation;
   }

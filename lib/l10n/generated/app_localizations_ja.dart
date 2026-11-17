@@ -179,6 +179,11 @@ class AppLocalizationsJa extends AppLocalizations {
   }
 
   @override
+  String m3f8bda535c(String p0) {
+    return '$p0 バイト';
+  }
+
+  @override
   String mb7b217c429(String p0, String p1, String p2) {
     return '$p0: $p2 ポイント中 $p1 ポイントが消費されました';
   }
@@ -200,6 +205,11 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get mb1ff29da2c => 'アーマー';
+
+  @override
+  String m968f778255(String p0) {
+    return '選択した $p0 バイトのファイルが削除されます。';
+  }
 
   @override
   String get m4fae346e6c => 'そうでした';
@@ -550,6 +560,11 @@ class AppLocalizationsJa extends AppLocalizations {
   }
 
   @override
+  String m5477f7cae5(String p0) {
+    return 'クリーニングに使用可能: $p0 バイト';
+  }
+
+  @override
   String get m41a4fa8b6a => 'スピリット';
 
   @override
@@ -615,6 +630,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m7ab4920661 => '選択したPoBを手動で閉じてから、もう一度起動してください。';
+
+  @override
+  String get m37326b558a => '他の PoB II インスタンスを閉じて、クリーンアップを繰り返します。';
 
   @override
   String get ma7a4033657 => '閉じる';
@@ -1014,6 +1032,12 @@ class AppLocalizationsJa extends AppLocalizations {
   }
 
   @override
+  String get mbceeadc946 => 'アセンブリフォルダーの確認に失敗しました。';
+
+  @override
+  String get m33ea6a4505 => 'プロファイルの検証に失敗しました。';
+
+  @override
   String mfdddf71553(String p0) {
     return '画像の読み取りに失敗しました: $p0';
   }
@@ -1154,6 +1178,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m6f381f6aed => 'このアーキテクチャには Lua ランタイムがありません';
+
+  @override
+  String get m41d413ec96 => 'クリアするデータがありません。';
 
   @override
   String get ma76f928c09 => '単一パケットのチェックサムがありません';
@@ -1347,7 +1374,19 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m28af538cbc => 'サポートを試算';
 
   @override
+  String get m96b101de7c => '選択を解除';
+
+  @override
   String get m6e1f7baa47 => '検索をクリア';
+
+  @override
+  String get m8262f83278 => 'プロフィールを明確にしますか?';
+
+  @override
+  String get m17b8f6c23b => 'プロファイルのクリーニングは現在利用できません。';
+
+  @override
+  String get m27234756aa => 'プロファイルをクリアしています...';
 
   @override
   String get m6cc0ad9655 => 'メガネ';
@@ -1499,6 +1538,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m929d292c0e => 'ビルドフォルダーを接続';
 
   @override
+  String get m6287090984 => 'クリーニングの確認';
+
+  @override
   String get m5f5155bb1f => 'マッチングサポート';
 
   @override
@@ -1601,6 +1643,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m10e4fefa12 => 'アイテム';
 
   @override
+  String get mad582b726d => 'プロファイルのクリーニングのプレビュー';
+
+  @override
   String get m3c2b5cfe97 => '警告 Lua';
 
   @override
@@ -1660,6 +1705,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get me4424a6df6 => 'チェック';
 
   @override
+  String get mf04117e11b => 'プロファイルの場所を確認する';
+
+  @override
   String get m93b08f7b14 => 'アップデートを確認する';
 
   @override
@@ -1714,13 +1762,22 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m1ea3791d9d => 'リリースを確認しています...';
 
   @override
+  String get m1d1347fc69 => 'プロフィールを確認しています...';
+
+  @override
   String get m62ed32eb22 => 'チェック中...';
+
+  @override
+  String get m006f803f7b => 'プロファイルはすでに使用されています。';
 
   @override
   String get m1dc35191c6 => 'PoB の経路にはこの段階に含まれないノードがあります';
 
   @override
   String get m886e1844ee => '次のノードへの経路';
+
+  @override
+  String get m9dba617454 => 'プロファイルのパスが変更されました。';
 
   @override
   String get m913b373c85 => 'アプリケーションウィンドウで作業します。組み合わせをクリックして変更します。';
@@ -2127,6 +2184,11 @@ class AppLocalizationsJa extends AppLocalizations {
   String get mcacf1f7fd0 => 'インターフェースを拡大する';
 
   @override
+  String mab4e553a75(String p0) {
+    return '削除されました: $p0 バイト';
+  }
+
+  @override
   String get mbe99b13612 => '削除';
 
   @override
@@ -2246,6 +2308,9 @@ class AppLocalizationsJa extends AppLocalizations {
   }
 
   @override
+  String get mb4dd85a98a => 'ファイルまたはフォルダーがプレビューから変更されました。';
+
+  @override
   String get m64bd568b72 => 'アップデート ファイルには検証可能なチェックサムがありません';
 
   @override
@@ -2268,6 +2333,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get mb88cddfeb4 => '数字とルール · ルアポブ';
+
+  @override
+  String get m9c8371b55d => '一部のデータがビジー状態または使用不可です。';
 
   @override
   String m913d7f855b(String p0) {

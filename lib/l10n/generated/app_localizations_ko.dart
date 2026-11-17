@@ -179,6 +179,11 @@ class AppLocalizationsKo extends AppLocalizations {
   }
 
   @override
+  String m3f8bda535c(String p0) {
+    return '$p0바이트';
+  }
+
+  @override
   String mb7b217c429(String p0, String p1, String p2) {
     return '$p0: $p2 포인트 중 $p1 포인트 사용';
   }
@@ -200,6 +205,11 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get mb1ff29da2c => '방어구';
+
+  @override
+  String m968f778255(String p0) {
+    return '선택한 $p0바이트 파일이 삭제됩니다.';
+  }
 
   @override
   String get m4fae346e6c => '그랬어요';
@@ -550,6 +560,11 @@ class AppLocalizationsKo extends AppLocalizations {
   }
 
   @override
+  String m5477f7cae5(String p0) {
+    return '정리 가능: $p0바이트';
+  }
+
+  @override
   String get m41a4fa8b6a => '영혼';
 
   @override
@@ -615,6 +630,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m7ab4920661 => '선택한 PoB를 직접 닫고 다시 실행하세요.';
+
+  @override
+  String get m37326b558a => '다른 PoB II 인스턴스를 닫고 정리를 반복합니다.';
 
   @override
   String get ma7a4033657 => '닫기';
@@ -1014,6 +1032,12 @@ class AppLocalizationsKo extends AppLocalizations {
   }
 
   @override
+  String get mbceeadc946 => '어셈블리 폴더를 확인하지 못했습니다.';
+
+  @override
+  String get m33ea6a4505 => '프로필을 확인하지 못했습니다.';
+
+  @override
   String mfdddf71553(String p0) {
     return '이미지를 읽지 못했습니다: $p0';
   }
@@ -1154,6 +1178,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m6f381f6aed => '이 아키텍처에는 Lua 런타임이 없습니다.';
+
+  @override
+  String get m41d413ec96 => '지울 데이터가 없습니다.';
 
   @override
   String get ma76f928c09 => '단일 패킷 체크섬 없음';
@@ -1347,7 +1374,19 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m28af538cbc => '보조 젬 평가';
 
   @override
+  String get m96b101de7c => '선택 취소';
+
+  @override
   String get m6e1f7baa47 => '검색 지우기';
+
+  @override
+  String get m8262f83278 => '프로필을 삭제하시겠습니까?';
+
+  @override
+  String get m17b8f6c23b => '현재 프로필 정리를 사용할 수 없습니다.';
+
+  @override
+  String get m27234756aa => '프로필을 삭제하는 중...';
 
   @override
   String get m6cc0ad9655 => '안경';
@@ -1499,6 +1538,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m929d292c0e => '빌드 폴더 연결';
 
   @override
+  String get m6287090984 => '청소 확인';
+
+  @override
   String get m5f5155bb1f => '매칭 지원';
 
   @override
@@ -1601,6 +1643,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m10e4fefa12 => '아이템';
 
   @override
+  String get mad582b726d => '프로필 정리 미리보기';
+
+  @override
   String get m3c2b5cfe97 => '경고 Lua';
 
   @override
@@ -1660,6 +1705,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get me4424a6df6 => '확인';
 
   @override
+  String get mf04117e11b => '프로필 위치 확인';
+
+  @override
   String get m93b08f7b14 => '업데이트 확인';
 
   @override
@@ -1714,13 +1762,22 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m1ea3791d9d => '릴리스 확인 중...';
 
   @override
+  String get m1d1347fc69 => '프로필 확인 중...';
+
+  @override
   String get m62ed32eb22 => '확인 중...';
+
+  @override
+  String get m006f803f7b => '프로필이 이미 사용 중입니다.';
 
   @override
   String get m1dc35191c6 => 'PoB 경로에 이 단계에 없는 노드가 포함됩니다';
 
   @override
   String get m886e1844ee => '다음 노드로 가는 경로';
+
+  @override
+  String get m9dba617454 => '프로필 경로가 변경되었습니다.';
 
   @override
   String get m913b373c85 => '응용프로그램 창에서 작업합니다. 변경하려면 조합을 클릭하세요.';
@@ -2127,6 +2184,11 @@ class AppLocalizationsKo extends AppLocalizations {
   String get mcacf1f7fd0 => '인터페이스 확대';
 
   @override
+  String mab4e553a75(String p0) {
+    return '제거됨: $p0바이트';
+  }
+
+  @override
   String get mbe99b13612 => '삭제';
 
   @override
@@ -2246,6 +2308,9 @@ class AppLocalizationsKo extends AppLocalizations {
   }
 
   @override
+  String get mb4dd85a98a => '미리보기 이후 파일 또는 폴더가 변경되었습니다.';
+
+  @override
   String get m64bd568b72 => '업데이트 파일에 확인 가능한 체크섬이 없습니다.';
 
   @override
@@ -2268,6 +2333,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get mb88cddfeb4 => '숫자 및 규칙 · LUA POB';
+
+  @override
+  String get m9c8371b55d => '일부 데이터가 사용 중이거나 사용할 수 없습니다.';
 
   @override
   String m913d7f855b(String p0) {

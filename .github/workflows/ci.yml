@@ -170,11 +170,11 @@ jobs:
             args+=(--lock tool/components-lock.json)
           fi
           dart run tool/smoke.dart "${args[@]}" | tee build/review/components.json
-      - name: Скачать установщик v0.5.0 для проверки обновления
+      - name: Скачать установщик v0.6.0 для проверки обновления
         shell: bash
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh release download v0.5.0 --dir build/previous --pattern '*${{ matrix.target }}*'
+        run: gh release download v0.6.0 --dir build/previous --pattern '*${{ matrix.target }}*'
       - name: Проверить установку и восстановление сборки с Lua
         shell: bash
         env:
@@ -189,6 +189,13 @@ jobs:
           fi
           if [[ "$LIVE_LINK" == true ]]; then args+=(--verify-link); fi
           "${runner[@]}" python tool/check_installer.py "${args[@]}"
+      - name: Предпросмотр и очистка профиля
+        if: inputs.cold_install != true
+        shell: bash
+        run: |
+          runner=()
+          if [[ "$RUNNER_OS" == Linux ]]; then runner=(xvfb-run -a); fi
+          "${runner[@]}" flutter test integration_test/profile_cleanup_test.dart -d ${{ matrix.platform }} --no-pub
       - name: Новый интерфейс с настоящим Lua
         if: inputs.cold_install != true && runner.os != 'Linux'
         env:
