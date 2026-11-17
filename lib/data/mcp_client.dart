@@ -27,7 +27,7 @@ class McpClient {
     String? pobDirectory,
   ) async {
     await close();
-    final python = await ProcessService().python();
+    final python = await ProcessService().runtimePython(mcp);
     final process = await Process.start(python, [
       '-X',
       'utf8',

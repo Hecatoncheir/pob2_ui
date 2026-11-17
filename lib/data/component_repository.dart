@@ -2,11 +2,14 @@ import 'dart:convert';
 import 'dart:io';
 
 import '../domain/component.dart';
+import 'component_archive.dart';
+import 'component_packages.dart';
 import 'github_service.dart';
 import 'installation_store.dart';
 import 'process_service.dart';
 import 'native_runtime_installer.dart';
 import 'managed_installation.dart';
+import 'verified_download.dart';
 
 enum ComponentInstallStage { pob, mcp, compatibility }
 
@@ -16,16 +19,29 @@ class ComponentRepository {
     GitHubService? github,
     ProcessService? processes,
     NativeRuntimeInstaller? runtimeInstaller,
+    VerifiedDownload? packageDownload,
   }) : github = github ?? GitHubService(),
        processes = processes ?? ProcessService(),
-       _runtimeInstaller = runtimeInstaller ?? NativeRuntimeInstaller();
+       _runtimeInstaller = runtimeInstaller ?? NativeRuntimeInstaller(),
+       _packageDownload = packageDownload ?? VerifiedDownload();
 
   final InstallationStore store;
   final GitHubService github;
   final ProcessService processes;
   final NativeRuntimeInstaller _runtimeInstaller;
+  final VerifiedDownload _packageDownload;
   Installations active = {};
   static final _lockedRoots = <String>{};
+
+  Map<Component, Release> availableReleases() => componentReleases();
+
+  bool needsInstall(Component component, Release release) =>
+      _needsInstall(active[component], release);
+
+  bool _needsInstall(Installation? installed, Release release) =>
+      installed?.tag != release.tag ||
+      (release.package != null &&
+          installed?.archiveSha256 != release.package!.sha256);
 
   Future<void> load() async {
     active = await store.load();
@@ -43,7 +59,13 @@ class ComponentRepository {
       try {
         await lock.lock(FileLock.exclusive);
         final saved = await store.read();
-        return await apply(saved.active, saved.previous);
+        await _cleanupCandidates(saved.active, saved.previous);
+        try {
+          return await apply(saved.active, saved.previous);
+        } finally {
+          final stored = await store.read();
+          await _cleanupCandidates(stored.active, stored.previous);
+        }
       } finally {
         await lock.close();
       }
@@ -109,7 +131,7 @@ class ComponentRepository {
     }
     final next = Map<Component, Installation>.of(current);
     for (final MapEntry(:key, :value) in requested.entries) {
-      if (next[key]?.tag != value.tag) {
+      if (_needsInstall(next[key], value)) {
         onStage?.call(switch (key) {
           Component.pob => ComponentInstallStage.pob,
           Component.mcp => ComponentInstallStage.mcp,
@@ -175,6 +197,9 @@ class ComponentRepository {
     ).create(recursive: true);
     final candidate = await versions.createTemp('${component.name}-');
     log('Загрузка ${component.title} ${release.tag}…');
+    if (release.package != null) {
+      return _downloadArchive(component, release, candidate);
+    }
     await _git(candidate, ['init', '--quiet']);
     await _git(candidate, ['remote', 'add', 'origin', '${component.url}.git']);
     if (component == Component.pob) {
@@ -194,13 +219,83 @@ class ComponentRepository {
     if (component == Component.mcp) {
       await _runtimeInstaller.install(candidate, release.tag, processes, log);
     }
-    await _validate(component, candidate);
-    log('${component.title} ${release.tag} загружен. Git: $commit');
-    return Installation(
+    final installation = Installation(
       tag: release.tag,
       commit: commit,
       directory: candidate.path,
     );
+    await _validate(component, installation);
+    log('${component.title} ${release.tag} загружен. Git: $commit');
+    return installation;
+  }
+
+  Future<Installation> _downloadArchive(
+    Component component,
+    Release release,
+    Directory candidate,
+  ) async {
+    await _pendingMarker(candidate).create();
+    final asset = release.package!;
+    final commit = release.expectedCommit;
+    final digest = asset.sha256 ?? '';
+    if (commit == null ||
+        !RegExp(r'^[a-f0-9]{40}$').hasMatch(commit) ||
+        !RegExp(r'^[a-f0-9]{64}$').hasMatch(digest)) {
+      throw const FormatException('Для архива нужна закреплённая ревизия');
+    }
+    final cache = Directory.fromUri(
+      store.root.uri.resolve('component-downloads/$digest/'),
+    );
+    final source = await _packageDownload.download(
+      asset,
+      cache,
+      onProgress: (_) {},
+    );
+    await extractComponentArchive(source.path, candidate.path);
+    final installation = Installation(
+      tag: release.tag,
+      commit: commit,
+      directory: candidate.path,
+      archiveSha256: digest,
+    );
+    await _validate(component, installation);
+    await cache.delete(recursive: true);
+    return installation;
+  }
+
+  File _pendingMarker(Directory directory) =>
+      File.fromUri(directory.uri.resolve('.component-candidate'));
+
+  Future<void> _cleanupCandidates(
+    Installations current,
+    Installations previous,
+  ) async {
+    final protected = {
+      for (final installation in [...current.values, ...previous.values])
+        Directory(installation.directory).absolute.path,
+    };
+    final versions = Directory.fromUri(store.root.uri.resolve('versions/'));
+    if (!await versions.exists()) return;
+    await for (final entity in versions.list(followLinks: false)) {
+      if (entity is Directory) await _cleanupCandidate(entity, protected);
+    }
+  }
+
+  Future<void> _cleanupCandidate(
+    Directory candidate,
+    Set<String> protected,
+  ) async {
+    final marker = _pendingMarker(candidate);
+    if (!await marker.exists()) return;
+    try {
+      if (protected.contains(candidate.absolute.path)) {
+        await marker.delete();
+      } else {
+        await candidate.delete(recursive: true);
+      }
+    } on FileSystemException {
+      // Повторим очистку при следующей операции, если файл ещё занят.
+    }
   }
 
   Future<void> _checkInstalledCommit(
@@ -209,6 +304,7 @@ class ComponentRepository {
     Installation installation,
   ) async {
     _checkCommit(component, release, installation.commit);
+    if (installation.archiveSha256 != null) return;
     final actual = await _git(Directory(installation.directory), [
       'rev-parse',
       'HEAD',
@@ -231,7 +327,8 @@ class ComponentRepository {
   ]) =>
       processes.run('git', ['-C', directory.path, ...arguments], onOutput: log);
 
-  Future<void> _validate(Component component, Directory directory) async {
+  Future<void> _validate(Component component, Installation installation) async {
+    final directory = Directory(installation.directory);
     final files = component == Component.pob
         ? [
             'src/Launch.lua',
@@ -248,7 +345,7 @@ class ComponentRepository {
       }
     }
     if (component == Component.mcp) {
-      final python = await processes.python();
+      final python = await processes.runtimePython(installation);
       await processes.run(
         python,
         ['-X', 'utf8', 'run.py', '--version'],
@@ -264,7 +361,7 @@ class ComponentRepository {
     final mcp = pair[Component.mcp];
     if (pob == null || mcp == null)
       throw StateError('Сначала установите оба компонента');
-    final python = await processes.python();
+    final python = await processes.runtimePython(mcp);
     final output = await processes.run(
       python,
       [

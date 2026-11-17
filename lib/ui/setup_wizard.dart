@@ -168,7 +168,7 @@ class _SetupWizardState extends State<_SetupWizard> {
     WorkshopState state,
   ) => switch (step) {
     _SetupStep.pob || _SetupStep.mcp => _SetupActions(
-      message: 'Для установки нужны Git и 64-битный Python 3.11+. После загрузки компонентов расчёты работают без сети.',
+      message: 'Для загрузки компонентов нужен интернет. После установки расчёты работают без сети.',
       actions: [
         FilledButton(
           onPressed: state.busy ? null : () => _run(model.prepareComponents),

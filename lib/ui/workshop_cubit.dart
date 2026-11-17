@@ -430,7 +430,6 @@ class WorkshopCubit extends Cubit<WorkshopState> {
   });
 
   Future<void> _installFirstPair() async {
-    await _checkInstallationTools();
     _showSetupStage(WorkshopSetupStage.releases);
     await _checkComponentReleases();
     await components.installPair(
@@ -447,36 +446,14 @@ class WorkshopCubit extends Cubit<WorkshopState> {
   void _showSetupStage(WorkshopSetupStage stage) =>
       _update(state.copyWith(setupStage: stage));
 
-  Future<void> _checkInstallationTools() async {
-    _showSetupStage(WorkshopSetupStage.python);
-    try {
-      await components.processes.python();
-    } on ProcessException {
-      throw StateError(
-        'Установите 64-битный Python 3.11+ и перезапустите PoB II.',
-      );
-    }
-    _showSetupStage(WorkshopSetupStage.git);
-    try {
-      await components.processes.run('git', [
-        '--version',
-      ], timeout: const Duration(seconds: 10));
-    } on ProcessException {
-      throw StateError('Установите Git и перезапустите PoB II.');
-    }
-  }
-
   bool get hasComponentUpdates => state.releases.entries.any(
-    (entry) => components.active[entry.key]?.tag != entry.value.tag,
+    (entry) => components.needsInstall(entry.key, entry.value),
   );
 
   Future<void> checkUpdates() => _run(_checkComponentReleases);
 
   Future<void> _checkComponentReleases() async {
-    final releases = <Component, Release>{};
-    for (final component in Component.values) {
-      releases[component] = await components.github.latest(component);
-    }
+    final releases = components.availableReleases();
     _update(
       state.copyWith(releases: releases, status: 'Проверка выпусков завершена'),
     );

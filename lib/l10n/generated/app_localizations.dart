@@ -497,6 +497,12 @@ abstract class AppLocalizations {
   /// **'The component is missing {p0}. The working version has been saved.'**
   String m1163ee245e(String p0);
 
+  /// В пакете MCP отсутствует Python
+  ///
+  /// In en, this message translates to:
+  /// **'The MCP package is missing Python'**
+  String get m9bb974d2c9;
+
   /// Важные показатели
   ///
   /// In en, this message translates to:
@@ -947,6 +953,12 @@ abstract class AppLocalizations {
   /// **'Diagnostics copied'**
   String get m748d0b0dbd;
 
+  /// Для архива нужна закреплённая ревизия
+  ///
+  /// In en, this message translates to:
+  /// **'The archive requires a pinned revision'**
+  String get mff31635225;
+
   /// Для готового дерева PoB обновите MCP до 0.7.0.
   ///
   /// In en, this message translates to:
@@ -958,6 +970,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Tree needs MCP 0.5.0. Update component MCP.'**
   String get mdb491b2fb7;
+
+  /// Для загрузки компонентов нужен интернет. После установки расчёты работают без сети.
+  ///
+  /// In en, this message translates to:
+  /// **'Internet access is required to download components. Calculations work offline after installation.'**
+  String get m75ec9f43e9;
 
   /// Для оригинальных иконок обновите MCP до 0.6.0.
   ///
@@ -988,12 +1006,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Managing the PoB window through Wine requires X11 or XWayland.'**
   String get mbd97478bba;
-
-  /// Для установки нужны Git и 64-битный Python 3.11+. После загрузки компонентов расчёты работают без сети.
-  ///
-  /// In en, this message translates to:
-  /// **'Installation requires Git and 64-bit Python 3.11+. After loading the components, calculations work without a network.'**
-  String get m3e069d1fae;
 
   /// Для частей, которых нет в этапе, используются данные текущей сборки.
   ///
@@ -1998,6 +2010,18 @@ abstract class AppLocalizations {
   /// **'Invalid release file source'**
   String get m5426ce4a91;
 
+  /// Недопустимый путь в архиве
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid path in archive'**
+  String get mead5c633d1;
+
+  /// Недопустимый тип файла в архиве
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid file type in archive'**
+  String get m153634f023;
+
   /// Неизвестная версия настроек
   ///
   /// In en, this message translates to:
@@ -2742,6 +2766,12 @@ abstract class AppLocalizations {
   /// **'Save again'**
   String get m3c320d7fe3;
 
+  /// Повторяющийся путь в архиве
+  ///
+  /// In en, this message translates to:
+  /// **'Duplicate path in archive'**
+  String get m8b614efa1f;
+
   /// Подавление урона чар
   ///
   /// In en, this message translates to:
@@ -3132,18 +3162,6 @@ abstract class AppLocalizations {
   /// **'Check compatibility'**
   String get mfa4af9bbe7;
 
-  /// Проверка Git
-  ///
-  /// In en, this message translates to:
-  /// **'Checking Git'**
-  String get m34f26e6d74;
-
-  /// Проверка Python
-  ///
-  /// In en, this message translates to:
-  /// **'Checking Python'**
-  String get m3cbe98277d;
-
   /// Проверка выпуска: HTTP {p0}
   ///
   /// In en, this message translates to:
@@ -3275,6 +3293,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Allow edits via MCP'**
   String get m13601ffe54;
+
+  /// Распакованный компонент слишком велик
+  ///
+  /// In en, this message translates to:
+  /// **'The extracted component is too large'**
+  String get m0449346093;
+
+  /// Распакованный размер файла не совпал
+  ///
+  /// In en, this message translates to:
+  /// **'The extracted file size does not match'**
+  String get m221310ed98;
 
   /// Расстояние до узла
   ///
@@ -4139,18 +4169,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Calculation settings and party settings come from the first build.'**
   String get mec1443af90;
-
-  /// Установите 64-битный Python 3.11+ и перезапустите PoB II.
-  ///
-  /// In en, this message translates to:
-  /// **'Install 64-bit Python 3.11 or newer and restart PoB II.'**
-  String get m0a3fddcd95;
-
-  /// Установите Git и перезапустите PoB II.
-  ///
-  /// In en, this message translates to:
-  /// **'Install Git and restart PoB II.'**
-  String get mdccbb9341b;
 
   /// Установите компоненты и подключите Lua
   ///

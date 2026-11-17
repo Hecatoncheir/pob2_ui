@@ -373,6 +373,11 @@
       }
     }
   },
+  "m9bb974d2c9": "The MCP package is missing Python",
+  "@m9bb974d2c9": {
+    "description": "В пакете MCP отсутствует Python",
+    "placeholders": {}
+  },
   "m3e8bb03d9a": "Important indicators",
   "@m3e8bb03d9a": {
     "description": "Важные показатели",
@@ -756,6 +761,11 @@
     "description": "Диагностика скопирована",
     "placeholders": {}
   },
+  "mff31635225": "The archive requires a pinned revision",
+  "@mff31635225": {
+    "description": "Для архива нужна закреплённая ревизия",
+    "placeholders": {}
+  },
   "m7c2e51e000": "For a finished PoB tree, update MCP to 0.7.0.",
   "@m7c2e51e000": {
     "description": "Для готового дерева PoB обновите MCP до 0.7.0.",
@@ -764,6 +774,11 @@
   "mdb491b2fb7": "Tree needs MCP 0.5.0. Update component MCP.",
   "@mdb491b2fb7": {
     "description": "Для дерева нужен MCP 0.5.0. Обновите компонент MCP.",
+    "placeholders": {}
+  },
+  "m75ec9f43e9": "Internet access is required to download components. Calculations work offline after installation.",
+  "@m75ec9f43e9": {
+    "description": "Для загрузки компонентов нужен интернет. После установки расчёты работают без сети.",
     "placeholders": {}
   },
   "m130a0abbfa": "For original icons, update MCP to 0.6.0.",
@@ -789,11 +804,6 @@
   "mbd97478bba": "Managing the PoB window through Wine requires X11 or XWayland.",
   "@mbd97478bba": {
     "description": "Для управления окном PoB через Wine нужен X11 или XWayland.",
-    "placeholders": {}
-  },
-  "m3e069d1fae": "Installation requires Git and 64-bit Python 3.11+. After loading the components, calculations work without a network.",
-  "@m3e069d1fae": {
-    "description": "Для установки нужны Git и 64-битный Python 3.11+. После загрузки компонентов расчёты работают без сети.",
     "placeholders": {}
   },
   "m34279a696f": "Missing milestone parts use data from the current build.",
@@ -1757,6 +1767,16 @@
     "description": "Неверный источник файла выпуска",
     "placeholders": {}
   },
+  "mead5c633d1": "Invalid path in archive",
+  "@mead5c633d1": {
+    "description": "Недопустимый путь в архиве",
+    "placeholders": {}
+  },
+  "m153634f023": "Invalid file type in archive",
+  "@m153634f023": {
+    "description": "Недопустимый тип файла в архиве",
+    "placeholders": {}
+  },
   "m34f418bb26": "Unknown settings version",
   "@m34f418bb26": {
     "description": "Неизвестная версия настроек",
@@ -2401,6 +2421,11 @@
     "description": "Повторить сохранение",
     "placeholders": {}
   },
+  "m8b614efa1f": "Duplicate path in archive",
+  "@m8b614efa1f": {
+    "description": "Повторяющийся путь в архиве",
+    "placeholders": {}
+  },
   "mbcc0fdbe14": "Spell Suppression Chance",
   "@mbcc0fdbe14": {
     "description": "Подавление урона чар",
@@ -2754,16 +2779,6 @@
     "description": "Проверить совместимость",
     "placeholders": {}
   },
-  "m34f26e6d74": "Checking Git",
-  "@m34f26e6d74": {
-    "description": "Проверка Git",
-    "placeholders": {}
-  },
-  "m3cbe98277d": "Checking Python",
-  "@m3cbe98277d": {
-    "description": "Проверка Python",
-    "placeholders": {}
-  },
   "mfeb5830ec9": "Release check: HTTP {p0}",
   "@mfeb5830ec9": {
     "description": "Проверка выпуска: HTTP {p0}",
@@ -2880,6 +2895,16 @@
   "m13601ffe54": "Allow edits via MCP",
   "@m13601ffe54": {
     "description": "Разрешить правки через MCP",
+    "placeholders": {}
+  },
+  "m0449346093": "The extracted component is too large",
+  "@m0449346093": {
+    "description": "Распакованный компонент слишком велик",
+    "placeholders": {}
+  },
+  "m221310ed98": "The extracted file size does not match",
+  "@m221310ed98": {
+    "description": "Распакованный размер файла не совпал",
     "placeholders": {}
   },
   "mde6527a5fe": "Distance to node",
@@ -3640,16 +3665,6 @@
   "mec1443af90": "Calculation settings and party settings come from the first build.",
   "@mec1443af90": {
     "description": "Условия расчёта и настройки группы берутся из первой сборки.",
-    "placeholders": {}
-  },
-  "m0a3fddcd95": "Install 64-bit Python 3.11 or newer and restart PoB II.",
-  "@m0a3fddcd95": {
-    "description": "Установите 64-битный Python 3.11+ и перезапустите PoB II.",
-    "placeholders": {}
-  },
-  "mdccbb9341b": "Install Git and restart PoB II.",
-  "@mdccbb9341b": {
-    "description": "Установите Git и перезапустите PoB II.",
     "placeholders": {}
   },
   "m720408ab97": "Install components and connect Lua",

@@ -15,8 +15,6 @@ typedef WorkshopDocument = ({
 });
 
 enum WorkshopSetupStage {
-  python('Проверка Python'),
-  git('Проверка Git'),
   releases('Проверка выпусков'),
   pob('Загрузка Path of Building'),
   mcp('Загрузка PoB MCP'),

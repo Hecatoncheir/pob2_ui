@@ -227,6 +227,9 @@ class AppLocalizationsTh extends AppLocalizations {
   }
 
   @override
+  String get m9bb974d2c9 => 'แพ็กเกจ MCP ไม่มี Python';
+
+  @override
   String get m3e8bb03d9a => 'ตัวชี้วัดที่สำคัญ';
 
   @override
@@ -457,11 +460,18 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m748d0b0dbd => 'คัดลอกข้อมูลวินิจฉัยแล้ว';
 
   @override
+  String get mff31635225 => 'ต้องระบุรีวิชันที่แน่นอนสำหรับไฟล์บีบอัด';
+
+  @override
   String get m7c2e51e000 =>
       'สำหรับแผนผัง PoB ที่เสร็จสมบูรณ์แล้ว ให้อัปเดต MCP เป็น 0.7.0';
 
   @override
   String get mdb491b2fb7 => 'ทรีต้องการ MCP 0.5.0 อัปเดตคอมโพเนนต์ MCP';
+
+  @override
+  String get m75ec9f43e9 =>
+      'ต้องเชื่อมต่ออินเทอร์เน็ตเพื่อดาวน์โหลดส่วนประกอบ หลังจากติดตั้งแล้วจะคำนวณแบบออฟไลน์ได้';
 
   @override
   String get m130a0abbfa => 'สำหรับไอคอนดั้งเดิม ให้อัปเดต MCP เป็น 0.6.0';
@@ -479,10 +489,6 @@ class AppLocalizationsTh extends AppLocalizations {
   @override
   String get mbd97478bba =>
       'การควบคุมหน้าต่าง PoB ผ่าน Wine ต้องใช้ X11 หรือ XWayland';
-
-  @override
-  String get m3e069d1fae =>
-      'การติดตั้งต้องใช้ Git และ Python 3.11+ 64 บิต หลังจากโหลดส่วนประกอบแล้ว การคำนวณจะทำงานโดยไม่มีเครือข่าย';
 
   @override
   String get m34279a696f => 'ส่วนที่ไม่มีในขั้นจะใช้ข้อมูลจากบิลด์ปัจจุบัน';
@@ -1049,6 +1055,12 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m5426ce4a91 => 'แหล่งไฟล์รีลีสไม่ถูกต้อง';
 
   @override
+  String get mead5c633d1 => 'พาธในไฟล์บีบอัดไม่ถูกต้อง';
+
+  @override
+  String get m153634f023 => 'ชนิดไฟล์ในไฟล์บีบอัดไม่ถูกต้อง';
+
+  @override
   String get m34f418bb26 => 'เวอร์ชันการตั้งค่าที่ไม่รู้จัก';
 
   @override
@@ -1436,6 +1448,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m3c320d7fe3 => 'บันทึกอีกครั้ง';
 
   @override
+  String get m8b614efa1f => 'มีพาธซ้ำในไฟล์บีบอัด';
+
+  @override
   String get mbcc0fdbe14 => 'โอกาสในการสะกดคำ';
 
   @override
@@ -1645,12 +1660,6 @@ class AppLocalizationsTh extends AppLocalizations {
   String get mfa4af9bbe7 => 'ตรวจสอบความเข้ากันได้';
 
   @override
-  String get m34f26e6d74 => 'กำลังตรวจสอบ Git';
-
-  @override
-  String get m3cbe98277d => 'กำลังตรวจสอบ Python';
-
-  @override
   String mfeb5830ec9(String p0) {
     return 'การตรวจสอบการเปิดตัว: HTTP $p0';
   }
@@ -1720,6 +1729,12 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m13601ffe54 => 'อนุญาตให้แก้ไขผ่าน MCP';
+
+  @override
+  String get m0449346093 => 'ส่วนประกอบที่แตกไฟล์แล้วมีขนาดใหญ่เกินไป';
+
+  @override
+  String get m221310ed98 => 'ขนาดไฟล์ที่แตกแล้วไม่ตรงกัน';
 
   @override
   String get mde6527a5fe => 'Distance to node';
@@ -2175,13 +2190,6 @@ class AppLocalizationsTh extends AppLocalizations {
   @override
   String get mec1443af90 =>
       'ใช้เงื่อนไขการคำนวณและการตั้งค่าปาร์ตี้จากบิลด์แรก';
-
-  @override
-  String get m0a3fddcd95 =>
-      'ติดตั้ง Python 3.11 ขึ้นไปแบบ 64 บิต แล้วเปิด PoB II ใหม่';
-
-  @override
-  String get mdccbb9341b => 'ติดตั้ง Git แล้วเปิด PoB II ใหม่';
 
   @override
   String get m720408ab97 => 'ติดตั้งส่วนประกอบและเชื่อมต่อ Lua';

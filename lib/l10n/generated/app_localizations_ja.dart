@@ -224,6 +224,9 @@ class AppLocalizationsJa extends AppLocalizations {
   }
 
   @override
+  String get m9bb974d2c9 => 'MCP パッケージに Python がありません';
+
+  @override
   String get m3e8bb03d9a => '重要な指標';
 
   @override
@@ -453,10 +456,17 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m748d0b0dbd => '診断情報をコピーしました';
 
   @override
+  String get mff31635225 => 'アーカイブには固定リビジョンが必要です';
+
+  @override
   String get m7c2e51e000 => '完成した PoB ツリーの場合、MCP を 0.7.0 に更新します。';
 
   @override
   String get mdb491b2fb7 => 'ツリーには MCP 0.5.0 が必要です。コンポーネントを更新します。MCP';
+
+  @override
+  String get m75ec9f43e9 =>
+      'コンポーネントのダウンロードにはインターネット接続が必要です。インストール後はオフラインで計算できます。';
 
   @override
   String get m130a0abbfa => 'オリジナルアイコンの場合、MCP を 0.6.0 に更新します。';
@@ -472,10 +482,6 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get mbd97478bba => 'Wine で PoB のウィンドウを操作するには X11 または XWayland が必要です。';
-
-  @override
-  String get m3e069d1fae =>
-      'インストールには Git および 64 ビット Python 3.11 以降が必要です。コンポーネントをロードすると、計算はネットワークなしで機能します。';
 
   @override
   String get m34279a696f => 'ステージにない項目は現在のビルドのデータを使用します。';
@@ -1040,6 +1046,12 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m5426ce4a91 => '無効なリリース ファイル ソース';
 
   @override
+  String get mead5c633d1 => 'アーカイブ内のパスが無効です';
+
+  @override
+  String get m153634f023 => 'アーカイブ内のファイル形式が無効です';
+
+  @override
   String get m34f418bb26 => '不明な設定バージョン';
 
   @override
@@ -1424,6 +1436,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m3c320d7fe3 => '再度保存します';
 
   @override
+  String get m8b614efa1f => 'アーカイブ内に重複するパスがあります';
+
+  @override
   String get mbcc0fdbe14 => 'スペル抑制チャンス';
 
   @override
@@ -1633,12 +1648,6 @@ class AppLocalizationsJa extends AppLocalizations {
   String get mfa4af9bbe7 => '互換性を確認する';
 
   @override
-  String get m34f26e6d74 => 'Git を確認中';
-
-  @override
-  String get m3cbe98277d => 'Python を確認中';
-
-  @override
   String mfeb5830ec9(String p0) {
     return 'リリースチェック: HTTP $p0';
   }
@@ -1707,6 +1716,12 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m13601ffe54 => 'MCP 経由での編集を許可します';
+
+  @override
+  String get m0449346093 => '展開後のコンポーネントが大きすぎます';
+
+  @override
+  String get m221310ed98 => '展開後のファイルサイズが一致しません';
 
   @override
   String get mde6527a5fe => 'ノードまでの距離';
@@ -2156,13 +2171,6 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get mec1443af90 => '計算条件とパーティ設定は1つ目のビルドから取得します。';
-
-  @override
-  String get m0a3fddcd95 =>
-      '64 ビット版の Python 3.11 以降をインストールし、PoB II を再起動してください。';
-
-  @override
-  String get mdccbb9341b => 'Git をインストールし、PoB II を再起動してください。';
 
   @override
   String get m720408ab97 => 'コンポーネントをインストールして接続 Lua';

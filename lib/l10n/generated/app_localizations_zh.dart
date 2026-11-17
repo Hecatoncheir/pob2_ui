@@ -223,6 +223,9 @@ class AppLocalizationsZh extends AppLocalizations {
   }
 
   @override
+  String get m9bb974d2c9 => 'MCP 套件缺少 Python';
+
+  @override
   String get m3e8bb03d9a => '重要指標';
 
   @override
@@ -452,10 +455,16 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m748d0b0dbd => '已複製診斷資訊';
 
   @override
+  String get mff31635225 => '壓縮檔需要固定的修訂版本';
+
+  @override
   String get m7c2e51e000 => '對於完成的 PoB 樹，將 MCP 更新為 0.7.0。';
 
   @override
   String get mdb491b2fb7 => '樹需要 MCP 0.5.0。更新組件MCP。';
+
+  @override
+  String get m75ec9f43e9 => '下載元件需要網路連線。安裝完成後即可離線計算。';
 
   @override
   String get m130a0abbfa => '對於原始圖標，請將 MCP 更新為 0.6.0。';
@@ -471,9 +480,6 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get mbd97478bba => '透過 Wine 管理 PoB 視窗需要 X11 或 XWayland。';
-
-  @override
-  String get m3e069d1fae => '安裝需要 Git 和 64 位元 Python 3.11+。載入組件後，無需網路即可進行計算。';
 
   @override
   String get m34279a696f => '階段中缺少的部分使用目前流派的資料。';
@@ -1037,6 +1043,12 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m5426ce4a91 => '發佈文件來源無效';
 
   @override
+  String get mead5c633d1 => '壓縮檔中的路徑無效';
+
+  @override
+  String get m153634f023 => '壓縮檔中的檔案類型無效';
+
+  @override
   String get m34f418bb26 => '未知設定版本';
 
   @override
@@ -1421,6 +1433,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m3c320d7fe3 => '再次儲存';
 
   @override
+  String get m8b614efa1f => '壓縮檔中有重複路徑';
+
+  @override
   String get mbcc0fdbe14 => '法術抑制幾率';
 
   @override
@@ -1630,12 +1645,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get mfa4af9bbe7 => '檢查相容性';
 
   @override
-  String get m34f26e6d74 => '正在檢查 Git';
-
-  @override
-  String get m3cbe98277d => '正在檢查 Python';
-
-  @override
   String mfeb5830ec9(String p0) {
     return '發布檢查：HTTP $p0';
   }
@@ -1704,6 +1713,12 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m13601ffe54 => '允许通过 MCP 进行编辑';
+
+  @override
+  String get m0449346093 => '解壓縮後的元件過大';
+
+  @override
+  String get m221310ed98 => '解壓縮後的檔案大小不符';
 
   @override
   String get mde6527a5fe => '到節點的距離';
@@ -2150,12 +2165,6 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get mec1443af90 => '計算條件與隊伍設定取自第一個流派。';
-
-  @override
-  String get m0a3fddcd95 => '安裝 64 位元 Python 3.11 或更新版本，再重新啟動 PoB II。';
-
-  @override
-  String get mdccbb9341b => '安裝 Git，再重新啟動 PoB II。';
 
   @override
   String get m720408ab97 => '安裝組件並連接 Lua';
@@ -2524,6 +2533,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   }
 
   @override
+  String get m9bb974d2c9 => 'MCP 套件缺少 Python';
+
+  @override
   String get m3e8bb03d9a => '重要指標';
 
   @override
@@ -2753,10 +2765,16 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m748d0b0dbd => '已複製診斷資訊';
 
   @override
+  String get mff31635225 => '壓縮檔需要固定的修訂版本';
+
+  @override
   String get m7c2e51e000 => '對於完成的 PoB 樹，將 MCP 更新為 0.7.0。';
 
   @override
   String get mdb491b2fb7 => '樹需要 MCP 0.5.0。更新組件MCP。';
+
+  @override
+  String get m75ec9f43e9 => '下載元件需要網路連線。安裝完成後即可離線計算。';
 
   @override
   String get m130a0abbfa => '對於原始圖標，請將 MCP 更新為 0.6.0。';
@@ -2772,9 +2790,6 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get mbd97478bba => '透過 Wine 管理 PoB 視窗需要 X11 或 XWayland。';
-
-  @override
-  String get m3e069d1fae => '安裝需要 Git 和 64 位元 Python 3.11+。載入組件後，無需網路即可進行計算。';
 
   @override
   String get m34279a696f => '階段中缺少的部分使用目前流派的資料。';
@@ -3338,6 +3353,12 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m5426ce4a91 => '發佈文件來源無效';
 
   @override
+  String get mead5c633d1 => '壓縮檔中的路徑無效';
+
+  @override
+  String get m153634f023 => '壓縮檔中的檔案類型無效';
+
+  @override
   String get m34f418bb26 => '未知設定版本';
 
   @override
@@ -3722,6 +3743,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m3c320d7fe3 => '再次儲存';
 
   @override
+  String get m8b614efa1f => '壓縮檔中有重複路徑';
+
+  @override
   String get mbcc0fdbe14 => '法術抑制幾率';
 
   @override
@@ -3931,12 +3955,6 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get mfa4af9bbe7 => '檢查相容性';
 
   @override
-  String get m34f26e6d74 => '正在檢查 Git';
-
-  @override
-  String get m3cbe98277d => '正在檢查 Python';
-
-  @override
   String mfeb5830ec9(String p0) {
     return '發布檢查：HTTP $p0';
   }
@@ -4005,6 +4023,12 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m13601ffe54 => '允许通过 MCP 进行编辑';
+
+  @override
+  String get m0449346093 => '解壓縮後的元件過大';
+
+  @override
+  String get m221310ed98 => '解壓縮後的檔案大小不符';
 
   @override
   String get mde6527a5fe => '到節點的距離';
@@ -4451,12 +4475,6 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get mec1443af90 => '計算條件與隊伍設定取自第一個流派。';
-
-  @override
-  String get m0a3fddcd95 => '安裝 64 位元 Python 3.11 或更新版本，再重新啟動 PoB II。';
-
-  @override
-  String get mdccbb9341b => '安裝 Git，再重新啟動 PoB II。';
 
   @override
   String get m720408ab97 => '安裝組件並連接 Lua';

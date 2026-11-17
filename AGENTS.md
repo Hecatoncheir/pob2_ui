@@ -19,7 +19,7 @@ PoB II — настольный интерфейс на Flutter для Path of B
 
 ## Тестирование
 
-Модульные и виджетные тесты на `flutter_test` размещайте в `test/` под именами `*_test.dart`. Запускайте их командой `flutter test`. Сквозные сценарии находятся в `integration_test/`, например `flutter test integration_test/workspace_test.dart -d windows`. Для проверки с настоящим Lua и MCP выполните `dart run tool/smoke.dart --install`. Для загрузки компонентов нужны сеть, Git и 64-битный Python 3.11+. В отчётах указывайте, что этот сценарий проверяет расчёты в PoB.
+Модульные и виджетные тесты на `flutter_test` размещайте в `test/` под именами `*_test.dart`. Запускайте их командой `flutter test`. Сквозные сценарии находятся в `integration_test/`, например `flutter test integration_test/workspace_test.dart -d windows`. Для проверки с настоящим Lua и MCP выполните `dart run tool/smoke.dart --install`. Для архивной установки нужна сеть. Сценарий с клонированием исходников через `--install-source` требует Git и 64-битный Python 3.11+. В отчётах указывайте, что этот сценарий проверяет расчёты в PoB.
 
 ## Коммиты и запросы на слияние
 

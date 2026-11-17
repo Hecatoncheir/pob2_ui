@@ -20,9 +20,9 @@ class WinePobWindow {
   static Future<WinePobWindow?> start(
     File executable,
     String prefix, {
+    required String python,
     required Future<void> Function() prepareBridge,
   }) async {
-    final python = await ProcessService().python();
     final token = List.generate(
       24,
       (_) => _random.nextInt(256),

@@ -14,15 +14,24 @@ Future<void> main(List<String> arguments) async {
   );
   await repository.load();
   if (arguments case ['--install', '--lock', final path]) {
-    await repository.installPair(await _lockedReleases(path), stderr.writeln);
+    final releases = repository.availableReleases();
+    await _verifyLock(path, releases);
+    await repository.installPair(releases, stderr.writeln);
   } else if (arguments case ['--install']) {
+    await repository.installPair(
+      repository.availableReleases(),
+      stderr.writeln,
+    );
+  } else if (arguments case ['--install-source']) {
     final releases = {
       for (final component in Component.values)
         component: await repository.github.latest(component),
     };
     await repository.installPair(releases, stderr.writeln);
   } else if (arguments.isNotEmpty) {
-    throw const FormatException('Используйте --install [--lock <файл>]');
+    throw const FormatException(
+      'Используйте --install [--lock <файл>] или --install-source',
+    );
   }
   final client = McpClient();
   try {
@@ -94,27 +103,18 @@ Future<void> main(List<String> arguments) async {
   }
 }
 
-Future<Map<Component, Release>> _lockedReleases(String path) async {
-  final data = jsonDecode(await File(path).readAsString());
-  if (data case {'pob': final Object? pob, 'mcp': final Object? mcp}) {
-    return {
-      Component.pob: _lockedRelease(Component.pob, pob),
-      Component.mcp: _lockedRelease(Component.mcp, mcp),
-    };
+Future<void> _verifyLock(String path, Map<Component, Release> releases) async {
+  final data =
+      jsonDecode(await File(path).readAsString()) as Map<String, dynamic>;
+  for (final entry in releases.entries) {
+    final release = entry.value;
+    final locked = data[entry.key.name];
+    if (locked is! Map ||
+        locked['tag'] != release.tag ||
+        locked['commit'] != release.expectedCommit) {
+      throw FormatException(
+        'Архив не соответствует закреплённой ревизии ${entry.key.title}',
+      );
+    }
   }
-  throw const FormatException('В манифесте нужны ревизии PoB и MCP');
-}
-
-Release _lockedRelease(Component component, Object? entry) {
-  if (entry case {'tag': final String tag, 'commit': final String commit}
-      when RegExp(r'^v\d+\.\d+\.\d+$').hasMatch(tag) &&
-          RegExp(r'^[a-f0-9]{40}$').hasMatch(commit)) {
-    return Release(
-      tag,
-      '${component.url}/releases/tag/$tag',
-      DateTime.utc(1970),
-      expectedCommit: commit,
-    );
-  }
-  throw FormatException('Некорректный тег или Git SHA для ${component.title}');
 }

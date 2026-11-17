@@ -3,12 +3,10 @@ import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:pob2_ui/data/component_repository.dart';
-import 'package:pob2_ui/data/github_service.dart';
 import 'package:pob2_ui/data/installation_store.dart';
 import 'package:pob2_ui/data/mcp_client.dart';
 import 'package:pob2_ui/data/pob_build_document.dart';
 import 'package:pob2_ui/data/pob_build_library.dart';
-import 'package:pob2_ui/data/process_service.dart';
 import 'package:pob2_ui/domain/build_report.dart';
 import 'package:pob2_ui/domain/component.dart';
 import 'package:pob2_ui/ui/workshop_cubit.dart';
@@ -38,33 +36,14 @@ List<String> _tags(Installations pair) => [
   for (final component in Component.values) pair[component]!.tag,
 ];
 
-class _LatestReleases extends GitHubService {
-  @override
-  Future<Release> latest(Component component) async =>
-      Release(_newTag, '', DateTime.utc(2026));
-}
-
-class _InstallationTools extends ProcessService {
-  @override
-  Future<String> python() async => 'python';
-
-  @override
-  Future<String> run(
-    String executable,
-    List<String> arguments, {
-    String? directory,
-    Duration timeout = const Duration(minutes: 10),
-    void Function(String)? onOutput,
-  }) async => 'git version';
-}
-
 class _ComponentUpdates extends ComponentRepository {
-  _ComponentUpdates(InstallationStore store)
-    : super(
-        store: store,
-        github: _LatestReleases(),
-        processes: _InstallationTools(),
-      );
+  _ComponentUpdates(InstallationStore store) : super(store: store);
+
+  @override
+  Map<Component, Release> availableReleases() => {
+    for (final component in Component.values)
+      component: Release(_newTag, '', DateTime.utc(2026)),
+  };
 
   bool failCommit = false;
 

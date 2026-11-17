@@ -1,3 +1,5 @@
+import 'app_release.dart';
+
 enum Component {
   pob(
     'Path of Building',
@@ -18,11 +20,18 @@ enum Component {
 }
 
 class Release {
-  const Release(this.tag, this.url, this.publishedAt, {this.expectedCommit});
+  const Release(
+    this.tag,
+    this.url,
+    this.publishedAt, {
+    this.expectedCommit,
+    this.package,
+  });
   final String tag;
   final String url;
   final DateTime publishedAt;
   final String? expectedCommit;
+  final AppAsset? package;
 
   factory Release.fromJson(Map<String, dynamic> json) {
     final tag = json['tag_name'] as String;
@@ -42,21 +51,25 @@ class Installation {
     required this.tag,
     required this.commit,
     required this.directory,
+    this.archiveSha256,
   });
   final String tag;
   final String commit;
   final String directory;
+  final String? archiveSha256;
 
   factory Installation.fromJson(Map<String, dynamic> json) => Installation(
     tag: json['tag'] as String,
     commit: json['commit'] as String,
     directory: json['directory'] as String,
+    archiveSha256: json['archiveSha256'] as String?,
   );
 
   Map<String, dynamic> toJson() => {
     'tag': tag,
     'commit': commit,
     'directory': directory,
+    if (archiveSha256 != null) 'archiveSha256': archiveSha256,
   };
 }
 

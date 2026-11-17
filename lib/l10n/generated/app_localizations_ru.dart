@@ -228,6 +228,9 @@ class AppLocalizationsRu extends AppLocalizations {
   }
 
   @override
+  String get m9bb974d2c9 => 'В пакете MCP отсутствует Python';
+
+  @override
   String get m3e8bb03d9a => 'Важные показатели';
 
   @override
@@ -460,11 +463,18 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m748d0b0dbd => 'Диагностика скопирована';
 
   @override
+  String get mff31635225 => 'Для архива нужна закреплённая ревизия';
+
+  @override
   String get m7c2e51e000 => 'Для готового дерева PoB обновите MCP до 0.7.0.';
 
   @override
   String get mdb491b2fb7 =>
       'Для дерева нужен MCP 0.5.0. Обновите компонент MCP.';
+
+  @override
+  String get m75ec9f43e9 =>
+      'Для загрузки компонентов нужен интернет. После установки расчёты работают без сети.';
 
   @override
   String get m130a0abbfa => 'Для оригинальных иконок обновите MCP до 0.6.0.';
@@ -482,10 +492,6 @@ class AppLocalizationsRu extends AppLocalizations {
   @override
   String get mbd97478bba =>
       'Для управления окном PoB через Wine нужен X11 или XWayland.';
-
-  @override
-  String get m3e069d1fae =>
-      'Для установки нужны Git и 64-битный Python 3.11+. После загрузки компонентов расчёты работают без сети.';
 
   @override
   String get m34279a696f =>
@@ -1059,6 +1065,12 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m5426ce4a91 => 'Неверный источник файла выпуска';
 
   @override
+  String get mead5c633d1 => 'Недопустимый путь в архиве';
+
+  @override
+  String get m153634f023 => 'Недопустимый тип файла в архиве';
+
+  @override
   String get m34f418bb26 => 'Неизвестная версия настроек';
 
   @override
@@ -1450,6 +1462,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m3c320d7fe3 => 'Повторить сохранение';
 
   @override
+  String get m8b614efa1f => 'Повторяющийся путь в архиве';
+
+  @override
   String get mbcc0fdbe14 => 'Подавление урона чар';
 
   @override
@@ -1661,12 +1676,6 @@ class AppLocalizationsRu extends AppLocalizations {
   String get mfa4af9bbe7 => 'Проверить совместимость';
 
   @override
-  String get m34f26e6d74 => 'Проверка Git';
-
-  @override
-  String get m3cbe98277d => 'Проверка Python';
-
-  @override
   String mfeb5830ec9(String p0) {
     return 'Проверка выпуска: HTTP $p0';
   }
@@ -1737,6 +1746,12 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get m13601ffe54 => 'Разрешить правки через MCP';
+
+  @override
+  String get m0449346093 => 'Распакованный компонент слишком велик';
+
+  @override
+  String get m221310ed98 => 'Распакованный размер файла не совпал';
 
   @override
   String get mde6527a5fe => 'Расстояние до узла';
@@ -2196,13 +2211,6 @@ class AppLocalizationsRu extends AppLocalizations {
   @override
   String get mec1443af90 =>
       'Условия расчёта и настройки группы берутся из первой сборки.';
-
-  @override
-  String get m0a3fddcd95 =>
-      'Установите 64-битный Python 3.11+ и перезапустите PoB II.';
-
-  @override
-  String get mdccbb9341b => 'Установите Git и перезапустите PoB II.';
 
   @override
   String get m720408ab97 => 'Установите компоненты и подключите Lua';

@@ -8,6 +8,7 @@ environment:
   flutter: '>=3.50.0'
 
 dependencies:
+  archive: 4.5.2
   crypto: ^3.0.8
   file_selector: 1.1.0
   flutter:
@@ -18,6 +19,7 @@ dependencies:
   intl: ^0.20.3
   material_ui: ^1.11.1
   path: 1.9.1
+  posix: ^6.5.2
   xml: 7.1.0
 
 dev_dependencies:

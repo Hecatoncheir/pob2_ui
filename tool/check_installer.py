@@ -127,8 +127,13 @@ def check_build(executable, base, environment, components):
         json.dumps({'directory': str(builds), 'migrated': True}), encoding='utf-8',
     )
     environment = dict(environment, POB2_UI_HOME=str(data), PYTHONDONTWRITEBYTECODE='1')
+    if components is None:
+        environment = archive_check_environment(environment)
     saved = run_build_check(executable, data, environment, 'save')
     assert saved['source'] == 'original-lua' and saved['level'] == 90 and saved['life'] > 0
+    if components is None:
+        active = json.loads((data / 'components.json').read_text(encoding='utf-8'))['active']
+        assert all(component.get('archiveSha256') for component in active.values())
     files = list(builds.glob('*.xml'))
     assert len(files) == 1 and files[0].name == saved['id']
     original = files[0].read_bytes()
@@ -136,6 +141,20 @@ def check_build(executable, base, environment, components):
     assert restored == saved, (saved, restored)
     assert files[0].read_bytes() == original, 'Повторный запуск изменил XML'
     print('Установленный PoB II: расчёт Lua, XML и заметки восстановлены после перезапуска')
+
+
+def archive_check_environment(environment):
+    system_path = str(Path(os.environ['SystemRoot']) / 'System32') if os.name == 'nt' else ''
+    environment = dict(
+        environment,
+        PATH=system_path,
+        POB2_UI_CHECK_FIXTURE=str(ROOT / 'integration_test/fixtures/witch_fireball.xml'),
+    )
+    for key in ('POB2_UI_PYTHON', 'PYTHONHOME', 'PYTHONPATH'):
+        environment.pop(key, None)
+    for executable in ('git', 'python', 'python3'):
+        assert shutil.which(executable, path=system_path) is None, executable
+    return environment
 
 
 def check(target, *, build_check=False, components=None, package=None):

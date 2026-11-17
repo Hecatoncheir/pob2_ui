@@ -98,6 +98,7 @@ class PobWindowRepository {
     final window = await WinePobWindow.start(
       executable,
       prefix,
+      python: await ProcessService().runtimePython(mcp),
       prepareBridge: () async {
         await _run(mcp, ['-c', _ensureBridge, directory]);
       },
@@ -353,7 +354,7 @@ class PobWindowRepository {
     Duration timeout = const Duration(seconds: 30),
   }) async {
     final process = ProcessService();
-    final python = await process.python();
+    final python = await process.runtimePython(mcp);
     try {
       return await process.run(
         python,

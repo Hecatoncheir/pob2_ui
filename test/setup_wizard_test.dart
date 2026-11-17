@@ -6,11 +6,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:pob2_ui/data/component_repository.dart';
-import 'package:pob2_ui/data/github_service.dart';
 import 'package:pob2_ui/data/installation_store.dart';
 import 'package:pob2_ui/data/mcp_client.dart';
 import 'package:pob2_ui/data/pob_build_library.dart';
-import 'package:pob2_ui/data/process_service.dart';
 import 'package:pob2_ui/data/session_repository.dart';
 import 'package:pob2_ui/domain/component.dart';
 import 'package:pob2_ui/ui/core/spark_theme.dart';
@@ -114,12 +112,7 @@ void main() {
 }
 
 class _SetupRepository extends ComponentRepository {
-  _SetupRepository(InstallationStore store)
-    : super(
-        store: store,
-        github: _SetupGitHub(),
-        processes: _SetupProcesses(),
-      ) {
+  _SetupRepository(InstallationStore store) : super(store: store) {
     active = {
       Component.pob: const Installation(
         tag: 'v1.0.0',
@@ -131,6 +124,12 @@ class _SetupRepository extends ComponentRepository {
 
   final failDownload = Completer<void>();
   int attempts = 0;
+
+  @override
+  Map<Component, Release> availableReleases() => {
+    for (final component in Component.values)
+      component: Release('v2.0.0', '', DateTime.utc(2026)),
+  };
 
   @override
   Future<void> installPair(
@@ -157,26 +156,6 @@ class _SetupRepository extends ComponentRepository {
     await validate?.call(candidate);
     active = candidate;
   }
-}
-
-class _SetupGitHub extends GitHubService {
-  @override
-  Future<Release> latest(Component component) async =>
-      Release('v2.0.0', '', DateTime.utc(2026));
-}
-
-class _SetupProcesses extends ProcessService {
-  @override
-  Future<String> python() async => 'python';
-
-  @override
-  Future<String> run(
-    String executable,
-    List<String> arguments, {
-    String? directory,
-    Duration timeout = const Duration(minutes: 10),
-    void Function(String)? onOutput,
-  }) async => 'git version';
 }
 
 class _SetupEngine extends McpClient {

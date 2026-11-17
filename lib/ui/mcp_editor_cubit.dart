@@ -116,7 +116,7 @@ class McpEditorCubit extends Cubit<McpEditorState> {
   Future<String> _connectionCommand() async {
     final mcp = model.components.active[Component.mcp]!;
     final process = ProcessService();
-    final python = await process.python();
+    final python = await process.runtimePython(mcp);
     final script = File.fromUri(
       Directory(mcp.directory).absolute.uri.resolve('run.py'),
     ).path;

@@ -224,6 +224,9 @@ class AppLocalizationsKo extends AppLocalizations {
   }
 
   @override
+  String get m9bb974d2c9 => 'MCP 패키지에 Python이 없습니다';
+
+  @override
   String get m3e8bb03d9a => '중요 지표';
 
   @override
@@ -453,10 +456,17 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m748d0b0dbd => '진단 정보를 복사했습니다';
 
   @override
+  String get mff31635225 => '압축 파일에 고정된 리비전이 필요합니다';
+
+  @override
   String get m7c2e51e000 => '완성된 PoB 트리의 경우 MCP을 0.7.0으로 업데이트하세요.';
 
   @override
   String get mdb491b2fb7 => '트리에는 MCP 0.5.0이 필요합니다. 구성요소를 업데이트합니다.';
+
+  @override
+  String get m75ec9f43e9 =>
+      '구성 요소를 다운로드하려면 인터넷 연결이 필요합니다. 설치 후에는 오프라인으로 계산할 수 있습니다.';
 
   @override
   String get m130a0abbfa => '원본 아이콘의 경우 MCP을 0.6.0으로 업데이트하세요.';
@@ -472,10 +482,6 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get mbd97478bba => 'Wine에서 PoB 창을 제어하려면 X11 또는 XWayland가 필요합니다.';
-
-  @override
-  String get m3e069d1fae =>
-      '설치에는 Git 및 64비트 Python 3.11 이상이 필요합니다. 구성 요소를 로드한 후에는 네트워크 없이 계산이 수행됩니다.';
 
   @override
   String get m34279a696f => '단계에 없는 부분은 현재 빌드의 데이터를 사용합니다.';
@@ -1040,6 +1046,12 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m5426ce4a91 => '잘못된 릴리스 파일 소스';
 
   @override
+  String get mead5c633d1 => '압축 파일의 경로가 잘못되었습니다';
+
+  @override
+  String get m153634f023 => '압축 파일의 파일 유형이 잘못되었습니다';
+
+  @override
   String get m34f418bb26 => '알 수 없는 설정 버전';
 
   @override
@@ -1424,6 +1436,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m3c320d7fe3 => '다시 저장하세요';
 
   @override
+  String get m8b614efa1f => '압축 파일에 중복 경로가 있습니다';
+
+  @override
   String get mbcc0fdbe14 => '주문 억제 확률';
 
   @override
@@ -1633,12 +1648,6 @@ class AppLocalizationsKo extends AppLocalizations {
   String get mfa4af9bbe7 => '호환성 확인';
 
   @override
-  String get m34f26e6d74 => 'Git 확인 중';
-
-  @override
-  String get m3cbe98277d => 'Python 확인 중';
-
-  @override
   String mfeb5830ec9(String p0) {
     return '출시 확인: HTTP $p0';
   }
@@ -1707,6 +1716,12 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m13601ffe54 => 'MCP을 통한 편집 허용';
+
+  @override
+  String get m0449346093 => '압축을 푼 구성 요소가 너무 큽니다';
+
+  @override
+  String get m221310ed98 => '압축을 푼 파일 크기가 일치하지 않습니다';
 
   @override
   String get mde6527a5fe => '노드까지의 거리';
@@ -2156,12 +2171,6 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get mec1443af90 => '계산 조건과 파티 설정은 첫 번째 빌드에서 가져옵니다.';
-
-  @override
-  String get m0a3fddcd95 => '64비트 Python 3.11 이상을 설치하고 PoB II를 다시 시작하세요.';
-
-  @override
-  String get mdccbb9341b => 'Git을 설치하고 PoB II를 다시 시작하세요.';
 
   @override
   String get m720408ab97 => '구성요소 설치 및 연결 Lua';

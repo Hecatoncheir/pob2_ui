@@ -229,6 +229,9 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String get m9bb974d2c9 => 'The MCP package is missing Python';
+
+  @override
   String get m3e8bb03d9a => 'Important indicators';
 
   @override
@@ -461,10 +464,17 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m748d0b0dbd => 'Diagnostics copied';
 
   @override
+  String get mff31635225 => 'The archive requires a pinned revision';
+
+  @override
   String get m7c2e51e000 => 'For a finished PoB tree, update MCP to 0.7.0.';
 
   @override
   String get mdb491b2fb7 => 'Tree needs MCP 0.5.0. Update component MCP.';
+
+  @override
+  String get m75ec9f43e9 =>
+      'Internet access is required to download components. Calculations work offline after installation.';
 
   @override
   String get m130a0abbfa => 'For original icons, update MCP to 0.6.0.';
@@ -482,10 +492,6 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get mbd97478bba =>
       'Managing the PoB window through Wine requires X11 or XWayland.';
-
-  @override
-  String get m3e069d1fae =>
-      'Installation requires Git and 64-bit Python 3.11+. After loading the components, calculations work without a network.';
 
   @override
   String get m34279a696f =>
@@ -1058,6 +1064,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m5426ce4a91 => 'Invalid release file source';
 
   @override
+  String get mead5c633d1 => 'Invalid path in archive';
+
+  @override
+  String get m153634f023 => 'Invalid file type in archive';
+
+  @override
   String get m34f418bb26 => 'Unknown settings version';
 
   @override
@@ -1449,6 +1461,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m3c320d7fe3 => 'Save again';
 
   @override
+  String get m8b614efa1f => 'Duplicate path in archive';
+
+  @override
   String get mbcc0fdbe14 => 'Spell Suppression Chance';
 
   @override
@@ -1659,12 +1674,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get mfa4af9bbe7 => 'Check compatibility';
 
   @override
-  String get m34f26e6d74 => 'Checking Git';
-
-  @override
-  String get m3cbe98277d => 'Checking Python';
-
-  @override
   String mfeb5830ec9(String p0) {
     return 'Release check: HTTP $p0';
   }
@@ -1734,6 +1743,12 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get m13601ffe54 => 'Allow edits via MCP';
+
+  @override
+  String get m0449346093 => 'The extracted component is too large';
+
+  @override
+  String get m221310ed98 => 'The extracted file size does not match';
 
   @override
   String get mde6527a5fe => 'Distance to node';
@@ -2194,13 +2209,6 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get mec1443af90 =>
       'Calculation settings and party settings come from the first build.';
-
-  @override
-  String get m0a3fddcd95 =>
-      'Install 64-bit Python 3.11 or newer and restart PoB II.';
-
-  @override
-  String get mdccbb9341b => 'Install Git and restart PoB II.';
 
   @override
   String get m720408ab97 => 'Install components and connect Lua';

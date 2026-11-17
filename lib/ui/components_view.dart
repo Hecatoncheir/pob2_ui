@@ -41,10 +41,6 @@ class ComponentsView extends StatelessWidget {
       const SizedBox(height: 24),
       _componentActions(),
       const SizedBox(height: 24),
-      AppText(
-        'Для установки нужны Git и 64-битный Python 3.11+. После загрузки компонентов расчёты работают без сети.',
-        style: TextStyle(color: Spark.of(context).muted),
-      ),
       const SizedBox(height: 20),
       ExpansionTile(
         tilePadding: EdgeInsets.zero,

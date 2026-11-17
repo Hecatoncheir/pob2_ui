@@ -48,6 +48,7 @@ Future<Map<String, Object?>> _checkBuild(
       'id': id,
       'level': report.level,
       'life': report.stats['Life'],
+      'dps': report.stats['TotalDPS'],
     };
   } finally {
     await model.close();
@@ -56,8 +57,7 @@ Future<Map<String, Object?>> _checkBuild(
 
 Future<void> _saveBuild(WorkshopCubit model) async {
   _require(model.state.library.entries.isEmpty, model);
-  final witch = model.state.classes.firstWhere((row) => row['name'] == 'Witch');
-  await model.createBuild(witch['id'] as int, 90, name: _name);
+  await _openWitch(model);
   final before = model.state.report?.stats['Life'];
   _require(before is num && before > 0, model);
   final edited = await model.equipItem('Ring 1', raw: _ring);
@@ -67,6 +67,19 @@ Future<void> _saveBuild(WorkshopCubit model) async {
   await model.buildNotes.readNotes(id);
   await model.buildNotes.saveNotes(id, _notes);
   await model.checkpoint();
+}
+
+Future<void> _openWitch(WorkshopCubit model) async {
+  if (Platform.environment['POB2_UI_CHECK_FIXTURE'] case final path?) {
+    await model.importXml(await File(path).readAsString());
+    final report = model.state.report;
+    _require(report?.raw['source'] == 'original-lua', model);
+    final dps = report?.stats['TotalDPS'];
+    _require(dps is num && (dps - 12.817708).abs() < 0.00001, model);
+    return;
+  }
+  final witch = model.state.classes.firstWhere((row) => row['name'] == 'Witch');
+  await model.createBuild(witch['id'] as int, 90, name: _name);
 }
 
 void _require(bool condition, WorkshopCubit model) {

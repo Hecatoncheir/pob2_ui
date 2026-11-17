@@ -2,6 +2,8 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
+import '../domain/component.dart';
+
 class ProcessService {
   Future<String> run(
     String executable,
@@ -50,6 +52,19 @@ class ProcessService {
       buffer.write(chunk);
       onOutput?.call(chunk);
     }
+  }
+
+  Future<String> runtimePython(Installation mcp) async {
+    if (mcp.archiveSha256 == null) return python();
+    final file = File.fromUri(
+      Directory(mcp.directory).absolute.uri.resolve(
+        Platform.isWindows ? 'python/python.exe' : 'python/bin/python3',
+      ),
+    );
+    if (!await file.exists()) {
+      throw StateError('В пакете MCP отсутствует Python');
+    }
+    return file.path;
   }
 
   Future<String> python() async {

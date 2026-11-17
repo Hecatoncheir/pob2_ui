@@ -167,10 +167,10 @@ jobs:
           dart run tool/smoke.dart "${args[@]}" | tee build/review/components.json
       - name: Проверить установку и восстановление сборки с Lua
         if: runner.os == 'Linux'
-        run: xvfb-run -a python tool/check_installer.py --target ${{ matrix.target }} --components "${{ runner.temp }}/pob2-lua-smoke/components.json"
+        run: xvfb-run -a python tool/check_installer.py --target ${{ matrix.target }} --build-check
       - name: Проверить установку и восстановление сборки с Lua
         if: runner.os != 'Linux'
-        run: python tool/check_installer.py --target ${{ matrix.target }} --components "${{ runner.temp }}/pob2-lua-smoke/components.json"
+        run: python tool/check_installer.py --target ${{ matrix.target }} --build-check
       - name: Новый интерфейс с настоящим Lua
         if: runner.os != 'Linux'
         env:

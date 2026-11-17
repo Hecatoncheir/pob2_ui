@@ -238,6 +238,9 @@ class AppLocalizationsDe extends AppLocalizations {
   }
 
   @override
+  String get m9bb974d2c9 => 'Im MCP-Paket fehlt Python';
+
+  @override
   String get m3e8bb03d9a => 'Wichtige Indikatoren';
 
   @override
@@ -475,12 +478,20 @@ class AppLocalizationsDe extends AppLocalizations {
   String get m748d0b0dbd => 'Diagnosedaten kopiert';
 
   @override
+  String get mff31635225 =>
+      'Für das Archiv ist eine festgelegte Revision erforderlich';
+
+  @override
   String get m7c2e51e000 =>
       'Für einen fertigen PoB-Baum aktualisieren Sie MCP auf 0.7.0.';
 
   @override
   String get mdb491b2fb7 =>
       'Baum benötigt MCP 0.5.0. Komponente aktualisieren MCP.';
+
+  @override
+  String get m75ec9f43e9 =>
+      'Zum Herunterladen der Komponenten ist eine Internetverbindung erforderlich. Nach der Installation funktionieren die Berechnungen offline.';
 
   @override
   String get m130a0abbfa =>
@@ -499,10 +510,6 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get mbd97478bba =>
       'Die Steuerung des PoB-Fensters über Wine benötigt X11 oder XWayland.';
-
-  @override
-  String get m3e069d1fae =>
-      'Die Installation erfordert Git und 64-Bit-Python 3.11+. Nach dem Laden der Komponenten funktionieren Berechnungen ohne Netzwerk.';
 
   @override
   String get m34279a696f =>
@@ -1082,6 +1089,12 @@ class AppLocalizationsDe extends AppLocalizations {
   String get m5426ce4a91 => 'Ungültige Release-Dateiquelle';
 
   @override
+  String get mead5c633d1 => 'Ungültiger Pfad im Archiv';
+
+  @override
+  String get m153634f023 => 'Ungültiger Dateityp im Archiv';
+
+  @override
   String get m34f418bb26 => 'Unbekannte Einstellungsversion';
 
   @override
@@ -1476,6 +1489,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get m3c320d7fe3 => 'Erneut speichern';
 
   @override
+  String get m8b614efa1f => 'Doppelter Pfad im Archiv';
+
+  @override
   String get mbcc0fdbe14 => 'Chance auf Zauberunterdrückung';
 
   @override
@@ -1690,12 +1706,6 @@ class AppLocalizationsDe extends AppLocalizations {
   String get mfa4af9bbe7 => 'Kompatibilität prüfen';
 
   @override
-  String get m34f26e6d74 => 'Git wird geprüft';
-
-  @override
-  String get m3cbe98277d => 'Python wird geprüft';
-
-  @override
   String mfeb5830ec9(String p0) {
     return 'Release-Check: HTTP $p0';
   }
@@ -1770,6 +1780,13 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get m13601ffe54 => 'Bearbeitungen über MCP zulassen';
+
+  @override
+  String get m0449346093 => 'Die entpackte Komponente ist zu groß';
+
+  @override
+  String get m221310ed98 =>
+      'Die Größe der entpackten Datei stimmt nicht überein';
 
   @override
   String get mde6527a5fe => 'Entfernung zum Knoten';
@@ -2237,13 +2254,6 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get mec1443af90 =>
       'Berechnungsbedingungen und Gruppeneinstellungen stammen aus dem ersten Build.';
-
-  @override
-  String get m0a3fddcd95 =>
-      'Installieren Sie Python 3.11 oder neuer (64 Bit) und starten Sie PoB II neu.';
-
-  @override
-  String get mdccbb9341b => 'Installieren Sie Git und starten Sie PoB II neu.';
 
   @override
   String get m720408ab97 => 'Komponenten installieren und verbinden Lua';

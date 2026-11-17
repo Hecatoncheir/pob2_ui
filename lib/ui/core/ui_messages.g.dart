@@ -121,6 +121,8 @@ final uiExactTranslations = <String, String Function(AppLocalizations)>{
   "There are no characters available on the account.": (l) => l.m2b96f1cb20,
   "В группе нет активных умений": (l) => l.mfd96d5c7e6,
   "The group has no active skills": (l) => l.mfd96d5c7e6,
+  "В пакете MCP отсутствует Python": (l) => l.m9bb974d2c9,
+  "The MCP package is missing Python": (l) => l.m9bb974d2c9,
   "Важные показатели": (l) => l.m3e8bb03d9a,
   "Important indicators": (l) => l.m3e8bb03d9a,
   "Валюта": (l) => l.m6aa14ce33b,
@@ -270,10 +272,16 @@ final uiExactTranslations = <String, String Function(AppLocalizations)>{
   "Tree not yet available": (l) => l.m57d9f5cb7c,
   "Диагностика скопирована": (l) => l.m748d0b0dbd,
   "Diagnostics copied": (l) => l.m748d0b0dbd,
+  "Для архива нужна закреплённая ревизия": (l) => l.mff31635225,
+  "The archive requires a pinned revision": (l) => l.mff31635225,
   "Для готового дерева PoB обновите MCP до 0.7.0.": (l) => l.m7c2e51e000,
   "For a finished PoB tree, update MCP to 0.7.0.": (l) => l.m7c2e51e000,
   "Для дерева нужен MCP 0.5.0. Обновите компонент MCP.": (l) => l.mdb491b2fb7,
   "Tree needs MCP 0.5.0. Update component MCP.": (l) => l.mdb491b2fb7,
+  "Для загрузки компонентов нужен интернет. После установки расчёты работают без сети.":
+      (l) => l.m75ec9f43e9,
+  "Internet access is required to download components. Calculations work offline after installation.":
+      (l) => l.m75ec9f43e9,
   "Для оригинальных иконок обновите MCP до 0.6.0.": (l) => l.m130a0abbfa,
   "For original icons, update MCP to 0.6.0.": (l) => l.m130a0abbfa,
   "Для поиска по характеристике обновите MCP до 0.9.0 в разделе «Компоненты».":
@@ -288,10 +296,6 @@ final uiExactTranslations = <String, String Function(AppLocalizations)>{
       l.mbd97478bba,
   "Managing the PoB window through Wine requires X11 or XWayland.": (l) =>
       l.mbd97478bba,
-  "Для установки нужны Git и 64-битный Python 3.11+. После загрузки компонентов расчёты работают без сети.":
-      (l) => l.m3e069d1fae,
-  "Installation requires Git and 64-bit Python 3.11+. After loading the components, calculations work without a network.":
-      (l) => l.m3e069d1fae,
   "Для частей, которых нет в этапе, используются данные текущей сборки.": (l) =>
       l.m34279a696f,
   "Missing milestone parts use data from the current build.": (l) =>
@@ -576,6 +580,10 @@ final uiExactTranslations = <String, String Function(AppLocalizations)>{
   "Invalid boot continuation range": (l) => l.m4412eb3d42,
   "Неверный источник файла выпуска": (l) => l.m5426ce4a91,
   "Invalid release file source": (l) => l.m5426ce4a91,
+  "Недопустимый путь в архиве": (l) => l.mead5c633d1,
+  "Invalid path in archive": (l) => l.mead5c633d1,
+  "Недопустимый тип файла в архиве": (l) => l.m153634f023,
+  "Invalid file type in archive": (l) => l.m153634f023,
   "Неизвестная версия настроек": (l) => l.m34f418bb26,
   "Unknown settings version": (l) => l.m34f418bb26,
   "Неизвестный тип установки": (l) => l.me6b70e080e,
@@ -824,6 +832,8 @@ final uiExactTranslations = <String, String Function(AppLocalizations)>{
   "Retry stage calculations": (l) => l.m6a2417f3ec,
   "Повторить сохранение": (l) => l.m3c320d7fe3,
   "Save again": (l) => l.m3c320d7fe3,
+  "Повторяющийся путь в архиве": (l) => l.m8b614efa1f,
+  "Duplicate path in archive": (l) => l.m8b614efa1f,
   "Подавление урона чар": (l) => l.mbcc0fdbe14,
   "Spell Suppression Chance": (l) => l.mbcc0fdbe14,
   "Подготовить PoB II": (l) => l.mb66419affe,
@@ -938,10 +948,6 @@ final uiExactTranslations = <String, String Function(AppLocalizations)>{
   "Check connection": (l) => l.m87cb1172f2,
   "Проверить совместимость": (l) => l.mfa4af9bbe7,
   "Check compatibility": (l) => l.mfa4af9bbe7,
-  "Проверка Git": (l) => l.m34f26e6d74,
-  "Checking Git": (l) => l.m34f26e6d74,
-  "Проверка Python": (l) => l.m3cbe98277d,
-  "Checking Python": (l) => l.m3cbe98277d,
   "Проверка выпусков": (l) => l.mf0c425d946,
   "Checking releases": (l) => l.mf0c425d946,
   "Проверка выпусков завершена": (l) => l.m25ee4bf0ec,
@@ -986,6 +992,10 @@ final uiExactTranslations = <String, String Function(AppLocalizations)>{
   "Change": (l) => l.m93ea4e89b1,
   "Разрешить правки через MCP": (l) => l.m13601ffe54,
   "Allow edits via MCP": (l) => l.m13601ffe54,
+  "Распакованный компонент слишком велик": (l) => l.m0449346093,
+  "The extracted component is too large": (l) => l.m0449346093,
+  "Распакованный размер файла не совпал": (l) => l.m221310ed98,
+  "The extracted file size does not match": (l) => l.m221310ed98,
   "Расстояние до узла": (l) => l.mde6527a5fe,
   "Distance to node": (l) => l.mde6527a5fe,
   "Рассчитано в Lua PoB": (l) => l.m7846ddb858,
@@ -1285,12 +1295,6 @@ final uiExactTranslations = <String, String Function(AppLocalizations)>{
       l.mec1443af90,
   "Calculation settings and party settings come from the first build.": (l) =>
       l.mec1443af90,
-  "Установите 64-битный Python 3.11+ и перезапустите PoB II.": (l) =>
-      l.m0a3fddcd95,
-  "Install 64-bit Python 3.11 or newer and restart PoB II.": (l) =>
-      l.m0a3fddcd95,
-  "Установите Git и перезапустите PoB II.": (l) => l.mdccbb9341b,
-  "Install Git and restart PoB II.": (l) => l.mdccbb9341b,
   "Установите компоненты и подключите Lua": (l) => l.m720408ab97,
   "Install components and connect Lua": (l) => l.m720408ab97,
   "Установите компоненты, чтобы открыть сборку и получить настоящий расчёт.": (
