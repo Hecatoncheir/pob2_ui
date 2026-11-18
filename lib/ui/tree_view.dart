@@ -735,7 +735,12 @@ class _TreeViewState extends State<TreeView>
         scene.nodes[int.tryParse(value)] ??
         widget.tree.nodes.where((node) => _matches(node, value)).firstOrNull;
     if (node == null) return;
-    if (pathModel.state.visible) pathModel.pick(node);
+    final selection = pathModel.state;
+    if (selection.visible &&
+        selection.first != node.id &&
+        selection.second != node.id) {
+      pathModel.pick(node);
+    }
     setState(() => selected = node.id);
     _center(scene.points[node.id]!, widget.tree.original == null ? 4 : 8);
   }

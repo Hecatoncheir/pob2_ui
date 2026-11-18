@@ -16,6 +16,7 @@ import 'package:pob2_ui/data/xml_file_service.dart';
 import 'package:pob2_ui/domain/build_report.dart';
 import 'package:pob2_ui/domain/tree_path_comparison.dart';
 import 'package:pob2_ui/domain/tree_allocation_mode.dart';
+import 'package:pob2_ui/domain/tree_progression.dart';
 import 'package:pob2_ui/installer_check.dart';
 import 'package:pob2_ui/ui/app.dart';
 import 'package:pob2_ui/ui/tree_canvas.dart';
@@ -260,6 +261,16 @@ Future<String> _prepare(
   final id = model.state.library.activeId!;
   await model.buildNotes.readNotes(id);
   await model.buildNotes.saveNotes(id, _notes);
+  if (fixture == 'witch_weapon_paths') {
+    await model.progressionRepository(model.progressionKey!).save([
+      TreeProgressionStep(
+        90,
+        [54447, 44871, 4739],
+        title: 'Оба набора оружия',
+        note: _notes,
+      ),
+    ]);
+  }
   return _export(model);
 }
 
@@ -356,6 +367,9 @@ Future<void> _applyWeaponPath(
     PobBuildDocument(await _export(model)).allocationModes,
     applied.allocationModes,
   );
+  final plan = await model.progressionRepository(model.progressionKey!).load();
+  expect(plan.single.title, 'Оба набора оружия');
+  expect(plan.single.note, _notes);
 }
 
 Future<String> _export(WorkshopCubit model) async {
@@ -375,8 +389,13 @@ Future<void> _chooseTargets(WidgetTester tester) async {
   final field = find.byKey(const Key('tree-search'));
   for (final id in [_pureEnergy, _rawDestruction]) {
     await tester.tap(field);
+    await tester.showKeyboard(field);
     await tester.enterText(field, '$id');
     await tester.pumpAndSettle();
+    final input = tester.widget<EditableText>(
+      find.descendant(of: field, matching: find.byType(EditableText)),
+    );
+    expect(input.controller.text, '$id');
     await tester.testTextInput.receiveAction(TextInputAction.done);
     await tester.pumpAndSettle();
   }
@@ -524,7 +543,7 @@ Future<void> _reopen(
   String expected, {
   num expectedDps = _dpsAfter,
 }) async {
-  final file = File.fromUri(root.uri.resolve('witch-path.xml'));
+  final file = File.fromUri(root.uri.resolve('Ведьма оружие I II.xml'));
   dialogs.savePath = file.path;
   await model.saveXmlFile();
   expect(model.state.error, isNull);
