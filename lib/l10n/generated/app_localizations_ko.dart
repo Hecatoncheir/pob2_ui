@@ -46,6 +46,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m152f871d87 => 'Lua가 종료되었습니다';
 
   @override
+  String get m186b7a4956 => 'Lua이 다른 경로를 할당했습니다.';
+
+  @override
   String get mbb582808f3 => 'Lua가 빌드를 반환하지 않았습니다.';
 
   @override
@@ -357,6 +360,12 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m99068c6fe4 => '두 번째 빌드';
 
   @override
+  String get m27c00630ba => '두 개의 서로 다른 노드를 선택합니다.';
+
+  @override
+  String get mbe5d3137c5 => '트리에서 두 개의 대상 노드를 선택합니다.';
+
+  @override
   String get m33813b1d8e => '값 선택';
 
   @override
@@ -370,6 +379,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m2ac910bfb3 => '수업 선택';
+
+  @override
+  String get maf17ce8a37 => '접근 가능한 경로가 있는 할당되지 않은 노드를 선택합니다.';
 
   @override
   String get m25511c66c8 => 'PoE 2용 PoB 폴더를 선택하세요';
@@ -742,6 +754,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m95cbeda583 => '보고서 원본';
+
+  @override
+  String get mc99eefdd60 => '선택한 노드에 대한 경로가 없습니다.';
 
   @override
   String get mfc105fdc07 => 'Gem 활성화됨';
@@ -1374,6 +1389,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m28af538cbc => '보조 젬 평가';
 
   @override
+  String get m4a385547da => '선택 취소';
+
+  @override
   String get m96b101de7c => '선택 취소';
 
   @override
@@ -1390,6 +1408,11 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m6cc0ad9655 => '안경';
+
+  @override
+  String mbe045b91a6(String p0) {
+    return '필요 포인트 · $p0';
+  }
 
   @override
   String m07817efe16(String p0) {
@@ -1685,6 +1708,12 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m84028563e4 => '적용 및 계산';
 
   @override
+  String get m1f8f9efe4d => '경로 A 적용';
+
+  @override
+  String get m7e6e0a7f1b => '경로 B 적용';
+
+  @override
   String get m711164636a => '단계 적용';
 
   @override
@@ -1771,6 +1800,12 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m006f803f7b => '프로필이 이미 사용 중입니다.';
 
   @override
+  String get mee97fbe2f9 => '경로 A';
+
+  @override
+  String get m66413f01a4 => '경로 B';
+
+  @override
   String get m1dc35191c6 => 'PoB 경로에 이 단계에 없는 노드가 포함됩니다';
 
   @override
@@ -1824,6 +1859,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m7846ddb858 => 'Lua PoB로 계산됨';
+
+  @override
+  String get m6fa4aff83a => '경로 계산';
 
   @override
   String m33a38de9ff(String p0) {
@@ -1902,6 +1940,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m1aee4fe817 => '빌드가 변경되었습니다. 단계를 다시 여세요.';
+
+  @override
+  String get md582f99ed2 => '빌드가 변경되었습니다. 경로를 다시 계산하세요.';
 
   @override
   String get m544bec7909 => '\"적용\"을 클릭하면 빌드가 변경됩니다.';
@@ -2109,10 +2150,16 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m651f75da98 => '구매 목록';
 
   @override
+  String get me953a11402 => '경로 비교';
+
+  @override
   String get m55e18d4647 => '빌드 비교';
 
   @override
   String get m868f6bf490 => '단계 비교';
+
+  @override
+  String get m043dd5eab1 => '경로 비교';
 
   @override
   String get m42098f4d60 => '다른 단계와 비교';

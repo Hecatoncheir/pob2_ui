@@ -29,6 +29,8 @@ import 'tree_jewel_artwork.dart';
 import 'original_tree_artwork.dart';
 import 'attribute_picker.dart';
 import 'tree_point_counters.dart';
+import 'tree_path_cubit.dart';
+import 'tree_path_panel.dart';
 import '../domain/node_power.dart';
 import 'node_power_cubit.dart';
 import 'node_power_panel.dart';
@@ -85,6 +87,7 @@ class _TreeViewState extends State<TreeView>
     widget.model.engine,
     widget.model.loadTreeSceneImages,
   );
+  late final pathModel = TreePathCubit(widget.model);
   @override
   void initState() {
     super.initState();
@@ -197,6 +200,7 @@ class _TreeViewState extends State<TreeView>
     editorFocus.dispose();
     powerGeneration++;
     powerModel.close();
+    pathModel.close();
     powerArtwork?.dispose();
     hoverModel.close();
     hoverArtwork?.dispose();
@@ -242,7 +246,16 @@ class _TreeViewState extends State<TreeView>
             child: OverlayPortal(
               controller: tooltipPortal,
               overlayChildBuilder: _tooltip,
-              child: Focus(focusNode: editorFocus, child: _body()),
+              child: Focus(
+                focusNode: editorFocus,
+                child: BlocConsumer<TreePathCubit, TreePathState>(
+                  bloc: pathModel,
+                  listenWhen: (before, after) =>
+                      before.comparison != after.comparison,
+                  listener: (_, state) => _focusComparison(state),
+                  builder: (_, _) => _body(),
+                ),
+              ),
             ),
           ),
         ),
@@ -282,9 +295,42 @@ class _TreeViewState extends State<TreeView>
     ),
   );
 
+  Widget _pathPanel(double height) => Padding(
+    padding: const EdgeInsets.only(bottom: 8),
+    child: ConstrainedBox(
+      constraints: BoxConstraints(maxHeight: math.min(270, height * .55)),
+      child: TreePathPanel(cubit: pathModel, nodes: scene.nodes),
+    ),
+  );
+
+  void _focusComparison(TreePathState state) {
+    final comparison = state.comparison;
+    if (comparison == null) return;
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted ||
+          viewport == null ||
+          pathModel.state.comparison != comparison) {
+        return;
+      }
+      final (first, second) = _comparisonPaths();
+      _focusStage({...first, ...second});
+    });
+  }
+
+  (List<int>, List<int>) _comparisonPaths() {
+    final state = pathModel.state;
+    if (!state.visible) return (const [], const []);
+    if (state.comparison case final comparison?
+        when widget.model.isTreePathCurrent(comparison)) {
+      return (comparison.reports.first.nodes, comparison.reports.second.nodes);
+    }
+    return ([?state.first], [?state.second]);
+  }
+
   Widget _treeArea() => LayoutBuilder(
     builder: (context, constraints) => Column(
       children: [
+        if (pathModel.state.visible) _pathPanel(constraints.maxHeight),
         if (powerVisible)
           ConstrainedBox(
             constraints: BoxConstraints(
@@ -416,6 +462,7 @@ class _TreeViewState extends State<TreeView>
                           progression: progression,
                           planHovered: planHovered,
                           planPath: _planPath,
+                          comparisonPaths: _comparisonPaths(),
                         ),
                       ),
                     ),
@@ -443,7 +490,7 @@ class _TreeViewState extends State<TreeView>
         child: TextField(
           key: const Key('tree-search'),
           onChanged: (value) => setState(() => query = value),
-          onSubmitted: (_) => _focusMatch(),
+          onSubmitted: _focusMatch,
           decoration: const InputDecoration(
             hint: AppText('Найти узел'),
             prefixIcon: Padding(
@@ -456,6 +503,15 @@ class _TreeViewState extends State<TreeView>
       const SizedBox(width: 6),
       _specPicker(),
       TreeClassButton(widget.model),
+      ArtIconButton.material(
+        Icons.alt_route_rounded,
+        key: const Key('tree-path-toggle'),
+        label: 'Сравнить пути',
+        selected: pathModel.state.visible,
+        onPressed: pathModel.state.visible || widget.model.canCompareTreePaths
+            ? _toggleComparison
+            : null,
+      ),
       ArtIconButton.material(
         Icons.manage_search_rounded,
         key: const Key('node-power-toggle'),
@@ -507,10 +563,17 @@ class _TreeViewState extends State<TreeView>
   void _togglePower() {
     setState(() => powerVisible = !powerVisible);
     if (powerVisible) {
+      if (pathModel.state.visible) pathModel.toggle();
       if (powerModel.state.metrics.isEmpty) powerModel.load();
     } else {
       powerModel.cancel();
     }
+  }
+
+  void _toggleComparison() {
+    if (!pathModel.state.visible && powerVisible) _togglePower();
+    hoverModel.clear();
+    pathModel.toggle();
   }
 
   void _focusTreeNode(int id) {
@@ -665,20 +728,26 @@ class _TreeViewState extends State<TreeView>
       .firstOrNull
       ?.id;
 
-  void _focusMatch() {
-    if (query.isEmpty) return;
-    final node = widget.tree.nodes.where(_matches).firstOrNull;
+  void _focusMatch(String submitted) {
+    final value = submitted.trim();
+    if (value.isEmpty) return;
+    final node =
+        scene.nodes[int.tryParse(value)] ??
+        widget.tree.nodes.where((node) => _matches(node, value)).firstOrNull;
     if (node == null) return;
+    if (pathModel.state.visible) pathModel.pick(node);
     setState(() => selected = node.id);
     _center(scene.points[node.id]!, widget.tree.original == null ? 4 : 8);
   }
 
-  bool _matches(TreeNode node) =>
-      node.matches(query) ||
-      translateGame(
-        context,
-        node.name,
-      ).toLowerCase().contains(query.trim().toLowerCase());
+  bool _matches(TreeNode node, [String? text]) {
+    final value = text ?? query;
+    return node.matches(value) ||
+        translateGame(
+          context,
+          node.name,
+        ).toLowerCase().contains(value.trim().toLowerCase());
+  }
 
   Set<int> _matchedIds() => query.trim().isEmpty
       ? const {}
@@ -703,6 +772,10 @@ class _TreeViewState extends State<TreeView>
     hoverModel.clear();
     final node = scene.nodes[id];
     if (node == null || widget.model.state.busy) return;
+    if (pathModel.state.visible) {
+      pathModel.pick(node);
+      return;
+    }
     if ({'ClassStart', 'AscendClassStart'}.contains(node.kind)) return;
     _selectNode(node);
   }
@@ -733,6 +806,10 @@ class _TreeViewState extends State<TreeView>
   void _detailsAt(Offset point) {
     final node = scene.nodes[_hit(point)];
     if (node == null || widget.model.state.busy) return;
+    if (pathModel.state.visible) {
+      pathModel.pick(node);
+      return;
+    }
     if (node.kind == 'Mastery') {
       showTreeMastery(context, widget.model, node);
     } else {

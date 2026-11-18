@@ -21,9 +21,11 @@ import '../data/build_library.dart';
 import '../data/tree_icon_repository.dart';
 import '../data/tree_progression_exchange.dart';
 import '../data/tree_progression_repository.dart';
+import '../data/tree_path_comparison.dart' as paths;
 import '../domain/build_report.dart';
 import '../domain/tree_geometry.dart';
 import '../domain/tree_progression.dart';
+import '../domain/tree_path_comparison.dart';
 import '../domain/original_tree_scene.dart';
 import '../domain/node_preview.dart';
 import '../domain/library_entry.dart';
@@ -219,6 +221,66 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     }
     final pair = Map<Component, Installation>.unmodifiable(components.active);
     return compareSavedXml(_createEngine(), pair, baselineXml, candidateXml);
+  }
+
+  bool get canCompareTreePaths =>
+      ready &&
+      engine.connected &&
+      !state.busy &&
+      state.document?.stale == false &&
+      state.treeMode == TreeAllocationMode.common &&
+      engine.tools.containsAll({'pob_node_tooltip', 'pob_tree_action'});
+
+  Future<TreePathComparison> compareTreePaths(int first, int second) async {
+    final report = state.report;
+    if (report == null || !canCompareTreePaths)
+      throw StateError(staleTreePaths);
+    final buildId = state.library.activeId;
+    final pair = Map<Component, Installation>.unmodifiable(components.active);
+    final xml = await _currentXml();
+    final reports = await paths.compareTreePaths(
+      _createEngine(),
+      pair,
+      xml,
+      first,
+      second,
+    );
+    final comparison = TreePathComparison(
+      source: report,
+      sourceRevision: PobBuildDocument(xml).revision,
+      buildId: buildId,
+      reports: reports,
+    );
+    if (!canCompareTreePaths || !isTreePathCurrent(comparison)) {
+      throw StateError(staleTreePaths);
+    }
+    return comparison;
+  }
+
+  bool isTreePathCurrent(TreePathComparison comparison) =>
+      state.document?.stale == false &&
+      state.treeMode == TreeAllocationMode.common &&
+      identical(state.report, comparison.source) &&
+      state.library.activeId == comparison.buildId;
+
+  Future<BuildEditResult> applyTreePath(
+    TreePathComparison comparison, {
+    required bool first,
+  }) {
+    final option = first ? comparison.reports.first : comparison.reports.second;
+    late String updated;
+    return _changeBuild(
+      () => _loadXml(updated),
+      guard: (before) {
+        final current = PobBuildDocument(before);
+        if (!isTreePathCurrent(comparison) ||
+            current.revision != comparison.sourceRevision) {
+          throw StateError(staleTreePaths);
+        }
+        updated = current.withTreeAllocation(PobBuildDocument(option.xml));
+      },
+      validate: (after) => paths.checkAppliedTreePath(after, option),
+    );
   }
 
   String get _componentSource => _pairSource(components.active);
@@ -1436,6 +1498,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
 
   Future<BuildEditResult> _changeBuild(
     Future<void> Function() action, {
+    void Function(String xml)? guard,
     void Function(String xml)? validate,
   }) async {
     var committed = false;
@@ -1444,6 +1507,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
       if (document == null) return;
       final builds = state.library;
       final before = await _currentXml();
+      guard?.call(before);
       _markStale();
       try {
         await action();

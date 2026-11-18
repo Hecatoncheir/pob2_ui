@@ -46,6 +46,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m152f871d87 => 'Lua หยุดทำงานแล้ว';
 
   @override
+  String get m186b7a4956 => 'Lua กำหนดเส้นทางอื่น';
+
+  @override
   String get mbb582808f3 => 'Lua ไม่ส่งคืน XML บิลด์';
 
   @override
@@ -360,6 +363,12 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m99068c6fe4 => 'บิลด์ที่สอง';
 
   @override
+  String get m27c00630ba => 'เลือกสองโหนดที่แตกต่างกัน';
+
+  @override
+  String get mbe5d3137c5 => 'เลือกโหนดเป้าหมายสองโหนดในแผนผัง';
+
+  @override
   String get m33813b1d8e => 'เลือกค่า';
 
   @override
@@ -373,6 +382,10 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m2ac910bfb3 => 'เลือกคลาส';
+
+  @override
+  String get maf17ce8a37 =>
+      'เลือกโหนดที่ไม่ได้กำหนดด้วยเส้นทางที่สามารถเข้าถึงได้';
 
   @override
   String get m25511c66c8 => 'เลือกโฟลเดอร์ PoB สำหรับ PoE 2';
@@ -750,6 +763,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m95cbeda583 => 'รายงานต้นฉบับ';
+
+  @override
+  String get mc99eefdd60 => 'ไม่มีเส้นทางไปยังโหนดที่เลือก';
 
   @override
   String get mfc105fdc07 => 'เปิดใช้งานอัญมณีแล้ว';
@@ -1385,6 +1401,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m28af538cbc => 'ประเมินหินเสริม';
 
   @override
+  String get m4a385547da => 'ล้างการเลือก';
+
+  @override
   String get m96b101de7c => 'ลบการเลือก';
 
   @override
@@ -1401,6 +1420,11 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m6cc0ad9655 => 'แว่น';
+
+  @override
+  String mbe045b91a6(String p0) {
+    return 'จุดเส้นทาง · $p0';
+  }
 
   @override
   String m07817efe16(String p0) {
@@ -1697,6 +1721,12 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m84028563e4 => 'นำไปใช้และคำนวณ';
 
   @override
+  String get m1f8f9efe4d => 'ใช้เส้นทาง A';
+
+  @override
+  String get m7e6e0a7f1b => 'ใช้เส้นทาง B';
+
+  @override
   String get m711164636a => 'ใช้ขั้นตอนนี้';
 
   @override
@@ -1783,6 +1813,12 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m006f803f7b => 'โปรไฟล์นี้มีการใช้งานแล้ว';
 
   @override
+  String get mee97fbe2f9 => 'เส้นทาง A';
+
+  @override
+  String get m66413f01a4 => 'เส้นทาง B';
+
+  @override
   String get m1dc35191c6 => 'เส้นทางของ PoB ผ่านโหนดที่ไม่อยู่ในขั้นนี้';
 
   @override
@@ -1837,6 +1873,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m7846ddb858 => 'Calculated in Lua PoB';
+
+  @override
+  String get m6fa4aff83a => 'คำนวณเส้นทาง';
 
   @override
   String m33a38de9ff(String p0) {
@@ -1917,6 +1956,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m1aee4fe817 => 'บิลด์มีการเปลี่ยนแปลง โปรดเปิดขั้นนี้อีกครั้ง';
+
+  @override
+  String get md582f99ed2 => 'บิลด์มีการเปลี่ยนแปลง โปรดคำนวณเส้นทางใหม่';
 
   @override
   String get m544bec7909 => 'โครงสร้างจะเปลี่ยนไปหลังจากคลิก \"นำไปใช้\"';
@@ -2125,10 +2167,16 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m651f75da98 => 'รายการซื้อ';
 
   @override
+  String get me953a11402 => 'การเปรียบเทียบเส้นทาง';
+
+  @override
   String get m55e18d4647 => 'การเปรียบเทียบบิลด์';
 
   @override
   String get m868f6bf490 => 'เปรียบเทียบขั้น';
+
+  @override
+  String get m043dd5eab1 => 'เปรียบเทียบเส้นทาง';
 
   @override
   String get m42098f4d60 => 'เปรียบเทียบกับขั้นอื่น';

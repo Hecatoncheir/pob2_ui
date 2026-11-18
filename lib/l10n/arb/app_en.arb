@@ -55,6 +55,11 @@
     "description": "Lua завершился",
     "placeholders": {}
   },
+  "m186b7a4956": "Lua assigned a different path.",
+  "@m186b7a4956": {
+    "description": "Lua назначил другой путь.",
+    "placeholders": {}
+  },
   "mbb582808f3": "Lua did not return XML build",
   "@mbb582808f3": {
     "description": "Lua не вернул XML сборки",
@@ -596,6 +601,16 @@
     "description": "Вторая сборка",
     "placeholders": {}
   },
+  "m27c00630ba": "Select two different nodes.",
+  "@m27c00630ba": {
+    "description": "Выберите два разных узла.",
+    "placeholders": {}
+  },
+  "mbe5d3137c5": "Select two target nodes in the tree.",
+  "@mbe5d3137c5": {
+    "description": "Выберите два целевых узла на дереве.",
+    "placeholders": {}
+  },
   "m33813b1d8e": "Select value",
   "@m33813b1d8e": {
     "description": "Выберите значение",
@@ -619,6 +634,11 @@
   "m2ac910bfb3": "Select class",
   "@m2ac910bfb3": {
     "description": "Выберите класс",
+    "placeholders": {}
+  },
+  "maf17ce8a37": "Select an unassigned node with an accessible path.",
+  "@maf17ce8a37": {
+    "description": "Выберите неназначенный узел с доступным путём.",
     "placeholders": {}
   },
   "m25511c66c8": "Choose the PoB application folder for PoE 2",
@@ -1252,6 +1272,11 @@
   "m95cbeda583": "Original report",
   "@m95cbeda583": {
     "description": "Исходный отчёт",
+    "placeholders": {}
+  },
+  "mc99eefdd60": "There is no path to the selected node.",
+  "@mc99eefdd60": {
+    "description": "К выбранному узлу нет пути.",
     "placeholders": {}
   },
   "mfc105fdc07": "Gem enabled",
@@ -2317,6 +2342,11 @@
     "description": "Оценить поддержку",
     "placeholders": {}
   },
+  "m4a385547da": "Clear selection",
+  "@m4a385547da": {
+    "description": "Очистить выбор",
+    "placeholders": {}
+  },
   "m96b101de7c": "Clear selected",
   "@m96b101de7c": {
     "description": "Очистить выбранное",
@@ -2346,6 +2376,15 @@
   "@m6cc0ad9655": {
     "description": "Очки",
     "placeholders": {}
+  },
+  "mbe045b91a6": "Path points · {p0}",
+  "@mbe045b91a6": {
+    "description": "Очки пути · {p0}",
+    "placeholders": {
+      "p0": {
+        "type": "String"
+      }
+    }
   },
   "m07817efe16": "Points: {p0}",
   "@m07817efe16": {
@@ -2842,6 +2881,16 @@
     "description": "Применить и рассчитать",
     "placeholders": {}
   },
+  "m1f8f9efe4d": "Apply path A",
+  "@m1f8f9efe4d": {
+    "description": "Применить путь A",
+    "placeholders": {}
+  },
+  "m7e6e0a7f1b": "Apply path B",
+  "@m7e6e0a7f1b": {
+    "description": "Применить путь B",
+    "placeholders": {}
+  },
   "m711164636a": "Apply milestone",
   "@m711164636a": {
     "description": "Применить этап",
@@ -2988,6 +3037,16 @@
     "description": "Профиль уже используется.",
     "placeholders": {}
   },
+  "mee97fbe2f9": "Path A",
+  "@mee97fbe2f9": {
+    "description": "Путь A",
+    "placeholders": {}
+  },
+  "m66413f01a4": "Path B",
+  "@m66413f01a4": {
+    "description": "Путь B",
+    "placeholders": {}
+  },
   "m1dc35191c6": "The PoB path includes nodes outside this stage",
   "@m1dc35191c6": {
     "description": "Путь PoB проходит через узлы вне этапа",
@@ -3079,6 +3138,11 @@
   "m7846ddb858": "Calculated in Lua PoB",
   "@m7846ddb858": {
     "description": "Рассчитано в Lua PoB",
+    "placeholders": {}
+  },
+  "m6fa4aff83a": "Calculate paths",
+  "@m6fa4aff83a": {
+    "description": "Рассчитать пути",
     "placeholders": {}
   },
   "m33a38de9ff": "Calculation Lua · {p0}%",
@@ -3220,6 +3284,11 @@
   "m1aee4fe817": "The build changed. Open the stage again.",
   "@m1aee4fe817": {
     "description": "Сборка изменилась. Откройте этап снова.",
+    "placeholders": {}
+  },
+  "md582f99ed2": "The build has changed. Recalculate the paths.",
+  "@md582f99ed2": {
+    "description": "Сборка изменилась. Пересчитайте пути.",
     "placeholders": {}
   },
   "m544bec7909": "The build will change after clicking \"Apply\"",
@@ -3560,6 +3629,11 @@
     "description": "Список покупок",
     "placeholders": {}
   },
+  "me953a11402": "Path comparison",
+  "@me953a11402": {
+    "description": "Сравнение путей",
+    "placeholders": {}
+  },
   "m55e18d4647": "Build comparison",
   "@m55e18d4647": {
     "description": "Сравнение сборок",
@@ -3568,6 +3642,11 @@
   "m868f6bf490": "Compare milestones",
   "@m868f6bf490": {
     "description": "Сравнение этапов",
+    "placeholders": {}
+  },
+  "m043dd5eab1": "Compare paths",
+  "@m043dd5eab1": {
+    "description": "Сравнить пути",
     "placeholders": {}
   },
   "m42098f4d60": "Compare with another milestone",

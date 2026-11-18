@@ -46,6 +46,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m152f871d87 => 'Lua 已結束';
 
   @override
+  String get m186b7a4956 => 'Lua 分配了不同的路徑。';
+
+  @override
   String get mbb582808f3 => 'Lua 未回傳 XML 版本';
 
   @override
@@ -356,6 +359,12 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m99068c6fe4 => '第二個流派';
 
   @override
+  String get m27c00630ba => '選擇兩個不同的節點。';
+
+  @override
+  String get mbe5d3137c5 => '在樹中選擇兩個目標節點。';
+
+  @override
   String get m33813b1d8e => '選擇值';
 
   @override
@@ -369,6 +378,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m2ac910bfb3 => '選出班級';
+
+  @override
+  String get maf17ce8a37 => '選擇具有可存取路徑的未指派節點。';
 
   @override
   String get m25511c66c8 => '請選擇 PoE 2 的 PoB 應用程式資料夾';
@@ -740,6 +752,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m95cbeda583 => '原始報告';
+
+  @override
+  String get mc99eefdd60 => '沒有指向所選節點的路徑。';
 
   @override
   String get mfc105fdc07 => '啟用 Gem';
@@ -1371,6 +1386,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m28af538cbc => '評估輔助寶石';
 
   @override
+  String get m4a385547da => '清除選擇';
+
+  @override
   String get m96b101de7c => '清除所選內容';
 
   @override
@@ -1387,6 +1405,11 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m6cc0ad9655 => '眼鏡';
+
+  @override
+  String mbe045b91a6(String p0) {
+    return '路徑點 · $p0';
+  }
 
   @override
   String m07817efe16(String p0) {
@@ -1682,6 +1705,12 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m84028563e4 => '應用並計算';
 
   @override
+  String get m1f8f9efe4d => '應用路徑 A';
+
+  @override
+  String get m7e6e0a7f1b => '應用路徑 B';
+
+  @override
   String get m711164636a => '套用階段';
 
   @override
@@ -1768,6 +1797,12 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m006f803f7b => '該設定檔已在使用中。';
 
   @override
+  String get mee97fbe2f9 => '路徑A';
+
+  @override
+  String get m66413f01a4 => '路徑B';
+
+  @override
   String get m1dc35191c6 => 'PoB 的路徑經過此階段以外的天賦節點';
 
   @override
@@ -1821,6 +1856,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m7846ddb858 => '以 Lua PoB 計算';
+
+  @override
+  String get m6fa4aff83a => '計算路徑';
 
   @override
   String m33a38de9ff(String p0) {
@@ -1899,6 +1937,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m1aee4fe817 => '流派已變更。請重新開啟此階段。';
+
+  @override
+  String get md582f99ed2 => '角色配置已變更。請重新計算路徑。';
 
   @override
   String get m544bec7909 => '點選「應用」後建置將會發生變化';
@@ -2103,10 +2144,16 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m651f75da98 => '購物清單';
 
   @override
+  String get me953a11402 => '路徑比較';
+
+  @override
   String get m55e18d4647 => '流派比較';
 
   @override
   String get m868f6bf490 => '比較階段';
+
+  @override
+  String get m043dd5eab1 => '比較路徑';
 
   @override
   String get m42098f4d60 => '與其他階段比較';
@@ -2475,6 +2522,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m152f871d87 => 'Lua 已結束';
 
   @override
+  String get m186b7a4956 => 'Lua 分配了不同的路徑。';
+
+  @override
   String get mbb582808f3 => 'Lua 未回傳 XML 版本';
 
   @override
@@ -2785,6 +2835,12 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m99068c6fe4 => '第二個流派';
 
   @override
+  String get m27c00630ba => '選擇兩個不同的節點。';
+
+  @override
+  String get mbe5d3137c5 => '在樹中選擇兩個目標節點。';
+
+  @override
   String get m33813b1d8e => '選擇值';
 
   @override
@@ -2798,6 +2854,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m2ac910bfb3 => '選出班級';
+
+  @override
+  String get maf17ce8a37 => '選擇具有可存取路徑的未指派節點。';
 
   @override
   String get m25511c66c8 => '請選擇 PoE 2 的 PoB 應用程式資料夾';
@@ -3169,6 +3228,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m95cbeda583 => '原始報告';
+
+  @override
+  String get mc99eefdd60 => '沒有指向所選節點的路徑。';
 
   @override
   String get mfc105fdc07 => '啟用 Gem';
@@ -3800,6 +3862,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m28af538cbc => '評估輔助寶石';
 
   @override
+  String get m4a385547da => '清除選擇';
+
+  @override
   String get m96b101de7c => '清除所選內容';
 
   @override
@@ -3816,6 +3881,11 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m6cc0ad9655 => '眼鏡';
+
+  @override
+  String mbe045b91a6(String p0) {
+    return '路徑點 · $p0';
+  }
 
   @override
   String m07817efe16(String p0) {
@@ -4111,6 +4181,12 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m84028563e4 => '應用並計算';
 
   @override
+  String get m1f8f9efe4d => '應用路徑 A';
+
+  @override
+  String get m7e6e0a7f1b => '應用路徑 B';
+
+  @override
   String get m711164636a => '套用階段';
 
   @override
@@ -4197,6 +4273,12 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m006f803f7b => '該設定檔已在使用中。';
 
   @override
+  String get mee97fbe2f9 => '路徑A';
+
+  @override
+  String get m66413f01a4 => '路徑B';
+
+  @override
   String get m1dc35191c6 => 'PoB 的路徑經過此階段以外的天賦節點';
 
   @override
@@ -4250,6 +4332,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m7846ddb858 => '以 Lua PoB 計算';
+
+  @override
+  String get m6fa4aff83a => '計算路徑';
 
   @override
   String m33a38de9ff(String p0) {
@@ -4328,6 +4413,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m1aee4fe817 => '流派已變更。請重新開啟此階段。';
+
+  @override
+  String get md582f99ed2 => '角色配置已變更。請重新計算路徑。';
 
   @override
   String get m544bec7909 => '點選「應用」後建置將會發生變化';
@@ -4532,10 +4620,16 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m651f75da98 => '購物清單';
 
   @override
+  String get me953a11402 => '路徑比較';
+
+  @override
   String get m55e18d4647 => '流派比較';
 
   @override
   String get m868f6bf490 => '比較階段';
+
+  @override
+  String get m043dd5eab1 => '比較路徑';
 
   @override
   String get m42098f4d60 => '與其他階段比較';

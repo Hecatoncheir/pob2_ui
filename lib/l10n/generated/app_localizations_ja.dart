@@ -46,6 +46,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m152f871d87 => 'Lua が終了しました';
 
   @override
+  String get m186b7a4956 => 'Lua は別のパスを割り当てました。';
+
+  @override
   String get mbb582808f3 => 'Lua がビルドを返しませんでしたXML';
 
   @override
@@ -357,6 +360,12 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m99068c6fe4 => '2つ目のビルド';
 
   @override
+  String get m27c00630ba => '2 つの異なるノードを選択します。';
+
+  @override
+  String get mbe5d3137c5 => 'ツリー内の 2 つのターゲット ノードを選択します。';
+
+  @override
   String get m33813b1d8e => 'Select value';
 
   @override
@@ -370,6 +379,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m2ac910bfb3 => 'クラスの選択';
+
+  @override
+  String get maf17ce8a37 => 'アクセス可能なパスを持つ未割り当てのノードを選択します。';
 
   @override
   String get m25511c66c8 => 'PoE 2用のPoBフォルダーを選択してください';
@@ -742,6 +754,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m95cbeda583 => '元のレポート';
+
+  @override
+  String get mc99eefdd60 => '選択したノードへのパスがありません。';
 
   @override
   String get mfc105fdc07 => 'ジェムが有効になりました';
@@ -1374,6 +1389,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m28af538cbc => 'サポートを試算';
 
   @override
+  String get m4a385547da => '選択をクリア';
+
+  @override
   String get m96b101de7c => '選択を解除';
 
   @override
@@ -1390,6 +1408,11 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m6cc0ad9655 => 'メガネ';
+
+  @override
+  String mbe045b91a6(String p0) {
+    return 'パス ポイント · $p0';
+  }
 
   @override
   String m07817efe16(String p0) {
@@ -1685,6 +1708,12 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m84028563e4 => '適用して計算する';
 
   @override
+  String get m1f8f9efe4d => 'パス A を適用します';
+
+  @override
+  String get m7e6e0a7f1b => 'パス B を適用します';
+
+  @override
   String get m711164636a => '段階を適用';
 
   @override
@@ -1771,6 +1800,12 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m006f803f7b => 'プロファイルはすでに使用されています。';
 
   @override
+  String get mee97fbe2f9 => 'パスA';
+
+  @override
+  String get m66413f01a4 => 'パスB';
+
+  @override
   String get m1dc35191c6 => 'PoB の経路にはこの段階に含まれないノードがあります';
 
   @override
@@ -1824,6 +1859,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m7846ddb858 => 'Lua PoB で計算';
+
+  @override
+  String get m6fa4aff83a => 'パスを計算する';
 
   @override
   String m33a38de9ff(String p0) {
@@ -1902,6 +1940,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m1aee4fe817 => 'ビルドが変更されました。ステージを開き直してください。';
+
+  @override
+  String get md582f99ed2 => 'ビルドが変更されました。パスを再計算してください。';
 
   @override
   String get m544bec7909 => '「適用」をクリックするとビルドが変更されます';
@@ -2109,10 +2150,16 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m651f75da98 => '購入リスト';
 
   @override
+  String get me953a11402 => 'パスの比較';
+
+  @override
   String get m55e18d4647 => 'ビルド比較';
 
   @override
   String get m868f6bf490 => 'ステージを比較';
+
+  @override
+  String get m043dd5eab1 => 'パスを比較する';
 
   @override
   String get m42098f4d60 => '別のステージと比較';

@@ -147,6 +147,26 @@ void main() {
     expect(PobBuildDocument(changed).notes, 'Моя заметка');
   });
 
+  test('Порядок атрибутов XML не меняет распределение очков', () {
+    const xml = '''
+<PathOfBuilding2><Build/><Tree><Spec nodes="11,12">
+  <Overrides><AttributeOverride strNodes="11" dexNodes="12"/></Overrides>
+</Spec></Tree></PathOfBuilding2>
+''';
+    final original = PobBuildDocument(xml);
+    final reordered = PobBuildDocument(
+      xml.replaceAll(
+        'strNodes="11" dexNodes="12"',
+        'dexNodes="12" strNodes="11"',
+      ),
+    );
+    final changed = PobBuildDocument(
+      xml.replaceAll('dexNodes="12"', 'dexNodes=""'),
+    );
+    expect(original.hasSameTreeAllocation(reordered), isTrue);
+    expect(original.hasSameTreeAllocation(changed), isFalse);
+  });
+
   test(
     'XML переносит этапы с одинаковым уровнем и сохраняет исходную сборку',
     () {

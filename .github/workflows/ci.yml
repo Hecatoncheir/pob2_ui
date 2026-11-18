@@ -196,6 +196,15 @@ jobs:
           runner=()
           if [[ "$RUNNER_OS" == Linux ]]; then runner=(xvfb-run -a); fi
           "${runner[@]}" flutter test integration_test/profile_cleanup_test.dart -d ${{ matrix.platform }} --no-pub
+      - name: Сравнение путей дерева с настоящим Lua
+        if: inputs.cold_install != true
+        shell: bash
+        env:
+          POB2_UI_HOME: ${{ runner.temp }}/pob2-lua-smoke
+        run: |
+          runner=()
+          if [[ "$RUNNER_OS" == Linux ]]; then runner=(xvfb-run -a); fi
+          "${runner[@]}" flutter test integration_test/tree_path_comparison_test.dart -d ${{ matrix.platform }} --no-pub
       - name: Новый интерфейс с настоящим Lua
         if: inputs.cold_install != true && runner.os != 'Linux'
         env:

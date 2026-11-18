@@ -47,6 +47,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get m152f871d87 => 'Lua wurde beendet';
 
   @override
+  String get m186b7a4956 => 'Lua hat einen anderen Pfad zugewiesen.';
+
+  @override
   String get mbb582808f3 => 'Lua hat den Build nicht zurückgegeben';
 
   @override
@@ -373,6 +376,12 @@ class AppLocalizationsDe extends AppLocalizations {
   String get m99068c6fe4 => 'Zweiter Build';
 
   @override
+  String get m27c00630ba => 'Wählen Sie zwei verschiedene Knoten aus.';
+
+  @override
+  String get mbe5d3137c5 => 'Wählen Sie zwei Zielknoten im Baum aus.';
+
+  @override
   String get m33813b1d8e => 'Wert auswählen';
 
   @override
@@ -386,6 +395,10 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get m2ac910bfb3 => 'Klasse auswählen';
+
+  @override
+  String get maf17ce8a37 =>
+      'Wählen Sie einen nicht zugewiesenen Knoten mit einem zugänglichen Pfad aus.';
 
   @override
   String get m25511c66c8 => 'Wählen Sie den PoB-Anwendungsordner für PoE 2';
@@ -780,6 +793,9 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get m95cbeda583 => 'Originalbericht';
+
+  @override
+  String get mc99eefdd60 => 'Es gibt keinen Pfad zum ausgewählten Knoten.';
 
   @override
   String get mfc105fdc07 => 'Gem aktiviert';
@@ -1425,6 +1441,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get m28af538cbc => 'Unterstützung prüfen';
 
   @override
+  String get m4a385547da => 'Auswahl löschen';
+
+  @override
   String get m96b101de7c => 'Auswahl löschen';
 
   @override
@@ -1442,6 +1461,11 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get m6cc0ad9655 => 'Brille';
+
+  @override
+  String mbe045b91a6(String p0) {
+    return 'Pfadpunkte · $p0';
+  }
 
   @override
   String m07817efe16(String p0) {
@@ -1746,6 +1770,12 @@ class AppLocalizationsDe extends AppLocalizations {
   String get m84028563e4 => 'Anwenden und berechnen';
 
   @override
+  String get m1f8f9efe4d => 'Pfad A anwenden';
+
+  @override
+  String get m7e6e0a7f1b => 'Pfad B anwenden';
+
+  @override
   String get m711164636a => 'Etappe anwenden';
 
   @override
@@ -1836,6 +1866,12 @@ class AppLocalizationsDe extends AppLocalizations {
   String get m006f803f7b => 'Das Profil wird bereits verwendet.';
 
   @override
+  String get mee97fbe2f9 => 'Pfad A';
+
+  @override
+  String get m66413f01a4 => 'Pfad B';
+
+  @override
   String get m1dc35191c6 =>
       'Der PoB-Pfad enthält Knoten außerhalb dieser Etappe';
 
@@ -1892,6 +1928,9 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get m7846ddb858 => 'Berechnet in Lua PoB';
+
+  @override
+  String get m6fa4aff83a => 'Pfade berechnen';
 
   @override
   String m33a38de9ff(String p0) {
@@ -1975,6 +2014,10 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get m1aee4fe817 =>
       'Der Build wurde geändert. Öffne die Etappe erneut.';
+
+  @override
+  String get md582f99ed2 =>
+      'Der Build hat sich geändert. Berechnen Sie die Pfade neu.';
 
   @override
   String get m544bec7909 =>
@@ -2191,10 +2234,16 @@ class AppLocalizationsDe extends AppLocalizations {
   String get m651f75da98 => 'Einkaufsliste';
 
   @override
+  String get me953a11402 => 'Pfadvergleich';
+
+  @override
   String get m55e18d4647 => 'Buildvergleich';
 
   @override
   String get m868f6bf490 => 'Etappen vergleichen';
+
+  @override
+  String get m043dd5eab1 => 'Pfade vergleichen';
 
   @override
   String get m42098f4d60 => 'Mit anderer Etappe vergleichen';

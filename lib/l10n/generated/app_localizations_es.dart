@@ -46,6 +46,9 @@ class AppLocalizationsEs extends AppLocalizations {
   String get m152f871d87 => 'Lua se ha detenido';
 
   @override
+  String get m186b7a4956 => 'Lua asignó una ruta diferente.';
+
+  @override
   String get mbb582808f3 => 'Lua no devolvió la compilación XML';
 
   @override
@@ -365,6 +368,12 @@ class AppLocalizationsEs extends AppLocalizations {
   String get m99068c6fe4 => 'Segunda configuración';
 
   @override
+  String get m27c00630ba => 'Seleccione dos nodos diferentes.';
+
+  @override
+  String get mbe5d3137c5 => 'Seleccione dos nodos de destino en el árbol.';
+
+  @override
   String get m33813b1d8e => 'Seleccionar valor';
 
   @override
@@ -378,6 +387,10 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get m2ac910bfb3 => 'Seleccionar clase';
+
+  @override
+  String get maf17ce8a37 =>
+      'Seleccione un nodo no asignado con una ruta accesible.';
 
   @override
   String get m25511c66c8 => 'Elige la carpeta de PoB para PoE 2';
@@ -765,6 +778,9 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get m95cbeda583 => 'Informe original';
+
+  @override
+  String get mc99eefdd60 => 'No hay ruta al nodo seleccionado.';
 
   @override
   String get mfc105fdc07 => 'Gema habilitada';
@@ -1416,6 +1432,9 @@ class AppLocalizationsEs extends AppLocalizations {
   String get m28af538cbc => 'Evaluar asistencia';
 
   @override
+  String get m4a385547da => 'Borrar selección';
+
+  @override
   String get m96b101de7c => 'Borrar seleccionado';
 
   @override
@@ -1433,6 +1452,11 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get m6cc0ad9655 => 'Gafas';
+
+  @override
+  String mbe045b91a6(String p0) {
+    return 'Puntos de ruta · $p0';
+  }
 
   @override
   String m07817efe16(String p0) {
@@ -1734,6 +1758,12 @@ class AppLocalizationsEs extends AppLocalizations {
   String get m84028563e4 => 'Aplicar y calcular';
 
   @override
+  String get m1f8f9efe4d => 'Aplicar ruta A';
+
+  @override
+  String get m7e6e0a7f1b => 'Aplicar ruta B';
+
+  @override
   String get m711164636a => 'Aplicar etapa';
 
   @override
@@ -1823,6 +1853,12 @@ class AppLocalizationsEs extends AppLocalizations {
   String get m006f803f7b => 'El perfil ya está en uso.';
 
   @override
+  String get mee97fbe2f9 => 'Ruta A';
+
+  @override
+  String get m66413f01a4 => 'Ruta B';
+
+  @override
   String get m1dc35191c6 => 'La ruta de PoB incluye nodos fuera de esta etapa';
 
   @override
@@ -1878,6 +1914,9 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get m7846ddb858 => 'Calculado en Lua PoB';
+
+  @override
+  String get m6fa4aff83a => 'Calcular rutas';
 
   @override
   String m33a38de9ff(String p0) {
@@ -1958,6 +1997,10 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get m1aee4fe817 => 'La build ha cambiado. Vuelve a abrir la etapa.';
+
+  @override
+  String get md582f99ed2 =>
+      'La configuración ha cambiado. Vuelve a calcular las rutas.';
 
   @override
   String get m544bec7909 =>
@@ -2173,10 +2216,16 @@ class AppLocalizationsEs extends AppLocalizations {
   String get m651f75da98 => 'Lista de compras';
 
   @override
+  String get me953a11402 => 'Comparación de rutas';
+
+  @override
   String get m55e18d4647 => 'Comparación de configuraciones';
 
   @override
   String get m868f6bf490 => 'Comparar etapas';
+
+  @override
+  String get m043dd5eab1 => 'Comparar rutas';
 
   @override
   String get m42098f4d60 => 'Comparar con otra etapa';

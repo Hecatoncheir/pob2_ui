@@ -185,6 +185,12 @@ abstract class AppLocalizations {
   /// **'Lua stopped'**
   String get m152f871d87;
 
+  /// Lua назначил другой путь.
+  ///
+  /// In en, this message translates to:
+  /// **'Lua assigned a different path.'**
+  String get m186b7a4956;
+
   /// Lua не вернул XML сборки
   ///
   /// In en, this message translates to:
@@ -755,6 +761,18 @@ abstract class AppLocalizations {
   /// **'Second build'**
   String get m99068c6fe4;
 
+  /// Выберите два разных узла.
+  ///
+  /// In en, this message translates to:
+  /// **'Select two different nodes.'**
+  String get m27c00630ba;
+
+  /// Выберите два целевых узла на дереве.
+  ///
+  /// In en, this message translates to:
+  /// **'Select two target nodes in the tree.'**
+  String get mbe5d3137c5;
+
   /// Выберите значение
   ///
   /// In en, this message translates to:
@@ -784,6 +802,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Select class'**
   String get m2ac910bfb3;
+
+  /// Выберите неназначенный узел с доступным путём.
+  ///
+  /// In en, this message translates to:
+  /// **'Select an unassigned node with an accessible path.'**
+  String get maf17ce8a37;
 
   /// Выберите папку с приложением PoB для PoE 2
   ///
@@ -1474,6 +1498,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Original report'**
   String get m95cbeda583;
+
+  /// К выбранному узлу нет пути.
+  ///
+  /// In en, this message translates to:
+  /// **'There is no path to the selected node.'**
+  String get mc99eefdd60;
 
   /// Камень включён
   ///
@@ -2646,6 +2676,12 @@ abstract class AppLocalizations {
   /// **'Preview support'**
   String get m28af538cbc;
 
+  /// Очистить выбор
+  ///
+  /// In en, this message translates to:
+  /// **'Clear selection'**
+  String get m4a385547da;
+
   /// Очистить выбранное
   ///
   /// In en, this message translates to:
@@ -2681,6 +2717,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Glasses'**
   String get m6cc0ad9655;
+
+  /// Очки пути · {p0}
+  ///
+  /// In en, this message translates to:
+  /// **'Path points · {p0}'**
+  String mbe045b91a6(String p0);
 
   /// Очки: {p0}
   ///
@@ -3228,6 +3270,18 @@ abstract class AppLocalizations {
   /// **'Apply and calculate'**
   String get m84028563e4;
 
+  /// Применить путь A
+  ///
+  /// In en, this message translates to:
+  /// **'Apply path A'**
+  String get m1f8f9efe4d;
+
+  /// Применить путь B
+  ///
+  /// In en, this message translates to:
+  /// **'Apply path B'**
+  String get m7e6e0a7f1b;
+
   /// Применить этап
   ///
   /// In en, this message translates to:
@@ -3384,6 +3438,18 @@ abstract class AppLocalizations {
   /// **'The profile is already in use.'**
   String get m006f803f7b;
 
+  /// Путь A
+  ///
+  /// In en, this message translates to:
+  /// **'Path A'**
+  String get mee97fbe2f9;
+
+  /// Путь B
+  ///
+  /// In en, this message translates to:
+  /// **'Path B'**
+  String get m66413f01a4;
+
   /// Путь PoB проходит через узлы вне этапа
   ///
   /// In en, this message translates to:
@@ -3485,6 +3551,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Calculated in Lua PoB'**
   String get m7846ddb858;
+
+  /// Рассчитать пути
+  ///
+  /// In en, this message translates to:
+  /// **'Calculate paths'**
+  String get m6fa4aff83a;
 
   /// Расчёт Lua · {p0}%
   ///
@@ -3629,6 +3701,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'The build changed. Open the stage again.'**
   String get m1aee4fe817;
+
+  /// Сборка изменилась. Пересчитайте пути.
+  ///
+  /// In en, this message translates to:
+  /// **'The build has changed. Recalculate the paths.'**
+  String get md582f99ed2;
 
   /// Сборка изменится после нажатия «Применить»
   ///
@@ -4026,6 +4104,12 @@ abstract class AppLocalizations {
   /// **'Shopping list'**
   String get m651f75da98;
 
+  /// Сравнение путей
+  ///
+  /// In en, this message translates to:
+  /// **'Path comparison'**
+  String get me953a11402;
+
   /// Сравнение сборок
   ///
   /// In en, this message translates to:
@@ -4037,6 +4121,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Compare milestones'**
   String get m868f6bf490;
+
+  /// Сравнить пути
+  ///
+  /// In en, this message translates to:
+  /// **'Compare paths'**
+  String get m043dd5eab1;
 
   /// Сравнить с другим этапом
   ///

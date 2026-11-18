@@ -46,6 +46,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get m152f871d87 => 'Lua s’est arrêté';
 
   @override
+  String get m186b7a4956 => 'Lua a attribué un chemin différent.';
+
+  @override
   String get mbb582808f3 => 'Lua n\'a pas renvoyé la version XML';
 
   @override
@@ -371,6 +374,13 @@ class AppLocalizationsFr extends AppLocalizations {
   String get m99068c6fe4 => 'Deuxième build';
 
   @override
+  String get m27c00630ba => 'Sélectionnez deux nœuds différents.';
+
+  @override
+  String get mbe5d3137c5 =>
+      'Sélectionnez deux nœuds cibles dans l\'arborescence.';
+
+  @override
   String get m33813b1d8e => 'Sélectionner une valeur';
 
   @override
@@ -384,6 +394,10 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get m2ac910bfb3 => 'Sélectionner une classe';
+
+  @override
+  String get maf17ce8a37 =>
+      'Sélectionnez un nœud non attribué avec un chemin accessible.';
 
   @override
   String get m25511c66c8 => 'Choisissez le dossier de PoB pour PoE 2';
@@ -776,6 +790,10 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get m95cbeda583 => 'Original report';
+
+  @override
+  String get mc99eefdd60 =>
+      'Il n\'existe aucun chemin vers le nœud sélectionné.';
 
   @override
   String get mfc105fdc07 => 'Gemme activée';
@@ -1425,6 +1443,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get m28af538cbc => 'Évaluer le soutien';
 
   @override
+  String get m4a385547da => 'Effacer la sélection';
+
+  @override
   String get m96b101de7c => 'Effacer la sélection';
 
   @override
@@ -1442,6 +1463,11 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get m6cc0ad9655 => 'Lunettes';
+
+  @override
+  String mbe045b91a6(String p0) {
+    return 'Points de chemin · $p0';
+  }
 
   @override
   String m07817efe16(String p0) {
@@ -1744,6 +1770,12 @@ class AppLocalizationsFr extends AppLocalizations {
   String get m84028563e4 => 'Appliquer et calculer';
 
   @override
+  String get m1f8f9efe4d => 'Appliquer le chemin A';
+
+  @override
+  String get m7e6e0a7f1b => 'Appliquer le chemin B';
+
+  @override
   String get m711164636a => 'Appliquer l’étape';
 
   @override
@@ -1833,6 +1865,12 @@ class AppLocalizationsFr extends AppLocalizations {
   String get m006f803f7b => 'Le profil est déjà utilisé.';
 
   @override
+  String get mee97fbe2f9 => 'Chemin A';
+
+  @override
+  String get m66413f01a4 => 'Chemin B';
+
+  @override
   String get m1dc35191c6 =>
       'Le chemin PoB passe par des nœuds hors de cette étape';
 
@@ -1889,6 +1927,9 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get m7846ddb858 => 'Calculé en Lua PoB';
+
+  @override
+  String get m6fa4aff83a => 'Calculer les chemins';
 
   @override
   String m33a38de9ff(String p0) {
@@ -1970,6 +2011,9 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get m1aee4fe817 => 'Le build a changé. Rouvrez l’étape.';
+
+  @override
+  String get md582f99ed2 => 'Le build a changé. Recalculez les chemins.';
 
   @override
   String get m544bec7909 =>
@@ -2185,10 +2229,16 @@ class AppLocalizationsFr extends AppLocalizations {
   String get m651f75da98 => 'Liste d’achats';
 
   @override
+  String get me953a11402 => 'Comparaison des chemins';
+
+  @override
   String get m55e18d4647 => 'Comparaison des builds';
 
   @override
   String get m868f6bf490 => 'Comparer les étapes';
+
+  @override
+  String get m043dd5eab1 => 'Comparer les chemins';
 
   @override
   String get m42098f4d60 => 'Comparer avec une autre étape';

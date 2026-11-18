@@ -7,6 +7,9 @@ import '../domain/tree_geometry.dart';
 import '../domain/tree_progression.dart';
 import 'core/spark_theme.dart';
 
+const firstTreePathColor = Color(0xFFFFB454);
+const secondTreePathColor = Color(0xFF51D9D1);
+
 class TreeScene {
   TreeScene(this.tree) {
     final xs = tree.nodes.map((node) => node.x);
@@ -58,6 +61,7 @@ class TreePainter extends CustomPainter {
     this.progression,
     this.planHovered,
     this.planPath = const [],
+    this.comparisonPaths = (const [], const []),
   }) : super(repaint: transform);
   final TreeScene scene;
   final int? selected;
@@ -72,6 +76,7 @@ class TreePainter extends CustomPainter {
   final TreeProgressionChange? progression;
   final int? planHovered;
   final List<int> planPath;
+  final (List<int>, List<int>) comparisonPaths;
   late double zoom;
   late Rect visible;
   @override
@@ -83,23 +88,29 @@ class TreePainter extends CustomPainter {
     ).inflate(100 / zoom);
     _paintTree(canvas);
     if (hoverArtwork case final picture?) canvas.drawPicture(picture);
-    _paintPlanPath(canvas);
+    _paintPath(canvas, planPath, const Color(0xFFFFC85A));
+    _paintPath(canvas, comparisonPaths.$1, firstTreePathColor, width: 6);
+    _paintPath(canvas, comparisonPaths.$2, secondTreePathColor);
     _paintPlanHover(canvas);
   }
 
-  void _paintPlanPath(Canvas canvas) {
-    if (planPath.isEmpty) return;
-    final color = const Color(0xFFFFC85A);
+  void _paintPath(
+    Canvas canvas,
+    List<int> ids,
+    Color color, {
+    double width = 3,
+  }) {
+    if (ids.isEmpty) return;
     final paint = Paint()
       ..color = color
-      ..strokeWidth = 3 / zoom
+      ..strokeWidth = width / zoom
       ..style = PaintingStyle.stroke;
-    for (var index = 1; index < planPath.length; index++) {
-      final start = scene.points[planPath[index - 1]];
-      final end = scene.points[planPath[index]];
+    for (var index = 1; index < ids.length; index++) {
+      final start = scene.points[ids[index - 1]];
+      final end = scene.points[ids[index]];
       if (start != null && end != null) canvas.drawLine(start, end, paint);
     }
-    for (final id in planPath) {
+    for (final id in ids) {
       if (scene.nodes[id] case final node?) {
         canvas.drawCircle(scene.points[id]!, _radius(node) + 5 / zoom, paint);
       }

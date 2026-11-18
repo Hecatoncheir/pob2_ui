@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:crypto/crypto.dart';
 import 'package:xml/xml.dart';
+import 'package:xml/xpath.dart';
 
 import '../domain/tree_progression.dart';
 import 'pob_progression_loadout.dart';
@@ -49,15 +50,35 @@ class PobBuildDocument {
       int.parse(match[1]!): int.parse(match[2]!),
   };
 
-  String get progressionAllocation {
+  String get progressionAllocation => _progressionAllocation.toXmlString();
+
+  XmlElement get _progressionAllocation {
     final snapshot = XmlElement(const XmlName.qualified('Spec'));
     _copyAllocation(_activeSpec, snapshot);
-    return snapshot.toXmlString();
+    return snapshot;
+  }
+
+  bool hasSameTreeAllocation(PobBuildDocument other) {
+    final result = _progressionAllocation.xpathEvaluate(
+      r'deep-equal(., $other)',
+      configuration: XPathConfiguration(
+        variables: {'other': other._progressionAllocation},
+      ),
+    );
+    return result.single == XPathBoolean.trueInstance;
   }
 
   String get progressionSkills => captureProgressionSkills(_xml.rootElement);
   String get progressionEquipment =>
       captureProgressionEquipment(_xml.rootElement, _activeSpec);
+
+  String withTreeAllocation(PobBuildDocument source) {
+    final target = _activeSpec;
+    final allocation = source._activeSpec;
+    target.setAttribute('nodes', allocation.getAttribute('nodes'));
+    _copyAllocation(allocation, target);
+    return _xml.toXmlString();
+  }
 
   String withCalculationConditions(PobBuildDocument source) {
     final root = _xml.rootElement;

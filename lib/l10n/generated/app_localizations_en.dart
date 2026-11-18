@@ -46,6 +46,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m152f871d87 => 'Lua stopped';
 
   @override
+  String get m186b7a4956 => 'Lua assigned a different path.';
+
+  @override
   String get mbb582808f3 => 'Lua did not return XML build';
 
   @override
@@ -363,6 +366,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m99068c6fe4 => 'Second build';
 
   @override
+  String get m27c00630ba => 'Select two different nodes.';
+
+  @override
+  String get mbe5d3137c5 => 'Select two target nodes in the tree.';
+
+  @override
   String get m33813b1d8e => 'Select value';
 
   @override
@@ -376,6 +385,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get m2ac910bfb3 => 'Select class';
+
+  @override
+  String get maf17ce8a37 =>
+      'Select an unassigned node with an accessible path.';
 
   @override
   String get m25511c66c8 => 'Choose the PoB application folder for PoE 2';
@@ -757,6 +770,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get m95cbeda583 => 'Original report';
+
+  @override
+  String get mc99eefdd60 => 'There is no path to the selected node.';
 
   @override
   String get mfc105fdc07 => 'Gem enabled';
@@ -1398,6 +1414,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m28af538cbc => 'Preview support';
 
   @override
+  String get m4a385547da => 'Clear selection';
+
+  @override
   String get m96b101de7c => 'Clear selected';
 
   @override
@@ -1414,6 +1433,11 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get m6cc0ad9655 => 'Glasses';
+
+  @override
+  String mbe045b91a6(String p0) {
+    return 'Path points · $p0';
+  }
 
   @override
   String m07817efe16(String p0) {
@@ -1712,6 +1736,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m84028563e4 => 'Apply and calculate';
 
   @override
+  String get m1f8f9efe4d => 'Apply path A';
+
+  @override
+  String get m7e6e0a7f1b => 'Apply path B';
+
+  @override
   String get m711164636a => 'Apply milestone';
 
   @override
@@ -1798,6 +1828,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m006f803f7b => 'The profile is already in use.';
 
   @override
+  String get mee97fbe2f9 => 'Path A';
+
+  @override
+  String get m66413f01a4 => 'Path B';
+
+  @override
   String get m1dc35191c6 => 'The PoB path includes nodes outside this stage';
 
   @override
@@ -1852,6 +1888,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get m7846ddb858 => 'Calculated in Lua PoB';
+
+  @override
+  String get m6fa4aff83a => 'Calculate paths';
 
   @override
   String m33a38de9ff(String p0) {
@@ -1932,6 +1971,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get m1aee4fe817 => 'The build changed. Open the stage again.';
+
+  @override
+  String get md582f99ed2 => 'The build has changed. Recalculate the paths.';
 
   @override
   String get m544bec7909 => 'The build will change after clicking \"Apply\"';
@@ -2144,10 +2186,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m651f75da98 => 'Shopping list';
 
   @override
+  String get me953a11402 => 'Path comparison';
+
+  @override
   String get m55e18d4647 => 'Build comparison';
 
   @override
   String get m868f6bf490 => 'Compare milestones';
+
+  @override
+  String get m043dd5eab1 => 'Compare paths';
 
   @override
   String get m42098f4d60 => 'Compare with another milestone';

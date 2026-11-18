@@ -46,6 +46,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m152f871d87 => 'Lua завершился';
 
   @override
+  String get m186b7a4956 => 'Lua назначил другой путь.';
+
+  @override
   String get mbb582808f3 => 'Lua не вернул XML сборки';
 
   @override
@@ -362,6 +365,12 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m99068c6fe4 => 'Вторая сборка';
 
   @override
+  String get m27c00630ba => 'Выберите два разных узла.';
+
+  @override
+  String get mbe5d3137c5 => 'Выберите два целевых узла на дереве.';
+
+  @override
   String get m33813b1d8e => 'Выберите значение';
 
   @override
@@ -375,6 +384,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get m2ac910bfb3 => 'Выберите класс';
+
+  @override
+  String get maf17ce8a37 => 'Выберите неназначенный узел с доступным путём.';
 
   @override
   String get m25511c66c8 => 'Выберите папку с приложением PoB для PoE 2';
@@ -759,6 +771,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get m95cbeda583 => 'Исходный отчёт';
+
+  @override
+  String get mc99eefdd60 => 'К выбранному узлу нет пути.';
 
   @override
   String get mfc105fdc07 => 'Камень включён';
@@ -1398,6 +1413,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m28af538cbc => 'Оценить поддержку';
 
   @override
+  String get m4a385547da => 'Очистить выбор';
+
+  @override
   String get m96b101de7c => 'Очистить выбранное';
 
   @override
@@ -1414,6 +1432,11 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get m6cc0ad9655 => 'Очки';
+
+  @override
+  String mbe045b91a6(String p0) {
+    return 'Очки пути · $p0';
+  }
 
   @override
   String m07817efe16(String p0) {
@@ -1714,6 +1737,12 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m84028563e4 => 'Применить и рассчитать';
 
   @override
+  String get m1f8f9efe4d => 'Применить путь A';
+
+  @override
+  String get m7e6e0a7f1b => 'Применить путь B';
+
+  @override
   String get m711164636a => 'Применить этап';
 
   @override
@@ -1801,6 +1830,12 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m006f803f7b => 'Профиль уже используется.';
 
   @override
+  String get mee97fbe2f9 => 'Путь A';
+
+  @override
+  String get m66413f01a4 => 'Путь B';
+
+  @override
   String get m1dc35191c6 => 'Путь PoB проходит через узлы вне этапа';
 
   @override
@@ -1855,6 +1890,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get m7846ddb858 => 'Рассчитано в Lua PoB';
+
+  @override
+  String get m6fa4aff83a => 'Рассчитать пути';
 
   @override
   String m33a38de9ff(String p0) {
@@ -1936,6 +1974,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get m1aee4fe817 => 'Сборка изменилась. Откройте этап снова.';
+
+  @override
+  String get md582f99ed2 => 'Сборка изменилась. Пересчитайте пути.';
 
   @override
   String get m544bec7909 => 'Сборка изменится после нажатия «Применить»';
@@ -2146,10 +2187,16 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m651f75da98 => 'Список покупок';
 
   @override
+  String get me953a11402 => 'Сравнение путей';
+
+  @override
   String get m55e18d4647 => 'Сравнение сборок';
 
   @override
   String get m868f6bf490 => 'Сравнение этапов';
+
+  @override
+  String get m043dd5eab1 => 'Сравнить пути';
 
   @override
   String get m42098f4d60 => 'Сравнить с другим этапом';
