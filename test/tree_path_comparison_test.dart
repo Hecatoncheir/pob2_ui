@@ -18,6 +18,7 @@ class _PathEngine extends McpClient {
   var imports = 0;
   var closed = false;
   var wrongWeapon = false;
+  var reachable = true;
   final modes = <int>[];
 
   @override
@@ -40,7 +41,7 @@ class _PathEngine extends McpClient {
         return {};
       case 'pob_node_tooltip':
         return {
-          'path': [arguments['id']],
+          'path': reachable ? [arguments['id']] : [],
           'points': 1,
         };
       case 'pob_tree_action':
@@ -114,6 +115,28 @@ void main() {
     );
     expect(engine.closed, isTrue);
   });
+
+  for (final allocated in [false, true]) {
+    test(
+      'Уже назначенная или недоступная цель отклоняется: $allocated',
+      () async {
+        final engine = _PathEngine()..reachable = allocated;
+        await expectLater(
+          compareTreePaths(
+            engine,
+            {},
+            _source,
+            allocated ? 11 : 12,
+            22,
+            mode: TreeAllocationMode.weaponOne,
+          ),
+          throwsFormatException,
+        );
+        expect(engine.target, 0);
+        expect(engine.closed, isTrue);
+      },
+    );
+  }
 
   test('Порядок узлов I/II в XML не меняет распределение', () {
     final before = PobBuildDocument(

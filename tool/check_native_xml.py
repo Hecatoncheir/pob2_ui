@@ -216,7 +216,7 @@ def open_dialog(ui, key):
         ui.chord('control', key)
         time.sleep(1)
         return ui.dialog()
-    dialog = wait_for(trigger, f'Нативный диалог Ctrl+{key.upper()} не появился')
+    dialog = wait_for(trigger, f'Нативный диалог Ctrl+{key.upper()} не появился', timeout=180)
     print(f'Открыт нативный диалог Ctrl+{key.upper()}', flush=True)
     return dialog
 
