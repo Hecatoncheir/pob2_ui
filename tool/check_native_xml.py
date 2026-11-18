@@ -11,7 +11,7 @@ import tempfile
 import time
 import xml.etree.ElementTree as ET
 
-from check_installer import FIXTURES, prepare_profile, run_build_check
+from check_installer import FIXTURES, ROOT, prepare_profile, run_build_check
 
 
 def wait_for(read, message, timeout=45):
@@ -135,6 +135,7 @@ class XWindowAttributes(C.Structure):
 
 class LinuxUi:
     def __init__(self, process):
+        self._prepare_clipboard()
         self.x = C.CDLL('libX11.so.6')
         self.xt = C.CDLL('libXtst.so.6')
         self.x.XOpenDisplay.restype = C.c_void_p
@@ -156,12 +157,25 @@ class LinuxUi:
         self.x.XGetWindowAttributes.argtypes = [C.c_void_p, C.c_ulong, C.POINTER(XWindowAttributes)]
         self.x.XSetInputFocus.argtypes = [C.c_void_p, C.c_ulong, C.c_int, C.c_ulong]
         self.x.XKeysymToKeycode.argtypes = [C.c_void_p, C.c_ulong]
-        self.x.XChangeKeyboardMapping.argtypes = [C.c_void_p, C.c_int, C.c_int, C.POINTER(C.c_ulong), C.c_int]
         self.x.XSync.argtypes = [C.c_void_p, C.c_int]
         self.x.XFree.argtypes = [C.c_void_p]
         self.xt.XTestFakeKeyEvent.argtypes = [C.c_void_p, C.c_uint, C.c_int, C.c_ulong]
         self.process = process
         self.window = wait_for(self._process_window, 'Окно GTK не появилось')
+
+    def _prepare_clipboard(self):
+        self.gtk = C.CDLL('libgtk-3.so.0')
+        self.gdk = C.CDLL('libgdk-3.so.0')
+        self.glib = C.CDLL('libglib-2.0.so.0')
+        if not self.gtk.gtk_init_check(None, None):
+            raise RuntimeError('GTK не подключился к DISPLAY')
+        self.gdk.gdk_atom_intern.argtypes = [C.c_char_p, C.c_int]
+        self.gdk.gdk_atom_intern.restype = C.c_void_p
+        self.gtk.gtk_clipboard_get.argtypes = [C.c_void_p]
+        self.gtk.gtk_clipboard_get.restype = C.c_void_p
+        self.gtk.gtk_clipboard_set_text.argtypes = [C.c_void_p, C.c_char_p, C.c_int]
+        self.glib.g_main_context_iteration.argtypes = [C.c_void_p, C.c_int]
+        self.clipboard = self.gtk.gtk_clipboard_get(self.gdk.gdk_atom_intern(b'CLIPBOARD', False))
 
     def _windows(self):
         root, parent = C.c_ulong(), C.c_ulong()
@@ -233,17 +247,28 @@ class LinuxUi:
         self.chord('control', 'l')
         time.sleep(.3)
         self.chord('control', 'a')
-        for char in str(file):
-            value = ord(char)
-            symbol = value if value < 256 else value | 0x1000000
-            symbols = (C.c_ulong * 2)(symbol, symbol)
-            # Два явных символа сохраняют регистр имени без автоматической смены регистра Xlib.
-            self.x.XChangeKeyboardMapping(self.display, 255, 2, symbols, 1)
-            self.x.XSync(self.display, False)
-            time.sleep(.02)
-            self._key(255, True)
-            self._key(255, False)
+        self.gtk.gtk_clipboard_set_text(self.clipboard, str(file).encode('utf-8'), -1)
+        self.chord('control', 'v')
+        for _ in range(200):
+            self.glib.g_main_context_iteration(None, False)
+            time.sleep(.01)
         self.chord(None, 'enter')
+
+    def capture_failure(self):
+        self.gdk.gdk_get_default_root_window.restype = C.c_void_p
+        window = self.gdk.gdk_get_default_root_window()
+        self.gdk.gdk_window_get_width.argtypes = [C.c_void_p]
+        self.gdk.gdk_window_get_height.argtypes = [C.c_void_p]
+        self.gdk.gdk_pixbuf_get_from_window.argtypes = [C.c_void_p] + [C.c_int] * 4
+        self.gdk.gdk_pixbuf_get_from_window.restype = C.c_void_p
+        pixbuf = self.gdk.gdk_pixbuf_get_from_window(
+            window, 0, 0, self.gdk.gdk_window_get_width(window), self.gdk.gdk_window_get_height(window))
+        library = C.CDLL('libgdk_pixbuf-2.0.so.0')
+        library.gdk_pixbuf_savev.argtypes = [C.c_void_p, C.c_char_p, C.c_char_p, C.c_void_p, C.c_void_p, C.c_void_p]
+        destination = ROOT / 'build/review/native-linux-failed.png'
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        if pixbuf:
+            library.gdk_pixbuf_savev(pixbuf, os.fsencode(destination), b'png', None, None, None)
 
 
 def open_dialog(ui, key):
@@ -280,6 +305,7 @@ def check(binary, components):
         source.write_bytes((FIXTURES / 'witch_weapon_paths.xml').read_bytes())
         target = root / 'Ведьма сохранена.xml'
         process = subprocess.Popen([str(binary)], env=environment, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        ui = None
         try:
             ui = WindowsUi(process) if sys.platform == 'win32' else LinuxUi(process)
             dialog = open_dialog(ui, 'o')
@@ -295,6 +321,10 @@ def check(binary, components):
             ui.choose(open_dialog(ui, 'o'), target)
             wait_for(lambda: not ui.dialog(), 'Сохранённый XML не открылся')
             print('Нативные Ctrl+O/Ctrl+S, отмена, кириллица и пробелы в пути, XML I/II проверены.', flush=True)
+        except Exception:
+            if isinstance(ui, LinuxUi):
+                ui.capture_failure()
+            raise
         finally:
             process.terminate()
             process.wait(timeout=20)
