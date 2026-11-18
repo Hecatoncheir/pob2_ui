@@ -94,6 +94,18 @@ class WindowsUi:
                 raise RuntimeError('Windows отклонила ввод пути XML')
 
 
+class XWindowAttributes(C.Structure):
+    _fields_ = [
+        ('x', C.c_int), ('y', C.c_int), ('width', C.c_int), ('height', C.c_int),
+        ('border', C.c_int), ('depth', C.c_int), ('visual', C.c_void_p), ('root', C.c_ulong),
+        ('kind', C.c_int), ('bit_gravity', C.c_int), ('win_gravity', C.c_int),
+        ('backing_store', C.c_int), ('backing_planes', C.c_ulong), ('backing_pixel', C.c_ulong),
+        ('save_under', C.c_int), ('colormap', C.c_ulong), ('map_installed', C.c_int),
+        ('map_state', C.c_int), ('all_events', C.c_long), ('your_events', C.c_long),
+        ('propagate', C.c_long), ('override_redirect', C.c_int), ('screen', C.c_void_p),
+    ]
+
+
 class LinuxUi:
     def __init__(self, process):
         self.x = C.CDLL('libX11.so.6')
@@ -114,9 +126,7 @@ class LinuxUi:
                                              C.c_long, C.c_int, C.c_ulong, C.POINTER(C.c_ulong),
                                              C.POINTER(C.c_int), C.POINTER(C.c_ulong),
                                              C.POINTER(C.c_ulong), C.POINTER(C.c_void_p)]
-        self.x.XGetGeometry.argtypes = [C.c_void_p, C.c_ulong, C.POINTER(C.c_ulong),
-                                       C.POINTER(C.c_int), C.POINTER(C.c_int), C.POINTER(C.c_uint),
-                                       C.POINTER(C.c_uint), C.POINTER(C.c_uint), C.POINTER(C.c_uint)]
+        self.x.XGetWindowAttributes.argtypes = [C.c_void_p, C.c_ulong, C.POINTER(XWindowAttributes)]
         self.x.XSetInputFocus.argtypes = [C.c_void_p, C.c_ulong, C.c_int, C.c_ulong]
         self.x.XKeysymToKeycode.argtypes = [C.c_void_p, C.c_ulong]
         self.x.XChangeKeyboardMapping.argtypes = [C.c_void_p, C.c_int, C.c_int, C.POINTER(C.c_ulong), C.c_int]
@@ -132,6 +142,8 @@ class LinuxUi:
         self.x.XQueryTree(self.display, self.root, C.byref(root), C.byref(parent), C.byref(children), C.byref(count))
         rows = []
         for window in list(children[:count.value]):
+            if not self._shown(window):
+                continue
             name = C.c_void_p()
             self.x.XFetchName(self.display, window, C.byref(name))
             title = C.string_at(name).decode('utf-8', errors='replace') if name.value else ''
@@ -154,16 +166,14 @@ class LinuxUi:
             pid = C.cast(data, C.POINTER(C.c_ulong))[0] if count.value else None
             if data.value:
                 self.x.XFree(data)
-            if pid == self.process.pid and self._large_window(window):
+            if pid == self.process.pid:
                 return window
         return None
 
-    def _large_window(self, window):
-        root, x, y = C.c_ulong(), C.c_int(), C.c_int()
-        width, height, border, depth = (C.c_uint() for _ in range(4))
-        self.x.XGetGeometry(self.display, window, C.byref(root), C.byref(x), C.byref(y),
-                            C.byref(width), C.byref(height), C.byref(border), C.byref(depth))
-        return width.value > 100 and height.value > 100
+    def _shown(self, window):
+        attributes = XWindowAttributes()
+        self.x.XGetWindowAttributes(self.display, window, C.byref(attributes))
+        return attributes.map_state == 2 and attributes.width > 100 and attributes.height > 100
 
     def _find(self, title):
         return next((window for window, name in self._windows() if title.lower() in name.lower()), None)
