@@ -32,20 +32,47 @@ class WindowsUi:
         self.window = wait_for(lambda: window_for(process), 'Окно Windows не появилось')
         self.user.SetForegroundWindow.argtypes = [W.HWND]
         self.user.GetClassNameW.argtypes = [W.HWND, W.LPWSTR, C.c_int]
+        self.user.GetForegroundWindow.restype = W.HWND
+        self.user.MapVirtualKeyW.argtypes = [W.UINT, W.UINT]
+        self.user.keybd_event.argtypes = [W.BYTE, W.BYTE, W.DWORD, C.c_size_t]
+        self.user.AttachThreadInput.argtypes = [W.DWORD, W.DWORD, W.BOOL]
 
     def chord(self, modifier, key):
         codes = {'control': 0x11, 'alt': 0x12, 'escape': 0x1B, 'enter': 0x0D}
         if modifier:
-            self.user.keybd_event(codes[modifier], 0, 0, 0)
+            self._key(codes[modifier], False)
         code = codes.get(key, ord(key.upper()) if len(key) == 1 else 0)
-        self.user.keybd_event(code, 0, 0, 0)
-        self.user.keybd_event(code, 0, 2, 0)
+        self._key(code, False)
+        self._key(code, True)
         if modifier:
-            self.user.keybd_event(codes[modifier], 0, 2, 0)
+            self._key(codes[modifier], True)
+
+    def _key(self, code, released):
+        scan = self.user.MapVirtualKeyW(code, 0)
+        self.user.keybd_event(code, scan, 2 if released else 0, 0)
 
     def focus(self, window):
+        self.user.ShowWindow(window, 9)
         self.user.SetForegroundWindow(window)
+        if self.user.GetForegroundWindow() != window:
+            self._attach_focus(window)
         time.sleep(.2)
+        if self.user.GetForegroundWindow() != window:
+            raise RuntimeError('Windows не предоставила тесту фокус окна')
+
+    def _attach_focus(self, window):
+        current = C.WinDLL('kernel32').GetCurrentThreadId()
+        threads = {
+            self.user.GetWindowThreadProcessId(self.user.GetForegroundWindow(), None),
+            self.user.GetWindowThreadProcessId(window, None),
+        } - {0, current}
+        for thread in threads:
+            self.user.AttachThreadInput(current, thread, True)
+        try:
+            self.user.SetForegroundWindow(window)
+        finally:
+            for thread in threads:
+                self.user.AttachThreadInput(current, thread, False)
 
     def dialog(self):
         from check_window_state import CALLBACK
