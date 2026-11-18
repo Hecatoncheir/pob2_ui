@@ -223,7 +223,7 @@ def check_previous(target, package, executable, base, environment, components, v
     verify_reopened(executable, data, builds, env, saved)
     assert any((data / 'tree-cache').rglob('*.png')), 'Кеш дерева не восстановлен из Lua'
     print(f'После обновления с v{PREVIOUS_VERSION}, очистки и отката совпали XML, заметки и отчёт Lua')
-    check_previous_weapons(old, executable, data, builds, env, saved['id'])
+    check_previous_weapons(old, executable, data, env)
     if verify_link:
         link_env = dict(env, POB2_UI_CHECK_LINK=str(FIXTURES / 'witch_fireball.poblink'))
         imported = run_build_check(executable, data, link_env, 'link')
@@ -232,19 +232,25 @@ def check_previous(target, package, executable, base, environment, components, v
         print(f"После обновления Ведьма с pobb.in рассчитана на Lua, TotalDPS {imported['dps']}")
 
 
-def check_previous_weapons(old, executable, data, builds, environment, build_id):
-    file = builds / build_id
-    notes = ET.fromstring(file.read_bytes()).find('Notes').text
+def check_previous_weapons(old, executable, source_data, environment):
     for weapon, expected in ((1, 15.38125), (2, 19.482916666667)):
+        data = source_data.parent / f'v{PREVIOUS_VERSION}-weapon-{weapon}-profile'
+        builds = prepare_profile(data, source_data / 'components.json')
+        file = builds / 'Ведьма оружие.xml'
         root = ET.parse(FIXTURES / 'witch_weapon_paths.xml').getroot()
-        root.find('Notes').text = notes
+        root.find('Notes').text = 'Installer check notes'
         items = root.find('Items')
         for section in (items, items.find('ItemSet')):
             section.set('useSecondWeaponSet', 'true' if weapon == 2 else 'false')
         file.write_bytes(ET.tostring(root, encoding='utf-8', xml_declaration=True))
-        saved = run_build_check(old, data, environment, 'restore')
-        assert saved['id'] == build_id and abs(saved['dps'] - expected) < 0.00001, saved
-        verify_reopened(executable, data, builds, environment, saved)
+        settings = data / 'pob-builds.json'
+        selected = json.loads(settings.read_text(encoding='utf-8'))
+        selected['active'] = file.name
+        settings.write_text(json.dumps(selected), encoding='utf-8')
+        env = dict(environment, POB2_UI_HOME=str(data))
+        saved = run_build_check(old, data, env, 'restore')
+        assert saved['id'] == file.name and abs(saved['dps'] - expected) < 0.00001, saved
+        verify_reopened(executable, data, builds, env, saved)
         print(f'Профиль v{PREVIOUS_VERSION}: оружие {weapon}, DPS {expected}, XML и заметки сохранены без HTTP', flush=True)
 
 
