@@ -66,6 +66,7 @@ void main() {
       await _prepare(model, fixture: 'witch_weapon_paths');
       await model.selectWeaponSet(weapon);
       for (final mode in [
+        TreeAllocationMode.common,
         TreeAllocationMode.weaponOne,
         TreeAllocationMode.weaponTwo,
       ]) {
@@ -84,7 +85,7 @@ void main() {
         await _chooseTargets(tester);
         preview = await _calculate(tester);
         await _applyWeaponPath(tester, model, preview, baseline, first: false);
-        if (mode == TreeAllocationMode.weaponOne) await model.undo();
+        if (mode != TreeAllocationMode.weaponTwo) await model.undo();
       }
       final applied = await _export(model);
       await _reopen(
@@ -303,19 +304,28 @@ Future<void> _verifyWeaponPreview(
   } finally {
     await session.close();
   }
-  expect((
-    preview.reports.first.points,
-    preview.reports.second.points,
-  ), preview.mode == TreeAllocationMode.weaponOne ? (4, 8) : (8, 4));
+  final points = switch (preview.mode) {
+    TreeAllocationMode.common => (5, 5),
+    TreeAllocationMode.weaponOne => (4, 8),
+    TreeAllocationMode.weaponTwo => (8, 4),
+  };
+  expect((preview.reports.first.points, preview.reports.second.points), points);
   final expected = switch ((preview.weaponSet, preview.mode)) {
+    (1, TreeAllocationMode.common) => (15.38125, 22.046458333333),
     (1, TreeAllocationMode.weaponOne) => (15.38125, 17.432083333333),
     (1, TreeAllocationMode.weaponTwo) => (15.38125, 15.38125),
+    (2, TreeAllocationMode.common) => (19.482916666667, 24.61),
     (2, TreeAllocationMode.weaponOne) => (19.482916666667, 19.482916666667),
     (2, TreeAllocationMode.weaponTwo) => (23.78075, 24.61),
-    _ => throw StateError('Ожидался предпросмотр I/II'),
+    _ => throw StateError('Неизвестный активный набор оружия'),
   };
   expect(preview.reports.first.stats.dps, closeTo(expected.$1, 0.00001));
   expect(preview.reports.second.stats.dps, closeTo(expected.$2, 0.00001));
+  final effective =
+      preview.mode == TreeAllocationMode.common ||
+      preview.mode.luaValue == preview.weaponSet;
+  expect(preview.reports.first.stats.life, effective ? 1218 : 1187);
+  expect(preview.reports.second.stats.life, 1187);
   expect(await _export(model), baseline);
 }
 
