@@ -21,6 +21,7 @@
     "m5bf96935c9": "Lua не вернул предупреждений для этого расчёта.",
     "m1f463483a4": "Lua не вернул сведения об узле",
     "m35f86d9c5e": "Lua не вернул совместимость камней",
+    "m1810485f55": "Lua не вернул счётчики очков дерева.",
     "mecc0fe5cd1": "Lua не вернул характеристики",
     "mddf65e8cca": "Lua не подключён",
     "m43ddb3a975": "Lua не прошёл проверку",
@@ -53,6 +54,7 @@
     "mbefa507d02": "{p0} · уровень {p1}",
     "m3f8bda535c": "{p0} байт",
     "mb7b217c429": "{p0}: потрачено {p1} из {p2} очков",
+    "m607c57804e": "Активное оружие · {p0}",
     "m63141a77bf": "Амулет",
     "mc11be494c0": "База предмета",
     "m7d4b534b8d": "Без восхождения",
@@ -1545,7 +1547,9 @@
     "m6fa4aff83a": "Calculate paths",
     "md582f99ed2": "The build has changed. Recalculate the paths.",
     "me953a11402": "Path comparison",
-    "m043dd5eab1": "Compare paths"
+    "m043dd5eab1": "Compare paths",
+    "m607c57804e": "Active weapon · {p0}",
+    "m1810485f55": "Lua did not return tree point counters."
   },
   "fr": {
     "m0c63e733f9": "Lua n'a pas renvoyé toutes les icônes",
@@ -2319,7 +2323,9 @@
     "m6fa4aff83a": "Calculer les chemins",
     "md582f99ed2": "Le build a changé. Recalculez les chemins.",
     "me953a11402": "Comparaison des chemins",
-    "m043dd5eab1": "Comparer les chemins"
+    "m043dd5eab1": "Comparer les chemins",
+    "m607c57804e": "Arme active · {p0}",
+    "m1810485f55": "Lua n’a pas renvoyé les compteurs de points de l’arbre."
   },
   "de": {
     "m0c63e733f9": "Lua hat nicht alle Symbole zurückgegeben",
@@ -3093,7 +3099,9 @@
     "m6fa4aff83a": "Pfade berechnen",
     "md582f99ed2": "Der Build hat sich geändert. Berechnen Sie die Pfade neu.",
     "me953a11402": "Pfadvergleich",
-    "m043dd5eab1": "Pfade vergleichen"
+    "m043dd5eab1": "Pfade vergleichen",
+    "m607c57804e": "Aktive Waffe · {p0}",
+    "m1810485f55": "Lua hat keine Fertigkeitspunktzähler zurückgegeben."
   },
   "es": {
     "m0c63e733f9": "Lua no devolvió todos los íconos",
@@ -3867,7 +3875,9 @@
     "m6fa4aff83a": "Calcular rutas",
     "md582f99ed2": "La configuración ha cambiado. Vuelve a calcular las rutas.",
     "me953a11402": "Comparación de rutas",
-    "m043dd5eab1": "Comparar rutas"
+    "m043dd5eab1": "Comparar rutas",
+    "m607c57804e": "Arma activa · {p0}",
+    "m1810485f55": "Lua no devolvió los contadores de puntos del árbol."
   },
   "pt_BR": {
     "m0c63e733f9": "Lua não retornou todos os ícones",
@@ -4641,7 +4651,9 @@
     "m6fa4aff83a": "Calcular caminhos",
     "md582f99ed2": "A build mudou. Recalcule os caminhos.",
     "me953a11402": "Comparação de caminhos",
-    "m043dd5eab1": "Comparar caminhos"
+    "m043dd5eab1": "Comparar caminhos",
+    "m607c57804e": "Arma ativa · {p0}",
+    "m1810485f55": "Lua não retornou os contadores de pontos da árvore."
   },
   "ja": {
     "m0c63e733f9": "Lua はすべてのアイコンを返しませんでした",
@@ -5415,7 +5427,9 @@
     "m6fa4aff83a": "パスを計算する",
     "md582f99ed2": "ビルドが変更されました。パスを再計算してください。",
     "me953a11402": "パスの比較",
-    "m043dd5eab1": "パスを比較する"
+    "m043dd5eab1": "パスを比較する",
+    "m607c57804e": "使用中の武器 · {p0}",
+    "m1810485f55": "Lua がツリーのポイント数を返しませんでした。"
   },
   "ko": {
     "m0c63e733f9": "Lua이 모든 아이콘을 반환하지 않았습니다.",
@@ -6189,7 +6203,9 @@
     "m6fa4aff83a": "경로 계산",
     "md582f99ed2": "빌드가 변경되었습니다. 경로를 다시 계산하세요.",
     "me953a11402": "경로 비교",
-    "m043dd5eab1": "경로 비교"
+    "m043dd5eab1": "경로 비교",
+    "m607c57804e": "현재 무기 · {p0}",
+    "m1810485f55": "Lua가 트리 포인트 수를 반환하지 않았습니다."
   },
   "th": {
     "m0c63e733f9": "Lua ไม่ได้ส่งคืนไอคอนทั้งหมด",
@@ -6963,7 +6979,9 @@
     "m6fa4aff83a": "คำนวณเส้นทาง",
     "md582f99ed2": "บิลด์มีการเปลี่ยนแปลง โปรดคำนวณเส้นทางใหม่",
     "me953a11402": "การเปรียบเทียบเส้นทาง",
-    "m043dd5eab1": "เปรียบเทียบเส้นทาง"
+    "m043dd5eab1": "เปรียบเทียบเส้นทาง",
+    "m607c57804e": "อาวุธที่ใช้งาน · {p0}",
+    "m1810485f55": "Lua ไม่ได้ส่งคืนจำนวนแต้มของผังทักษะ"
   },
   "zh_Hant": {
     "m0c63e733f9": "Lua 未傳回所有圖標",
@@ -7737,6 +7755,8 @@
     "m6fa4aff83a": "計算路徑",
     "md582f99ed2": "角色配置已變更。請重新計算路徑。",
     "me953a11402": "路徑比較",
-    "m043dd5eab1": "比較路徑"
+    "m043dd5eab1": "比較路徑",
+    "m607c57804e": "目前武器 · {p0}",
+    "m1810485f55": "Lua 未傳回天賦樹點數。"
   }
 }

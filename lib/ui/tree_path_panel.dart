@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:material_ui/material_ui.dart';
 
 import '../domain/tree_geometry.dart';
+import '../domain/tree_allocation_mode.dart';
 import '../domain/tree_path_comparison.dart';
 import 'core/app_text.dart';
 import 'core/panels.dart';
@@ -36,6 +37,7 @@ class TreePathPanel extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         const AppText('Сравнение путей'),
+        _context(state),
         if (state.second == null)
           const AppText('Выберите два целевых узла на дереве.'),
         if (state.busy) const LinearProgressIndicator(),
@@ -45,6 +47,23 @@ class TreePathPanel extends StatelessWidget {
         _actions(state),
         const SizedBox(height: 8),
         _paths(context, state, current),
+      ],
+    );
+  }
+
+  Widget _context(TreePathState state) {
+    final mode = state.comparison?.mode ?? cubit.model.state.treeMode;
+    final weapon =
+        state.comparison?.weaponSet ?? cubit.model.state.report?.weaponSet;
+    return Wrap(
+      spacing: 12,
+      children: [
+        AppText(switch (mode) {
+          TreeAllocationMode.common => 'Пассивные',
+          TreeAllocationMode.weaponOne => 'Оружие I',
+          TreeAllocationMode.weaponTwo => 'Оружие II',
+        }),
+        AppText('Активное оружие · ${weapon == 2 ? 'II' : 'I'}'),
       ],
     );
   }

@@ -76,6 +76,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m35f86d9c5e => 'Lua ไม่ได้ส่งคืนความเข้ากันได้ของ stone';
 
   @override
+  String get m1810485f55 => 'Lua ไม่ได้ส่งคืนจำนวนแต้มของผังทักษะ';
+
+  @override
   String get mecc0fe5cd1 => 'Lua ไม่ได้ส่งคืนคุณลักษณะ';
 
   @override
@@ -192,6 +195,11 @@ class AppLocalizationsTh extends AppLocalizations {
   @override
   String mb7b217c429(String p0, String p1, String p2) {
     return '$p0: ใช้แต้มไป $p1 จาก $p2 แต้ม';
+  }
+
+  @override
+  String m607c57804e(String p0) {
+    return 'อาวุธที่ใช้งาน · $p0';
   }
 
   @override

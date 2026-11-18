@@ -89,9 +89,27 @@ class TreePainter extends CustomPainter {
     _paintTree(canvas);
     if (hoverArtwork case final picture?) canvas.drawPicture(picture);
     _paintPath(canvas, planPath, const Color(0xFFFFC85A));
-    _paintPath(canvas, comparisonPaths.$1, firstTreePathColor, width: 6);
-    _paintPath(canvas, comparisonPaths.$2, secondTreePathColor);
+    _paintComparison(canvas, comparisonPaths.$1, firstTreePathColor, 6);
+    _paintComparison(canvas, comparisonPaths.$2, secondTreePathColor, 3);
     _paintPlanHover(canvas);
+  }
+
+  void _paintComparison(
+    Canvas canvas,
+    List<int> ids,
+    Color color,
+    double width,
+  ) {
+    final selected = ids.toSet();
+    _paintPath(
+      canvas,
+      ids,
+      color,
+      width: width,
+      connections: scene.tree.edges.where(
+        (edge) => selected.contains(edge.$1) && selected.contains(edge.$2),
+      ),
+    );
   }
 
   void _paintPath(
@@ -99,15 +117,22 @@ class TreePainter extends CustomPainter {
     List<int> ids,
     Color color, {
     double width = 3,
+    Iterable<(int, int)>? connections,
   }) {
     if (ids.isEmpty) return;
     final paint = Paint()
       ..color = color
       ..strokeWidth = width / zoom
       ..style = PaintingStyle.stroke;
-    for (var index = 1; index < ids.length; index++) {
-      final start = scene.points[ids[index - 1]];
-      final end = scene.points[ids[index]];
+    final edges =
+        connections ??
+        [
+          for (var index = 1; index < ids.length; index++)
+            (ids[index - 1], ids[index]),
+        ];
+    for (final (a, b) in edges) {
+      final start = scene.points[a];
+      final end = scene.points[b];
       if (start != null && end != null) canvas.drawLine(start, end, paint);
     }
     for (final id in ids) {

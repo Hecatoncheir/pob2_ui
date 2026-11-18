@@ -37,6 +37,7 @@ class BuildReport {
   String get name => character['name'] as String? ?? 'Сборка';
   String get characterClass => character['class'] as String? ?? '—';
   int get level => character['level'] as int? ?? 0;
+  int get weaponSet => raw['weaponSet'] as int? ?? 1;
   String get points => cleanPoB(raw['pointDisplay'] as String? ?? '');
   String get treeVersion => snapshot['treeVersion'] as String? ?? '—';
   int? get activeTreeSpec => switch (jsonMap(raw['activeSets'])['tree']) {

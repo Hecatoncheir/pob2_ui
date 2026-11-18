@@ -76,6 +76,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m35f86d9c5e => 'Lua не вернул совместимость камней';
 
   @override
+  String get m1810485f55 => 'Lua не вернул счётчики очков дерева.';
+
+  @override
   String get mecc0fe5cd1 => 'Lua не вернул характеристики';
 
   @override
@@ -193,6 +196,11 @@ class AppLocalizationsRu extends AppLocalizations {
   @override
   String mb7b217c429(String p0, String p1, String p2) {
     return '$p0: потрачено $p1 из $p2 очков';
+  }
+
+  @override
+  String m607c57804e(String p0) {
+    return 'Активное оружие · $p0';
   }
 
   @override

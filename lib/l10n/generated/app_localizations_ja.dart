@@ -76,6 +76,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m35f86d9c5e => 'Lua は石の互換性を返しませんでした';
 
   @override
+  String get m1810485f55 => 'Lua がツリーのポイント数を返しませんでした。';
+
+  @override
   String get mecc0fe5cd1 => 'Lua は特性を返しませんでした';
 
   @override
@@ -189,6 +192,11 @@ class AppLocalizationsJa extends AppLocalizations {
   @override
   String mb7b217c429(String p0, String p1, String p2) {
     return '$p0: $p2 ポイント中 $p1 ポイントが消費されました';
+  }
+
+  @override
+  String m607c57804e(String p0) {
+    return '使用中の武器 · $p0';
   }
 
   @override

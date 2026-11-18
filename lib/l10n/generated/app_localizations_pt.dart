@@ -76,6 +76,10 @@ class AppLocalizationsPt extends AppLocalizations {
   String get m35f86d9c5e => 'Lua não retornou compatibilidade com pedras';
 
   @override
+  String get m1810485f55 =>
+      'Lua não retornou os contadores de pontos da árvore.';
+
+  @override
   String get mecc0fe5cd1 => 'Lua não retornou características';
 
   @override
@@ -194,6 +198,11 @@ class AppLocalizationsPt extends AppLocalizations {
   @override
   String mb7b217c429(String p0, String p1, String p2) {
     return '$p0: $p1 de $p2 pontos gastos';
+  }
+
+  @override
+  String m607c57804e(String p0) {
+    return 'Arma ativa · $p0';
   }
 
   @override
@@ -2626,6 +2635,10 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get m35f86d9c5e => 'Lua não retornou compatibilidade com pedras';
 
   @override
+  String get m1810485f55 =>
+      'Lua não retornou os contadores de pontos da árvore.';
+
+  @override
   String get mecc0fe5cd1 => 'Lua não retornou características';
 
   @override
@@ -2744,6 +2757,11 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   @override
   String mb7b217c429(String p0, String p1, String p2) {
     return '$p0: $p1 de $p2 pontos gastos';
+  }
+
+  @override
+  String m607c57804e(String p0) {
+    return 'Arma ativa · $p0';
   }
 
   @override

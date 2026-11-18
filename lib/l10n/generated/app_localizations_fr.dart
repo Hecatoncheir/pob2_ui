@@ -80,6 +80,10 @@ class AppLocalizationsFr extends AppLocalizations {
       'Lua n\'a pas renvoyé la compatibilité avec la pierre';
 
   @override
+  String get m1810485f55 =>
+      'Lua n’a pas renvoyé les compteurs de points de l’arbre.';
+
+  @override
   String get mecc0fe5cd1 => 'Lua n\'a pas renvoyé les caractéristiques';
 
   @override
@@ -200,6 +204,11 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String mb7b217c429(String p0, String p1, String p2) {
     return '$p0 : $p1 points sur $p2 dépensés';
+  }
+
+  @override
+  String m607c57804e(String p0) {
+    return 'Arme active · $p0';
   }
 
   @override

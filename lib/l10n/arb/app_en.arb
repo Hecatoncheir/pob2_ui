@@ -105,6 +105,11 @@
     "description": "Lua не вернул совместимость камней",
     "placeholders": {}
   },
+  "m1810485f55": "Lua did not return tree point counters.",
+  "@m1810485f55": {
+    "description": "Lua не вернул счётчики очков дерева.",
+    "placeholders": {}
+  },
   "mecc0fe5cd1": "Lua did not return characteristics",
   "@mecc0fe5cd1": {
     "description": "Lua не вернул характеристики",
@@ -312,6 +317,15 @@
         "type": "String"
       },
       "p2": {
+        "type": "String"
+      }
+    }
+  },
+  "m607c57804e": "Active weapon · {p0}",
+  "@m607c57804e": {
+    "description": "Активное оружие · {p0}",
+    "placeholders": {
+      "p0": {
         "type": "String"
       }
     }

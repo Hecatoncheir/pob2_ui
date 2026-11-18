@@ -77,6 +77,10 @@ class AppLocalizationsEs extends AppLocalizations {
   String get m35f86d9c5e => 'Lua no devolvió compatibilidad con piedras';
 
   @override
+  String get m1810485f55 =>
+      'Lua no devolvió los contadores de puntos del árbol.';
+
+  @override
   String get mecc0fe5cd1 => 'Lua no devolvió características';
 
   @override
@@ -196,6 +200,11 @@ class AppLocalizationsEs extends AppLocalizations {
   @override
   String mb7b217c429(String p0, String p1, String p2) {
     return '$p0: $p1 de $p2 puntos gastados';
+  }
+
+  @override
+  String m607c57804e(String p0) {
+    return 'Arma activa · $p0';
   }
 
   @override

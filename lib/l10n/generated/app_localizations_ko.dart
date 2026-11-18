@@ -76,6 +76,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m35f86d9c5e => 'Lua이 스톤 호환성을 반환하지 않았습니다.';
 
   @override
+  String get m1810485f55 => 'Lua가 트리 포인트 수를 반환하지 않았습니다.';
+
+  @override
   String get mecc0fe5cd1 => 'Lua이 특성을 반환하지 않았습니다.';
 
   @override
@@ -189,6 +192,11 @@ class AppLocalizationsKo extends AppLocalizations {
   @override
   String mb7b217c429(String p0, String p1, String p2) {
     return '$p0: $p2 포인트 중 $p1 포인트 사용';
+  }
+
+  @override
+  String m607c57804e(String p0) {
+    return '현재 무기 · $p0';
   }
 
   @override

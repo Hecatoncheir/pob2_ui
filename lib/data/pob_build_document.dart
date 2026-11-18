@@ -43,6 +43,15 @@ class PobBuildDocument {
   Set<int> get allocatedNodes =>
       _nodeIds(_activeSpec.getAttribute('nodes') ?? '');
 
+  Map<int, int> get allocationModes => {
+    for (final id in allocatedNodes) id: 0,
+    for (final mode in [1, 2])
+      for (final id in _nodeIds(
+        _activeSpec.getElement('WeaponSet$mode')?.getAttribute('nodes') ?? '',
+      ))
+        id: mode,
+  };
+
   Map<int, int> get masteryEffects => {
     for (final match in _masterySelection.allMatches(
       _activeSpec.getAttribute('masteryEffects') ?? '',
@@ -55,6 +64,19 @@ class PobBuildDocument {
   XmlElement get _progressionAllocation {
     final snapshot = XmlElement(const XmlName.qualified('Spec'));
     _copyAllocation(_activeSpec, snapshot);
+    for (final element in snapshot.descendants.whereType<XmlElement>()) {
+      for (final attribute in element.attributes.where(
+        (item) => const {
+          'nodes',
+          'strNodes',
+          'dexNodes',
+          'intNodes',
+        }.contains(item.name.local),
+      )) {
+        final nodes = _nodeIds(attribute.value).toList()..sort();
+        attribute.value = nodes.join(',');
+      }
+    }
     return snapshot;
   }
 

@@ -228,14 +228,19 @@ class WorkshopCubit extends Cubit<WorkshopState> {
       engine.connected &&
       !state.busy &&
       state.document?.stale == false &&
-      state.treeMode == TreeAllocationMode.common &&
-      engine.tools.containsAll({'pob_node_tooltip', 'pob_tree_action'});
+      engine.tools.containsAll({
+        'pob_node_tooltip',
+        'pob_tree_action',
+        'pob_tree_options',
+      });
 
   Future<TreePathComparison> compareTreePaths(int first, int second) async {
     final report = state.report;
     if (report == null || !canCompareTreePaths)
       throw StateError(staleTreePaths);
     final buildId = state.library.activeId;
+    final mode = state.treeMode;
+    final componentSource = _componentSource;
     final pair = Map<Component, Installation>.unmodifiable(components.active);
     final xml = await _currentXml();
     final reports = await paths.compareTreePaths(
@@ -244,12 +249,16 @@ class WorkshopCubit extends Cubit<WorkshopState> {
       xml,
       first,
       second,
+      mode: mode,
     );
     final comparison = TreePathComparison(
       source: report,
       sourceRevision: PobBuildDocument(xml).revision,
       buildId: buildId,
       reports: reports,
+      mode: mode,
+      weaponSet: report.weaponSet,
+      componentSource: componentSource,
     );
     if (!canCompareTreePaths || !isTreePathCurrent(comparison)) {
       throw StateError(staleTreePaths);
@@ -258,8 +267,11 @@ class WorkshopCubit extends Cubit<WorkshopState> {
   }
 
   bool isTreePathCurrent(TreePathComparison comparison) =>
+      ready &&
       state.document?.stale == false &&
-      state.treeMode == TreeAllocationMode.common &&
+      state.treeMode == comparison.mode &&
+      state.report?.weaponSet == comparison.weaponSet &&
+      _componentSource == comparison.componentSource &&
       identical(state.report, comparison.source) &&
       state.library.activeId == comparison.buildId;
 

@@ -82,6 +82,10 @@ class AppLocalizationsDe extends AppLocalizations {
   String get m35f86d9c5e => 'Lua hat keine Steinkompatibilität zurückgegeben';
 
   @override
+  String get m1810485f55 =>
+      'Lua hat keine Fertigkeitspunktzähler zurückgegeben.';
+
+  @override
   String get mecc0fe5cd1 => 'Lua hat keine Merkmale zurückgegeben';
 
   @override
@@ -203,6 +207,11 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String mb7b217c429(String p0, String p1, String p2) {
     return '$p0: $p1 von $p2 Punkten ausgegeben';
+  }
+
+  @override
+  String m607c57804e(String p0) {
+    return 'Aktive Waffe · $p0';
   }
 
   @override

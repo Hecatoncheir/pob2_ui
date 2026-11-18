@@ -245,6 +245,12 @@ abstract class AppLocalizations {
   /// **'Lua did not return stone compatibility'**
   String get m35f86d9c5e;
 
+  /// Lua не вернул счётчики очков дерева.
+  ///
+  /// In en, this message translates to:
+  /// **'Lua did not return tree point counters.'**
+  String get m1810485f55;
+
   /// Lua не вернул характеристики
   ///
   /// In en, this message translates to:
@@ -436,6 +442,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'{p0}: {p1} of {p2} points spent'**
   String mb7b217c429(String p0, String p1, String p2);
+
+  /// Активное оружие · {p0}
+  ///
+  /// In en, this message translates to:
+  /// **'Active weapon · {p0}'**
+  String m607c57804e(String p0);
 
   /// Амулет
   ///

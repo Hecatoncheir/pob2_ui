@@ -189,6 +189,17 @@ jobs:
           fi
           if [[ "$LIVE_LINK" == true ]]; then args+=(--verify-link); fi
           "${runner[@]}" python tool/check_installer.py "${args[@]}"
+      - name: Нативные диалоги XML Windows и Linux
+        if: inputs.cold_install != true && runner.os != 'macOS'
+        shell: bash
+        run: |
+          runner=()
+          binary=build/windows/x64/runner/Release/pob2_ui.exe
+          if [[ "$RUNNER_OS" == Linux ]]; then
+            runner=(xvfb-run -a)
+            binary=build/linux/x64/release/bundle/pob2_ui
+          fi
+          "${runner[@]}" python tool/check_native_xml.py --binary "$binary" --components "$RUNNER_TEMP/pob2-lua-smoke/components.json"
       - name: Предпросмотр и очистка профиля
         if: inputs.cold_install != true
         shell: bash
@@ -201,6 +212,7 @@ jobs:
         shell: bash
         env:
           POB2_UI_HOME: ${{ runner.temp }}/pob2-lua-smoke
+          POB2_UI_SCREENSHOT: ${{ github.workspace }}/build/review/paths-${{ matrix.platform }}.png
         run: |
           runner=()
           if [[ "$RUNNER_OS" == Linux ]]; then runner=(xvfb-run -a); fi

@@ -76,6 +76,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m35f86d9c5e => 'Lua did not return stone compatibility';
 
   @override
+  String get m1810485f55 => 'Lua did not return tree point counters.';
+
+  @override
   String get mecc0fe5cd1 => 'Lua did not return characteristics';
 
   @override
@@ -194,6 +197,11 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String mb7b217c429(String p0, String p1, String p2) {
     return '$p0: $p1 of $p2 points spent';
+  }
+
+  @override
+  String m607c57804e(String p0) {
+    return 'Active weapon · $p0';
   }
 
   @override
