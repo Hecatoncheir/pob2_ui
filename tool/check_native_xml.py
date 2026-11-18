@@ -235,8 +235,10 @@ class LinuxUi:
         self.chord('control', 'a')
         for char in str(file):
             value = ord(char)
-            symbol = C.c_ulong(value if value < 256 else value | 0x1000000)
-            self.x.XChangeKeyboardMapping(self.display, 255, 1, C.byref(symbol), 1)
+            symbol = value if value < 256 else value | 0x1000000
+            symbols = (C.c_ulong * 2)(symbol, symbol)
+            # Два явных символа сохраняют регистр имени без автоматической смены регистра Xlib.
+            self.x.XChangeKeyboardMapping(self.display, 255, 2, symbols, 1)
             self.x.XSync(self.display, False)
             time.sleep(.02)
             self._key(255, True)
