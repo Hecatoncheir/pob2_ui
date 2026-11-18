@@ -12,7 +12,7 @@ import time
 
 from release import ROOT, dart_executable, filename, version
 
-PREVIOUS_VERSION = '0.6.0'
+PREVIOUS_VERSION = '0.7.0'
 FIXTURES = ROOT / 'integration_test/fixtures'
 
 

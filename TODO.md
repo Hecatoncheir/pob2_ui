@@ -14,6 +14,7 @@
 | [**v0.5.0**](#v050--обмен-сборками-с-path-of-building-2) | Импорт и копирование кодов сборок PoB | Выпущен | **17 ноября 2026** |
 | [**v0.6.0**](#v060--импорт-сборок-по-ссылке) | Импорт сборок PoE2 с `pobb.in` | Выпущен | **18 ноября 2026** |
 | [**v0.7.0**](#v070--очистка-профиля-pob-ii) | Предпросмотр и очистка данных профиля | Выпущен | **18 ноября 2026** |
+| [**v0.8.0**](#v080--сравнение-путей-дерева) | Сравнение двух путей с расчётом Lua | Подготовлен кандидат | **18 ноября 2026** |
 
 ## Что уже сделано
 
@@ -327,6 +328,12 @@
 | Windows x64 | `flutter test integration_test/profile_cleanup_test.dart -d windows` | `.exe`, цель `windows-x64` |
 | macOS arm64 | `flutter test integration_test/profile_cleanup_test.dart -d macos` | `.dmg`, цель `macos-arm64` |
 | Linux x64 | `xvfb-run -a flutter test integration_test/profile_cleanup_test.dart -d linux` | `.run`, цель `linux-x64`, запуск через Xvfb |
+
+## v0.8.0 — сравнение путей дерева
+
+- [x] Сравнить на сборке Ведьмы два пути по 5 очков при одинаковых настройках Lua. Pure Energy увеличивает здоровье с 1187 до 1218, Raw Destruction увеличивает `TotalDPS` с 12,817708 до 19,482917.
+- [x] Проверить применение пути одним действием, Undo/Redo, отказ от применения устаревшего предпросмотра и повторное открытие XML. Сквозной тест прошёл на Windows x64, macOS arm64 и Linux x64. [Тест](integration_test/tree_path_comparison_test.dart) · [CI на main](https://github.com/Hecatoncheir/pob2_ui/actions/runs/44316575509)
+- [ ] Проверить обновление с v0.7.0 на всех трёх ОС, опубликовать установщики и сверить SHA-256 скачанных файлов. [Порядок выпуска](installer/README.md#ci-и-выпуск)
 
 ## Общие условия выпуска
 
