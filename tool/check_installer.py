@@ -9,10 +9,11 @@ import shutil
 import subprocess
 import tempfile
 import time
+import xml.etree.ElementTree as ET
 
 from release import ROOT, dart_executable, filename, version
 
-PREVIOUS_VERSION = '0.7.0'
+PREVIOUS_VERSION = '0.8.0'
 FIXTURES = ROOT / 'integration_test/fixtures'
 
 
@@ -222,12 +223,29 @@ def check_previous(target, package, executable, base, environment, components, v
     verify_reopened(executable, data, builds, env, saved)
     assert any((data / 'tree-cache').rglob('*.png')), 'Кеш дерева не восстановлен из Lua'
     print(f'После обновления с v{PREVIOUS_VERSION}, очистки и отката совпали XML, заметки и отчёт Lua')
+    check_previous_weapons(old, executable, data, builds, env, saved['id'])
     if verify_link:
         link_env = dict(env, POB2_UI_CHECK_LINK=str(FIXTURES / 'witch_fireball.poblink'))
         imported = run_build_check(executable, data, link_env, 'link')
         assert imported['id'] != saved['id'] and imported['source'] == 'original-lua', imported
         assert abs(imported['dps'] - 12.817708) < 0.00001, imported
         print(f"После обновления Ведьма с pobb.in рассчитана на Lua, TotalDPS {imported['dps']}")
+
+
+def check_previous_weapons(old, executable, data, builds, environment, build_id):
+    file = builds / build_id
+    notes = ET.fromstring(file.read_bytes()).find('Notes').text
+    for weapon, expected in ((1, 15.38125), (2, 19.482916666667)):
+        root = ET.parse(FIXTURES / 'witch_weapon_paths.xml').getroot()
+        root.find('Notes').text = notes
+        items = root.find('Items')
+        for section in (items, items.find('ItemSet')):
+            section.set('useSecondWeaponSet', 'true' if weapon == 2 else 'false')
+        file.write_bytes(ET.tostring(root, encoding='utf-8', xml_declaration=True))
+        saved = run_build_check(old, data, environment, 'restore')
+        assert saved['id'] == build_id and abs(saved['dps'] - expected) < 0.00001, saved
+        verify_reopened(executable, data, builds, environment, saved)
+        print(f'Профиль v{PREVIOUS_VERSION}: оружие {weapon}, DPS {expected}, XML и заметки сохранены без HTTP', flush=True)
 
 
 def _link_or_copy(source, target):

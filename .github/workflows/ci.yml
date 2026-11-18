@@ -170,11 +170,11 @@ jobs:
             args+=(--lock tool/components-lock.json)
           fi
           dart run tool/smoke.dart "${args[@]}" | tee build/review/components.json
-      - name: Скачать установщик v0.7.0 для проверки обновления
+      - name: Скачать установщик v0.8.0 для проверки обновления
         shell: bash
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh release download v0.7.0 --dir build/previous --pattern '*${{ matrix.target }}*'
+        run: gh release download v0.8.0 --dir build/previous --pattern '*${{ matrix.target }}*'
       - name: Проверить установку и восстановление сборки с Lua
         shell: bash
         env:

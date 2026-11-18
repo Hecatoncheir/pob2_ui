@@ -31,6 +31,7 @@ class WindowsUi:
         self.process = process
         self.window = wait_for(lambda: window_for(process), 'Окно Windows не появилось')
         self.user.SetForegroundWindow.argtypes = [W.HWND]
+        self.user.GetClassNameW.argtypes = [W.HWND, W.LPWSTR, C.c_int]
 
     def chord(self, modifier, key):
         codes = {'control': 0x11, 'alt': 0x12, 'escape': 0x1B, 'enter': 0x0D}
@@ -107,13 +108,23 @@ class LinuxUi:
         self.x.XQueryTree.argtypes = [C.c_void_p, C.c_ulong, C.POINTER(C.c_ulong),
                                      C.POINTER(C.c_ulong), C.POINTER(C.POINTER(C.c_ulong)), C.POINTER(C.c_uint)]
         self.x.XFetchName.argtypes = [C.c_void_p, C.c_ulong, C.POINTER(C.c_void_p)]
+        self.x.XInternAtom.argtypes = [C.c_void_p, C.c_char_p, C.c_int]
+        self.x.XInternAtom.restype = C.c_ulong
+        self.x.XGetWindowProperty.argtypes = [C.c_void_p, C.c_ulong, C.c_ulong, C.c_long,
+                                             C.c_long, C.c_int, C.c_ulong, C.POINTER(C.c_ulong),
+                                             C.POINTER(C.c_int), C.POINTER(C.c_ulong),
+                                             C.POINTER(C.c_ulong), C.POINTER(C.c_void_p)]
+        self.x.XGetGeometry.argtypes = [C.c_void_p, C.c_ulong, C.POINTER(C.c_ulong),
+                                       C.POINTER(C.c_int), C.POINTER(C.c_int), C.POINTER(C.c_uint),
+                                       C.POINTER(C.c_uint), C.POINTER(C.c_uint), C.POINTER(C.c_uint)]
         self.x.XSetInputFocus.argtypes = [C.c_void_p, C.c_ulong, C.c_int, C.c_ulong]
         self.x.XKeysymToKeycode.argtypes = [C.c_void_p, C.c_ulong]
         self.x.XChangeKeyboardMapping.argtypes = [C.c_void_p, C.c_int, C.c_int, C.POINTER(C.c_ulong), C.c_int]
         self.x.XSync.argtypes = [C.c_void_p, C.c_int]
         self.x.XFree.argtypes = [C.c_void_p]
         self.xt.XTestFakeKeyEvent.argtypes = [C.c_void_p, C.c_uint, C.c_int, C.c_ulong]
-        self.window = wait_for(lambda: self._find('PoB II'), 'Окно GTK не появилось')
+        self.process = process
+        self.window = wait_for(self._process_window, 'Окно GTK не появилось')
 
     def _windows(self):
         root, parent = C.c_ulong(), C.c_ulong()
@@ -122,12 +133,37 @@ class LinuxUi:
         rows = []
         for window in list(children[:count.value]):
             name = C.c_void_p()
-            if self.x.XFetchName(self.display, window, C.byref(name)) and name.value:
-                rows.append((window, C.string_at(name).decode('utf-8', errors='replace')))
+            self.x.XFetchName(self.display, window, C.byref(name))
+            title = C.string_at(name).decode('utf-8', errors='replace') if name.value else ''
+            rows.append((window, title))
+            if name.value:
                 self.x.XFree(name)
         if children:
             self.x.XFree(children)
         return rows
+
+    def _process_window(self):
+        atom = self.x.XInternAtom(self.display, b'_NET_WM_PID', False)
+        for window, _ in self._windows():
+            actual, count, remaining = C.c_ulong(), C.c_ulong(), C.c_ulong()
+            format_ = C.c_int()
+            data = C.c_void_p()
+            self.x.XGetWindowProperty(self.display, window, atom, 0, 1, False, 6,
+                                      C.byref(actual), C.byref(format_), C.byref(count),
+                                      C.byref(remaining), C.byref(data))
+            pid = C.cast(data, C.POINTER(C.c_ulong))[0] if count.value else None
+            if data.value:
+                self.x.XFree(data)
+            if pid == self.process.pid and self._large_window(window):
+                return window
+        return None
+
+    def _large_window(self, window):
+        root, x, y = C.c_ulong(), C.c_int(), C.c_int()
+        width, height, border, depth = (C.c_uint() for _ in range(4))
+        self.x.XGetGeometry(self.display, window, C.byref(root), C.byref(x), C.byref(y),
+                            C.byref(width), C.byref(height), C.byref(border), C.byref(depth))
+        return width.value > 100 and height.value > 100
 
     def _find(self, title):
         return next((window for window, name in self._windows() if title.lower() in name.lower()), None)
@@ -195,7 +231,7 @@ def allocation(file):
 
 def check(binary, components):
     with tempfile.TemporaryDirectory(prefix='pob2-native-') as temporary:
-        root = Path(temporary)
+        root = Path(temporary).resolve()
         prepare_profile(root, components)
         environment = dict(os.environ, POB2_UI_HOME=str(root), POB2_UI_CHECK_FIXTURE=str(FIXTURES / 'witch_fireball.xml'))
         environment.pop('POB2_UI_CHECK_CODE', None)
