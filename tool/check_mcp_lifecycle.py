@@ -78,7 +78,7 @@ def wait_for_editor(process, profile):
 
 def check(binary, components):
     with tempfile.TemporaryDirectory(prefix='pob2-mcp-exit-') as temporary:
-        profile = Path(temporary)
+        profile = Path(temporary).resolve()
         builds = profile / 'builds'
         builds.mkdir()
         shutil.copyfile(components, profile / 'components.json')
@@ -96,6 +96,7 @@ def check(binary, components):
             tools = editor.rpc('tools/list', {})['tools']
             assert len(tools) == 42, len(tools)
             status = editor.call('pob_editor_status')
+            assert not status['dialogOpen'], status
             assert status['processId'] == process.pid, status
             classes = editor.call('pob_catalog', {'kind': 'classes'})['entries']
             witch = next(entry for entry in classes if entry['name'] == 'Witch')
