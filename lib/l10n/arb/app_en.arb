@@ -1716,6 +1716,15 @@
     "description": "Не удалось защитить каталог подключения MCP",
     "placeholders": {}
   },
+  "ma33f1f1a50": "Failed to update connection command MCP: {p0}",
+  "@ma33f1f1a50": {
+    "description": "Не удалось обновить команду подключения MCP: {p0}",
+    "placeholders": {
+      "p0": {
+        "type": "String"
+      }
+    }
+  },
   "m8644bfa547": "Could not disable the previous MCP editor: {p0}",
   "@m8644bfa547": {
     "description": "Не удалось отключить прежний редактор MCP: {p0}",

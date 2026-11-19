@@ -1046,6 +1046,11 @@ class AppLocalizationsPt extends AppLocalizations {
   String get m6dc7d664a3 => 'Falha ao proteger o diretório de conexão MCP';
 
   @override
+  String ma33f1f1a50(String p0) {
+    return 'Falha ao atualizar o comando de conexão MCP: $p0';
+  }
+
+  @override
   String m8644bfa547(String p0) {
     return 'Não foi possível desativar o editor MCP anterior: $p0';
   }
@@ -3677,6 +3682,11 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get m6dc7d664a3 => 'Falha ao proteger o diretório de conexão MCP';
+
+  @override
+  String ma33f1f1a50(String p0) {
+    return 'Falha ao atualizar o comando de conexão MCP: $p0';
+  }
 
   @override
   String m8644bfa547(String p0) {

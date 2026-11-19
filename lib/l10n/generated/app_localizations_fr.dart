@@ -1067,6 +1067,11 @@ class AppLocalizationsFr extends AppLocalizations {
       'Échec de la protection du répertoire de connexion MCP';
 
   @override
+  String ma33f1f1a50(String p0) {
+    return 'Échec de la mise à jour de la commande de connexion MCP : $p0';
+  }
+
+  @override
   String m8644bfa547(String p0) {
     return 'Impossible de désactiver l’ancien éditeur MCP : $p0';
   }

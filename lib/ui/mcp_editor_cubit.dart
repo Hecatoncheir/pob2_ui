@@ -223,6 +223,7 @@ class McpEditorCubit extends Cubit<McpEditorState> {
       {'update', 'rollback', 'select_installed'}.contains(args['action']);
 
   JsonMap _startJob(String tool, JsonMap args) {
+    final previousMcp = model.components.active[Component.mcp]?.directory;
     _executing = true;
     remoteChanging = true;
     final id = ++_jobId;
@@ -235,6 +236,7 @@ class McpEditorCubit extends Cubit<McpEditorState> {
     _jobFuture = Future<void>(() async {
       try {
         final result = await _application(tool, args);
+        await _refreshConnectionCommand(previousMcp);
         _buildId = model.state.library.activeId;
         _syncRevision();
         _revision++;
@@ -256,6 +258,18 @@ class McpEditorCubit extends Cubit<McpEditorState> {
     return _reply(_job);
   }
 
+  Future<void> _refreshConnectionCommand(String? previousMcp) async {
+    if (model.components.active[Component.mcp]?.directory == previousMcp)
+      return;
+    try {
+      final command = await _connectionCommand();
+      if (!enabled || _closing) return;
+      emit((busy: false, command: command, error: null, change: state.change));
+    } catch (error) {
+      model.addLog('Не удалось обновить команду подключения MCP: $error');
+    }
+  }
+
   Future<JsonMap> _appTool(
     String tool,
     JsonMap arguments,
@@ -274,6 +288,7 @@ class McpEditorCubit extends Cubit<McpEditorState> {
 
   JsonMap _status() => {
     'enabled': enabled,
+    'connectionCommand': state.command,
     'connected': model.engine.connected,
     'busy': model.state.busy || _executing,
     'dialogOpen': model.modalOpen?.call() ?? false,

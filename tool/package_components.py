@@ -48,6 +48,7 @@ def download(cache, repo, tag, name, sha256):
 
 def zip_member(archive, relative, source, mode):
     entry = zipfile.ZipInfo(relative)
+    entry.create_system = 3
     entry.compress_type = zipfile.ZIP_DEFLATED
     entry.external_attr = ((mode & 0o755) | 0o100000) << 16
     with archive.open(entry, 'w') as output:
@@ -98,6 +99,7 @@ def unpack_mcp(cache, target, staging):
 
 def pack_mcp(output, cache, target, staging):
     source = unpack_mcp(cache, target, staging)
+    modes = runtime_modes(cache, target)
     (source / 'run.py').write_text('from pob_poe2_mcp.cli import main\n\n'
                                  'if __name__ == "__main__":\n    main()\n', encoding='utf-8')
     with zipfile.ZipFile(output, 'w') as archive:
@@ -106,7 +108,17 @@ def pack_mcp(output, cache, target, staging):
                 raise ValueError(f'Ссылка выходит за пределы пакета {file}')
             if file.is_file():
                 with file.open('rb') as stream:
-                    zip_member(archive, file.relative_to(source).as_posix(), stream, file.stat().st_mode)
+                    relative = file.relative_to(source).as_posix()
+                    zip_member(archive, relative, stream, modes.get(relative, file.stat().st_mode))
+
+
+def runtime_modes(cache, target):
+    if target == 'windows-x64':
+        return {}
+    architecture = PYTHON_ASSETS[target][0]
+    name = f'{PYTHON_PREFIX}{architecture}-install_only_stripped.tar.gz'
+    with tarfile.open(cache / name) as archive:
+        return {entry.name: entry.mode for entry in archive}
 
 
 def fetch_pob(destination):

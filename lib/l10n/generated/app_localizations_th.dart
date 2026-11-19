@@ -1030,6 +1030,11 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m6dc7d664a3 => 'ไม่สามารถป้องกันไดเร็กทอรีการเชื่อมต่อ MCP';
 
   @override
+  String ma33f1f1a50(String p0) {
+    return 'ไม่สามารถอัปเดตคำสั่งการเชื่อมต่อ MCP: $p0';
+  }
+
+  @override
   String m8644bfa547(String p0) {
     return 'ปิดใช้งานตัวแก้ไข MCP เดิมไม่สำเร็จ: $p0';
   }

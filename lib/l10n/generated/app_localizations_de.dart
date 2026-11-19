@@ -1068,6 +1068,11 @@ class AppLocalizationsDe extends AppLocalizations {
       'Verbindungsverzeichnis MCP konnte nicht geschützt werden.';
 
   @override
+  String ma33f1f1a50(String p0) {
+    return 'Verbindungsbefehl MCP konnte nicht aktualisiert werden: $p0';
+  }
+
+  @override
   String m8644bfa547(String p0) {
     return 'Der bisherige MCP-Editor konnte nicht deaktiviert werden: $p0';
   }

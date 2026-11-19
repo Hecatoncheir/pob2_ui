@@ -312,6 +312,7 @@
   "m8f6df28a92": "Não foi possível fechar a sessão do Lua: {p0}",
   "m46ed8403b7": "Não foi possível iniciar o PoB.",
   "m6dc7d664a3": "Falha ao proteger o diretório de conexão MCP",
+  "ma33f1f1a50": "Falha ao atualizar o comando de conexão MCP: {p0}",
   "m8644bfa547": "Não foi possível desativar o editor MCP anterior: {p0}",
   "m725605a944": "Falha ao abrir o navegador: {p0}",
   "m189f5a7238": "Falha ao abrir ou salvar notas.\n{p0}",

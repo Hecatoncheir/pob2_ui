@@ -1991,6 +1991,12 @@ abstract class AppLocalizations {
   /// **'Failed to protect connection directory MCP'**
   String get m6dc7d664a3;
 
+  /// Не удалось обновить команду подключения MCP: {p0}
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to update connection command MCP: {p0}'**
+  String ma33f1f1a50(String p0);
+
   /// Не удалось отключить прежний редактор MCP: {p0}
   ///
   /// In en, this message translates to:

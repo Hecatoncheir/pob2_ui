@@ -1019,6 +1019,11 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m6dc7d664a3 => '接続ディレクトリ MCP を保護できませんでした';
 
   @override
+  String ma33f1f1a50(String p0) {
+    return '接続コマンド MCP を更新できませんでした: $p0';
+  }
+
+  @override
   String m8644bfa547(String p0) {
     return '以前の MCP エディターを無効にできませんでした: $p0';
   }

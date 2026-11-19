@@ -1040,6 +1040,11 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m6dc7d664a3 => 'Failed to protect connection directory MCP';
 
   @override
+  String ma33f1f1a50(String p0) {
+    return 'Failed to update connection command MCP: $p0';
+  }
+
+  @override
   String m8644bfa547(String p0) {
     return 'Could not disable the previous MCP editor: $p0';
   }

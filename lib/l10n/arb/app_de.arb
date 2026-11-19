@@ -312,6 +312,7 @@
   "m8f6df28a92": "Die Lua-Sitzung konnte nicht geschlossen werden: {p0}",
   "m46ed8403b7": "PoB konnte nicht gestartet werden.",
   "m6dc7d664a3": "Verbindungsverzeichnis MCP konnte nicht geschützt werden.",
+  "ma33f1f1a50": "Verbindungsbefehl MCP konnte nicht aktualisiert werden: {p0}",
   "m8644bfa547": "Der bisherige MCP-Editor konnte nicht deaktiviert werden: {p0}",
   "m725605a944": "Browser konnte nicht geöffnet werden: {p0}",
   "m189f5a7238": "Notizen konnten nicht geöffnet oder gespeichert werden.\n{p0}",

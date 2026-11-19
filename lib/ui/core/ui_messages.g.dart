@@ -1589,6 +1589,10 @@ final uiPatternTranslations = <UiRule>[
     (l, args) => l.mf01de15993(args[0]),
   ),
   UiRule(
+    "Не удалось обновить команду подключения MCP: {p0}",
+    (l, args) => l.ma33f1f1a50(args[0]),
+  ),
+  UiRule(
     "There is no {p1} in {p0}; requires MCP 0.4.0 or later",
     (l, args) => l.m7daed90e2c(args[0], args[1]),
   ),
@@ -1623,6 +1627,10 @@ final uiPatternTranslations = <UiRule>[
   UiRule(
     "Revision mismatch for {p0} {p1}: expected {p2}, got {p3}.",
     (l, args) => l.m7fce31d207(args[0], args[1], args[2], args[3]),
+  ),
+  UiRule(
+    "Failed to update connection command MCP: {p0}",
+    (l, args) => l.ma33f1f1a50(args[0]),
   ),
   UiRule(
     "The finished scene is not fully loaded: {p0}",

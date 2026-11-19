@@ -1040,6 +1040,11 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m6dc7d664a3 => 'Не удалось защитить каталог подключения MCP';
 
   @override
+  String ma33f1f1a50(String p0) {
+    return 'Не удалось обновить команду подключения MCP: $p0';
+  }
+
+  @override
   String m8644bfa547(String p0) {
     return 'Не удалось отключить прежний редактор MCP: $p0';
   }

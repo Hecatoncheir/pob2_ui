@@ -1016,6 +1016,11 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m6dc7d664a3 => '无法保护连接目录 MCP';
 
   @override
+  String ma33f1f1a50(String p0) {
+    return '無法更新連線指令 MCP：$p0';
+  }
+
+  @override
   String m8644bfa547(String p0) {
     return '無法停用先前的 MCP 編輯器：$p0';
   }
@@ -3568,6 +3573,11 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m6dc7d664a3 => '无法保护连接目录 MCP';
+
+  @override
+  String ma33f1f1a50(String p0) {
+    return '無法更新連線指令 MCP：$p0';
+  }
 
   @override
   String m8644bfa547(String p0) {

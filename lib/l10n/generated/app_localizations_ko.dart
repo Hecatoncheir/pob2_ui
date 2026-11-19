@@ -1019,6 +1019,11 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m6dc7d664a3 => '연결 디렉터리를 보호하지 못했습니다. MCP';
 
   @override
+  String ma33f1f1a50(String p0) {
+    return '연결 명령 MCP을(를) 업데이트하지 못했습니다: $p0';
+  }
+
+  @override
   String m8644bfa547(String p0) {
     return '이전 MCP 편집기를 비활성화하지 못했습니다: $p0';
   }

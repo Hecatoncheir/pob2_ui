@@ -2,7 +2,7 @@ import '../domain/app_release.dart';
 import '../domain/component.dart';
 import 'managed_installation.dart';
 
-const componentPackageTag = 'components-0.23.1-0.22.0-1';
+const componentPackageTag = 'components-0.23.1-0.22.0-2';
 const _base =
     'https://github.com/Hecatoncheir/pob2_ui/releases/download/'
     '$componentPackageTag';
@@ -24,15 +24,15 @@ Release _mcpRelease(String? target) {
   final (size, digest) = switch (target) {
     'windows-x64' => (
       12504986,
-      '10854a8c8d4a5d53c90519ee9067425f3bf12cdd25fbf50612db02775dfc6af5',
+      'c5d0bdd472ee853f74ae4a7c1a06577efa857b0405d8b948bcade0ea5d3098dd',
     ),
     'macos-arm64' => (
       44499002,
-      'eb777d78620aa8d3af725395864403325a8d432e9bd272c8f351f6433dbe24ae',
+      'f08245c9fcc77b0356c16a0416ce7e038e21a03f87378b8afb6f28182c67c30d',
     ),
     'linux-x64' => (
       74345549,
-      '5921029ca188214ba0706ba5b41adbd5ca0bc7a0f9345915e94b6f6cb91cbb2c',
+      '1a4a0a1ff58e467045e7b7ea9c738a003e0a6521ba24d8057f6f58282d4a3b1f',
     ),
     _ => throw UnsupportedError(
       'Поддерживаются Windows x64, Linux x64 и macOS arm64',

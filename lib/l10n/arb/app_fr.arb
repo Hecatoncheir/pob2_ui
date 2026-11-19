@@ -312,6 +312,7 @@
   "m8f6df28a92": "Impossible de fermer la session Lua : {p0}",
   "m46ed8403b7": "Impossible de démarrer PoB.",
   "m6dc7d664a3": "Échec de la protection du répertoire de connexion MCP",
+  "ma33f1f1a50": "Échec de la mise à jour de la commande de connexion MCP : {p0}",
   "m8644bfa547": "Impossible de désactiver l’ancien éditeur MCP : {p0}",
   "m725605a944": "Échec de l''ouverture du navigateur : {p0}",
   "m189f5a7238": "Échec de l''ouverture ou de l''enregistrement des notes.\n{p0}",
