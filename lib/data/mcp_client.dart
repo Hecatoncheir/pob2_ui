@@ -138,6 +138,14 @@ class McpClient {
     String name, [
     Map<String, dynamic> arguments = const {},
   ]) async {
+    return (await callWithContent(name, arguments)).result;
+  }
+
+  Future<({Map<String, dynamic> result, List<dynamic> content})>
+  callWithContent(
+    String name, [
+    Map<String, dynamic> arguments = const {},
+  ]) async {
     final response = await request('tools/call', {
       'name': name,
       'arguments': arguments,
@@ -151,11 +159,19 @@ class McpClient {
       );
     }
     final structured = response['structuredContent'] as Map<String, dynamic>?;
-    if (structured != null) return structured['result'] as Map<String, dynamic>;
+    if (structured != null)
+      return (
+        result: structured['result'] as Map<String, dynamic>,
+        content: response['content'] as List<dynamic>? ?? const [],
+      );
     final content = response['content'] as List<dynamic>;
     final text = (content.first as Map<String, dynamic>)['text'] as String;
-    return (jsonDecode(text) as Map<String, dynamic>)['result']
-        as Map<String, dynamic>;
+    return (
+      result:
+          (jsonDecode(text) as Map<String, dynamic>)['result']
+              as Map<String, dynamic>,
+      content: content,
+    );
   }
 
   Future<String> exportBuildXml() async =>

@@ -1,4 +1,5 @@
-import 'dart:ui' show AppExitResponse;
+import 'dart:ui' show AppExitResponse, AppExitType;
+import 'dart:io';
 
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter/services.dart';
@@ -22,17 +23,40 @@ class _ExitProtectionState extends State<ExitProtection> {
     super.initState();
     listener = AppLifecycleListener(onExitRequested: _exit);
     channel.setMethodCallHandler(_windowRequest);
+    widget.model.mcpEditor.lifecycleAction = _remoteExit;
   }
 
   @override
   void dispose() {
     listener.dispose();
     channel.setMethodCallHandler(null);
+    widget.model.mcpEditor.lifecycleAction = null;
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) => widget.child;
+
+  Future<void> _remoteExit(String action) async {
+    try {
+      await widget.model.checkpoint(closePob: true);
+      if (action == 'restart') {
+        await Process.start(
+          Platform.resolvedExecutable,
+          const [],
+          mode: ProcessStartMode.detached,
+          workingDirectory: Directory.current.path,
+        );
+      }
+      await widget.model.close();
+      await ServicesBinding.instance.exitApplication(AppExitType.required);
+    } catch (error) {
+      if (!widget.model.isClosed)
+        widget.model.reportPersistenceError(
+          'Не удалось завершить приложение: $error',
+        );
+    }
+  }
 
   Future<bool> _windowRequest(MethodCall call) async {
     if (call.method != 'requestClose') throw MissingPluginException();

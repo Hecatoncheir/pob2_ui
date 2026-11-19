@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'dart:async';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:pob2_ui/data/mcp_editor_gateway.dart';
@@ -7,6 +8,40 @@ import 'package:pob2_ui/data/mcp_editor_gateway.dart';
 import 'support/temporary_directory.dart';
 
 void main() {
+  test(
+    'Завершение приложения вызывается после отправки успешного ответа',
+    () async {
+      final profile = await Directory.systemTemp.createTemp('pob2-reply-test-');
+      addTearDown(() => removeTemporaryDirectory(profile));
+      final gateway = McpEditorGateway(profile);
+      addTearDown(gateway.stop);
+      final sent = Completer<void>();
+      final client = HttpClient();
+      addTearDown(() => client.close(force: true));
+      await gateway.start(
+        (_, _, _) async => {
+          'result': {'scheduled': 'close'},
+          'revision': 1,
+        },
+        afterReply: (reply) async {
+          expect(reply['result'], {'scheduled': 'close'});
+          await gateway.stop();
+          sent.complete();
+        },
+      );
+      final endpoint = jsonDecode(
+        await gateway.endpoint.readAsString(),
+      ) as Map<String, dynamic>;
+      final result = await _request(
+        client,
+        Uri.http('127.0.0.1:${endpoint['port']}', '/edit'),
+        endpoint['token'] as String,
+      );
+      expect(jsonDecode(result.body)['revision'], 1);
+      await sent.future;
+      expect(await gateway.endpoint.exists(), isFalse);
+    },
+  );
   test('Редактор принимает команды только по токену открытой сессии', () async {
     final profile = await Directory.systemTemp.createTemp('pob2-editor-test-');
     addTearDown(() => removeTemporaryDirectory(profile));

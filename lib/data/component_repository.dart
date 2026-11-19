@@ -55,6 +55,55 @@ class ComponentRepository {
     active = await store.load();
   }
 
+  Future<Installations> _installedDirectory(Directory directory) async {
+    if (await managedComponentTag(directory) == null) return {};
+    final marker = jsonDecode(
+      await File.fromUri(directory.uri.resolve(componentOwnershipFile))
+          .readAsString(),
+    ) as Map<String, dynamic>;
+    final component = Component.values.byName(marker['component'] as String);
+    return {
+      component: Installation(
+        tag: marker['tag'] as String,
+        commit: marker['commit'] as String,
+        directory: directory.path,
+        archiveSha256: marker['archiveSha256'] as String?,
+      ),
+    };
+  }
+
+  Future<List<Installations>> installedPairs() async {
+    final versions = Directory.fromUri(store.root.uri.resolve('versions/'));
+    if (!await versions.exists()) return [];
+    final found = <Installations>[];
+    await for (final entry in versions.list(followLinks: false)) {
+      if (entry is! Directory) continue;
+      final item = await _installedDirectory(entry);
+      if (item.isNotEmpty) found.add(item);
+    }
+    return found;
+  }
+
+  Future<void> selectInstalled(
+    Component component,
+    String commit, {
+    Future<void> Function(Installations)? validate,
+  }) => _withLock((current, previous) async {
+    final found = (await installedPairs())
+        .map((pair) => pair[component])
+        .whereType<Installation>()
+        .where((item) => item.commit == commit)
+        .toList();
+    if (found.isEmpty) throw StateError('Установленная версия не найдена');
+    found.sort((a, b) => a.directory.compareTo(b.directory));
+    final saved = [...current.values, ...previous.values]
+        .where((item) => found.any((f) => item.directory == f.directory))
+        .firstOrNull;
+    final next = {...current, component: saved ?? found.first};
+    await _checkPair(next, (_) {}, validate);
+    await _activate(next, current);
+  });
+
   Future<T> _withLock<T>(
     Future<T> Function(Installations current, Installations previous) apply, {
     bool cleanupCandidates = true,

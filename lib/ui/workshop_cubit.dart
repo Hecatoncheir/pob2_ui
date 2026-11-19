@@ -578,6 +578,39 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     ),
   );
 
+  Future<void> selectMcpComponent(Component component, String commit) =>
+      _runComponentChange(
+        () => _changeComponentPair(
+          (validate) =>
+              components.selectInstalled(component, commit, validate: validate),
+          'Установленная пара компонентов проверена и подключена',
+        ),
+      );
+
+  Future<void> disconnectMcpEngine() async {
+    await checkpoint();
+    engine.onDisconnected = null;
+    await engine.close();
+    _update(
+      state.copyWith(
+        status: 'Lua отключён',
+        operation: (busy: false, error: null),
+      ),
+    );
+  }
+
+  Future<void> writeMcpNotes(String id, String text) => _run(() async {
+    await buildNotes.flushText();
+    await buildNotes.readNotes(id);
+    await buildNotes.saveNotes(id, text);
+    await buildNotes.flushText();
+    if (sharedLibrary case final shared?) {
+      final disk = await shared.open(id);
+      _seenBuildXml = disk.xml;
+      _update(state.copyWith(library: _withEntry(disk.entry)));
+    }
+  });
+
   Future<void> _runComponentChange(Future<void> Function() action) async {
     if (_closing || isClosed || state.busy) return;
     final pending = _run(action);
@@ -678,7 +711,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     if (!candidate.connected) _lostConnection(StateError('Lua завершился'));
     addLog(status);
     try {
-      await _mcpEditor?.disable();
+      if (_mcpEditor?.remoteChanging != true) await _mcpEditor?.disable();
     } catch (error) {
       addLog('Не удалось отключить прежний редактор MCP: $error');
     }
@@ -1498,6 +1531,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
       final result = await _changeBuild(execute);
       if (!result.committed)
         throw McpEditorFault('EDITOR_EDIT_FAILED', result.error!);
+      if (tool == 'pob_tree_options') _syncMcpTreeMode(arguments);
     } else {
       await _run(execute);
     }
@@ -1505,6 +1539,33 @@ class WorkshopCubit extends Cubit<WorkshopState> {
         (throw McpEditorFault(
           'EDITOR_FAILED',
           state.error ?? 'Действие недоступно',
+        ));
+  }
+
+  void _syncMcpTreeMode(JsonMap arguments) {
+    if (arguments['mode'] case final int mode) {
+      _update(
+        state.copyWith(
+          treeMode: TreeAllocationMode.values.firstWhere(
+            (e) => e.luaValue == mode,
+          ),
+        ),
+      );
+    }
+  }
+
+  Future<({JsonMap result, List<dynamic> content})> executeMcpEditorRead(
+    String tool,
+    JsonMap arguments,
+  ) async {
+    ({JsonMap result, List<dynamic> content})? response;
+    await _run(() async {
+      response = await engine.callWithContent(tool, arguments);
+    });
+    return response ??
+        (throw McpEditorFault(
+          'EDITOR_FAILED',
+          state.error ?? 'Нет ответа Lua',
         ));
   }
 

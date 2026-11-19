@@ -29,6 +29,7 @@ class InterfaceScaleBloc
   }
 
   final PreferenceWrites<int> _writes;
+  Future<void> get pendingSave => _writes.pending;
 
   Future<void> _change(
     InterfaceScaleEvent event,

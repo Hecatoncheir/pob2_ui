@@ -55,9 +55,36 @@ class McpEditorButton extends StatelessWidget {
       sparkDialog<void>(context, _McpEditorDialog(model.mcpEditor));
 }
 
-class _McpEditorDialog extends StatelessWidget {
+class _McpEditorDialog extends StatefulWidget {
   const _McpEditorDialog(this.editor);
   final McpEditorCubit editor;
+
+  @override
+  State<_McpEditorDialog> createState() => _McpEditorDialogState();
+}
+
+class _McpEditorDialogState extends State<_McpEditorDialog> {
+  McpEditorCubit get editor => widget.editor;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    editor.closePermissionDialog = _close;
+    editor.permissionDialogCurrent = () =>
+        ModalRoute.of(context)?.isCurrent ?? false;
+  }
+
+  Future<void> _close() async {
+    if (ModalRoute.of(context)?.isCurrent != true) return;
+    Navigator.pop(context);
+  }
+
+  @override
+  void dispose() {
+    editor.closePermissionDialog = null;
+    editor.permissionDialogCurrent = null;
+    super.dispose();
+  }
 
   @override
   Widget build(
@@ -77,7 +104,7 @@ class _McpEditorDialog extends StatelessWidget {
               contentPadding: EdgeInsets.zero,
               title: const AppText('Разрешить правки через MCP'),
               subtitle: const AppText(
-                'MCP может создавать сборки и править текущую. Если вы смените сборку вручную, доступ отключится.',
+                'MCP может править сборки, управлять библиотекой, файлами, компонентами и приложением. Если вы смените сборку вручную, доступ отключится.',
               ),
               value: state.command != null,
               onChanged: state.busy

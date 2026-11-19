@@ -25,7 +25,10 @@ class McpEditorGateway {
   HttpServer? _server;
   String? _token;
 
-  Future<void> start(McpEditorRequest execute) async {
+  Future<void> start(
+    McpEditorRequest execute, {
+    Future<void> Function(JsonMap reply)? afterReply,
+  }) async {
     await endpoint.parent.create(recursive: true);
     if (!Platform.isWindows) {
       final permissions = await Process.run('chmod', [
@@ -47,7 +50,9 @@ class McpEditorGateway {
     _server = server;
     _token = token;
     try {
-      server.listen((request) => unawaited(_handle(request, token, execute)));
+      server.listen(
+        (request) => unawaited(_handle(request, token, execute, afterReply)),
+      );
       await AtomicTextFile().write(
         endpoint,
         jsonEncode({'port': server.port, 'token': token}),
@@ -81,8 +86,10 @@ class McpEditorGateway {
     HttpRequest request,
     String token,
     McpEditorRequest execute,
+    Future<void> Function(JsonMap reply)? afterReply,
   ) async {
     final response = request.response;
+    JsonMap? reply;
     try {
       response.headers.contentType = ContentType.json;
       if (_token != token ||
@@ -95,11 +102,19 @@ class McpEditorGateway {
         response.statusCode = HttpStatus.notFound;
         return;
       }
-      response.write(jsonEncode(await _execute(request, token, execute)));
+      reply = await _execute(request, token, execute);
+      response.write(jsonEncode(reply));
     } on IOException {
       // Клиент мог завершиться во время расчёта.
     } finally {
       await response.close().catchError((Object _) {});
+    }
+    if (reply != null && !reply.containsKey('error')) {
+      try {
+        await afterReply?.call(reply);
+      } catch (_) {
+        // Ответ уже отправлен. Ошибку жизненного цикла показывает приложение.
+      }
     }
   }
 

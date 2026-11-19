@@ -19,6 +19,7 @@ class AppearanceBloc extends Bloc<ThemeSelected, AppearanceState> {
   }
 
   final PreferenceWrites<AppTheme> _writes;
+  Future<void> get pendingSave => _writes.pending;
 
   Future<void> _select(ThemeSelected event, Emitter<AppearanceState> emit) {
     emit((theme: event.theme, error: null));

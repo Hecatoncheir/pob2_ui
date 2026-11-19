@@ -73,6 +73,7 @@ void main() {
     if (hasSkillControls) {
       await _checkSkillVariants(tester, client, model, shell);
     }
+    await _checkApplicationTools(tester, client, model);
     await model.openBuild(model.state.library.entries.last.id);
     await tester.pumpAndSettle();
     expect(model.mcpEditor.enabled, isFalse);
@@ -82,7 +83,177 @@ void main() {
       jsonRows(disabled['content']).single['text'],
       contains('EDITOR_DISABLED'),
     );
-  }, timeout: const Timeout(Duration(minutes: 6)));
+  }, timeout: const Timeout(Duration(minutes: 10)));
+}
+
+Future<void> _checkApplicationTools(
+  WidgetTester tester,
+  _ExternalEditor client,
+  WorkshopCubit model,
+) async {
+  await tester.tap(find.byKey(const Key('mcp-editor-settings')));
+  await tester.pumpAndSettle();
+  final opened = await client.success('pob_editor_status');
+  expect(opened['dialogOpen'], isTrue);
+  expect(opened['canCloseDialog'], isTrue);
+  await client.success('pob_check_build');
+  await client.success('pob_editor_app', {'action': 'close_dialog'});
+  await tester.pumpAndSettle();
+  expect((await client.success('pob_editor_status'))['dialogOpen'], isFalse);
+  await _checkProtectedDialog(tester, client);
+
+  await client.success('pob_editor_library', {
+    'action': 'rename',
+    'title': 'Расширенный MCP',
+  });
+  final id = model.state.library.activeId;
+  await client.success('pob_editor_notes', {
+    'action': 'write',
+    'text': 'Кириллица: раскалывающая смесь ✓',
+  });
+  expect(
+    (await client.success('pob_editor_notes', {'action': 'read'}))['text'],
+    contains('Кириллица'),
+  );
+  final xml = await client.success('pob_editor_files', {
+    'action': 'export_xml',
+  });
+  expect(xml['xml'], contains('Кириллица'));
+  final code = await client.success('pob_editor_files', {
+    'action': 'export_code',
+  });
+  expect(code['code'], isNotEmpty);
+  await client.success('pob_editor_library', {'action': 'copy'});
+  expect(model.state.library.activeId, isNot(id));
+  expect(model.mcpEditor.enabled, isTrue);
+  await client.success('pob_editor_library', {'action': 'open', 'id': id});
+  expect(model.state.library.activeId, id);
+
+  final history = await client.success('pob_editor_history', {
+    'action': 'status',
+  });
+  if ((history['undo'] as int) > 0) {
+    await client.success('pob_editor_history', {'action': 'undo'});
+    await client.success('pob_editor_history', {'action': 'redo'});
+  }
+  await client.success('pob_editor_progression', {
+    'action': 'capture',
+    'title': 'Первый этап',
+  });
+  final plan = await client.success('pob_editor_progression', {
+    'action': 'update',
+    'index': 0,
+    'completed': true,
+  });
+  expect(jsonRows(plan['steps']).first['completed'], isTrue);
+  await client.success('pob_editor_progression', {
+    'action': 'apply',
+    'index': 0,
+    'parts': ['tree', 'skills', 'equipment'],
+  });
+  await client.success('pob_editor_progression', {
+    'action': 'delete',
+    'index': 0,
+  });
+
+  await client.success('pob_editor_ui', {
+    'action': 'navigate',
+    'page': 'components',
+  });
+  expect(
+    (await client.success('pob_editor_ui', {'action': 'status'}))['page'],
+    'components',
+  );
+  await client.success('pob_editor_ui', {
+    'action': 'preferences',
+    'scale': 1.1,
+    'motion': false,
+  });
+  final ui = await client.success('pob_editor_ui', {'action': 'status'});
+  expect(ui['scale'], 1.1);
+  expect(ui['motion'], isFalse);
+  await client.success('pob_editor_ui', {
+    'action': 'preferences',
+    'scale': 1.0,
+    'motion': true,
+  });
+  await client.success('pob_editor_ui', {
+    'action': 'navigate',
+    'page': 'workspace',
+    'tab': 'skills',
+  });
+  await tester.pumpAndSettle();
+
+  await client.success('pob_editor_components', {'action': 'status'});
+  await client.success('pob_editor_components', {'action': 'check_updates'});
+  await client.success('pob_editor_components', {'action': 'rollback'});
+  expect((await _waitJob(client))['state'], 'complete');
+  expect(model.mcpEditor.enabled, isTrue);
+  expect(model.state.library.activeId, id);
+  await client.success('pob_editor_components', {
+    'action': 'select_installed',
+    'component': 'pob',
+    'commit': 'b' * 40,
+  });
+  expect((await _waitJob(client))['state'], 'failed');
+  expect(model.mcpEditor.enabled, isTrue);
+  await client.success('pob_editor_app', {'action': 'disconnect'});
+  expect((await client.success('pob_editor_status'))['connected'], isFalse);
+  expect(model.mcpEditor.enabled, isTrue);
+  await client.success('pob_editor_app', {'action': 'connect'});
+  expect(model.engine.connected, isTrue);
+  expect(model.state.library.activeId, id);
+  await client.success('pob_editor_app', {'action': 'save'});
+
+  final image = await client.call('pob_render_image', {'view': 'overview'});
+  expect(image['isError'], isFalse, reason: '$image');
+  expect(
+    jsonRows(image['content']).where((b) => b['type'] == 'image'),
+    hasLength(1),
+  );
+  final lifecycle = <String>[];
+  model.mcpEditor.lifecycleAction = (action) async {
+    lifecycle.add(action);
+  };
+  await client.success('pob_editor_app', {'action': 'restart'});
+  expect(lifecycle, ['restart']);
+  model.mcpEditor.lifecycleAction = null;
+}
+
+Future<JsonMap> _waitJob(_ExternalEditor client) async {
+  for (var attempt = 0; attempt < 300; attempt++) {
+    final job = await client.success('pob_editor_job');
+    if (job['state'] != 'running') return job;
+    await Future<void>.delayed(const Duration(milliseconds: 100));
+  }
+  throw StateError('Фоновая задача не завершилась');
+}
+
+Future<void> _checkProtectedDialog(
+  WidgetTester tester,
+  _ExternalEditor client,
+) async {
+  final context = tester.element(find.byType(WorkspaceView));
+  unawaited(
+    showDialog<void>(
+      context: context,
+      builder: (_) => const AlertDialog(content: Text('Несохранённый ввод')),
+    ),
+  );
+  await tester.pumpAndSettle();
+  expect(
+    (await client.success('pob_editor_status'))['canCloseDialog'],
+    isFalse,
+  );
+  final refused = await client.call('pob_editor_notes', {
+    'action': 'write',
+    'text': 'Нельзя',
+  });
+  expect(refused['isError'], isTrue);
+  expect(jsonRows(refused['content']).first['text'], contains('APP_BUSY'));
+  await client.success('pob_check_build');
+  Navigator.of(context).pop();
+  await tester.pumpAndSettle();
 }
 
 Future<void> _createBuilds(_ExternalEditor client, WorkshopCubit model) async {

@@ -19,6 +19,8 @@ Future<void> recordComponent(
     'component': component.name,
     'tag': installation.tag,
     'commit': installation.commit,
+    if (installation.archiveSha256 != null)
+      'archiveSha256': installation.archiveSha256,
   }),
   flush: true,
 );

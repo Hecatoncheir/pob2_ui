@@ -48,6 +48,7 @@ import 'keyboard_bindings.dart';
 import 'shortcut_settings.dart';
 import 'resizable_sidebar.dart';
 import 'setup_wizard.dart';
+import 'mcp_editor_ui.dart';
 import 'core/ui_translation.dart';
 
 class PobApp extends StatelessWidget {
@@ -144,6 +145,14 @@ class _MaterialAppState extends State<_MaterialApp> {
     }
   }
 
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final control = McpEditorUi(context);
+    widget.model.mcpEditor.uiAction = control.call;
+    widget.model.mcpEditor.uiStatus = control.status;
+  }
+
   Future<void> _showFirstSetup() async {
     final model = widget.model;
     if (model.ready && model.buildFolderReady) return;
@@ -164,13 +173,20 @@ class _MaterialAppState extends State<_MaterialApp> {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.model == widget.model) return;
     oldWidget.model.modalOpen = null;
+    oldWidget.model.mcpEditor.uiAction = null;
+    oldWidget.model.mcpEditor.uiStatus = null;
     widget.model.modalOpen = _modalOpen;
+    final control = McpEditorUi(context);
+    widget.model.mcpEditor.uiAction = control.call;
+    widget.model.mcpEditor.uiStatus = control.status;
   }
 
   @override
   void dispose() {
     _lifecycle.dispose();
     widget.model.modalOpen = null;
+    widget.model.mcpEditor.uiAction = null;
+    widget.model.mcpEditor.uiStatus = null;
     super.dispose();
   }
 
