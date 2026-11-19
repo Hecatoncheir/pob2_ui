@@ -157,7 +157,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m8ed6f8a850 => 'XML 空';
 
   @override
-  String get me72be74923 => 'XML 構建';
+  String get me72be74923 => '配置 XML';
 
   @override
   String get me097dcd9f8 => 'XML 已儲存';
@@ -743,7 +743,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get medafd2f9d8 => '從 PoB 導入角色';
 
   @override
-  String get m2c72186c20 => '導入元件';
+  String get m2c72186c20 => '已匯入的配置';
 
   @override
   String get m848ed36881 => '導入';
@@ -2045,7 +2045,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get md16bd478bc => '在此連結找不到流派。';
 
   @override
-  String get mc27d8aad03 => '由原始 Lua 計算的程序集';
+  String get mc27d8aad03 => '已使用原始 Lua 計算配置';
 
   @override
   String get med0b7c459c => '已存在同名的組件。';
@@ -2741,7 +2741,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m8ed6f8a850 => 'XML 空';
 
   @override
-  String get me72be74923 => 'XML 構建';
+  String get me72be74923 => '配置 XML';
 
   @override
   String get me097dcd9f8 => 'XML 已儲存';
@@ -3327,7 +3327,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get medafd2f9d8 => '從 PoB 導入角色';
 
   @override
-  String get m2c72186c20 => '導入元件';
+  String get m2c72186c20 => '已匯入的配置';
 
   @override
   String get m848ed36881 => '導入';
@@ -4629,7 +4629,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get md16bd478bc => '在此連結找不到流派。';
 
   @override
-  String get mc27d8aad03 => '由原始 Lua 計算的程序集';
+  String get mc27d8aad03 => '已使用原始 Lua 計算配置';
 
   @override
   String get med0b7c459c => '已存在同名的組件。';

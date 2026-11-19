@@ -158,7 +158,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m8ed6f8a850 => 'XML 空';
 
   @override
-  String get me72be74923 => 'XML ビルド';
+  String get me72be74923 => 'ビルドXML';
 
   @override
   String get me097dcd9f8 => 'XML を保存しました';
@@ -745,7 +745,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get medafd2f9d8 => 'PoB からキャラクターをインポートする';
 
   @override
-  String get m2c72186c20 => 'インポートされたアセンブリ';
+  String get m2c72186c20 => 'インポートしたビルド';
 
   @override
   String get m848ed36881 => 'インポート';
@@ -2050,7 +2050,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get md16bd478bc => 'このリンクのビルドが見つかりませんでした。';
 
   @override
-  String get mc27d8aad03 => 'オリジナルの Lua によって計算されたアセンブリ';
+  String get mc27d8aad03 => 'オリジナルのLuaで計算したビルド';
 
   @override
   String get med0b7c459c => '同じ名前のアセンブリがすでに存在します。';

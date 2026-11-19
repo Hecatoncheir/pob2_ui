@@ -170,7 +170,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get m8ed6f8a850 => 'XML vide';
 
   @override
-  String get me72be74923 => 'XML versions';
+  String get me72be74923 => 'XML du build';
 
   @override
   String get me097dcd9f8 => 'XML enregistrés';
@@ -786,7 +786,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get medafd2f9d8 => 'Importer un personnage depuis PoB';
 
   @override
-  String get m2c72186c20 => 'Imported assembly';
+  String get m2c72186c20 => 'Build importé';
 
   @override
   String get m848ed36881 => 'Importer';
@@ -2128,7 +2128,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get md16bd478bc => 'Aucun build trouvé à cette adresse.';
 
   @override
-  String get mc27d8aad03 => 'Assemblage calculé par l\'original Lua';
+  String get mc27d8aad03 => 'Build calculé par le code Lua d’origine';
 
   @override
   String get med0b7c459c => 'Un assembly portant le même nom existe déjà.';

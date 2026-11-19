@@ -164,7 +164,7 @@ class AppLocalizationsPt extends AppLocalizations {
   String get m8ed6f8a850 => 'XML vazio';
 
   @override
-  String get me72be74923 => 'XML compilações';
+  String get me72be74923 => 'XML da build';
 
   @override
   String get me097dcd9f8 => 'XML salvo';
@@ -767,7 +767,7 @@ class AppLocalizationsPt extends AppLocalizations {
   String get medafd2f9d8 => 'Importando um personagem do PoB';
 
   @override
-  String get m2c72186c20 => 'Montagem importada';
+  String get m2c72186c20 => 'Build importada';
 
   @override
   String get m848ed36881 => 'Importar';
@@ -2104,7 +2104,7 @@ class AppLocalizationsPt extends AppLocalizations {
   String get md16bd478bc => 'Nenhuma build foi encontrada neste link.';
 
   @override
-  String get mc27d8aad03 => 'Montagem calculada pelo original Lua';
+  String get mc27d8aad03 => 'Build calculada pelo Lua original';
 
   @override
   String get med0b7c459c => 'Já existe um assembly com o mesmo nome.';
@@ -2830,7 +2830,7 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get m8ed6f8a850 => 'XML vazio';
 
   @override
-  String get me72be74923 => 'XML compilações';
+  String get me72be74923 => 'XML da build';
 
   @override
   String get me097dcd9f8 => 'XML salvo';
@@ -3433,7 +3433,7 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get medafd2f9d8 => 'Importando um personagem do PoB';
 
   @override
-  String get m2c72186c20 => 'Montagem importada';
+  String get m2c72186c20 => 'Build importada';
 
   @override
   String get m848ed36881 => 'Importar';
@@ -4770,7 +4770,7 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get md16bd478bc => 'Nenhuma build foi encontrada neste link.';
 
   @override
-  String get mc27d8aad03 => 'Montagem calculada pelo original Lua';
+  String get mc27d8aad03 => 'Build calculada pelo Lua original';
 
   @override
   String get med0b7c459c => 'Já existe um assembly com o mesmo nome.';

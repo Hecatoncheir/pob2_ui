@@ -166,7 +166,7 @@ class AppLocalizationsEs extends AppLocalizations {
   String get m8ed6f8a850 => 'XML vacío';
 
   @override
-  String get me72be74923 => 'XML compilaciones';
+  String get me72be74923 => 'XML de la configuración';
 
   @override
   String get me097dcd9f8 => 'XML guardado';
@@ -774,7 +774,7 @@ class AppLocalizationsEs extends AppLocalizations {
   String get medafd2f9d8 => 'Importando un personaje desde PoB';
 
   @override
-  String get m2c72186c20 => 'Conjunto importado';
+  String get m2c72186c20 => 'Configuración importada';
 
   @override
   String get m848ed36881 => 'Importar';
@@ -2115,7 +2115,7 @@ class AppLocalizationsEs extends AppLocalizations {
   String get md16bd478bc => 'No se encontró una build en este enlace.';
 
   @override
-  String get mc27d8aad03 => 'Ensamblaje calculado por el Lua original';
+  String get mc27d8aad03 => 'Configuración calculada con el Lua original';
 
   @override
   String get med0b7c459c => 'Ya existe un ensamblado con el mismo nombre.';

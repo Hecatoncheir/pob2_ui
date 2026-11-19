@@ -2472,7 +2472,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get mec1443af90 =>
-      'Calculation settings and party settings come from the first build.';
+      'Calculation settings and skill group settings come from the first build.';
 
   @override
   String get m720408ab97 => 'Install components and connect Lua';

@@ -161,7 +161,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m8ed6f8a850 => 'XML ว่างเปล่า';
 
   @override
-  String get me72be74923 => 'XML บิลด์';
+  String get me72be74923 => 'XML ของบิลด์';
 
   @override
   String get me097dcd9f8 => 'บันทึกแล้ว XML';
@@ -755,7 +755,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get medafd2f9d8 => 'การนำเข้าตัวละครจาก PoB';
 
   @override
-  String get m2c72186c20 => 'ชุดประกอบนำเข้า';
+  String get m2c72186c20 => 'บิลด์ที่นำเข้า';
 
   @override
   String get m848ed36881 => 'นำเข้า';
@@ -1978,7 +1978,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m30a07ea432 => 'กำลังคำนวณผลเปรียบเทียบ…';
 
   @override
-  String get m9b9370223c => 'Calculations';
+  String get m9b9370223c => 'การคำนวณ';
 
   @override
   String get m1e135b51f1 => 'การคำนวณ...';
@@ -2067,7 +2067,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get md16bd478bc => 'ไม่พบบิลด์ในลิงก์นี้';
 
   @override
-  String get mc27d8aad03 => 'การประกอบคำนวณโดยต้นฉบับ Lua';
+  String get mc27d8aad03 => 'คำนวณบิลด์ด้วย Lua ต้นฉบับแล้ว';
 
   @override
   String get med0b7c459c => 'มีแอสเซมบลีที่มีชื่อเดียวกันอยู่แล้ว';

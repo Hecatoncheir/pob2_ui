@@ -1431,8 +1431,9 @@ final uiExactTranslations = <String, String Function(AppLocalizations)>{
   "Calculation conditions": (l) => l.m7186793dd5,
   "Условия расчёта и настройки группы берутся из первой сборки.": (l) =>
       l.mec1443af90,
-  "Calculation settings and party settings come from the first build.": (l) =>
-      l.mec1443af90,
+  "Calculation settings and skill group settings come from the first build.": (
+    l,
+  ) => l.mec1443af90,
   "Установите компоненты и подключите Lua": (l) => l.m720408ab97,
   "Install components and connect Lua": (l) => l.m720408ab97,
   "Установите компоненты, чтобы открыть сборку и получить настоящий расчёт.": (

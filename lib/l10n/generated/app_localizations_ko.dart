@@ -158,7 +158,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m8ed6f8a850 => 'XML 비어 있음';
 
   @override
-  String get me72be74923 => 'XML 빌드';
+  String get me72be74923 => '빌드 XML';
 
   @override
   String get me097dcd9f8 => 'XML 저장됨';
@@ -745,7 +745,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get medafd2f9d8 => 'PoB에서 캐릭터 가져오기';
 
   @override
-  String get m2c72186c20 => '가져온 어셈블리';
+  String get m2c72186c20 => '가져온 빌드';
 
   @override
   String get m848ed36881 => '가져오기';
@@ -2050,7 +2050,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get md16bd478bc => '이 링크에서 빌드를 찾을 수 없습니다.';
 
   @override
-  String get mc27d8aad03 => '원본으로 계산된 어셈블리 Lua';
+  String get mc27d8aad03 => '원본 Lua로 계산한 빌드';
 
   @override
   String get med0b7c459c => '동일한 이름의 어셈블리가 이미 존재합니다.';

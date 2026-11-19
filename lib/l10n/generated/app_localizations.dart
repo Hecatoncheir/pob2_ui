@@ -4629,7 +4629,7 @@ abstract class AppLocalizations {
   /// Условия расчёта и настройки группы берутся из первой сборки.
   ///
   /// In en, this message translates to:
-  /// **'Calculation settings and party settings come from the first build.'**
+  /// **'Calculation settings and skill group settings come from the first build.'**
   String get mec1443af90;
 
   /// Установите компоненты и подключите Lua

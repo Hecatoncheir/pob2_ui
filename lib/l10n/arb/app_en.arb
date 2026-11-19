@@ -4103,7 +4103,7 @@
     "description": "Условия расчёта",
     "placeholders": {}
   },
-  "mec1443af90": "Calculation settings and party settings come from the first build.",
+  "mec1443af90": "Calculation settings and skill group settings come from the first build.",
   "@mec1443af90": {
     "description": "Условия расчёта и настройки группы берутся из первой сборки.",
     "placeholders": {}

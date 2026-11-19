@@ -173,7 +173,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get m8ed6f8a850 => 'XML leer';
 
   @override
-  String get me72be74923 => 'XML Builds';
+  String get me72be74923 => 'Build-XML';
 
   @override
   String get me097dcd9f8 => 'XML gespeichert';
@@ -788,7 +788,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get medafd2f9d8 => 'Importieren eines Charakters aus PoB';
 
   @override
-  String get m2c72186c20 => 'Importierte Baugruppe';
+  String get m2c72186c20 => 'Importierter Build';
 
   @override
   String get m848ed36881 => 'Importieren';
@@ -2130,7 +2130,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get md16bd478bc => 'Unter diesem Link wurde kein Build gefunden.';
 
   @override
-  String get mc27d8aad03 => 'Von Original Lua berechnete Baugruppe';
+  String get mc27d8aad03 => 'Build mit dem ursprünglichen Lua berechnet';
 
   @override
   String get med0b7c459c =>
