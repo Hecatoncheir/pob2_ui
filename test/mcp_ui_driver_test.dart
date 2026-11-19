@@ -191,6 +191,11 @@ void main() {
       var taps = 0;
       var dragged = 0.0;
       var shortcuts = 0;
+      var modifiedTaps = 0;
+      var functionKeys = 0;
+      var doubleTaps = 0;
+      var longPresses = 0;
+      var secondaryTaps = 0;
       const dragKey = Key('drag-area');
       await tester.pumpWidget(
         RepaintBoundary(
@@ -199,6 +204,8 @@ void main() {
             navigatorKey: navigator,
             home: CallbackShortcuts(
               bindings: {
+                const SingleActivator(LogicalKeyboardKey.f1): () =>
+                    functionKeys++,
                 const SingleActivator(
                   LogicalKeyboardKey.keyK,
                   control: true,
@@ -211,11 +218,18 @@ void main() {
                   body: Column(
                     children: [
                       TextButton(
-                        onPressed: () => taps++,
+                        onPressed: () {
+                          taps++;
+                          if (HardwareKeyboard.instance.isShiftPressed)
+                            modifiedTaps++;
+                        },
                         child: const Text('Нажать'),
                       ),
                       GestureDetector(
                         key: dragKey,
+                        onDoubleTap: () => doubleTaps++,
+                        onLongPress: () => longPresses++,
+                        onSecondaryTap: () => secondaryTaps++,
                         onPanUpdate: (event) => dragged += event.delta.dx,
                         child: Container(
                           width: 200,
@@ -246,6 +260,8 @@ void main() {
         Offset from, {
         Offset? to,
         Object? value,
+        List<String> modifiers = const [],
+        String button = 'primary',
       }) async {
         final snapshot = await drive(tester, driver.snapshot());
         await drive(
@@ -254,6 +270,8 @@ void main() {
             'action': 'gesture',
             'snapshotId': snapshot['snapshotId'],
             'operation': operation,
+            'modifiers': modifiers,
+            'button': button,
             'from': {'x': from.dx, 'y': from.dy},
             if (to != null) 'to': {'x': to.dx, 'y': to.dy},
             if (value != null) 'value': value,
@@ -263,7 +281,20 @@ void main() {
 
       await gesture('tap', tester.getCenter(find.text('Нажать')));
       expect(taps, 1);
+      await gesture(
+        'tap',
+        tester.getCenter(find.text('Нажать')),
+        modifiers: ['shift'],
+      );
+      expect(modifiedTaps, 1);
+      expect(HardwareKeyboard.instance.logicalKeysPressed, isEmpty);
       final from = tester.getCenter(find.byKey(dragKey));
+      await gesture('doubleTap', from);
+      expect(doubleTaps, 1);
+      await gesture('longPress', from);
+      expect(longPresses, 1);
+      await gesture('tap', from, button: 'secondary');
+      expect(secondaryTaps, 1);
       await gesture('drag', from, to: from + const Offset(70, 0));
       expect(dragged, greaterThan(30));
       await gesture(
@@ -283,14 +314,26 @@ void main() {
         }),
       );
       expect(shortcuts, 1);
+      final keys = await drive(tester, driver.snapshot());
+      await drive(
+        tester,
+        driver.interact({
+          'action': 'key',
+          'snapshotId': keys['snapshotId'],
+          'key': 'f1',
+        }),
+      );
+      expect(functionKeys, 1);
       expect(HardwareKeyboard.instance.logicalKeysPressed, isEmpty);
       await rejects(
         () => gesture(
           'tap',
           const Offset(-1, 0),
+          modifiers: ['control'],
         ).then((_) => <String, dynamic>{}),
         'INVALID_ARGUMENTS',
       );
+      expect(HardwareKeyboard.instance.logicalKeysPressed, isEmpty);
       driver.dispose();
       await tester.pumpWidget(const SizedBox.shrink());
     },

@@ -32,7 +32,10 @@ class McpUiInput {
   void _send(PointerEvent event) =>
       GestureBinding.instance.handlePointerEvent(event);
 
-  Future<void> gesture(JsonMap args) async {
+  Future<void> gesture(JsonMap args) =>
+      _withKeys(jsonStrings(args['modifiers']).map(_key), () => _gesture(args));
+
+  Future<void> _gesture(JsonMap args) async {
     final from = _point(args['from']);
     final operation = args['operation'];
     if (operation == 'hover') {
@@ -136,20 +139,28 @@ class McpUiInput {
       'meta': LogicalKeyboardKey.metaLeft,
     };
     if (keys[name] case final key?) return key;
-    if (name is String && RegExp(r'^[a-z0-9]$').hasMatch(name))
-      return LogicalKeyboardKey(name.codeUnitAt(0));
+    if (name is String && RegExp(r'^[\x20-\x7e]$').hasMatch(name))
+      return LogicalKeyboardKey(name.toLowerCase().codeUnitAt(0));
+    if (name is String && RegExp(r'^f([1-9]|1\d|2[0-4])$').hasMatch(name))
+      return LogicalKeyboardKey(
+        LogicalKeyboardKey.f1.keyId + int.parse(name.substring(1)) - 1,
+      );
     return _invalid();
   }
 
-  void key(JsonMap args) {
-    final keys = [
-      ...jsonStrings(args['modifiers']).map(_key),
-      _key(args['key']),
-    ].toSet();
+  Future<void> key(JsonMap args) => _withKeys([
+    ...jsonStrings(args['modifiers']).map(_key),
+    _key(args['key']),
+  ], () {});
+
+  Future<void> _withKeys(
+    Iterable<LogicalKeyboardKey> keys,
+    FutureOr<void> Function() action,
+  ) async {
     final keyboard = HardwareKeyboard.instance;
     final pressed = <LogicalKeyboardKey>[];
     try {
-      for (final key in keys) {
+      for (final key in keys.toSet()) {
         if (keyboard.logicalKeysPressed.contains(key)) continue;
         pressed.add(key);
         _keyEvent(
@@ -160,6 +171,7 @@ class McpUiInput {
           ),
         );
       }
+      await action();
     } finally {
       for (final key in pressed.reversed) {
         _keyEvent(

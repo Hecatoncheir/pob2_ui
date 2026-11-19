@@ -10,6 +10,7 @@ import subprocess
 import tempfile
 import threading
 import time
+from urllib.request import Request, urlopen
 
 ROOT = Path(__file__).resolve().parents[1]
 BINARIES = {
@@ -17,6 +18,22 @@ BINARIES = {
     'linux-x64': 'build/linux/x64/release/bundle/pob2_ui',
     'macos-arm64': 'build/macos/Build/Products/Release/PoB II.app/Contents/MacOS/PoB II',
 }
+
+
+def failure_status(profile):
+    try:
+        endpoint = json.loads((profile / 'mcp-editor/endpoint.json').read_text())
+        payload = json.dumps({'tool': 'pob_editor_status', 'arguments': {},
+                              'revision': None}).encode()
+        request = Request(f"http://127.0.0.1:{endpoint['port']}/edit", data=payload,
+                          headers={'Authorization': 'Bearer ' + endpoint['token'],
+                                   'Content-Type': 'application/json'})
+        with urlopen(request, timeout=5) as response:
+            status = json.load(response)['result']
+        return {key: status.get(key) for key in
+                ('busy', 'dialogOpen', 'status', 'error', 'log')}
+    except (OSError, ValueError, KeyError) as error:
+        return {'diagnosticError': str(error)}
 
 
 class Editor:
@@ -110,6 +127,10 @@ def check(binary, components):
             assert list(builds.glob('*.xml')), 'Не сохранён XML'
             return {'appVersion': status['appVersion'], 'appBuild': status['appBuild'],
                     'tools': len(tools), 'exitCode': code, 'xmlSaved': True}
+        except Exception:
+            print(json.dumps({'failureStatus': failure_status(profile)},
+                             ensure_ascii=False), flush=True)
+            raise
         finally:
             if process.poll() is None:
                 process.terminate()

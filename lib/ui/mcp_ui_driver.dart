@@ -136,7 +136,7 @@ class McpUiDriver {
     if (args['action'] == 'gesture') {
       await input.gesture(args);
     } else {
-      input.key(args);
+      await input.key(args);
     }
     await _frame();
     return snapshot();
