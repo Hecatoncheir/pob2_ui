@@ -1,4 +1,5 @@
 import 'core/dialog_close_button.dart';
+import 'core/tree_glass.dart';
 import 'core/app_text.dart';
 
 import 'dart:convert';
@@ -341,12 +342,18 @@ class _StatGroup extends StatelessWidget {
       childrenPadding: const EdgeInsets.fromLTRB(12, 0, 12, 12),
       visualDensity: VisualDensity.compact,
       clipBehavior: Clip.antiAlias,
-      collapsedBackgroundColor: Theme.of(context)
-          .colorScheme
-          .surfaceContainerHigh,
-      backgroundColor: Color.alphaBlend(
-        Theme.of(context).colorScheme.primary.withValues(alpha: .06),
+      collapsedBackgroundColor: TreeGlassScope.surface(
+        context,
         Theme.of(context).colorScheme.surfaceContainerHigh,
+        opacity: .65,
+      ),
+      backgroundColor: TreeGlassScope.surface(
+        context,
+        Color.alphaBlend(
+          Theme.of(context).colorScheme.primary.withValues(alpha: .06),
+          Theme.of(context).colorScheme.surfaceContainerHigh,
+        ),
+        opacity: .65,
       ),
       title: AppText(
         title,

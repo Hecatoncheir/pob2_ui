@@ -51,6 +51,9 @@ import 'setup_wizard.dart';
 import 'mcp_editor_ui.dart';
 import 'mcp_ui_driver.dart';
 import 'core/ui_translation.dart';
+import 'core/tree_glass.dart';
+import 'tree_view.dart';
+import 'tree_progression_bloc.dart';
 
 class PobApp extends StatelessWidget {
   const PobApp({
@@ -256,49 +259,91 @@ class _Shell extends StatelessWidget {
           builder: (context, state) {
             final shell = context.read<ShellBloc>();
             final narrow = MediaQuery.sizeOf(context).width < 650;
-            return Scaffold(
-              body: SafeArea(
-                child: ScrollableWorkspace(
-                  child: Row(
-                    children: [
-                      if (!narrow) _Sidebar(model, updates),
-                      Expanded(
-                        child: Column(
-                          children: [
-                            if (narrow) _CompactActions(model, updates),
-                            if (model.state.busy)
-                              LinearProgressIndicator(
-                                minHeight: 2,
-                                color: Spark.of(context).green,
-                                backgroundColor: Spark.of(context).sage,
-                              ),
-                            if (model.state.error != null)
-                              _ErrorNotice(model.state.error!),
-                            Expanded(
-                              child: ClipRect(
-                                child: SoftSwitch(
-                                  child: KeyedSubtree(
-                                    key: ValueKey(state.page),
-                                    child: _page(state.page, model, shell),
+            return _withTree(
+              context,
+              state,
+              Scaffold(
+                backgroundColor: _treeActive(state) ? Colors.transparent : null,
+                body: SafeArea(
+                  child: ScrollableWorkspace(
+                    child: Row(
+                      children: [
+                        if (!narrow) _Sidebar(model, updates),
+                        Expanded(
+                          child: Column(
+                            children: [
+                              if (narrow) _CompactActions(model, updates),
+                              if (model.state.busy)
+                                LinearProgressIndicator(
+                                  minHeight: 2,
+                                  color: Spark.of(context).green,
+                                  backgroundColor: Spark.of(context).sage,
+                                ),
+                              if (model.state.error != null)
+                                _ErrorNotice(model.state.error!),
+                              Expanded(
+                                child: ClipRect(
+                                  child: SoftSwitch(
+                                    child: KeyedSubtree(
+                                      key: ValueKey(state.page),
+                                      child: _page(state.page, model, shell),
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                            _StatusBar(model),
-                          ],
+                              _StatusBar(model),
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
+                bottomNavigationBar: narrow
+                    ? _BottomNav(state.page, shell)
+                    : null,
               ),
-              bottomNavigationBar: narrow
-                  ? _BottomNav(state.page, shell)
-                  : null,
             );
           },
         ),
       );
+  bool _treeActive(ShellState state) =>
+      model.state.document?.tree != null &&
+      state.page == AppPage.workspace &&
+      state.tab == WorkshopTab.tree;
+
+  Widget _withTree(BuildContext context, ShellState state, Widget foreground) {
+    final tree = model.state.document?.tree;
+    if (tree == null) return foreground;
+    final active = _treeActive(state);
+    final theme = Theme.of(context);
+    final input = theme.inputDecorationTheme.copyWith(
+      fillColor: Spark.of(context).surface.withValues(alpha: .30),
+    );
+    final content = TreeGlassScope(
+      active: active,
+      child: Theme(
+        data: active ? theme.copyWith(inputDecorationTheme: input) : theme,
+        child: TreeView(
+          key: ObjectKey(model.engine),
+          model: model,
+          tree: tree,
+          active: active,
+          foreground: foreground,
+        ),
+      ),
+    );
+    final key = model.progressionKey;
+    if (key == null) return content;
+    return BlocProvider(
+      key: ValueKey(key),
+      create: (_) =>
+          TreeProgressionBloc(model.progressionRepository(key))
+            ..add(const TreeProgressionOpened()),
+      child: content,
+    );
+  }
+
   Widget _page(AppPage page, WorkshopCubit model, ShellBloc shell) =>
       switch (page) {
         AppPage.library => LibraryView(model: model, shell: shell),
@@ -512,7 +557,7 @@ class _SidebarTools extends StatelessWidget {
   Widget build(BuildContext context) => Container(
     padding: EdgeInsets.symmetric(horizontal: compact ? 0 : 8, vertical: 8),
     decoration: BoxDecoration(
-      color: Spark.of(context).surface,
+      color: TreeGlassScope.surface(context, Spark.of(context).surface),
       borderRadius: BorderRadius.circular(16),
       border: Border.all(color: Spark.of(context).line),
     ),
@@ -726,7 +771,7 @@ class _BottomNav extends StatelessWidget {
   @override
   Widget build(BuildContext context) => NavigationBar(
     height: 68,
-    backgroundColor: Spark.of(context).surface,
+    backgroundColor: TreeGlassScope.surface(context, Spark.of(context).surface),
     indicatorColor: Spark.of(context).sage,
     selectedIndex: page.index,
     onDestinationSelected: (index) =>

@@ -39,6 +39,8 @@ import 'workshop_state.dart';
 import 'mcp_editor_cubit.dart';
 import 'core/language_scope.dart';
 import 'tree_progression_bloc.dart';
+import 'tree_window_scope.dart';
+import 'core/tree_glass.dart';
 
 typedef _ProgressionCanvasState = ({
   List<TreeProgressionStep> steps,
@@ -47,9 +49,17 @@ typedef _ProgressionCanvasState = ({
 });
 
 class TreeView extends StatefulWidget {
-  const TreeView({super.key, required this.model, required this.tree});
+  const TreeView({
+    super.key,
+    required this.model,
+    required this.tree,
+    this.foreground,
+    this.active = true,
+  });
   final WorkshopCubit model;
   final TreeGeometry tree;
+  final Widget? foreground;
+  final bool active;
 
   @override
   State<TreeView> createState() => _TreeViewState();
@@ -63,6 +73,9 @@ class _TreeViewState extends State<TreeView>
   List<int> _planPath = const [];
   String query = '';
   Size? viewport;
+  final _windowKey = GlobalKey();
+  Rect? _windowViewport;
+  bool _viewportPending = false;
   late final zoomAnimation = AnimationController(vsync: this)
     ..addListener(_zoomFrame);
   Animation<Matrix4>? zoomTween;
@@ -98,6 +111,7 @@ class _TreeViewState extends State<TreeView>
   @override
   void didUpdateWidget(TreeView old) {
     super.didUpdateWidget(old);
+    _updateWindowActivity(old);
     if (old.tree == widget.tree) return;
     _planPath = const [];
     WidgetsBinding.instance.addPostFrameCallback((_) => _refreshPower());
@@ -109,6 +123,14 @@ class _TreeViewState extends State<TreeView>
     if (_root(old.tree) != _root(widget.tree) ||
         old.tree.version != widget.tree.version)
       _scheduleFocus();
+  }
+
+  void _updateWindowActivity(TreeView old) {
+    if (old.active && !widget.active) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted && !widget.active) hoverModel.clear();
+      });
+    }
   }
 
   void _updateArtwork(TreeGeometry old) {
@@ -253,13 +275,67 @@ class _TreeViewState extends State<TreeView>
                   listenWhen: (before, after) =>
                       before.comparison != after.comparison,
                   listener: (_, state) => _focusComparison(state),
-                  builder: (_, _) => _body(),
+                  builder: (_, _) =>
+                      widget.foreground == null ? _body() : _window(),
                 ),
               ),
             ),
           ),
         ),
       );
+
+  Widget _window() => TreeWindowScope(
+    chrome: _body,
+    viewportPainted: _viewportPainted,
+    child: Stack(
+      key: _windowKey,
+      fit: StackFit.expand,
+      children: [
+        Offstage(
+          offstage: !widget.active,
+          child: RepaintBoundary(child: _treeCanvasWithProgression()),
+        ),
+        if (widget.active) TreeFrost(viewport: _windowViewport),
+        TreeInputHole(
+          viewport: widget.active ? _windowViewport : null,
+          child: RepaintBoundary(child: widget.foreground!),
+        ),
+      ],
+    ),
+  );
+
+  void _viewportPainted(RenderBox box) {
+    if (_viewportPending || !widget.active) return;
+    _viewportPending = true;
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _viewportPending = false;
+      if (!mounted || !box.attached) return;
+      final root = _windowKey.currentContext?.findRenderObject() as RenderBox?;
+      if (root == null) return;
+      final offset = box.localToGlobal(Offset.zero, ancestor: root);
+      final rect = (offset & box.size).intersect(Offset.zero & root.size);
+      if (!rect.isEmpty) _updateViewport(rect);
+    });
+  }
+
+  void _updateViewport(Rect rect) {
+    final previous = _windowViewport;
+    if (rect == previous) return;
+    setState(() => _windowViewport = rect);
+    viewport = rect.size;
+    if (previous == null) {
+      _focusAllocated();
+      return;
+    }
+    zoomAnimation.stop();
+    final shift = rect.center - previous.center;
+    transform.value = Matrix4.translationValues(shift.dx, shift.dy, 0)
+      ..multiply(transform.value);
+  }
+
+  Offset get _viewportCenter =>
+      _windowViewport?.center ??
+      Offset(viewport!.width / 2, viewport!.height / 2);
 
   Widget _body() => Padding(
     padding: const EdgeInsets.fromLTRB(0, 0, 0, 2),
@@ -347,7 +423,11 @@ class _TreeViewState extends State<TreeView>
           ),
         if (powerVisible && constraints.maxHeight >= 40)
           const SizedBox(height: 8),
-        Expanded(child: _treeCanvasWithProgression()),
+        Expanded(
+          child: widget.foreground == null
+              ? _treeCanvasWithProgression()
+              : const TreeWindowViewport(key: Key('tree-interaction-viewport')),
+        ),
       ],
     ),
   );
@@ -409,70 +489,71 @@ class _TreeViewState extends State<TreeView>
       before?.identity != after?.identity ||
       !setEquals(before?.nodes, after?.nodes);
 
-  Widget _treeCanvas([TreeProgressionChange? progression, int? planHovered]) =>
-      ClipRRect(
-        borderRadius: BorderRadius.circular(18),
-        child: ColoredBox(
-          color: Spark.of(context).treeBackground,
-          child: LayoutBuilder(
-            builder: (context, constraints) {
-              final size = Size(constraints.maxWidth, constraints.maxHeight);
-              if (viewport == null) {
-                viewport = size;
-                WidgetsBinding.instance.addPostFrameCallback((_) {
-                  if (mounted) _focusAllocated();
-                });
-              }
-              viewport = size;
-              return MouseRegion(
-                onHover: (event) => _hover(event.localPosition, event.position),
-                onExit: (_) => hoverModel.clear(),
-                child: GestureDetector(
-                  onTapUp: _select,
-                  onLongPressStart: (event) => _detailsAt(event.localPosition),
-                  child: InteractiveViewer(
-                    key: const Key('passive-tree'),
-                    transformationController: transform,
-                    onInteractionStart: (_) {
-                      editorFocus.requestFocus();
-                      zoomAnimation.stop();
-                      hoverModel.clear();
-                    },
-                    constrained: false,
-                    minScale: .08,
-                    maxScale: 12,
-                    boundaryMargin: const EdgeInsets.all(500),
-                    child: TreeJewelArtwork(
-                      scene: scene,
-                      report: widget.model.state.report!,
-                      child: CustomPaint(
-                        size: const Size(1800, 1800),
-                        isComplex: true,
-                        painter: TreePainter(
-                          scene,
-                          selected,
-                          hovered,
-                          query,
-                          icons,
-                          transform,
-                          size,
-                          powerArtwork?.artwork.picture ?? artwork?.picture,
-                          hoverArtwork?.picture,
-                          matches: _matchedIds(),
-                          progression: progression,
-                          planHovered: planHovered,
-                          planPath: _planPath,
-                          comparisonPaths: _comparisonPaths(),
-                        ),
-                      ),
+  Widget _treeCanvas([TreeProgressionChange? progression, int? planHovered]) {
+    final canvas = ColoredBox(
+      color: Spark.of(context).treeBackground,
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          final size = Size(constraints.maxWidth, constraints.maxHeight);
+          _recordCanvasSize(size);
+          return MouseRegion(
+            onHover: (event) => _hover(event.localPosition, event.position),
+            onExit: (_) => hoverModel.clear(),
+            child: GestureDetector(
+              onTapUp: _select,
+              onLongPressStart: (event) => _detailsAt(event.localPosition),
+              child: InteractiveViewer(
+                key: const Key('passive-tree'),
+                transformationController: transform,
+                onInteractionStart: (_) {
+                  editorFocus.requestFocus();
+                  zoomAnimation.stop();
+                  hoverModel.clear();
+                },
+                constrained: false,
+                minScale: .08,
+                maxScale: 12,
+                boundaryMargin: const EdgeInsets.all(500),
+                child: TreeJewelArtwork(
+                  scene: scene,
+                  report: widget.model.state.report!,
+                  child: CustomPaint(
+                    size: const Size(1800, 1800),
+                    isComplex: true,
+                    painter: TreePainter(
+                      scene,
+                      selected,
+                      hovered,
+                      query,
+                      icons,
+                      transform,
+                      size,
+                      powerArtwork?.artwork.picture ?? artwork?.picture,
+                      hoverArtwork?.picture,
+                      matches: _matchedIds(),
+                      progression: progression,
+                      planHovered: planHovered,
+                      planPath: _planPath,
+                      comparisonPaths: _comparisonPaths(),
                     ),
                   ),
                 ),
-              );
-            },
-          ),
-        ),
-      );
+              ),
+            ),
+          );
+        },
+      ),
+    );
+    return widget.foreground == null
+        ? ClipRRect(borderRadius: BorderRadius.circular(18), child: canvas)
+        : canvas;
+  }
+
+  void _recordCanvasSize(Size size) {
+    if (widget.foreground != null) return;
+    if (viewport == null) _scheduleFocus();
+    viewport = size;
+  }
 
   Widget _pointCounters() => TreePointCounters(
     widget.model.state.report!.points,
@@ -663,19 +744,15 @@ class _TreeViewState extends State<TreeView>
   }
 
   void _fit() {
-    final size = viewport!;
+    final size = viewport;
+    if (size == null) return;
     final scale = math.min(size.width, size.height) / 1800;
-    _animateTo(
-      Matrix4.diagonal3Values(scale, scale, 1)..setTranslationRaw(
-        (size.width - 1800 * scale) / 2,
-        (size.height - 1800 * scale) / 2,
-        0,
-      ),
-    );
+    _center(const Offset(900, 900), scale);
   }
 
   void _zoom(double factor) {
-    final center = Offset(viewport!.width / 2, viewport!.height / 2);
+    if (viewport == null) return;
+    final center = _viewportCenter;
     final value = transform.value;
     final scale = (value.getMaxScaleOnAxis() * factor).clamp(.08, 12.0);
     final point = transform.toScene(center);
@@ -708,6 +785,7 @@ class _TreeViewState extends State<TreeView>
   }
 
   void _focusAllocated() {
+    if (viewport == null) return;
     final root = _root(widget.tree);
     final node = widget.tree.nodes.where((node) => node.id == root).firstOrNull;
     if (node == null) {
@@ -759,10 +837,12 @@ class _TreeViewState extends State<TreeView>
       : widget.tree.nodes.where(_matches).map((node) => node.id).toSet();
 
   void _center(Offset point, double scale, {bool animate = true}) {
+    if (viewport == null) return;
+    final center = _viewportCenter;
     final target = Matrix4.diagonal3Values(scale, scale, 1)
       ..setTranslationRaw(
-        viewport!.width / 2 - point.dx * scale,
-        viewport!.height / 2 - point.dy * scale,
+        center.dx - point.dx * scale,
+        center.dy - point.dy * scale,
         0,
       );
     if (animate)

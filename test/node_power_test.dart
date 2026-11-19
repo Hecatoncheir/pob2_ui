@@ -264,7 +264,7 @@ void main() {
     addTearDown(model.close);
     await tester.pumpWidget(PobApp(model: model));
     await tester.pumpAndSettle();
-    final treeCanvas = find.byKey(const Key('passive-tree'));
+    final treeCanvas = find.byKey(const Key('tree-interaction-viewport'));
     final originalHeight = tester.getSize(treeCanvas).height;
     expect(find.byIcon(Icons.manage_search_rounded), findsOneWidget);
     expect(find.byIcon(Icons.leaderboard_outlined), findsOneWidget);

@@ -4,6 +4,7 @@ import 'package:material_ui/material_ui.dart';
 
 import 'spark_art.dart';
 import 'spark_theme.dart';
+import 'tree_glass.dart';
 
 class SurfacePanel extends StatelessWidget {
   const SurfacePanel({
@@ -17,7 +18,7 @@ class SurfacePanel extends StatelessWidget {
   final bool showBorder;
   @override
   Widget build(BuildContext context) => Material(
-    color: Spark.of(context).surface,
+    color: TreeGlassScope.surface(context, Spark.of(context).surface),
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(18),
       side: showBorder

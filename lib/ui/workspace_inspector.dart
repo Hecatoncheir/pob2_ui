@@ -67,7 +67,7 @@ class WorkspaceInspector extends StatelessWidget {
       );
 
   Widget _switcher(TreeProgressionBloc plan, bool visible) => Padding(
-    padding: const EdgeInsets.fromLTRB(14, 12, 14, 0),
+    padding: const EdgeInsets.fromLTRB(14, 12, 14, 12),
     child: SegmentedButton<bool>(
       showSelectedIcon: false,
       segments: const [
