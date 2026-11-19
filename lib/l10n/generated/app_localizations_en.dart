@@ -101,6 +101,9 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String get m79df86397e => 'Lua disabled';
+
+  @override
   String get mbf7bbb22e3 => 'Lua connected';
 
   @override
@@ -112,8 +115,8 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get m8a7e5686b9 =>
-      'MCP can create builds and edit the current build. Switching builds manually turns off access.';
+  String get m9f82e876bd =>
+      'MCP can edit assemblies, manage the library, files, components and application. If you change the build manually, access will be disabled.';
 
   @override
   String get mcdf95e40cd => 'PoB II · Workshop';
@@ -461,6 +464,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m903bd09e68 => 'Performing the operation...';
 
   @override
+  String get md681d62567 => 'Another MCP command is running.';
+
+  @override
   String get m357ccc3e75 => 'Move up';
 
   @override
@@ -487,6 +493,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get ma755f360c2 => 'Two components. Calculations on your computer.';
 
   @override
+  String get md27019b2d6 => 'The action or its parameters are not available.';
+
+  @override
   String get me3c3ea3a85 => 'Action not available';
 
   @override
@@ -502,6 +511,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get m748d0b0dbd => 'Diagnostics copied';
+
+  @override
+  String get mff23476c58 =>
+      'Dialogue MCP is not open; other dialogs require you to complete your input.';
 
   @override
   String get mff31635225 => 'The archive requires a pinned revision';
@@ -612,6 +625,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get mf9a38201c0 => 'Log and details';
+
+  @override
+  String get mf1cb1d0eae => 'Application termination is not available.';
 
   @override
   String get m0f98334ad1 => 'Complete editing before closing the application';
@@ -758,6 +774,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get ma8f8e11f0c => 'Intelligence';
 
   @override
+  String get mc9c8c4828a => 'The interface is not connected.';
+
+  @override
   String get mb1f4f27181 => 'Search the market';
 
   @override
@@ -866,6 +885,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get m7e5029786d => 'Scale 100%';
+
+  @override
+  String get m54f3e0a058 => 'The scale should be from 0.75 to 2.';
 
   @override
   String get mbe517dba6c => 'Interface scale';
@@ -988,6 +1010,11 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String mcf4205d2e9(String p0) {
     return 'Failed to restore state after error: $p0';
+  }
+
+  @override
+  String mca0792f167(String p0) {
+    return 'Failed to terminate application: $p0';
   }
 
   @override
@@ -1143,6 +1170,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m34f418bb26 => 'Unknown settings version';
 
   @override
+  String get m596dfa75c4 => 'Unknown command.';
+
+  @override
+  String get md86c6427dc => 'Unknown interface action.';
+
+  @override
+  String get m4b8f0df7bc => 'Unknown application action.';
+
+  @override
   String m88bb56b333(String p0) {
     return 'Unknown PoB scene mode: $p0';
   }
@@ -1152,6 +1188,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get me90bfa5f82 => 'Unknown assembly library format';
+
+  @override
+  String get m5f6fa3296b => 'Unknown language.';
 
   @override
   String get mf3a3cbeee9 => 'Incorrect icon Lua';
@@ -1226,10 +1265,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m41d413ec96 => 'No data to clear.';
 
   @override
+  String get ma04e1706b3 => 'There is no current build tree.';
+
+  @override
   String get ma76f928c09 => 'No single packet checksum';
 
   @override
   String get mb71873c826 => 'No checksum Lua runtime';
+
+  @override
+  String get mad247478cb => 'No answer Lua';
 
   @override
   String get m0497e1e404 =>
@@ -1260,6 +1305,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get ma76e43569d => 'New combination';
+
+  @override
+  String get md90f3b7ecd => 'An absolute path is needed.';
 
   @override
   String get md72a4c2675 => 'We need a stable version like 0.2.0';
@@ -1321,6 +1369,10 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get m452a863748 =>
       'The update has been downloaded and verified. The build and XML will be saved before restarting.';
+
+  @override
+  String get m35dcef33e4 =>
+      'The update will replace the dev version with a pinned release. Check status and specify allowReplaceDev=true.';
 
   @override
   String m425b17d88a(String p0) {
@@ -1582,6 +1634,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get m67f5d8880e => 'Connect Lua';
+
+  @override
+  String get ma33d11be60 => 'Connect Lua via pob_editor_app.';
 
   @override
   String get m0d8b14b475 => 'Reconnect the bridge and restart PoB.';
@@ -2118,6 +2173,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get mde2ce6f05b => 'Select versions for both components first';
 
   @override
+  String get m93e0cd3908 => 'First open the assembly.';
+
+  @override
   String get m70a5cadc50 =>
       'First get the latest build report via pob_check_build.';
 
@@ -2315,6 +2373,11 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m66e6ee7733 => 'No node changes';
 
   @override
+  String ma9ea6a77a9(String p0) {
+    return 'Specify $p0.';
+  }
+
+  @override
   String get mb68ab7d79e =>
       'Choose the PoB folder manually or look in the default location.';
 
@@ -2404,11 +2467,22 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String get m1bff3dd3a5 => 'Installed version not found';
+
+  @override
+  String get m45b81fa451 =>
+      'The installed pair of components is checked and connected';
+
+  @override
   String get mb4dd85a98a => 'The file or folder has changed since the preview.';
 
   @override
   String get m64bd568b72 =>
       'The update file does not have a verifiable checksum';
+
+  @override
+  String get ma6b9ff9cd6 =>
+      'The file exists. To replace, specify overwrite=true.';
 
   @override
   String get md8a38f5bc2 => 'Vial of Health';

@@ -102,6 +102,9 @@ class AppLocalizationsPt extends AppLocalizations {
   }
 
   @override
+  String get m79df86397e => 'Lua desativado';
+
+  @override
   String get mbf7bbb22e3 => 'Lua conectado';
 
   @override
@@ -113,8 +116,8 @@ class AppLocalizationsPt extends AppLocalizations {
   }
 
   @override
-  String get m8a7e5686b9 =>
-      'O MCP pode criar builds e editar a build atual. Trocar de build manualmente desativa o acesso.';
+  String get m9f82e876bd =>
+      'MCP pode editar montagens, gerenciar a biblioteca, arquivos, componentes e aplicativos. Se você alterar a compilação manualmente, o acesso será desabilitado.';
 
   @override
   String get mcdf95e40cd => 'PoB II · Oficina';
@@ -463,6 +466,9 @@ class AppLocalizationsPt extends AppLocalizations {
   String get m903bd09e68 => 'Executando a operação...';
 
   @override
+  String get md681d62567 => 'Outro comando MCP está em execução.';
+
+  @override
   String get m357ccc3e75 => 'Mover para cima';
 
   @override
@@ -489,6 +495,9 @@ class AppLocalizationsPt extends AppLocalizations {
   String get ma755f360c2 => 'Dois componentes. Cálculos no seu computador.';
 
   @override
+  String get md27019b2d6 => 'A ação ou seus parâmetros não estão disponíveis.';
+
+  @override
   String get me3c3ea3a85 => 'Ação não disponível';
 
   @override
@@ -504,6 +513,10 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get m748d0b0dbd => 'Diagnóstico copiado';
+
+  @override
+  String get mff23476c58 =>
+      'O diálogo MCP não está aberto; outras caixas de diálogo exigem que você complete sua entrada.';
 
   @override
   String get mff31635225 => 'O arquivo requer uma revisão específica';
@@ -616,6 +629,9 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get mf9a38201c0 => 'Registro e detalhes';
+
+  @override
+  String get mf1cb1d0eae => 'O encerramento do aplicativo não está disponível.';
 
   @override
   String get m0f98334ad1 => 'Conclua a edição antes de fechar o aplicativo';
@@ -763,6 +779,9 @@ class AppLocalizationsPt extends AppLocalizations {
   String get ma8f8e11f0c => 'Inteligência';
 
   @override
+  String get mc9c8c4828a => 'A interface não está conectada.';
+
+  @override
   String get mb1f4f27181 => 'Pesquise no mercado';
 
   @override
@@ -872,6 +891,9 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get m7e5029786d => 'Escala 100%';
+
+  @override
+  String get m54f3e0a058 => 'A escala deve ser de 0,75 a 2.';
 
   @override
   String get mbe517dba6c => 'Escala de interface';
@@ -994,6 +1016,11 @@ class AppLocalizationsPt extends AppLocalizations {
   @override
   String mcf4205d2e9(String p0) {
     return 'Falha ao restaurar o estado após erro: $p0';
+  }
+
+  @override
+  String mca0792f167(String p0) {
+    return 'Falha ao encerrar o aplicativo: $p0';
   }
 
   @override
@@ -1150,6 +1177,15 @@ class AppLocalizationsPt extends AppLocalizations {
   String get m34f418bb26 => 'Versão de configurações desconhecida';
 
   @override
+  String get m596dfa75c4 => 'Comando desconhecido.';
+
+  @override
+  String get md86c6427dc => 'Ação de interface desconhecida.';
+
+  @override
+  String get m4b8f0df7bc => 'Ação de aplicativo desconhecida.';
+
+  @override
   String m88bb56b333(String p0) {
     return 'Modo de cena PoB desconhecido: $p0';
   }
@@ -1159,6 +1195,9 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get me90bfa5f82 => 'Formato de biblioteca assembly desconhecido';
+
+  @override
+  String get m5f6fa3296b => 'Idioma desconhecido.';
 
   @override
   String get mf3a3cbeee9 => 'Ícone incorreto Lua';
@@ -1234,10 +1273,16 @@ class AppLocalizationsPt extends AppLocalizations {
   String get m41d413ec96 => 'Nenhum dado para limpar.';
 
   @override
+  String get ma04e1706b3 => 'Não há árvore de construção atual.';
+
+  @override
   String get ma76f928c09 => 'Nenhuma soma de verificação de pacote único';
 
   @override
   String get mb71873c826 => 'Sem soma de verificação Lua tempo de execução';
+
+  @override
+  String get mad247478cb => 'Sem resposta Lua';
 
   @override
   String get m0497e1e404 =>
@@ -1268,6 +1313,9 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get ma76e43569d => 'Nova combinação';
+
+  @override
+  String get md90f3b7ecd => 'É necessário um caminho absoluto.';
 
   @override
   String get md72a4c2675 => 'Precisamos de uma versão estável como 0.2.0';
@@ -1331,6 +1379,10 @@ class AppLocalizationsPt extends AppLocalizations {
   @override
   String get m452a863748 =>
       'A atualização foi baixada e verificada. A compilação e XML serão salvos antes de reiniciar.';
+
+  @override
+  String get m35dcef33e4 =>
+      'A atualização substituirá a versão dev por uma versão fixada. Verifique o status e especifique permitReplaceDev=true.';
 
   @override
   String m425b17d88a(String p0) {
@@ -1596,6 +1648,9 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get m67f5d8880e => 'Conectar Lua';
+
+  @override
+  String get ma33d11be60 => 'Conecte Lua via pob_editor_app.';
 
   @override
   String get m0d8b14b475 => 'Reconecte a ponte e reinicie o PoB.';
@@ -2139,6 +2194,9 @@ class AppLocalizationsPt extends AppLocalizations {
       'Selecione primeiro as versões dos dois componentes';
 
   @override
+  String get m93e0cd3908 => 'Primeiro abra a montagem.';
+
+  @override
   String get m70a5cadc50 =>
       'Primeiro, obtenha o relatório de compilação mais recente via pob_check_build.';
 
@@ -2336,6 +2394,11 @@ class AppLocalizationsPt extends AppLocalizations {
   String get m66e6ee7733 => 'Sem alterações nos nós';
 
   @override
+  String ma9ea6a77a9(String p0) {
+    return 'Especifique $p0.';
+  }
+
+  @override
   String get mb68ab7d79e =>
       'Escolha a pasta do PoB manualmente ou procure no local padrão.';
 
@@ -2425,12 +2488,23 @@ class AppLocalizationsPt extends AppLocalizations {
   }
 
   @override
+  String get m1bff3dd3a5 => 'Versão instalada não encontrada';
+
+  @override
+  String get m45b81fa451 =>
+      'O par de componentes instalados é verificado e conectado';
+
+  @override
   String get mb4dd85a98a =>
       'O arquivo ou pasta foi alterado desde a visualização.';
 
   @override
   String get m64bd568b72 =>
       'O arquivo de atualização não possui uma soma de verificação verificável';
+
+  @override
+  String get ma6b9ff9cd6 =>
+      'O arquivo existe. Para substituir, especifique overwrite=true.';
 
   @override
   String get md8a38f5bc2 => 'Frasco de Saúde';
@@ -2661,6 +2735,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   }
 
   @override
+  String get m79df86397e => 'Lua desativado';
+
+  @override
   String get mbf7bbb22e3 => 'Lua conectado';
 
   @override
@@ -2672,8 +2749,8 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   }
 
   @override
-  String get m8a7e5686b9 =>
-      'O MCP pode criar builds e editar a build atual. Trocar de build manualmente desativa o acesso.';
+  String get m9f82e876bd =>
+      'MCP pode editar montagens, gerenciar a biblioteca, arquivos, componentes e aplicativos. Se você alterar a compilação manualmente, o acesso será desabilitado.';
 
   @override
   String get mcdf95e40cd => 'PoB II · Oficina';
@@ -3022,6 +3099,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get m903bd09e68 => 'Executando a operação...';
 
   @override
+  String get md681d62567 => 'Outro comando MCP está em execução.';
+
+  @override
   String get m357ccc3e75 => 'Mover para cima';
 
   @override
@@ -3048,6 +3128,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get ma755f360c2 => 'Dois componentes. Cálculos no seu computador.';
 
   @override
+  String get md27019b2d6 => 'A ação ou seus parâmetros não estão disponíveis.';
+
+  @override
   String get me3c3ea3a85 => 'Ação não disponível';
 
   @override
@@ -3063,6 +3146,10 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get m748d0b0dbd => 'Diagnóstico copiado';
+
+  @override
+  String get mff23476c58 =>
+      'O diálogo MCP não está aberto; outras caixas de diálogo exigem que você complete sua entrada.';
 
   @override
   String get mff31635225 => 'O arquivo requer uma revisão específica';
@@ -3175,6 +3262,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get mf9a38201c0 => 'Registro e detalhes';
+
+  @override
+  String get mf1cb1d0eae => 'O encerramento do aplicativo não está disponível.';
 
   @override
   String get m0f98334ad1 => 'Conclua a edição antes de fechar o aplicativo';
@@ -3322,6 +3412,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get ma8f8e11f0c => 'Inteligência';
 
   @override
+  String get mc9c8c4828a => 'A interface não está conectada.';
+
+  @override
   String get mb1f4f27181 => 'Pesquise no mercado';
 
   @override
@@ -3431,6 +3524,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get m7e5029786d => 'Escala 100%';
+
+  @override
+  String get m54f3e0a058 => 'A escala deve ser de 0,75 a 2.';
 
   @override
   String get mbe517dba6c => 'Escala de interface';
@@ -3553,6 +3649,11 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   @override
   String mcf4205d2e9(String p0) {
     return 'Falha ao restaurar o estado após erro: $p0';
+  }
+
+  @override
+  String mca0792f167(String p0) {
+    return 'Falha ao encerrar o aplicativo: $p0';
   }
 
   @override
@@ -3709,6 +3810,15 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get m34f418bb26 => 'Versão de configurações desconhecida';
 
   @override
+  String get m596dfa75c4 => 'Comando desconhecido.';
+
+  @override
+  String get md86c6427dc => 'Ação de interface desconhecida.';
+
+  @override
+  String get m4b8f0df7bc => 'Ação de aplicativo desconhecida.';
+
+  @override
   String m88bb56b333(String p0) {
     return 'Modo de cena PoB desconhecido: $p0';
   }
@@ -3718,6 +3828,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get me90bfa5f82 => 'Formato de biblioteca assembly desconhecido';
+
+  @override
+  String get m5f6fa3296b => 'Idioma desconhecido.';
 
   @override
   String get mf3a3cbeee9 => 'Ícone incorreto Lua';
@@ -3793,10 +3906,16 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get m41d413ec96 => 'Nenhum dado para limpar.';
 
   @override
+  String get ma04e1706b3 => 'Não há árvore de construção atual.';
+
+  @override
   String get ma76f928c09 => 'Nenhuma soma de verificação de pacote único';
 
   @override
   String get mb71873c826 => 'Sem soma de verificação Lua tempo de execução';
+
+  @override
+  String get mad247478cb => 'Sem resposta Lua';
 
   @override
   String get m0497e1e404 =>
@@ -3827,6 +3946,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get ma76e43569d => 'Nova combinação';
+
+  @override
+  String get md90f3b7ecd => 'É necessário um caminho absoluto.';
 
   @override
   String get md72a4c2675 => 'Precisamos de uma versão estável como 0.2.0';
@@ -3890,6 +4012,10 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   @override
   String get m452a863748 =>
       'A atualização foi baixada e verificada. A compilação e XML serão salvos antes de reiniciar.';
+
+  @override
+  String get m35dcef33e4 =>
+      'A atualização substituirá a versão dev por uma versão fixada. Verifique o status e especifique permitReplaceDev=true.';
 
   @override
   String m425b17d88a(String p0) {
@@ -4155,6 +4281,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get m67f5d8880e => 'Conectar Lua';
+
+  @override
+  String get ma33d11be60 => 'Conecte Lua via pob_editor_app.';
 
   @override
   String get m0d8b14b475 => 'Reconecte a ponte e reinicie o PoB.';
@@ -4698,6 +4827,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
       'Selecione primeiro as versões dos dois componentes';
 
   @override
+  String get m93e0cd3908 => 'Primeiro abra a montagem.';
+
+  @override
   String get m70a5cadc50 =>
       'Primeiro, obtenha o relatório de compilação mais recente via pob_check_build.';
 
@@ -4895,6 +5027,11 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get m66e6ee7733 => 'Sem alterações nos nós';
 
   @override
+  String ma9ea6a77a9(String p0) {
+    return 'Especifique $p0.';
+  }
+
+  @override
   String get mb68ab7d79e =>
       'Escolha a pasta do PoB manualmente ou procure no local padrão.';
 
@@ -4984,12 +5121,23 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   }
 
   @override
+  String get m1bff3dd3a5 => 'Versão instalada não encontrada';
+
+  @override
+  String get m45b81fa451 =>
+      'O par de componentes instalados é verificado e conectado';
+
+  @override
   String get mb4dd85a98a =>
       'O arquivo ou pasta foi alterado desde a visualização.';
 
   @override
   String get m64bd568b72 =>
       'O arquivo de atualização não possui uma soma de verificação verificável';
+
+  @override
+  String get ma6b9ff9cd6 =>
+      'O arquivo existe. Para substituir, especifique overwrite=true.';
 
   @override
   String get md8a38f5bc2 => 'Frasco de Saúde';

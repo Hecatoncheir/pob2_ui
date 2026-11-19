@@ -89,6 +89,10 @@ Future<void> main(List<String> arguments) async {
       progress!.record('first-frame');
       exit(await checkInstalledBuild(model, initialization, check, progress));
     }
+    if (arguments.contains('--mcp-editor')) {
+      await initialization;
+      await model.mcpEditor.enable();
+    }
     await updates.initialize();
   });
   if (check == null) language.add(const LanguageLoadRequested());

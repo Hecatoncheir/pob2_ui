@@ -101,7 +101,7 @@ class ComponentRepository {
         .firstOrNull;
     final next = {...current, component: saved ?? found.first};
     await _checkPair(next, (_) {}, validate);
-    await _activate(next, current);
+    if (!_samePair(next, current)) await _activate(next, current);
   });
 
   Future<T> _withLock<T>(

@@ -65,6 +65,11 @@ void main() {
       expect(saved.active[Component.pob]!.commit, next.commit);
       expect(saved.active[Component.mcp]!.directory, 'old-mcp');
       expect(saved.previous[Component.pob]!.directory, 'old-pob');
+      await repository.selectInstalled(Component.pob, next.commit);
+      expect(
+        (await store.read()).previous[Component.pob]!.directory,
+        'old-pob',
+      );
       await expectLater(
         repository.selectInstalled(Component.pob, 'b' * 40),
         throwsStateError,

@@ -287,6 +287,12 @@ abstract class AppLocalizations {
   /// **'Lua answers. Classes in the catalog: {p0}'**
   String md9540a4b84(String p0);
 
+  /// Lua отключён
+  ///
+  /// In en, this message translates to:
+  /// **'Lua disabled'**
+  String get m79df86397e;
+
   /// Lua подключён
   ///
   /// In en, this message translates to:
@@ -305,11 +311,11 @@ abstract class AppLocalizations {
   /// **'MCP has ended. {p0}'**
   String m12e8f27f62(String p0);
 
-  /// MCP может создавать сборки и править текущую. Если вы смените сборку вручную, доступ отключится.
+  /// MCP может править сборки, управлять библиотекой, файлами, компонентами и приложением. Если вы смените сборку вручную, доступ отключится.
   ///
   /// In en, this message translates to:
-  /// **'MCP can create builds and edit the current build. Switching builds manually turns off access.'**
-  String get m8a7e5686b9;
+  /// **'MCP can edit assemblies, manage the library, files, components and application. If you change the build manually, access will be disabled.'**
+  String get m9f82e876bd;
 
   /// PoB II · Мастерская
   ///
@@ -941,6 +947,12 @@ abstract class AppLocalizations {
   /// **'Performing the operation...'**
   String get m903bd09e68;
 
+  /// Выполняется другая команда MCP.
+  ///
+  /// In en, this message translates to:
+  /// **'Another MCP command is running.'**
+  String get md681d62567;
+
   /// Выше
   ///
   /// In en, this message translates to:
@@ -989,6 +1001,12 @@ abstract class AppLocalizations {
   /// **'Two components. Calculations on your computer.'**
   String get ma755f360c2;
 
+  /// Действие или его параметры недоступны.
+  ///
+  /// In en, this message translates to:
+  /// **'The action or its parameters are not available.'**
+  String get md27019b2d6;
+
   /// Действие недоступно
   ///
   /// In en, this message translates to:
@@ -1018,6 +1036,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Diagnostics copied'**
   String get m748d0b0dbd;
+
+  /// Диалог MCP не открыт; другие диалоги требуют завершения ввода.
+  ///
+  /// In en, this message translates to:
+  /// **'Dialogue MCP is not open; other dialogs require you to complete your input.'**
+  String get mff23476c58;
 
   /// Для архива нужна закреплённая ревизия
   ///
@@ -1210,6 +1234,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Log and details'**
   String get mf9a38201c0;
+
+  /// Завершение приложения недоступно.
+  ///
+  /// In en, this message translates to:
+  /// **'Application termination is not available.'**
+  String get mf1cb1d0eae;
 
   /// Завершите редактирование перед закрытием приложения
   ///
@@ -1475,6 +1505,12 @@ abstract class AppLocalizations {
   /// **'Intelligence'**
   String get ma8f8e11f0c;
 
+  /// Интерфейс не подключён.
+  ///
+  /// In en, this message translates to:
+  /// **'The interface is not connected.'**
+  String get mc9c8c4828a;
+
   /// Искать на рынке
   ///
   /// In en, this message translates to:
@@ -1684,6 +1720,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Scale 100%'**
   String get m7e5029786d;
+
+  /// Масштаб должен быть от 0.75 до 2.
+  ///
+  /// In en, this message translates to:
+  /// **'The scale should be from 0.75 to 2.'**
+  String get m54f3e0a058;
 
   /// Масштаб интерфейса
   ///
@@ -1906,6 +1948,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Failed to restore state after error: {p0}'**
   String mcf4205d2e9(String p0);
+
+  /// Не удалось завершить приложение: {p0}
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to terminate application: {p0}'**
+  String mca0792f167(String p0);
 
   /// Не удалось загрузить перевод: {p0}
   ///
@@ -2148,6 +2196,24 @@ abstract class AppLocalizations {
   /// **'Unknown settings version'**
   String get m34f418bb26;
 
+  /// Неизвестная команда.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown command.'**
+  String get m596dfa75c4;
+
+  /// Неизвестное действие интерфейса.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown interface action.'**
+  String get md86c6427dc;
+
+  /// Неизвестное действие приложения.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown application action.'**
+  String get m4b8f0df7bc;
+
   /// Неизвестный режим сцены PoB: {p0}
   ///
   /// In en, this message translates to:
@@ -2165,6 +2231,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Unknown assembly library format'**
   String get me90bfa5f82;
+
+  /// Неизвестный язык.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown language.'**
+  String get m5f6fa3296b;
 
   /// Некорректная иконка Lua
   ///
@@ -2310,6 +2382,12 @@ abstract class AppLocalizations {
   /// **'No data to clear.'**
   String get m41d413ec96;
 
+  /// Нет дерева текущей сборки.
+  ///
+  /// In en, this message translates to:
+  /// **'There is no current build tree.'**
+  String get ma04e1706b3;
+
   /// Нет единственной контрольной суммы пакета
   ///
   /// In en, this message translates to:
@@ -2321,6 +2399,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No checksum Lua runtime'**
   String get mb71873c826;
+
+  /// Нет ответа Lua
+  ///
+  /// In en, this message translates to:
+  /// **'No answer Lua'**
+  String get mad247478cb;
 
   /// Нет ответа MCP. Сессия закрыта; повторно импортируйте XML.
   ///
@@ -2375,6 +2459,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'New combination'**
   String get ma76e43569d;
+
+  /// Нужен абсолютный путь.
+  ///
+  /// In en, this message translates to:
+  /// **'An absolute path is needed.'**
+  String get md90f3b7ecd;
 
   /// Нужна стабильная версия вида 0.2.0
   ///
@@ -2495,6 +2585,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'The update has been downloaded and verified. The build and XML will be saved before restarting.'**
   String get m452a863748;
+
+  /// Обновление заменит dev-версию закреплённым выпуском. Проверьте status и укажите allowReplaceDev=true.
+  ///
+  /// In en, this message translates to:
+  /// **'The update will replace the dev version with a pinned release. Check status and specify allowReplaceDev=true.'**
+  String get m35dcef33e4;
 
   /// Обновление не запущено: {p0}
   ///
@@ -2987,6 +3083,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Connect Lua'**
   String get m67f5d8880e;
+
+  /// Подключите Lua через pob_editor_app.
+  ///
+  /// In en, this message translates to:
+  /// **'Connect Lua via pob_editor_app.'**
+  String get ma33d11be60;
 
   /// Подключите мост заново и перезапустите PoB.
   ///
@@ -3978,6 +4080,12 @@ abstract class AppLocalizations {
   /// **'Select versions for both components first'**
   String get mde2ce6f05b;
 
+  /// Сначала откройте сборку.
+  ///
+  /// In en, this message translates to:
+  /// **'First open the assembly.'**
+  String get m93e0cd3908;
+
   /// Сначала получите актуальный отчёт сборки через pob_check_build.
   ///
   /// In en, this message translates to:
@@ -4350,6 +4458,12 @@ abstract class AppLocalizations {
   /// **'No node changes'**
   String get m66e6ee7733;
 
+  /// Укажите {p0}.
+  ///
+  /// In en, this message translates to:
+  /// **'Specify {p0}.'**
+  String ma9ea6a77a9(String p0);
+
   /// Укажите папку PoB вручную или попробуйте найти её по стандартному пути.
   ///
   /// In en, this message translates to:
@@ -4506,6 +4620,18 @@ abstract class AppLocalizations {
   /// **'Installed: {p0}'**
   String mff8616cb20(String p0);
 
+  /// Установленная версия не найдена
+  ///
+  /// In en, this message translates to:
+  /// **'Installed version not found'**
+  String get m1bff3dd3a5;
+
+  /// Установленная пара компонентов проверена и подключена
+  ///
+  /// In en, this message translates to:
+  /// **'The installed pair of components is checked and connected'**
+  String get m45b81fa451;
+
   /// Файл или папка изменились после предпросмотра.
   ///
   /// In en, this message translates to:
@@ -4517,6 +4643,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'The update file does not have a verifiable checksum'**
   String get m64bd568b72;
+
+  /// Файл существует. Для замены укажите overwrite=true.
+  ///
+  /// In en, this message translates to:
+  /// **'The file exists. To replace, specify overwrite=true.'**
+  String get ma6b9ff9cd6;
 
   /// Флакон здоровья
   ///

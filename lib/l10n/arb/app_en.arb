@@ -148,6 +148,11 @@
       }
     }
   },
+  "m79df86397e": "Lua disabled",
+  "@m79df86397e": {
+    "description": "Lua отключён",
+    "placeholders": {}
+  },
   "mbf7bbb22e3": "Lua connected",
   "@mbf7bbb22e3": {
     "description": "Lua подключён",
@@ -167,9 +172,9 @@
       }
     }
   },
-  "m8a7e5686b9": "MCP can create builds and edit the current build. Switching builds manually turns off access.",
-  "@m8a7e5686b9": {
-    "description": "MCP может создавать сборки и править текущую. Если вы смените сборку вручную, доступ отключится.",
+  "m9f82e876bd": "MCP can edit assemblies, manage the library, files, components and application. If you change the build manually, access will be disabled.",
+  "@m9f82e876bd": {
+    "description": "MCP может править сборки, управлять библиотекой, файлами, компонентами и приложением. Если вы смените сборку вручную, доступ отключится.",
     "placeholders": {}
   },
   "mcdf95e40cd": "PoB II · Workshop",
@@ -755,6 +760,11 @@
     "description": "Выполняем операцию…",
     "placeholders": {}
   },
+  "md681d62567": "Another MCP command is running.",
+  "@md681d62567": {
+    "description": "Выполняется другая команда MCP.",
+    "placeholders": {}
+  },
   "m357ccc3e75": "Move up",
   "@m357ccc3e75": {
     "description": "Выше",
@@ -799,6 +809,11 @@
     "description": "Два компонента. Расчёты на вашем компьютере.",
     "placeholders": {}
   },
+  "md27019b2d6": "The action or its parameters are not available.",
+  "@md27019b2d6": {
+    "description": "Действие или его параметры недоступны.",
+    "placeholders": {}
+  },
   "me3c3ea3a85": "Action not available",
   "@me3c3ea3a85": {
     "description": "Действие недоступно",
@@ -826,6 +841,11 @@
   "m748d0b0dbd": "Diagnostics copied",
   "@m748d0b0dbd": {
     "description": "Диагностика скопирована",
+    "placeholders": {}
+  },
+  "mff23476c58": "Dialogue MCP is not open; other dialogs require you to complete your input.",
+  "@mff23476c58": {
+    "description": "Диалог MCP не открыт; другие диалоги требуют завершения ввода.",
     "placeholders": {}
   },
   "mff31635225": "The archive requires a pinned revision",
@@ -1002,6 +1022,11 @@
   "mf9a38201c0": "Log and details",
   "@mf9a38201c0": {
     "description": "Журнал и подробности",
+    "placeholders": {}
+  },
+  "mf1cb1d0eae": "Application termination is not available.",
+  "@mf1cb1d0eae": {
+    "description": "Завершение приложения недоступно.",
     "placeholders": {}
   },
   "m0f98334ad1": "Complete editing before closing the application",
@@ -1250,6 +1275,11 @@
     "description": "Интеллект",
     "placeholders": {}
   },
+  "mc9c8c4828a": "The interface is not connected.",
+  "@mc9c8c4828a": {
+    "description": "Интерфейс не подключён.",
+    "placeholders": {}
+  },
   "mb1f4f27181": "Search the market",
   "@mb1f4f27181": {
     "description": "Искать на рынке",
@@ -1431,6 +1461,11 @@
   "m7e5029786d": "Scale 100%",
   "@m7e5029786d": {
     "description": "Масштаб 100%",
+    "placeholders": {}
+  },
+  "m54f3e0a058": "The scale should be from 0.75 to 2.",
+  "@m54f3e0a058": {
+    "description": "Масштаб должен быть от 0.75 до 2.",
     "placeholders": {}
   },
   "mbe517dba6c": "Interface scale",
@@ -1628,6 +1663,15 @@
   "mcf4205d2e9": "Failed to restore state after error: {p0}",
   "@mcf4205d2e9": {
     "description": "Не удалось восстановить состояние после ошибки: {p0}",
+    "placeholders": {
+      "p0": {
+        "type": "String"
+      }
+    }
+  },
+  "mca0792f167": "Failed to terminate application: {p0}",
+  "@mca0792f167": {
+    "description": "Не удалось завершить приложение: {p0}",
     "placeholders": {
       "p0": {
         "type": "String"
@@ -1898,6 +1942,21 @@
     "description": "Неизвестная версия настроек",
     "placeholders": {}
   },
+  "m596dfa75c4": "Unknown command.",
+  "@m596dfa75c4": {
+    "description": "Неизвестная команда.",
+    "placeholders": {}
+  },
+  "md86c6427dc": "Unknown interface action.",
+  "@md86c6427dc": {
+    "description": "Неизвестное действие интерфейса.",
+    "placeholders": {}
+  },
+  "m4b8f0df7bc": "Unknown application action.",
+  "@m4b8f0df7bc": {
+    "description": "Неизвестное действие приложения.",
+    "placeholders": {}
+  },
   "m88bb56b333": "Unknown PoB scene mode: {p0}",
   "@m88bb56b333": {
     "description": "Неизвестный режим сцены PoB: {p0}",
@@ -1915,6 +1974,11 @@
   "me90bfa5f82": "Unknown assembly library format",
   "@me90bfa5f82": {
     "description": "Неизвестный формат библиотеки сборок",
+    "placeholders": {}
+  },
+  "m5f6fa3296b": "Unknown language.",
+  "@m5f6fa3296b": {
+    "description": "Неизвестный язык.",
     "placeholders": {}
   },
   "mf3a3cbeee9": "Incorrect icon Lua",
@@ -2037,6 +2101,11 @@
     "description": "Нет данных для очистки.",
     "placeholders": {}
   },
+  "ma04e1706b3": "There is no current build tree.",
+  "@ma04e1706b3": {
+    "description": "Нет дерева текущей сборки.",
+    "placeholders": {}
+  },
   "ma76f928c09": "No single packet checksum",
   "@ma76f928c09": {
     "description": "Нет единственной контрольной суммы пакета",
@@ -2045,6 +2114,11 @@
   "mb71873c826": "No checksum Lua runtime",
   "@mb71873c826": {
     "description": "Нет контрольной суммы Lua runtime",
+    "placeholders": {}
+  },
+  "mad247478cb": "No answer Lua",
+  "@mad247478cb": {
+    "description": "Нет ответа Lua",
     "placeholders": {}
   },
   "m0497e1e404": "No answer MCP. The session is closed; re-import XML.",
@@ -2090,6 +2164,11 @@
   "ma76e43569d": "New combination",
   "@ma76e43569d": {
     "description": "Новое сочетание",
+    "placeholders": {}
+  },
+  "md90f3b7ecd": "An absolute path is needed.",
+  "@md90f3b7ecd": {
+    "description": "Нужен абсолютный путь.",
     "placeholders": {}
   },
   "md72a4c2675": "We need a stable version like 0.2.0",
@@ -2190,6 +2269,11 @@
   "m452a863748": "The update has been downloaded and verified. The build and XML will be saved before restarting.",
   "@m452a863748": {
     "description": "Обновление загружено и проверено. Перед перезапуском сборка и XML будут сохранены.",
+    "placeholders": {}
+  },
+  "m35dcef33e4": "The update will replace the dev version with a pinned release. Check status and specify allowReplaceDev=true.",
+  "@m35dcef33e4": {
+    "description": "Обновление заменит dev-версию закреплённым выпуском. Проверьте status и укажите allowReplaceDev=true.",
     "placeholders": {}
   },
   "m425b17d88a": "Update not started: {p0}",
@@ -2624,6 +2708,11 @@
   "m67f5d8880e": "Connect Lua",
   "@m67f5d8880e": {
     "description": "Подключите Lua",
+    "placeholders": {}
+  },
+  "ma33d11be60": "Connect Lua via pob_editor_app.",
+  "@ma33d11be60": {
+    "description": "Подключите Lua через pob_editor_app.",
     "placeholders": {}
   },
   "m0d8b14b475": "Reconnect the bridge and restart PoB.",
@@ -3524,6 +3613,11 @@
     "description": "Сначала выберите версии обоих компонентов",
     "placeholders": {}
   },
+  "m93e0cd3908": "First open the assembly.",
+  "@m93e0cd3908": {
+    "description": "Сначала откройте сборку.",
+    "placeholders": {}
+  },
   "m70a5cadc50": "First get the latest build report via pob_check_build.",
   "@m70a5cadc50": {
     "description": "Сначала получите актуальный отчёт сборки через pob_check_build.",
@@ -3842,6 +3936,15 @@
     "description": "Узлы без изменений",
     "placeholders": {}
   },
+  "ma9ea6a77a9": "Specify {p0}.",
+  "@ma9ea6a77a9": {
+    "description": "Укажите {p0}.",
+    "placeholders": {
+      "p0": {
+        "type": "String"
+      }
+    }
+  },
   "mb68ab7d79e": "Choose the PoB folder manually or look in the default location.",
   "@mb68ab7d79e": {
     "description": "Укажите папку PoB вручную или попробуйте найти её по стандартному пути.",
@@ -3991,6 +4094,16 @@
       }
     }
   },
+  "m1bff3dd3a5": "Installed version not found",
+  "@m1bff3dd3a5": {
+    "description": "Установленная версия не найдена",
+    "placeholders": {}
+  },
+  "m45b81fa451": "The installed pair of components is checked and connected",
+  "@m45b81fa451": {
+    "description": "Установленная пара компонентов проверена и подключена",
+    "placeholders": {}
+  },
   "mb4dd85a98a": "The file or folder has changed since the preview.",
   "@mb4dd85a98a": {
     "description": "Файл или папка изменились после предпросмотра.",
@@ -3999,6 +4112,11 @@
   "m64bd568b72": "The update file does not have a verifiable checksum",
   "@m64bd568b72": {
     "description": "Файл обновления не имеет проверяемой контрольной суммы",
+    "placeholders": {}
+  },
+  "ma6b9ff9cd6": "The file exists. To replace, specify overwrite=true.",
+  "@ma6b9ff9cd6": {
+    "description": "Файл существует. Для замены укажите overwrite=true.",
     "placeholders": {}
   },
   "md8a38f5bc2": "Vial of Health",

@@ -2,7 +2,7 @@ import '../domain/app_release.dart';
 import '../domain/component.dart';
 import 'managed_installation.dart';
 
-const componentPackageTag = 'components-0.23.1-0.21.0-1';
+const componentPackageTag = 'components-0.23.1-0.22.0-1';
 const _base =
     'https://github.com/Hecatoncheir/pob2_ui/releases/download/'
     '$componentPackageTag';
@@ -23,16 +23,16 @@ Map<Component, Release> componentReleases() => {
 Release _mcpRelease(String? target) {
   final (size, digest) = switch (target) {
     'windows-x64' => (
-      12501300,
-      '4e94fd31f0c7f7da3b9f5eb281270593a8b522b9c57346483a3c18e1b28e1405',
+      12504986,
+      '10854a8c8d4a5d53c90519ee9067425f3bf12cdd25fbf50612db02775dfc6af5',
     ),
     'macos-arm64' => (
-      44495669,
-      'df13a098dc19d67f87ade228061e566401fa632f03d8970e0d70f84e09a19356',
+      44499002,
+      'eb777d78620aa8d3af725395864403325a8d432e9bd272c8f351f6433dbe24ae',
     ),
     'linux-x64' => (
-      74342217,
-      '689dd30a68610c8ab6a0ffb40324bac9d39b7cdd7df658c05f18363c4ff518bd',
+      74345549,
+      '5921029ca188214ba0706ba5b41adbd5ca0bc7a0f9345915e94b6f6cb91cbb2c',
     ),
     _ => throw UnsupportedError(
       'Поддерживаются Windows x64, Linux x64 и macOS arm64',
@@ -40,8 +40,8 @@ Release _mcpRelease(String? target) {
   };
   return _release(
     Component.mcp,
-    'v0.21.0',
-    'd932e4b6b05934c906607c6558e841cc64580967',
+    'v0.22.0',
+    'c56f1b0ded6c732a7adf23a81a627318768a748a',
     'mcp-$target.zip',
     size,
     digest,
@@ -58,7 +58,7 @@ Release _release(
 ) => Release(
   tag,
   '${component.url}/releases/tag/$tag',
-  DateTime.utc(2026, 11, 17),
+  DateTime.utc(2026, 11, 19),
   expectedCommit: commit,
   package: AppAsset(
     name: name,

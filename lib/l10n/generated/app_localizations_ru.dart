@@ -101,6 +101,9 @@ class AppLocalizationsRu extends AppLocalizations {
   }
 
   @override
+  String get m79df86397e => 'Lua отключён';
+
+  @override
   String get mbf7bbb22e3 => 'Lua подключён';
 
   @override
@@ -112,8 +115,8 @@ class AppLocalizationsRu extends AppLocalizations {
   }
 
   @override
-  String get m8a7e5686b9 =>
-      'MCP может создавать сборки и править текущую. Если вы смените сборку вручную, доступ отключится.';
+  String get m9f82e876bd =>
+      'MCP может править сборки, управлять библиотекой, файлами, компонентами и приложением. Если вы смените сборку вручную, доступ отключится.';
 
   @override
   String get mcdf95e40cd => 'PoB II · Мастерская';
@@ -459,6 +462,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m903bd09e68 => 'Выполняем операцию…';
 
   @override
+  String get md681d62567 => 'Выполняется другая команда MCP.';
+
+  @override
   String get m357ccc3e75 => 'Выше';
 
   @override
@@ -485,6 +491,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get ma755f360c2 => 'Два компонента. Расчёты на вашем компьютере.';
 
   @override
+  String get md27019b2d6 => 'Действие или его параметры недоступны.';
+
+  @override
   String get me3c3ea3a85 => 'Действие недоступно';
 
   @override
@@ -500,6 +509,10 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get m748d0b0dbd => 'Диагностика скопирована';
+
+  @override
+  String get mff23476c58 =>
+      'Диалог MCP не открыт; другие диалоги требуют завершения ввода.';
 
   @override
   String get mff31635225 => 'Для архива нужна закреплённая ревизия';
@@ -611,6 +624,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get mf9a38201c0 => 'Журнал и подробности';
+
+  @override
+  String get mf1cb1d0eae => 'Завершение приложения недоступно.';
 
   @override
   String get m0f98334ad1 =>
@@ -759,6 +775,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get ma8f8e11f0c => 'Интеллект';
 
   @override
+  String get mc9c8c4828a => 'Интерфейс не подключён.';
+
+  @override
   String get mb1f4f27181 => 'Искать на рынке';
 
   @override
@@ -866,6 +885,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get m7e5029786d => 'Масштаб 100%';
+
+  @override
+  String get m54f3e0a058 => 'Масштаб должен быть от 0.75 до 2.';
 
   @override
   String get mbe517dba6c => 'Масштаб интерфейса';
@@ -988,6 +1010,11 @@ class AppLocalizationsRu extends AppLocalizations {
   @override
   String mcf4205d2e9(String p0) {
     return 'Не удалось восстановить состояние после ошибки: $p0';
+  }
+
+  @override
+  String mca0792f167(String p0) {
+    return 'Не удалось завершить приложение: $p0';
   }
 
   @override
@@ -1143,6 +1170,15 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m34f418bb26 => 'Неизвестная версия настроек';
 
   @override
+  String get m596dfa75c4 => 'Неизвестная команда.';
+
+  @override
+  String get md86c6427dc => 'Неизвестное действие интерфейса.';
+
+  @override
+  String get m4b8f0df7bc => 'Неизвестное действие приложения.';
+
+  @override
   String m88bb56b333(String p0) {
     return 'Неизвестный режим сцены PoB: $p0';
   }
@@ -1152,6 +1188,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get me90bfa5f82 => 'Неизвестный формат библиотеки сборок';
+
+  @override
+  String get m5f6fa3296b => 'Неизвестный язык.';
 
   @override
   String get mf3a3cbeee9 => 'Некорректная иконка Lua';
@@ -1226,10 +1265,16 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m41d413ec96 => 'Нет данных для очистки.';
 
   @override
+  String get ma04e1706b3 => 'Нет дерева текущей сборки.';
+
+  @override
   String get ma76f928c09 => 'Нет единственной контрольной суммы пакета';
 
   @override
   String get mb71873c826 => 'Нет контрольной суммы Lua runtime';
+
+  @override
+  String get mad247478cb => 'Нет ответа Lua';
 
   @override
   String get m0497e1e404 =>
@@ -1258,6 +1303,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get ma76e43569d => 'Новое сочетание';
+
+  @override
+  String get md90f3b7ecd => 'Нужен абсолютный путь.';
 
   @override
   String get md72a4c2675 => 'Нужна стабильная версия вида 0.2.0';
@@ -1320,6 +1368,10 @@ class AppLocalizationsRu extends AppLocalizations {
   @override
   String get m452a863748 =>
       'Обновление загружено и проверено. Перед перезапуском сборка и XML будут сохранены.';
+
+  @override
+  String get m35dcef33e4 =>
+      'Обновление заменит dev-версию закреплённым выпуском. Проверьте status и укажите allowReplaceDev=true.';
 
   @override
   String m425b17d88a(String p0) {
@@ -1583,6 +1635,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get m67f5d8880e => 'Подключите Lua';
+
+  @override
+  String get ma33d11be60 => 'Подключите Lua через pob_editor_app.';
 
   @override
   String get m0d8b14b475 => 'Подключите мост заново и перезапустите PoB.';
@@ -2120,6 +2175,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get mde2ce6f05b => 'Сначала выберите версии обоих компонентов';
 
   @override
+  String get m93e0cd3908 => 'Сначала откройте сборку.';
+
+  @override
   String get m70a5cadc50 =>
       'Сначала получите актуальный отчёт сборки через pob_check_build.';
 
@@ -2316,6 +2374,11 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m66e6ee7733 => 'Узлы без изменений';
 
   @override
+  String ma9ea6a77a9(String p0) {
+    return 'Укажите $p0.';
+  }
+
+  @override
   String get mb68ab7d79e =>
       'Укажите папку PoB вручную или попробуйте найти её по стандартному пути.';
 
@@ -2405,11 +2468,22 @@ class AppLocalizationsRu extends AppLocalizations {
   }
 
   @override
+  String get m1bff3dd3a5 => 'Установленная версия не найдена';
+
+  @override
+  String get m45b81fa451 =>
+      'Установленная пара компонентов проверена и подключена';
+
+  @override
   String get mb4dd85a98a => 'Файл или папка изменились после предпросмотра.';
 
   @override
   String get m64bd568b72 =>
       'Файл обновления не имеет проверяемой контрольной суммы';
+
+  @override
+  String get ma6b9ff9cd6 =>
+      'Файл существует. Для замены укажите overwrite=true.';
 
   @override
   String get md8a38f5bc2 => 'Флакон здоровья';

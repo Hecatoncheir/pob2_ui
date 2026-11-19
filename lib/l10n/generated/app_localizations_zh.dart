@@ -101,6 +101,9 @@ class AppLocalizationsZh extends AppLocalizations {
   }
 
   @override
+  String get m79df86397e => 'Lua 已停用';
+
+  @override
   String get mbf7bbb22e3 => 'Lua 已連接';
 
   @override
@@ -112,7 +115,7 @@ class AppLocalizationsZh extends AppLocalizations {
   }
 
   @override
-  String get m8a7e5686b9 => 'MCP 可以建立流派配置並編輯目前的配置。手動切換配置會停用存取權限。';
+  String get m9f82e876bd => 'MCP 可以編輯組件、管理庫、檔案、元件和應用程式。如果您手動變更版本，存取將被停用。';
 
   @override
   String get mcdf95e40cd => 'PoB II · 研討會';
@@ -451,6 +454,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m903bd09e68 => '正在執行操作...';
 
   @override
+  String get md681d62567 => '另一個 MCP 指令正在運作。';
+
+  @override
   String get m357ccc3e75 => '上移';
 
   @override
@@ -477,6 +483,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get ma755f360c2 => '兩個組件。在您的計算機上進行計算。';
 
   @override
+  String get md27019b2d6 => '該操作或其參數不可用。';
+
+  @override
   String get me3c3ea3a85 => '操作不可用';
 
   @override
@@ -492,6 +501,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m748d0b0dbd => '已複製診斷資訊';
+
+  @override
+  String get mff23476c58 => '對話 MCP 未開啟；其他對話方塊要求您完成輸入。';
 
   @override
   String get mff31635225 => '壓縮檔需要固定的修訂版本';
@@ -596,6 +608,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get mf9a38201c0 => '日誌和詳細信息';
+
+  @override
+  String get mf1cb1d0eae => '應用程式終止不可用。';
 
   @override
   String get m0f98334ad1 => '在關閉應用程式之前完成編輯';
@@ -740,6 +755,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get ma8f8e11f0c => '情報';
 
   @override
+  String get mc9c8c4828a => '介面未連接。';
+
+  @override
   String get mb1f4f27181 => '搜尋市場';
 
   @override
@@ -847,6 +865,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m7e5029786d => '比例 100%';
+
+  @override
+  String get m54f3e0a058 => '比例應為 0.75 到 2。';
 
   @override
   String get mbe517dba6c => '介面規模';
@@ -965,6 +986,11 @@ class AppLocalizationsZh extends AppLocalizations {
   @override
   String mcf4205d2e9(String p0) {
     return '發生錯誤後無法恢復狀態：$p0';
+  }
+
+  @override
+  String mca0792f167(String p0) {
+    return '無法終止應用程式：$p0';
   }
 
   @override
@@ -1120,6 +1146,15 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m34f418bb26 => '未知設定版本';
 
   @override
+  String get m596dfa75c4 => '未知指令。';
+
+  @override
+  String get md86c6427dc => '未知的介面操作。';
+
+  @override
+  String get m4b8f0df7bc => '未知的應用程式操作。';
+
+  @override
   String m88bb56b333(String p0) {
     return '未知 PoB 場景模式：$p0';
   }
@@ -1129,6 +1164,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get me90bfa5f82 => '未知的彙編庫格式';
+
+  @override
+  String get m5f6fa3296b => '未知語言。';
 
   @override
   String get mf3a3cbeee9 => '圖示不正確 Lua';
@@ -1203,10 +1241,16 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m41d413ec96 => '沒有要清除的資料。';
 
   @override
+  String get ma04e1706b3 => '目前沒有建構樹。';
+
+  @override
   String get ma76f928c09 => '沒有單包校驗和';
 
   @override
   String get mb71873c826 => '無校驗和 Lua 運行時';
+
+  @override
+  String get mad247478cb => '無回應Lua';
 
   @override
   String get m0497e1e404 => '沒有答案MCP。會議結束；重新導入XML。';
@@ -1234,6 +1278,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get ma76e43569d => '新組合';
+
+  @override
+  String get md90f3b7ecd => '需要絕對路徑。';
 
   @override
   String get md72a4c2675 => '我們需要一個像0.2.0這樣的穩定版本';
@@ -1294,6 +1341,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m452a863748 => '更新已下載並驗證。重新啟動之前將儲存建置和 XML。';
+
+  @override
+  String get m35dcef33e4 => '此更新將以固定版本取代開發版本。檢查狀態並指定allowReplaceDev=true。';
 
   @override
   String m425b17d88a(String p0) {
@@ -1552,6 +1602,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m67f5d8880e => '連接 Lua';
+
+  @override
+  String get ma33d11be60 => '透過 pob_editor_app 連接 Lua。';
 
   @override
   String get m0d8b14b475 => '重新連接橋接器並重新啟動 PoB。';
@@ -2081,6 +2134,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get mde2ce6f05b => '請先選擇兩個元件的版本';
 
   @override
+  String get m93e0cd3908 => '首先開啟程序集。';
+
+  @override
   String get m70a5cadc50 => '首先透過pob_check_build取得最新的建置報告。';
 
   @override
@@ -2271,6 +2327,11 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m66e6ee7733 => '天賦節點沒有變更';
 
   @override
+  String ma9ea6a77a9(String p0) {
+    return '指定 $p0。';
+  }
+
+  @override
   String get mb68ab7d79e => '手動選擇 PoB 資料夾，或嘗試從預設位置尋找。';
 
   @override
@@ -2357,10 +2418,19 @@ class AppLocalizationsZh extends AppLocalizations {
   }
 
   @override
+  String get m1bff3dd3a5 => '找不到已安裝的版本';
+
+  @override
+  String get m45b81fa451 => '檢查並連接已安裝的一對組件';
+
+  @override
   String get mb4dd85a98a => '文件或資料夾自預覽以來已更改。';
 
   @override
   String get m64bd568b72 => '更新檔案沒有可驗證的校驗和';
+
+  @override
+  String get ma6b9ff9cd6 => '文件存在。若要替換，請指定 overwrite=true。';
 
   @override
   String get md8a38f5bc2 => '小瓶健康';
@@ -2585,6 +2655,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   }
 
   @override
+  String get m79df86397e => 'Lua 已停用';
+
+  @override
   String get mbf7bbb22e3 => 'Lua 已連接';
 
   @override
@@ -2596,7 +2669,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   }
 
   @override
-  String get m8a7e5686b9 => 'MCP 可以建立流派配置並編輯目前的配置。手動切換配置會停用存取權限。';
+  String get m9f82e876bd => 'MCP 可以編輯組件、管理庫、檔案、元件和應用程式。如果您手動變更版本，存取將被停用。';
 
   @override
   String get mcdf95e40cd => 'PoB II · 研討會';
@@ -2935,6 +3008,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m903bd09e68 => '正在執行操作...';
 
   @override
+  String get md681d62567 => '另一個 MCP 指令正在運作。';
+
+  @override
   String get m357ccc3e75 => '上移';
 
   @override
@@ -2961,6 +3037,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get ma755f360c2 => '兩個組件。在您的計算機上進行計算。';
 
   @override
+  String get md27019b2d6 => '該操作或其參數不可用。';
+
+  @override
   String get me3c3ea3a85 => '操作不可用';
 
   @override
@@ -2976,6 +3055,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m748d0b0dbd => '已複製診斷資訊';
+
+  @override
+  String get mff23476c58 => '對話 MCP 未開啟；其他對話方塊要求您完成輸入。';
 
   @override
   String get mff31635225 => '壓縮檔需要固定的修訂版本';
@@ -3080,6 +3162,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get mf9a38201c0 => '日誌和詳細信息';
+
+  @override
+  String get mf1cb1d0eae => '應用程式終止不可用。';
 
   @override
   String get m0f98334ad1 => '在關閉應用程式之前完成編輯';
@@ -3224,6 +3309,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get ma8f8e11f0c => '情報';
 
   @override
+  String get mc9c8c4828a => '介面未連接。';
+
+  @override
   String get mb1f4f27181 => '搜尋市場';
 
   @override
@@ -3331,6 +3419,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m7e5029786d => '比例 100%';
+
+  @override
+  String get m54f3e0a058 => '比例應為 0.75 到 2。';
 
   @override
   String get mbe517dba6c => '介面規模';
@@ -3449,6 +3540,11 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   @override
   String mcf4205d2e9(String p0) {
     return '發生錯誤後無法恢復狀態：$p0';
+  }
+
+  @override
+  String mca0792f167(String p0) {
+    return '無法終止應用程式：$p0';
   }
 
   @override
@@ -3604,6 +3700,15 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m34f418bb26 => '未知設定版本';
 
   @override
+  String get m596dfa75c4 => '未知指令。';
+
+  @override
+  String get md86c6427dc => '未知的介面操作。';
+
+  @override
+  String get m4b8f0df7bc => '未知的應用程式操作。';
+
+  @override
   String m88bb56b333(String p0) {
     return '未知 PoB 場景模式：$p0';
   }
@@ -3613,6 +3718,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get me90bfa5f82 => '未知的彙編庫格式';
+
+  @override
+  String get m5f6fa3296b => '未知語言。';
 
   @override
   String get mf3a3cbeee9 => '圖示不正確 Lua';
@@ -3687,10 +3795,16 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m41d413ec96 => '沒有要清除的資料。';
 
   @override
+  String get ma04e1706b3 => '目前沒有建構樹。';
+
+  @override
   String get ma76f928c09 => '沒有單包校驗和';
 
   @override
   String get mb71873c826 => '無校驗和 Lua 運行時';
+
+  @override
+  String get mad247478cb => '無回應Lua';
 
   @override
   String get m0497e1e404 => '沒有答案MCP。會議結束；重新導入XML。';
@@ -3718,6 +3832,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get ma76e43569d => '新組合';
+
+  @override
+  String get md90f3b7ecd => '需要絕對路徑。';
 
   @override
   String get md72a4c2675 => '我們需要一個像0.2.0這樣的穩定版本';
@@ -3778,6 +3895,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m452a863748 => '更新已下載並驗證。重新啟動之前將儲存建置和 XML。';
+
+  @override
+  String get m35dcef33e4 => '此更新將以固定版本取代開發版本。檢查狀態並指定allowReplaceDev=true。';
 
   @override
   String m425b17d88a(String p0) {
@@ -4036,6 +4156,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m67f5d8880e => '連接 Lua';
+
+  @override
+  String get ma33d11be60 => '透過 pob_editor_app 連接 Lua。';
 
   @override
   String get m0d8b14b475 => '重新連接橋接器並重新啟動 PoB。';
@@ -4565,6 +4688,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get mde2ce6f05b => '請先選擇兩個元件的版本';
 
   @override
+  String get m93e0cd3908 => '首先開啟程序集。';
+
+  @override
   String get m70a5cadc50 => '首先透過pob_check_build取得最新的建置報告。';
 
   @override
@@ -4755,6 +4881,11 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m66e6ee7733 => '天賦節點沒有變更';
 
   @override
+  String ma9ea6a77a9(String p0) {
+    return '指定 $p0。';
+  }
+
+  @override
   String get mb68ab7d79e => '手動選擇 PoB 資料夾，或嘗試從預設位置尋找。';
 
   @override
@@ -4841,10 +4972,19 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   }
 
   @override
+  String get m1bff3dd3a5 => '找不到已安裝的版本';
+
+  @override
+  String get m45b81fa451 => '檢查並連接已安裝的一對組件';
+
+  @override
   String get mb4dd85a98a => '文件或資料夾自預覽以來已更改。';
 
   @override
   String get m64bd568b72 => '更新檔案沒有可驗證的校驗和';
+
+  @override
+  String get ma6b9ff9cd6 => '文件存在。若要替換，請指定 overwrite=true。';
 
   @override
   String get md8a38f5bc2 => '小瓶健康';

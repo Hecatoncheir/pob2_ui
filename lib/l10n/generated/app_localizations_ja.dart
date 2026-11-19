@@ -101,6 +101,9 @@ class AppLocalizationsJa extends AppLocalizations {
   }
 
   @override
+  String get m79df86397e => 'Lua 無効';
+
+  @override
   String get mbf7bbb22e3 => 'Lua 接続しました';
 
   @override
@@ -112,8 +115,8 @@ class AppLocalizationsJa extends AppLocalizations {
   }
 
   @override
-  String get m8a7e5686b9 =>
-      'MCP はビルドを作成し、現在のビルドを編集できます。手動でビルドを切り替えると、アクセスは無効になります。';
+  String get m9f82e876bd =>
+      'MCP はアセンブリを編集し、ライブラリ、ファイル、コンポーネント、アプリケーションを管理できます。ビルドを手動で変更すると、アクセスが無効になります。';
 
   @override
   String get mcdf95e40cd => 'PoB II · ワークショップ';
@@ -452,6 +455,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m903bd09e68 => '操作を実行しています...';
 
   @override
+  String get md681d62567 => '別の MCP コマンドが実行中です。';
+
+  @override
   String get m357ccc3e75 => '上に移動';
 
   @override
@@ -478,6 +484,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get ma755f360c2 => '2 つのコンポーネント。コンピューター上での計算。';
 
   @override
+  String get md27019b2d6 => 'アクションまたはそのパラメータは使用できません。';
+
+  @override
   String get me3c3ea3a85 => 'Action not available';
 
   @override
@@ -493,6 +502,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m748d0b0dbd => '診断情報をコピーしました';
+
+  @override
+  String get mff23476c58 => 'ダイアログ MCP は開いていません。他のダイアログでは入力を完了する必要があります。';
 
   @override
   String get mff31635225 => 'アーカイブには固定リビジョンが必要です';
@@ -598,6 +610,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get mf9a38201c0 => 'ログと詳細';
+
+  @override
+  String get mf1cb1d0eae => 'アプリケーションの終了はできません。';
 
   @override
   String get m0f98334ad1 => 'アプリケーションを閉じる前に編集を完了してください';
@@ -742,6 +757,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get ma8f8e11f0c => 'インテリジェンス';
 
   @override
+  String get mc9c8c4828a => 'インターフェースが接続されていません。';
+
+  @override
   String get mb1f4f27181 => 'マーケットを検索する';
 
   @override
@@ -849,6 +867,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m7e5029786d => 'スケール 100%';
+
+  @override
+  String get m54f3e0a058 => 'スケールは 0.75 ～ 2 である必要があります。';
 
   @override
   String get mbe517dba6c => 'インターフェーススケール';
@@ -968,6 +989,11 @@ class AppLocalizationsJa extends AppLocalizations {
   @override
   String mcf4205d2e9(String p0) {
     return 'エラーの後、状態を復元できませんでした: $p0';
+  }
+
+  @override
+  String mca0792f167(String p0) {
+    return 'アプリケーションを終了できませんでした: $p0';
   }
 
   @override
@@ -1123,6 +1149,15 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m34f418bb26 => '不明な設定バージョン';
 
   @override
+  String get m596dfa75c4 => '不明なコマンドです。';
+
+  @override
+  String get md86c6427dc => '不明なインターフェイス アクション。';
+
+  @override
+  String get m4b8f0df7bc => '不明なアプリケーション アクション。';
+
+  @override
   String m88bb56b333(String p0) {
     return '不明な PoB シーン モード: $p0';
   }
@@ -1132,6 +1167,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get me90bfa5f82 => '不明なアセンブリ ライブラリ形式';
+
+  @override
+  String get m5f6fa3296b => '不明な言語です。';
 
   @override
   String get mf3a3cbeee9 => '間違ったアイコン Lua';
@@ -1206,10 +1244,16 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m41d413ec96 => 'クリアするデータがありません。';
 
   @override
+  String get ma04e1706b3 => '現在のビルド ツリーはありません。';
+
+  @override
   String get ma76f928c09 => '単一パケットのチェックサムがありません';
 
   @override
   String get mb71873c826 => 'チェックサムなし Lua ランタイム';
+
+  @override
+  String get mad247478cb => '無回答 Lua';
 
   @override
   String get m0497e1e404 => '答えはありません MCP。セッションは終了しました。再インポートします。XML';
@@ -1237,6 +1281,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get ma76e43569d => '新しい組み合わせ';
+
+  @override
+  String get md90f3b7ecd => '絶対パスが必要です。';
 
   @override
   String get md72a4c2675 => '0.2.0 のような安定したバージョンが必要です';
@@ -1297,6 +1344,10 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m452a863748 => 'アップデートがダウンロードされ、確認されました。ビルドと XML は再起動前に保存されます。';
+
+  @override
+  String get m35dcef33e4 =>
+      'このアップデートにより、開発バージョンが固定リリースに置き換えられます。ステータスを確認し、allowReplaceDev=true を指定します。';
 
   @override
   String m425b17d88a(String p0) {
@@ -1555,6 +1606,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m67f5d8880e => 'Lua に接続します';
+
+  @override
+  String get ma33d11be60 => 'pob_editor_app 経由で Lua に接続します。';
 
   @override
   String get m0d8b14b475 => 'ブリッジを再接続し、PoB を再開します。';
@@ -2084,6 +2138,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get mde2ce6f05b => '先に両方のコンポーネントのバージョンを選択してください';
 
   @override
+  String get m93e0cd3908 => 'まずアセンブリを開きます。';
+
+  @override
   String get m70a5cadc50 => 'まず、pob_check_build 経由で最新のビルド レポートを取得します。';
 
   @override
@@ -2277,6 +2334,11 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m66e6ee7733 => 'ノードの変更なし';
 
   @override
+  String ma9ea6a77a9(String p0) {
+    return '$p0を指定してください。';
+  }
+
+  @override
   String get mb68ab7d79e => 'PoB フォルダーを手動で選択するか、既定の場所を探します。';
 
   @override
@@ -2363,10 +2425,19 @@ class AppLocalizationsJa extends AppLocalizations {
   }
 
   @override
+  String get m1bff3dd3a5 => 'インストールされているバージョンが見つかりません';
+
+  @override
+  String get m45b81fa451 => 'インストールされているコンポーネントのペアがチェックされ、接続されています';
+
+  @override
   String get mb4dd85a98a => 'ファイルまたはフォルダーがプレビューから変更されました。';
 
   @override
   String get m64bd568b72 => 'アップデート ファイルには検証可能なチェックサムがありません';
+
+  @override
+  String get ma6b9ff9cd6 => 'ファイルは存在します。置き換える場合はoverwrite=trueを指定します。';
 
   @override
   String get md8a38f5bc2 => '健康の小瓶';

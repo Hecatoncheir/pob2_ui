@@ -101,6 +101,9 @@ class AppLocalizationsTh extends AppLocalizations {
   }
 
   @override
+  String get m79df86397e => 'Lua ปิดการใช้งาน';
+
+  @override
   String get mbf7bbb22e3 => 'เชื่อมต่อแล้ว Lua';
 
   @override
@@ -112,8 +115,8 @@ class AppLocalizationsTh extends AppLocalizations {
   }
 
   @override
-  String get m8a7e5686b9 =>
-      'MCP สามารถสร้างบิลด์และแก้ไขบิลด์ปัจจุบันได้ การสลับบิลด์ด้วยตนเองจะปิดการเข้าถึง';
+  String get m9f82e876bd =>
+      'MCP สามารถแก้ไขแอสเซมบลี จัดการไลบรารี ไฟล์ ส่วนประกอบ และแอปพลิเคชัน หากคุณเปลี่ยนบิลด์ด้วยตนเอง การเข้าถึงจะถูกปิดใช้งาน';
 
   @override
   String get mcdf95e40cd => 'PoB II · เวิร์กช็อป';
@@ -457,6 +460,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m903bd09e68 => 'กำลังดำเนินการ...';
 
   @override
+  String get md681d62567 => 'คำสั่ง MCP อื่นกำลังทำงานอยู่';
+
+  @override
   String get m357ccc3e75 => 'เลื่อนขึ้น';
 
   @override
@@ -483,6 +489,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get ma755f360c2 => 'สองส่วนประกอบ การคำนวณบนคอมพิวเตอร์ของคุณ';
 
   @override
+  String get md27019b2d6 => 'การดำเนินการหรือพารามิเตอร์ไม่พร้อมใช้งาน';
+
+  @override
   String get me3c3ea3a85 => 'ไม่สามารถดำเนินการได้';
 
   @override
@@ -498,6 +507,10 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m748d0b0dbd => 'คัดลอกข้อมูลวินิจฉัยแล้ว';
+
+  @override
+  String get mff23476c58 =>
+      'บทสนทนา MCP ไม่เปิดอยู่ กล่องโต้ตอบอื่นๆ ต้องการให้คุณกรอกข้อมูลให้ครบถ้วน';
 
   @override
   String get mff31635225 => 'ต้องระบุรีวิชันที่แน่นอนสำหรับไฟล์บีบอัด';
@@ -606,6 +619,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get mf9a38201c0 => 'บันทึกและรายละเอียด';
+
+  @override
+  String get mf1cb1d0eae => 'ไม่มีการยุติแอปพลิเคชัน';
 
   @override
   String get m0f98334ad1 => 'แก้ไขให้เสร็จสิ้นก่อนปิดแอปพลิเคชัน';
@@ -751,6 +767,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get ma8f8e11f0c => 'ความฉลาด';
 
   @override
+  String get mc9c8c4828a => 'ไม่ได้เชื่อมต่ออินเทอร์เฟซ';
+
+  @override
   String get mb1f4f27181 => 'ค้นหาตลาด';
 
   @override
@@ -858,6 +877,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m7e5029786d => 'สเกล 100%';
+
+  @override
+  String get m54f3e0a058 => 'สเกลควรอยู่ระหว่าง 0.75 ถึง 2';
 
   @override
   String get mbe517dba6c => 'ขนาดอินเทอร์เฟซ';
@@ -978,6 +1000,11 @@ class AppLocalizationsTh extends AppLocalizations {
   @override
   String mcf4205d2e9(String p0) {
     return 'ไม่สามารถกู้คืนสถานะหลังจากข้อผิดพลาด: $p0';
+  }
+
+  @override
+  String mca0792f167(String p0) {
+    return 'ไม่สามารถยุติแอปพลิเคชัน: $p0';
   }
 
   @override
@@ -1133,6 +1160,15 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m34f418bb26 => 'เวอร์ชันการตั้งค่าที่ไม่รู้จัก';
 
   @override
+  String get m596dfa75c4 => 'คำสั่งที่ไม่รู้จัก';
+
+  @override
+  String get md86c6427dc => 'การกระทำของอินเทอร์เฟซที่ไม่รู้จัก';
+
+  @override
+  String get m4b8f0df7bc => 'การทำงานของแอปพลิเคชันที่ไม่รู้จัก';
+
+  @override
   String m88bb56b333(String p0) {
     return 'โหมดฉาก PoB ที่ไม่รู้จัก: $p0';
   }
@@ -1142,6 +1178,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get me90bfa5f82 => 'รูปแบบไลบรารีแอสเซมบลีที่ไม่รู้จัก';
+
+  @override
+  String get m5f6fa3296b => 'ภาษาที่ไม่รู้จัก';
 
   @override
   String get mf3a3cbeee9 => 'ไอคอนไม่ถูกต้อง Lua';
@@ -1216,10 +1255,16 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m41d413ec96 => 'ไม่มีข้อมูลให้ล้าง';
 
   @override
+  String get ma04e1706b3 => 'ไม่มีแผนผังบิลด์ปัจจุบัน';
+
+  @override
   String get ma76f928c09 => 'ไม่มีการตรวจสอบแพ็คเก็ตเดี่ยว';
 
   @override
   String get mb71873c826 => 'ไม่มีรันไทม์ตรวจสอบ Lua';
+
+  @override
+  String get mad247478cb => 'ไม่มีคำตอบ Lua';
 
   @override
   String get m0497e1e404 => 'ไม่มีคำตอบ MCP ปิดเซสชันแล้ว นำเข้าอีกครั้ง XML';
@@ -1247,6 +1292,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get ma76e43569d => 'ชุดค่าผสมใหม่';
+
+  @override
+  String get md90f3b7ecd => 'จำเป็นต้องมีเส้นทางที่แน่นอน';
 
   @override
   String get md72a4c2675 => 'เราต้องการเวอร์ชันที่เสถียรเช่น 0.2.0';
@@ -1308,6 +1356,10 @@ class AppLocalizationsTh extends AppLocalizations {
   @override
   String get m452a863748 =>
       'ดาวน์โหลดและตรวจสอบการอัปเดตแล้ว บิลด์และ XML จะถูกบันทึกก่อนที่จะรีสตาร์ท';
+
+  @override
+  String get m35dcef33e4 =>
+      'การอัปเดตจะแทนที่เวอร์ชัน dev ด้วยเวอร์ชันที่ปักหมุดไว้ ตรวจสอบสถานะและระบุ AllowReplaceDev=true';
 
   @override
   String m425b17d88a(String p0) {
@@ -1568,6 +1620,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m67f5d8880e => 'เชื่อมต่อ Lua';
+
+  @override
+  String get ma33d11be60 => 'เชื่อมต่อ Lua ผ่าน pob_editor_app';
 
   @override
   String get m0d8b14b475 => 'เชื่อมต่อบริดจ์อีกครั้งและรีสตาร์ท PoB';
@@ -2100,6 +2155,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get mde2ce6f05b => 'เลือกเวอร์ชันของส่วนประกอบทั้งสองก่อน';
 
   @override
+  String get m93e0cd3908 => 'ก่อนอื่นให้เปิดชุดประกอบ';
+
+  @override
   String get m70a5cadc50 =>
       'ก่อนอื่นให้รับรายงานบิลด์ล่าสุดผ่าน pob_check_build';
 
@@ -2295,6 +2353,11 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m66e6ee7733 => 'ไม่มีการเปลี่ยนแปลงโหนด';
 
   @override
+  String ma9ea6a77a9(String p0) {
+    return 'ระบุ $p0';
+  }
+
+  @override
   String get mb68ab7d79e =>
       'เลือกโฟลเดอร์ PoB เองหรือลองค้นหาในตำแหน่งเริ่มต้น';
 
@@ -2384,10 +2447,21 @@ class AppLocalizationsTh extends AppLocalizations {
   }
 
   @override
+  String get m1bff3dd3a5 => 'ไม่พบเวอร์ชันที่ติดตั้ง';
+
+  @override
+  String get m45b81fa451 =>
+      'มีการตรวจสอบและเชื่อมต่อคู่ส่วนประกอบที่ติดตั้งแล้ว';
+
+  @override
   String get mb4dd85a98a => 'ไฟล์หรือโฟลเดอร์มีการเปลี่ยนแปลงตั้งแต่ดูตัวอย่าง';
 
   @override
   String get m64bd568b72 => 'ไฟล์อัพเดตไม่มีเช็คซัมที่ตรวจสอบได้';
+
+  @override
+  String get ma6b9ff9cd6 =>
+      'มีไฟล์อยู่ หากต้องการแทนที่ ให้ระบุ overwrite=true';
 
   @override
   String get md8a38f5bc2 => 'ขวดเพื่อสุขภาพ';

@@ -31,6 +31,8 @@ void main() {
     await File.fromUri(profile.uri.resolve('components.json'))
         .copy(File.fromUri(root.uri.resolve('components.json')).path);
     final components = ComponentRepository(store: InstallationStore(root));
+    await components.load();
+    await components.store.save(components.active, components.active);
     final builds = await Directory.fromUri(root.uri.resolve('builds/'))
         .create();
     final library = PobBuildLibrary(root);
@@ -206,11 +208,16 @@ Future<void> _checkApplicationTools(
   await client.success('pob_editor_app', {'action': 'save'});
 
   final image = await client.call('pob_render_image', {'view': 'overview'});
-  expect(image['isError'], isFalse, reason: '$image');
-  expect(
-    jsonRows(image['content']).where((b) => b['type'] == 'image'),
-    hasLength(1),
-  );
+  if (Platform.isWindows) {
+    expect(image['isError'], isFalse, reason: '$image');
+    expect(
+      jsonRows(image['content']).where((b) => b['type'] == 'image'),
+      hasLength(1),
+    );
+  } else {
+    expect(image['isError'], isTrue);
+    expect(jsonRows(image['content']).first['text'], contains('Windows'));
+  }
   final lifecycle = <String>[];
   model.mcpEditor.lifecycleAction = (action) async {
     lifecycle.add(action);
