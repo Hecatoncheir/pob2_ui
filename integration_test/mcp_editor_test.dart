@@ -293,18 +293,37 @@ Future<void> _checkDpsDialog(
   WidgetTester tester,
   _ExternalEditor client,
 ) async {
+  tester.view.devicePixelRatio = 1;
+  try {
+    for (final width in [1024.0, 1280.0]) {
+      tester.view.physicalSize = Size(width, 800);
+      await _checkDpsAtCurrentSize(tester, client);
+    }
+  } finally {
+    tester.view.resetPhysicalSize();
+    tester.view.resetDevicePixelRatio();
+  }
+}
+
+Future<void> _checkDpsAtCurrentSize(
+  WidgetTester tester,
+  _ExternalEditor client,
+) async {
   await client.success('pob_editor_ui', {
     'action': 'navigate',
     'page': 'workspace',
     'tab': 'calculations',
   });
-  await _uiPerform(tester, client, 'Полный DPS', 'tap');
+  final panelOpened = await _openDps(tester, client);
   expect((await client.success('pob_editor_status'))['dialogOpen'], isTrue);
   expect((await client.success('pob_editor_status'))['canCloseDialog'], isTrue);
   await _checkScreenshot(client);
   await client.success('pob_editor_app', {'action': 'close_dialog'});
   await tester.pumpAndSettle();
-  expect((await client.success('pob_editor_status'))['dialogOpen'], isFalse);
+  expect(
+    (await client.success('pob_editor_status'))['dialogOpen'],
+    panelOpened,
+  );
   await _uiPerform(tester, client, 'Полный DPS', 'tap');
   final snapshot = await client.success('pob_editor_ui', {
     'action': 'snapshot',
@@ -315,7 +334,26 @@ Future<void> _checkDpsDialog(
     'key': 'escape',
   });
   await tester.pumpAndSettle();
+  if (panelOpened) {
+    await client.success('pob_editor_app', {'action': 'close_dialog'});
+    await tester.pumpAndSettle();
+  }
   expect((await client.success('pob_editor_status'))['dialogOpen'], isFalse);
+}
+
+Future<bool> _openDps(WidgetTester tester, _ExternalEditor client) async {
+  await tester.pumpAndSettle();
+  final snapshot = await client.success('pob_editor_ui', {
+    'action': 'snapshot',
+  });
+  final visible = jsonRows(snapshot['nodes']).any(
+    (node) =>
+        '${node['label']}'.contains('Полный DPS') &&
+        jsonStrings(node['actions']).contains('tap'),
+  );
+  if (!visible) await _uiPerform(tester, client, 'Показатели', 'tap');
+  await _uiPerform(tester, client, 'Полный DPS', 'tap');
+  return !visible;
 }
 
 Future<void> _checkScreenshot(_ExternalEditor client) async {
@@ -327,8 +365,16 @@ Future<void> _checkScreenshot(_ExternalEditor client) async {
       .firstWhere((item) => item['type'] == 'image');
   final bytes = base64Decode(png['data'] as String);
   expect(bytes.take(8), [137, 80, 78, 71, 13, 10, 26, 10]);
+  final result = jsonMap(jsonMap(screenshot['structuredContent'])['result']);
+  final viewport = jsonMap(result['viewport']);
+  final width = (viewport['width'] as num).ceil();
+  expect(bytes.buffer.asByteData().getUint32(16), width);
+  expect(
+    bytes.buffer.asByteData().getUint32(20),
+    (viewport['height'] as num).ceil(),
+  );
   final file = File(
-    'build/review/mcp-full-dps-${Platform.operatingSystem}.png',
+    'build/review/mcp-full-dps-$width-${Platform.operatingSystem}.png',
   );
   await file.parent.create(recursive: true);
   await file.writeAsBytes(bytes);
