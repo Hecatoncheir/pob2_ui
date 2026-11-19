@@ -278,6 +278,12 @@ class AppLocalizationsJa extends AppLocalizations {
   String get mbce24a2108 => '名前を入力してください';
 
   @override
+  String get m3904114504 => 'poe.ninja の PoE 2 ビルドリンクを入力してください。';
+
+  @override
+  String get mdb6ccff07b => 'pobb.in または poe.ninja のビルドリンクを入力してください。';
+
+  @override
   String get ma520dea087 => 'pobb.in のビルドリンクを入力してください。';
 
   @override
@@ -1002,7 +1008,9 @@ class AppLocalizationsJa extends AppLocalizations {
   }
 
   @override
-  String get m6d9965924b => 'pobb.in からビルドをダウンロードできませんでした。';
+  String m2a6db48354(String p0) {
+    return '$p0 からビルドをダウンロードできませんでした。';
+  }
 
   @override
   String get m6f37ba2ab7 => 'PoB を閉じられませんでした。';
@@ -1027,6 +1035,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String m8644bfa547(String p0) {
     return '以前の MCP エディターを無効にできませんでした: $p0';
   }
+
+  @override
+  String get m8f403e0fea => 'ブラウザーを開けませんでした。リンクを手動で開いてください。';
 
   @override
   String m725605a944(String p0) {
@@ -1090,6 +1101,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m33ea6a4505 => 'プロファイルの検証に失敗しました。';
+
+  @override
+  String get m7cde69fd21 => 'クリップボードを読み取れませんでした。';
 
   @override
   String mfdddf71553(String p0) {
@@ -1294,6 +1308,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get md72a4c2675 => '0.2.0 のような安定したバージョンが必要です';
 
   @override
+  String get m92782507e5 => 'poe.ninja のキャラクターページが必要です。';
+
+  @override
   String get m83e9fd7c8a => 'アミュレット I';
 
   @override
@@ -1423,6 +1440,10 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m3e95800065 => '無効';
 
   @override
+  String get m654046a00d =>
+      'poe.ninja でキャラクターを開き、Copy PoB code を選択して、PoB II にコードを貼り付けてください。';
+
+  @override
   String get mea1f408246 => '開く';
 
   @override
@@ -1430,6 +1451,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m38ec738ed2 => 'PoB から XML を開きます';
+
+  @override
+  String get m12ae4659d0 => 'poe.ninja を開く';
 
   @override
   String get m589c35aaa6 => '開いて計算してください';
@@ -1986,7 +2010,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get maa7d8fe68c => 'どのステージと比較しますか？';
 
   @override
-  String get m64d0c7f0a2 => 'pobb.in サイトは時間通りに応答しませんでした。';
+  String m389de358a7(String p0) {
+    return '$p0 サイトが時間内に応答しませんでした。';
+  }
 
   @override
   String get m49db3482db => 'ジュエル';
@@ -2244,7 +2270,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get ma775dcaa51 => '平均ダメージ';
 
   @override
-  String get m926d57bfc2 => 'pobb.in からのリンク';
+  String get m57f9da1c61 => 'リンクまたは PoB コード';
 
   @override
   String get m91d6208508 => '安定リリースはまだありません';

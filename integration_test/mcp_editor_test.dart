@@ -125,6 +125,7 @@ Future<void> _checkApplicationTools(
     'action': 'export_code',
   });
   expect(code['code'], isNotEmpty);
+  await _checkNinjaProfileImport(client, model);
   await client.success('pob_editor_library', {'action': 'copy'});
   expect(model.state.library.activeId, isNot(id));
   expect(model.mcpEditor.enabled, isTrue);
@@ -225,6 +226,31 @@ Future<void> _checkApplicationTools(
   await client.success('pob_editor_app', {'action': 'restart'});
   expect(lifecycle, ['restart']);
   model.mcpEditor.lifecycleAction = null;
+}
+
+Future<void> _checkNinjaProfileImport(
+  _ExternalEditor client,
+  WorkshopCubit model,
+) async {
+  final id = model.state.library.activeId!;
+  final before = await model.library.read(id);
+  final history = model.state.history;
+  for (final link in [
+    'https://poe.ninja/poe2/profile/Example-1234/standard/character/ExampleCharacter',
+    'https://poe.ninja/poe2/builds/standard/character/account-1234/character',
+  ]) {
+    final result = await client.success('pob_editor_files', {
+      'action': 'import_link',
+      'text': link,
+    });
+    expect(result['imported'], isFalse);
+    expect(result['requires'], 'pob_code');
+    expect(result['sourceUrl'], link);
+    expect(result['nextAction'], 'import_code');
+    expect(model.state.library.activeId, id);
+    expect(await model.library.read(id), before);
+    expect(model.state.history, history);
+  }
 }
 
 Future<JsonMap> _waitJob(_ExternalEditor client) async {

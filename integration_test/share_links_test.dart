@@ -38,7 +38,7 @@ void main() {
     );
   }, skip: !_live);
 
-  testWidgets('Три сборки по ссылкам и повторное открытие без HTTP', (
+  testWidgets('Ссылки pobb.in и poe.ninja и повторное открытие без HTTP', (
     tester,
   ) async {
     final root = await _testProfile();
@@ -46,9 +46,14 @@ void main() {
     final snapshots = <String, Map<String, Object?>>{};
     for (final fixture in _fixtures) {
       final baseline = await _importXml(model, fixture);
-      final imported = await _importLink(tester, model, _link(fixture));
-      expect(imported, baseline);
-      snapshots[model.state.library.activeId!] = baseline;
+      for (final link in [
+        _link(fixture),
+        'https://poe.ninja/poe2/pob/$fixture',
+      ]) {
+        final imported = await _importLink(tester, model, link);
+        expect(imported, baseline);
+        snapshots[model.state.library.activeId!] = baseline;
+      }
     }
     _expectWitch(snapshots.values.first);
     await _verifyReopen(tester, model, root, snapshots);
@@ -73,6 +78,9 @@ Future<PobShareLinks> _localLinks() async {
   final codes = {
     for (final fixture in _fixtures)
       '/pob/$fixture': await File('$_fixturesPath/$fixture.pobcode')
+          .readAsString(),
+    for (final fixture in _fixtures)
+      '/poe2/pob/raw/$fixture': await File('$_fixturesPath/$fixture.pobcode')
           .readAsString(),
     '/pob/damaged': '***',
     '/pob/poe1': base64Url.encode(

@@ -593,6 +593,18 @@ abstract class AppLocalizations {
   /// **'Enter a name'**
   String get mbce24a2108;
 
+  /// Введите ссылку на сборку PoE 2 с poe.ninja.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a PoE 2 build link from poe.ninja.'**
+  String get m3904114504;
+
+  /// Введите ссылку на сборку с pobb.in или poe.ninja.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a build link from pobb.in or poe.ninja.'**
+  String get mdb6ccff07b;
+
   /// Введите ссылку на сборку с pobb.in.
   ///
   /// In en, this message translates to:
@@ -1961,11 +1973,11 @@ abstract class AppLocalizations {
   /// **'Failed to load translation: {p0}'**
   String m4b1c83eb15(String p0);
 
-  /// Не удалось загрузить сборку с pobb.in.
+  /// Не удалось загрузить сборку с {p0}.
   ///
   /// In en, this message translates to:
-  /// **'Could not download the build from pobb.in.'**
-  String get m6d9965924b;
+  /// **'Could not download the build from {p0}.'**
+  String m2a6db48354(String p0);
 
   /// Не удалось закрыть PoB.
   ///
@@ -2002,6 +2014,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Could not disable the previous MCP editor: {p0}'**
   String m8644bfa547(String p0);
+
+  /// Не удалось открыть браузер. Откройте ссылку вручную.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not open the browser. Open the link manually.'**
+  String get m8f403e0fea;
 
   /// Не удалось открыть браузер: {p0}
   ///
@@ -2093,6 +2111,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Failed to verify profile.'**
   String get m33ea6a4505;
+
+  /// Не удалось прочитать буфер обмена.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not read the clipboard.'**
+  String get m7cde69fd21;
 
   /// Не удалось прочитать изображения: {p0}
   ///
@@ -2478,6 +2502,12 @@ abstract class AppLocalizations {
   /// **'We need a stable version like 0.2.0'**
   String get md72a4c2675;
 
+  /// Нужна страница персонажа poe.ninja.
+  ///
+  /// In en, this message translates to:
+  /// **'A poe.ninja character page is required.'**
+  String get m92782507e5;
+
   /// Оберег I
   ///
   /// In en, this message translates to:
@@ -2730,6 +2760,12 @@ abstract class AppLocalizations {
   /// **'Disabled'**
   String get m3e95800065;
 
+  /// Откройте персонажа на poe.ninja, нажмите Copy PoB code и вставьте код в PoB II.
+  ///
+  /// In en, this message translates to:
+  /// **'Open the character on poe.ninja, select Copy PoB code, then paste the code into PoB II.'**
+  String get m654046a00d;
+
   /// Открыть
   ///
   /// In en, this message translates to:
@@ -2747,6 +2783,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Open XML from PoB'**
   String get m38ec738ed2;
+
+  /// Открыть poe.ninja
+  ///
+  /// In en, this message translates to:
+  /// **'Open poe.ninja'**
+  String get m12ae4659d0;
 
   /// Открыть и рассчитать
   ///
@@ -3780,11 +3822,11 @@ abstract class AppLocalizations {
   /// **'Which milestone should be compared?'**
   String get maa7d8fe68c;
 
-  /// Сайт pobb.in не ответил вовремя.
+  /// Сайт {p0} не ответил вовремя.
   ///
   /// In en, this message translates to:
-  /// **'The pobb.in site did not respond on time.'**
-  String get m64d0c7f0a2;
+  /// **'The {p0} site did not respond on time.'**
+  String m389de358a7(String p0);
 
   /// Самоцветы
   ///
@@ -4278,11 +4320,11 @@ abstract class AppLocalizations {
   /// **'Average damage'**
   String get ma775dcaa51;
 
-  /// Ссылка с pobb.in
+  /// Ссылка или код PoB
   ///
   /// In en, this message translates to:
-  /// **'Link from pobb.in'**
-  String get m926d57bfc2;
+  /// **'Link or PoB code'**
+  String get m57f9da1c61;
 
   /// Стабильных выпусков пока нет
   ///

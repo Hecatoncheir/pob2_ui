@@ -282,6 +282,12 @@ class AppLocalizationsRu extends AppLocalizations {
   String get mbce24a2108 => 'Введите название';
 
   @override
+  String get m3904114504 => 'Введите ссылку на сборку PoE 2 с poe.ninja.';
+
+  @override
+  String get mdb6ccff07b => 'Введите ссылку на сборку с pobb.in или poe.ninja.';
+
+  @override
   String get ma520dea087 => 'Введите ссылку на сборку с pobb.in.';
 
   @override
@@ -1023,7 +1029,9 @@ class AppLocalizationsRu extends AppLocalizations {
   }
 
   @override
-  String get m6d9965924b => 'Не удалось загрузить сборку с pobb.in.';
+  String m2a6db48354(String p0) {
+    return 'Не удалось загрузить сборку с $p0.';
+  }
 
   @override
   String get m6f37ba2ab7 => 'Не удалось закрыть PoB.';
@@ -1048,6 +1056,10 @@ class AppLocalizationsRu extends AppLocalizations {
   String m8644bfa547(String p0) {
     return 'Не удалось отключить прежний редактор MCP: $p0';
   }
+
+  @override
+  String get m8f403e0fea =>
+      'Не удалось открыть браузер. Откройте ссылку вручную.';
 
   @override
   String m725605a944(String p0) {
@@ -1111,6 +1123,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get m33ea6a4505 => 'Не удалось проверить профиль.';
+
+  @override
+  String get m7cde69fd21 => 'Не удалось прочитать буфер обмена.';
 
   @override
   String mfdddf71553(String p0) {
@@ -1316,6 +1331,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get md72a4c2675 => 'Нужна стабильная версия вида 0.2.0';
 
   @override
+  String get m92782507e5 => 'Нужна страница персонажа poe.ninja.';
+
+  @override
   String get m83e9fd7c8a => 'Оберег I';
 
   @override
@@ -1448,6 +1466,10 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m3e95800065 => 'Отключено';
 
   @override
+  String get m654046a00d =>
+      'Откройте персонажа на poe.ninja, нажмите Copy PoB code и вставьте код в PoB II.';
+
+  @override
   String get mea1f408246 => 'Открыть';
 
   @override
@@ -1455,6 +1477,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get m38ec738ed2 => 'Открыть XML из PoB';
+
+  @override
+  String get m12ae4659d0 => 'Открыть poe.ninja';
 
   @override
   String get m589c35aaa6 => 'Открыть и рассчитать';
@@ -2019,7 +2044,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get maa7d8fe68c => 'С каким этапом сравнить?';
 
   @override
-  String get m64d0c7f0a2 => 'Сайт pobb.in не ответил вовремя.';
+  String m389de358a7(String p0) {
+    return 'Сайт $p0 не ответил вовремя.';
+  }
 
   @override
   String get m49db3482db => 'Самоцветы';
@@ -2282,7 +2309,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get ma775dcaa51 => 'Средний урон';
 
   @override
-  String get m926d57bfc2 => 'Ссылка с pobb.in';
+  String get m57f9da1c61 => 'Ссылка или код PoB';
 
   @override
   String get m91d6208508 => 'Стабильных выпусков пока нет';

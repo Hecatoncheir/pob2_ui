@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:pob2_ui/data/pob_share_links.dart';
+import 'package:pob2_ui/domain/build_import_link.dart';
 
 void main() {
   late HttpServer server;
@@ -47,6 +48,30 @@ void main() {
     ]) {
       await expectLater(links.download(link), throwsFormatException);
     }
+    expect(requests, isEmpty);
+  });
+
+  test('Код poe.ninja загружается по публичной ссылке экспорта PoB', () async {
+    expect(
+      await links.download('https://poe.ninja/poe2/pob/150d6?view=tree'),
+      'TEST_CODE',
+    );
+    expect(requests, [Uri.parse('/poe2/pob/raw/150d6')]);
+  });
+
+  test('Для профиля не вызывается внутренний API poe.ninja', () async {
+    await expectLater(
+      links.download(
+        'https://poe.ninja/poe2/profile/Example-1234/standard/character/ExampleCharacter',
+      ),
+      throwsA(
+        isA<FormatException>().having(
+          (error) => error.message,
+          'инструкция экспорта',
+          poeNinjaExportHint,
+        ),
+      ),
+    );
     expect(requests, isEmpty);
   });
 

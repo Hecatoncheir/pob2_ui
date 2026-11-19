@@ -465,6 +465,16 @@
     "description": "Введите название",
     "placeholders": {}
   },
+  "m3904114504": "Enter a PoE 2 build link from poe.ninja.",
+  "@m3904114504": {
+    "description": "Введите ссылку на сборку PoE 2 с poe.ninja.",
+    "placeholders": {}
+  },
+  "mdb6ccff07b": "Enter a build link from pobb.in or poe.ninja.",
+  "@mdb6ccff07b": {
+    "description": "Введите ссылку на сборку с pobb.in или poe.ninja.",
+    "placeholders": {}
+  },
   "ma520dea087": "Enter a build link from pobb.in.",
   "@ma520dea087": {
     "description": "Введите ссылку на сборку с pobb.in.",
@@ -1687,10 +1697,14 @@
       }
     }
   },
-  "m6d9965924b": "Could not download the build from pobb.in.",
-  "@m6d9965924b": {
-    "description": "Не удалось загрузить сборку с pobb.in.",
-    "placeholders": {}
+  "m2a6db48354": "Could not download the build from {p0}.",
+  "@m2a6db48354": {
+    "description": "Не удалось загрузить сборку с {p0}.",
+    "placeholders": {
+      "p0": {
+        "type": "String"
+      }
+    }
   },
   "m6f37ba2ab7": "Could not close PoB.",
   "@m6f37ba2ab7": {
@@ -1733,6 +1747,11 @@
         "type": "String"
       }
     }
+  },
+  "m8f403e0fea": "Could not open the browser. Open the link manually.",
+  "@m8f403e0fea": {
+    "description": "Не удалось открыть браузер. Откройте ссылку вручную.",
+    "placeholders": {}
   },
   "m725605a944": "Failed to open browser: {p0}",
   "@m725605a944": {
@@ -1843,6 +1862,11 @@
   "m33ea6a4505": "Failed to verify profile.",
   "@m33ea6a4505": {
     "description": "Не удалось проверить профиль.",
+    "placeholders": {}
+  },
+  "m7cde69fd21": "Could not read the clipboard.",
+  "@m7cde69fd21": {
+    "description": "Не удалось прочитать буфер обмена.",
     "placeholders": {}
   },
   "mfdddf71553": "Failed to read images: {p0}",
@@ -2185,6 +2209,11 @@
     "description": "Нужна стабильная версия вида 0.2.0",
     "placeholders": {}
   },
+  "m92782507e5": "A poe.ninja character page is required.",
+  "@m92782507e5": {
+    "description": "Нужна страница персонажа poe.ninja.",
+    "placeholders": {}
+  },
   "m83e9fd7c8a": "Amulet I",
   "@m83e9fd7c8a": {
     "description": "Оберег I",
@@ -2399,6 +2428,11 @@
     "description": "Отключено",
     "placeholders": {}
   },
+  "m654046a00d": "Open the character on poe.ninja, select Copy PoB code, then paste the code into PoB II.",
+  "@m654046a00d": {
+    "description": "Откройте персонажа на poe.ninja, нажмите Copy PoB code и вставьте код в PoB II.",
+    "placeholders": {}
+  },
   "mea1f408246": "Open",
   "@mea1f408246": {
     "description": "Открыть",
@@ -2412,6 +2446,11 @@
   "m38ec738ed2": "Open XML from PoB",
   "@m38ec738ed2": {
     "description": "Открыть XML из PoB",
+    "placeholders": {}
+  },
+  "m12ae4659d0": "Open poe.ninja",
+  "@m12ae4659d0": {
+    "description": "Открыть poe.ninja",
     "placeholders": {}
   },
   "m589c35aaa6": "Open and calculate",
@@ -3359,10 +3398,14 @@
     "description": "С каким этапом сравнить?",
     "placeholders": {}
   },
-  "m64d0c7f0a2": "The pobb.in site did not respond on time.",
-  "@m64d0c7f0a2": {
-    "description": "Сайт pobb.in не ответил вовремя.",
-    "placeholders": {}
+  "m389de358a7": "The {p0} site did not respond on time.",
+  "@m389de358a7": {
+    "description": "Сайт {p0} не ответил вовремя.",
+    "placeholders": {
+      "p0": {
+        "type": "String"
+      }
+    }
   },
   "m49db3482db": "Jewels",
   "@m49db3482db": {
@@ -3786,9 +3829,9 @@
     "description": "Средний урон",
     "placeholders": {}
   },
-  "m926d57bfc2": "Link from pobb.in",
-  "@m926d57bfc2": {
-    "description": "Ссылка с pobb.in",
+  "m57f9da1c61": "Link or PoB code",
+  "@m57f9da1c61": {
+    "description": "Ссылка или код PoB",
     "placeholders": {}
   },
   "m91d6208508": "No stable releases yet",

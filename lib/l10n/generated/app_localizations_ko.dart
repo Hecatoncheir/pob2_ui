@@ -278,6 +278,12 @@ class AppLocalizationsKo extends AppLocalizations {
   String get mbce24a2108 => '이름을 입력하세요';
 
   @override
+  String get m3904114504 => 'poe.ninja의 PoE 2 빌드 링크를 입력하세요.';
+
+  @override
+  String get mdb6ccff07b => 'pobb.in 또는 poe.ninja의 빌드 링크를 입력하세요.';
+
+  @override
   String get ma520dea087 => 'pobb.in 빌드 링크를 입력하세요.';
 
   @override
@@ -1002,7 +1008,9 @@ class AppLocalizationsKo extends AppLocalizations {
   }
 
   @override
-  String get m6d9965924b => 'pobb.in에서 빌드를 다운로드하지 못했습니다.';
+  String m2a6db48354(String p0) {
+    return '$p0에서 빌드를 다운로드하지 못했습니다.';
+  }
 
   @override
   String get m6f37ba2ab7 => 'PoB를 닫을 수 없습니다.';
@@ -1027,6 +1035,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String m8644bfa547(String p0) {
     return '이전 MCP 편집기를 비활성화하지 못했습니다: $p0';
   }
+
+  @override
+  String get m8f403e0fea => '브라우저를 열지 못했습니다. 링크를 직접 여세요.';
 
   @override
   String m725605a944(String p0) {
@@ -1090,6 +1101,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m33ea6a4505 => '프로필을 확인하지 못했습니다.';
+
+  @override
+  String get m7cde69fd21 => '클립보드를 읽지 못했습니다.';
 
   @override
   String mfdddf71553(String p0) {
@@ -1294,6 +1308,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get md72a4c2675 => '0.2.0과 같은 안정적인 버전이 필요합니다.';
 
   @override
+  String get m92782507e5 => 'poe.ninja 캐릭터 페이지가 필요합니다.';
+
+  @override
   String get m83e9fd7c8a => '부적 I';
 
   @override
@@ -1423,6 +1440,10 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m3e95800065 => '비활성화';
 
   @override
+  String get m654046a00d =>
+      'poe.ninja에서 캐릭터를 열고 Copy PoB code를 선택한 다음 PoB II에 코드를 붙여넣으세요.';
+
+  @override
   String get mea1f408246 => '열기';
 
   @override
@@ -1430,6 +1451,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m38ec738ed2 => 'PoB에서 XML 열기';
+
+  @override
+  String get m12ae4659d0 => 'poe.ninja 열기';
 
   @override
   String get m589c35aaa6 => '열기 및 계산';
@@ -1986,7 +2010,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get maa7d8fe68c => '어느 단계와 비교할까요?';
 
   @override
-  String get m64d0c7f0a2 => 'pobb.in 사이트가 제 시간에 응답하지 않았습니다.';
+  String m389de358a7(String p0) {
+    return '$p0 사이트가 제시간에 응답하지 않았습니다.';
+  }
 
   @override
   String get m49db3482db => '주얼';
@@ -2244,7 +2270,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get ma775dcaa51 => '평균 데미지';
 
   @override
-  String get m926d57bfc2 => 'pobb.in의 링크';
+  String get m57f9da1c61 => '링크 또는 PoB 코드';
 
   @override
   String get m91d6208508 => '아직 안정적인 릴리스가 없습니다.';

@@ -277,6 +277,12 @@ class AppLocalizationsZh extends AppLocalizations {
   String get mbce24a2108 => '輸入名稱';
 
   @override
+  String get m3904114504 => '請輸入 poe.ninja 的 PoE 2 流派連結。';
+
+  @override
+  String get mdb6ccff07b => '請輸入 pobb.in 或 poe.ninja 的流派連結。';
+
+  @override
   String get ma520dea087 => '請輸入 pobb.in 的流派連結。';
 
   @override
@@ -999,7 +1005,9 @@ class AppLocalizationsZh extends AppLocalizations {
   }
 
   @override
-  String get m6d9965924b => '無法從 pobb.in 下載流派。';
+  String m2a6db48354(String p0) {
+    return '無法從 $p0 下載流派。';
+  }
 
   @override
   String get m6f37ba2ab7 => '無法關閉 PoB。';
@@ -1024,6 +1032,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String m8644bfa547(String p0) {
     return '無法停用先前的 MCP 編輯器：$p0';
   }
+
+  @override
+  String get m8f403e0fea => '無法開啟瀏覽器，請手動開啟連結。';
 
   @override
   String m725605a944(String p0) {
@@ -1087,6 +1098,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m33ea6a4505 => '無法驗證設定檔。';
+
+  @override
+  String get m7cde69fd21 => '無法讀取剪貼簿。';
 
   @override
   String mfdddf71553(String p0) {
@@ -1291,6 +1305,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get md72a4c2675 => '我們需要一個像0.2.0這樣的穩定版本';
 
   @override
+  String get m92782507e5 => '需要 poe.ninja 的角色頁面。';
+
+  @override
   String get m83e9fd7c8a => '護身符 I';
 
   @override
@@ -1419,6 +1436,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m3e95800065 => '已停用';
 
   @override
+  String get m654046a00d => '在 poe.ninja 開啟角色，點選 Copy PoB code，再將代碼貼到 PoB II。';
+
+  @override
   String get mea1f408246 => '打開';
 
   @override
@@ -1426,6 +1446,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m38ec738ed2 => '從 PoB 開啟 XML';
+
+  @override
+  String get m12ae4659d0 => '開啟 poe.ninja';
 
   @override
   String get m589c35aaa6 => '開啟並計算';
@@ -1982,7 +2005,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get maa7d8fe68c => '要和哪個階段比較？';
 
   @override
-  String get m64d0c7f0a2 => 'pobb.in 網站沒有及時回覆。';
+  String m389de358a7(String p0) {
+    return '網站 $p0 未及時回應。';
+  }
 
   @override
   String get m49db3482db => '珠寶';
@@ -2237,7 +2262,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get ma775dcaa51 => '平均傷害';
 
   @override
-  String get m926d57bfc2 => '來自 pobb.in 的鏈接';
+  String get m57f9da1c61 => '連結或 PoB 代碼';
 
   @override
   String get m91d6208508 => '尚無穩定版本';
@@ -2836,6 +2861,12 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get mbce24a2108 => '輸入名稱';
 
   @override
+  String get m3904114504 => '請輸入 poe.ninja 的 PoE 2 流派連結。';
+
+  @override
+  String get mdb6ccff07b => '請輸入 pobb.in 或 poe.ninja 的流派連結。';
+
+  @override
   String get ma520dea087 => '請輸入 pobb.in 的流派連結。';
 
   @override
@@ -3558,7 +3589,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   }
 
   @override
-  String get m6d9965924b => '無法從 pobb.in 下載流派。';
+  String m2a6db48354(String p0) {
+    return '無法從 $p0 下載流派。';
+  }
 
   @override
   String get m6f37ba2ab7 => '無法關閉 PoB。';
@@ -3583,6 +3616,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String m8644bfa547(String p0) {
     return '無法停用先前的 MCP 編輯器：$p0';
   }
+
+  @override
+  String get m8f403e0fea => '無法開啟瀏覽器，請手動開啟連結。';
 
   @override
   String m725605a944(String p0) {
@@ -3646,6 +3682,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m33ea6a4505 => '無法驗證設定檔。';
+
+  @override
+  String get m7cde69fd21 => '無法讀取剪貼簿。';
 
   @override
   String mfdddf71553(String p0) {
@@ -3850,6 +3889,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get md72a4c2675 => '我們需要一個像0.2.0這樣的穩定版本';
 
   @override
+  String get m92782507e5 => '需要 poe.ninja 的角色頁面。';
+
+  @override
   String get m83e9fd7c8a => '護身符 I';
 
   @override
@@ -3978,6 +4020,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m3e95800065 => '已停用';
 
   @override
+  String get m654046a00d => '在 poe.ninja 開啟角色，點選 Copy PoB code，再將代碼貼到 PoB II。';
+
+  @override
   String get mea1f408246 => '打開';
 
   @override
@@ -3985,6 +4030,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m38ec738ed2 => '從 PoB 開啟 XML';
+
+  @override
+  String get m12ae4659d0 => '開啟 poe.ninja';
 
   @override
   String get m589c35aaa6 => '開啟並計算';
@@ -4541,7 +4589,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get maa7d8fe68c => '要和哪個階段比較？';
 
   @override
-  String get m64d0c7f0a2 => 'pobb.in 網站沒有及時回覆。';
+  String m389de358a7(String p0) {
+    return '網站 $p0 未及時回應。';
+  }
 
   @override
   String get m49db3482db => '珠寶';
@@ -4796,7 +4846,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get ma775dcaa51 => '平均傷害';
 
   @override
-  String get m926d57bfc2 => '來自 pobb.in 的鏈接';
+  String get m57f9da1c61 => '連結或 PoB 代碼';
 
   @override
   String get m91d6208508 => '尚無穩定版本';

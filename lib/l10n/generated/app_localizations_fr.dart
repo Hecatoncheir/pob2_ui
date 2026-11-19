@@ -291,6 +291,13 @@ class AppLocalizationsFr extends AppLocalizations {
   String get mbce24a2108 => 'Entrez un nom';
 
   @override
+  String get m3904114504 => 'Saisissez un lien de build PoE 2 de poe.ninja.';
+
+  @override
+  String get mdb6ccff07b =>
+      'Saisissez un lien de build de pobb.in ou poe.ninja.';
+
+  @override
   String get ma520dea087 => 'Saisissez le lien d’un build sur pobb.in.';
 
   @override
@@ -1048,8 +1055,9 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get m6d9965924b =>
-      'Impossible de télécharger le build depuis pobb.in.';
+  String m2a6db48354(String p0) {
+    return 'Impossible de télécharger le build depuis $p0.';
+  }
 
   @override
   String get m6f37ba2ab7 => 'Impossible de fermer PoB.';
@@ -1075,6 +1083,10 @@ class AppLocalizationsFr extends AppLocalizations {
   String m8644bfa547(String p0) {
     return 'Impossible de désactiver l’ancien éditeur MCP : $p0';
   }
+
+  @override
+  String get m8f403e0fea =>
+      'Impossible d’ouvrir le navigateur. Ouvrez le lien manuellement.';
 
   @override
   String m725605a944(String p0) {
@@ -1138,6 +1150,9 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get m33ea6a4505 => 'Échec de la vérification du profil.';
+
+  @override
+  String get m7cde69fd21 => 'Impossible de lire le presse-papiers.';
 
   @override
   String mfdddf71553(String p0) {
@@ -1348,6 +1363,9 @@ class AppLocalizationsFr extends AppLocalizations {
       'Nous avons besoin d\'une version stable comme la 0.2.0';
 
   @override
+  String get m92782507e5 => 'Une page de personnage poe.ninja est requise.';
+
+  @override
   String get m83e9fd7c8a => 'Amulette I';
 
   @override
@@ -1482,6 +1500,10 @@ class AppLocalizationsFr extends AppLocalizations {
   String get m3e95800065 => 'Désactivé';
 
   @override
+  String get m654046a00d =>
+      'Ouvrez le personnage sur poe.ninja, cliquez sur Copy PoB code, puis collez le code dans PoB II.';
+
+  @override
   String get mea1f408246 => 'Ouvrir';
 
   @override
@@ -1489,6 +1511,9 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get m38ec738ed2 => 'Ouvrir XML depuis PoB';
+
+  @override
+  String get m12ae4659d0 => 'Ouvrir poe.ninja';
 
   @override
   String get m589c35aaa6 => 'Ouvrir et calculer';
@@ -2060,7 +2085,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get maa7d8fe68c => 'Avec quelle étape comparer ?';
 
   @override
-  String get m64d0c7f0a2 => 'Le site pobb.in n\'a pas répondu à temps.';
+  String m389de358a7(String p0) {
+    return 'Le site $p0 n’a pas répondu à temps.';
+  }
 
   @override
   String get m49db3482db => 'Joyaux';
@@ -2328,7 +2355,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get ma775dcaa51 => 'Dégâts moyens';
 
   @override
-  String get m926d57bfc2 => 'Lien depuis pobb.in';
+  String get m57f9da1c61 => 'Lien ou code PoB';
 
   @override
   String get m91d6208508 => 'Pas encore de version stable';

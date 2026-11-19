@@ -9,6 +9,7 @@ import 'core/spark_art.dart';
 import 'core/spark_theme.dart';
 import 'core/ui_translation.dart';
 import 'workshop_cubit.dart';
+import 'pob_link_dialog.dart';
 
 Future<void> showNewBuild(BuildContext context, WorkshopCubit model) =>
     sparkDialog<void>(context, _NewBuildDialog(model));
@@ -29,54 +30,16 @@ Future<void> showPobLinkImport(
   BuildContext context,
   WorkshopCubit model,
 ) async {
-  final link = await sparkDialog<String>(context, const _PobLinkDialog());
-  if (link != null) await model.importShareLink(link);
-}
-
-class _PobLinkDialog extends StatefulWidget {
-  const _PobLinkDialog();
-
-  @override
-  State<_PobLinkDialog> createState() => _PobLinkDialogState();
-}
-
-class _PobLinkDialogState extends State<_PobLinkDialog> {
-  final _link = TextEditingController();
-
-  @override
-  void dispose() {
-    _link.dispose();
-    super.dispose();
-  }
-
-  void _submit() => Navigator.pop(context, _link.text);
-
-  @override
-  Widget build(BuildContext context) => AlertDialog(
-    title: const AppText('Импортировать по ссылке'),
-    content: SizedBox(
-      width: 380,
-      child: TextField(
-        key: const Key('pob-link-input'),
-        controller: _link,
-        autofocus: true,
-        keyboardType: TextInputType.url,
-        decoration: const InputDecoration(
-          label: AppText('Ссылка с pobb.in'),
-          hintText: 'https://pobb.in/…',
-        ),
-        onSubmitted: (_) => _submit(),
-      ),
-    ),
-    actions: [
-      const DialogCloseButton(label: 'Отмена'),
-      FilledButton(
-        key: const Key('pob-link-submit'),
-        onPressed: _submit,
-        child: const AppText('Открыть и рассчитать'),
-      ),
-    ],
+  final choice = await sparkDialog<PobImportChoice>(
+    context,
+    const PobLinkDialog(),
   );
+  if (choice == null) return;
+  if (choice.code) {
+    await model.importShareCode(choice.text);
+  } else {
+    await model.importShareLink(choice.text);
+  }
 }
 
 class _NewBuildDialog extends StatefulWidget {

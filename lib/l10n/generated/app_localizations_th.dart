@@ -281,6 +281,12 @@ class AppLocalizationsTh extends AppLocalizations {
   String get mbce24a2108 => 'ป้อนชื่อ';
 
   @override
+  String get m3904114504 => 'ป้อนลิงก์บิลด์ PoE 2 จาก poe.ninja';
+
+  @override
+  String get mdb6ccff07b => 'ป้อนลิงก์บิลด์จาก pobb.in หรือ poe.ninja';
+
+  @override
   String get ma520dea087 => 'ป้อนลิงก์บิลด์จาก pobb.in';
 
   @override
@@ -1013,7 +1019,9 @@ class AppLocalizationsTh extends AppLocalizations {
   }
 
   @override
-  String get m6d9965924b => 'ดาวน์โหลดบิลด์จาก pobb.in ไม่สำเร็จ';
+  String m2a6db48354(String p0) {
+    return 'ดาวน์โหลดบิลด์จาก $p0 ไม่สำเร็จ';
+  }
 
   @override
   String get m6f37ba2ab7 => 'ไม่สามารถปิด PoB ได้';
@@ -1038,6 +1046,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String m8644bfa547(String p0) {
     return 'ปิดใช้งานตัวแก้ไข MCP เดิมไม่สำเร็จ: $p0';
   }
+
+  @override
+  String get m8f403e0fea => 'เปิดเบราว์เซอร์ไม่สำเร็จ โปรดเปิดลิงก์ด้วยตนเอง';
 
   @override
   String m725605a944(String p0) {
@@ -1101,6 +1112,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m33ea6a4505 => 'ไม่สามารถตรวจสอบโปรไฟล์ได้';
+
+  @override
+  String get m7cde69fd21 => 'อ่านคลิปบอร์ดไม่สำเร็จ';
 
   @override
   String mfdddf71553(String p0) {
@@ -1305,6 +1319,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get md72a4c2675 => 'เราต้องการเวอร์ชันที่เสถียรเช่น 0.2.0';
 
   @override
+  String get m92782507e5 => 'ต้องใช้หน้าตัวละครของ poe.ninja';
+
+  @override
   String get m83e9fd7c8a => 'พระเครื่อง I';
 
   @override
@@ -1436,6 +1453,10 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m3e95800065 => 'ปิดใช้งาน';
 
   @override
+  String get m654046a00d =>
+      'เปิดตัวละครบน poe.ninja กด Copy PoB code แล้ววางโค้ดใน PoB II';
+
+  @override
   String get mea1f408246 => 'เปิด';
 
   @override
@@ -1443,6 +1464,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m38ec738ed2 => 'เปิด XML จาก PoB';
+
+  @override
+  String get m12ae4659d0 => 'เปิด poe.ninja';
 
   @override
   String get m589c35aaa6 => 'เปิดและคำนวณ';
@@ -2001,7 +2025,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get maa7d8fe68c => 'เปรียบเทียบกับขั้นไหน?';
 
   @override
-  String get m64d0c7f0a2 => 'ไซต์ pobb.in ไม่ตอบสนองตรงเวลา';
+  String m389de358a7(String p0) {
+    return 'เว็บไซต์ $p0 ไม่ตอบสนองภายในเวลาที่กำหนด';
+  }
 
   @override
   String get m49db3482db => 'จิวเวล';
@@ -2262,7 +2288,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get ma775dcaa51 => 'ความเสียหายโดยเฉลี่ย';
 
   @override
-  String get m926d57bfc2 => 'ลิงค์จาก pobb.in';
+  String get m57f9da1c61 => 'ลิงก์หรือโค้ด PoB';
 
   @override
   String get m91d6208508 => 'ยังไม่มีการเผยแพร่ที่เสถียร';

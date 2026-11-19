@@ -6,6 +6,7 @@ import '../data/atomic_text_file.dart';
 import '../data/mcp_editor_gateway.dart';
 import '../data/pob_share_code.dart';
 import '../domain/build_report.dart';
+import '../domain/build_import_link.dart';
 import '../domain/component.dart';
 import '../domain/tree_progression.dart';
 import 'workshop_cubit.dart';
@@ -188,7 +189,7 @@ class McpEditorCommands {
       case 'import_code':
         await model.importShareCode(mcpRequiredText(args, 'text'));
       case 'import_link':
-        await model.importShareLink(mcpRequiredText(args, 'text'));
+        return _importLink(args);
       case 'export_xml':
         return {'xml': await _export()};
       case 'export_code':
@@ -198,6 +199,29 @@ class McpEditorCommands {
       default:
         _invalid();
     }
+    _checkError();
+    return libraryState();
+  }
+
+  Future<JsonMap> _importLink(JsonMap args) async {
+    final text = mcpRequiredText(args, 'text');
+    final BuildImportLink link;
+    try {
+      link = BuildImportLink.parse(text);
+    } on FormatException catch (error) {
+      throw McpEditorFault('INVALID_ARGUMENTS', error.message);
+    }
+    if (link.needsExport) {
+      return {
+        ...libraryState(),
+        'imported': false,
+        'requires': 'pob_code',
+        'sourceUrl': link.source.toString(),
+        'message': poeNinjaExportHint,
+        'nextAction': 'import_code',
+      };
+    }
+    await model.importShareLink(text);
     _checkError();
     return libraryState();
   }
