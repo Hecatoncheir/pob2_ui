@@ -169,7 +169,7 @@ def verify_reopened(executable, data, builds, environment, saved):
     assert files[0].read_bytes() == original, 'Повторный запуск изменил XML'
 
 
-def check_build(executable, base, environment, target, *, components, archives, previous, verify_link):
+def check_build(executable, base, environment, target, *, components, archives, previous, verify_link, package):
     data = base / 'build-profile'
     builds = prepare_profile(data, components, archives)
     env = dict(environment, POB2_UI_HOME=str(data), PYTHONDONTWRITEBYTECODE='1')
@@ -186,7 +186,7 @@ def check_build(executable, base, environment, target, *, components, archives, 
     verify_reopened(executable, data, builds, env, saved)
     print('Установленный PoB II: расчёт Lua, XML и заметки восстановлены без HTTP после перезапуска')
     if previous is not None:
-        check_previous(target, previous, executable, base, env, manifest, verify_link)
+        check_previous(target, previous, executable, base, env, manifest, verify_link, package)
 
 
 def verify_archive_reuse(data, target):
@@ -207,7 +207,23 @@ def previous_executable(target, package, base, environment):
     return base / 'versions' / PREVIOUS_VERSION / 'pob2_ui'
 
 
-def check_previous(target, package, executable, base, environment, components, verify_link):
+def verify_launcher_upgrade(target, old, executable, package, environment):
+    if target == 'macos-arm64':
+        return
+    install = old.parents[2]
+    if target == 'windows-x64':
+        run(package, '/VERYSILENT', '/SUPPRESSMSGBOXES', '/NORESTART', '/SP-',
+            '/DIR=' + str(install), env=environment)
+        name = 'pob2_ui.exe'
+    else:
+        run('/bin/sh', package, '--prefix', install, env=environment)
+        name = 'pob2-ui'
+    expected = executable.parents[2] / name
+    assert (install / name).read_bytes() == expected.read_bytes(), 'Установщик оставил старый загрузчик'
+    print('Установщик обновил прежний корневой загрузчик')
+
+
+def check_previous(target, package, executable, base, environment, components, verify_link, current_package):
     data = base / f'v{PREVIOUS_VERSION}-profile'
     builds = prepare_profile(data, components)
     env = dict(environment, POB2_UI_HOME=str(data),
@@ -216,6 +232,7 @@ def check_previous(target, package, executable, base, environment, components, v
     setup_env = dict(env, PATH=os.environ.get('PATH', ''))
     old = previous_executable(target, package, base / f'v{PREVIOUS_VERSION}-installation', setup_env)
     saved = run_build_check(old, data, env, 'save')
+    verify_launcher_upgrade(target, old, executable, current_package, setup_env)
     prepare_cleanup_profile(data)
     before = {file.name: file.read_bytes() for file in builds.glob('*.xml')}
     assert run_build_check(executable, data, env, 'cleanup') == saved
@@ -298,8 +315,9 @@ def check(target, *, build_check=False, components=None, archives=None, package=
     number = version()
     if previous is not None and not previous.is_file():
         raise FileNotFoundError(previous)
-    options = dict(components=components, archives=archives, previous=previous, verify_link=verify_link)
     package = package or ROOT / 'build/packages' / filename(number, target)
+    options = dict(components=components, archives=archives, previous=previous,
+                   verify_link=verify_link, package=package)
     with tempfile.TemporaryDirectory(prefix='pob2-install-check-') as temporary:
         base = Path(temporary).resolve()
         install = base / 'PoB II'
@@ -340,15 +358,23 @@ def check(target, *, build_check=False, components=None, archives=None, package=
         assert not (install / 'pending-version').exists()
         assert '999.0.2' in (install / 'update.log').read_text(encoding='utf-8')
         stop_versions(install, environment)
-        # Проверяем протокол переключения на том же настоящем Flutter-бандле.
+        # Загрузчик должен найти новую версию без pending-version.
         candidate = '999.0.1'
         shutil.copytree(install / 'versions' / number, install / 'versions' / candidate, symlinks=True)
-        (install / 'pending-version').write_text(candidate)
         run(install / binary, env=environment)
         assert (install / 'active-version').read_text().strip() == candidate
         assert (install / 'previous-version').read_text().strip() == number
         stop_versions(install, environment)
+        # Устаревший маркер не должен понизить уже работающую новую версию.
+        (install / 'pending-version').write_text(number)
+        run(install / binary, env=environment)
+        assert (install / 'active-version').read_text().strip() == candidate
+        assert not (install / 'pending-version').exists()
+        stop_versions(install, environment)
         run(install / binary, '--rollback', env=environment)
+        assert (install / 'active-version').read_text().strip() == number
+        stop_versions(install, environment)
+        run(install / binary, env=environment)
         assert (install / 'active-version').read_text().strip() == number
         stop_versions(install, environment)
         if build_check:

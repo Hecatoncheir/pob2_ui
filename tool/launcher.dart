@@ -3,6 +3,7 @@ import 'dart:io';
 import 'dart:math';
 
 import '../lib/data/installation_store.dart';
+import '../lib/data/launcher_versions.dart';
 import '../lib/domain/app_info.dart';
 import '../lib/domain/app_release.dart';
 
@@ -32,7 +33,11 @@ Future<void> main(List<String> arguments) async {
 Future<String?> readVersion(Directory root, String name) async {
   final file = File.fromUri(root.uri.resolve(name));
   if (!await file.exists()) return null;
-  return '${AppVersion.parse((await file.readAsString()).trim())}';
+  try {
+    return '${AppVersion.parse((await file.readAsString()).trim())}';
+  } on FormatException {
+    return null;
+  }
 }
 
 Future<void> writeVersion(Directory root, String name, String version) async {
@@ -46,8 +51,7 @@ Future<Process> startVersion(
   String version,
   List<String> arguments,
 ) async {
-  final name = Platform.isWindows ? 'pob2_ui.exe' : 'pob2_ui';
-  final executable = File.fromUri(root.uri.resolve('versions/$version/$name'));
+  final executable = LauncherVersions(root).executable(version);
   if (!await executable.exists())
     throw const FileSystemException('Нет файлов выбранной версии');
   return Process.start(
@@ -59,19 +63,27 @@ Future<Process> startVersion(
 }
 
 Future<void> launch(Directory root, List<String> arguments) async {
-  final active = await chooseActive(
-    root,
-    rollback: arguments.contains('--rollback'),
-  );
-  final pending = await readPending(root);
+  final active = await readVersion(root, 'active-version');
   final forwarded = arguments.where((value) => value != '--rollback').toList();
-  if (pending == null || pending == active) {
-    if (active == null) throw const FileSystemException('Нет активной версии');
-    await startVersion(root, active, forwarded);
+  if (arguments.contains('--rollback')) {
+    await rollbackVersion(root, active, forwarded);
     return;
   }
-  await tryCandidate(root, pending, active, forwarded);
+  final pending = await readPending(root);
+  final versions = LauncherVersions(root);
+  for (final version in await versions.candidates(
+    active: active,
+    pending: pending,
+  )) {
+    if (await launchVersion(root, version, active, forwarded)) {
+      if (await readPending(root) == pending) await clearPending(root);
+      return;
+    }
+    await versions.reject(version);
+    await recordFailure(root, version);
+  }
   if (await readPending(root) == pending) await clearPending(root);
+  throw const FileSystemException('Нет исправной установленной версии');
 }
 
 Future<void> clearPending(Directory root) async {
@@ -79,28 +91,47 @@ Future<void> clearPending(Directory root) async {
   if (await file.exists()) await file.delete();
 }
 
-Future<String?> readPending(Directory root) async {
+Future<String?> readPending(Directory root) =>
+    readVersion(root, 'pending-version');
+
+Future<bool> launchVersion(
+  Directory root,
+  String version,
+  String? active,
+  List<String> arguments,
+) async {
+  if (version != active) return tryCandidate(root, version, active, arguments);
   try {
-    return await readVersion(root, 'pending-version');
-  } on FormatException {
-    await clearPending(root);
-    return null;
+    await startVersion(root, version, arguments);
+    return true;
+  } on ProcessException {
+    return false;
+  } on FileSystemException {
+    return false;
   }
 }
 
-Future<String?> chooseActive(Directory root, {required bool rollback}) async {
-  final active = await readVersion(root, 'active-version');
-  if (!rollback) return active;
+Future<void> rollbackVersion(
+  Directory root,
+  String? active,
+  List<String> arguments,
+) async {
   final previous = await readVersion(root, 'previous-version');
   if (previous == null)
     throw const FileSystemException('Нет предыдущей версии');
-  if (active != null) await writeVersion(root, 'previous-version', active);
-  await writeVersion(root, 'active-version', previous);
+  final versions = LauncherVersions(root);
+  if (await tryCandidate(root, previous, active, arguments)) {
+    if (active != null && active != previous) await versions.reject(active);
+  } else {
+    await versions.reject(previous);
+    await recordFailure(root, previous);
+    if (active == null) throw const FileSystemException('Нет активной версии');
+    await startVersion(root, active, arguments);
+  }
   await clearPending(root);
-  return previous;
 }
 
-Future<void> tryCandidate(
+Future<bool> tryCandidate(
   Directory root,
   String pending,
   String? active,
@@ -119,14 +150,20 @@ Future<void> tryCandidate(
     '--pob-update-token',
     token,
   ], health);
-  if (healthy) {
-    if (active != null) await writeVersion(root, 'previous-version', active);
-    await writeVersion(root, 'active-version', pending);
-    await health.delete();
-  } else {
+  if (!healthy) {
     if (process != null) Process.killPid(process.pid);
-    await recover(root, pending, active, arguments);
+    return false;
   }
+  if (active != null && active != pending)
+    await writeVersion(root, 'previous-version', active);
+  await writeVersion(root, 'active-version', pending);
+  await LauncherVersions(root).allow(pending);
+  try {
+    await health.delete();
+  } on FileSystemException {
+    // Подтверждение может быть ещё открыто завершившим запись Flutter-процессом.
+  }
+  return true;
 }
 
 Future<({Process? process, bool healthy})> probeCandidate(
@@ -146,21 +183,11 @@ Future<({Process? process, bool healthy})> probeCandidate(
   }
 }
 
-Future<void> recover(
-  Directory root,
-  String pending,
-  String? active,
-  List<String> arguments,
-) async {
+Future<void> recordFailure(Directory root, String version) async {
   await File.fromUri(root.uri.resolve('update.log')).writeAsString(
-    'Версия $pending не подтвердила запуск; восстановлена $active.\n',
+    'Версия $version не подтвердила запуск; проверяется следующая установленная.\n',
     mode: FileMode.append,
   );
-  if (active == null) {
-    exitCode = 1;
-    return;
-  }
-  await startVersion(root, active, arguments);
 }
 
 Future<bool> waitForHealth(File file) async {

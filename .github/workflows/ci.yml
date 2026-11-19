@@ -154,6 +154,9 @@ jobs:
         run: flutter build ${{ matrix.platform }} --release
       - name: Собрать установщик
         run: python tool/release.py --package ${{ matrix.target }}
+      - name: Проверить выбор установленной версии загрузчиком
+        if: runner.os != 'macOS'
+        run: python tool/check_launcher.py --target ${{ matrix.target }}
       - name: Проверить компоненты с настоящим Lua
         if: inputs.cold_install != true
         shell: bash

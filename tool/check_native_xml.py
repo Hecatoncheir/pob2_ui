@@ -52,13 +52,17 @@ class WindowsUi:
         self.user.keybd_event(code, scan, 2 if released else 0, 0)
 
     def focus(self, window):
-        self.user.ShowWindow(window, 9)
-        self.user.SetForegroundWindow(window)
-        if self.user.GetForegroundWindow() != window:
-            self._attach_focus(window)
-        time.sleep(.2)
-        if self.user.GetForegroundWindow() != window:
-            raise RuntimeError('Windows не предоставила тесту фокус окна')
+        for _ in range(15):
+            if self.process.poll() is not None:
+                raise RuntimeError(f'Приложение завершилось с кодом {self.process.returncode}')
+            self.user.ShowWindow(window, 9)
+            self.user.SetForegroundWindow(window)
+            if self.user.GetForegroundWindow() != window:
+                self._attach_focus(window)
+            time.sleep(.2)
+            if self.user.GetForegroundWindow() == window:
+                return
+        raise RuntimeError('Windows не предоставила тесту фокус окна')
 
     def _attach_focus(self, window):
         current = C.WinDLL('kernel32').GetCurrentThreadId()

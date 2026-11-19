@@ -39,7 +39,7 @@ Name: english; MessagesFile: compiler:Default.isl
 
 [Files]
 Source: "{#BundleDir}\*"; DestDir: "{app}\versions\{#AppVersion}"; Flags: recursesubdirs createallsubdirs onlyifdoesntexist
-Source: "{#LauncherFile}"; DestDir: "{app}"; DestName: "pob2_ui.exe"; Flags: onlyifdoesntexist
+Source: "{#LauncherFile}"; DestDir: "{app}"; DestName: "pob2_ui.exe"; Flags: ignoreversion
 Source: "windows-marker.json"; DestDir: "{app}"; DestName: "pob2-install.json"; Flags: ignoreversion
 
 [Icons]
@@ -62,6 +62,40 @@ begin
     if CompareText(ParamStr(I), '/RELAUNCH') = 0 then Result := True;
 end;
 
+procedure RepairShortcut(const FileName: String);
+var Shell, Shortcut: Variant; Target, Prefix: String;
+begin
+  try
+    Shell := CreateOleObject('WScript.Shell');
+    Shortcut := Shell.CreateShortcut(FileName);
+    Target := ExpandFileName(Shortcut.TargetPath);
+    Prefix := AddBackslash(ExpandConstant('{app}')) + 'versions\';
+    if (Pos(Lowercase(Prefix), Lowercase(Target)) <> 1) or
+       (CompareText(ExtractFileName(Target), 'pob2_ui.exe') <> 0) then Exit;
+    Shortcut.TargetPath := ExpandConstant('{app}\pob2_ui.exe');
+    Shortcut.WorkingDirectory := ExpandConstant('{app}');
+    Shortcut.IconLocation := ExpandConstant('{app}\versions\{#AppVersion}\pob2_ui.exe,0');
+    Shortcut.Save;
+    Log('Ярлык переведён на загрузчик: ' + FileName);
+  except
+    Log('Не удалось обновить ярлык ' + FileName + ': ' + GetExceptionMessage);
+  end;
+end;
+
+procedure RepairShortcuts(const Directory: String);
+var Entry: TFindRec;
+begin
+  if not FindFirst(AddBackslash(Directory) + '*.lnk', Entry) then Exit;
+  try
+    repeat
+      if (Entry.Attributes and FILE_ATTRIBUTE_DIRECTORY) = 0 then
+        RepairShortcut(AddBackslash(Directory) + Entry.Name);
+    until not FindNext(Entry);
+  finally
+    FindClose(Entry);
+  end;
+end;
+
 procedure CurStepChanged(CurStep: TSetupStep);
 var Temporary, Target: String;
 begin
@@ -73,5 +107,9 @@ begin
     if FileExists(Target) then DeleteFile(Target);
     if not RenameFile(Temporary, Target) then
       RaiseException('Не удалось выбрать новую версию');
+    RepairShortcuts(ExpandConstant('{userdesktop}'));
+    RepairShortcuts(ExpandConstant('{userprograms}\PoB II'));
+    RepairShortcuts(ExpandConstant('{userappdata}\Microsoft\Internet Explorer\Quick Launch'));
+    RepairShortcuts(ExpandConstant('{userappdata}\Microsoft\Internet Explorer\Quick Launch\User Pinned\TaskBar'));
   end;
 end;
