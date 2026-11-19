@@ -22,13 +22,13 @@ PYTHON_ASSETS = {
     'linux-x64': ('x86_64-unknown-linux-gnu', 'c2ff2e97422f5d3896a16e0317fd212ba977bbf2688d93a6f7a03d817506bd30'),
 }
 MCP_WHEEL = (f'pob_poe2_mcp-{MCP_TAG[1:]}-py3-none-any.whl',
-             'd19a5d68050f56c7016476c98d9760ecfcb5b59b5d9ff777b514997329676d9e')
+             '29118cb0d9d26dbc14a9a5a38478bfa3eb51b85f675a02113a66038a7a6c6046')
 MCP_NATIVE = {
-    'macos-arm64': '4a97f8a6de4d8678aaef0fa1a8dedc1d54f7198c322be2fb7708cbd91405ce3c',
-    'linux-x64': 'b39cc1c980c3b92cd31f7cf40e5b16c02bf8a7b39d4cdce740849a998d596a7c',
+    'macos-arm64': '8ef6600d341a0d4789584b830341ca5d119313787d87bc24f8146b11d4bce675',
+    'linux-x64': '83edd562422707f8ec30d2fe43bc81487b748d9b5acef0fa48d15e5086d59162',
 }
 MCP_WINDOWS = ('pob-poe2-mcp-windows-x64.zip',
-               '4b7060f7596befe65161adcdf91c6647fe812c2274170c5440e72f4650c54f07')
+               '2007e1f52c2f968f242858d69ced1382a1e81276d021404c03e30ba8af4ca618')
 
 
 def digest(path):

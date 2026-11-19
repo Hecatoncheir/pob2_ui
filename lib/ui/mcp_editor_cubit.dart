@@ -70,6 +70,7 @@ class McpEditorCubit extends Cubit<McpEditorState> {
   bool _creating = false;
   bool remoteChanging = false;
   bool _executing = false;
+  int _uiChanges = 0;
   Future<void>? _jobFuture;
   JsonMap _job = const {'state': 'idle'};
   int _jobId = 0;
@@ -128,7 +129,8 @@ class McpEditorCubit extends Cubit<McpEditorState> {
   bool _matches(String? id) => canEnable && model.state.library.activeId == id;
 
   void checkBuild() {
-    if (!enabled || remoteChanging || _creating && canEnable) return;
+    if (!enabled || remoteChanging || _uiChanges > 0 || _creating && canEnable)
+      return;
     if (!_matches(_buildId)) unawaited(disable());
   }
 
@@ -185,10 +187,13 @@ class McpEditorCubit extends Cubit<McpEditorState> {
     int? revision,
   ) async {
     final appRead = mcpApplicationRead(tool, arguments);
-    _checkAccess(tool, appRead || _reads.contains(tool));
+    _checkAccess(tool, appRead || _reads.contains(tool), arguments);
     _syncRevision();
     if (tool == 'pob_editor_status') return _reply(_status());
     if (tool == 'pob_editor_job') return _reply(_job);
+    if (_uiInteraction(tool, arguments)) {
+      return _uiTool(tool, arguments, revision);
+    }
     if (_executing)
       throw const McpEditorFault('APP_BUSY', 'Выполняется другая команда MCP.');
     if (_background(tool, arguments)) {
@@ -222,6 +227,33 @@ class McpEditorCubit extends Cubit<McpEditorState> {
   bool _background(String tool, JsonMap args) =>
       tool == 'pob_editor_components' &&
       {'update', 'rollback', 'select_installed'}.contains(args['action']);
+
+  Future<JsonMap> _uiTool(String tool, JsonMap args, int? revision) async {
+    final read = mcpApplicationRead(tool, args);
+    if (!read) _checkRevision(revision, args['expectedRevision']);
+    final previousMcp = model.components.active[Component.mcp]?.directory;
+    if (!read) _uiChanges++;
+    try {
+      final result = await _application(tool, args);
+      if (!read) {
+        await _refreshConnectionCommand(previousMcp);
+        _buildId = model.state.library.activeId;
+        _revision++;
+      }
+      _syncRevision();
+      final image = result.remove('_image');
+      return {
+        ..._reply(result),
+        if (image is String)
+          'content': [
+            {'type': 'image', 'mimeType': 'image/png', 'data': image},
+          ],
+      };
+    } finally {
+      if (!read) _uiChanges--;
+      checkBuild();
+    }
+  }
 
   JsonMap _startJob(String tool, JsonMap args) {
     final previousMcp = model.components.active[Component.mcp]?.directory;
@@ -294,9 +326,9 @@ class McpEditorCubit extends Cubit<McpEditorState> {
     'enabled': enabled,
     'connectionCommand': state.command,
     'connected': model.engine.connected,
-    'busy': model.state.busy || _executing,
+    'busy': model.state.busy || _executing || _uiChanges > 0,
     'dialogOpen': model.modalOpen?.call() ?? false,
-    'canCloseDialog': permissionDialogCurrent?.call() ?? false,
+    'canCloseDialog': model.modalOpen?.call() ?? false,
     'activeBuild': model.state.library.activeId,
     'revision': _revision,
     'job': _job,
@@ -344,7 +376,13 @@ class McpEditorCubit extends Cubit<McpEditorState> {
       case 'doctor':
         await model.doctor();
       case 'close_dialog':
-        await _closePermissionDialog();
+        if (permissionDialogCurrent?.call() == true) {
+          await _closePermissionDialog();
+        } else if (uiAction case final action?) {
+          return action({'action': 'close_dialog', 'discard': args['discard']});
+        } else {
+          await _closePermissionDialog();
+        }
       case 'disable_access':
         return {'scheduled': 'disable_access'};
       case 'close' || 'restart':
@@ -455,7 +493,7 @@ class McpEditorCubit extends Cubit<McpEditorState> {
     }
   }
 
-  void _checkAccess(String tool, bool read) {
+  void _checkAccess(String tool, bool read, JsonMap arguments) {
     if (!enabled || !_matches(_buildId)) {
       throw const McpEditorFault(
         'EDITOR_DISABLED',
@@ -463,6 +501,7 @@ class McpEditorCubit extends Cubit<McpEditorState> {
       );
     }
     if (tool == 'pob_editor_status' || tool == 'pob_editor_job') return;
+    if (_uiInteraction(tool, arguments)) return;
     if (model.state.busy || (!read && _protectedDialog(tool))) {
       throw const McpEditorFault(
         'APP_BUSY',
@@ -470,6 +509,19 @@ class McpEditorCubit extends Cubit<McpEditorState> {
       );
     }
   }
+
+  bool _uiInteraction(String tool, JsonMap args) => switch (tool) {
+    'pob_editor_ui' => {
+      'snapshot',
+      'perform',
+      'screenshot',
+      'gesture',
+      'key',
+      'close_dialog',
+    }.contains(args['action']),
+    'pob_editor_app' => args['action'] == 'close_dialog',
+    _ => false,
+  };
 
   bool _protectedDialog(String tool) =>
       model.modalOpen?.call() == true &&

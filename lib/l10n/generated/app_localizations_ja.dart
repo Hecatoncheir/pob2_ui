@@ -2223,6 +2223,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get mcd4e66880d => 'グループの構成が変更されました。転送を繰り返す';
 
   @override
+  String get mc152c120ef => '画面の状態が変わりました。snapshotを再取得してください。';
+
+  @override
   String get mbd97450c85 => '保存中…';
 
   @override
@@ -2363,6 +2366,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m66e6ee7733 => 'ノードの変更なし';
+
+  @override
+  String get mdb39b8ca05 => '入力を破棄するにはdiscard=trueを指定するか、フォームを保存してください。';
 
   @override
   String ma9ea6a77a9(String p0) {
@@ -2543,6 +2549,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get mae1df2993a => 'エクスポート XML';
+
+  @override
+  String get m476baab3aa => 'この画面要素は利用できなくなりました。';
 
   @override
   String get mf49983ccf6 => 'エナジーシールド';

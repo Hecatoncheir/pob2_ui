@@ -4230,6 +4230,12 @@ abstract class AppLocalizations {
   /// **'The composition of the group has changed; repeat the transfer'**
   String get mcd4e66880d;
 
+  /// Состояние интерфейса устарело. Запросите snapshot заново.
+  ///
+  /// In en, this message translates to:
+  /// **'The interface state is stale. Request a new snapshot.'**
+  String get mc152c120ef;
+
   /// Сохранение…
   ///
   /// In en, this message translates to:
@@ -4505,6 +4511,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No node changes'**
   String get m66e6ee7733;
+
+  /// Укажите discard=true для отмены ввода или сохраните форму.
+  ///
+  /// In en, this message translates to:
+  /// **'Use discard=true to discard the input, or save the form.'**
+  String get mdb39b8ca05;
 
   /// Укажите {p0}.
   ///
@@ -4841,6 +4853,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Export XML'**
   String get mae1df2993a;
+
+  /// Элемент интерфейса больше недоступен.
+  ///
+  /// In en, this message translates to:
+  /// **'The interface element is no longer available.'**
+  String get m476baab3aa;
 
   /// Энергощит
   ///

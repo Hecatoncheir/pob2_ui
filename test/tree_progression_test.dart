@@ -29,6 +29,7 @@ import 'package:pob2_ui/ui/workspace_view.dart';
 import 'package:xml/xml.dart';
 
 import 'support/workshop_fixture.dart' as fixture;
+import 'support/temporary_directory.dart';
 
 const _key = (
   folder: 'PoB',
@@ -470,7 +471,7 @@ void main() {
 
   test('Этапы сохраняются по уровням отдельно для каждой сборки', () async {
     final profile = await Directory.systemTemp.createTemp('pob-progression');
-    addTearDown(() => profile.delete(recursive: true));
+    addTearDown(() => removeTemporaryDirectory(profile));
     final repository = TreeProgressionRepository(profile, _key);
     final bloc = TreeProgressionBloc(repository);
     addTearDown(bloc.close);

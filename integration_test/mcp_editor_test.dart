@@ -49,13 +49,14 @@ void main() {
     expect(model.mcpEditor.enabled, isTrue);
     final shell = tester.element(find.byType(WorkspaceView)).read<ShellBloc>();
     final client = await _ExternalEditor.connect(
+      tester,
       root,
       components.active[Component.mcp]!,
     );
     addTearDown(client.close);
     final hasSkillControls = await _checkSkillControlSchema(client);
 
-    await _createBuilds(client, model);
+    await _createBuilds(tester, client, model);
     await tester.pumpAndSettle();
     await _enableFromLibrary(tester, model, shell);
     final node = await _node(client);
@@ -103,6 +104,7 @@ Future<void> _checkApplicationTools(
   await tester.pumpAndSettle();
   expect((await client.success('pob_editor_status'))['dialogOpen'], isFalse);
   await _checkProtectedDialog(tester, client);
+  await _checkDpsDialog(tester, client);
 
   await client.success('pob_editor_library', {
     'action': 'rename',
@@ -274,10 +276,7 @@ Future<void> _checkProtectedDialog(
     ),
   );
   await tester.pumpAndSettle();
-  expect(
-    (await client.success('pob_editor_status'))['canCloseDialog'],
-    isFalse,
-  );
+  expect((await client.success('pob_editor_status'))['canCloseDialog'], isTrue);
   final refused = await client.call('pob_editor_notes', {
     'action': 'write',
     'text': 'Нельзя',
@@ -285,11 +284,87 @@ Future<void> _checkProtectedDialog(
   expect(refused['isError'], isTrue);
   expect(jsonRows(refused['content']).first['text'], contains('APP_BUSY'));
   await client.success('pob_check_build');
-  Navigator.of(context).pop();
+  await client.success('pob_editor_app', {'action': 'close_dialog'});
   await tester.pumpAndSettle();
+  expect(find.text('Несохранённый ввод'), findsNothing);
 }
 
-Future<void> _createBuilds(_ExternalEditor client, WorkshopCubit model) async {
+Future<void> _checkDpsDialog(
+  WidgetTester tester,
+  _ExternalEditor client,
+) async {
+  await client.success('pob_editor_ui', {
+    'action': 'navigate',
+    'page': 'workspace',
+    'tab': 'calculations',
+  });
+  await _uiPerform(tester, client, 'Полный DPS', 'tap');
+  expect((await client.success('pob_editor_status'))['dialogOpen'], isTrue);
+  expect((await client.success('pob_editor_status'))['canCloseDialog'], isTrue);
+  await _checkScreenshot(client);
+  await client.success('pob_editor_app', {'action': 'close_dialog'});
+  await tester.pumpAndSettle();
+  expect((await client.success('pob_editor_status'))['dialogOpen'], isFalse);
+  await _uiPerform(tester, client, 'Полный DPS', 'tap');
+  final snapshot = await client.success('pob_editor_ui', {
+    'action': 'snapshot',
+  });
+  await client.success('pob_editor_ui', {
+    'action': 'key',
+    'snapshotId': snapshot['snapshotId'],
+    'key': 'escape',
+  });
+  await tester.pumpAndSettle();
+  expect((await client.success('pob_editor_status'))['dialogOpen'], isFalse);
+}
+
+Future<void> _checkScreenshot(_ExternalEditor client) async {
+  final screenshot = await client.call('pob_editor_ui', {
+    'action': 'screenshot',
+  });
+  expect(screenshot['isError'], isFalse);
+  final png = jsonRows(screenshot['content'])
+      .firstWhere((item) => item['type'] == 'image');
+  final bytes = base64Decode(png['data'] as String);
+  expect(bytes.take(8), [137, 80, 78, 71, 13, 10, 26, 10]);
+  final file = File(
+    'build/review/mcp-full-dps-${Platform.operatingSystem}.png',
+  );
+  await file.parent.create(recursive: true);
+  await file.writeAsBytes(bytes);
+}
+
+Future<JsonMap> _uiPerform(
+  WidgetTester tester,
+  _ExternalEditor client,
+  String label,
+  String operation, {
+  Object? value,
+}) async {
+  await tester.pumpAndSettle();
+  final snapshot = await client.success('pob_editor_ui', {
+    'action': 'snapshot',
+  });
+  final node = jsonRows(snapshot['nodes']).firstWhere(
+    (node) =>
+        '${node['label']}'.contains(label) &&
+        jsonStrings(node['actions']).contains(operation),
+    orElse: () => throw StateError('$label / $operation: $snapshot'),
+  );
+  return client.success('pob_editor_ui', {
+    'action': 'perform',
+    'snapshotId': snapshot['snapshotId'],
+    'nodeId': node['id'],
+    'operation': operation,
+    if (value != null) 'value': value,
+  });
+}
+
+Future<void> _createBuilds(
+  WidgetTester tester,
+  _ExternalEditor client,
+  WorkshopCubit model,
+) async {
   final disabledCheck = await client.call('pob_check_build');
   expect(disabledCheck['isError'], isTrue);
   expect(
@@ -299,7 +374,37 @@ Future<void> _createBuilds(_ExternalEditor client, WorkshopCubit model) async {
   final classes = await client.success('pob_catalog', {'kind': 'classes'});
   expect(jsonRows(classes['entries']).map((entry) => entry['id']), contains(1));
 
-  final first = await _create(client, 'Первая сборка MCP');
+  await _uiPerform(tester, client, 'Новая сборка', 'tap');
+  await _uiPerform(
+    tester,
+    client,
+    'Название',
+    'setText',
+    value: 'Первая сборка MCP',
+  );
+  final refused = await client.call('pob_editor_ui', {
+    'action': 'close_dialog',
+  });
+  expect(refused['isError'], isTrue);
+  expect(jsonRows(refused['content']).first['text'], contains('DIALOG_INPUT'));
+  expect(find.text('Первая сборка MCP'), findsOneWidget);
+  await client.success('pob_editor_ui', {
+    'action': 'close_dialog',
+    'discard': true,
+  });
+  expect(model.state.report, isNull);
+  await _uiPerform(tester, client, 'Новая сборка', 'tap');
+  await _uiPerform(
+    tester,
+    client,
+    'Название',
+    'setText',
+    value: 'Первая сборка MCP',
+  );
+  await _uiPerform(tester, client, 'Warrior', 'tap');
+  await _uiPerform(tester, client, 'Создать сборку', 'tap');
+  expect(model.mcpEditor.enabled, isTrue);
+  final first = await client.success('pob_check_build');
   final second = await _create(client, 'Правки MCP');
   expect(first['id'], isNot(second['id']));
   expect(model.state.library.entries, hasLength(2));
@@ -576,15 +681,17 @@ Future<void> _checkSkills(
 }
 
 class _ExternalEditor {
-  _ExternalEditor(this.process)
+  _ExternalEditor(this.tester, this.process)
     : _lines = StreamIterator(
         process.stdout.transform(utf8.decoder).transform(const LineSplitter()),
       );
   final Process process;
+  final WidgetTester tester;
   final StreamIterator<String> _lines;
   int _counter = 0;
 
   static Future<_ExternalEditor> connect(
+    WidgetTester tester,
     Directory root,
     Installation mcp,
   ) async {
@@ -600,7 +707,7 @@ class _ExternalEditor {
       endpoint.path,
     ], workingDirectory: mcp.directory);
     unawaited(process.stderr.drain<void>());
-    final client = _ExternalEditor(process);
+    final client = _ExternalEditor(tester, process);
     await client._rpc('initialize', {});
     return client;
   }
@@ -617,10 +724,19 @@ class _ExternalEditor {
   }
 
   Future<JsonMap> success(String name, [JsonMap arguments = const {}]) async {
-    final result = await call(name, arguments);
+    var result = await call(name, arguments);
+    for (var i = 0; i < 300 && _busy(result); i++) {
+      await Future<void>.delayed(const Duration(milliseconds: 100));
+      result = await call(name, arguments);
+    }
     expect(result['isError'], isFalse, reason: '$result');
     return jsonMap(jsonMap(result['structuredContent'])['result']);
   }
+
+  bool _busy(JsonMap result) =>
+      result['isError'] == true &&
+      jsonRows(result['content'])
+          .any((item) => '${item['text']}'.contains('"code": "APP_BUSY"'));
 
   Future<JsonMap> _rpc(String method, JsonMap params) async {
     process.stdin.writeln(
@@ -631,7 +747,19 @@ class _ExternalEditor {
         'params': params,
       }),
     );
-    expect(await _lines.moveNext().timeout(const Duration(minutes: 3)), isTrue);
+    var completed = false;
+    final next = _lines.moveNext().timeout(const Duration(minutes: 3));
+    unawaited(
+      next.then(
+        (_) => completed = true,
+        onError: (Object _) => completed = true,
+      ),
+    );
+    while (!completed) {
+      await tester.pump(const Duration(milliseconds: 20));
+      await Future<void>.delayed(const Duration(milliseconds: 1));
+    }
+    expect(await next, isTrue);
     return jsonMap(jsonMap(jsonDecode(_lines.current))['result']);
   }
 

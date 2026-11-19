@@ -2295,6 +2295,10 @@ class AppLocalizationsEs extends AppLocalizations {
       'La composición del grupo ha cambiado; repetir la transferencia';
 
   @override
+  String get mc152c120ef =>
+      'El estado de la interfaz cambió. Solicita un nuevo snapshot.';
+
+  @override
   String get mbd97450c85 => 'Guardando…';
 
   @override
@@ -2438,6 +2442,10 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get m66e6ee7733 => 'Sin cambios en los nodos';
+
+  @override
+  String get mdb39b8ca05 =>
+      'Usa discard=true para descartar los cambios o guarda el formulario.';
 
   @override
   String ma9ea6a77a9(String p0) {
@@ -2626,6 +2634,9 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get mae1df2993a => 'Exportar XML';
+
+  @override
+  String get m476baab3aa => 'El elemento de la interfaz ya no está disponible.';
 
   @override
   String get mf49983ccf6 => 'Escudo de energía';

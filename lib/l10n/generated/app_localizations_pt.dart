@@ -2283,6 +2283,10 @@ class AppLocalizationsPt extends AppLocalizations {
       'A composição do grupo mudou; repita a transferência';
 
   @override
+  String get mc152c120ef =>
+      'O estado da interface mudou. Solicite um novo snapshot.';
+
+  @override
   String get mbd97450c85 => 'Salvando…';
 
   @override
@@ -2425,6 +2429,10 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get m66e6ee7733 => 'Sem alterações nos nós';
+
+  @override
+  String get mdb39b8ca05 =>
+      'Use discard=true para descartar a entrada ou salve o formulário.';
 
   @override
   String ma9ea6a77a9(String p0) {
@@ -2612,6 +2620,9 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get mae1df2993a => 'Exportar XML';
+
+  @override
+  String get m476baab3aa => 'O elemento da interface não está mais disponível.';
 
   @override
   String get mf49983ccf6 => 'Escudo de Energia';
@@ -4949,6 +4960,10 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
       'A composição do grupo mudou; repita a transferência';
 
   @override
+  String get mc152c120ef =>
+      'O estado da interface mudou. Solicite um novo snapshot.';
+
+  @override
   String get mbd97450c85 => 'Salvando…';
 
   @override
@@ -5091,6 +5106,10 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get m66e6ee7733 => 'Sem alterações nos nós';
+
+  @override
+  String get mdb39b8ca05 =>
+      'Use discard=true para descartar a entrada ou salve o formulário.';
 
   @override
   String ma9ea6a77a9(String p0) {
@@ -5278,6 +5297,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get mae1df2993a => 'Exportar XML';
+
+  @override
+  String get m476baab3aa => 'O elemento da interface não está mais disponível.';
 
   @override
   String get mf49983ccf6 => 'Escudo de Energia';

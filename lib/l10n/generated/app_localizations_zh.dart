@@ -2215,6 +2215,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get mcd4e66880d => '團體的組成發生了變化；重複傳輸';
 
   @override
+  String get mc152c120ef => '介面狀態已變更，請重新取得 snapshot。';
+
+  @override
   String get mbd97450c85 => '正在儲存...';
 
   @override
@@ -2355,6 +2358,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m66e6ee7733 => '天賦節點沒有變更';
+
+  @override
+  String get mdb39b8ca05 => '請使用 discard=true 放棄輸入，或儲存表單。';
 
   @override
   String ma9ea6a77a9(String p0) {
@@ -2535,6 +2541,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get mae1df2993a => '導出 XML';
+
+  @override
+  String get m476baab3aa => '此介面元素已無法使用。';
 
   @override
   String get mf49983ccf6 => '能量護盾';
@@ -4799,6 +4808,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get mcd4e66880d => '團體的組成發生了變化；重複傳輸';
 
   @override
+  String get mc152c120ef => '介面狀態已變更，請重新取得 snapshot。';
+
+  @override
   String get mbd97450c85 => '正在儲存...';
 
   @override
@@ -4939,6 +4951,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m66e6ee7733 => '天賦節點沒有變更';
+
+  @override
+  String get mdb39b8ca05 => '請使用 discard=true 放棄輸入，或儲存表單。';
 
   @override
   String ma9ea6a77a9(String p0) {
@@ -5119,6 +5134,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get mae1df2993a => '導出 XML';
+
+  @override
+  String get m476baab3aa => '此介面元素已無法使用。';
 
   @override
   String get mf49983ccf6 => '能量護盾';

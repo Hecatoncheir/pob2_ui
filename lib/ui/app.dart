@@ -49,6 +49,7 @@ import 'shortcut_settings.dart';
 import 'resizable_sidebar.dart';
 import 'setup_wizard.dart';
 import 'mcp_editor_ui.dart';
+import 'mcp_ui_driver.dart';
 import 'core/ui_translation.dart';
 
 class PobApp extends StatelessWidget {
@@ -122,6 +123,7 @@ class _MaterialApp extends StatefulWidget {
 
 class _MaterialAppState extends State<_MaterialApp> {
   final navigator = GlobalKey<NavigatorState>();
+  late final _uiDriver = McpUiDriver(navigator);
   late final AppLifecycleListener _lifecycle;
   late final _BuildSyncNavigatorObserver _navigation;
 
@@ -148,7 +150,7 @@ class _MaterialAppState extends State<_MaterialApp> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    final control = McpEditorUi(context);
+    final control = McpEditorUi(context, _uiDriver);
     widget.model.mcpEditor.uiAction = control.call;
     widget.model.mcpEditor.uiStatus = control.status;
   }
@@ -176,13 +178,14 @@ class _MaterialAppState extends State<_MaterialApp> {
     oldWidget.model.mcpEditor.uiAction = null;
     oldWidget.model.mcpEditor.uiStatus = null;
     widget.model.modalOpen = _modalOpen;
-    final control = McpEditorUi(context);
+    final control = McpEditorUi(context, _uiDriver);
     widget.model.mcpEditor.uiAction = control.call;
     widget.model.mcpEditor.uiStatus = control.status;
   }
 
   @override
   void dispose() {
+    _uiDriver.dispose();
     _lifecycle.dispose();
     widget.model.modalOpen = null;
     widget.model.mcpEditor.uiAction = null;
@@ -231,7 +234,10 @@ class _MaterialAppState extends State<_MaterialApp> {
         model: widget.model,
         shell: context.read<ShellBloc>(),
         navigator: navigator,
-        child: InterfaceViewport(child: child!, motion: state.motion),
+        child: RepaintBoundary(
+          key: _uiDriver.surface,
+          child: InterfaceViewport(child: child!, motion: state.motion),
+        ),
       ),
       home: _Shell(widget.model, widget.updates),
     ),

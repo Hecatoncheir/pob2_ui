@@ -3750,6 +3750,11 @@
     "description": "Состав группы изменился; повторите перенос",
     "placeholders": {}
   },
+  "mc152c120ef": "The interface state is stale. Request a new snapshot.",
+  "@mc152c120ef": {
+    "description": "Состояние интерфейса устарело. Запросите snapshot заново.",
+    "placeholders": {}
+  },
   "mbd97450c85": "Saving…",
   "@mbd97450c85": {
     "description": "Сохранение…",
@@ -3986,6 +3991,11 @@
   "m66e6ee7733": "No node changes",
   "@m66e6ee7733": {
     "description": "Узлы без изменений",
+    "placeholders": {}
+  },
+  "mdb39b8ca05": "Use discard=true to discard the input, or save the form.",
+  "@mdb39b8ca05": {
+    "description": "Укажите discard=true для отмены ввода или сохраните форму.",
     "placeholders": {}
   },
   "ma9ea6a77a9": "Specify {p0}.",
@@ -4293,6 +4303,11 @@
   "mae1df2993a": "Export XML",
   "@mae1df2993a": {
     "description": "Экспорт XML",
+    "placeholders": {}
+  },
+  "m476baab3aa": "The interface element is no longer available.",
+  "@m476baab3aa": {
+    "description": "Элемент интерфейса больше недоступен.",
     "placeholders": {}
   },
   "mf49983ccf6": "Energy Shield",

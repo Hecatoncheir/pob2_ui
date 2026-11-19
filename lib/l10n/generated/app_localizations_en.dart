@@ -2260,6 +2260,10 @@ class AppLocalizationsEn extends AppLocalizations {
       'The composition of the group has changed; repeat the transfer';
 
   @override
+  String get mc152c120ef =>
+      'The interface state is stale. Request a new snapshot.';
+
+  @override
   String get mbd97450c85 => 'Saving…';
 
   @override
@@ -2402,6 +2406,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get m66e6ee7733 => 'No node changes';
+
+  @override
+  String get mdb39b8ca05 =>
+      'Use discard=true to discard the input, or save the form.';
 
   @override
   String ma9ea6a77a9(String p0) {
@@ -2588,6 +2596,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get mae1df2993a => 'Export XML';
+
+  @override
+  String get m476baab3aa => 'The interface element is no longer available.';
 
   @override
   String get mf49983ccf6 => 'Energy Shield';

@@ -2241,6 +2241,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get mcd4e66880d => 'องค์ประกอบของกลุ่มมีการเปลี่ยนแปลง ทำซ้ำการโอน';
 
   @override
+  String get mc152c120ef => 'สถานะหน้าจอเปลี่ยนไป โปรดขอ snapshot ใหม่';
+
+  @override
   String get mbd97450c85 => 'กำลังบันทึก...';
 
   @override
@@ -2382,6 +2385,10 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m66e6ee7733 => 'ไม่มีการเปลี่ยนแปลงโหนด';
+
+  @override
+  String get mdb39b8ca05 =>
+      'ใช้ discard=true เพื่อยกเลิกข้อมูลที่ป้อน หรือบันทึกแบบฟอร์ม';
 
   @override
   String ma9ea6a77a9(String p0) {
@@ -2567,6 +2574,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get mae1df2993a => 'ส่งออก XML';
+
+  @override
+  String get m476baab3aa => 'องค์ประกอบหน้าจอนี้ไม่พร้อมใช้งานแล้ว';
 
   @override
   String get mf49983ccf6 => 'โล่พลังงาน';

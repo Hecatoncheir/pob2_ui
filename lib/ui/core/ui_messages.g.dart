@@ -1299,6 +1299,9 @@ final uiExactTranslations = <String, String Function(AppLocalizations)>{
   "Состав группы изменился; повторите перенос": (l) => l.mcd4e66880d,
   "The composition of the group has changed; repeat the transfer": (l) =>
       l.mcd4e66880d,
+  "Состояние интерфейса устарело. Запросите snapshot заново.": (l) =>
+      l.mc152c120ef,
+  "The interface state is stale. Request a new snapshot.": (l) => l.mc152c120ef,
   "Сохранение…": (l) => l.mbd97450c85,
   "Saving…": (l) => l.mbd97450c85,
   "Сохранено": (l) => l.m2fe8f2fd72,
@@ -1392,6 +1395,10 @@ final uiExactTranslations = <String, String Function(AppLocalizations)>{
   "Nodes": (l) => l.mf3a46c2f2b,
   "Узлы без изменений": (l) => l.m66e6ee7733,
   "No node changes": (l) => l.m66e6ee7733,
+  "Укажите discard=true для отмены ввода или сохраните форму.": (l) =>
+      l.mdb39b8ca05,
+  "Use discard=true to discard the input, or save the form.": (l) =>
+      l.mdb39b8ca05,
   "Укажите папку PoB вручную или попробуйте найти её по стандартному пути.": (
     l,
   ) => l.mb68ab7d79e,
@@ -1503,6 +1510,8 @@ final uiExactTranslations = <String, String Function(AppLocalizations)>{
   "Equipment": (l) => l.m0b5051e1b2,
   "Экспорт XML": (l) => l.mae1df2993a,
   "Export XML": (l) => l.mae1df2993a,
+  "Элемент интерфейса больше недоступен.": (l) => l.m476baab3aa,
+  "The interface element is no longer available.": (l) => l.m476baab3aa,
   "Энергощит": (l) => l.mf49983ccf6,
   "Energy Shield": (l) => l.mf49983ccf6,
   "Эта копия запущена без установщика или из каталога без права записи. Установите новую версию со страницы выпусков.":

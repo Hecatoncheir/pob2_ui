@@ -857,6 +857,26 @@ void main() {
     expect(await reopened.preserveLocal(disk), isNull);
   });
 
+  test(
+    'Устаревший снимок наблюдателя не расходует резервную копию заметок',
+    () async {
+      await model.treeAction(10, false);
+      final stale = await library.open(id);
+      await library.readNotes(id);
+      await library.saveNotes(id, 'Новый план');
+      expect(await library.preserveLocal(stale), isNull);
+      expect(await library.readNotes(id), 'Новый план');
+      expect((await library.scan()).entries, hasLength(1));
+      await model.close();
+      await original.writeAsString(buildXml(48, notes: 'План из PoB'));
+      final reopened = PobBuildLibrary(profile);
+      await reopened.load();
+      final copy = await reopened.preserveLocal(await reopened.open(id));
+      expect(copy, isNotNull);
+      expect(await reopened.readNotes(copy!.id), 'Новый план');
+    },
+  );
+
   test('После завершения MCP открывается сохранённая сборка и правка не повторяется', () async {
     await model.close();
     model = createWorkshop();

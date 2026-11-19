@@ -2262,6 +2262,10 @@ class AppLocalizationsRu extends AppLocalizations {
   String get mcd4e66880d => 'Состав группы изменился; повторите перенос';
 
   @override
+  String get mc152c120ef =>
+      'Состояние интерфейса устарело. Запросите snapshot заново.';
+
+  @override
   String get mbd97450c85 => 'Сохранение…';
 
   @override
@@ -2404,6 +2408,10 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get m66e6ee7733 => 'Узлы без изменений';
+
+  @override
+  String get mdb39b8ca05 =>
+      'Укажите discard=true для отмены ввода или сохраните форму.';
 
   @override
   String ma9ea6a77a9(String p0) {
@@ -2590,6 +2598,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get mae1df2993a => 'Экспорт XML';
+
+  @override
+  String get m476baab3aa => 'Элемент интерфейса больше недоступен.';
 
   @override
   String get mf49983ccf6 => 'Энергощит';

@@ -9,14 +9,29 @@ import 'appearance_bloc.dart';
 import 'interface_scale_bloc.dart';
 import 'language_bloc.dart';
 import 'shell_bloc.dart';
+import 'mcp_ui_driver.dart';
+import 'workshop_cubit.dart';
 
 class McpEditorUi {
-  McpEditorUi(this.context);
+  McpEditorUi(this.context, this.driver);
   final BuildContext context;
+  final McpUiDriver driver;
 
   JsonMap status() {
     final shell = context.read<ShellBloc>().state;
     return {
+      'uiProtocol': 1,
+      'actions': [
+        'status',
+        'navigate',
+        'preferences',
+        'snapshot',
+        'perform',
+        'screenshot',
+        'gesture',
+        'key',
+        'close_dialog',
+      ],
       'page': shell.page.name,
       'tab': shell.tab.name,
       'motion': shell.motion,
@@ -29,6 +44,27 @@ class McpEditorUi {
 
   Future<JsonMap> call(JsonMap args) async {
     switch (args['action']) {
+      case 'snapshot':
+        return driver.snapshot();
+      case 'screenshot':
+        return driver.screenshot();
+      case 'gesture':
+      case 'key':
+      case 'perform':
+        final model = context.read<WorkshopCubit>();
+        if (args['action'] == 'perform') {
+          await driver.perform(args);
+        } else {
+          await driver.interact(args);
+        }
+        if (model.state.busy) {
+          await model.stream
+              .firstWhere((state) => !state.busy)
+              .timeout(const Duration(seconds: 90));
+        }
+        return driver.snapshot();
+      case 'close_dialog':
+        return driver.closeDialog(discard: args['discard'] == true);
       case 'navigate':
         await _navigate(args);
       case 'preferences':

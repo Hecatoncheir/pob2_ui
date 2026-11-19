@@ -2223,6 +2223,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get mcd4e66880d => '그룹 구성이 변경되었습니다. 전송을 반복하다';
 
   @override
+  String get mc152c120ef => '인터페이스 상태가 변경되었습니다. snapshot을 다시 요청하세요.';
+
+  @override
   String get mbd97450c85 => '저장 중…';
 
   @override
@@ -2363,6 +2366,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m66e6ee7733 => '노드 변경 없음';
+
+  @override
+  String get mdb39b8ca05 => '입력을 취소하려면 discard=true를 지정하거나 양식을 저장하세요.';
 
   @override
   String ma9ea6a77a9(String p0) {
@@ -2543,6 +2549,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get mae1df2993a => '내보내기 XML';
+
+  @override
+  String get m476baab3aa => '이 인터페이스 요소는 더 이상 사용할 수 없습니다.';
 
   @override
   String get mf49983ccf6 => '에너지 보호막';

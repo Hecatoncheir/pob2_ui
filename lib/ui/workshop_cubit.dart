@@ -1109,6 +1109,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     bool keepWorking = true,
   }) async {
     final copy = await shared.preserveLocal(disk);
+    disk = await shared.open(disk.entry.id);
     if (copy != null) _update(state.copyWith(library: _withEntry(copy)));
     _seenBuildXml = disk.xml;
     final entry = disk.entry;

@@ -27,9 +27,12 @@ const mcpApplicationTools = {
 bool mcpApplicationRead(String tool, JsonMap args) => switch (tool) {
   'pob_editor_status' || 'pob_editor_job' => true,
   'pob_editor_library' => args['action'] == 'list',
-  'pob_editor_components' ||
-  'pob_editor_history' ||
-  'pob_editor_ui' => args['action'] == 'status',
+  'pob_editor_components' || 'pob_editor_history' => args['action'] == 'status',
+  'pob_editor_ui' => {
+    'status',
+    'snapshot',
+    'screenshot',
+  }.contains(args['action']),
   'pob_editor_notes' => args['action'] == 'read',
   'pob_editor_progression' => args['action'] == 'list',
   'pob_editor_files' => {'export_xml', 'export_code'}.contains(args['action']),

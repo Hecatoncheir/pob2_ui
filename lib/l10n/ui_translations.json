@@ -685,6 +685,7 @@
     "md79906423b": "Создать сборку",
     "m62bb423bd3": "Сопротивления",
     "mcd4e66880d": "Состав группы изменился; повторите перенос",
+    "mc152c120ef": "Состояние интерфейса устарело. Запросите snapshot заново.",
     "mbd97450c85": "Сохранение…",
     "m2fe8f2fd72": "Сохранено",
     "mb4d30cae52": "Сохранить",
@@ -731,6 +732,7 @@
     "m8cf5c33b30": "Узел не изменит показатели.",
     "mf3a46c2f2b": "Узлы",
     "m66e6ee7733": "Узлы без изменений",
+    "mdb39b8ca05": "Укажите discard=true для отмены ввода или сохраните форму.",
     "ma9ea6a77a9": "Укажите {p0}.",
     "mb68ab7d79e": "Укажите папку PoB вручную или попробуйте найти её по стандартному пути.",
     "mdba310a980": "Укажите число от 1 до 200",
@@ -787,6 +789,7 @@
     "me43836c564": "Штраф сопротивлений",
     "m0b5051e1b2": "Экипировка",
     "mae1df2993a": "Экспорт XML",
+    "m476baab3aa": "Элемент интерфейса больше недоступен.",
     "mf49983ccf6": "Энергощит",
     "m2b2c6df514": "Эта копия запущена без установщика или из каталога без права записи. Установите новую версию со страницы выпусков.",
     "m902b19aeea": "Эта поддержка не подходит выбранному умению",
@@ -1609,7 +1612,10 @@
     "m654046a00d": "Open the character on poe.ninja, select Copy PoB code, then paste the code into PoB II.",
     "m12ae4659d0": "Open poe.ninja",
     "m389de358a7": "The {p0} site did not respond on time.",
-    "m57f9da1c61": "Link or PoB code"
+    "m57f9da1c61": "Link or PoB code",
+    "mc152c120ef": "The interface state is stale. Request a new snapshot.",
+    "mdb39b8ca05": "Use discard=true to discard the input, or save the form.",
+    "m476baab3aa": "The interface element is no longer available."
   },
   "fr": {
     "m0c63e733f9": "Lua n'a pas renvoyé toutes les icônes",
@@ -2415,7 +2421,10 @@
     "m654046a00d": "Ouvrez le personnage sur poe.ninja, cliquez sur Copy PoB code, puis collez le code dans PoB II.",
     "m12ae4659d0": "Ouvrir poe.ninja",
     "m389de358a7": "Le site {p0} n’a pas répondu à temps.",
-    "m57f9da1c61": "Lien ou code PoB"
+    "m57f9da1c61": "Lien ou code PoB",
+    "mc152c120ef": "L’état de l’interface a changé. Demandez un nouveau snapshot.",
+    "mdb39b8ca05": "Utilisez discard=true pour abandonner la saisie, ou enregistrez le formulaire.",
+    "m476baab3aa": "Cet élément de l’interface n’est plus disponible."
   },
   "de": {
     "m0c63e733f9": "Lua hat nicht alle Symbole zurückgegeben",
@@ -3221,7 +3230,10 @@
     "m654046a00d": "Öffne den Charakter auf poe.ninja, wähle Copy PoB code und füge den Code in PoB II ein.",
     "m12ae4659d0": "poe.ninja öffnen",
     "m389de358a7": "Die Website {p0} hat nicht rechtzeitig geantwortet.",
-    "m57f9da1c61": "Link oder PoB-Code"
+    "m57f9da1c61": "Link oder PoB-Code",
+    "mc152c120ef": "Der Oberflächenzustand ist veraltet. Rufen Sie snapshot erneut auf.",
+    "mdb39b8ca05": "Verwerfen Sie die Eingabe mit discard=true oder speichern Sie das Formular.",
+    "m476baab3aa": "Das Oberflächenelement ist nicht mehr verfügbar."
   },
   "es": {
     "m0c63e733f9": "Lua no devolvió todos los íconos",
@@ -4027,7 +4039,10 @@
     "m654046a00d": "Abre el personaje en poe.ninja, pulsa Copy PoB code y pega el código en PoB II.",
     "m12ae4659d0": "Abrir poe.ninja",
     "m389de358a7": "El sitio {p0} no respondió a tiempo.",
-    "m57f9da1c61": "Enlace o código PoB"
+    "m57f9da1c61": "Enlace o código PoB",
+    "mc152c120ef": "El estado de la interfaz cambió. Solicita un nuevo snapshot.",
+    "mdb39b8ca05": "Usa discard=true para descartar los cambios o guarda el formulario.",
+    "m476baab3aa": "El elemento de la interfaz ya no está disponible."
   },
   "pt_BR": {
     "m0c63e733f9": "Lua não retornou todos os ícones",
@@ -4833,7 +4848,10 @@
     "m654046a00d": "Abra o personagem no poe.ninja, selecione Copy PoB code e cole o código no PoB II.",
     "m12ae4659d0": "Abrir poe.ninja",
     "m389de358a7": "O site {p0} não respondeu a tempo.",
-    "m57f9da1c61": "Link ou código PoB"
+    "m57f9da1c61": "Link ou código PoB",
+    "mc152c120ef": "O estado da interface mudou. Solicite um novo snapshot.",
+    "mdb39b8ca05": "Use discard=true para descartar a entrada ou salve o formulário.",
+    "m476baab3aa": "O elemento da interface não está mais disponível."
   },
   "ja": {
     "m0c63e733f9": "Lua はすべてのアイコンを返しませんでした",
@@ -5639,7 +5657,10 @@
     "m654046a00d": "poe.ninja でキャラクターを開き、Copy PoB code を選択して、PoB II にコードを貼り付けてください。",
     "m12ae4659d0": "poe.ninja を開く",
     "m389de358a7": "{p0} サイトが時間内に応答しませんでした。",
-    "m57f9da1c61": "リンクまたは PoB コード"
+    "m57f9da1c61": "リンクまたは PoB コード",
+    "mc152c120ef": "画面の状態が変わりました。snapshotを再取得してください。",
+    "mdb39b8ca05": "入力を破棄するにはdiscard=trueを指定するか、フォームを保存してください。",
+    "m476baab3aa": "この画面要素は利用できなくなりました。"
   },
   "ko": {
     "m0c63e733f9": "Lua이 모든 아이콘을 반환하지 않았습니다.",
@@ -6445,7 +6466,10 @@
     "m654046a00d": "poe.ninja에서 캐릭터를 열고 Copy PoB code를 선택한 다음 PoB II에 코드를 붙여넣으세요.",
     "m12ae4659d0": "poe.ninja 열기",
     "m389de358a7": "{p0} 사이트가 제시간에 응답하지 않았습니다.",
-    "m57f9da1c61": "링크 또는 PoB 코드"
+    "m57f9da1c61": "링크 또는 PoB 코드",
+    "mc152c120ef": "인터페이스 상태가 변경되었습니다. snapshot을 다시 요청하세요.",
+    "mdb39b8ca05": "입력을 취소하려면 discard=true를 지정하거나 양식을 저장하세요.",
+    "m476baab3aa": "이 인터페이스 요소는 더 이상 사용할 수 없습니다."
   },
   "th": {
     "m0c63e733f9": "Lua ไม่ได้ส่งคืนไอคอนทั้งหมด",
@@ -7251,7 +7275,10 @@
     "m654046a00d": "เปิดตัวละครบน poe.ninja กด Copy PoB code แล้ววางโค้ดใน PoB II",
     "m12ae4659d0": "เปิด poe.ninja",
     "m389de358a7": "เว็บไซต์ {p0} ไม่ตอบสนองภายในเวลาที่กำหนด",
-    "m57f9da1c61": "ลิงก์หรือโค้ด PoB"
+    "m57f9da1c61": "ลิงก์หรือโค้ด PoB",
+    "mc152c120ef": "สถานะหน้าจอเปลี่ยนไป โปรดขอ snapshot ใหม่",
+    "mdb39b8ca05": "ใช้ discard=true เพื่อยกเลิกข้อมูลที่ป้อน หรือบันทึกแบบฟอร์ม",
+    "m476baab3aa": "องค์ประกอบหน้าจอนี้ไม่พร้อมใช้งานแล้ว"
   },
   "zh_Hant": {
     "m0c63e733f9": "Lua 未傳回所有圖標",
@@ -8057,6 +8084,9 @@
     "m654046a00d": "在 poe.ninja 開啟角色，點選 Copy PoB code，再將代碼貼到 PoB II。",
     "m12ae4659d0": "開啟 poe.ninja",
     "m389de358a7": "網站 {p0} 未及時回應。",
-    "m57f9da1c61": "連結或 PoB 代碼"
+    "m57f9da1c61": "連結或 PoB 代碼",
+    "mc152c120ef": "介面狀態已變更，請重新取得 snapshot。",
+    "mdb39b8ca05": "請使用 discard=true 放棄輸入，或儲存表單。",
+    "m476baab3aa": "此介面元素已無法使用。"
   }
 }

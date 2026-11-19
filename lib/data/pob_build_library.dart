@@ -228,7 +228,8 @@ class PobBuildLibrary implements BuildStorage, BuildNotesStorage {
 
   Future<LibraryEntry?> preserveLocal(PobBuildVersion disk) => _write(() async {
     final file = await _file(_root, disk.entry.id);
-    return _preserveLocal(file, disk);
+    // Снимок наблюдателя мог предшествовать нашей записи, стоявшей в очереди.
+    return _preserveLocal(file, await _readFile(_root, file));
   });
 
   File _recoveryFile(File file) {

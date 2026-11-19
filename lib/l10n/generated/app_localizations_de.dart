@@ -2311,6 +2311,10 @@ class AppLocalizationsDe extends AppLocalizations {
       'Die Zusammensetzung der Gruppe hat sich geändert; Wiederholen Sie die Übertragung';
 
   @override
+  String get mc152c120ef =>
+      'Der Oberflächenzustand ist veraltet. Rufen Sie snapshot erneut auf.';
+
+  @override
   String get mbd97450c85 => 'Speichern…';
 
   @override
@@ -2454,6 +2458,10 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get m66e6ee7733 => 'Keine Knotenänderungen';
+
+  @override
+  String get mdb39b8ca05 =>
+      'Verwerfen Sie die Eingabe mit discard=true oder speichern Sie das Formular.';
 
   @override
   String ma9ea6a77a9(String p0) {
@@ -2642,6 +2650,9 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get mae1df2993a => 'Exportieren XML';
+
+  @override
+  String get m476baab3aa => 'Das Oberflächenelement ist nicht mehr verfügbar.';
 
   @override
   String get mf49983ccf6 => 'Energieschild';
