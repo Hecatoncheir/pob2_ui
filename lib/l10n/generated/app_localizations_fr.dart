@@ -238,7 +238,7 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get m4fae346e6c => 'C\'était';
+  String get m4fae346e6c => 'Avant';
 
   @override
   String get m84e960d40a => 'Budget';
@@ -604,7 +604,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get me598ae02b1 => 'Ajouter un nœud clé';
 
   @override
-  String get m9cef26392f => 'Ajouter un élément';
+  String get m9cef26392f => 'Ajouter un objet';
 
   @override
   String get mbc10505bdf =>
@@ -720,7 +720,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get ma7a4033657 => 'Close';
 
   @override
-  String get mbfc7b67eb5 => 'Remplacer l\'élément';
+  String get mbfc7b67eb5 => 'Remplacer l’objet';
 
   @override
   String get md4bac1da57 => 'Note de l’étape';
@@ -744,10 +744,10 @@ class AppLocalizationsFr extends AppLocalizations {
   String get mfac4030099 => 'Your builds will go here';
 
   @override
-  String get m0cc21de8b8 => 'Health';
+  String get m0cc21de8b8 => 'Vie';
 
   @override
-  String get mf869293c62 => 'Meaning';
+  String get mf869293c62 => 'Valeur';
 
   @override
   String get mf6a527732e => 'Valeur du rapport PoB Lua actuel.';
@@ -839,7 +839,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get m05b721e615 => 'Aucune pierre trouvée';
 
   @override
-  String get m566d4d32d7 => 'Pierres de soutien';
+  String get m566d4d32d7 => 'Gemmes de soutien';
 
   @override
   String get md0ef3540b0 => 'Catalogue';
@@ -883,10 +883,10 @@ class AppLocalizationsFr extends AppLocalizations {
   String get m6916d088f3 => 'Critique. chance';
 
   @override
-  String get m7bf311d808 => 'Main gauche';
+  String get m7bf311d808 => 'Main secondaire';
 
   @override
-  String get m7825825def => 'Main gauche II';
+  String get m7825825def => 'Main secondaire II';
 
   @override
   String get m1190db95a3 => 'Ligue';
@@ -944,11 +944,11 @@ class AppLocalizationsFr extends AppLocalizations {
   String get m204751ca09 => 'RÉCENT';
 
   @override
-  String get me113ee319c => 'À très bientôt';
+  String get me113ee319c => 'Par point';
 
   @override
   String m1d32e63718(String p0) {
-    return 'À propos : $p0';
+    return 'Par point : $p0';
   }
 
   @override
@@ -958,10 +958,10 @@ class AppLocalizationsFr extends AppLocalizations {
   String get me55cf2491b => 'Ensemble de l’arbre passif';
 
   @override
-  String get mf71a076c69 => 'Ensemble d\'armes';
+  String get mf71a076c69 => 'Jeu d’armes';
 
   @override
-  String get mff86959fa1 => 'Bavoir';
+  String get mff86959fa1 => 'Armure de torse';
 
   @override
   String get m38509ab991 =>
@@ -974,7 +974,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get md45e66ab55 => 'Nom du groupe';
 
   @override
-  String get m51233393a5 => 'Название сборки';
+  String get m51233393a5 => 'Nom du build';
 
   @override
   String get m378e9ed8fc => 'Nom de l’étape';
@@ -998,7 +998,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get m85b24dddaa => 'Trouver le dossier PoB';
 
   @override
-  String get m302605cf87 => 'Найти сборку';
+  String get m302605cf87 => 'Rechercher un build';
 
   @override
   String get mf211301b5e => 'Rechercher un nœud';
@@ -1350,7 +1350,7 @@ class AppLocalizationsFr extends AppLocalizations {
       'La nouvelle paire de composants a modifié la classe du build ouvert';
 
   @override
-  String get m282cf4ee16 => 'Nouvelle version';
+  String get m282cf4ee16 => 'Nouveau build';
 
   @override
   String get ma76e43569d => 'Nouvelle combinaison';
@@ -1366,13 +1366,13 @@ class AppLocalizationsFr extends AppLocalizations {
   String get m92782507e5 => 'Une page de personnage poe.ninja est requise.';
 
   @override
-  String get m83e9fd7c8a => 'Amulette I';
+  String get m83e9fd7c8a => 'Charme I';
 
   @override
-  String get mbe485a0526 => 'Amulette II';
+  String get mbe485a0526 => 'Charme II';
 
   @override
-  String get m4a1afe7893 => 'Amulette III';
+  String get m4a1afe7893 => 'Charme III';
 
   @override
   String get md65eeeeaab => 'Mettez à jour MCP dans la section Composants.';
@@ -1528,7 +1528,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get m8fbe9b75cb => 'Annuler';
 
   @override
-  String get mb9b86803ad => 'Annuler l\'action';
+  String get mb9b86803ad => 'Annuler l’action';
 
   @override
   String get m1731619efa => 'Conception';
@@ -1556,7 +1556,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get m27234756aa => 'Effacement du profil...';
 
   @override
-  String get m6cc0ad9655 => 'Lunettes';
+  String get m6cc0ad9655 => 'Points';
 
   @override
   String mbe045b91a6(String p0) {
@@ -1635,7 +1635,7 @@ class AppLocalizationsFr extends AppLocalizations {
       'Passer à la liste ajoute le support, revenir en arrière le supprime';
 
   @override
-  String get m79ab5f1286 => 'Convertir en Lua';
+  String get m79ab5f1286 => 'Recalculer avec Lua';
 
   @override
   String get m24ad4cc4a3 =>
@@ -1660,10 +1660,10 @@ class AppLocalizationsFr extends AppLocalizations {
   String get mfd0560ebbf => 'Par défaut';
 
   @override
-  String get m5189135a61 => 'Répéter';
+  String get m5189135a61 => 'Réessayer';
 
   @override
-  String get madb0c613d6 => 'Répéter l\'action';
+  String get madb0c613d6 => 'Rétablir l’action';
 
   @override
   String get m298e41327f => 'Réessayez le téléchargement';
@@ -1737,7 +1737,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get md133559e02 => 'La recherche s\'ouvrira sur le site officiel';
 
   @override
-  String get mbf3c9df646 => 'Indicateurs';
+  String get mbf3c9df646 => 'Statistiques';
 
   @override
   String get mc7fc04e5df => 'Les indicateurs ne changeront pas';
@@ -1746,7 +1746,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get m53788df38a => 'Indicateurs de l\'état actuel de la build';
 
   @override
-  String get mfdf0487fc4 => 'Indicateur';
+  String get mfdf0487fc4 => 'Statistique';
 
   @override
   String get m21a6bb1840 => 'Afficher l\'arbre entier';
@@ -1815,13 +1815,13 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get m7ba6aa7f66 => 'Article d\'assemblage';
+  String get m7ba6aa7f66 => 'Objet du build';
 
   @override
   String get m9ce35b77ce => 'L\'article ne convient pas à cet emplacement';
 
   @override
-  String get m10e4fefa12 => 'Articles';
+  String get m10e4fefa12 => 'Objets';
 
   @override
   String get mad582b726d => 'Aperçu du nettoyage du profil';
@@ -1861,7 +1861,7 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get me15f960d93 => 'Postuler';
+  String get me15f960d93 => 'Appliquer';
 
   @override
   String get m84028563e4 => 'Appliquer et calculer';
@@ -1876,7 +1876,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get m711164636a => 'Appliquer l’étape';
 
   @override
-  String get mae2ea1c701 => 'Essayer';
+  String get mae2ea1c701 => 'Aperçu de l’objet';
 
   @override
   String get m6aab9e2cb4 => 'Suspendre';
@@ -1899,7 +1899,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get m93b08f7b14 => 'Rechercher les mises à jour';
 
   @override
-  String get me269e51359 => 'Vérifier l\'article';
+  String get me269e51359 => 'Vérifier l’objet';
 
   @override
   String get m87cb1172f2 => 'Vérifier la connexion';
@@ -2093,7 +2093,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get m49db3482db => 'Joyaux';
 
   @override
-  String get m8c39bb691b => 'Assemblage';
+  String get m8c39bb691b => 'Build';
 
   @override
   String get m15d7545f05 =>
@@ -2139,7 +2139,7 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get m187a481844 => 'Construction supprimée';
+  String get m187a481844 => 'Build supprimé';
 
   @override
   String get m9027890a7b =>
@@ -2271,7 +2271,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get m5ebbc9d7a5 => 'Retirés';
 
   @override
-  String get md4b51f7a04 => 'Supprimer';
+  String get md4b51f7a04 => 'Retirer';
 
   @override
   String get mf3f1d96087 => 'Posséder des propriétés';
@@ -2298,7 +2298,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get mc42ccf5a81 => 'Créer une copie';
 
   @override
-  String get md79906423b => 'Créer un assemblage';
+  String get md79906423b => 'Créer un build';
 
   @override
   String get m62bb423bd3 => 'Résistances';
@@ -2361,14 +2361,14 @@ class AppLocalizationsFr extends AppLocalizations {
   String get m91d6208508 => 'Pas encore de version stable';
 
   @override
-  String get md3ae3e1986 => 'Devenu';
+  String get md3ae3e1986 => 'Après';
 
   @override
   String get mabdae6b126 =>
       'Dossier PoB par défaut introuvable. Choisissez un dossier manuellement.';
 
   @override
-  String get mf7eaffec2f => 'Page des problèmes';
+  String get mf7eaffec2f => 'Page des versions';
 
   @override
   String get m4ef88e033d => 'Propriétés récapitulatives';
@@ -2380,7 +2380,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get mcda85a1ad9 => 'Texte de l\'élément';
 
   @override
-  String get m682f961a07 => 'Sujet';
+  String get m682f961a07 => 'Thème';
 
   @override
   String get m7242065c34 => 'Type d\'ennemi';
@@ -2423,10 +2423,10 @@ class AppLocalizationsFr extends AppLocalizations {
   String get mbe99b13612 => 'Supprimer';
 
   @override
-  String get m9ba95f357c => 'Supprimer la version';
+  String get m9ba95f357c => 'Supprimer le build';
 
   @override
-  String get mb3157cbf2b => 'Supprimer cette version ?';
+  String get mb3157cbf2b => 'Supprimer ce build ?';
 
   @override
   String get m1c89558239 => 'Supprimer la compétence';
@@ -2568,10 +2568,10 @@ class AppLocalizationsFr extends AppLocalizations {
       'Le fichier existe. Pour remplacer, spécifiez overwrite=true.';
 
   @override
-  String get md8a38f5bc2 => 'Fiole de santé';
+  String get md8a38f5bc2 => 'Flacon de vie';
 
   @override
-  String get m5d2173db9c => 'Fiole de mana';
+  String get m5d2173db9c => 'Flacon de mana';
 
   @override
   String get m62d8c4932b => 'Chaos';
@@ -2642,7 +2642,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get mae1df2993a => 'Exporter XML';
 
   @override
-  String get mf49983ccf6 => 'Bouclier énergétique';
+  String get mf49983ccf6 => 'Bouclier d’énergie';
 
   @override
   String get m2b2c6df514 =>

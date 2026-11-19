@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../data/equipment_repository.dart';
 import '../data/item_art_catalog.dart';
 import '../domain/build_report.dart';
+import '../domain/item_name.dart';
 import 'core/app_text.dart';
 import 'core/motion.dart';
 import 'core/spark_theme.dart';
@@ -199,8 +200,11 @@ class _ItemEditorDialogState extends State<_ItemEditorDialog> {
     );
   }
 
-  Widget _itemLabel(JsonMap item) =>
-      AppText('${item['name']}', game: true, overflow: TextOverflow.ellipsis);
+  Widget _itemLabel(JsonMap item) => AppText(
+    itemDisplayName(item),
+    game: true,
+    overflow: TextOverflow.ellipsis,
+  );
 
   Widget _itemOption(JsonMap item) => Row(
     children: [

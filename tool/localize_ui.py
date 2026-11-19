@@ -216,6 +216,7 @@ def main():
     cache['ru'] = messages
     english = cache.setdefault('en', {})
     english.update({key: SEEDS[value] for key, value in messages.items() if value in SEEDS})
+    apply_reviewed(cache, messages)
     missing = {key: value for key, value in messages.items() if key not in english}
     if missing and args.translate: english.update(translate(missing, 'ru', 'en'))
     if any(key not in english for key in messages): raise ValueError('Не переведён базовый каталог')
@@ -242,6 +243,20 @@ def main():
     (OUTPUT / 'ui_sources.json').write_text(json.dumps(messages, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
     generate_lookup(messages, english)
     print('Строк:', len(messages))
+
+
+def apply_reviewed(cache, messages):
+    reviewed = json.loads((OUTPUT / 'ui_reviewed.json').read_text('utf-8'))
+    for key, source in messages.items():
+        if source in reviewed.get('english', {}):
+            cache['en'][key] = reviewed['english'][source]
+        values = reviewed['terms'].get(source)
+        if values is None:
+            continue
+        if len(values) != len(reviewed['locales']):
+            raise ValueError('Неполный редакторский перевод: ' + source)
+        for locale, value in zip(reviewed['locales'], values):
+            cache.setdefault(locale, {})[key] = value
 
 
 if __name__ == '__main__': main()

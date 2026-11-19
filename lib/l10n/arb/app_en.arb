@@ -40,7 +40,7 @@
     "description": "Lua вернул не все иконки",
     "placeholders": {}
   },
-  "m88beda68f0": "Lua returned an incomplete directory",
+  "m88beda68f0": "Lua returned an incomplete catalog",
   "@m88beda68f0": {
     "description": "Lua вернул неполный каталог",
     "placeholders": {}
@@ -60,12 +60,12 @@
     "description": "Lua назначил другой путь.",
     "placeholders": {}
   },
-  "mbb582808f3": "Lua did not return XML build",
+  "mbb582808f3": "Lua did not return the build XML",
   "@mbb582808f3": {
     "description": "Lua не вернул XML сборки",
     "placeholders": {}
   },
-  "ma83268a520": "Lua did not return class directory",
+  "ma83268a520": "Lua did not return the class catalog",
   "@ma83268a520": {
     "description": "Lua не вернул каталог классов",
     "placeholders": {}
@@ -100,7 +100,7 @@
     "description": "Lua не вернул сведения об узле",
     "placeholders": {}
   },
-  "m35f86d9c5e": "Lua did not return stone compatibility",
+  "m35f86d9c5e": "Lua did not return gem compatibility",
   "@m35f86d9c5e": {
     "description": "Lua не вернул совместимость камней",
     "placeholders": {}
@@ -110,7 +110,7 @@
     "description": "Lua не вернул счётчики очков дерева.",
     "placeholders": {}
   },
-  "mecc0fe5cd1": "Lua did not return characteristics",
+  "mecc0fe5cd1": "Lua did not return stats",
   "@mecc0fe5cd1": {
     "description": "Lua не вернул характеристики",
     "placeholders": {}
@@ -130,7 +130,7 @@
     "description": "Lua не смог применить этот этап",
     "placeholders": {}
   },
-  "mf01de15993": "Lua answers · {p0} classes · compatibility checked",
+  "mf01de15993": "Lua responding · {p0} classes · compatibility checked",
   "@mf01de15993": {
     "description": "Lua отвечает · {p0} классов · совместимость проверена",
     "placeholders": {
@@ -139,7 +139,7 @@
       }
     }
   },
-  "md9540a4b84": "Lua answers. Classes in the catalog: {p0}",
+  "md9540a4b84": "Lua responding. Classes in the catalog: {p0}",
   "@md9540a4b84": {
     "description": "Lua отвечает. Классов в каталоге: {p0}",
     "placeholders": {
@@ -148,7 +148,7 @@
       }
     }
   },
-  "m79df86397e": "Lua disabled",
+  "m79df86397e": "Lua disconnected",
   "@m79df86397e": {
     "description": "Lua отключён",
     "placeholders": {}
@@ -172,7 +172,7 @@
       }
     }
   },
-  "m9f82e876bd": "MCP can edit assemblies, manage the library, files, components and application. If you change the build manually, access will be disabled.",
+  "m9f82e876bd": "MCP can edit builds and manage the library, files, components and application. Switching builds manually disables access.",
   "@m9f82e876bd": {
     "description": "MCP может править сборки, управлять библиотекой, файлами, компонентами и приложением. Если вы смените сборку вручную, доступ отключится.",
     "placeholders": {}
@@ -222,7 +222,7 @@
     "description": "PoB не нашёл путь к узлу",
     "placeholders": {}
   },
-  "m917bb579d9": "PoB did not report the path to the assembly folder.",
+  "m917bb579d9": "PoB did not return the builds folder path.",
   "@m917bb579d9": {
     "description": "PoB не сообщил путь к папке сборок.",
     "placeholders": {}
@@ -242,7 +242,7 @@
     "description": "XML пуст",
     "placeholders": {}
   },
-  "me72be74923": "XML builds",
+  "me72be74923": "Build XML",
   "@me72be74923": {
     "description": "XML сборки",
     "placeholders": {}
@@ -570,7 +570,7 @@
     "description": "Все действия для этапа выполнены",
     "placeholders": {}
   },
-  "m4cd169b3d5": "All indicators Lua",
+  "m4cd169b3d5": "All Lua stats",
   "@m4cd169b3d5": {
     "description": "Все показатели Lua",
     "placeholders": {}
@@ -615,7 +615,7 @@
     "description": "Вставить найденный предмет",
     "placeholders": {}
   },
-  "m6bf3b12df4": "Insert XML assemblies. It will be checked and calculated in Lua.",
+  "m6bf3b12df4": "Paste the build XML. Lua will validate and calculate it.",
   "@m6bf3b12df4": {
     "description": "Вставьте XML сборки. Она будет проверена и рассчитана в Lua.",
     "placeholders": {}
@@ -695,7 +695,7 @@
     "description": "Выберите узлы и сохраните первый этап.",
     "placeholders": {}
   },
-  "m0513479f74": "Select a skill to select supports",
+  "m0513479f74": "Select a skill to find support gems",
   "@m0513479f74": {
     "description": "Выберите умение для подбора поддержек",
     "placeholders": {}
@@ -913,7 +913,7 @@
     "description": "Для этого умения нельзя добавить поддержки",
     "placeholders": {}
   },
-  "ma2ab6a340a": "There is no service pack for this platform",
+  "ma2ab6a340a": "No update package is available for this platform",
   "@ma2ab6a340a": {
     "description": "Для этой платформы нет пакета обновления",
     "placeholders": {}
@@ -957,7 +957,7 @@
     "description": "Добавить предмет",
     "placeholders": {}
   },
-  "mbc10505bdf": "Add a group of stones to get the skill calculation.",
+  "mbc10505bdf": "Add a gem group to calculate a skill.",
   "@mbc10505bdf": {
     "description": "Добавьте группу камней, чтобы получить расчёт умения.",
     "placeholders": {}
@@ -972,7 +972,7 @@
     "description": "Дождитесь завершения текущей операции",
     "placeholders": {}
   },
-  "mf0216281b8": "Additional cells",
+  "mf0216281b8": "Additional slots",
   "@mf0216281b8": {
     "description": "Дополнительные ячейки",
     "placeholders": {}
@@ -1125,7 +1125,7 @@
     "description": "Задачи этапа",
     "placeholders": {}
   },
-  "m540fb030a9": "Fasten indicators",
+  "m540fb030a9": "Pin stats",
   "@m540fb030a9": {
     "description": "Закрепить показатели",
     "placeholders": {}
@@ -1190,7 +1190,7 @@
     "description": "Здоровье",
     "placeholders": {}
   },
-  "mf869293c62": "Meaning",
+  "mf869293c62": "Value",
   "@mf869293c62": {
     "description": "Значение",
     "placeholders": {}
@@ -1240,12 +1240,12 @@
     "description": "Изменить этап",
     "placeholders": {}
   },
-  "md5a9ca934e": "Stone image not found",
+  "md5a9ca934e": "Gem image not found",
   "@md5a9ca934e": {
     "description": "Изображение камня не найдено",
     "placeholders": {}
   },
-  "m1ccb8777b8": "Stone image unavailable",
+  "m1ccb8777b8": "Gem image unavailable",
   "@m1ccb8777b8": {
     "description": "Изображение камня недоступно",
     "placeholders": {}
@@ -1255,7 +1255,7 @@
     "description": "Импорт персонажа из PoB",
     "placeholders": {}
   },
-  "m2c72186c20": "Imported assembly",
+  "m2c72186c20": "Imported build",
   "@m2c72186c20": {
     "description": "Импортированная сборка",
     "placeholders": {}
@@ -1338,12 +1338,12 @@
     "description": "Камень включён",
     "placeholders": {}
   },
-  "m05b721e615": "No stones found",
+  "m05b721e615": "No gems found",
   "@m05b721e615": {
     "description": "Камни не найдены",
     "placeholders": {}
   },
-  "m566d4d32d7": "Support stones",
+  "m566d4d32d7": "Support gems",
   "@m566d4d32d7": {
     "description": "Камни поддержки",
     "placeholders": {}
@@ -1403,7 +1403,7 @@
     "description": "Компоненты установлены. Можно подключить Lua.",
     "placeholders": {}
   },
-  "mcf9fbc3f41": "Transfer checksum did not match",
+  "mcf9fbc3f41": "Translation checksum mismatch",
   "@mcf9fbc3f41": {
     "description": "Контрольная сумма перевода не совпала",
     "placeholders": {}
@@ -1413,12 +1413,12 @@
     "description": "Крит. шанс",
     "placeholders": {}
   },
-  "m7bf311d808": "Left hand",
+  "m7bf311d808": "Off hand",
   "@m7bf311d808": {
     "description": "Левая рука",
     "placeholders": {}
   },
-  "m7825825def": "Left hand II",
+  "m7825825def": "Off hand II",
   "@m7825825def": {
     "description": "Левая рука II",
     "placeholders": {}
@@ -1513,12 +1513,12 @@
     "description": "НЕДАВНИЕ",
     "placeholders": {}
   },
-  "me113ee319c": "На очко",
+  "me113ee319c": "Per point",
   "@me113ee319c": {
     "description": "На очко",
     "placeholders": {}
   },
-  "m1d32e63718": "На очко: {p0}",
+  "m1d32e63718": "Per point: {p0}",
   "@m1d32e63718": {
     "description": "На очко: {p0}",
     "placeholders": {
@@ -1542,7 +1542,7 @@
     "description": "Набор оружия",
     "placeholders": {}
   },
-  "mff86959fa1": "Bib",
+  "mff86959fa1": "Body Armour",
   "@mff86959fa1": {
     "description": "Нагрудник",
     "placeholders": {}
@@ -1562,7 +1562,7 @@
     "description": "Название группы",
     "placeholders": {}
   },
-  "m51233393a5": "Название сборки",
+  "m51233393a5": "Build name",
   "@m51233393a5": {
     "description": "Название сборки",
     "placeholders": {}
@@ -1601,7 +1601,7 @@
     "description": "Найти папку PoB",
     "placeholders": {}
   },
-  "m302605cf87": "Найти сборку",
+  "m302605cf87": "Find build",
   "@m302605cf87": {
     "description": "Найти сборку",
     "placeholders": {}
@@ -1660,7 +1660,7 @@
     "description": "Не найден домашний каталог",
     "placeholders": {}
   },
-  "m3427d6812f": "Not recognized Lua",
+  "m3427d6812f": "Not recognized by Lua",
   "@m3427d6812f": {
     "description": "Не распознано Lua",
     "placeholders": {}
@@ -1854,7 +1854,7 @@
       }
     }
   },
-  "mbceeadc946": "Failed to check assembly folder.",
+  "mbceeadc946": "Could not check the builds folder.",
   "@mbceeadc946": {
     "description": "Не удалось проверить папку сборок.",
     "placeholders": {}
@@ -1916,7 +1916,7 @@
     "description": "Не удалось сохранить план прокачки",
     "placeholders": {}
   },
-  "m92233abcc1": "Failed to save topic.",
+  "m92233abcc1": "Could not save the theme.",
   "@m92233abcc1": {
     "description": "Не удалось сохранить тему.",
     "placeholders": {}
@@ -1950,7 +1950,7 @@
     "description": "Неверная запись каталога Lua",
     "placeholders": {}
   },
-  "m4412eb3d42": "Invalid boot continuation range",
+  "m4412eb3d42": "Invalid download resume range",
   "@m4412eb3d42": {
     "description": "Неверный диапазон продолжения загрузки",
     "placeholders": {}
@@ -2004,7 +2004,7 @@
     "description": "Неизвестный тип установки",
     "placeholders": {}
   },
-  "me90bfa5f82": "Unknown assembly library format",
+  "me90bfa5f82": "Unknown build library format",
   "@me90bfa5f82": {
     "description": "Неизвестный формат библиотеки сборок",
     "placeholders": {}
@@ -2034,7 +2034,7 @@
     "description": "Некорректная ссылка поиска",
     "placeholders": {}
   },
-  "m3f7db06826": "Incorrect texture of the finished wood",
+  "m3f7db06826": "Invalid passive tree texture",
   "@m3f7db06826": {
     "description": "Некорректная текстура готового дерева",
     "placeholders": {}
@@ -2059,7 +2059,7 @@
     "description": "Некорректный идентификатор заметок",
     "placeholders": {}
   },
-  "mc652a6b3a8": "Incorrect assembly ID",
+  "mc652a6b3a8": "Invalid build ID",
   "@mc652a6b3a8": {
     "description": "Некорректный идентификатор сборки",
     "placeholders": {}
@@ -2079,7 +2079,7 @@
     "description": "Некорректный план прокачки",
     "placeholders": {}
   },
-  "mbfa40c4fb1": "Incorrect path to PoB assembly.",
+  "mbfa40c4fb1": "Invalid PoB build path.",
   "@mbfa40c4fb1": {
     "description": "Некорректный путь к сборке PoB.",
     "placeholders": {}
@@ -2214,17 +2214,17 @@
     "description": "Нужна страница персонажа poe.ninja.",
     "placeholders": {}
   },
-  "m83e9fd7c8a": "Amulet I",
+  "m83e9fd7c8a": "Charm I",
   "@m83e9fd7c8a": {
     "description": "Оберег I",
     "placeholders": {}
   },
-  "mbe485a0526": "Amulet II",
+  "mbe485a0526": "Charm II",
   "@mbe485a0526": {
     "description": "Оберег II",
     "placeholders": {}
   },
-  "m4a1afe7893": "Amulet III",
+  "m4a1afe7893": "Charm III",
   "@m4a1afe7893": {
     "description": "Оберег III",
     "placeholders": {}
@@ -2234,7 +2234,7 @@
     "description": "Обновите MCP в разделе «Компоненты».",
     "placeholders": {}
   },
-  "m616c984fe4": "Update MCP for stone catalog and compatibility",
+  "m616c984fe4": "Update MCP for the gem catalog and compatibility checks",
   "@m616c984fe4": {
     "description": "Обновите MCP для каталога камней и совместимости",
     "placeholders": {}
@@ -2249,7 +2249,7 @@
     "description": "Обновите MCP для оригинальных иконок и совместимости",
     "placeholders": {}
   },
-  "md423f03f4f": "Update MCP for original stone icons",
+  "md423f03f4f": "Update MCP for original gem icons",
   "@md423f03f4f": {
     "description": "Обновите MCP для оригинальных иконок камней",
     "placeholders": {}
@@ -2269,7 +2269,7 @@
     "description": "Обновите MCP для редактора экипировки",
     "placeholders": {}
   },
-  "md708edb156": "Update MCP item comparison",
+  "md708edb156": "Update MCP for item comparison",
   "@md708edb156": {
     "description": "Обновите MCP для сравнения предметов",
     "placeholders": {}
@@ -2358,7 +2358,7 @@
     "description": "Ожидалось описание предмета из Lua",
     "placeholders": {}
   },
-  "mc3bde350c7": "Expected XML Path of Building builds for PoE 2.",
+  "mc3bde350c7": "Expected a Path of Building XML build for PoE 2.",
   "@mc3bde350c7": {
     "description": "Ожидался XML сборки Path of Building для PoE 2.",
     "placeholders": {}
@@ -2383,7 +2383,7 @@
     "description": "Описание выпуска отсутствует",
     "placeholders": {}
   },
-  "m0736fbba4d": "Weapons",
+  "m0736fbba4d": "Weapon",
   "@m0736fbba4d": {
     "description": "Оружие",
     "placeholders": {}
@@ -2473,7 +2473,7 @@
     "description": "Отмена",
     "placeholders": {}
   },
-  "mb9b86803ad": "Cancel action",
+  "mb9b86803ad": "Undo",
   "@mb9b86803ad": {
     "description": "Отменить действие",
     "placeholders": {}
@@ -2518,7 +2518,7 @@
     "description": "Очищаем профиль…",
     "placeholders": {}
   },
-  "m6cc0ad9655": "Glasses",
+  "m6cc0ad9655": "Points",
   "@m6cc0ad9655": {
     "description": "Очки",
     "placeholders": {}
@@ -2604,7 +2604,7 @@
     "description": "Первая сборка",
     "placeholders": {}
   },
-  "m8188a57c48": "Transfer is larger than expected size",
+  "m8188a57c48": "Translation exceeds the expected size",
   "@m8188a57c48": {
     "description": "Перевод больше ожидаемого размера",
     "placeholders": {}
@@ -2648,12 +2648,12 @@
     "description": "Перенос в список добавляет поддержку, обратно — убирает",
     "placeholders": {}
   },
-  "m79ab5f1286": "Convert to Lua",
+  "m79ab5f1286": "Recalculate in Lua",
   "@m79ab5f1286": {
     "description": "Пересчитать в Lua",
     "placeholders": {}
   },
-  "m24ad4cc4a3": "Drag the stone here or click on the icon to configure",
+  "m24ad4cc4a3": "Drag a gem here or select its icon to configure it",
   "@m24ad4cc4a3": {
     "description": "Перетащите камень сюда или нажмите на иконку для настройки",
     "placeholders": {}
@@ -2688,12 +2688,12 @@
     "description": "По умолчанию",
     "placeholders": {}
   },
-  "m5189135a61": "Repeat",
+  "m5189135a61": "Retry",
   "@m5189135a61": {
     "description": "Повторить",
     "placeholders": {}
   },
-  "madb0c613d6": "Repeat action",
+  "madb0c613d6": "Redo",
   "@madb0c613d6": {
     "description": "Повторить действие",
     "placeholders": {}
@@ -2813,7 +2813,7 @@
     "description": "Поиск откроется на официальном сайте",
     "placeholders": {}
   },
-  "mbf3c9df646": "Indicators",
+  "mbf3c9df646": "Stats",
   "@mbf3c9df646": {
     "description": "Показатели",
     "placeholders": {}
@@ -2828,7 +2828,7 @@
     "description": "Показатели текущего состояния сборки",
     "placeholders": {}
   },
-  "mfdf0487fc4": "Indicator",
+  "mfdf0487fc4": "Stat",
   "@mfdf0487fc4": {
     "description": "Показатель",
     "placeholders": {}
@@ -2873,7 +2873,7 @@
     "description": "Пользовательские модификаторы",
     "placeholders": {}
   },
-  "md90da4d82c": "Try recalculating the assembly.",
+  "md90da4d82c": "Try recalculating the build.",
   "@md90da4d82c": {
     "description": "Попробуйте пересчитать сборку.",
     "placeholders": {}
@@ -2945,7 +2945,7 @@
       }
     }
   },
-  "m7ba6aa7f66": "Assembly item",
+  "m7ba6aa7f66": "Item from build",
   "@m7ba6aa7f66": {
     "description": "Предмет из сборки",
     "placeholders": {}
@@ -3047,7 +3047,7 @@
     "description": "Применить этап",
     "placeholders": {}
   },
-  "mae2ea1c701": "Preview",
+  "mae2ea1c701": "Item preview",
   "@mae2ea1c701": {
     "description": "Примерка",
     "placeholders": {}
@@ -3076,7 +3076,7 @@
     "description": "Проверить",
     "placeholders": {}
   },
-  "mf04117e11b": "Check profile location",
+  "mf04117e11b": "Check profile disk usage",
   "@mf04117e11b": {
     "description": "Проверить место в профиле",
     "placeholders": {}
@@ -3218,7 +3218,7 @@
     "description": "Работают в окне приложения. Нажмите на сочетание, чтобы изменить его.",
     "placeholders": {}
   },
-  "m0964e41783": "Working assembly saved; failed to restore Lua: {p0}",
+  "m0964e41783": "The working build was saved; could not restore Lua: {p0}",
   "@m0964e41783": {
     "description": "Рабочая сборка сохранена; не удалось восстановить Lua: {p0}",
     "placeholders": {
@@ -3338,7 +3338,7 @@
       }
     }
   },
-  "m8d7bd9deb6": "Health regeneration",
+  "m8d7bd9deb6": "Life regeneration",
   "@m8d7bd9deb6": {
     "description": "Регенерация здоровья",
     "placeholders": {}
@@ -3412,7 +3412,7 @@
     "description": "Самоцветы",
     "placeholders": {}
   },
-  "m8c39bb691b": "Assembly",
+  "m8c39bb691b": "Build",
   "@m8c39bb691b": {
     "description": "Сборка",
     "placeholders": {}
@@ -3451,7 +3451,7 @@
     "description": "Сборка изменится после нажатия «Применить»",
     "placeholders": {}
   },
-  "m5c8bb47697": "Assembly not found",
+  "m5c8bb47697": "Build not found",
   "@m5c8bb47697": {
     "description": "Сборка не найдена",
     "placeholders": {}
@@ -3466,12 +3466,12 @@
     "description": "Сборка по ссылке не найдена.",
     "placeholders": {}
   },
-  "mc27d8aad03": "Assembly calculated by original Lua",
+  "mc27d8aad03": "Build calculated by original Lua",
   "@mc27d8aad03": {
     "description": "Сборка рассчитана исходным Lua",
     "placeholders": {}
   },
-  "med0b7c459c": "An assembly with the same name already exists.",
+  "med0b7c459c": "A build with this name already exists.",
   "@med0b7c459c": {
     "description": "Сборка с таким именем уже существует.",
     "placeholders": {}
@@ -3665,7 +3665,7 @@
     "description": "Сначала выберите версии обоих компонентов",
     "placeholders": {}
   },
-  "m93e0cd3908": "First open the assembly.",
+  "m93e0cd3908": "Open a build first.",
   "@m93e0cd3908": {
     "description": "Сначала откройте сборку.",
     "placeholders": {}
@@ -3680,7 +3680,7 @@
     "description": "Сначала создайте или откройте сборку.",
     "placeholders": {}
   },
-  "m59b50cc146": "Remove support stones first",
+  "m59b50cc146": "Remove support gems first",
   "@m59b50cc146": {
     "description": "Сначала уберите камни поддержки",
     "placeholders": {}
@@ -3695,7 +3695,7 @@
     "description": "Снимутся",
     "placeholders": {}
   },
-  "md4b51f7a04": "Remove",
+  "md4b51f7a04": "Unequip",
   "@md4b51f7a04": {
     "description": "Снять",
     "placeholders": {}
@@ -3720,12 +3720,12 @@
     "description": "Соединить дерево",
     "placeholders": {}
   },
-  "m7ab8e7349a": "Create a character or unlock XML from PoB. All indicators will be calculated by Lua.",
+  "m7ab8e7349a": "Create a character or open an XML build from PoB. Lua will calculate all stats.",
   "@m7ab8e7349a": {
     "description": "Создайте персонажа или откройте XML из PoB. Все показатели рассчитает Lua.",
     "placeholders": {}
   },
-  "mb724f3e4cd": "Create a character or unlock XML from PoB. Successful calculations are saved automatically.",
+  "mb724f3e4cd": "Create a character or open an XML build from PoB. Successful calculations are saved automatically.",
   "@mb724f3e4cd": {
     "description": "Создайте персонажа или откройте XML из PoB. Успешные расчёты сохраняются автоматически.",
     "placeholders": {}
@@ -3735,7 +3735,7 @@
     "description": "Создать копию",
     "placeholders": {}
   },
-  "md79906423b": "Create assembly",
+  "md79906423b": "Create build",
   "@md79906423b": {
     "description": "Создать сборку",
     "placeholders": {}
@@ -3770,7 +3770,7 @@
     "description": "Сохранить и рассчитать",
     "placeholders": {}
   },
-  "mfca5aabf85": "Save step",
+  "mfca5aabf85": "Save milestone",
   "@mfca5aabf85": {
     "description": "Сохранить этап",
     "placeholders": {}
@@ -3849,7 +3849,7 @@
     "description": "Стандартная папка PoB не найдена. Выберите папку вручную.",
     "placeholders": {}
   },
-  "mf7eaffec2f": "Issues page",
+  "mf7eaffec2f": "Releases page",
   "@mf7eaffec2f": {
     "description": "Страница выпусков",
     "placeholders": {}
@@ -3869,7 +3869,7 @@
     "description": "Текст предмета",
     "placeholders": {}
   },
-  "m682f961a07": "Topic",
+  "m682f961a07": "Theme",
   "@m682f961a07": {
     "description": "Тема",
     "placeholders": {}
@@ -3953,7 +3953,7 @@
     "description": "Удалить умение",
     "placeholders": {}
   },
-  "md9dc2e9ec2": "Delete step",
+  "md9dc2e9ec2": "Delete milestone",
   "@md9dc2e9ec2": {
     "description": "Удалить этап",
     "placeholders": {}
@@ -4113,7 +4113,7 @@
     "description": "Установите компоненты и подключите Lua",
     "placeholders": {}
   },
-  "m4d9acf3506": "Install the components to open the assembly and get the real calculation.",
+  "m4d9acf3506": "Install the components to open a build and calculate it with Lua.",
   "@m4d9acf3506": {
     "description": "Установите компоненты, чтобы открыть сборку и получить настоящий расчёт.",
     "placeholders": {}
@@ -4171,12 +4171,12 @@
     "description": "Файл существует. Для замены укажите overwrite=true.",
     "placeholders": {}
   },
-  "md8a38f5bc2": "Vial of Health",
+  "md8a38f5bc2": "Life flask",
   "@md8a38f5bc2": {
     "description": "Флакон здоровья",
     "placeholders": {}
   },
-  "m5d2173db9c": "Mana Vial",
+  "m5d2173db9c": "Mana flask",
   "@m5d2173db9c": {
     "description": "Флакон маны",
     "placeholders": {}
@@ -4310,7 +4310,7 @@
     "description": "Эта поддержка не подходит выбранному умению",
     "placeholders": {}
   },
-  "mdfa94e9fd6": "This assembly is already in the PoB library. Choose a different name for the copy.",
+  "mdfa94e9fd6": "This build is already in the PoB library. Choose another name for the copy.",
   "@mdfa94e9fd6": {
     "description": "Эта сборка уже есть в библиотеке PoB. Выберите другое имя для копии.",
     "placeholders": {}
@@ -4320,7 +4320,7 @@
     "description": "Этап завершён",
     "placeholders": {}
   },
-  "mca16b5fe71": "These settings affect build performance",
+  "mca16b5fe71": "These settings affect build stats",
   "@mca16b5fe71": {
     "description": "Эти настройки влияют на показатели сборки",
     "placeholders": {}

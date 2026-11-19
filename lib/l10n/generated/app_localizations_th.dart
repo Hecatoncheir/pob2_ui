@@ -229,7 +229,7 @@ class AppLocalizationsTh extends AppLocalizations {
   }
 
   @override
-  String get m4fae346e6c => 'มันเป็นอย่างนั้น';
+  String get m4fae346e6c => 'ก่อน';
 
   @override
   String get m84e960d40a => 'งบประมาณ';
@@ -501,7 +501,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get me3c3ea3a85 => 'ไม่สามารถดำเนินการได้';
 
   @override
-  String get me1daa9e250 => 'ต้นไม้';
+  String get me1daa9e250 => 'ผังพาสซีฟ';
 
   @override
   String m0e1306f92c(String p0) {
@@ -579,7 +579,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get me598ae02b1 => 'เพิ่มโหนดสำคัญ';
 
   @override
-  String get m9cef26392f => 'เพิ่มรายการ';
+  String get m9cef26392f => 'เพิ่มไอเทม';
 
   @override
   String get mbc10505bdf => 'เพิ่มกลุ่มหินเพื่อรับการคำนวณทักษะ';
@@ -612,7 +612,7 @@ class AppLocalizationsTh extends AppLocalizations {
   }
 
   @override
-  String get m41a4fa8b6a => 'วิญญาณ';
+  String get m41a4fa8b6a => 'พลังวิญญาณ';
 
   @override
   String get m974eae850c => 'หาก PoB ขอให้บันทึกบิลด์ ให้ตอบในหน้าต่าง PoB';
@@ -689,7 +689,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get ma7a4033657 => 'ปิด';
 
   @override
-  String get mbfc7b67eb5 => 'เปลี่ยนรายการ';
+  String get mbfc7b67eb5 => 'เปลี่ยนไอเทม';
 
   @override
   String get md4bac1da57 => 'บันทึกของขั้น';
@@ -713,10 +713,10 @@ class AppLocalizationsTh extends AppLocalizations {
   String get mfac4030099 => 'งานสร้างของคุณจะอยู่ที่นี่';
 
   @override
-  String get m0cc21de8b8 => 'สุขภาพ';
+  String get m0cc21de8b8 => 'พลังชีวิต';
 
   @override
-  String get mf869293c62 => 'ความหมาย';
+  String get mf869293c62 => 'ค่า';
 
   @override
   String get mf6a527732e => 'ค่าจากรายงาน Lua PoB ปัจจุบัน';
@@ -770,7 +770,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m4376254217 => 'นำเข้าผ่านลิงก์';
 
   @override
-  String get ma8f8e11f0c => 'ความฉลาด';
+  String get ma8f8e11f0c => 'Intelligence';
 
   @override
   String get mc9c8c4828a => 'ไม่ได้เชื่อมต่ออินเทอร์เฟซ';
@@ -807,7 +807,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m05b721e615 => 'ไม่พบหิน';
 
   @override
-  String get m566d4d32d7 => 'หินสนับสนุน';
+  String get m566d4d32d7 => 'หินเสริม';
 
   @override
   String get md0ef3540b0 => 'แค็ตตาล็อก';
@@ -849,16 +849,16 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m6916d088f3 => 'คริติคอล โอกาส';
 
   @override
-  String get m7bf311d808 => 'มือซ้าย';
+  String get m7bf311d808 => 'มือรอง';
 
   @override
-  String get m7825825def => 'มือซ้าย II';
+  String get m7825825def => 'มือรอง II';
 
   @override
   String get m1190db95a3 => 'ลีก';
 
   @override
-  String get m609fc60c74 => 'ความคล่องแคล่ว';
+  String get m609fc60c74 => 'Dexterity';
 
   @override
   String get m5da5bd2f47 => 'การเชื่อมต่ออินเทอร์เฟซท้องถิ่นพร้อมการคำนวณ';
@@ -876,7 +876,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get mf33c9a814c => 'สูงสุด';
 
   @override
-  String get mc73618fdf4 => 'มานะ';
+  String get mc73618fdf4 => 'มานา';
 
   @override
   String get m6c50317db8 => 'เวิร์คช็อป';
@@ -897,7 +897,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m22e1e2c7ad => 'ตัวคูณคริติคอล';
 
   @override
-  String get m13e9f80144 => 'งานสร้างของฉัน';
+  String get m13e9f80144 => 'บิลด์ของฉัน';
 
   @override
   String get m16d1252699 => 'สายฟ้า';
@@ -910,11 +910,11 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m204751ca09 => 'ล่าสุด';
 
   @override
-  String get me113ee319c => 'ไม่เป็นไร';
+  String get me113ee319c => 'ต่อแต้ม';
 
   @override
   String m1d32e63718(String p0) {
-    return 'ไม่มี: $p0';
+    return 'ต่อแต้ม: $p0';
   }
 
   @override
@@ -927,7 +927,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get mf71a076c69 => 'ชุดอาวุธ';
 
   @override
-  String get mff86959fa1 => 'ผ้ากันเปื้อน';
+  String get mff86959fa1 => 'เกราะ';
 
   @override
   String get m38509ab991 => 'กดร่วมกับ Ctrl, Alt หรือ Cmd Esc - ยกเลิก';
@@ -939,7 +939,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get md45e66ab55 => 'ชื่อกลุ่ม';
 
   @override
-  String get m51233393a5 => 'สโมสรฟุตบอล';
+  String get m51233393a5 => 'ชื่อบิลด์';
 
   @override
   String get m378e9ed8fc => 'ชื่อขั้น';
@@ -962,7 +962,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m85b24dddaa => 'ค้นหาโฟลเดอร์ PoB';
 
   @override
-  String get m302605cf87 => 'ไม่เป็นไร';
+  String get m302605cf87 => 'ค้นหาบิลด์';
 
   @override
   String get mf211301b5e => 'ค้นหาโหนด';
@@ -1322,13 +1322,13 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m92782507e5 => 'ต้องใช้หน้าตัวละครของ poe.ninja';
 
   @override
-  String get m83e9fd7c8a => 'พระเครื่อง I';
+  String get m83e9fd7c8a => 'เครื่องราง I';
 
   @override
-  String get mbe485a0526 => 'พระเครื่อง II';
+  String get mbe485a0526 => 'เครื่องราง II';
 
   @override
-  String get m4a1afe7893 => 'พระเครื่อง III';
+  String get m4a1afe7893 => 'เครื่องราง III';
 
   @override
   String get md65eeeeaab => 'อัปเดต MCP ในส่วนส่วนประกอบ';
@@ -1481,7 +1481,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m8fbe9b75cb => 'ยกเลิก';
 
   @override
-  String get mb9b86803ad => 'ยกเลิกการกระทำ';
+  String get mb9b86803ad => 'เลิกทำ';
 
   @override
   String get m1731619efa => 'การออกแบบ';
@@ -1508,7 +1508,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m27234756aa => 'กำลังล้างโปรไฟล์...';
 
   @override
-  String get m6cc0ad9655 => 'แว่น';
+  String get m6cc0ad9655 => 'แต้ม';
 
   @override
   String mbe045b91a6(String p0) {
@@ -1585,7 +1585,7 @@ class AppLocalizationsTh extends AppLocalizations {
       'การย้ายไปยังรายการจะเพิ่มการสนับสนุน การย้อนกลับจะเป็นการลบออก';
 
   @override
-  String get m79ab5f1286 => 'แปลงเป็น Lua';
+  String get m79ab5f1286 => 'คำนวณใหม่ด้วย Lua';
 
   @override
   String get m24ad4cc4a3 => 'ลากหินมาที่นี่หรือคลิกที่ไอคอนเพื่อกำหนดค่า';
@@ -1609,10 +1609,10 @@ class AppLocalizationsTh extends AppLocalizations {
   String get mfd0560ebbf => 'ค่าเริ่มต้น';
 
   @override
-  String get m5189135a61 => 'ทำซ้ำ';
+  String get m5189135a61 => 'ลองอีกครั้ง';
 
   @override
-  String get madb0c613d6 => 'ทำซ้ำการกระทำ';
+  String get madb0c613d6 => 'ทำซ้ำ';
 
   @override
   String get m298e41327f => 'ลองดาวน์โหลดอีกครั้ง';
@@ -1684,7 +1684,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get md133559e02 => 'การค้นหาจะเปิดขึ้นบนเว็บไซต์อย่างเป็นทางการ';
 
   @override
-  String get mbf3c9df646 => 'ตัวบ่งชี้';
+  String get mbf3c9df646 => 'ค่าสถานะ';
 
   @override
   String get mc7fc04e5df => 'ตัวบ่งชี้จะไม่เปลี่ยนแปลง';
@@ -1693,7 +1693,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m53788df38a => 'ตัวบ่งชี้สถานะการสร้างปัจจุบัน';
 
   @override
-  String get mfdf0487fc4 => 'ตัวบ่งชี้';
+  String get mfdf0487fc4 => 'ค่าสถานะ';
 
   @override
   String get m21a6bb1840 => 'แสดงทั้งต้นไม้';
@@ -1762,13 +1762,13 @@ class AppLocalizationsTh extends AppLocalizations {
   }
 
   @override
-  String get m7ba6aa7f66 => 'รายการประกอบ';
+  String get m7ba6aa7f66 => 'ไอเทมในบิลด์';
 
   @override
   String get m9ce35b77ce => 'รายการไม่เหมาะกับช่องนี้';
 
   @override
-  String get m10e4fefa12 => 'รายการ';
+  String get m10e4fefa12 => 'ไอเทม';
 
   @override
   String get mad582b726d => 'ตัวอย่างการทำความสะอาดโปรไฟล์';
@@ -1807,7 +1807,7 @@ class AppLocalizationsTh extends AppLocalizations {
   }
 
   @override
-  String get me15f960d93 => 'Apply';
+  String get me15f960d93 => 'นำไปใช้';
 
   @override
   String get m84028563e4 => 'นำไปใช้และคำนวณ';
@@ -1822,7 +1822,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m711164636a => 'ใช้ขั้นตอนนี้';
 
   @override
-  String get mae2ea1c701 => 'กำลังพยายามอยู่';
+  String get mae2ea1c701 => 'ดูตัวอย่างไอเทม';
 
   @override
   String get m6aab9e2cb4 => 'Suspend';
@@ -1845,7 +1845,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m93b08f7b14 => 'ตรวจสอบการอัปเดต';
 
   @override
-  String get me269e51359 => 'ตรวจสอบรายการ';
+  String get me269e51359 => 'ตรวจสอบไอเทม';
 
   @override
   String get m87cb1172f2 => 'ตรวจสอบการเชื่อมต่อ';
@@ -2033,7 +2033,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m49db3482db => 'จิวเวล';
 
   @override
-  String get m8c39bb691b => 'การประกอบ';
+  String get m8c39bb691b => 'บิลด์';
 
   @override
   String get m15d7545f05 =>
@@ -2120,7 +2120,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m32bb1c680f => 'ปิดเซสชันแล้ว';
 
   @override
-  String get m69c1590a47 => 'ความแรง';
+  String get m69c1590a47 => 'Strength';
 
   @override
   String get m3860f59770 => 'ตามระบบ';
@@ -2205,7 +2205,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m5ebbc9d7a5 => 'นำออก';
 
   @override
-  String get md4b51f7a04 => 'ลบ';
+  String get md4b51f7a04 => 'ถอด';
 
   @override
   String get mf3f1d96087 => 'คุณสมบัติของตัวเอง';
@@ -2232,7 +2232,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get mc42ccf5a81 => 'สร้างสำเนา';
 
   @override
-  String get md79906423b => 'สร้างแอสเซมบลี';
+  String get md79906423b => 'สร้างบิลด์';
 
   @override
   String get m62bb423bd3 => 'แนวต้าน';
@@ -2294,13 +2294,13 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m91d6208508 => 'ยังไม่มีการเผยแพร่ที่เสถียร';
 
   @override
-  String get md3ae3e1986 => 'กลายเป็น';
+  String get md3ae3e1986 => 'หลัง';
 
   @override
   String get mabdae6b126 => 'ไม่พบโฟลเดอร์เริ่มต้นของ PoB โปรดเลือกโฟลเดอร์เอง';
 
   @override
-  String get mf7eaffec2f => 'หน้าปัญหา';
+  String get mf7eaffec2f => 'หน้าเวอร์ชัน';
 
   @override
   String get m4ef88e033d => 'คุณสมบัติสรุป';
@@ -2312,7 +2312,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get mcda85a1ad9 => 'ข้อความรายการ';
 
   @override
-  String get m682f961a07 => 'หัวข้อ';
+  String get m682f961a07 => 'ธีม';
 
   @override
   String get m7242065c34 => 'ประเภทศัตรู';
@@ -2356,7 +2356,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m9ba95f357c => 'ลบบิลด์';
 
   @override
-  String get mb3157cbf2b => 'ลบบิลด์นี้ใช่ไหม';
+  String get mb3157cbf2b => 'ลบบิลด์นี้หรือไม่?';
 
   @override
   String get m1c89558239 => 'ลบสกิล';
@@ -2442,7 +2442,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m9c6708a566 => 'ความเสียหาย/การป้องกัน';
 
   @override
-  String get m908b6d3a83 => 'การกำหนดค่า';
+  String get m908b6d3a83 => 'การตั้งค่า';
 
   @override
   String get m288545991b => 'ไม่พบเงื่อนไข';
@@ -2495,10 +2495,10 @@ class AppLocalizationsTh extends AppLocalizations {
       'มีไฟล์อยู่ หากต้องการแทนที่ ให้ระบุ overwrite=true';
 
   @override
-  String get md8a38f5bc2 => 'ขวดเพื่อสุขภาพ';
+  String get md8a38f5bc2 => 'ขวดยาพลังชีวิต';
 
   @override
-  String get m5d2173db9c => 'ขวดมานา';
+  String get m5d2173db9c => 'ขวดยามานา';
 
   @override
   String get m62d8c4932b => 'ความโกลาหล';

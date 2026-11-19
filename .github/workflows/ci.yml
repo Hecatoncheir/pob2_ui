@@ -173,11 +173,15 @@ jobs:
             args+=(--lock tool/components-lock.json)
           fi
           dart run tool/smoke.dart "${args[@]}" | tee build/review/components.json
-      - name: Скачать установщик v0.8.0 для проверки обновления
+      - name: Проверить игровые словари десяти языков
+        if: inputs.cold_install != true
+        shell: bash
+        run: dart run tool/check_languages.dart "$RUNNER_TEMP/pob2-lua-smoke"
+      - name: Скачать установщик v0.11.0 для проверки обновления
         shell: bash
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh release download v0.8.0 --dir build/previous --pattern '*${{ matrix.target }}*'
+        run: gh release download v0.11.0 --dir build/previous --pattern '*${{ matrix.target }}*'
       - name: Проверить фактическое завершение через MCP
         if: inputs.cold_install != true
         shell: bash
@@ -301,6 +305,15 @@ jobs:
           POB2_UI_HOME: ${{ runner.temp }}/pob2-lua-smoke
           POB2_UI_REQUIRE_SKILL_CONTROLS: ${{ inputs.locked_components || false }}
         run: xvfb-run -a flutter test integration_test/mcp_editor_test.dart -d linux --no-pub
+      - name: Названия предметов и десять языков с настоящим Lua
+        if: inputs.cold_install != true
+        shell: bash
+        env:
+          POB2_UI_HOME: ${{ runner.temp }}/pob2-lua-smoke
+        run: |
+          runner=()
+          if [[ "$RUNNER_OS" == Linux ]]; then runner=(xvfb-run -a); fi
+          "${runner[@]}" flutter test integration_test/item_names_test.dart -d ${{ matrix.platform }} --no-pub
       - name: Проверить сохранение окна
         if: inputs.cold_install != true && runner.os == 'Windows'
         run: python -X utf8 tool/check_window_state.py

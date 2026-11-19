@@ -63,7 +63,7 @@ class ItemDescription extends StatelessWidget {
           )
         else
           PoBText(
-            '${line['text'] ?? ''}',
+            inspection.displayText('${line['text'] ?? ''}'),
             size: (line['size'] as num? ?? 14) >= 20 ? 18 : 14,
             bold: (line['size'] as num? ?? 14) >= 20,
             textAlign: TextAlign.center,

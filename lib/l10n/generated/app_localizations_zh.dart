@@ -225,7 +225,7 @@ class AppLocalizationsZh extends AppLocalizations {
   }
 
   @override
-  String get m4fae346e6c => '這是';
+  String get m4fae346e6c => '變更前';
 
   @override
   String get m84e960d40a => '預算';
@@ -495,7 +495,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get me3c3ea3a85 => '操作不可用';
 
   @override
-  String get me1daa9e250 => '樹';
+  String get me1daa9e250 => '天賦樹';
 
   @override
   String m0e1306f92c(String p0) {
@@ -568,7 +568,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get me598ae02b1 => '新增關鍵天賦節點';
 
   @override
-  String get m9cef26392f => '新增項目';
+  String get m9cef26392f => '新增物品';
 
   @override
   String get mbc10505bdf => '增加一組石頭以獲得技能計算。';
@@ -601,7 +601,7 @@ class AppLocalizationsZh extends AppLocalizations {
   }
 
   @override
-  String get m41a4fa8b6a => '精神';
+  String get m41a4fa8b6a => '精魂';
 
   @override
   String get m974eae850c => '如果 PoB 詢問是否儲存流派，請在它的視窗中回應。';
@@ -677,7 +677,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get ma7a4033657 => '關閉';
 
   @override
-  String get mbfc7b67eb5 => '替換項目';
+  String get mbfc7b67eb5 => '替換物品';
 
   @override
   String get md4bac1da57 => '階段備註';
@@ -701,10 +701,10 @@ class AppLocalizationsZh extends AppLocalizations {
   String get mfac4030099 => '您的建造將位於此處';
 
   @override
-  String get m0cc21de8b8 => '健康';
+  String get m0cc21de8b8 => '生命';
 
   @override
-  String get mf869293c62 => '意義';
+  String get mf869293c62 => '數值';
 
   @override
   String get mf6a527732e => '目前 Lua PoB 報告中的值。';
@@ -758,7 +758,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m4376254217 => '透過連結導入';
 
   @override
-  String get ma8f8e11f0c => '情報';
+  String get ma8f8e11f0c => '智慧';
 
   @override
   String get mc9c8c4828a => '介面未連接。';
@@ -795,7 +795,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m05b721e615 => '沒有找到石頭';
 
   @override
-  String get m566d4d32d7 => '支撐石';
+  String get m566d4d32d7 => '輔助寶石';
 
   @override
   String get md0ef3540b0 => '目錄';
@@ -837,10 +837,10 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m6916d088f3 => '暴擊。機會';
 
   @override
-  String get m7bf311d808 => '左手';
+  String get m7bf311d808 => '副手';
 
   @override
-  String get m7825825def => '左手 II';
+  String get m7825825def => '副手 II';
 
   @override
   String get m1190db95a3 => '聯賽';
@@ -864,7 +864,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get mf33c9a814c => '最大值';
 
   @override
-  String get mc73618fdf4 => '法力';
+  String get mc73618fdf4 => '魔力';
 
   @override
   String get m6c50317db8 => '工作坊';
@@ -885,7 +885,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m22e1e2c7ad => '爆擊倍數';
 
   @override
-  String get m13e9f80144 => '我的構建';
+  String get m13e9f80144 => '我的配置';
 
   @override
   String get m16d1252699 => '閃電';
@@ -897,11 +897,11 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m204751ca09 => '最近';
 
   @override
-  String get me113ee319c => 'На очко';
+  String get me113ee319c => '每點';
 
   @override
   String m1d32e63718(String p0) {
-    return 'На очко：$p0';
+    return '每點：$p0';
   }
 
   @override
@@ -911,10 +911,10 @@ class AppLocalizationsZh extends AppLocalizations {
   String get me55cf2491b => '天賦樹配置';
 
   @override
-  String get mf71a076c69 => '武器套裝';
+  String get mf71a076c69 => '武器組';
 
   @override
-  String get mff86959fa1 => '圍兜';
+  String get mff86959fa1 => '胸甲';
 
   @override
   String get m38509ab991 => '按 Ctrl、Alt 或 Cmd 組合鍵。 Esc - 取消。';
@@ -926,7 +926,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get md45e66ab55 => '群組名稱';
 
   @override
-  String get m51233393a5 => 'Название сборки';
+  String get m51233393a5 => '配置名稱';
 
   @override
   String get m378e9ed8fc => '階段名稱';
@@ -949,7 +949,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m85b24dddaa => '尋找 PoB 資料夾';
 
   @override
-  String get m302605cf87 => 'Найти сборку';
+  String get m302605cf87 => '搜尋配置';
 
   @override
   String get mf211301b5e => '找出節點';
@@ -1293,7 +1293,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get maf3cd75c2f => '新的元件組合變更了目前開啟之流派的職業';
 
   @override
-  String get m282cf4ee16 => '新版本';
+  String get m282cf4ee16 => '新增配置';
 
   @override
   String get ma76e43569d => '新組合';
@@ -1308,13 +1308,13 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m92782507e5 => '需要 poe.ninja 的角色頁面。';
 
   @override
-  String get m83e9fd7c8a => '護身符 I';
+  String get m83e9fd7c8a => '護符 I';
 
   @override
-  String get mbe485a0526 => '護身符 II';
+  String get mbe485a0526 => '護符 II';
 
   @override
-  String get m4a1afe7893 => '護身符 III';
+  String get m4a1afe7893 => '護符 III';
 
   @override
   String get md65eeeeaab => '更新「元件」部分中的 MCP。';
@@ -1463,7 +1463,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m8fbe9b75cb => '取消';
 
   @override
-  String get mb9b86803ad => '取消操作';
+  String get mb9b86803ad => '復原';
 
   @override
   String get m1731619efa => '設計';
@@ -1490,7 +1490,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m27234756aa => '正在清除個人資料...';
 
   @override
-  String get m6cc0ad9655 => '眼鏡';
+  String get m6cc0ad9655 => '點數';
 
   @override
   String mbe045b91a6(String p0) {
@@ -1566,7 +1566,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m9af13a3399 => '移動到列表會添加支持，向後移動會刪除它';
 
   @override
-  String get m79ab5f1286 => '轉換為 Lua';
+  String get m79ab5f1286 => '使用 Lua 重新計算';
 
   @override
   String get m24ad4cc4a3 => '將石頭拖曳到此處或點擊圖示進行配置';
@@ -1590,10 +1590,10 @@ class AppLocalizationsZh extends AppLocalizations {
   String get mfd0560ebbf => '默認';
 
   @override
-  String get m5189135a61 => '重複';
+  String get m5189135a61 => '重試';
 
   @override
-  String get madb0c613d6 => '重複操作';
+  String get madb0c613d6 => '重做';
 
   @override
   String get m298e41327f => '重試下載';
@@ -1665,7 +1665,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get md133559e02 => '搜尋會在官網打開';
 
   @override
-  String get mbf3c9df646 => '指標';
+  String get mbf3c9df646 => '能力值';
 
   @override
   String get mc7fc04e5df => '指標不會改變';
@@ -1674,7 +1674,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m53788df38a => '目前建置狀態的指示器';
 
   @override
-  String get mfdf0487fc4 => '指標';
+  String get mfdf0487fc4 => '能力值';
 
   @override
   String get m21a6bb1840 => '顯示整棵樹';
@@ -1743,7 +1743,7 @@ class AppLocalizationsZh extends AppLocalizations {
   }
 
   @override
-  String get m7ba6aa7f66 => '組裝項目';
+  String get m7ba6aa7f66 => '配置中的物品';
 
   @override
   String get m9ce35b77ce => '物品不適用於此插槽';
@@ -1788,7 +1788,7 @@ class AppLocalizationsZh extends AppLocalizations {
   }
 
   @override
-  String get me15f960d93 => '申請';
+  String get me15f960d93 => '套用';
 
   @override
   String get m84028563e4 => '應用並計算';
@@ -1803,7 +1803,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m711164636a => '套用階段';
 
   @override
-  String get mae2ea1c701 => '試穿';
+  String get mae2ea1c701 => '物品預覽';
 
   @override
   String get m6aab9e2cb4 => '暫停';
@@ -1826,7 +1826,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m93b08f7b14 => '檢查更新';
 
   @override
-  String get me269e51359 => '檢查項目';
+  String get me269e51359 => '檢查物品';
 
   @override
   String get m87cb1172f2 => '檢查連線';
@@ -2013,7 +2013,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m49db3482db => '珠寶';
 
   @override
-  String get m8c39bb691b => '裝配';
+  String get m8c39bb691b => '配置';
 
   @override
   String get m15d7545f05 => 'PoB 建置不再可用。更新建置清單。';
@@ -2056,7 +2056,7 @@ class AppLocalizationsZh extends AppLocalizations {
   }
 
   @override
-  String get m187a481844 => '建置已刪除';
+  String get m187a481844 => '已刪除配置';
 
   @override
   String get m9027890a7b => '已連接資料夾中的流派可在「我的流派」查看。';
@@ -2098,7 +2098,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m32bb1c680f => '會議已結束';
 
   @override
-  String get m69c1590a47 => '實力';
+  String get m69c1590a47 => '力量';
 
   @override
   String get m3860f59770 => '跟隨系統';
@@ -2182,7 +2182,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m5ebbc9d7a5 => '將取消配置';
 
   @override
-  String get md4b51f7a04 => '刪除';
+  String get md4b51f7a04 => '卸下';
 
   @override
   String get mf3f1d96087 => '自己的房產';
@@ -2206,7 +2206,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get mc42ccf5a81 => '建立副本';
 
   @override
-  String get md79906423b => '建立程式集';
+  String get md79906423b => '建立配置';
 
   @override
   String get m62bb423bd3 => '抵抗';
@@ -2221,7 +2221,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m2fe8f2fd72 => '已儲存';
 
   @override
-  String get mb4d30cae52 => '保存';
+  String get mb4d30cae52 => '儲存';
 
   @override
   String get m9af7509a85 => '儲存並計算';
@@ -2268,13 +2268,13 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m91d6208508 => '尚無穩定版本';
 
   @override
-  String get md3ae3e1986 => '成為';
+  String get md3ae3e1986 => '變更後';
 
   @override
   String get mabdae6b126 => '找不到 PoB 預設資料夾。請手動選擇資料夾。';
 
   @override
-  String get mf7eaffec2f => '問題頁面';
+  String get mf7eaffec2f => '版本頁面';
 
   @override
   String get m4ef88e033d => '屬性摘要';
@@ -2327,10 +2327,10 @@ class AppLocalizationsZh extends AppLocalizations {
   String get mbe99b13612 => '刪除';
 
   @override
-  String get m9ba95f357c => '刪除構建';
+  String get m9ba95f357c => '刪除配置';
 
   @override
-  String get mb3157cbf2b => '刪除此版本？';
+  String get mb3157cbf2b => '要刪除此配置嗎？';
 
   @override
   String get m1c89558239 => '刪除技能';
@@ -2414,7 +2414,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m9c6708a566 => '傷害/防禦';
 
   @override
-  String get m908b6d3a83 => '配置';
+  String get m908b6d3a83 => '設定';
 
   @override
   String get m288545991b => '未找到條件';
@@ -2463,10 +2463,10 @@ class AppLocalizationsZh extends AppLocalizations {
   String get ma6b9ff9cd6 => '文件存在。若要替換，請指定 overwrite=true。';
 
   @override
-  String get md8a38f5bc2 => '小瓶健康';
+  String get md8a38f5bc2 => '生命藥劑';
 
   @override
-  String get m5d2173db9c => '法力瓶';
+  String get m5d2173db9c => '魔力藥劑';
 
   @override
   String get m62d8c4932b => '混亂';
@@ -2809,7 +2809,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   }
 
   @override
-  String get m4fae346e6c => '這是';
+  String get m4fae346e6c => '變更前';
 
   @override
   String get m84e960d40a => '預算';
@@ -3079,7 +3079,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get me3c3ea3a85 => '操作不可用';
 
   @override
-  String get me1daa9e250 => '樹';
+  String get me1daa9e250 => '天賦樹';
 
   @override
   String m0e1306f92c(String p0) {
@@ -3152,7 +3152,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get me598ae02b1 => '新增關鍵天賦節點';
 
   @override
-  String get m9cef26392f => '新增項目';
+  String get m9cef26392f => '新增物品';
 
   @override
   String get mbc10505bdf => '增加一組石頭以獲得技能計算。';
@@ -3185,7 +3185,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   }
 
   @override
-  String get m41a4fa8b6a => '精神';
+  String get m41a4fa8b6a => '精魂';
 
   @override
   String get m974eae850c => '如果 PoB 詢問是否儲存流派，請在它的視窗中回應。';
@@ -3261,7 +3261,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get ma7a4033657 => '關閉';
 
   @override
-  String get mbfc7b67eb5 => '替換項目';
+  String get mbfc7b67eb5 => '替換物品';
 
   @override
   String get md4bac1da57 => '階段備註';
@@ -3285,10 +3285,10 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get mfac4030099 => '您的建造將位於此處';
 
   @override
-  String get m0cc21de8b8 => '健康';
+  String get m0cc21de8b8 => '生命';
 
   @override
-  String get mf869293c62 => '意義';
+  String get mf869293c62 => '數值';
 
   @override
   String get mf6a527732e => '目前 Lua PoB 報告中的值。';
@@ -3342,7 +3342,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m4376254217 => '透過連結導入';
 
   @override
-  String get ma8f8e11f0c => '情報';
+  String get ma8f8e11f0c => '智慧';
 
   @override
   String get mc9c8c4828a => '介面未連接。';
@@ -3379,7 +3379,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m05b721e615 => '沒有找到石頭';
 
   @override
-  String get m566d4d32d7 => '支撐石';
+  String get m566d4d32d7 => '輔助寶石';
 
   @override
   String get md0ef3540b0 => '目錄';
@@ -3421,10 +3421,10 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m6916d088f3 => '暴擊。機會';
 
   @override
-  String get m7bf311d808 => '左手';
+  String get m7bf311d808 => '副手';
 
   @override
-  String get m7825825def => '左手 II';
+  String get m7825825def => '副手 II';
 
   @override
   String get m1190db95a3 => '聯賽';
@@ -3448,7 +3448,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get mf33c9a814c => '最大值';
 
   @override
-  String get mc73618fdf4 => '法力';
+  String get mc73618fdf4 => '魔力';
 
   @override
   String get m6c50317db8 => '工作坊';
@@ -3469,7 +3469,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m22e1e2c7ad => '爆擊倍數';
 
   @override
-  String get m13e9f80144 => '我的構建';
+  String get m13e9f80144 => '我的配置';
 
   @override
   String get m16d1252699 => '閃電';
@@ -3481,11 +3481,11 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m204751ca09 => '最近';
 
   @override
-  String get me113ee319c => 'На очко';
+  String get me113ee319c => '每點';
 
   @override
   String m1d32e63718(String p0) {
-    return 'На очко：$p0';
+    return '每點：$p0';
   }
 
   @override
@@ -3495,10 +3495,10 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get me55cf2491b => '天賦樹配置';
 
   @override
-  String get mf71a076c69 => '武器套裝';
+  String get mf71a076c69 => '武器組';
 
   @override
-  String get mff86959fa1 => '圍兜';
+  String get mff86959fa1 => '胸甲';
 
   @override
   String get m38509ab991 => '按 Ctrl、Alt 或 Cmd 組合鍵。 Esc - 取消。';
@@ -3510,7 +3510,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get md45e66ab55 => '群組名稱';
 
   @override
-  String get m51233393a5 => 'Название сборки';
+  String get m51233393a5 => '配置名稱';
 
   @override
   String get m378e9ed8fc => '階段名稱';
@@ -3533,7 +3533,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m85b24dddaa => '尋找 PoB 資料夾';
 
   @override
-  String get m302605cf87 => 'Найти сборку';
+  String get m302605cf87 => '搜尋配置';
 
   @override
   String get mf211301b5e => '找出節點';
@@ -3877,7 +3877,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get maf3cd75c2f => '新的元件組合變更了目前開啟之流派的職業';
 
   @override
-  String get m282cf4ee16 => '新版本';
+  String get m282cf4ee16 => '新增配置';
 
   @override
   String get ma76e43569d => '新組合';
@@ -3892,13 +3892,13 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m92782507e5 => '需要 poe.ninja 的角色頁面。';
 
   @override
-  String get m83e9fd7c8a => '護身符 I';
+  String get m83e9fd7c8a => '護符 I';
 
   @override
-  String get mbe485a0526 => '護身符 II';
+  String get mbe485a0526 => '護符 II';
 
   @override
-  String get m4a1afe7893 => '護身符 III';
+  String get m4a1afe7893 => '護符 III';
 
   @override
   String get md65eeeeaab => '更新「元件」部分中的 MCP。';
@@ -4047,7 +4047,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m8fbe9b75cb => '取消';
 
   @override
-  String get mb9b86803ad => '取消操作';
+  String get mb9b86803ad => '復原';
 
   @override
   String get m1731619efa => '設計';
@@ -4074,7 +4074,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m27234756aa => '正在清除個人資料...';
 
   @override
-  String get m6cc0ad9655 => '眼鏡';
+  String get m6cc0ad9655 => '點數';
 
   @override
   String mbe045b91a6(String p0) {
@@ -4150,7 +4150,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m9af13a3399 => '移動到列表會添加支持，向後移動會刪除它';
 
   @override
-  String get m79ab5f1286 => '轉換為 Lua';
+  String get m79ab5f1286 => '使用 Lua 重新計算';
 
   @override
   String get m24ad4cc4a3 => '將石頭拖曳到此處或點擊圖示進行配置';
@@ -4174,10 +4174,10 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get mfd0560ebbf => '默認';
 
   @override
-  String get m5189135a61 => '重複';
+  String get m5189135a61 => '重試';
 
   @override
-  String get madb0c613d6 => '重複操作';
+  String get madb0c613d6 => '重做';
 
   @override
   String get m298e41327f => '重試下載';
@@ -4249,7 +4249,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get md133559e02 => '搜尋會在官網打開';
 
   @override
-  String get mbf3c9df646 => '指標';
+  String get mbf3c9df646 => '能力值';
 
   @override
   String get mc7fc04e5df => '指標不會改變';
@@ -4258,7 +4258,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m53788df38a => '目前建置狀態的指示器';
 
   @override
-  String get mfdf0487fc4 => '指標';
+  String get mfdf0487fc4 => '能力值';
 
   @override
   String get m21a6bb1840 => '顯示整棵樹';
@@ -4327,7 +4327,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   }
 
   @override
-  String get m7ba6aa7f66 => '組裝項目';
+  String get m7ba6aa7f66 => '配置中的物品';
 
   @override
   String get m9ce35b77ce => '物品不適用於此插槽';
@@ -4372,7 +4372,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   }
 
   @override
-  String get me15f960d93 => '申請';
+  String get me15f960d93 => '套用';
 
   @override
   String get m84028563e4 => '應用並計算';
@@ -4387,7 +4387,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m711164636a => '套用階段';
 
   @override
-  String get mae2ea1c701 => '試穿';
+  String get mae2ea1c701 => '物品預覽';
 
   @override
   String get m6aab9e2cb4 => '暫停';
@@ -4410,7 +4410,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m93b08f7b14 => '檢查更新';
 
   @override
-  String get me269e51359 => '檢查項目';
+  String get me269e51359 => '檢查物品';
 
   @override
   String get m87cb1172f2 => '檢查連線';
@@ -4597,7 +4597,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m49db3482db => '珠寶';
 
   @override
-  String get m8c39bb691b => '裝配';
+  String get m8c39bb691b => '配置';
 
   @override
   String get m15d7545f05 => 'PoB 建置不再可用。更新建置清單。';
@@ -4640,7 +4640,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   }
 
   @override
-  String get m187a481844 => '建置已刪除';
+  String get m187a481844 => '已刪除配置';
 
   @override
   String get m9027890a7b => '已連接資料夾中的流派可在「我的流派」查看。';
@@ -4682,7 +4682,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m32bb1c680f => '會議已結束';
 
   @override
-  String get m69c1590a47 => '實力';
+  String get m69c1590a47 => '力量';
 
   @override
   String get m3860f59770 => '跟隨系統';
@@ -4766,7 +4766,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m5ebbc9d7a5 => '將取消配置';
 
   @override
-  String get md4b51f7a04 => '刪除';
+  String get md4b51f7a04 => '卸下';
 
   @override
   String get mf3f1d96087 => '自己的房產';
@@ -4790,7 +4790,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get mc42ccf5a81 => '建立副本';
 
   @override
-  String get md79906423b => '建立程式集';
+  String get md79906423b => '建立配置';
 
   @override
   String get m62bb423bd3 => '抵抗';
@@ -4805,7 +4805,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m2fe8f2fd72 => '已儲存';
 
   @override
-  String get mb4d30cae52 => '保存';
+  String get mb4d30cae52 => '儲存';
 
   @override
   String get m9af7509a85 => '儲存並計算';
@@ -4852,13 +4852,13 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m91d6208508 => '尚無穩定版本';
 
   @override
-  String get md3ae3e1986 => '成為';
+  String get md3ae3e1986 => '變更後';
 
   @override
   String get mabdae6b126 => '找不到 PoB 預設資料夾。請手動選擇資料夾。';
 
   @override
-  String get mf7eaffec2f => '問題頁面';
+  String get mf7eaffec2f => '版本頁面';
 
   @override
   String get m4ef88e033d => '屬性摘要';
@@ -4911,10 +4911,10 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get mbe99b13612 => '刪除';
 
   @override
-  String get m9ba95f357c => '刪除構建';
+  String get m9ba95f357c => '刪除配置';
 
   @override
-  String get mb3157cbf2b => '刪除此版本？';
+  String get mb3157cbf2b => '要刪除此配置嗎？';
 
   @override
   String get m1c89558239 => '刪除技能';
@@ -4998,7 +4998,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m9c6708a566 => '傷害/防禦';
 
   @override
-  String get m908b6d3a83 => '配置';
+  String get m908b6d3a83 => '設定';
 
   @override
   String get m288545991b => '未找到條件';
@@ -5047,10 +5047,10 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get ma6b9ff9cd6 => '文件存在。若要替換，請指定 overwrite=true。';
 
   @override
-  String get md8a38f5bc2 => '小瓶健康';
+  String get md8a38f5bc2 => '生命藥劑';
 
   @override
-  String get m5d2173db9c => '法力瓶';
+  String get m5d2173db9c => '魔力藥劑';
 
   @override
   String get m62d8c4932b => '混亂';

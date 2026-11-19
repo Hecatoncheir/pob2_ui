@@ -1,6 +1,7 @@
 import 'package:material_ui/material_ui.dart';
 
 import '../domain/build_report.dart';
+import '../domain/item_name.dart';
 import 'core/app_text.dart';
 import 'core/language_scope.dart';
 import 'core/spark_theme.dart';
@@ -203,7 +204,7 @@ class _EquipmentTile extends StatelessWidget {
           const SizedBox(height: 5),
           Flexible(
             child: AppText(
-              '${item!['name']}',
+              itemDisplayName(item!),
               game: true,
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
@@ -230,6 +231,6 @@ class _EquipmentTile extends StatelessWidget {
   String _tooltip(BuildContext context) {
     final label = translateUi(context, equipmentLabel(name));
     if (item == null) return label;
-    return '$label\n${translateGame(context, '${item!['name']}')}';
+    return '$label\n${translateGame(context, itemDisplayName(item!))}';
   }
 }

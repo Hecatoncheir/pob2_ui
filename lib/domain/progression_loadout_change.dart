@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'build_report.dart';
+import 'item_name.dart';
 import 'progression_comparison.dart';
 
 typedef ProgressionGem = ({
@@ -84,7 +85,7 @@ Map<String, ProgressionPurchase> _shoppingEntries(
     _countPurchase(
       entries,
       'item:${item['raw']}',
-      cleanPoB('${item['name']}'),
+      itemDisplayName(item),
       slot: _marketSlot(slot),
       base: item['base'] as String?,
     );
@@ -154,8 +155,11 @@ Map<({String slot, int? nodeId}), ProgressionItem> _equipped(
   return {
     for (final slot in report.slots)
       if (slot case {'name': final String name, 'itemId': final int id})
-        if (items[id] case {'name': final String item, 'raw': final String raw})
-          (slot: name, nodeId: slot['nodeId'] as int?): (name: item, raw: raw),
+        if (items[id] case {'raw': final String raw})
+          (slot: name, nodeId: slot['nodeId'] as int?): (
+            name: itemDisplayName(items[id]!),
+            raw: raw,
+          ),
   };
 }
 

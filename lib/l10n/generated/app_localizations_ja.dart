@@ -226,7 +226,7 @@ class AppLocalizationsJa extends AppLocalizations {
   }
 
   @override
-  String get m4fae346e6c => 'そうでした';
+  String get m4fae346e6c => '変更前';
 
   @override
   String get m84e960d40a => '予算';
@@ -679,7 +679,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get ma7a4033657 => '閉じる';
 
   @override
-  String get mbfc7b67eb5 => 'アイテムを置き換える';
+  String get mbfc7b67eb5 => 'アイテムを交換';
 
   @override
   String get md4bac1da57 => '段階のメモ';
@@ -703,10 +703,10 @@ class AppLocalizationsJa extends AppLocalizations {
   String get mfac4030099 => 'ビルドはここに配置されます';
 
   @override
-  String get m0cc21de8b8 => '健康';
+  String get m0cc21de8b8 => 'ライフ';
 
   @override
-  String get mf869293c62 => '意味';
+  String get mf869293c62 => '値';
 
   @override
   String get mf6a527732e => '現在の Lua PoB レポートの値。';
@@ -760,7 +760,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m4376254217 => 'リンク経由でインポート';
 
   @override
-  String get ma8f8e11f0c => 'インテリジェンス';
+  String get ma8f8e11f0c => '知性';
 
   @override
   String get mc9c8c4828a => 'インターフェースが接続されていません。';
@@ -797,7 +797,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m05b721e615 => '石が見つかりませんでした';
 
   @override
-  String get m566d4d32d7 => 'サポートストーン';
+  String get m566d4d32d7 => 'サポートジェム';
 
   @override
   String get md0ef3540b0 => 'カタログ';
@@ -839,10 +839,10 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m6916d088f3 => 'クリティカル。チャンス';
 
   @override
-  String get m7bf311d808 => '左手';
+  String get m7bf311d808 => 'オフハンド';
 
   @override
-  String get m7825825def => '左手II';
+  String get m7825825def => 'オフハンド II';
 
   @override
   String get m1190db95a3 => 'リーグ';
@@ -887,7 +887,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m22e1e2c7ad => 'クリティカル倍率';
 
   @override
-  String get m13e9f80144 => '私のビルド';
+  String get m13e9f80144 => 'マイビルド';
 
   @override
   String get m16d1252699 => 'ライトニング';
@@ -899,11 +899,11 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m204751ca09 => '最近';
 
   @override
-  String get me113ee319c => 'На очко';
+  String get me113ee319c => '1ポイントあたり';
 
   @override
   String m1d32e63718(String p0) {
-    return 'На очко: $p0';
+    return '1ポイントあたり: $p0';
   }
 
   @override
@@ -916,7 +916,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get mf71a076c69 => '武器セット';
 
   @override
-  String get mff86959fa1 => 'よだれかけ';
+  String get mff86959fa1 => 'ボディアーマー';
 
   @override
   String get m38509ab991 => 'Ctrl、Alt、または Cmd を組み合わせて押します。 Esc - キャンセルします。';
@@ -928,7 +928,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get md45e66ab55 => 'グループ名';
 
   @override
-  String get m51233393a5 => 'Название сборки';
+  String get m51233393a5 => 'ビルド名';
 
   @override
   String get m378e9ed8fc => '段階の名前';
@@ -951,7 +951,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m85b24dddaa => 'PoB フォルダーを探す';
 
   @override
-  String get m302605cf87 => 'Найти сборку';
+  String get m302605cf87 => 'ビルドを検索';
 
   @override
   String get mf211301b5e => 'ノードの検索';
@@ -1296,7 +1296,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get maf3cd75c2f => '新しいコンポーネントの組み合わせで、開いているビルドのクラスが変わりました';
 
   @override
-  String get m282cf4ee16 => '新しいビルド';
+  String get m282cf4ee16 => '新規ビルド';
 
   @override
   String get ma76e43569d => '新しい組み合わせ';
@@ -1311,13 +1311,13 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m92782507e5 => 'poe.ninja のキャラクターページが必要です。';
 
   @override
-  String get m83e9fd7c8a => 'アミュレット I';
+  String get m83e9fd7c8a => 'チャーム I';
 
   @override
-  String get mbe485a0526 => 'アミュレット II';
+  String get mbe485a0526 => 'チャーム II';
 
   @override
-  String get m4a1afe7893 => 'アミュレットⅢ';
+  String get m4a1afe7893 => 'チャーム III';
 
   @override
   String get md65eeeeaab => 'コンポーネント セクションの MCP を更新します。';
@@ -1468,7 +1468,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m8fbe9b75cb => 'キャンセル';
 
   @override
-  String get mb9b86803ad => 'アクションをキャンセルします';
+  String get mb9b86803ad => '元に戻す';
 
   @override
   String get m1731619efa => 'デザイン';
@@ -1495,7 +1495,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m27234756aa => 'プロファイルをクリアしています...';
 
   @override
-  String get m6cc0ad9655 => 'メガネ';
+  String get m6cc0ad9655 => 'ポイント';
 
   @override
   String mbe045b91a6(String p0) {
@@ -1571,7 +1571,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m9af13a3399 => 'リストに移動するとサポートが追加され、リストに戻るとサポートが削除されます';
 
   @override
-  String get m79ab5f1286 => 'Lua に変換します';
+  String get m79ab5f1286 => 'Luaで再計算';
 
   @override
   String get m24ad4cc4a3 => '石をここにドラッグするか、アイコンをクリックして設定します';
@@ -1595,10 +1595,10 @@ class AppLocalizationsJa extends AppLocalizations {
   String get mfd0560ebbf => 'デフォルト';
 
   @override
-  String get m5189135a61 => 'リピート';
+  String get m5189135a61 => '再試行';
 
   @override
-  String get madb0c613d6 => 'アクションを繰り返す';
+  String get madb0c613d6 => 'やり直す';
 
   @override
   String get m298e41327f => 'ダウンロードを再試行します';
@@ -1670,7 +1670,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get md133559e02 => '公式ウェブサイトで検索が開きます';
 
   @override
-  String get mbf3c9df646 => 'インジケーター';
+  String get mbf3c9df646 => 'ステータス';
 
   @override
   String get mc7fc04e5df => 'インジケーターは変更されません';
@@ -1679,7 +1679,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m53788df38a => '現在のビルド状態のインジケーター';
 
   @override
-  String get mfdf0487fc4 => 'インジケーター';
+  String get mfdf0487fc4 => 'ステータス';
 
   @override
   String get m21a6bb1840 => 'ツリー全体を表示';
@@ -1748,7 +1748,7 @@ class AppLocalizationsJa extends AppLocalizations {
   }
 
   @override
-  String get m7ba6aa7f66 => '組立品';
+  String get m7ba6aa7f66 => 'ビルド内のアイテム';
 
   @override
   String get m9ce35b77ce => 'アイテムはこのスロットには適していません';
@@ -1793,7 +1793,7 @@ class AppLocalizationsJa extends AppLocalizations {
   }
 
   @override
-  String get me15f960d93 => '適用する';
+  String get me15f960d93 => '適用';
 
   @override
   String get m84028563e4 => '適用して計算する';
@@ -1808,7 +1808,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m711164636a => '段階を適用';
 
   @override
-  String get mae2ea1c701 => '試着中';
+  String get mae2ea1c701 => 'アイテムのプレビュー';
 
   @override
   String get m6aab9e2cb4 => '一時停止';
@@ -1831,7 +1831,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m93b08f7b14 => 'アップデートを確認する';
 
   @override
-  String get me269e51359 => 'チェック項目';
+  String get me269e51359 => 'アイテムを確認';
 
   @override
   String get m87cb1172f2 => '接続を確認';
@@ -2018,7 +2018,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m49db3482db => 'ジュエル';
 
   @override
-  String get m8c39bb691b => 'アセンブリ';
+  String get m8c39bb691b => 'ビルド';
 
   @override
   String get m15d7545f05 => 'PoB ビルドは利用できなくなりました。ビルドリストを更新します。';
@@ -2061,7 +2061,7 @@ class AppLocalizationsJa extends AppLocalizations {
   }
 
   @override
-  String get m187a481844 => 'ビルドが削除されました';
+  String get m187a481844 => 'ビルドを削除しました';
 
   @override
   String get m9027890a7b => '接続したフォルダーのビルドは「マイビルド」で利用できます。';
@@ -2103,7 +2103,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m32bb1c680f => 'セッションは終了しました';
 
   @override
-  String get m69c1590a47 => '強さ';
+  String get m69c1590a47 => '筋力';
 
   @override
   String get m3860f59770 => 'システム';
@@ -2187,7 +2187,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m5ebbc9d7a5 => '解除';
 
   @override
-  String get md4b51f7a04 => '削除';
+  String get md4b51f7a04 => '装備を外す';
 
   @override
   String get mf3f1d96087 => '独自のプロパティ';
@@ -2214,7 +2214,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get mc42ccf5a81 => 'コピーを作成します';
 
   @override
-  String get md79906423b => 'アセンブリの作成';
+  String get md79906423b => 'ビルドを作成';
 
   @override
   String get m62bb423bd3 => '抵抗';
@@ -2276,13 +2276,13 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m91d6208508 => '安定リリースはまだありません';
 
   @override
-  String get md3ae3e1986 => 'になりました';
+  String get md3ae3e1986 => '変更後';
 
   @override
   String get mabdae6b126 => 'PoB の既定フォルダーが見つかりません。フォルダーを手動で選択してください。';
 
   @override
-  String get mf7eaffec2f => '問題ページ';
+  String get mf7eaffec2f => 'リリースページ';
 
   @override
   String get m4ef88e033d => '概要プロパティ';
@@ -2294,7 +2294,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get mcda85a1ad9 => 'アイテムテキスト';
 
   @override
-  String get m682f961a07 => 'トピック';
+  String get m682f961a07 => 'テーマ';
 
   @override
   String get m7242065c34 => '敵の種類';
@@ -2338,7 +2338,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m9ba95f357c => 'ビルドを削除';
 
   @override
-  String get mb3157cbf2b => 'このビルドを削除しますか?';
+  String get mb3157cbf2b => 'このビルドを削除しますか？';
 
   @override
   String get m1c89558239 => 'スキルを削除します';
@@ -2422,7 +2422,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m9c6708a566 => 'ダメージ/防御力';
 
   @override
-  String get m908b6d3a83 => '構成';
+  String get m908b6d3a83 => '設定';
 
   @override
   String get m288545991b => '条件が見つかりません';
@@ -2471,10 +2471,10 @@ class AppLocalizationsJa extends AppLocalizations {
   String get ma6b9ff9cd6 => 'ファイルは存在します。置き換える場合はoverwrite=trueを指定します。';
 
   @override
-  String get md8a38f5bc2 => '健康の小瓶';
+  String get md8a38f5bc2 => 'ライフフラスコ';
 
   @override
-  String get m5d2173db9c => 'マナの小瓶';
+  String get m5d2173db9c => 'マナフラスコ';
 
   @override
   String get m62d8c4932b => 'カオス';
@@ -2545,7 +2545,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get mae1df2993a => 'エクスポート XML';
 
   @override
-  String get mf49983ccf6 => 'エネルギーシールド';
+  String get mf49983ccf6 => 'エナジーシールド';
 
   @override
   String get m2b2c6df514 =>

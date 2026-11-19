@@ -34,10 +34,7 @@ class GameDictionary {
   }
 
   void _addTemplate(String id, String source, String value) {
-    // Выгрузка нормализует позиции до #. Для нескольких чисел порядок
-    // аргументов не доказан: такие строки оставляем в исходном виде.
-    if ('#'.allMatches(source).length != 1 || '#'.allMatches(value).length != 1)
-      return;
+    if (!_supportedTemplate(id, source, value)) return;
     final key = _key(source);
     // В описаниях дерева предпочитаем профильный каталог: другие категории
     // иногда переводят ту же английскую фразу с иным предлогом или регистром.
@@ -45,6 +42,23 @@ class GameDictionary {
     if (!passive && _passiveKeys.contains(key)) return;
     if (passive && _passiveKeys.add(key)) _templates.remove(key);
     _templates.putIfAbsent(key, () => []).add(_Template(source, value));
+  }
+
+  bool _supportedTemplate(String id, String source, String value) {
+    final count = '#'.allMatches(source).length;
+    if (count != '#'.allMatches(value).length) return false;
+    if (count == 1) return true;
+    // Только проверенные пары минимум/максимум: порядок {0}, {1}
+    // задан StatDescriptions PoB и совпадает в закреплённых переводах.
+    final range = RegExp(
+      r'(?:^|\.)(global|local)_minimum_added_'
+      r'(physical|fire|cold|lightning|chaos)_damage '
+      r'\1_maximum_added_\2_damage\[0\]$',
+    );
+    return count == 2 &&
+        source.startsWith('Adds # to # ') &&
+        source.endsWith(' Damage') &&
+        range.hasMatch(id);
   }
 
   String translate(String source) {
@@ -82,6 +96,8 @@ class _Template {
   final String localized;
   String? apply(String source) {
     final match = pattern.firstMatch(source);
-    return match == null ? null : localized.replaceFirst('#', match[1]!);
+    if (match == null) return null;
+    var index = 0;
+    return localized.replaceAllMapped(RegExp('#'), (_) => match[++index]!);
   }
 }

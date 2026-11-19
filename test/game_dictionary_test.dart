@@ -2,6 +2,28 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:pob2_ui/domain/game_dictionary.dart';
 
 void main() {
+  test(
+    'Проверенные диапазоны сохраняют порядок, знак и формат обоих чисел',
+    () {
+      const id =
+          'stat_translations.local_minimum_added_fire_damage '
+          'local_maximum_added_fire_damage[0]';
+      final dictionary = GameDictionary(
+        'ru',
+        {id: 'Adds # to # Fire Damage'},
+        {id: 'Добавляет от # до # урона от огня'},
+      );
+      expect(
+        dictionary.translate('Adds 3 to 17 Fire Damage'),
+        'Добавляет от 3 до 17 урона от огня',
+      );
+      expect(
+        dictionary.translate('Adds -3.5 to +17,25 Fire Damage'),
+        'Добавляет от -3.5 до +17,25 урона от огня',
+      );
+    },
+  );
+
   test('Перевод текста сохраняет числа и пробелы; неоднозначность не подменяет данные', () {
     final dictionary = GameDictionary(
       'ru',

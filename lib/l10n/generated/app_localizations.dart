@@ -170,7 +170,7 @@ abstract class AppLocalizations {
   /// Lua вернул неполный каталог
   ///
   /// In en, this message translates to:
-  /// **'Lua returned an incomplete directory'**
+  /// **'Lua returned an incomplete catalog'**
   String get m88beda68f0;
 
   /// Lua вернул пустое дерево
@@ -194,13 +194,13 @@ abstract class AppLocalizations {
   /// Lua не вернул XML сборки
   ///
   /// In en, this message translates to:
-  /// **'Lua did not return XML build'**
+  /// **'Lua did not return the build XML'**
   String get mbb582808f3;
 
   /// Lua не вернул каталог классов
   ///
   /// In en, this message translates to:
-  /// **'Lua did not return class directory'**
+  /// **'Lua did not return the class catalog'**
   String get ma83268a520;
 
   /// Lua не вернул описание камня
@@ -242,7 +242,7 @@ abstract class AppLocalizations {
   /// Lua не вернул совместимость камней
   ///
   /// In en, this message translates to:
-  /// **'Lua did not return stone compatibility'**
+  /// **'Lua did not return gem compatibility'**
   String get m35f86d9c5e;
 
   /// Lua не вернул счётчики очков дерева.
@@ -254,7 +254,7 @@ abstract class AppLocalizations {
   /// Lua не вернул характеристики
   ///
   /// In en, this message translates to:
-  /// **'Lua did not return characteristics'**
+  /// **'Lua did not return stats'**
   String get mecc0fe5cd1;
 
   /// Lua не подключён
@@ -278,19 +278,19 @@ abstract class AppLocalizations {
   /// Lua отвечает · {p0} классов · совместимость проверена
   ///
   /// In en, this message translates to:
-  /// **'Lua answers · {p0} classes · compatibility checked'**
+  /// **'Lua responding · {p0} classes · compatibility checked'**
   String mf01de15993(String p0);
 
   /// Lua отвечает. Классов в каталоге: {p0}
   ///
   /// In en, this message translates to:
-  /// **'Lua answers. Classes in the catalog: {p0}'**
+  /// **'Lua responding. Classes in the catalog: {p0}'**
   String md9540a4b84(String p0);
 
   /// Lua отключён
   ///
   /// In en, this message translates to:
-  /// **'Lua disabled'**
+  /// **'Lua disconnected'**
   String get m79df86397e;
 
   /// Lua подключён
@@ -314,7 +314,7 @@ abstract class AppLocalizations {
   /// MCP может править сборки, управлять библиотекой, файлами, компонентами и приложением. Если вы смените сборку вручную, доступ отключится.
   ///
   /// In en, this message translates to:
-  /// **'MCP can edit assemblies, manage the library, files, components and application. If you change the build manually, access will be disabled.'**
+  /// **'MCP can edit builds and manage the library, files, components and application. Switching builds manually disables access.'**
   String get m9f82e876bd;
 
   /// PoB II · Мастерская
@@ -374,7 +374,7 @@ abstract class AppLocalizations {
   /// PoB не сообщил путь к папке сборок.
   ///
   /// In en, this message translates to:
-  /// **'PoB did not report the path to the assembly folder.'**
+  /// **'PoB did not return the builds folder path.'**
   String get m917bb579d9;
 
   /// PoB уже открыт без связи с мостом. Перезапустите его один раз.
@@ -398,7 +398,7 @@ abstract class AppLocalizations {
   /// XML сборки
   ///
   /// In en, this message translates to:
-  /// **'XML builds'**
+  /// **'Build XML'**
   String get me72be74923;
 
   /// XML сохранён
@@ -722,7 +722,7 @@ abstract class AppLocalizations {
   /// Все показатели Lua
   ///
   /// In en, this message translates to:
-  /// **'All indicators Lua'**
+  /// **'All Lua stats'**
   String get m4cd169b3d5;
 
   /// Все характеристики
@@ -776,7 +776,7 @@ abstract class AppLocalizations {
   /// Вставьте XML сборки. Она будет проверена и рассчитана в Lua.
   ///
   /// In en, this message translates to:
-  /// **'Insert XML assemblies. It will be checked and calculated in Lua.'**
+  /// **'Paste the build XML. Lua will validate and calculate it.'**
   String get m6bf3b12df4;
 
   /// Всё для работы
@@ -872,7 +872,7 @@ abstract class AppLocalizations {
   /// Выберите умение для подбора поддержек
   ///
   /// In en, this message translates to:
-  /// **'Select a skill to select supports'**
+  /// **'Select a skill to find support gems'**
   String get m0513479f74;
 
   /// Выберите установку PoB
@@ -1124,7 +1124,7 @@ abstract class AppLocalizations {
   /// Для этой платформы нет пакета обновления
   ///
   /// In en, this message translates to:
-  /// **'There is no service pack for this platform'**
+  /// **'No update package is available for this platform'**
   String get ma2ab6a340a;
 
   /// Для этой платформы пока нет установщика
@@ -1172,7 +1172,7 @@ abstract class AppLocalizations {
   /// Добавьте группу камней, чтобы получить расчёт умения.
   ///
   /// In en, this message translates to:
-  /// **'Add a group of stones to get the skill calculation.'**
+  /// **'Add a gem group to calculate a skill.'**
   String get mbc10505bdf;
 
   /// Добавятся
@@ -1190,7 +1190,7 @@ abstract class AppLocalizations {
   /// Дополнительные ячейки
   ///
   /// In en, this message translates to:
-  /// **'Additional cells'**
+  /// **'Additional slots'**
   String get mf0216281b8;
 
   /// Достичь уровня {p0}
@@ -1328,7 +1328,7 @@ abstract class AppLocalizations {
   /// Закрепить показатели
   ///
   /// In en, this message translates to:
-  /// **'Fasten indicators'**
+  /// **'Pin stats'**
   String get m540fb030a9;
 
   /// Закройте выбранный PoB вручную и повторите запуск.
@@ -1406,7 +1406,7 @@ abstract class AppLocalizations {
   /// Значение
   ///
   /// In en, this message translates to:
-  /// **'Meaning'**
+  /// **'Value'**
   String get mf869293c62;
 
   /// Значение из текущего отчёта Lua PoB.
@@ -1466,13 +1466,13 @@ abstract class AppLocalizations {
   /// Изображение камня не найдено
   ///
   /// In en, this message translates to:
-  /// **'Stone image not found'**
+  /// **'Gem image not found'**
   String get md5a9ca934e;
 
   /// Изображение камня недоступно
   ///
   /// In en, this message translates to:
-  /// **'Stone image unavailable'**
+  /// **'Gem image unavailable'**
   String get m1ccb8777b8;
 
   /// Импорт персонажа из PoB
@@ -1484,7 +1484,7 @@ abstract class AppLocalizations {
   /// Импортированная сборка
   ///
   /// In en, this message translates to:
-  /// **'Imported assembly'**
+  /// **'Imported build'**
   String get m2c72186c20;
 
   /// Импортировать
@@ -1574,13 +1574,13 @@ abstract class AppLocalizations {
   /// Камни не найдены
   ///
   /// In en, this message translates to:
-  /// **'No stones found'**
+  /// **'No gems found'**
   String get m05b721e615;
 
   /// Камни поддержки
   ///
   /// In en, this message translates to:
-  /// **'Support stones'**
+  /// **'Support gems'**
   String get m566d4d32d7;
 
   /// Каталог
@@ -1652,7 +1652,7 @@ abstract class AppLocalizations {
   /// Контрольная сумма перевода не совпала
   ///
   /// In en, this message translates to:
-  /// **'Transfer checksum did not match'**
+  /// **'Translation checksum mismatch'**
   String get mcf9fbc3f41;
 
   /// Крит. шанс
@@ -1664,13 +1664,13 @@ abstract class AppLocalizations {
   /// Левая рука
   ///
   /// In en, this message translates to:
-  /// **'Left hand'**
+  /// **'Off hand'**
   String get m7bf311d808;
 
   /// Левая рука II
   ///
   /// In en, this message translates to:
-  /// **'Left hand II'**
+  /// **'Off hand II'**
   String get m7825825def;
 
   /// Лига
@@ -1784,13 +1784,13 @@ abstract class AppLocalizations {
   /// На очко
   ///
   /// In en, this message translates to:
-  /// **'На очко'**
+  /// **'Per point'**
   String get me113ee319c;
 
   /// На очко: {p0}
   ///
   /// In en, this message translates to:
-  /// **'На очко: {p0}'**
+  /// **'Per point: {p0}'**
   String m1d32e63718(String p0);
 
   /// На этом расстоянии подходящих узлов нет.
@@ -1814,7 +1814,7 @@ abstract class AppLocalizations {
   /// Нагрудник
   ///
   /// In en, this message translates to:
-  /// **'Bib'**
+  /// **'Body Armour'**
   String get mff86959fa1;
 
   /// Нажмите сочетание с Ctrl, Alt или Cmd. Esc — отмена.
@@ -1838,7 +1838,7 @@ abstract class AppLocalizations {
   /// Название сборки
   ///
   /// In en, this message translates to:
-  /// **'Название сборки'**
+  /// **'Build name'**
   String get m51233393a5;
 
   /// Название этапа
@@ -1880,7 +1880,7 @@ abstract class AppLocalizations {
   /// Найти сборку
   ///
   /// In en, this message translates to:
-  /// **'Найти сборку'**
+  /// **'Find build'**
   String get m302605cf87;
 
   /// Найти узел
@@ -1946,7 +1946,7 @@ abstract class AppLocalizations {
   /// Не распознано Lua
   ///
   /// In en, this message translates to:
-  /// **'Not recognized Lua'**
+  /// **'Not recognized by Lua'**
   String get m3427d6812f;
 
   /// Не удалось включить правки через MCP. Проверьте, что установлен обновлённый MCP.
@@ -2103,7 +2103,7 @@ abstract class AppLocalizations {
   /// Не удалось проверить папку сборок.
   ///
   /// In en, this message translates to:
-  /// **'Failed to check assembly folder.'**
+  /// **'Could not check the builds folder.'**
   String get mbceeadc946;
 
   /// Не удалось проверить профиль.
@@ -2163,7 +2163,7 @@ abstract class AppLocalizations {
   /// Не удалось сохранить тему.
   ///
   /// In en, this message translates to:
-  /// **'Failed to save topic.'**
+  /// **'Could not save the theme.'**
   String get m92233abcc1;
 
   /// Не удалось сохранить черновик XML: {p0}
@@ -2199,7 +2199,7 @@ abstract class AppLocalizations {
   /// Неверный диапазон продолжения загрузки
   ///
   /// In en, this message translates to:
-  /// **'Invalid boot continuation range'**
+  /// **'Invalid download resume range'**
   String get m4412eb3d42;
 
   /// Неверный источник файла выпуска
@@ -2259,7 +2259,7 @@ abstract class AppLocalizations {
   /// Неизвестный формат библиотеки сборок
   ///
   /// In en, this message translates to:
-  /// **'Unknown assembly library format'**
+  /// **'Unknown build library format'**
   String get me90bfa5f82;
 
   /// Неизвестный язык.
@@ -2295,7 +2295,7 @@ abstract class AppLocalizations {
   /// Некорректная текстура готового дерева
   ///
   /// In en, this message translates to:
-  /// **'Incorrect texture of the finished wood'**
+  /// **'Invalid passive tree texture'**
   String get m3f7db06826;
 
   /// Некорректное дерево сборки
@@ -2325,7 +2325,7 @@ abstract class AppLocalizations {
   /// Некорректный идентификатор сборки
   ///
   /// In en, this message translates to:
-  /// **'Incorrect assembly ID'**
+  /// **'Invalid build ID'**
   String get mc652a6b3a8;
 
   /// Некорректный или обрезанный код PoB.
@@ -2349,7 +2349,7 @@ abstract class AppLocalizations {
   /// Некорректный путь к сборке PoB.
   ///
   /// In en, this message translates to:
-  /// **'Incorrect path to PoB assembly.'**
+  /// **'Invalid PoB build path.'**
   String get mbfa40c4fb1;
 
   /// Некорректный размер Lua runtime
@@ -2511,19 +2511,19 @@ abstract class AppLocalizations {
   /// Оберег I
   ///
   /// In en, this message translates to:
-  /// **'Amulet I'**
+  /// **'Charm I'**
   String get m83e9fd7c8a;
 
   /// Оберег II
   ///
   /// In en, this message translates to:
-  /// **'Amulet II'**
+  /// **'Charm II'**
   String get mbe485a0526;
 
   /// Оберег III
   ///
   /// In en, this message translates to:
-  /// **'Amulet III'**
+  /// **'Charm III'**
   String get m4a1afe7893;
 
   /// Обновите MCP в разделе «Компоненты».
@@ -2535,7 +2535,7 @@ abstract class AppLocalizations {
   /// Обновите MCP для каталога камней и совместимости
   ///
   /// In en, this message translates to:
-  /// **'Update MCP for stone catalog and compatibility'**
+  /// **'Update MCP for the gem catalog and compatibility checks'**
   String get m616c984fe4;
 
   /// Обновите MCP для описаний камней
@@ -2553,7 +2553,7 @@ abstract class AppLocalizations {
   /// Обновите MCP для оригинальных иконок камней
   ///
   /// In en, this message translates to:
-  /// **'Update MCP for original stone icons'**
+  /// **'Update MCP for original gem icons'**
   String get md423f03f4f;
 
   /// Обновите MCP для поиска на рынке
@@ -2577,7 +2577,7 @@ abstract class AppLocalizations {
   /// Обновите MCP для сравнения предметов
   ///
   /// In en, this message translates to:
-  /// **'Update MCP item comparison'**
+  /// **'Update MCP for item comparison'**
   String get md708edb156;
 
   /// Обновите MCP для удаления умения
@@ -2679,7 +2679,7 @@ abstract class AppLocalizations {
   /// Ожидался XML сборки Path of Building для PoE 2.
   ///
   /// In en, this message translates to:
-  /// **'Expected XML Path of Building builds for PoE 2.'**
+  /// **'Expected a Path of Building XML build for PoE 2.'**
   String get mc3bde350c7;
 
   /// Ожидался отчёт исходного Lua
@@ -2709,7 +2709,7 @@ abstract class AppLocalizations {
   /// Оружие
   ///
   /// In en, this message translates to:
-  /// **'Weapons'**
+  /// **'Weapon'**
   String get m0736fbba4d;
 
   /// Оружие I
@@ -2817,7 +2817,7 @@ abstract class AppLocalizations {
   /// Отменить действие
   ///
   /// In en, this message translates to:
-  /// **'Cancel action'**
+  /// **'Undo'**
   String get mb9b86803ad;
 
   /// Оформление
@@ -2871,7 +2871,7 @@ abstract class AppLocalizations {
   /// Очки
   ///
   /// In en, this message translates to:
-  /// **'Glasses'**
+  /// **'Points'**
   String get m6cc0ad9655;
 
   /// Очки пути · {p0}
@@ -2955,7 +2955,7 @@ abstract class AppLocalizations {
   /// Перевод больше ожидаемого размера
   ///
   /// In en, this message translates to:
-  /// **'Transfer is larger than expected size'**
+  /// **'Translation exceeds the expected size'**
   String get m8188a57c48;
 
   /// Перевод: HTTP {p0}
@@ -3003,13 +3003,13 @@ abstract class AppLocalizations {
   /// Пересчитать в Lua
   ///
   /// In en, this message translates to:
-  /// **'Convert to Lua'**
+  /// **'Recalculate in Lua'**
   String get m79ab5f1286;
 
   /// Перетащите камень сюда или нажмите на иконку для настройки
   ///
   /// In en, this message translates to:
-  /// **'Drag the stone here or click on the icon to configure'**
+  /// **'Drag a gem here or select its icon to configure it'**
   String get m24ad4cc4a3;
 
   /// Перчатки
@@ -3051,13 +3051,13 @@ abstract class AppLocalizations {
   /// Повторить
   ///
   /// In en, this message translates to:
-  /// **'Repeat'**
+  /// **'Retry'**
   String get m5189135a61;
 
   /// Повторить действие
   ///
   /// In en, this message translates to:
-  /// **'Repeat action'**
+  /// **'Redo'**
   String get madb0c613d6;
 
   /// Повторить загрузку
@@ -3201,7 +3201,7 @@ abstract class AppLocalizations {
   /// Показатели
   ///
   /// In en, this message translates to:
-  /// **'Indicators'**
+  /// **'Stats'**
   String get mbf3c9df646;
 
   /// Показатели не изменятся
@@ -3219,7 +3219,7 @@ abstract class AppLocalizations {
   /// Показатель
   ///
   /// In en, this message translates to:
-  /// **'Indicator'**
+  /// **'Stat'**
   String get mfdf0487fc4;
 
   /// Показать всё дерево
@@ -3273,7 +3273,7 @@ abstract class AppLocalizations {
   /// Попробуйте пересчитать сборку.
   ///
   /// In en, this message translates to:
-  /// **'Try recalculating the assembly.'**
+  /// **'Try recalculating the build.'**
   String get md90da4d82c;
 
   /// Порядок ключевых узлов
@@ -3345,7 +3345,7 @@ abstract class AppLocalizations {
   /// Предмет из сборки
   ///
   /// In en, this message translates to:
-  /// **'Assembly item'**
+  /// **'Item from build'**
   String get m7ba6aa7f66;
 
   /// Предмет не подходит для этого слота
@@ -3453,7 +3453,7 @@ abstract class AppLocalizations {
   /// Примерка
   ///
   /// In en, this message translates to:
-  /// **'Preview'**
+  /// **'Item preview'**
   String get mae2ea1c701;
 
   /// Приостановить
@@ -3483,7 +3483,7 @@ abstract class AppLocalizations {
   /// Проверить место в профиле
   ///
   /// In en, this message translates to:
-  /// **'Check profile location'**
+  /// **'Check profile disk usage'**
   String get mf04117e11b;
 
   /// Проверить обновления
@@ -3639,7 +3639,7 @@ abstract class AppLocalizations {
   /// Рабочая сборка сохранена; не удалось восстановить Lua: {p0}
   ///
   /// In en, this message translates to:
-  /// **'Working assembly saved; failed to restore Lua: {p0}'**
+  /// **'The working build was saved; could not restore Lua: {p0}'**
   String m0964e41783(String p0);
 
   /// Радиус освещения
@@ -3753,7 +3753,7 @@ abstract class AppLocalizations {
   /// Регенерация здоровья
   ///
   /// In en, this message translates to:
-  /// **'Health regeneration'**
+  /// **'Life regeneration'**
   String get m8d7bd9deb6;
 
   /// Регенерация маны
@@ -3837,7 +3837,7 @@ abstract class AppLocalizations {
   /// Сборка
   ///
   /// In en, this message translates to:
-  /// **'Assembly'**
+  /// **'Build'**
   String get m8c39bb691b;
 
   /// Сборка PoB больше недоступна. Обновите список сборок.
@@ -3879,7 +3879,7 @@ abstract class AppLocalizations {
   /// Сборка не найдена
   ///
   /// In en, this message translates to:
-  /// **'Assembly not found'**
+  /// **'Build not found'**
   String get m5c8bb47697;
 
   /// Сборка обновлена из Path of Building
@@ -3897,13 +3897,13 @@ abstract class AppLocalizations {
   /// Сборка рассчитана исходным Lua
   ///
   /// In en, this message translates to:
-  /// **'Assembly calculated by original Lua'**
+  /// **'Build calculated by original Lua'**
   String get mc27d8aad03;
 
   /// Сборка с таким именем уже существует.
   ///
   /// In en, this message translates to:
-  /// **'An assembly with the same name already exists.'**
+  /// **'A build with this name already exists.'**
   String get med0b7c459c;
 
   /// Сборка сохранена в библиотеке, но копия восстановления недоступна: {p0}
@@ -4131,7 +4131,7 @@ abstract class AppLocalizations {
   /// Сначала откройте сборку.
   ///
   /// In en, this message translates to:
-  /// **'First open the assembly.'**
+  /// **'Open a build first.'**
   String get m93e0cd3908;
 
   /// Сначала получите актуальный отчёт сборки через pob_check_build.
@@ -4149,7 +4149,7 @@ abstract class AppLocalizations {
   /// Сначала уберите камни поддержки
   ///
   /// In en, this message translates to:
-  /// **'Remove support stones first'**
+  /// **'Remove support gems first'**
   String get m59b50cc146;
 
   /// Сначала установите оба компонента
@@ -4167,7 +4167,7 @@ abstract class AppLocalizations {
   /// Снять
   ///
   /// In en, this message translates to:
-  /// **'Remove'**
+  /// **'Unequip'**
   String get md4b51f7a04;
 
   /// Собственные свойства
@@ -4197,13 +4197,13 @@ abstract class AppLocalizations {
   /// Создайте персонажа или откройте XML из PoB. Все показатели рассчитает Lua.
   ///
   /// In en, this message translates to:
-  /// **'Create a character or unlock XML from PoB. All indicators will be calculated by Lua.'**
+  /// **'Create a character or open an XML build from PoB. Lua will calculate all stats.'**
   String get m7ab8e7349a;
 
   /// Создайте персонажа или откройте XML из PoB. Успешные расчёты сохраняются автоматически.
   ///
   /// In en, this message translates to:
-  /// **'Create a character or unlock XML from PoB. Successful calculations are saved automatically.'**
+  /// **'Create a character or open an XML build from PoB. Successful calculations are saved automatically.'**
   String get mb724f3e4cd;
 
   /// Создать копию
@@ -4215,7 +4215,7 @@ abstract class AppLocalizations {
   /// Создать сборку
   ///
   /// In en, this message translates to:
-  /// **'Create assembly'**
+  /// **'Create build'**
   String get md79906423b;
 
   /// Сопротивления
@@ -4257,7 +4257,7 @@ abstract class AppLocalizations {
   /// Сохранить этап
   ///
   /// In en, this message translates to:
-  /// **'Save step'**
+  /// **'Save milestone'**
   String get mfca5aabf85;
 
   /// Сочетание уже используется: {p0}
@@ -4347,7 +4347,7 @@ abstract class AppLocalizations {
   /// Страница выпусков
   ///
   /// In en, this message translates to:
-  /// **'Issues page'**
+  /// **'Releases page'**
   String get mf7eaffec2f;
 
   /// Суммарные свойства
@@ -4371,7 +4371,7 @@ abstract class AppLocalizations {
   /// Тема
   ///
   /// In en, this message translates to:
-  /// **'Topic'**
+  /// **'Theme'**
   String get m682f961a07;
 
   /// Тип противника
@@ -4467,7 +4467,7 @@ abstract class AppLocalizations {
   /// Удалить этап
   ///
   /// In en, this message translates to:
-  /// **'Delete step'**
+  /// **'Delete milestone'**
   String get md9dc2e9ec2;
 
   /// Уже выполняется установка
@@ -4641,7 +4641,7 @@ abstract class AppLocalizations {
   /// Установите компоненты, чтобы открыть сборку и получить настоящий расчёт.
   ///
   /// In en, this message translates to:
-  /// **'Install the components to open the assembly and get the real calculation.'**
+  /// **'Install the components to open a build and calculate it with Lua.'**
   String get m4d9acf3506;
 
   /// Установить компоненты
@@ -4701,13 +4701,13 @@ abstract class AppLocalizations {
   /// Флакон здоровья
   ///
   /// In en, this message translates to:
-  /// **'Vial of Health'**
+  /// **'Life flask'**
   String get md8a38f5bc2;
 
   /// Флакон маны
   ///
   /// In en, this message translates to:
-  /// **'Mana Vial'**
+  /// **'Mana flask'**
   String get m5d2173db9c;
 
   /// Хаос
@@ -4863,7 +4863,7 @@ abstract class AppLocalizations {
   /// Эта сборка уже есть в библиотеке PoB. Выберите другое имя для копии.
   ///
   /// In en, this message translates to:
-  /// **'This assembly is already in the PoB library. Choose a different name for the copy.'**
+  /// **'This build is already in the PoB library. Choose another name for the copy.'**
   String get mdfa94e9fd6;
 
   /// Этап завершён
@@ -4875,7 +4875,7 @@ abstract class AppLocalizations {
   /// Эти настройки влияют на показатели сборки
   ///
   /// In en, this message translates to:
-  /// **'These settings affect build performance'**
+  /// **'These settings affect build stats'**
   String get mca16b5fe71;
 
   /// Этот узел даст:

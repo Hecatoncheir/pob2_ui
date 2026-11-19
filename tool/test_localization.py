@@ -10,6 +10,21 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 class LocalizationTests(unittest.TestCase):
+    def test_reviewed_terms_are_reproducible_and_complete(self):
+        reviewed = json.loads((ROOT / 'lib/l10n/ui_reviewed.json').read_text('utf-8'))
+        cache = json.loads((ROOT / 'lib/l10n/ui_translations.json').read_text('utf-8'))
+        messages = localize_ui.collect()
+        for source, values in reviewed['terms'].items():
+            with self.subTest(source=source):
+                self.assertTrue(source in messages.values(), source)
+                self.assertEqual(len(values), len(reviewed['locales']))
+                key = next(key for key, text in messages.items() if text == source)
+                for locale, value in zip(reviewed['locales'], values):
+                    self.assertEqual(cache[locale][key], value)
+        for source, value in reviewed['english'].items():
+            key = next(key for key, text in messages.items() if text == source)
+            self.assertEqual(cache['en'][key], value)
+
     def test_all_catalogs_match_sources_and_parameters(self):
         messages = localize_ui.collect()
         saved = json.loads((ROOT / 'lib/l10n/ui_sources.json').read_text('utf-8'))

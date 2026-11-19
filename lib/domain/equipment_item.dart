@@ -1,5 +1,6 @@
 import 'build_report.dart';
 import 'item_comparison.dart';
+import 'item_name.dart';
 
 class EquipmentItem {
   EquipmentItem.fromJson(JsonMap json)
@@ -12,6 +13,7 @@ class EquipmentItem {
   final int? id;
   final String name, base, raw, rarity;
   final List<JsonMap> unsupported;
+  String get displayName => readableItemName(name, base);
 }
 
 class ItemInspection {
@@ -31,4 +33,10 @@ class ItemInspection {
   final List<JsonMap> lines;
   final bool compatible;
   final ItemComparison? comparison;
+
+  String displayText(String text) {
+    final clean = cleanPoB(text);
+    if (clean.isEmpty || clean != cleanPoB(item.name)) return text;
+    return text.replaceFirst(clean, item.displayName);
+  }
 }

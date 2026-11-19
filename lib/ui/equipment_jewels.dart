@@ -5,6 +5,7 @@ import '../data/item_art_catalog.dart';
 import '../data/mcp_error_message.dart';
 import '../domain/build_report.dart';
 import '../domain/equipment_item.dart';
+import '../domain/item_name.dart';
 import 'core/app_text.dart';
 import 'core/dialog_close_button.dart';
 import 'core/panels.dart';
@@ -92,7 +93,7 @@ class EquipmentJewels extends StatelessWidget {
             ? icon
             : ItemArtworkImage(url: url, placeholder: icon),
       ),
-      title: AppText(jewel['name'] as String, game: true),
+      title: AppText(itemDisplayName(jewel), game: true),
       trailing: const Icon(Icons.chevron_right),
       onTap: busy || !repository.canInspect
           ? null

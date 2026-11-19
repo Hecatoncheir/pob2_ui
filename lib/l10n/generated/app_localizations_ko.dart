@@ -226,7 +226,7 @@ class AppLocalizationsKo extends AppLocalizations {
   }
 
   @override
-  String get m4fae346e6c => '그랬어요';
+  String get m4fae346e6c => '변경 전';
 
   @override
   String get m84e960d40a => '예산';
@@ -496,7 +496,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get me3c3ea3a85 => '사용할 수 없는 작업';
 
   @override
-  String get me1daa9e250 => '나무';
+  String get me1daa9e250 => '트리';
 
   @override
   String m0e1306f92c(String p0) {
@@ -570,7 +570,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get me598ae02b1 => '핵심 노드 추가';
 
   @override
-  String get m9cef26392f => '항목 추가';
+  String get m9cef26392f => '아이템 추가';
 
   @override
   String get mbc10505bdf => '스킬 계산을 위해 돌그룹을 추가합니다.';
@@ -603,7 +603,7 @@ class AppLocalizationsKo extends AppLocalizations {
   }
 
   @override
-  String get m41a4fa8b6a => '영혼';
+  String get m41a4fa8b6a => '정신력';
 
   @override
   String get m974eae850c => 'PoB가 빌드 저장을 요청하면 해당 창에서 응답하세요.';
@@ -679,7 +679,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get ma7a4033657 => '닫기';
 
   @override
-  String get mbfc7b67eb5 => '항목 교체';
+  String get mbfc7b67eb5 => '아이템 교체';
 
   @override
   String get md4bac1da57 => '단계 메모';
@@ -703,10 +703,10 @@ class AppLocalizationsKo extends AppLocalizations {
   String get mfac4030099 => '빌드가 여기에 저장됩니다.';
 
   @override
-  String get m0cc21de8b8 => '건강';
+  String get m0cc21de8b8 => '생명력';
 
   @override
-  String get mf869293c62 => '의미';
+  String get mf869293c62 => '값';
 
   @override
   String get mf6a527732e => '현재 Lua PoB 보고서의 값입니다.';
@@ -797,7 +797,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m05b721e615 => '돌이 발견되지 않았습니다';
 
   @override
-  String get m566d4d32d7 => '지지석';
+  String get m566d4d32d7 => '보조 젬';
 
   @override
   String get md0ef3540b0 => '카탈로그';
@@ -839,16 +839,16 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m6916d088f3 => '치명타. 기회';
 
   @override
-  String get m7bf311d808 => '왼손';
+  String get m7bf311d808 => '보조 장비';
 
   @override
-  String get m7825825def => '왼손 II';
+  String get m7825825def => '보조 장비 II';
 
   @override
   String get m1190db95a3 => '리그';
 
   @override
-  String get m609fc60c74 => '민첩성';
+  String get m609fc60c74 => '민첩';
 
   @override
   String get m5da5bd2f47 => '계산을 통한 로컬 인터페이스 연결';
@@ -899,11 +899,11 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m204751ca09 => '최근';
 
   @override
-  String get me113ee319c => '네 очко';
+  String get me113ee319c => '포인트당';
 
   @override
   String m1d32e63718(String p0) {
-    return '나에게: $p0';
+    return '포인트당: $p0';
   }
 
   @override
@@ -916,7 +916,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get mf71a076c69 => '무기 세트';
 
   @override
-  String get mff86959fa1 => '턱받이';
+  String get mff86959fa1 => '갑옷';
 
   @override
   String get m38509ab991 => 'Ctrl, Alt 또는 Cmd 조합을 누르세요. Esc - 취소합니다.';
@@ -928,7 +928,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get md45e66ab55 => '그룹 이름';
 
   @override
-  String get m51233393a5 => 'Название сборки';
+  String get m51233393a5 => '빌드 이름';
 
   @override
   String get m378e9ed8fc => '단계 이름';
@@ -951,7 +951,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m85b24dddaa => 'PoB 폴더 찾기';
 
   @override
-  String get m302605cf87 => '나이티 сборку';
+  String get m302605cf87 => '빌드 검색';
 
   @override
   String get mf211301b5e => '노드 찾기';
@@ -1311,13 +1311,13 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m92782507e5 => 'poe.ninja 캐릭터 페이지가 필요합니다.';
 
   @override
-  String get m83e9fd7c8a => '부적 I';
+  String get m83e9fd7c8a => '호신부 I';
 
   @override
-  String get mbe485a0526 => '부적II';
+  String get mbe485a0526 => '호신부 II';
 
   @override
-  String get m4a1afe7893 => '아뮬렛III';
+  String get m4a1afe7893 => '호신부 III';
 
   @override
   String get md65eeeeaab => '구성요소 섹션에서 MCP를 업데이트하세요.';
@@ -1468,7 +1468,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m8fbe9b75cb => '취소';
 
   @override
-  String get mb9b86803ad => '작업 취소';
+  String get mb9b86803ad => '실행 취소';
 
   @override
   String get m1731619efa => '디자인';
@@ -1495,7 +1495,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m27234756aa => '프로필을 삭제하는 중...';
 
   @override
-  String get m6cc0ad9655 => '안경';
+  String get m6cc0ad9655 => '포인트';
 
   @override
   String mbe045b91a6(String p0) {
@@ -1571,7 +1571,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m9af13a3399 => '목록으로 이동하면 지원이 추가되고 뒤로 이동하면 제거됩니다.';
 
   @override
-  String get m79ab5f1286 => 'Lua로 변환';
+  String get m79ab5f1286 => 'Lua로 다시 계산';
 
   @override
   String get m24ad4cc4a3 => '여기에 돌을 드래그하거나 아이콘을 클릭하여 구성하세요.';
@@ -1595,10 +1595,10 @@ class AppLocalizationsKo extends AppLocalizations {
   String get mfd0560ebbf => '기본값';
 
   @override
-  String get m5189135a61 => '반복';
+  String get m5189135a61 => '다시 시도';
 
   @override
-  String get madb0c613d6 => '작업 반복';
+  String get madb0c613d6 => '다시 실행';
 
   @override
   String get m298e41327f => '다운로드 다시 시도';
@@ -1670,7 +1670,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get md133559e02 => '공식 홈페이지에서 검색이 열립니다';
 
   @override
-  String get mbf3c9df646 => '지표';
+  String get mbf3c9df646 => '능력치';
 
   @override
   String get mc7fc04e5df => '지표는 변경되지 않습니다.';
@@ -1679,7 +1679,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m53788df38a => '현재 빌드 상태 표시기';
 
   @override
-  String get mfdf0487fc4 => '표시기';
+  String get mfdf0487fc4 => '능력치';
 
   @override
   String get m21a6bb1840 => '전체 트리 표시';
@@ -1748,7 +1748,7 @@ class AppLocalizationsKo extends AppLocalizations {
   }
 
   @override
-  String get m7ba6aa7f66 => '조립 품목';
+  String get m7ba6aa7f66 => '빌드의 아이템';
 
   @override
   String get m9ce35b77ce => '이 슬롯에는 아이템이 적합하지 않습니다';
@@ -1793,7 +1793,7 @@ class AppLocalizationsKo extends AppLocalizations {
   }
 
   @override
-  String get me15f960d93 => '신청';
+  String get me15f960d93 => '적용';
 
   @override
   String get m84028563e4 => '적용 및 계산';
@@ -1808,7 +1808,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m711164636a => '단계 적용';
 
   @override
-  String get mae2ea1c701 => '시도 중';
+  String get mae2ea1c701 => '아이템 미리 보기';
 
   @override
   String get m6aab9e2cb4 => '일시중지';
@@ -1831,7 +1831,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m93b08f7b14 => '업데이트 확인';
 
   @override
-  String get me269e51359 => '항목 확인';
+  String get me269e51359 => '아이템 확인';
 
   @override
   String get m87cb1172f2 => '연결 확인';
@@ -2018,7 +2018,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m49db3482db => '주얼';
 
   @override
-  String get m8c39bb691b => '조립';
+  String get m8c39bb691b => '빌드';
 
   @override
   String get m15d7545f05 => 'PoB 빌드를 더 이상 사용할 수 없습니다. 빌드 목록을 업데이트합니다.';
@@ -2061,7 +2061,7 @@ class AppLocalizationsKo extends AppLocalizations {
   }
 
   @override
-  String get m187a481844 => '빌드가 삭제되었습니다.';
+  String get m187a481844 => '빌드 삭제됨';
 
   @override
   String get m9027890a7b => '연결된 폴더의 빌드는 ‘내 빌드’에서 볼 수 있습니다.';
@@ -2187,7 +2187,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m5ebbc9d7a5 => '제거';
 
   @override
-  String get md4b51f7a04 => '제거';
+  String get md4b51f7a04 => '장착 해제';
 
   @override
   String get mf3f1d96087 => '자신의 속성';
@@ -2214,7 +2214,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get mc42ccf5a81 => '사본 만들기';
 
   @override
-  String get md79906423b => '어셈블리 생성';
+  String get md79906423b => '빌드 생성';
 
   @override
   String get m62bb423bd3 => '저항';
@@ -2276,13 +2276,13 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m91d6208508 => '아직 안정적인 릴리스가 없습니다.';
 
   @override
-  String get md3ae3e1986 => '되었다';
+  String get md3ae3e1986 => '변경 후';
 
   @override
   String get mabdae6b126 => 'PoB 기본 폴더를 찾을 수 없습니다. 폴더를 직접 선택하세요.';
 
   @override
-  String get mf7eaffec2f => '문제 페이지';
+  String get mf7eaffec2f => '릴리스 페이지';
 
   @override
   String get m4ef88e033d => '요약 속성';
@@ -2294,7 +2294,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get mcda85a1ad9 => '항목 텍스트';
 
   @override
-  String get m682f961a07 => '주제';
+  String get m682f961a07 => '테마';
 
   @override
   String get m7242065c34 => '적 유형';
@@ -2338,7 +2338,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m9ba95f357c => '빌드 삭제';
 
   @override
-  String get mb3157cbf2b => '이 빌드를 삭제하시겠습니까?';
+  String get mb3157cbf2b => '이 빌드를 삭제할까요?';
 
   @override
   String get m1c89558239 => '스킬 삭제';
@@ -2422,7 +2422,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m9c6708a566 => '피해/방어';
 
   @override
-  String get m908b6d3a83 => '구성';
+  String get m908b6d3a83 => '설정';
 
   @override
   String get m288545991b => '조건을 찾을 수 없습니다.';
@@ -2471,10 +2471,10 @@ class AppLocalizationsKo extends AppLocalizations {
   String get ma6b9ff9cd6 => '파일이 존재합니다. 바꾸려면 overwrite=true를 지정합니다.';
 
   @override
-  String get md8a38f5bc2 => '건강의 약병';
+  String get md8a38f5bc2 => '생명력 플라스크';
 
   @override
-  String get m5d2173db9c => '마나 약병';
+  String get m5d2173db9c => '마나 플라스크';
 
   @override
   String get m62d8c4932b => '카오스';
@@ -2545,7 +2545,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get mae1df2993a => '내보내기 XML';
 
   @override
-  String get mf49983ccf6 => '에너지 쉴드';
+  String get mf49983ccf6 => '에너지 보호막';
 
   @override
   String get m2b2c6df514 =>
