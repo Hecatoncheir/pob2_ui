@@ -8,6 +8,7 @@ import '../data/mcp_editor_gateway.dart';
 import '../data/process_service.dart';
 import '../domain/build_report.dart';
 import '../domain/component.dart';
+import '../domain/app_info.dart';
 import 'shell_bloc.dart';
 import 'workshop_cubit.dart';
 import 'mcp_editor_commands.dart';
@@ -287,6 +288,9 @@ class McpEditorCubit extends Cubit<McpEditorState> {
   JsonMap _reply(JsonMap result) => {'result': result, 'revision': _revision};
 
   JsonMap _status() => {
+    'appVersion': appVersion,
+    'appBuild': appBuild,
+    'processId': pid,
     'enabled': enabled,
     'connectionCommand': state.command,
     'connected': model.engine.connected,

@@ -1,4 +1,4 @@
-import 'dart:ui' show AppExitResponse, AppExitType;
+import 'dart:ui' show AppExitResponse;
 import 'dart:io';
 
 import 'package:material_ui/material_ui.dart';
@@ -49,7 +49,7 @@ class _ExitProtectionState extends State<ExitProtection> {
         );
       }
       await widget.model.close();
-      await ServicesBinding.instance.exitApplication(AppExitType.required);
+      exit(0);
     } catch (error) {
       if (!widget.model.isClosed)
         widget.model.reportPersistenceError(

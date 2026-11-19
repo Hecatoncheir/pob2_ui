@@ -175,6 +175,15 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: gh release download v0.8.0 --dir build/previous --pattern '*${{ matrix.target }}*'
+      - name: Проверить фактическое завершение через MCP
+        if: inputs.cold_install != true
+        shell: bash
+        run: |
+          runner=()
+          if [[ "$RUNNER_OS" == Linux ]]; then runner=(xvfb-run -a); fi
+          "${runner[@]}" python tool/check_mcp_lifecycle.py --target ${{ matrix.target }} \
+            --components "$RUNNER_TEMP/pob2-lua-smoke/components.json" \
+            --output build/review/mcp-lifecycle-${{ matrix.target }}.json
       - name: Проверить установку и восстановление сборки с Lua
         shell: bash
         env:
@@ -300,6 +309,7 @@ jobs:
           path: |
             build/review/*.png
             build/review/components.json
+            build/review/mcp-lifecycle-*.json
             build/review/*installer-progress*.jsonl
           if-no-files-found: ignore
       - uses: actions/upload-artifact@v7.0.2
