@@ -40,8 +40,10 @@ class EngineSessionCubit extends Cubit<EngineSessionState> {
   Future<void> _applying = Future.value();
 
   Future<void> connect(EngineOptions options, {String? createName}) async {
-    await disconnect();
+    final releasing = disconnect();
     final generation = _generation;
+    await releasing;
+    if (generation != _generation || isClosed) return;
     emit(
       EngineSessionState(
         options: options,

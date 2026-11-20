@@ -35,6 +35,28 @@ class _XmlEngine extends McpClient {
 
 void main() {
   test(
+    'Последнее подключение отменяет предыдущее до открытия процесса',
+    () async {
+      final opened = <String>[];
+      final connection = FakeEngineConnection();
+      final cubit = EngineSessionCubit(
+        open: (options) async {
+          opened.add(options.profile);
+          return connection;
+        },
+      );
+      addTearDown(connection.events.close);
+      addTearDown(cubit.close);
+      final first = cubit.connect(const EngineOptions(profile: 'first'));
+      final second = cubit.connect(const EngineOptions(profile: 'second'));
+      await Future.wait([first, second]);
+      expect(opened, ['second']);
+      expect(cubit.state.options.profile, 'second');
+      expect(cubit.state.connected, true);
+    },
+  );
+
+  test(
     'Привязка следует за именем XML при внешних правках, правке UI и Undo',
     () async {
       final root = await Directory.systemTemp.createTemp('pob2-engine-xml-');
