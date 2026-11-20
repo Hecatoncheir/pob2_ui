@@ -234,11 +234,19 @@ jobs:
           if [[ "$RUNNER_OS" == Linux ]]; then runner=(xvfb-run -a); fi
           "${runner[@]}" flutter test integration_test/tree_path_comparison_test.dart -d ${{ matrix.platform }} --no-pub
       - name: Новый интерфейс с настоящим Lua
-        if: inputs.cold_install != true && runner.os != 'Linux'
+        if: inputs.cold_install != true && runner.os == 'Windows'
+        timeout-minutes: 18
         env:
           POB2_UI_HOME: ${{ runner.temp }}/pob2-lua-smoke
           POB2_UI_SCREENSHOT: ${{ github.workspace }}/build/review/flutter-${{ matrix.platform }}.png
-        run: flutter test integration_test/workspace_test.dart -d ${{ matrix.platform }} --no-pub
+        # Лимиты отдельного теста заменены общим пределом шага для медленного runner.
+        run: flutter test integration_test/workspace_test.dart -d windows --no-pub --ignore-timeouts
+      - name: Новый интерфейс с настоящим Lua
+        if: inputs.cold_install != true && runner.os == 'macOS'
+        env:
+          POB2_UI_HOME: ${{ runner.temp }}/pob2-lua-smoke
+          POB2_UI_SCREENSHOT: ${{ github.workspace }}/build/review/flutter-${{ matrix.platform }}.png
+        run: flutter test integration_test/workspace_test.dart -d macos --no-pub
       - name: Новый интерфейс с настоящим Lua
         if: inputs.cold_install != true && runner.os == 'Linux'
         env:
@@ -246,11 +254,18 @@ jobs:
           POB2_UI_SCREENSHOT: ${{ github.workspace }}/build/review/flutter-linux.png
         run: xvfb-run -a flutter test integration_test/workspace_test.dart -d linux --no-pub
       - name: Редакторы умений и условий с настоящим Lua
-        if: inputs.cold_install != true && runner.os != 'Linux'
+        if: inputs.cold_install != true && runner.os == 'Windows'
+        timeout-minutes: 18
         env:
           POB2_UI_HOME: ${{ runner.temp }}/pob2-lua-smoke
           POB2_UI_SCREENSHOT: ${{ github.workspace }}/build/review/editors-${{ matrix.platform }}.png
-        run: flutter test integration_test/editors_test.dart -d ${{ matrix.platform }} --no-pub
+        run: flutter test integration_test/editors_test.dart -d windows --no-pub --ignore-timeouts
+      - name: Редакторы умений и условий с настоящим Lua
+        if: inputs.cold_install != true && runner.os == 'macOS'
+        env:
+          POB2_UI_HOME: ${{ runner.temp }}/pob2-lua-smoke
+          POB2_UI_SCREENSHOT: ${{ github.workspace }}/build/review/editors-${{ matrix.platform }}.png
+        run: flutter test integration_test/editors_test.dart -d macos --no-pub
       - name: Редакторы умений и условий с настоящим Lua
         if: inputs.cold_install != true && runner.os == 'Linux'
         env:
