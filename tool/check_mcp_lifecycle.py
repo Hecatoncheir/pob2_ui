@@ -111,7 +111,8 @@ def check(binary, components):
             wait_for_editor(process, profile)
             editor = Editor(profile, component)
             tools = editor.rpc('tools/list', {})['tools']
-            assert len(tools) == 42, len(tools)
+            assert len(tools) == 43, len(tools)
+            assert any(tool['name'] == 'pob_compare_supports' for tool in tools)
             status = editor.call('pob_editor_status')
             assert not status['dialogOpen'], status
             assert status['processId'] == process.pid, status
