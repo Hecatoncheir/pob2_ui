@@ -5,6 +5,7 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import '../data/component_repository.dart';
+import '../data/engine_session_client.dart';
 import '../data/mcp_client.dart';
 import '../data/mcp_editor_gateway.dart';
 import '../data/mcp_error_message.dart';
@@ -38,6 +39,8 @@ import '../data/game_catalog_repository.dart';
 import '../data/saved_build_comparison.dart';
 import '../domain/build_comparison.dart';
 import '../domain/build_edit_result.dart';
+import '../domain/engine_session.dart';
+import 'engine_session_cubit.dart';
 
 typedef _BuildSnapshot = ({String xml, String title});
 typedef _ComponentValidation = Future<void> Function(Installations);
@@ -54,6 +57,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     PobBuildLocations? buildLocations,
     PobShareLinks? shareLinks,
     McpClient Function()? createEngine,
+    Future<EngineConnection> Function(EngineOptions)? openEngineSession,
   }) : _engine = engine,
        _createEngine = createEngine ?? McpClient.new,
        session = session ?? SessionRepository(components.store.root),
@@ -62,8 +66,60 @@ class WorkshopCubit extends Cubit<WorkshopState> {
        pobWindow = pobWindow ?? PobWindowRepository(),
        buildLocations = buildLocations ?? PobBuildLocations(),
        _shareLinks = shareLinks ?? PobShareLinks(),
+       _openEngineSession = openEngineSession,
        super(initialState ?? WorkshopState());
   final ComponentRepository components;
+  final Future<EngineConnection> Function(EngineOptions)? _openEngineSession;
+  late final engineSession = EngineSessionCubit(
+    open: _openEngineSession,
+    onSnapshot: _applyEngineSnapshot,
+  );
+  ({String folder, String id})? _engineBinding;
+  int _engineBindingEpoch = 0;
+  ({String folder, String id})? get _currentEngineBinding {
+    final id = state.library.activeId;
+    return id == null ? null : (folder: sharedLibrary?.directory ?? '', id: id);
+  }
+
+  Future<void> connectEngine(
+    EngineOptions options, {
+    String? createName,
+    bool bindCurrentBuild = false,
+  }) async {
+    _engineBindingEpoch++;
+    _engineBinding = bindCurrentBuild ? _currentEngineBinding : null;
+    try {
+      await engineSession.connect(options, createName: createName);
+    } catch (_) {
+      _engineBinding = null;
+      rethrow;
+    }
+  }
+
+  Future<void> disconnectEngine() async {
+    _engineBindingEpoch++;
+    _engineBinding = null;
+    await engineSession.disconnect();
+  }
+
+  Future<void> _applyEngineSnapshot(EngineSnapshot snapshot) async {
+    final binding = _engineBinding;
+    final epoch = _engineBindingEpoch;
+    if (binding == null) return;
+    if (state.busy) await stream.firstWhere((value) => !value.busy);
+    if (isClosed ||
+        _closing ||
+        _engineBinding != binding ||
+        _currentEngineBinding != binding ||
+        epoch != _engineBindingEpoch)
+      return;
+    await _renameLocalBuild(snapshot.buildName);
+    if (state.error case final error?) throw StateError(error);
+    addLog(
+      'Общая сессия ${snapshot.sessionId}, ревизия ${snapshot.revision}: название «${snapshot.buildName}»',
+    );
+  }
+
   final PobShareLinks _shareLinks;
   McpClient _engine;
   McpClient get engine => _engine;
@@ -347,6 +403,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     if (isClosed) return;
     final wasBusy = state.busy;
     emit(next);
+    if (_engineBinding != _currentEngineBinding) _engineBinding = null;
     _mcpEditor?.checkBuild();
     _watchOpenBuild();
     if (wasBusy && !next.busy) resumeBuildSync();
@@ -1331,7 +1388,12 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     _clearHistory();
   });
 
-  Future<void> renameBuild(String title) => _run(() async {
+  Future<void> renameBuild(String title) {
+    if (_engineBinding != null) return _run(() => engineSession.rename(title));
+    return _renameLocalBuild(title);
+  }
+
+  Future<void> _renameLocalBuild(String title) => _run(() async {
     if (state.report == null || title.trim().isEmpty) return;
     final previousTitle = state.library.active?.title ?? state.report!.name;
     if (previousTitle == title.trim()) return;
@@ -1640,6 +1702,9 @@ class WorkshopCubit extends Cubit<WorkshopState> {
       xml: await _currentXml(),
       title: state.library.active?.title ?? state.report!.name,
     );
+    if (_engineBinding != null && source.last.title != before.title) {
+      await engineSession.rename(source.last.title);
+    }
     try {
       await _restoreSnapshot(source.last);
     } catch (_) {
@@ -1769,6 +1834,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
   @override
   Future<void> close() async {
     _closing = true;
+    await engineSession.close();
     _buildChangeDelay?.cancel();
     await _buildChanges?.cancel();
     await _buildSync?.future;

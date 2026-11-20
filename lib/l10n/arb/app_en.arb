@@ -1,5 +1,10 @@
 {
   "@@locale": "en",
+  "m14158eacb5": "CLI, MCP and application see one session. The title is currently being synchronized; game calculations are performed by Lua.",
+  "@m14158eacb5": {
+    "description": "CLI, MCP и приложение видят одну сессию. Сейчас синхронизируется название; игровые расчёты выполняет Lua.",
+    "placeholders": {}
+  },
   "m8c9a654b8c": "DPS before",
   "@m8c9a654b8c": {
     "description": "DPS до",
@@ -290,6 +295,21 @@
       }
     }
   },
+  "m6e6c42ad66": "{p0} · revision {p1} · {p2}",
+  "@m6e6c42ad66": {
+    "description": "{p0} · ревизия {p1} · {p2}",
+    "placeholders": {
+      "p0": {
+        "type": "String"
+      },
+      "p1": {
+        "type": "String"
+      },
+      "p2": {
+        "type": "String"
+      }
+    }
+  },
   "mbefa507d02": "{p0} · level {p1}",
   "@mbefa507d02": {
     "description": "{p0} · уровень {p1}",
@@ -305,6 +325,15 @@
   "m3f8bda535c": "{p0} bytes",
   "@m3f8bda535c": {
     "description": "{p0} байт",
+    "placeholders": {
+      "p0": {
+        "type": "String"
+      }
+    }
+  },
+  "m6bfd5c5a8f": "{p0}. Reconnecting...",
+  "@m6bfd5c5a8f": {
+    "description": "{p0}. Переподключение…",
     "placeholders": {
       "p0": {
         "type": "String"
@@ -745,6 +774,11 @@
     "description": "Выбрать XML-файл",
     "placeholders": {}
   },
+  "mf0fa40444a": "Select engine",
+  "@mf0fa40444a": {
+    "description": "Выбрать движок",
+    "placeholders": {}
+  },
   "m88d4b06d56": "Choose folder",
   "@m88d4b06d56": {
     "description": "Выбрать папку",
@@ -753,6 +787,11 @@
   "md22f8aaed2": "Select PoB build folder",
   "@md22f8aaed2": {
     "description": "Выбрать папку сборок PoB",
+    "placeholders": {}
+  },
+  "m572cfed3aa": "Select program",
+  "@m572cfed3aa": {
+    "description": "Выбрать программу",
     "placeholders": {}
   },
   "m4cb6a01a0e": "Choose a path",
@@ -817,6 +856,21 @@
   "ma755f360c2": "Two components. Calculations on your computer.",
   "@ma755f360c2": {
     "description": "Два компонента. Расчёты на вашем компьютере.",
+    "placeholders": {}
+  },
+  "mf68d71e67c": "The engine returned incompatible connection parameters",
+  "@mf68d71e67c": {
+    "description": "Движок вернул несовместимые параметры подключения",
+    "placeholders": {}
+  },
+  "m61f92fb847": "The engine did not report connection parameters",
+  "@m61f92fb847": {
+    "description": "Движок не сообщил параметры подключения",
+    "placeholders": {}
+  },
+  "md3339c001c": "Engine unavailable",
+  "@md3339c001c": {
+    "description": "Движок недоступен",
     "placeholders": {}
   },
   "md27019b2d6": "The action or its parameters are not available.",
@@ -1210,6 +1264,11 @@
     "description": "Идеи, к которым хочется вернуться",
     "placeholders": {}
   },
+  "mc88f7b9ebc": "Session ID",
+  "@mc88f7b9ebc": {
+    "description": "Идентификатор сессии",
+    "placeholders": {}
+  },
   "ma48353b7b1": "Melee avoid chance",
   "@ma48353b7b1": {
     "description": "Избежание атак вблизи",
@@ -1278,6 +1337,11 @@
   "m4376254217": "Import via link",
   "@m4376254217": {
     "description": "Импортировать по ссылке",
+    "placeholders": {}
+  },
+  "me95acf38f2": "The shared session name will be saved in the open assembly. When you change the assembly, the binding will be disabled.",
+  "@me95acf38f2": {
+    "description": "Имя общей сессии будет сохранено в открытой сборке. При смене сборки привязка отключится.",
     "placeholders": {}
   },
   "ma8f8e11f0c": "Intelligence",
@@ -1571,6 +1635,18 @@
   "@m378e9ed8fc": {
     "description": "Название этапа",
     "placeholders": {}
+  },
+  "mfe4c378fa6": "Title: \"{p0}\" → \"{p1}\"",
+  "@mfe4c378fa6": {
+    "description": "Название: «{p0}» → «{p1}»",
+    "placeholders": {
+      "p0": {
+        "type": "String"
+      },
+      "p1": {
+        "type": "String"
+      }
+    }
   },
   "m0bf71e1c90": "Several PoB folders were found. Choose the one you use.",
   "@m0bf71e1c90": {
@@ -1906,6 +1982,15 @@
     "description": "Не удалось сохранить группу",
     "placeholders": {}
   },
+  "mea514c56ce": "Failed to save name in XML: {p0}",
+  "@mea514c56ce": {
+    "description": "Не удалось сохранить имя в XML: {p0}",
+    "placeholders": {
+      "p0": {
+        "type": "String"
+      }
+    }
+  },
   "mef9d01550d": "Failed to save scale.",
   "@mef9d01550d": {
     "description": "Не удалось сохранить масштаб.",
@@ -2164,6 +2249,11 @@
     "description": "Нет перевода — показываем оригинал",
     "placeholders": {}
   },
+  "m8a210e3e2e": "No connection to shared session",
+  "@m8a210e3e2e": {
+    "description": "Нет соединения с общей сессией",
+    "placeholders": {}
+  },
   "m443c49da2a": "Move down",
   "@m443c49da2a": {
     "description": "Ниже",
@@ -2338,6 +2428,36 @@
     "description": "Общая карта урона и защиты. Для списка выберите отдельный показатель.",
     "placeholders": {}
   },
+  "m3b30fa7276": "General session",
+  "@m3b30fa7276": {
+    "description": "Общая сессия",
+    "placeholders": {}
+  },
+  "mc1330cb96d": "General Go session",
+  "@mc1330cb96d": {
+    "description": "Общая сессия Go",
+    "placeholders": {}
+  },
+  "m5e16506fb5": "General session {p0}, revision {p1}: name \"{p2}\"",
+  "@m5e16506fb5": {
+    "description": "Общая сессия {p0}, ревизия {p1}: название «{p2}»",
+    "placeholders": {
+      "p0": {
+        "type": "String"
+      },
+      "p1": {
+        "type": "String"
+      },
+      "p2": {
+        "type": "String"
+      }
+    }
+  },
+  "m4964128d55": "General session not connected",
+  "@m4964128d55": {
+    "description": "Общая сессия не подключена",
+    "placeholders": {}
+  },
   "m8cb7d50be2": "Fire",
   "@m8cb7d50be2": {
     "description": "Огонь",
@@ -2426,6 +2546,11 @@
   "m3e95800065": "Disabled",
   "@m3e95800065": {
     "description": "Отключено",
+    "placeholders": {}
+  },
+  "mbb5bdd176c": "Disable",
+  "@mbb5bdd176c": {
+    "description": "Отключить",
     "placeholders": {}
   },
   "m654046a00d": "Open the character on poe.ninja, select Copy PoB code, then paste the code into PoB II.",
@@ -2753,6 +2878,11 @@
     "description": "Подключение Lua",
     "placeholders": {}
   },
+  "me2449ea8e4": "Connecting…",
+  "@me2449ea8e4": {
+    "description": "Подключение…",
+    "placeholders": {}
+  },
   "m67f5d8880e": "Connect Lua",
   "@m67f5d8880e": {
     "description": "Подключите Lua",
@@ -2766,6 +2896,11 @@
   "m0d8b14b475": "Reconnect the bridge and restart PoB.",
   "@m0d8b14b475": {
     "description": "Подключите мост заново и перезапустите PoB.",
+    "placeholders": {}
+  },
+  "m3af435b32e": "Connect",
+  "@m3af435b32e": {
+    "description": "Подключить",
     "placeholders": {}
   },
   "m538d913ee0": "Connect Lua",
@@ -2868,6 +3003,11 @@
     "description": "Получаемый физический урон",
     "placeholders": {}
   },
+  "ma25a5c7093": "Session snapshot received",
+  "@ma25a5c7093": {
+    "description": "Получен снимок сессии",
+    "placeholders": {}
+  },
   "m8c0ef0f511": "Custom modifiers",
   "@m8c0ef0f511": {
     "description": "Пользовательские модификаторы",
@@ -2895,6 +3035,11 @@
   "m0f80007ec0": "DoT DPS",
   "@m0f80007ec0": {
     "description": "Постепенный DPS",
+    "placeholders": {}
+  },
+  "me5e5204ccf": "Change thread closed",
+  "@me5e5204ccf": {
+    "description": "Поток изменений закрыт",
     "placeholders": {}
   },
   "mb4fd967719": "Pull to change panel width",
@@ -3181,6 +3326,16 @@
   "m62ed32eb22": "Checking...",
   "@m62ed32eb22": {
     "description": "Проверяем…",
+    "placeholders": {}
+  },
+  "mce86d859e2": "pob2-engine program",
+  "@mce86d859e2": {
+    "description": "Программа pob2-engine",
+    "placeholders": {}
+  },
+  "me881a16f50": "Server profile",
+  "@me881a16f50": {
+    "description": "Профиль сервера",
     "placeholders": {}
   },
   "m006f803f7b": "The profile is already in use.",
@@ -3490,6 +3645,11 @@
     "description": "Сборка удалена",
     "placeholders": {}
   },
+  "m993b5ef013": "The assembly has already been modified by another client. Wait for a new revision",
+  "@m993b5ef013": {
+    "description": "Сборка уже изменена другим клиентом. Дождитесь новой ревизии",
+    "placeholders": {}
+  },
   "m9027890a7b": "Builds in the connected folder are available in My Builds.",
   "@m9027890a7b": {
     "description": "Сборки из подключённой папки уже доступны в разделе «Мои сборки».",
@@ -3530,6 +3690,11 @@
     "description": "Свои…",
     "placeholders": {}
   },
+  "m4adb0d6692": "Link to open assembly",
+  "@m4adb0d6692": {
+    "description": "Связать с открытой сборкой",
+    "placeholders": {}
+  },
   "m02578f2b24": "PoB connection confirmed",
   "@m02578f2b24": {
     "description": "Связь с PoB подтверждена",
@@ -3550,9 +3715,29 @@
     "description": "Сдвинуть вправо",
     "placeholders": {}
   },
+  "m57ac031b0e": "Server returned older session; reconnect it",
+  "@m57ac031b0e": {
+    "description": "Сервер вернул более старую сессию; подключите её заново",
+    "placeholders": {}
+  },
+  "mf0ca78d984": "Server does not support shared session subscriptions",
+  "@mf0ca78d984": {
+    "description": "Сервер не поддерживает подписки общей сессии",
+    "placeholders": {}
+  },
   "m32bb1c680f": "Session closed",
   "@m32bb1c680f": {
     "description": "Сессия закрыта",
+    "placeholders": {}
+  },
+  "mff4d880370": "Session not found. Create it explicitly",
+  "@mff4d880370": {
+    "description": "Сессия не найдена. Создайте её явно",
+    "placeholders": {}
+  },
+  "m122d76b9ee": "Session already exists. Connect without creation",
+  "@m122d76b9ee": {
+    "description": "Сессия уже существует. Подключитесь без создания",
     "placeholders": {}
   },
   "m69c1590a47": "Strength",
@@ -3705,6 +3890,11 @@
     "description": "Собственные свойства",
     "placeholders": {}
   },
+  "m2cdbcd559d": "Connection restored",
+  "@m2cdbcd559d": {
+    "description": "Соединение восстановлено",
+    "placeholders": {}
+  },
   "m7d3f9a98b5": "Connecting may spend passive points. Resetting removes all allocated nodes in the current tree.",
   "@m7d3f9a98b5": {
     "description": "Соединение может потратить пассивные очки. Сброс снимет все назначенные узлы текущего дерева.",
@@ -3733,6 +3923,11 @@
   "mc42ccf5a81": "Create a copy",
   "@mc42ccf5a81": {
     "description": "Создать копию",
+    "placeholders": {}
+  },
+  "m9da159743e": "Create a new session",
+  "@m9da159743e": {
+    "description": "Создать новую сессию",
     "placeholders": {}
   },
   "md79906423b": "Create build",

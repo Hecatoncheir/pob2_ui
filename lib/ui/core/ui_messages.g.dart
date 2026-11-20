@@ -3,6 +3,10 @@ import '../../l10n/generated/app_localizations.dart';
 import 'ui_rule.dart';
 
 final uiExactTranslations = <String, String Function(AppLocalizations)>{
+  "CLI, MCP и приложение видят одну сессию. Сейчас синхронизируется название; игровые расчёты выполняет Lua.":
+      (l) => l.m14158eacb5,
+  "CLI, MCP and application see one session. The title is currently being synchronized; game calculations are performed by Lua.":
+      (l) => l.m14158eacb5,
   "DPS до": (l) => l.m8c9a654b8c,
   "DPS before": (l) => l.m8c9a654b8c,
   "DPS кровотечения": (l) => l.m4577961ef0,
@@ -262,10 +266,14 @@ final uiExactTranslations = <String, String Function(AppLocalizations)>{
   "Select": (l) => l.m38aa0ac1ff,
   "Выбрать XML-файл": (l) => l.m0b27387ff0,
   "Choose XML file": (l) => l.m0b27387ff0,
+  "Выбрать движок": (l) => l.mf0fa40444a,
+  "Select engine": (l) => l.mf0fa40444a,
   "Выбрать папку": (l) => l.m88d4b06d56,
   "Choose folder": (l) => l.m88d4b06d56,
   "Выбрать папку сборок PoB": (l) => l.md22f8aaed2,
   "Select PoB build folder": (l) => l.md22f8aaed2,
+  "Выбрать программу": (l) => l.m572cfed3aa,
+  "Select program": (l) => l.m572cfed3aa,
   "Выбрать путь": (l) => l.m4cb6a01a0e,
   "Choose a path": (l) => l.m4cb6a01a0e,
   "Выключено": (l) => l.m20494f41ab,
@@ -288,6 +296,13 @@ final uiExactTranslations = <String, String Function(AppLocalizations)>{
   "Groups": (l) => l.mcd8c587351,
   "Два компонента. Расчёты на вашем компьютере.": (l) => l.ma755f360c2,
   "Two components. Calculations on your computer.": (l) => l.ma755f360c2,
+  "Движок вернул несовместимые параметры подключения": (l) => l.mf68d71e67c,
+  "The engine returned incompatible connection parameters": (l) =>
+      l.mf68d71e67c,
+  "Движок не сообщил параметры подключения": (l) => l.m61f92fb847,
+  "The engine did not report connection parameters": (l) => l.m61f92fb847,
+  "Движок недоступен": (l) => l.md3339c001c,
+  "Engine unavailable": (l) => l.md3339c001c,
   "Действие или его параметры недоступны.": (l) => l.md27019b2d6,
   "The action or its parameters are not available.": (l) => l.md27019b2d6,
   "Действие недоступно": (l) => l.me3c3ea3a85,
@@ -421,6 +436,8 @@ final uiExactTranslations = <String, String Function(AppLocalizations)>{
   "Loading game translations…": (l) => l.ma9f9d23dcb,
   "Идеи, к которым хочется вернуться": (l) => l.m5cb66ce618,
   "Ideas that you want to return to": (l) => l.m5cb66ce618,
+  "Идентификатор сессии": (l) => l.mc88f7b9ebc,
+  "Session ID": (l) => l.mc88f7b9ebc,
   "Избежание атак вблизи": (l) => l.ma48353b7b1,
   "Melee avoid chance": (l) => l.ma48353b7b1,
   "Избежание снарядов": (l) => l.m8a055d1e48,
@@ -449,6 +466,10 @@ final uiExactTranslations = <String, String Function(AppLocalizations)>{
   "Import character": (l) => l.mcaa43cf432,
   "Импортировать по ссылке": (l) => l.m4376254217,
   "Import via link": (l) => l.m4376254217,
+  "Имя общей сессии будет сохранено в открытой сборке. При смене сборки привязка отключится.":
+      (l) => l.me95acf38f2,
+  "The shared session name will be saved in the open assembly. When you change the assembly, the binding will be disabled.":
+      (l) => l.me95acf38f2,
   "Интеллект": (l) => l.ma8f8e11f0c,
   "Intelligence": (l) => l.ma8f8e11f0c,
   "Интерфейс не подключён.": (l) => l.mc9c8c4828a,
@@ -718,6 +739,8 @@ final uiExactTranslations = <String, String Function(AppLocalizations)>{
   "Нет перевода — показываем оригинал": (l) => l.m323494c6da,
   "Original text is shown when a translation is unavailable": (l) =>
       l.m323494c6da,
+  "Нет соединения с общей сессией": (l) => l.m8a210e3e2e,
+  "No connection to shared session": (l) => l.m8a210e3e2e,
   "Ниже": (l) => l.m443c49da2a,
   "Move down": (l) => l.m443c49da2a,
   "Ничего не найдено": (l) => l.m480fae1c4b,
@@ -793,6 +816,12 @@ final uiExactTranslations = <String, String Function(AppLocalizations)>{
   ) => l.mc006d459af,
   "General damage and defense map. For the list, select an individual metric.":
       (l) => l.mc006d459af,
+  "Общая сессия": (l) => l.m3b30fa7276,
+  "General session": (l) => l.m3b30fa7276,
+  "Общая сессия Go": (l) => l.mc1330cb96d,
+  "General Go session": (l) => l.mc1330cb96d,
+  "Общая сессия не подключена": (l) => l.m4964128d55,
+  "General session not connected": (l) => l.m4964128d55,
   "Огонь": (l) => l.m8cb7d50be2,
   "Fire": (l) => l.m8cb7d50be2,
   "Одна задача на строку": (l) => l.m5791044c7e,
@@ -829,6 +858,8 @@ final uiExactTranslations = <String, String Function(AppLocalizations)>{
   "Zoom out": (l) => l.m8e6a41ecd0,
   "Отключено": (l) => l.m3e95800065,
   "Disabled": (l) => l.m3e95800065,
+  "Отключить": (l) => l.mbb5bdd176c,
+  "Disable": (l) => l.mbb5bdd176c,
   "Откройте персонажа на poe.ninja, нажмите Copy PoB code и вставьте код в PoB II.":
       (l) => l.m654046a00d,
   "Open the character on poe.ninja, select Copy PoB code, then paste the code into PoB II.":
@@ -946,12 +977,16 @@ final uiExactTranslations = <String, String Function(AppLocalizations)>{
   "Default PoB folder connected": (l) => l.m54ab473017,
   "Подключение Lua": (l) => l.mce1dabc47f,
   "Connecting to Lua": (l) => l.mce1dabc47f,
+  "Подключение…": (l) => l.me2449ea8e4,
+  "Connecting…": (l) => l.me2449ea8e4,
   "Подключите Lua": (l) => l.m67f5d8880e,
   "Connect Lua": (l) => l.m67f5d8880e,
   "Подключите Lua через pob_editor_app.": (l) => l.ma33d11be60,
   "Connect Lua via pob_editor_app.": (l) => l.ma33d11be60,
   "Подключите мост заново и перезапустите PoB.": (l) => l.m0d8b14b475,
   "Reconnect the bridge and restart PoB.": (l) => l.m0d8b14b475,
+  "Подключить": (l) => l.m3af435b32e,
+  "Connect": (l) => l.m3af435b32e,
   "Подключить Lua": (l) => l.m538d913ee0,
   "Подключить мост": (l) => l.m80cc1bdb9b,
   "Connect bridge": (l) => l.m80cc1bdb9b,
@@ -991,6 +1026,8 @@ final uiExactTranslations = <String, String Function(AppLocalizations)>{
   "Taken Cold dmg": (l) => l.m22ad5a098c,
   "Получаемый физический урон": (l) => l.m2ffaee13bd,
   "Taken Phys dmg": (l) => l.m2ffaee13bd,
+  "Получен снимок сессии": (l) => l.ma25a5c7093,
+  "Session snapshot received": (l) => l.ma25a5c7093,
   "Пользовательские модификаторы": (l) => l.m8c0ef0f511,
   "Custom modifiers": (l) => l.m8c0ef0f511,
   "Попробуйте пересчитать сборку.": (l) => l.md90da4d82c,
@@ -999,6 +1036,8 @@ final uiExactTranslations = <String, String Function(AppLocalizations)>{
   "Key node order": (l) => l.mce98e63b90,
   "Постепенный DPS": (l) => l.m0f80007ec0,
   "DoT DPS": (l) => l.m0f80007ec0,
+  "Поток изменений закрыт": (l) => l.me5e5204ccf,
+  "Change thread closed": (l) => l.me5e5204ccf,
   "Потяните, чтобы изменить ширину панели": (l) => l.mb4fd967719,
   "Pull to change panel width": (l) => l.mb4fd967719,
   "Похищение здоровья": (l) => l.ma01259ad57,
@@ -1082,6 +1121,10 @@ final uiExactTranslations = <String, String Function(AppLocalizations)>{
   "Checking the profile...": (l) => l.m1d1347fc69,
   "Проверяем…": (l) => l.m62ed32eb22,
   "Checking...": (l) => l.m62ed32eb22,
+  "Программа pob2-engine": (l) => l.mce86d859e2,
+  "pob2-engine program": (l) => l.mce86d859e2,
+  "Профиль сервера": (l) => l.me881a16f50,
+  "Server profile": (l) => l.me881a16f50,
   "Профиль уже используется.": (l) => l.m006f803f7b,
   "The profile is already in use.": (l) => l.m006f803f7b,
   "Путь A": (l) => l.mee97fbe2f9,
@@ -1182,6 +1225,10 @@ final uiExactTranslations = <String, String Function(AppLocalizations)>{
   "A build with this name already exists.": (l) => l.med0b7c459c,
   "Сборка удалена": (l) => l.m187a481844,
   "Build deleted": (l) => l.m187a481844,
+  "Сборка уже изменена другим клиентом. Дождитесь новой ревизии": (l) =>
+      l.m993b5ef013,
+  "The assembly has already been modified by another client. Wait for a new revision":
+      (l) => l.m993b5ef013,
   "Сборки из подключённой папки уже доступны в разделе «Мои сборки».": (l) =>
       l.m9027890a7b,
   "Builds in the connected folder are available in My Builds.": (l) =>
@@ -1200,6 +1247,8 @@ final uiExactTranslations = <String, String Function(AppLocalizations)>{
   "Light": (l) => l.mf0cd3a6033,
   "Свои…": (l) => l.ma50190234a,
   "Own...": (l) => l.ma50190234a,
+  "Связать с открытой сборкой": (l) => l.m4adb0d6692,
+  "Link to open assembly": (l) => l.m4adb0d6692,
   "Связь с PoB подтверждена": (l) => l.m02578f2b24,
   "PoB connection confirmed": (l) => l.m02578f2b24,
   "Связь с PoB подтверждена. Откройте сборку для импорта.": (l) =>
@@ -1209,8 +1258,17 @@ final uiExactTranslations = <String, String Function(AppLocalizations)>{
   "Move left": (l) => l.m7434b2e81b,
   "Сдвинуть вправо": (l) => l.m63a2484f1c,
   "Move right": (l) => l.m63a2484f1c,
+  "Сервер вернул более старую сессию; подключите её заново": (l) =>
+      l.m57ac031b0e,
+  "Server returned older session; reconnect it": (l) => l.m57ac031b0e,
+  "Сервер не поддерживает подписки общей сессии": (l) => l.mf0ca78d984,
+  "Server does not support shared session subscriptions": (l) => l.mf0ca78d984,
   "Сессия закрыта": (l) => l.m32bb1c680f,
   "Session closed": (l) => l.m32bb1c680f,
+  "Сессия не найдена. Создайте её явно": (l) => l.mff4d880370,
+  "Session not found. Create it explicitly": (l) => l.mff4d880370,
+  "Сессия уже существует. Подключитесь без создания": (l) => l.m122d76b9ee,
+  "Session already exists. Connect without creation": (l) => l.m122d76b9ee,
   "Сила": (l) => l.m69c1590a47,
   "Strength": (l) => l.m69c1590a47,
   "Системная": (l) => l.m3860f59770,
@@ -1274,6 +1332,8 @@ final uiExactTranslations = <String, String Function(AppLocalizations)>{
   "Unequip": (l) => l.md4b51f7a04,
   "Собственные свойства": (l) => l.mf3f1d96087,
   "Own properties": (l) => l.mf3f1d96087,
+  "Соединение восстановлено": (l) => l.m2cdbcd559d,
+  "Connection restored": (l) => l.m2cdbcd559d,
   "Соединение может потратить пассивные очки. Сброс снимет все назначенные узлы текущего дерева.":
       (l) => l.m7d3f9a98b5,
   "Connecting may spend passive points. Resetting removes all allocated nodes in the current tree.":
@@ -1292,6 +1352,8 @@ final uiExactTranslations = <String, String Function(AppLocalizations)>{
       (l) => l.mb724f3e4cd,
   "Создать копию": (l) => l.mc42ccf5a81,
   "Create a copy": (l) => l.mc42ccf5a81,
+  "Создать новую сессию": (l) => l.m9da159743e,
+  "Create a new session": (l) => l.m9da159743e,
   "Создать сборку": (l) => l.md79906423b,
   "Create build": (l) => l.md79906423b,
   "Сопротивления": (l) => l.m62bb423bd3,
@@ -1687,8 +1749,16 @@ final uiPatternTranslations = <UiRule>[
     (l, args) => l.mcf4205d2e9(args[0]),
   ),
   UiRule(
+    "Общая сессия {p0}, ревизия {p1}: название «{p2}»",
+    (l, args) => l.m5e16506fb5(args[0], args[1], args[2]),
+  ),
+  UiRule(
     "Не удалось показать тепловую карту: {p0}",
     (l, args) => l.ma9bd749aa5(args[0]),
+  ),
+  UiRule(
+    "General session {p0}, revision {p1}: name \"{p2}\"",
+    (l, args) => l.m5e16506fb5(args[0], args[1], args[2]),
   ),
   UiRule(
     "Не удалось сохранить черновик XML: {p0}",
@@ -1737,6 +1807,10 @@ final uiPatternTranslations = <UiRule>[
   UiRule(
     "Could not close the Lua session: {p0}",
     (l, args) => l.m8f6df28a92(args[0]),
+  ),
+  UiRule(
+    "Не удалось сохранить имя в XML: {p0}",
+    (l, args) => l.mea514c56ce(args[0]),
   ),
   UiRule(
     "Загрузка LuaJIT и lua-utf8 для {p0}…",
@@ -1823,6 +1897,10 @@ final uiPatternTranslations = <UiRule>[
     (l, args) => l.m913d7f855b(args[0]),
   ),
   UiRule(
+    "Failed to save name in XML: {p0}",
+    (l, args) => l.mea514c56ce(args[0]),
+  ),
+  UiRule(
     "Failed to load translation: {p0}",
     (l, args) => l.m4b1c83eb15(args[0]),
   ),
@@ -1890,11 +1968,17 @@ final uiPatternTranslations = <UiRule>[
   UiRule("Эффект мастерства {p0}", (l, args) => l.m026f42945f(args[0])),
   UiRule("Распаковка архива {p0}", (l, args) => l.ma1af9f3f0e(args[0])),
   UiRule("Активное оружие · {p0}", (l, args) => l.m607c57804e(args[0])),
+  UiRule("{p0}. Переподключение…", (l, args) => l.m6bfd5c5a8f(args[0])),
   UiRule("Version {p0} installed", (l, args) => l.m44150e69ff(args[0])),
   UiRule("Version {p0} available", (l, args) => l.m10b5bc7e91(args[0])),
   UiRule("Tree unavailable: {p0}", (l, args) => l.m0e1306f92c(args[0])),
   UiRule("Translation: HTTP {p0}", (l, args) => l.m46c64e6832(args[0])),
   UiRule("Предупреждения · {p0}", (l, args) => l.m39215290bb(args[0])),
+  UiRule(
+    "Название: «{p0}» → «{p1}»",
+    (l, args) => l.mfe4c378fa6(args[0], args[1]),
+  ),
+  UiRule("{p0}. Reconnecting...", (l, args) => l.m6bfd5c5a8f(args[0])),
   UiRule(
     "{p0} {p1} загружен. Git: {p2}",
     (l, args) => l.mad59a0d2ab(args[0], args[1], args[2]),
@@ -1910,6 +1994,10 @@ final uiPatternTranslations = <UiRule>[
   UiRule("Загрузка: HTTP {p0}", (l, args) => l.m7ac5d410c5(args[0])),
   UiRule("Достичь уровня {p0}", (l, args) => l.m9719fefc91(args[0])),
   UiRule("До узла: {p0} очков", (l, args) => l.m8997ad5a89(args[0])),
+  UiRule(
+    "{p0} · revision {p1} · {p2}",
+    (l, args) => l.m6e6c42ad66(args[0], args[1], args[2]),
+  ),
   UiRule("{p0} · PoB II edits", (l, args) => l.m2fb8d3ac27(args[0])),
   UiRule("{p0} points to node", (l, args) => l.m8997ad5a89(args[0])),
   UiRule("Removed: {p0} bytes", (l, args) => l.mab4e553a75(args[0])),
@@ -1919,6 +2007,14 @@ final uiPatternTranslations = <UiRule>[
   UiRule("Удалено: {p0} байт", (l, args) => l.mab4e553a75(args[0])),
   UiRule("Расчёт Lua · {p0}%", (l, args) => l.m33a38de9ff(args[0])),
   UiRule("Перевод: HTTP {p0}", (l, args) => l.m46c64e6832(args[0])),
+  UiRule(
+    "{p0} · ревизия {p1} · {p2}",
+    (l, args) => l.m6e6c42ad66(args[0], args[1], args[2]),
+  ),
+  UiRule(
+    "Title: \"{p0}\" → \"{p1}\"",
+    (l, args) => l.mfe4c378fa6(args[0], args[1]),
+  ),
   UiRule("Path points · {p0}", (l, args) => l.mbe045b91a6(args[0])),
   UiRule("Loading: HTTP {p0}", (l, args) => l.m7ac5d410c5(args[0])),
   UiRule("Установлена: {p0}", (l, args) => l.mff8616cb20(args[0])),

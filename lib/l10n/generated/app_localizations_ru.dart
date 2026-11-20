@@ -13,6 +13,10 @@ class AppLocalizationsRu extends AppLocalizations {
   AppLocalizationsRu([String locale = 'ru']) : super(locale);
 
   @override
+  String get m14158eacb5 =>
+      'CLI, MCP и приложение видят одну сессию. Сейчас синхронизируется название; игровые расчёты выполняет Lua.';
+
+  @override
   String get m8c9a654b8c => 'DPS до';
 
   @override
@@ -187,6 +191,11 @@ class AppLocalizationsRu extends AppLocalizations {
   }
 
   @override
+  String m6e6c42ad66(String p0, String p1, String p2) {
+    return '$p0 · ревизия $p1 · $p2';
+  }
+
+  @override
   String mbefa507d02(String p0, String p1) {
     return '$p0 · уровень $p1';
   }
@@ -194,6 +203,11 @@ class AppLocalizationsRu extends AppLocalizations {
   @override
   String m3f8bda535c(String p0) {
     return '$p0 байт';
+  }
+
+  @override
+  String m6bfd5c5a8f(String p0) {
+    return '$p0. Переподключение…';
   }
 
   @override
@@ -453,10 +467,16 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m0b27387ff0 => 'Выбрать XML-файл';
 
   @override
+  String get mf0fa40444a => 'Выбрать движок';
+
+  @override
   String get m88d4b06d56 => 'Выбрать папку';
 
   @override
   String get md22f8aaed2 => 'Выбрать папку сборок PoB';
+
+  @override
+  String get m572cfed3aa => 'Выбрать программу';
 
   @override
   String get m4cb6a01a0e => 'Выбрать путь';
@@ -495,6 +515,15 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get ma755f360c2 => 'Два компонента. Расчёты на вашем компьютере.';
+
+  @override
+  String get mf68d71e67c => 'Движок вернул несовместимые параметры подключения';
+
+  @override
+  String get m61f92fb847 => 'Движок не сообщил параметры подключения';
+
+  @override
+  String get md3339c001c => 'Движок недоступен';
 
   @override
   String get md27019b2d6 => 'Действие или его параметры недоступны.';
@@ -736,6 +765,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m5cb66ce618 => 'Идеи, к которым хочется вернуться';
 
   @override
+  String get mc88f7b9ebc => 'Идентификатор сессии';
+
+  @override
   String get ma48353b7b1 => 'Избежание атак вблизи';
 
   @override
@@ -776,6 +808,10 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get m4376254217 => 'Импортировать по ссылке';
+
+  @override
+  String get me95acf38f2 =>
+      'Имя общей сессии будет сохранено в открытой сборке. При смене сборки привязка отключится.';
 
   @override
   String get ma8f8e11f0c => 'Интеллект';
@@ -952,6 +988,11 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get m378e9ed8fc => 'Название этапа';
+
+  @override
+  String mfe4c378fa6(String p0, String p1) {
+    return 'Название: «$p0» → «$p1»';
+  }
 
   @override
   String get m0bf71e1c90 =>
@@ -1149,6 +1190,11 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m409f34eb59 => 'Не удалось сохранить группу';
 
   @override
+  String mea514c56ce(String p0) {
+    return 'Не удалось сохранить имя в XML: $p0';
+  }
+
+  @override
   String get mef9d01550d => 'Не удалось сохранить масштаб.';
 
   @override
@@ -1304,6 +1350,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m323494c6da => 'Нет перевода — показываем оригинал';
 
   @override
+  String get m8a210e3e2e => 'Нет соединения с общей сессией';
+
+  @override
   String get m443c49da2a => 'Ниже';
 
   @override
@@ -1412,6 +1461,20 @@ class AppLocalizationsRu extends AppLocalizations {
       'Общая карта урона и защиты. Для списка выберите отдельный показатель.';
 
   @override
+  String get m3b30fa7276 => 'Общая сессия';
+
+  @override
+  String get mc1330cb96d => 'Общая сессия Go';
+
+  @override
+  String m5e16506fb5(String p0, String p1, String p2) {
+    return 'Общая сессия $p0, ревизия $p1: название «$p2»';
+  }
+
+  @override
+  String get m4964128d55 => 'Общая сессия не подключена';
+
+  @override
   String get m8cb7d50be2 => 'Огонь';
 
   @override
@@ -1464,6 +1527,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get m3e95800065 => 'Отключено';
+
+  @override
+  String get mbb5bdd176c => 'Отключить';
 
   @override
   String get m654046a00d =>
@@ -1664,6 +1730,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get mce1dabc47f => 'Подключение Lua';
 
   @override
+  String get me2449ea8e4 => 'Подключение…';
+
+  @override
   String get m67f5d8880e => 'Подключите Lua';
 
   @override
@@ -1671,6 +1740,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get m0d8b14b475 => 'Подключите мост заново и перезапустите PoB.';
+
+  @override
+  String get m3af435b32e => 'Подключить';
 
   @override
   String get m538d913ee0 => 'Подключить Lua';
@@ -1733,6 +1805,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m2ffaee13bd => 'Получаемый физический урон';
 
   @override
+  String get ma25a5c7093 => 'Получен снимок сессии';
+
+  @override
   String get m8c0ef0f511 => 'Пользовательские модификаторы';
 
   @override
@@ -1748,6 +1823,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get m0f80007ec0 => 'Постепенный DPS';
+
+  @override
+  String get me5e5204ccf => 'Поток изменений закрыт';
 
   @override
   String get mb4fd967719 => 'Потяните, чтобы изменить ширину панели';
@@ -1918,6 +1996,12 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get m62ed32eb22 => 'Проверяем…';
+
+  @override
+  String get mce86d859e2 => 'Программа pob2-engine';
+
+  @override
+  String get me881a16f50 => 'Профиль сервера';
 
   @override
   String get m006f803f7b => 'Профиль уже используется.';
@@ -2100,6 +2184,10 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m187a481844 => 'Сборка удалена';
 
   @override
+  String get m993b5ef013 =>
+      'Сборка уже изменена другим клиентом. Дождитесь новой ревизии';
+
+  @override
   String get m9027890a7b =>
       'Сборки из подключённой папки уже доступны в разделе «Мои сборки».';
 
@@ -2125,6 +2213,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get ma50190234a => 'Свои…';
 
   @override
+  String get m4adb0d6692 => 'Связать с открытой сборкой';
+
+  @override
   String get m02578f2b24 => 'Связь с PoB подтверждена';
 
   @override
@@ -2138,7 +2229,20 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m63a2484f1c => 'Сдвинуть вправо';
 
   @override
+  String get m57ac031b0e =>
+      'Сервер вернул более старую сессию; подключите её заново';
+
+  @override
+  String get mf0ca78d984 => 'Сервер не поддерживает подписки общей сессии';
+
+  @override
   String get m32bb1c680f => 'Сессия закрыта';
+
+  @override
+  String get mff4d880370 => 'Сессия не найдена. Создайте её явно';
+
+  @override
+  String get m122d76b9ee => 'Сессия уже существует. Подключитесь без создания';
 
   @override
   String get m69c1590a47 => 'Сила';
@@ -2232,6 +2336,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get mf3f1d96087 => 'Собственные свойства';
 
   @override
+  String get m2cdbcd559d => 'Соединение восстановлено';
+
+  @override
   String get m7d3f9a98b5 =>
       'Соединение может потратить пассивные очки. Сброс снимет все назначенные узлы текущего дерева.';
 
@@ -2251,6 +2358,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get mc42ccf5a81 => 'Создать копию';
+
+  @override
+  String get m9da159743e => 'Создать новую сессию';
 
   @override
   String get md79906423b => 'Создать сборку';

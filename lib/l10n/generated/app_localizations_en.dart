@@ -13,6 +13,10 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
+  String get m14158eacb5 =>
+      'CLI, MCP and application see one session. The title is currently being synchronized; game calculations are performed by Lua.';
+
+  @override
   String get m8c9a654b8c => 'DPS before';
 
   @override
@@ -187,6 +191,11 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String m6e6c42ad66(String p0, String p1, String p2) {
+    return '$p0 · revision $p1 · $p2';
+  }
+
+  @override
   String mbefa507d02(String p0, String p1) {
     return '$p0 · level $p1';
   }
@@ -194,6 +203,11 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String m3f8bda535c(String p0) {
     return '$p0 bytes';
+  }
+
+  @override
+  String m6bfd5c5a8f(String p0) {
+    return '$p0. Reconnecting...';
   }
 
   @override
@@ -454,10 +468,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m0b27387ff0 => 'Choose XML file';
 
   @override
+  String get mf0fa40444a => 'Select engine';
+
+  @override
   String get m88d4b06d56 => 'Choose folder';
 
   @override
   String get md22f8aaed2 => 'Select PoB build folder';
+
+  @override
+  String get m572cfed3aa => 'Select program';
 
   @override
   String get m4cb6a01a0e => 'Choose a path';
@@ -496,6 +516,16 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get ma755f360c2 => 'Two components. Calculations on your computer.';
+
+  @override
+  String get mf68d71e67c =>
+      'The engine returned incompatible connection parameters';
+
+  @override
+  String get m61f92fb847 => 'The engine did not report connection parameters';
+
+  @override
+  String get md3339c001c => 'Engine unavailable';
 
   @override
   String get md27019b2d6 => 'The action or its parameters are not available.';
@@ -733,6 +763,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m5cb66ce618 => 'Ideas that you want to return to';
 
   @override
+  String get mc88f7b9ebc => 'Session ID';
+
+  @override
   String get ma48353b7b1 => 'Melee avoid chance';
 
   @override
@@ -773,6 +806,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get m4376254217 => 'Import via link';
+
+  @override
+  String get me95acf38f2 =>
+      'The shared session name will be saved in the open assembly. When you change the assembly, the binding will be disabled.';
 
   @override
   String get ma8f8e11f0c => 'Intelligence';
@@ -950,6 +987,11 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get m378e9ed8fc => 'Milestone name';
+
+  @override
+  String mfe4c378fa6(String p0, String p1) {
+    return 'Title: \"$p0\" → \"$p1\"';
+  }
 
   @override
   String get m0bf71e1c90 =>
@@ -1147,6 +1189,11 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m409f34eb59 => 'Failed to save group';
 
   @override
+  String mea514c56ce(String p0) {
+    return 'Failed to save name in XML: $p0';
+  }
+
+  @override
   String get mef9d01550d => 'Failed to save scale.';
 
   @override
@@ -1303,6 +1350,9 @@ class AppLocalizationsEn extends AppLocalizations {
       'Original text is shown when a translation is unavailable';
 
   @override
+  String get m8a210e3e2e => 'No connection to shared session';
+
+  @override
   String get m443c49da2a => 'Move down';
 
   @override
@@ -1412,6 +1462,20 @@ class AppLocalizationsEn extends AppLocalizations {
       'General damage and defense map. For the list, select an individual metric.';
 
   @override
+  String get m3b30fa7276 => 'General session';
+
+  @override
+  String get mc1330cb96d => 'General Go session';
+
+  @override
+  String m5e16506fb5(String p0, String p1, String p2) {
+    return 'General session $p0, revision $p1: name \"$p2\"';
+  }
+
+  @override
+  String get m4964128d55 => 'General session not connected';
+
+  @override
   String get m8cb7d50be2 => 'Fire';
 
   @override
@@ -1464,6 +1528,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get m3e95800065 => 'Disabled';
+
+  @override
+  String get mbb5bdd176c => 'Disable';
 
   @override
   String get m654046a00d =>
@@ -1662,6 +1729,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get mce1dabc47f => 'Connecting to Lua';
 
   @override
+  String get me2449ea8e4 => 'Connecting…';
+
+  @override
   String get m67f5d8880e => 'Connect Lua';
 
   @override
@@ -1669,6 +1739,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get m0d8b14b475 => 'Reconnect the bridge and restart PoB.';
+
+  @override
+  String get m3af435b32e => 'Connect';
 
   @override
   String get m538d913ee0 => 'Connect Lua';
@@ -1731,6 +1804,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m2ffaee13bd => 'Taken Phys dmg';
 
   @override
+  String get ma25a5c7093 => 'Session snapshot received';
+
+  @override
   String get m8c0ef0f511 => 'Custom modifiers';
 
   @override
@@ -1746,6 +1822,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get m0f80007ec0 => 'DoT DPS';
+
+  @override
+  String get me5e5204ccf => 'Change thread closed';
 
   @override
   String get mb4fd967719 => 'Pull to change panel width';
@@ -1915,6 +1994,12 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get m62ed32eb22 => 'Checking...';
+
+  @override
+  String get mce86d859e2 => 'pob2-engine program';
+
+  @override
+  String get me881a16f50 => 'Server profile';
 
   @override
   String get m006f803f7b => 'The profile is already in use.';
@@ -2096,6 +2181,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m187a481844 => 'Build deleted';
 
   @override
+  String get m993b5ef013 =>
+      'The assembly has already been modified by another client. Wait for a new revision';
+
+  @override
   String get m9027890a7b =>
       'Builds in the connected folder are available in My Builds.';
 
@@ -2121,6 +2210,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get ma50190234a => 'Own...';
 
   @override
+  String get m4adb0d6692 => 'Link to open assembly';
+
+  @override
   String get m02578f2b24 => 'PoB connection confirmed';
 
   @override
@@ -2134,7 +2226,20 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m63a2484f1c => 'Move right';
 
   @override
+  String get m57ac031b0e => 'Server returned older session; reconnect it';
+
+  @override
+  String get mf0ca78d984 =>
+      'Server does not support shared session subscriptions';
+
+  @override
   String get m32bb1c680f => 'Session closed';
+
+  @override
+  String get mff4d880370 => 'Session not found. Create it explicitly';
+
+  @override
+  String get m122d76b9ee => 'Session already exists. Connect without creation';
 
   @override
   String get m69c1590a47 => 'Strength';
@@ -2229,6 +2334,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get mf3f1d96087 => 'Own properties';
 
   @override
+  String get m2cdbcd559d => 'Connection restored';
+
+  @override
   String get m7d3f9a98b5 =>
       'Connecting may spend passive points. Resetting removes all allocated nodes in the current tree.';
 
@@ -2248,6 +2356,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get mc42ccf5a81 => 'Create a copy';
+
+  @override
+  String get m9da159743e => 'Create a new session';
 
   @override
   String get md79906423b => 'Create build';

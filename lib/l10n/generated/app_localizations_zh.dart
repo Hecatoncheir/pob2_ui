@@ -13,6 +13,9 @@ class AppLocalizationsZh extends AppLocalizations {
   AppLocalizationsZh([String locale = 'zh']) : super(locale);
 
   @override
+  String get m14158eacb5 => 'CLI、MCP 和应用程序看到一个会话。目前正在同步标题；游戏计算由Lua执行。';
+
+  @override
   String get m8c9a654b8c => '加入前 DPS';
 
   @override
@@ -182,6 +185,11 @@ class AppLocalizationsZh extends AppLocalizations {
   }
 
   @override
+  String m6e6c42ad66(String p0, String p1, String p2) {
+    return '$p0 · 修訂版 $p1 · $p2';
+  }
+
+  @override
   String mbefa507d02(String p0, String p1) {
     return '$p0 · 級別 $p1';
   }
@@ -189,6 +197,11 @@ class AppLocalizationsZh extends AppLocalizations {
   @override
   String m3f8bda535c(String p0) {
     return '$p0 位元組';
+  }
+
+  @override
+  String m6bfd5c5a8f(String p0) {
+    return '$p0。正在重新連接...';
   }
 
   @override
@@ -445,10 +458,16 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m0b27387ff0 => '選擇 XML 檔案';
 
   @override
+  String get mf0fa40444a => '選擇引擎';
+
+  @override
   String get m88d4b06d56 => '選擇資料夾';
 
   @override
   String get md22f8aaed2 => '選擇 PoB 建置資料夾';
+
+  @override
+  String get m572cfed3aa => '選擇程序';
 
   @override
   String get m4cb6a01a0e => '選擇路徑';
@@ -487,6 +506,15 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get ma755f360c2 => '兩個組件。在您的計算機上進行計算。';
+
+  @override
+  String get mf68d71e67c => '引擎返回不兼容的连接参数';
+
+  @override
+  String get m61f92fb847 => '引擎未回報連線參數';
+
+  @override
+  String get md3339c001c => '引擎不可用';
 
   @override
   String get md27019b2d6 => '該操作或其參數不可用。';
@@ -716,6 +744,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m5cb66ce618 => '您想要返回的想法';
 
   @override
+  String get mc88f7b9ebc => '會話 ID';
+
+  @override
   String get ma48353b7b1 => '近戰避免機會';
 
   @override
@@ -756,6 +787,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m4376254217 => '透過連結導入';
+
+  @override
+  String get me95acf38f2 => '共享会话名称将保存在打开的程序集中。當您變更組件時，綁定將被停用。';
 
   @override
   String get ma8f8e11f0c => '智慧';
@@ -930,6 +964,11 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m378e9ed8fc => '階段名稱';
+
+  @override
+  String mfe4c378fa6(String p0, String p1) {
+    return '標題：“$p0”→“$p1”';
+  }
 
   @override
   String get m0bf71e1c90 => '找到多個 PoB 資料夾。請選擇您使用的資料夾。';
@@ -1124,6 +1163,11 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m409f34eb59 => '無法保存群組';
 
   @override
+  String mea514c56ce(String p0) {
+    return '无法在 XML 中保存名称：$p0';
+  }
+
+  @override
   String get mef9d01550d => '無法保存比例。';
 
   @override
@@ -1278,6 +1322,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m323494c6da => '當翻譯不可用時顯示原始文本';
 
   @override
+  String get m8a210e3e2e => '沒有連接到共享會話';
+
+  @override
   String get m443c49da2a => '下移';
 
   @override
@@ -1382,6 +1429,20 @@ class AppLocalizationsZh extends AppLocalizations {
   String get mc006d459af => '一般傷害與防禦圖。對於列表，選擇單一指標。';
 
   @override
+  String get m3b30fa7276 => '全體會議';
+
+  @override
+  String get mc1330cb96d => '一般 Go 會話';
+
+  @override
+  String m5e16506fb5(String p0, String p1, String p2) {
+    return '常規會話 $p0，修訂版 $p1：名稱“$p2”';
+  }
+
+  @override
+  String get m4964128d55 => '常規會話未連接';
+
+  @override
   String get m8cb7d50be2 => '火';
 
   @override
@@ -1434,6 +1495,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m3e95800065 => '已停用';
+
+  @override
+  String get mbb5bdd176c => '停用';
 
   @override
   String get m654046a00d => '在 poe.ninja 開啟角色，點選 Copy PoB code，再將代碼貼到 PoB II。';
@@ -1629,6 +1693,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get mce1dabc47f => '正在連線至 Lua';
 
   @override
+  String get me2449ea8e4 => '正在連接...';
+
+  @override
   String get m67f5d8880e => '連接 Lua';
 
   @override
@@ -1636,6 +1703,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m0d8b14b475 => '重新連接橋接器並重新啟動 PoB。';
+
+  @override
+  String get m3af435b32e => '連接';
 
   @override
   String get m538d913ee0 => '連接 Lua';
@@ -1698,6 +1768,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m2ffaee13bd => '物理傷害';
 
   @override
+  String get ma25a5c7093 => '收到會話快照';
+
+  @override
   String get m8c0ef0f511 => '自訂修飾符';
 
   @override
@@ -1713,6 +1786,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m0f80007ec0 => '點 DPS';
+
+  @override
+  String get me5e5204ccf => '更改線程已關閉';
 
   @override
   String get mb4fd967719 => '拉動以更改面板寬度';
@@ -1881,6 +1957,12 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m62ed32eb22 => '正在檢查中...';
+
+  @override
+  String get mce86d859e2 => 'pob2引擎程序';
+
+  @override
+  String get me881a16f50 => '伺服器設定檔';
 
   @override
   String get m006f803f7b => '該設定檔已在使用中。';
@@ -2059,6 +2141,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m187a481844 => '已刪除配置';
 
   @override
+  String get m993b5ef013 => '该程序集已被另一个客户端修改。等待新的改版';
+
+  @override
   String get m9027890a7b => '已連接資料夾中的流派可在「我的流派」查看。';
 
   @override
@@ -2083,6 +2168,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get ma50190234a => '自己的...';
 
   @override
+  String get m4adb0d6692 => '打开程序集的链接';
+
+  @override
   String get m02578f2b24 => 'PoB 連線已確認';
 
   @override
@@ -2095,7 +2183,19 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m63a2484f1c => '向右移動';
 
   @override
+  String get m57ac031b0e => '服务器返回旧会话；重新连接它';
+
+  @override
+  String get mf0ca78d984 => '服务器不支持共享会话订阅';
+
+  @override
   String get m32bb1c680f => '會議已結束';
+
+  @override
+  String get mff4d880370 => '找不到会话。明確創建它';
+
+  @override
+  String get m122d76b9ee => '会话已存在。無需建立即可連接';
 
   @override
   String get m69c1590a47 => '力量';
@@ -2188,6 +2288,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get mf3f1d96087 => '自己的房產';
 
   @override
+  String get m2cdbcd559d => '连接已恢复';
+
+  @override
   String get m7d3f9a98b5 => '連接可能消耗天賦點。重置會取消目前天賦樹中已分配的所有節點。';
 
   @override
@@ -2204,6 +2307,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get mc42ccf5a81 => '建立副本';
+
+  @override
+  String get m9da159743e => '创建一个新会话';
 
   @override
   String get md79906423b => '建立配置';
@@ -2606,6 +2712,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   AppLocalizationsZhHant() : super('zh_Hant');
 
   @override
+  String get m14158eacb5 => 'CLI、MCP 和应用程序看到一个会话。目前正在同步标题；游戏计算由Lua执行。';
+
+  @override
   String get m8c9a654b8c => '加入前 DPS';
 
   @override
@@ -2775,6 +2884,11 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   }
 
   @override
+  String m6e6c42ad66(String p0, String p1, String p2) {
+    return '$p0 · 修訂版 $p1 · $p2';
+  }
+
+  @override
   String mbefa507d02(String p0, String p1) {
     return '$p0 · 級別 $p1';
   }
@@ -2782,6 +2896,11 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   @override
   String m3f8bda535c(String p0) {
     return '$p0 位元組';
+  }
+
+  @override
+  String m6bfd5c5a8f(String p0) {
+    return '$p0。正在重新連接...';
   }
 
   @override
@@ -3038,10 +3157,16 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m0b27387ff0 => '選擇 XML 檔案';
 
   @override
+  String get mf0fa40444a => '選擇引擎';
+
+  @override
   String get m88d4b06d56 => '選擇資料夾';
 
   @override
   String get md22f8aaed2 => '選擇 PoB 建置資料夾';
+
+  @override
+  String get m572cfed3aa => '選擇程序';
 
   @override
   String get m4cb6a01a0e => '選擇路徑';
@@ -3080,6 +3205,15 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get ma755f360c2 => '兩個組件。在您的計算機上進行計算。';
+
+  @override
+  String get mf68d71e67c => '引擎返回不兼容的连接参数';
+
+  @override
+  String get m61f92fb847 => '引擎未回報連線參數';
+
+  @override
+  String get md3339c001c => '引擎不可用';
 
   @override
   String get md27019b2d6 => '該操作或其參數不可用。';
@@ -3309,6 +3443,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m5cb66ce618 => '您想要返回的想法';
 
   @override
+  String get mc88f7b9ebc => '會話 ID';
+
+  @override
   String get ma48353b7b1 => '近戰避免機會';
 
   @override
@@ -3349,6 +3486,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m4376254217 => '透過連結導入';
+
+  @override
+  String get me95acf38f2 => '共享会话名称将保存在打开的程序集中。當您變更組件時，綁定將被停用。';
 
   @override
   String get ma8f8e11f0c => '智慧';
@@ -3523,6 +3663,11 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m378e9ed8fc => '階段名稱';
+
+  @override
+  String mfe4c378fa6(String p0, String p1) {
+    return '標題：“$p0”→“$p1”';
+  }
 
   @override
   String get m0bf71e1c90 => '找到多個 PoB 資料夾。請選擇您使用的資料夾。';
@@ -3717,6 +3862,11 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m409f34eb59 => '無法保存群組';
 
   @override
+  String mea514c56ce(String p0) {
+    return '无法在 XML 中保存名称：$p0';
+  }
+
+  @override
   String get mef9d01550d => '無法保存比例。';
 
   @override
@@ -3871,6 +4021,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m323494c6da => '當翻譯不可用時顯示原始文本';
 
   @override
+  String get m8a210e3e2e => '沒有連接到共享會話';
+
+  @override
   String get m443c49da2a => '下移';
 
   @override
@@ -3975,6 +4128,20 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get mc006d459af => '一般傷害與防禦圖。對於列表，選擇單一指標。';
 
   @override
+  String get m3b30fa7276 => '全體會議';
+
+  @override
+  String get mc1330cb96d => '一般 Go 會話';
+
+  @override
+  String m5e16506fb5(String p0, String p1, String p2) {
+    return '常規會話 $p0，修訂版 $p1：名稱“$p2”';
+  }
+
+  @override
+  String get m4964128d55 => '常規會話未連接';
+
+  @override
   String get m8cb7d50be2 => '火';
 
   @override
@@ -4027,6 +4194,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m3e95800065 => '已停用';
+
+  @override
+  String get mbb5bdd176c => '停用';
 
   @override
   String get m654046a00d => '在 poe.ninja 開啟角色，點選 Copy PoB code，再將代碼貼到 PoB II。';
@@ -4222,6 +4392,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get mce1dabc47f => '正在連線至 Lua';
 
   @override
+  String get me2449ea8e4 => '正在連接...';
+
+  @override
   String get m67f5d8880e => '連接 Lua';
 
   @override
@@ -4229,6 +4402,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m0d8b14b475 => '重新連接橋接器並重新啟動 PoB。';
+
+  @override
+  String get m3af435b32e => '連接';
 
   @override
   String get m538d913ee0 => '連接 Lua';
@@ -4291,6 +4467,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m2ffaee13bd => '物理傷害';
 
   @override
+  String get ma25a5c7093 => '收到會話快照';
+
+  @override
   String get m8c0ef0f511 => '自訂修飾符';
 
   @override
@@ -4306,6 +4485,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m0f80007ec0 => '點 DPS';
+
+  @override
+  String get me5e5204ccf => '更改線程已關閉';
 
   @override
   String get mb4fd967719 => '拉動以更改面板寬度';
@@ -4474,6 +4656,12 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m62ed32eb22 => '正在檢查中...';
+
+  @override
+  String get mce86d859e2 => 'pob2引擎程序';
+
+  @override
+  String get me881a16f50 => '伺服器設定檔';
 
   @override
   String get m006f803f7b => '該設定檔已在使用中。';
@@ -4652,6 +4840,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m187a481844 => '已刪除配置';
 
   @override
+  String get m993b5ef013 => '该程序集已被另一个客户端修改。等待新的改版';
+
+  @override
   String get m9027890a7b => '已連接資料夾中的流派可在「我的流派」查看。';
 
   @override
@@ -4676,6 +4867,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get ma50190234a => '自己的...';
 
   @override
+  String get m4adb0d6692 => '打开程序集的链接';
+
+  @override
   String get m02578f2b24 => 'PoB 連線已確認';
 
   @override
@@ -4688,7 +4882,19 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m63a2484f1c => '向右移動';
 
   @override
+  String get m57ac031b0e => '服务器返回旧会话；重新连接它';
+
+  @override
+  String get mf0ca78d984 => '服务器不支持共享会话订阅';
+
+  @override
   String get m32bb1c680f => '會議已結束';
+
+  @override
+  String get mff4d880370 => '找不到会话。明確創建它';
+
+  @override
+  String get m122d76b9ee => '会话已存在。無需建立即可連接';
 
   @override
   String get m69c1590a47 => '力量';
@@ -4781,6 +4987,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get mf3f1d96087 => '自己的房產';
 
   @override
+  String get m2cdbcd559d => '连接已恢复';
+
+  @override
   String get m7d3f9a98b5 => '連接可能消耗天賦點。重置會取消目前天賦樹中已分配的所有節點。';
 
   @override
@@ -4797,6 +5006,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get mc42ccf5a81 => '建立副本';
+
+  @override
+  String get m9da159743e => '创建一个新会话';
 
   @override
   String get md79906423b => '建立配置';

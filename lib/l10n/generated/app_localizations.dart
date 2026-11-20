@@ -119,6 +119,12 @@ abstract class AppLocalizations {
     Locale.fromSubtags(languageCode: 'zh', scriptCode: 'Hant'),
   ];
 
+  /// CLI, MCP и приложение видят одну сессию. Сейчас синхронизируется название; игровые расчёты выполняет Lua.
+  ///
+  /// In en, this message translates to:
+  /// **'CLI, MCP and application see one session. The title is currently being synchronized; game calculations are performed by Lua.'**
+  String get m14158eacb5;
+
   /// DPS до
   ///
   /// In en, this message translates to:
@@ -431,6 +437,12 @@ abstract class AppLocalizations {
   /// **'{p0} · PoB II edits'**
   String m2fb8d3ac27(String p0);
 
+  /// {p0} · ревизия {p1} · {p2}
+  ///
+  /// In en, this message translates to:
+  /// **'{p0} · revision {p1} · {p2}'**
+  String m6e6c42ad66(String p0, String p1, String p2);
+
   /// {p0} · уровень {p1}
   ///
   /// In en, this message translates to:
@@ -442,6 +454,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'{p0} bytes'**
   String m3f8bda535c(String p0);
+
+  /// {p0}. Переподключение…
+  ///
+  /// In en, this message translates to:
+  /// **'{p0}. Reconnecting...'**
+  String m6bfd5c5a8f(String p0);
 
   /// {p0}: потрачено {p1} из {p2} очков
   ///
@@ -929,6 +947,12 @@ abstract class AppLocalizations {
   /// **'Choose XML file'**
   String get m0b27387ff0;
 
+  /// Выбрать движок
+  ///
+  /// In en, this message translates to:
+  /// **'Select engine'**
+  String get mf0fa40444a;
+
   /// Выбрать папку
   ///
   /// In en, this message translates to:
@@ -940,6 +964,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Select PoB build folder'**
   String get md22f8aaed2;
+
+  /// Выбрать программу
+  ///
+  /// In en, this message translates to:
+  /// **'Select program'**
+  String get m572cfed3aa;
 
   /// Выбрать путь
   ///
@@ -1012,6 +1042,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Two components. Calculations on your computer.'**
   String get ma755f360c2;
+
+  /// Движок вернул несовместимые параметры подключения
+  ///
+  /// In en, this message translates to:
+  /// **'The engine returned incompatible connection parameters'**
+  String get mf68d71e67c;
+
+  /// Движок не сообщил параметры подключения
+  ///
+  /// In en, this message translates to:
+  /// **'The engine did not report connection parameters'**
+  String get m61f92fb847;
+
+  /// Движок недоступен
+  ///
+  /// In en, this message translates to:
+  /// **'Engine unavailable'**
+  String get md3339c001c;
 
   /// Действие или его параметры недоступны.
   ///
@@ -1427,6 +1475,12 @@ abstract class AppLocalizations {
   /// **'Ideas that you want to return to'**
   String get m5cb66ce618;
 
+  /// Идентификатор сессии
+  ///
+  /// In en, this message translates to:
+  /// **'Session ID'**
+  String get mc88f7b9ebc;
+
   /// Избежание атак вблизи
   ///
   /// In en, this message translates to:
@@ -1510,6 +1564,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Import via link'**
   String get m4376254217;
+
+  /// Имя общей сессии будет сохранено в открытой сборке. При смене сборки привязка отключится.
+  ///
+  /// In en, this message translates to:
+  /// **'The shared session name will be saved in the open assembly. When you change the assembly, the binding will be disabled.'**
+  String get me95acf38f2;
 
   /// Интеллект
   ///
@@ -1847,6 +1907,12 @@ abstract class AppLocalizations {
   /// **'Milestone name'**
   String get m378e9ed8fc;
 
+  /// Название: «{p0}» → «{p1}»
+  ///
+  /// In en, this message translates to:
+  /// **'Title: \"{p0}\" → \"{p1}\"'**
+  String mfe4c378fa6(String p0, String p1);
+
   /// Найдено несколько папок PoB. Выберите нужную вручную.
   ///
   /// In en, this message translates to:
@@ -2148,6 +2214,12 @@ abstract class AppLocalizations {
   /// **'Failed to save group'**
   String get m409f34eb59;
 
+  /// Не удалось сохранить имя в XML: {p0}
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to save name in XML: {p0}'**
+  String mea514c56ce(String p0);
+
   /// Не удалось сохранить масштаб.
   ///
   /// In en, this message translates to:
@@ -2448,6 +2520,12 @@ abstract class AppLocalizations {
   /// **'Original text is shown when a translation is unavailable'**
   String get m323494c6da;
 
+  /// Нет соединения с общей сессией
+  ///
+  /// In en, this message translates to:
+  /// **'No connection to shared session'**
+  String get m8a210e3e2e;
+
   /// Ниже
   ///
   /// In en, this message translates to:
@@ -2652,6 +2730,30 @@ abstract class AppLocalizations {
   /// **'General damage and defense map. For the list, select an individual metric.'**
   String get mc006d459af;
 
+  /// Общая сессия
+  ///
+  /// In en, this message translates to:
+  /// **'General session'**
+  String get m3b30fa7276;
+
+  /// Общая сессия Go
+  ///
+  /// In en, this message translates to:
+  /// **'General Go session'**
+  String get mc1330cb96d;
+
+  /// Общая сессия {p0}, ревизия {p1}: название «{p2}»
+  ///
+  /// In en, this message translates to:
+  /// **'General session {p0}, revision {p1}: name \"{p2}\"'**
+  String m5e16506fb5(String p0, String p1, String p2);
+
+  /// Общая сессия не подключена
+  ///
+  /// In en, this message translates to:
+  /// **'General session not connected'**
+  String get m4964128d55;
+
   /// Огонь
   ///
   /// In en, this message translates to:
@@ -2759,6 +2861,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Disabled'**
   String get m3e95800065;
+
+  /// Отключить
+  ///
+  /// In en, this message translates to:
+  /// **'Disable'**
+  String get mbb5bdd176c;
 
   /// Откройте персонажа на poe.ninja, нажмите Copy PoB code и вставьте код в PoB II.
   ///
@@ -3126,6 +3234,12 @@ abstract class AppLocalizations {
   /// **'Connecting to Lua'**
   String get mce1dabc47f;
 
+  /// Подключение…
+  ///
+  /// In en, this message translates to:
+  /// **'Connecting…'**
+  String get me2449ea8e4;
+
   /// Подключите Lua
   ///
   /// In en, this message translates to:
@@ -3143,6 +3257,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Reconnect the bridge and restart PoB.'**
   String get m0d8b14b475;
+
+  /// Подключить
+  ///
+  /// In en, this message translates to:
+  /// **'Connect'**
+  String get m3af435b32e;
 
   /// Подключить Lua
   ///
@@ -3264,6 +3384,12 @@ abstract class AppLocalizations {
   /// **'Taken Phys dmg'**
   String get m2ffaee13bd;
 
+  /// Получен снимок сессии
+  ///
+  /// In en, this message translates to:
+  /// **'Session snapshot received'**
+  String get ma25a5c7093;
+
   /// Пользовательские модификаторы
   ///
   /// In en, this message translates to:
@@ -3293,6 +3419,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'DoT DPS'**
   String get m0f80007ec0;
+
+  /// Поток изменений закрыт
+  ///
+  /// In en, this message translates to:
+  /// **'Change thread closed'**
+  String get me5e5204ccf;
 
   /// Потяните, чтобы изменить ширину панели
   ///
@@ -3593,6 +3725,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Checking...'**
   String get m62ed32eb22;
+
+  /// Программа pob2-engine
+  ///
+  /// In en, this message translates to:
+  /// **'pob2-engine program'**
+  String get mce86d859e2;
+
+  /// Профиль сервера
+  ///
+  /// In en, this message translates to:
+  /// **'Server profile'**
+  String get me881a16f50;
 
   /// Профиль уже используется.
   ///
@@ -3918,6 +4062,12 @@ abstract class AppLocalizations {
   /// **'Build deleted'**
   String get m187a481844;
 
+  /// Сборка уже изменена другим клиентом. Дождитесь новой ревизии
+  ///
+  /// In en, this message translates to:
+  /// **'The assembly has already been modified by another client. Wait for a new revision'**
+  String get m993b5ef013;
+
   /// Сборки из подключённой папки уже доступны в разделе «Мои сборки».
   ///
   /// In en, this message translates to:
@@ -3966,6 +4116,12 @@ abstract class AppLocalizations {
   /// **'Own...'**
   String get ma50190234a;
 
+  /// Связать с открытой сборкой
+  ///
+  /// In en, this message translates to:
+  /// **'Link to open assembly'**
+  String get m4adb0d6692;
+
   /// Связь с PoB подтверждена
   ///
   /// In en, this message translates to:
@@ -3990,11 +4146,35 @@ abstract class AppLocalizations {
   /// **'Move right'**
   String get m63a2484f1c;
 
+  /// Сервер вернул более старую сессию; подключите её заново
+  ///
+  /// In en, this message translates to:
+  /// **'Server returned older session; reconnect it'**
+  String get m57ac031b0e;
+
+  /// Сервер не поддерживает подписки общей сессии
+  ///
+  /// In en, this message translates to:
+  /// **'Server does not support shared session subscriptions'**
+  String get mf0ca78d984;
+
   /// Сессия закрыта
   ///
   /// In en, this message translates to:
   /// **'Session closed'**
   String get m32bb1c680f;
+
+  /// Сессия не найдена. Создайте её явно
+  ///
+  /// In en, this message translates to:
+  /// **'Session not found. Create it explicitly'**
+  String get mff4d880370;
+
+  /// Сессия уже существует. Подключитесь без создания
+  ///
+  /// In en, this message translates to:
+  /// **'Session already exists. Connect without creation'**
+  String get m122d76b9ee;
 
   /// Сила
   ///
@@ -4176,6 +4356,12 @@ abstract class AppLocalizations {
   /// **'Own properties'**
   String get mf3f1d96087;
 
+  /// Соединение восстановлено
+  ///
+  /// In en, this message translates to:
+  /// **'Connection restored'**
+  String get m2cdbcd559d;
+
   /// Соединение может потратить пассивные очки. Сброс снимет все назначенные узлы текущего дерева.
   ///
   /// In en, this message translates to:
@@ -4211,6 +4397,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Create a copy'**
   String get mc42ccf5a81;
+
+  /// Создать новую сессию
+  ///
+  /// In en, this message translates to:
+  /// **'Create a new session'**
+  String get m9da159743e;
 
   /// Создать сборку
   ///

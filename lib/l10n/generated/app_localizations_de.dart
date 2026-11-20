@@ -13,6 +13,10 @@ class AppLocalizationsDe extends AppLocalizations {
   AppLocalizationsDe([String locale = 'de']) : super(locale);
 
   @override
+  String get m14158eacb5 =>
+      'CLI, MCP und Anwendung sehen eine Sitzung. Der Titel wird derzeit synchronisiert; Spielberechnungen werden von Lua durchgeführt.';
+
+  @override
   String get m8c9a654b8c => 'DPS vorher';
 
   @override
@@ -198,6 +202,11 @@ class AppLocalizationsDe extends AppLocalizations {
   }
 
   @override
+  String m6e6c42ad66(String p0, String p1, String p2) {
+    return '$p0 · Revision $p1 · $p2';
+  }
+
+  @override
   String mbefa507d02(String p0, String p1) {
     return '$p0 · Level $p1';
   }
@@ -205,6 +214,11 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String m3f8bda535c(String p0) {
     return '$p0 Bytes';
+  }
+
+  @override
+  String m6bfd5c5a8f(String p0) {
+    return '$p0. Verbindung wird wieder hergestellt...';
   }
 
   @override
@@ -470,10 +484,16 @@ class AppLocalizationsDe extends AppLocalizations {
   String get m0b27387ff0 => 'XML-Datei auswählen';
 
   @override
+  String get mf0fa40444a => 'Motor auswählen';
+
+  @override
   String get m88d4b06d56 => 'Ordner auswählen';
 
   @override
   String get md22f8aaed2 => 'Wählen Sie den PoB-Build-Ordner aus';
+
+  @override
+  String get m572cfed3aa => 'Programm auswählen';
 
   @override
   String get m4cb6a01a0e => 'Wählen Sie einen Pfad';
@@ -513,6 +533,17 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get ma755f360c2 =>
       'Zwei Komponenten. Berechnungen auf Ihrem Computer.';
+
+  @override
+  String get mf68d71e67c =>
+      'Die Engine hat inkompatible Verbindungsparameter zurückgegeben';
+
+  @override
+  String get m61f92fb847 =>
+      'Die Engine hat keine Verbindungsparameter gemeldet';
+
+  @override
+  String get md3339c001c => 'Engine nicht verfügbar';
 
   @override
   String get md27019b2d6 =>
@@ -761,6 +792,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get m5cb66ce618 => 'Ideen, zu denen Sie zurückkehren möchten';
 
   @override
+  String get mc88f7b9ebc => 'Sitzungs-ID';
+
+  @override
   String get ma48353b7b1 => 'Nahkampf vermeide Chance';
 
   @override
@@ -801,6 +835,10 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get m4376254217 => 'Import über Link';
+
+  @override
+  String get me95acf38f2 =>
+      'Der freigegebene Sitzungsname wird in der geöffneten Assembly gespeichert. Wenn Sie die Baugruppe ändern, wird die Bindung deaktiviert.';
 
   @override
   String get ma8f8e11f0c => 'Intelligenz';
@@ -979,6 +1017,11 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get m378e9ed8fc => 'Name der Etappe';
+
+  @override
+  String mfe4c378fa6(String p0, String p1) {
+    return 'Titel: „$p0“ → „$p1“';
+  }
 
   @override
   String get m0bf71e1c90 =>
@@ -1177,6 +1220,11 @@ class AppLocalizationsDe extends AppLocalizations {
   String get m409f34eb59 => 'Die Gruppe konnte nicht gespeichert werden';
 
   @override
+  String mea514c56ce(String p0) {
+    return 'Name konnte nicht in XML gespeichert werden: $p0';
+  }
+
+  @override
   String get mef9d01550d => 'Maßstab konnte nicht gespeichert werden.';
 
   @override
@@ -1333,6 +1381,9 @@ class AppLocalizationsDe extends AppLocalizations {
       'Der Originaltext wird angezeigt, wenn keine Übersetzung verfügbar ist';
 
   @override
+  String get m8a210e3e2e => 'Keine Verbindung zur freigegebenen Sitzung';
+
+  @override
   String get m443c49da2a => 'Nach unten';
 
   @override
@@ -1443,6 +1494,20 @@ class AppLocalizationsDe extends AppLocalizations {
       'Allgemeine Schadens- und Verteidigungskarte. Wählen Sie für die Liste eine einzelne Metrik aus.';
 
   @override
+  String get m3b30fa7276 => 'Allgemeine Sitzung';
+
+  @override
+  String get mc1330cb96d => 'Allgemeine Go-Sitzung';
+
+  @override
+  String m5e16506fb5(String p0, String p1, String p2) {
+    return 'Allgemeine Sitzung $p0, Revision $p1: Name „$p2“';
+  }
+
+  @override
+  String get m4964128d55 => 'Allgemeine Sitzung nicht verbunden';
+
+  @override
   String get m8cb7d50be2 => 'Feuer';
 
   @override
@@ -1495,6 +1560,9 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get m3e95800065 => 'Deaktiviert';
+
+  @override
+  String get mbb5bdd176c => 'Deaktivieren';
 
   @override
   String get m654046a00d =>
@@ -1698,6 +1766,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get mce1dabc47f => 'Verbindung mit Lua wird hergestellt';
 
   @override
+  String get me2449ea8e4 => 'Verbinden…';
+
+  @override
   String get m67f5d8880e => 'Verbinden Lua';
 
   @override
@@ -1706,6 +1777,9 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get m0d8b14b475 =>
       'Schließen Sie die Bridge wieder an und starten Sie PoB neu.';
+
+  @override
+  String get m3af435b32e => 'Verbinden';
 
   @override
   String get m538d913ee0 => 'Verbinden Lua';
@@ -1769,6 +1843,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get m2ffaee13bd => 'Physischer Schaden genommen';
 
   @override
+  String get ma25a5c7093 => 'Sitzungs-Snapshot empfangen';
+
+  @override
   String get m8c0ef0f511 => 'Benutzerdefinierte Modifikatoren';
 
   @override
@@ -1784,6 +1861,9 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get m0f80007ec0 => 'DoT DPS';
+
+  @override
+  String get me5e5204ccf => 'Änderungsthread geschlossen';
 
   @override
   String get mb4fd967719 => 'Ziehen, um die Panelbreite zu ändern';
@@ -1957,6 +2037,12 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get m62ed32eb22 => 'Überprüfung...';
+
+  @override
+  String get mce86d859e2 => 'pob2-engine-Programm';
+
+  @override
+  String get me881a16f50 => 'Serverprofil';
 
   @override
   String get m006f803f7b => 'Das Profil wird bereits verwendet.';
@@ -2145,6 +2231,10 @@ class AppLocalizationsDe extends AppLocalizations {
   String get m187a481844 => 'Build gelöscht';
 
   @override
+  String get m993b5ef013 =>
+      'Die Assembly wurde bereits von einem anderen Client geändert. Warten Sie auf eine neue Revision';
+
+  @override
   String get m9027890a7b =>
       'Builds aus dem verbundenen Ordner sind unter „Meine Builds“ verfügbar.';
 
@@ -2170,6 +2260,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get ma50190234a => 'Eigene...';
 
   @override
+  String get m4adb0d6692 => 'Link zum Öffnen der Assembly';
+
+  @override
   String get m02578f2b24 => 'PoB-Verbindung bestätigt';
 
   @override
@@ -2183,7 +2276,22 @@ class AppLocalizationsDe extends AppLocalizations {
   String get m63a2484f1c => 'Nach rechts bewegen';
 
   @override
+  String get m57ac031b0e =>
+      'Der Server hat eine ältere Sitzung zurückgegeben; schließen Sie es wieder an';
+
+  @override
+  String get mf0ca78d984 =>
+      'Der Server unterstützt keine gemeinsamen Sitzungsabonnements';
+
+  @override
   String get m32bb1c680f => 'Sitzung geschlossen';
+
+  @override
+  String get mff4d880370 => 'Sitzung nicht gefunden. Erstellen Sie es explizit';
+
+  @override
+  String get m122d76b9ee =>
+      'Sitzung existiert bereits. Verbinde dich ohne Schöpfung';
 
   @override
   String get m69c1590a47 => 'Stärke';
@@ -2280,6 +2388,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get mf3f1d96087 => 'Eigene Immobilien';
 
   @override
+  String get m2cdbcd559d => 'Verbindung wiederhergestellt';
+
+  @override
   String get m7d3f9a98b5 =>
       'Das Verbinden kann Passivpunkte kosten. Beim Zurücksetzen werden alle zugewiesenen Knoten des aktuellen Baums entfernt.';
 
@@ -2299,6 +2410,9 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get mc42ccf5a81 => 'Erstellen Sie eine Kopie';
+
+  @override
+  String get m9da159743e => 'Erstellen Sie eine neue Sitzung';
 
   @override
   String get md79906423b => 'Build erstellen';

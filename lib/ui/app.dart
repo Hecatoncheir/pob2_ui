@@ -51,6 +51,8 @@ import 'setup_wizard.dart';
 import 'mcp_editor_ui.dart';
 import 'mcp_ui_driver.dart';
 import 'core/ui_translation.dart';
+import 'engine_session_view.dart';
+import 'engine_session_dialog.dart';
 
 class PobApp extends StatelessWidget {
   const PobApp({
@@ -802,11 +804,12 @@ class _StatusBar extends StatelessWidget {
     child: Row(
       children: [
         Expanded(
-          child: AppText(
-            model.state.busy ? 'Выполняем операцию…' : model.state.status,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: TextStyle(color: Spark.of(context).muted, fontSize: 10),
+          child: EngineSessionBar(
+            cubit: model.engineSession,
+            configure: () => showEngineSession(context, model),
+            fallback: model.state.busy
+                ? 'Выполняем операцию…'
+                : model.state.status,
           ),
         ),
         if (MediaQuery.sizeOf(context).width > 700)

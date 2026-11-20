@@ -13,6 +13,10 @@ class AppLocalizationsKo extends AppLocalizations {
   AppLocalizationsKo([String locale = 'ko']) : super(locale);
 
   @override
+  String get m14158eacb5 =>
+      'CLI, MCP 및 애플리케이션은 하나의 세션을 봅니다. 타이틀이 현재 동기화 중입니다. 게임 계산은 Lua에 의해 수행됩니다.';
+
+  @override
   String get m8c9a654b8c => '추가 전 DPS';
 
   @override
@@ -183,6 +187,11 @@ class AppLocalizationsKo extends AppLocalizations {
   }
 
   @override
+  String m6e6c42ad66(String p0, String p1, String p2) {
+    return '$p0 · 개정판 $p1 · $p2';
+  }
+
+  @override
   String mbefa507d02(String p0, String p1) {
     return '$p0 · 레벨 $p1';
   }
@@ -190,6 +199,11 @@ class AppLocalizationsKo extends AppLocalizations {
   @override
   String m3f8bda535c(String p0) {
     return '$p0바이트';
+  }
+
+  @override
+  String m6bfd5c5a8f(String p0) {
+    return '$p0. 다시 연결하는 중...';
   }
 
   @override
@@ -446,10 +460,16 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m0b27387ff0 => 'XML 파일 선택';
 
   @override
+  String get mf0fa40444a => '엔진 선택';
+
+  @override
   String get m88d4b06d56 => '폴더 선택';
 
   @override
   String get md22f8aaed2 => 'PoB 빌드 폴더 선택';
+
+  @override
+  String get m572cfed3aa => '프로그램 선택';
 
   @override
   String get m4cb6a01a0e => '경로 선택';
@@ -488,6 +508,15 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get ma755f360c2 => '두 가지 구성요소. 컴퓨터에서의 계산.';
+
+  @override
+  String get mf68d71e67c => '엔진이 호환되지 않는 연결 매개변수를 반환했습니다.';
+
+  @override
+  String get m61f92fb847 => '엔진이 연결 매개변수를 보고하지 않았습니다.';
+
+  @override
+  String get md3339c001c => '엔진을 사용할 수 없음';
 
   @override
   String get md27019b2d6 => '작업 또는 해당 매개변수를 사용할 수 없습니다.';
@@ -718,6 +747,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m5cb66ce618 => '돌아가고 싶은 아이디어';
 
   @override
+  String get mc88f7b9ebc => '세션 ID';
+
+  @override
   String get ma48353b7b1 => '근접공격은 기회를 피한다';
 
   @override
@@ -758,6 +790,10 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m4376254217 => '링크를 통해 가져오기';
+
+  @override
+  String get me95acf38f2 =>
+      '공유 세션 이름은 열린 어셈블리에 저장됩니다. 어셈블리를 변경하면 바인딩이 비활성화됩니다.';
 
   @override
   String get ma8f8e11f0c => '지능';
@@ -932,6 +968,11 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m378e9ed8fc => '단계 이름';
+
+  @override
+  String mfe4c378fa6(String p0, String p1) {
+    return '제목: \"$p0\" → \"$p1\"';
+  }
 
   @override
   String get m0bf71e1c90 => 'PoB 폴더가 여러 개 발견되었습니다. 사용하는 폴더를 선택하세요.';
@@ -1127,6 +1168,11 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m409f34eb59 => '그룹을 저장하지 못했습니다.';
 
   @override
+  String mea514c56ce(String p0) {
+    return 'XML에 이름을 저장하지 못했습니다: $p0';
+  }
+
+  @override
   String get mef9d01550d => '스케일을 저장하지 못했습니다.';
 
   @override
@@ -1281,6 +1327,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m323494c6da => '번역을 사용할 수 없는 경우 원본 텍스트가 표시됩니다.';
 
   @override
+  String get m8a210e3e2e => '공유 세션에 연결되지 않았습니다.';
+
+  @override
   String get m443c49da2a => '아래로 이동';
 
   @override
@@ -1386,6 +1435,20 @@ class AppLocalizationsKo extends AppLocalizations {
   String get mc006d459af => '일반 데미지 및 방어 맵입니다. 목록의 경우 개별 측정항목을 선택하세요.';
 
   @override
+  String get m3b30fa7276 => '일반 세션';
+
+  @override
+  String get mc1330cb96d => '일반 Go 세션';
+
+  @override
+  String m5e16506fb5(String p0, String p1, String p2) {
+    return '일반 세션 $p0, 개정판 $p1: 이름 \"$p2\"';
+  }
+
+  @override
+  String get m4964128d55 => '일반 세션이 연결되지 않았습니다';
+
+  @override
   String get m8cb7d50be2 => '불';
 
   @override
@@ -1438,6 +1501,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m3e95800065 => '비활성화';
+
+  @override
+  String get mbb5bdd176c => '비활성화';
 
   @override
   String get m654046a00d =>
@@ -1634,6 +1700,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get mce1dabc47f => 'Lua에 연결 중';
 
   @override
+  String get me2449ea8e4 => '연결 중…';
+
+  @override
   String get m67f5d8880e => '연결 Lua';
 
   @override
@@ -1641,6 +1710,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m0d8b14b475 => '브리지를 다시 연결하고 PoB를 다시 시작하세요.';
+
+  @override
+  String get m3af435b32e => '연결';
 
   @override
   String get m538d913ee0 => '연결 Lua';
@@ -1703,6 +1775,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m2ffaee13bd => 'Taken Phys dmg';
 
   @override
+  String get ma25a5c7093 => '세션 스냅샷 수신됨';
+
+  @override
   String get m8c0ef0f511 => '맞춤 수정자';
 
   @override
@@ -1718,6 +1793,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m0f80007ec0 => 'DoT DPS';
+
+  @override
+  String get me5e5204ccf => '변경 스레드가 닫혔습니다.';
 
   @override
   String get mb4fd967719 => '당겨서 패널 너비 변경';
@@ -1886,6 +1964,12 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m62ed32eb22 => '확인 중...';
+
+  @override
+  String get mce86d859e2 => 'pob2 엔진 프로그램';
+
+  @override
+  String get me881a16f50 => '서버 프로필';
 
   @override
   String get m006f803f7b => '프로필이 이미 사용 중입니다.';
@@ -2064,6 +2148,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m187a481844 => '빌드 삭제됨';
 
   @override
+  String get m993b5ef013 => '어셈블리가 이미 다른 클라이언트에 의해 수정되었습니다. 새로운 개정판을 기다리세요';
+
+  @override
   String get m9027890a7b => '연결된 폴더의 빌드는 ‘내 빌드’에서 볼 수 있습니다.';
 
   @override
@@ -2088,6 +2175,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get ma50190234a => '나만의...';
 
   @override
+  String get m4adb0d6692 => '어셈블리 열기 링크';
+
+  @override
   String get m02578f2b24 => 'PoB 연결 확인됨';
 
   @override
@@ -2100,7 +2190,19 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m63a2484f1c => '오른쪽으로 이동';
 
   @override
+  String get m57ac031b0e => '서버가 이전 세션을 반환했습니다. 다시 연결해 보세요';
+
+  @override
+  String get mf0ca78d984 => '서버가 공유 세션 구독을 지원하지 않습니다.';
+
+  @override
   String get m32bb1c680f => '세션이 종료되었습니다.';
+
+  @override
+  String get mff4d880370 => '세션을 찾을 수 없습니다. 명시적으로 생성';
+
+  @override
+  String get m122d76b9ee => '세션이 이미 존재합니다. 생성하지 않고 연결';
 
   @override
   String get m69c1590a47 => '힘';
@@ -2193,6 +2295,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get mf3f1d96087 => '자신의 속성';
 
   @override
+  String get m2cdbcd559d => '연결이 복원되었습니다.';
+
+  @override
   String get m7d3f9a98b5 =>
       '연결 시 패시브 포인트를 사용할 수 있습니다. 초기화하면 현재 트리에서 할당된 모든 노드가 해제됩니다.';
 
@@ -2212,6 +2317,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get mc42ccf5a81 => '사본 만들기';
+
+  @override
+  String get m9da159743e => '새 세션 만들기';
 
   @override
   String get md79906423b => '빌드 생성';

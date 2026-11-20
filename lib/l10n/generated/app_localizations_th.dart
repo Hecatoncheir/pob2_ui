@@ -13,6 +13,10 @@ class AppLocalizationsTh extends AppLocalizations {
   AppLocalizationsTh([String locale = 'th']) : super(locale);
 
   @override
+  String get m14158eacb5 =>
+      'CLI, MCP และแอปพลิเคชันเห็นหนึ่งเซสชัน กำลังซิงโครไนซ์ชื่ออยู่ การคำนวณเกมจะดำเนินการภายใน Lua';
+
+  @override
   String get m8c9a654b8c => 'DPS ก่อนเพิ่ม';
 
   @override
@@ -186,6 +190,11 @@ class AppLocalizationsTh extends AppLocalizations {
   }
 
   @override
+  String m6e6c42ad66(String p0, String p1, String p2) {
+    return '$p0 · ฉบับแก้ไข $p1 · $p2';
+  }
+
+  @override
   String mbefa507d02(String p0, String p1) {
     return '$p0 · ระดับ $p1';
   }
@@ -193,6 +202,11 @@ class AppLocalizationsTh extends AppLocalizations {
   @override
   String m3f8bda535c(String p0) {
     return '$p0 ไบต์';
+  }
+
+  @override
+  String m6bfd5c5a8f(String p0) {
+    return '$p0 กำลังเชื่อมต่อใหม่...';
   }
 
   @override
@@ -451,10 +465,16 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m0b27387ff0 => 'เลือกไฟล์ XML';
 
   @override
+  String get mf0fa40444a => 'เลือกเครื่องยนต์';
+
+  @override
   String get m88d4b06d56 => 'เลือกโฟลเดอร์';
 
   @override
   String get md22f8aaed2 => 'เลือกโฟลเดอร์บิลด์ PoB';
+
+  @override
+  String get m572cfed3aa => 'เลือกโปรแกรม';
 
   @override
   String get m4cb6a01a0e => 'เลือกเส้นทาง';
@@ -493,6 +513,16 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get ma755f360c2 => 'สองส่วนประกอบ การคำนวณบนคอมพิวเตอร์ของคุณ';
+
+  @override
+  String get mf68d71e67c =>
+      'โปรแกรมส่งคืนพารามิเตอร์การเชื่อมต่อที่เข้ากันไม่ได้';
+
+  @override
+  String get m61f92fb847 => 'เอ็นจิ้นไม่ได้รายงานพารามิเตอร์การเชื่อมต่อ';
+
+  @override
+  String get md3339c001c => 'เครื่องยนต์ไม่พร้อมใช้งาน';
 
   @override
   String get md27019b2d6 => 'การดำเนินการหรือพารามิเตอร์ไม่พร้อมใช้งาน';
@@ -728,6 +758,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m5cb66ce618 => 'ไอเดียที่อยากกลับมา';
 
   @override
+  String get mc88f7b9ebc => 'รหัสเซสชัน';
+
+  @override
   String get ma48353b7b1 => 'ระยะประชิดหลีกเลี่ยงโอกาส';
 
   @override
@@ -768,6 +801,10 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m4376254217 => 'นำเข้าผ่านลิงก์';
+
+  @override
+  String get me95acf38f2 =>
+      'ชื่อเซสชันที่แชร์จะถูกบันทึกไว้ในแอสเซมบลีแบบเปิด เมื่อคุณเปลี่ยนชุดประกอบ การผูกจะถูกปิดใช้งาน';
 
   @override
   String get ma8f8e11f0c => 'Intelligence';
@@ -943,6 +980,11 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m378e9ed8fc => 'ชื่อขั้น';
+
+  @override
+  String mfe4c378fa6(String p0, String p1) {
+    return 'หัวข้อ: \"$p0\" → \"$p1\"';
+  }
 
   @override
   String get m0bf71e1c90 => 'พบหลายโฟลเดอร์ของ PoB โปรดเลือกโฟลเดอร์ที่ใช้';
@@ -1138,6 +1180,11 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m409f34eb59 => 'ไม่สามารถบันทึกกลุ่ม';
 
   @override
+  String mea514c56ce(String p0) {
+    return 'ไม่สามารถบันทึกชื่อใน XML: $p0';
+  }
+
+  @override
   String get mef9d01550d => 'ไม่สามารถบันทึกมาตราส่วนได้';
 
   @override
@@ -1292,6 +1339,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m323494c6da => 'ข้อความต้นฉบับจะแสดงขึ้นเมื่อการแปลไม่พร้อมใช้งาน';
 
   @override
+  String get m8a210e3e2e => 'ไม่มีการเชื่อมต่อกับเซสชันที่แชร์';
+
+  @override
   String get m443c49da2a => 'เลื่อนลง';
 
   @override
@@ -1399,6 +1449,20 @@ class AppLocalizationsTh extends AppLocalizations {
       'แผนที่ความเสียหายและการป้องกันทั่วไป สำหรับรายการ ให้เลือกเมตริกแต่ละรายการ';
 
   @override
+  String get m3b30fa7276 => 'เซสชันทั่วไป';
+
+  @override
+  String get mc1330cb96d => 'เซสชัน Go ทั่วไป';
+
+  @override
+  String m5e16506fb5(String p0, String p1, String p2) {
+    return 'เซสชันทั่วไป $p0 การแก้ไข $p1: ชื่อ \"$p2\"';
+  }
+
+  @override
+  String get m4964128d55 => 'ไม่ได้เชื่อมต่อเซสชันทั่วไป';
+
+  @override
   String get m8cb7d50be2 => 'ไฟไหม้';
 
   @override
@@ -1451,6 +1515,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m3e95800065 => 'ปิดใช้งาน';
+
+  @override
+  String get mbb5bdd176c => 'ปิดการใช้งาน';
 
   @override
   String get m654046a00d =>
@@ -1648,6 +1715,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get mce1dabc47f => 'กำลังเชื่อมต่อกับ Lua';
 
   @override
+  String get me2449ea8e4 => 'กำลังเชื่อมต่อ...';
+
+  @override
   String get m67f5d8880e => 'เชื่อมต่อ Lua';
 
   @override
@@ -1655,6 +1725,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m0d8b14b475 => 'เชื่อมต่อบริดจ์อีกครั้งและรีสตาร์ท PoB';
+
+  @override
+  String get m3af435b32e => 'เชื่อมต่อ';
 
   @override
   String get m538d913ee0 => 'เชื่อมต่อ Lua';
@@ -1717,6 +1790,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m2ffaee13bd => 'รับ Phys dmg';
 
   @override
+  String get ma25a5c7093 => 'ได้รับสแนปชอตเซสชันแล้ว';
+
+  @override
   String get m8c0ef0f511 => 'ตัวปรับแต่งแบบกำหนดเอง';
 
   @override
@@ -1732,6 +1808,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m0f80007ec0 => 'ดอท DPS';
+
+  @override
+  String get me5e5204ccf => 'เปลี่ยนกระทู้ปิดครับ';
 
   @override
   String get mb4fd967719 => 'ดึงเพื่อเปลี่ยนความกว้างของแผง';
@@ -1900,6 +1979,12 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m62ed32eb22 => 'กำลังตรวจสอบ...';
+
+  @override
+  String get mce86d859e2 => 'โปรแกรมเครื่องยนต์ pob2';
+
+  @override
+  String get me881a16f50 => 'โปรไฟล์เซิร์ฟเวอร์';
 
   @override
   String get m006f803f7b => 'โปรไฟล์นี้มีการใช้งานแล้ว';
@@ -2081,6 +2166,10 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m187a481844 => 'ลบบิลด์แล้ว';
 
   @override
+  String get m993b5ef013 =>
+      'แอสเซมบลีได้รับการแก้ไขโดยไคลเอนต์อื่นแล้ว รอการแก้ไขใหม่';
+
+  @override
   String get m9027890a7b => 'บิลด์ในโฟลเดอร์ที่เชื่อมต่ออยู่ใน «บิลด์ของฉัน»';
 
   @override
@@ -2105,6 +2194,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get ma50190234a => 'เป็นเจ้าของ...';
 
   @override
+  String get m4adb0d6692 => 'ลิงก์ไปยังการเปิดแอสเซมบลี';
+
+  @override
   String get m02578f2b24 => 'ยืนยันการเชื่อมต่อ PoB แล้ว';
 
   @override
@@ -2117,7 +2209,20 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m63a2484f1c => 'เลื่อนไปทางขวา';
 
   @override
+  String get m57ac031b0e => 'เซิร์ฟเวอร์ส่งคืนเซสชันที่เก่ากว่า เชื่อมต่อใหม่';
+
+  @override
+  String get mf0ca78d984 =>
+      'เซิร์ฟเวอร์ไม่รองรับการสมัครสมาชิกเซสชันที่ใช้ร่วมกัน';
+
+  @override
   String get m32bb1c680f => 'ปิดเซสชันแล้ว';
+
+  @override
+  String get mff4d880370 => 'ไม่พบเซสชัน สร้างมันขึ้นมาอย่างชัดเจน';
+
+  @override
+  String get m122d76b9ee => 'มีเซสชันอยู่แล้ว เชื่อมต่อโดยไม่ต้องสร้าง';
 
   @override
   String get m69c1590a47 => 'Strength';
@@ -2211,6 +2316,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get mf3f1d96087 => 'คุณสมบัติของตัวเอง';
 
   @override
+  String get m2cdbcd559d => 'คืนการเชื่อมต่อแล้ว';
+
+  @override
   String get m7d3f9a98b5 =>
       'การเชื่อมอาจใช้แต้มพาสซีฟ การรีเซ็ตจะยกเลิกโหนดที่จัดสรรทั้งหมดในผังปัจจุบัน';
 
@@ -2230,6 +2338,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get mc42ccf5a81 => 'สร้างสำเนา';
+
+  @override
+  String get m9da159743e => 'สร้างเซสชันใหม่';
 
   @override
   String get md79906423b => 'สร้างบิลด์';

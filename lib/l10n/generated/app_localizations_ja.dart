@@ -13,6 +13,10 @@ class AppLocalizationsJa extends AppLocalizations {
   AppLocalizationsJa([String locale = 'ja']) : super(locale);
 
   @override
+  String get m14158eacb5 =>
+      'CLI、MCP、およびアプリケーションは 1 つのセッションを参照します。タイトルは現在同期中です。ゲームの計算は Lua によって実行されます。';
+
+  @override
   String get m8c9a654b8c => '追加前のDPS';
 
   @override
@@ -183,6 +187,11 @@ class AppLocalizationsJa extends AppLocalizations {
   }
 
   @override
+  String m6e6c42ad66(String p0, String p1, String p2) {
+    return '$p0 · リビジョン $p1 · $p2';
+  }
+
+  @override
   String mbefa507d02(String p0, String p1) {
     return '$p0 · レベル $p1';
   }
@@ -190,6 +199,11 @@ class AppLocalizationsJa extends AppLocalizations {
   @override
   String m3f8bda535c(String p0) {
     return '$p0 バイト';
+  }
+
+  @override
+  String m6bfd5c5a8f(String p0) {
+    return '$p0。再接続中...';
   }
 
   @override
@@ -446,10 +460,16 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m0b27387ff0 => 'XML ファイルを選択';
 
   @override
+  String get mf0fa40444a => 'エンジンの選択';
+
+  @override
   String get m88d4b06d56 => 'フォルダーを選択';
 
   @override
   String get md22f8aaed2 => 'PoB ビルド フォルダーの選択';
+
+  @override
+  String get m572cfed3aa => 'プログラムの選択';
 
   @override
   String get m4cb6a01a0e => 'パスを選択してください';
@@ -488,6 +508,15 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get ma755f360c2 => '2 つのコンポーネント。コンピューター上での計算。';
+
+  @override
+  String get mf68d71e67c => 'エンジンが互換性のない接続パラメータを返しました';
+
+  @override
+  String get m61f92fb847 => 'エンジンは接続パラメータを報告しませんでした';
+
+  @override
+  String get md3339c001c => 'エンジンが使用不可';
 
   @override
   String get md27019b2d6 => 'アクションまたはそのパラメータは使用できません。';
@@ -718,6 +747,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m5cb66ce618 => '戻りたいアイデア';
 
   @override
+  String get mc88f7b9ebc => 'セッションID';
+
+  @override
   String get ma48353b7b1 => '近接回避のチャンス';
 
   @override
@@ -758,6 +790,10 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m4376254217 => 'リンク経由でインポート';
+
+  @override
+  String get me95acf38f2 =>
+      '共有セッション名は、開いているアセンブリに保存されます。アセンブリを変更すると、バインドは無効になります。';
 
   @override
   String get ma8f8e11f0c => '知性';
@@ -932,6 +968,11 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m378e9ed8fc => '段階の名前';
+
+  @override
+  String mfe4c378fa6(String p0, String p1) {
+    return 'タイトル: \"$p0\" → \"$p1\"';
+  }
 
   @override
   String get m0bf71e1c90 => 'PoB フォルダーが複数見つかりました。使用するフォルダーを選択してください。';
@@ -1127,6 +1168,11 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m409f34eb59 => 'グループの保存に失敗しました';
 
   @override
+  String mea514c56ce(String p0) {
+    return 'XML に名前を保存できませんでした: $p0';
+  }
+
+  @override
   String get mef9d01550d => 'スケールの保存に失敗しました。';
 
   @override
@@ -1281,6 +1327,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m323494c6da => '翻訳が利用できない場合は元のテキストが表示されます';
 
   @override
+  String get m8a210e3e2e => '共有セッションに接続できません';
+
+  @override
   String get m443c49da2a => '下に移動';
 
   @override
@@ -1386,6 +1435,20 @@ class AppLocalizationsJa extends AppLocalizations {
   String get mc006d459af => '一般的なダメージと防御のマップ。リストでは、個々のメトリックを選択します。';
 
   @override
+  String get m3b30fa7276 => '一般セッション';
+
+  @override
+  String get mc1330cb96d => '一般囲碁セッション';
+
+  @override
+  String m5e16506fb5(String p0, String p1, String p2) {
+    return '一般セッション $p0、リビジョン $p1: 名前 \"$p2\"';
+  }
+
+  @override
+  String get m4964128d55 => '一般セッションが接続されていません';
+
+  @override
   String get m8cb7d50be2 => '火事';
 
   @override
@@ -1438,6 +1501,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m3e95800065 => '無効';
+
+  @override
+  String get mbb5bdd176c => '無効にする';
 
   @override
   String get m654046a00d =>
@@ -1634,6 +1700,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get mce1dabc47f => 'Lua に接続中';
 
   @override
+  String get me2449ea8e4 => '接続中…';
+
+  @override
   String get m67f5d8880e => 'Lua に接続します';
 
   @override
@@ -1641,6 +1710,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m0d8b14b475 => 'ブリッジを再接続し、PoB を再開します。';
+
+  @override
+  String get m3af435b32e => '接続します';
 
   @override
   String get m538d913ee0 => 'Lua に接続します';
@@ -1703,6 +1775,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m2ffaee13bd => '物理ダメージを受けた';
 
   @override
+  String get ma25a5c7093 => 'セッションスナップショットを受信しました';
+
+  @override
   String get m8c0ef0f511 => 'カスタム修飾子';
 
   @override
@@ -1718,6 +1793,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m0f80007ec0 => 'ドットDPS';
+
+  @override
+  String get me5e5204ccf => '変更スレッドは閉じられました';
 
   @override
   String get mb4fd967719 => '引いてパネルの幅を変更します';
@@ -1886,6 +1964,12 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m62ed32eb22 => 'チェック中...';
+
+  @override
+  String get mce86d859e2 => 'pob2 エンジン プログラム';
+
+  @override
+  String get me881a16f50 => 'サーバープロファイル';
 
   @override
   String get m006f803f7b => 'プロファイルはすでに使用されています。';
@@ -2064,6 +2148,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m187a481844 => 'ビルドを削除しました';
 
   @override
+  String get m993b5ef013 => 'アセンブリは別のクライアントによってすでに変更されています。新しいリビジョンを待ちます';
+
+  @override
   String get m9027890a7b => '接続したフォルダーのビルドは「マイビルド」で利用できます。';
 
   @override
@@ -2088,6 +2175,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get ma50190234a => '自分の...';
 
   @override
+  String get m4adb0d6692 => 'アセンブリを開くリンク';
+
+  @override
   String get m02578f2b24 => 'PoB接続を確認しました';
 
   @override
@@ -2100,7 +2190,19 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m63a2484f1c => '右に移動';
 
   @override
+  String get m57ac031b0e => 'サーバーは古いセッションを返しました。再接続します';
+
+  @override
+  String get mf0ca78d984 => 'サーバーは共有セッション サブスクリプションをサポートしていません';
+
+  @override
   String get m32bb1c680f => 'セッションは終了しました';
+
+  @override
+  String get mff4d880370 => 'セッションが見つかりません。明示的に作成する';
+
+  @override
+  String get m122d76b9ee => 'セッションはすでに存在します。創造せずにつながる';
 
   @override
   String get m69c1590a47 => '筋力';
@@ -2193,6 +2295,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get mf3f1d96087 => '独自のプロパティ';
 
   @override
+  String get m2cdbcd559d => '接続が回復しました';
+
+  @override
   String get m7d3f9a98b5 =>
       '接続にはパッシブポイントを消費する場合があります。リセットすると現在のツリーで割り当てたノードがすべて解除されます。';
 
@@ -2212,6 +2317,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get mc42ccf5a81 => 'コピーを作成します';
+
+  @override
+  String get m9da159743e => '新しいセッションを作成する';
 
   @override
   String get md79906423b => 'ビルドを作成';
