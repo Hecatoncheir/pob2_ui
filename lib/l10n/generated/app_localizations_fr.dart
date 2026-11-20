@@ -73,11 +73,18 @@ class AppLocalizationsFr extends AppLocalizations {
       'Lua n\'a renvoyé aucun avertissement pour ce calcul.';
 
   @override
+  String get m1be4cd345c =>
+      'Lua n\'a pas renvoyé d\'informations sur le socket';
+
+  @override
   String get m1f463483a4 => 'Lua n\'a pas renvoyé d\'informations sur le nœud';
 
   @override
   String get m35f86d9c5e =>
       'Lua n\'a pas renvoyé la compatibilité avec la pierre';
+
+  @override
+  String get m8becf2b23a => 'Lua n\'a pas renvoyé la comparaison de support';
 
   @override
   String get m1810485f55 =>
@@ -154,6 +161,10 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get m7610c788c5 => 'PoB n’a trouvé aucun chemin vers ce nœud';
+
+  @override
+  String get mef355f9087 =>
+      'PoB ne fournit pas le nombre d\'emplacements disponibles pour cette compétence';
 
   @override
   String get m917bb579d9 =>
@@ -322,7 +333,13 @@ class AppLocalizationsFr extends AppLocalizations {
   String get m4d1d43042e => 'Activé';
 
   @override
+  String get mabc4967822 => 'Activé :';
+
+  @override
   String get m79741659f7 => 'Activez les modifications via MCP.';
+
+  @override
+  String get m3dcf849f05 => 'La capacité du socket est inconnue';
 
   @override
   String get m66b96db6c1 =>
@@ -426,6 +443,10 @@ class AppLocalizationsFr extends AppLocalizations {
       'Sélectionnez le dossier de construction Chemin du bâtiment.';
 
   @override
+  String get m276c753964 =>
+      'Sélectionnez les supports à comparer. Votre build restera inchangé.';
+
+  @override
   String get m956c346c46 => 'Sélectionnez un build';
 
   @override
@@ -459,6 +480,9 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get m9cf249e2a8 => 'Sélectionné';
+
+  @override
+  String get m05bf0a5b7f => 'Supports sélectionnés :';
 
   @override
   String get m19a610ab93 => 'Sélectionné';
@@ -931,6 +955,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get m22e1e2c7ad => 'Multiplicateur de critiques';
 
   @override
+  String get mf889a95ade => 'Vous pouvez comparer jusqu\'à 8 supports';
+
+  @override
   String get m13e9f80144 => 'Mes builds';
 
   @override
@@ -1304,6 +1331,9 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get m7b3c2887b7 => 'Commande de rendu PoB incomplète';
+
+  @override
+  String get m03d3822674 => 'ID de support manquant';
 
   @override
   String get m6f381f6aed =>
@@ -1827,6 +1857,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get mad582b726d => 'Aperçu du nettoyage du profil';
 
   @override
+  String get md6155fcb9b => 'Avertissements';
+
+  @override
   String get m3c2b5cfe97 => 'Avertissements Lua';
 
   @override
@@ -2029,9 +2062,15 @@ class AppLocalizationsFr extends AppLocalizations {
   String get m6fa4aff83a => 'Calculer les chemins';
 
   @override
+  String get m1bd14f9320 => 'Calculer la comparaison';
+
+  @override
   String m33a38de9ff(String p0) {
     return 'Calcul Lua · $p0 %';
   }
+
+  @override
+  String get m024e700eef => 'Calcul des supports…';
 
   @override
   String get m30a07ea432 => 'Calcul de la comparaison…';
@@ -2071,6 +2110,9 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get mcc5183e960 => 'Suivre le plan';
+
+  @override
+  String get m24735a7161 => 'Résultats';
 
   @override
   String get meba267d9f8 => 'Ressources';
@@ -2117,6 +2159,10 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get m544bec7909 =>
       'La build changera après avoir cliqué sur \"Appliquer\"';
+
+  @override
+  String get mf4309857da =>
+      'Le build ou le groupe de compétences a changé. Rouvrez la comparaison.';
 
   @override
   String get m5c8bb47697 => 'Assemblage introuvable';
@@ -2335,13 +2381,22 @@ class AppLocalizationsFr extends AppLocalizations {
   String get m651f75da98 => 'Liste d’achats';
 
   @override
+  String get macf3060cc3 => 'Comparaison des supports';
+
+  @override
   String get me953a11402 => 'Comparaison des chemins';
 
   @override
   String get m55e18d4647 => 'Comparaison des builds';
 
   @override
+  String get m4640b319c7 => 'La comparaison est actuellement indisponible';
+
+  @override
   String get m868f6bf490 => 'Comparer les étapes';
+
+  @override
+  String get m18a29a98fa => 'Comparer les supports';
 
   @override
   String get m043dd5eab1 => 'Comparer les chemins';
@@ -2512,6 +2567,10 @@ class AppLocalizationsFr extends AppLocalizations {
       'Le niveau et la qualité doivent être des nombres entiers';
 
   @override
+  String get mf63eaa58ef =>
+      'Les supports sont de niveau 1 avec une qualité 0. La comparaison est basée uniquement sur DPS.';
+
+  @override
   String get mecb350422f => 'Niveau ennemi';
 
   @override
@@ -2562,6 +2621,9 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get m45b81fa451 =>
       'La paire de composants installée est vérifiée et connectée';
+
+  @override
+  String get m2d56da6df4 => 'Supports installés :';
 
   @override
   String get mb4dd85a98a =>

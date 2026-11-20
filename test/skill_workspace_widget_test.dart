@@ -252,6 +252,10 @@ void main() {
     await tester.enterText(find.byKey(const ValueKey('gem-level-1')), '9');
     await settle(tester);
 
+    await tester.ensureVisible(
+      find.byKey(const ValueKey('preview-support-support')).last,
+    );
+    await tester.pumpAndSettle();
     await tester.tap(
       find.byKey(const ValueKey('preview-support-support')).last,
     );

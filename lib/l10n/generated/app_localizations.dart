@@ -233,6 +233,12 @@ abstract class AppLocalizations {
   /// **'Lua returned no warnings for this calculation.'**
   String get m5bf96935c9;
 
+  /// Lua не вернул сведения о ячейках
+  ///
+  /// In en, this message translates to:
+  /// **'Lua did not return socket information'**
+  String get m1be4cd345c;
+
   /// Lua не вернул сведения об узле
   ///
   /// In en, this message translates to:
@@ -244,6 +250,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Lua did not return gem compatibility'**
   String get m35f86d9c5e;
+
+  /// Lua не вернул сравнение поддержек
+  ///
+  /// In en, this message translates to:
+  /// **'Lua did not return the support comparison'**
+  String get m8becf2b23a;
 
   /// Lua не вернул счётчики очков дерева.
   ///
@@ -370,6 +382,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'PoB found no path to this node'**
   String get m7610c788c5;
+
+  /// PoB не предоставляет число доступных ячеек этого умения
+  ///
+  /// In en, this message translates to:
+  /// **'PoB does not provide the number of available sockets for this skill'**
+  String get mef355f9087;
 
   /// PoB не сообщил путь к папке сборок.
   ///
@@ -653,11 +671,23 @@ abstract class AppLocalizations {
   /// **'Enabled'**
   String get m4d1d43042e;
 
+  /// Включено:
+  ///
+  /// In en, this message translates to:
+  /// **'Enabled:'**
+  String get mabc4967822;
+
   /// Включите правки через MCP.
   ///
   /// In en, this message translates to:
   /// **'Enable editing through MCP.'**
   String get m79741659f7;
+
+  /// Вместимость ячеек неизвестна
+  ///
+  /// In en, this message translates to:
+  /// **'Socket capacity is unknown'**
+  String get m3dcf849f05;
 
   /// Вместо файла загрузки обнаружена ссылка
   ///
@@ -851,6 +881,12 @@ abstract class AppLocalizations {
   /// **'Select the Path of Building build folder.'**
   String get m4a02239801;
 
+  /// Выберите поддержки для сравнения. Сборка не изменится.
+  ///
+  /// In en, this message translates to:
+  /// **'Select supports to compare. Your build will remain unchanged.'**
+  String get m276c753964;
+
   /// Выберите сборку
   ///
   /// In en, this message translates to:
@@ -910,6 +946,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Selected'**
   String get m9cf249e2a8;
+
+  /// Выбрано поддержек:
+  ///
+  /// In en, this message translates to:
+  /// **'Selected supports:'**
+  String get m05bf0a5b7f;
 
   /// Выбраны
   ///
@@ -1757,6 +1799,12 @@ abstract class AppLocalizations {
   /// **'Crit Multiplier'**
   String get m22e1e2c7ad;
 
+  /// Можно сравнить не более 8 поддержек
+  ///
+  /// In en, this message translates to:
+  /// **'You can compare up to 8 supports'**
+  String get mf889a95ade;
+
   /// Мои сборки
   ///
   /// In en, this message translates to:
@@ -2399,6 +2447,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Incomplete PoB render command'**
   String get m7b3c2887b7;
+
+  /// Нет ID поддержки
+  ///
+  /// In en, this message translates to:
+  /// **'Missing support ID'**
+  String get m03d3822674;
 
   /// Нет Lua runtime для этой архитектуры
   ///
@@ -3366,6 +3420,12 @@ abstract class AppLocalizations {
   /// **'Preview of profile cleaning'**
   String get mad582b726d;
 
+  /// Предупреждения
+  ///
+  /// In en, this message translates to:
+  /// **'Warnings'**
+  String get md6155fcb9b;
+
   /// Предупреждения Lua
   ///
   /// In en, this message translates to:
@@ -3720,11 +3780,23 @@ abstract class AppLocalizations {
   /// **'Calculate paths'**
   String get m6fa4aff83a;
 
+  /// Рассчитать сравнение
+  ///
+  /// In en, this message translates to:
+  /// **'Calculate comparison'**
+  String get m1bd14f9320;
+
   /// Расчёт Lua · {p0}%
   ///
   /// In en, this message translates to:
   /// **'Calculation Lua · {p0}%'**
   String m33a38de9ff(String p0);
+
+  /// Расчёт поддержек…
+  ///
+  /// In en, this message translates to:
+  /// **'Calculating supports…'**
+  String get m024e700eef;
 
   /// Расчёт сравнения…
   ///
@@ -3797,6 +3869,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Follow plan'**
   String get mcc5183e960;
+
+  /// Результаты
+  ///
+  /// In en, this message translates to:
+  /// **'Results'**
+  String get m24735a7161;
 
   /// Ресурсы
   ///
@@ -3875,6 +3953,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'The build will change after clicking \"Apply\"'**
   String get m544bec7909;
+
+  /// Сборка или группа изменились. Откройте сравнение заново.
+  ///
+  /// In en, this message translates to:
+  /// **'The build or skill group changed. Reopen the comparison.'**
+  String get mf4309857da;
 
   /// Сборка не найдена
   ///
@@ -4278,6 +4362,12 @@ abstract class AppLocalizations {
   /// **'Shopping list'**
   String get m651f75da98;
 
+  /// Сравнение поддержек
+  ///
+  /// In en, this message translates to:
+  /// **'Support comparison'**
+  String get macf3060cc3;
+
   /// Сравнение путей
   ///
   /// In en, this message translates to:
@@ -4290,11 +4380,23 @@ abstract class AppLocalizations {
   /// **'Build comparison'**
   String get m55e18d4647;
 
+  /// Сравнение сейчас недоступно
+  ///
+  /// In en, this message translates to:
+  /// **'Comparison is currently unavailable'**
+  String get m4640b319c7;
+
   /// Сравнение этапов
   ///
   /// In en, this message translates to:
   /// **'Compare milestones'**
   String get m868f6bf490;
+
+  /// Сравнить поддержки
+  ///
+  /// In en, this message translates to:
+  /// **'Compare supports'**
+  String get m18a29a98fa;
 
   /// Сравнить пути
   ///
@@ -4602,6 +4704,12 @@ abstract class AppLocalizations {
   /// **'Level and quality must be integers'**
   String get mbb0ceac2d1;
 
+  /// Уровень поддержек — 1, качество — 0. Сравнение только по DPS.
+  ///
+  /// In en, this message translates to:
+  /// **'Supports are level 1 with 0 quality. Comparison is based on DPS only.'**
+  String get mf63eaa58ef;
+
   /// Уровень противника
   ///
   /// In en, this message translates to:
@@ -4691,6 +4799,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'The installed pair of components is checked and connected'**
   String get m45b81fa451;
+
+  /// Установлено поддержек:
+  ///
+  /// In en, this message translates to:
+  /// **'Supports installed:'**
+  String get m2d56da6df4;
 
   /// Файл или папка изменились после предпросмотра.
   ///

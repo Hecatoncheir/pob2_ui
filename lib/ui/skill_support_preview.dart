@@ -45,7 +45,7 @@ class _SkillSupportPreviewState extends State<_SkillSupportPreview> {
                 return AppText(mcpErrorMessage(snapshot.error!));
               }
               if (snapshot.data case final result?) {
-                return _SupportDpsValues(result);
+                return SupportDpsValues(result);
               }
               return const LinearProgressIndicator();
             },
@@ -62,8 +62,8 @@ class _SkillSupportPreviewState extends State<_SkillSupportPreview> {
   );
 }
 
-class _SupportDpsValues extends StatelessWidget {
-  const _SupportDpsValues(this.result);
+class SupportDpsValues extends StatelessWidget {
+  const SupportDpsValues(this.result, {super.key});
   final SupportDps result;
 
   @override

@@ -70,10 +70,16 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m5bf96935c9 => 'Lua 沒有針對此計算回傳任何警告。';
 
   @override
+  String get m1be4cd345c => 'Lua 未回傳套接字訊息';
+
+  @override
   String get m1f463483a4 => 'Lua 未回傳節點資訊';
 
   @override
   String get m35f86d9c5e => 'Lua 未回傳石頭相容性';
+
+  @override
+  String get m8becf2b23a => 'Lua 未回傳支援比較';
 
   @override
   String get m1810485f55 => 'Lua 未傳回天賦樹點數。';
@@ -143,6 +149,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m7610c788c5 => 'PoB 找不到通往此天賦節點的路徑';
+
+  @override
+  String get mef355f9087 => 'PoB沒有提供此技能的可用套接字數量';
 
   @override
   String get m917bb579d9 => 'PoB 未報告組件資料夾的路徑。';
@@ -307,7 +316,13 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m4d1d43042e => '已啟用';
 
   @override
+  String get mabc4967822 => '已啟用：';
+
+  @override
   String get m79741659f7 => '請啟用透過 MCP 編輯。';
+
+  @override
+  String get m3dcf849f05 => '套接字容量未知';
 
   @override
   String get m66b96db6c1 => '偵測到連結而不是下載文件';
@@ -406,6 +421,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m4a02239801 => '選擇建置建置資料夾的路徑。';
 
   @override
+  String get m276c753964 => '選擇支援進行比較。您的建置將保持不變。';
+
+  @override
   String get m956c346c46 => '選擇一個流派';
 
   @override
@@ -434,6 +452,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m9cf249e2a8 => '已選擇';
+
+  @override
+  String get m05bf0a5b7f => '選定的支持：';
 
   @override
   String get m19a610ab93 => '已選擇';
@@ -885,6 +906,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m22e1e2c7ad => '爆擊倍數';
 
   @override
+  String get mf889a95ade => '您最多可以比較 8 個支撐';
+
+  @override
   String get m13e9f80144 => '我的配置';
 
   @override
@@ -1252,6 +1276,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m7b3c2887b7 => '不完整的 PoB 渲染指令';
+
+  @override
+  String get m03d3822674 => '缺少支援 ID';
 
   @override
   String get m6f381f6aed => '此架構沒有 Lua 執行時期';
@@ -1755,6 +1782,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get mad582b726d => '輪廓清理預覽';
 
   @override
+  String get md6155fcb9b => '警告';
+
+  @override
   String get m3c2b5cfe97 => '警告Lua';
 
   @override
@@ -1950,9 +1980,15 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m6fa4aff83a => '計算路徑';
 
   @override
+  String get m1bd14f9320 => '計算比較';
+
+  @override
   String m33a38de9ff(String p0) {
     return '計算 Lua · $p0%';
   }
+
+  @override
+  String get m024e700eef => '計算支援...';
 
   @override
   String get m30a07ea432 => '正在計算比較…';
@@ -1991,6 +2027,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get mcc5183e960 => '依計畫進行';
+
+  @override
+  String get m24735a7161 => '結果';
 
   @override
   String get meba267d9f8 => '資源';
@@ -2034,6 +2073,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m544bec7909 => '點選「應用」後建置將會發生變化';
+
+  @override
+  String get mf4309857da => '建置或技能組已更改。重新開啟比較。';
 
   @override
   String get m5c8bb47697 => '找不到程序集';
@@ -2241,13 +2283,22 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m651f75da98 => '購物清單';
 
   @override
+  String get macf3060cc3 => '支援比較';
+
+  @override
   String get me953a11402 => '路徑比較';
 
   @override
   String get m55e18d4647 => '流派比較';
 
   @override
+  String get m4640b319c7 => '目前無法進行比較';
+
+  @override
   String get m868f6bf490 => '比較階段';
+
+  @override
+  String get m18a29a98fa => '比較支持';
 
   @override
   String get m043dd5eab1 => '比較路徑';
@@ -2411,6 +2462,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get mbb0ceac2d1 => '等級和品質必須是整數';
 
   @override
+  String get mf63eaa58ef => '支援等級為 1，品質為 0。比較僅基於 DPS。';
+
+  @override
   String get mecb350422f => '敵人等級';
 
   @override
@@ -2458,6 +2512,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m45b81fa451 => '檢查並連接已安裝的一對組件';
+
+  @override
+  String get m2d56da6df4 => '支援安裝：';
 
   @override
   String get mb4dd85a98a => '文件或資料夾自預覽以來已更改。';
@@ -2663,10 +2720,16 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m5bf96935c9 => 'Lua 沒有針對此計算回傳任何警告。';
 
   @override
+  String get m1be4cd345c => 'Lua 未回傳套接字訊息';
+
+  @override
   String get m1f463483a4 => 'Lua 未回傳節點資訊';
 
   @override
   String get m35f86d9c5e => 'Lua 未回傳石頭相容性';
+
+  @override
+  String get m8becf2b23a => 'Lua 未回傳支援比較';
 
   @override
   String get m1810485f55 => 'Lua 未傳回天賦樹點數。';
@@ -2736,6 +2799,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m7610c788c5 => 'PoB 找不到通往此天賦節點的路徑';
+
+  @override
+  String get mef355f9087 => 'PoB沒有提供此技能的可用套接字數量';
 
   @override
   String get m917bb579d9 => 'PoB 未報告組件資料夾的路徑。';
@@ -2900,7 +2966,13 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m4d1d43042e => '已啟用';
 
   @override
+  String get mabc4967822 => '已啟用：';
+
+  @override
   String get m79741659f7 => '請啟用透過 MCP 編輯。';
+
+  @override
+  String get m3dcf849f05 => '套接字容量未知';
 
   @override
   String get m66b96db6c1 => '偵測到連結而不是下載文件';
@@ -2999,6 +3071,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m4a02239801 => '選擇建置建置資料夾的路徑。';
 
   @override
+  String get m276c753964 => '選擇支援進行比較。您的建置將保持不變。';
+
+  @override
   String get m956c346c46 => '選擇一個流派';
 
   @override
@@ -3027,6 +3102,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m9cf249e2a8 => '已選擇';
+
+  @override
+  String get m05bf0a5b7f => '選定的支持：';
 
   @override
   String get m19a610ab93 => '已選擇';
@@ -3478,6 +3556,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m22e1e2c7ad => '爆擊倍數';
 
   @override
+  String get mf889a95ade => '您最多可以比較 8 個支撐';
+
+  @override
   String get m13e9f80144 => '我的配置';
 
   @override
@@ -3845,6 +3926,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m7b3c2887b7 => '不完整的 PoB 渲染指令';
+
+  @override
+  String get m03d3822674 => '缺少支援 ID';
 
   @override
   String get m6f381f6aed => '此架構沒有 Lua 執行時期';
@@ -4348,6 +4432,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get mad582b726d => '輪廓清理預覽';
 
   @override
+  String get md6155fcb9b => '警告';
+
+  @override
   String get m3c2b5cfe97 => '警告Lua';
 
   @override
@@ -4543,9 +4630,15 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m6fa4aff83a => '計算路徑';
 
   @override
+  String get m1bd14f9320 => '計算比較';
+
+  @override
   String m33a38de9ff(String p0) {
     return '計算 Lua · $p0%';
   }
+
+  @override
+  String get m024e700eef => '計算支援...';
 
   @override
   String get m30a07ea432 => '正在計算比較…';
@@ -4584,6 +4677,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get mcc5183e960 => '依計畫進行';
+
+  @override
+  String get m24735a7161 => '結果';
 
   @override
   String get meba267d9f8 => '資源';
@@ -4627,6 +4723,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m544bec7909 => '點選「應用」後建置將會發生變化';
+
+  @override
+  String get mf4309857da => '建置或技能組已更改。重新開啟比較。';
 
   @override
   String get m5c8bb47697 => '找不到程序集';
@@ -4834,13 +4933,22 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m651f75da98 => '購物清單';
 
   @override
+  String get macf3060cc3 => '支援比較';
+
+  @override
   String get me953a11402 => '路徑比較';
 
   @override
   String get m55e18d4647 => '流派比較';
 
   @override
+  String get m4640b319c7 => '目前無法進行比較';
+
+  @override
   String get m868f6bf490 => '比較階段';
+
+  @override
+  String get m18a29a98fa => '比較支持';
 
   @override
   String get m043dd5eab1 => '比較路徑';
@@ -5004,6 +5112,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get mbb0ceac2d1 => '等級和品質必須是整數';
 
   @override
+  String get mf63eaa58ef => '支援等級為 1，品質為 0。比較僅基於 DPS。';
+
+  @override
   String get mecb350422f => '敵人等級';
 
   @override
@@ -5051,6 +5162,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m45b81fa451 => '檢查並連接已安裝的一對組件';
+
+  @override
+  String get m2d56da6df4 => '支援安裝：';
 
   @override
   String get mb4dd85a98a => '文件或資料夾自預覽以來已更改。';

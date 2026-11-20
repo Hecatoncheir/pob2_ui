@@ -70,10 +70,16 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m5bf96935c9 => 'Lua はこの計算に対して警告を返しませんでした。';
 
   @override
+  String get m1be4cd345c => 'Lua はソケット情報を返しませんでした';
+
+  @override
   String get m1f463483a4 => 'Lua はノード情報を返しませんでした';
 
   @override
   String get m35f86d9c5e => 'Lua は石の互換性を返しませんでした';
+
+  @override
+  String get m8becf2b23a => 'Lua はサポート比較を返しませんでした';
 
   @override
   String get m1810485f55 => 'Lua がツリーのポイント数を返しませんでした。';
@@ -144,6 +150,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m7610c788c5 => 'PoB がこのノードへの経路を見つけられませんでした';
+
+  @override
+  String get mef355f9087 => 'PoB はこのスキルに使用可能なソケットの数を提供しません';
 
   @override
   String get m917bb579d9 => 'PoB はアセンブリ フォルダーへのパスを報告しませんでした。';
@@ -308,7 +317,13 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m4d1d43042e => '有効';
 
   @override
+  String get mabc4967822 => '有効:';
+
+  @override
   String get m79741659f7 => 'MCP による編集を有効にしてください。';
+
+  @override
+  String get m3dcf849f05 => 'ソケット容量が不明です';
 
   @override
   String get m66b96db6c1 => 'ダウンロード ファイルの代わりにリンクが検出されました';
@@ -407,6 +422,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m4a02239801 => 'ビルド フォルダーのパスを選択します。';
 
   @override
+  String get m276c753964 => '比較するサポートを選択してください。ビルドは変更されません。';
+
+  @override
   String get m956c346c46 => 'ビルドを選択';
 
   @override
@@ -435,6 +453,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m9cf249e2a8 => '選択済み';
+
+  @override
+  String get m05bf0a5b7f => '選択されたサポート:';
 
   @override
   String get m19a610ab93 => 'Selected';
@@ -887,6 +908,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m22e1e2c7ad => 'クリティカル倍率';
 
   @override
+  String get mf889a95ade => '最大 8 つのサポートを比較できます';
+
+  @override
   String get m13e9f80144 => 'マイビルド';
 
   @override
@@ -1255,6 +1279,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m7b3c2887b7 => '不完全な PoB レンダリング コマンド';
+
+  @override
+  String get m03d3822674 => 'サポート ID がありません';
 
   @override
   String get m6f381f6aed => 'このアーキテクチャには Lua ランタイムがありません';
@@ -1760,6 +1787,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get mad582b726d => 'プロファイルのクリーニングのプレビュー';
 
   @override
+  String get md6155fcb9b => '警告';
+
+  @override
   String get m3c2b5cfe97 => '警告 Lua';
 
   @override
@@ -1955,9 +1985,15 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m6fa4aff83a => 'パスを計算する';
 
   @override
+  String get m1bd14f9320 => '比較を計算する';
+
+  @override
   String m33a38de9ff(String p0) {
     return '計算 Lua · $p0%';
   }
+
+  @override
+  String get m024e700eef => 'サポートを計算しています…';
 
   @override
   String get m30a07ea432 => '比較を計算中…';
@@ -1996,6 +2032,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get mcc5183e960 => 'プランに沿って進む';
+
+  @override
+  String get m24735a7161 => '結果';
 
   @override
   String get meba267d9f8 => 'リソース';
@@ -2039,6 +2078,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m544bec7909 => '「適用」をクリックするとビルドが変更されます';
+
+  @override
+  String get mf4309857da => 'ビルドまたはスキルグループが変更されました。比較を再開します。';
 
   @override
   String get m5c8bb47697 => 'アセンブリが見つかりません';
@@ -2249,13 +2291,22 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m651f75da98 => '購入リスト';
 
   @override
+  String get macf3060cc3 => 'サポート比較';
+
+  @override
   String get me953a11402 => 'パスの比較';
 
   @override
   String get m55e18d4647 => 'ビルド比較';
 
   @override
+  String get m4640b319c7 => '現在、比較はできません';
+
+  @override
   String get m868f6bf490 => 'ステージを比較';
+
+  @override
+  String get m18a29a98fa => 'サポートの比較';
 
   @override
   String get m043dd5eab1 => 'パスを比較する';
@@ -2419,6 +2470,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get mbb0ceac2d1 => 'レベルと品質は整数でなければなりません';
 
   @override
+  String get mf63eaa58ef => 'サポートはレベル 1 で品質は 0 です。比較は DPS のみに基づいています。';
+
+  @override
   String get mecb350422f => '敵のレベル';
 
   @override
@@ -2466,6 +2520,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m45b81fa451 => 'インストールされているコンポーネントのペアがチェックされ、接続されています';
+
+  @override
+  String get m2d56da6df4 => 'インストールされているサポート:';
 
   @override
   String get mb4dd85a98a => 'ファイルまたはフォルダーがプレビューから変更されました。';

@@ -38,6 +38,7 @@ const _reads = {
   'pob_gem_icons',
   'pob_gem_supports',
   'pob_preview_support',
+  'pob_compare_supports',
   'pob_gem_tooltip',
   'pob_compare_item',
   'pob_trade_catalog',

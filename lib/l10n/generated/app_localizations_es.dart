@@ -71,10 +71,16 @@ class AppLocalizationsEs extends AppLocalizations {
   String get m5bf96935c9 => 'Lua no devolvió advertencias para este cálculo.';
 
   @override
+  String get m1be4cd345c => 'Lua no devolvió información del socket';
+
+  @override
   String get m1f463483a4 => 'Lua no devolvió información del nodo';
 
   @override
   String get m35f86d9c5e => 'Lua no devolvió compatibilidad con piedras';
+
+  @override
+  String get m8becf2b23a => 'Lua no devolvió la comparación de soporte';
 
   @override
   String get m1810485f55 =>
@@ -150,6 +156,10 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get m7610c788c5 => 'PoB no encontró una ruta a este nodo';
+
+  @override
+  String get mef355f9087 =>
+      'PoB no proporciona la cantidad de sockets disponibles para esta habilidad';
 
   @override
   String get m917bb579d9 =>
@@ -318,7 +328,13 @@ class AppLocalizationsEs extends AppLocalizations {
   String get m4d1d43042e => 'Habilitado';
 
   @override
+  String get mabc4967822 => 'Habilitado:';
+
+  @override
   String get m79741659f7 => 'Activa la edición mediante MCP.';
+
+  @override
+  String get m3dcf849f05 => 'Se desconoce la capacidad del socket';
 
   @override
   String get m66b96db6c1 => 'Enlace detectado en lugar de archivo de descarga';
@@ -420,6 +436,10 @@ class AppLocalizationsEs extends AppLocalizations {
       'Seleccione la carpeta de compilación Ruta de construcción.';
 
   @override
+  String get m276c753964 =>
+      'Seleccione soportes para comparar. Tu construcción permanecerá sin cambios.';
+
+  @override
   String get m956c346c46 => 'Elige una configuración';
 
   @override
@@ -452,6 +472,9 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get m9cf249e2a8 => 'Seleccionado';
+
+  @override
+  String get m05bf0a5b7f => 'Soportes seleccionados:';
 
   @override
   String get m19a610ab93 => 'Seleccionado';
@@ -919,6 +942,9 @@ class AppLocalizationsEs extends AppLocalizations {
   String get m22e1e2c7ad => 'Multiplicador de críticos';
 
   @override
+  String get mf889a95ade => 'Puedes comparar hasta 8 soportes';
+
+  @override
   String get m13e9f80144 => 'Mis configuraciones';
 
   @override
@@ -1293,6 +1319,9 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get m7b3c2887b7 => 'Comando de renderizado PoB incompleto';
+
+  @override
+  String get m03d3822674 => 'Falta ID de soporte';
 
   @override
   String get m6f381f6aed =>
@@ -1814,6 +1843,9 @@ class AppLocalizationsEs extends AppLocalizations {
   String get mad582b726d => 'Vista previa de la limpieza del perfil';
 
   @override
+  String get md6155fcb9b => 'Advertencias';
+
+  @override
   String get m3c2b5cfe97 => 'Advertencias Lua';
 
   @override
@@ -2016,9 +2048,15 @@ class AppLocalizationsEs extends AppLocalizations {
   String get m6fa4aff83a => 'Calcular rutas';
 
   @override
+  String get m1bd14f9320 => 'Calcular comparación';
+
+  @override
   String m33a38de9ff(String p0) {
     return 'Cálculo Lua · $p0%';
   }
+
+  @override
+  String get m024e700eef => 'Calculando soportes…';
 
   @override
   String get m30a07ea432 => 'Calculando la comparación…';
@@ -2057,6 +2095,9 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get mcc5183e960 => 'Seguir el plan';
+
+  @override
+  String get m24735a7161 => 'Resultados';
 
   @override
   String get meba267d9f8 => 'Recursos';
@@ -2104,6 +2145,10 @@ class AppLocalizationsEs extends AppLocalizations {
   @override
   String get m544bec7909 =>
       'La compilación cambiará después de hacer clic en \"Aplicar\"';
+
+  @override
+  String get mf4309857da =>
+      'La configuración o el grupo de habilidades cambió. Vuelva a abrir la comparación.';
 
   @override
   String get m5c8bb47697 => 'Conjunto no encontrado';
@@ -2322,13 +2367,22 @@ class AppLocalizationsEs extends AppLocalizations {
   String get m651f75da98 => 'Lista de compras';
 
   @override
+  String get macf3060cc3 => 'Comparación de soporte';
+
+  @override
   String get me953a11402 => 'Comparación de rutas';
 
   @override
   String get m55e18d4647 => 'Comparación de configuraciones';
 
   @override
+  String get m4640b319c7 => 'La comparación no está disponible actualmente';
+
+  @override
   String get m868f6bf490 => 'Comparar etapas';
+
+  @override
+  String get m18a29a98fa => 'Comparar soportes';
 
   @override
   String get m043dd5eab1 => 'Comparar rutas';
@@ -2497,6 +2551,10 @@ class AppLocalizationsEs extends AppLocalizations {
   String get mbb0ceac2d1 => 'El nivel y la calidad deben ser números enteros';
 
   @override
+  String get mf63eaa58ef =>
+      'Los soportes son de nivel 1 con calidad 0. La comparación se basa únicamente en DPS.';
+
+  @override
   String get mecb350422f => 'Nivel enemigo';
 
   @override
@@ -2547,6 +2605,9 @@ class AppLocalizationsEs extends AppLocalizations {
   @override
   String get m45b81fa451 =>
       'El par de componentes instalados está comprobado y conectado';
+
+  @override
+  String get m2d56da6df4 => 'Soportes instalados:';
 
   @override
   String get mb4dd85a98a =>

@@ -9,11 +9,14 @@ import 'core/app_text.dart';
 import 'core/language_scope.dart';
 import 'core/motion.dart';
 import 'core/spark_theme.dart';
+import 'core/ui_translation.dart';
 import 'skill_group_cubit.dart';
 import 'skill_gem_catalog_tile.dart';
 import 'skill_group_composer.dart';
 import 'skill_support_preview.dart';
 import 'skill_support_target_picker.dart';
+import 'skill_socket_summary.dart';
+import 'support_comparison_dialog.dart';
 import 'gem_drag.dart';
 import 'workshop_cubit.dart';
 
@@ -69,6 +72,8 @@ class _SkillGroupDialogState extends State<_SkillGroupDialog> {
           ),
     groupId: widget.group?['id'] as int?,
     group: widget.group,
+    contextVersion: () => widget.model.state.report,
+    contextChanges: widget.model.stream.map((state) => state.report).distinct(),
     initial: widget.initial,
     label: widget.group?['customLabel'] as String? ?? '',
   );
@@ -264,56 +269,82 @@ class SkillGemCatalog extends StatelessWidget {
               _visible(gem),
         )
         .toList();
-    return Column(
-      children: [
-        if (supportsOnly && state.activeGems.length > 1)
-          SkillSupportTargetPicker(
-            editor,
-            state,
-            key: const Key('workspace-support-target'),
-          ),
-        if (editor.supportScope == 'slot')
-          const AppText(
-            'Поддержки общие для умений этого слота',
-            style: TextStyle(fontSize: 11),
-          ),
-        if (!supportsOnly && !editor.locksPrimary)
-          Wrap(
-            spacing: 6,
+    return CustomScrollView(
+      key: const Key('gem-catalog'),
+      slivers: [
+        SliverToBoxAdapter(
+          child: Column(
             children: [
-              ChoiceChip(
-                label: const AppText('Умения'),
-                selected: !state.showSupports,
-                onSelected: state.saving
-                    ? null
-                    : (_) => editor.chooseSupports(false),
+              if (supportsOnly && state.activeGems.length > 1)
+                SkillSupportTargetPicker(
+                  editor,
+                  state,
+                  key: const Key('workspace-support-target'),
+                ),
+              if (editor.supportScope == 'slot')
+                const AppText(
+                  'Поддержки общие для умений этого слота',
+                  style: TextStyle(fontSize: 11),
+                ),
+              if (!supportsOnly && !editor.locksPrimary)
+                Wrap(
+                  spacing: 6,
+                  children: [
+                    ChoiceChip(
+                      label: const AppText('Умения'),
+                      selected: !state.showSupports,
+                      onSelected: state.saving
+                          ? null
+                          : (_) => editor.chooseSupports(false),
+                    ),
+                    ChoiceChip(
+                      label: const AppText('Подходящие поддержки'),
+                      selected: state.showSupports,
+                      onSelected: state.saving || state.supportTarget == null
+                          ? null
+                          : (_) => editor.chooseSupports(true),
+                    ),
+                  ],
+                ),
+              const SizedBox(height: 10),
+              if (supportMode &&
+                  !state.support.loading &&
+                  state.supportTarget != null) ...[
+                SkillSocketSummary(state),
+                const SizedBox(height: 8),
+              ],
+              KeyedSubtree(
+                key: ValueKey(state.showSupports),
+                child: TextFormField(
+                  key: searchKey,
+                  initialValue: state.query,
+                  enabled: !state.saving,
+                  onChanged: editor.search,
+                  decoration: InputDecoration(
+                    hint: const AppText('Найти камень'),
+                    prefixIcon: const Icon(Icons.search, size: 19),
+                    suffixIcon: _comparisonButton(context),
+                  ),
+                ),
               ),
-              ChoiceChip(
-                label: const AppText('Подходящие поддержки'),
-                selected: state.showSupports,
-                onSelected: state.saving || state.supportTarget == null
-                    ? null
-                    : (_) => editor.chooseSupports(true),
-              ),
+              const SizedBox(height: 8),
             ],
           ),
-        const SizedBox(height: 10),
-        KeyedSubtree(
-          key: ValueKey(state.showSupports),
-          child: TextFormField(
-            key: searchKey,
-            initialValue: state.query,
-            enabled: !state.saving,
-            onChanged: editor.search,
-            decoration: const InputDecoration(
-              hint: AppText('Найти камень'),
-              prefixIcon: Icon(Icons.search, size: 19),
-            ),
-          ),
         ),
-        const SizedBox(height: 8),
-        Expanded(child: _results(context, entries)),
+        _results(context, entries),
       ],
+    );
+  }
+
+  Widget? _comparisonButton(BuildContext context) {
+    if (!supportMode || !editor.repository.hasSupportComparison) return null;
+    return IconButton(
+      key: const Key('compare-supports'),
+      tooltip: translateUi(context, 'Сравнить поддержки'),
+      onPressed: editor.canCompareSupports
+          ? () => showSupportComparison(context, editor)
+          : null,
+      icon: const Icon(Icons.compare_arrows, size: 18),
     );
   }
 
@@ -326,29 +357,41 @@ class SkillGemCatalog extends StatelessWidget {
 
   Widget _results(BuildContext context, List<SkillGem> entries) {
     if (state.loading || supportMode && state.support.loading)
-      return const Center(child: CircularProgressIndicator());
+      return const SliverFillRemaining(
+        hasScrollBody: false,
+        child: Center(
+          child: CircularProgressIndicator(key: Key('gem-catalog-loading')),
+        ),
+      );
     if (supportMode && state.support.error != null) {
-      return _loadError(
-        state.support.error!,
-        'Повторить',
-        editor.refreshSupports,
+      return SliverFillRemaining(
+        hasScrollBody: false,
+        child: _loadError(
+          state.support.error!,
+          'Повторить',
+          editor.refreshSupports,
+        ),
       );
     }
     if (state.catalog.isEmpty && state.error != null) {
-      return _loadError(state.error!, 'Повторить загрузку', editor.load);
+      return SliverFillRemaining(
+        hasScrollBody: false,
+        child: _loadError(state.error!, 'Повторить загрузку', editor.load),
+      );
     }
     if (entries.isEmpty)
-      return const Center(child: AppText('Камни не найдены'));
+      return const SliverFillRemaining(
+        hasScrollBody: false,
+        child: Center(child: AppText('Камни не найдены')),
+      );
     if (!supportMode)
-      return ListView.separated(
-        key: const Key('gem-catalog'),
+      return SliverList.separated(
         itemCount: entries.length,
         separatorBuilder: (_, _) => const SizedBox(height: 8),
         itemBuilder: (context, index) =>
             _tile(context, entries[index], compact: true),
       );
-    return GridView.builder(
-      key: const Key('gem-catalog'),
+    return SliverGrid.builder(
       gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
         maxCrossAxisExtent: 170,
         mainAxisExtent: editor.repository.hasSupportPreview ? 158 : 132,

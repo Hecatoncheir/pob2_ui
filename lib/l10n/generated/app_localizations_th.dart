@@ -70,10 +70,16 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m5bf96935c9 => 'Lua ไม่มีคำเตือนสำหรับการคำนวณนี้';
 
   @override
+  String get m1be4cd345c => 'Lua ไม่ได้ส่งคืนข้อมูลซ็อกเก็ต';
+
+  @override
   String get m1f463483a4 => 'Lua ไม่ส่งคืนข้อมูลโหนด';
 
   @override
   String get m35f86d9c5e => 'Lua ไม่ได้ส่งคืนความเข้ากันได้ของ stone';
+
+  @override
+  String get m8becf2b23a => 'Lua ไม่ส่งคืนการเปรียบเทียบการสนับสนุน';
 
   @override
   String get m1810485f55 => 'Lua ไม่ได้ส่งคืนจำนวนแต้มของผังทักษะ';
@@ -146,6 +152,10 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m7610c788c5 => 'PoB ไม่พบเส้นทางไปยังโหนดนี้';
+
+  @override
+  String get mef355f9087 =>
+      'PoB ไม่ได้ระบุจำนวนซ็อกเก็ตที่ใช้ได้สำหรับทักษะนี้';
 
   @override
   String get m917bb579d9 => 'PoB ไม่ได้รายงานเส้นทางไปยังโฟลเดอร์แอสเซมบลี';
@@ -311,7 +321,13 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m4d1d43042e => 'เปิดใช้งานแล้ว';
 
   @override
+  String get mabc4967822 => 'เปิดใช้งานแล้ว:';
+
+  @override
   String get m79741659f7 => 'เปิดใช้งานการแก้ไขผ่าน MCP';
+
+  @override
+  String get m3dcf849f05 => 'ไม่ทราบความจุของซ็อกเก็ต';
 
   @override
   String get m66b96db6c1 => 'ตรวจพบลิงก์แทนที่จะดาวน์โหลดไฟล์';
@@ -411,6 +427,10 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m4a02239801 => 'เลือกโฟลเดอร์เส้นทางการสร้างอาคาร';
 
   @override
+  String get m276c753964 =>
+      'เลือกรองรับเพื่อเปรียบเทียบ งานสร้างของคุณจะยังคงไม่เปลี่ยนแปลง';
+
+  @override
   String get m956c346c46 => 'เลือกบิลด์';
 
   @override
@@ -440,6 +460,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m9cf249e2a8 => 'เลือกแล้ว';
+
+  @override
+  String get m05bf0a5b7f => 'รองรับที่เลือก:';
 
   @override
   String get m19a610ab93 => 'เลือกแล้ว';
@@ -897,6 +920,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m22e1e2c7ad => 'ตัวคูณคริติคอล';
 
   @override
+  String get mf889a95ade => 'คุณสามารถเปรียบเทียบการรองรับได้สูงสุด 8 รายการ';
+
+  @override
   String get m13e9f80144 => 'บิลด์ของฉัน';
 
   @override
@@ -1266,6 +1292,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m7b3c2887b7 => 'คำสั่งการเรนเดอร์ PoB ไม่สมบูรณ์';
+
+  @override
+  String get m03d3822674 => 'ไม่มีรหัสสนับสนุน';
 
   @override
   String get m6f381f6aed => 'ไม่มี Lua รันไทม์สำหรับสถาปัตยกรรมนี้';
@@ -1774,6 +1803,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get mad582b726d => 'ตัวอย่างการทำความสะอาดโปรไฟล์';
 
   @override
+  String get md6155fcb9b => 'คำเตือน';
+
+  @override
   String get m3c2b5cfe97 => 'คำเตือน Lua';
 
   @override
@@ -1970,9 +2002,15 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m6fa4aff83a => 'คำนวณเส้นทาง';
 
   @override
+  String get m1bd14f9320 => 'คำนวณการเปรียบเทียบ';
+
+  @override
   String m33a38de9ff(String p0) {
     return 'Calculation Lua · $p0%';
   }
+
+  @override
+  String get m024e700eef => 'กำลังคำนวณการสนับสนุน...';
 
   @override
   String get m30a07ea432 => 'กำลังคำนวณผลเปรียบเทียบ…';
@@ -2011,6 +2049,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get mcc5183e960 => 'ติดตามแผน';
+
+  @override
+  String get m24735a7161 => 'ผลลัพธ์';
 
   @override
   String get meba267d9f8 => 'แหล่งข้อมูล';
@@ -2056,6 +2097,10 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m544bec7909 => 'โครงสร้างจะเปลี่ยนไปหลังจากคลิก \"นำไปใช้\"';
+
+  @override
+  String get mf4309857da =>
+      'โครงสร้างหรือกลุ่มทักษะเปลี่ยนไป เปิดการเปรียบเทียบอีกครั้ง';
 
   @override
   String get m5c8bb47697 => 'ไม่พบชุดประกอบ';
@@ -2267,13 +2312,22 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m651f75da98 => 'รายการซื้อ';
 
   @override
+  String get macf3060cc3 => 'การเปรียบเทียบการสนับสนุน';
+
+  @override
   String get me953a11402 => 'การเปรียบเทียบเส้นทาง';
 
   @override
   String get m55e18d4647 => 'การเปรียบเทียบบิลด์';
 
   @override
+  String get m4640b319c7 => 'การเปรียบเทียบไม่พร้อมใช้งานในขณะนี้';
+
+  @override
   String get m868f6bf490 => 'เปรียบเทียบขั้น';
+
+  @override
+  String get m18a29a98fa => 'เปรียบเทียบการรองรับ';
 
   @override
   String get m043dd5eab1 => 'เปรียบเทียบเส้นทาง';
@@ -2440,6 +2494,10 @@ class AppLocalizationsTh extends AppLocalizations {
   String get mbb0ceac2d1 => 'ระดับและคุณภาพต้องเป็นจำนวนเต็ม';
 
   @override
+  String get mf63eaa58ef =>
+      'การสนับสนุนอยู่ที่ระดับ 1 ที่มีคุณภาพ 0 การเปรียบเทียบขึ้นอยู่กับ DPS เท่านั้น';
+
+  @override
   String get mecb350422f => 'ระดับศัตรู';
 
   @override
@@ -2490,6 +2548,9 @@ class AppLocalizationsTh extends AppLocalizations {
   @override
   String get m45b81fa451 =>
       'มีการตรวจสอบและเชื่อมต่อคู่ส่วนประกอบที่ติดตั้งแล้ว';
+
+  @override
+  String get m2d56da6df4 => 'รองรับการติดตั้ง:';
 
   @override
   String get mb4dd85a98a => 'ไฟล์หรือโฟลเดอร์มีการเปลี่ยนแปลงตั้งแต่ดูตัวอย่าง';

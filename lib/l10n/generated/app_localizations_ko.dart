@@ -70,10 +70,16 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m5bf96935c9 => 'Lua은 이 계산에 대해 경고를 반환하지 않았습니다.';
 
   @override
+  String get m1be4cd345c => 'Lua이 소켓 정보를 반환하지 않았습니다.';
+
+  @override
   String get m1f463483a4 => 'Lua이 노드 정보를 반환하지 않았습니다.';
 
   @override
   String get m35f86d9c5e => 'Lua이 스톤 호환성을 반환하지 않았습니다.';
+
+  @override
+  String get m8becf2b23a => 'Lua이 지원 비교를 반환하지 않았습니다.';
 
   @override
   String get m1810485f55 => 'Lua가 트리 포인트 수를 반환하지 않았습니다.';
@@ -144,6 +150,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m7610c788c5 => 'PoB가 이 노드로 가는 경로를 찾지 못했습니다';
+
+  @override
+  String get mef355f9087 => 'PoB에서는 이 스킬에 사용 가능한 소켓 수를 제공하지 않습니다.';
 
   @override
   String get m917bb579d9 => 'PoB가 어셈블리 폴더 경로를 보고하지 않았습니다.';
@@ -308,7 +317,13 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m4d1d43042e => '활성화됨';
 
   @override
+  String get mabc4967822 => '활성화됨:';
+
+  @override
   String get m79741659f7 => 'MCP를 통한 편집을 허용하세요.';
+
+  @override
+  String get m3dcf849f05 => '소켓 용량을 알 수 없음';
 
   @override
   String get m66b96db6c1 => '다운로드 파일 대신 링크가 감지되었습니다.';
@@ -407,6 +422,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m4a02239801 => '빌드 빌드 폴더 경로를 선택합니다.';
 
   @override
+  String get m276c753964 => '비교할 지원을 선택하세요. 빌드는 변경되지 않습니다.';
+
+  @override
   String get m956c346c46 => '빌드를 선택하세요';
 
   @override
@@ -435,6 +453,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m9cf249e2a8 => '선택됨';
+
+  @override
+  String get m05bf0a5b7f => '선택된 지원:';
 
   @override
   String get m19a610ab93 => '선택됨';
@@ -887,6 +908,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m22e1e2c7ad => '치명타 승수';
 
   @override
+  String get mf889a95ade => '최대 8개의 지지대를 비교할 수 있습니다.';
+
+  @override
   String get m13e9f80144 => '내 빌드';
 
   @override
@@ -1255,6 +1279,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m7b3c2887b7 => '불완전한 PoB 렌더링 명령';
+
+  @override
+  String get m03d3822674 => '지원 ID 누락';
 
   @override
   String get m6f381f6aed => '이 아키텍처에는 Lua 런타임이 없습니다.';
@@ -1760,6 +1787,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get mad582b726d => '프로필 정리 미리보기';
 
   @override
+  String get md6155fcb9b => '경고';
+
+  @override
   String get m3c2b5cfe97 => '경고 Lua';
 
   @override
@@ -1955,9 +1985,15 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m6fa4aff83a => '경로 계산';
 
   @override
+  String get m1bd14f9320 => '비교 계산';
+
+  @override
   String m33a38de9ff(String p0) {
     return '계산 Lua · $p0%';
   }
+
+  @override
+  String get m024e700eef => '지원 계산 중…';
 
   @override
   String get m30a07ea432 => '비교 계산 중…';
@@ -1996,6 +2032,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get mcc5183e960 => '계획 따라가기';
+
+  @override
+  String get m24735a7161 => '결과';
 
   @override
   String get meba267d9f8 => '리소스';
@@ -2039,6 +2078,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m544bec7909 => '\"적용\"을 클릭하면 빌드가 변경됩니다.';
+
+  @override
+  String get mf4309857da => '빌드나 스킬그룹이 변경되었습니다. 비교를 다시 엽니다.';
 
   @override
   String get m5c8bb47697 => '어셈블리를 찾을 수 없습니다.';
@@ -2249,13 +2291,22 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m651f75da98 => '구매 목록';
 
   @override
+  String get macf3060cc3 => '지원 비교';
+
+  @override
   String get me953a11402 => '경로 비교';
 
   @override
   String get m55e18d4647 => '빌드 비교';
 
   @override
+  String get m4640b319c7 => '현재는 비교할 수 없습니다.';
+
+  @override
   String get m868f6bf490 => '단계 비교';
+
+  @override
+  String get m18a29a98fa => '비교 지원';
 
   @override
   String get m043dd5eab1 => '경로 비교';
@@ -2419,6 +2470,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get mbb0ceac2d1 => '레벨과 품질은 정수여야 합니다.';
 
   @override
+  String get mf63eaa58ef => '지원은 품질이 0인 레벨 1입니다. 비교는 DPS만을 기준으로 합니다.';
+
+  @override
   String get mecb350422f => '적 레벨';
 
   @override
@@ -2466,6 +2520,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m45b81fa451 => '설치된 구성요소 쌍을 확인하고 연결합니다.';
+
+  @override
+  String get m2d56da6df4 => '지원 설치:';
 
   @override
   String get mb4dd85a98a => '미리보기 이후 파일 또는 폴더가 변경되었습니다.';

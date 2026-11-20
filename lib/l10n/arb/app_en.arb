@@ -95,6 +95,11 @@
     "description": "Lua не вернул предупреждений для этого расчёта.",
     "placeholders": {}
   },
+  "m1be4cd345c": "Lua did not return socket information",
+  "@m1be4cd345c": {
+    "description": "Lua не вернул сведения о ячейках",
+    "placeholders": {}
+  },
   "m1f463483a4": "Lua did not return node information",
   "@m1f463483a4": {
     "description": "Lua не вернул сведения об узле",
@@ -103,6 +108,11 @@
   "m35f86d9c5e": "Lua did not return gem compatibility",
   "@m35f86d9c5e": {
     "description": "Lua не вернул совместимость камней",
+    "placeholders": {}
+  },
+  "m8becf2b23a": "Lua did not return the support comparison",
+  "@m8becf2b23a": {
+    "description": "Lua не вернул сравнение поддержек",
     "placeholders": {}
   },
   "m1810485f55": "Lua did not return tree point counters.",
@@ -220,6 +230,11 @@
   "m7610c788c5": "PoB found no path to this node",
   "@m7610c788c5": {
     "description": "PoB не нашёл путь к узлу",
+    "placeholders": {}
+  },
+  "mef355f9087": "PoB does not provide the number of available sockets for this skill",
+  "@mef355f9087": {
+    "description": "PoB не предоставляет число доступных ячеек этого умения",
     "placeholders": {}
   },
   "m917bb579d9": "PoB did not return the builds folder path.",
@@ -515,9 +530,19 @@
     "description": "Включено",
     "placeholders": {}
   },
+  "mabc4967822": "Enabled:",
+  "@mabc4967822": {
+    "description": "Включено:",
+    "placeholders": {}
+  },
   "m79741659f7": "Enable editing through MCP.",
   "@m79741659f7": {
     "description": "Включите правки через MCP.",
+    "placeholders": {}
+  },
+  "m3dcf849f05": "Socket capacity is unknown",
+  "@m3dcf849f05": {
+    "description": "Вместимость ячеек неизвестна",
     "placeholders": {}
   },
   "m66b96db6c1": "Link detected instead of download file",
@@ -680,6 +705,11 @@
     "description": "Выберите папку сборок Path of Building.",
     "placeholders": {}
   },
+  "m276c753964": "Select supports to compare. Your build will remain unchanged.",
+  "@m276c753964": {
+    "description": "Выберите поддержки для сравнения. Сборка не изменится.",
+    "placeholders": {}
+  },
   "m956c346c46": "Choose a build",
   "@m956c346c46": {
     "description": "Выберите сборку",
@@ -728,6 +758,11 @@
   "m9cf249e2a8": "Selected",
   "@m9cf249e2a8": {
     "description": "Выбрано",
+    "placeholders": {}
+  },
+  "m05bf0a5b7f": "Selected supports:",
+  "@m05bf0a5b7f": {
+    "description": "Выбрано поддержек:",
     "placeholders": {}
   },
   "m19a610ab93": "Selected",
@@ -1493,6 +1528,11 @@
     "description": "Множитель критического удара",
     "placeholders": {}
   },
+  "mf889a95ade": "You can compare up to 8 supports",
+  "@mf889a95ade": {
+    "description": "Можно сравнить не более 8 поддержек",
+    "placeholders": {}
+  },
   "m13e9f80144": "My builds",
   "@m13e9f80144": {
     "description": "Мои сборки",
@@ -2122,6 +2162,11 @@
   "m7b3c2887b7": "Incomplete PoB render command",
   "@m7b3c2887b7": {
     "description": "Неполная команда отрисовки PoB",
+    "placeholders": {}
+  },
+  "m03d3822674": "Missing support ID",
+  "@m03d3822674": {
+    "description": "Нет ID поддержки",
     "placeholders": {}
   },
   "m6f381f6aed": "No Lua runtime for this architecture",
@@ -2965,6 +3010,11 @@
     "description": "Предпросмотр очистки профиля",
     "placeholders": {}
   },
+  "md6155fcb9b": "Warnings",
+  "@md6155fcb9b": {
+    "description": "Предупреждения",
+    "placeholders": {}
+  },
   "m3c2b5cfe97": "Warnings Lua",
   "@m3c2b5cfe97": {
     "description": "Предупреждения Lua",
@@ -3296,6 +3346,11 @@
     "description": "Рассчитать пути",
     "placeholders": {}
   },
+  "m1bd14f9320": "Calculate comparison",
+  "@m1bd14f9320": {
+    "description": "Рассчитать сравнение",
+    "placeholders": {}
+  },
   "m33a38de9ff": "Calculation Lua · {p0}%",
   "@m33a38de9ff": {
     "description": "Расчёт Lua · {p0}%",
@@ -3304,6 +3359,11 @@
         "type": "String"
       }
     }
+  },
+  "m024e700eef": "Calculating supports…",
+  "@m024e700eef": {
+    "description": "Расчёт поддержек…",
+    "placeholders": {}
   },
   "m30a07ea432": "Calculating comparison…",
   "@m30a07ea432": {
@@ -3378,6 +3438,11 @@
     "description": "Режим прохождения",
     "placeholders": {}
   },
+  "m24735a7161": "Results",
+  "@m24735a7161": {
+    "description": "Результаты",
+    "placeholders": {}
+  },
   "meba267d9f8": "Resources",
   "@meba267d9f8": {
     "description": "Ресурсы",
@@ -3449,6 +3514,11 @@
   "m544bec7909": "The build will change after clicking \"Apply\"",
   "@m544bec7909": {
     "description": "Сборка изменится после нажатия «Применить»",
+    "placeholders": {}
+  },
+  "mf4309857da": "The build or skill group changed. Reopen the comparison.",
+  "@mf4309857da": {
+    "description": "Сборка или группа изменились. Откройте сравнение заново.",
     "placeholders": {}
   },
   "m5c8bb47697": "Build not found",
@@ -3794,6 +3864,11 @@
     "description": "Список покупок",
     "placeholders": {}
   },
+  "macf3060cc3": "Support comparison",
+  "@macf3060cc3": {
+    "description": "Сравнение поддержек",
+    "placeholders": {}
+  },
   "me953a11402": "Path comparison",
   "@me953a11402": {
     "description": "Сравнение путей",
@@ -3804,9 +3879,19 @@
     "description": "Сравнение сборок",
     "placeholders": {}
   },
+  "m4640b319c7": "Comparison is currently unavailable",
+  "@m4640b319c7": {
+    "description": "Сравнение сейчас недоступно",
+    "placeholders": {}
+  },
   "m868f6bf490": "Compare milestones",
   "@m868f6bf490": {
     "description": "Сравнение этапов",
+    "placeholders": {}
+  },
+  "m18a29a98fa": "Compare supports",
+  "@m18a29a98fa": {
+    "description": "Сравнить поддержки",
     "placeholders": {}
   },
   "m043dd5eab1": "Compare paths",
@@ -4083,6 +4168,11 @@
     "description": "Уровень и качество должны быть целыми числами",
     "placeholders": {}
   },
+  "mf63eaa58ef": "Supports are level 1 with 0 quality. Comparison is based on DPS only.",
+  "@mf63eaa58ef": {
+    "description": "Уровень поддержек — 1, качество — 0. Сравнение только по DPS.",
+    "placeholders": {}
+  },
   "mecb350422f": "Enemy level",
   "@mecb350422f": {
     "description": "Уровень противника",
@@ -4164,6 +4254,11 @@
   "m45b81fa451": "The installed pair of components is checked and connected",
   "@m45b81fa451": {
     "description": "Установленная пара компонентов проверена и подключена",
+    "placeholders": {}
+  },
+  "m2d56da6df4": "Supports installed:",
+  "@m2d56da6df4": {
+    "description": "Установлено поддержек:",
     "placeholders": {}
   },
   "mb4dd85a98a": "The file or folder has changed since the preview.",

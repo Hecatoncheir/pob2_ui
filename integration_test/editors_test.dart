@@ -11,6 +11,7 @@ import 'package:pob2_ui/data/mcp_client.dart';
 import 'package:pob2_ui/data/pob_build_library.dart';
 import 'package:pob2_ui/data/xml_file_service.dart';
 import 'package:pob2_ui/domain/build_report.dart';
+import 'package:pob2_ui/domain/skill_gem.dart';
 import 'package:pob2_ui/ui/app.dart';
 import 'package:pob2_ui/ui/comparison_stats_table.dart';
 import 'package:pob2_ui/ui/components_view.dart';
@@ -79,6 +80,7 @@ void main() {
       await _hoverDescriptions(tester, model);
       await _previewDraft(tester, model);
       await _workspaceEditing(tester, model);
+      await _compareSupports(tester, model);
       await _setCondition(tester, model);
       final stats = model.state.report!.stats;
       final groups = model.state.report!.groups;
@@ -725,6 +727,8 @@ Future<void> _workspaceEditing(WidgetTester tester, WorkshopCubit model) async {
   );
   final search = find.byKey(const Key('support-search'));
   await _wait(tester, () => search.evaluate().isNotEmpty);
+  await tester.ensureVisible(search);
+  await tester.pumpAndSettle();
   await tester.tap(search);
   await tester.pumpAndSettle();
   await tester.enterText(search, 'Controlled Destruction');
@@ -733,8 +737,14 @@ Future<void> _workspaceEditing(WidgetTester tester, WorkshopCubit model) async {
     (gem) => gem.name == 'Controlled Destruction',
   );
   final tile = find.byKey(ValueKey('catalog-gem-${support.id}'));
-  await _wait(tester, () => tile.evaluate().isNotEmpty);
+  await _revealCatalog(tester, tile);
   final row = find.byKey(ValueKey('skill-group-drop-$id'));
+  await tester.ensureVisible(row);
+  await tester.pumpAndSettle();
+  await _capture(tester, '-workspace-before-drag');
+  debugPrint(
+    'Перенос: камень ${tester.getRect(tile)}, группа ${tester.getRect(row)}',
+  );
   await tester.dragFrom(
     tester.getCenter(tile),
     tester.getCenter(row) - tester.getCenter(tile),
@@ -784,6 +794,8 @@ Future<void> _workspaceEditing(WidgetTester tester, WorkshopCubit model) async {
   expect(jsonRows(model.state.report!.groups.last['gems']).first['level'], 7);
   expect(model.state.report!.groupSelector['selected'], id);
   await _workspaceReady(tester);
+  await tester.ensureVisible(search);
+  await tester.pumpAndSettle();
   await tester.tap(search);
   await tester.pumpAndSettle();
   await tester.enterText(search, '');
@@ -823,6 +835,106 @@ Future<void> _workspaceReady(WidgetTester tester) async {
   await tester.pumpAndSettle();
 }
 
+Future<void> _compareSupports(WidgetTester tester, WorkshopCubit model) async {
+  debugPrint('Начало: пакетное сравнение поддержек из одного XML');
+  final group = model.state.report!.skillGroups.first;
+  final id = group['id'] as int;
+  final row = find.byKey(ValueKey('skill-group-$id'));
+  final edit = find.descendant(
+    of: row,
+    matching: find.byTooltip('Редактировать группу'),
+  );
+  await tester.ensureVisible(edit);
+  await tester.tap(edit);
+  await _wait(
+    tester,
+    () => find.byKey(const Key('skill-group-cancel')).evaluate().isNotEmpty,
+  );
+  await tester.pumpAndSettle();
+  await tester.tap(find.widgetWithText(ChoiceChip, 'Подходящие поддержки'));
+  final open = find.byKey(const Key('compare-supports')).last;
+  await _wait(
+    tester,
+    () =>
+        open.evaluate().isNotEmpty &&
+        tester.widget<IconButton>(open).onPressed != null,
+  );
+  await tester.ensureVisible(open);
+  await tester.pumpAndSettle();
+  final gems = groupGemDrafts(group).map(gemRequest).toList();
+  final compatible = await model.catalogs.supportCompatibility(
+    gems,
+    groupId: id,
+    targetIndex: 1,
+  );
+  final existing = gems.map((gem) => gem['id']).toSet();
+  final ids = compatible.ids
+      .where((value) => !existing.contains(value))
+      .take(2)
+      .toList();
+  expect(ids, hasLength(2));
+  final control = await model.catalogs.compareSupports(
+    gems,
+    groupId: id,
+    targetIndex: 1,
+    supportIds: ids,
+  );
+  final xml = await model.exportXml();
+  final history = model.state.history;
+  await _wait(tester, () => tester.widget<IconButton>(open).onPressed != null);
+  await tester.pumpAndSettle();
+  await tester.ensureVisible(open);
+  await tester.pumpAndSettle();
+  await _capture(tester, '-comparison-before-open');
+  await tester.tap(open);
+  await _wait(
+    tester,
+    () => find
+        .byKey(const Key('support-comparison-search'))
+        .evaluate()
+        .isNotEmpty,
+  );
+  await tester.pumpAndSettle();
+  for (final value in ids) {
+    await _selectComparisonSupport(tester, value);
+  }
+  await tester.tap(find.byKey(const Key('support-comparison-calculate')));
+  await _wait(
+    tester,
+    () => find
+        .byKey(const Key('support-comparison-results'))
+        .evaluate()
+        .isNotEmpty,
+  );
+  await tester.pumpAndSettle();
+  final first = find.byKey(
+    ValueKey('support-result-${control.ranked.first.id}'),
+  );
+  final second = find.byKey(
+    ValueKey('support-result-${control.ranked.last.id}'),
+  );
+  expect(tester.getTopLeft(first).dy, lessThan(tester.getTopLeft(second).dy));
+  await _capture(tester, '-support-comparison');
+  await tester.tap(find.byKey(const Key('support-comparison-close')));
+  await tester.pumpAndSettle();
+  await tester.tap(find.byKey(const Key('skill-group-cancel')));
+  await tester.pumpAndSettle();
+  expect(await model.exportXml(), xml);
+  expect(model.state.history, history);
+  debugPrint('Готово: порядок соответствует Lua, XML и история сохранены');
+}
+
+Future<void> _selectComparisonSupport(WidgetTester tester, String id) async {
+  final search = find.byKey(const Key('support-comparison-search'));
+  await tester.tap(search);
+  await tester.enterText(search, id);
+  await tester.pumpAndSettle();
+  final choice = find.byKey(ValueKey('compare-support-$id'));
+  await tester.ensureVisible(choice);
+  await tester.tap(choice);
+  await tester.pumpAndSettle();
+}
+
 Future<void> _submitGroup(WidgetTester tester) async {
   final button = find.byKey(const Key('skill-group-save'));
   await _wait(
@@ -832,11 +944,30 @@ Future<void> _submitGroup(WidgetTester tester) async {
   await tester.tap(button);
 }
 
+Future<void> _revealCatalog(WidgetTester tester, Finder target) async {
+  final catalog = find.byKey(const Key('gem-catalog')).last;
+  await _wait(
+    tester,
+    () =>
+        catalog.evaluate().isNotEmpty &&
+        find.byKey(const Key('gem-catalog-loading')).evaluate().isEmpty,
+  );
+  await tester.scrollUntilVisible(
+    target,
+    120,
+    scrollable: find
+        .descendant(of: catalog, matching: find.byType(Scrollable))
+        .first,
+  );
+  await tester.pumpAndSettle();
+}
+
 Future<void> _wait(WidgetTester tester, bool Function() complete) async {
   for (var attempt = 0; attempt < 900; attempt++) {
     await tester.pump(const Duration(milliseconds: 100));
     if (complete()) return;
   }
+  await _capture(tester, '-timeout');
   fail('Интерфейс не завершил операцию');
 }
 

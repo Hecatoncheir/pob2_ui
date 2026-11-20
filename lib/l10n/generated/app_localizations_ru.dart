@@ -70,10 +70,16 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m5bf96935c9 => 'Lua не вернул предупреждений для этого расчёта.';
 
   @override
+  String get m1be4cd345c => 'Lua не вернул сведения о ячейках';
+
+  @override
   String get m1f463483a4 => 'Lua не вернул сведения об узле';
 
   @override
   String get m35f86d9c5e => 'Lua не вернул совместимость камней';
+
+  @override
+  String get m8becf2b23a => 'Lua не вернул сравнение поддержек';
 
   @override
   String get m1810485f55 => 'Lua не вернул счётчики очков дерева.';
@@ -147,6 +153,10 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get m7610c788c5 => 'PoB не нашёл путь к узлу';
+
+  @override
+  String get mef355f9087 =>
+      'PoB не предоставляет число доступных ячеек этого умения';
 
   @override
   String get m917bb579d9 => 'PoB не сообщил путь к папке сборок.';
@@ -312,7 +322,13 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m4d1d43042e => 'Включено';
 
   @override
+  String get mabc4967822 => 'Включено:';
+
+  @override
   String get m79741659f7 => 'Включите правки через MCP.';
+
+  @override
+  String get m3dcf849f05 => 'Вместимость ячеек неизвестна';
 
   @override
   String get m66b96db6c1 => 'Вместо файла загрузки обнаружена ссылка';
@@ -412,6 +428,10 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m4a02239801 => 'Выберите папку сборок Path of Building.';
 
   @override
+  String get m276c753964 =>
+      'Выберите поддержки для сравнения. Сборка не изменится.';
+
+  @override
   String get m956c346c46 => 'Выберите сборку';
 
   @override
@@ -442,6 +462,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get m9cf249e2a8 => 'Выбрано';
+
+  @override
+  String get m05bf0a5b7f => 'Выбрано поддержек:';
 
   @override
   String get m19a610ab93 => 'Выбраны';
@@ -905,6 +928,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m22e1e2c7ad => 'Множитель критического удара';
 
   @override
+  String get mf889a95ade => 'Можно сравнить не более 8 поддержек';
+
+  @override
   String get m13e9f80144 => 'Мои сборки';
 
   @override
@@ -1277,6 +1303,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get m7b3c2887b7 => 'Неполная команда отрисовки PoB';
+
+  @override
+  String get m03d3822674 => 'Нет ID поддержки';
 
   @override
   String get m6f381f6aed => 'Нет Lua runtime для этой архитектуры';
@@ -1790,6 +1819,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get mad582b726d => 'Предпросмотр очистки профиля';
 
   @override
+  String get md6155fcb9b => 'Предупреждения';
+
+  @override
   String get m3c2b5cfe97 => 'Предупреждения Lua';
 
   @override
@@ -1988,9 +2020,15 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m6fa4aff83a => 'Рассчитать пути';
 
   @override
+  String get m1bd14f9320 => 'Рассчитать сравнение';
+
+  @override
   String m33a38de9ff(String p0) {
     return 'Расчёт Lua · $p0%';
   }
+
+  @override
+  String get m024e700eef => 'Расчёт поддержек…';
 
   @override
   String get m30a07ea432 => 'Расчёт сравнения…';
@@ -2030,6 +2068,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get mcc5183e960 => 'Режим прохождения';
+
+  @override
+  String get m24735a7161 => 'Результаты';
 
   @override
   String get meba267d9f8 => 'Ресурсы';
@@ -2075,6 +2116,10 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get m544bec7909 => 'Сборка изменится после нажатия «Применить»';
+
+  @override
+  String get mf4309857da =>
+      'Сборка или группа изменились. Откройте сравнение заново.';
 
   @override
   String get m5c8bb47697 => 'Сборка не найдена';
@@ -2289,13 +2334,22 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m651f75da98 => 'Список покупок';
 
   @override
+  String get macf3060cc3 => 'Сравнение поддержек';
+
+  @override
   String get me953a11402 => 'Сравнение путей';
 
   @override
   String get m55e18d4647 => 'Сравнение сборок';
 
   @override
+  String get m4640b319c7 => 'Сравнение сейчас недоступно';
+
+  @override
   String get m868f6bf490 => 'Сравнение этапов';
+
+  @override
+  String get m18a29a98fa => 'Сравнить поддержки';
 
   @override
   String get m043dd5eab1 => 'Сравнить пути';
@@ -2463,6 +2517,10 @@ class AppLocalizationsRu extends AppLocalizations {
   String get mbb0ceac2d1 => 'Уровень и качество должны быть целыми числами';
 
   @override
+  String get mf63eaa58ef =>
+      'Уровень поддержек — 1, качество — 0. Сравнение только по DPS.';
+
+  @override
   String get mecb350422f => 'Уровень противника';
 
   @override
@@ -2513,6 +2571,9 @@ class AppLocalizationsRu extends AppLocalizations {
   @override
   String get m45b81fa451 =>
       'Установленная пара компонентов проверена и подключена';
+
+  @override
+  String get m2d56da6df4 => 'Установлено поддержек:';
 
   @override
   String get mb4dd85a98a => 'Файл или папка изменились после предпросмотра.';

@@ -63,6 +63,7 @@ class SkillWorkspaceCubit extends Cubit<SkillWorkspaceState> {
       (label, gems) => model.updateSkillGroup(id, label, gems),
       groupId: id,
       group: group,
+      contextVersion: () => model.state.report,
       initial: initial,
       label: group['customLabel'] as String? ?? '',
     );

@@ -8,6 +8,7 @@ import '../data/mcp_error_message.dart';
 import '../domain/build_report.dart';
 import '../domain/build_edit_result.dart';
 import '../domain/skill_gem.dart';
+import '../domain/support_comparison.dart';
 
 typedef SaveSkillGroup = Future<BuildEditResult> Function(
   String label,
@@ -29,6 +30,7 @@ class SkillGroupState {
     this.support = (loading: false, ids: const {}, error: null),
     this.selectedKey,
     this.supportTargetKey,
+    this.compatibility,
   }) : catalog = List.unmodifiable(catalog),
        gems = List.unmodifiable(gems);
   final List<SkillGem> catalog;
@@ -38,6 +40,7 @@ class SkillGroupState {
   final String? error;
   final bool showSupports, locksPrimary;
   final SupportSelection support;
+  final SupportCompatibility? compatibility;
   final int? selectedKey, supportTargetKey;
   late final List<GemDraft> activeGems = List.unmodifiable(
     gems.where((gem) => !gem.gem.support),
@@ -72,6 +75,8 @@ class SkillGroupState {
     SupportSelection? support,
     int? selectedKey,
     int? supportTargetKey,
+    SupportCompatibility? compatibility,
+    bool clearCompatibility = false,
   }) => SkillGroupState(
     catalog: catalog ?? this.catalog,
     gems: gems ?? this.gems,
@@ -85,7 +90,13 @@ class SkillGroupState {
     support: support ?? this.support,
     selectedKey: selectedKey ?? this.selectedKey,
     supportTargetKey: supportTargetKey ?? this.supportTargetKey,
+    compatibility: _nextCompatibility(compatibility, clearCompatibility),
   );
+
+  SupportCompatibility? _nextCompatibility(
+    SupportCompatibility? next,
+    bool clear,
+  ) => clear ? null : next ?? compatibility;
 }
 
 class SkillGroupCubit extends Cubit<SkillGroupState> {
@@ -96,6 +107,8 @@ class SkillGroupCubit extends Cubit<SkillGroupState> {
     String label = '',
     this.groupId,
     this.group,
+    this.contextVersion,
+    Stream<Object?>? contextChanges,
   }) : super(
          SkillGroupState(
            gems: initial,
@@ -110,11 +123,27 @@ class SkillGroupCubit extends Cubit<SkillGroupState> {
       (next, gem) => gem.key >= next ? gem.key + 1 : next,
     );
     _original = _signature();
+    _initialContext = contextVersion?.call();
+    _contextSubscription = contextChanges?.listen((_) {
+      if (contextVersion?.call() != _initialContext && !isClosed) {
+        _timer?.cancel();
+        _generation++;
+        emit(
+          state.copyWith(
+            error: 'Сборка или группа изменились. Откройте сравнение заново.',
+          ),
+        );
+      }
+    });
   }
   final GameCatalogRepository repository;
   final SaveSkillGroup commit;
   final int? groupId;
   final JsonMap? group;
+  final Object? Function()? contextVersion;
+  Object? _initialContext;
+  StreamSubscription<Object?>? _contextSubscription;
+  int get comparisonGeneration => _generation;
   bool get locksPrimary => state.locksPrimary;
   String? get supportScope => group?['supportScope'] as String?;
   late String _original;
@@ -248,6 +277,7 @@ class SkillGroupCubit extends Cubit<SkillGroupState> {
     final draft = gems.removeAt(index);
     gems.insert(destination.clamp(0, gems.length), draft);
     emit(state.copyWith(gems: gems));
+    refreshSupports();
   }
 
   bool canMoveSupport(int key, int destination) {
@@ -307,6 +337,7 @@ class SkillGroupCubit extends Cubit<SkillGroupState> {
     final generation = ++_generation;
     emit(
       state.copyWith(
+        clearCompatibility: true,
         support: (
           loading: state.supportTarget != null,
           ids: const {},
@@ -323,11 +354,21 @@ class SkillGroupCubit extends Cubit<SkillGroupState> {
     _checking = true;
     _checkedGeneration = generation;
     try {
-      final ids = await repository.supports(
+      final compatibility = await repository.supportCompatibility(
         _supportRequests(),
         groupId: groupId,
+        targetIndex: repository.hasSupportComparison
+            ? state.gems.indexOf(state.supportTarget!) + 1
+            : null,
       );
-      _applySupport(generation, (loading: false, ids: ids, error: null));
+      if (!isClosed && generation == _generation) {
+        emit(
+          state.copyWith(
+            support: (loading: false, ids: compatibility.ids, error: null),
+            compatibility: compatibility,
+          ),
+        );
+      }
     } catch (error) {
       _applySupport(generation, (
         loading: false,
@@ -387,15 +428,64 @@ class SkillGroupCubit extends Cubit<SkillGroupState> {
       state.supportTarget?.enabled == true &&
       accepts(gem, state.gems.length);
 
-  Future<SupportDps> previewSupport(SkillGem gem) async =>
-      repository.previewSupport(
-        _gemRequests(),
-        targetIndex: state.gems.indexOf(state.supportTarget!) + 1,
-        supportId: gem.id,
-        groupId: groupId,
+  Future<SupportDps> previewSupport(SkillGem gem) async {
+    final generation = _generation;
+    _checkPreviewContext(generation);
+    final result = await repository.previewSupport(
+      _gemRequests(),
+      targetIndex: state.gems.indexOf(state.supportTarget!) + 1,
+      supportId: gem.id,
+      groupId: groupId,
+    );
+    _checkPreviewContext(generation);
+    return result;
+  }
+
+  bool get canCompareSupports =>
+      repository.hasSupportComparison &&
+      !state.loading &&
+      !state.saving &&
+      state.error == null &&
+      !state.support.loading &&
+      state.support.error == null &&
+      state.supportTarget?.enabled == true &&
+      state.gems.length < 12;
+
+  Future<SupportComparison> compareSupports(List<String> ids) async {
+    final generation = _generation;
+    _checkPreviewContext(generation);
+    if (!canCompareSupports)
+      throw const FormatException('Сравнение сейчас недоступно');
+    final result = await repository.compareSupports(
+      _gemRequests(),
+      targetIndex: state.gems.indexOf(state.supportTarget!) + 1,
+      supportIds: List.unmodifiable(ids),
+      groupId: groupId,
+    );
+    _checkPreviewContext(generation);
+    return result;
+  }
+
+  void _checkPreviewContext(int generation) {
+    if (isClosed ||
+        generation != _generation ||
+        contextVersion?.call() != _initialContext) {
+      throw const FormatException(
+        'Сборка или группа изменились. Откройте сравнение заново.',
       );
+    }
+  }
 
   List<JsonMap> _supportRequests() {
+    if (repository.hasSupportComparison) {
+      return _gemRequests().indexed
+          .map(
+            (entry) => entry.$1 == state.gems.indexOf(state.supportTarget!)
+                ? {...entry.$2, 'enabled': true}
+                : entry.$2,
+          )
+          .toList();
+    }
     if (locksPrimary) return _gemRequests();
     // MCP принимает один активный камень для проверки в пробной сессии.
     return [
@@ -408,6 +498,7 @@ class SkillGroupCubit extends Cubit<SkillGroupState> {
   Future<void> close() async {
     _timer?.cancel();
     _generation++;
+    await _contextSubscription?.cancel();
     await super.close();
   }
 
@@ -427,6 +518,7 @@ class SkillGroupCubit extends Cubit<SkillGroupState> {
   });
 
   void _acknowledge() {
+    _initialContext = contextVersion?.call();
     if (groupId != null) {
       final gems = state.gems.indexed
           .map(

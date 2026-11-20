@@ -5,6 +5,7 @@ import '../domain/gem_icon.dart';
 import '../domain/build_report.dart';
 import '../domain/condition_definition.dart';
 import '../domain/skill_gem.dart';
+import '../domain/support_comparison.dart';
 import 'mcp_client.dart';
 
 class GameCatalogRepository {
@@ -19,6 +20,8 @@ class GameCatalogRepository {
       engine.tools.containsAll({'pob_gem_icons', 'pob_gem_supports'});
 
   bool get hasSupportPreview => engine.tools.contains('pob_preview_support');
+  bool get hasSupportComparison =>
+      engine.tools.contains('pob_compare_supports');
 
   Future<List<JsonMap>> gemTooltip({
     required String id,
@@ -48,7 +51,11 @@ class GameCatalogRepository {
     _icons.clear();
   }
 
-  Future<Set<String>> supports(List<JsonMap> gems, {int? groupId}) async {
+  Future<SupportCompatibility> supportCompatibility(
+    List<JsonMap> gems, {
+    int? groupId,
+    int? targetIndex,
+  }) async {
     if (!hasGemEditor)
       throw const FormatException(
         'Обновите MCP для каталога камней и совместимости',
@@ -56,12 +63,51 @@ class GameCatalogRepository {
     final result = await engine.call('pob_gem_supports', {
       'gems': gems,
       if (groupId != null) 'groupId': groupId,
+      if (targetIndex != null) 'targetIndex': targetIndex,
     });
     return switch (result) {
-      {'source': 'original-lua', 'supportIds': final List<dynamic> ids} =>
-        Set.unmodifiable(ids.cast<String>()),
+      {'source': 'original-lua', 'supportIds': final List<dynamic> ids} => (
+        ids: Set.unmodifiable(ids.cast<String>()),
+        sockets: result['sockets'] is JsonMap
+            ? SupportSockets.fromJson(result['sockets'] as JsonMap)
+            : null,
+        warnings: List<String>.unmodifiable(jsonStrings(result['warnings'])),
+      ),
       _ => throw const FormatException('Lua не вернул совместимость камней'),
     };
+  }
+
+  Future<SupportComparison> compareSupports(
+    List<JsonMap> gems, {
+    required int targetIndex,
+    required List<String> supportIds,
+    int? groupId,
+  }) async {
+    final result = await engine.call('pob_compare_supports', {
+      'gems': gems,
+      'targetIndex': targetIndex,
+      'supportIds': supportIds,
+      if (groupId != null) 'groupId': groupId,
+    });
+    if (result case {
+      'source': 'original-lua',
+      'xmlHash': final String hash,
+      'baseRevision': final int revision,
+      'entries': final List<dynamic> _,
+    }) {
+      final entries = jsonRows(result['entries'])
+          .map(SupportComparisonEntry.fromJson)
+          .toList();
+      final ids = entries.map((entry) => entry.id).toSet();
+      if (RegExp(r'^[0-9a-f]{64}$').hasMatch(hash) &&
+          revision >= 0 &&
+          entries.length == supportIds.length &&
+          ids.length == entries.length &&
+          ids.containsAll(supportIds)) {
+        return SupportComparison(hash, revision, entries);
+      }
+    }
+    throw const FormatException('Lua не вернул сравнение поддержек');
   }
 
   Future<SupportDps> previewSupport(
