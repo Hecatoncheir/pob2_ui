@@ -145,9 +145,12 @@ Future<({WorkshopCubit model, SelectPaths dialogs})> _prepareFileWorkshop(
   expect(model.state.error, isNull);
   expect(model.engine.connected, isTrue);
   await tester.pumpWidget(
-    ExitProtection(
-      model: model,
-      child: PobApp(model: model),
+    RepaintBoundary(
+      key: const Key('editor-review-image'),
+      child: ExitProtection(
+        model: model,
+        child: PobApp(model: model),
+      ),
     ),
   );
   await tester.pumpAndSettle();
@@ -247,10 +250,20 @@ Future<String> _previewWitchSupport(
   final support = (await model.catalogs.gems()).firstWhere(
     (gem) => gem.name == name,
   );
-  final preview = find.byKey(ValueKey('preview-support-${support.id}'));
-  await _wait(tester, () => preview.evaluate().isNotEmpty);
+  final preview = find.descendant(
+    of: find.byType(AlertDialog).last,
+    matching: find.byKey(ValueKey('preview-support-${support.id}')),
+  );
+  await _revealCatalog(tester, preview);
+  await _wait(
+    tester,
+    () =>
+        preview.evaluate().isNotEmpty &&
+        tester.widget<IconButton>(preview).onPressed != null,
+  );
   await tester.ensureVisible(preview);
-  await tester.tap(preview);
+  await tester.pumpAndSettle();
+  await tester.tap(preview.hitTestable());
   await _wait(tester, () => find.text('DPS до').evaluate().isNotEmpty);
   expect(find.text('12,8177'), findsOneWidget);
   expect(find.text('15,3333'), findsOneWidget);
