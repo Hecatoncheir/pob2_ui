@@ -6,6 +6,7 @@ import 'package:material_ui/material_ui.dart';
 import 'package:pob2_ui/data/component_repository.dart';
 import 'package:pob2_ui/data/installation_store.dart';
 import 'package:pob2_ui/data/mcp_client.dart';
+import 'package:pob2_ui/data/pob_build_library.dart';
 import 'package:pob2_ui/domain/engine_session.dart';
 import 'package:pob2_ui/ui/engine_session_cubit.dart';
 import 'package:pob2_ui/ui/engine_session_view.dart';
@@ -23,12 +24,67 @@ class _XmlEngine extends McpClient {
     String name, [
     Map<String, dynamic> arguments = const {},
   ]) async => switch (name) {
-    'pob_export_xml' => {'xml': '<PathOfBuilding/>'},
+    'pob_export_xml' => {
+      'xml': '<PathOfBuilding2><Build className="Witch" level="90"/><Notes/></PathOfBuilding2>',
+    },
+    'pob_import_xml' => {},
+    'pob_check_build' => {'report': fixture.raw},
     _ => throw StateError(name),
   };
 }
 
 void main() {
+  test(
+    'Привязка следует за именем XML при внешних правках, правке UI и Undo',
+    () async {
+      final root = await Directory.systemTemp.createTemp('pob2-engine-xml-');
+      addTearDown(() => removeTemporaryDirectory(root));
+      final builds = await Directory.fromUri(root.uri.resolve('builds/'))
+          .create();
+      final library = PobBuildLibrary(root);
+      await library.configure(builds.path);
+      final connection = FakeEngineConnection();
+      final model = WorkshopCubit(
+        ComponentRepository(store: InstallationStore(root)),
+        _XmlEngine(),
+        library: library,
+        openEngineSession: (_) async => connection,
+        initialState: WorkshopState(
+          document: (
+            report: fixture,
+            tree: tree,
+            stale: false,
+            treeError: null,
+          ),
+        ),
+      );
+      addTearDown(connection.events.close);
+      addTearDown(model.close);
+      await model.renameBuild('Начальная');
+      await model.connectEngine(const EngineOptions(), bindCurrentBuild: true);
+      await Future<void>.delayed(Duration.zero);
+      for (final name in ['CLI', 'MCP']) {
+        final changed = model.stream.firstWhere(
+          (state) => state.library.active?.title == name && !state.busy,
+        );
+        connection.change(name);
+        await changed.timeout(const Duration(seconds: 3));
+        expect(model.state.library.activeId, '$name.xml');
+      }
+      final renamed = model.stream.firstWhere(
+        (state) => state.library.active?.title == 'UI' && !state.busy,
+      );
+      await model.renameBuild('UI');
+      await renamed.timeout(const Duration(seconds: 3));
+      expect(connection.renames.single.name, 'UI');
+      await model.undo();
+      expect(model.state.error, isNull);
+      expect(connection.renames.last.name, 'MCP');
+      expect(model.state.library.activeId, 'MCP.xml');
+      expect((await library.load()).active!.title, 'MCP');
+    },
+  );
+
   testWidgets(
     'Внешняя правка сразу показывает имя, ревизию и изменённое поле',
     (tester) async {

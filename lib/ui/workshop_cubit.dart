@@ -1042,16 +1042,32 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     String xml, {
     String? title,
     TreeProgressionKey? progressionSource,
-  }) => switch (sharedLibrary) {
-    final shared? => shared.save(
-      target,
-      report,
-      xml,
-      title: title,
-      progressionSource: progressionSource,
-    ),
-    null => library.save(target, report, xml, title: title),
-  };
+  }) async {
+    final epoch = _engineBindingEpoch;
+    final builds = await switch (sharedLibrary) {
+      final shared? => shared.save(
+        target,
+        report,
+        xml,
+        title: title,
+        progressionSource: progressionSource,
+      ),
+      null => library.save(target, report, xml, title: title),
+    };
+    if (title != null) _followEngineRename(target, builds, epoch);
+    return builds;
+  }
+
+  void _followEngineRename(LibraryState before, LibraryState after, int epoch) {
+    final binding = _engineBinding;
+    if (binding == null ||
+        epoch != _engineBindingEpoch ||
+        binding != _currentEngineBinding ||
+        before.activeId != binding.id ||
+        after.activeId == null)
+      return;
+    _engineBinding = (folder: binding.folder, id: after.activeId!);
+  }
 
   void _checkProgression(
     TreeProgressionTransfer plan,

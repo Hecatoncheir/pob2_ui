@@ -152,7 +152,7 @@ jobs:
         if: runner.os == 'Linux'
         with:
           repository: Hecatoncheir/pob2_engine
-          ref: 60d232f0ba8f5b72616e1d4628d4da390e4767e5
+          ref: 175bb83ad09a6a45d0220c8647f793afdbe6b009
           path: build/engine-source
       - name: Подготовить движок для процессного теста
         if: runner.os == 'Linux'
