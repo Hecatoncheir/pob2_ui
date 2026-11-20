@@ -69,10 +69,17 @@ class Editor:
         return response['result']
 
     def call(self, name, arguments=None):
-        response = self.rpc('tools/call', {'name': name, 'arguments': arguments or {}})
-        if response.get('isError'):
-            raise RuntimeError(response)
-        return response['structuredContent']['result']
+        deadline = time.monotonic() + 120
+        while True:
+            response = self.rpc('tools/call', {'name': name, 'arguments': arguments or {}})
+            if not response.get('isError'):
+                return response['structuredContent']['result']
+            content = response.get('content', [])
+            error = json.loads(content[0]['text']) if content else {}
+            # APP_BUSY означает отказ до выполнения команды: дождаться фоновой операции.
+            if error.get('code') != 'APP_BUSY' or time.monotonic() >= deadline:
+                raise RuntimeError(response)
+            time.sleep(.2)
 
     def close(self):
         self.process.stdin.close()
