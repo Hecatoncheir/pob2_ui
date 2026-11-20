@@ -154,6 +154,7 @@
     "m1adc0797f0": "Группа недоступна для редактирования",
     "mcd8c587351": "Группы",
     "ma755f360c2": "Два компонента. Расчёты на вашем компьютере.",
+    "m2206bb2615": "Движок вернул некорректные параметры подключения",
     "mf68d71e67c": "Движок вернул несовместимые параметры подключения",
     "m61f92fb847": "Движок не сообщил параметры подключения",
     "md3339c001c": "Движок недоступен",
@@ -1679,7 +1680,8 @@
     "m122d76b9ee": "Session already exists. Connect without creation",
     "m2cdbcd559d": "Connection restored",
     "m9da159743e": "Create a new session",
-    "m6e6c42ad66": "{p0} · revision {p1} · {p2}"
+    "m6e6c42ad66": "{p0} · revision {p1} · {p2}",
+    "m2206bb2615": "The engine returned incorrect connection parameters"
   },
   "fr": {
     "m0c63e733f9": "Lua n'a pas renvoyé toutes les icônes",
@@ -2520,7 +2522,8 @@
     "m122d76b9ee": "La session existe déjà. Connectez-vous sans création",
     "m2cdbcd559d": "Connexion restaurée",
     "m9da159743e": "Créer une nouvelle session",
-    "m6e6c42ad66": "{p0} · révision {p1} · {p2}"
+    "m6e6c42ad66": "{p0} · révision {p1} · {p2}",
+    "m2206bb2615": "Le moteur a renvoyé des paramètres de connexion incorrects"
   },
   "de": {
     "m0c63e733f9": "Lua hat nicht alle Symbole zurückgegeben",
@@ -3361,7 +3364,8 @@
     "m122d76b9ee": "Sitzung existiert bereits. Verbinde dich ohne Schöpfung",
     "m2cdbcd559d": "Verbindung wiederhergestellt",
     "m9da159743e": "Erstellen Sie eine neue Sitzung",
-    "m6e6c42ad66": "{p0} · Revision {p1} · {p2}"
+    "m6e6c42ad66": "{p0} · Revision {p1} · {p2}",
+    "m2206bb2615": "Die Engine hat falsche Verbindungsparameter zurückgegeben"
   },
   "es": {
     "m0c63e733f9": "Lua no devolvió todos los íconos",
@@ -4202,7 +4206,8 @@
     "m122d76b9ee": "La sesión ya existe. Conéctate sin creación",
     "m2cdbcd559d": "Conexión restaurada",
     "m9da159743e": "Crear una nueva sesión",
-    "m6e6c42ad66": "{p0} · revisión {p1} · {p2}"
+    "m6e6c42ad66": "{p0} · revisión {p1} · {p2}",
+    "m2206bb2615": "El motor devolvió parámetros de conexión incorrectos"
   },
   "pt_BR": {
     "m0c63e733f9": "Lua não retornou todos os ícones",
@@ -5043,7 +5048,8 @@
     "m122d76b9ee": "A sessão já existe. Conecte-se sem criação",
     "m2cdbcd559d": "Conexão restaurada",
     "m9da159743e": "Crie uma nova sessão",
-    "m6e6c42ad66": "{p0} · revisão {p1} · {p2}"
+    "m6e6c42ad66": "{p0} · revisão {p1} · {p2}",
+    "m2206bb2615": "O mecanismo retornou parâmetros de conexão incorretos"
   },
   "ja": {
     "m0c63e733f9": "Lua はすべてのアイコンを返しませんでした",
@@ -5884,7 +5890,8 @@
     "m122d76b9ee": "セッションはすでに存在します。創造せずにつながる",
     "m2cdbcd559d": "接続が回復しました",
     "m9da159743e": "新しいセッションを作成する",
-    "m6e6c42ad66": "{p0} · リビジョン {p1} · {p2}"
+    "m6e6c42ad66": "{p0} · リビジョン {p1} · {p2}",
+    "m2206bb2615": "エンジンが間違った接続パラメータを返しました"
   },
   "ko": {
     "m0c63e733f9": "Lua이 모든 아이콘을 반환하지 않았습니다.",
@@ -6725,7 +6732,8 @@
     "m122d76b9ee": "세션이 이미 존재합니다. 생성하지 않고 연결",
     "m2cdbcd559d": "연결이 복원되었습니다.",
     "m9da159743e": "새 세션 만들기",
-    "m6e6c42ad66": "{p0} · 개정판 {p1} · {p2}"
+    "m6e6c42ad66": "{p0} · 개정판 {p1} · {p2}",
+    "m2206bb2615": "엔진이 잘못된 연결 매개변수를 반환했습니다."
   },
   "th": {
     "m0c63e733f9": "Lua ไม่ได้ส่งคืนไอคอนทั้งหมด",
@@ -7566,7 +7574,8 @@
     "m122d76b9ee": "มีเซสชันอยู่แล้ว เชื่อมต่อโดยไม่ต้องสร้าง",
     "m2cdbcd559d": "คืนการเชื่อมต่อแล้ว",
     "m9da159743e": "สร้างเซสชันใหม่",
-    "m6e6c42ad66": "{p0} · ฉบับแก้ไข {p1} · {p2}"
+    "m6e6c42ad66": "{p0} · ฉบับแก้ไข {p1} · {p2}",
+    "m2206bb2615": "โปรแกรมส่งคืนพารามิเตอร์การเชื่อมต่อที่ไม่ถูกต้อง"
   },
   "zh_Hant": {
     "m0c63e733f9": "Lua 未傳回所有圖標",
@@ -8407,6 +8416,7 @@
     "m122d76b9ee": "会话已存在。無需建立即可連接",
     "m2cdbcd559d": "连接已恢复",
     "m9da159743e": "创建一个新会话",
-    "m6e6c42ad66": "{p0} · 修訂版 {p1} · {p2}"
+    "m6e6c42ad66": "{p0} · 修訂版 {p1} · {p2}",
+    "m2206bb2615": "引擎回傳了錯誤的連接參數"
   }
 }

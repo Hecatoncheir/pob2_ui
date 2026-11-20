@@ -858,6 +858,11 @@
     "description": "Два компонента. Расчёты на вашем компьютере.",
     "placeholders": {}
   },
+  "m2206bb2615": "The engine returned incorrect connection parameters",
+  "@m2206bb2615": {
+    "description": "Движок вернул некорректные параметры подключения",
+    "placeholders": {}
+  },
   "mf68d71e67c": "The engine returned incompatible connection parameters",
   "@mf68d71e67c": {
     "description": "Движок вернул несовместимые параметры подключения",

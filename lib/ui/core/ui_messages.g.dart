@@ -296,6 +296,8 @@ final uiExactTranslations = <String, String Function(AppLocalizations)>{
   "Groups": (l) => l.mcd8c587351,
   "Два компонента. Расчёты на вашем компьютере.": (l) => l.ma755f360c2,
   "Two components. Calculations on your computer.": (l) => l.ma755f360c2,
+  "Движок вернул некорректные параметры подключения": (l) => l.m2206bb2615,
+  "The engine returned incorrect connection parameters": (l) => l.m2206bb2615,
   "Движок вернул несовместимые параметры подключения": (l) => l.mf68d71e67c,
   "The engine returned incompatible connection parameters": (l) =>
       l.mf68d71e67c,

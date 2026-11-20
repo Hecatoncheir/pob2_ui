@@ -518,6 +518,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get ma755f360c2 => 'Two components. Calculations on your computer.';
 
   @override
+  String get m2206bb2615 =>
+      'The engine returned incorrect connection parameters';
+
+  @override
   String get mf68d71e67c =>
       'The engine returned incompatible connection parameters';
 

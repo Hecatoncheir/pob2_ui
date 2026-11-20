@@ -1043,6 +1043,12 @@ abstract class AppLocalizations {
   /// **'Two components. Calculations on your computer.'**
   String get ma755f360c2;
 
+  /// Движок вернул некорректные параметры подключения
+  ///
+  /// In en, this message translates to:
+  /// **'The engine returned incorrect connection parameters'**
+  String get m2206bb2615;
+
   /// Движок вернул несовместимые параметры подключения
   ///
   /// In en, this message translates to:

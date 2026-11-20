@@ -508,6 +508,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get ma755f360c2 => '兩個組件。在您的計算機上進行計算。';
 
   @override
+  String get m2206bb2615 => '引擎回傳了錯誤的連接參數';
+
+  @override
   String get mf68d71e67c => '引擎返回不兼容的连接参数';
 
   @override
@@ -3205,6 +3208,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get ma755f360c2 => '兩個組件。在您的計算機上進行計算。';
+
+  @override
+  String get m2206bb2615 => '引擎回傳了錯誤的連接參數';
 
   @override
   String get mf68d71e67c => '引擎返回不兼容的连接参数';

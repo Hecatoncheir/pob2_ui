@@ -515,6 +515,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get ma755f360c2 => 'สองส่วนประกอบ การคำนวณบนคอมพิวเตอร์ของคุณ';
 
   @override
+  String get m2206bb2615 => 'โปรแกรมส่งคืนพารามิเตอร์การเชื่อมต่อที่ไม่ถูกต้อง';
+
+  @override
   String get mf68d71e67c =>
       'โปรแกรมส่งคืนพารามิเตอร์การเชื่อมต่อที่เข้ากันไม่ได้';
 

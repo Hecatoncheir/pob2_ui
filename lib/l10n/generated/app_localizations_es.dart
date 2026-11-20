@@ -527,6 +527,10 @@ class AppLocalizationsEs extends AppLocalizations {
   String get ma755f360c2 => 'Dos componentes. Cálculos en tu computadora.';
 
   @override
+  String get m2206bb2615 =>
+      'El motor devolvió parámetros de conexión incorrectos';
+
+  @override
   String get mf68d71e67c =>
       'El motor devolvió parámetros de conexión incompatibles';
 

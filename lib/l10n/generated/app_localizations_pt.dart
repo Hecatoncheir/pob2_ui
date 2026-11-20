@@ -521,6 +521,10 @@ class AppLocalizationsPt extends AppLocalizations {
   String get ma755f360c2 => 'Dois componentes. Cálculos no seu computador.';
 
   @override
+  String get m2206bb2615 =>
+      'O mecanismo retornou parâmetros de conexão incorretos';
+
+  @override
   String get mf68d71e67c =>
       'O mecanismo retornou parâmetros de conexão incompatíveis';
 
@@ -3308,6 +3312,10 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get ma755f360c2 => 'Dois componentes. Cálculos no seu computador.';
+
+  @override
+  String get m2206bb2615 =>
+      'O mecanismo retornou parâmetros de conexão incorretos';
 
   @override
   String get mf68d71e67c =>

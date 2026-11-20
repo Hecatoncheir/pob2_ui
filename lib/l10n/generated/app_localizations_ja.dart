@@ -510,6 +510,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get ma755f360c2 => '2 つのコンポーネント。コンピューター上での計算。';
 
   @override
+  String get m2206bb2615 => 'エンジンが間違った接続パラメータを返しました';
+
+  @override
   String get mf68d71e67c => 'エンジンが互換性のない接続パラメータを返しました';
 
   @override

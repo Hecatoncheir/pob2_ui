@@ -517,6 +517,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get ma755f360c2 => 'Два компонента. Расчёты на вашем компьютере.';
 
   @override
+  String get m2206bb2615 => 'Движок вернул некорректные параметры подключения';
+
+  @override
   String get mf68d71e67c => 'Движок вернул несовместимые параметры подключения';
 
   @override

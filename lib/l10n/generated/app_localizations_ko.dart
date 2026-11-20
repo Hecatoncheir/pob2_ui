@@ -510,6 +510,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get ma755f360c2 => '두 가지 구성요소. 컴퓨터에서의 계산.';
 
   @override
+  String get m2206bb2615 => '엔진이 잘못된 연결 매개변수를 반환했습니다.';
+
+  @override
   String get mf68d71e67c => '엔진이 호환되지 않는 연결 매개변수를 반환했습니다.';
 
   @override

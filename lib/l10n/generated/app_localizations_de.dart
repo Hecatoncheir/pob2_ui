@@ -535,6 +535,10 @@ class AppLocalizationsDe extends AppLocalizations {
       'Zwei Komponenten. Berechnungen auf Ihrem Computer.';
 
   @override
+  String get m2206bb2615 =>
+      'Die Engine hat falsche Verbindungsparameter zurückgegeben';
+
+  @override
   String get mf68d71e67c =>
       'Die Engine hat inkompatible Verbindungsparameter zurückgegeben';
 
