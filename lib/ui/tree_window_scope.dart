@@ -1,6 +1,29 @@
 import 'package:flutter/rendering.dart';
 import 'package:material_ui/material_ui.dart';
 
+Rect visibleTreeViewport(RenderBox viewport, RenderBox root) {
+  var visible = MatrixUtils.transformRect(
+    viewport.getTransformTo(root),
+    Offset.zero & viewport.size,
+  );
+  RenderObject child = viewport;
+  for (
+    var ancestor = viewport.parent;
+    ancestor != null;
+    ancestor = ancestor.parent
+  ) {
+    final clip = ancestor.describeApproximatePaintClip(child);
+    if (clip != null) {
+      visible = visible.intersect(
+        MatrixUtils.transformRect(ancestor.getTransformTo(root), clip),
+      );
+    }
+    if (ancestor == root) break;
+    child = ancestor;
+  }
+  return visible.intersect(Offset.zero & root.size);
+}
+
 class TreeWindowScope extends InheritedWidget {
   const TreeWindowScope({
     super.key,
@@ -48,6 +71,12 @@ class _ViewportObserver extends RenderProxyBox {
 
   @override
   bool hitTestSelf(Offset position) => true;
+
+  @override
+  void performLayout() {
+    super.performLayout();
+    onPaint(this);
+  }
 
   @override
   void paint(PaintingContext context, Offset offset) {

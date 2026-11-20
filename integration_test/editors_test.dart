@@ -337,7 +337,11 @@ Future<void> _allocateWarriorNode(
   await tester.enterText(find.byKey(const Key('tree-search')), '$id');
   await tester.testTextInput.receiveAction(TextInputAction.done);
   await tester.pumpAndSettle();
-  await _tapEditorAction(tester, model, find.byKey(const Key('passive-tree')));
+  await _tapEditorAction(
+    tester,
+    model,
+    find.byKey(const Key('tree-interaction-viewport')),
+  );
   expect(_warriorNodeAllocated(model, id), isTrue);
   expect(model.state.report!.stats['TotalDPS'], greaterThan(dps));
   await _tapEditorAction(tester, model, find.byKey(const Key('undo-build')));

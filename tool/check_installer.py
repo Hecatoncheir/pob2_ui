@@ -13,7 +13,7 @@ import xml.etree.ElementTree as ET
 
 from release import ROOT, dart_executable, filename, version
 
-PREVIOUS_VERSION = '0.11.0'
+PREVIOUS_VERSION = '0.12.0'
 FIXTURES = ROOT / 'integration_test/fixtures'
 
 

@@ -33,6 +33,7 @@ import 'package:pob2_ui/data/game_dictionary_repository.dart';
 import 'package:pob2_ui/domain/app_language.dart';
 import 'package:pob2_ui/ui/language_bloc.dart';
 import 'package:pob2_ui/ui/core/spark_art.dart';
+import 'package:pob2_ui/ui/core/tree_glass.dart';
 import 'package:pob2_ui/data/interface_scale_repository.dart';
 import 'package:pob2_ui/ui/interface_scale_bloc.dart';
 import 'package:pob2_ui/domain/tree_allocation_mode.dart';
@@ -46,6 +47,16 @@ class SelectedXmlFiles implements XmlFileDialogs {
   Future<String?> open() async => path;
   @override
   Future<String?> save(String suggestedName) async => path;
+}
+
+Finder get _treeViewport => find.byKey(const Key('tree-interaction-viewport'));
+
+Offset _treeCenter(WidgetTester tester) {
+  final viewport = tester.widget<TreeFrost>(find.byType(TreeFrost)).viewport!;
+  final canvas = tester.renderObject<RenderBox>(
+    find.byKey(const Key('passive-tree')),
+  );
+  return canvas.localToGlobal(viewport.center);
 }
 
 Duration get _workspaceTestLimit => switch (Platform.operatingSystem) {
@@ -604,11 +615,11 @@ Future<void> _reviewScale(WidgetTester tester, InterfaceScaleBloc scale) async {
   await tester.pump();
   await tester.testTextInput.receiveAction(TextInputAction.done);
   await tester.pumpAndSettle();
-  await tester.ensureVisible(find.byKey(const Key('passive-tree')));
+  await tester.ensureVisible(_treeViewport);
   await tester.pumpAndSettle();
   final mouse = await tester.createGesture(kind: ui.PointerDeviceKind.mouse);
   await mouse.addPointer(location: Offset.zero);
-  await mouse.moveTo(tester.getCenter(find.byKey(const Key('passive-tree'))));
+  await mouse.moveTo(_treeCenter(tester));
   await _waitForHover(tester);
   final tooltip = tester.getRect(find.byType(TreeHoverCard));
   final bounds = tester.getRect(find.byKey(const Key('review-image')));
@@ -646,7 +657,7 @@ Future<void> _switchTheme(WidgetTester tester) async {
   await _capture(tester, suffix: '-dark');
   final mouse = await tester.createGesture(kind: ui.PointerDeviceKind.mouse);
   await mouse.addPointer(location: Offset.zero);
-  await mouse.moveTo(tester.getCenter(find.byKey(const Key('passive-tree'))));
+  await mouse.moveTo(_treeCenter(tester));
   await _waitForHover(tester);
   await _capture(tester, suffix: '-dark-hover');
   await mouse.moveTo(const Offset(4, 4));
@@ -749,7 +760,7 @@ Future<void> _localizeTree(
   expect(painter.scene.nodes[painter.selected]!.name, 'Intelligence');
   final mouse = await tester.createGesture(kind: ui.PointerDeviceKind.mouse);
   await mouse.addPointer(location: Offset.zero);
-  await mouse.moveTo(tester.getCenter(find.byKey(const Key('passive-tree'))));
+  await mouse.moveTo(_treeCenter(tester));
   await _waitForHover(tester);
   expect(
     find.descendant(
@@ -818,7 +829,7 @@ Future<void> _selectAttribute(WidgetTester tester, WorkshopCubit model) async {
   expect(tester.widget<EditableText>(input).controller.text, '$target');
   await tester.testTextInput.receiveAction(TextInputAction.done);
   await tester.pumpAndSettle();
-  await tester.tapAt(tester.getCenter(find.byKey(const Key('passive-tree'))));
+  await tester.tapAt(_treeCenter(tester));
   for (
     var attempt = 0;
     attempt < 100 && find.byKey(const Key('attribute-2')).evaluate().isEmpty;
@@ -844,7 +855,7 @@ Future<void> _selectAttribute(WidgetTester tester, WorkshopCubit model) async {
   await tester.pumpAndSettle();
   final nodes = model.state.report!.raw['allocatedNodes'];
   final points = model.state.report!.points;
-  await tester.tapAt(tester.getCenter(find.byKey(const Key('passive-tree'))));
+  await tester.tapAt(_treeCenter(tester));
   await _waitForAttributePicker(tester);
   await tester.tap(find.byKey(const Key('attribute-3')));
   await tester.tap(find.text('Применить'));
@@ -857,7 +868,7 @@ Future<void> _selectAttribute(WidgetTester tester, WorkshopCubit model) async {
   expect(changed.name, 'Intelligence');
   expect(model.state.report!.raw['allocatedNodes'], nodes);
   expect(model.state.report!.points, points);
-  await tester.tapAt(tester.getCenter(find.byKey(const Key('passive-tree'))));
+  await tester.tapAt(_treeCenter(tester));
   await _waitForAttributePicker(tester);
   await tester.tap(find.text('Вернуть очко'));
   await _waitForIdle(tester, model);
@@ -943,10 +954,10 @@ Future<int> _allocateWeaponNode(
   await tester.pump();
   await tester.testTextInput.receiveAction(TextInputAction.done);
   await tester.pumpAndSettle();
-  final tree = find.byKey(const Key('passive-tree'));
+  final tree = _treeViewport;
   await tester.ensureVisible(tree);
   await tester.pumpAndSettle();
-  await tester.tapAt(tester.getCenter(tree));
+  await tester.tapAt(_treeCenter(tester));
   await _waitForIdle(tester, model);
   await tester.pumpAndSettle();
   await _capture(tester, suffix: '-weapon-${mode.luaValue}');
@@ -1008,8 +1019,7 @@ Future<void> _searchAndAllocate(
   await tester.enterText(find.byKey(const Key('tree-search')), '${node.id}');
   await tester.testTextInput.receiveAction(TextInputAction.done);
   await tester.pumpAndSettle();
-  final viewer = find.byKey(const Key('passive-tree'));
-  final center = tester.getCenter(viewer);
+  final center = _treeCenter(tester);
   final mouse = await tester.createGesture(kind: ui.PointerDeviceKind.mouse);
   await mouse.addPointer(location: Offset.zero);
   await mouse.moveTo(center);

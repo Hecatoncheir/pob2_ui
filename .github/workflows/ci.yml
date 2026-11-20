@@ -177,11 +177,11 @@ jobs:
         if: inputs.cold_install != true
         shell: bash
         run: dart run tool/check_languages.dart "$RUNNER_TEMP/pob2-lua-smoke"
-      - name: Скачать установщик v0.11.0 для проверки обновления
+      - name: Скачать установщик v0.12.0 для проверки обновления
         shell: bash
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh release download v0.11.0 --dir build/previous --pattern '*${{ matrix.target }}*'
+        run: gh release download v0.12.0 --dir build/previous --pattern '*${{ matrix.target }}*'
       - name: Проверить фактическое завершение через MCP
         if: inputs.cold_install != true
         shell: bash

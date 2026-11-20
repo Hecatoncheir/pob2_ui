@@ -75,6 +75,7 @@ class _TreeViewState extends State<TreeView>
   Size? viewport;
   final _windowKey = GlobalKey();
   Rect? _windowViewport;
+  RenderBox? _viewportBox;
   bool _viewportPending = false;
   late final zoomAnimation = AnimationController(vsync: this)
     ..addListener(_zoomFrame);
@@ -298,13 +299,17 @@ class _TreeViewState extends State<TreeView>
         if (widget.active) TreeFrost(viewport: _windowViewport),
         TreeInputHole(
           viewport: widget.active ? _windowViewport : null,
-          child: RepaintBoundary(child: widget.foreground!),
+          child: NotificationListener<ScrollNotification>(
+            onNotification: _treeScrolled,
+            child: RepaintBoundary(child: widget.foreground!),
+          ),
         ),
       ],
     ),
   );
 
   void _viewportPainted(RenderBox box) {
+    _viewportBox = box;
     if (_viewportPending || !widget.active) return;
     _viewportPending = true;
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -312,10 +317,15 @@ class _TreeViewState extends State<TreeView>
       if (!mounted || !box.attached) return;
       final root = _windowKey.currentContext?.findRenderObject() as RenderBox?;
       if (root == null) return;
-      final offset = box.localToGlobal(Offset.zero, ancestor: root);
-      final rect = (offset & box.size).intersect(Offset.zero & root.size);
+      final rect = visibleTreeViewport(box, root);
       if (!rect.isEmpty) _updateViewport(rect);
     });
+  }
+
+  bool _treeScrolled(ScrollNotification notification) {
+    final box = _viewportBox;
+    if (box != null) _viewportPainted(box);
+    return false;
   }
 
   void _updateViewport(Rect rect) {
