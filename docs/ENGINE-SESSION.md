@@ -45,3 +45,10 @@
 привязку. Для настоящих CLI/MCP задайте `POB2_ENGINE_TEST_EXECUTABLE` и выполните
 `flutter test test/engine_session_process_test.dart`. CI запускает процессный
 сценарий на Linux. Эти проверки подтверждают транспорт, а не игровые расчёты Go.
+
+Для сквозной проверки в нативном окне задайте `POB2_ENGINE_TEST_EXECUTABLE`
+и отдельный `POB2_UI_HOME` с установленной парой Lua PoB и MCP. Запустите
+`flutter test integration_test/engine_session_desktop_test.dart -d windows`.
+Тест открывает копию XML из набора примеров, подключает окно к общей сессии,
+проверяет применение имени из MCP в интерфейсе и библиотеке, а затем читает
+через MCP имя, изменённое пользователем в окне PoB II.

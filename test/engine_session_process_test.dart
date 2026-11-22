@@ -1,52 +1,12 @@
 import 'dart:async';
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:pob2_ui/data/engine_session_client.dart';
 import 'package:pob2_ui/domain/engine_session.dart';
 
+import 'support/engine_mcp_peer.dart';
 import 'support/temporary_directory.dart';
-
-class _McpPeer {
-  _McpPeer(this.process)
-    : lines = StreamIterator(
-        process.stdout.transform(utf8.decoder).transform(const LineSplitter()),
-      );
-  final Process process;
-  final StreamIterator<String> lines;
-  int nextId = 0;
-  bool closed = false;
-  Future<Map<String, dynamic>> request(
-    String method,
-    Map<String, dynamic> params,
-  ) async {
-    final id = ++nextId;
-    process.stdin.writeln(
-      jsonEncode({
-        'jsonrpc': '2.0',
-        'id': id,
-        'method': method,
-        'params': params,
-      }),
-    );
-    while (await lines.moveNext().timeout(const Duration(seconds: 5))) {
-      final json = jsonDecode(lines.current) as Map<String, dynamic>;
-      if (json['id'] != id) continue;
-      expect(json['error'], isNull);
-      return json['result'] as Map<String, dynamic>;
-    }
-    throw StateError('MCP закрыл stdout');
-  }
-
-  Future<void> close() async {
-    if (closed) return;
-    closed = true;
-    await process.stdin.close();
-    await process.exitCode.timeout(const Duration(seconds: 5));
-    await lines.cancel();
-  }
-}
 
 void main() {
   final executable = Platform.environment['POB2_ENGINE_TEST_EXECUTABLE'];
@@ -101,18 +61,9 @@ void main() {
         'main',
         ...args,
       ]);
-      final errors = process.stderr.listen((_) {});
-      addTearDown(errors.cancel);
-      final mcp = _McpPeer(process);
+      final mcp = EngineMcpPeer(process);
       addTearDown(mcp.close);
-      await mcp.request('initialize', {
-        'protocolVersion': '2025-11-25',
-        'capabilities': <String, dynamic>{},
-        'clientInfo': {'name': 'flutter-session-test', 'version': '1'},
-      });
-      process.stdin.writeln(
-        jsonEncode({'jsonrpc': '2.0', 'method': 'notifications/initialized'}),
-      );
+      await mcp.initialize();
       final command = {
         'name': 'rename_build',
         'arguments': {

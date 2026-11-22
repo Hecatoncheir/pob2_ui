@@ -265,28 +265,27 @@ Future<void> showXmlCopy(BuildContext context, WorkshopCubit model) async {
 }
 
 Future<void> renameBuild(BuildContext context, WorkshopCubit model) async {
-  final field = TextEditingController(
-    text: model.state.library.active?.title ?? model.state.report?.name,
-  );
+  var title =
+      model.state.library.active?.title ?? model.state.report?.name ?? '';
   final result = await sparkDialog<String>(
     context,
     AlertDialog(
       title: const AppText('Название сборки'),
-      content: TextField(
-        controller: field,
+      content: TextFormField(
+        initialValue: title,
         autofocus: true,
         maxLength: 80,
-        onSubmitted: (value) => Navigator.pop(context, value),
+        onChanged: (value) => title = value,
+        onFieldSubmitted: (value) => Navigator.pop(context, value),
       ),
       actions: [
         const DialogCloseButton(label: 'Отмена'),
         FilledButton(
-          onPressed: () => Navigator.pop(context, field.text),
+          onPressed: () => Navigator.pop(context, title),
           child: const AppText('Сохранить'),
         ),
       ],
     ),
   );
-  field.dispose();
   if (result != null) await model.renameBuild(result);
 }
