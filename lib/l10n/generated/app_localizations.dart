@@ -167,6 +167,12 @@ abstract class AppLocalizations {
   /// **'Hit DPS'**
   String get m9ec0f47b47;
 
+  /// DPS умения
+  ///
+  /// In en, this message translates to:
+  /// **'Skill DPS'**
+  String get mf5593e021c;
+
   /// Lua вернул не все иконки
   ///
   /// In en, this message translates to:
@@ -377,11 +383,23 @@ abstract class AppLocalizations {
   /// **'PoB found no path to this node'**
   String get m7610c788c5;
 
+  /// PoB не подтвердил совместимость поддержки
+  ///
+  /// In en, this message translates to:
+  /// **'PoB did not confirm support compatibility'**
+  String get m35a791a827;
+
   /// PoB не сообщил путь к папке сборок.
   ///
   /// In en, this message translates to:
   /// **'PoB did not return the builds folder path.'**
   String get m917bb579d9;
+
+  /// PoB подтвердил совместимость
+  ///
+  /// In en, this message translates to:
+  /// **'PoB confirmed compatibility'**
+  String get m4489788af8;
 
   /// PoB уже открыт без связи с мостом. Перезапустите его один раз.
   ///
@@ -995,6 +1013,12 @@ abstract class AppLocalizations {
   /// **'Off'**
   String get m20494f41ab;
 
+  /// Выполните предпросмотр для текущей ревизии
+  ///
+  /// In en, this message translates to:
+  /// **'Preview the current revision'**
+  String get mba092edc71;
+
   /// Выполняем операцию…
   ///
   /// In en, this message translates to:
@@ -1030,6 +1054,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Done'**
   String get mef05d57959;
+
+  /// Группа {p0}
+  ///
+  /// In en, this message translates to:
+  /// **'Group {p0}'**
+  String mbf5a9b9dee(String p0);
 
   /// Группа больше не существует
   ///
@@ -1090,6 +1120,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Action not available'**
   String get me3c3ea3a85;
+
+  /// Действий в секунду
+  ///
+  /// In en, this message translates to:
+  /// **'Actions per second'**
+  String get m062c95654b;
 
   /// Дерево
   ///
@@ -1205,6 +1241,12 @@ abstract class AppLocalizations {
   /// **'No calculation for this revision yet'**
   String get m4b77800e7b;
 
+  /// До добавления
+  ///
+  /// In en, this message translates to:
+  /// **'Before adding'**
+  String get mcd80d82ab1;
+
   /// До узла
   ///
   /// In en, this message translates to:
@@ -1234,6 +1276,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Add a key node'**
   String get me598ae02b1;
+
+  /// Добавить поддержку
+  ///
+  /// In en, this message translates to:
+  /// **'Add support'**
+  String get maf42afbd5f;
 
   /// Добавить предмет
   ///
@@ -1312,6 +1360,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'More'**
   String get m2071fb9905;
+
+  /// Жизнь
+  ///
+  /// In en, this message translates to:
+  /// **'Life'**
+  String get m399abce26a;
 
   /// Жизнь: {p0}
   ///
@@ -1667,6 +1721,12 @@ abstract class AppLocalizations {
   /// **'Gem enabled'**
   String get mfc105fdc07;
 
+  /// Камень поддержки
+  ///
+  /// In en, this message translates to:
+  /// **'Support gem'**
+  String get m49bbce4771;
+
   /// Камни не найдены
   ///
   /// In en, this message translates to:
@@ -1684,6 +1744,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Catalog'**
   String get md0ef3540b0;
+
+  /// Качество
+  ///
+  /// In en, this message translates to:
+  /// **'Quality'**
+  String get m43c6960012;
 
   /// Качество, %
   ///
@@ -1930,6 +1996,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Group name'**
   String get md45e66ab55;
+
+  /// Название или ID
+  ///
+  /// In en, this message translates to:
+  /// **'Name or ID'**
+  String get m8edeba72b2;
 
   /// Название сборки
   ///
@@ -2910,6 +2982,12 @@ abstract class AppLocalizations {
   /// **'Disable'**
   String get mbb5bdd176c;
 
+  /// Отключён
+  ///
+  /// In en, this message translates to:
+  /// **'Disabled'**
+  String get ma3fbed9442;
+
   /// Откройте персонажа на poe.ninja, нажмите Copy PoB code и вставьте код в PoB II.
   ///
   /// In en, this message translates to:
@@ -3264,6 +3342,12 @@ abstract class AppLocalizations {
   /// **'Windows x64, Linux x64 and macOS arm64 supported'**
   String get m52d7142d18;
 
+  /// Поддержки не найдены
+  ///
+  /// In en, this message translates to:
+  /// **'No support gems found'**
+  String get m8ba2618d75;
+
   /// Поддержки общие для умений этого слота
   ///
   /// In en, this message translates to:
@@ -3456,6 +3540,12 @@ abstract class AppLocalizations {
   /// **'Key node order'**
   String get mce98e63b90;
 
+  /// После добавления
+  ///
+  /// In en, this message translates to:
+  /// **'After adding'**
+  String get m8e807c5b72;
+
   /// Последняя: {p0}
   ///
   /// In en, this message translates to:
@@ -3539,6 +3629,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Items'**
   String get m10e4fefa12;
+
+  /// Предпросмотр
+  ///
+  /// In en, this message translates to:
+  /// **'Preview'**
+  String get m32060a34f5;
 
   /// Предпросмотр очистки профиля
   ///
@@ -3840,6 +3936,12 @@ abstract class AppLocalizations {
   /// **'Light Radius'**
   String get m9aaa2d503d;
 
+  /// Радиус, м
+  ///
+  /// In en, this message translates to:
+  /// **'Radius, m'**
+  String get mdd644df5f1;
+
   /// Развернуть панель
   ///
   /// In en, this message translates to:
@@ -3917,6 +4019,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Calculate paths'**
   String get m6fa4aff83a;
+
+  /// Расход маны
+  ///
+  /// In en, this message translates to:
+  /// **'Mana cost'**
+  String get m3307cc53d4;
 
   /// Расчёт Lua · {p0}%
   ///
@@ -4853,6 +4961,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Make the interface smaller'**
   String get m7eac5d04d3;
+
+  /// Ур. {p0} · {p1}%
+  ///
+  /// In en, this message translates to:
+  /// **'Lv. {p0} · {p1}%'**
+  String m39a93dd212(String p0, String p1);
 
   /// Уровень
   ///

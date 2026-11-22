@@ -38,6 +38,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m9ec0f47b47 => '히트 DPS';
 
   @override
+  String get mf5593e021c => '스킬 DPS';
+
+  @override
   String get m0c63e733f9 => 'Lua이 모든 아이콘을 반환하지 않았습니다.';
 
   @override
@@ -150,7 +153,13 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m7610c788c5 => 'PoB가 이 노드로 가는 경로를 찾지 못했습니다';
 
   @override
+  String get m35a791a827 => 'PoB가 보조 젬의 호환성을 확인하지 못했습니다';
+
+  @override
   String get m917bb579d9 => 'PoB가 어셈블리 폴더 경로를 보고하지 않았습니다.';
+
+  @override
+  String get m4489788af8 => 'PoB가 호환성을 확인했습니다';
 
   @override
   String get maaaf9e5923 => 'PoB가 브리지에 연결되지 않은 상태로 열려 있습니다. 한 번 다시 시작하세요.';
@@ -484,6 +493,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m20494f41ab => '끄기';
 
   @override
+  String get mba092edc71 => '현재 리비전을 미리 확인하세요';
+
+  @override
   String get m903bd09e68 => '작업을 수행하는 중...';
 
   @override
@@ -502,6 +514,11 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get mef05d57959 => '완료';
+
+  @override
+  String mbf5a9b9dee(String p0) {
+    return '그룹 $p0';
+  }
 
   @override
   String get m8eb6bbb41e => '그룹이 더 이상 존재하지 않습니다.';
@@ -532,6 +549,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get me3c3ea3a85 => '사용할 수 없는 작업';
+
+  @override
+  String get m062c95654b => '초당 행동 횟수';
 
   @override
   String get me1daa9e250 => '트리';
@@ -594,6 +614,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m4b77800e7b => '이 리비전의 계산 결과가 아직 없습니다';
 
   @override
+  String get mcd80d82ab1 => '추가 전';
+
+  @override
   String get m08afe540b9 => '노드로';
 
   @override
@@ -609,6 +632,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get me598ae02b1 => '핵심 노드 추가';
+
+  @override
+  String get maf42afbd5f => '보조 젬 추가';
 
   @override
   String get m9cef26392f => '아이템 추가';
@@ -654,6 +680,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m2071fb9905 => '더보기';
+
+  @override
+  String get m399abce26a => '생명력';
 
   @override
   String m2e046fa26a(String p0) {
@@ -850,6 +879,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get mfc105fdc07 => 'Gem 활성화됨';
 
   @override
+  String get m49bbce4771 => '보조 젬';
+
+  @override
   String get m05b721e615 => '돌이 발견되지 않았습니다';
 
   @override
@@ -857,6 +889,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get md0ef3540b0 => '카탈로그';
+
+  @override
+  String get m43c6960012 => '퀄리티';
 
   @override
   String get m74189f93c7 => '품질, %';
@@ -982,6 +1017,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get md45e66ab55 => '그룹 이름';
+
+  @override
+  String get m8edeba72b2 => '이름 또는 ID';
 
   @override
   String get m51233393a5 => '빌드 이름';
@@ -1529,6 +1567,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get mbb5bdd176c => '비활성화';
 
   @override
+  String get ma3fbed9442 => '비활성화';
+
+  @override
   String get m654046a00d =>
       'poe.ninja에서 캐릭터를 열고 Copy PoB code를 선택한 다음 PoB II에 코드를 붙여넣으세요.';
 
@@ -1717,6 +1758,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m52d7142d18 => 'Windows x64, Linux x64, macOS arm64 지원';
 
   @override
+  String get m8ba2618d75 => '보조 젬을 찾을 수 없습니다';
+
+  @override
   String get mc2fd54cfce => '이 장비 슬롯의 스킬은 보조 젬을 공유합니다';
 
   @override
@@ -1813,6 +1857,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get mce98e63b90 => '핵심 노드 순서';
 
   @override
+  String get m8e807c5b72 => '추가 후';
+
+  @override
   String m032a431609(String p0) {
     return '마지막: $p0';
   }
@@ -1859,6 +1906,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m10e4fefa12 => '아이템';
+
+  @override
+  String get m32060a34f5 => '미리 보기';
 
   @override
   String get mad582b726d => '프로필 정리 미리보기';
@@ -2027,6 +2077,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m9aaa2d503d => '빛의 반경';
 
   @override
+  String get mdd644df5f1 => '반경, m';
+
+  @override
   String get mf66e719066 => '패널 확장';
 
   @override
@@ -2066,6 +2119,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m6fa4aff83a => '경로 계산';
+
+  @override
+  String get m3307cc53d4 => '마나 소모';
 
   @override
   String m33a38de9ff(String p0) {
@@ -2555,6 +2611,11 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m7eac5d04d3 => '인터페이스를 더 작게 만드세요';
+
+  @override
+  String m39a93dd212(String p0, String p1) {
+    return '레벨 $p0 · $p1%';
+  }
 
   @override
   String get m7f67af3d6c => '레벨';

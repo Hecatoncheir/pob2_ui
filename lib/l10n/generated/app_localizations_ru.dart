@@ -38,6 +38,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m9ec0f47b47 => 'DPS ударов';
 
   @override
+  String get mf5593e021c => 'DPS умения';
+
+  @override
   String get m0c63e733f9 => 'Lua вернул не все иконки';
 
   @override
@@ -153,7 +156,13 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m7610c788c5 => 'PoB не нашёл путь к узлу';
 
   @override
+  String get m35a791a827 => 'PoB не подтвердил совместимость поддержки';
+
+  @override
   String get m917bb579d9 => 'PoB не сообщил путь к папке сборок.';
+
+  @override
+  String get m4489788af8 => 'PoB подтвердил совместимость';
 
   @override
   String get maaaf9e5923 =>
@@ -491,6 +500,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m20494f41ab => 'Выключено';
 
   @override
+  String get mba092edc71 => 'Выполните предпросмотр для текущей ревизии';
+
+  @override
   String get m903bd09e68 => 'Выполняем операцию…';
 
   @override
@@ -509,6 +521,11 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get mef05d57959 => 'Готово';
+
+  @override
+  String mbf5a9b9dee(String p0) {
+    return 'Группа $p0';
+  }
 
   @override
   String get m8eb6bbb41e => 'Группа больше не существует';
@@ -539,6 +556,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get me3c3ea3a85 => 'Действие недоступно';
+
+  @override
+  String get m062c95654b => 'Действий в секунду';
 
   @override
   String get me1daa9e250 => 'Дерево';
@@ -606,6 +626,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m4b77800e7b => 'Для этой ревизии расчёта ещё нет';
 
   @override
+  String get mcd80d82ab1 => 'До добавления';
+
+  @override
   String get m08afe540b9 => 'До узла';
 
   @override
@@ -621,6 +644,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get me598ae02b1 => 'Добавить ключевой узел';
+
+  @override
+  String get maf42afbd5f => 'Добавить поддержку';
 
   @override
   String get m9cef26392f => 'Добавить предмет';
@@ -668,6 +694,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get m2071fb9905 => 'Ещё';
+
+  @override
+  String get m399abce26a => 'Жизнь';
 
   @override
   String m2e046fa26a(String p0) {
@@ -868,6 +897,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get mfc105fdc07 => 'Камень включён';
 
   @override
+  String get m49bbce4771 => 'Камень поддержки';
+
+  @override
   String get m05b721e615 => 'Камни не найдены';
 
   @override
@@ -875,6 +907,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get md0ef3540b0 => 'Каталог';
+
+  @override
+  String get m43c6960012 => 'Качество';
 
   @override
   String get m74189f93c7 => 'Качество, %';
@@ -1002,6 +1037,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get md45e66ab55 => 'Название группы';
+
+  @override
+  String get m8edeba72b2 => 'Название или ID';
 
   @override
   String get m51233393a5 => 'Название сборки';
@@ -1555,6 +1593,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get mbb5bdd176c => 'Отключить';
 
   @override
+  String get ma3fbed9442 => 'Отключён';
+
+  @override
   String get m654046a00d =>
       'Откройте персонажа на poe.ninja, нажмите Copy PoB code и вставьте код в PoB II.';
 
@@ -1747,6 +1788,9 @@ class AppLocalizationsRu extends AppLocalizations {
       'Поддерживаются Windows x64, Linux x64 и macOS arm64';
 
   @override
+  String get m8ba2618d75 => 'Поддержки не найдены';
+
+  @override
   String get mc2fd54cfce => 'Поддержки общие для умений этого слота';
 
   @override
@@ -1843,6 +1887,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get mce98e63b90 => 'Порядок ключевых узлов';
 
   @override
+  String get m8e807c5b72 => 'После добавления';
+
+  @override
   String m032a431609(String p0) {
     return 'Последняя: $p0';
   }
@@ -1889,6 +1936,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get m10e4fefa12 => 'Предметы';
+
+  @override
+  String get m32060a34f5 => 'Предпросмотр';
 
   @override
   String get mad582b726d => 'Предпросмотр очистки профиля';
@@ -2060,6 +2110,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m9aaa2d503d => 'Радиус освещения';
 
   @override
+  String get mdd644df5f1 => 'Радиус, м';
+
+  @override
   String get mf66e719066 => 'Развернуть панель';
 
   @override
@@ -2099,6 +2152,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get m6fa4aff83a => 'Рассчитать пути';
+
+  @override
+  String get m3307cc53d4 => 'Расход маны';
 
   @override
   String m33a38de9ff(String p0) {
@@ -2601,6 +2657,11 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get m7eac5d04d3 => 'Уменьшить интерфейс';
+
+  @override
+  String m39a93dd212(String p0, String p1) {
+    return 'Ур. $p0 · $p1%';
+  }
 
   @override
   String get m7f67af3d6c => 'Уровень';

@@ -37,6 +37,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m9ec0f47b47 => '點選 DPS';
 
   @override
+  String get mf5593e021c => '技能 DPS';
+
+  @override
   String get m0c63e733f9 => 'Lua 未傳回所有圖標';
 
   @override
@@ -148,7 +151,13 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m7610c788c5 => 'PoB 找不到通往此天賦節點的路徑';
 
   @override
+  String get m35a791a827 => 'PoB 未確認輔助寶石的相容性';
+
+  @override
   String get m917bb579d9 => 'PoB 未報告組件資料夾的路徑。';
+
+  @override
+  String get m4489788af8 => 'PoB 已確認相容性';
 
   @override
   String get maaaf9e5923 => 'PoB 已開啟，但尚未連接橋接器。請重新啟動一次。';
@@ -482,6 +491,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m20494f41ab => '關閉';
 
   @override
+  String get mba092edc71 => '請預覽目前的修訂';
+
+  @override
   String get m903bd09e68 => '正在執行操作...';
 
   @override
@@ -500,6 +512,11 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get mef05d57959 => '完成';
+
+  @override
+  String mbf5a9b9dee(String p0) {
+    return '群組 $p0';
+  }
 
   @override
   String get m8eb6bbb41e => '該組不再存在';
@@ -530,6 +547,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get me3c3ea3a85 => '操作不可用';
+
+  @override
+  String get m062c95654b => '每秒動作次數';
 
   @override
   String get me1daa9e250 => '天賦樹';
@@ -591,6 +611,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m4b77800e7b => '此修訂尚無計算結果';
 
   @override
+  String get mcd80d82ab1 => '加入前';
+
+  @override
   String get m08afe540b9 => '到節點';
 
   @override
@@ -606,6 +629,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get me598ae02b1 => '新增關鍵天賦節點';
+
+  @override
+  String get maf42afbd5f => '加入輔助寶石';
 
   @override
   String get m9cef26392f => '新增物品';
@@ -651,6 +677,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m2071fb9905 => '更多';
+
+  @override
+  String get m399abce26a => '生命';
 
   @override
   String m2e046fa26a(String p0) {
@@ -846,6 +875,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get mfc105fdc07 => '啟用 Gem';
 
   @override
+  String get m49bbce4771 => '輔助寶石';
+
+  @override
   String get m05b721e615 => '沒有找到石頭';
 
   @override
@@ -853,6 +885,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get md0ef3540b0 => '目錄';
+
+  @override
+  String get m43c6960012 => '品質';
 
   @override
   String get m74189f93c7 => '質量，%';
@@ -978,6 +1013,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get md45e66ab55 => '群組名稱';
+
+  @override
+  String get m8edeba72b2 => '名稱或 ID';
 
   @override
   String get m51233393a5 => '配置名稱';
@@ -1523,6 +1561,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get mbb5bdd176c => '停用';
 
   @override
+  String get ma3fbed9442 => '已停用';
+
+  @override
   String get m654046a00d => '在 poe.ninja 開啟角色，點選 Copy PoB code，再將代碼貼到 PoB II。';
 
   @override
@@ -1710,6 +1751,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m52d7142d18 => '支援 Windows x64、Linux x64 和 macOS arm64';
 
   @override
+  String get m8ba2618d75 => '找不到輔助寶石';
+
+  @override
   String get mc2fd54cfce => '此裝備欄位的技能共用輔助寶石';
 
   @override
@@ -1806,6 +1850,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get mce98e63b90 => '關鍵天賦節點順序';
 
   @override
+  String get m8e807c5b72 => '加入後';
+
+  @override
   String m032a431609(String p0) {
     return '最後：$p0';
   }
@@ -1852,6 +1899,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m10e4fefa12 => '物品';
+
+  @override
+  String get m32060a34f5 => '預覽';
 
   @override
   String get mad582b726d => '輪廓清理預覽';
@@ -2020,6 +2070,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m9aaa2d503d => '光半徑';
 
   @override
+  String get mdd644df5f1 => '半徑（公尺）';
+
+  @override
   String get mf66e719066 => '展開面板';
 
   @override
@@ -2059,6 +2112,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m6fa4aff83a => '計算路徑';
+
+  @override
+  String get m3307cc53d4 => '魔力消耗';
 
   @override
   String m33a38de9ff(String p0) {
@@ -2545,6 +2601,11 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m7eac5d04d3 => '使介面更小';
+
+  @override
+  String m39a93dd212(String p0, String p1) {
+    return '等級 $p0 · $p1%';
+  }
 
   @override
   String get m7f67af3d6c => '等級';
@@ -2796,6 +2857,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m9ec0f47b47 => '點選 DPS';
 
   @override
+  String get mf5593e021c => '技能 DPS';
+
+  @override
   String get m0c63e733f9 => 'Lua 未傳回所有圖標';
 
   @override
@@ -2907,7 +2971,13 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m7610c788c5 => 'PoB 找不到通往此天賦節點的路徑';
 
   @override
+  String get m35a791a827 => 'PoB 未確認輔助寶石的相容性';
+
+  @override
   String get m917bb579d9 => 'PoB 未報告組件資料夾的路徑。';
+
+  @override
+  String get m4489788af8 => 'PoB 已確認相容性';
 
   @override
   String get maaaf9e5923 => 'PoB 已開啟，但尚未連接橋接器。請重新啟動一次。';
@@ -3241,6 +3311,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m20494f41ab => '關閉';
 
   @override
+  String get mba092edc71 => '請預覽目前的修訂';
+
+  @override
   String get m903bd09e68 => '正在執行操作...';
 
   @override
@@ -3259,6 +3332,11 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get mef05d57959 => '完成';
+
+  @override
+  String mbf5a9b9dee(String p0) {
+    return '群組 $p0';
+  }
 
   @override
   String get m8eb6bbb41e => '該組不再存在';
@@ -3289,6 +3367,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get me3c3ea3a85 => '操作不可用';
+
+  @override
+  String get m062c95654b => '每秒動作次數';
 
   @override
   String get me1daa9e250 => '天賦樹';
@@ -3350,6 +3431,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m4b77800e7b => '此修訂尚無計算結果';
 
   @override
+  String get mcd80d82ab1 => '加入前';
+
+  @override
   String get m08afe540b9 => '到節點';
 
   @override
@@ -3365,6 +3449,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get me598ae02b1 => '新增關鍵天賦節點';
+
+  @override
+  String get maf42afbd5f => '加入輔助寶石';
 
   @override
   String get m9cef26392f => '新增物品';
@@ -3410,6 +3497,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m2071fb9905 => '更多';
+
+  @override
+  String get m399abce26a => '生命';
 
   @override
   String m2e046fa26a(String p0) {
@@ -3605,6 +3695,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get mfc105fdc07 => '啟用 Gem';
 
   @override
+  String get m49bbce4771 => '輔助寶石';
+
+  @override
   String get m05b721e615 => '沒有找到石頭';
 
   @override
@@ -3612,6 +3705,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get md0ef3540b0 => '目錄';
+
+  @override
+  String get m43c6960012 => '品質';
 
   @override
   String get m74189f93c7 => '質量，%';
@@ -3737,6 +3833,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get md45e66ab55 => '群組名稱';
+
+  @override
+  String get m8edeba72b2 => '名稱或 ID';
 
   @override
   String get m51233393a5 => '配置名稱';
@@ -4282,6 +4381,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get mbb5bdd176c => '停用';
 
   @override
+  String get ma3fbed9442 => '已停用';
+
+  @override
   String get m654046a00d => '在 poe.ninja 開啟角色，點選 Copy PoB code，再將代碼貼到 PoB II。';
 
   @override
@@ -4469,6 +4571,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m52d7142d18 => '支援 Windows x64、Linux x64 和 macOS arm64';
 
   @override
+  String get m8ba2618d75 => '找不到輔助寶石';
+
+  @override
   String get mc2fd54cfce => '此裝備欄位的技能共用輔助寶石';
 
   @override
@@ -4565,6 +4670,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get mce98e63b90 => '關鍵天賦節點順序';
 
   @override
+  String get m8e807c5b72 => '加入後';
+
+  @override
   String m032a431609(String p0) {
     return '最後：$p0';
   }
@@ -4611,6 +4719,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m10e4fefa12 => '物品';
+
+  @override
+  String get m32060a34f5 => '預覽';
 
   @override
   String get mad582b726d => '輪廓清理預覽';
@@ -4779,6 +4890,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m9aaa2d503d => '光半徑';
 
   @override
+  String get mdd644df5f1 => '半徑（公尺）';
+
+  @override
   String get mf66e719066 => '展開面板';
 
   @override
@@ -4818,6 +4932,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m6fa4aff83a => '計算路徑';
+
+  @override
+  String get m3307cc53d4 => '魔力消耗';
 
   @override
   String m33a38de9ff(String p0) {
@@ -5304,6 +5421,11 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m7eac5d04d3 => '使介面更小';
+
+  @override
+  String m39a93dd212(String p0, String p1) {
+    return '等級 $p0 · $p1%';
+  }
 
   @override
   String get m7f67af3d6c => '等級';

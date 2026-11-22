@@ -38,6 +38,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m9ec0f47b47 => 'DPS をヒットします';
 
   @override
+  String get mf5593e021c => 'スキルDPS';
+
+  @override
   String get m0c63e733f9 => 'Lua はすべてのアイコンを返しませんでした';
 
   @override
@@ -150,7 +153,13 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m7610c788c5 => 'PoB がこのノードへの経路を見つけられませんでした';
 
   @override
+  String get m35a791a827 => 'PoB はサポートの互換性を確認できませんでした';
+
+  @override
   String get m917bb579d9 => 'PoB はアセンブリ フォルダーへのパスを報告しませんでした。';
+
+  @override
+  String get m4489788af8 => 'PoB が互換性を確認しました';
 
   @override
   String get maaaf9e5923 => 'PoB がブリッジに接続せずに起動しています。一度再起動してください。';
@@ -484,6 +493,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m20494f41ab => 'Off';
 
   @override
+  String get mba092edc71 => '現在のリビジョンをプレビューしてください';
+
+  @override
   String get m903bd09e68 => '操作を実行しています...';
 
   @override
@@ -502,6 +514,11 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get mef05d57959 => 'Done';
+
+  @override
+  String mbf5a9b9dee(String p0) {
+    return 'グループ $p0';
+  }
 
   @override
   String get m8eb6bbb41e => 'グループはもう存在しません';
@@ -532,6 +549,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get me3c3ea3a85 => 'Action not available';
+
+  @override
+  String get m062c95654b => '1秒あたりのアクション数';
 
   @override
   String get me1daa9e250 => 'ツリー';
@@ -594,6 +614,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m4b77800e7b => 'このリビジョンはまだ計算されていません';
 
   @override
+  String get mcd80d82ab1 => '追加前';
+
+  @override
   String get m08afe540b9 => 'ノードへ';
 
   @override
@@ -609,6 +632,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get me598ae02b1 => '重要なノードを追加';
+
+  @override
+  String get maf42afbd5f => 'サポートを追加';
 
   @override
   String get m9cef26392f => 'アイテムを追加';
@@ -654,6 +680,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m2071fb9905 => '詳細';
+
+  @override
+  String get m399abce26a => 'ライフ';
 
   @override
   String m2e046fa26a(String p0) {
@@ -850,6 +879,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get mfc105fdc07 => 'ジェムが有効になりました';
 
   @override
+  String get m49bbce4771 => 'サポートジェム';
+
+  @override
   String get m05b721e615 => '石が見つかりませんでした';
 
   @override
@@ -857,6 +889,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get md0ef3540b0 => 'カタログ';
+
+  @override
+  String get m43c6960012 => '品質';
 
   @override
   String get m74189f93c7 => '品質、%';
@@ -982,6 +1017,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get md45e66ab55 => 'グループ名';
+
+  @override
+  String get m8edeba72b2 => '名前またはID';
 
   @override
   String get m51233393a5 => 'ビルド名';
@@ -1529,6 +1567,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get mbb5bdd176c => '無効にする';
 
   @override
+  String get ma3fbed9442 => '無効';
+
+  @override
   String get m654046a00d =>
       'poe.ninja でキャラクターを開き、Copy PoB code を選択して、PoB II にコードを貼り付けてください。';
 
@@ -1717,6 +1758,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m52d7142d18 => 'Windows x64、Linux x64、および macOS arm64 をサポート';
 
   @override
+  String get m8ba2618d75 => 'サポートジェムが見つかりません';
+
+  @override
   String get mc2fd54cfce => 'この装備スロットのスキルはサポートを共有します';
 
   @override
@@ -1813,6 +1857,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get mce98e63b90 => '重要なノードの順序';
 
   @override
+  String get m8e807c5b72 => '追加後';
+
+  @override
   String m032a431609(String p0) {
     return '最後: $p0\n【m51d2753a44】ベルト';
   }
@@ -1859,6 +1906,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m10e4fefa12 => 'アイテム';
+
+  @override
+  String get m32060a34f5 => 'プレビュー';
 
   @override
   String get mad582b726d => 'プロファイルのクリーニングのプレビュー';
@@ -2027,6 +2077,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m9aaa2d503d => 'ライト半径';
 
   @override
+  String get mdd644df5f1 => '半径、m';
+
+  @override
   String get mf66e719066 => 'パネルを展開します';
 
   @override
@@ -2066,6 +2119,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m6fa4aff83a => 'パスを計算する';
+
+  @override
+  String get m3307cc53d4 => 'マナコスト';
 
   @override
   String m33a38de9ff(String p0) {
@@ -2555,6 +2611,11 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m7eac5d04d3 => 'インターフェースを小さくする';
+
+  @override
+  String m39a93dd212(String p0, String p1) {
+    return 'Lv. $p0 · $p1%';
+  }
 
   @override
   String get m7f67af3d6c => 'レベル';

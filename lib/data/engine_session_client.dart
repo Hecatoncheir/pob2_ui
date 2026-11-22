@@ -6,6 +6,7 @@ import 'dart:math';
 import 'package:fixnum/fixnum.dart';
 import 'package:grpc/grpc.dart';
 import 'package:pob2_engine_api/pob2/v1/build.pb.dart' as builds;
+import 'package:pob2_engine_api/pob2/v1/catalog.pb.dart' as catalog;
 import 'package:pob2_engine_api/pob2/v1/session.pbgrpc.dart' as pb;
 
 import '../domain/engine_session.dart';
@@ -24,6 +25,17 @@ abstract interface class EngineConnection {
     String requestId,
   );
   Future<void> setLevel(EngineSnapshot current, int level, String requestId);
+  bool get supportsAddSupport;
+  Future<EngineSupportPage> findSupports(String query, int offset);
+  Future<EngineSupportPreview> previewSupport(
+    EngineSnapshot current,
+    EngineSupportSelection selection,
+  );
+  Future<void> addSupport(
+    EngineSnapshot current,
+    EngineSupportSelection selection,
+    String requestId,
+  );
   Future<void> calculate(EngineSnapshot current, String requestId);
   Stream<EngineChange> watch(String sessionId, int afterRevision);
   Future<void> close();
@@ -45,12 +57,15 @@ class EngineSessionClient implements EngineConnection {
     this._errors,
     this._channel,
     this._rpc,
+    this.supportsAddSupport,
   );
   final Process _helper;
   final StreamSubscription<String> _output;
   final StreamSubscription<List<int>> _errors;
   final ClientChannel _channel;
   final pb.SessionServiceClient _rpc;
+  @override
+  final bool supportsAddSupport;
   bool _closed = false;
 
   static Future<EngineConnection> open(EngineOptions options) async {
@@ -117,7 +132,14 @@ class EngineSessionClient implements EngineConnection {
         options: CallOptions(timeout: const Duration(seconds: 5)),
       );
       _validateServer(info, credentials.instance);
-      return EngineSessionClient._(helper, output, errors, channel, rpc);
+      return EngineSessionClient._(
+        helper,
+        output,
+        errors,
+        channel,
+        rpc,
+        info.capabilities.contains('build.add_support'),
+      );
     } catch (_) {
       await channel?.terminate();
       helper.kill();
@@ -197,6 +219,28 @@ class EngineSessionClient implements EngineConnection {
       xml: value.xml,
       level: value.model.level,
       calculation: calculation,
+      group: _selectedGroup(value.model),
+    );
+  }
+
+  static EngineSkillGroup? _selectedGroup(builds.BuildModel model) {
+    final group = model.groups
+        .where((group) => group.id == model.mainGroup)
+        .firstOrNull;
+    if (group == null) return null;
+    return (
+      id: group.id,
+      label: group.label,
+      gems: List.unmodifiable(
+        group.gems.map(
+          (gem) => (
+            name: gem.name.isEmpty ? gem.skillId : gem.name,
+            level: gem.level,
+            quality: gem.quality,
+            enabled: gem.enabled,
+          ),
+        ),
+      ),
     );
   }
 
@@ -211,6 +255,7 @@ class EngineSessionClient implements EngineConnection {
           _ => 'Неизвестный статус',
         },
         life: value.stats['Life'],
+        dps: value.stats['TotalDPS'],
         warnings: List.unmodifiable(value.issues.map((issue) => issue.message)),
       );
   CallOptions get _timeout => CallOptions(timeout: const Duration(seconds: 5));
@@ -255,9 +300,95 @@ class EngineSessionClient implements EngineConnection {
   );
 
   @override
-  Future<void> setLevel(
+  Future<void> setLevel(EngineSnapshot current, int level, String requestId) =>
+      _applyEdit(
+        current,
+        builds.BuildEdit(level: builds.LevelEdit(level: level)),
+        requestId,
+      );
+
+  @override
+  Future<EngineSupportPage> findSupports(String query, int offset) async {
+    final page = await _rpc.getCatalog(
+      catalog.GetCatalogRequest(
+        kind: 'gems',
+        query: query,
+        limit: 40,
+        offset: offset,
+      ),
+      options: _timeout,
+    );
+    final next = page.offset + page.limit;
+    return (
+      entries: List<EngineSupportOption>.unmodifiable(
+        page.entries
+            .where((entry) => entry.support)
+            .map(
+              (entry) => (
+                id: entry.id,
+                name: entry.name,
+                levels: List<int>.unmodifiable(entry.levels),
+                qualities: List<int>.unmodifiable(entry.qualities),
+              ),
+            ),
+      ),
+      nextOffset: next < page.total && next <= 10000 ? next : null,
+    );
+  }
+
+  @override
+  Future<EngineSupportPreview> previewSupport(
     EngineSnapshot current,
-    int level,
+    EngineSupportSelection selection,
+  ) async {
+    final preview = await _rpc.previewSupport(
+      catalog.PreviewSupportRequest(
+        sessionId: current.sessionId,
+        expectedRevision: Int64(current.revision),
+        supportId: selection.id,
+        level: selection.level,
+        quality: selection.quality,
+      ),
+      options: _calculationTimeout,
+    );
+    return EngineSupportPreview(
+      revision: preview.revision.toInt(),
+      compatible: preview.compatible,
+      before: _calculation(preview.comparison.before),
+      after: _calculation(preview.comparison.after),
+      deltas: List.unmodifiable(
+        preview.comparison.deltas.map(
+          (delta) => (
+            name: delta.stat,
+            before: delta.before,
+            after: delta.after,
+            difference: delta.difference,
+          ),
+        ),
+      ),
+    );
+  }
+
+  @override
+  Future<void> addSupport(
+    EngineSnapshot current,
+    EngineSupportSelection selection,
+    String requestId,
+  ) => _applyEdit(
+    current,
+    builds.BuildEdit(
+      addSupport: builds.AddSupportEdit(
+        supportId: selection.id,
+        level: selection.level,
+        quality: selection.quality,
+      ),
+    ),
+    requestId,
+  );
+
+  Future<void> _applyEdit(
+    EngineSnapshot current,
+    builds.BuildEdit edit,
     String requestId,
   ) async {
     await _rpc.applyBuild(
@@ -265,11 +396,14 @@ class EngineSessionClient implements EngineConnection {
         sessionId: current.sessionId,
         expectedRevision: Int64(current.revision),
         requestId: requestId,
-        edit: builds.BuildEdit(level: builds.LevelEdit(level: level)),
+        edit: edit,
       ),
       options: _timeout,
     );
   }
+
+  CallOptions get _calculationTimeout =>
+      CallOptions(timeout: const Duration(seconds: 90));
 
   @override
   Future<void> calculate(EngineSnapshot current, String requestId) async {
@@ -280,7 +414,7 @@ class EngineSessionClient implements EngineConnection {
             expectedRevision: Int64(current.revision),
             requestId: requestId,
           ),
-          options: CallOptions(timeout: const Duration(seconds: 90)),
+          options: _calculationTimeout,
         )
         .where((answer) => answer.hasSnapshot())
         .single;

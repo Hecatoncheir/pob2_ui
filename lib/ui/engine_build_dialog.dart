@@ -6,6 +6,7 @@ import 'core/app_text.dart';
 import 'core/dialog_close_button.dart';
 import 'core/motion.dart';
 import 'engine_session_cubit.dart';
+import 'engine_support_dialog.dart';
 import 'workshop_cubit.dart';
 
 Future<void> showEngineBuild(BuildContext context, WorkshopCubit model) =>
@@ -94,6 +95,7 @@ class _EngineBuildDialogState extends State<_EngineBuildDialog> {
                 'Уровень персонажа: ${build.level}',
                 key: const Key('engine-build-level'),
               ),
+              if (build.group case final group?) _EngineBuildGroup(group),
               const SizedBox(height: 12),
               _EngineBuildResult(build.calculation),
               if (!state.connected) AppText(state.message, localize: false),
@@ -115,6 +117,14 @@ class _EngineBuildDialogState extends State<_EngineBuildDialog> {
           onPressed: canChange ? () => _editLevel(snapshot, build.level) : null,
           child: const AppText('Изменить уровень'),
         ),
+        if (_session.supportsAddSupport && build.group != null)
+          TextButton(
+            key: const Key('engine-open-support'),
+            onPressed: canChange
+                ? () => showEngineSupport(context, _session)
+                : null,
+            child: const AppText('Добавить поддержку'),
+          ),
         FilledButton(
           key: const Key('engine-calculate'),
           onPressed: canChange
@@ -125,6 +135,30 @@ class _EngineBuildDialogState extends State<_EngineBuildDialog> {
       ],
     );
   }
+}
+
+class _EngineBuildGroup extends StatelessWidget {
+  const _EngineBuildGroup(this.group);
+  final EngineSkillGroup group;
+
+  @override
+  Widget build(BuildContext context) => Column(
+    key: const Key('engine-build-gems'),
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      const SizedBox(height: 12),
+      AppText(group.label.isEmpty ? 'Группа ${group.id}' : group.label),
+      for (final gem in group.gems)
+        Wrap(
+          spacing: 6,
+          children: [
+            AppText(gem.name, game: true),
+            AppText('Ур. ${gem.level} · ${gem.quality}%'),
+            if (!gem.enabled) const AppText('Отключён'),
+          ],
+        ),
+    ],
+  );
 }
 
 class _EngineBuildResult extends StatelessWidget {
@@ -146,6 +180,11 @@ class _EngineBuildResult extends StatelessWidget {
           AppText(
             'Жизнь: ${life.toStringAsFixed(0)}',
             key: const Key('engine-build-life'),
+          ),
+        if (calculation.dps case final dps?)
+          AppText(
+            'DPS: ${dps.toStringAsFixed(2)}',
+            key: const Key('engine-build-dps'),
           ),
         for (final warning in calculation.warnings)
           AppText(warning, localize: false),

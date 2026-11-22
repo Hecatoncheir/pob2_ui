@@ -14,6 +14,10 @@ on:
         description: 'Тег движка для сквозной проверки общей сборки'
         type: string
         default: ''
+      engine_support:
+        description: 'Проверить предпросмотр и применение поддержки в общей сборке'
+        type: boolean
+        default: false
       cold_install:
         description: 'Проверить первый запуск без предварительной загрузки архивов'
         type: boolean
@@ -167,6 +171,7 @@ jobs:
         shell: bash
         env:
           ENGINE_TAG: ${{ inputs.engine_release }}
+          POB2_ENGINE_TEST_SUPPORT: ${{ inputs.engine_support && '1' || '0' }}
           GH_TOKEN: ${{ github.token }}
           POB2_UI_HOME: ${{ runner.temp }}/pob2-lua-smoke
           TARGET: ${{ matrix.target }}

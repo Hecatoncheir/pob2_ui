@@ -38,6 +38,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m9ec0f47b47 => 'กด DPS';
 
   @override
+  String get mf5593e021c => 'DPS ของสกิล';
+
+  @override
   String get m0c63e733f9 => 'Lua ไม่ได้ส่งคืนไอคอนทั้งหมด';
 
   @override
@@ -152,7 +155,13 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m7610c788c5 => 'PoB ไม่พบเส้นทางไปยังโหนดนี้';
 
   @override
+  String get m35a791a827 => 'PoB ไม่ยืนยันความเข้ากันได้ของสกิลเสริม';
+
+  @override
   String get m917bb579d9 => 'PoB ไม่ได้รายงานเส้นทางไปยังโฟลเดอร์แอสเซมบลี';
+
+  @override
+  String get m4489788af8 => 'PoB ยืนยันความเข้ากันได้แล้ว';
 
   @override
   String get maaaf9e5923 =>
@@ -489,6 +498,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m20494f41ab => 'ปิด';
 
   @override
+  String get mba092edc71 => 'ดูตัวอย่างฉบับแก้ไขปัจจุบัน';
+
+  @override
   String get m903bd09e68 => 'กำลังดำเนินการ...';
 
   @override
@@ -507,6 +519,11 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get mef05d57959 => 'เสร็จแล้ว';
+
+  @override
+  String mbf5a9b9dee(String p0) {
+    return 'กลุ่ม $p0';
+  }
 
   @override
   String get m8eb6bbb41e => 'กลุ่มนี้ไม่มีอยู่แล้ว';
@@ -538,6 +555,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get me3c3ea3a85 => 'ไม่สามารถดำเนินการได้';
+
+  @override
+  String get m062c95654b => 'จำนวนการกระทำต่อวินาที';
 
   @override
   String get me1daa9e250 => 'ผังพาสซีฟ';
@@ -604,6 +624,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m4b77800e7b => 'ยังไม่มีผลคำนวณสำหรับฉบับแก้ไขนี้';
 
   @override
+  String get mcd80d82ab1 => 'ก่อนเพิ่ม';
+
+  @override
   String get m08afe540b9 => 'ไปยังโหนด';
 
   @override
@@ -619,6 +642,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get me598ae02b1 => 'เพิ่มโหนดสำคัญ';
+
+  @override
+  String get maf42afbd5f => 'เพิ่มสกิลเสริม';
 
   @override
   String get m9cef26392f => 'เพิ่มไอเทม';
@@ -664,6 +690,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m2071fb9905 => 'เพิ่มเติม';
+
+  @override
+  String get m399abce26a => 'พลังชีวิต';
 
   @override
   String m2e046fa26a(String p0) {
@@ -861,6 +890,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get mfc105fdc07 => 'เปิดใช้งานอัญมณีแล้ว';
 
   @override
+  String get m49bbce4771 => 'หินสกิลเสริม';
+
+  @override
   String get m05b721e615 => 'ไม่พบหิน';
 
   @override
@@ -868,6 +900,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get md0ef3540b0 => 'แค็ตตาล็อก';
+
+  @override
+  String get m43c6960012 => 'คุณภาพ';
 
   @override
   String get m74189f93c7 => 'คุณภาพ, %';
@@ -994,6 +1029,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get md45e66ab55 => 'ชื่อกลุ่ม';
+
+  @override
+  String get m8edeba72b2 => 'ชื่อหรือ ID';
 
   @override
   String get m51233393a5 => 'ชื่อบิลด์';
@@ -1543,6 +1581,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get mbb5bdd176c => 'ปิดการใช้งาน';
 
   @override
+  String get ma3fbed9442 => 'ปิดใช้งาน';
+
+  @override
   String get m654046a00d =>
       'เปิดตัวละครบน poe.ninja กด Copy PoB code แล้ววางโค้ดใน PoB II';
 
@@ -1732,6 +1773,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m52d7142d18 => 'รองรับ Windows x64, Linux x64 และ macOS arm64';
 
   @override
+  String get m8ba2618d75 => 'ไม่พบหินสกิลเสริม';
+
+  @override
   String get mc2fd54cfce => 'สกิลในช่องอุปกรณ์นี้ใช้เจมเสริมร่วมกัน';
 
   @override
@@ -1828,6 +1872,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get mce98e63b90 => 'ลำดับโหนดสำคัญ';
 
   @override
+  String get m8e807c5b72 => 'หลังเพิ่ม';
+
+  @override
   String m032a431609(String p0) {
     return 'ล่าสุด: $p0';
   }
@@ -1874,6 +1921,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m10e4fefa12 => 'ไอเทม';
+
+  @override
+  String get m32060a34f5 => 'ดูตัวอย่าง';
 
   @override
   String get mad582b726d => 'ตัวอย่างการทำความสะอาดโปรไฟล์';
@@ -2043,6 +2093,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m9aaa2d503d => 'รัศมีแสง';
 
   @override
+  String get mdd644df5f1 => 'รัศมี (ม.)';
+
+  @override
   String get mf66e719066 => 'ขยายแผง';
 
   @override
@@ -2082,6 +2135,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m6fa4aff83a => 'คำนวณเส้นทาง';
+
+  @override
+  String get m3307cc53d4 => 'ค่าใช้งานมานา';
 
   @override
   String m33a38de9ff(String p0) {
@@ -2579,6 +2635,11 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m7eac5d04d3 => 'ทำให้อินเทอร์เฟซเล็กลง';
+
+  @override
+  String m39a93dd212(String p0, String p1) {
+    return 'เลเวล $p0 · $p1%';
+  }
 
   @override
   String get m7f67af3d6c => 'ระดับ';

@@ -11,6 +11,7 @@ import 'package:pob2_ui/data/mcp_client.dart';
 import 'package:pob2_ui/data/pob_build_library.dart';
 import 'package:pob2_ui/domain/engine_session.dart';
 import 'package:pob2_ui/ui/app.dart';
+import 'package:pob2_ui/ui/core/app_text.dart';
 import 'package:pob2_ui/ui/workshop_cubit.dart';
 import 'package:pob2_ui/ui/workspace_view.dart';
 
@@ -95,8 +96,16 @@ void main() {
     final calculated =
         (await mcp.call('get_snapshot'))['build'] as Map<String, dynamic>;
     _checkCalculation(tester, calculated);
+    final checkSupport =
+        Platform.environment['POB2_ENGINE_TEST_SUPPORT'] == '1';
+    final revision = checkSupport ? await _checkSupports(tester, mcp) : 7;
+    if (checkSupport) {
+      await _previewSupport(tester, 'Rapid Attacks I', compatible: false);
+    }
     await mcp.close();
-    await _checkReconnect(tester, model, executable, flags, root);
+    await _checkReconnect(model, executable, flags, root, revision);
+    if (checkSupport) await _checkStalePreviewAfterReconnect(tester);
+    await _waitFor(tester, find.byKey(const Key('engine-build-life')));
 
     expect(await local.readAsString(), localBefore);
     expect(await File(_fixture).readAsString(), original);
@@ -104,6 +113,95 @@ void main() {
     await tester.pumpAndSettle();
   }, timeout: const Timeout(Duration(minutes: 3)));
 }
+
+Future<int> _checkSupports(WidgetTester tester, EngineMcpPeer mcp) async {
+  await _previewSupport(tester, 'Controlled Destruction');
+  expect((await mcp.call('get_snapshot'))['revision'], 7);
+  await tester.tap(find.byKey(const Key('engine-support-cancel')));
+  await tester.pumpAndSettle();
+  expect((await mcp.call('get_snapshot'))['revision'], 7);
+
+  await _previewSupport(tester, 'Controlled Destruction');
+  await _editSharedLevel(mcp, 45, 7);
+  await _waitFor(
+    tester,
+    find.text('Выполните предпросмотр для текущей ревизии'),
+  );
+  final apply = find.byKey(const Key('engine-support-apply'));
+  expect(tester.widget<FilledButton>(apply).onPressed, isNull);
+  await tester.tap(find.byKey(const Key('engine-support-preview')));
+  await tester.pump();
+  await _waitFor(tester, find.text('PoB подтвердил совместимость'));
+  await tester.tap(apply);
+  await _waitFor(tester, _groupGem('Controlled Destruction'));
+  final added = await mcp.call('get_snapshot');
+  expect(added['revision'], 9);
+  expect(_xml(added), contains('ControlledDestruction'));
+  expect(_xml(added), contains('mainActiveSkill="2"'));
+  expect(find.byKey(const Key('engine-build-life')), findsNothing);
+  return _checkSupportFromMcp(tester, mcp);
+}
+
+Future<void> _previewSupport(
+  WidgetTester tester,
+  String support, {
+  bool compatible = true,
+}) async {
+  await tester.tap(find.byKey(const Key('engine-open-support')));
+  await tester.pumpAndSettle();
+  await tester.enterText(
+    find.byKey(const Key('engine-support-query')),
+    support,
+  );
+  await tester.tap(find.byKey(const Key('engine-support-search')));
+  await _waitFor(tester, find.byKey(const Key('engine-support-gem')));
+  await tester.tap(find.byKey(const Key('engine-support-preview')));
+  await _waitFor(tester, find.byKey(const Key('engine-support-result')));
+  expect(
+    find.text(
+      compatible
+          ? 'PoB подтвердил совместимость'
+          : 'PoB не подтвердил совместимость поддержки',
+    ),
+    findsOneWidget,
+  );
+}
+
+Future<void> _checkStalePreviewAfterReconnect(WidgetTester tester) async {
+  await _waitFor(
+    tester,
+    find.text('Выполните предпросмотр для текущей ревизии'),
+  );
+  await tester.tap(find.byKey(const Key('engine-support-cancel')));
+  await tester.pumpAndSettle();
+}
+
+Future<int> _checkSupportFromMcp(WidgetTester tester, EngineMcpPeer mcp) async {
+  await mcp.call('edit_build', {
+    'edit': {
+      'add_support': {'support_id': 'Concentrated Area', 'quality': 20},
+    },
+    'expected_revision': 9,
+    'request_id': 'desktop-mcp-support',
+  });
+  await _waitFor(tester, _groupGem('Concentrated Area'));
+  await tester.tap(find.byKey(const Key('engine-calculate')));
+  await _waitFor(tester, find.byKey(const Key('engine-build-dps')));
+  final snapshot = await mcp.call('get_snapshot');
+  expect(snapshot['revision'], 11);
+  _checkCalculation(tester, snapshot['build'] as Map<String, dynamic>);
+  return 11;
+}
+
+String _xml(Map<String, dynamic> snapshot) =>
+    (snapshot['build'] as Map<String, dynamic>)['xml'] as String;
+
+Finder _groupGem(String name) => find.descendant(
+  of: find.byKey(const Key('engine-build-gems')),
+  matching: find.byWidgetPredicate(
+    (widget) => widget is AppText && widget.data == name,
+  ),
+);
 
 Future<WorkshopCubit> _openBuild(Directory root) async {
   final builds = await Directory.fromUri(root.uri.resolve('builds/')).create();
@@ -297,11 +395,11 @@ void _checkCalculation(WidgetTester tester, Map<String, dynamic> build) {
 }
 
 Future<void> _checkReconnect(
-  WidgetTester tester,
   WorkshopCubit model,
   String executable,
   List<String> flags,
   Directory root,
+  int revision,
 ) async {
   final lost = model.engineSession.stream.firstWhere(
     (state) => !state.connected,
@@ -313,8 +411,7 @@ Future<void> _checkReconnect(
         .firstWhere((state) => state.connected)
         .timeout(const Duration(seconds: 15));
   }
-  expect(model.engineSession.state.snapshot?.revision, 7);
-  await _waitFor(tester, find.byKey(const Key('engine-build-life')));
+  expect(model.engineSession.state.snapshot?.revision, revision);
 }
 
 Future<void> _waitFor(WidgetTester tester, Finder finder) async {

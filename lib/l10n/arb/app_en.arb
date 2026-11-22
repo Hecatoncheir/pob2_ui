@@ -40,6 +40,11 @@
     "description": "DPS ударов",
     "placeholders": {}
   },
+  "mf5593e021c": "Skill DPS",
+  "@mf5593e021c": {
+    "description": "DPS умения",
+    "placeholders": {}
+  },
   "m0c63e733f9": "Lua did not return all icons",
   "@m0c63e733f9": {
     "description": "Lua вернул не все иконки",
@@ -227,9 +232,19 @@
     "description": "PoB не нашёл путь к узлу",
     "placeholders": {}
   },
+  "m35a791a827": "PoB did not confirm support compatibility",
+  "@m35a791a827": {
+    "description": "PoB не подтвердил совместимость поддержки",
+    "placeholders": {}
+  },
   "m917bb579d9": "PoB did not return the builds folder path.",
   "@m917bb579d9": {
     "description": "PoB не сообщил путь к папке сборок.",
+    "placeholders": {}
+  },
+  "m4489788af8": "PoB confirmed compatibility",
+  "@m4489788af8": {
+    "description": "PoB подтвердил совместимость",
     "placeholders": {}
   },
   "maaaf9e5923": "PoB is open without a bridge connection. Restart it once.",
@@ -814,6 +829,11 @@
     "description": "Выключено",
     "placeholders": {}
   },
+  "mba092edc71": "Preview the current revision",
+  "@mba092edc71": {
+    "description": "Выполните предпросмотр для текущей ревизии",
+    "placeholders": {}
+  },
   "m903bd09e68": "Performing the operation...",
   "@m903bd09e68": {
     "description": "Выполняем операцию…",
@@ -847,6 +867,15 @@
   "@mef05d57959": {
     "description": "Готово",
     "placeholders": {}
+  },
+  "mbf5a9b9dee": "Group {p0}",
+  "@mbf5a9b9dee": {
+    "description": "Группа {p0}",
+    "placeholders": {
+      "p0": {
+        "type": "String"
+      }
+    }
   },
   "m8eb6bbb41e": "The group no longer exists",
   "@m8eb6bbb41e": {
@@ -896,6 +925,11 @@
   "me3c3ea3a85": "Action not available",
   "@me3c3ea3a85": {
     "description": "Действие недоступно",
+    "placeholders": {}
+  },
+  "m062c95654b": "Actions per second",
+  "@m062c95654b": {
+    "description": "Действий в секунду",
     "placeholders": {}
   },
   "me1daa9e250": "Tree",
@@ -997,6 +1031,11 @@
     "description": "Для этой ревизии расчёта ещё нет",
     "placeholders": {}
   },
+  "mcd80d82ab1": "Before adding",
+  "@mcd80d82ab1": {
+    "description": "До добавления",
+    "placeholders": {}
+  },
   "m08afe540b9": "To node",
   "@m08afe540b9": {
     "description": "До узла",
@@ -1024,6 +1063,11 @@
   "me598ae02b1": "Add a key node",
   "@me598ae02b1": {
     "description": "Добавить ключевой узел",
+    "placeholders": {}
+  },
+  "maf42afbd5f": "Add support",
+  "@maf42afbd5f": {
+    "description": "Добавить поддержку",
     "placeholders": {}
   },
   "m9cef26392f": "Add item",
@@ -1101,6 +1145,11 @@
   "m2071fb9905": "More",
   "@m2071fb9905": {
     "description": "Ещё",
+    "placeholders": {}
+  },
+  "m399abce26a": "Life",
+  "@m399abce26a": {
+    "description": "Жизнь",
     "placeholders": {}
   },
   "m2e046fa26a": "Life: {p0}",
@@ -1436,6 +1485,11 @@
     "description": "Камень включён",
     "placeholders": {}
   },
+  "m49bbce4771": "Support gem",
+  "@m49bbce4771": {
+    "description": "Камень поддержки",
+    "placeholders": {}
+  },
   "m05b721e615": "No gems found",
   "@m05b721e615": {
     "description": "Камни не найдены",
@@ -1449,6 +1503,11 @@
   "md0ef3540b0": "Catalog",
   "@md0ef3540b0": {
     "description": "Каталог",
+    "placeholders": {}
+  },
+  "m43c6960012": "Quality",
+  "@m43c6960012": {
+    "description": "Качество",
     "placeholders": {}
   },
   "m74189f93c7": "Quality, %",
@@ -1658,6 +1717,11 @@
   "md45e66ab55": "Group name",
   "@md45e66ab55": {
     "description": "Название группы",
+    "placeholders": {}
+  },
+  "m8edeba72b2": "Name or ID",
+  "@m8edeba72b2": {
+    "description": "Название или ID",
     "placeholders": {}
   },
   "m51233393a5": "Build name",
@@ -2592,6 +2656,11 @@
     "description": "Отключить",
     "placeholders": {}
   },
+  "ma3fbed9442": "Disabled",
+  "@ma3fbed9442": {
+    "description": "Отключён",
+    "placeholders": {}
+  },
   "m654046a00d": "Open the character on poe.ninja, select Copy PoB code, then paste the code into PoB II.",
   "@m654046a00d": {
     "description": "Откройте персонажа на poe.ninja, нажмите Copy PoB code и вставьте код в PoB II.",
@@ -2907,6 +2976,11 @@
     "description": "Поддерживаются Windows x64, Linux x64 и macOS arm64",
     "placeholders": {}
   },
+  "m8ba2618d75": "No support gems found",
+  "@m8ba2618d75": {
+    "description": "Поддержки не найдены",
+    "placeholders": {}
+  },
   "mc2fd54cfce": "Skills in this equipment slot share supports",
   "@mc2fd54cfce": {
     "description": "Поддержки общие для умений этого слота",
@@ -3067,6 +3141,11 @@
     "description": "Порядок ключевых узлов",
     "placeholders": {}
   },
+  "m8e807c5b72": "After adding",
+  "@m8e807c5b72": {
+    "description": "После добавления",
+    "placeholders": {}
+  },
   "m032a431609": "Last: {p0}",
   "@m032a431609": {
     "description": "Последняя: {p0}",
@@ -3147,6 +3226,11 @@
   "m10e4fefa12": "Items",
   "@m10e4fefa12": {
     "description": "Предметы",
+    "placeholders": {}
+  },
+  "m32060a34f5": "Preview",
+  "@m32060a34f5": {
+    "description": "Предпросмотр",
     "placeholders": {}
   },
   "mad582b726d": "Preview of profile cleaning",
@@ -3431,6 +3515,11 @@
     "description": "Радиус освещения",
     "placeholders": {}
   },
+  "mdd644df5f1": "Radius, m",
+  "@mdd644df5f1": {
+    "description": "Радиус, м",
+    "placeholders": {}
+  },
   "mf66e719066": "Expand panel",
   "@mf66e719066": {
     "description": "Развернуть панель",
@@ -3498,6 +3587,11 @@
   "m6fa4aff83a": "Calculate paths",
   "@m6fa4aff83a": {
     "description": "Рассчитать пути",
+    "placeholders": {}
+  },
+  "m3307cc53d4": "Mana cost",
+  "@m3307cc53d4": {
+    "description": "Расход маны",
     "placeholders": {}
   },
   "m33a38de9ff": "Calculation Lua · {p0}%",
@@ -4324,6 +4418,18 @@
   "@m7eac5d04d3": {
     "description": "Уменьшить интерфейс",
     "placeholders": {}
+  },
+  "m39a93dd212": "Lv. {p0} · {p1}%",
+  "@m39a93dd212": {
+    "description": "Ур. {p0} · {p1}%",
+    "placeholders": {
+      "p0": {
+        "type": "String"
+      },
+      "p1": {
+        "type": "String"
+      }
+    }
   },
   "m7f67af3d6c": "Level",
   "@m7f67af3d6c": {

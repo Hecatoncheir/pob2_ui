@@ -38,6 +38,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get m9ec0f47b47 => 'Frappez DPS';
 
   @override
+  String get mf5593e021c => 'DPS de la compétence';
+
+  @override
   String get m0c63e733f9 => 'Lua n\'a pas renvoyé toutes les icônes';
 
   @override
@@ -160,8 +163,14 @@ class AppLocalizationsFr extends AppLocalizations {
   String get m7610c788c5 => 'PoB n’a trouvé aucun chemin vers ce nœud';
 
   @override
+  String get m35a791a827 => 'PoB n’a pas confirmé la compatibilité du soutien';
+
+  @override
   String get m917bb579d9 =>
       'PoB n\'a pas signalé le chemin d\'accès au dossier d\'assemblage.';
+
+  @override
+  String get m4489788af8 => 'PoB a confirmé la compatibilité';
 
   @override
   String get maaaf9e5923 =>
@@ -509,6 +518,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get m20494f41ab => 'Désactivé';
 
   @override
+  String get mba092edc71 => 'Prévisualisez la révision actuelle';
+
+  @override
   String get m903bd09e68 => 'Exécution de l\'opération...';
 
   @override
@@ -527,6 +539,11 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get mef05d57959 => 'Terminé';
+
+  @override
+  String mbf5a9b9dee(String p0) {
+    return 'Groupe $p0';
+  }
 
   @override
   String get m8eb6bbb41e => 'Le groupe n\'existe plus';
@@ -561,6 +578,9 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get me3c3ea3a85 => 'Action non disponible';
+
+  @override
+  String get m062c95654b => 'Actions par seconde';
 
   @override
   String get me1daa9e250 => 'Arbre';
@@ -632,6 +652,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get m4b77800e7b => 'Cette révision n’a pas encore été calculée';
 
   @override
+  String get mcd80d82ab1 => 'Avant l’ajout';
+
+  @override
   String get m08afe540b9 => 'Vers le nœud';
 
   @override
@@ -647,6 +670,9 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get me598ae02b1 => 'Ajouter un nœud clé';
+
+  @override
+  String get maf42afbd5f => 'Ajouter un soutien';
 
   @override
   String get m9cef26392f => 'Ajouter un objet';
@@ -694,6 +720,9 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get m2071fb9905 => 'Plus';
+
+  @override
+  String get m399abce26a => 'Vie';
 
   @override
   String m2e046fa26a(String p0) {
@@ -896,6 +925,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get mfc105fdc07 => 'Gemme activée';
 
   @override
+  String get m49bbce4771 => 'Gemme de soutien';
+
+  @override
   String get m05b721e615 => 'Aucune pierre trouvée';
 
   @override
@@ -903,6 +935,9 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get md0ef3540b0 => 'Catalogue';
+
+  @override
+  String get m43c6960012 => 'Qualité';
 
   @override
   String get m74189f93c7 => 'Qualité, %';
@@ -1032,6 +1067,9 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get md45e66ab55 => 'Nom du groupe';
+
+  @override
+  String get m8edeba72b2 => 'Nom ou identifiant';
 
   @override
   String get m51233393a5 => 'Nom du build';
@@ -1593,6 +1631,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get mbb5bdd176c => 'Désactiver';
 
   @override
+  String get ma3fbed9442 => 'Désactivé';
+
+  @override
   String get m654046a00d =>
       'Ouvrez le personnage sur poe.ninja, cliquez sur Copy PoB code, puis collez le code dans PoB II.';
 
@@ -1787,6 +1828,9 @@ class AppLocalizationsFr extends AppLocalizations {
       'Windows x64, Linux x64 et macOS arm64 pris en charge';
 
   @override
+  String get m8ba2618d75 => 'Aucune gemme de soutien trouvée';
+
+  @override
   String get mc2fd54cfce =>
       'Les compétences de cet emplacement partagent les soutiens';
 
@@ -1884,6 +1928,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get mce98e63b90 => 'Ordre des nœuds clés';
 
   @override
+  String get m8e807c5b72 => 'Après l’ajout';
+
+  @override
   String m032a431609(String p0) {
     return 'Dernier : $p0';
   }
@@ -1930,6 +1977,9 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get m10e4fefa12 => 'Objets';
+
+  @override
+  String get m32060a34f5 => 'Aperçu';
 
   @override
   String get mad582b726d => 'Aperçu du nettoyage du profil';
@@ -2104,6 +2154,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get m9aaa2d503d => 'Rayon de lumière';
 
   @override
+  String get mdd644df5f1 => 'Rayon, m';
+
+  @override
   String get mf66e719066 => 'Agrandir le panneau';
 
   @override
@@ -2144,6 +2197,9 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get m6fa4aff83a => 'Calculer les chemins';
+
+  @override
+  String get m3307cc53d4 => 'Coût en mana';
 
   @override
   String m33a38de9ff(String p0) {
@@ -2655,6 +2711,11 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get m7eac5d04d3 => 'Rendre l\'interface plus petite';
+
+  @override
+  String m39a93dd212(String p0, String p1) {
+    return 'Niv. $p0 · $p1 %';
+  }
 
   @override
   String get m7f67af3d6c => 'Niveau';

@@ -23,6 +23,13 @@ class EngineSessionState {
   final List<EngineChange> changes;
 }
 
+typedef EngineSupportOffer = ({
+  String sessionId,
+  int connectionId,
+  EngineSupportSelection selection,
+  EngineSupportPreview preview,
+});
+
 class EngineSessionCubit extends Cubit<EngineSessionState> {
   EngineSessionCubit({
     Future<EngineConnection> Function(EngineOptions)? open,
@@ -37,6 +44,7 @@ class EngineSessionCubit extends Cubit<EngineSessionState> {
   StreamSubscription<EngineChange>? _watch;
   Timer? _retry;
   int _generation = 0;
+  int _connectionId = 0;
   Future<void> _applying = Future.value();
 
   Future<void> connect(EngineOptions options, {String? createName}) async {
@@ -189,6 +197,48 @@ class EngineSessionCubit extends Cubit<EngineSessionState> {
   Future<void> calculate(EngineSnapshot current) =>
       _connectedTo(current).calculate(current, engineRequestId());
 
+  bool get supportsAddSupport =>
+      state.connected && (_connection?.supportsAddSupport ?? false);
+
+  Future<EngineSupportPage> findSupports(
+    EngineSnapshot current,
+    String query,
+    int offset,
+  ) => _connectedTo(current).findSupports(query, offset);
+
+  Future<EngineSupportOffer> previewSupport(
+    EngineSnapshot current,
+    EngineSupportSelection selection,
+  ) async {
+    final connectionId = _connectionId;
+    final preview = await _connectedTo(current)
+        .previewSupport(current, selection);
+    return (
+      sessionId: current.sessionId,
+      connectionId: connectionId,
+      selection: selection,
+      preview: preview,
+    );
+  }
+
+  bool isCurrentSupportOffer(EngineSupportOffer offer) =>
+      supportsAddSupport &&
+      offer.connectionId == _connectionId &&
+      offer.sessionId == state.snapshot?.sessionId &&
+      offer.preview.revision == state.snapshot?.revision;
+
+  Future<void> addSupport(EngineSupportOffer offer) async {
+    if (!isCurrentSupportOffer(offer)) {
+      throw StateError('Выполните предпросмотр для текущей ревизии');
+    }
+    if (!offer.preview.compatible) {
+      throw StateError('PoB не подтвердил совместимость поддержки');
+    }
+    final snapshot = state.snapshot!;
+    await _connectedTo(snapshot)
+        .addSupport(snapshot, offer.selection, engineRequestId());
+  }
+
   EngineConnection _connectedTo(EngineSnapshot current) {
     final connection = _connection;
     if (!state.connected ||
@@ -200,6 +250,7 @@ class EngineSessionCubit extends Cubit<EngineSessionState> {
   }
 
   Future<void> _disposeConnection() async {
+    _connectionId++;
     final watch = _watch;
     final connection = _connection;
     _watch = null;

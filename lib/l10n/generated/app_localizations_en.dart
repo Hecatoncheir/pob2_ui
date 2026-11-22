@@ -38,6 +38,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m9ec0f47b47 => 'Hit DPS';
 
   @override
+  String get mf5593e021c => 'Skill DPS';
+
+  @override
   String get m0c63e733f9 => 'Lua did not return all icons';
 
   @override
@@ -153,7 +156,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m7610c788c5 => 'PoB found no path to this node';
 
   @override
+  String get m35a791a827 => 'PoB did not confirm support compatibility';
+
+  @override
   String get m917bb579d9 => 'PoB did not return the builds folder path.';
+
+  @override
+  String get m4489788af8 => 'PoB confirmed compatibility';
 
   @override
   String get maaaf9e5923 =>
@@ -492,6 +501,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m20494f41ab => 'Off';
 
   @override
+  String get mba092edc71 => 'Preview the current revision';
+
+  @override
   String get m903bd09e68 => 'Performing the operation...';
 
   @override
@@ -510,6 +522,11 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get mef05d57959 => 'Done';
+
+  @override
+  String mbf5a9b9dee(String p0) {
+    return 'Group $p0';
+  }
 
   @override
   String get m8eb6bbb41e => 'The group no longer exists';
@@ -542,6 +559,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get me3c3ea3a85 => 'Action not available';
+
+  @override
+  String get m062c95654b => 'Actions per second';
 
   @override
   String get me1daa9e250 => 'Tree';
@@ -608,6 +628,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m4b77800e7b => 'No calculation for this revision yet';
 
   @override
+  String get mcd80d82ab1 => 'Before adding';
+
+  @override
   String get m08afe540b9 => 'To node';
 
   @override
@@ -623,6 +646,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get me598ae02b1 => 'Add a key node';
+
+  @override
+  String get maf42afbd5f => 'Add support';
 
   @override
   String get m9cef26392f => 'Add item';
@@ -669,6 +695,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get m2071fb9905 => 'More';
+
+  @override
+  String get m399abce26a => 'Life';
 
   @override
   String m2e046fa26a(String p0) {
@@ -867,6 +896,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get mfc105fdc07 => 'Gem enabled';
 
   @override
+  String get m49bbce4771 => 'Support gem';
+
+  @override
   String get m05b721e615 => 'No gems found';
 
   @override
@@ -874,6 +906,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get md0ef3540b0 => 'Catalog';
+
+  @override
+  String get m43c6960012 => 'Quality';
 
   @override
   String get m74189f93c7 => 'Quality, %';
@@ -1002,6 +1037,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get md45e66ab55 => 'Group name';
+
+  @override
+  String get m8edeba72b2 => 'Name or ID';
 
   @override
   String get m51233393a5 => 'Build name';
@@ -1557,6 +1595,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get mbb5bdd176c => 'Disable';
 
   @override
+  String get ma3fbed9442 => 'Disabled';
+
+  @override
   String get m654046a00d =>
       'Open the character on poe.ninja, select Copy PoB code, then paste the code into PoB II.';
 
@@ -1747,6 +1788,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m52d7142d18 => 'Windows x64, Linux x64 and macOS arm64 supported';
 
   @override
+  String get m8ba2618d75 => 'No support gems found';
+
+  @override
   String get mc2fd54cfce => 'Skills in this equipment slot share supports';
 
   @override
@@ -1843,6 +1887,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get mce98e63b90 => 'Key node order';
 
   @override
+  String get m8e807c5b72 => 'After adding';
+
+  @override
   String m032a431609(String p0) {
     return 'Last: $p0';
   }
@@ -1889,6 +1936,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get m10e4fefa12 => 'Items';
+
+  @override
+  String get m32060a34f5 => 'Preview';
 
   @override
   String get mad582b726d => 'Preview of profile cleaning';
@@ -2059,6 +2109,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m9aaa2d503d => 'Light Radius';
 
   @override
+  String get mdd644df5f1 => 'Radius, m';
+
+  @override
   String get mf66e719066 => 'Expand panel';
 
   @override
@@ -2098,6 +2151,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get m6fa4aff83a => 'Calculate paths';
+
+  @override
+  String get m3307cc53d4 => 'Mana cost';
 
   @override
   String m33a38de9ff(String p0) {
@@ -2601,6 +2657,11 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get m7eac5d04d3 => 'Make the interface smaller';
+
+  @override
+  String m39a93dd212(String p0, String p1) {
+    return 'Lv. $p0 · $p1%';
+  }
 
   @override
   String get m7f67af3d6c => 'Level';
