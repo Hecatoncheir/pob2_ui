@@ -100,6 +100,9 @@ void main() {
     );
     final originalId = model.state.library.activeId!;
     await _addRealSkill(model);
+    expect(model.state.error, isNull);
+    expect(model.state.document?.stale, isFalse);
+    expect(model.state.document?.tree?.original?.commands, isNotEmpty);
     final life = model.state.report!.stats['Life'];
     expect(life, greaterThan(0));
     expect(model.state.document!.tree!.nodes.length, greaterThan(1000));

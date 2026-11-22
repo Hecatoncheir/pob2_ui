@@ -1144,12 +1144,17 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     });
   }
 
-  // Для проверок, которым нужен восстановленный кеш, после открытия сборки.
+  // Проверки оформления ждут и загрузку, и её паузы на операции редактора.
   Future<void> waitForTreeArtwork() async {
-    var pending = _treeArtworkLoad;
-    while (pending != null) {
+    while (!_closing && !isClosed) {
+      if (state.busy) {
+        await stream.firstWhere((state) => !state.busy, orElse: () => state);
+        continue;
+      }
+      _startTreeArtwork();
+      final pending = _treeArtworkLoad;
+      if (pending == null) return;
       await pending;
-      pending = _treeArtworkLoad;
     }
   }
 
