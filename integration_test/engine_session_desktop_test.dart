@@ -63,7 +63,7 @@ void main() {
     final snapshot = await mcp.call('get_snapshot');
     expect(snapshot['build_name'], _fromUi);
     expect(snapshot['revision'], 3);
-    expect((snapshot['build'] as Map)['xml'], isNotEmpty);
+    expect((snapshot['build'] as Map<String, dynamic>)['xml'], isNotEmpty);
     expect((await model.library.load()).active?.title, _fromUi);
     expect(model.state.error, isNull);
 
@@ -87,7 +87,8 @@ void main() {
 
     await tester.tap(find.byKey(const Key('engine-calculate')));
     await _waitFor(tester, find.byKey(const Key('engine-build-life')));
-    final calculated = (await mcp.call('get_snapshot'))['build'] as Map;
+    final calculated =
+        (await mcp.call('get_snapshot'))['build'] as Map<String, dynamic>;
     _checkCalculation(tester, calculated);
     await mcp.close();
     await _checkReconnect(tester, model, executable, flags, root);
@@ -156,7 +157,7 @@ Future<void> _seedEngine(String executable, List<String> flags) async {
   expect(result.exitCode, 0, reason: '${result.stderr}');
   final snapshot = jsonDecode(result.stdout as String) as Map<String, dynamic>;
   expect(snapshot['revision'], 1);
-  expect((snapshot['build'] as Map)['input_revision'], 1);
+  expect((snapshot['build'] as Map<String, dynamic>)['input_revision'], 1);
 }
 
 Future<EngineMcpPeer> _attachMcp(String executable, List<String> flags) async {
@@ -272,16 +273,21 @@ Future<void> _submitLevel(WidgetTester tester, int level) async {
 }
 
 int _level(Map<String, dynamic> snapshot) =>
-    ((snapshot['build'] as Map)['model'] as Map)['level'] as int;
+    ((snapshot['build'] as Map<String, dynamic>)['model']
+            as Map<String, dynamic>)['level']
+        as int;
 
-void _checkCalculation(WidgetTester tester, Map build) {
-  final calculation = build['calculation'] as Map;
-  final life = (calculation['stats'] as Map)['Life'] as num;
+void _checkCalculation(WidgetTester tester, Map<String, dynamic> build) {
+  final calculation = build['calculation'] as Map<String, dynamic>;
+  final life = (calculation['stats'] as Map<String, dynamic>)['Life'] as num;
   expect(life, greaterThan(0));
   expect(build['calculated_from_revision'], build['input_revision']);
   expect(find.text('Жизнь: ${life.toStringAsFixed(0)}'), findsOneWidget);
-  for (final issue in calculation['issues'] as List? ?? const []) {
-    expect(find.text((issue as Map)['message'] as String), findsWidgets);
+  for (final issue in calculation['issues'] as List<dynamic>? ?? const []) {
+    expect(
+      find.text((issue as Map<String, dynamic>)['message'] as String),
+      findsWidgets,
+    );
   }
 }
 
