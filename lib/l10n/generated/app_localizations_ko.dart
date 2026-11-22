@@ -726,11 +726,6 @@ class AppLocalizationsKo extends AppLocalizations {
   }
 
   @override
-  String m35c7d57c9f(String p0, String p1) {
-    return '원본 PoB 트리 로드 중 $p0 / $p1';
-  }
-
-  @override
   String m7ac5d410c5(String p0) {
     return '로드 중: HTTP $p0';
   }

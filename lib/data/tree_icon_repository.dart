@@ -14,11 +14,7 @@ class TreeIconRepository {
   ) async {
     final loaded = await _loadScene(tree, engine, source, null);
     if (loaded.iconError case final error?) throw StateError(error);
-    return {
-      for (final key
-          in tree.original!.commands.map((command) => command.texture).toSet())
-        key: loaded.icons[key]!,
-    };
+    return loaded.icons;
   }
 
   TreeIconRepository({this.root});
@@ -31,10 +27,10 @@ class TreeIconRepository {
     TreeGeometry tree,
     McpClient engine,
     String source, {
-    void Function(int, int)? onProgress,
+    bool Function()? canContinue,
   }) async {
     if (tree.original != null)
-      return _loadScene(tree, engine, source, onProgress);
+      return _loadScene(tree, engine, source, canContinue);
     if (!engine.tools.contains('pob_tree_icons')) {
       return tree.withIcons(
         {},
@@ -49,8 +45,8 @@ class TreeIconRepository {
         .where((key) => key.isNotEmpty && !cache.containsKey(key))
         .toList();
     try {
-      await _loadMissing(missing, cache, engine);
-      return tree.withIcons(cache, null);
+      final complete = await _loadMissing(missing, cache, engine, canContinue);
+      return complete ? tree.withIcons(cache, null) : tree;
     } catch (error) {
       return tree.withIcons(cache, 'Часть иконок недоступна: $error');
     }
@@ -60,7 +56,7 @@ class TreeIconRepository {
     TreeGeometry tree,
     McpClient engine,
     String source,
-    void Function(int, int)? onProgress,
+    bool Function()? canContinue,
   ) async {
     if (!engine.tools.contains('pob_tree_textures')) {
       return tree.withIcons(
@@ -72,22 +68,39 @@ class TreeIconRepository {
     final keys = tree.original!.commands
         .map((command) => command.texture)
         .toSet();
-    var loaded = keys.where(cache.containsKey).length;
-    onProgress?.call(loaded, keys.length);
     try {
       for (final token in keys.where((key) => !cache.containsKey(key))) {
-        cache[token] = await _texture(engine, token, source, tree.version);
-        loaded++;
-        _progress(onProgress, loaded, keys.length);
+        if (canContinue?.call() == false) return tree;
+        final bytes = await _texture(
+          engine,
+          token,
+          source,
+          tree.version,
+          canContinue,
+        );
+        if (bytes == null) return tree;
+        cache[token] = bytes;
       }
-      return tree.withIcons(cache, null);
+      return _sceneResult(tree, keys, cache);
     } catch (error) {
-      return tree.withIcons(
+      return _sceneResult(
+        tree,
+        keys,
         cache,
         'Готовая сцена загружена не полностью: $error',
       );
     }
   }
+
+  TreeGeometry _sceneResult(
+    TreeGeometry tree,
+    Set<String> keys,
+    Map<String, Uint8List> cache, [
+    String? error,
+  ]) => tree.withIcons({
+    for (final key in keys)
+      if (cache[key] case final bytes?) key: bytes,
+  }, error);
 
   File? _file(String source, String version, String token) {
     if (root == null) return null;
@@ -99,20 +112,22 @@ class TreeIconRepository {
     return File.fromUri(root!.uri.resolve('$source/$version/$token.png'));
   }
 
-  Future<Uint8List> _texture(
+  Future<Uint8List?> _texture(
     McpClient engine,
     String token,
     String source,
     String version,
+    bool Function()? canContinue,
   ) async {
     final file = _file(source, version, token);
     final stored = await _readCache(file);
     if (stored != null) return stored;
+    if (canContinue?.call() == false) return null;
     final bytes = _sceneImage(
       await engine.call('pob_tree_textures', {'token': token}),
       token,
     );
-    if (file != null) {
+    if (file != null && canContinue?.call() != false) {
       await file.parent.create(recursive: true);
       final temporary = File(
         '${file.path}.$pid-${DateTime.now().microsecondsSinceEpoch}.tmp',
@@ -133,10 +148,6 @@ class TreeIconRepository {
   bool _validPng(Uint8List bytes) =>
       bytes.length >= 8 && base64Encode(bytes.sublist(0, 8)) == 'iVBORw0KGgo=';
 
-  void _progress(void Function(int, int)? callback, int loaded, int total) {
-    if (loaded % 16 == 0 || loaded == total) callback?.call(loaded, total);
-  }
-
   Uint8List _sceneImage(JsonMap json, String token) => switch (json) {
     {'token': final String key, 'png': final String png}
         when key == token && png.length < 6 * 1024 * 1024 =>
@@ -144,16 +155,19 @@ class TreeIconRepository {
     _ => throw const FormatException('Некорректная текстура готового дерева'),
   };
 
-  Future<void> _loadMissing(
+  Future<bool> _loadMissing(
     List<String> keys,
     Map<String, Uint8List> cache,
     McpClient engine,
+    bool Function()? canContinue,
   ) async {
     for (var start = 0; start < keys.length; start += 32) {
+      if (canContinue?.call() == false) return false;
       final batch = keys.skip(start).take(32).toList();
       final result = await engine.call('pob_tree_icons', {'icons': batch});
       _read(result, batch, cache);
     }
+    return true;
   }
 
   void _read(JsonMap result, List<String> batch, Map<String, Uint8List> cache) {

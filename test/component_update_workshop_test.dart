@@ -1,6 +1,8 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:io';
 
+import 'package:crypto/crypto.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:pob2_ui/data/component_repository.dart';
 import 'package:pob2_ui/data/installation_store.dart';
@@ -27,7 +29,10 @@ Installations _pair(String tag) => {
   for (final component in Component.values)
     component: Installation(
       tag: tag,
-      commit: '${component.name}-$tag',
+      commit: sha256
+          .convert(utf8.encode('${component.name}-$tag'))
+          .toString()
+          .substring(0, 40),
       directory: '${component.name}-$tag',
     ),
 };
@@ -175,6 +180,52 @@ class _Engine extends McpClient {
   }
 }
 
+class _SlowArtworkEngine extends _Engine {
+  final started = Completer<void>();
+  final release = Completer<void>();
+  final textures = <String>[];
+  int _sceneVersion = 0;
+
+  @override
+  Future<JsonMap> call(String name, [JsonMap arguments = const {}]) async {
+    if (name == 'pob_tree_textures') {
+      final token = arguments['token'] as String;
+      textures.add(token);
+      if (!started.isCompleted) {
+        started.complete();
+        await release.future;
+      }
+      return {
+        'token': token,
+        'png': 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+aCpYAAAAASUVORK5CYII=',
+      };
+    }
+    final result = await super.call(name, arguments);
+    if (name != 'pob_get_tree' || arguments['includeScene'] != true) {
+      return result;
+    }
+    final first = ++_sceneVersion * 2 - 1;
+    return {
+      ...result,
+      'scene': {
+        'scale': 1,
+        'offsetX': 0,
+        'offsetY': 0,
+        'commands': [_draw(first), _draw(first + 1)],
+      },
+    };
+  }
+
+  static JsonMap _draw(int id) => {
+    'texture': '$id' * 64,
+    'positions': List<int>.filled(8, 0),
+    'uv': List<int>.filled(8, 0),
+    'color': List<int>.filled(4, 1),
+    'blend': 'ALPHA',
+    'clamp': true,
+  };
+}
+
 void main() {
   late Directory root;
   late File buildFile;
@@ -223,6 +274,42 @@ void main() {
     expect(_tags(await reopened.load()), [active, active]);
     expect(_tags(reopened.previous), [previous, previous]);
   }
+
+  test(
+    'MCP подтверждает создание сборки во время загрузки оформления',
+    () async {
+      final slow = _SlowArtworkEngine();
+      working = slow;
+      final model = await openWorkshop([]);
+      slow.tools = {...slow.tools, 'pob_tree_textures'};
+      const limit = Duration(seconds: 5);
+      try {
+        final first = await model
+            .createMcpBuild({'name': 'Первая', 'classId': 1, 'level': 1})
+            .timeout(limit);
+        await slow.started.future.timeout(limit);
+        expect(first['id'], model.state.library.activeId);
+        expect(model.state.busy, isFalse);
+        expect(model.state.document!.tree!.nodes, isNotEmpty);
+        expect(model.state.document!.tree!.icons, isEmpty);
+        final second = await model
+            .createMcpBuild({'name': 'Вторая', 'classId': 1, 'level': 1})
+            .timeout(limit);
+        expect(second['id'], isNot(first['id']));
+        expect(
+          await library.read(second['id'] as String),
+          contains('level="1"'),
+        );
+      } finally {
+        slow.release.complete();
+      }
+      final decorated = await model.stream
+          .firstWhere((state) => state.document!.tree!.icons.isNotEmpty)
+          .timeout(limit);
+      expect(decorated.document!.tree!.icons.keys, ['3' * 64, '4' * 64]);
+      expect(slow.textures, ['1' * 64, '3' * 64, '4' * 64]);
+    },
+  );
 
   test('Отказ кандидата оставляет открытый XML, движок и историю', () async {
     final started = Completer<void>();

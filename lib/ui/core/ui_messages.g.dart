@@ -1791,10 +1791,6 @@ final uiPatternTranslations = <UiRule>[
     (l, args) => l.md9540a4b84(args[0]),
   ),
   UiRule(
-    "Загрузка оригинального дерева PoB · {p0} / {p1}",
-    (l, args) => l.m35c7d57c9f(args[0], args[1]),
-  ),
-  UiRule(
     "Не удалось открыть страницу выпусков: {p0}",
     (l, args) => l.mce8b7ad723(args[0]),
   ),
@@ -1937,10 +1933,6 @@ final uiPatternTranslations = <UiRule>[
   UiRule(
     "Не удалось применить снимок: {p0}",
     (l, args) => l.m7a15f7eafb(args[0]),
-  ),
-  UiRule(
-    "Loading original PoB tree {p0} / {p1}",
-    (l, args) => l.m35c7d57c9f(args[0], args[1]),
   ),
   UiRule(
     "Failed to check for updates: {p0}",

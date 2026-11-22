@@ -769,11 +769,6 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String m35c7d57c9f(String p0, String p1) {
-    return 'Chargement de l\'arborescence PoB d\'origine $p0 / $p1';
-  }
-
-  @override
   String m7ac5d410c5(String p0) {
     return 'Loading: HTTP $p0';
   }

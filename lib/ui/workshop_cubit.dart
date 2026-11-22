@@ -253,6 +253,8 @@ class WorkshopCubit extends Cubit<WorkshopState> {
   late final treeIcons = TreeIconRepository(
     root: Directory.fromUri(components.store.root.uri.resolve('tree-cache/')),
   );
+  TreeGeometry? _pendingTreeArtwork;
+  Future<void>? _treeArtworkLoad;
   Timer? _buildChangeDelay;
   StreamSubscription<FileSystemEvent>? _buildChanges;
   ({String directory, String id})? _watchedBuild;
@@ -407,6 +409,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     _mcpEditor?.checkBuild();
     _watchOpenBuild();
     if (wasBusy && !next.busy) resumeBuildSync();
+    if (!next.busy) _startTreeArtwork();
   }
 
   void addLog(String value) {
@@ -696,7 +699,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
           throw const FormatException('Lua не вернул каталог классов');
         }
         if (xml != null) {
-          document = await _checkComponentBuild(candidate, pair, xml);
+          document = await _checkComponentBuild(candidate, xml);
         }
         if (!candidate.connected) throw StateError('Соединение с Lua прервано');
       });
@@ -723,7 +726,6 @@ class WorkshopCubit extends Cubit<WorkshopState> {
 
   Future<WorkshopDocument> _checkComponentBuild(
     McpClient candidate,
-    Installations pair,
     String xml,
   ) async {
     await candidate.call('pob_import_xml', {'xml': xml});
@@ -734,11 +736,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     if (exported.characterClass != PobBuildDocument(xml).characterClass) {
       throw StateError('Новая пара изменила класс открытой сборки');
     }
-    final (:tree, :error) = await _readTree(
-      candidate,
-      pair,
-      loadArtwork: false,
-    );
+    final (:tree, :error) = await _readTree(candidate, includeScene: false);
     if (tree == null && state.document?.tree != null) throw StateError(error!);
     return (report: report, tree: tree, stale: false, treeError: error);
   }
@@ -783,8 +781,9 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     WorkshopDocument document,
     String status,
   ) async {
-    final (:tree, :error) = await _readTree(candidate, components.active);
+    final (:tree, :error) = await _readTree(candidate);
     if (!candidate.connected) return;
+    _pendingTreeArtwork = tree;
     _update(
       state.copyWith(
         document: (
@@ -1007,7 +1006,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     TreeProgressionKey? progressionSource,
   }) async {
     final (:report, :xml) = await _readResult();
-    final (:tree, :error) = await _readTree(engine, components.active);
+    final (:tree, :error) = await _readTree(engine);
     if (progression != null) _checkProgression(progression, report, tree);
     final builds = persist
         ? await _saveBuild(
@@ -1025,6 +1024,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     final saved = sharedLibrary != null
         ? builds.active != null
         : await _saveRecovery(xml);
+    _pendingTreeArtwork = tree;
     _update(
       state.copyWith(
         document: (report: report, tree: tree, stale: false, treeError: error),
@@ -1093,9 +1093,8 @@ class WorkshopCubit extends Cubit<WorkshopState> {
   }
 
   Future<({TreeGeometry? tree, String? error})> _readTree(
-    McpClient client,
-    Installations pair, {
-    bool loadArtwork = true,
+    McpClient client, {
+    bool includeScene = true,
   }) async {
     if (!client.tools.contains('pob_get_tree'))
       return (
@@ -1103,18 +1102,11 @@ class WorkshopCubit extends Cubit<WorkshopState> {
         error: 'Для дерева нужен MCP 0.5.0. Обновите компонент MCP.',
       );
     try {
-      final geometry = TreeGeometry.fromJson(
+      final tree = TreeGeometry.fromJson(
         await client.call('pob_get_tree', {
-          if (loadArtwork && client.tools.contains('pob_tree_textures'))
+          if (includeScene && client.tools.contains('pob_tree_textures'))
             'includeScene': true,
         }),
-      );
-      if (!loadArtwork) return (tree: geometry, error: null);
-      final tree = await treeIcons.load(
-        geometry,
-        client,
-        _pairSource(pair),
-        onProgress: _showTreeProgress,
       );
       return (tree: tree, error: null);
     } catch (error) {
@@ -1122,10 +1114,60 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     }
   }
 
-  void _showTreeProgress(int loaded, int total) {
+  bool _canLoadTreeArtwork(TreeGeometry tree, McpClient client) =>
+      !_closing &&
+      !isClosed &&
+      !state.busy &&
+      ready &&
+      client.connected &&
+      identical(client, engine) &&
+      state.document?.stale == false &&
+      identical(state.document?.tree, tree);
+
+  void _startTreeArtwork() {
+    // Запрашиваем оформление после сохранения расчёта и завершения операции.
+    final tree = _pendingTreeArtwork;
+    final client = engine;
+    if (tree == null ||
+        _treeArtworkLoad != null ||
+        !_canLoadTreeArtwork(tree, client)) {
+      return;
+    }
+    final source = _componentSource;
+    _treeArtworkLoad = Future<void>(() async {
+      try {
+        await _loadTreeArtwork(tree, client, source);
+      } finally {
+        _treeArtworkLoad = null;
+        _startTreeArtwork();
+      }
+    });
+  }
+
+  Future<void> _loadTreeArtwork(
+    TreeGeometry tree,
+    McpClient client,
+    String source,
+  ) async {
+    bool current() => _canLoadTreeArtwork(tree, client);
+    if (!current()) return;
+    final loaded = await treeIcons.load(
+      tree,
+      client,
+      source,
+      canContinue: current,
+    );
+    if (!current() || identical(loaded, tree)) return;
+    final document = state.document!;
+    _pendingTreeArtwork = null;
     _update(
       state.copyWith(
-        status: 'Загрузка оригинального дерева PoB · $loaded / $total',
+        document: (
+          report: document.report,
+          tree: loaded,
+          stale: document.stale,
+          treeError: document.treeError,
+        ),
       ),
     );
   }
@@ -1814,6 +1856,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
   Future<CleanupResult> cleanProfile(Set<CleanupEntry> selected) async {
     late CleanupResult result;
     await _protectExit(() async {
+      await _treeArtworkLoad;
       result = await components.cleanProfile(selected);
       treeIcons.clear();
     });
@@ -1858,6 +1901,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     await _mcpEditor?.close();
     await _flushText();
     await engine.close();
+    await _treeArtworkLoad;
     await components.profileUse?.close();
     await super.close();
   }

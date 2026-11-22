@@ -748,11 +748,6 @@ class AppLocalizationsPt extends AppLocalizations {
   }
 
   @override
-  String m35c7d57c9f(String p0, String p1) {
-    return 'Carregando árvore PoB original $p0/$p1';
-  }
-
-  @override
   String m7ac5d410c5(String p0) {
     return 'Carregando: HTTP $p0';
   }
@@ -3656,11 +3651,6 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   @override
   String m912da5cc75(String p0) {
     return 'Carregamento incompleto: $p0';
-  }
-
-  @override
-  String m35c7d57c9f(String p0, String p1) {
-    return 'Carregando árvore PoB original $p0/$p1';
   }
 
   @override

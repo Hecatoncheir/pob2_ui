@@ -1226,18 +1226,6 @@
       }
     }
   },
-  "m35c7d57c9f": "Loading original PoB tree {p0} / {p1}",
-  "@m35c7d57c9f": {
-    "description": "Загрузка оригинального дерева PoB · {p0} / {p1}",
-    "placeholders": {
-      "p0": {
-        "type": "String"
-      },
-      "p1": {
-        "type": "String"
-      }
-    }
-  },
   "m7ac5d410c5": "Loading: HTTP {p0}",
   "@m7ac5d410c5": {
     "description": "Загрузка: HTTP {p0}",

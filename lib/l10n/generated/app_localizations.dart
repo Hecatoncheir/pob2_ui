@@ -1433,12 +1433,6 @@ abstract class AppLocalizations {
   /// **'Loading incomplete: {p0}'**
   String m912da5cc75(String p0);
 
-  /// Загрузка оригинального дерева PoB · {p0} / {p1}
-  ///
-  /// In en, this message translates to:
-  /// **'Loading original PoB tree {p0} / {p1}'**
-  String m35c7d57c9f(String p0, String p1);
-
   /// Загрузка: HTTP {p0}
   ///
   /// In en, this message translates to:

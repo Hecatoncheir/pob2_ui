@@ -723,11 +723,6 @@ class AppLocalizationsZh extends AppLocalizations {
   }
 
   @override
-  String m35c7d57c9f(String p0, String p1) {
-    return '正在載入原始 PoB 樹 $p0 / $p1';
-  }
-
-  @override
   String m7ac5d410c5(String p0) {
     return '載入中：HTTP $p0';
   }
@@ -3540,11 +3535,6 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   @override
   String m912da5cc75(String p0) {
     return '載入未完成：$p0';
-  }
-
-  @override
-  String m35c7d57c9f(String p0, String p1) {
-    return '正在載入原始 PoB 樹 $p0 / $p1';
   }
 
   @override

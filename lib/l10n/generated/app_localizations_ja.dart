@@ -726,11 +726,6 @@ class AppLocalizationsJa extends AppLocalizations {
   }
 
   @override
-  String m35c7d57c9f(String p0, String p1) {
-    return '元の PoB ツリー $p0 / $p1 をロードしています';
-  }
-
-  @override
   String m7ac5d410c5(String p0) {
     return '読み込み中: HTTP $p0';
   }

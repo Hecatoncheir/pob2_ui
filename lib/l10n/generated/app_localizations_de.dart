@@ -771,11 +771,6 @@ class AppLocalizationsDe extends AppLocalizations {
   }
 
   @override
-  String m35c7d57c9f(String p0, String p1) {
-    return 'Laden des ursprünglichen PoB-Baums $p0 / $p1';
-  }
-
-  @override
   String m7ac5d410c5(String p0) {
     return 'Laden: HTTP $p0';
   }

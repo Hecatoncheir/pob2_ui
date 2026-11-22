@@ -99,6 +99,11 @@ class _TreeViewState extends State<TreeView>
   void didUpdateWidget(TreeView old) {
     super.didUpdateWidget(old);
     if (old.tree == widget.tree) return;
+    if (identical(old.tree.nodes, widget.tree.nodes) &&
+        identical(old.tree.original, widget.tree.original)) {
+      _updateArtwork(old.tree);
+      return;
+    }
     _planPath = const [];
     WidgetsBinding.instance.addPostFrameCallback((_) => _refreshPower());
     scene = TreeScene(widget.tree);
@@ -192,7 +197,9 @@ class _TreeViewState extends State<TreeView>
   void _recordArtwork() {
     artwork?.dispose();
     final original = widget.tree.original;
-    artwork = original == null ? null : OriginalTreeArtwork(original, icons);
+    artwork = original == null || icons.isEmpty
+        ? null
+        : OriginalTreeArtwork(original, icons);
   }
 
   @override
