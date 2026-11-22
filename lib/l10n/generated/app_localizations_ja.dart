@@ -13,8 +13,8 @@ class AppLocalizationsJa extends AppLocalizations {
   AppLocalizationsJa([String locale = 'ja']) : super(locale);
 
   @override
-  String get m14158eacb5 =>
-      'CLI、MCP、およびアプリケーションは 1 つのセッションを参照します。タイトルは現在同期中です。ゲームの計算は Lua によって実行されます。';
+  String get mf070207e99 =>
+      'CLI、MCP、アプリは同じセッションを共有します。接続すると共有 XML を開いてキャラクターレベルを変更できます。';
 
   @override
   String get m8c9a654b8c => '追加前のDPS';
@@ -165,6 +165,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get me72be74923 => 'ビルドXML';
 
   @override
+  String get mcdc9b98a1e => 'ビルド XML を更新しました';
+
+  @override
   String get me097dcd9f8 => 'XML を保存しました';
 
   @override
@@ -263,6 +266,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String m1163ee245e(String p0) {
     return 'コンポーネント $p0 がありません。作業バージョンが保存されました。';
   }
+
+  @override
+  String get meccb4de0ee => '共有セッションにビルド XML がありません';
 
   @override
   String get m9bb974d2c9 => 'MCP パッケージに Python がありません';
@@ -585,6 +591,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get mc0259d55bc => 'このプラットフォーム用のインストーラーはまだありません';
 
   @override
+  String get m4b77800e7b => 'このリビジョンはまだ計算されていません';
+
+  @override
   String get m08afe540b9 => 'ノードへ';
 
   @override
@@ -645,6 +654,11 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m2071fb9905 => '詳細';
+
+  @override
+  String m2e046fa26a(String p0) {
+    return 'ライフ：$p0';
+  }
 
   @override
   String get mf9a38201c0 => 'ログと詳細';
@@ -766,6 +780,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m3c043ffe87 => '装備の変更';
+
+  @override
+  String get m3e6dfc9e9d => 'レベルを変更';
 
   @override
   String get med931b5f06 => '段階を編集';
@@ -1136,6 +1153,11 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m57d96c50f4 => 'アイテムの適用に失敗しました';
 
   @override
+  String m7a15f7eafb(String p0) {
+    return 'スナップショットを適用できませんでした：$p0';
+  }
+
+  @override
   String m4d1a8400d5(String p0) {
     return 'アップデートのチェックに失敗しました: $p0';
   }
@@ -1169,11 +1191,6 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m409f34eb59 => 'グループの保存に失敗しました';
-
-  @override
-  String mea514c56ce(String p0) {
-    return 'XML に名前を保存できませんでした: $p0';
-  }
 
   @override
   String get mef9d01550d => 'スケールの保存に失敗しました。';
@@ -1229,6 +1246,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String m88bb56b333(String p0) {
     return '不明な PoB シーン モード: $p0';
   }
+
+  @override
+  String get m520286c8d7 => '不明な状態';
 
   @override
   String get me6b70e080e => '不明なインストール タイプ';
@@ -1529,6 +1549,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m5ba3edc059 => 'ビルドを開くか作成';
+
+  @override
+  String get me005edfdd2 => '共有ビルドを開く';
 
   @override
   String get mcfc22a4611 => '検索を開く';
@@ -2039,12 +2062,21 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m7846ddb858 => 'Lua PoB で計算';
 
   @override
+  String get m81ad452265 => '計算';
+
+  @override
   String get m6fa4aff83a => 'パスを計算する';
 
   @override
   String m33a38de9ff(String p0) {
     return '計算 Lua · $p0%';
   }
+
+  @override
+  String get m113fcbe1d4 => '計算はサポートされていません';
+
+  @override
+  String get mf59bc90ee5 => '計算結果を保存しました';
 
   @override
   String get m30a07ea432 => '比較を計算中…';
@@ -2054,6 +2086,11 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m1e135b51f1 => '計算中…';
+
+  @override
+  String md6e28957de(String p0) {
+    return 'リビジョン $p0';
+  }
 
   @override
   String m7fce31d207(String p0, String p1, String p2, String p3) {
@@ -2119,6 +2156,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m7806bb3683 => 'ディスク上のビルドが変更されました。PoB からの更新をお待ちください。';
 
   @override
+  String get m66d08814d9 => 'ビルドが変更されました。新しいリビジョンを待ってから再度お試しください。';
+
+  @override
   String get m1aee4fe817 => 'ビルドが変更されました。ステージを開き直してください。';
 
   @override
@@ -2129,6 +2169,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m5c8bb47697 => 'アセンブリが見つかりません';
+
+  @override
+  String get m460924c692 => 'ビルドを更新しました';
 
   @override
   String get ma8f340d211 => 'Path of Building からビルドを更新しました';
@@ -2149,9 +2192,6 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m187a481844 => 'ビルドを削除しました';
-
-  @override
-  String get m993b5ef013 => 'アセンブリは別のクライアントによってすでに変更されています。新しいリビジョンを待ちます';
 
   @override
   String get m9027890a7b => '接続したフォルダーのビルドは「マイビルド」で利用できます。';
@@ -2203,6 +2243,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get mff4d880370 => 'セッションが見つかりません。明示的に作成する';
+
+  @override
+  String get ma9e16d992f => 'セッションを作成しました';
 
   @override
   String get m122d76b9ee => 'セッションはすでに存在します。創造せずにつながる';
@@ -2344,6 +2387,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get mb4d30cae52 => '保存';
+
+  @override
+  String get mf86539cea6 => 'XML を保存';
 
   @override
   String get m9af7509a85 => '保存して計算する';
@@ -2530,6 +2576,14 @@ class AppLocalizationsJa extends AppLocalizations {
   String get mbb0ceac2d1 => 'レベルと品質は整数でなければなりません';
 
   @override
+  String get m6b99447edb => 'キャラクターレベル';
+
+  @override
+  String maa52e33902(String p0) {
+    return 'キャラクターレベル：$p0';
+  }
+
+  @override
   String get mecb350422f => '敵のレベル';
 
   @override
@@ -2607,6 +2661,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get mb88cddfeb4 => '数字とルール · ルアポブ';
+
+  @override
+  String get mf381d2d571 => '部分計算';
 
   @override
   String get m9c8371b55d => '一部のデータがビジー状態または使用不可です。';

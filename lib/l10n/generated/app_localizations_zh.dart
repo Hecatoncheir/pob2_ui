@@ -13,7 +13,7 @@ class AppLocalizationsZh extends AppLocalizations {
   AppLocalizationsZh([String locale = 'zh']) : super(locale);
 
   @override
-  String get m14158eacb5 => 'CLI、MCP 和应用程序看到一个会话。目前正在同步标题；游戏计算由Lua执行。';
+  String get mf070207e99 => 'CLI、MCP 和應用程式共用同一個工作階段。連線後即可開啟共用 XML 並變更角色等級。';
 
   @override
   String get m8c9a654b8c => '加入前 DPS';
@@ -163,6 +163,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get me72be74923 => '配置 XML';
 
   @override
+  String get mcdc9b98a1e => '已更新流派 XML';
+
+  @override
   String get me097dcd9f8 => 'XML 已儲存';
 
   @override
@@ -261,6 +264,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String m1163ee245e(String p0) {
     return '元件缺少 $p0。工作版本已儲存。';
   }
+
+  @override
+  String get meccb4de0ee => '共用工作階段沒有流派 XML';
 
   @override
   String get m9bb974d2c9 => 'MCP 套件缺少 Python';
@@ -582,6 +588,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get mc0259d55bc => '該平台還沒有安裝程序';
 
   @override
+  String get m4b77800e7b => '此修訂尚無計算結果';
+
+  @override
   String get m08afe540b9 => '到節點';
 
   @override
@@ -642,6 +651,11 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m2071fb9905 => '更多';
+
+  @override
+  String m2e046fa26a(String p0) {
+    return '生命：$p0';
+  }
 
   @override
   String get mf9a38201c0 => '日誌和詳細信息';
@@ -763,6 +777,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m3c043ffe87 => '裝備變更';
+
+  @override
+  String get m3e6dfc9e9d => '變更等級';
 
   @override
   String get med931b5f06 => '編輯階段';
@@ -1131,6 +1148,11 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m57d96c50f4 => '申請計畫失敗';
 
   @override
+  String m7a15f7eafb(String p0) {
+    return '無法套用快照：$p0';
+  }
+
+  @override
   String m4d1a8400d5(String p0) {
     return '無法檢查更新：$p0';
   }
@@ -1164,11 +1186,6 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m409f34eb59 => '無法保存群組';
-
-  @override
-  String mea514c56ce(String p0) {
-    return '无法在 XML 中保存名称：$p0';
-  }
 
   @override
   String get mef9d01550d => '無法保存比例。';
@@ -1224,6 +1241,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String m88bb56b333(String p0) {
     return '未知 PoB 場景模式：$p0';
   }
+
+  @override
+  String get m520286c8d7 => '未知狀態';
 
   @override
   String get me6b70e080e => '未知的安裝類型';
@@ -1522,6 +1542,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m5ba3edc059 => '開啟或建立流派';
+
+  @override
+  String get me005edfdd2 => '開啟共用流派';
 
   @override
   String get mcfc22a4611 => '開啟搜尋';
@@ -2032,12 +2055,21 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m7846ddb858 => '以 Lua PoB 計算';
 
   @override
+  String get m81ad452265 => '計算';
+
+  @override
   String get m6fa4aff83a => '計算路徑';
 
   @override
   String m33a38de9ff(String p0) {
     return '計算 Lua · $p0%';
   }
+
+  @override
+  String get m113fcbe1d4 => '不支援此計算';
+
+  @override
+  String get mf59bc90ee5 => '已儲存計算結果';
 
   @override
   String get m30a07ea432 => '正在計算比較…';
@@ -2047,6 +2079,11 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m1e135b51f1 => '計算...';
+
+  @override
+  String md6e28957de(String p0) {
+    return '修訂 $p0';
+  }
 
   @override
   String m7fce31d207(String p0, String p1, String p2, String p3) {
@@ -2112,6 +2149,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m7806bb3683 => '磁碟上的配置已變更。請等待 PoB 的更新。';
 
   @override
+  String get m66d08814d9 => '流派已變更。請等待新的修訂後再試一次。';
+
+  @override
   String get m1aee4fe817 => '流派已變更。請重新開啟此階段。';
 
   @override
@@ -2122,6 +2162,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m5c8bb47697 => '找不到程序集';
+
+  @override
+  String get m460924c692 => '已更新流派';
 
   @override
   String get ma8f340d211 => '已從 Path of Building 更新配置';
@@ -2142,9 +2185,6 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m187a481844 => '已刪除配置';
-
-  @override
-  String get m993b5ef013 => '该程序集已被另一个客户端修改。等待新的改版';
 
   @override
   String get m9027890a7b => '已連接資料夾中的流派可在「我的流派」查看。';
@@ -2196,6 +2236,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get mff4d880370 => '找不到会话。明確創建它';
+
+  @override
+  String get ma9e16d992f => '已建立工作階段';
 
   @override
   String get m122d76b9ee => '会话已存在。無需建立即可連接';
@@ -2334,6 +2377,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get mb4d30cae52 => '儲存';
+
+  @override
+  String get mf86539cea6 => '儲存 XML';
 
   @override
   String get m9af7509a85 => '儲存並計算';
@@ -2520,6 +2566,14 @@ class AppLocalizationsZh extends AppLocalizations {
   String get mbb0ceac2d1 => '等級和品質必須是整數';
 
   @override
+  String get m6b99447edb => '角色等級';
+
+  @override
+  String maa52e33902(String p0) {
+    return '角色等級：$p0';
+  }
+
+  @override
   String get mecb350422f => '敵人等級';
 
   @override
@@ -2597,6 +2651,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get mb88cddfeb4 => '數字與規則·LUA POB';
+
+  @override
+  String get mf381d2d571 => '部分計算';
 
   @override
   String get m9c8371b55d => '部分資料繁忙或無法使用。';
@@ -2715,7 +2772,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   AppLocalizationsZhHant() : super('zh_Hant');
 
   @override
-  String get m14158eacb5 => 'CLI、MCP 和应用程序看到一个会话。目前正在同步标题；游戏计算由Lua执行。';
+  String get mf070207e99 => 'CLI、MCP 和應用程式共用同一個工作階段。連線後即可開啟共用 XML 並變更角色等級。';
 
   @override
   String get m8c9a654b8c => '加入前 DPS';
@@ -2865,6 +2922,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get me72be74923 => '配置 XML';
 
   @override
+  String get mcdc9b98a1e => '已更新流派 XML';
+
+  @override
   String get me097dcd9f8 => 'XML 已儲存';
 
   @override
@@ -2963,6 +3023,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String m1163ee245e(String p0) {
     return '元件缺少 $p0。工作版本已儲存。';
   }
+
+  @override
+  String get meccb4de0ee => '共用工作階段沒有流派 XML';
 
   @override
   String get m9bb974d2c9 => 'MCP 套件缺少 Python';
@@ -3284,6 +3347,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get mc0259d55bc => '該平台還沒有安裝程序';
 
   @override
+  String get m4b77800e7b => '此修訂尚無計算結果';
+
+  @override
   String get m08afe540b9 => '到節點';
 
   @override
@@ -3344,6 +3410,11 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m2071fb9905 => '更多';
+
+  @override
+  String m2e046fa26a(String p0) {
+    return '生命：$p0';
+  }
 
   @override
   String get mf9a38201c0 => '日誌和詳細信息';
@@ -3465,6 +3536,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m3c043ffe87 => '裝備變更';
+
+  @override
+  String get m3e6dfc9e9d => '變更等級';
 
   @override
   String get med931b5f06 => '編輯階段';
@@ -3833,6 +3907,11 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m57d96c50f4 => '申請計畫失敗';
 
   @override
+  String m7a15f7eafb(String p0) {
+    return '無法套用快照：$p0';
+  }
+
+  @override
   String m4d1a8400d5(String p0) {
     return '無法檢查更新：$p0';
   }
@@ -3866,11 +3945,6 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m409f34eb59 => '無法保存群組';
-
-  @override
-  String mea514c56ce(String p0) {
-    return '无法在 XML 中保存名称：$p0';
-  }
 
   @override
   String get mef9d01550d => '無法保存比例。';
@@ -3926,6 +4000,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String m88bb56b333(String p0) {
     return '未知 PoB 場景模式：$p0';
   }
+
+  @override
+  String get m520286c8d7 => '未知狀態';
 
   @override
   String get me6b70e080e => '未知的安裝類型';
@@ -4224,6 +4301,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m5ba3edc059 => '開啟或建立流派';
+
+  @override
+  String get me005edfdd2 => '開啟共用流派';
 
   @override
   String get mcfc22a4611 => '開啟搜尋';
@@ -4734,12 +4814,21 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m7846ddb858 => '以 Lua PoB 計算';
 
   @override
+  String get m81ad452265 => '計算';
+
+  @override
   String get m6fa4aff83a => '計算路徑';
 
   @override
   String m33a38de9ff(String p0) {
     return '計算 Lua · $p0%';
   }
+
+  @override
+  String get m113fcbe1d4 => '不支援此計算';
+
+  @override
+  String get mf59bc90ee5 => '已儲存計算結果';
 
   @override
   String get m30a07ea432 => '正在計算比較…';
@@ -4749,6 +4838,11 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m1e135b51f1 => '計算...';
+
+  @override
+  String md6e28957de(String p0) {
+    return '修訂 $p0';
+  }
 
   @override
   String m7fce31d207(String p0, String p1, String p2, String p3) {
@@ -4814,6 +4908,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m7806bb3683 => '磁碟上的配置已變更。請等待 PoB 的更新。';
 
   @override
+  String get m66d08814d9 => '流派已變更。請等待新的修訂後再試一次。';
+
+  @override
   String get m1aee4fe817 => '流派已變更。請重新開啟此階段。';
 
   @override
@@ -4824,6 +4921,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m5c8bb47697 => '找不到程序集';
+
+  @override
+  String get m460924c692 => '已更新流派';
 
   @override
   String get ma8f340d211 => '已從 Path of Building 更新配置';
@@ -4844,9 +4944,6 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m187a481844 => '已刪除配置';
-
-  @override
-  String get m993b5ef013 => '该程序集已被另一个客户端修改。等待新的改版';
 
   @override
   String get m9027890a7b => '已連接資料夾中的流派可在「我的流派」查看。';
@@ -4898,6 +4995,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get mff4d880370 => '找不到会话。明確創建它';
+
+  @override
+  String get ma9e16d992f => '已建立工作階段';
 
   @override
   String get m122d76b9ee => '会话已存在。無需建立即可連接';
@@ -5036,6 +5136,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get mb4d30cae52 => '儲存';
+
+  @override
+  String get mf86539cea6 => '儲存 XML';
 
   @override
   String get m9af7509a85 => '儲存並計算';
@@ -5222,6 +5325,14 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get mbb0ceac2d1 => '等級和品質必須是整數';
 
   @override
+  String get m6b99447edb => '角色等級';
+
+  @override
+  String maa52e33902(String p0) {
+    return '角色等級：$p0';
+  }
+
+  @override
   String get mecb350422f => '敵人等級';
 
   @override
@@ -5299,6 +5410,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get mb88cddfeb4 => '數字與規則·LUA POB';
+
+  @override
+  String get mf381d2d571 => '部分計算';
 
   @override
   String get m9c8371b55d => '部分資料繁忙或無法使用。';

@@ -119,11 +119,11 @@ abstract class AppLocalizations {
     Locale.fromSubtags(languageCode: 'zh', scriptCode: 'Hant'),
   ];
 
-  /// CLI, MCP и приложение видят одну сессию. Сейчас синхронизируется название; игровые расчёты выполняет Lua.
+  /// CLI, MCP и приложение видят одну сессию. После подключения можно открыть общий XML и изменить уровень персонажа.
   ///
   /// In en, this message translates to:
-  /// **'CLI, MCP and application see one session. The title is currently being synchronized; game calculations are performed by Lua.'**
-  String get m14158eacb5;
+  /// **'CLI, MCP and the app share a session. Connect to open the shared XML and change the character level.'**
+  String get mf070207e99;
 
   /// DPS до
   ///
@@ -407,6 +407,12 @@ abstract class AppLocalizations {
   /// **'Build XML'**
   String get me72be74923;
 
+  /// XML сборки обновлён
+  ///
+  /// In en, this message translates to:
+  /// **'Build XML updated'**
+  String get mcdc9b98a1e;
+
   /// XML сохранён
   ///
   /// In en, this message translates to:
@@ -556,6 +562,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'The component is missing {p0}. The working version has been saved.'**
   String m1163ee245e(String p0);
+
+  /// В общей сессии нет XML сборки
+  ///
+  /// In en, this message translates to:
+  /// **'The shared session has no build XML'**
+  String get meccb4de0ee;
 
   /// В пакете MCP отсутствует Python
   ///
@@ -1187,6 +1199,12 @@ abstract class AppLocalizations {
   /// **'There is no installer for this platform yet'**
   String get mc0259d55bc;
 
+  /// Для этой ревизии расчёта ещё нет
+  ///
+  /// In en, this message translates to:
+  /// **'No calculation for this revision yet'**
+  String get m4b77800e7b;
+
   /// До узла
   ///
   /// In en, this message translates to:
@@ -1294,6 +1312,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'More'**
   String get m2071fb9905;
+
+  /// Жизнь: {p0}
+  ///
+  /// In en, this message translates to:
+  /// **'Life: {p0}'**
+  String m2e046fa26a(String p0);
 
   /// Журнал и подробности
   ///
@@ -1516,6 +1540,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Equipment changes'**
   String get m3c043ffe87;
+
+  /// Изменить уровень
+  ///
+  /// In en, this message translates to:
+  /// **'Change level'**
+  String get m3e6dfc9e9d;
 
   /// Изменить этап
   ///
@@ -2166,6 +2196,12 @@ abstract class AppLocalizations {
   /// **'Failed to apply item'**
   String get m57d96c50f4;
 
+  /// Не удалось применить снимок: {p0}
+  ///
+  /// In en, this message translates to:
+  /// **'Could not apply snapshot: {p0}'**
+  String m7a15f7eafb(String p0);
+
   /// Не удалось проверить обновления: {p0}
   ///
   /// In en, this message translates to:
@@ -2219,12 +2255,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Failed to save group'**
   String get m409f34eb59;
-
-  /// Не удалось сохранить имя в XML: {p0}
-  ///
-  /// In en, this message translates to:
-  /// **'Failed to save name in XML: {p0}'**
-  String mea514c56ce(String p0);
 
   /// Не удалось сохранить масштаб.
   ///
@@ -2327,6 +2357,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Unknown PoB scene mode: {p0}'**
   String m88bb56b333(String p0);
+
+  /// Неизвестный статус
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown status'**
+  String get m520286c8d7;
 
   /// Неизвестный тип установки
   ///
@@ -2915,6 +2951,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Open or create a build'**
   String get m5ba3edc059;
+
+  /// Открыть общую сборку
+  ///
+  /// In en, this message translates to:
+  /// **'Open shared build'**
+  String get me005edfdd2;
 
   /// Открыть поиск
   ///
@@ -3864,6 +3906,12 @@ abstract class AppLocalizations {
   /// **'Calculated in Lua PoB'**
   String get m7846ddb858;
 
+  /// Рассчитать
+  ///
+  /// In en, this message translates to:
+  /// **'Calculate'**
+  String get m81ad452265;
+
   /// Рассчитать пути
   ///
   /// In en, this message translates to:
@@ -3875,6 +3923,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Calculation Lua · {p0}%'**
   String m33a38de9ff(String p0);
+
+  /// Расчёт не поддерживается
+  ///
+  /// In en, this message translates to:
+  /// **'Calculation not supported'**
+  String get m113fcbe1d4;
+
+  /// Расчёт сохранён
+  ///
+  /// In en, this message translates to:
+  /// **'Calculation saved'**
+  String get mf59bc90ee5;
 
   /// Расчёт сравнения…
   ///
@@ -3893,6 +3953,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Calculation…'**
   String get m1e135b51f1;
+
+  /// Ревизия {p0}
+  ///
+  /// In en, this message translates to:
+  /// **'Revision {p0}'**
+  String md6e28957de(String p0);
 
   /// Ревизия {p0} {p1} не совпадает: ожидалась {p2}, получена {p3}.
   ///
@@ -4008,6 +4074,12 @@ abstract class AppLocalizations {
   /// **'The build changed on disk. Wait for the update from PoB.'**
   String get m7806bb3683;
 
+  /// Сборка изменилась. Дождитесь новой ревизии и повторите действие
+  ///
+  /// In en, this message translates to:
+  /// **'The build changed. Wait for the new revision and try again.'**
+  String get m66d08814d9;
+
   /// Сборка изменилась. Откройте этап снова.
   ///
   /// In en, this message translates to:
@@ -4031,6 +4103,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Build not found'**
   String get m5c8bb47697;
+
+  /// Сборка обновлена
+  ///
+  /// In en, this message translates to:
+  /// **'Build updated'**
+  String get m460924c692;
 
   /// Сборка обновлена из Path of Building
   ///
@@ -4067,12 +4145,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Build deleted'**
   String get m187a481844;
-
-  /// Сборка уже изменена другим клиентом. Дождитесь новой ревизии
-  ///
-  /// In en, this message translates to:
-  /// **'The assembly has already been modified by another client. Wait for a new revision'**
-  String get m993b5ef013;
 
   /// Сборки из подключённой папки уже доступны в разделе «Мои сборки».
   ///
@@ -4175,6 +4247,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Session not found. Create it explicitly'**
   String get mff4d880370;
+
+  /// Сессия создана
+  ///
+  /// In en, this message translates to:
+  /// **'Session created'**
+  String get ma9e16d992f;
 
   /// Сессия уже существует. Подключитесь без создания
   ///
@@ -4451,6 +4529,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Save'**
   String get mb4d30cae52;
+
+  /// Сохранить XML
+  ///
+  /// In en, this message translates to:
+  /// **'Save XML'**
+  String get mf86539cea6;
 
   /// Сохранить и рассчитать
   ///
@@ -4800,6 +4884,18 @@ abstract class AppLocalizations {
   /// **'Level and quality must be integers'**
   String get mbb0ceac2d1;
 
+  /// Уровень персонажа
+  ///
+  /// In en, this message translates to:
+  /// **'Character level'**
+  String get m6b99447edb;
+
+  /// Уровень персонажа: {p0}
+  ///
+  /// In en, this message translates to:
+  /// **'Character level: {p0}'**
+  String maa52e33902(String p0);
+
   /// Уровень противника
   ///
   /// In en, this message translates to:
@@ -4949,6 +5045,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'NUMBERS AND RULES · LUA POB'**
   String get mb88cddfeb4;
+
+  /// Частичный расчёт
+  ///
+  /// In en, this message translates to:
+  /// **'Partial calculation'**
+  String get mf381d2d571;
 
   /// Часть данных занята или недоступна.
   ///

@@ -5,9 +5,11 @@ import 'dart:math';
 
 import 'package:fixnum/fixnum.dart';
 import 'package:grpc/grpc.dart';
+import 'package:pob2_engine_api/pob2/v1/build.pb.dart' as builds;
 import 'package:pob2_engine_api/pob2/v1/session.pbgrpc.dart' as pb;
 
 import '../domain/engine_session.dart';
+import 'pob_build_document.dart';
 
 abstract interface class EngineConnection {
   Future<EngineSnapshot> snapshot(String sessionId);
@@ -21,6 +23,8 @@ abstract interface class EngineConnection {
     String name,
     String requestId,
   );
+  Future<void> setLevel(EngineSnapshot current, int level, String requestId);
+  Future<void> calculate(EngineSnapshot current, String requestId);
   Stream<EngineChange> watch(String sessionId, int afterRevision);
   Future<void> close();
 }
@@ -175,8 +179,40 @@ class EngineSessionClient implements EngineConnection {
     }
   }
 
-  static EngineSnapshot _snapshot(pb.SessionSnapshot value) =>
-      EngineSnapshot(value.sessionId, value.buildName, value.revision.toInt());
+  static EngineSnapshot _snapshot(pb.SessionSnapshot value) => EngineSnapshot(
+    value.sessionId,
+    value.buildName,
+    value.revision.toInt(),
+    build: value.hasBuild() ? _build(value.build) : null,
+  );
+
+  static EngineBuild _build(builds.BuildDocument value) {
+    PobBuildDocument(value.xml);
+    final calculation =
+        value.hasCalculation() &&
+            value.calculatedFromRevision == value.inputRevision
+        ? _calculation(value.calculation)
+        : null;
+    return EngineBuild(
+      xml: value.xml,
+      level: value.model.level,
+      calculation: calculation,
+    );
+  }
+
+  static EngineCalculation _calculation(builds.CalculationResult value) =>
+      EngineCalculation(
+        status: switch (value.status) {
+          builds.CalculationStatus.CALCULATION_STATUS_COMPLETE => 'Готово',
+          builds.CalculationStatus.CALCULATION_STATUS_PARTIAL =>
+            'Частичный расчёт',
+          builds.CalculationStatus.CALCULATION_STATUS_UNSUPPORTED =>
+            'Расчёт не поддерживается',
+          _ => 'Неизвестный статус',
+        },
+        life: value.stats['Life'],
+        warnings: List.unmodifiable(value.issues.map((issue) => issue.message)),
+      );
   CallOptions get _timeout => CallOptions(timeout: const Duration(seconds: 5));
 
   @override
@@ -217,6 +253,38 @@ class EngineSessionClient implements EngineConnection {
       options: _timeout,
     )).snapshot,
   );
+
+  @override
+  Future<void> setLevel(
+    EngineSnapshot current,
+    int level,
+    String requestId,
+  ) async {
+    await _rpc.applyBuild(
+      pb.ApplyBuildRequest(
+        sessionId: current.sessionId,
+        expectedRevision: Int64(current.revision),
+        requestId: requestId,
+        edit: builds.BuildEdit(level: builds.LevelEdit(level: level)),
+      ),
+      options: _timeout,
+    );
+  }
+
+  @override
+  Future<void> calculate(EngineSnapshot current, String requestId) async {
+    await _rpc
+        .calculateBuild(
+          pb.CalculateBuildRequest(
+            sessionId: current.sessionId,
+            expectedRevision: Int64(current.revision),
+            requestId: requestId,
+          ),
+          options: CallOptions(timeout: const Duration(seconds: 90)),
+        )
+        .where((answer) => answer.hasSnapshot())
+        .single;
+  }
 
   @override
   Stream<EngineChange> watch(String sessionId, int afterRevision) => _rpc

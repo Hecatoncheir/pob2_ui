@@ -13,8 +13,8 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
-  String get m14158eacb5 =>
-      'CLI, MCP and application see one session. The title is currently being synchronized; game calculations are performed by Lua.';
+  String get mf070207e99 =>
+      'CLI, MCP and the app share a session. Connect to open the shared XML and change the character level.';
 
   @override
   String get m8c9a654b8c => 'DPS before';
@@ -169,6 +169,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get me72be74923 => 'Build XML';
 
   @override
+  String get mcdc9b98a1e => 'Build XML updated';
+
+  @override
   String get me097dcd9f8 => 'XML saved';
 
   @override
@@ -267,6 +270,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String m1163ee245e(String p0) {
     return 'The component is missing $p0. The working version has been saved.';
   }
+
+  @override
+  String get meccb4de0ee => 'The shared session has no build XML';
 
   @override
   String get m9bb974d2c9 => 'The MCP package is missing Python';
@@ -599,6 +605,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get mc0259d55bc => 'There is no installer for this platform yet';
 
   @override
+  String get m4b77800e7b => 'No calculation for this revision yet';
+
+  @override
   String get m08afe540b9 => 'To node';
 
   @override
@@ -660,6 +669,11 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get m2071fb9905 => 'More';
+
+  @override
+  String m2e046fa26a(String p0) {
+    return 'Life: $p0';
+  }
 
   @override
   String get mf9a38201c0 => 'Log and details';
@@ -783,6 +797,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get m3c043ffe87 => 'Equipment changes';
+
+  @override
+  String get m3e6dfc9e9d => 'Change level';
 
   @override
   String get med931b5f06 => 'Edit milestone';
@@ -1158,6 +1175,11 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m57d96c50f4 => 'Failed to apply item';
 
   @override
+  String m7a15f7eafb(String p0) {
+    return 'Could not apply snapshot: $p0';
+  }
+
+  @override
   String m4d1a8400d5(String p0) {
     return 'Failed to check for updates: $p0';
   }
@@ -1191,11 +1213,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get m409f34eb59 => 'Failed to save group';
-
-  @override
-  String mea514c56ce(String p0) {
-    return 'Failed to save name in XML: $p0';
-  }
 
   @override
   String get mef9d01550d => 'Failed to save scale.';
@@ -1251,6 +1268,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String m88bb56b333(String p0) {
     return 'Unknown PoB scene mode: $p0';
   }
+
+  @override
+  String get m520286c8d7 => 'Unknown status';
 
   @override
   String get me6b70e080e => 'Unknown installation type';
@@ -1557,6 +1577,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get m5ba3edc059 => 'Open or create a build';
+
+  @override
+  String get me005edfdd2 => 'Open shared build';
 
   @override
   String get mcfc22a4611 => 'Open search';
@@ -2071,12 +2094,21 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m7846ddb858 => 'Calculated in Lua PoB';
 
   @override
+  String get m81ad452265 => 'Calculate';
+
+  @override
   String get m6fa4aff83a => 'Calculate paths';
 
   @override
   String m33a38de9ff(String p0) {
     return 'Calculation Lua · $p0%';
   }
+
+  @override
+  String get m113fcbe1d4 => 'Calculation not supported';
+
+  @override
+  String get mf59bc90ee5 => 'Calculation saved';
 
   @override
   String get m30a07ea432 => 'Calculating comparison…';
@@ -2086,6 +2118,11 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get m1e135b51f1 => 'Calculation…';
+
+  @override
+  String md6e28957de(String p0) {
+    return 'Revision $p0';
+  }
 
   @override
   String m7fce31d207(String p0, String p1, String p2, String p3) {
@@ -2153,6 +2190,10 @@ class AppLocalizationsEn extends AppLocalizations {
       'The build changed on disk. Wait for the update from PoB.';
 
   @override
+  String get m66d08814d9 =>
+      'The build changed. Wait for the new revision and try again.';
+
+  @override
   String get m1aee4fe817 => 'The build changed. Open the stage again.';
 
   @override
@@ -2163,6 +2204,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get m5c8bb47697 => 'Build not found';
+
+  @override
+  String get m460924c692 => 'Build updated';
 
   @override
   String get ma8f340d211 => 'Build updated from Path of Building';
@@ -2183,10 +2227,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get m187a481844 => 'Build deleted';
-
-  @override
-  String get m993b5ef013 =>
-      'The assembly has already been modified by another client. Wait for a new revision';
 
   @override
   String get m9027890a7b =>
@@ -2241,6 +2281,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get mff4d880370 => 'Session not found. Create it explicitly';
+
+  @override
+  String get ma9e16d992f => 'Session created';
 
   @override
   String get m122d76b9ee => 'Session already exists. Connect without creation';
@@ -2386,6 +2429,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get mb4d30cae52 => 'Save';
+
+  @override
+  String get mf86539cea6 => 'Save XML';
 
   @override
   String get m9af7509a85 => 'Save and calculate';
@@ -2576,6 +2622,14 @@ class AppLocalizationsEn extends AppLocalizations {
   String get mbb0ceac2d1 => 'Level and quality must be integers';
 
   @override
+  String get m6b99447edb => 'Character level';
+
+  @override
+  String maa52e33902(String p0) {
+    return 'Character level: $p0';
+  }
+
+  @override
   String get mecb350422f => 'Enemy level';
 
   @override
@@ -2658,6 +2712,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get mb88cddfeb4 => 'NUMBERS AND RULES · LUA POB';
+
+  @override
+  String get mf381d2d571 => 'Partial calculation';
 
   @override
   String get m9c8371b55d => 'Some of the data is busy or unavailable.';

@@ -400,8 +400,8 @@ packages:
     dependency: "direct main"
     description:
       path: "gen/dart"
-      ref: "175bb83ad09a6a45d0220c8647f793afdbe6b009"
-      resolved-ref: "175bb83ad09a6a45d0220c8647f793afdbe6b009"
+      ref: "714cea980775600b5951db0cf7c02b55aa2a72d2"
+      resolved-ref: "714cea980775600b5951db0cf7c02b55aa2a72d2"
       url: "https://github.com/Hecatoncheir/pob2_engine.git"
     source: git
     version: "0.0.0"

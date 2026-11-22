@@ -7,6 +7,7 @@ import '../domain/engine_session.dart';
 import 'core/app_text.dart';
 import 'core/dialog_close_button.dart';
 import 'core/motion.dart';
+import 'engine_build_dialog.dart';
 import 'engine_session_cubit.dart';
 import 'engine_session_view.dart';
 import 'workshop_cubit.dart';
@@ -97,7 +98,7 @@ class _EngineSessionDialogState extends State<_EngineSessionDialog> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const AppText(
-              'CLI, MCP и приложение видят одну сессию. Сейчас синхронизируется название; игровые расчёты выполняет Lua.',
+              'CLI, MCP и приложение видят одну сессию. После подключения можно открыть общий XML и изменить уровень персонажа.',
             ),
             const SizedBox(height: 16),
             Row(
@@ -168,6 +169,12 @@ class _EngineSessionDialogState extends State<_EngineSessionDialog> {
       );
 
   List<Widget> _actions(BuildContext context) => [
+    if (widget.model.engineSession.state.snapshot?.build != null)
+      TextButton(
+        key: const Key('engine-open-build'),
+        onPressed: busy ? null : () => showEngineBuild(context, widget.model),
+        child: const AppText('Открыть общую сборку'),
+      ),
     if (widget.model.engineSession.state.snapshot != null)
       TextButton(
         onPressed: busy

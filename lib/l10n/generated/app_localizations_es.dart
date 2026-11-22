@@ -13,8 +13,8 @@ class AppLocalizationsEs extends AppLocalizations {
   AppLocalizationsEs([String locale = 'es']) : super(locale);
 
   @override
-  String get m14158eacb5 =>
-      'CLI, MCP y la aplicación ven una sesión. El título se está sincronizando actualmente; Los cálculos del juego los realiza Lua.';
+  String get mf070207e99 =>
+      'La CLI, MCP y la aplicación comparten una sesión. Conéctate para abrir el XML compartido y cambiar el nivel del personaje.';
 
   @override
   String get m8c9a654b8c => 'DPS antes';
@@ -173,6 +173,9 @@ class AppLocalizationsEs extends AppLocalizations {
   String get me72be74923 => 'XML de la configuración';
 
   @override
+  String get mcdc9b98a1e => 'XML de la configuración actualizado';
+
+  @override
   String get me097dcd9f8 => 'XML guardado';
 
   @override
@@ -271,6 +274,10 @@ class AppLocalizationsEs extends AppLocalizations {
   String m1163ee245e(String p0) {
     return 'Falta el componente $p0. La versión funcional se ha guardado.';
   }
+
+  @override
+  String get meccb4de0ee =>
+      'La sesión compartida no contiene XML de la configuración';
 
   @override
   String get m9bb974d2c9 => 'Falta Python en el paquete MCP';
@@ -610,6 +617,9 @@ class AppLocalizationsEs extends AppLocalizations {
   String get mc0259d55bc => 'Aún no existe un instalador para esta plataforma';
 
   @override
+  String get m4b77800e7b => 'Aún no hay un cálculo para esta revisión';
+
+  @override
   String get m08afe540b9 => 'Al nodo';
 
   @override
@@ -672,6 +682,11 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get m2071fb9905 => 'Más';
+
+  @override
+  String m2e046fa26a(String p0) {
+    return 'Vida: $p0';
+  }
 
   @override
   String get mf9a38201c0 => 'Registro y detalles';
@@ -797,6 +812,9 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get m3c043ffe87 => 'Cambios de equipo';
+
+  @override
+  String get m3e6dfc9e9d => 'Cambiar nivel';
 
   @override
   String get med931b5f06 => 'Editar etapa';
@@ -1174,6 +1192,11 @@ class AppLocalizationsEs extends AppLocalizations {
   String get m57d96c50f4 => 'No se pudo aplicar el elemento';
 
   @override
+  String m7a15f7eafb(String p0) {
+    return 'No se pudo aplicar la instantánea: $p0';
+  }
+
+  @override
   String m4d1a8400d5(String p0) {
     return 'No se pudieron buscar actualizaciones: $p0';
   }
@@ -1207,11 +1230,6 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get m409f34eb59 => 'No se pudo guardar el grupo';
-
-  @override
-  String mea514c56ce(String p0) {
-    return 'No se pudo guardar el nombre en XML: $p0';
-  }
 
   @override
   String get mef9d01550d => 'No se pudo guardar la escala.';
@@ -1268,6 +1286,9 @@ class AppLocalizationsEs extends AppLocalizations {
   String m88bb56b333(String p0) {
     return 'Modo de escena PoB desconocido: $p0';
   }
+
+  @override
+  String get m520286c8d7 => 'Estado desconocido';
 
   @override
   String get me6b70e080e => 'Tipo de instalación desconocido';
@@ -1580,6 +1601,9 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get m5ba3edc059 => 'Abrir o crear una configuración';
+
+  @override
+  String get me005edfdd2 => 'Abrir configuración compartida';
 
   @override
   String get mcfc22a4611 => 'Abrir búsqueda';
@@ -2102,12 +2126,21 @@ class AppLocalizationsEs extends AppLocalizations {
   String get m7846ddb858 => 'Calculado en Lua PoB';
 
   @override
+  String get m81ad452265 => 'Calcular';
+
+  @override
   String get m6fa4aff83a => 'Calcular rutas';
 
   @override
   String m33a38de9ff(String p0) {
     return 'Cálculo Lua · $p0%';
   }
+
+  @override
+  String get m113fcbe1d4 => 'Cálculo no compatible';
+
+  @override
+  String get mf59bc90ee5 => 'Cálculo guardado';
 
   @override
   String get m30a07ea432 => 'Calculando la comparación…';
@@ -2117,6 +2150,11 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get m1e135b51f1 => 'Cálculo…';
+
+  @override
+  String md6e28957de(String p0) {
+    return 'Revisión $p0';
+  }
 
   @override
   String m7fce31d207(String p0, String p1, String p2, String p3) {
@@ -2184,6 +2222,10 @@ class AppLocalizationsEs extends AppLocalizations {
       'La configuración cambió en el disco. Espera a que se actualice desde PoB.';
 
   @override
+  String get m66d08814d9 =>
+      'La configuración cambió. Espera la nueva revisión y vuelve a intentarlo.';
+
+  @override
   String get m1aee4fe817 => 'La build ha cambiado. Vuelve a abrir la etapa.';
 
   @override
@@ -2196,6 +2238,9 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get m5c8bb47697 => 'Conjunto no encontrado';
+
+  @override
+  String get m460924c692 => 'Configuración actualizada';
 
   @override
   String get ma8f340d211 => 'Configuración actualizada desde Path of Building';
@@ -2216,10 +2261,6 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get m187a481844 => 'Configuración eliminada';
-
-  @override
-  String get m993b5ef013 =>
-      'El ensamblaje ya ha sido modificado por otro cliente. Espere una nueva revisión';
 
   @override
   String get m9027890a7b =>
@@ -2275,6 +2316,9 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get mff4d880370 => 'Sesión no encontrada. Créelo explícitamente';
+
+  @override
+  String get ma9e16d992f => 'Sesión creada';
 
   @override
   String get m122d76b9ee => 'La sesión ya existe. Conéctate sin creación';
@@ -2422,6 +2466,9 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get mb4d30cae52 => 'Guardar';
+
+  @override
+  String get mf86539cea6 => 'Guardar XML';
 
   @override
   String get m9af7509a85 => 'Guardar y calcular';
@@ -2613,6 +2660,14 @@ class AppLocalizationsEs extends AppLocalizations {
   String get mbb0ceac2d1 => 'El nivel y la calidad deben ser números enteros';
 
   @override
+  String get m6b99447edb => 'Nivel del personaje';
+
+  @override
+  String maa52e33902(String p0) {
+    return 'Nivel del personaje: $p0';
+  }
+
+  @override
   String get mecb350422f => 'Nivel enemigo';
 
   @override
@@ -2696,6 +2751,9 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get mb88cddfeb4 => 'NÚMEROS Y REGLAS · LUA POB';
+
+  @override
+  String get mf381d2d571 => 'Cálculo parcial';
 
   @override
   String get m9c8371b55d =>

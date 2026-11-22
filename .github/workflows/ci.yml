@@ -10,6 +10,10 @@ on:
         description: 'Проверить пару из tool/components-lock.json'
         type: boolean
         default: false
+      engine_release:
+        description: 'Тег движка для сквозной проверки общей сборки'
+        type: string
+        default: ''
       cold_install:
         description: 'Проверить первый запуск без предварительной загрузки архивов'
         type: boolean
@@ -192,6 +196,45 @@ jobs:
             args+=(--lock tool/components-lock.json)
           fi
           dart run tool/smoke.dart "${args[@]}" | tee build/review/components.json
+      - name: Проверить общую XML-сборку с опубликованным движком
+        if: inputs.engine_release && inputs.cold_install != true
+        shell: bash
+        env:
+          ENGINE_TAG: ${{ inputs.engine_release }}
+          GH_TOKEN: ${{ github.token }}
+          POB2_UI_HOME: ${{ runner.temp }}/pob2-lua-smoke
+          TARGET: ${{ matrix.target }}
+        run: |
+          [[ "$ENGINE_TAG" =~ ^v[0-9]+\.[0-9]+\.[0-9]+(-rc\.[0-9]+)?$ ]]
+          case "$TARGET" in
+            windows-x64) suffix=windows_amd64.exe ;;
+            linux-x64) suffix=linux_amd64 ;;
+            macos-arm64) suffix=darwin_arm64 ;;
+            *) exit 1 ;;
+          esac
+          binary="pob2_engine_${ENGINE_TAG}_$suffix"
+          engine_dir="$RUNNER_TEMP/shared-engine"
+          gh release download "$ENGINE_TAG" --repo Hecatoncheir/pob2_engine \
+            --pattern "$binary" --pattern SHA256SUMS --dir "$engine_dir"
+          python - "$engine_dir" "$binary" <<'PY'
+          from hashlib import sha256
+          from pathlib import Path
+          from sys import argv
+
+          root, name = Path(argv[1]), argv[2]
+          expected = dict(
+              (filename.lstrip('*'), digest)
+              for digest, filename in (line.split() for line in (root / 'SHA256SUMS').read_text().splitlines())
+          )
+          if sha256((root / name).read_bytes()).hexdigest() != expected[name]:
+              raise SystemExit('Не совпадает SHA-256 движка')
+          PY
+          chmod +x "$engine_dir/$binary"
+          export POB2_ENGINE_TEST_EXECUTABLE="$engine_dir/$binary"
+          flutter test --no-pub test/engine_session_process_test.dart
+          runner=()
+          if [[ "$RUNNER_OS" == Linux ]]; then runner=(xvfb-run -a); fi
+          "${runner[@]}" flutter test --no-pub integration_test/engine_session_desktop_test.dart -d "${{ matrix.platform }}"
       - name: Проверить игровые словари десяти языков
         if: inputs.cold_install != true
         shell: bash

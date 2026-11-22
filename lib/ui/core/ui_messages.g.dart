@@ -3,10 +3,10 @@ import '../../l10n/generated/app_localizations.dart';
 import 'ui_rule.dart';
 
 final uiExactTranslations = <String, String Function(AppLocalizations)>{
-  "CLI, MCP и приложение видят одну сессию. Сейчас синхронизируется название; игровые расчёты выполняет Lua.":
-      (l) => l.m14158eacb5,
-  "CLI, MCP and application see one session. The title is currently being synchronized; game calculations are performed by Lua.":
-      (l) => l.m14158eacb5,
+  "CLI, MCP и приложение видят одну сессию. После подключения можно открыть общий XML и изменить уровень персонажа.":
+      (l) => l.mf070207e99,
+  "CLI, MCP and the app share a session. Connect to open the shared XML and change the character level.":
+      (l) => l.mf070207e99,
   "DPS до": (l) => l.m8c9a654b8c,
   "DPS before": (l) => l.m8c9a654b8c,
   "DPS кровотечения": (l) => l.m4577961ef0,
@@ -105,6 +105,8 @@ final uiExactTranslations = <String, String Function(AppLocalizations)>{
   "XML empty": (l) => l.m8ed6f8a850,
   "XML сборки": (l) => l.me72be74923,
   "Build XML": (l) => l.me72be74923,
+  "XML сборки обновлён": (l) => l.mcdc9b98a1e,
+  "Build XML updated": (l) => l.mcdc9b98a1e,
   "XML сохранён": (l) => l.me097dcd9f8,
   "XML saved": (l) => l.me097dcd9f8,
   "import sys, struct; assert sys.version_info >= (3,11) and struct.calcsize(\"P\") == 8, \"Нужен 64-битный Python 3.11+\"":
@@ -133,6 +135,8 @@ final uiExactTranslations = <String, String Function(AppLocalizations)>{
   "There is no PoB code on the clipboard.": (l) => l.m60bb05b2f1,
   "В группе нет активных умений": (l) => l.mfd96d5c7e6,
   "The group has no active skills": (l) => l.mfd96d5c7e6,
+  "В общей сессии нет XML сборки": (l) => l.meccb4de0ee,
+  "The shared session has no build XML": (l) => l.meccb4de0ee,
   "В пакете MCP отсутствует Python": (l) => l.m9bb974d2c9,
   "The MCP package is missing Python": (l) => l.m9bb974d2c9,
   "Важные показатели": (l) => l.m3e8bb03d9a,
@@ -353,6 +357,8 @@ final uiExactTranslations = <String, String Function(AppLocalizations)>{
   "No update package is available for this platform": (l) => l.ma2ab6a340a,
   "Для этой платформы пока нет установщика": (l) => l.mc0259d55bc,
   "There is no installer for this platform yet": (l) => l.mc0259d55bc,
+  "Для этой ревизии расчёта ещё нет": (l) => l.m4b77800e7b,
+  "No calculation for this revision yet": (l) => l.m4b77800e7b,
   "До узла": (l) => l.m08afe540b9,
   "To node": (l) => l.m08afe540b9,
   "Добавить": (l) => l.m71038c53bb,
@@ -450,6 +456,8 @@ final uiExactTranslations = <String, String Function(AppLocalizations)>{
   "Skill changes": (l) => l.m7b447f3126,
   "Изменения экипировки": (l) => l.m3c043ffe87,
   "Equipment changes": (l) => l.m3c043ffe87,
+  "Изменить уровень": (l) => l.m3e6dfc9e9d,
+  "Change level": (l) => l.m3e6dfc9e9d,
   "Изменить этап": (l) => l.med931b5f06,
   "Edit milestone": (l) => l.med931b5f06,
   "Изображение камня не найдено": (l) => l.md5a9ca934e,
@@ -673,6 +681,8 @@ final uiExactTranslations = <String, String Function(AppLocalizations)>{
   "Unknown interface action.": (l) => l.md86c6427dc,
   "Неизвестное действие приложения.": (l) => l.m4b8f0df7bc,
   "Unknown application action.": (l) => l.m4b8f0df7bc,
+  "Неизвестный статус": (l) => l.m520286c8d7,
+  "Unknown status": (l) => l.m520286c8d7,
   "Неизвестный тип установки": (l) => l.me6b70e080e,
   "Unknown installation type": (l) => l.me6b70e080e,
   "Неизвестный формат библиотеки сборок": (l) => l.me90bfa5f82,
@@ -878,6 +888,8 @@ final uiExactTranslations = <String, String Function(AppLocalizations)>{
   "Open and calculate": (l) => l.m589c35aaa6,
   "Открыть или создать сборку": (l) => l.m5ba3edc059,
   "Open or create a build": (l) => l.m5ba3edc059,
+  "Открыть общую сборку": (l) => l.me005edfdd2,
+  "Open shared build": (l) => l.me005edfdd2,
   "Открыть поиск": (l) => l.mcfc22a4611,
   "Open search": (l) => l.mcfc22a4611,
   "Отмена": (l) => l.m8fbe9b75cb,
@@ -1166,8 +1178,14 @@ final uiExactTranslations = <String, String Function(AppLocalizations)>{
   "Distance to node": (l) => l.mde6527a5fe,
   "Рассчитано в Lua PoB": (l) => l.m7846ddb858,
   "Calculated in Lua PoB": (l) => l.m7846ddb858,
+  "Рассчитать": (l) => l.m81ad452265,
+  "Calculate": (l) => l.m81ad452265,
   "Рассчитать пути": (l) => l.m6fa4aff83a,
   "Calculate paths": (l) => l.m6fa4aff83a,
+  "Расчёт не поддерживается": (l) => l.m113fcbe1d4,
+  "Calculation not supported": (l) => l.m113fcbe1d4,
+  "Расчёт сохранён": (l) => l.mf59bc90ee5,
+  "Calculation saved": (l) => l.mf59bc90ee5,
   "Расчёт сравнения…": (l) => l.m30a07ea432,
   "Calculating comparison…": (l) => l.m30a07ea432,
   "Расчёты": (l) => l.m9b9370223c,
@@ -1209,6 +1227,10 @@ final uiExactTranslations = <String, String Function(AppLocalizations)>{
       l.m7806bb3683,
   "The build changed on disk. Wait for the update from PoB.": (l) =>
       l.m7806bb3683,
+  "Сборка изменилась. Дождитесь новой ревизии и повторите действие": (l) =>
+      l.m66d08814d9,
+  "The build changed. Wait for the new revision and try again.": (l) =>
+      l.m66d08814d9,
   "Сборка изменилась. Откройте этап снова.": (l) => l.m1aee4fe817,
   "The build changed. Open the stage again.": (l) => l.m1aee4fe817,
   "Сборка изменилась. Пересчитайте пути.": (l) => l.md582f99ed2,
@@ -1217,6 +1239,8 @@ final uiExactTranslations = <String, String Function(AppLocalizations)>{
   "The build will change after clicking \"Apply\"": (l) => l.m544bec7909,
   "Сборка не найдена": (l) => l.m5c8bb47697,
   "Build not found": (l) => l.m5c8bb47697,
+  "Сборка обновлена": (l) => l.m460924c692,
+  "Build updated": (l) => l.m460924c692,
   "Сборка обновлена из Path of Building": (l) => l.ma8f340d211,
   "Build updated from Path of Building": (l) => l.ma8f340d211,
   "Сборка по ссылке не найдена.": (l) => l.md16bd478bc,
@@ -1227,10 +1251,6 @@ final uiExactTranslations = <String, String Function(AppLocalizations)>{
   "A build with this name already exists.": (l) => l.med0b7c459c,
   "Сборка удалена": (l) => l.m187a481844,
   "Build deleted": (l) => l.m187a481844,
-  "Сборка уже изменена другим клиентом. Дождитесь новой ревизии": (l) =>
-      l.m993b5ef013,
-  "The assembly has already been modified by another client. Wait for a new revision":
-      (l) => l.m993b5ef013,
   "Сборки из подключённой папки уже доступны в разделе «Мои сборки».": (l) =>
       l.m9027890a7b,
   "Builds in the connected folder are available in My Builds.": (l) =>
@@ -1269,6 +1289,8 @@ final uiExactTranslations = <String, String Function(AppLocalizations)>{
   "Session closed": (l) => l.m32bb1c680f,
   "Сессия не найдена. Создайте её явно": (l) => l.mff4d880370,
   "Session not found. Create it explicitly": (l) => l.mff4d880370,
+  "Сессия создана": (l) => l.ma9e16d992f,
+  "Session created": (l) => l.ma9e16d992f,
   "Сессия уже существует. Подключитесь без создания": (l) => l.m122d76b9ee,
   "Session already exists. Connect without creation": (l) => l.m122d76b9ee,
   "Сила": (l) => l.m69c1590a47,
@@ -1372,6 +1394,8 @@ final uiExactTranslations = <String, String Function(AppLocalizations)>{
   "Saved": (l) => l.m2fe8f2fd72,
   "Сохранить": (l) => l.mb4d30cae52,
   "Save": (l) => l.mb4d30cae52,
+  "Сохранить XML": (l) => l.mf86539cea6,
+  "Save XML": (l) => l.mf86539cea6,
   "Сохранить и рассчитать": (l) => l.m9af7509a85,
   "Save and calculate": (l) => l.m9af7509a85,
   "Сохранить этап": (l) => l.mfca5aabf85,
@@ -1488,6 +1512,8 @@ final uiExactTranslations = <String, String Function(AppLocalizations)>{
   "Level and passive tree": (l) => l.m2ef9d59a72,
   "Уровень и качество должны быть целыми числами": (l) => l.mbb0ceac2d1,
   "Level and quality must be integers": (l) => l.mbb0ceac2d1,
+  "Уровень персонажа": (l) => l.m6b99447edb,
+  "Character level": (l) => l.m6b99447edb,
   "Уровень противника": (l) => l.mecb350422f,
   "Enemy level": (l) => l.mecb350422f,
   "Урон": (l) => l.m5883e88858,
@@ -1542,6 +1568,8 @@ final uiExactTranslations = <String, String Function(AppLocalizations)>{
   "Cold": (l) => l.m8295a5b3a5,
   "ЧИСЛА И ПРАВИЛА · LUA POB": (l) => l.mb88cddfeb4,
   "NUMBERS AND RULES · LUA POB": (l) => l.mb88cddfeb4,
+  "Частичный расчёт": (l) => l.mf381d2d571,
+  "Partial calculation": (l) => l.mf381d2d571,
   "Часть данных занята или недоступна.": (l) => l.m9c8371b55d,
   "Some of the data is busy or unavailable.": (l) => l.m9c8371b55d,
   "Часть умения": (l) => l.mdab05cc16d,
@@ -1811,10 +1839,6 @@ final uiPatternTranslations = <UiRule>[
     (l, args) => l.m8f6df28a92(args[0]),
   ),
   UiRule(
-    "Не удалось сохранить имя в XML: {p0}",
-    (l, args) => l.mea514c56ce(args[0]),
-  ),
-  UiRule(
     "Загрузка LuaJIT и lua-utf8 для {p0}…",
     (l, args) => l.m65a1b960c7(args[0]),
   ),
@@ -1879,6 +1903,10 @@ final uiPatternTranslations = <UiRule>[
     (l, args) => l.m88bb56b333(args[0]),
   ),
   UiRule(
+    "Не удалось применить снимок: {p0}",
+    (l, args) => l.m7a15f7eafb(args[0]),
+  ),
+  UiRule(
     "Loading original PoB tree {p0} / {p1}",
     (l, args) => l.m35c7d57c9f(args[0], args[1]),
   ),
@@ -1897,10 +1925,6 @@ final uiPatternTranslations = <UiRule>[
   UiRule(
     "Some icons are unavailable: {p0}",
     (l, args) => l.m913d7f855b(args[0]),
-  ),
-  UiRule(
-    "Failed to save name in XML: {p0}",
-    (l, args) => l.mea514c56ce(args[0]),
   ),
   UiRule(
     "Failed to load translation: {p0}",
@@ -1926,6 +1950,7 @@ final uiPatternTranslations = <UiRule>[
   UiRule("Failed to show highlight: {p0}", (l, args) => l.m0d58180884(args[0])),
   UiRule("Failed to save draft XML: {p0}", (l, args) => l.m62f5b562c1(args[0])),
   UiRule("Failed to read directory: {p0}", (l, args) => l.mdace2a4a3b(args[0])),
+  UiRule("Could not apply snapshot: {p0}", (l, args) => l.m7a15f7eafb(args[0])),
   UiRule("Часть иконок недоступна: {p0}", (l, args) => l.m913d7f855b(args[0])),
   UiRule("Сайт {p0} не ответил вовремя.", (l, args) => l.m389de358a7(args[0])),
   UiRule("Native release MCP: HTTP {p0}", (l, args) => l.m5ffb2fa414(args[0])),
@@ -1953,6 +1978,7 @@ final uiPatternTranslations = <UiRule>[
   UiRule("Failed to get hint: {p0}", (l, args) => l.mcd252d5275(args[0])),
   UiRule("Checking SHA-256 of {p0}", (l, args) => l.mcb69e5c81f(args[0])),
   UiRule("Установлена версия {p0}", (l, args) => l.m44150e69ff(args[0])),
+  UiRule("Уровень персонажа: {p0}", (l, args) => l.maa52e33902(args[0])),
   UiRule("Дерево недоступно: {p0}", (l, args) => l.m0e1306f92c(args[0])),
   UiRule(
     "{p0}: {p1} of {p2} points spent",
@@ -1986,6 +2012,7 @@ final uiPatternTranslations = <UiRule>[
     (l, args) => l.mad59a0d2ab(args[0], args[1], args[2]),
   ),
   UiRule("Runtime exceeded {p0}", (l, args) => l.m1a132e5834(args[0])),
+  UiRule("Character level: {p0}", (l, args) => l.maa52e33902(args[0])),
   UiRule("Проверка файлов {p0}", (l, args) => l.me498367e06(args[0])),
   UiRule("Предупреждения: {p0}", (l, args) => l.m28ba7365b1(args[0])),
   UiRule("Доступна версия {p0}", (l, args) => l.m10b5bc7e91(args[0])),
@@ -2037,15 +2064,19 @@ final uiPatternTranslations = <UiRule>[
   UiRule("На очко: {p0}", (l, args) => l.m1d32e63718(args[0])),
   UiRule("{p0} · level {p1}", (l, args) => l.mbefa507d02(args[0], args[1])),
   UiRule("Specify {p0}.", (l, args) => l.ma9ea6a77a9(args[0])),
+  UiRule("Revision {p0}", (l, args) => l.md6e28957de(args[0])),
   UiRule("Уровень {p0}", (l, args) => l.m7ae0591157(args[0])),
+  UiRule("Ревизия {p0}", (l, args) => l.md6e28957de(args[0])),
   UiRule("Ошибка: {p0}", (l, args) => l.mefe256475e(args[0])),
   UiRule("{p0} · копия", (l, args) => l.m613198439d(args[0])),
   UiRule("Points: {p0}", (l, args) => l.m07817efe16(args[0])),
+  UiRule("Жизнь: {p0}", (l, args) => l.m2e046fa26a(args[0])),
   UiRule("{p0} · copy", (l, args) => l.m613198439d(args[0])),
   UiRule("Minion {p0}", (l, args) => l.m0680c9d188(args[0])),
   UiRule("Error: {p0}", (l, args) => l.mefe256475e(args[0])),
   UiRule("Очки: {p0}", (l, args) => l.m07817efe16(args[0])),
   UiRule("{p0} bytes", (l, args) => l.m3f8bda535c(args[0])),
+  UiRule("Life: {p0}", (l, args) => l.m2e046fa26a(args[0])),
   UiRule("Level {p0}", (l, args) => l.m7ae0591157(args[0])),
   UiRule("Last: {p0}", (l, args) => l.m032a431609(args[0])),
   UiRule("{p0} байт", (l, args) => l.m3f8bda535c(args[0])),

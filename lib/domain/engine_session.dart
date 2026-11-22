@@ -14,10 +14,36 @@ class EngineOptions {
 }
 
 class EngineSnapshot {
-  const EngineSnapshot(this.sessionId, this.buildName, this.revision);
+  const EngineSnapshot(
+    this.sessionId,
+    this.buildName,
+    this.revision, {
+    this.build,
+  });
   final String sessionId;
   final String buildName;
   final int revision;
+  final EngineBuild? build;
+}
+
+class EngineBuild {
+  const EngineBuild({required this.xml, required this.level, this.calculation});
+
+  final String xml;
+  final int level;
+  final EngineCalculation? calculation;
+}
+
+class EngineCalculation {
+  const EngineCalculation({
+    required this.status,
+    this.life,
+    required this.warnings,
+  });
+
+  final String status;
+  final double? life;
+  final List<String> warnings;
 }
 
 class EngineChange {
@@ -34,7 +60,12 @@ class EngineChange {
   final String previousName;
   final List<String> fields;
 
-  String get description => kind == 'snapshot'
-      ? 'Получен снимок сессии'
-      : 'Название: «$previousName» → «${snapshot.buildName}»';
+  String get description => switch (kind) {
+    'snapshot' => 'Получен снимок сессии',
+    'created' => 'Сессия создана',
+    'renamed' => 'Название: «$previousName» → «${snapshot.buildName}»',
+    'calculated' => 'Расчёт сохранён',
+    'imported' || 'edited' => 'XML сборки обновлён',
+    _ => 'Сборка обновлена',
+  };
 }

@@ -1,8 +1,8 @@
 {
   "@@locale": "en",
-  "m14158eacb5": "CLI, MCP and application see one session. The title is currently being synchronized; game calculations are performed by Lua.",
-  "@m14158eacb5": {
-    "description": "CLI, MCP и приложение видят одну сессию. Сейчас синхронизируется название; игровые расчёты выполняет Lua.",
+  "mf070207e99": "CLI, MCP and the app share a session. Connect to open the shared XML and change the character level.",
+  "@mf070207e99": {
+    "description": "CLI, MCP и приложение видят одну сессию. После подключения можно открыть общий XML и изменить уровень персонажа.",
     "placeholders": {}
   },
   "m8c9a654b8c": "DPS before",
@@ -252,6 +252,11 @@
     "description": "XML сборки",
     "placeholders": {}
   },
+  "mcdc9b98a1e": "Build XML updated",
+  "@mcdc9b98a1e": {
+    "description": "XML сборки обновлён",
+    "placeholders": {}
+  },
   "me097dcd9f8": "XML saved",
   "@me097dcd9f8": {
     "description": "XML сохранён",
@@ -448,6 +453,11 @@
         "type": "String"
       }
     }
+  },
+  "meccb4de0ee": "The shared session has no build XML",
+  "@meccb4de0ee": {
+    "description": "В общей сессии нет XML сборки",
+    "placeholders": {}
   },
   "m9bb974d2c9": "The MCP package is missing Python",
   "@m9bb974d2c9": {
@@ -982,6 +992,11 @@
     "description": "Для этой платформы пока нет установщика",
     "placeholders": {}
   },
+  "m4b77800e7b": "No calculation for this revision yet",
+  "@m4b77800e7b": {
+    "description": "Для этой ревизии расчёта ещё нет",
+    "placeholders": {}
+  },
   "m08afe540b9": "To node",
   "@m08afe540b9": {
     "description": "До узла",
@@ -1087,6 +1102,15 @@
   "@m2071fb9905": {
     "description": "Ещё",
     "placeholders": {}
+  },
+  "m2e046fa26a": "Life: {p0}",
+  "@m2e046fa26a": {
+    "description": "Жизнь: {p0}",
+    "placeholders": {
+      "p0": {
+        "type": "String"
+      }
+    }
   },
   "mf9a38201c0": "Log and details",
   "@mf9a38201c0": {
@@ -1297,6 +1321,11 @@
   "m3c043ffe87": "Equipment changes",
   "@m3c043ffe87": {
     "description": "Изменения экипировки",
+    "placeholders": {}
+  },
+  "m3e6dfc9e9d": "Change level",
+  "@m3e6dfc9e9d": {
+    "description": "Изменить уровень",
     "placeholders": {}
   },
   "med931b5f06": "Edit milestone",
@@ -1926,6 +1955,15 @@
     "description": "Не удалось применить предмет",
     "placeholders": {}
   },
+  "m7a15f7eafb": "Could not apply snapshot: {p0}",
+  "@m7a15f7eafb": {
+    "description": "Не удалось применить снимок: {p0}",
+    "placeholders": {
+      "p0": {
+        "type": "String"
+      }
+    }
+  },
   "m4d1a8400d5": "Failed to check for updates: {p0}",
   "@m4d1a8400d5": {
     "description": "Не удалось проверить обновления: {p0}",
@@ -1986,15 +2024,6 @@
   "@m409f34eb59": {
     "description": "Не удалось сохранить группу",
     "placeholders": {}
-  },
-  "mea514c56ce": "Failed to save name in XML: {p0}",
-  "@mea514c56ce": {
-    "description": "Не удалось сохранить имя в XML: {p0}",
-    "placeholders": {
-      "p0": {
-        "type": "String"
-      }
-    }
   },
   "mef9d01550d": "Failed to save scale.",
   "@mef9d01550d": {
@@ -2088,6 +2117,11 @@
         "type": "String"
       }
     }
+  },
+  "m520286c8d7": "Unknown status",
+  "@m520286c8d7": {
+    "description": "Неизвестный статус",
+    "placeholders": {}
   },
   "me6b70e080e": "Unknown installation type",
   "@me6b70e080e": {
@@ -2591,6 +2625,11 @@
   "m5ba3edc059": "Open or create a build",
   "@m5ba3edc059": {
     "description": "Открыть или создать сборку",
+    "placeholders": {}
+  },
+  "me005edfdd2": "Open shared build",
+  "@me005edfdd2": {
+    "description": "Открыть общую сборку",
     "placeholders": {}
   },
   "mcfc22a4611": "Open search",
@@ -3451,6 +3490,11 @@
     "description": "Рассчитано в Lua PoB",
     "placeholders": {}
   },
+  "m81ad452265": "Calculate",
+  "@m81ad452265": {
+    "description": "Рассчитать",
+    "placeholders": {}
+  },
   "m6fa4aff83a": "Calculate paths",
   "@m6fa4aff83a": {
     "description": "Рассчитать пути",
@@ -3464,6 +3508,16 @@
         "type": "String"
       }
     }
+  },
+  "m113fcbe1d4": "Calculation not supported",
+  "@m113fcbe1d4": {
+    "description": "Расчёт не поддерживается",
+    "placeholders": {}
+  },
+  "mf59bc90ee5": "Calculation saved",
+  "@mf59bc90ee5": {
+    "description": "Расчёт сохранён",
+    "placeholders": {}
   },
   "m30a07ea432": "Calculating comparison…",
   "@m30a07ea432": {
@@ -3479,6 +3533,15 @@
   "@m1e135b51f1": {
     "description": "Расчёт…",
     "placeholders": {}
+  },
+  "md6e28957de": "Revision {p0}",
+  "@md6e28957de": {
+    "description": "Ревизия {p0}",
+    "placeholders": {
+      "p0": {
+        "type": "String"
+      }
+    }
   },
   "m7fce31d207": "Revision mismatch for {p0} {p1}: expected {p2}, got {p3}.",
   "@m7fce31d207": {
@@ -3596,6 +3659,11 @@
     "description": "Сборка изменилась на диске. Дождитесь обновления из PoB.",
     "placeholders": {}
   },
+  "m66d08814d9": "The build changed. Wait for the new revision and try again.",
+  "@m66d08814d9": {
+    "description": "Сборка изменилась. Дождитесь новой ревизии и повторите действие",
+    "placeholders": {}
+  },
   "m1aee4fe817": "The build changed. Open the stage again.",
   "@m1aee4fe817": {
     "description": "Сборка изменилась. Откройте этап снова.",
@@ -3614,6 +3682,11 @@
   "m5c8bb47697": "Build not found",
   "@m5c8bb47697": {
     "description": "Сборка не найдена",
+    "placeholders": {}
+  },
+  "m460924c692": "Build updated",
+  "@m460924c692": {
+    "description": "Сборка обновлена",
     "placeholders": {}
   },
   "ma8f340d211": "Build updated from Path of Building",
@@ -3648,11 +3721,6 @@
   "m187a481844": "Build deleted",
   "@m187a481844": {
     "description": "Сборка удалена",
-    "placeholders": {}
-  },
-  "m993b5ef013": "The assembly has already been modified by another client. Wait for a new revision",
-  "@m993b5ef013": {
-    "description": "Сборка уже изменена другим клиентом. Дождитесь новой ревизии",
     "placeholders": {}
   },
   "m9027890a7b": "Builds in the connected folder are available in My Builds.",
@@ -3738,6 +3806,11 @@
   "mff4d880370": "Session not found. Create it explicitly",
   "@mff4d880370": {
     "description": "Сессия не найдена. Создайте её явно",
+    "placeholders": {}
+  },
+  "ma9e16d992f": "Session created",
+  "@ma9e16d992f": {
+    "description": "Сессия создана",
     "placeholders": {}
   },
   "m122d76b9ee": "Session already exists. Connect without creation",
@@ -3968,6 +4041,11 @@
   "mb4d30cae52": "Save",
   "@mb4d30cae52": {
     "description": "Сохранить",
+    "placeholders": {}
+  },
+  "mf86539cea6": "Save XML",
+  "@mf86539cea6": {
+    "description": "Сохранить XML",
     "placeholders": {}
   },
   "m9af7509a85": "Save and calculate",
@@ -4283,6 +4361,20 @@
     "description": "Уровень и качество должны быть целыми числами",
     "placeholders": {}
   },
+  "m6b99447edb": "Character level",
+  "@m6b99447edb": {
+    "description": "Уровень персонажа",
+    "placeholders": {}
+  },
+  "maa52e33902": "Character level: {p0}",
+  "@maa52e33902": {
+    "description": "Уровень персонажа: {p0}",
+    "placeholders": {
+      "p0": {
+        "type": "String"
+      }
+    }
+  },
   "mecb350422f": "Enemy level",
   "@mecb350422f": {
     "description": "Уровень противника",
@@ -4414,6 +4506,11 @@
   "mb88cddfeb4": "NUMBERS AND RULES · LUA POB",
   "@mb88cddfeb4": {
     "description": "ЧИСЛА И ПРАВИЛА · LUA POB",
+    "placeholders": {}
+  },
+  "mf381d2d571": "Partial calculation",
+  "@mf381d2d571": {
+    "description": "Частичный расчёт",
     "placeholders": {}
   },
   "m9c8371b55d": "Some of the data is busy or unavailable.",

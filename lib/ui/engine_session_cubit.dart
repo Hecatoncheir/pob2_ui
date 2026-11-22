@@ -114,7 +114,7 @@ class EngineSessionCubit extends Cubit<EngineSessionState> {
     } catch (error) {
       if (generation == _generation && !isClosed)
         _status(
-          'Не удалось сохранить имя в XML: $error',
+          'Не удалось применить снимок: $error',
           connected: state.connected,
           connecting: state.connecting,
         );
@@ -183,6 +183,22 @@ class EngineSessionCubit extends Cubit<EngineSessionState> {
     await connection.rename(current, name.trim(), engineRequestId());
   }
 
+  Future<void> setLevel(EngineSnapshot current, int level) =>
+      _connectedTo(current).setLevel(current, level, engineRequestId());
+
+  Future<void> calculate(EngineSnapshot current) =>
+      _connectedTo(current).calculate(current, engineRequestId());
+
+  EngineConnection _connectedTo(EngineSnapshot current) {
+    final connection = _connection;
+    if (!state.connected ||
+        connection == null ||
+        state.snapshot?.sessionId != current.sessionId) {
+      throw StateError('Нет соединения с общей сессией');
+    }
+    return connection;
+  }
+
   Future<void> _disposeConnection() async {
     final watch = _watch;
     final connection = _connection;
@@ -212,7 +228,7 @@ String engineError(Object error) => switch (error) {
   GrpcError(code: StatusCode.alreadyExists) =>
     'Сессия уже существует. Подключитесь без создания',
   GrpcError(code: StatusCode.aborted) =>
-    'Сборка уже изменена другим клиентом. Дождитесь новой ревизии',
+    'Сборка изменилась. Дождитесь новой ревизии и повторите действие',
   GrpcError(code: StatusCode.unavailable) => 'Движок недоступен',
   _ => '$error',
 };

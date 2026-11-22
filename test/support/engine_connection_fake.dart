@@ -48,6 +48,14 @@ class FakeEngineConnection implements EngineConnection {
   }
 
   @override
+  Future<void> setLevel(EngineSnapshot current, int level, String requestId) =>
+      throw UnimplementedError();
+
+  @override
+  Future<void> calculate(EngineSnapshot current, String requestId) =>
+      throw UnimplementedError();
+
+  @override
   Stream<EngineChange> watch(String sessionId, int afterRevision) {
     watchedRevisions.add(afterRevision);
     return Stream.multi((controller) {

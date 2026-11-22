@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
@@ -16,6 +17,7 @@ import 'package:pob2_ui/ui/workspace_view.dart';
 import '../test/support/engine_mcp_peer.dart';
 import '../test/support/temporary_directory.dart';
 
+const _fixture = 'integration_test/fixtures/witch_fireball.xml';
 const _initial = 'Fireball';
 const _fromMcp = 'Переименовано через MCP';
 const _fromUi = 'Переименовано в PoB II';
@@ -25,9 +27,7 @@ const _session = 'fireball';
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
-  testWidgets('PoB II и MCP переименовывают одну XML-сборку через gRPC', (
-    tester,
-  ) async {
+  testWidgets('PoB II и MCP правят одну XML-сборку через gRPC', (tester) async {
     final executable = Platform.environment['POB2_ENGINE_TEST_EXECUTABLE'];
     if (executable == null ||
         !Platform.environment.containsKey('POB2_UI_HOME')) {
@@ -35,6 +35,7 @@ void main() {
     }
     final root = await Directory.systemTemp.createTemp('pob2-shared-desktop-');
     addTearDown(() => removeTemporaryDirectory(root));
+    final original = await File(_fixture).readAsString();
     final model = await _openBuild(root);
     final flags = _profileFlags(root);
     addTearDown(() => _stopEngine(executable, flags, root));
@@ -47,25 +48,52 @@ void main() {
     await tester.pumpAndSettle();
 
     await _connect(tester, executable);
-    await _waitForHeading(tester, model, _initial, 2);
+    await _waitForHeading(tester, model, _initial, 1);
     final mcp = await _attachMcp(executable, flags);
     await mcp.call('rename_build', {
       'build_name': _fromMcp,
-      'expected_revision': 2,
+      'expected_revision': 1,
       'request_id': 'desktop-mcp',
     });
-    await _waitForHeading(tester, model, _fromMcp, 3);
+    await _waitForHeading(tester, model, _fromMcp, 2);
     expect(model.state.library.activeId, '$_fromMcp.xml');
 
     await _renameFromUi(tester);
-    await _waitForHeading(tester, model, _fromUi, 4);
+    await _waitForHeading(tester, model, _fromUi, 3);
     final snapshot = await mcp.call('get_snapshot');
     expect(snapshot['build_name'], _fromUi);
-    expect(snapshot['revision'], 4);
+    expect(snapshot['revision'], 3);
     expect((snapshot['build'] as Map)['xml'], isNotEmpty);
     expect((await model.library.load()).active?.title, _fromUi);
     expect(model.state.error, isNull);
 
+    final local = File.fromUri(root.uri.resolve('builds/$_fromUi.xml'));
+    final localBefore = await local.readAsString();
+    await _openSharedBuild(tester);
+    await _editSharedLevel(mcp, 42, 3);
+    await _waitFor(tester, find.text('Уровень персонажа: 42'));
+
+    await _openLevelEditor(tester);
+    await _editSharedLevel(mcp, 43, 4);
+    await _submitLevel(tester, 44);
+    await _waitFor(tester, find.byKey(const Key('engine-build-error')));
+    expect(find.textContaining('Сборка изменилась'), findsOneWidget);
+    await _waitFor(tester, find.text('Уровень персонажа: 43'));
+
+    await _openLevelEditor(tester);
+    await _submitLevel(tester, 44);
+    await _waitFor(tester, find.text('Уровень персонажа: 44'));
+    expect(_level(await mcp.call('get_snapshot')), 44);
+
+    await tester.tap(find.byKey(const Key('engine-calculate')));
+    await _waitFor(tester, find.byKey(const Key('engine-build-life')));
+    final calculated = (await mcp.call('get_snapshot'))['build'] as Map;
+    _checkCalculation(tester, calculated);
+    await mcp.close();
+    await _checkReconnect(tester, model, executable, flags, root);
+
+    expect(await local.readAsString(), localBefore);
+    expect(await File(_fixture).readAsString(), original);
     await tester.pumpWidget(const SizedBox.shrink());
     await tester.pumpAndSettle();
   }, timeout: const Timeout(Duration(minutes: 3)));
@@ -73,8 +101,7 @@ void main() {
 
 Future<WorkshopCubit> _openBuild(Directory root) async {
   final builds = await Directory.fromUri(root.uri.resolve('builds/')).create();
-  await File('integration_test/fixtures/witch_fireball.xml')
-      .copy(builds.uri.resolve('$_initial.xml').toFilePath());
+  await File(_fixture).copy(builds.uri.resolve('$_initial.xml').toFilePath());
   await File.fromUri(
     InstallationStore.defaultRoot().uri.resolve('components.json'),
   ).copy(root.uri.resolve('components.json').toFilePath());
@@ -107,29 +134,29 @@ List<String> _profileFlags(Directory root) => [
 ];
 
 Future<void> _seedEngine(String executable, List<String> flags) async {
-  final commands = [
-    ['session', 'create', '--name', _initial, '--request-id', 'desktop-create'],
+  final result = await Process.run(
+    executable,
     [
-      'build',
-      'import',
-      '--revision',
-      '1',
+      'session',
+      'create',
+      '--name',
+      _initial,
       '--request-id',
-      'desktop-import',
+      'desktop-create',
       '--file',
-      'integration_test/fixtures/witch_fireball.xml',
-    ],
-  ];
-  for (final command in commands) {
-    final result = await Process.run(executable, [
-      ...command,
+      _fixture,
       ...flags,
       '--session',
       _session,
       '--start-server',
-    ]);
-    expect(result.exitCode, 0, reason: '${result.stderr}');
-  }
+    ],
+    stdoutEncoding: utf8,
+    stderrEncoding: utf8,
+  );
+  expect(result.exitCode, 0, reason: '${result.stderr}');
+  final snapshot = jsonDecode(result.stdout as String) as Map<String, dynamic>;
+  expect(snapshot['revision'], 1);
+  expect((snapshot['build'] as Map)['input_revision'], 1);
 }
 
 Future<EngineMcpPeer> _attachMcp(String executable, List<String> flags) async {
@@ -211,3 +238,78 @@ Future<void> _renameFromUi(WidgetTester tester) async {
 Finder _heading(String name) => find
     .descendant(of: find.byType(WorkspaceView), matching: find.text(name))
     .hitTestable();
+
+Future<void> _openSharedBuild(WidgetTester tester) async {
+  await tester.tap(find.byKey(const Key('engine-session-settings')));
+  await tester.pumpAndSettle();
+  await tester.tap(find.byKey(const Key('engine-open-build')));
+  await tester.pumpAndSettle();
+  expect(find.byKey(const Key('engine-build-level')), findsOneWidget);
+}
+
+Future<void> _editSharedLevel(
+  EngineMcpPeer mcp,
+  int level,
+  int revision,
+) async {
+  await mcp.call('edit_build', {
+    'edit': {
+      'level': {'level': level},
+    },
+    'expected_revision': revision,
+    'request_id': 'mcp-level-$level',
+  });
+}
+
+Future<void> _openLevelEditor(WidgetTester tester) async {
+  await tester.tap(find.byKey(const Key('engine-edit-level')));
+  await tester.pumpAndSettle();
+}
+
+Future<void> _submitLevel(WidgetTester tester, int level) async {
+  await tester.enterText(find.byKey(const Key('engine-level-input')), '$level');
+  await tester.tap(find.byKey(const Key('engine-save-level')));
+}
+
+int _level(Map<String, dynamic> snapshot) =>
+    ((snapshot['build'] as Map)['model'] as Map)['level'] as int;
+
+void _checkCalculation(WidgetTester tester, Map build) {
+  final calculation = build['calculation'] as Map;
+  final life = (calculation['stats'] as Map)['Life'] as num;
+  expect(life, greaterThan(0));
+  expect(build['calculated_from_revision'], build['input_revision']);
+  expect(find.text('Жизнь: ${life.toStringAsFixed(0)}'), findsOneWidget);
+  for (final issue in calculation['issues'] as List? ?? const []) {
+    expect(find.text((issue as Map)['message'] as String), findsWidgets);
+  }
+}
+
+Future<void> _checkReconnect(
+  WidgetTester tester,
+  WorkshopCubit model,
+  String executable,
+  List<String> flags,
+  Directory root,
+) async {
+  final lost = model.engineSession.stream.firstWhere(
+    (state) => !state.connected,
+  );
+  await _stopEngine(executable, flags, root);
+  await lost.timeout(const Duration(seconds: 12));
+  if (!model.engineSession.state.connected) {
+    await model.engineSession.stream
+        .firstWhere((state) => state.connected)
+        .timeout(const Duration(seconds: 15));
+  }
+  expect(model.engineSession.state.snapshot?.revision, 7);
+  await _waitFor(tester, find.byKey(const Key('engine-build-life')));
+}
+
+Future<void> _waitFor(WidgetTester tester, Finder finder) async {
+  final deadline = DateTime.now().add(const Duration(seconds: 30));
+  while (finder.evaluate().isEmpty && DateTime.now().isBefore(deadline)) {
+    await tester.pump(const Duration(milliseconds: 50));
+  }
+  expect(finder, findsWidgets);
+}

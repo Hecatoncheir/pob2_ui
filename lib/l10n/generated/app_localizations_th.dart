@@ -13,8 +13,8 @@ class AppLocalizationsTh extends AppLocalizations {
   AppLocalizationsTh([String locale = 'th']) : super(locale);
 
   @override
-  String get m14158eacb5 =>
-      'CLI, MCP และแอปพลิเคชันเห็นหนึ่งเซสชัน กำลังซิงโครไนซ์ชื่ออยู่ การคำนวณเกมจะดำเนินการภายใน Lua';
+  String get mf070207e99 =>
+      'CLI, MCP และแอปใช้เซสชันร่วมกัน เชื่อมต่อเพื่อเปิด XML ที่แชร์และเปลี่ยนเลเวลตัวละคร';
 
   @override
   String get m8c9a654b8c => 'DPS ก่อนเพิ่ม';
@@ -168,6 +168,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get me72be74923 => 'XML ของบิลด์';
 
   @override
+  String get mcdc9b98a1e => 'อัปเดต XML ของบิลด์แล้ว';
+
+  @override
   String get me097dcd9f8 => 'บันทึกแล้ว XML';
 
   @override
@@ -266,6 +269,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String m1163ee245e(String p0) {
     return 'ส่วนประกอบหายไป $p0 บันทึกเวอร์ชันการทำงานแล้ว';
   }
+
+  @override
+  String get meccb4de0ee => 'เซสชันที่แชร์ไม่มี XML ของบิลด์';
 
   @override
   String get m9bb974d2c9 => 'แพ็กเกจ MCP ไม่มี Python';
@@ -595,6 +601,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get mc0259d55bc => 'ยังไม่มีตัวติดตั้งสำหรับแพลตฟอร์มนี้';
 
   @override
+  String get m4b77800e7b => 'ยังไม่มีผลคำนวณสำหรับฉบับแก้ไขนี้';
+
+  @override
   String get m08afe540b9 => 'ไปยังโหนด';
 
   @override
@@ -655,6 +664,11 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m2071fb9905 => 'เพิ่มเติม';
+
+  @override
+  String m2e046fa26a(String p0) {
+    return 'พลังชีวิต: $p0';
+  }
 
   @override
   String get mf9a38201c0 => 'บันทึกและรายละเอียด';
@@ -777,6 +791,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m3c043ffe87 => 'การเปลี่ยนแปลงอุปกรณ์';
+
+  @override
+  String get m3e6dfc9e9d => 'เปลี่ยนเลเวล';
 
   @override
   String get med931b5f06 => 'แก้ไขขั้น';
@@ -1148,6 +1165,11 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m57d96c50f4 => 'ไม่สามารถใช้รายการได้';
 
   @override
+  String m7a15f7eafb(String p0) {
+    return 'ใช้สแนปช็อตไม่ได้: $p0';
+  }
+
+  @override
   String m4d1a8400d5(String p0) {
     return 'ไม่สามารถตรวจสอบการอัปเดต: $p0';
   }
@@ -1181,11 +1203,6 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m409f34eb59 => 'ไม่สามารถบันทึกกลุ่ม';
-
-  @override
-  String mea514c56ce(String p0) {
-    return 'ไม่สามารถบันทึกชื่อใน XML: $p0';
-  }
 
   @override
   String get mef9d01550d => 'ไม่สามารถบันทึกมาตราส่วนได้';
@@ -1241,6 +1258,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String m88bb56b333(String p0) {
     return 'โหมดฉาก PoB ที่ไม่รู้จัก: $p0';
   }
+
+  @override
+  String get m520286c8d7 => 'ไม่ทราบสถานะ';
 
   @override
   String get me6b70e080e => 'ประเภทการติดตั้งที่ไม่รู้จัก';
@@ -1543,6 +1563,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m5ba3edc059 => 'เปิดหรือสร้างบิลด์';
+
+  @override
+  String get me005edfdd2 => 'เปิดบิลด์ที่แชร์';
 
   @override
   String get mcfc22a4611 => 'เปิดการค้นหา';
@@ -2055,12 +2078,21 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m7846ddb858 => 'Calculated in Lua PoB';
 
   @override
+  String get m81ad452265 => 'คำนวณ';
+
+  @override
   String get m6fa4aff83a => 'คำนวณเส้นทาง';
 
   @override
   String m33a38de9ff(String p0) {
     return 'Calculation Lua · $p0%';
   }
+
+  @override
+  String get m113fcbe1d4 => 'ไม่รองรับการคำนวณ';
+
+  @override
+  String get mf59bc90ee5 => 'บันทึกผลคำนวณแล้ว';
 
   @override
   String get m30a07ea432 => 'กำลังคำนวณผลเปรียบเทียบ…';
@@ -2070,6 +2102,11 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m1e135b51f1 => 'การคำนวณ...';
+
+  @override
+  String md6e28957de(String p0) {
+    return 'ฉบับแก้ไข $p0';
+  }
 
   @override
   String m7fce31d207(String p0, String p1, String p2, String p3) {
@@ -2137,6 +2174,10 @@ class AppLocalizationsTh extends AppLocalizations {
       'บิลด์บนดิสก์มีการเปลี่ยนแปลง โปรดรอการอัปเดตจาก PoB';
 
   @override
+  String get m66d08814d9 =>
+      'บิลด์เปลี่ยนแปลงแล้ว รอฉบับแก้ไขใหม่แล้วลองอีกครั้ง';
+
+  @override
   String get m1aee4fe817 => 'บิลด์มีการเปลี่ยนแปลง โปรดเปิดขั้นนี้อีกครั้ง';
 
   @override
@@ -2147,6 +2188,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m5c8bb47697 => 'ไม่พบชุดประกอบ';
+
+  @override
+  String get m460924c692 => 'อัปเดตบิลด์แล้ว';
 
   @override
   String get ma8f340d211 => 'อัปเดตบิลด์จาก Path of Building แล้ว';
@@ -2167,10 +2211,6 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m187a481844 => 'ลบบิลด์แล้ว';
-
-  @override
-  String get m993b5ef013 =>
-      'แอสเซมบลีได้รับการแก้ไขโดยไคลเอนต์อื่นแล้ว รอการแก้ไขใหม่';
 
   @override
   String get m9027890a7b => 'บิลด์ในโฟลเดอร์ที่เชื่อมต่ออยู่ใน «บิลด์ของฉัน»';
@@ -2223,6 +2263,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get mff4d880370 => 'ไม่พบเซสชัน สร้างมันขึ้นมาอย่างชัดเจน';
+
+  @override
+  String get ma9e16d992f => 'สร้างเซสชันแล้ว';
 
   @override
   String get m122d76b9ee => 'มีเซสชันอยู่แล้ว เชื่อมต่อโดยไม่ต้องสร้าง';
@@ -2365,6 +2408,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get mb4d30cae52 => 'บันทึก';
+
+  @override
+  String get mf86539cea6 => 'บันทึก XML';
 
   @override
   String get m9af7509a85 => 'บันทึกและคำนวณ';
@@ -2554,6 +2600,14 @@ class AppLocalizationsTh extends AppLocalizations {
   String get mbb0ceac2d1 => 'ระดับและคุณภาพต้องเป็นจำนวนเต็ม';
 
   @override
+  String get m6b99447edb => 'เลเวลตัวละคร';
+
+  @override
+  String maa52e33902(String p0) {
+    return 'เลเวลตัวละคร: $p0';
+  }
+
+  @override
   String get mecb350422f => 'ระดับศัตรู';
 
   @override
@@ -2635,6 +2689,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get mb88cddfeb4 => 'ตัวเลขและกฎเกณฑ์ · ลัวะ ปอบ';
+
+  @override
+  String get mf381d2d571 => 'คำนวณบางส่วน';
 
   @override
   String get m9c8371b55d => 'ข้อมูลบางส่วนไม่ว่างหรือไม่พร้อมใช้งาน';

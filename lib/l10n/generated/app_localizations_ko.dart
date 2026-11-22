@@ -13,8 +13,8 @@ class AppLocalizationsKo extends AppLocalizations {
   AppLocalizationsKo([String locale = 'ko']) : super(locale);
 
   @override
-  String get m14158eacb5 =>
-      'CLI, MCP 및 애플리케이션은 하나의 세션을 봅니다. 타이틀이 현재 동기화 중입니다. 게임 계산은 Lua에 의해 수행됩니다.';
+  String get mf070207e99 =>
+      'CLI, MCP, 앱이 세션을 공유합니다. 연결하면 공유 XML을 열고 캐릭터 레벨을 변경할 수 있습니다.';
 
   @override
   String get m8c9a654b8c => '추가 전 DPS';
@@ -165,6 +165,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get me72be74923 => '빌드 XML';
 
   @override
+  String get mcdc9b98a1e => '빌드 XML이 업데이트되었습니다';
+
+  @override
   String get me097dcd9f8 => 'XML 저장됨';
 
   @override
@@ -263,6 +266,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String m1163ee245e(String p0) {
     return '구성요소에 $p0이(가) 없습니다. 작업 버전이 저장되었습니다.';
   }
+
+  @override
+  String get meccb4de0ee => '공유 세션에 빌드 XML이 없습니다';
 
   @override
   String get m9bb974d2c9 => 'MCP 패키지에 Python이 없습니다';
@@ -585,6 +591,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get mc0259d55bc => '이 플랫폼에 대한 설치 프로그램이 아직 없습니다.';
 
   @override
+  String get m4b77800e7b => '이 리비전의 계산 결과가 아직 없습니다';
+
+  @override
   String get m08afe540b9 => '노드로';
 
   @override
@@ -645,6 +654,11 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m2071fb9905 => '더보기';
+
+  @override
+  String m2e046fa26a(String p0) {
+    return '생명력: $p0';
+  }
 
   @override
   String get mf9a38201c0 => '로그 및 세부정보';
@@ -766,6 +780,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m3c043ffe87 => '장비 변경';
+
+  @override
+  String get m3e6dfc9e9d => '레벨 변경';
 
   @override
   String get med931b5f06 => '단계 편집';
@@ -1136,6 +1153,11 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m57d96c50f4 => '아이템 적용 실패';
 
   @override
+  String m7a15f7eafb(String p0) {
+    return '스냅샷을 적용할 수 없습니다: $p0';
+  }
+
+  @override
   String m4d1a8400d5(String p0) {
     return '업데이트 확인 실패: $p0';
   }
@@ -1169,11 +1191,6 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m409f34eb59 => '그룹을 저장하지 못했습니다.';
-
-  @override
-  String mea514c56ce(String p0) {
-    return 'XML에 이름을 저장하지 못했습니다: $p0';
-  }
 
   @override
   String get mef9d01550d => '스케일을 저장하지 못했습니다.';
@@ -1229,6 +1246,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String m88bb56b333(String p0) {
     return '알 수 없는 PoB 장면 모드: $p0';
   }
+
+  @override
+  String get m520286c8d7 => '알 수 없는 상태';
 
   @override
   String get me6b70e080e => '알 수 없는 설치 유형';
@@ -1529,6 +1549,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m5ba3edc059 => '빌드 열기 또는 만들기';
+
+  @override
+  String get me005edfdd2 => '공유 빌드 열기';
 
   @override
   String get mcfc22a4611 => '검색 열기';
@@ -2039,12 +2062,21 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m7846ddb858 => 'Lua PoB로 계산됨';
 
   @override
+  String get m81ad452265 => '계산';
+
+  @override
   String get m6fa4aff83a => '경로 계산';
 
   @override
   String m33a38de9ff(String p0) {
     return '계산 Lua · $p0%';
   }
+
+  @override
+  String get m113fcbe1d4 => '지원되지 않는 계산입니다';
+
+  @override
+  String get mf59bc90ee5 => '계산 결과가 저장되었습니다';
 
   @override
   String get m30a07ea432 => '비교 계산 중…';
@@ -2054,6 +2086,11 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m1e135b51f1 => '계산 중…';
+
+  @override
+  String md6e28957de(String p0) {
+    return '리비전 $p0';
+  }
 
   @override
   String m7fce31d207(String p0, String p1, String p2, String p3) {
@@ -2119,6 +2156,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m7806bb3683 => '디스크의 빌드가 변경되었습니다. PoB에서 업데이트될 때까지 기다리세요.';
 
   @override
+  String get m66d08814d9 => '빌드가 변경되었습니다. 새 리비전을 기다린 후 다시 시도하세요.';
+
+  @override
   String get m1aee4fe817 => '빌드가 변경되었습니다. 단계를 다시 여세요.';
 
   @override
@@ -2129,6 +2169,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m5c8bb47697 => '어셈블리를 찾을 수 없습니다.';
+
+  @override
+  String get m460924c692 => '빌드가 업데이트되었습니다';
 
   @override
   String get ma8f340d211 => 'Path of Building에서 빌드를 업데이트했습니다';
@@ -2149,9 +2192,6 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m187a481844 => '빌드 삭제됨';
-
-  @override
-  String get m993b5ef013 => '어셈블리가 이미 다른 클라이언트에 의해 수정되었습니다. 새로운 개정판을 기다리세요';
 
   @override
   String get m9027890a7b => '연결된 폴더의 빌드는 ‘내 빌드’에서 볼 수 있습니다.';
@@ -2203,6 +2243,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get mff4d880370 => '세션을 찾을 수 없습니다. 명시적으로 생성';
+
+  @override
+  String get ma9e16d992f => '세션이 생성되었습니다';
 
   @override
   String get m122d76b9ee => '세션이 이미 존재합니다. 생성하지 않고 연결';
@@ -2344,6 +2387,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get mb4d30cae52 => '저장';
+
+  @override
+  String get mf86539cea6 => 'XML 저장';
 
   @override
   String get m9af7509a85 => '저장 및 계산';
@@ -2530,6 +2576,14 @@ class AppLocalizationsKo extends AppLocalizations {
   String get mbb0ceac2d1 => '레벨과 품질은 정수여야 합니다.';
 
   @override
+  String get m6b99447edb => '캐릭터 레벨';
+
+  @override
+  String maa52e33902(String p0) {
+    return '캐릭터 레벨: $p0';
+  }
+
+  @override
   String get mecb350422f => '적 레벨';
 
   @override
@@ -2607,6 +2661,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get mb88cddfeb4 => '숫자 및 규칙 · LUA POB';
+
+  @override
+  String get mf381d2d571 => '부분 계산';
 
   @override
   String get m9c8371b55d => '일부 데이터가 사용 중이거나 사용할 수 없습니다.';

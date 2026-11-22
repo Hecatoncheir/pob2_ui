@@ -13,8 +13,8 @@ class AppLocalizationsPt extends AppLocalizations {
   AppLocalizationsPt([String locale = 'pt']) : super(locale);
 
   @override
-  String get m14158eacb5 =>
-      'CLI, MCP e aplicativo veem uma sessão. O título está sendo sincronizado; os cálculos do jogo são realizados por Lua.';
+  String get mf070207e99 =>
+      'A CLI, o MCP e o aplicativo compartilham uma sessão. Conecte-se para abrir o XML compartilhado e mudar o nível do personagem.';
 
   @override
   String get m8c9a654b8c => 'DPS antes';
@@ -171,6 +171,9 @@ class AppLocalizationsPt extends AppLocalizations {
   String get me72be74923 => 'XML da build';
 
   @override
+  String get mcdc9b98a1e => 'XML da build atualizado';
+
+  @override
   String get me097dcd9f8 => 'XML salvo';
 
   @override
@@ -269,6 +272,9 @@ class AppLocalizationsPt extends AppLocalizations {
   String m1163ee245e(String p0) {
     return 'O componente está faltando $p0. A versão funcional foi salva.';
   }
+
+  @override
+  String get meccb4de0ee => 'A sessão compartilhada não tem XML da build';
 
   @override
   String get m9bb974d2c9 => 'O pacote MCP não contém Python';
@@ -604,6 +610,9 @@ class AppLocalizationsPt extends AppLocalizations {
   String get mc0259d55bc => 'Ainda não há instalador para esta plataforma';
 
   @override
+  String get m4b77800e7b => 'Ainda não há cálculo para esta revisão';
+
+  @override
   String get m08afe540b9 => 'Para o nó';
 
   @override
@@ -666,6 +675,11 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get m2071fb9905 => 'Mais';
+
+  @override
+  String m2e046fa26a(String p0) {
+    return 'Vida: $p0';
+  }
 
   @override
   String get mf9a38201c0 => 'Registro e detalhes';
@@ -790,6 +804,9 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get m3c043ffe87 => 'Alterações no equipamento';
+
+  @override
+  String get m3e6dfc9e9d => 'Mudar nível';
 
   @override
   String get med931b5f06 => 'Editar etapa';
@@ -1166,6 +1183,11 @@ class AppLocalizationsPt extends AppLocalizations {
   String get m57d96c50f4 => 'Falha ao aplicar o item';
 
   @override
+  String m7a15f7eafb(String p0) {
+    return 'Não foi possível aplicar o estado salvo: $p0';
+  }
+
+  @override
   String m4d1a8400d5(String p0) {
     return 'Falha ao verificar atualizações: $p0';
   }
@@ -1199,11 +1221,6 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get m409f34eb59 => 'Falha ao salvar o grupo';
-
-  @override
-  String mea514c56ce(String p0) {
-    return 'Falha ao salvar o nome em XML: $p0';
-  }
 
   @override
   String get mef9d01550d => 'Falha ao salvar escala.';
@@ -1260,6 +1277,9 @@ class AppLocalizationsPt extends AppLocalizations {
   String m88bb56b333(String p0) {
     return 'Modo de cena PoB desconhecido: $p0';
   }
+
+  @override
+  String get m520286c8d7 => 'Status desconhecido';
 
   @override
   String get me6b70e080e => 'Tipo de instalação desconhecido';
@@ -1569,6 +1589,9 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get m5ba3edc059 => 'Abrir ou criar uma build';
+
+  @override
+  String get me005edfdd2 => 'Abrir build compartilhada';
 
   @override
   String get mcfc22a4611 => 'Abrir pesquisa';
@@ -2091,12 +2114,21 @@ class AppLocalizationsPt extends AppLocalizations {
   String get m7846ddb858 => 'Calculado em Lua PoB';
 
   @override
+  String get m81ad452265 => 'Calcular';
+
+  @override
   String get m6fa4aff83a => 'Calcular caminhos';
 
   @override
   String m33a38de9ff(String p0) {
     return 'Cálculo Lua · $p0%';
   }
+
+  @override
+  String get m113fcbe1d4 => 'Cálculo não suportado';
+
+  @override
+  String get mf59bc90ee5 => 'Cálculo salvo';
 
   @override
   String get m30a07ea432 => 'Calculando a comparação…';
@@ -2106,6 +2138,11 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get m1e135b51f1 => 'Cálculo…';
+
+  @override
+  String md6e28957de(String p0) {
+    return 'Revisão $p0';
+  }
 
   @override
   String m7fce31d207(String p0, String p1, String p2, String p3) {
@@ -2174,6 +2211,10 @@ class AppLocalizationsPt extends AppLocalizations {
       'A build mudou no disco. Aguarde a atualização do PoB.';
 
   @override
+  String get m66d08814d9 =>
+      'A build mudou. Aguarde a nova revisão e tente novamente.';
+
+  @override
   String get m1aee4fe817 => 'A build mudou. Abra a etapa novamente.';
 
   @override
@@ -2185,6 +2226,9 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get m5c8bb47697 => 'Montagem não encontrada';
+
+  @override
+  String get m460924c692 => 'Build atualizada';
 
   @override
   String get ma8f340d211 => 'Build atualizada a partir do Path of Building';
@@ -2205,10 +2249,6 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get m187a481844 => 'Build excluída';
-
-  @override
-  String get m993b5ef013 =>
-      'A montagem já foi modificada por outro cliente. Aguarde uma nova revisão';
 
   @override
   String get m9027890a7b =>
@@ -2264,6 +2304,9 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get mff4d880370 => 'Sessão não encontrada. Crie-o explicitamente';
+
+  @override
+  String get ma9e16d992f => 'Sessão criada';
 
   @override
   String get m122d76b9ee => 'A sessão já existe. Conecte-se sem criação';
@@ -2410,6 +2453,9 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get mb4d30cae52 => 'Salvar';
+
+  @override
+  String get mf86539cea6 => 'Salvar XML';
 
   @override
   String get m9af7509a85 => 'Salvar e calcular';
@@ -2600,6 +2646,14 @@ class AppLocalizationsPt extends AppLocalizations {
   String get mbb0ceac2d1 => 'O nível e a qualidade devem ser números inteiros';
 
   @override
+  String get m6b99447edb => 'Nível do personagem';
+
+  @override
+  String maa52e33902(String p0) {
+    return 'Nível do personagem: $p0';
+  }
+
+  @override
   String get mecb350422f => 'Nível do inimigo';
 
   @override
@@ -2683,6 +2737,9 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get mb88cddfeb4 => 'NÚMEROS E REGRAS · LUA POB';
+
+  @override
+  String get mf381d2d571 => 'Cálculo parcial';
 
   @override
   String get m9c8371b55d => 'Alguns dados estão ocupados ou indisponíveis.';
@@ -2806,8 +2863,8 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   AppLocalizationsPtBr() : super('pt_BR');
 
   @override
-  String get m14158eacb5 =>
-      'CLI, MCP e aplicativo veem uma sessão. O título está sendo sincronizado; os cálculos do jogo são realizados por Lua.';
+  String get mf070207e99 =>
+      'A CLI, o MCP e o aplicativo compartilham uma sessão. Conecte-se para abrir o XML compartilhado e mudar o nível do personagem.';
 
   @override
   String get m8c9a654b8c => 'DPS antes';
@@ -2964,6 +3021,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get me72be74923 => 'XML da build';
 
   @override
+  String get mcdc9b98a1e => 'XML da build atualizado';
+
+  @override
   String get me097dcd9f8 => 'XML salvo';
 
   @override
@@ -3062,6 +3122,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String m1163ee245e(String p0) {
     return 'O componente está faltando $p0. A versão funcional foi salva.';
   }
+
+  @override
+  String get meccb4de0ee => 'A sessão compartilhada não tem XML da build';
 
   @override
   String get m9bb974d2c9 => 'O pacote MCP não contém Python';
@@ -3397,6 +3460,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get mc0259d55bc => 'Ainda não há instalador para esta plataforma';
 
   @override
+  String get m4b77800e7b => 'Ainda não há cálculo para esta revisão';
+
+  @override
   String get m08afe540b9 => 'Para o nó';
 
   @override
@@ -3459,6 +3525,11 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get m2071fb9905 => 'Mais';
+
+  @override
+  String m2e046fa26a(String p0) {
+    return 'Vida: $p0';
+  }
 
   @override
   String get mf9a38201c0 => 'Registro e detalhes';
@@ -3583,6 +3654,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get m3c043ffe87 => 'Alterações no equipamento';
+
+  @override
+  String get m3e6dfc9e9d => 'Mudar nível';
 
   @override
   String get med931b5f06 => 'Editar etapa';
@@ -3959,6 +4033,11 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get m57d96c50f4 => 'Falha ao aplicar o item';
 
   @override
+  String m7a15f7eafb(String p0) {
+    return 'Não foi possível aplicar o estado salvo: $p0';
+  }
+
+  @override
   String m4d1a8400d5(String p0) {
     return 'Falha ao verificar atualizações: $p0';
   }
@@ -3992,11 +4071,6 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get m409f34eb59 => 'Falha ao salvar o grupo';
-
-  @override
-  String mea514c56ce(String p0) {
-    return 'Falha ao salvar o nome em XML: $p0';
-  }
 
   @override
   String get mef9d01550d => 'Falha ao salvar escala.';
@@ -4053,6 +4127,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String m88bb56b333(String p0) {
     return 'Modo de cena PoB desconhecido: $p0';
   }
+
+  @override
+  String get m520286c8d7 => 'Status desconhecido';
 
   @override
   String get me6b70e080e => 'Tipo de instalação desconhecido';
@@ -4362,6 +4439,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get m5ba3edc059 => 'Abrir ou criar uma build';
+
+  @override
+  String get me005edfdd2 => 'Abrir build compartilhada';
 
   @override
   String get mcfc22a4611 => 'Abrir pesquisa';
@@ -4884,12 +4964,21 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get m7846ddb858 => 'Calculado em Lua PoB';
 
   @override
+  String get m81ad452265 => 'Calcular';
+
+  @override
   String get m6fa4aff83a => 'Calcular caminhos';
 
   @override
   String m33a38de9ff(String p0) {
     return 'Cálculo Lua · $p0%';
   }
+
+  @override
+  String get m113fcbe1d4 => 'Cálculo não suportado';
+
+  @override
+  String get mf59bc90ee5 => 'Cálculo salvo';
 
   @override
   String get m30a07ea432 => 'Calculando a comparação…';
@@ -4899,6 +4988,11 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get m1e135b51f1 => 'Cálculo…';
+
+  @override
+  String md6e28957de(String p0) {
+    return 'Revisão $p0';
+  }
 
   @override
   String m7fce31d207(String p0, String p1, String p2, String p3) {
@@ -4967,6 +5061,10 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
       'A build mudou no disco. Aguarde a atualização do PoB.';
 
   @override
+  String get m66d08814d9 =>
+      'A build mudou. Aguarde a nova revisão e tente novamente.';
+
+  @override
   String get m1aee4fe817 => 'A build mudou. Abra a etapa novamente.';
 
   @override
@@ -4978,6 +5076,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get m5c8bb47697 => 'Montagem não encontrada';
+
+  @override
+  String get m460924c692 => 'Build atualizada';
 
   @override
   String get ma8f340d211 => 'Build atualizada a partir do Path of Building';
@@ -4998,10 +5099,6 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get m187a481844 => 'Build excluída';
-
-  @override
-  String get m993b5ef013 =>
-      'A montagem já foi modificada por outro cliente. Aguarde uma nova revisão';
 
   @override
   String get m9027890a7b =>
@@ -5057,6 +5154,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get mff4d880370 => 'Sessão não encontrada. Crie-o explicitamente';
+
+  @override
+  String get ma9e16d992f => 'Sessão criada';
 
   @override
   String get m122d76b9ee => 'A sessão já existe. Conecte-se sem criação';
@@ -5203,6 +5303,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get mb4d30cae52 => 'Salvar';
+
+  @override
+  String get mf86539cea6 => 'Salvar XML';
 
   @override
   String get m9af7509a85 => 'Salvar e calcular';
@@ -5393,6 +5496,14 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get mbb0ceac2d1 => 'O nível e a qualidade devem ser números inteiros';
 
   @override
+  String get m6b99447edb => 'Nível do personagem';
+
+  @override
+  String maa52e33902(String p0) {
+    return 'Nível do personagem: $p0';
+  }
+
+  @override
   String get mecb350422f => 'Nível do inimigo';
 
   @override
@@ -5476,6 +5587,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get mb88cddfeb4 => 'NÚMEROS E REGRAS · LUA POB';
+
+  @override
+  String get mf381d2d571 => 'Cálculo parcial';
 
   @override
   String get m9c8371b55d => 'Alguns dados estão ocupados ou indisponíveis.';

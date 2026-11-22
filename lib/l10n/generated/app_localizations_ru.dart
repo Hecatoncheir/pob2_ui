@@ -13,8 +13,8 @@ class AppLocalizationsRu extends AppLocalizations {
   AppLocalizationsRu([String locale = 'ru']) : super(locale);
 
   @override
-  String get m14158eacb5 =>
-      'CLI, MCP и приложение видят одну сессию. Сейчас синхронизируется название; игровые расчёты выполняет Lua.';
+  String get mf070207e99 =>
+      'CLI, MCP и приложение видят одну сессию. После подключения можно открыть общий XML и изменить уровень персонажа.';
 
   @override
   String get m8c9a654b8c => 'DPS до';
@@ -169,6 +169,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get me72be74923 => 'XML сборки';
 
   @override
+  String get mcdc9b98a1e => 'XML сборки обновлён';
+
+  @override
   String get me097dcd9f8 => 'XML сохранён';
 
   @override
@@ -267,6 +270,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String m1163ee245e(String p0) {
     return 'В компоненте отсутствует $p0. Рабочая версия сохранена.';
   }
+
+  @override
+  String get meccb4de0ee => 'В общей сессии нет XML сборки';
 
   @override
   String get m9bb974d2c9 => 'В пакете MCP отсутствует Python';
@@ -597,6 +603,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get mc0259d55bc => 'Для этой платформы пока нет установщика';
 
   @override
+  String get m4b77800e7b => 'Для этой ревизии расчёта ещё нет';
+
+  @override
   String get m08afe540b9 => 'До узла';
 
   @override
@@ -659,6 +668,11 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get m2071fb9905 => 'Ещё';
+
+  @override
+  String m2e046fa26a(String p0) {
+    return 'Жизнь: $p0';
+  }
 
   @override
   String get mf9a38201c0 => 'Журнал и подробности';
@@ -784,6 +798,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get m3c043ffe87 => 'Изменения экипировки';
+
+  @override
+  String get m3e6dfc9e9d => 'Изменить уровень';
 
   @override
   String get med931b5f06 => 'Изменить этап';
@@ -1158,6 +1175,11 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m57d96c50f4 => 'Не удалось применить предмет';
 
   @override
+  String m7a15f7eafb(String p0) {
+    return 'Не удалось применить снимок: $p0';
+  }
+
+  @override
   String m4d1a8400d5(String p0) {
     return 'Не удалось проверить обновления: $p0';
   }
@@ -1191,11 +1213,6 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get m409f34eb59 => 'Не удалось сохранить группу';
-
-  @override
-  String mea514c56ce(String p0) {
-    return 'Не удалось сохранить имя в XML: $p0';
-  }
 
   @override
   String get mef9d01550d => 'Не удалось сохранить масштаб.';
@@ -1251,6 +1268,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String m88bb56b333(String p0) {
     return 'Неизвестный режим сцены PoB: $p0';
   }
+
+  @override
+  String get m520286c8d7 => 'Неизвестный статус';
 
   @override
   String get me6b70e080e => 'Неизвестный тип установки';
@@ -1555,6 +1575,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get m5ba3edc059 => 'Открыть или создать сборку';
+
+  @override
+  String get me005edfdd2 => 'Открыть общую сборку';
 
   @override
   String get mcfc22a4611 => 'Открыть поиск';
@@ -2072,12 +2095,21 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m7846ddb858 => 'Рассчитано в Lua PoB';
 
   @override
+  String get m81ad452265 => 'Рассчитать';
+
+  @override
   String get m6fa4aff83a => 'Рассчитать пути';
 
   @override
   String m33a38de9ff(String p0) {
     return 'Расчёт Lua · $p0%';
   }
+
+  @override
+  String get m113fcbe1d4 => 'Расчёт не поддерживается';
+
+  @override
+  String get mf59bc90ee5 => 'Расчёт сохранён';
 
   @override
   String get m30a07ea432 => 'Расчёт сравнения…';
@@ -2087,6 +2119,11 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get m1e135b51f1 => 'Расчёт…';
+
+  @override
+  String md6e28957de(String p0) {
+    return 'Ревизия $p0';
+  }
 
   @override
   String m7fce31d207(String p0, String p1, String p2, String p3) {
@@ -2155,6 +2192,10 @@ class AppLocalizationsRu extends AppLocalizations {
       'Сборка изменилась на диске. Дождитесь обновления из PoB.';
 
   @override
+  String get m66d08814d9 =>
+      'Сборка изменилась. Дождитесь новой ревизии и повторите действие';
+
+  @override
   String get m1aee4fe817 => 'Сборка изменилась. Откройте этап снова.';
 
   @override
@@ -2165,6 +2206,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get m5c8bb47697 => 'Сборка не найдена';
+
+  @override
+  String get m460924c692 => 'Сборка обновлена';
 
   @override
   String get ma8f340d211 => 'Сборка обновлена из Path of Building';
@@ -2185,10 +2229,6 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get m187a481844 => 'Сборка удалена';
-
-  @override
-  String get m993b5ef013 =>
-      'Сборка уже изменена другим клиентом. Дождитесь новой ревизии';
 
   @override
   String get m9027890a7b =>
@@ -2243,6 +2283,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get mff4d880370 => 'Сессия не найдена. Создайте её явно';
+
+  @override
+  String get ma9e16d992f => 'Сессия создана';
 
   @override
   String get m122d76b9ee => 'Сессия уже существует. Подключитесь без создания';
@@ -2386,6 +2429,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get mb4d30cae52 => 'Сохранить';
+
+  @override
+  String get mf86539cea6 => 'Сохранить XML';
 
   @override
   String get m9af7509a85 => 'Сохранить и рассчитать';
@@ -2576,6 +2622,14 @@ class AppLocalizationsRu extends AppLocalizations {
   String get mbb0ceac2d1 => 'Уровень и качество должны быть целыми числами';
 
   @override
+  String get m6b99447edb => 'Уровень персонажа';
+
+  @override
+  String maa52e33902(String p0) {
+    return 'Уровень персонажа: $p0';
+  }
+
+  @override
   String get mecb350422f => 'Уровень противника';
 
   @override
@@ -2658,6 +2712,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get mb88cddfeb4 => 'ЧИСЛА И ПРАВИЛА · LUA POB';
+
+  @override
+  String get mf381d2d571 => 'Частичный расчёт';
 
   @override
   String get m9c8371b55d => 'Часть данных занята или недоступна.';
