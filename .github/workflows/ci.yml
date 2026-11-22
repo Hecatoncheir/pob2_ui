@@ -146,40 +146,6 @@ jobs:
           flutter gen-l10n
           dart format lib/l10n lib/ui/core/ui_messages.g.dart
           git diff --exit-code -- lib/l10n lib/ui/core/ui_messages.g.dart
-      - name: Тесты приложения
-        run: flutter test
-      - uses: actions/setup-go@v7.1.0
-        if: runner.os == 'Linux'
-        with:
-          go-version: '1.27.4'
-      - uses: actions/checkout@v7.0.1
-        if: runner.os == 'Linux'
-        with:
-          repository: Hecatoncheir/pob2_engine
-          ref: 175bb83ad09a6a45d0220c8647f793afdbe6b009
-          path: build/engine-source
-      - name: Подготовить движок для процессного теста
-        if: runner.os == 'Linux'
-        working-directory: build/engine-source
-        run: go build -o ../pob2-engine-test ./cmd/pob2-engine
-      - name: Проверить общую сессию настоящими CLI и MCP
-        if: runner.os == 'Linux'
-        env:
-          POB2_ENGINE_TEST_EXECUTABLE: ${{ github.workspace }}/build/pob2-engine-test
-        run: flutter test test/engine_session_process_test.dart
-      - name: Проверки релиза и прототипа
-        shell: bash
-        run: |
-          python -m unittest discover -s tool -p 'test_*.py' -v
-          python tool/release.py --check-only
-          node --test tool/design_state_test.cjs
-      - name: Собрать приложение
-        run: flutter build ${{ matrix.platform }} --release
-      - name: Собрать установщик
-        run: python tool/release.py --package ${{ matrix.target }}
-      - name: Проверить выбор установленной версии загрузчиком
-        if: runner.os != 'macOS'
-        run: python tool/check_launcher.py --target ${{ matrix.target }}
       - name: Проверить компоненты с настоящим Lua
         if: inputs.cold_install != true
         shell: bash
@@ -231,10 +197,47 @@ jobs:
           PY
           chmod +x "$engine_dir/$binary"
           export POB2_ENGINE_TEST_EXECUTABLE="$engine_dir/$binary"
+          "$POB2_ENGINE_TEST_EXECUTABLE" session create --profile ci-install --start-server \
+            --runtime-dir "$engine_dir/runtime" --data-dir "$engine_dir/data" --timeout 120s \
+            --session install --name CI --request-id install
           flutter test --no-pub test/engine_session_process_test.dart
           runner=()
           if [[ "$RUNNER_OS" == Linux ]]; then runner=(xvfb-run -a); fi
           "${runner[@]}" flutter test --no-pub integration_test/engine_session_desktop_test.dart -d "${{ matrix.platform }}"
+      - name: Тесты приложения
+        run: flutter test
+      - uses: actions/setup-go@v7.1.0
+        if: runner.os == 'Linux'
+        with:
+          go-version: '1.27.4'
+      - uses: actions/checkout@v7.0.1
+        if: runner.os == 'Linux'
+        with:
+          repository: Hecatoncheir/pob2_engine
+          ref: 175bb83ad09a6a45d0220c8647f793afdbe6b009
+          path: build/engine-source
+      - name: Подготовить движок для процессного теста
+        if: runner.os == 'Linux'
+        working-directory: build/engine-source
+        run: go build -o ../pob2-engine-test ./cmd/pob2-engine
+      - name: Проверить общую сессию настоящими CLI и MCP
+        if: runner.os == 'Linux'
+        env:
+          POB2_ENGINE_TEST_EXECUTABLE: ${{ github.workspace }}/build/pob2-engine-test
+        run: flutter test test/engine_session_process_test.dart
+      - name: Проверки релиза и прототипа
+        shell: bash
+        run: |
+          python -m unittest discover -s tool -p 'test_*.py' -v
+          python tool/release.py --check-only
+          node --test tool/design_state_test.cjs
+      - name: Собрать приложение
+        run: flutter build ${{ matrix.platform }} --release
+      - name: Собрать установщик
+        run: python tool/release.py --package ${{ matrix.target }}
+      - name: Проверить выбор установленной версии загрузчиком
+        if: runner.os != 'macOS'
+        run: python tool/check_launcher.py --target ${{ matrix.target }}
       - name: Проверить игровые словари десяти языков
         if: inputs.cold_install != true
         shell: bash
