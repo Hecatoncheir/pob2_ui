@@ -87,6 +87,7 @@ Future<Map<String, Object?>> _checkBuild(
     _require(model.state.error == null && model.luaReady, model);
     _require(report != null && id != null, model);
     _require(await model.buildNotes.readNotes(id!) == _notes, model);
+    await _checkRestoredTreeArtwork(model, stage, progress);
     return {
       'source': report!.raw['source'],
       'id': id,
@@ -97,6 +98,23 @@ Future<Map<String, Object?>> _checkBuild(
   } finally {
     await model.close();
   }
+}
+
+Future<void> _checkRestoredTreeArtwork(
+  WorkshopCubit model,
+  String stage,
+  InstallerCheckProgress progress,
+) async {
+  if (stage != 'restore' ||
+      Platform.environment['POB2_UI_CHECK_TREE_CACHE'] != '1') {
+    return;
+  }
+  progress.record('restore-tree-artwork');
+  await model.waitForTreeArtwork();
+  final tree = model.state.document?.tree;
+  if (tree?.iconError case final error?) throw StateError(error);
+  _require(tree != null && tree.icons.isNotEmpty, model);
+  progress.record('tree-artwork-ready');
 }
 
 Future<void> _cleanAndRollback(

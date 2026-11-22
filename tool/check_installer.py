@@ -160,11 +160,12 @@ def prepare_profile(data, components, archives=None):
     return builds
 
 
-def verify_reopened(executable, data, builds, environment, saved):
+def verify_reopened(executable, data, builds, environment, saved, *, restore_tree_cache=False):
     files = list(builds.glob('*.xml'))
     assert len(files) == 1 and files[0].name == saved['id']
     original = files[0].read_bytes()
-    restored = run_build_check(executable, data, environment, 'restore')
+    restore_env = dict(environment, POB2_UI_CHECK_TREE_CACHE='1') if restore_tree_cache else environment
+    restored = run_build_check(executable, data, restore_env, 'restore')
     assert restored == saved, (saved, restored)
     assert files[0].read_bytes() == original, 'Повторный запуск изменил XML'
 
@@ -237,7 +238,7 @@ def check_previous(target, package, executable, base, environment, components, v
     before = {file.name: file.read_bytes() for file in builds.glob('*.xml')}
     assert run_build_check(executable, data, env, 'cleanup') == saved
     assert {file.name: file.read_bytes() for file in builds.glob('*.xml')} == before
-    verify_reopened(executable, data, builds, env, saved)
+    verify_reopened(executable, data, builds, env, saved, restore_tree_cache=True)
     assert any((data / 'tree-cache').rglob('*.png')), 'Кеш дерева не восстановлен из Lua'
     print(f'После обновления с v{PREVIOUS_VERSION}, очистки и отката совпали XML, заметки и отчёт Lua')
     check_previous_weapons(old, executable, data, env)

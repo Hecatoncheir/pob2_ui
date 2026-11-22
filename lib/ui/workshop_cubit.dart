@@ -1144,6 +1144,15 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     });
   }
 
+  // Для проверок, которым нужен восстановленный кеш, после открытия сборки.
+  Future<void> waitForTreeArtwork() async {
+    var pending = _treeArtworkLoad;
+    while (pending != null) {
+      await pending;
+      pending = _treeArtworkLoad;
+    }
+  }
+
   Future<void> _loadTreeArtwork(
     TreeGeometry tree,
     McpClient client,

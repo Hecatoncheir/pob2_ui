@@ -303,10 +303,8 @@ void main() {
       } finally {
         slow.release.complete();
       }
-      final decorated = await model.stream
-          .firstWhere((state) => state.document!.tree!.icons.isNotEmpty)
-          .timeout(limit);
-      expect(decorated.document!.tree!.icons.keys, ['3' * 64, '4' * 64]);
+      await model.waitForTreeArtwork().timeout(limit);
+      expect(model.state.document!.tree!.icons.keys, ['3' * 64, '4' * 64]);
       expect(slow.textures, ['1' * 64, '3' * 64, '4' * 64]);
     },
   );

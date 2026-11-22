@@ -18,7 +18,6 @@ import 'package:pob2_ui/data/appearance_repository.dart';
 import 'package:pob2_ui/domain/appearance.dart';
 import 'package:pob2_ui/domain/build_report.dart';
 import 'package:pob2_ui/domain/progression_comparison.dart';
-import 'package:pob2_ui/domain/tree_geometry.dart';
 import 'package:pob2_ui/domain/tree_progression.dart';
 import 'package:pob2_ui/ui/app.dart';
 import 'package:pob2_ui/ui/tree_canvas.dart';
@@ -104,11 +103,7 @@ void main() {
     final life = model.state.report!.stats['Life'];
     expect(life, greaterThan(0));
     expect(model.state.document!.tree!.nodes.length, greaterThan(1000));
-    if (!_treeArtworkReady(model.state.document?.tree)) {
-      await model.stream.firstWhere(
-        (state) => _treeArtworkReady(state.document?.tree),
-      );
-    }
+    await model.waitForTreeArtwork();
     expect(model.state.document!.tree!.iconError, isNull);
     expect(model.state.document!.tree!.icons.length, greaterThan(100));
     await tester.pumpWidget(
@@ -979,9 +974,6 @@ Future<void> _addRealSkill(WorkshopCubit model) async {
   });
   await model.refreshReport();
 }
-
-bool _treeArtworkReady(TreeGeometry? tree) =>
-    tree != null && (tree.icons.length > 100 || tree.iconError != null);
 
 Future<void> _waitForImages(WidgetTester tester) async {
   for (var attempt = 0; attempt < 600; attempt++) {
