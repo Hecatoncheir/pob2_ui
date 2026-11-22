@@ -28,6 +28,11 @@ void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
   testWidgets('PoB II и MCP правят одну XML-сборку через gRPC', (tester) async {
+    tester.view.devicePixelRatio = 1;
+    tester.view.physicalSize = const Size(1280, 800);
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
     final executable = Platform.environment['POB2_ENGINE_TEST_EXECUTABLE'];
     if (executable == null ||
         !Platform.environment.containsKey('POB2_UI_HOME')) {
