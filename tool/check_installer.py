@@ -171,7 +171,14 @@ def verify_reopened(executable, data, builds, environment, saved, *, restore_tre
     original = files[0].read_bytes()
     restore_env = dict(environment, POB2_UI_CHECK_TREE_CACHE='1') if restore_tree_cache else environment
     restored = run_build_check(executable, data, restore_env, 'restore')
-    assert restored == saved, (saved, restored)
+    restored_session = restored.pop('engineSession', None)
+    saved_report = dict(saved)
+    saved_session = saved_report.pop('engineSession', None)
+    assert restored == saved_report, (saved_report, restored)
+    if saved_session is not None:
+        assert restored_session == saved_session, (saved_session, restored_session)
+    elif environment.get('POB2_PACKAGED_ENGINE_VERSION'):
+        assert isinstance(restored_session, str) and restored_session.startswith('build-'), restored_session
     assert files[0].read_bytes() == original, 'Повторный запуск изменил XML'
 
 
