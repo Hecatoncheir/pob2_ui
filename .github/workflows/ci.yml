@@ -240,7 +240,7 @@ jobs:
         if: runner.os == 'Linux'
         with:
           repository: Hecatoncheir/pob2_engine
-          ref: 175bb83ad09a6a45d0220c8647f793afdbe6b009
+          ref: 83b47dab660018c17237ead33a6392f99492dd56
           path: build/engine-source
       - name: Подготовить движок для процессного теста
         if: runner.os == 'Linux'
@@ -250,6 +250,7 @@ jobs:
         if: runner.os == 'Linux'
         env:
           POB2_ENGINE_TEST_EXECUTABLE: ${{ github.workspace }}/build/pob2-engine-test
+          POB2_ENGINE_CALCULATOR: go
         run: flutter test test/engine_session_process_test.dart
       - name: Проверки релиза и прототипа
         shell: bash
