@@ -255,6 +255,12 @@ class AppLocalizationsEs extends AppLocalizations {
   String get mb1ff29da2c => 'Armadura';
 
   @override
+  String get m0b6f02a8f4 => 'Por asignar';
+
+  @override
+  String get mcdb0f6d11c => 'Por reembolsar';
+
+  @override
   String m968f778255(String p0) {
     return 'Se eliminarán los archivos seleccionados de $p0 bytes.';
   }
@@ -559,6 +565,9 @@ class AppLocalizationsEs extends AppLocalizations {
       'El motor devolvió parámetros de conexión incompatibles';
 
   @override
+  String get mb6dc5488ee => 'El motor no devolvió los nodos modificados';
+
+  @override
   String get m61f92fb847 => 'El motor no reportó parámetros de conexión';
 
   @override
@@ -580,6 +589,9 @@ class AppLocalizationsEs extends AppLocalizations {
   String m0e1306f92c(String p0) {
     return 'Árbol no disponible: $p0';
   }
+
+  @override
+  String get mb7363b6692 => 'Árbol de pasivas';
 
   @override
   String get m57d9f5cb7c => 'Árbol aún no disponible';
@@ -868,6 +880,9 @@ class AppLocalizationsEs extends AppLocalizations {
   String get m4376254217 => 'Importar mediante enlace';
 
   @override
+  String get md9d1b9437e => 'Nombre o ID de la pasiva';
+
+  @override
   String get me95acf38f2 =>
       'El nombre de la sesión compartida se guardará en el ensamblado abierto. Cuando cambie el ensamblaje, el enlace se desactivará.';
 
@@ -916,6 +931,9 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get md0ef3540b0 => 'Catálogo';
+
+  @override
+  String get mbda80aa454 => 'El catálogo de PoB usa otra versión del árbol';
 
   @override
   String get m43c6960012 => 'Calidad';
@@ -1879,6 +1897,9 @@ class AppLocalizationsEs extends AppLocalizations {
   String get m21a6bb1840 => 'Mostrar árbol completo';
 
   @override
+  String get mc6826c7837 => 'Mostrar más';
+
+  @override
   String get m233d77b731 => 'Completo DPS';
 
   @override
@@ -1963,7 +1984,13 @@ class AppLocalizationsEs extends AppLocalizations {
   String get m32060a34f5 => 'Vista previa';
 
   @override
+  String get m7ece05214c => 'Previsualizar asignación';
+
+  @override
   String get mad582b726d => 'Vista previa de la limpieza del perfil';
+
+  @override
+  String get m665711d6eb => 'Previsualizar reembolso';
 
   @override
   String get m3c2b5cfe97 => 'Advertencias Lua';
@@ -2530,6 +2557,11 @@ class AppLocalizationsEs extends AppLocalizations {
   @override
   String md7dfb40adb(String p0) {
     return 'Combinación ya en uso: $p0';
+  }
+
+  @override
+  String mf534a9d6b4(String p0) {
+    return 'Configuración de árbol $p0';
   }
 
   @override

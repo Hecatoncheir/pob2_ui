@@ -247,6 +247,12 @@ class AppLocalizationsKo extends AppLocalizations {
   String get mb1ff29da2c => '방어구';
 
   @override
+  String get m0b6f02a8f4 => '할당 예정';
+
+  @override
+  String get mcdb0f6d11c => '반환 예정';
+
+  @override
   String m968f778255(String p0) {
     return '선택한 $p0바이트 파일이 삭제됩니다.';
   }
@@ -539,6 +545,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get mf68d71e67c => '엔진이 호환되지 않는 연결 매개변수를 반환했습니다.';
 
   @override
+  String get mb6dc5488ee => '엔진이 변경된 노드를 반환하지 않았습니다';
+
+  @override
   String get m61f92fb847 => '엔진이 연결 매개변수를 보고하지 않았습니다.';
 
   @override
@@ -560,6 +569,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String m0e1306f92c(String p0) {
     return '트리를 사용할 수 없음: $p0';
   }
+
+  @override
+  String get mb7363b6692 => '패시브 트리';
 
   @override
   String get m57d9f5cb7c => '아직 사용할 수 없는 나무';
@@ -836,6 +848,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m4376254217 => '링크를 통해 가져오기';
 
   @override
+  String get md9d1b9437e => '패시브 이름 또는 ID';
+
+  @override
   String get me95acf38f2 =>
       '공유 세션 이름은 열린 어셈블리에 저장됩니다. 어셈블리를 변경하면 바인딩이 비활성화됩니다.';
 
@@ -884,6 +899,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get md0ef3540b0 => '카탈로그';
+
+  @override
+  String get mbda80aa454 => 'PoB 목록의 트리 버전이 다릅니다';
 
   @override
   String get m43c6960012 => '퀄리티';
@@ -1822,6 +1840,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m21a6bb1840 => '전체 트리 표시';
 
   @override
+  String get mc6826c7837 => '더 보기';
+
+  @override
   String get m233d77b731 => '전체 DPS';
 
   @override
@@ -1906,7 +1927,13 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m32060a34f5 => '미리 보기';
 
   @override
+  String get m7ece05214c => '할당 미리 보기';
+
+  @override
   String get mad582b726d => '프로필 정리 미리보기';
+
+  @override
+  String get m665711d6eb => '반환 미리 보기';
 
   @override
   String get m3c2b5cfe97 => '경고 Lua';
@@ -2451,6 +2478,11 @@ class AppLocalizationsKo extends AppLocalizations {
   @override
   String md7dfb40adb(String p0) {
     return '이미 사용 중인 조합: $p0';
+  }
+
+  @override
+  String mf534a9d6b4(String p0) {
+    return '트리 구성 $p0';
   }
 
   @override

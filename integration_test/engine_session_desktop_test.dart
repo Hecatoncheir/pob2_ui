@@ -115,6 +115,11 @@ void main() {
       await _checkEquipment(tester, equipmentMcp);
       await equipmentMcp.close();
     }
+    if (Platform.environment['POB2_ENGINE_TEST_TREE'] == '1') {
+      final treeMcp = await _attachMcp(executable, flags);
+      addTearDown(treeMcp.close);
+      await _checkTree(tester, treeMcp);
+    }
     expect(await local.readAsString(), localBefore);
     expect(await File(_fixture).readAsString(), original);
     await tester.pumpWidget(const SizedBox.shrink());
@@ -199,6 +204,58 @@ Future<int> _checkSupportFromMcp(WidgetTester tester, EngineMcpPeer mcp) async {
   expect(snapshot['revision'], 11);
   _checkCalculation(tester, snapshot['build'] as Map<String, dynamic>);
   return 11;
+}
+
+Future<void> _checkTree(WidgetTester tester, EngineMcpPeer mcp) async {
+  final before = await mcp.call('get_snapshot');
+  await _openTreeNode(tester);
+  await _previewTreeNode(tester, 'Будут назначены');
+  expect(await mcp.call('get_snapshot'), before);
+  final revision = before['revision'] as int;
+  await _editSharedLevel(mcp, 47, revision);
+  await _waitFor(
+    tester,
+    find.text('Выполните предпросмотр для текущей ревизии'),
+  );
+  final apply = find.byKey(const Key('engine-tree-apply'));
+  expect(tester.widget<FilledButton>(apply).onPressed, isNull);
+  await _previewTreeNode(tester, 'Будут назначены');
+  await _applyTreeNode(tester, revision + 2);
+  expect(
+    _xml(await mcp.call('get_snapshot')),
+    contains('nodes="54447,4739,18845"'),
+  );
+
+  await _openTreeNode(tester);
+  await _previewTreeNode(tester, 'Будут сняты');
+  await _applyTreeNode(tester, revision + 3);
+  expect(_xml(await mcp.call('get_snapshot')), contains('nodes="54447,4739"'));
+}
+
+Future<void> _applyTreeNode(WidgetTester tester, int revision) async {
+  await tester.tap(find.byKey(const Key('engine-tree-apply')));
+  await _waitFor(tester, find.text('Ревизия $revision'));
+  await tester.pumpAndSettle();
+  expect(find.byKey(const Key('engine-tree-apply')), findsNothing);
+}
+
+Future<void> _openTreeNode(WidgetTester tester) async {
+  final tree = find.byKey(const Key('engine-open-tree'));
+  await tester.ensureVisible(tree);
+  await tester.tap(tree);
+  await tester.pumpAndSettle();
+  await tester.enterText(find.byKey(const Key('engine-tree-query')), '18845');
+  await tester.tap(find.byKey(const Key('engine-tree-search')));
+  await _waitFor(tester, find.byKey(const Key('engine-tree-node-18845')));
+}
+
+Future<void> _previewTreeNode(WidgetTester tester, String action) async {
+  await tester.tap(find.byKey(const Key('engine-tree-preview')));
+  await tester.pump();
+  await _waitFor(tester, find.text(action));
+  await tester.pumpAndSettle();
+  final apply = find.byKey(const Key('engine-tree-apply'));
+  expect(tester.widget<FilledButton>(apply).onPressed, isNotNull);
 }
 
 Future<void> _checkEquipment(WidgetTester tester, EngineMcpPeer mcp) async {

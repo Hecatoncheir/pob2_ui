@@ -251,6 +251,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get mb1ff29da2c => 'Armour';
 
   @override
+  String get m0b6f02a8f4 => 'To be allocated';
+
+  @override
+  String get mcdb0f6d11c => 'To be refunded';
+
+  @override
   String m968f778255(String p0) {
     return 'Selected files of $p0 bytes will be deleted.';
   }
@@ -549,6 +555,9 @@ class AppLocalizationsEn extends AppLocalizations {
       'The engine returned incompatible connection parameters';
 
   @override
+  String get mb6dc5488ee => 'The engine did not return the changed nodes';
+
+  @override
   String get m61f92fb847 => 'The engine did not report connection parameters';
 
   @override
@@ -570,6 +579,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String m0e1306f92c(String p0) {
     return 'Tree unavailable: $p0';
   }
+
+  @override
+  String get mb7363b6692 => 'Passive tree';
 
   @override
   String get m57d9f5cb7c => 'Tree not yet available';
@@ -853,6 +865,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m4376254217 => 'Import via link';
 
   @override
+  String get md9d1b9437e => 'Passive name or ID';
+
+  @override
   String get me95acf38f2 =>
       'The shared session name will be saved in the open assembly. When you change the assembly, the binding will be disabled.';
 
@@ -901,6 +916,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get md0ef3540b0 => 'Catalog';
+
+  @override
+  String get mbda80aa454 => 'The PoB catalog uses a different tree version';
 
   @override
   String get m43c6960012 => 'Quality';
@@ -1852,6 +1870,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m21a6bb1840 => 'Show whole tree';
 
   @override
+  String get mc6826c7837 => 'Show more';
+
+  @override
   String get m233d77b731 => 'Full DPS';
 
   @override
@@ -1936,7 +1957,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m32060a34f5 => 'Preview';
 
   @override
+  String get m7ece05214c => 'Preview allocation';
+
+  @override
   String get mad582b726d => 'Preview of profile cleaning';
+
+  @override
+  String get m665711d6eb => 'Preview refund';
 
   @override
   String get m3c2b5cfe97 => 'Warnings Lua';
@@ -2493,6 +2520,11 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String md7dfb40adb(String p0) {
     return 'Combination already in use: $p0';
+  }
+
+  @override
+  String mf534a9d6b4(String p0) {
+    return 'Tree setup $p0';
   }
 
   @override

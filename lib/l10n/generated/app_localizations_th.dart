@@ -250,6 +250,12 @@ class AppLocalizationsTh extends AppLocalizations {
   String get mb1ff29da2c => 'เกราะ';
 
   @override
+  String get m0b6f02a8f4 => 'จะจัดสรร';
+
+  @override
+  String get mcdb0f6d11c => 'จะคืนแต้ม';
+
+  @override
   String m968f778255(String p0) {
     return 'ไฟล์ที่เลือกขนาด $p0 ไบต์จะถูกลบ';
   }
@@ -545,6 +551,9 @@ class AppLocalizationsTh extends AppLocalizations {
       'โปรแกรมส่งคืนพารามิเตอร์การเชื่อมต่อที่เข้ากันไม่ได้';
 
   @override
+  String get mb6dc5488ee => 'เอนจินไม่ได้ส่งคืนโหนดที่เปลี่ยนแปลง';
+
+  @override
   String get m61f92fb847 => 'เอ็นจิ้นไม่ได้รายงานพารามิเตอร์การเชื่อมต่อ';
 
   @override
@@ -566,6 +575,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String m0e1306f92c(String p0) {
     return 'แผนผังไม่พร้อมใช้งาน: $p0';
   }
+
+  @override
+  String get mb7363b6692 => 'ผังพาสซีฟ';
 
   @override
   String get m57d9f5cb7c => 'ต้นไม้ยังไม่พร้อมใช้งาน';
@@ -847,6 +859,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m4376254217 => 'นำเข้าผ่านลิงก์';
 
   @override
+  String get md9d1b9437e => 'ชื่อหรือ ID พาสซีฟ';
+
+  @override
   String get me95acf38f2 =>
       'ชื่อเซสชันที่แชร์จะถูกบันทึกไว้ในแอสเซมบลีแบบเปิด เมื่อคุณเปลี่ยนชุดประกอบ การผูกจะถูกปิดใช้งาน';
 
@@ -895,6 +910,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get md0ef3540b0 => 'แค็ตตาล็อก';
+
+  @override
+  String get mbda80aa454 => 'แค็ตตาล็อก PoB ใช้ผังคนละเวอร์ชัน';
 
   @override
   String get m43c6960012 => 'คุณภาพ';
@@ -1837,6 +1855,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m21a6bb1840 => 'แสดงทั้งต้นไม้';
 
   @override
+  String get mc6826c7837 => 'แสดงเพิ่มเติม';
+
+  @override
   String get m233d77b731 => 'เต็ม DPS';
 
   @override
@@ -1921,7 +1942,13 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m32060a34f5 => 'ดูตัวอย่าง';
 
   @override
+  String get m7ece05214c => 'ดูตัวอย่างการจัดสรร';
+
+  @override
   String get mad582b726d => 'ตัวอย่างการทำความสะอาดโปรไฟล์';
+
+  @override
+  String get m665711d6eb => 'ดูตัวอย่างการคืนแต้ม';
 
   @override
   String get m3c2b5cfe97 => 'คำเตือน Lua';
@@ -2472,6 +2499,11 @@ class AppLocalizationsTh extends AppLocalizations {
   @override
   String md7dfb40adb(String p0) {
     return 'ชุดค่าผสมถูกใช้แล้ว: $p0';
+  }
+
+  @override
+  String mf534a9d6b4(String p0) {
+    return 'ชุดผัง $p0';
   }
 
   @override

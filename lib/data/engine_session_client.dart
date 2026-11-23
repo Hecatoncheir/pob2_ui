@@ -36,6 +36,21 @@ abstract interface class EngineConnection {
     EngineEquipmentEdit edit,
     String requestId,
   );
+  bool get supportsTreePreview;
+  Future<EnginePassivePage> findPassives(
+    String version,
+    String query,
+    int offset,
+  );
+  Future<EngineTreePreview> previewTree(
+    EngineSnapshot current,
+    EngineTreeEdit edit,
+  );
+  Future<void> editTree(
+    EngineSnapshot current,
+    EngineTreeEdit edit,
+    String requestId,
+  );
   Future<EngineSupportPage> findSupports(String query, int offset);
   Future<EngineSupportPreview> previewSupport(
     EngineSnapshot current,
@@ -69,6 +84,7 @@ class EngineSessionClient implements EngineConnection {
     this._rpc,
     this.supportsAddSupport,
     this.supportsEquipmentPreview,
+    this.supportsTreePreview,
   );
   final Process _helper;
   final StreamSubscription<String> _output;
@@ -79,6 +95,8 @@ class EngineSessionClient implements EngineConnection {
   final bool supportsAddSupport;
   @override
   final bool supportsEquipmentPreview;
+  @override
+  final bool supportsTreePreview;
   bool _closed = false;
 
   static Future<EngineConnection> open(EngineOptions options) async {
@@ -153,6 +171,7 @@ class EngineSessionClient implements EngineConnection {
         rpc,
         info.capabilities.contains('build.add_support'),
         info.capabilities.contains('build.equipment_preview'),
+        info.capabilities.contains('build.tree_preview'),
       );
     } catch (_) {
       await channel?.terminate();
@@ -235,6 +254,16 @@ class EngineSessionClient implements EngineConnection {
       calculation: calculation,
       group: _selectedGroup(value.model),
       equipment: _equipment(value.model),
+      tree: _tree(value.model),
+    );
+  }
+
+  static EngineTree? _tree(builds.BuildModel model) {
+    if (model.treeVersion.isEmpty || model.activeSets.tree == 0) return null;
+    return (
+      spec: model.activeSets.tree,
+      version: model.treeVersion,
+      nodes: Set.unmodifiable(model.nodes),
     );
   }
 
@@ -400,21 +429,30 @@ class EngineSessionClient implements EngineConnection {
     EngineSnapshot current,
     EngineEquipmentEdit edit,
   ) async {
-    final result = await _rpc.compareBuild(
-      pb.CompareBuildRequest(
-        sessionId: current.sessionId,
-        expectedRevision: Int64(current.revision),
-        edit: _equipmentChange(edit),
-      ),
-      options: _calculationTimeout,
-    );
-    return (
-      revision: result.revision.toInt(),
-      before: _calculation(result.comparison.before),
-      after: _calculation(result.comparison.after),
-      deltas: _statDeltas(result.comparison),
-    );
+    final result = await _compareEdit(current, _equipmentChange(edit));
+    return _buildComparison(result);
   }
+
+  Future<pb.CompareBuildResponse> _compareEdit(
+    EngineSnapshot current,
+    builds.BuildEdit edit,
+  ) => _rpc.compareBuild(
+    pb.CompareBuildRequest(
+      sessionId: current.sessionId,
+      expectedRevision: Int64(current.revision),
+      edit: edit,
+    ),
+    options: _calculationTimeout,
+  );
+
+  static EngineBuildComparison _buildComparison(
+    pb.CompareBuildResponse result,
+  ) => (
+    revision: result.revision.toInt(),
+    before: _calculation(result.comparison.before),
+    after: _calculation(result.comparison.after),
+    deltas: _statDeltas(result.comparison),
+  );
 
   @override
   Future<void> editEquipment(
@@ -427,6 +465,64 @@ class EngineSessionClient implements EngineConnection {
       builds.BuildEdit(
         equipment: builds.EquipmentEdit(slot: edit.slot, raw: edit.raw),
       );
+
+  @override
+  Future<EnginePassivePage> findPassives(
+    String version,
+    String query,
+    int offset,
+  ) async {
+    final page = await _rpc.getCatalog(
+      catalog.GetCatalogRequest(
+        kind: 'passives',
+        query: query,
+        limit: 30,
+        offset: offset,
+      ),
+      options: _calculationTimeout,
+    );
+    if (page.treeVersion != version) {
+      throw StateError('Каталог PoB относится к другой версии дерева');
+    }
+    final matches = page.entries.map(
+      (entry) => (id: int.parse(entry.id), name: entry.name),
+    );
+    final next = page.offset + page.limit;
+    return (
+      entries: List<EnginePassive>.unmodifiable(matches),
+      nextOffset: next < page.total && next <= 10000 ? next : null,
+    );
+  }
+
+  @override
+  Future<EngineTreePreview> previewTree(
+    EngineSnapshot current,
+    EngineTreeEdit edit,
+  ) async {
+    final result = await _compareEdit(current, _treeChange(edit));
+    if (!result.hasPassiveChange()) {
+      throw const FormatException('Движок не вернул изменённые узлы');
+    }
+    return (
+      comparison: _buildComparison(result),
+      added: List<int>.unmodifiable(result.passiveChange.added),
+      removed: List<int>.unmodifiable(result.passiveChange.removed),
+    );
+  }
+
+  @override
+  Future<void> editTree(
+    EngineSnapshot current,
+    EngineTreeEdit edit,
+    String requestId,
+  ) => _applyEdit(current, _treeChange(edit), requestId);
+
+  static builds.BuildEdit _treeChange(EngineTreeEdit edit) => builds.BuildEdit(
+    treeNode: builds.TreeNodeEdit(
+      nodeId: edit.nodeId,
+      action: edit.refund ? 'refund' : 'allocate',
+    ),
+  );
 
   @override
   Future<void> addSupport(
@@ -457,7 +553,9 @@ class EngineSessionClient implements EngineConnection {
         requestId: requestId,
         edit: edit,
       ),
-      options: edit.hasEquipment() ? _calculationTimeout : _timeout,
+      options: edit.hasEquipment() || edit.hasTreeNode()
+          ? _calculationTimeout
+          : _timeout,
     );
   }
 

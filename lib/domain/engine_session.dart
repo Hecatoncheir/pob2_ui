@@ -33,6 +33,7 @@ class EngineBuild {
     this.calculation,
     this.group,
     this.equipment = const {},
+    this.tree,
   });
 
   final String xml;
@@ -40,6 +41,7 @@ class EngineBuild {
   final EngineCalculation? calculation;
   final EngineSkillGroup? group;
   final Map<String, String> equipment;
+  final EngineTree? tree;
 }
 
 typedef EngineGem = ({String name, int level, int quality, bool enabled});
@@ -63,11 +65,22 @@ typedef EngineStatDelta = ({
 });
 
 typedef EngineEquipmentEdit = ({String slot, String raw});
-typedef EngineEquipmentPreview = ({
+typedef EngineEquipmentPreview = EngineBuildComparison;
+typedef EngineBuildComparison = ({
   int revision,
   EngineCalculation before,
   EngineCalculation after,
   List<EngineStatDelta> deltas,
+});
+
+typedef EngineTree = ({int spec, String version, Set<int> nodes});
+typedef EnginePassive = ({int id, String name});
+typedef EnginePassivePage = ({List<EnginePassive> entries, int? nextOffset});
+typedef EngineTreeEdit = ({int nodeId, bool refund});
+typedef EngineTreePreview = ({
+  EngineBuildComparison comparison,
+  List<int> added,
+  List<int> removed,
 });
 
 class EngineSupportPreview {

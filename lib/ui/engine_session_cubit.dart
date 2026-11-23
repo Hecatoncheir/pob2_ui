@@ -37,6 +37,13 @@ typedef EngineEquipmentOffer = ({
   EngineEquipmentPreview preview,
 });
 
+typedef EngineTreeOffer = ({
+  String sessionId,
+  int connectionId,
+  EngineTreeEdit edit,
+  EngineTreePreview preview,
+});
+
 class EngineSessionCubit extends Cubit<EngineSessionState> {
   EngineSessionCubit({
     Future<EngineConnection> Function(EngineOptions)? open,
@@ -280,6 +287,47 @@ class EngineSessionCubit extends Cubit<EngineSessionState> {
     final snapshot = state.snapshot!;
     await _connectedTo(snapshot)
         .editEquipment(snapshot, offer.edit, engineRequestId());
+  }
+
+  bool get supportsTreePreview =>
+      state.connected && (_connection?.supportsTreePreview ?? false);
+
+  Future<EnginePassivePage> findPassives(
+    EngineSnapshot current,
+    String version,
+    String query,
+    int offset,
+  ) => _connectedTo(current).findPassives(version, query, offset);
+
+  Future<EngineTreeOffer> previewTree(
+    EngineSnapshot current,
+    EngineTreeEdit edit,
+  ) async {
+    final connectionId = _connectionId;
+    final preview = await _connectedTo(current).previewTree(current, edit);
+    return (
+      sessionId: current.sessionId,
+      connectionId: connectionId,
+      edit: edit,
+      preview: preview,
+    );
+  }
+
+  bool isCurrentTreeOffer(EngineTreeOffer offer) =>
+      supportsTreePreview &&
+      _isCurrentOffer(
+        offer.sessionId,
+        offer.connectionId,
+        offer.preview.comparison.revision,
+      );
+
+  Future<void> editTree(EngineTreeOffer offer) async {
+    if (!isCurrentTreeOffer(offer)) {
+      throw StateError('Выполните предпросмотр для текущей ревизии');
+    }
+    final snapshot = state.snapshot!;
+    await _connectedTo(snapshot)
+        .editTree(snapshot, offer.edit, engineRequestId());
   }
 
   bool _isCurrentOffer(String sessionId, int connectionId, int revision) =>

@@ -263,6 +263,12 @@ class AppLocalizationsDe extends AppLocalizations {
   String get mb1ff29da2c => 'Rüstung';
 
   @override
+  String get m0b6f02a8f4 => 'Wird zugewiesen';
+
+  @override
+  String get mcdb0f6d11c => 'Wird zurückerstattet';
+
+  @override
   String m968f778255(String p0) {
     return 'Ausgewählte Dateien mit $p0 Byte werden gelöscht.';
   }
@@ -567,6 +573,10 @@ class AppLocalizationsDe extends AppLocalizations {
       'Die Engine hat inkompatible Verbindungsparameter zurückgegeben';
 
   @override
+  String get mb6dc5488ee =>
+      'Die Engine hat die geänderten Knoten nicht zurückgegeben';
+
+  @override
   String get m61f92fb847 =>
       'Die Engine hat keine Verbindungsparameter gemeldet';
 
@@ -590,6 +600,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String m0e1306f92c(String p0) {
     return 'Baum nicht verfügbar: $p0';
   }
+
+  @override
+  String get mb7363b6692 => 'Passivbaum';
 
   @override
   String get m57d9f5cb7c => 'Baum noch nicht verfügbar';
@@ -883,6 +896,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get m4376254217 => 'Import über Link';
 
   @override
+  String get md9d1b9437e => 'Name oder ID der Passive';
+
+  @override
   String get me95acf38f2 =>
       'Der freigegebene Sitzungsname wird in der geöffneten Assembly gespeichert. Wenn Sie die Baugruppe ändern, wird die Bindung deaktiviert.';
 
@@ -931,6 +947,9 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get md0ef3540b0 => 'Katalog';
+
+  @override
+  String get mbda80aa454 => 'Der PoB-Katalog verwendet eine andere Baumversion';
 
   @override
   String get m43c6960012 => 'Qualität';
@@ -1892,6 +1911,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get m21a6bb1840 => 'Gesamten Baum anzeigen';
 
   @override
+  String get mc6826c7837 => 'Mehr anzeigen';
+
+  @override
   String get m233d77b731 => 'Voll DPS';
 
   @override
@@ -1976,7 +1998,13 @@ class AppLocalizationsDe extends AppLocalizations {
   String get m32060a34f5 => 'Vorschau';
 
   @override
+  String get m7ece05214c => 'Zuweisung ansehen';
+
+  @override
   String get mad582b726d => 'Vorschau der Profilbereinigung';
+
+  @override
+  String get m665711d6eb => 'Rückerstattung ansehen';
 
   @override
   String get m3c2b5cfe97 => 'Warnungen Lua';
@@ -2548,6 +2576,11 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String md7dfb40adb(String p0) {
     return 'Kombination bereits verwendet: $p0';
+  }
+
+  @override
+  String mf534a9d6b4(String p0) {
+    return 'Baumkonfiguration $p0';
   }
 
   @override

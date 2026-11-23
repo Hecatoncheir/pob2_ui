@@ -533,6 +533,18 @@ abstract class AppLocalizations {
   /// **'Armour'**
   String get mb1ff29da2c;
 
+  /// Будут назначены
+  ///
+  /// In en, this message translates to:
+  /// **'To be allocated'**
+  String get m0b6f02a8f4;
+
+  /// Будут сняты
+  ///
+  /// In en, this message translates to:
+  /// **'To be refunded'**
+  String get mcdb0f6d11c;
+
   /// Будут удалены выбранные файлы объёмом {p0} байт.
   ///
   /// In en, this message translates to:
@@ -1097,6 +1109,12 @@ abstract class AppLocalizations {
   /// **'The engine returned incompatible connection parameters'**
   String get mf68d71e67c;
 
+  /// Движок не вернул изменённые узлы
+  ///
+  /// In en, this message translates to:
+  /// **'The engine did not return the changed nodes'**
+  String get mb6dc5488ee;
+
   /// Движок не сообщил параметры подключения
   ///
   /// In en, this message translates to:
@@ -1138,6 +1156,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Tree unavailable: {p0}'**
   String m0e1306f92c(String p0);
+
+  /// Дерево пассивов
+  ///
+  /// In en, this message translates to:
+  /// **'Passive tree'**
+  String get mb7363b6692;
 
   /// Дерево пока недоступно
   ///
@@ -1649,6 +1673,12 @@ abstract class AppLocalizations {
   /// **'Import via link'**
   String get m4376254217;
 
+  /// Имя или ID пассива
+  ///
+  /// In en, this message translates to:
+  /// **'Passive name or ID'**
+  String get md9d1b9437e;
+
   /// Имя общей сессии будет сохранено в открытой сборке. При смене сборки привязка отключится.
   ///
   /// In en, this message translates to:
@@ -1738,6 +1768,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Catalog'**
   String get md0ef3540b0;
+
+  /// Каталог PoB относится к другой версии дерева
+  ///
+  /// In en, this message translates to:
+  /// **'The PoB catalog uses a different tree version'**
+  String get mbda80aa454;
 
   /// Качество
   ///
@@ -3474,6 +3510,12 @@ abstract class AppLocalizations {
   /// **'Show whole tree'**
   String get m21a6bb1840;
 
+  /// Показать ещё
+  ///
+  /// In en, this message translates to:
+  /// **'Show more'**
+  String get mc6826c7837;
+
   /// Полный DPS
   ///
   /// In en, this message translates to:
@@ -3630,11 +3672,23 @@ abstract class AppLocalizations {
   /// **'Preview'**
   String get m32060a34f5;
 
+  /// Предпросмотр назначения
+  ///
+  /// In en, this message translates to:
+  /// **'Preview allocation'**
+  String get m7ece05214c;
+
   /// Предпросмотр очистки профиля
   ///
   /// In en, this message translates to:
   /// **'Preview of profile cleaning'**
   String get mad582b726d;
+
+  /// Предпросмотр снятия
+  ///
+  /// In en, this message translates to:
+  /// **'Preview refund'**
+  String get m665711d6eb;
 
   /// Предупреждения Lua
   ///
@@ -4655,6 +4709,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Combination already in use: {p0}'**
   String md7dfb40adb(String p0);
+
+  /// Спецификация дерева {p0}
+  ///
+  /// In en, this message translates to:
+  /// **'Tree setup {p0}'**
+  String mf534a9d6b4(String p0);
 
   /// Список покупок
   ///

@@ -245,6 +245,12 @@ class AppLocalizationsZh extends AppLocalizations {
   String get mb1ff29da2c => '盔甲';
 
   @override
+  String get m0b6f02a8f4 => '將配置';
+
+  @override
+  String get mcdb0f6d11c => '將重置';
+
+  @override
   String m968f778255(String p0) {
     return '將刪除所選的 $p0 位元組檔案。';
   }
@@ -537,6 +543,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get mf68d71e67c => '引擎返回不兼容的连接参数';
 
   @override
+  String get mb6dc5488ee => '引擎未回傳變更的節點';
+
+  @override
   String get m61f92fb847 => '引擎未回報連線參數';
 
   @override
@@ -558,6 +567,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String m0e1306f92c(String p0) {
     return '樹不可用：$p0';
   }
+
+  @override
+  String get mb7363b6692 => '天賦樹';
 
   @override
   String get m57d9f5cb7c => '樹尚未可用';
@@ -833,6 +845,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m4376254217 => '透過連結導入';
 
   @override
+  String get md9d1b9437e => '天賦名稱或 ID';
+
+  @override
   String get me95acf38f2 => '共享会话名称将保存在打开的程序集中。當您變更組件時，綁定將被停用。';
 
   @override
@@ -880,6 +895,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get md0ef3540b0 => '目錄';
+
+  @override
+  String get mbda80aa454 => 'PoB 目錄使用不同版本的天賦樹';
 
   @override
   String get m43c6960012 => '品質';
@@ -1815,6 +1833,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m21a6bb1840 => '顯示整棵樹';
 
   @override
+  String get mc6826c7837 => '顯示更多';
+
+  @override
   String get m233d77b731 => '完整 DPS';
 
   @override
@@ -1899,7 +1920,13 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m32060a34f5 => '預覽';
 
   @override
+  String get m7ece05214c => '預覽配置';
+
+  @override
   String get mad582b726d => '輪廓清理預覽';
+
+  @override
+  String get m665711d6eb => '預覽重置';
 
   @override
   String get m3c2b5cfe97 => '警告Lua';
@@ -2441,6 +2468,11 @@ class AppLocalizationsZh extends AppLocalizations {
   @override
   String md7dfb40adb(String p0) {
     return '組合已在使用：$p0';
+  }
+
+  @override
+  String mf534a9d6b4(String p0) {
+    return '天賦配置 $p0';
   }
 
   @override
@@ -3060,6 +3092,12 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get mb1ff29da2c => '盔甲';
 
   @override
+  String get m0b6f02a8f4 => '將配置';
+
+  @override
+  String get mcdb0f6d11c => '將重置';
+
+  @override
   String m968f778255(String p0) {
     return '將刪除所選的 $p0 位元組檔案。';
   }
@@ -3352,6 +3390,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get mf68d71e67c => '引擎返回不兼容的连接参数';
 
   @override
+  String get mb6dc5488ee => '引擎未回傳變更的節點';
+
+  @override
   String get m61f92fb847 => '引擎未回報連線參數';
 
   @override
@@ -3373,6 +3414,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String m0e1306f92c(String p0) {
     return '樹不可用：$p0';
   }
+
+  @override
+  String get mb7363b6692 => '天賦樹';
 
   @override
   String get m57d9f5cb7c => '樹尚未可用';
@@ -3648,6 +3692,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m4376254217 => '透過連結導入';
 
   @override
+  String get md9d1b9437e => '天賦名稱或 ID';
+
+  @override
   String get me95acf38f2 => '共享会话名称将保存在打开的程序集中。當您變更組件時，綁定將被停用。';
 
   @override
@@ -3695,6 +3742,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get md0ef3540b0 => '目錄';
+
+  @override
+  String get mbda80aa454 => 'PoB 目錄使用不同版本的天賦樹';
 
   @override
   String get m43c6960012 => '品質';
@@ -4630,6 +4680,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m21a6bb1840 => '顯示整棵樹';
 
   @override
+  String get mc6826c7837 => '顯示更多';
+
+  @override
   String get m233d77b731 => '完整 DPS';
 
   @override
@@ -4714,7 +4767,13 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m32060a34f5 => '預覽';
 
   @override
+  String get m7ece05214c => '預覽配置';
+
+  @override
   String get mad582b726d => '輪廓清理預覽';
+
+  @override
+  String get m665711d6eb => '預覽重置';
 
   @override
   String get m3c2b5cfe97 => '警告Lua';
@@ -5256,6 +5315,11 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   @override
   String md7dfb40adb(String p0) {
     return '組合已在使用：$p0';
+  }
+
+  @override
+  String mf534a9d6b4(String p0) {
+    return '天賦配置 $p0';
   }
 
   @override

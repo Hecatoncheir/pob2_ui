@@ -253,6 +253,12 @@ class AppLocalizationsPt extends AppLocalizations {
   String get mb1ff29da2c => 'Armadura';
 
   @override
+  String get m0b6f02a8f4 => 'A alocar';
+
+  @override
+  String get mcdb0f6d11c => 'A remover';
+
+  @override
   String m968f778255(String p0) {
     return 'Os arquivos selecionados de $p0 bytes serão excluídos.';
   }
@@ -552,6 +558,9 @@ class AppLocalizationsPt extends AppLocalizations {
       'O mecanismo retornou parâmetros de conexão incompatíveis';
 
   @override
+  String get mb6dc5488ee => 'O motor não retornou os nós alterados';
+
+  @override
   String get m61f92fb847 => 'O mecanismo não relatou parâmetros de conexão';
 
   @override
@@ -573,6 +582,9 @@ class AppLocalizationsPt extends AppLocalizations {
   String m0e1306f92c(String p0) {
     return 'Árvore indisponível: $p0';
   }
+
+  @override
+  String get mb7363b6692 => 'Árvore passiva';
 
   @override
   String get m57d9f5cb7c => 'Árvore ainda não disponível';
@@ -860,6 +872,9 @@ class AppLocalizationsPt extends AppLocalizations {
   String get m4376254217 => 'Importar via link';
 
   @override
+  String get md9d1b9437e => 'Nome ou ID da passiva';
+
+  @override
   String get me95acf38f2 =>
       'O nome da sessão compartilhada será salvo na montagem aberta. Ao alterar a montagem, a vinculação será desativada.';
 
@@ -908,6 +923,9 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get md0ef3540b0 => 'Catálogo';
+
+  @override
+  String get mbda80aa454 => 'O catálogo PoB usa outra versão da árvore';
 
   @override
   String get m43c6960012 => 'Qualidade';
@@ -1868,6 +1886,9 @@ class AppLocalizationsPt extends AppLocalizations {
   String get m21a6bb1840 => 'Mostrar árvore inteira';
 
   @override
+  String get mc6826c7837 => 'Mostrar mais';
+
+  @override
   String get m233d77b731 => 'Completo DPS';
 
   @override
@@ -1952,7 +1973,13 @@ class AppLocalizationsPt extends AppLocalizations {
   String get m32060a34f5 => 'Prévia';
 
   @override
+  String get m7ece05214c => 'Prévia da alocação';
+
+  @override
   String get mad582b726d => 'Visualização da limpeza de perfil';
+
+  @override
+  String get m665711d6eb => 'Prévia da remoção';
 
   @override
   String get m3c2b5cfe97 => 'Avisos Lua';
@@ -2517,6 +2544,11 @@ class AppLocalizationsPt extends AppLocalizations {
   @override
   String md7dfb40adb(String p0) {
     return 'Combinação já em uso: $p0';
+  }
+
+  @override
+  String mf534a9d6b4(String p0) {
+    return 'Configuração de árvore $p0';
   }
 
   @override
@@ -3159,6 +3191,12 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get mb1ff29da2c => 'Armadura';
 
   @override
+  String get m0b6f02a8f4 => 'A alocar';
+
+  @override
+  String get mcdb0f6d11c => 'A remover';
+
+  @override
   String m968f778255(String p0) {
     return 'Os arquivos selecionados de $p0 bytes serão excluídos.';
   }
@@ -3458,6 +3496,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
       'O mecanismo retornou parâmetros de conexão incompatíveis';
 
   @override
+  String get mb6dc5488ee => 'O motor não retornou os nós alterados';
+
+  @override
   String get m61f92fb847 => 'O mecanismo não relatou parâmetros de conexão';
 
   @override
@@ -3479,6 +3520,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String m0e1306f92c(String p0) {
     return 'Árvore indisponível: $p0';
   }
+
+  @override
+  String get mb7363b6692 => 'Árvore passiva';
 
   @override
   String get m57d9f5cb7c => 'Árvore ainda não disponível';
@@ -3766,6 +3810,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get m4376254217 => 'Importar via link';
 
   @override
+  String get md9d1b9437e => 'Nome ou ID da passiva';
+
+  @override
   String get me95acf38f2 =>
       'O nome da sessão compartilhada será salvo na montagem aberta. Ao alterar a montagem, a vinculação será desativada.';
 
@@ -3814,6 +3861,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get md0ef3540b0 => 'Catálogo';
+
+  @override
+  String get mbda80aa454 => 'O catálogo PoB usa outra versão da árvore';
 
   @override
   String get m43c6960012 => 'Qualidade';
@@ -4774,6 +4824,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get m21a6bb1840 => 'Mostrar árvore inteira';
 
   @override
+  String get mc6826c7837 => 'Mostrar mais';
+
+  @override
   String get m233d77b731 => 'Completo DPS';
 
   @override
@@ -4858,7 +4911,13 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get m32060a34f5 => 'Prévia';
 
   @override
+  String get m7ece05214c => 'Prévia da alocação';
+
+  @override
   String get mad582b726d => 'Visualização da limpeza de perfil';
+
+  @override
+  String get m665711d6eb => 'Prévia da remoção';
 
   @override
   String get m3c2b5cfe97 => 'Avisos Lua';
@@ -5423,6 +5482,11 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   @override
   String md7dfb40adb(String p0) {
     return 'Combinação já em uso: $p0';
+  }
+
+  @override
+  String mf534a9d6b4(String p0) {
+    return 'Configuração de árvore $p0';
   }
 
   @override

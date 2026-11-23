@@ -247,6 +247,12 @@ class AppLocalizationsJa extends AppLocalizations {
   String get mb1ff29da2c => 'アーマー';
 
   @override
+  String get m0b6f02a8f4 => '割り当て予定';
+
+  @override
+  String get mcdb0f6d11c => '振り直し予定';
+
+  @override
   String m968f778255(String p0) {
     return '選択した $p0 バイトのファイルが削除されます。';
   }
@@ -539,6 +545,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get mf68d71e67c => 'エンジンが互換性のない接続パラメータを返しました';
 
   @override
+  String get mb6dc5488ee => '変更したノードが返されませんでした';
+
+  @override
   String get m61f92fb847 => 'エンジンは接続パラメータを報告しませんでした';
 
   @override
@@ -560,6 +569,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String m0e1306f92c(String p0) {
     return 'ツリーが利用できません: $p0';
   }
+
+  @override
+  String get mb7363b6692 => 'パッシブツリー';
 
   @override
   String get m57d9f5cb7c => 'ツリーはまだ利用できません';
@@ -836,6 +848,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m4376254217 => 'リンク経由でインポート';
 
   @override
+  String get md9d1b9437e => 'パッシブ名またはID';
+
+  @override
   String get me95acf38f2 =>
       '共有セッション名は、開いているアセンブリに保存されます。アセンブリを変更すると、バインドは無効になります。';
 
@@ -884,6 +899,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get md0ef3540b0 => 'カタログ';
+
+  @override
+  String get mbda80aa454 => 'PoBカタログのツリーバージョンが異なります';
 
   @override
   String get m43c6960012 => '品質';
@@ -1822,6 +1840,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m21a6bb1840 => 'ツリー全体を表示';
 
   @override
+  String get mc6826c7837 => 'さらに表示';
+
+  @override
   String get m233d77b731 => 'フル DPS';
 
   @override
@@ -1906,7 +1927,13 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m32060a34f5 => 'プレビュー';
 
   @override
+  String get m7ece05214c => '割り当てをプレビュー';
+
+  @override
   String get mad582b726d => 'プロファイルのクリーニングのプレビュー';
+
+  @override
+  String get m665711d6eb => '振り直しをプレビュー';
 
   @override
   String get m3c2b5cfe97 => '警告 Lua';
@@ -2451,6 +2478,11 @@ class AppLocalizationsJa extends AppLocalizations {
   @override
   String md7dfb40adb(String p0) {
     return '組み合わせはすでに使用されています: $p0';
+  }
+
+  @override
+  String mf534a9d6b4(String p0) {
+    return 'ツリー構成 $p0';
   }
 
   @override

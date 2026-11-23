@@ -251,6 +251,12 @@ class AppLocalizationsRu extends AppLocalizations {
   String get mb1ff29da2c => 'Броня';
 
   @override
+  String get m0b6f02a8f4 => 'Будут назначены';
+
+  @override
+  String get mcdb0f6d11c => 'Будут сняты';
+
+  @override
   String m968f778255(String p0) {
     return 'Будут удалены выбранные файлы объёмом $p0 байт.';
   }
@@ -546,6 +552,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get mf68d71e67c => 'Движок вернул несовместимые параметры подключения';
 
   @override
+  String get mb6dc5488ee => 'Движок не вернул изменённые узлы';
+
+  @override
   String get m61f92fb847 => 'Движок не сообщил параметры подключения';
 
   @override
@@ -567,6 +576,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String m0e1306f92c(String p0) {
     return 'Дерево недоступно: $p0';
   }
+
+  @override
+  String get mb7363b6692 => 'Дерево пассивов';
 
   @override
   String get m57d9f5cb7c => 'Дерево пока недоступно';
@@ -854,6 +866,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m4376254217 => 'Импортировать по ссылке';
 
   @override
+  String get md9d1b9437e => 'Имя или ID пассива';
+
+  @override
   String get me95acf38f2 =>
       'Имя общей сессии будет сохранено в открытой сборке. При смене сборки привязка отключится.';
 
@@ -902,6 +917,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get md0ef3540b0 => 'Каталог';
+
+  @override
+  String get mbda80aa454 => 'Каталог PoB относится к другой версии дерева';
 
   @override
   String get m43c6960012 => 'Качество';
@@ -1852,6 +1870,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m21a6bb1840 => 'Показать всё дерево';
 
   @override
+  String get mc6826c7837 => 'Показать ещё';
+
+  @override
   String get m233d77b731 => 'Полный DPS';
 
   @override
@@ -1936,7 +1957,13 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m32060a34f5 => 'Предпросмотр';
 
   @override
+  String get m7ece05214c => 'Предпросмотр назначения';
+
+  @override
   String get mad582b726d => 'Предпросмотр очистки профиля';
+
+  @override
+  String get m665711d6eb => 'Предпросмотр снятия';
 
   @override
   String get m3c2b5cfe97 => 'Предупреждения Lua';
@@ -2493,6 +2520,11 @@ class AppLocalizationsRu extends AppLocalizations {
   @override
   String md7dfb40adb(String p0) {
     return 'Сочетание уже используется: $p0';
+  }
+
+  @override
+  String mf534a9d6b4(String p0) {
+    return 'Спецификация дерева $p0';
   }
 
   @override

@@ -414,6 +414,16 @@
     "description": "Броня",
     "placeholders": {}
   },
+  "m0b6f02a8f4": "To be allocated",
+  "@m0b6f02a8f4": {
+    "description": "Будут назначены",
+    "placeholders": {}
+  },
+  "mcdb0f6d11c": "To be refunded",
+  "@mcdb0f6d11c": {
+    "description": "Будут сняты",
+    "placeholders": {}
+  },
   "m968f778255": "Selected files of {p0} bytes will be deleted.",
   "@m968f778255": {
     "description": "Будут удалены выбранные файлы объёмом {p0} байт.",
@@ -907,6 +917,11 @@
     "description": "Движок вернул несовместимые параметры подключения",
     "placeholders": {}
   },
+  "mb6dc5488ee": "The engine did not return the changed nodes",
+  "@mb6dc5488ee": {
+    "description": "Движок не вернул изменённые узлы",
+    "placeholders": {}
+  },
   "m61f92fb847": "The engine did not report connection parameters",
   "@m61f92fb847": {
     "description": "Движок не сообщил параметры подключения",
@@ -945,6 +960,11 @@
         "type": "String"
       }
     }
+  },
+  "mb7363b6692": "Passive tree",
+  "@mb7363b6692": {
+    "description": "Дерево пассивов",
+    "placeholders": {}
   },
   "m57d9f5cb7c": "Tree not yet available",
   "@m57d9f5cb7c": {
@@ -1410,6 +1430,11 @@
     "description": "Импортировать по ссылке",
     "placeholders": {}
   },
+  "md9d1b9437e": "Passive name or ID",
+  "@md9d1b9437e": {
+    "description": "Имя или ID пассива",
+    "placeholders": {}
+  },
   "me95acf38f2": "The shared session name will be saved in the open assembly. When you change the assembly, the binding will be disabled.",
   "@me95acf38f2": {
     "description": "Имя общей сессии будет сохранено в открытой сборке. При смене сборки привязка отключится.",
@@ -1491,6 +1516,11 @@
   "md0ef3540b0": "Catalog",
   "@md0ef3540b0": {
     "description": "Каталог",
+    "placeholders": {}
+  },
+  "mbda80aa454": "The PoB catalog uses a different tree version",
+  "@mbda80aa454": {
+    "description": "Каталог PoB относится к другой версии дерева",
     "placeholders": {}
   },
   "m43c6960012": "Quality",
@@ -3079,6 +3109,11 @@
     "description": "Показать всё дерево",
     "placeholders": {}
   },
+  "mc6826c7837": "Show more",
+  "@mc6826c7837": {
+    "description": "Показать ещё",
+    "placeholders": {}
+  },
   "m233d77b731": "Full DPS",
   "@m233d77b731": {
     "description": "Полный DPS",
@@ -3221,9 +3256,19 @@
     "description": "Предпросмотр",
     "placeholders": {}
   },
+  "m7ece05214c": "Preview allocation",
+  "@m7ece05214c": {
+    "description": "Предпросмотр назначения",
+    "placeholders": {}
+  },
   "mad582b726d": "Preview of profile cleaning",
   "@mad582b726d": {
     "description": "Предпросмотр очистки профиля",
+    "placeholders": {}
+  },
+  "m665711d6eb": "Preview refund",
+  "@m665711d6eb": {
+    "description": "Предпросмотр снятия",
     "placeholders": {}
   },
   "m3c2b5cfe97": "Warnings Lua",
@@ -4143,6 +4188,15 @@
   "md7dfb40adb": "Combination already in use: {p0}",
   "@md7dfb40adb": {
     "description": "Сочетание уже используется: {p0}",
+    "placeholders": {
+      "p0": {
+        "type": "String"
+      }
+    }
+  },
+  "mf534a9d6b4": "Tree setup {p0}",
+  "@mf534a9d6b4": {
+    "description": "Спецификация дерева {p0}",
     "placeholders": {
       "p0": {
         "type": "String"

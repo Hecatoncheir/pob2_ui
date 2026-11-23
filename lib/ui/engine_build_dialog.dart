@@ -8,6 +8,7 @@ import 'core/motion.dart';
 import 'engine_equipment_dialog.dart';
 import 'engine_session_cubit.dart';
 import 'engine_support_dialog.dart';
+import 'engine_tree_dialog.dart';
 import 'workshop_cubit.dart';
 
 Future<void> showEngineBuild(BuildContext context, WorkshopCubit model) =>
@@ -99,6 +100,8 @@ class _EngineBuildDialogState extends State<_EngineBuildDialog> {
               if (build.group case final group?) _EngineBuildGroup(group),
               const SizedBox(height: 12),
               _EngineBuildResult(build.calculation),
+              if (_session.supportsTreePreview && build.tree != null)
+                EngineTreeButton(_session, enabled: canChange),
               EngineEquipmentPanel(_session, build),
               if (!state.connected) AppText(state.message, localize: false),
               if (_error case final message?)

@@ -71,6 +71,29 @@ class FakeEngineConnection implements EngineConnection {
   ) => throw UnimplementedError();
 
   @override
+  bool get supportsTreePreview => false;
+
+  @override
+  Future<EnginePassivePage> findPassives(
+    String version,
+    String query,
+    int offset,
+  ) => throw UnimplementedError();
+
+  @override
+  Future<EngineTreePreview> previewTree(
+    EngineSnapshot current,
+    EngineTreeEdit edit,
+  ) => throw UnimplementedError();
+
+  @override
+  Future<void> editTree(
+    EngineSnapshot current,
+    EngineTreeEdit edit,
+    String requestId,
+  ) => throw UnimplementedError();
+
+  @override
   Future<EngineSupportPage> findSupports(String query, int offset) =>
       throw UnimplementedError();
 
