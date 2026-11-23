@@ -138,7 +138,7 @@ Future<void> _cleanAndRollback(
   );
   final result = await model.cleanProfile(entries.toSet());
   if (result.skipped.isNotEmpty) {
-    throw StateError('Не удалось очистить профиль: ${result.skipped}');
+    throw StateError(result.skipped.toString());
   }
   _require(result.bytes > 0, model);
   _require(!await Directory(path.join(root.path, obsolete)).exists(), model);
