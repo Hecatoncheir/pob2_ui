@@ -24,7 +24,7 @@ dependencies:
   pob2_engine_api:
     git:
       url: https://github.com/Hecatoncheir/pob2_engine.git
-      ref: 87505d00a60a82ffe95017943122374de1612ecd
+      ref: 2b4a2b8891db22d8f740e7156f829db6ecb8abe2
       path: gen/dart
   posix: ^6.5.2
   xml: 7.1.0

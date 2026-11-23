@@ -194,6 +194,16 @@ void main() {
     timeout: const Timeout(Duration(minutes: 2)),
   );
   test(
+    'Штатный отчёт, дерево и путь узла читаются из общей сессии',
+    () => _checkWorkshopReads(executable!),
+    skip:
+        canUseWorkshop &&
+            Platform.environment['POB2_ENGINE_TEST_WORKSHOP_READS'] == '1'
+        ? false
+        : 'Для проверки отчёта и дерева укажите POB2_ENGINE_TEST_WORKSHOP_READS=1',
+    timeout: const Timeout(Duration(minutes: 2)),
+  );
+  test(
     'Движок передаёт команду только окну с включённым разрешением',
     () => _checkEditorBridge(executable!),
     skip: _skipWorkshopRelease(canUseWorkshop),
@@ -506,6 +516,31 @@ Future<void> _checkSharedProgression(
   await model.redo();
   expect((await repository.load()).single.title, 'Первые пассивы');
   expect(await _cliBuildXml(executable, opened.flags), xml);
+}
+
+Future<void> _checkWorkshopReads(String executable) async {
+  final opened = await _startWorkshop(executable, 'warrior_witch_specs');
+  final model = opened.model;
+  final report = await _cli(executable, [
+    'build-report',
+    '--session',
+    'main',
+    ...opened.flags,
+  ]);
+  expect(model.state.report!.raw, (jsonDecode(report) as Map)['report']);
+
+  final geometry = await _cli(executable, [
+    'tree-geometry',
+    '--session',
+    'main',
+    ...opened.flags,
+  ]);
+  final tree = model.state.document!.tree!;
+  final graph = jsonDecode(geometry) as Map;
+  expect(tree.nodes.length, (graph['nodes'] as List).length);
+  expect(tree.edges.length, (graph['edges'] as List).length);
+  expect(tree.original, isNotNull);
+  expect(await model.progressionPath(13397), [3936, 13397]);
 }
 
 Future<void> _checkEditorBridge(String executable) async {
@@ -906,9 +941,15 @@ Future<String> _cliBuildXml(String executable, List<String> flags) async {
   return result.stdout as String;
 }
 
-Future<void> _cli(String executable, List<String> args) async {
-  final result = await Process.run(executable, args);
+Future<String> _cli(String executable, List<String> args) async {
+  final result = await Process.run(
+    executable,
+    args,
+    stdoutEncoding: utf8,
+    stderrEncoding: utf8,
+  );
   expect(result.exitCode, 0, reason: '${result.stderr}');
+  return result.stdout as String;
 }
 
 Future<void> _waitForShutdown(EngineOptions options) async {

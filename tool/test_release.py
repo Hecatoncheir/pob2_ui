@@ -34,8 +34,12 @@ class ReleaseTests(unittest.TestCase):
             for target, (folder, name) in folders.items():
                 with self.subTest(target=target):
                     (root / folder).mkdir(parents=True)
-                    stage_engine(target, binary, root=root)
-                    self.assertEqual((root / folder / name).read_bytes(), b'engine')
+                    directory = root / folder
+                    manifest_dir = directory.parent / 'Resources' if target == 'macos-arm64' else directory
+                    manifest_dir.mkdir(exist_ok=True)
+                    stage_engine(target, binary, 'v0.0.13-rc.2', root=root)
+                    self.assertEqual((directory / name).read_bytes(), b'engine')
+                    self.assertEqual((manifest_dir / 'pob2-engine.version').read_text().strip(), 'v0.0.13-rc.2')
 
     def test_all_three_installers_are_required(self):
         with tempfile.TemporaryDirectory() as temporary, patch('release.validate', return_value='Описание\n'):

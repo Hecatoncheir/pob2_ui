@@ -262,6 +262,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
         progressionSource: _storedProgressionKey,
         savedXml: incoming.xml,
         expectedXml: diskXml,
+        snapshot: snapshot,
       );
       if (progression == null) await _clearMissingProgression(diskXml);
       _engineXmlBinding = (
@@ -563,12 +564,12 @@ class WorkshopCubit extends Cubit<WorkshopState> {
       Component.values.map((key) => pair[key]!.commit).join('-');
 
   Future<NodePreview> previewNode(int id) async {
+    final tip = await _sharedNodeTooltip(id, compare: true);
     if (!engine.tools.contains('pob_tree_hover')) {
       return NodePreview(
-        tooltip: await engine.call('pob_node_tooltip', {
-          'id': id,
-          'compare': true,
-        }),
+        tooltip:
+            tip ??
+            await engine.call('pob_node_tooltip', {'id': id, 'compare': true}),
       );
     }
     final result = await engine.call('pob_tree_hover', {
@@ -578,18 +579,25 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     final scene = OriginalTreeScene.fromJson(jsonMap(result['scene']));
     final images = await loadTreeSceneImages(scene);
     return NodePreview(
-      tooltip: jsonMap(result['tooltip']),
+      tooltip: tip ?? jsonMap(result['tooltip']),
       scene: scene,
       images: images,
     );
   }
 
+  Future<JsonMap?> _sharedNodeTooltip(int id, {required bool compare}) async {
+    final snapshot = _engineXmlBinding == null
+        ? null
+        : engineSession.state.snapshot;
+    if (snapshot == null) return null;
+    return engineSession.workshopReader?.readNodeTooltip(snapshot, id, compare);
+  }
+
   Future<List<int>> progressionPath(int id) async {
     final report = state.report;
-    final result = await engine.call('pob_node_tooltip', {
-      'id': id,
-      'compare': false,
-    });
+    final result =
+        await _sharedNodeTooltip(id, compare: false) ??
+        await engine.call('pob_node_tooltip', {'id': id, 'compare': false});
     if (state.report != report || state.busy) return const [];
     final path = NodePreview(tooltip: result).path;
     return path.firstOrNull == id ? List.unmodifiable(path.reversed) : const [];
@@ -1239,7 +1247,13 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     );
   });
 
-  Future<({BuildReport report, String xml})> _readResult() async {
+  Future<({BuildReport report, String xml})> _readResult([
+    EngineSnapshot? snapshot,
+  ]) async {
+    if (snapshot != null && snapshot.build != null) {
+      final report = await engineSession.workshopReader?.readReport(snapshot);
+      if (report != null) return (report: report, xml: snapshot.build!.xml);
+    }
     final result = await engine.call('pob_check_build');
     final report = parseBuildReport(result);
     return (report: report, xml: await _currentXml());
@@ -1253,9 +1267,10 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     String? expectedXml,
     TreeProgressionTransfer? progression,
     TreeProgressionKey? progressionSource,
+    EngineSnapshot? snapshot,
   }) async {
-    final (:report, :xml) = await _readResult();
-    final (:tree, :error) = await _readTree(engine);
+    final (:report, :xml) = await _readResult(snapshot);
+    final (:tree, :error) = await _readWorkshopTree(snapshot);
     if (progression != null && expectedXml == null) {
       _checkProgression(progression, report, tree);
     }
@@ -1371,6 +1386,22 @@ class WorkshopCubit extends Cubit<WorkshopState> {
       );
       return false;
     }
+  }
+
+  Future<({TreeGeometry? tree, String? error})> _readWorkshopTree(
+    EngineSnapshot? snapshot,
+  ) async {
+    final artwork = await _readTree(engine);
+    if (snapshot == null) return artwork;
+    final geometry = await engineSession.workshopReader?.readTree(snapshot);
+    if (geometry == null) return artwork;
+    final scene = artwork.tree?.version == geometry.version
+        ? artwork.tree?.original
+        : null;
+    return (
+      tree: scene == null ? geometry : geometry.withScene(scene),
+      error: null,
+    );
   }
 
   Future<({TreeGeometry? tree, String? error})> _readTree(

@@ -66,6 +66,16 @@ class TreeGeometry {
       iconError = null {
     if (nodes.isEmpty) throw const FormatException('Lua вернул пустое дерево');
   }
+  TreeGeometry.fromNodes(
+    this.version,
+    Iterable<TreeNode> nodes,
+    Iterable<(int, int)> edges,
+  ) : nodes = List.unmodifiable(nodes),
+      edges = List.unmodifiable(edges),
+      icons = const {},
+      iconError = null,
+      original = null;
+
   TreeGeometry._(
     this.nodes,
     this.edges,

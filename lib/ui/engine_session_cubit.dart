@@ -62,6 +62,11 @@ class EngineSessionCubit extends Cubit<EngineSessionState> {
   final Future<EngineConnection> Function(EngineOptions) _open;
   final Future<void> Function(EngineSnapshot)? onSnapshot;
   EngineConnection? _connection;
+
+  EngineWorkshopReader? get workshopReader => switch (_connection) {
+    final EngineWorkshopReader reader when state.connected => reader,
+    _ => null,
+  };
   // Подписка закрывается в _disposeConnection при смене сессии и close.
   // ignore: cancel_subscriptions
   StreamSubscription<EngineChange>? _watch;

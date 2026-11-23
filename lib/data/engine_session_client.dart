@@ -11,6 +11,8 @@ import 'package:pob2_engine_api/pob2/v1/session.pbgrpc.dart' as pb;
 
 import '../domain/build_report.dart';
 import '../domain/engine_session.dart';
+import '../domain/tree_geometry.dart';
+import 'bundled_engine.dart';
 import 'mcp_editor_gateway.dart';
 import '../domain/tree_allocation_mode.dart';
 import 'pob_build_document.dart';
@@ -116,6 +118,16 @@ abstract interface class EngineConnection {
   Future<void> close();
 }
 
+abstract interface class EngineWorkshopReader {
+  Future<BuildReport?> readReport(EngineSnapshot snapshot);
+  Future<TreeGeometry?> readTree(EngineSnapshot snapshot);
+  Future<JsonMap?> readNodeTooltip(
+    EngineSnapshot snapshot,
+    int id,
+    bool compare,
+  );
+}
+
 String engineRequestId() {
   final random = Random.secure();
   return List.generate(
@@ -125,7 +137,7 @@ String engineRequestId() {
 }
 
 // Дочерний connect владеет обнаружением и одной арендой приложения.
-class EngineSessionClient implements EngineConnection {
+class EngineSessionClient implements EngineConnection, EngineWorkshopReader {
   EngineSessionClient._(
     this._helper,
     this._output,
@@ -143,6 +155,7 @@ class EngineSessionClient implements EngineConnection {
     this.supportsTreeSpecs,
     this.supportsTreeClass,
     this._supportsEditorBridge,
+    this._workshopCapabilities,
   );
   final Process _helper;
   final StreamSubscription<String> _output;
@@ -169,13 +182,12 @@ class EngineSessionClient implements EngineConnection {
   @override
   final bool supportsTreeClass;
   final bool _supportsEditorBridge;
+  final Set<String> _workshopCapabilities;
   bool _closed = false;
 
   static String _engineExecutable(String configured) {
     if (configured != 'pob2-engine') return configured;
-    final filename = Platform.isWindows ? 'pob2-engine.exe' : 'pob2-engine';
-    final directory = File(Platform.resolvedExecutable).parent;
-    final bundled = File.fromUri(directory.uri.resolve(filename));
+    final bundled = bundledEngineFile();
     return bundled.existsSync() ? bundled.path : configured;
   }
 
@@ -260,6 +272,7 @@ class EngineSessionClient implements EngineConnection {
         info.capabilities.contains('build.tree_specs'),
         info.capabilities.contains('build.tree_class'),
         info.capabilities.contains('ui.bridge'),
+        info.capabilities.toSet(),
       );
     } catch (_) {
       await channel?.terminate();
@@ -319,6 +332,95 @@ class EngineSessionClient implements EngineConnection {
       throw const FormatException(
         'Сервер не поддерживает подписки общей сессии',
       );
+    }
+  }
+
+  @override
+  Future<BuildReport?> readReport(EngineSnapshot snapshot) =>
+      _readWorkshop('build.report', () async {
+        final reply = await _rpc.getBuildReport(
+          builds.GetBuildReportRequest(
+            sessionId: snapshot.sessionId,
+            expectedRevision: Int64(snapshot.revision),
+          ),
+          options: _workshopReadOptions(),
+        );
+        return BuildReport.fromJson(
+          jsonMap(jsonDecode(utf8.decode(reply.reportJson))),
+        );
+      });
+
+  @override
+  Future<TreeGeometry?> readTree(EngineSnapshot snapshot) =>
+      _readWorkshop('build.tree_geometry', () async {
+        final reply = await _rpc.getTreeGeometry(
+          builds.GetTreeGeometryRequest(
+            sessionId: snapshot.sessionId,
+            expectedRevision: Int64(snapshot.revision),
+          ),
+          options: _workshopReadOptions(),
+        );
+        return TreeGeometry.fromNodes(
+          reply.version,
+          reply.nodes.map(_geometryNode),
+          reply.edges.map((edge) => (edge.fromNode, edge.toNode)),
+        );
+      });
+
+  static TreeNode _geometryNode(builds.TreeGeometryNode value) => TreeNode(
+    id: value.id,
+    x: value.x,
+    y: value.y,
+    name: value.name,
+    kind: value.kind,
+    allocated: value.allocated,
+    isAttribute: value.attribute,
+    allocationMode: value.allocationMode,
+    icon: value.icon,
+    drawSize: value.drawSize,
+  );
+
+  @override
+  Future<JsonMap?> readNodeTooltip(
+    EngineSnapshot snapshot,
+    int id,
+    bool compare,
+  ) => _readWorkshop('build.tree_tooltip', () async {
+    final reply = await _rpc.getTreeNodeTooltip(
+      builds.GetTreeNodeTooltipRequest(
+        sessionId: snapshot.sessionId,
+        expectedRevision: Int64(snapshot.revision),
+        nodeId: id,
+        compare: compare,
+      ),
+      options: _workshopReadOptions(),
+    );
+    return <String, dynamic>{
+      'lines': [
+        for (final line in reply.lines)
+          <String, dynamic>{
+            'size': line.size,
+            'text': line.text,
+            'separator': line.separator,
+          },
+      ],
+      'path': reply.path,
+    };
+  });
+
+  CallOptions _workshopReadOptions() =>
+      CallOptions(timeout: const Duration(seconds: 30));
+
+  Future<T?> _readWorkshop<T>(
+    String capability,
+    Future<T> Function() query,
+  ) async {
+    if (!_workshopCapabilities.contains(capability)) return null;
+    try {
+      return await query();
+    } on GrpcError catch (error) {
+      if (error.code == StatusCode.aborted) return null;
+      rethrow;
     }
   }
 

@@ -207,6 +207,7 @@ jobs:
           POB2_ENGINE_TEST_TREE_SPECS: ${{ inputs.engine_workshop && '1' || '0' }}
           POB2_ENGINE_TEST_TREE_CLASS: ${{ inputs.engine_workshop && '1' || '0' }}
           POB2_ENGINE_TEST_WORKSHOP: ${{ inputs.engine_workshop && '1' || '0' }}
+          POB2_ENGINE_TEST_WORKSHOP_READS: ${{ inputs.engine_workshop && '1' || '0' }}
           POB2_ENGINE_POB_GITHUB_TOKEN: ${{ github.token }}
           GH_TOKEN: ${{ github.token }}
           POB2_UI_HOME: ${{ runner.temp }}/pob2-lua-smoke
@@ -282,7 +283,7 @@ jobs:
         run: |
           args=(--package ${{ matrix.target }})
           if [[ -n "${POB2_PACKAGED_ENGINE:-}" ]]; then
-            args+=(--engine-binary "$POB2_PACKAGED_ENGINE")
+            args+=(--engine-binary "$POB2_PACKAGED_ENGINE" --engine-version "$POB2_PACKAGED_ENGINE_VERSION")
           fi
           python tool/release.py "${args[@]}"
       - name: Проверить выбор установленной версии загрузчиком

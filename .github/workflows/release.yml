@@ -98,3 +98,56 @@ jobs:
           fi
           gh release create "$RELEASE_TAG" build/packages/*.exe build/packages/*.dmg build/packages/*.run build/packages/SHA256SUMS \
             --verify-tag --title "$RELEASE_TAG — PoB II" --notes-file build/packages/RELEASE_NOTES.md
+
+  verify:
+    name: Проверить скачанный установщик ${{ matrix.target }}
+    needs: [metadata, publish]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: windows-2022
+            target: windows-x64
+          - os: ubuntu-22.04
+            target: linux-x64
+          - os: macos-15
+            target: macos-arm64
+    env:
+      GH_TOKEN: ${{ github.token }}
+      RELEASE_TAG: ${{ needs.metadata.outputs.tag }}
+      TARGET: ${{ matrix.target }}
+      POB2_PACKAGED_ENGINE_VERSION: ${{ needs.metadata.outputs.engine }}
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          ref: ${{ needs.metadata.outputs.commit }}
+      - uses: actions/setup-python@v7.1.0
+        with:
+          python-version: '3.15'
+      - name: Подготовить Linux
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y xvfb libgtk-3-0
+      - name: Скачать выпуск, сверить SHA-256 и проверить установку
+        shell: bash
+        run: |
+          installer=$(python -c 'from tool.release import filename, version; import os; print(filename(version(), os.environ["TARGET"]))')
+          gh release download "$RELEASE_TAG" --pattern "$installer" --pattern SHA256SUMS --dir published
+          python - "$installer" <<'PY'
+          from hashlib import file_digest
+          from pathlib import Path
+          from sys import argv
+
+          root = Path("published")
+          expected = {name.lstrip("*"): digest for digest, name in (line.split() for line in (root / "SHA256SUMS").read_text().splitlines())}
+          package = root / argv[1]
+          with package.open("rb") as stream:
+              if file_digest(stream, "sha256").hexdigest() != expected[package.name]:
+                  raise SystemExit("SHA-256 установщика не совпадает с выпуском")
+          PY
+          runner=()
+          if [[ "$RUNNER_OS" == Linux ]]; then runner=(xvfb-run -a); fi
+          "${runner[@]}" python tool/check_installer.py --target "$TARGET" --package "published/$installer"

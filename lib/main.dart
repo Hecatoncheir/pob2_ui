@@ -31,6 +31,7 @@ Future<void> main(List<String> arguments) async {
   final progress = check == null ? null : InstallerCheckProgress(root, check);
   progress?.record('startup');
   WidgetsFlutterBinding.ensureInitialized();
+  if (!await checkUpdateEngine(arguments)) exit(1);
   if (check == 'restore' || check == 'cleanup') {
     HttpOverrides.global = OfflineInstallerCheck();
   }

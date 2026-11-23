@@ -7,6 +7,7 @@ import os
 from pathlib import Path
 import shutil
 import subprocess
+import sys
 import tempfile
 import time
 import xml.etree.ElementTree as ET
@@ -72,9 +73,13 @@ def failed_macos_package(bundle, base):
     staging.mkdir()
     candidate = staging / bundle.name
     run('ditto', bundle, candidate)
-    source = base / 'failed.c'
-    source.write_text('#include <unistd.h>\nint main(void) { sleep(60); return 0; }\n')
-    run('clang', source, '-o', candidate / 'Contents/MacOS/PoB II')
+    marker = candidate / 'Contents/Resources/pob2-engine.version'
+    if marker.is_file():
+        marker.write_text('v999.0.2\n', encoding='utf-8')
+    else:
+        source = base / 'failed.c'
+        source.write_text('#include <unistd.h>\nint main(void) { sleep(60); return 0; }\n')
+        run('clang', source, '-o', candidate / 'Contents/MacOS/PoB II')
     run('codesign', '--force', '--deep', '--sign', '-', candidate)
     package = base / 'failed.dmg'
     run('hdiutil', 'create', '-volname', 'PoB II', '-srcfolder', staging, '-format', 'UDZO', package)
@@ -312,11 +317,24 @@ def archive_check_environment(environment):
     return environment
 
 
+def bad_version(current, failed):
+    marker = current / 'pob2-engine.version'
+    if marker.is_file():
+        shutil.copytree(current, failed, symlinks=True)
+        (failed / marker.name).write_text('v999.0.2\n', encoding='utf-8')
+        return
+    failed.mkdir()
+    name = 'pob2_ui.exe' if os.name == 'nt' else 'pob2_ui'
+    run(dart_executable(), 'compile', 'exe', ROOT / 'tool/fixtures/failed_candidate.dart', '-o', failed / name)
+
+
 def check_bundled_engine(executable, base, environment):
     expected = environment.get('POB2_PACKAGED_ENGINE_VERSION')
     if expected is None:
         return
     engine = executable.with_name('pob2-engine.exe' if os.name == 'nt' else 'pob2-engine')
+    manifest_dir = executable.parent.parent / 'Resources' if sys.platform == 'darwin' else executable.parent
+    assert (manifest_dir / 'pob2-engine.version').read_text(encoding='utf-8').strip() == expected
     info = subprocess.check_output([engine, '--version', '--json'], timeout=20)
     if json.loads(info)['version'] != expected:
         raise ValueError('Версия установленного движка расходится с комплектом')
@@ -368,9 +386,7 @@ def check(target, *, build_check=False, components=None, archives=None, package=
         assert not (install / 'pending-version').exists()
         assert '999.0.0' in (install / 'update.log').read_text(encoding='utf-8')
         stop_versions(install, environment)
-        failed = install / 'versions/999.0.2'
-        failed.mkdir()
-        run(dart_executable(), 'compile', 'exe', ROOT / 'tool/fixtures/failed_candidate.dart', '-o', failed / ('pob2_ui.exe' if os.name == 'nt' else 'pob2_ui'))
+        bad_version(install / 'versions' / number, install / 'versions/999.0.2')
         (install / 'pending-version').write_text('999.0.2')
         run(install / binary, env=environment, timeout=45)
         assert (install / 'active-version').read_text().strip() == number
