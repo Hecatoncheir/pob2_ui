@@ -315,9 +315,25 @@ def stop_profile_engine(binary, root, environment):
     wait_for(lambda: not record.exists(), 'Движок проверяемого профиля не завершился', timeout=30)
 
 
+def remove_native_profile(temporary):
+    def remove():
+        try:
+            temporary.cleanup()
+        except PermissionError as error:
+            # Windows может держать журнал открытым после снятия записи подключения.
+            if getattr(error, 'winerror', None) not in (32, 33):
+                raise
+            return False
+        return True
+
+    wait_for(remove, 'Файлы проверяемого профиля остались заблокированы', timeout=30)
+
+
 def check(binary, components):
-    with tempfile.TemporaryDirectory(prefix='pob2-native-') as temporary, ExitStack() as cleanup:
-        root = Path(temporary).resolve()
+    with ExitStack() as cleanup:
+        temporary = tempfile.TemporaryDirectory(prefix='pob2-native-')
+        cleanup.callback(remove_native_profile, temporary)
+        root = Path(temporary.name).resolve()
         prepare_profile(root, components)
         environment = dict(os.environ, POB2_UI_HOME=str(root), POB2_UI_CHECK_FIXTURE=str(FIXTURES / 'witch_fireball.xml'))
         environment.pop('POB2_UI_CHECK_CODE', None)
