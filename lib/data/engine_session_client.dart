@@ -56,7 +56,7 @@ abstract interface class EngineConnection {
     EngineSnapshot current,
     EngineTreeEdit edit,
   );
-  Future<void> editTree(
+  Future<EngineSnapshot> editTree(
     EngineSnapshot current,
     EngineTreeEdit edit,
     String requestId,
@@ -588,11 +588,13 @@ class EngineSessionClient implements EngineConnection {
   }
 
   @override
-  Future<void> editTree(
+  Future<EngineSnapshot> editTree(
     EngineSnapshot current,
     EngineTreeEdit edit,
     String requestId,
-  ) => _applyEdit(current, _treeChange(edit), requestId);
+  ) async => _snapshot(
+    (await _applyEdit(current, _treeChange(edit), requestId)).snapshot,
+  );
 
   static EnginePassivePoints _points(builds.PassivePoints value) => (
     passives: value.passives,

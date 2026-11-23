@@ -102,7 +102,7 @@ class FakeEngineConnection implements EngineConnection {
   ) => throw UnimplementedError();
 
   @override
-  Future<void> editTree(
+  Future<EngineSnapshot> editTree(
     EngineSnapshot current,
     EngineTreeEdit edit,
     String requestId,

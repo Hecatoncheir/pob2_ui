@@ -262,7 +262,8 @@ class _EngineTreeDialogState extends State<EngineTreeDialog> {
       if (_modeControls(tree, current != null) case final controls?) controls,
       if (_attributeControls(tree, current != null) case final controls?)
         controls,
-      if (_offer case final offer?) _TreeComparison(offer.preview, fresh),
+      if (_offer case final offer?)
+        EngineTreeComparison(offer.preview, fresh: fresh),
       if (_error case final error?)
         AppText(error, key: const Key('engine-tree-error'), localize: false),
       if (_busy) const LinearProgressIndicator(),
@@ -406,8 +407,8 @@ class _EngineTreeDialogState extends State<EngineTreeDialog> {
       );
 }
 
-class _TreeComparison extends StatelessWidget {
-  const _TreeComparison(this.preview, this.fresh);
+class EngineTreeComparison extends StatelessWidget {
+  const EngineTreeComparison(this.preview, {required this.fresh, super.key});
 
   final EngineTreePreview preview;
   final bool fresh;

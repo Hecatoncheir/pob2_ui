@@ -39,6 +39,7 @@ import 'workshop_state.dart';
 import 'mcp_editor_cubit.dart';
 import 'core/language_scope.dart';
 import 'tree_progression_bloc.dart';
+import 'workshop_tree_preview_dialog.dart';
 
 typedef _ProgressionCanvasState = ({
   List<TreeProgressionStep> steps,
@@ -804,6 +805,8 @@ class _TreeViewState extends State<TreeView>
       if (!mounted || widget.model.state.busy) return;
       if (attribute) {
         sparkDialog<void>(context, _NodeDialog(widget.model, node));
+      } else if (_usesSharedTree(widget.model, node)) {
+        await showWorkshopTreePreview(context, widget.model, node);
       } else {
         widget.model.treeAction(node.id, node.allocated);
       }
@@ -917,6 +920,10 @@ class _TreeViewState extends State<TreeView>
   }
 }
 
+bool _usesSharedTree(WorkshopCubit model, TreeNode node) =>
+    model.hasSharedTree &&
+    const {'Normal', 'Notable', 'Keystone'}.contains(node.kind);
+
 class _NodeDialog extends StatefulWidget {
   const _NodeDialog(this.model, this.node);
   final WorkshopCubit model;
@@ -969,7 +976,9 @@ class _NodeDialogState extends State<_NodeDialog> {
             if (snapshot.hasData &&
                 !{'ClassStart', 'AscendClassStart'}.contains(widget.node.kind))
               FilledButton(
-                onPressed: _canApply(snapshot.data!.attributes) ? _apply : null,
+                onPressed: _canApply(snapshot.data!.attributes)
+                    ? () => _apply(snapshot.data!.attributes)
+                    : null,
                 child: AppText(_actionLabel(snapshot.data!.attributes)),
               ),
           ],
@@ -1020,7 +1029,16 @@ class _NodeDialogState extends State<_NodeDialog> {
     Navigator.pop(context);
   }
 
-  void _apply() {
+  Future<void> _apply(List<JsonMap> attributes) async {
+    if (attributes.isEmpty && _usesSharedTree(widget.model, widget.node)) {
+      final applied = await showWorkshopTreePreview(
+        context,
+        widget.model,
+        widget.node,
+      );
+      if (mounted && applied == true) Navigator.pop(context);
+      return;
+    }
     widget.model.treeAction(
       widget.node.id,
       widget.node.allocated,

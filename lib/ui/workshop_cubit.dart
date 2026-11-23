@@ -45,8 +45,14 @@ import 'engine_session_cubit.dart';
 typedef _BuildSnapshot = ({String xml, String title});
 typedef _ComponentValidation = Future<void> Function(Installations);
 typedef _EngineXmlBinding = ({int inputRevision, String libraryRevision});
+typedef WorkshopTreeOffer = ({
+  EngineTreeOffer offer,
+  int inputRevision,
+  int bindingEpoch,
+});
 
 const _missingEngineXml = 'В общей сессии нет XML сборки';
+const _staleTree = 'Выполните предпросмотр для текущей ревизии';
 const _staleCondition = 'Сборка изменилась. Откройте условие заново.';
 const _divergedBuild =
     'Файл сборки изменился. Проверьте версии перед переподключением.';
@@ -212,9 +218,14 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     EngineSnapshot snapshot,
     _EngineXmlBinding binding,
   ) async {
+    final epoch = _engineBindingEpoch;
     await _checkEngineFile(binding);
     await _flushText();
-    if (binding != _engineXmlBinding) throw StateError(_staleCondition);
+    if (epoch != _engineBindingEpoch || binding != _engineXmlBinding) {
+      throw StateError(
+        'Сборка изменилась. Дождитесь новой ревизии и повторите действие',
+      );
+    }
     final document = state.document!;
     final target = state.library;
     final before = await _currentXml();
@@ -1682,13 +1693,59 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     });
   });
 
+  bool get hasSharedTree => _engineXmlBinding != null;
+
+  Future<WorkshopTreeOffer> previewSharedTreeNode(int nodeId) async {
+    final epoch = _engineBindingEpoch;
+    final (:snapshot, :binding) = _engineEditSource(
+      _engineXmlBinding?.inputRevision,
+      epoch,
+      _staleTree,
+    );
+    final tree = snapshot.build!.tree;
+    if (tree == null || !engineSession.supportsTreeAllocationModes) {
+      throw StateError('Дерево пока недоступно');
+    }
+    await _checkEngineFile(binding);
+    final allocated = tree.nodes.contains(nodeId);
+    final offer = await engineSession.previewTree(snapshot, (
+      nodeId: nodeId,
+      action: allocated ? EngineTreeAction.refund : EngineTreeAction.allocate,
+      attribute: null,
+      allocationMode: allocated
+          ? tree.allocations[nodeId] ?? TreeAllocationMode.common
+          : state.treeMode,
+    ));
+    return (
+      offer: offer,
+      inputRevision: binding.inputRevision,
+      bindingEpoch: epoch,
+    );
+  }
+
+  bool isCurrentSharedTreeOffer(WorkshopTreeOffer preview) {
+    final binding = _engineXmlBinding;
+    return preview.bindingEpoch == _engineBindingEpoch &&
+        preview.inputRevision == binding?.inputRevision &&
+        state.library.active?.revision == binding?.libraryRevision &&
+        engineSession.isCurrentTreeOffer(preview.offer);
+  }
+
+  Future<BuildEditResult> applySharedTreeNode(WorkshopTreeOffer preview) =>
+      _applyEngineEdit(
+        expectedInput: preview.inputRevision,
+        epoch: preview.bindingEpoch,
+        staleMessage: _staleTree,
+        apply: (_) => engineSession.editTree(preview.offer),
+      );
+
   Future<void> selectTreeMode(TreeAllocationMode mode) => _run(() async {
     if (state.report == null) return;
     if (mode == state.treeMode && state.document?.stale == false) return;
     _markStale();
     await engine.call('pob_tree_options', {'mode': mode.luaValue});
     _update(state.copyWith(treeMode: mode));
-    await _readReport();
+    await _readReport(persist: !hasSharedTree);
   });
 
   Future<BuildEditResult> selectTreeSpec(int id) => _changeBuild(() async {
@@ -1804,26 +1861,55 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     Object? value,
     int expectedInput,
     int epoch,
-  ) async {
+  ) => _applyEngineEdit(
+    expectedInput: expectedInput,
+    epoch: epoch,
+    staleMessage: _staleCondition,
+    apply: (current) => engineSession.setCondition(current, key, value),
+    calculate: true,
+  );
+
+  ({EngineSnapshot snapshot, _EngineXmlBinding binding}) _engineEditSource(
+    int? expectedInput,
+    int epoch,
+    String staleMessage,
+  ) {
+    final binding = _engineXmlBinding;
+    final snapshot = engineSession.state.snapshot;
+    if (binding == null ||
+        expectedInput == null ||
+        expectedInput == 0 ||
+        snapshot?.build?.inputRevision != expectedInput ||
+        binding.inputRevision != expectedInput ||
+        epoch != _engineBindingEpoch) {
+      throw StateError(staleMessage);
+    }
+    return (snapshot: snapshot!, binding: binding);
+  }
+
+  Future<BuildEditResult> _applyEngineEdit({
+    required int expectedInput,
+    required int epoch,
+    required String staleMessage,
+    required Future<EngineSnapshot> Function(EngineSnapshot) apply,
+    bool calculate = false,
+  }) async {
     var committed = false;
     await _run(() async {
-      final binding = _engineXmlBinding;
-      final current = engineSession.state.snapshot;
-      if (binding == null ||
-          expectedInput == 0 ||
-          current?.build?.inputRevision != expectedInput ||
-          binding.inputRevision != expectedInput ||
-          epoch != _engineBindingEpoch) {
-        throw StateError(_staleCondition);
-      }
+      final (:snapshot, :binding) = _engineEditSource(
+        expectedInput,
+        epoch,
+        staleMessage,
+      );
       await _checkEngineFile(binding);
-      final updated = await engineSession.setCondition(current!, key, value);
-      if (epoch != _engineBindingEpoch) throw StateError(_staleCondition);
+      if (epoch != _engineBindingEpoch) throw StateError(staleMessage);
+      final updated = await apply(snapshot);
+      if (epoch != _engineBindingEpoch) throw StateError(staleMessage);
       if (updated.build!.inputRevision > binding.inputRevision) {
         await _mirrorEngineBuild(updated, binding);
       }
       committed = true;
-      unawaited(_calculateEngineCondition(updated));
+      if (calculate) unawaited(_calculateEngineCondition(updated));
     });
     return (
       committed: committed,

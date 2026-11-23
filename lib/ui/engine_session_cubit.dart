@@ -347,13 +347,17 @@ class EngineSessionCubit extends Cubit<EngineSessionState> {
         offer.preview.comparison.revision,
       );
 
-  Future<void> editTree(EngineTreeOffer offer) async {
+  Future<EngineSnapshot> editTree(EngineTreeOffer offer) async {
     if (!isCurrentTreeOffer(offer)) {
       throw StateError('Выполните предпросмотр для текущей ревизии');
     }
     final snapshot = state.snapshot!;
-    await _connectedTo(snapshot)
-        .editTree(snapshot, offer.edit, engineRequestId());
+    try {
+      return await _connectedTo(snapshot)
+          .editTree(snapshot, offer.edit, engineRequestId());
+    } on GrpcError catch (error) {
+      throw StateError(engineError(error));
+    }
   }
 
   bool _isCurrentOffer(String sessionId, int connectionId, int revision) =>
