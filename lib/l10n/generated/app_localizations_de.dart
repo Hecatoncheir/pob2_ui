@@ -645,6 +645,10 @@ class AppLocalizationsDe extends AppLocalizations {
       'Um nach Merkmalen zu suchen, aktualisieren Sie MCP im Abschnitt „Komponenten“ auf 0.9.0.';
 
   @override
+  String get mbeaac9e727 =>
+      'Aktualisieren Sie die Engine, um Juwelenfassungen zu bearbeiten.';
+
+  @override
   String get m9a923fd47c => 'Für die nächsten Etappen sind keine Käufe nötig';
 
   @override

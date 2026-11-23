@@ -620,6 +620,9 @@ class AppLocalizationsEn extends AppLocalizations {
       'To search by characteristic, update MCP to 0.9.0 in the Components section.';
 
   @override
+  String get mbeaac9e727 => 'Update the engine to edit jewel sockets.';
+
+  @override
   String get m9a923fd47c => 'No purchases needed for upcoming stages';
 
   @override

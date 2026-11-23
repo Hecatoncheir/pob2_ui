@@ -632,6 +632,10 @@ class AppLocalizationsEs extends AppLocalizations {
       'Para buscar por característica, actualice MCP a 0.9.0 en la sección Componentes.';
 
   @override
+  String get mbeaac9e727 =>
+      'Actualiza el motor para editar los engarces de joyas.';
+
+  @override
   String get m9a923fd47c => 'No hacen falta compras para las próximas etapas';
 
   @override

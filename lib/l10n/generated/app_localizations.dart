@@ -1229,6 +1229,12 @@ abstract class AppLocalizations {
   /// **'To search by characteristic, update MCP to 0.9.0 in the Components section.'**
   String get m6f9519e788;
 
+  /// Для правки гнёзд самоцветов обновите движок.
+  ///
+  /// In en, this message translates to:
+  /// **'Update the engine to edit jewel sockets.'**
+  String get mbeaac9e727;
+
   /// Для следующих этапов покупки не нужны
   ///
   /// In en, this message translates to:

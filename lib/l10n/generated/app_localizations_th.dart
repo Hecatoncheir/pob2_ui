@@ -617,6 +617,9 @@ class AppLocalizationsTh extends AppLocalizations {
       'หากต้องการค้นหาตามคุณลักษณะ ให้อัปเดต MCP เป็น 0.9.0 ในส่วนส่วนประกอบ';
 
   @override
+  String get mbeaac9e727 => 'อัปเดตเอนจินเพื่อแก้ไขช่องใส่จิวเวล';
+
+  @override
   String get m9a923fd47c => 'ไม่ต้องซื้ออะไรสำหรับขั้นถัดไป';
 
   @override

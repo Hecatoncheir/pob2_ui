@@ -160,6 +160,16 @@ void main() {
     skip: workshopSkip,
     timeout: const Timeout(Duration(minutes: 3)),
   );
+  test(
+    'Штатное дерево редактирует пустое гнездо в общем режиме',
+    () => _checkSharedSocket(executable!),
+    skip:
+        canUseWorkshop &&
+            Platform.environment['POB2_ENGINE_TEST_SOCKETS'] == '1'
+        ? false
+        : 'Для проверки гнёзд укажите POB2_ENGINE_TEST_SOCKETS=1 и новый движок',
+    timeout: const Timeout(Duration(minutes: 2)),
+  );
 }
 
 Future<void> _checkSharedCondition(String executable) async {
@@ -281,6 +291,39 @@ Future<void> _checkSharedTree(String executable) async {
   );
 }
 
+Future<void> _checkSharedSocket(String executable) async {
+  final opened = await _startWorkshop(executable, 'witch_fireball');
+  final model = opened.model;
+  expect(model.engineSession.supportsTreeSockets, isTrue);
+  const socket = 61419;
+  final mcp = EngineMcpPeer(
+    await Process.start(executable, [
+      'mcp',
+      '--attach',
+      'main',
+      ...opened.flags,
+    ]),
+  );
+  addTearDown(mcp.close);
+  await mcp.initialize();
+  await model.selectTreeMode(TreeAllocationMode.weaponTwo);
+  final before = await mcp.call('export_build');
+  final allocate = await model.previewSharedTreeNode(socket);
+  expect(allocate.offer.edit.allocationMode, TreeAllocationMode.common);
+  expect(allocate.offer.preview.added, contains(socket));
+  expect(await mcp.call('export_build'), before);
+  expect(await opened.file.readAsString(), before['xml']);
+  await _applyWorkshopTree(opened, mcp, allocate, allocated: true);
+  final refund = await model.previewSharedTreeNode(socket);
+  expect(refund.offer.edit.allocationMode, TreeAllocationMode.common);
+  expect(refund.offer.preview.removed, [socket]);
+  await _applyWorkshopTree(opened, mcp, refund, allocated: false);
+  expect(
+    await _cliBuildXml(executable, opened.flags),
+    await opened.file.readAsString(),
+  );
+}
+
 Future<void> _rejectStaleTreePreview(
   _SharedWorkshop opened,
   EngineMcpPeer mcp,
@@ -346,7 +389,7 @@ Future<void> _applyWorkshopTree(
   final result = await model.applySharedTreeNode(preview);
   expect(result.committed, isTrue, reason: result.error);
   final node = model.state.document!.tree!.nodes.singleWhere(
-    (node) => node.id == _sharedPassive,
+    (node) => node.id == preview.offer.edit.nodeId,
   );
   expect(node.allocated, allocated);
   if (allocated)

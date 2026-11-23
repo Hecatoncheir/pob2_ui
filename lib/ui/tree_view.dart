@@ -922,7 +922,7 @@ class _TreeViewState extends State<TreeView>
 
 bool _usesSharedTree(WorkshopCubit model, TreeNode node) =>
     model.hasSharedTree &&
-    const {'Normal', 'Notable', 'Keystone'}.contains(node.kind);
+    const {'Normal', 'Notable', 'Keystone', 'Socket'}.contains(node.kind);
 
 class _NodeDialog extends StatefulWidget {
   const _NodeDialog(this.model, this.node);

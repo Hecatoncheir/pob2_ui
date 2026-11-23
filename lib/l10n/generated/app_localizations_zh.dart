@@ -605,6 +605,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m6f9519e788 => '若要依特徵搜索，請將「組件」部分中的 MCP 更新為 0.9.0。';
 
   @override
+  String get mbeaac9e727 => '請更新引擎以編輯珠寶插槽。';
+
+  @override
   String get m9a923fd47c => '接下來的階段無需購買任何物品';
 
   @override
@@ -3488,6 +3491,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m6f9519e788 => '若要依特徵搜索，請將「組件」部分中的 MCP 更新為 0.9.0。';
+
+  @override
+  String get mbeaac9e727 => '請更新引擎以編輯珠寶插槽。';
 
   @override
   String get m9a923fd47c => '接下來的階段無需購買任何物品';

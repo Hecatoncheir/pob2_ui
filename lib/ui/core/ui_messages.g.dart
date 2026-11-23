@@ -361,6 +361,8 @@ final uiExactTranslations = <String, String Function(AppLocalizations)>{
       (l) => l.m6f9519e788,
   "To search by characteristic, update MCP to 0.9.0 in the Components section.":
       (l) => l.m6f9519e788,
+  "Для правки гнёзд самоцветов обновите движок.": (l) => l.mbeaac9e727,
+  "Update the engine to edit jewel sockets.": (l) => l.mbeaac9e727,
   "Для следующих этапов покупки не нужны": (l) => l.m9a923fd47c,
   "No purchases needed for upcoming stages": (l) => l.m9a923fd47c,
   "Для сравнения подготовьте PoB и MCP": (l) => l.m10db96c5ff,

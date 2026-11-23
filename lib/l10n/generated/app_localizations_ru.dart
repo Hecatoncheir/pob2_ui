@@ -618,6 +618,9 @@ class AppLocalizationsRu extends AppLocalizations {
       'Для поиска по характеристике обновите MCP до 0.9.0 в разделе «Компоненты».';
 
   @override
+  String get mbeaac9e727 => 'Для правки гнёзд самоцветов обновите движок.';
+
+  @override
   String get m9a923fd47c => 'Для следующих этапов покупки не нужны';
 
   @override

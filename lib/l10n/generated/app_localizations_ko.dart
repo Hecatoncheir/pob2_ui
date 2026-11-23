@@ -608,6 +608,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m6f9519e788 => '특성으로 검색하려면 구성 요소 섹션에서 MCP을 0.9.0으로 업데이트하세요.';
 
   @override
+  String get mbeaac9e727 => '주얼 소켓을 편집하려면 엔진을 업데이트하세요.';
+
+  @override
   String get m9a923fd47c => '다음 단계에 구매할 항목이 없습니다';
 
   @override

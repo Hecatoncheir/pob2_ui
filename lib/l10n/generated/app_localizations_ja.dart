@@ -608,6 +608,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m6f9519e788 => '特性で検索するには、「コンポーネント」セクションで MCP を 0.9.0 に更新します。';
 
   @override
+  String get mbeaac9e727 => 'ジュエルソケットを編集するには、エンジンを更新してください。';
+
+  @override
   String get m9a923fd47c => '今後の段階に必要な購入品はありません';
 
   @override

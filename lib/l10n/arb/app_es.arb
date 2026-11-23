@@ -185,6 +185,7 @@
   "m75ec9f43e9": "Se necesita conexión a Internet para descargar los componentes. Los cálculos funcionan sin conexión después de la instalación.",
   "m130a0abbfa": "Para iconos originales, actualice MCP a 0.6.0.",
   "m6f9519e788": "Para buscar por característica, actualice MCP a 0.9.0 en la sección Componentes.",
+  "mbeaac9e727": "Actualiza el motor para editar los engarces de joyas.",
   "m9a923fd47c": "No hacen falta compras para las próximas etapas",
   "m10db96c5ff": "Configura PoB y MCP para comparar",
   "mbd97478bba": "Para gestionar la ventana de PoB con Wine se necesita X11 o XWayland.",

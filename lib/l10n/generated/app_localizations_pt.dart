@@ -625,6 +625,9 @@ class AppLocalizationsPt extends AppLocalizations {
       'Para pesquisar por característica, atualize MCP para 0.9.0 na seção Componentes.';
 
   @override
+  String get mbeaac9e727 => 'Atualize o motor para editar encaixes de joias.';
+
+  @override
   String get m9a923fd47c =>
       'Nenhuma compra é necessária para as próximas etapas';
 
@@ -3602,6 +3605,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   @override
   String get m6f9519e788 =>
       'Para pesquisar por característica, atualize MCP para 0.9.0 na seção Componentes.';
+
+  @override
+  String get mbeaac9e727 => 'Atualize o motor para editar encaixes de joias.';
 
   @override
   String get m9a923fd47c =>

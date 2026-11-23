@@ -1712,15 +1712,32 @@ class WorkshopCubit extends Cubit<WorkshopState> {
       nodeId: nodeId,
       action: allocated ? EngineTreeAction.refund : EngineTreeAction.allocate,
       attribute: null,
-      allocationMode: allocated
-          ? tree.allocations[nodeId] ?? TreeAllocationMode.common
-          : state.treeMode,
+      allocationMode: _sharedTreeMode(tree, nodeId, allocated),
     ));
     return (
       offer: offer,
       inputRevision: binding.inputRevision,
       bindingEpoch: epoch,
     );
+  }
+
+  TreeAllocationMode _sharedTreeMode(
+    EngineTree tree,
+    int nodeId,
+    bool allocated,
+  ) {
+    final node = state.document?.tree?.nodes
+        .where((node) => node.id == nodeId)
+        .firstOrNull;
+    if (node?.kind == 'Socket') {
+      if (!engineSession.supportsTreeSockets) {
+        throw StateError('Для правки гнёзд самоцветов обновите движок.');
+      }
+      return TreeAllocationMode.common;
+    }
+    return allocated
+        ? tree.allocations[nodeId] ?? TreeAllocationMode.common
+        : state.treeMode;
   }
 
   bool isCurrentSharedTreeOffer(WorkshopTreeOffer preview) {

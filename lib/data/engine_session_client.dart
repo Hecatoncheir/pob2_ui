@@ -47,6 +47,7 @@ abstract interface class EngineConnection {
   bool get supportsTreePreview;
   bool get supportsTreeAttributes;
   bool get supportsTreeAllocationModes;
+  bool get supportsTreeSockets;
   Future<EnginePassivePage> findPassives(
     String version,
     String query,
@@ -97,6 +98,7 @@ class EngineSessionClient implements EngineConnection {
     this.supportsTreePreview,
     this.supportsTreeAttributes,
     this.supportsTreeAllocationModes,
+    this.supportsTreeSockets,
   );
   final Process _helper;
   final StreamSubscription<String> _output;
@@ -113,6 +115,8 @@ class EngineSessionClient implements EngineConnection {
   final bool supportsTreeAttributes;
   @override
   final bool supportsTreeAllocationModes;
+  @override
+  final bool supportsTreeSockets;
   bool _closed = false;
 
   static Future<EngineConnection> open(EngineOptions options) async {
@@ -190,6 +194,7 @@ class EngineSessionClient implements EngineConnection {
         info.capabilities.contains('build.tree_preview'),
         info.capabilities.contains('build.tree_attributes'),
         info.capabilities.contains('build.tree_allocation_modes'),
+        info.capabilities.contains('build.tree_sockets'),
       );
     } catch (_) {
       await channel?.terminate();

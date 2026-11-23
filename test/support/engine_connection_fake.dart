@@ -89,6 +89,9 @@ class FakeEngineConnection implements EngineConnection {
   bool get supportsTreeAllocationModes => false;
 
   @override
+  bool get supportsTreeSockets => false;
+
+  @override
   Future<EnginePassivePage> findPassives(
     String version,
     String query,

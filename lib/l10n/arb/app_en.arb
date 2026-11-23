@@ -1021,6 +1021,11 @@
     "description": "Для поиска по характеристике обновите MCP до 0.9.0 в разделе «Компоненты».",
     "placeholders": {}
   },
+  "mbeaac9e727": "Update the engine to edit jewel sockets.",
+  "@mbeaac9e727": {
+    "description": "Для правки гнёзд самоцветов обновите движок.",
+    "placeholders": {}
+  },
   "m9a923fd47c": "No purchases needed for upcoming stages",
   "@m9a923fd47c": {
     "description": "Для следующих этапов покупки не нужны",
