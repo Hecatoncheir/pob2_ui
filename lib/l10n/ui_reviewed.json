@@ -119,6 +119,8 @@
     "XML сборки": ["Build XML", "XML du build", "Build-XML", "XML de la configuración", "XML da build", "ビルドXML", "빌드 XML", "XML ของบิลด์", "配置 XML"],
     "Импортированная сборка": ["Imported build", "Build importé", "Importierter Build", "Configuración importada", "Build importada", "インポートしたビルド", "가져온 빌드", "บิลด์ที่นำเข้า", "已匯入的配置"],
     "Сборка рассчитана исходным Lua": ["Build calculated by original Lua", "Build calculé par le code Lua d’origine", "Build mit dem ursprünglichen Lua berechnet", "Configuración calculada con el Lua original", "Build calculada pelo Lua original", "オリジナルのLuaで計算したビルド", "원본 Lua로 계산한 빌드", "คำนวณบิลด์ด้วย Lua ต้นฉบับแล้ว", "已使用原始 Lua 計算配置"],
+    "Общие пассивы": ["Shared passives", "Passifs communs", "Gemeinsame Passive", "Pasivas comunes", "Passivas compartilhadas", "共通パッシブ", "공용 패시브", "พาสซีฟร่วม", "共用天賦"],
+    "Режим назначения": ["Allocation mode", "Mode d’attribution", "Zuweisungsmodus", "Modo de asignación", "Modo de alocação", "割り当てモード", "할당 모드", "โหมดจัดสรร", "配置模式"],
     "Очки": ["Points", "Points", "Punkte", "Puntos", "Pontos", "ポイント", "포인트", "แต้ม", "點數"],
     "Нагрудник": ["Body Armour", "Armure de torse", "Körperrüstung", "Armadura corporal", "Armadura corporal", "ボディアーマー", "갑옷", "เกราะ", "胸甲"],
     "Камни поддержки": ["Support gems", "Gemmes de soutien", "Unterstützungsgemmen", "Gemas de asistencia", "Gemas de suporte", "サポートジェム", "보조 젬", "หินเสริม", "輔助寶石"],

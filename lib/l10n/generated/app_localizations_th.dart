@@ -1548,6 +1548,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m4964128d55 => 'ไม่ได้เชื่อมต่อเซสชันทั่วไป';
 
   @override
+  String get m484c9330fa => 'พาสซีฟร่วม';
+
+  @override
   String get m8cb7d50be2 => 'ไฟไหม้';
 
   @override
@@ -2225,6 +2228,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m3826292e79 => 'พบความหายากของไอเทม';
+
+  @override
+  String get m8abb4db975 => 'โหมดจัดสรร';
 
   @override
   String get mcc5183e960 => 'ติดตามแผน';

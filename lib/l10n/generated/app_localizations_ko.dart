@@ -1534,6 +1534,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m4964128d55 => '일반 세션이 연결되지 않았습니다';
 
   @override
+  String get m484c9330fa => '공용 패시브';
+
+  @override
   String get m8cb7d50be2 => '불';
 
   @override
@@ -2209,6 +2212,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m3826292e79 => '희귀한 아이템 발견';
+
+  @override
+  String get m8abb4db975 => '할당 모드';
 
   @override
   String get mcc5183e960 => '계획 따라가기';

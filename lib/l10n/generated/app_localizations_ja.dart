@@ -1534,6 +1534,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m4964128d55 => '一般セッションが接続されていません';
 
   @override
+  String get m484c9330fa => '共通パッシブ';
+
+  @override
   String get m8cb7d50be2 => '火事';
 
   @override
@@ -2209,6 +2212,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m3826292e79 => '見つかったアイテムのレア度';
+
+  @override
+  String get m8abb4db975 => '割り当てモード';
 
   @override
   String get mcc5183e960 => 'プランに沿って進む';

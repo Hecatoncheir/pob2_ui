@@ -295,6 +295,9 @@ class EngineSessionCubit extends Cubit<EngineSessionState> {
   bool get supportsTreeAttributes =>
       state.connected && (_connection?.supportsTreeAttributes ?? false);
 
+  bool get supportsTreeAllocationModes =>
+      state.connected && (_connection?.supportsTreeAllocationModes ?? false);
+
   Future<EnginePassivePage> findPassives(
     EngineSnapshot current,
     String version,

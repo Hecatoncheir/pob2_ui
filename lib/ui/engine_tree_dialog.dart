@@ -2,6 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_ui/material_ui.dart';
 
 import '../domain/engine_session.dart';
+import '../domain/tree_allocation_mode.dart';
 import 'core/app_text.dart';
 import 'core/dialog_close_button.dart';
 import 'core/motion.dart';
@@ -40,6 +41,7 @@ class _EngineTreeDialogState extends State<EngineTreeDialog> {
   EnginePassive? _node;
   EnginePassiveAttribute? _attribute;
   bool _refund = false;
+  TreeAllocationMode _mode = TreeAllocationMode.common;
   EngineTreeOffer? _offer;
   String? _error;
   bool _busy = false;
@@ -113,6 +115,15 @@ class _EngineTreeDialogState extends State<EngineTreeDialog> {
     _offer = null;
     _error = null;
   });
+
+  void _chooseMode(TreeAllocationMode? mode) {
+    if (mode == null) return;
+    setState(() {
+      _mode = mode;
+      _offer = null;
+      _error = null;
+    });
+  }
 
   EnginePassive? _attributeNode(EngineTree tree) {
     final node = _node;
@@ -189,47 +200,107 @@ class _EngineTreeDialogState extends State<EngineTreeDialog> {
       return null;
     }
     final allocated = tree.nodes.contains(node.id);
+    final mode = _allocationMode(tree, node.id);
     if (_attributeNode(tree) == null) {
       final action = allocated
           ? EngineTreeAction.refund
           : EngineTreeAction.allocate;
-      return (nodeId: node.id, action: action, attribute: null);
+      return (
+        nodeId: node.id,
+        action: action,
+        attribute: null,
+        allocationMode: mode,
+      );
     }
-    return _attributeEdit(tree, node.id, allocated);
+    return _attributeEdit(tree, node.id, allocated, mode);
   }
 
-  EngineTreeEdit? _attributeEdit(EngineTree tree, int id, bool allocated) {
+  TreeAllocationMode? _allocationMode(EngineTree tree, int id) {
+    if (!widget.session.supportsTreeAllocationModes) return null;
+    if (!tree.nodes.contains(id)) return _mode;
+    return tree.allocations[id] ?? TreeAllocationMode.common;
+  }
+
+  EngineTreeEdit? _attributeEdit(
+    EngineTree tree,
+    int id,
+    bool allocated,
+    TreeAllocationMode? mode,
+  ) {
     if (allocated && _refund) {
-      return (nodeId: id, action: EngineTreeAction.refund, attribute: null);
+      return (
+        nodeId: id,
+        action: EngineTreeAction.refund,
+        attribute: null,
+        allocationMode: mode,
+      );
     }
     final attribute = _attribute;
     if (attribute == null || attribute == tree.attributes[id]) return null;
     final action = allocated
         ? EngineTreeAction.setAttribute
         : EngineTreeAction.allocate;
-    return (nodeId: id, action: action, attribute: attribute);
+    return (
+      nodeId: id,
+      action: action,
+      attribute: attribute,
+      allocationMode: mode,
+    );
   }
 
-  Widget _content(EngineSnapshot? current, EngineTree? tree, bool fresh) =>
-      Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          if (tree != null) AppText('Спецификация дерева ${tree.spec}'),
-          _searchField(current, tree?.version),
-          if (tree != null && _catalog?.version == tree.version)
-            _results(tree, current, _catalog!.page),
-          if (_attributeControls(tree, current != null) case final controls?)
-            controls,
-          if (_offer case final offer?) _TreeComparison(offer.preview, fresh),
-          if (_error case final error?)
-            AppText(
-              error,
-              key: const Key('engine-tree-error'),
-              localize: false,
-            ),
-          if (_busy) const LinearProgressIndicator(),
+  Widget _content(
+    EngineSnapshot? current,
+    EngineTree? tree,
+    bool fresh,
+  ) => Column(
+    crossAxisAlignment: CrossAxisAlignment.stretch,
+    children: [
+      if (tree != null) AppText('Спецификация дерева ${tree.spec}'),
+      _searchField(current, tree?.version),
+      if (tree != null && _catalog?.version == tree.version)
+        _results(tree, current, _catalog!.page),
+      if (_modeControls(tree, current != null) case final controls?) controls,
+      if (_attributeControls(tree, current != null) case final controls?)
+        controls,
+      if (_offer case final offer?) _TreeComparison(offer.preview, fresh),
+      if (_error case final error?)
+        AppText(error, key: const Key('engine-tree-error'), localize: false),
+      if (_busy) const LinearProgressIndicator(),
+    ],
+  );
+
+  Widget? _modeControls(EngineTree? tree, bool enabled) {
+    final node = _node;
+    if (tree == null || node == null || _catalog?.version != tree.version) {
+      return null;
+    }
+    final mode = _allocationMode(tree, node.id);
+    if (mode == null) return null;
+    return _modePicker(tree, node.id, mode, enabled);
+  }
+
+  Widget _modePicker(
+    EngineTree tree,
+    int id,
+    TreeAllocationMode mode,
+    bool enabled,
+  ) => Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      AppText('Активное оружие · ${tree.weaponSet == 2 ? "II" : "I"}'),
+      const AppText('Режим назначения'),
+      DropdownButton<TreeAllocationMode>(
+        key: const Key('engine-tree-allocation-mode'),
+        isExpanded: true,
+        value: mode,
+        onChanged: enabled && !tree.nodes.contains(id) ? _chooseMode : null,
+        items: [
+          for (final entry in TreeAllocationMode.values)
+            DropdownMenuItem(value: entry, child: AppText(_modeLabel(entry))),
         ],
-      );
+      ),
+    ],
+  );
 
   Widget? _attributeControls(EngineTree? tree, bool enabled) {
     if (tree == null) return null;
@@ -342,15 +413,54 @@ class _TreeComparison extends StatelessWidget {
   final bool fresh;
 
   @override
-  Widget build(BuildContext context) => Column(
-    key: const Key('engine-tree-result'),
-    crossAxisAlignment: CrossAxisAlignment.start,
+  Widget build(BuildContext context) {
+    final modes = {
+      for (final change in preview.allocations) change.nodeId: change,
+    };
+    return Column(
+      key: const Key('engine-tree-result'),
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        if (preview.added.isNotEmpty)
+          _nodes('Будут назначены', preview.added, (id) => modes[id]?.after),
+        if (preview.removed.isNotEmpty)
+          _nodes('Будут сняты', preview.removed, (id) => modes[id]?.before),
+        for (final change in preview.allocations)
+          if (change.before != null && change.after != null)
+            _modeChange(change),
+        if (preview.points case final points?) _pointChanges(points),
+        for (final change in preview.attributes) _attributeChange(change),
+        EngineBuildComparisonPanel(preview.comparison, fresh: fresh),
+      ],
+    );
+  }
+
+  Widget _modeChange(EnginePassiveAllocationChange change) => Wrap(
+    key: ValueKey('engine-tree-mode-change-${change.nodeId}'),
+    spacing: 8,
     children: [
-      if (preview.added.isNotEmpty) _nodes('Будут назначены', preview.added),
-      if (preview.removed.isNotEmpty) _nodes('Будут сняты', preview.removed),
-      for (final change in preview.attributes) _attributeChange(change),
-      EngineBuildComparisonPanel(preview.comparison, fresh: fresh),
+      AppText('#${change.nodeId}', localize: false),
+      AppText(_modeLabel(change.before!)),
+      const AppText('→', localize: false),
+      AppText(_modeLabel(change.after!)),
     ],
+  );
+
+  Widget _pointChanges(EnginePassivePointsChange change) => Wrap(
+    key: const Key('engine-tree-point-changes'),
+    spacing: 12,
+    runSpacing: 4,
+    children: [
+      const AppText('Очки'),
+      _pointDelta('Пассивные', change.before.passives, change.after.passives),
+      _pointDelta('Оружие I', change.before.weaponOne, change.after.weaponOne),
+      _pointDelta('Оружие II', change.before.weaponTwo, change.after.weaponTwo),
+    ],
+  );
+
+  Widget _pointDelta(String label, int before, int after) => Wrap(
+    spacing: 4,
+    children: [AppText(label), AppText('$before → $after', localize: false)],
   );
 
   Widget _attributeChange(EnginePassiveAttributeChange change) => Wrap(
@@ -366,15 +476,30 @@ class _TreeComparison extends StatelessWidget {
     ],
   );
 
-  Widget _nodes(String label, List<int> ids) => Wrap(
+  Widget _nodes(
+    String label,
+    List<int> ids,
+    TreeAllocationMode? Function(int) mode,
+  ) => Wrap(
     spacing: 8,
     runSpacing: 4,
+    children: [AppText(label), for (final id in ids) _pathNode(id, mode(id))],
+  );
+
+  Widget _pathNode(int id, TreeAllocationMode? mode) => Wrap(
+    spacing: 4,
     children: [
-      AppText(label),
-      for (final id in ids) AppText('#$id', localize: false),
+      AppText('#$id', localize: false),
+      if (mode != null) AppText(_modeLabel(mode)),
     ],
   );
 }
+
+String _modeLabel(TreeAllocationMode mode) => switch (mode) {
+  TreeAllocationMode.common => 'Общие пассивы',
+  TreeAllocationMode.weaponOne => 'Оружие I',
+  TreeAllocationMode.weaponTwo => 'Оружие II',
+};
 
 String _attributeLabel(EnginePassiveAttribute attribute) => switch (attribute) {
   EnginePassiveAttribute.strength => 'Сила',

@@ -2916,6 +2916,12 @@ abstract class AppLocalizations {
   /// **'General session not connected'**
   String get m4964128d55;
 
+  /// Общие пассивы
+  ///
+  /// In en, this message translates to:
+  /// **'Shared passives'**
+  String get m484c9330fa;
+
   /// Огонь
   ///
   /// In en, this message translates to:
@@ -4187,6 +4193,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Rarity of Items found'**
   String get m3826292e79;
+
+  /// Режим назначения
+  ///
+  /// In en, this message translates to:
+  /// **'Allocation mode'**
+  String get m8abb4db975;
 
   /// Режим прохождения
   ///

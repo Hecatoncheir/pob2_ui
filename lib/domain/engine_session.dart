@@ -1,3 +1,5 @@
+import 'tree_allocation_mode.dart';
+
 class EngineOptions {
   const EngineOptions({
     this.executable = 'pob2-engine',
@@ -98,6 +100,8 @@ typedef EngineTree = ({
   String version,
   Set<int> nodes,
   Map<int, EnginePassiveAttribute> attributes,
+  Map<int, TreeAllocationMode> allocations,
+  int weaponSet,
 });
 typedef EnginePassive = ({int id, String name, bool attributeChoice});
 typedef EnginePassivePage = ({List<EnginePassive> entries, int? nextOffset});
@@ -105,17 +109,30 @@ typedef EngineTreeEdit = ({
   int nodeId,
   EngineTreeAction action,
   EnginePassiveAttribute? attribute,
+  TreeAllocationMode? allocationMode,
 });
 typedef EnginePassiveAttributeChange = ({
   int nodeId,
   EnginePassiveAttribute? before,
   EnginePassiveAttribute after,
 });
+typedef EnginePassiveAllocationChange = ({
+  int nodeId,
+  TreeAllocationMode? before,
+  TreeAllocationMode? after,
+});
+typedef EnginePassivePoints = ({int passives, int weaponOne, int weaponTwo});
+typedef EnginePassivePointsChange = ({
+  EnginePassivePoints before,
+  EnginePassivePoints after,
+});
 typedef EngineTreePreview = ({
   EngineBuildComparison comparison,
   List<int> added,
   List<int> removed,
   List<EnginePassiveAttributeChange> attributes,
+  List<EnginePassiveAllocationChange> allocations,
+  EnginePassivePointsChange? points,
 });
 
 class EngineSupportPreview {

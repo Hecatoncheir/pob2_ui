@@ -1528,6 +1528,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m4964128d55 => '常規會話未連接';
 
   @override
+  String get m484c9330fa => '共用天賦';
+
+  @override
   String get m8cb7d50be2 => '火';
 
   @override
@@ -2202,6 +2205,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m3826292e79 => '發現物品的稀有度';
+
+  @override
+  String get m8abb4db975 => '配置模式';
 
   @override
   String get mcc5183e960 => '依計畫進行';
@@ -4392,6 +4398,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m4964128d55 => '常規會話未連接';
 
   @override
+  String get m484c9330fa => '共用天賦';
+
+  @override
   String get m8cb7d50be2 => '火';
 
   @override
@@ -5066,6 +5075,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m3826292e79 => '發現物品的稀有度';
+
+  @override
+  String get m8abb4db975 => '配置模式';
 
   @override
   String get mcc5183e960 => '依計畫進行';

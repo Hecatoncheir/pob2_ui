@@ -1574,6 +1574,9 @@ class AppLocalizationsPt extends AppLocalizations {
   String get m4964128d55 => 'Sessão geral não conectada';
 
   @override
+  String get m484c9330fa => 'Passivas compartilhadas';
+
+  @override
   String get m8cb7d50be2 => 'Fogo';
 
   @override
@@ -2262,6 +2265,9 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get m3826292e79 => 'Raridade de itens encontrados';
+
+  @override
+  String get m8abb4db975 => 'Modo de alocação';
 
   @override
   String get mcc5183e960 => 'Seguir o plano';
@@ -4529,6 +4535,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get m4964128d55 => 'Sessão geral não conectada';
 
   @override
+  String get m484c9330fa => 'Passivas compartilhadas';
+
+  @override
   String get m8cb7d50be2 => 'Fogo';
 
   @override
@@ -5217,6 +5226,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get m3826292e79 => 'Raridade de itens encontrados';
+
+  @override
+  String get m8abb4db975 => 'Modo de alocação';
 
   @override
   String get mcc5183e960 => 'Seguir o plano';

@@ -466,6 +466,7 @@
     "mc1330cb96d": "Общая сессия Go",
     "m5e16506fb5": "Общая сессия {p0}, ревизия {p1}: название «{p2}»",
     "m4964128d55": "Общая сессия не подключена",
+    "m484c9330fa": "Общие пассивы",
     "m8cb7d50be2": "Огонь",
     "m5791044c7e": "Одна задача на строку",
     "m480c4531b2": "Ожидает расчёта",
@@ -678,6 +679,7 @@
     "m11dc0e7d04": "Редактор группы умений",
     "mf35834d767": "Редактор поддерживает одно активное умение в группе",
     "m3826292e79": "Редкость найденных предметов",
+    "m8abb4db975": "Режим назначения",
     "mcc5183e960": "Режим прохождения",
     "meba267d9f8": "Ресурсы",
     "ma735c975e0": "Руническая защита",
@@ -1781,7 +1783,9 @@
     "mea642413c7": "Choose an attribute",
     "m51629e8867": "Unknown passive attribute: {p0}",
     "m93f8a89eb5": "Preview attribute change",
-    "mcf5e71cc14": "Refund passive"
+    "mcf5e71cc14": "Refund passive",
+    "m484c9330fa": "Shared passives",
+    "m8abb4db975": "Allocation mode"
   },
   "fr": {
     "m0c63e733f9": "Lua n'a pas renvoyé toutes les icônes",
@@ -2673,7 +2677,9 @@
     "mea642413c7": "Choisir un attribut",
     "m51629e8867": "Attribut du passif inconnu : {p0}",
     "m93f8a89eb5": "Aperçu du changement d’attribut",
-    "mcf5e71cc14": "Rembourser le passif"
+    "mcf5e71cc14": "Rembourser le passif",
+    "m484c9330fa": "Passifs communs",
+    "m8abb4db975": "Mode d’attribution"
   },
   "de": {
     "m0c63e733f9": "Lua hat nicht alle Symbole zurückgegeben",
@@ -3565,7 +3571,9 @@
     "mea642413c7": "Attribut wählen",
     "m51629e8867": "Unbekanntes Attribut der Passiven: {p0}",
     "m93f8a89eb5": "Attributwechsel ansehen",
-    "mcf5e71cc14": "Passive zurückerstatten"
+    "mcf5e71cc14": "Passive zurückerstatten",
+    "m484c9330fa": "Gemeinsame Passive",
+    "m8abb4db975": "Zuweisungsmodus"
   },
   "es": {
     "m0c63e733f9": "Lua no devolvió todos los íconos",
@@ -4457,7 +4465,9 @@
     "mea642413c7": "Elegir un atributo",
     "m51629e8867": "Atributo de la pasiva desconocido: {p0}",
     "m93f8a89eb5": "Vista previa del cambio de atributo",
-    "mcf5e71cc14": "Reembolsar pasiva"
+    "mcf5e71cc14": "Reembolsar pasiva",
+    "m484c9330fa": "Pasivas comunes",
+    "m8abb4db975": "Modo de asignación"
   },
   "pt_BR": {
     "m0c63e733f9": "Lua não retornou todos os ícones",
@@ -5349,7 +5359,9 @@
     "mea642413c7": "Escolher um atributo",
     "m51629e8867": "Atributo da passiva desconhecido: {p0}",
     "m93f8a89eb5": "Prévia da alteração de atributo",
-    "mcf5e71cc14": "Restituir passiva"
+    "mcf5e71cc14": "Restituir passiva",
+    "m484c9330fa": "Passivas compartilhadas",
+    "m8abb4db975": "Modo de alocação"
   },
   "ja": {
     "m0c63e733f9": "Lua はすべてのアイコンを返しませんでした",
@@ -6241,7 +6253,9 @@
     "mea642413c7": "能力値を選択",
     "m51629e8867": "不明なパッシブの能力値: {p0}",
     "m93f8a89eb5": "能力値の変更をプレビュー",
-    "mcf5e71cc14": "パッシブを解除"
+    "mcf5e71cc14": "パッシブを解除",
+    "m484c9330fa": "共通パッシブ",
+    "m8abb4db975": "割り当てモード"
   },
   "ko": {
     "m0c63e733f9": "Lua이 모든 아이콘을 반환하지 않았습니다.",
@@ -7133,7 +7147,9 @@
     "mea642413c7": "능력치 선택",
     "m51629e8867": "알 수 없는 패시브 능력치: {p0}",
     "m93f8a89eb5": "능력치 변경 미리 보기",
-    "mcf5e71cc14": "패시브 반환"
+    "mcf5e71cc14": "패시브 반환",
+    "m484c9330fa": "공용 패시브",
+    "m8abb4db975": "할당 모드"
   },
   "th": {
     "m0c63e733f9": "Lua ไม่ได้ส่งคืนไอคอนทั้งหมด",
@@ -8025,7 +8041,9 @@
     "mea642413c7": "เลือกคุณสมบัติ",
     "m51629e8867": "ไม่รู้จักคุณสมบัติพาสซีฟ: {p0}",
     "m93f8a89eb5": "ดูตัวอย่างการเปลี่ยนคุณสมบัติ",
-    "mcf5e71cc14": "คืนแต้มพาสซีฟ"
+    "mcf5e71cc14": "คืนแต้มพาสซีฟ",
+    "m484c9330fa": "พาสซีฟร่วม",
+    "m8abb4db975": "โหมดจัดสรร"
   },
   "zh_Hant": {
     "m0c63e733f9": "Lua 未傳回所有圖標",
@@ -8917,6 +8935,8 @@
     "mea642413c7": "選擇屬性",
     "m51629e8867": "未知的天賦屬性：{p0}",
     "m93f8a89eb5": "預覽屬性變更",
-    "mcf5e71cc14": "移除天賦"
+    "mcf5e71cc14": "移除天賦",
+    "m484c9330fa": "共用天賦",
+    "m8abb4db975": "配置模式"
   }
 }

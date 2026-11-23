@@ -1562,6 +1562,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m4964128d55 => 'General session not connected';
 
   @override
+  String get m484c9330fa => 'Shared passives';
+
+  @override
   String get m8cb7d50be2 => 'Fire';
 
   @override
@@ -2241,6 +2244,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get m3826292e79 => 'Rarity of Items found';
+
+  @override
+  String get m8abb4db975 => 'Allocation mode';
 
   @override
   String get mcc5183e960 => 'Follow plan';

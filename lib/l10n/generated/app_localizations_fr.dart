@@ -1599,6 +1599,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get m4964128d55 => 'Session générale non connectée';
 
   @override
+  String get m484c9330fa => 'Passifs communs';
+
+  @override
   String get m8cb7d50be2 => 'Feu';
 
   @override
@@ -2289,6 +2292,9 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get m3826292e79 => 'Rareté des objets trouvés';
+
+  @override
+  String get m8abb4db975 => 'Mode d’attribution';
 
   @override
   String get mcc5183e960 => 'Suivre le plan';

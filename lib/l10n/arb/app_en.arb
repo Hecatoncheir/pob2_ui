@@ -2598,6 +2598,11 @@
     "description": "Общая сессия не подключена",
     "placeholders": {}
   },
+  "m484c9330fa": "Shared passives",
+  "@m484c9330fa": {
+    "description": "Общие пассивы",
+    "placeholders": {}
+  },
   "m8cb7d50be2": "Fire",
   "@m8cb7d50be2": {
     "description": "Огонь",
@@ -3745,6 +3750,11 @@
   "m3826292e79": "Rarity of Items found",
   "@m3826292e79": {
     "description": "Редкость найденных предметов",
+    "placeholders": {}
+  },
+  "m8abb4db975": "Allocation mode",
+  "@m8abb4db975": {
+    "description": "Режим назначения",
     "placeholders": {}
   },
   "mcc5183e960": "Follow plan",

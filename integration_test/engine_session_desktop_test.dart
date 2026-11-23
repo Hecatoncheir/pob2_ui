@@ -10,6 +10,7 @@ import 'package:pob2_ui/data/installation_store.dart';
 import 'package:pob2_ui/data/mcp_client.dart';
 import 'package:pob2_ui/data/pob_build_library.dart';
 import 'package:pob2_ui/domain/engine_session.dart';
+import 'package:pob2_ui/domain/tree_allocation_mode.dart';
 import 'package:pob2_ui/ui/app.dart';
 import 'package:pob2_ui/ui/core/app_text.dart';
 import 'package:pob2_ui/ui/workshop_cubit.dart';
@@ -209,11 +210,13 @@ Future<void> _checkTreeFeatures(
 ) async {
   final tree = Platform.environment['POB2_ENGINE_TEST_TREE'] == '1';
   final attributes = Platform.environment['POB2_ENGINE_TEST_ATTRIBUTES'] == '1';
-  if (!tree && !attributes) return;
+  final modes = Platform.environment['POB2_ENGINE_TEST_WEAPON_MODES'] == '1';
+  if (!tree && !attributes && !modes) return;
   final mcp = await _attachMcp(executable, flags);
   addTearDown(mcp.close);
   if (tree) await _checkTree(tester, mcp);
   if (attributes) await _checkTreeAttributes(tester, mcp);
+  if (modes) await _checkTreeWeaponModes(tester, mcp);
 }
 
 Future<void> _checkTree(WidgetTester tester, EngineMcpPeer mcp) async {
@@ -369,6 +372,98 @@ Map<String, dynamic> _treeAttributes(Map<String, dynamic> snapshot) {
   final build = snapshot['build'] as Map<String, dynamic>;
   final model = build['model'] as Map<String, dynamic>;
   return model['passive_attributes'] as Map<String, dynamic>;
+}
+
+const _weaponTarget = 51184;
+const _treeModePicker = Key('engine-tree-allocation-mode');
+
+Future<void> _checkTreeWeaponModes(
+  WidgetTester tester,
+  EngineMcpPeer mcp,
+) async {
+  final revision = await _importWeaponTree(tester, mcp);
+  await _openTreeNode(tester, _weaponTarget);
+  await _previewTreeNode(tester, 'Будут назначены');
+  expect(
+    find.byKey(const ValueKey('engine-tree-mode-change-4739')),
+    findsOneWidget,
+  );
+  final picker = find.byKey(_treeModePicker);
+  await tester.ensureVisible(picker);
+  await tester.tap(picker);
+  await tester.pumpAndSettle();
+  await tester.tap(find.text('Оружие II').last);
+  await tester.pumpAndSettle();
+  _expectTreeApplyDisabled(tester);
+  await _previewTreeNode(tester, 'Будут назначены');
+  expect(find.byKey(const Key('engine-tree-point-changes')), findsOneWidget);
+
+  await _switchActiveWeapon(tester, mcp, revision);
+  await _previewTreeNode(tester, 'Будут назначены');
+  final before = await mcp.call('get_snapshot');
+  await _applyTreeNode(tester, revision + 2);
+  final after = await mcp.call('get_snapshot');
+  expect(
+    _xml(after),
+    contains('<WeaponSet2 nodes="4739,1755,18845,41965,51184"'),
+  );
+  await _refundWeaponTreePath(tester, mcp, before, revision + 3);
+}
+
+Future<int> _importWeaponTree(WidgetTester tester, EngineMcpPeer mcp) async {
+  final before = await mcp.call('get_snapshot');
+  final revision = before['revision'] as int;
+  final fixture = File('integration_test/fixtures/witch_weapon_paths.xml');
+  await mcp.call('import_build', {
+    'expected_revision': revision,
+    'request_id': 'import-weapon-paths',
+    'xml': await fixture.readAsString(),
+  });
+  await _waitFor(tester, find.text('Ревизия ${revision + 1}'));
+  return revision + 1;
+}
+
+Future<void> _switchActiveWeapon(
+  WidgetTester tester,
+  EngineMcpPeer mcp,
+  int revision,
+) async {
+  expect(find.text('Активное оружие · I'), findsOneWidget);
+  await mcp.call('edit_build', {
+    'expected_revision': revision,
+    'request_id': 'activate-weapon-two',
+    'edit': {
+      'selection': {'weapon_set': 2},
+    },
+  });
+  await _waitFor(tester, find.text('Активное оружие · II'));
+  await _waitFor(
+    tester,
+    find.text('Выполните предпросмотр для текущей ревизии'),
+  );
+  _expectTreeApplyDisabled(tester);
+}
+
+void _expectTreeApplyDisabled(WidgetTester tester) {
+  final button = find.byKey(const Key('engine-tree-apply'));
+  expect(tester.widget<FilledButton>(button).onPressed, isNull);
+}
+
+Future<void> _refundWeaponTreePath(
+  WidgetTester tester,
+  EngineMcpPeer mcp,
+  Map<String, dynamic> before,
+  int revision,
+) async {
+  await _openTreeNode(tester, 18845);
+  final picker = tester.widget<DropdownButton<TreeAllocationMode>>(
+    find.byKey(_treeModePicker),
+  );
+  expect(picker.value, TreeAllocationMode.weaponTwo);
+  expect(picker.onChanged, isNull);
+  await _previewTreeNode(tester, 'Будут сняты');
+  await _applyTreeNode(tester, revision);
+  expect(_xml(await mcp.call('get_snapshot')), _xml(before));
 }
 
 Future<void> _applyTreeNode(WidgetTester tester, int revision) async {

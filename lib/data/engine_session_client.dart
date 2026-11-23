@@ -10,6 +10,7 @@ import 'package:pob2_engine_api/pob2/v1/catalog.pb.dart' as catalog;
 import 'package:pob2_engine_api/pob2/v1/session.pbgrpc.dart' as pb;
 
 import '../domain/engine_session.dart';
+import '../domain/tree_allocation_mode.dart';
 import 'pob_build_document.dart';
 
 abstract interface class EngineConnection {
@@ -38,6 +39,7 @@ abstract interface class EngineConnection {
   );
   bool get supportsTreePreview;
   bool get supportsTreeAttributes;
+  bool get supportsTreeAllocationModes;
   Future<EnginePassivePage> findPassives(
     String version,
     String query,
@@ -87,6 +89,7 @@ class EngineSessionClient implements EngineConnection {
     this.supportsEquipmentPreview,
     this.supportsTreePreview,
     this.supportsTreeAttributes,
+    this.supportsTreeAllocationModes,
   );
   final Process _helper;
   final StreamSubscription<String> _output;
@@ -101,6 +104,8 @@ class EngineSessionClient implements EngineConnection {
   final bool supportsTreePreview;
   @override
   final bool supportsTreeAttributes;
+  @override
+  final bool supportsTreeAllocationModes;
   bool _closed = false;
 
   static Future<EngineConnection> open(EngineOptions options) async {
@@ -177,6 +182,7 @@ class EngineSessionClient implements EngineConnection {
         info.capabilities.contains('build.equipment_preview'),
         info.capabilities.contains('build.tree_preview'),
         info.capabilities.contains('build.tree_attributes'),
+        info.capabilities.contains('build.tree_allocation_modes'),
       );
     } catch (_) {
       await channel?.terminate();
@@ -269,6 +275,12 @@ class EngineSessionClient implements EngineConnection {
       spec: model.activeSets.tree,
       version: model.treeVersion,
       nodes: Set.unmodifiable(model.nodes),
+      allocations: Map.unmodifiable({
+        for (final entry in model.passiveAllocations.entries)
+          if (TreeAllocationMode.fromWire(entry.value) case final mode?)
+            entry.key: mode,
+      }),
+      weaponSet: model.weaponSet,
       attributes: Map.unmodifiable(
         model.passiveAttributes.map(
           (id, attribute) =>
@@ -518,10 +530,26 @@ class EngineSessionClient implements EngineConnection {
     if (!result.hasPassiveChange()) {
       throw const FormatException('Движок не вернул изменённые узлы');
     }
+    final change = result.passiveChange;
     return (
       comparison: _buildComparison(result),
-      added: List<int>.unmodifiable(result.passiveChange.added),
-      removed: List<int>.unmodifiable(result.passiveChange.removed),
+      added: List<int>.unmodifiable(change.added),
+      removed: List<int>.unmodifiable(change.removed),
+      allocations: List<EnginePassiveAllocationChange>.unmodifiable(
+        change.allocations.map(
+          (allocation) => (
+            nodeId: allocation.nodeId,
+            before: TreeAllocationMode.fromWire(allocation.before),
+            after: TreeAllocationMode.fromWire(allocation.after),
+          ),
+        ),
+      ),
+      points: change.hasPoints()
+          ? (
+              before: _points(change.points.before),
+              after: _points(change.points.after),
+            )
+          : null,
       attributes: List<EnginePassiveAttributeChange>.unmodifiable(
         result.passiveChange.attributes.map(
           (change) => (
@@ -543,11 +571,18 @@ class EngineSessionClient implements EngineConnection {
     String requestId,
   ) => _applyEdit(current, _treeChange(edit), requestId);
 
+  static EnginePassivePoints _points(builds.PassivePoints value) => (
+    passives: value.passives,
+    weaponOne: value.weaponSet1,
+    weaponTwo: value.weaponSet2,
+  );
+
   static builds.BuildEdit _treeChange(EngineTreeEdit edit) => builds.BuildEdit(
     treeNode: builds.TreeNodeEdit(
       nodeId: edit.nodeId,
       action: edit.action.wireName,
       attribute: edit.attribute?.name,
+      allocationMode: edit.allocationMode?.wireName,
     ),
   );
 

@@ -1560,6 +1560,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m4964128d55 => 'Общая сессия не подключена';
 
   @override
+  String get m484c9330fa => 'Общие пассивы';
+
+  @override
   String get m8cb7d50be2 => 'Огонь';
 
   @override
@@ -2243,6 +2246,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get m3826292e79 => 'Редкость найденных предметов';
+
+  @override
+  String get m8abb4db975 => 'Режим назначения';
 
   @override
   String get mcc5183e960 => 'Режим прохождения';

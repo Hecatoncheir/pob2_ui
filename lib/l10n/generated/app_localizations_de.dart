@@ -1596,6 +1596,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get m4964128d55 => 'Allgemeine Sitzung nicht verbunden';
 
   @override
+  String get m484c9330fa => 'Gemeinsame Passive';
+
+  @override
   String get m8cb7d50be2 => 'Feuer';
 
   @override
@@ -2289,6 +2292,9 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get m3826292e79 => 'Seltenheit der gefundenen Gegenstände';
+
+  @override
+  String get m8abb4db975 => 'Zuweisungsmodus';
 
   @override
   String get mcc5183e960 => 'Plan verfolgen';

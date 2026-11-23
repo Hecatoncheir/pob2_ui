@@ -1585,6 +1585,9 @@ class AppLocalizationsEs extends AppLocalizations {
   String get m4964128d55 => 'Sesión general no conectada';
 
   @override
+  String get m484c9330fa => 'Pasivas comunes';
+
+  @override
   String get m8cb7d50be2 => 'Fuego';
 
   @override
@@ -2273,6 +2276,9 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get m3826292e79 => 'Rareza de los artículos encontrados';
+
+  @override
+  String get m8abb4db975 => 'Modo de asignación';
 
   @override
   String get mcc5183e960 => 'Seguir el plan';
