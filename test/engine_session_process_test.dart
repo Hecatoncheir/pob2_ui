@@ -14,6 +14,7 @@ import 'package:pob2_ui/domain/engine_session.dart';
 import 'package:pob2_ui/domain/tree_allocation_mode.dart';
 import 'package:pob2_ui/domain/tree_progression.dart';
 import 'package:pob2_ui/ui/condition_editor_cubit.dart';
+import 'package:pob2_ui/ui/node_power_cubit.dart';
 import 'package:pob2_ui/ui/workshop_cubit.dart';
 
 import 'support/engine_mcp_peer.dart';
@@ -202,6 +203,16 @@ void main() {
             Platform.environment['POB2_ENGINE_TEST_WORKSHOP_READS'] == '1'
         ? false
         : 'Для проверки отчёта и дерева укажите POB2_ENGINE_TEST_WORKSHOP_READS=1',
+    timeout: const Timeout(Duration(minutes: 2)),
+  );
+  test(
+    'Каталог условий и описание предмета приходят из общей сессии',
+    () => _checkWorkshopForms(executable!),
+    skip:
+        canUseWorkshop &&
+            Platform.environment['POB2_ENGINE_TEST_WORKSHOP_FORMS'] == '1'
+        ? false
+        : 'Для проверки форм укажите POB2_ENGINE_TEST_WORKSHOP_FORMS=1',
     timeout: const Timeout(Duration(minutes: 2)),
   );
   test(
@@ -552,6 +563,72 @@ Future<void> _checkWorkshopReads(String executable) async {
   expect(tree.edges.length, (graph['edges'] as List).length);
   expect(tree.original, isNotNull);
   expect(await model.progressionPath(13397), [3936, 13397]);
+  if (Platform.environment['POB2_ENGINE_TEST_WORKSHOP_TEXTURES'] == '1') {
+    await _checkSharedArtwork(model);
+    await _checkSharedPower(model);
+  }
+}
+
+Future<void> _checkSharedArtwork(WorkshopCubit model) async {
+  await model.waitForTreeArtwork();
+  final tree = model.state.document!.tree!;
+  final scene = tree.original!;
+  expect(scene.assetId, matches(RegExp(r'^[a-f0-9]{64}$')));
+  expect(tree.iconError, isNull);
+  expect(
+    tree.icons.keys.toSet(),
+    scene.commands.map((command) => command.texture).toSet(),
+  );
+}
+
+Future<void> _checkSharedPower(WorkshopCubit model) async {
+  final hovered = await model.previewNode(13397);
+  expect(hovered.path, [13397, 3936]);
+  expect(hovered.scene?.assetId, isNotNull);
+  expect(hovered.images, isNotEmpty);
+
+  final power = NodePowerCubit(
+    model.engine,
+    model.loadTreeSceneImages,
+    sharedMetrics: model.readSharedPowerMetrics,
+    sharedPower: model.watchSharedPower,
+  );
+  addTearDown(power.close);
+  final updates = <double>[];
+  final subscription = power.stream.listen((state) {
+    if (state.progress case final progress?) updates.add(progress);
+  });
+  addTearDown(subscription.cancel);
+  await power.load();
+  expect(power.state.metrics.map((metric) => metric['id']), contains('Life'));
+  await power.configure((stat: 'Life', distance: 8, allocation: 'unallocated'));
+  await power.calculate();
+  expect(power.state.error, isNull);
+  expect(power.state.report?.scene.assetId, hovered.scene!.assetId);
+  expect(power.state.report?.images, isNotEmpty);
+  expect(power.state.report?.entries, isNotEmpty);
+  expect(updates, isNotEmpty);
+}
+
+Future<void> _checkWorkshopForms(String executable) async {
+  final opened = await _startWorkshop(executable, 'warrior_witch_specs');
+  final model = opened.model;
+  final before = await opened.file.readAsString();
+  final conditions = jsonRows(model.state.report!.raw['conditionDefinitions']);
+  expect(conditions.any((row) => row['id'] == 'enemyLevel'), isTrue);
+  final description = await model.equipmentRepository().inspect(
+    slot: 'Weapon 1',
+    itemId: 1,
+    compare: true,
+  );
+  expect(description.item.base, 'Wooden Club');
+  expect(description.lines, isNotEmpty);
+  expect(description.comparison?.rows, isNotEmpty);
+  expect(
+    description.buildRevision,
+    model.engineSession.state.snapshot!.build!.inputRevision,
+  );
+  expect(await opened.file.readAsString(), before);
 }
 
 Future<void> _checkWorkshopSkillChoice(String executable) async {

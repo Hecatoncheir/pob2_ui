@@ -6,6 +6,7 @@ import 'dart:typed_data';
 
 import '../data/component_repository.dart';
 import '../data/engine_session_client.dart';
+import '../data/equipment_repository.dart';
 import '../data/mcp_client.dart';
 import '../data/mcp_editor_gateway.dart';
 import '../data/mcp_error_message.dart';
@@ -24,10 +25,12 @@ import '../data/tree_progression_exchange.dart';
 import '../data/tree_progression_repository.dart';
 import '../data/tree_path_comparison.dart' as paths;
 import '../domain/build_report.dart';
+import '../domain/equipment_item.dart';
 import '../domain/tree_geometry.dart';
 import '../domain/tree_progression.dart';
 import '../domain/tree_path_comparison.dart';
 import '../domain/original_tree_scene.dart';
+import '../domain/node_power.dart';
 import '../domain/node_preview.dart';
 import '../domain/library_entry.dart';
 import '../domain/component.dart';
@@ -457,6 +460,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
   GameCatalogRepository get catalogs => _catalogs;
   late final treeIcons = TreeIconRepository(
     root: Directory.fromUri(components.store.root.uri.resolve('tree-cache/')),
+    readShared: _readSharedTexture,
   );
   TreeGeometry? _pendingTreeArtwork;
   Future<void>? _treeArtworkLoad;
@@ -564,6 +568,19 @@ class WorkshopCubit extends Cubit<WorkshopState> {
       Component.values.map((key) => pair[key]!.commit).join('-');
 
   Future<NodePreview> previewNode(int id) async {
+    final hovered = await _sharedNodeTooltip(
+      id,
+      compare: true,
+      includeScene: true,
+    );
+    if (hovered?['engineScene'] case final OriginalTreeScene scene) {
+      final images = await loadTreeSceneImages(scene);
+      return NodePreview(tooltip: hovered!, scene: scene, images: images);
+    }
+    return _legacyNodePreview(id);
+  }
+
+  Future<NodePreview> _legacyNodePreview(int id) async {
     final tip = await _sharedNodeTooltip(id, compare: true);
     if (!engine.tools.contains('pob_tree_hover')) {
       return NodePreview(
@@ -585,12 +602,21 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     );
   }
 
-  Future<JsonMap?> _sharedNodeTooltip(int id, {required bool compare}) async {
+  Future<JsonMap?> _sharedNodeTooltip(
+    int id, {
+    required bool compare,
+    bool includeScene = false,
+  }) async {
     final snapshot = _engineXmlBinding == null
         ? null
         : engineSession.state.snapshot;
     if (snapshot == null) return null;
-    return engineSession.workshopReader?.readNodeTooltip(snapshot, id, compare);
+    return engineSession.workshopReader?.readNodeTooltip(
+      snapshot,
+      id,
+      compare,
+      includeScene: includeScene,
+    );
   }
 
   Future<List<int>> progressionPath(int id) async {
@@ -602,6 +628,31 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     final path = NodePreview(tooltip: result).path;
     return path.firstOrNull == id ? List.unmodifiable(path.reversed) : const [];
   }
+
+  ({EngineTreePowerReader reader, EngineSnapshot snapshot})? get _sharedPower {
+    if (_engineXmlBinding == null) return null;
+    final Object? reader = engineSession.workshopReader;
+    final snapshot = engineSession.state.snapshot;
+    if (reader is EngineTreePowerReader &&
+        reader.supportsTreePower &&
+        snapshot != null) {
+      return (reader: reader, snapshot: snapshot);
+    }
+    return null;
+  }
+
+  Future<List<JsonMap>>? readSharedPowerMetrics() {
+    final power = _sharedPower;
+    return power?.reader.readPowerMetrics(power.snapshot);
+  }
+
+  Stream<NodePowerUpdate>? watchSharedPower(NodePowerOptions options) {
+    final power = _sharedPower;
+    return power?.reader.watchTreePower(power.snapshot, options);
+  }
+
+  Future<Uint8List?> _readSharedTexture(TreeTextureReference reference) async =>
+      engineSession.workshopReader?.readTreeTexture(reference);
 
   Future<Map<String, Uint8List>> loadTreeSceneImages(OriginalTreeScene scene) =>
       treeIcons.overlay(
@@ -1391,9 +1442,11 @@ class WorkshopCubit extends Cubit<WorkshopState> {
   Future<({TreeGeometry? tree, String? error})> _readWorkshopTree(
     EngineSnapshot? snapshot,
   ) async {
+    final geometry = snapshot == null
+        ? null
+        : await engineSession.workshopReader?.readTree(snapshot);
+    if (geometry?.original != null) return (tree: geometry, error: null);
     final artwork = await _readTree(engine);
-    if (snapshot == null) return artwork;
-    final geometry = await engineSession.workshopReader?.readTree(snapshot);
     if (geometry == null) return artwork;
     final scene = artwork.tree?.version == geometry.version
         ? artwork.tree?.original
@@ -2146,6 +2199,27 @@ class WorkshopCubit extends Cubit<WorkshopState> {
   Future<BuildEditResult> deleteSkillGroup(int id) => _changeBuild(() async {
     await engine.call('pob_delete_skill_group', {'groupId': id});
   });
+
+  EquipmentRepository equipmentRepository() =>
+      EquipmentRepository(engine, readShared: _readSharedEquipment);
+
+  Future<ItemInspection?> _readSharedEquipment({
+    String? slot,
+    String? raw,
+    int? itemId,
+    required bool compare,
+  }) async {
+    if (_engineXmlBinding == null) return null;
+    final snapshot = engineSession.state.snapshot;
+    if (snapshot == null) return null;
+    return engineSession.workshopReader?.readEquipmentDetails(
+      snapshot,
+      slot: slot,
+      raw: raw,
+      itemId: itemId,
+      compare: compare,
+    );
+  }
 
   Future<int> previewSharedEquipment(EngineEquipmentEdit edit) async {
     final epoch = _engineBindingEpoch;

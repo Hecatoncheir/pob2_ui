@@ -208,6 +208,8 @@ jobs:
           POB2_ENGINE_TEST_TREE_CLASS: ${{ inputs.engine_workshop && '1' || '0' }}
           POB2_ENGINE_TEST_WORKSHOP: ${{ inputs.engine_workshop && '1' || '0' }}
           POB2_ENGINE_TEST_WORKSHOP_READS: ${{ inputs.engine_workshop && '1' || '0' }}
+          POB2_ENGINE_TEST_WORKSHOP_TEXTURES: ${{ inputs.engine_workshop && '1' || '0' }}
+          POB2_ENGINE_TEST_WORKSHOP_FORMS: ${{ inputs.engine_workshop && '1' || '0' }}
           POB2_ENGINE_TEST_SKILL_CHOICE: ${{ inputs.engine_workshop && '1' || '0' }}
           POB2_ENGINE_POB_GITHUB_TOKEN: ${{ github.token }}
           GH_TOKEN: ${{ github.token }}

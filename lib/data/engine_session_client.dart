@@ -2,6 +2,9 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
+import 'dart:typed_data';
+
+import 'package:crypto/crypto.dart';
 
 import 'package:fixnum/fixnum.dart';
 import 'package:grpc/grpc.dart';
@@ -11,6 +14,9 @@ import 'package:pob2_engine_api/pob2/v1/session.pbgrpc.dart' as pb;
 
 import '../domain/build_report.dart';
 import '../domain/engine_session.dart';
+import '../domain/equipment_item.dart';
+import '../domain/node_power.dart';
+import '../domain/original_tree_scene.dart';
 import '../domain/tree_geometry.dart';
 import 'bundled_engine.dart';
 import 'mcp_editor_gateway.dart';
@@ -120,11 +126,29 @@ abstract interface class EngineConnection {
 
 abstract interface class EngineWorkshopReader {
   Future<BuildReport?> readReport(EngineSnapshot snapshot);
+  Future<ItemInspection?> readEquipmentDetails(
+    EngineSnapshot snapshot, {
+    String? slot,
+    String? raw,
+    int? itemId,
+    required bool compare,
+  });
   Future<TreeGeometry?> readTree(EngineSnapshot snapshot);
+  Future<Uint8List?> readTreeTexture(TreeTextureReference reference);
   Future<JsonMap?> readNodeTooltip(
     EngineSnapshot snapshot,
     int id,
-    bool compare,
+    bool compare, {
+    bool includeScene = false,
+  });
+}
+
+abstract interface class EngineTreePowerReader {
+  bool get supportsTreePower;
+  Future<List<JsonMap>> readPowerMetrics(EngineSnapshot snapshot);
+  Stream<NodePowerUpdate> watchTreePower(
+    EngineSnapshot snapshot,
+    NodePowerOptions options,
   );
 }
 
@@ -148,7 +172,11 @@ String engineRequestId() {
 
 // Дочерний connect владеет обнаружением и одной арендой приложения.
 class EngineSessionClient
-    implements EngineConnection, EngineWorkshopReader, EngineSkillChoiceWriter {
+    implements
+        EngineConnection,
+        EngineWorkshopReader,
+        EngineSkillChoiceWriter,
+        EngineTreePowerReader {
   EngineSessionClient._(
     this._helper,
     this._output,
@@ -368,15 +396,180 @@ class EngineSessionClient
           builds.GetTreeGeometryRequest(
             sessionId: snapshot.sessionId,
             expectedRevision: Int64(snapshot.revision),
+            includeScene: _workshopCapabilities.contains('build.tree_textures'),
           ),
           options: _workshopReadOptions(),
         );
-        return TreeGeometry.fromNodes(
+        final tree = TreeGeometry.fromNodes(
           reply.version,
           reply.nodes.map(_geometryNode),
           reply.edges.map((edge) => (edge.fromNode, edge.toNode)),
         );
+        return reply.hasScene()
+            ? tree.withScene(_engineScene(reply.scene))
+            : tree;
       });
+
+  @override
+  Future<ItemInspection?> readEquipmentDetails(
+    EngineSnapshot snapshot, {
+    String? slot,
+    String? raw,
+    int? itemId,
+    required bool compare,
+  }) => _readWorkshop('build.equipment_details', () async {
+    final reply = await _rpc.getEquipmentDetails(
+      builds.GetEquipmentDetailsRequest(
+        sessionId: snapshot.sessionId,
+        expectedRevision: Int64(snapshot.revision),
+        slot: slot,
+        raw: raw,
+        itemId: itemId,
+        compare: compare,
+      ),
+      options: _workshopReadOptions(),
+    );
+    final data = jsonMap(jsonDecode(utf8.decode(reply.detailsJson)));
+    final revision = snapshot.build?.inputRevision;
+    if (data['comparison'] case final JsonMap comparison) {
+      data['comparison'] = {
+        ...comparison,
+        'revision': revision ?? reply.revision.toInt(),
+      };
+    }
+    return ItemInspection.withBuildRevision(
+      ItemInspection.fromJson(data),
+      revision,
+    );
+  });
+
+  @override
+  bool get supportsTreePower =>
+      _workshopCapabilities.contains('build.tree_power_watch');
+
+  @override
+  Future<List<JsonMap>> readPowerMetrics(EngineSnapshot snapshot) async {
+    final reply = await _rpc.getTreePower(
+      builds.GetTreePowerRequest(
+        sessionId: snapshot.sessionId,
+        expectedRevision: Int64(snapshot.revision),
+      ),
+      options: _workshopReadOptions(),
+    );
+    return [
+      for (final metric in reply.metrics)
+        {'id': metric.id, 'label': metric.label},
+    ];
+  }
+
+  @override
+  Stream<NodePowerUpdate> watchTreePower(
+    EngineSnapshot snapshot,
+    NodePowerOptions options,
+  ) => _rpc
+      .watchTreePower(
+        builds.WatchTreePowerRequest(
+          query: builds.GetTreePowerRequest(
+            sessionId: snapshot.sessionId,
+            expectedRevision: Int64(snapshot.revision),
+            metric: options.stat,
+            maxDistance: options.distance,
+            allocation: options.allocation,
+            includeScene: true,
+          ),
+        ),
+        options: CallOptions(timeout: const Duration(minutes: 5)),
+      )
+      .map(_powerUpdate);
+
+  static NodePowerUpdate _powerUpdate(builds.WatchTreePowerResponse event) {
+    if (event.hasProgress()) {
+      return (progress: event.progress / 100, report: null);
+    }
+    final result = event.result;
+    return (
+      progress: null,
+      report: NodePowerReport(
+        entries: result.entries.map(_powerEntry).toList(),
+        scene: _engineScene(result.scene),
+        images: const {},
+      ),
+    );
+  }
+
+  static JsonMap _powerEntry(builds.TreePowerEntry entry) => {
+    'id': entry.id,
+    'name': entry.name,
+    'type': entry.kind,
+    'allocated': entry.allocated,
+    'pathDist': entry.distance,
+    'power': entry.power,
+    'pathPower': entry.pathPower,
+    'powerStr': entry.powerText,
+    'pathPowerStr': entry.pathPowerText,
+  };
+
+  @override
+  Future<Uint8List?> readTreeTexture(TreeTextureReference reference) =>
+      _readWorkshop('build.tree_textures', () async {
+        final reply = await _rpc.getTreeTexture(
+          builds.GetTreeTextureRequest(
+            file: reference.file,
+            index: reference.index,
+            targetSize: reference.targetSize,
+          ),
+          options: _workshopReadOptions(),
+        );
+        return Uint8List.fromList(reply.png);
+      });
+
+  static OriginalTreeScene _engineScene(builds.TreeScene scene) =>
+      OriginalTreeScene.fromJson({
+        'width': scene.width,
+        'height': scene.height,
+        'scale': scene.scale,
+        'offsetX': scene.offsetX,
+        'offsetY': scene.offsetY,
+        'assetId': scene.assetId,
+        'commands': scene.commands.map(_drawCommand).toList(),
+      });
+
+  static JsonMap _drawCommand(builds.TreeDrawCommand command) {
+    final target = _textureTarget(command);
+    final key = sha256
+        .convert(utf8.encode(jsonEncode([command.file, command.index, target])))
+        .toString();
+    return {
+      'texture': key,
+      'engineTexture': {
+        'file': command.file,
+        'index': command.index,
+        'targetSize': target,
+      },
+      'positions': command.positions,
+      'uv': command.uv,
+      'color': command.color,
+      'blend': command.blend,
+      'clamp': command.clamp,
+    };
+  }
+
+  static int _textureTarget(builds.TreeDrawCommand command) {
+    if (!command.file.endsWith('.dds.zst')) return 1;
+    final horizontal =
+        _span(command.positions, 0) / max(_span(command.uv, 0), 0.001);
+    final vertical =
+        _span(command.positions, 1) / max(_span(command.uv, 1), 0.001);
+    final target = max(horizontal, vertical).clamp(1, 8192).ceil();
+    return 1 << (target - 1).bitLength;
+  }
+
+  static double _span(List<double> coordinates, int axis) {
+    final values = [
+      for (var i = axis; i < coordinates.length; i += 2) coordinates[i],
+    ];
+    return values.reduce(max) - values.reduce(min);
+  }
 
   static TreeNode _geometryNode(builds.TreeGeometryNode value) => TreeNode(
     id: value.id,
@@ -395,29 +588,35 @@ class EngineSessionClient
   Future<JsonMap?> readNodeTooltip(
     EngineSnapshot snapshot,
     int id,
-    bool compare,
-  ) => _readWorkshop('build.tree_tooltip', () async {
-    final reply = await _rpc.getTreeNodeTooltip(
-      builds.GetTreeNodeTooltipRequest(
-        sessionId: snapshot.sessionId,
-        expectedRevision: Int64(snapshot.revision),
-        nodeId: id,
-        compare: compare,
-      ),
-      options: _workshopReadOptions(),
-    );
-    return <String, dynamic>{
-      'lines': [
-        for (final line in reply.lines)
-          <String, dynamic>{
-            'size': line.size,
-            'text': line.text,
-            'separator': line.separator,
-          },
-      ],
-      'path': reply.path,
-    };
-  });
+    bool compare, {
+    bool includeScene = false,
+  }) => _readWorkshop(
+    includeScene ? 'build.tree_hover' : 'build.tree_tooltip',
+    () async {
+      final reply = await _rpc.getTreeNodeTooltip(
+        builds.GetTreeNodeTooltipRequest(
+          sessionId: snapshot.sessionId,
+          expectedRevision: Int64(snapshot.revision),
+          nodeId: id,
+          compare: compare,
+          includeScene: includeScene,
+        ),
+        options: _workshopReadOptions(),
+      );
+      return <String, dynamic>{
+        'lines': [
+          for (final line in reply.lines)
+            <String, dynamic>{
+              'size': line.size,
+              'text': line.text,
+              'separator': line.separator,
+            },
+        ],
+        'path': reply.path,
+        if (reply.hasScene()) 'engineScene': _engineScene(reply.scene),
+      };
+    },
+  );
 
   CallOptions _workshopReadOptions() =>
       CallOptions(timeout: const Duration(seconds: 30));

@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:typed_data';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,19 +9,26 @@ import '../domain/node_power.dart';
 import '../domain/original_tree_scene.dart';
 
 class NodePowerCubit extends Cubit<NodePowerState> {
-  NodePowerCubit(this.engine, this.loadImages)
-    : super((
-        metrics: const [],
-        options: (stat: 'Evasion', distance: 10, allocation: 'unallocated'),
-        progress: null,
-        report: null,
-        error: null,
-        stale: false,
-      ));
+  NodePowerCubit(
+    this.engine,
+    this.loadImages, {
+    this.sharedMetrics,
+    this.sharedPower,
+  }) : super((
+         metrics: const [],
+         options: (stat: 'Evasion', distance: 10, allocation: 'unallocated'),
+         progress: null,
+         report: null,
+         error: null,
+         stale: false,
+       ));
   final McpClient engine;
   final Future<Map<String, Uint8List>> Function(OriginalTreeScene) loadImages;
+  final Future<List<JsonMap>>? Function()? sharedMetrics;
+  final Stream<NodePowerUpdate>? Function(NodePowerOptions)? sharedPower;
   int _generation = 0;
   int? _job;
+  StreamIterator<NodePowerUpdate>? _sharedJob;
 
   void _publish({
     List<JsonMap>? metrics,
@@ -44,12 +52,7 @@ class NodePowerCubit extends Cubit<NodePowerState> {
 
   Future<void> load() async {
     try {
-      if (!engine.tools.contains('pob_node_power')) {
-        throw StateError(
-          'Для поиска по характеристике обновите MCP до 0.9.0 в разделе «Компоненты».',
-        );
-      }
-      final metrics = jsonRows((await _call({'action': 'catalog'}))['entries']);
+      final metrics = await (sharedMetrics?.call() ?? _legacyMetrics());
       if (metrics.isEmpty)
         throw const FormatException('Lua не вернул характеристики');
       final stat = metrics.any((metric) => metric['id'] == state.options.stat)
@@ -66,6 +69,15 @@ class NodePowerCubit extends Cubit<NodePowerState> {
     } catch (error) {
       _publish(error: '$error');
     }
+  }
+
+  Future<List<JsonMap>> _legacyMetrics() async {
+    if (!engine.tools.contains('pob_node_power')) {
+      throw StateError(
+        'Для поиска по характеристике обновите MCP до 0.9.0 в разделе «Компоненты».',
+      );
+    }
+    return jsonRows((await _call({'action': 'catalog'}))['entries']);
   }
 
   Future<JsonMap> _call(JsonMap arguments) =>
@@ -86,21 +98,75 @@ class NodePowerCubit extends Cubit<NodePowerState> {
     try {
       await pending;
       if (!_current(generation)) return;
-      final start = await _call({
-        'action': 'start',
-        'stat': options.stat,
-        if (options.distance != null) 'maxDistance': options.distance,
-      });
-      final job = start['job'] as int;
-      if (!_current(generation)) {
-        await _cancelJob(job);
+      final stream = sharedPower?.call(options);
+      if (stream != null) {
+        await _readSharedPower(stream, generation);
         return;
       }
-      _job = job;
-      await _poll(job, generation, options);
+      await _startLegacyPower(options, generation);
     } catch (error) {
       if (_current(generation))
         _publish(error: '$error', preserveReport: true, stale: state.stale);
+    }
+  }
+
+  Future<void> _startLegacyPower(
+    NodePowerOptions options,
+    int generation,
+  ) async {
+    final start = await _call({
+      'action': 'start',
+      'stat': options.stat,
+      if (options.distance != null) 'maxDistance': options.distance,
+    });
+    final job = start['job'] as int;
+    if (!_current(generation)) {
+      await _cancelJob(job);
+      return;
+    }
+    _job = job;
+    await _poll(job, generation, options);
+  }
+
+  Future<void> _readSharedPower(
+    Stream<NodePowerUpdate> stream,
+    int generation,
+  ) async {
+    final job = StreamIterator(stream);
+    _sharedJob = job;
+    try {
+      while (_current(generation) && await job.moveNext()) {
+        if (!_current(generation)) return;
+        await _acceptSharedUpdate(job.current, generation);
+      }
+    } finally {
+      if (identical(_sharedJob, job)) _sharedJob = null;
+      await job.cancel();
+    }
+  }
+
+  Future<void> _acceptSharedUpdate(
+    NodePowerUpdate update,
+    int generation,
+  ) async {
+    final report = update.report;
+    if (report == null) {
+      _publish(
+        progress: update.progress,
+        preserveReport: true,
+        stale: state.stale,
+      );
+      return;
+    }
+    final images = await loadImages(report.scene);
+    if (_current(generation)) {
+      _publish(
+        report: NodePowerReport(
+          entries: report.entries,
+          scene: report.scene,
+          images: images,
+        ),
+      );
     }
   }
 
@@ -142,10 +208,13 @@ class NodePowerCubit extends Cubit<NodePowerState> {
     _generation++;
     final job = _job;
     _job = null;
+    final shared = _sharedJob;
+    _sharedJob = null;
     _publish(
       preserveReport: preserveReport,
       stale: preserveReport && state.report != null,
     );
+    await shared?.cancel();
     await _cancelJob(job);
   }
 
@@ -162,6 +231,7 @@ class NodePowerCubit extends Cubit<NodePowerState> {
   @override
   Future<void> close() async {
     _generation++;
+    await _sharedJob?.cancel();
     await _cancelJob(_job);
     return super.close();
   }

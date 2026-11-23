@@ -1,6 +1,7 @@
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../domain/build_report.dart';
 import '../domain/condition_definition.dart';
 import 'catalog_cubit.dart';
 import 'condition_dialog.dart';
@@ -9,6 +10,7 @@ import 'core/language_scope.dart';
 import 'core/panels.dart';
 import 'core/spark_theme.dart';
 import 'workshop_cubit.dart';
+import 'workshop_state.dart';
 
 class ConditionsView extends StatefulWidget {
   const ConditionsView({super.key, required this.model});
@@ -18,7 +20,20 @@ class ConditionsView extends StatefulWidget {
 }
 
 class _ConditionsViewState extends State<ConditionsView> {
-  late final catalog = CatalogCubit(widget.model.catalogs.conditions);
+  late final catalog = CatalogCubit(_readConditions);
+
+  Future<List<ConditionDefinition>> _readConditions() async {
+    final definitions = widget.model.state.report?.raw['conditionDefinitions'];
+    if (definitions is List) {
+      return jsonRows(definitions)
+          .map(ConditionDefinition.fromJson)
+          .toList(growable: false);
+    }
+    return widget.model.catalogs.conditions();
+  }
+
+  bool _hasEngineConditions(WorkshopState state) =>
+      state.report?.raw['conditionDefinitions'] is List;
   @override
   void initState() {
     super.initState();
@@ -33,49 +48,56 @@ class _ConditionsViewState extends State<ConditionsView> {
 
   @override
   Widget build(BuildContext context) =>
-      BlocBuilder<
-        CatalogCubit<ConditionDefinition>,
-        CatalogState<ConditionDefinition>
-      >(
-        bloc: catalog,
-        builder: (context, state) => Padding(
-          padding: const EdgeInsets.all(22),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              const SectionHeading(
-                'Условия расчёта',
-                subtitle: 'Эти настройки влияют на показатели сборки',
-              ),
-              TextField(
-                key: const Key('condition-search'),
-                onChanged: catalog.search,
-                decoration: const InputDecoration(
-                  hint: AppText('Найти условие'),
-                  prefixIcon: Icon(Icons.search, size: 19),
+      BlocListener<WorkshopCubit, WorkshopState>(
+        bloc: widget.model,
+        listenWhen: (previous, current) =>
+            _hasEngineConditions(previous) != _hasEngineConditions(current),
+        listener: (_, _) => catalog.load(),
+        child:
+            BlocBuilder<
+              CatalogCubit<ConditionDefinition>,
+              CatalogState<ConditionDefinition>
+            >(
+              bloc: catalog,
+              builder: (context, state) => Padding(
+                padding: const EdgeInsets.all(22),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    const SectionHeading(
+                      'Условия расчёта',
+                      subtitle: 'Эти настройки влияют на показатели сборки',
+                    ),
+                    TextField(
+                      key: const Key('condition-search'),
+                      onChanged: catalog.search,
+                      decoration: const InputDecoration(
+                        hint: AppText('Найти условие'),
+                        prefixIcon: Icon(Icons.search, size: 19),
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    Wrap(
+                      spacing: 8,
+                      children: [
+                        ChoiceChip(
+                          label: const AppText('Все'),
+                          selected: !state.configuredOnly,
+                          onSelected: (_) => catalog.configured(false),
+                        ),
+                        ChoiceChip(
+                          label: const AppText('Заданные'),
+                          selected: state.configuredOnly,
+                          onSelected: (_) => catalog.configured(true),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 10),
+                    Expanded(child: _results(context, state)),
+                  ],
                 ),
               ),
-              const SizedBox(height: 10),
-              Wrap(
-                spacing: 8,
-                children: [
-                  ChoiceChip(
-                    label: const AppText('Все'),
-                    selected: !state.configuredOnly,
-                    onSelected: (_) => catalog.configured(false),
-                  ),
-                  ChoiceChip(
-                    label: const AppText('Заданные'),
-                    selected: state.configuredOnly,
-                    onSelected: (_) => catalog.configured(true),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 10),
-              Expanded(child: _results(context, state)),
-            ],
-          ),
-        ),
+            ),
       );
 
   Widget _results(

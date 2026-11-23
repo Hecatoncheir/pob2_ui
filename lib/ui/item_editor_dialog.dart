@@ -4,7 +4,6 @@ import 'package:material_ui/material_ui.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../data/equipment_repository.dart';
 import '../data/item_art_catalog.dart';
 import '../domain/build_report.dart';
 import '../domain/equipment_item.dart';
@@ -40,7 +39,7 @@ class _ItemEditorDialog extends StatefulWidget {
 }
 
 class _ItemEditorDialogState extends State<_ItemEditorDialog> {
-  late final repository = EquipmentRepository(widget.model.engine);
+  late final repository = widget.model.equipmentRepository();
   late final editor = ItemEditorCubit(
     _inspect,
     ({raw, itemId, expectedRevision}) => widget.model.equipItem(

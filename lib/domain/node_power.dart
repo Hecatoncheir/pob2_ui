@@ -4,6 +4,7 @@ import 'build_report.dart';
 import 'original_tree_scene.dart';
 
 typedef NodePowerOptions = ({String stat, int? distance, String allocation});
+typedef NodePowerUpdate = ({double? progress, NodePowerReport? report});
 typedef NodePowerState = ({
   List<JsonMap> metrics,
   NodePowerOptions options,

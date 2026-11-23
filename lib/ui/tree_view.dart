@@ -90,6 +90,8 @@ class _TreeViewState extends State<TreeView>
   late final powerModel = NodePowerCubit(
     widget.model.engine,
     widget.model.loadTreeSceneImages,
+    sharedMetrics: widget.model.readSharedPowerMetrics,
+    sharedPower: widget.model.watchSharedPower,
   );
   late final pathModel = TreePathCubit(widget.model);
   @override

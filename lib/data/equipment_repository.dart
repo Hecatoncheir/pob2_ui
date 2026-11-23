@@ -1,9 +1,17 @@
 import '../domain/equipment_item.dart';
 import 'mcp_client.dart';
 
+typedef SharedEquipmentReader = Future<ItemInspection?> Function({
+  String? slot,
+  String? raw,
+  int? itemId,
+  required bool compare,
+});
+
 class EquipmentRepository {
-  EquipmentRepository(this.engine);
+  EquipmentRepository(this.engine, {this.readShared});
   final McpClient engine;
+  final SharedEquipmentReader? readShared;
   bool get canCompare => engine.tools.contains('pob_compare_item');
   bool get canInspect => engine.tools.contains('pob_inspect_item');
   bool get available => engine.tools.containsAll({
@@ -17,6 +25,13 @@ class EquipmentRepository {
     int? itemId,
     bool compare = false,
   }) async {
+    final shared = await readShared?.call(
+      slot: slot,
+      raw: raw,
+      itemId: itemId,
+      compare: compare,
+    );
+    if (shared != null) return shared;
     if (!canInspect)
       throw const FormatException('Обновите MCP для редактора экипировки');
     return ItemInspection.fromJson(
