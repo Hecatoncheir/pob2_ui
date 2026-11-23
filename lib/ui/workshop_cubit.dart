@@ -325,16 +325,20 @@ class WorkshopCubit extends Cubit<WorkshopState> {
 
   EngineOptions _primaryOptions(String sessionId) {
     final pair = components.active;
-    final mcp = pair[Component.mcp]?.directory;
+    final pob = pair[Component.pob];
+    final native = pob?.nativeDirectory ?? _legacyNativeDirectory(pair);
     return _primaryEngine!.forBuild(
       sessionId,
-      pob: pair[Component.pob]?.directory,
-      native: Platform.isWindows || mcp == null
-          ? null
-          : Directory.fromUri(
-              Directory(mcp).uri.resolve('pob_poe2_mcp/native/'),
-            ).path,
+      pob: pob?.directory,
+      native: native,
     );
+  }
+
+  String? _legacyNativeDirectory(Installations pair) {
+    final mcp = pair[Component.mcp]?.directory;
+    if (Platform.isWindows || mcp == null) return null;
+    return Directory.fromUri(Directory(mcp).uri.resolve('pob_poe2_mcp/native/'))
+        .path;
   }
 
   Future<EngineSnapshot> _restorePrimarySession(
@@ -660,7 +664,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
           xml: xml,
           starts: _progressionStarts,
         );
-      });
+      }, engine: _createEngine());
 
   bool _canCompareProgression(TreeProgressionKey key) =>
       key == progressionKey && !state.busy && state.document?.stale == false;
@@ -702,7 +706,8 @@ class WorkshopCubit extends Cubit<WorkshopState> {
   final List<_BuildSnapshot> _undoHistory = [];
   final List<_BuildSnapshot> _redoHistory = [];
 
-  bool get ready => components.active.length == Component.values.length;
+  bool get ready =>
+      components.requiredComponents.every(components.active.containsKey);
   bool get luaReady => engine.connected && state.classes.isNotEmpty;
 
   Future<BuildComparison> compareSavedBuilds(
@@ -886,7 +891,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
   String get _componentSource => _pairSource(components.active);
 
   String _pairSource(Installations pair) =>
-      Component.values.map((key) => pair[key]!.commit).join('-');
+      components.requiredComponents.map((key) => pair[key]!.commit).join('-');
 
   Future<NodePreview> previewNode(int id) async {
     final hovered = await _sharedNodeTooltip(
@@ -982,8 +987,9 @@ class WorkshopCubit extends Cubit<WorkshopState> {
         _componentSource,
       );
 
-  bool get canRollback =>
-      components.store.previous.length == Component.values.length;
+  bool get canRollback => components.requiredComponents.every(
+    components.store.previous.containsKey,
+  );
 
   void _update(WorkshopState next) {
     if (isClosed) return;
@@ -1150,7 +1156,8 @@ class WorkshopCubit extends Cubit<WorkshopState> {
   Future<void> prepareComponents() => _run(() async {
     if (!ready) {
       await _installFirstPair();
-    } else if (!luaReady &&
+    } else if (components.engineExecutable == null &&
+        !luaReady &&
         components.active.values.any((item) => item.archiveSha256 == null)) {
       await _migrateLegacyPair();
     }
@@ -1210,7 +1217,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
   }
 
   Future<void> updateComponents() => _runComponentChange(() async {
-    if (state.releases.length != Component.values.length) {
+    if (!components.requiredComponents.every(state.releases.containsKey)) {
       await _checkComponentReleases();
     }
     await _changeComponentPair(

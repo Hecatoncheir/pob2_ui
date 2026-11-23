@@ -1433,6 +1433,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m323494c6da => '當翻譯不可用時顯示原始文本';
 
   @override
+  String get md6c5445cf8 => '沒有先前的 PoB 安裝';
+
+  @override
   String get m8a210e3e2e => '沒有連接到共享會話';
 
   @override
@@ -1808,6 +1811,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get mc1b2f9e3a6 => '設定 PoB II';
+
+  @override
+  String get m413fa4fd39 => '正在使用內附引擎準備 PoB 原始 Lua';
 
   @override
   String get m52d7142d18 => '支援 Windows x64、Linux x64 和 macOS arm64';
@@ -2757,6 +2763,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get mfdeaa71380 => '安裝元件';
+
+  @override
+  String get m536db585fd => 'PoB 安裝由內附引擎管理';
 
   @override
   String get mfcb7c67f91 => '安裝的目前版本';
@@ -4350,6 +4359,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m323494c6da => '當翻譯不可用時顯示原始文本';
 
   @override
+  String get md6c5445cf8 => '沒有先前的 PoB 安裝';
+
+  @override
   String get m8a210e3e2e => '沒有連接到共享會話';
 
   @override
@@ -4725,6 +4737,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get mc1b2f9e3a6 => '設定 PoB II';
+
+  @override
+  String get m413fa4fd39 => '正在使用內附引擎準備 PoB 原始 Lua';
 
   @override
   String get m52d7142d18 => '支援 Windows x64、Linux x64 和 macOS arm64';
@@ -5674,6 +5689,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get mfdeaa71380 => '安裝元件';
+
+  @override
+  String get m536db585fd => 'PoB 安裝由內附引擎管理';
 
   @override
   String get mfcb7c67f91 => '安裝的目前版本';

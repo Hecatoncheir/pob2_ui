@@ -6,6 +6,9 @@ import '../domain/component.dart';
 import 'process_service.dart';
 
 class McpClient {
+  McpClient({this.workbenchExecutable});
+
+  final String? workbenchExecutable;
   Process? _process;
   final _pending = <int, Completer<Map<String, dynamic>>>{};
   final _subscriptions = <StreamSubscription<dynamic>>[];
@@ -15,8 +18,21 @@ class McpClient {
   Set<String> tools = const {};
   void Function(Object)? onDisconnected;
 
-  Future<void> connect(Installations pair) =>
-      _connect(pair[Component.mcp]!, 'engine', pair[Component.pob]!.directory);
+  Future<void> connect(Installations pair) {
+    final pob = pair[Component.pob]!;
+    if (workbenchExecutable case final executable?) {
+      return _start(
+        executable,
+        ['workbench'],
+        environment: {
+          'POB2_ENGINE_POB_DIR': pob.directory,
+          if (pob.nativeDirectory case final directory?)
+            'POB2_ENGINE_POB_NATIVE_DIR': directory,
+        },
+      );
+    }
+    return _connect(pair[Component.mcp]!, 'engine', pob.directory);
+  }
 
   Future<void> connectToPobWindow(Installation mcp, {String? directory}) =>
       _connect(mcp, 'app', directory);
@@ -26,9 +42,8 @@ class McpClient {
     String mode,
     String? pobDirectory,
   ) async {
-    await close();
     final python = await ProcessService().runtimePython(mcp);
-    final process = await Process.start(python, [
+    return _start(python, [
       '-X',
       'utf8',
       'run.py',
@@ -36,7 +51,22 @@ class McpClient {
       '--mode',
       mode,
       if (pobDirectory != null) ...['--pob-dir', pobDirectory],
-    ], workingDirectory: mcp.directory);
+    ], directory: mcp.directory);
+  }
+
+  Future<void> _start(
+    String executable,
+    List<String> arguments, {
+    String? directory,
+    Map<String, String>? environment,
+  }) async {
+    await close();
+    final process = await Process.start(
+      executable,
+      arguments,
+      workingDirectory: directory,
+      environment: environment,
+    );
     _process = process;
     diagnostics.clear();
     _subscriptions.add(

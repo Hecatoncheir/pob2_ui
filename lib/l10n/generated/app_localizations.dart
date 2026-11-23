@@ -2730,6 +2730,12 @@ abstract class AppLocalizations {
   /// **'Original text is shown when a translation is unavailable'**
   String get m323494c6da;
 
+  /// Нет предыдущей установки PoB
+  ///
+  /// In en, this message translates to:
+  /// **'No previous PoB installation'**
+  String get md6c5445cf8;
+
   /// Нет соединения с общей сессией
   ///
   /// In en, this message translates to:
@@ -3455,6 +3461,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Set up PoB II'**
   String get mc1b2f9e3a6;
+
+  /// Подготовка исходного Lua PoB через комплектный движок
+  ///
+  /// In en, this message translates to:
+  /// **'Preparing the original PoB Lua with the bundled engine'**
+  String get m413fa4fd39;
 
   /// Поддерживаются Windows x64, Linux x64 и macOS arm64
   ///
@@ -5249,6 +5261,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Install components'**
   String get mfdeaa71380;
+
+  /// Установками PoB управляет комплектный движок
+  ///
+  /// In en, this message translates to:
+  /// **'The bundled engine manages PoB installations'**
+  String get m536db585fd;
 
   /// Установлена актуальная версия
   ///

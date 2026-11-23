@@ -141,8 +141,8 @@ Future<void> _cleanAndRollback(
   final repository = model.components;
   final root = repository.store.root;
   final original = repository.active[Component.pob]!.directory;
-  final rollback = repository.store.previous[Component.pob]!.directory;
-  _require(!path.equals(original, rollback), model);
+  final rollback = repository.store.previous[Component.pob]?.directory;
+  if (rollback != null) _require(!path.equals(original, rollback), model);
   _checkWitch(model);
   final obsolete = path.join('versions', 'pob-obsolete');
   final entries = await model.previewProfileCleanup();
@@ -161,10 +161,12 @@ Future<void> _cleanAndRollback(
   _require(!await Directory(path.join(root.path, obsolete)).exists(), model);
   _checkWitch(model);
   progress.record('profile-cleaned');
-  await model.rollback();
-  _require(repository.active[Component.pob]?.directory == rollback, model);
-  _checkWitch(model);
-  progress.record('components-rollback-checked');
+  if (rollback != null) {
+    await model.rollback();
+    _require(repository.active[Component.pob]?.directory == rollback, model);
+    _checkWitch(model);
+    progress.record('components-rollback-checked');
+  }
 }
 
 Future<Map<String, Object?>> _checkLink(

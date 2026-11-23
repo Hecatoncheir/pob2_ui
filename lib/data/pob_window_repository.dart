@@ -11,6 +11,9 @@ import 'wine_pob_window.dart';
 typedef _LaunchedPob = ({String path, int pid, int started});
 
 class PobWindowRepository {
+  PobWindowRepository({this.engineExecutable});
+
+  final String? engineExecutable;
   final _launched = <String, _LaunchedPob>{};
   WinePobWindow? _wineWindow;
   bool _windowBusy = false;
@@ -23,11 +26,12 @@ class PobWindowRepository {
     return List.unmodifiable((result['paths'] as List).cast<String>());
   }
 
-  Future<JsonMap> _discover(Installation mcp) async =>
-      jsonDecode(await _run(mcp, ['-c', _discovery])) as JsonMap;
+  Future<JsonMap> _discover(Installation mcp) => engineExecutable == null
+      ? _run(mcp, ['-c', _discovery]).then(_decode)
+      : _native('discover').then(_decode);
 
   Future<String> _launchDirectory(Installations components) async {
-    final result = await _discover(components[Component.mcp]!);
+    final result = await _discover(_bridgeComponent(components));
     if (result['preferred'] case final String preferred) return preferred;
     final paths = (result['paths'] as List).cast<String>();
     if (paths.length == 1) return paths.single;
@@ -38,6 +42,10 @@ class PobWindowRepository {
   }
 
   Future<void> installBridge(Installation mcp, String directory) async {
+    if (engineExecutable != null) {
+      await _native('install', directory: directory);
+      return;
+    }
     if (Platform.isLinux) {
       await _run(mcp, ['-c', _installLinuxBridge, directory]);
       return;
@@ -74,13 +82,7 @@ class PobWindowRepository {
     String directory, {
     required bool alreadyOpen,
   }) async {
-    final status = await _run(mcp, [
-      '-c',
-      _waitForBridge,
-      directory,
-      alreadyOpen ? '5' : '45',
-    ], timeout: const Duration(seconds: 60));
-    if (status != 'ready') {
+    if (!await _bridgeReady(mcp, directory, alreadyOpen)) {
       throw StateError(
         alreadyOpen
             ? 'PoB уже открыт без связи с мостом. Перезапустите его один раз.'
@@ -89,18 +91,62 @@ class PobWindowRepository {
     }
   }
 
+  Future<bool> _bridgeReady(
+    Installation mcp,
+    String directory,
+    bool alreadyOpen,
+  ) async {
+    final seconds = alreadyOpen ? '5' : '45';
+    if (engineExecutable == null) {
+      return await _run(mcp, [
+            '-c',
+            _waitForBridge,
+            directory,
+            seconds,
+          ], timeout: const Duration(seconds: 60)) ==
+          'ready';
+    }
+    try {
+      await _native(
+        'status',
+        directory: directory,
+        arguments: ['--wait', '${seconds}s'],
+      );
+      return true;
+    } on StateError catch (error) {
+      if (!_bridgeUnavailable(error)) rethrow;
+      return false;
+    }
+  }
+
+  Future<void> _ensureNativeOrLegacyBridge(
+    Installation mcp,
+    String directory,
+  ) async {
+    if (engineExecutable == null) {
+      await _run(mcp, ['-c', _ensureBridge, directory]);
+    } else {
+      await _native('install', directory: directory, arguments: ['--ensure']);
+    }
+  }
+
   Future<void> _startWine(
     Installation mcp,
     String directory,
     File executable,
   ) async {
-    final prefix = await _run(mcp, ['-c', _winePrefix, directory]);
+    final engine = engineExecutable;
+    final prefix = engine == null
+        ? await _run(mcp, ['-c', _winePrefix, directory])
+        : _decode(await _native('wine-prefix', directory: directory))['prefix']
+              as String;
     final window = await WinePobWindow.start(
       executable,
       prefix,
-      python: await ProcessService().runtimePython(mcp),
+      engineExecutable: engine,
+      python: engine == null ? await ProcessService().runtimePython(mcp) : null,
       prepareBridge: () async {
-        await _run(mcp, ['-c', _ensureBridge, directory]);
+        await _ensureNativeOrLegacyBridge(mcp, directory);
       },
     );
     if (window != null) _wineWindow = window;
@@ -217,12 +263,24 @@ class PobWindowRepository {
   ], environment: environment);
 
   Future<String?> checkBridge(Installation mcp, String directory) async {
-    final result = await _run(mcp, ['-c', _checkBridge, directory]);
-    return jsonDecode(result) as String?;
+    if (engineExecutable == null) {
+      final result = await _run(mcp, ['-c', _checkBridge, directory]);
+      return jsonDecode(result) as String?;
+    }
+    try {
+      await _native('check', directory: directory);
+      return null;
+    } on StateError catch (error) {
+      final details = _decode(error.message.toString());
+      return details['message'] as String;
+    }
   }
 
-  Future<String> readXml(Installations components) =>
-      _withWindow(components, (client) => client.exportBuildXml());
+  Future<String> readXml(Installations components) async =>
+      switch (await _windowTool(components, 'pob_export_xml')) {
+        {'xml': final String xml} when xml.trim().isNotEmpty => xml,
+        _ => throw const FormatException('Lua не вернул XML сборки'),
+      };
 
   Future<List<PobCharacter>> listCharacters(Installations components) async {
     final response = await _windowTool(components, 'pob_list_characters');
@@ -261,6 +319,9 @@ class PobWindowRepository {
     String tool, [
     JsonMap arguments = const {},
   ]) async {
+    if (engineExecutable != null) {
+      return _withNativeWindow(components, tool, arguments);
+    }
     return _withWindow(components, (client) async {
       if (!client.tools.contains(tool)) {
         throw StateError('Обновите MCP в разделе «Компоненты».');
@@ -274,6 +335,78 @@ class PobWindowRepository {
         rethrow;
       }
     });
+  }
+
+  Future<JsonMap> _withNativeWindow(
+    Installations components,
+    String tool,
+    JsonMap arguments,
+  ) => _windowOperation(() async {
+    try {
+      return await _readNativeWindow(tool, arguments);
+    } on StateError catch (error) {
+      if (!_bridgeUnavailable(error) || !supported) rethrow;
+    }
+    final directory = await _launchDirectory(components);
+    final executable = await _executable(directory);
+    await _startAutomatically(
+      _bridgeComponent(components),
+      directory,
+      executable,
+    );
+    return _readNativeWindow(tool, arguments, directory: directory);
+  });
+
+  Future<JsonMap> _readNativeWindow(
+    String tool,
+    JsonMap arguments, {
+    String? directory,
+  }) {
+    final command = switch (tool) {
+      'pob_export_xml' => 'export',
+      'pob_get_build_directory' => 'build-directory',
+      'pob_list_characters' => 'characters',
+      'pob_get_character' => 'character',
+      _ => throw ArgumentError.value(tool),
+    };
+    return _native(
+      command,
+      directory: directory,
+      arguments: [
+        if (arguments['name'] case final String name) ...['--name', name],
+      ],
+    ).then(_decode);
+  }
+
+  Installation _bridgeComponent(Installations components) =>
+      components[engineExecutable == null ? Component.mcp : Component.pob]!;
+
+  JsonMap _decode(String value) => jsonDecode(value) as JsonMap;
+
+  Future<String> _native(
+    String command, {
+    String? directory,
+    List<String> arguments = const [],
+  }) async {
+    try {
+      return await ProcessService().run(engineExecutable!, [
+        'pob-window',
+        if (directory != null) ...['--pob-dir', directory],
+        ...arguments,
+        command,
+      ], timeout: const Duration(seconds: 65));
+    } on ProcessException catch (error) {
+      final match = RegExp(
+        r'^([A-Z][A-Z_]+): (.*)',
+        multiLine: true,
+      ).firstMatch(error.message);
+      throw StateError(
+        jsonEncode({
+          'code': match?.group(1) ?? 'BRIDGE_ERROR',
+          'message': match?.group(2) ?? error.message.trim(),
+        }),
+      );
+    }
   }
 
   Future<T> _withWindow<T>(
@@ -311,7 +444,7 @@ class PobWindowRepository {
     if (probe.exitCode != 0 && probe.exitCode != 5) {
       throw StateError('Закройте выбранный PoB вручную и повторите запуск.');
     }
-    await _run(mcp, ['-c', _ensureBridge, directory]);
+    await _ensureNativeOrLegacyBridge(mcp, directory);
     await _startAndCheck(mcp, directory, executable, path, restart: false);
   }
 

@@ -1450,6 +1450,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m323494c6da => 'ข้อความต้นฉบับจะแสดงขึ้นเมื่อการแปลไม่พร้อมใช้งาน';
 
   @override
+  String get md6c5445cf8 => 'ไม่พบการติดตั้ง PoB เวอร์ชันก่อนหน้า';
+
+  @override
   String get m8a210e3e2e => 'ไม่มีการเชื่อมต่อกับเซสชันที่แชร์';
 
   @override
@@ -1830,6 +1833,10 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get mc1b2f9e3a6 => 'ตั้งค่า PoB II';
+
+  @override
+  String get m413fa4fd39 =>
+      'กำลังเตรียม Lua ต้นฉบับของ PoB ด้วยเอนจินที่มาพร้อมแอป';
 
   @override
   String get m52d7142d18 => 'รองรับ Windows x64, Linux x64 และ macOS arm64';
@@ -2795,6 +2802,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get mfdeaa71380 => 'ติดตั้งส่วนประกอบ';
+
+  @override
+  String get m536db585fd => 'เอนจินที่มาพร้อมแอปจัดการการติดตั้ง PoB';
 
   @override
   String get mfcb7c67f91 => 'ติดตั้งเวอร์ชันปัจจุบันแล้ว';

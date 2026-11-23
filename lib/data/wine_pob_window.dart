@@ -1,18 +1,19 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
 
 import 'process_service.dart';
 
 class WinePobWindow {
-  WinePobWindow._(this._process, this._python, this._name, this._token) {
+  WinePobWindow._(this._process, this._control, this._name, this._token) {
     unawaited(_process.stdout.drain<void>());
     unawaited(_process.stderr.drain<void>());
     unawaited(_process.exitCode.then((_) => _exited = true));
   }
 
   final Process _process;
-  final String _python;
+  final Future<int> Function(String, String, String) _control;
   final String _name;
   final String _token;
   bool _exited = false;
@@ -20,7 +21,8 @@ class WinePobWindow {
   static Future<WinePobWindow?> start(
     File executable,
     String prefix, {
-    required String python,
+    String? python,
+    String? engineExecutable,
     required Future<void> Function() prepareBridge,
   }) async {
     final token = List.generate(
@@ -28,8 +30,9 @@ class WinePobWindow {
       (_) => _random.nextInt(256),
     ).map((value) => value.toRadixString(16).padLeft(2, '0')).join();
     final name = executable.uri.pathSegments.last;
-    final probe = await _control(python, 'check', name);
-    switch (probe.exitCode) {
+    final control = _controller(python, engineExecutable);
+    final probe = await control('check', name, '');
+    switch (probe) {
       case 0:
         break;
       case 2:
@@ -54,21 +57,21 @@ class WinePobWindow {
         _ownerVariable: token,
       },
     );
-    return WinePobWindow._(process, python, name, token);
+    return WinePobWindow._(process, control, name, token);
   }
 
   static final _random = Random.secure();
 
   Future<void> minimize() async {
-    if (!_exited) await _control(_python, 'minimize', _name, _token);
+    if (!_exited) await _control('minimize', _name, _token);
   }
 
   Future<void> close() async {
     if (_exited) return;
-    final result = await _control(_python, 'close', _name, _token);
-    if (result.exitCode != 0 && !_exited) throw StateError(_closePending);
+    final result = await _control('close', _name, _token);
+    if (result != 0 && !_exited) throw StateError(_closePending);
     if (await _wait(const Duration(seconds: 1))) return;
-    await _control(_python, 'restore', _name, _token);
+    await _control('restore', _name, _token);
     if (!await _wait(const Duration(seconds: 44))) {
       throw StateError(_closePending);
     }
@@ -83,7 +86,36 @@ class WinePobWindow {
     }
   }
 
-  static Future<ProcessResult> _control(
+  static Future<int> Function(String, String, String) _controller(
+    String? python,
+    String? engine,
+  ) => engine == null
+      ? (action, name, token) async =>
+            (await _legacyControl(python!, action, name, token)).exitCode
+      : (action, name, token) => _engineControl(engine, action, name, token);
+
+  static Future<int> _engineControl(
+    String engine,
+    String action,
+    String name,
+    String token,
+  ) async {
+    final process = await Process.run(
+      engine,
+      ['pob-window-control', '--executable', name, action],
+      environment: {_ownerVariable: token},
+    );
+    if (process.exitCode != 0) return 1;
+    final reply = jsonDecode(process.stdout as String);
+    return switch ((action, reply)) {
+      ('check', {'found': true}) => 2,
+      ('close', {'found': false}) => 1,
+      (_, {'found': bool()}) => 0,
+      _ => 1,
+    };
+  }
+
+  static Future<ProcessResult> _legacyControl(
     String python,
     String action,
     String name, [

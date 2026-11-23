@@ -1472,6 +1472,9 @@ class AppLocalizationsPt extends AppLocalizations {
       'O texto original é mostrado quando uma tradução não está disponível';
 
   @override
+  String get md6c5445cf8 => 'Nenhuma instalação anterior do PoB';
+
+  @override
   String get m8a210e3e2e => 'Sem conexão com sessão compartilhada';
 
   @override
@@ -1862,6 +1865,10 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get mc1b2f9e3a6 => 'Configurar o PoB II';
+
+  @override
+  String get m413fa4fd39 =>
+      'Preparando o Lua original do PoB com o motor incluído';
 
   @override
   String get m52d7142d18 => 'Windows x64, Linux x64 e macOS arm64 compatíveis';
@@ -2843,6 +2850,9 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get mfdeaa71380 => 'Instalar componentes';
+
+  @override
+  String get m536db585fd => 'O motor incluído gerencia as instalações do PoB';
 
   @override
   String get mfcb7c67f91 => 'Versão atual instalada';
@@ -4485,6 +4495,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
       'O texto original é mostrado quando uma tradução não está disponível';
 
   @override
+  String get md6c5445cf8 => 'Nenhuma instalação anterior do PoB';
+
+  @override
   String get m8a210e3e2e => 'Sem conexão com sessão compartilhada';
 
   @override
@@ -4875,6 +4888,10 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get mc1b2f9e3a6 => 'Configurar o PoB II';
+
+  @override
+  String get m413fa4fd39 =>
+      'Preparando o Lua original do PoB com o motor incluído';
 
   @override
   String get m52d7142d18 => 'Windows x64, Linux x64 e macOS arm64 compatíveis';
@@ -5856,6 +5873,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get mfdeaa71380 => 'Instalar componentes';
+
+  @override
+  String get m536db585fd => 'O motor incluído gerencia as instalações do PoB';
 
   @override
   String get mfcb7c67f91 => 'Versão atual instalada';

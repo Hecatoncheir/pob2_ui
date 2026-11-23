@@ -1463,6 +1463,9 @@ class AppLocalizationsEn extends AppLocalizations {
       'Original text is shown when a translation is unavailable';
 
   @override
+  String get md6c5445cf8 => 'No previous PoB installation';
+
+  @override
   String get m8a210e3e2e => 'No connection to shared session';
 
   @override
@@ -1846,6 +1849,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get mc1b2f9e3a6 => 'Set up PoB II';
+
+  @override
+  String get m413fa4fd39 =>
+      'Preparing the original PoB Lua with the bundled engine';
 
   @override
   String get m52d7142d18 => 'Windows x64, Linux x64 and macOS arm64 supported';
@@ -2818,6 +2825,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get mfdeaa71380 => 'Install components';
+
+  @override
+  String get m536db585fd => 'The bundled engine manages PoB installations';
 
   @override
   String get mfcb7c67f91 => 'Current version installed';

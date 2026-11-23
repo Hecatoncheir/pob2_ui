@@ -1461,6 +1461,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m323494c6da => 'Нет перевода — показываем оригинал';
 
   @override
+  String get md6c5445cf8 => 'Нет предыдущей установки PoB';
+
+  @override
   String get m8a210e3e2e => 'Нет соединения с общей сессией';
 
   @override
@@ -1844,6 +1847,10 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get mc1b2f9e3a6 => 'Подготовка PoB II';
+
+  @override
+  String get m413fa4fd39 =>
+      'Подготовка исходного Lua PoB через комплектный движок';
 
   @override
   String get m52d7142d18 =>
@@ -2815,6 +2822,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get mfdeaa71380 => 'Установить компоненты';
+
+  @override
+  String get m536db585fd => 'Установками PoB управляет комплектный движок';
 
   @override
   String get mfcb7c67f91 => 'Установлена актуальная версия';

@@ -1438,6 +1438,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m323494c6da => '번역을 사용할 수 없는 경우 원본 텍스트가 표시됩니다.';
 
   @override
+  String get md6c5445cf8 => '이전 PoB 설치가 없습니다';
+
+  @override
   String get m8a210e3e2e => '공유 세션에 연결되지 않았습니다.';
 
   @override
@@ -1815,6 +1818,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get mc1b2f9e3a6 => 'PoB II 설정';
+
+  @override
+  String get m413fa4fd39 => '내장 엔진으로 원본 PoB Lua를 준비하는 중';
 
   @override
   String get m52d7142d18 => 'Windows x64, Linux x64, macOS arm64 지원';
@@ -2767,6 +2773,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get mfdeaa71380 => '구성 요소 설치';
+
+  @override
+  String get m536db585fd => '내장 엔진이 PoB 설치를 관리합니다';
 
   @override
   String get mfcb7c67f91 => '현재 버전이 설치됨';

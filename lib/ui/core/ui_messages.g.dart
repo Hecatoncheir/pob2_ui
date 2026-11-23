@@ -802,6 +802,8 @@ final uiExactTranslations = <String, String Function(AppLocalizations)>{
   "Нет перевода — показываем оригинал": (l) => l.m323494c6da,
   "Original text is shown when a translation is unavailable": (l) =>
       l.m323494c6da,
+  "Нет предыдущей установки PoB": (l) => l.md6c5445cf8,
+  "No previous PoB installation": (l) => l.md6c5445cf8,
   "Нет соединения с общей сессией": (l) => l.m8a210e3e2e,
   "No connection to shared session": (l) => l.m8a210e3e2e,
   "Ниже": (l) => l.m443c49da2a,
@@ -1043,6 +1045,9 @@ final uiExactTranslations = <String, String Function(AppLocalizations)>{
   "Подготовить PoB II": (l) => l.mb66419affe,
   "Set up PoB II": (l) => l.mb66419affe,
   "Подготовка PoB II": (l) => l.mc1b2f9e3a6,
+  "Подготовка исходного Lua PoB через комплектный движок": (l) => l.m413fa4fd39,
+  "Preparing the original PoB Lua with the bundled engine": (l) =>
+      l.m413fa4fd39,
   "Поддерживаются Windows x64, Linux x64 и macOS arm64": (l) => l.m52d7142d18,
   "Windows x64, Linux x64 and macOS arm64 supported": (l) => l.m52d7142d18,
   "Поддержки не найдены": (l) => l.m8ba2618d75,
@@ -1629,6 +1634,8 @@ final uiExactTranslations = <String, String Function(AppLocalizations)>{
       l.m4d9acf3506,
   "Установить компоненты": (l) => l.mfdeaa71380,
   "Install components": (l) => l.mfdeaa71380,
+  "Установками PoB управляет комплектный движок": (l) => l.m536db585fd,
+  "The bundled engine manages PoB installations": (l) => l.m536db585fd,
   "Установлена актуальная версия": (l) => l.mfcb7c67f91,
   "Current version installed": (l) => l.mfcb7c67f91,
   "Установленная версия не найдена": (l) => l.m1bff3dd3a5,

@@ -37,7 +37,9 @@ enum _SetupStep {
   static _SetupStep current(WorkshopCubit model) {
     final installed = model.components.active;
     if (!installed.containsKey(Component.pob)) return pob;
-    if (!installed.containsKey(Component.mcp)) return mcp;
+    if (model.components.requiredComponents.contains(Component.mcp) &&
+        !installed.containsKey(Component.mcp))
+      return mcp;
     if (!model.luaReady) return lua;
     if (!model.buildFolderReady) return folder;
     return builds;
@@ -84,7 +86,11 @@ class _SetupWizardState extends State<_SetupWizard> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   for (final item in _SetupStep.values)
-                    _StepRow(item, step, state.setupStage),
+                    if (item != _SetupStep.mcp ||
+                        model.components.requiredComponents.contains(
+                          Component.mcp,
+                        ))
+                      _StepRow(item, step, state.setupStage),
                   const SizedBox(height: 16),
                   _stepContent(context, step, state),
                   if (state.busy) _SetupProgress(phase ?? step.label),
@@ -134,7 +140,7 @@ class _SetupWizardState extends State<_SetupWizard> {
       '$appName $appVersion · ${Platform.operatingSystem}',
       if (phase != null) translateUi(context, phase),
       _diagnosticReason(translateUi(context, state.error!)),
-      for (final component in Component.values)
+      for (final component in model.components.requiredComponents)
         _componentDiagnostic(context, state, component),
     ];
     return lines.join('\n');
@@ -210,7 +216,10 @@ class _SetupWizardState extends State<_SetupWizard> {
               : () => showPobBridgeSetup(
                   context,
                   model.pobWindow,
-                  model.components.active[Component.mcp]!,
+                  model.components.active[model.components.engineExecutable ==
+                          null
+                      ? Component.mcp
+                      : Component.pob]!,
                 ),
           child: const AppText('Настроить мост PoB'),
         ),

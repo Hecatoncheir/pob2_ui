@@ -16,10 +16,11 @@ typedef ProgressionComparisonSource = ({
 });
 
 class ProgressionComparisonSession {
-  ProgressionComparisonSession(this.readSource);
+  ProgressionComparisonSession(this.readSource, {McpClient? engine})
+    : _engine = engine ?? McpClient();
 
   final Future<ProgressionComparisonSource> Function() readSource;
-  final _engine = McpClient();
+  final McpClient _engine;
   late final _catalog = GameCatalogRepository(_engine);
   late final _equipment = EquipmentRepository(_engine);
 

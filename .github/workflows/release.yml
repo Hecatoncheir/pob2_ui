@@ -119,6 +119,7 @@ jobs:
       RELEASE_TAG: ${{ needs.metadata.outputs.tag }}
       TARGET: ${{ matrix.target }}
       POB2_PACKAGED_ENGINE_VERSION: ${{ needs.metadata.outputs.engine }}
+      POB2_ENGINE_POB_GITHUB_TOKEN: ${{ github.token }}
     steps:
       - uses: actions/checkout@v7.0.1
         with:
@@ -150,4 +151,4 @@ jobs:
           PY
           runner=()
           if [[ "$RUNNER_OS" == Linux ]]; then runner=(xvfb-run -a); fi
-          "${runner[@]}" python tool/check_installer.py --target "$TARGET" --package "published/$installer"
+          "${runner[@]}" python tool/check_installer.py --target "$TARGET" --package "published/$installer" --build-check

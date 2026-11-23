@@ -89,7 +89,9 @@ class McpEditorCubit extends Cubit<McpEditorState> {
   int _revision = 0;
 
   bool get enabled => state.command != null;
-  bool get canEnable => model.components.active[Component.mcp] != null;
+  bool get canEnable => model.components.engineExecutable == null
+      ? model.components.active[Component.mcp] != null
+      : model.ready;
 
   Future<void> enable() async {
     if (enabled || state.busy || _closing) return;
@@ -202,6 +204,14 @@ class McpEditorCubit extends Cubit<McpEditorState> {
   }
 
   Future<String> _connectionCommand() async {
+    if (model.components.engineExecutable case final executable?) {
+      return _command([
+        executable,
+        'editor',
+        '--endpoint',
+        _gateway.endpoint.path,
+      ]);
+    }
     final mcp = model.components.active[Component.mcp]!;
     final process = ProcessService();
     final python = await process.runtimePython(mcp);
@@ -226,14 +236,13 @@ class McpEditorCubit extends Cubit<McpEditorState> {
         },
       },
     }) {
-      final invocation = [
-        command,
-        ...args.cast<String>(),
-      ].map(_quote).join(' ');
-      return 'codex mcp add pob2-editor -- $invocation';
+      return _command([command, ...args.cast<String>()]);
     }
     throw const FormatException();
   }
+
+  String _command(List<String> arguments) =>
+      'codex mcp add pob2-editor -- ${arguments.map(_quote).join(' ')}';
 
   String _quote(String argument) {
     if (Platform.isWindows) return "'${argument.replaceAll("'", "''")}'";

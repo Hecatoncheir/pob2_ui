@@ -435,6 +435,7 @@
     "mad247478cb": "Нет ответа Lua",
     "m0497e1e404": "Нет ответа MCP. Сессия закрыта; повторно импортируйте XML.",
     "m323494c6da": "Нет перевода — показываем оригинал",
+    "md6c5445cf8": "Нет предыдущей установки PoB",
     "m8a210e3e2e": "Нет соединения с общей сессией",
     "m443c49da2a": "Ниже",
     "m480fae1c4b": "Ничего не найдено",
@@ -556,6 +557,7 @@
     "mbcc0fdbe14": "Подавление урона чар",
     "mb66419affe": "Подготовить PoB II",
     "mc1b2f9e3a6": "Подготовка PoB II",
+    "m413fa4fd39": "Подготовка исходного Lua PoB через комплектный движок",
     "m52d7142d18": "Поддерживаются Windows x64, Linux x64 и macOS arm64",
     "m8ba2618d75": "Поддержки не найдены",
     "mc2fd54cfce": "Поддержки общие для умений этого слота",
@@ -855,6 +857,7 @@
     "m720408ab97": "Установите компоненты и подключите Lua",
     "m4d9acf3506": "Установите компоненты, чтобы открыть сборку и получить настоящий расчёт.",
     "mfdeaa71380": "Установить компоненты",
+    "m536db585fd": "Установками PoB управляет комплектный движок",
     "mfcb7c67f91": "Установлена актуальная версия",
     "m44150e69ff": "Установлена версия {p0}",
     "mff8616cb20": "Установлена: {p0}",
@@ -1815,7 +1818,10 @@
     "m8bfc4312d8": "PoB II window connection: {p0}",
     "m9d28683954": "The leveling plan has changed. Open it again.",
     "m4bd93e3298": "The server did not confirm the PoB II window connection.",
-    "m9fd15a00ec": "The build's engine binding is corrupted"
+    "m9fd15a00ec": "The build's engine binding is corrupted",
+    "md6c5445cf8": "No previous PoB installation",
+    "m413fa4fd39": "Preparing the original PoB Lua with the bundled engine",
+    "m536db585fd": "The bundled engine manages PoB installations"
   },
   "fr": {
     "m0c63e733f9": "Lua n'a pas renvoyé toutes les icônes",
@@ -2724,7 +2730,10 @@
     "m8bfc4312d8": "Connexion à la fenêtre PoB II : {p0}",
     "m9d28683954": "Le plan de progression a changé. Ouvrez-le à nouveau.",
     "m4bd93e3298": "Le serveur n’a pas confirmé la connexion à la fenêtre PoB II.",
-    "m9fd15a00ec": "L’association de ce build au moteur est endommagée"
+    "m9fd15a00ec": "L’association de ce build au moteur est endommagée",
+    "md6c5445cf8": "Aucune installation précédente de PoB",
+    "m413fa4fd39": "Préparation du Lua d’origine de PoB avec le moteur intégré",
+    "m536db585fd": "Le moteur intégré gère les installations de PoB"
   },
   "de": {
     "m0c63e733f9": "Lua hat nicht alle Symbole zurückgegeben",
@@ -3633,7 +3642,10 @@
     "m8bfc4312d8": "Verbindung zum PoB-II-Fenster: {p0}",
     "m9d28683954": "Der Levelplan wurde geändert. Öffne ihn erneut.",
     "m4bd93e3298": "Der Server hat die Verbindung zum PoB-II-Fenster nicht bestätigt.",
-    "m9fd15a00ec": "Die Zuordnung des Builds zur Engine ist beschädigt"
+    "m9fd15a00ec": "Die Zuordnung des Builds zur Engine ist beschädigt",
+    "md6c5445cf8": "Keine vorherige PoB-Installation",
+    "m413fa4fd39": "Originales PoB-Lua wird mit der integrierten Engine vorbereitet",
+    "m536db585fd": "Die integrierte Engine verwaltet die PoB-Installationen"
   },
   "es": {
     "m0c63e733f9": "Lua no devolvió todos los íconos",
@@ -4542,7 +4554,10 @@
     "m8bfc4312d8": "Conexión con la ventana de PoB II: {p0}",
     "m9d28683954": "El plan de progresión ha cambiado. Vuelve a abrirlo.",
     "m4bd93e3298": "El servidor no confirmó la conexión con la ventana de PoB II.",
-    "m9fd15a00ec": "El vínculo de la configuración con el motor está dañado"
+    "m9fd15a00ec": "El vínculo de la configuración con el motor está dañado",
+    "md6c5445cf8": "No hay una instalación anterior de PoB",
+    "m413fa4fd39": "Preparando el Lua original de PoB con el motor incluido",
+    "m536db585fd": "El motor incluido administra las instalaciones de PoB"
   },
   "pt_BR": {
     "m0c63e733f9": "Lua não retornou todos os ícones",
@@ -5451,7 +5466,10 @@
     "m8bfc4312d8": "Conexão com a janela do PoB II: {p0}",
     "m9d28683954": "O plano de progressão foi alterado. Abra-o novamente.",
     "m4bd93e3298": "O servidor não confirmou a conexão com a janela do PoB II.",
-    "m9fd15a00ec": "O vínculo da build com o motor está corrompido"
+    "m9fd15a00ec": "O vínculo da build com o motor está corrompido",
+    "md6c5445cf8": "Nenhuma instalação anterior do PoB",
+    "m413fa4fd39": "Preparando o Lua original do PoB com o motor incluído",
+    "m536db585fd": "O motor incluído gerencia as instalações do PoB"
   },
   "ja": {
     "m0c63e733f9": "Lua はすべてのアイコンを返しませんでした",
@@ -6360,7 +6378,10 @@
     "m8bfc4312d8": "PoB II のウィンドウ接続：{p0}",
     "m9d28683954": "レベル上げ計画が変更されました。開き直してください。",
     "m4bd93e3298": "サーバーが PoB II のウィンドウ接続を確認できませんでした。",
-    "m9fd15a00ec": "ビルドとエンジンの関連付けが破損しています"
+    "m9fd15a00ec": "ビルドとエンジンの関連付けが破損しています",
+    "md6c5445cf8": "以前の PoB インストールはありません",
+    "m413fa4fd39": "同梱エンジンで PoB のオリジナル Lua を準備しています",
+    "m536db585fd": "PoB のインストールは同梱エンジンが管理します"
   },
   "ko": {
     "m0c63e733f9": "Lua이 모든 아이콘을 반환하지 않았습니다.",
@@ -7269,7 +7290,10 @@
     "m8bfc4312d8": "PoB II 창 연결: {p0}",
     "m9d28683954": "레벨링 계획이 변경되었습니다. 다시 여세요.",
     "m4bd93e3298": "서버에서 PoB II 창 연결을 확인하지 못했습니다.",
-    "m9fd15a00ec": "빌드와 엔진의 연결 정보가 손상되었습니다"
+    "m9fd15a00ec": "빌드와 엔진의 연결 정보가 손상되었습니다",
+    "md6c5445cf8": "이전 PoB 설치가 없습니다",
+    "m413fa4fd39": "내장 엔진으로 원본 PoB Lua를 준비하는 중",
+    "m536db585fd": "내장 엔진이 PoB 설치를 관리합니다"
   },
   "th": {
     "m0c63e733f9": "Lua ไม่ได้ส่งคืนไอคอนทั้งหมด",
@@ -8178,7 +8202,10 @@
     "m8bfc4312d8": "การเชื่อมต่อกับหน้าต่าง PoB II: {p0}",
     "m9d28683954": "แผนเก็บเลเวลมีการเปลี่ยนแปลง โปรดเปิดใหม่",
     "m4bd93e3298": "เซิร์ฟเวอร์ไม่ได้ยืนยันการเชื่อมต่อกับหน้าต่าง PoB II",
-    "m9fd15a00ec": "ข้อมูลการเชื่อมโยงบิลด์กับเอนจินเสียหาย"
+    "m9fd15a00ec": "ข้อมูลการเชื่อมโยงบิลด์กับเอนจินเสียหาย",
+    "md6c5445cf8": "ไม่พบการติดตั้ง PoB เวอร์ชันก่อนหน้า",
+    "m413fa4fd39": "กำลังเตรียม Lua ต้นฉบับของ PoB ด้วยเอนจินที่มาพร้อมแอป",
+    "m536db585fd": "เอนจินที่มาพร้อมแอปจัดการการติดตั้ง PoB"
   },
   "zh_Hant": {
     "m0c63e733f9": "Lua 未傳回所有圖標",
@@ -9087,6 +9114,9 @@
     "m8bfc4312d8": "PoB II 視窗連線：{p0}",
     "m9d28683954": "升級計畫已變更，請重新開啟。",
     "m4bd93e3298": "伺服器未確認 PoB II 視窗連線。",
-    "m9fd15a00ec": "流派配置與引擎的關聯資料已損毀"
+    "m9fd15a00ec": "流派配置與引擎的關聯資料已損毀",
+    "md6c5445cf8": "沒有先前的 PoB 安裝",
+    "m413fa4fd39": "正在使用內附引擎準備 PoB 原始 Lua",
+    "m536db585fd": "PoB 安裝由內附引擎管理"
   }
 }

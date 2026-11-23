@@ -1500,6 +1500,9 @@ class AppLocalizationsDe extends AppLocalizations {
       'Der Originaltext wird angezeigt, wenn keine Übersetzung verfügbar ist';
 
   @override
+  String get md6c5445cf8 => 'Keine vorherige PoB-Installation';
+
+  @override
   String get m8a210e3e2e => 'Keine Verbindung zur freigegebenen Sitzung';
 
   @override
@@ -1889,6 +1892,10 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get mc1b2f9e3a6 => 'PoB II einrichten';
+
+  @override
+  String get m413fa4fd39 =>
+      'Originales PoB-Lua wird mit der integrierten Engine vorbereitet';
 
   @override
   String get m52d7142d18 =>
@@ -2881,6 +2888,10 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get mfdeaa71380 => 'Komponenten installieren';
+
+  @override
+  String get m536db585fd =>
+      'Die integrierte Engine verwaltet die PoB-Installationen';
 
   @override
   String get mfcb7c67f91 => 'Aktuelle Version installiert';

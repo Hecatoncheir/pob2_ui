@@ -41,6 +41,9 @@ class ComponentRepository {
   Installations active = {};
   static final _lockedRoots = <String>{};
 
+  List<Component> get requiredComponents => Component.values;
+  String? get engineExecutable => null;
+
   Map<Component, Release> availableReleases() => componentReleases();
 
   bool needsInstall(Component component, Release release) =>

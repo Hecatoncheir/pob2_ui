@@ -2433,6 +2433,11 @@
     "description": "Нет перевода — показываем оригинал",
     "placeholders": {}
   },
+  "md6c5445cf8": "No previous PoB installation",
+  "@md6c5445cf8": {
+    "description": "Нет предыдущей установки PoB",
+    "placeholders": {}
+  },
   "m8a210e3e2e": "No connection to shared session",
   "@m8a210e3e2e": {
     "description": "Нет соединения с общей сессией",
@@ -3070,6 +3075,11 @@
   "mc1b2f9e3a6": "Set up PoB II",
   "@mc1b2f9e3a6": {
     "description": "Подготовка PoB II",
+    "placeholders": {}
+  },
+  "m413fa4fd39": "Preparing the original PoB Lua with the bundled engine",
+  "@m413fa4fd39": {
+    "description": "Подготовка исходного Lua PoB через комплектный движок",
     "placeholders": {}
   },
   "m52d7142d18": "Windows x64, Linux x64 and macOS arm64 supported",
@@ -4684,6 +4694,11 @@
   "mfdeaa71380": "Install components",
   "@mfdeaa71380": {
     "description": "Установить компоненты",
+    "placeholders": {}
+  },
+  "m536db585fd": "The bundled engine manages PoB installations",
+  "@m536db585fd": {
+    "description": "Установками PoB управляет комплектный движок",
     "placeholders": {}
   },
   "mfcb7c67f91": "Current version installed",

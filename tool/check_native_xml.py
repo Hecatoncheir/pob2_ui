@@ -13,16 +13,7 @@ import time
 import xml.etree.ElementTree as ET
 
 from check_installer import FIXTURES, ROOT, prepare_profile, run_build_check
-
-
-def wait_for(read, message, timeout=45):
-    deadline = time.monotonic() + timeout
-    while time.monotonic() < deadline:
-        value = read()
-        if value:
-            return value
-        time.sleep(.1)
-    raise RuntimeError(message)
+from check_profile import remove_native_profile, stop_profile_engine, wait_for
 
 
 class WindowsUi:
@@ -296,37 +287,6 @@ def allocation(file):
     spec = specs[int(root.find('Tree').get('activeSpec', '1')) - 1]
     return {name: set((spec if name == 'nodes' else spec.find(name)).get('nodes', '').split(','))
             for name in ('nodes', 'WeaponSet1', 'WeaponSet2')}
-
-
-def stop_profile_engine(binary, root, environment):
-    runtime = root / 'engine-run'
-    record = runtime / 'pob2-engine' / 'pob2-ui' / 'connection.json'
-    if not record.is_file():
-        return
-    engine = binary.with_name('pob2-engine.exe' if sys.platform == 'win32' else 'pob2-engine')
-    command = [
-        str(engine), 'shutdown', '--profile', 'pob2-ui',
-        '--runtime-dir', str(runtime), '--data-dir', str(root / 'engine-data'),
-        '--timeout', '15s',
-    ]
-    result = subprocess.run(command, env=environment, capture_output=True, text=True, timeout=20)
-    if result.returncode and record.is_file():
-        raise RuntimeError('Не удалось остановить движок проверяемого профиля: ' + result.stderr.strip())
-    wait_for(lambda: not record.exists(), 'Движок проверяемого профиля не завершился', timeout=30)
-
-
-def remove_native_profile(temporary):
-    def remove():
-        try:
-            temporary.cleanup()
-        except PermissionError as error:
-            # Windows может держать журнал открытым после снятия записи подключения.
-            if getattr(error, 'winerror', None) not in (32, 33):
-                raise
-            return False
-        return True
-
-    wait_for(remove, 'Файлы проверяемого профиля остались заблокированы', timeout=30)
 
 
 def check(binary, components):
