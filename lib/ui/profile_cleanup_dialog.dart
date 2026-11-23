@@ -52,7 +52,7 @@ class _CleanupCubit extends Cubit<_CleanupState> {
 
   Future<void> scan() async {
     try {
-      final entries = await model.components.profileCleanup.preview();
+      final entries = await model.previewProfileCleanup();
       if (!isClosed) emit(_Selection(entries, Set.unmodifiable(entries)));
     } catch (_) {
       if (!isClosed) emit(const _Failed('Не удалось проверить профиль.'));

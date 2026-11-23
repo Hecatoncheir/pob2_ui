@@ -1867,6 +1867,12 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     if (closePob) await pobWindow.closeLaunchedWindows();
   });
 
+  Future<List<CleanupEntry>> previewProfileCleanup() async {
+    // Загрузка текстур меняет состав и размер кеша, пока строится список.
+    await waitForTreeArtwork();
+    return components.profileCleanup.preview();
+  }
+
   Future<CleanupResult> cleanProfile(Set<CleanupEntry> selected) async {
     late CleanupResult result;
     await _protectExit(() async {

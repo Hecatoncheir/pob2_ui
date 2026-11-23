@@ -9,6 +9,8 @@ import 'package:pob2_ui/data/installation_store.dart';
 import 'package:pob2_ui/data/mcp_client.dart';
 import 'package:pob2_ui/data/pob_build_document.dart';
 import 'package:pob2_ui/data/pob_build_library.dart';
+import 'package:pob2_ui/data/profile_cleanup.dart';
+import 'package:pob2_ui/data/profile_use.dart';
 import 'package:pob2_ui/domain/build_report.dart';
 import 'package:pob2_ui/domain/component.dart';
 import 'package:pob2_ui/ui/workshop_cubit.dart';
@@ -42,7 +44,16 @@ List<String> _tags(Installations pair) => [
 ];
 
 class _ComponentUpdates extends ComponentRepository {
-  _ComponentUpdates(InstallationStore store) : super(store: store);
+  _ComponentUpdates(InstallationStore store, {super.profileUse})
+    : super(store: store);
+
+  int cleanupScans = 0;
+
+  @override
+  ProfileCleanup get profileCleanup {
+    cleanupScans++;
+    return super.profileCleanup;
+  }
 
   @override
   Map<Component, Release> availableReleases() => {
@@ -308,6 +319,48 @@ void main() {
       expect(slow.textures, ['1' * 64, '3' * 64, '4' * 64]);
     },
   );
+
+  test('Предпросмотр очистки ждёт записи кеша дерева', () async {
+    final use = await ProfileUse.open(root);
+    if (use == null) fail('Не удалось открыть профиль');
+    components = _ComponentUpdates(components.store, profileUse: use);
+    final slow = _SlowArtworkEngine();
+    working = slow;
+    final model = await openWorkshop([]);
+    final source = Component.values
+        .map((component) => components.active[component]!.commit)
+        .join('-');
+    final cache = Directory.fromUri(
+      root.uri.resolve('tree-cache/$source/0_5/'),
+    );
+    await cache.create(recursive: true);
+    await File.fromUri(cache.uri.resolve('${'9' * 64}.png'))
+        .writeAsString('cache');
+    final old = await components.profileCleanup.preview();
+    const limit = Duration(seconds: 5);
+    try {
+      slow.tools = {...slow.tools, 'pob_tree_textures'};
+      await model.createMcpBuild({'name': 'Первая', 'classId': 1, 'level': 1});
+      await slow.started.future.timeout(limit);
+      final scans = components.cleanupScans;
+      final pending = model.previewProfileCleanup();
+      expect(components.cleanupScans, scans);
+      slow.release.complete();
+      final fresh = await pending.timeout(limit);
+      expect(fresh.single.bytes, greaterThan(old.single.bytes));
+      final changed = await model.cleanProfile(old.toSet());
+      expect(
+        changed.skipped[old.single.relativePath],
+        'Файл или папка изменились после предпросмотра.',
+      );
+      final result = await model.cleanProfile(fresh.toSet());
+      expect(result.skipped, isEmpty);
+      expect(result.bytes, fresh.single.bytes);
+      expect(await cache.exists(), isFalse);
+    } finally {
+      if (!slow.release.isCompleted) slow.release.complete();
+    }
+  });
 
   test('Отказ кандидата оставляет открытый XML, движок и историю', () async {
     final started = Completer<void>();

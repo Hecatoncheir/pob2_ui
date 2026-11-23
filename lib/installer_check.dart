@@ -128,7 +128,7 @@ Future<void> _cleanAndRollback(
   _require(!path.equals(original, rollback), model);
   _checkWitch(model);
   final obsolete = path.join('versions', 'pob-obsolete');
-  final entries = await repository.profileCleanup.preview();
+  final entries = await model.previewProfileCleanup();
   _require(entries.any((entry) => entry.relativePath == obsolete), model);
   _require(
     entries.any(
@@ -137,7 +137,10 @@ Future<void> _cleanAndRollback(
     model,
   );
   final result = await model.cleanProfile(entries.toSet());
-  _require(result.skipped.isEmpty && result.bytes > 0, model);
+  if (result.skipped.isNotEmpty) {
+    throw StateError('Не удалось очистить профиль: ${result.skipped}');
+  }
+  _require(result.bytes > 0, model);
   _require(!await Directory(path.join(root.path, obsolete)).exists(), model);
   _checkWitch(model);
   progress.record('profile-cleaned');
