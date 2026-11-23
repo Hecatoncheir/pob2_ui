@@ -51,6 +51,12 @@ typedef WorkshopTreeOffer = ({
   int bindingEpoch,
 });
 
+typedef WorkshopJewelOffer = ({
+  EngineJewelOffer offer,
+  int inputRevision,
+  int bindingEpoch,
+});
+
 const _missingEngineXml = 'В общей сессии нет XML сборки';
 const _staleTree = 'Выполните предпросмотр для текущей ревизии';
 const _staleCondition = 'Сборка изменилась. Откройте условие заново.';
@@ -1740,13 +1746,47 @@ class WorkshopCubit extends Cubit<WorkshopState> {
         : state.treeMode;
   }
 
-  bool isCurrentSharedTreeOffer(WorkshopTreeOffer preview) {
+  bool _isCurrentEngineInput(int epoch, int inputRevision) {
     final binding = _engineXmlBinding;
-    return preview.bindingEpoch == _engineBindingEpoch &&
-        preview.inputRevision == binding?.inputRevision &&
-        state.library.active?.revision == binding?.libraryRevision &&
-        engineSession.isCurrentTreeOffer(preview.offer);
+    return epoch == _engineBindingEpoch &&
+        inputRevision == binding?.inputRevision &&
+        state.library.active?.revision == binding?.libraryRevision;
   }
+
+  bool isCurrentSharedTreeOffer(WorkshopTreeOffer preview) =>
+      _isCurrentEngineInput(preview.bindingEpoch, preview.inputRevision) &&
+      engineSession.isCurrentTreeOffer(preview.offer);
+
+  bool get canEditSharedJewel =>
+      hasSharedTree && engineSession.supportsTreeJewels;
+
+  Future<WorkshopJewelOffer> previewSharedJewel(EngineJewelEdit edit) async {
+    final epoch = _engineBindingEpoch;
+    final (:snapshot, :binding) = _engineEditSource(
+      _engineXmlBinding?.inputRevision,
+      epoch,
+      _staleTree,
+    );
+    await _checkEngineFile(binding);
+    final offer = await engineSession.previewJewel(snapshot, edit);
+    return (
+      offer: offer,
+      inputRevision: binding.inputRevision,
+      bindingEpoch: epoch,
+    );
+  }
+
+  bool isCurrentSharedJewelOffer(WorkshopJewelOffer preview) =>
+      _isCurrentEngineInput(preview.bindingEpoch, preview.inputRevision) &&
+      engineSession.isCurrentJewelOffer(preview.offer);
+
+  Future<BuildEditResult> applySharedJewel(WorkshopJewelOffer preview) =>
+      _applyEngineEdit(
+        expectedInput: preview.inputRevision,
+        epoch: preview.bindingEpoch,
+        staleMessage: _staleTree,
+        apply: (_) => engineSession.editJewel(preview.offer),
+      );
 
   Future<BuildEditResult> applySharedTreeNode(WorkshopTreeOffer preview) =>
       _applyEngineEdit(

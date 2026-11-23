@@ -170,6 +170,15 @@ void main() {
         : 'Для проверки гнёзд укажите POB2_ENGINE_TEST_SOCKETS=1 и новый движок',
     timeout: const Timeout(Duration(minutes: 2)),
   );
+  test(
+    'Общая мастерская устанавливает и снимает самоцвет',
+    () => _checkSharedJewel(executable!),
+    skip:
+        canUseWorkshop && Platform.environment['POB2_ENGINE_TEST_JEWELS'] == '1'
+        ? false
+        : 'Для проверки самоцветов укажите POB2_ENGINE_TEST_JEWELS=1 и новый движок',
+    timeout: const Timeout(Duration(minutes: 2)),
+  );
 }
 
 Future<void> _checkSharedCondition(String executable) async {
@@ -322,6 +331,109 @@ Future<void> _checkSharedSocket(String executable) async {
     await _cliBuildXml(executable, opened.flags),
     await opened.file.readAsString(),
   );
+}
+
+const _jewelNode = 61419;
+const _rubyText =
+    'Rarity: RARE\nReference Ruby\nRuby\n--------\n+17% to Fire Resistance';
+
+Future<void> _checkSharedJewel(String executable) async {
+  final opened = await _startWorkshop(executable, 'witch_fireball');
+  final model = opened.model;
+  expect(model.canEditSharedJewel, isTrue);
+  final mcp = EngineMcpPeer(
+    await Process.start(executable, [
+      'mcp',
+      '--attach',
+      'main',
+      ...opened.flags,
+    ]),
+  );
+  addTearDown(mcp.close);
+  await mcp.initialize();
+  await _applyWorkshopTree(
+    opened,
+    mcp,
+    await model.previewSharedTreeNode(_jewelNode),
+    allocated: true,
+  );
+  final fireResist = model.state.report!.stats['FireResist'] as num;
+  const edit = (nodeId: _jewelNode, itemId: 0, raw: _rubyText);
+  await _rejectStaleJewelPreview(opened, mcp, edit);
+  final installed = await _applyWorkshopJewel(opened, mcp, edit);
+  final id = model.state.report!.socketedItems[_jewelNode]!['id'] as int;
+  final count = model.state.report!.items.length;
+  expect(model.state.report!.stats['FireResist'], fireResist + 17);
+  await _applyWorkshopJewel(opened, mcp, (
+    nodeId: _jewelNode,
+    itemId: 0,
+    raw: '',
+  ));
+  expect(model.state.report!.socketedItems[_jewelNode], isNull);
+  expect(model.state.report!.items.length, count);
+  expect(model.state.report!.stats['FireResist'], fireResist);
+  final restored = await _applyWorkshopJewel(opened, mcp, (
+    nodeId: _jewelNode,
+    itemId: id,
+    raw: '',
+  ));
+  expect(restored, installed);
+  expect(model.state.report!.socketedItems[_jewelNode]?['id'], id);
+  expect(model.state.report!.items.length, count);
+  expect(await _cliBuildXml(executable, opened.flags), restored);
+}
+
+Future<void> _rejectStaleJewelPreview(
+  _SharedWorkshop opened,
+  EngineMcpPeer mcp,
+  EngineJewelEdit edit,
+) async {
+  final model = opened.model;
+  final before = await mcp.call('export_build');
+  final old = await model.previewSharedJewel(edit);
+  final seen = model.stream.firstWhere(
+    (state) => !state.busy && state.report?.config['enemyLevel'] == 68,
+  );
+  await mcp.call('edit_build', {
+    'expected_revision': before['revision'],
+    'request_id': 'jewel-outdated',
+    'edit': {
+      'config': {
+        'name': 'enemyLevel',
+        'value': {'type': 'number', 'value': '68'},
+      },
+    },
+  });
+  await seen.timeout(const Duration(seconds: 25));
+  final latest = await mcp.call('export_build');
+  expect(model.isCurrentSharedJewelOffer(old), isFalse);
+  expect((await model.applySharedJewel(old)).committed, isFalse);
+  expect(await mcp.call('export_build'), latest);
+}
+
+Future<String> _applyWorkshopJewel(
+  _SharedWorkshop opened,
+  EngineMcpPeer mcp,
+  EngineJewelEdit edit,
+) async {
+  final (:model, :file, options: _, flags: _) = opened;
+  final before = await mcp.call('export_build');
+  final preview = await model.previewSharedJewel(edit);
+  expect(await mcp.call('export_build'), before);
+  expect(await file.readAsString(), before['xml']);
+  final result = await model.applySharedJewel(preview);
+  expect(result.committed, isTrue, reason: result.error);
+  final exported = await mcp.call('export_build');
+  expect(exported['revision'], preview.offer.preview.revision + 1);
+  final saved = await file.readAsString();
+  expect(saved, exported['xml']);
+  expect(
+    model.state.document!.tree!.nodes
+        .singleWhere((node) => node.id == _jewelNode)
+        .allocated,
+    isTrue,
+  );
+  return saved;
 }
 
 Future<void> _rejectStaleTreePreview(

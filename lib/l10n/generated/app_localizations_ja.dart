@@ -2249,6 +2249,9 @@ class AppLocalizationsJa extends AppLocalizations {
   }
 
   @override
+  String get mc3da8e80c2 => 'ジュエル';
+
+  @override
   String get m49db3482db => 'ジュエル';
 
   @override

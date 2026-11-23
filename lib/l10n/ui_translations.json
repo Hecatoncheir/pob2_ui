@@ -690,6 +690,7 @@
     "m9c7a204d54": "Руны",
     "maa7d8fe68c": "С каким этапом сравнить?",
     "m389de358a7": "Сайт {p0} не ответил вовремя.",
+    "mc3da8e80c2": "Самоцвет",
     "m49db3482db": "Самоцветы",
     "m8c39bb691b": "Сборка",
     "m15d7545f05": "Сборка PoB больше недоступна. Обновите список сборок.",
@@ -1797,7 +1798,8 @@
     "m6ea0e6ef03": "Replace the open build with the session snapshot",
     "m5cab61bd8f": "The build has changed. Reopen the condition editor.",
     "m0ae0be6b7f": "The build file has changed. Check both versions before reconnecting.",
-    "mbeaac9e727": "Update the engine to edit jewel sockets."
+    "mbeaac9e727": "Update the engine to edit jewel sockets.",
+    "mc3da8e80c2": "Jewel"
   },
   "fr": {
     "m0c63e733f9": "Lua n'a pas renvoyé toutes les icônes",
@@ -2697,7 +2699,8 @@
     "m6ea0e6ef03": "Remplacer le build ouvert par celui de la session",
     "m5cab61bd8f": "Le build a changé. Rouvrez l’éditeur de conditions.",
     "m0ae0be6b7f": "Le fichier du build a changé. Vérifiez les deux versions avant de vous reconnecter.",
-    "mbeaac9e727": "Mettez le moteur à jour pour modifier les châsses de joyaux."
+    "mbeaac9e727": "Mettez le moteur à jour pour modifier les châsses de joyaux.",
+    "mc3da8e80c2": "Joyau"
   },
   "de": {
     "m0c63e733f9": "Lua hat nicht alle Symbole zurückgegeben",
@@ -3597,7 +3600,8 @@
     "m6ea0e6ef03": "Offenen Build durch den Stand der Sitzung ersetzen",
     "m5cab61bd8f": "Der Build wurde geändert. Öffnen Sie den Bedingungseditor erneut.",
     "m0ae0be6b7f": "Die Build-Datei wurde geändert. Prüfen Sie beide Versionen, bevor Sie sich erneut verbinden.",
-    "mbeaac9e727": "Aktualisieren Sie die Engine, um Juwelenfassungen zu bearbeiten."
+    "mbeaac9e727": "Aktualisieren Sie die Engine, um Juwelenfassungen zu bearbeiten.",
+    "mc3da8e80c2": "Juwel"
   },
   "es": {
     "m0c63e733f9": "Lua no devolvió todos los íconos",
@@ -4497,7 +4501,8 @@
     "m6ea0e6ef03": "Reemplazar la configuración abierta por la de la sesión",
     "m5cab61bd8f": "La configuración cambió. Vuelve a abrir el editor de condiciones.",
     "m0ae0be6b7f": "El archivo de la configuración cambió. Revisa ambas versiones antes de volver a conectar.",
-    "mbeaac9e727": "Actualiza el motor para editar los engarces de joyas."
+    "mbeaac9e727": "Actualiza el motor para editar los engarces de joyas.",
+    "mc3da8e80c2": "Joya"
   },
   "pt_BR": {
     "m0c63e733f9": "Lua não retornou todos os ícones",
@@ -5397,7 +5402,8 @@
     "m6ea0e6ef03": "Substituir a build aberta pelo estado da sessão",
     "m5cab61bd8f": "A build mudou. Abra novamente o editor de condições.",
     "m0ae0be6b7f": "O arquivo da build mudou. Confira as duas versões antes de reconectar.",
-    "mbeaac9e727": "Atualize o motor para editar encaixes de joias."
+    "mbeaac9e727": "Atualize o motor para editar encaixes de joias.",
+    "mc3da8e80c2": "Joia"
   },
   "ja": {
     "m0c63e733f9": "Lua はすべてのアイコンを返しませんでした",
@@ -6297,7 +6303,8 @@
     "m6ea0e6ef03": "開いているビルドをセッションの状態に置き換える",
     "m5cab61bd8f": "ビルドが変更されました。条件エディターを開き直してください。",
     "m0ae0be6b7f": "ビルドファイルが変更されました。再接続する前に両方のバージョンを確認してください。",
-    "mbeaac9e727": "ジュエルソケットを編集するには、エンジンを更新してください。"
+    "mbeaac9e727": "ジュエルソケットを編集するには、エンジンを更新してください。",
+    "mc3da8e80c2": "ジュエル"
   },
   "ko": {
     "m0c63e733f9": "Lua이 모든 아이콘을 반환하지 않았습니다.",
@@ -7197,7 +7204,8 @@
     "m6ea0e6ef03": "열린 빌드를 세션 스냅샷으로 교체",
     "m5cab61bd8f": "빌드가 변경되었습니다. 조건 편집기를 다시 여세요.",
     "m0ae0be6b7f": "빌드 파일이 변경되었습니다. 다시 연결하기 전에 두 버전을 확인하세요.",
-    "mbeaac9e727": "주얼 소켓을 편집하려면 엔진을 업데이트하세요."
+    "mbeaac9e727": "주얼 소켓을 편집하려면 엔진을 업데이트하세요.",
+    "mc3da8e80c2": "주얼"
   },
   "th": {
     "m0c63e733f9": "Lua ไม่ได้ส่งคืนไอคอนทั้งหมด",
@@ -8097,7 +8105,8 @@
     "m6ea0e6ef03": "แทนที่บิลด์ที่เปิดอยู่ด้วยสแนปช็อตของเซสชัน",
     "m5cab61bd8f": "บิลด์มีการเปลี่ยนแปลง โปรดเปิดตัวแก้ไขเงื่อนไขอีกครั้ง",
     "m0ae0be6b7f": "ไฟล์บิลด์มีการเปลี่ยนแปลง โปรดตรวจสอบทั้งสองเวอร์ชันก่อนเชื่อมต่อใหม่",
-    "mbeaac9e727": "อัปเดตเอนจินเพื่อแก้ไขช่องใส่จิวเวล"
+    "mbeaac9e727": "อัปเดตเอนจินเพื่อแก้ไขช่องใส่จิวเวล",
+    "mc3da8e80c2": "จิวเวล"
   },
   "zh_Hant": {
     "m0c63e733f9": "Lua 未傳回所有圖標",
@@ -8997,6 +9006,7 @@
     "m6ea0e6ef03": "以工作階段快照取代已開啟的流派配置",
     "m5cab61bd8f": "流派配置已變更。請重新開啟條件編輯器。",
     "m0ae0be6b7f": "流派配置檔案已變更。重新連線前請檢查兩個版本。",
-    "mbeaac9e727": "請更新引擎以編輯珠寶插槽。"
+    "mbeaac9e727": "請更新引擎以編輯珠寶插槽。",
+    "mc3da8e80c2": "珠寶"
   }
 }

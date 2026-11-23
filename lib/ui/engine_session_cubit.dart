@@ -37,6 +37,13 @@ typedef EngineEquipmentOffer = ({
   EngineEquipmentPreview preview,
 });
 
+typedef EngineJewelOffer = ({
+  String sessionId,
+  int connectionId,
+  EngineJewelEdit edit,
+  EngineBuildComparison preview,
+});
+
 typedef EngineTreeOffer = ({
   String sessionId,
   int connectionId,
@@ -320,6 +327,44 @@ class EngineSessionCubit extends Cubit<EngineSessionState> {
 
   bool get supportsTreeSockets =>
       state.connected && (_connection?.supportsTreeSockets ?? false);
+
+  bool get supportsTreeJewels =>
+      state.connected && (_connection?.supportsTreeJewels ?? false);
+
+  Future<EngineJewelOffer> previewJewel(
+    EngineSnapshot current,
+    EngineJewelEdit edit,
+  ) async {
+    final connectionId = _connectionId;
+    final preview = await _connectedTo(current).previewJewel(current, edit);
+    return (
+      sessionId: current.sessionId,
+      connectionId: connectionId,
+      edit: edit,
+      preview: preview,
+    );
+  }
+
+  bool isCurrentJewelOffer(EngineJewelOffer offer) =>
+      supportsTreeJewels &&
+      _isCurrentOffer(
+        offer.sessionId,
+        offer.connectionId,
+        offer.preview.revision,
+      );
+
+  Future<EngineSnapshot> editJewel(EngineJewelOffer offer) async {
+    if (!isCurrentJewelOffer(offer)) {
+      throw StateError('Выполните предпросмотр для текущей ревизии');
+    }
+    final snapshot = state.snapshot!;
+    try {
+      return await _connectedTo(snapshot)
+          .editJewel(snapshot, offer.edit, engineRequestId());
+    } on GrpcError catch (error) {
+      throw StateError(engineError(error));
+    }
+  }
 
   Future<EnginePassivePage> findPassives(
     EngineSnapshot current,

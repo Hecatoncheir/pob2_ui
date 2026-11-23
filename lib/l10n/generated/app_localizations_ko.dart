@@ -2249,6 +2249,9 @@ class AppLocalizationsKo extends AppLocalizations {
   }
 
   @override
+  String get mc3da8e80c2 => '주얼';
+
+  @override
   String get m49db3482db => '주얼';
 
   @override

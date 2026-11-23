@@ -40,6 +40,7 @@ import 'mcp_editor_cubit.dart';
 import 'core/language_scope.dart';
 import 'tree_progression_bloc.dart';
 import 'workshop_tree_preview_dialog.dart';
+import 'workshop_jewel_dialog.dart';
 
 typedef _ProgressionCanvasState = ({
   List<TreeProgressionStep> steps,
@@ -437,6 +438,7 @@ class _TreeViewState extends State<TreeView>
                 onExit: (_) => hoverModel.clear(),
                 child: GestureDetector(
                   onTapUp: _select,
+                  onSecondaryTapUp: (event) => _detailsAt(event.localPosition),
                   onLongPressStart: (event) => _detailsAt(event.localPosition),
                   child: InteractiveViewer(
                     key: const Key('passive-tree'),
@@ -967,6 +969,12 @@ class _NodeDialogState extends State<_NodeDialog> {
           ),
           actions: [
             const DialogCloseButton(label: 'Закрыть'),
+            if (_canEditJewel)
+              TextButton(
+                key: const Key('tree-open-jewel'),
+                onPressed: _editJewel,
+                child: const AppText('Самоцвет'),
+              ),
             if (widget.node.allocated &&
                 snapshot.data?.attributes.isNotEmpty == true)
               TextButton(
@@ -1013,6 +1021,20 @@ class _NodeDialogState extends State<_NodeDialog> {
           ),
       ],
     );
+  }
+
+  bool get _canEditJewel =>
+      widget.node.allocated &&
+      widget.node.kind == 'Socket' &&
+      widget.model.canEditSharedJewel;
+
+  Future<void> _editJewel() async {
+    final applied = await showWorkshopJewelDialog(
+      context,
+      widget.model,
+      widget.node,
+    );
+    if (mounted && applied == true) Navigator.pop(context);
   }
 
   bool _canApply(List<JsonMap> attributes) =>

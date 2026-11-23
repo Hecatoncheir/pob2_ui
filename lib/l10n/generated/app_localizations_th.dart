@@ -2265,6 +2265,9 @@ class AppLocalizationsTh extends AppLocalizations {
   }
 
   @override
+  String get mc3da8e80c2 => 'จิวเวล';
+
+  @override
   String get m49db3482db => 'จิวเวล';
 
   @override

@@ -2303,6 +2303,9 @@ class AppLocalizationsPt extends AppLocalizations {
   }
 
   @override
+  String get mc3da8e80c2 => 'Joia';
+
+  @override
   String get m49db3482db => 'Joias';
 
   @override
@@ -5283,6 +5286,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String m389de358a7(String p0) {
     return 'O site $p0 não respondeu a tempo.';
   }
+
+  @override
+  String get mc3da8e80c2 => 'Joia';
 
   @override
   String get m49db3482db => 'Joias';

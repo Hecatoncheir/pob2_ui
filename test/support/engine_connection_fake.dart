@@ -92,6 +92,22 @@ class FakeEngineConnection implements EngineConnection {
   bool get supportsTreeSockets => false;
 
   @override
+  bool get supportsTreeJewels => false;
+
+  @override
+  Future<EngineBuildComparison> previewJewel(
+    EngineSnapshot current,
+    EngineJewelEdit edit,
+  ) => throw UnimplementedError();
+
+  @override
+  Future<EngineSnapshot> editJewel(
+    EngineSnapshot current,
+    EngineJewelEdit edit,
+    String requestId,
+  ) => throw UnimplementedError();
+
+  @override
   Future<EnginePassivePage> findPassives(
     String version,
     String query,

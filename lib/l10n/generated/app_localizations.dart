@@ -4260,6 +4260,12 @@ abstract class AppLocalizations {
   /// **'The {p0} site did not respond on time.'**
   String m389de358a7(String p0);
 
+  /// Самоцвет
+  ///
+  /// In en, this message translates to:
+  /// **'Jewel'**
+  String get mc3da8e80c2;
+
   /// Самоцветы
   ///
   /// In en, this message translates to:

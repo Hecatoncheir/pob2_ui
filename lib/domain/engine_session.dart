@@ -69,6 +69,7 @@ typedef EngineStatDelta = ({
 });
 
 typedef EngineEquipmentEdit = ({String slot, String raw});
+typedef EngineJewelEdit = ({int nodeId, int itemId, String raw});
 typedef EngineEquipmentPreview = EngineBuildComparison;
 typedef EngineBuildComparison = ({
   int revision,
@@ -103,6 +104,7 @@ typedef EngineTree = ({
   Set<int> nodes,
   Map<int, EnginePassiveAttribute> attributes,
   Map<int, TreeAllocationMode> allocations,
+  Map<int, int> jewels,
   int weaponSet,
 });
 typedef EnginePassive = ({int id, String name, bool attributeChoice});

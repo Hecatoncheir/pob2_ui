@@ -48,6 +48,16 @@ abstract interface class EngineConnection {
   bool get supportsTreeAttributes;
   bool get supportsTreeAllocationModes;
   bool get supportsTreeSockets;
+  bool get supportsTreeJewels;
+  Future<EngineBuildComparison> previewJewel(
+    EngineSnapshot current,
+    EngineJewelEdit edit,
+  );
+  Future<EngineSnapshot> editJewel(
+    EngineSnapshot current,
+    EngineJewelEdit edit,
+    String requestId,
+  );
   Future<EnginePassivePage> findPassives(
     String version,
     String query,
@@ -99,6 +109,7 @@ class EngineSessionClient implements EngineConnection {
     this.supportsTreeAttributes,
     this.supportsTreeAllocationModes,
     this.supportsTreeSockets,
+    this.supportsTreeJewels,
   );
   final Process _helper;
   final StreamSubscription<String> _output;
@@ -117,6 +128,8 @@ class EngineSessionClient implements EngineConnection {
   final bool supportsTreeAllocationModes;
   @override
   final bool supportsTreeSockets;
+  @override
+  final bool supportsTreeJewels;
   bool _closed = false;
 
   static Future<EngineConnection> open(EngineOptions options) async {
@@ -195,6 +208,7 @@ class EngineSessionClient implements EngineConnection {
         info.capabilities.contains('build.tree_attributes'),
         info.capabilities.contains('build.tree_allocation_modes'),
         info.capabilities.contains('build.tree_sockets'),
+        info.capabilities.contains('build.tree_jewels'),
       );
     } catch (_) {
       await channel?.terminate();
@@ -288,6 +302,7 @@ class EngineSessionClient implements EngineConnection {
       spec: model.activeSets.tree,
       version: model.treeVersion,
       nodes: Set.unmodifiable(model.nodes),
+      jewels: Map.unmodifiable(model.passiveJewels),
       allocations: Map.unmodifiable({
         for (final entry in model.passiveAllocations.entries)
           if (TreeAllocationMode.fromWire(entry.value) case final mode?)
@@ -484,6 +499,30 @@ class EngineSessionClient implements EngineConnection {
     return _buildComparison(result);
   }
 
+  @override
+  Future<EngineBuildComparison> previewJewel(
+    EngineSnapshot current,
+    EngineJewelEdit edit,
+  ) async => _buildComparison(await _compareEdit(current, _jewelChange(edit)));
+
+  @override
+  Future<EngineSnapshot> editJewel(
+    EngineSnapshot current,
+    EngineJewelEdit edit,
+    String requestId,
+  ) async => _snapshot(
+    (await _applyEdit(current, _jewelChange(edit), requestId)).snapshot,
+  );
+
+  static builds.BuildEdit _jewelChange(EngineJewelEdit edit) =>
+      builds.BuildEdit(
+        jewel: builds.JewelEdit(
+          nodeId: edit.nodeId,
+          itemId: edit.itemId,
+          raw: edit.raw,
+        ),
+      );
+
   Future<pb.CompareBuildResponse> _compareEdit(
     EngineSnapshot current,
     builds.BuildEdit edit,
@@ -675,7 +714,7 @@ class EngineSessionClient implements EngineConnection {
       requestId: requestId,
       edit: edit,
     ),
-    options: edit.hasEquipment() || edit.hasTreeNode()
+    options: edit.hasEquipment() || edit.hasTreeNode() || edit.hasJewel()
         ? _calculationTimeout
         : _timeout,
   );

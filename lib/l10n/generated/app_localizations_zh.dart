@@ -2242,6 +2242,9 @@ class AppLocalizationsZh extends AppLocalizations {
   }
 
   @override
+  String get mc3da8e80c2 => '珠寶';
+
+  @override
   String get m49db3482db => '珠寶';
 
   @override
@@ -5128,6 +5131,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String m389de358a7(String p0) {
     return '網站 $p0 未及時回應。';
   }
+
+  @override
+  String get mc3da8e80c2 => '珠寶';
 
   @override
   String get m49db3482db => '珠寶';

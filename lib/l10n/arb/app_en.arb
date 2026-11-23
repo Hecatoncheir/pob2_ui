@@ -3811,6 +3811,11 @@
       }
     }
   },
+  "mc3da8e80c2": "Jewel",
+  "@mc3da8e80c2": {
+    "description": "Самоцвет",
+    "placeholders": {}
+  },
   "m49db3482db": "Jewels",
   "@m49db3482db": {
     "description": "Самоцветы",
