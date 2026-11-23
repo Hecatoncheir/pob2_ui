@@ -111,6 +111,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     onSnapshot: _applyEngineSnapshot,
   );
   final EngineOptions? _primaryEngine;
+  Future<void>? _initialization;
   Future<void>? _primaryOpening;
   EngineBindingKey? _primaryAttempt;
   bool _managedEngine = false;
@@ -1043,7 +1044,12 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     }
   }
 
-  Future<void> initialize() => _run(() async {
+  Future<void> initialize() =>
+      _initialization ??= _run(_loadWorkspace).whenComplete(() {
+        _initialization = null;
+      });
+
+  Future<void> _loadWorkspace() async {
     await components.load();
     final builds = await _loadLibrary();
     final saved = !builds.skipSessionRecovery && await session.exists();
@@ -1059,7 +1065,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
       ),
     );
     await _resume();
-  });
+  }
 
   Future<LibraryState> _loadLibrary() async {
     try {
@@ -3083,12 +3089,18 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     addLog('$error');
   }
 
-  Future<void> checkpoint({bool closePob = false}) => _protectExit(() async {
-    await session.saveDraft(state.draftXml);
-    await _flushText();
-    await _checkpointBuild();
-    if (closePob) await pobWindow.closeLaunchedWindows();
-  });
+  Future<void> checkpoint({bool closePob = false}) async {
+    if (_initialization case final initialization?) {
+      await initialization;
+      if (state.error case final error?) throw StateError(error);
+    }
+    await _protectExit(() async {
+      await session.saveDraft(state.draftXml);
+      await _flushText();
+      await _checkpointBuild();
+      if (closePob) await pobWindow.closeLaunchedWindows();
+    });
+  }
 
   Future<List<CleanupEntry>> previewProfileCleanup() async {
     // Загрузка текстур меняет состав и размер кеша, пока строится список.
