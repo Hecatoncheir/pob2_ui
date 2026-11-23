@@ -1860,6 +1860,10 @@ class AppLocalizationsDe extends AppLocalizations {
   String get mfd0560ebbf => 'Standard';
 
   @override
+  String get m9fd15a00ec =>
+      'Die Zuordnung des Builds zur Engine ist beschädigt';
+
+  @override
   String get m5189135a61 => 'Erneut versuchen';
 
   @override

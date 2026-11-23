@@ -1861,6 +1861,10 @@ class AppLocalizationsFr extends AppLocalizations {
   String get mfd0560ebbf => 'Par défaut';
 
   @override
+  String get m9fd15a00ec =>
+      'L’association de ce build au moteur est endommagée';
+
+  @override
   String get m5189135a61 => 'Réessayer';
 
   @override

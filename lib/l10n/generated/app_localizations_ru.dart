@@ -1816,6 +1816,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get mfd0560ebbf => 'По умолчанию';
 
   @override
+  String get m9fd15a00ec => 'Повреждена привязка сборки к движку';
+
+  @override
   String get m5189135a61 => 'Повторить';
 
   @override

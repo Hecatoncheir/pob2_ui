@@ -546,6 +546,7 @@
     "m9d28683954": "План прокачки изменился. Откройте его заново.",
     "m1474fac529": "Планы, предметы, варианты развития…",
     "mfd0560ebbf": "По умолчанию",
+    "m9fd15a00ec": "Повреждена привязка сборки к движку",
     "m5189135a61": "Повторить",
     "madb0c613d6": "Повторить действие",
     "m298e41327f": "Повторить загрузку",
@@ -1813,7 +1814,8 @@
     "me00429e1a8": "The notes have changed. Open them again.",
     "m8bfc4312d8": "PoB II window connection: {p0}",
     "m9d28683954": "The leveling plan has changed. Open it again.",
-    "m4bd93e3298": "The server did not confirm the PoB II window connection."
+    "m4bd93e3298": "The server did not confirm the PoB II window connection.",
+    "m9fd15a00ec": "The build's engine binding is corrupted"
   },
   "fr": {
     "m0c63e733f9": "Lua n'a pas renvoyé toutes les icônes",
@@ -2721,7 +2723,8 @@
     "me00429e1a8": "Les notes ont changé. Ouvrez-les à nouveau.",
     "m8bfc4312d8": "Connexion à la fenêtre PoB II : {p0}",
     "m9d28683954": "Le plan de progression a changé. Ouvrez-le à nouveau.",
-    "m4bd93e3298": "Le serveur n’a pas confirmé la connexion à la fenêtre PoB II."
+    "m4bd93e3298": "Le serveur n’a pas confirmé la connexion à la fenêtre PoB II.",
+    "m9fd15a00ec": "L’association de ce build au moteur est endommagée"
   },
   "de": {
     "m0c63e733f9": "Lua hat nicht alle Symbole zurückgegeben",
@@ -3629,7 +3632,8 @@
     "me00429e1a8": "Die Notizen wurden geändert. Öffne sie erneut.",
     "m8bfc4312d8": "Verbindung zum PoB-II-Fenster: {p0}",
     "m9d28683954": "Der Levelplan wurde geändert. Öffne ihn erneut.",
-    "m4bd93e3298": "Der Server hat die Verbindung zum PoB-II-Fenster nicht bestätigt."
+    "m4bd93e3298": "Der Server hat die Verbindung zum PoB-II-Fenster nicht bestätigt.",
+    "m9fd15a00ec": "Die Zuordnung des Builds zur Engine ist beschädigt"
   },
   "es": {
     "m0c63e733f9": "Lua no devolvió todos los íconos",
@@ -4537,7 +4541,8 @@
     "me00429e1a8": "Las notas han cambiado. Vuelve a abrirlas.",
     "m8bfc4312d8": "Conexión con la ventana de PoB II: {p0}",
     "m9d28683954": "El plan de progresión ha cambiado. Vuelve a abrirlo.",
-    "m4bd93e3298": "El servidor no confirmó la conexión con la ventana de PoB II."
+    "m4bd93e3298": "El servidor no confirmó la conexión con la ventana de PoB II.",
+    "m9fd15a00ec": "El vínculo de la configuración con el motor está dañado"
   },
   "pt_BR": {
     "m0c63e733f9": "Lua não retornou todos os ícones",
@@ -5445,7 +5450,8 @@
     "me00429e1a8": "As notas foram alteradas. Abra-as novamente.",
     "m8bfc4312d8": "Conexão com a janela do PoB II: {p0}",
     "m9d28683954": "O plano de progressão foi alterado. Abra-o novamente.",
-    "m4bd93e3298": "O servidor não confirmou a conexão com a janela do PoB II."
+    "m4bd93e3298": "O servidor não confirmou a conexão com a janela do PoB II.",
+    "m9fd15a00ec": "O vínculo da build com o motor está corrompido"
   },
   "ja": {
     "m0c63e733f9": "Lua はすべてのアイコンを返しませんでした",
@@ -6353,7 +6359,8 @@
     "me00429e1a8": "メモが変更されました。開き直してください。",
     "m8bfc4312d8": "PoB II のウィンドウ接続：{p0}",
     "m9d28683954": "レベル上げ計画が変更されました。開き直してください。",
-    "m4bd93e3298": "サーバーが PoB II のウィンドウ接続を確認できませんでした。"
+    "m4bd93e3298": "サーバーが PoB II のウィンドウ接続を確認できませんでした。",
+    "m9fd15a00ec": "ビルドとエンジンの関連付けが破損しています"
   },
   "ko": {
     "m0c63e733f9": "Lua이 모든 아이콘을 반환하지 않았습니다.",
@@ -7261,7 +7268,8 @@
     "me00429e1a8": "메모가 변경되었습니다. 다시 여세요.",
     "m8bfc4312d8": "PoB II 창 연결: {p0}",
     "m9d28683954": "레벨링 계획이 변경되었습니다. 다시 여세요.",
-    "m4bd93e3298": "서버에서 PoB II 창 연결을 확인하지 못했습니다."
+    "m4bd93e3298": "서버에서 PoB II 창 연결을 확인하지 못했습니다.",
+    "m9fd15a00ec": "빌드와 엔진의 연결 정보가 손상되었습니다"
   },
   "th": {
     "m0c63e733f9": "Lua ไม่ได้ส่งคืนไอคอนทั้งหมด",
@@ -8169,7 +8177,8 @@
     "me00429e1a8": "โน้ตมีการเปลี่ยนแปลง โปรดเปิดใหม่",
     "m8bfc4312d8": "การเชื่อมต่อกับหน้าต่าง PoB II: {p0}",
     "m9d28683954": "แผนเก็บเลเวลมีการเปลี่ยนแปลง โปรดเปิดใหม่",
-    "m4bd93e3298": "เซิร์ฟเวอร์ไม่ได้ยืนยันการเชื่อมต่อกับหน้าต่าง PoB II"
+    "m4bd93e3298": "เซิร์ฟเวอร์ไม่ได้ยืนยันการเชื่อมต่อกับหน้าต่าง PoB II",
+    "m9fd15a00ec": "ข้อมูลการเชื่อมโยงบิลด์กับเอนจินเสียหาย"
   },
   "zh_Hant": {
     "m0c63e733f9": "Lua 未傳回所有圖標",
@@ -9077,6 +9086,7 @@
     "me00429e1a8": "備註已變更，請重新開啟。",
     "m8bfc4312d8": "PoB II 視窗連線：{p0}",
     "m9d28683954": "升級計畫已變更，請重新開啟。",
-    "m4bd93e3298": "伺服器未確認 PoB II 視窗連線。"
+    "m4bd93e3298": "伺服器未確認 PoB II 視窗連線。",
+    "m9fd15a00ec": "流派配置與引擎的關聯資料已損毀"
   }
 }

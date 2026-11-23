@@ -1834,6 +1834,9 @@ class AppLocalizationsPt extends AppLocalizations {
   String get mfd0560ebbf => 'Padrão';
 
   @override
+  String get m9fd15a00ec => 'O vínculo da build com o motor está corrompido';
+
+  @override
   String get m5189135a61 => 'Tentar novamente';
 
   @override
@@ -4842,6 +4845,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get mfd0560ebbf => 'Padrão';
+
+  @override
+  String get m9fd15a00ec => 'O vínculo da build com o motor está corrompido';
 
   @override
   String get m5189135a61 => 'Tentar novamente';

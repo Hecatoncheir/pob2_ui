@@ -1787,6 +1787,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get mfd0560ebbf => 'デフォルト';
 
   @override
+  String get m9fd15a00ec => 'ビルドとエンジンの関連付けが破損しています';
+
+  @override
   String get m5189135a61 => '再試行';
 
   @override

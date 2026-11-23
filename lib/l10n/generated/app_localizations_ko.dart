@@ -1787,6 +1787,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get mfd0560ebbf => '기본값';
 
   @override
+  String get m9fd15a00ec => '빌드와 엔진의 연결 정보가 손상되었습니다';
+
+  @override
   String get m5189135a61 => '다시 시도';
 
   @override

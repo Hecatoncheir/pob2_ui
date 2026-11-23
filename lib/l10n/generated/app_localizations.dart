@@ -3396,6 +3396,12 @@ abstract class AppLocalizations {
   /// **'Default'**
   String get mfd0560ebbf;
 
+  /// Повреждена привязка сборки к движку
+  ///
+  /// In en, this message translates to:
+  /// **'The build\'\'s engine binding is corrupted'**
+  String get m9fd15a00ec;
+
   /// Повторить
   ///
   /// In en, this message translates to:

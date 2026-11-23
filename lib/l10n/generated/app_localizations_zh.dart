@@ -1780,6 +1780,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get mfd0560ebbf => '默認';
 
   @override
+  String get m9fd15a00ec => '流派配置與引擎的關聯資料已損毀';
+
+  @override
   String get m5189135a61 => '重試';
 
   @override
@@ -4692,6 +4695,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get mfd0560ebbf => '默認';
+
+  @override
+  String get m9fd15a00ec => '流派配置與引擎的關聯資料已損毀';
 
   @override
   String get m5189135a61 => '重試';

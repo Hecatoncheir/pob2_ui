@@ -1802,6 +1802,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get mfd0560ebbf => 'ค่าเริ่มต้น';
 
   @override
+  String get m9fd15a00ec => 'ข้อมูลการเชื่อมโยงบิลด์กับเอนจินเสียหาย';
+
+  @override
   String get m5189135a61 => 'ลองอีกครั้ง';
 
   @override
