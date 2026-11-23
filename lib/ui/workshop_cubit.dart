@@ -2517,37 +2517,32 @@ class WorkshopCubit extends Cubit<WorkshopState> {
   ) {
     final revision = _engineXmlBinding?.inputRevision;
     final epoch = _engineBindingEpoch;
-    return (label, gems) => _writeSkillGroup(
-      (id: id, label: label, delete: false, gems: gems),
-      revision,
-      epoch,
-    );
+    return (label, gems) {
+      if (epoch != _engineBindingEpoch ||
+          revision != _engineXmlBinding?.inputRevision) {
+        return Future.value((committed: false, error: _staleBuild));
+      }
+      return id == null
+          ? addSkillGroup(label, gems)
+          : updateSkillGroup(id, label, gems);
+    };
   }
 
   Future<BuildEditResult> addSkillGroup(String label, List<JsonMap> gems) =>
-      skillGroupEditor(null)(label, gems);
+      _writeSkillGroup((id: null, label: label, delete: false, gems: gems));
 
   Future<BuildEditResult> updateSkillGroup(
     int id,
     String label,
     List<JsonMap> gems,
-  ) => skillGroupEditor(id)(label, gems);
+  ) => _writeSkillGroup((id: id, label: label, delete: false, gems: gems));
 
-  Future<BuildEditResult> deleteSkillGroup(int id) => _writeSkillGroup(
-    (id: id, label: null, delete: true, gems: const []),
-    _engineXmlBinding?.inputRevision,
-    _engineBindingEpoch,
-  );
+  Future<BuildEditResult> deleteSkillGroup(int id) =>
+      _writeSkillGroup((id: id, label: null, delete: true, gems: const []));
 
-  Future<BuildEditResult> _writeSkillGroup(
-    EngineSkillGroupEdit edit,
-    int? revision,
-    int epoch,
-  ) {
-    if (epoch != _engineBindingEpoch ||
-        revision != _engineXmlBinding?.inputRevision) {
-      return Future.value((committed: false, error: _staleBuild));
-    }
+  Future<BuildEditResult> _writeSkillGroup(EngineSkillGroupEdit edit) {
+    final revision = _engineXmlBinding?.inputRevision;
+    final epoch = _engineBindingEpoch;
     if (revision != null && engineSession.supportsSkillGroups) {
       return _applyEngineEdit(
         expectedInput: revision,
