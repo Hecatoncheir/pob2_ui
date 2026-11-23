@@ -59,6 +59,8 @@ typedef WorkshopJewelOffer = ({
 
 const _missingEngineXml = 'В общей сессии нет XML сборки';
 const _staleTree = 'Выполните предпросмотр для текущей ревизии';
+const _staleBuild =
+    'Сборка изменилась. Дождитесь новой ревизии и повторите действие';
 const _staleCondition = 'Сборка изменилась. Откройте условие заново.';
 const _divergedBuild =
     'Файл сборки изменился. Проверьте версии перед переподключением.';
@@ -228,9 +230,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     await _checkEngineFile(binding);
     await _flushText();
     if (epoch != _engineBindingEpoch || binding != _engineXmlBinding) {
-      throw StateError(
-        'Сборка изменилась. Дождитесь новой ревизии и повторите действие',
-      );
+      throw StateError(_staleBuild);
     }
     final document = state.document!;
     final target = state.library;
@@ -1805,11 +1805,27 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     await _readReport(persist: !hasSharedTree);
   });
 
-  Future<BuildEditResult> selectTreeSpec(int id) => _changeBuild(() async {
-    await engine.call('pob_tree_options', {'spec': id});
-    // MCP применяет mode к текущему набору до обработки spec.
-    await engine.call('pob_tree_options', {'mode': state.treeMode.luaValue});
-  });
+  Future<BuildEditResult> Function(int) treeSpecSelection() {
+    final binding = _engineXmlBinding;
+    if (binding == null) return _selectLocalTreeSpec;
+    final epoch = _engineBindingEpoch;
+    return (id) => _applyEngineEdit(
+      expectedInput: binding.inputRevision,
+      epoch: epoch,
+      staleMessage: _staleBuild,
+      apply: (current) => engineSession.selectTreeSpec(current, id),
+    );
+  }
+
+  Future<BuildEditResult> selectTreeSpec(int id) => treeSpecSelection()(id);
+
+  Future<BuildEditResult> _selectLocalTreeSpec(int id) => _changeBuild(
+    () async {
+      await engine.call('pob_tree_options', {'spec': id});
+      // MCP применяет mode к текущему набору до обработки spec.
+      await engine.call('pob_tree_options', {'mode': state.treeMode.luaValue});
+    },
+  );
 
   Future<BuildEditResult> selectTreeClass({
     required int classId,

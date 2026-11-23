@@ -49,6 +49,12 @@ abstract interface class EngineConnection {
   bool get supportsTreeAllocationModes;
   bool get supportsTreeSockets;
   bool get supportsTreeJewels;
+  bool get supportsTreeSpecs;
+  Future<EngineSnapshot> selectTreeSpec(
+    EngineSnapshot current,
+    int spec,
+    String requestId,
+  );
   Future<EngineBuildComparison> previewJewel(
     EngineSnapshot current,
     EngineJewelEdit edit,
@@ -110,6 +116,7 @@ class EngineSessionClient implements EngineConnection {
     this.supportsTreeAllocationModes,
     this.supportsTreeSockets,
     this.supportsTreeJewels,
+    this.supportsTreeSpecs,
   );
   final Process _helper;
   final StreamSubscription<String> _output;
@@ -130,6 +137,8 @@ class EngineSessionClient implements EngineConnection {
   final bool supportsTreeSockets;
   @override
   final bool supportsTreeJewels;
+  @override
+  final bool supportsTreeSpecs;
   bool _closed = false;
 
   static Future<EngineConnection> open(EngineOptions options) async {
@@ -209,6 +218,7 @@ class EngineSessionClient implements EngineConnection {
         info.capabilities.contains('build.tree_allocation_modes'),
         info.capabilities.contains('build.tree_sockets'),
         info.capabilities.contains('build.tree_jewels'),
+        info.capabilities.contains('build.tree_specs'),
       );
     } catch (_) {
       await channel?.terminate();
@@ -646,6 +656,22 @@ class EngineSessionClient implements EngineConnection {
     weaponTwo: value.weaponSet2,
   );
 
+  @override
+  Future<EngineSnapshot> selectTreeSpec(
+    EngineSnapshot current,
+    int spec,
+    String requestId,
+  ) async {
+    final response = await _applyEdit(
+      current,
+      builds.BuildEdit(
+        selection: builds.SelectionEdit(sets: builds.ActiveSets(tree: spec)),
+      ),
+      requestId,
+    );
+    return _snapshot(response.snapshot);
+  }
+
   static builds.BuildEdit _treeChange(EngineTreeEdit edit) => builds.BuildEdit(
     treeNode: builds.TreeNodeEdit(
       nodeId: edit.nodeId,
@@ -714,7 +740,11 @@ class EngineSessionClient implements EngineConnection {
       requestId: requestId,
       edit: edit,
     ),
-    options: edit.hasEquipment() || edit.hasTreeNode() || edit.hasJewel()
+    options:
+        edit.hasEquipment() ||
+            edit.hasTreeNode() ||
+            edit.hasJewel() ||
+            (edit.hasSelection() && edit.selection.sets.tree != 0)
         ? _calculationTimeout
         : _timeout,
   );

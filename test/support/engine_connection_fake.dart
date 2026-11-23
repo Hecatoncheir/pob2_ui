@@ -95,6 +95,16 @@ class FakeEngineConnection implements EngineConnection {
   bool get supportsTreeJewels => false;
 
   @override
+  bool get supportsTreeSpecs => false;
+
+  @override
+  Future<EngineSnapshot> selectTreeSpec(
+    EngineSnapshot current,
+    int spec,
+    String requestId,
+  ) => throw UnimplementedError();
+
+  @override
   Future<EngineBuildComparison> previewJewel(
     EngineSnapshot current,
     EngineJewelEdit edit,

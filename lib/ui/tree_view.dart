@@ -62,6 +62,7 @@ class _TreeViewState extends State<TreeView>
   final transform = TransformationController();
   late TreeScene scene = TreeScene(widget.tree);
   int? selected;
+  Future<void> Function(int)? _chooseTreeSpec;
   List<int> _planPath = const [];
   String query = '';
   Size? viewport;
@@ -562,8 +563,16 @@ class _TreeViewState extends State<TreeView>
             child: Text(_specTitle(spec)),
           ),
       ],
-      onSelected: widget.model.selectTreeSpec,
+      onOpened: () => _chooseTreeSpec = widget.model.treeSpecSelection(),
+      onCanceled: () => _chooseTreeSpec = null,
+      onSelected: _selectTreeSpecFromMenu,
     );
+  }
+
+  void _selectTreeSpecFromMenu(int id) {
+    final select = _chooseTreeSpec;
+    _chooseTreeSpec = null;
+    select?.call(id);
   }
 
   String _specTitle(({int id, String title}) spec) => spec.title.trim().isEmpty

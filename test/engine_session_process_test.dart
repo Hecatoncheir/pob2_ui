@@ -179,6 +179,16 @@ void main() {
         : 'Для проверки самоцветов укажите POB2_ENGINE_TEST_JEWELS=1 и новый движок',
     timeout: const Timeout(Duration(minutes: 2)),
   );
+  test(
+    'Спецификации общей сборки переключаются в мастерской и через MCP',
+    () => _checkSharedTreeSpecs(executable!),
+    skip:
+        canUseWorkshop &&
+            Platform.environment['POB2_ENGINE_TEST_TREE_SPECS'] == '1'
+        ? false
+        : 'Для проверки спецификаций укажите POB2_ENGINE_TEST_TREE_SPECS=1 и новый движок',
+    timeout: const Timeout(Duration(minutes: 2)),
+  );
 }
 
 Future<void> _checkSharedCondition(String executable) async {
@@ -434,6 +444,81 @@ Future<String> _applyWorkshopJewel(
     isTrue,
   );
   return saved;
+}
+
+Future<void> _checkSharedTreeSpecs(String executable) async {
+  final (:model, :flags, :file, options: _) = await _startWorkshop(
+    executable,
+    'warrior_witch_specs',
+  );
+  final mcp = EngineMcpPeer(
+    await Process.start(executable, ['mcp', '--attach', 'main', ...flags]),
+  );
+  addTearDown(mcp.close);
+  await mcp.initialize();
+  expect(model.state.report?.activeTreeSpec, 1);
+  expect(model.state.report?.characterClass, 'Warrior');
+  await _rejectStaleSpecMenu(model, mcp);
+  final original = await file.readAsString();
+  final result = await model.selectTreeSpec(2);
+  expect(result.committed, isTrue, reason: result.error);
+  expect(model.state.report?.activeTreeSpec, 2);
+  expect(model.state.report?.characterClass, 'Witch');
+  expect(model.state.report?.socketedItems[61419]?['id'], 2);
+  expect(model.state.report?.stats['FireResist'], 27);
+  expect(model.state.treeMode, TreeAllocationMode.weaponTwo);
+  final selected = await mcp.call('export_build');
+  expect(await file.readAsString(), selected['xml']);
+  expect(selected['xml'], contains('activeSpec="2"'));
+  expect(
+    selected['xml'],
+    contains('Обе спецификации и заметка должны сохраниться.'),
+  );
+  final restored = model.stream.firstWhere(
+    (state) => !state.busy && state.report?.activeTreeSpec == 1,
+  );
+  await mcp.call('edit_build', {
+    'expected_revision': selected['revision'],
+    'request_id': 'spec-restore',
+    'edit': {
+      'selection': {
+        'sets': {'tree': 1},
+      },
+    },
+  });
+  await restored.timeout(const Duration(seconds: 25));
+  expect(model.state.report?.characterClass, 'Warrior');
+  expect(model.state.report?.socketedItems[61419], isNull);
+  expect(await file.readAsString(), original);
+  expect(await _cliBuildXml(executable, flags), original);
+}
+
+Future<void> _rejectStaleSpecMenu(
+  WorkshopCubit model,
+  EngineMcpPeer mcp,
+) async {
+  await model.selectTreeMode(TreeAllocationMode.weaponTwo);
+  final oldSelection = model.treeSpecSelection();
+  final original = await mcp.call('export_build');
+  final updated = model.stream.firstWhere(
+    (state) => !state.busy && state.report?.config['enemyLevel'] == 41,
+  );
+  await mcp.call('edit_build', {
+    'expected_revision': original['revision'],
+    'request_id': 'spec-stale',
+    'edit': {
+      'config': {
+        'name': 'enemyLevel',
+        'value': {'type': 'number', 'value': '41'},
+      },
+    },
+  });
+  await updated.timeout(const Duration(seconds: 25));
+  final before = await mcp.call('export_build');
+  final stale = await oldSelection(2);
+  expect(stale.committed, isFalse);
+  expect(stale.error, contains('Сборка изменилась'));
+  expect(await mcp.call('export_build'), before);
 }
 
 Future<void> _rejectStaleTreePreview(

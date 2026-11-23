@@ -408,6 +408,22 @@ class EngineSessionCubit extends Cubit<EngineSessionState> {
     }
   }
 
+  Future<EngineSnapshot> selectTreeSpec(
+    EngineSnapshot current,
+    int spec,
+  ) async {
+    if (current.build?.tree?.spec == spec) return current;
+    final connection = _connectedTo(current);
+    if (!connection.supportsTreeSpecs) {
+      throw StateError('Дерево пока недоступно');
+    }
+    try {
+      return await connection.selectTreeSpec(current, spec, engineRequestId());
+    } on GrpcError catch (error) {
+      throw StateError(engineError(error));
+    }
+  }
+
   bool _isCurrentOffer(String sessionId, int connectionId, int revision) =>
       connectionId == _connectionId &&
       sessionId == state.snapshot?.sessionId &&

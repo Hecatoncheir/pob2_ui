@@ -84,6 +84,38 @@ void main() {
       await tester.pumpWidget(const SizedBox.shrink());
     },
   );
+  testWidgets('Список дерева вызывает выбор, сохранённый при открытии', (
+    tester,
+  ) async {
+    await tester.binding.setSurfaceSize(const Size(1280, 800));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+    final connection = FakeEngineConnection();
+    final report = BuildReport.fromJson({
+      ...fixture.raw,
+      'activeSets': {'tree': 1},
+      'sets': {
+        'tree': [
+          {'id': 1, 'title': 'Воин'},
+          {'id': 2, 'title': 'Ведьма'},
+        ],
+      },
+    });
+    final model = _PreviewWorkshop(connection, report: report);
+    addTearDown(connection.events.close);
+    addTearDown(model.close);
+    await tester.pumpWidget(PobApp(model: model));
+    await tester.pumpAndSettle();
+    final picker = find.byKey(const Key('tree-spec-picker'));
+    await tester.tap(picker);
+    await tester.pumpAndSettle();
+    expect(model.specMenusOpened, 1);
+    await tester.tap(find.widgetWithText(CheckedPopupMenuItem<int>, 'Ведьма'));
+    await tester.pumpAndSettle();
+    expect(model.specMenusOpened, 1);
+    expect(model.selectedSpecs, [2]);
+    expect(tester.takeException(), isNull);
+    await tester.pumpWidget(const SizedBox.shrink());
+  });
 }
 
 TreeGeometry _socketTree() => TreeGeometry.fromJson({
@@ -124,22 +156,37 @@ Future<void> _clickPassive(
 }
 
 class _PreviewWorkshop extends WorkshopCubit {
-  _PreviewWorkshop(FakeEngineConnection connection, {TreeGeometry? geometry})
-    : super(
-        ComponentRepository(
-          store: InstallationStore(Directory('test-components')),
-        ),
-        _TreeDialogMcp(),
-        openEngineSession: (_) async => connection,
-        initialState: WorkshopState(
-          document: (
-            report: fixture,
-            tree: geometry ?? tree,
-            stale: false,
-            treeError: null,
-          ),
-        ),
-      );
+  _PreviewWorkshop(
+    FakeEngineConnection connection, {
+    TreeGeometry? geometry,
+    BuildReport? report,
+  }) : super(
+         ComponentRepository(
+           store: InstallationStore(Directory('test-components')),
+         ),
+         _TreeDialogMcp(),
+         openEngineSession: (_) async => connection,
+         initialState: WorkshopState(
+           document: (
+             report: report ?? fixture,
+             tree: geometry ?? tree,
+             stale: false,
+             treeError: null,
+           ),
+         ),
+       );
+
+  int specMenusOpened = 0;
+  final selectedSpecs = <int>[];
+
+  @override
+  Future<BuildEditResult> Function(int) treeSpecSelection() {
+    specMenusOpened++;
+    return (id) async {
+      selectedSpecs.add(id);
+      return (committed: true, error: null);
+    };
+  }
 
   final applied = <int>[];
   final jewelEdits = <EngineJewelEdit>[];
@@ -233,6 +280,10 @@ class _PreviewWorkshop extends WorkshopCubit {
 }
 
 class _TreeDialogMcp extends McpClient {
+  _TreeDialogMcp() {
+    tools = const {'pob_tree_options'};
+  }
+
   @override
   Future<JsonMap> call(String name, [JsonMap arguments = const {}]) async =>
       name == 'pob_node_tooltip' ? {} : super.call(name, arguments);
