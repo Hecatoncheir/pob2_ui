@@ -400,18 +400,36 @@ Future<EngineMcpPeer> _attachMcp(String executable, List<String> flags) async {
 Future<void> _stopEngine(
   String executable,
   List<String> flags,
-  Directory root,
-) async {
-  await Process.run(executable, ['shutdown', ...flags]);
+  Directory root, {
+  bool allowReconnect = false,
+}) async {
   final record = File.fromUri(
     root.uri.resolve('pob2-engine/$_profile/connection.json'),
   );
+  final previous = await _serverInstance(record);
+  if (previous == null) return;
+  final shutdown = await Process.run(executable, ['shutdown', ...flags]);
+  if (shutdown.exitCode != 0 && await _serverInstance(record) == previous) {
+    throw StateError(
+      'Не удалось запросить остановку сервера: ${shutdown.stderr}',
+    );
+  }
   final deadline = DateTime.now().add(const Duration(seconds: 8));
-  while (await record.exists()) {
-    if (DateTime.now().isAfter(deadline)) {
-      throw StateError('Сервер не завершился после отключения клиентов');
-    }
+  while (DateTime.now().isBefore(deadline)) {
+    final current = await _serverInstance(record);
+    if (current == null || (allowReconnect && current != previous)) return;
     await Future<void>.delayed(const Duration(milliseconds: 50));
+  }
+  throw StateError('Сервер $previous не завершился после отключения клиентов');
+}
+
+Future<String?> _serverInstance(File record) async {
+  try {
+    final data =
+        jsonDecode(await record.readAsString()) as Map<String, dynamic>;
+    return data['instance_id'] as String;
+  } on PathNotFoundException {
+    return null;
   }
 }
 
@@ -525,7 +543,7 @@ Future<void> _checkReconnect(
   final lost = model.engineSession.stream.firstWhere(
     (state) => !state.connected,
   );
-  await _stopEngine(executable, flags, root);
+  await _stopEngine(executable, flags, root, allowReconnect: true);
   await lost.timeout(const Duration(seconds: 12));
   if (!model.engineSession.state.connected) {
     await model.engineSession.stream
