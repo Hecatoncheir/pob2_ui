@@ -440,6 +440,7 @@ class TreeProgressionPanel extends StatelessWidget {
     final plan = context.read<TreeProgressionBloc>();
     return Wrap(
       spacing: 6,
+      runSpacing: 6,
       children: [
         for (final id in added)
           _nodeChip(plan, id, Icons.add, colors.secondary),
