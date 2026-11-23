@@ -128,6 +128,16 @@ abstract interface class EngineWorkshopReader {
   );
 }
 
+abstract interface class EngineSkillChoiceWriter {
+  bool get supportsSkillChoice;
+  Future<EngineSnapshot> chooseSkill(
+    EngineSnapshot current,
+    String control,
+    int id,
+    String requestId,
+  );
+}
+
 String engineRequestId() {
   final random = Random.secure();
   return List.generate(
@@ -137,7 +147,8 @@ String engineRequestId() {
 }
 
 // Дочерний connect владеет обнаружением и одной арендой приложения.
-class EngineSessionClient implements EngineConnection, EngineWorkshopReader {
+class EngineSessionClient
+    implements EngineConnection, EngineWorkshopReader, EngineSkillChoiceWriter {
   EngineSessionClient._(
     this._helper,
     this._output,
@@ -851,6 +862,29 @@ class EngineSessionClient implements EngineConnection, EngineWorkshopReader {
           classId: edit.classId,
           ascendancyId: edit.ascendancyId,
           mode: edit.mode,
+        ),
+      ),
+      requestId,
+    )).snapshot,
+  );
+
+  @override
+  bool get supportsSkillChoice =>
+      _workshopCapabilities.contains('build.skill_choice');
+
+  @override
+  Future<EngineSnapshot> chooseSkill(
+    EngineSnapshot current,
+    String control,
+    int id,
+    String requestId,
+  ) async => _snapshot(
+    (await _applyEdit(
+      current,
+      builds.BuildEdit(
+        skillChoice: builds.SkillChoiceEdit(
+          control: control == 'statSets' ? 'stat_sets' : control,
+          optionId: id,
         ),
       ),
       requestId,

@@ -2076,9 +2076,52 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     await _restoreTreeMode();
   }
 
-  Future<void> selectMain(String control, int id) => _changeBuild(() async {
-    await engine.call('pob_select_main_skill', {'control': control, 'id': id});
-  });
+  Future<void> selectMain(String control, int id) =>
+      mainSkillEditor()(control, id);
+
+  Future<void> Function(String, int) mainSkillEditor() {
+    final revision = _engineXmlBinding?.inputRevision;
+    final epoch = _engineBindingEpoch;
+    return (control, id) => _chooseMainSkill(control, id, revision, epoch);
+  }
+
+  Future<void> _chooseMainSkill(
+    String control,
+    int id,
+    int? revision,
+    int epoch,
+  ) async {
+    if (epoch != _engineBindingEpoch ||
+        revision != _engineXmlBinding?.inputRevision) {
+      await _run(() async => throw StateError(_staleBuild));
+      return;
+    }
+    if (revision != null &&
+        engineSession.supportsSkillChoice &&
+        _hasPersistentSkill(control)) {
+      await _applyEngineEdit(
+        expectedInput: revision,
+        epoch: epoch,
+        staleMessage: _staleBuild,
+        apply: (current) => engineSession.chooseSkill(current, control, id),
+      );
+      return;
+    }
+    await _changeBuild(() async {
+      await engine.call('pob_select_main_skill', {
+        'control': control,
+        'id': id,
+      });
+    });
+  }
+
+  bool _hasPersistentSkill(String control) {
+    if (control == 'groups') return true;
+    final report = state.report!;
+    final id = report.groupSelector['selected'];
+    final group = report.groups.where((group) => group['id'] == id).firstOrNull;
+    return group != null && (group['source'] as String? ?? '').isEmpty;
+  }
 
   Future<BuildEditResult> addSkillGroup(String label, List<JsonMap> gems) =>
       _changeBuild(() async {

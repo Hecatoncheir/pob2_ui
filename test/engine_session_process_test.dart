@@ -8,6 +8,7 @@ import 'package:pob2_ui/data/component_repository.dart';
 import 'package:pob2_ui/data/installation_store.dart';
 import 'package:pob2_ui/data/mcp_client.dart';
 import 'package:pob2_ui/data/pob_build_library.dart';
+import 'package:pob2_ui/domain/build_report.dart';
 import 'package:pob2_ui/domain/condition_definition.dart';
 import 'package:pob2_ui/domain/engine_session.dart';
 import 'package:pob2_ui/domain/tree_allocation_mode.dart';
@@ -201,6 +202,16 @@ void main() {
             Platform.environment['POB2_ENGINE_TEST_WORKSHOP_READS'] == '1'
         ? false
         : 'Для проверки отчёта и дерева укажите POB2_ENGINE_TEST_WORKSHOP_READS=1',
+    timeout: const Timeout(Duration(minutes: 2)),
+  );
+  test(
+    'Штатные списки выбирают вариант умения в общей сборке',
+    () => _checkWorkshopSkillChoice(executable!),
+    skip:
+        canUseWorkshop &&
+            Platform.environment['POB2_ENGINE_TEST_SKILL_CHOICE'] == '1'
+        ? false
+        : 'Для проверки варианта умения укажите POB2_ENGINE_TEST_SKILL_CHOICE=1',
     timeout: const Timeout(Duration(minutes: 2)),
   );
   test(
@@ -541,6 +552,48 @@ Future<void> _checkWorkshopReads(String executable) async {
   expect(tree.edges.length, (graph['edges'] as List).length);
   expect(tree.original, isNotNull);
   expect(await model.progressionPath(13397), [3936, 13397]);
+}
+
+Future<void> _checkWorkshopSkillChoice(String executable) async {
+  final opened = await _startWorkshop(executable, 'witch_fireball');
+  final model = opened.model;
+  expect(model.engineSession.supportsSkillChoice, isTrue);
+  final added = await model.addSkillGroup('Ball Lightning', [
+    {
+      'id': 'Metadata/Items/Gems/SkillGemBallLightning',
+      'level': 1,
+      'quality': 0,
+    },
+  ]);
+  expect(added.committed, isTrue, reason: added.error);
+  await model.selectMain(
+    'groups',
+    model.state.report!.groups.last['id'] as int,
+  );
+  expect(model.state.error, isNull);
+
+  final before = model.state.report!;
+  final options = before.skillStatSetSelector;
+  final base = options['selected'] as int;
+  final infused =
+      jsonRows(options['entries'])
+              .singleWhere((row) => row['label'] == 'Fire-Infused')['id']
+          as int;
+  final choose = model.mainSkillEditor();
+  await choose('statSets', infused);
+  expect(model.state.error, isNull);
+  final after = model.state.report!;
+  expect(after.skillStatSetSelector['selected'], infused);
+  expect(after.stats['TotalDPS'], isNot(before.stats['TotalDPS']));
+  final saved = await opened.file.readAsString();
+  expect(saved, await _cliBuildXml(executable, opened.flags));
+
+  await choose('statSets', base);
+  expect(model.state.error, contains('Сборка изменилась'));
+  expect(await opened.file.readAsString(), saved);
+  await model.selectMain('statSets', base);
+  expect(model.state.error, isNull);
+  expect(model.state.report!.skillStatSetSelector['selected'], base);
 }
 
 Future<void> _checkEditorBridge(String executable) async {

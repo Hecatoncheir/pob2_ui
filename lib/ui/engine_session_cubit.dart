@@ -469,6 +469,30 @@ class EngineSessionCubit extends Cubit<EngineSessionState> {
     }
   }
 
+  bool get supportsSkillChoice => switch (_connection) {
+    final EngineSkillChoiceWriter writer when state.connected =>
+      writer.supportsSkillChoice,
+    _ => false,
+  };
+
+  Future<EngineSnapshot> chooseSkill(
+    EngineSnapshot current,
+    String control,
+    int id,
+  ) async {
+    final connection = _connectedTo(current) as EngineSkillChoiceWriter;
+    try {
+      return await connection.chooseSkill(
+        current,
+        control,
+        id,
+        engineRequestId(),
+      );
+    } on GrpcError catch (error) {
+      throw StateError(engineError(error));
+    }
+  }
+
   Future<EngineSnapshot> replaceBuild(
     EngineSnapshot current,
     String xml,

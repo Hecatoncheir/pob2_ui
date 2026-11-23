@@ -215,6 +215,7 @@ class _Selector extends StatelessWidget {
         game: true,
         style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 12),
       );
+    final choose = model.mainSkillEditor();
     return DropdownButton<int>(
       key: ValueKey('main-skill-$control'),
       value: data['selected'] as int?,
@@ -240,7 +241,7 @@ class _Selector extends StatelessWidget {
           .toList(),
       onChanged: model.state.busy || data['enabled'] != true
           ? null
-          : (id) => model.selectMain(control, id!),
+          : (id) => choose(control, id!),
     );
   }
 }
