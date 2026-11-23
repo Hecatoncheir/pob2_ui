@@ -2462,26 +2462,21 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     await _restoreTreeMode();
   }
 
-  Future<void> selectMain(String control, int id) =>
-      mainSkillEditor()(control, id);
-
   Future<void> Function(String, int) mainSkillEditor() {
     final revision = _engineXmlBinding?.inputRevision;
     final epoch = _engineBindingEpoch;
-    return (control, id) => _chooseMainSkill(control, id, revision, epoch);
+    return (control, id) {
+      if (epoch != _engineBindingEpoch ||
+          revision != _engineXmlBinding?.inputRevision) {
+        return _run(() async => throw StateError(_staleBuild));
+      }
+      return selectMain(control, id);
+    };
   }
 
-  Future<void> _chooseMainSkill(
-    String control,
-    int id,
-    int? revision,
-    int epoch,
-  ) async {
-    if (epoch != _engineBindingEpoch ||
-        revision != _engineXmlBinding?.inputRevision) {
-      await _run(() async => throw StateError(_staleBuild));
-      return;
-    }
+  Future<void> selectMain(String control, int id) async {
+    final revision = _engineXmlBinding?.inputRevision;
+    final epoch = _engineBindingEpoch;
     if (revision != null &&
         engineSession.supportsSkillChoice &&
         _hasPersistentSkill(control)) {
