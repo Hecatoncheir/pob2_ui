@@ -389,6 +389,11 @@
     "description": "Амулет",
     "placeholders": {}
   },
+  "m4b70491e0e": "Passive attribute",
+  "@m4b70491e0e": {
+    "description": "Атрибут пассива",
+    "placeholders": {}
+  },
   "mc11be494c0": "Item base",
   "@mc11be494c0": {
     "description": "База предмета",
@@ -692,6 +697,11 @@
   "m99068c6fe4": "Second build",
   "@m99068c6fe4": {
     "description": "Вторая сборка",
+    "placeholders": {}
+  },
+  "mea642413c7": "Choose an attribute",
+  "@mea642413c7": {
+    "description": "Выберите атрибут",
     "placeholders": {}
   },
   "m27c00630ba": "Select two different nodes.",
@@ -2191,6 +2201,15 @@
     "description": "Неизвестное действие приложения.",
     "placeholders": {}
   },
+  "m51629e8867": "Unknown passive attribute: {p0}",
+  "@m51629e8867": {
+    "description": "Неизвестный атрибут пассива: {p0}",
+    "placeholders": {
+      "p0": {
+        "type": "String"
+      }
+    }
+  },
   "m88bb56b333": "Unknown PoB scene mode: {p0}",
   "@m88bb56b333": {
     "description": "Неизвестный режим сцены PoB: {p0}",
@@ -3266,6 +3285,11 @@
     "description": "Предпросмотр очистки профиля",
     "placeholders": {}
   },
+  "m93f8a89eb5": "Preview attribute change",
+  "@m93f8a89eb5": {
+    "description": "Предпросмотр смены атрибута",
+    "placeholders": {}
+  },
   "m665711d6eb": "Preview refund",
   "@m665711d6eb": {
     "description": "Предпросмотр снятия",
@@ -4088,6 +4112,11 @@
   "md4b51f7a04": "Unequip",
   "@md4b51f7a04": {
     "description": "Снять",
+    "placeholders": {}
+  },
+  "mcf5e71cc14": "Refund passive",
+  "@mcf5e71cc14": {
+    "description": "Снять пассив",
     "placeholders": {}
   },
   "mf3f1d96087": "Own properties",

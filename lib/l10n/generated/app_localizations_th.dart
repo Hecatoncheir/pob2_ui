@@ -235,6 +235,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m63141a77bf => 'พระเครื่อง';
 
   @override
+  String get m4b70491e0e => 'คุณสมบัติพาสซีฟ';
+
+  @override
   String get mc11be494c0 => 'ฐานรายการ';
 
   @override
@@ -413,6 +416,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m99068c6fe4 => 'บิลด์ที่สอง';
+
+  @override
+  String get mea642413c7 => 'เลือกคุณสมบัติ';
 
   @override
   String get m27c00630ba => 'เลือกสองโหนดที่แตกต่างกัน';
@@ -1306,6 +1312,11 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m4b8f0df7bc => 'การทำงานของแอปพลิเคชันที่ไม่รู้จัก';
 
   @override
+  String m51629e8867(String p0) {
+    return 'ไม่รู้จักคุณสมบัติพาสซีฟ: $p0';
+  }
+
+  @override
   String m88bb56b333(String p0) {
     return 'โหมดฉาก PoB ที่ไม่รู้จัก: $p0';
   }
@@ -1948,6 +1959,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get mad582b726d => 'ตัวอย่างการทำความสะอาดโปรไฟล์';
 
   @override
+  String get m93f8a89eb5 => 'ดูตัวอย่างการเปลี่ยนคุณสมบัติ';
+
+  @override
   String get m665711d6eb => 'ดูตัวอย่างการคืนแต้ม';
 
   @override
@@ -2435,6 +2449,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get md4b51f7a04 => 'ถอด';
+
+  @override
+  String get mcf5e71cc14 => 'คืนแต้มพาสซีฟ';
 
   @override
   String get mf3f1d96087 => 'คุณสมบัติของตัวเอง';

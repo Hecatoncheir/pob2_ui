@@ -232,6 +232,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m63141a77bf => '부적';
 
   @override
+  String get m4b70491e0e => '패시브 능력치';
+
+  @override
   String get mc11be494c0 => '아이템 베이스';
 
   @override
@@ -410,6 +413,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m99068c6fe4 => '두 번째 빌드';
+
+  @override
+  String get mea642413c7 => '능력치 선택';
 
   @override
   String get m27c00630ba => '두 개의 서로 다른 노드를 선택합니다.';
@@ -1294,6 +1300,11 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m4b8f0df7bc => '알 수 없는 애플리케이션 작업입니다.';
 
   @override
+  String m51629e8867(String p0) {
+    return '알 수 없는 패시브 능력치: $p0';
+  }
+
+  @override
   String m88bb56b333(String p0) {
     return '알 수 없는 PoB 장면 모드: $p0';
   }
@@ -1933,6 +1944,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get mad582b726d => '프로필 정리 미리보기';
 
   @override
+  String get m93f8a89eb5 => '능력치 변경 미리 보기';
+
+  @override
   String get m665711d6eb => '반환 미리 보기';
 
   @override
@@ -2414,6 +2428,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get md4b51f7a04 => '장착 해제';
+
+  @override
+  String get mcf5e71cc14 => '패시브 반환';
 
   @override
   String get mf3f1d96087 => '자신의 속성';

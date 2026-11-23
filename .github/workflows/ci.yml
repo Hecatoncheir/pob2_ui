@@ -26,6 +26,10 @@ on:
         description: 'Проверить правку дерева в общей сборке'
         type: boolean
         default: false
+      engine_attributes:
+        description: 'Проверить выбор и смену атрибута пассива в общей сборке'
+        type: boolean
+        default: false
       cold_install:
         description: 'Проверить первый запуск без предварительной загрузки архивов'
         type: boolean
@@ -182,6 +186,7 @@ jobs:
           POB2_ENGINE_TEST_SUPPORT: ${{ inputs.engine_support && '1' || '0' }}
           POB2_ENGINE_TEST_EQUIPMENT: ${{ inputs.engine_equipment && '1' || '0' }}
           POB2_ENGINE_TEST_TREE: ${{ inputs.engine_tree && '1' || '0' }}
+          POB2_ENGINE_TEST_ATTRIBUTES: ${{ inputs.engine_attributes && '1' || '0' }}
           POB2_ENGINE_POB_GITHUB_TOKEN: ${{ github.token }}
           GH_TOKEN: ${{ github.token }}
           POB2_UI_HOME: ${{ runner.temp }}/pob2-lua-smoke

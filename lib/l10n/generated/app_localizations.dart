@@ -503,6 +503,12 @@ abstract class AppLocalizations {
   /// **'Amulet'**
   String get m63141a77bf;
 
+  /// Атрибут пассива
+  ///
+  /// In en, this message translates to:
+  /// **'Passive attribute'**
+  String get m4b70491e0e;
+
   /// База предмета
   ///
   /// In en, this message translates to:
@@ -850,6 +856,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Second build'**
   String get m99068c6fe4;
+
+  /// Выберите атрибут
+  ///
+  /// In en, this message translates to:
+  /// **'Choose an attribute'**
+  String get mea642413c7;
 
   /// Выберите два разных узла.
   ///
@@ -2454,6 +2466,12 @@ abstract class AppLocalizations {
   /// **'Unknown application action.'**
   String get m4b8f0df7bc;
 
+  /// Неизвестный атрибут пассива: {p0}
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown passive attribute: {p0}'**
+  String m51629e8867(String p0);
+
   /// Неизвестный режим сцены PoB: {p0}
   ///
   /// In en, this message translates to:
@@ -3684,6 +3702,12 @@ abstract class AppLocalizations {
   /// **'Preview of profile cleaning'**
   String get mad582b726d;
 
+  /// Предпросмотр смены атрибута
+  ///
+  /// In en, this message translates to:
+  /// **'Preview attribute change'**
+  String get m93f8a89eb5;
+
   /// Предпросмотр снятия
   ///
   /// In en, this message translates to:
@@ -4589,6 +4613,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Unequip'**
   String get md4b51f7a04;
+
+  /// Снять пассив
+  ///
+  /// In en, this message translates to:
+  /// **'Refund passive'**
+  String get mcf5e71cc14;
 
   /// Собственные свойства
   ///

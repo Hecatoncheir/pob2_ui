@@ -38,6 +38,8 @@ class _EngineTreeDialogState extends State<EngineTreeDialog> {
   final _query = TextEditingController();
   ({String version, EnginePassivePage page})? _catalog;
   EnginePassive? _node;
+  EnginePassiveAttribute? _attribute;
+  bool _refund = false;
   EngineTreeOffer? _offer;
   String? _error;
   bool _busy = false;
@@ -66,7 +68,6 @@ class _EngineTreeDialogState extends State<EngineTreeDialog> {
   void _clearSearch() => setState(() {
     _catalog = null;
     _select(null);
-    _error = null;
   });
 
   Future<void> _search(EngineSnapshot snapshot, String version, int offset) =>
@@ -95,7 +96,32 @@ class _EngineTreeDialogState extends State<EngineTreeDialog> {
 
   void _select(EnginePassive? node) {
     _node = node;
+    _attribute = null;
+    _refund = false;
     _offer = null;
+    _error = null;
+  }
+
+  void _chooseAttribute(EnginePassiveAttribute? value) => setState(() {
+    _attribute = value;
+    _offer = null;
+    _error = null;
+  });
+
+  void _chooseRefund(bool? value) => setState(() {
+    _refund = value ?? false;
+    _offer = null;
+    _error = null;
+  });
+
+  EnginePassive? _attributeNode(EngineTree tree) {
+    final node = _node;
+    if (_catalog?.version != tree.version ||
+        node?.attributeChoice != true ||
+        !widget.session.supportsTreeAttributes) {
+      return null;
+    }
+    return node;
   }
 
   Future<void> _preview(EngineSnapshot snapshot, EngineTreeEdit edit) =>
@@ -141,11 +167,12 @@ class _EngineTreeDialogState extends State<EngineTreeDialog> {
           onPressed: current != null && edit != null
               ? () => _preview(current, edit)
               : null,
-          child: AppText(
-            edit?.refund == true
-                ? 'Предпросмотр снятия'
-                : 'Предпросмотр назначения',
-          ),
+          child: AppText(switch (edit?.action) {
+            EngineTreeAction.refund => 'Предпросмотр снятия',
+            EngineTreeAction.allocate => 'Предпросмотр назначения',
+            EngineTreeAction.setAttribute => 'Предпросмотр смены атрибута',
+            null => 'Предпросмотр',
+          }),
         ),
         FilledButton(
           key: const Key('engine-tree-apply'),
@@ -161,7 +188,26 @@ class _EngineTreeDialogState extends State<EngineTreeDialog> {
     if (tree == null || node == null || _catalog?.version != tree.version) {
       return null;
     }
-    return (nodeId: node.id, refund: tree.nodes.contains(node.id));
+    final allocated = tree.nodes.contains(node.id);
+    if (_attributeNode(tree) == null) {
+      final action = allocated
+          ? EngineTreeAction.refund
+          : EngineTreeAction.allocate;
+      return (nodeId: node.id, action: action, attribute: null);
+    }
+    return _attributeEdit(tree, node.id, allocated);
+  }
+
+  EngineTreeEdit? _attributeEdit(EngineTree tree, int id, bool allocated) {
+    if (allocated && _refund) {
+      return (nodeId: id, action: EngineTreeAction.refund, attribute: null);
+    }
+    final attribute = _attribute;
+    if (attribute == null || attribute == tree.attributes[id]) return null;
+    final action = allocated
+        ? EngineTreeAction.setAttribute
+        : EngineTreeAction.allocate;
+    return (nodeId: id, action: action, attribute: attribute);
   }
 
   Widget _content(EngineSnapshot? current, EngineTree? tree, bool fresh) =>
@@ -172,6 +218,8 @@ class _EngineTreeDialogState extends State<EngineTreeDialog> {
           _searchField(current, tree?.version),
           if (tree != null && _catalog?.version == tree.version)
             _results(tree, current, _catalog!.page),
+          if (_attributeControls(tree, current != null) case final controls?)
+            controls,
           if (_offer case final offer?) _TreeComparison(offer.preview, fresh),
           if (_error case final error?)
             AppText(
@@ -182,6 +230,43 @@ class _EngineTreeDialogState extends State<EngineTreeDialog> {
           if (_busy) const LinearProgressIndicator(),
         ],
       );
+
+  Widget? _attributeControls(EngineTree? tree, bool enabled) {
+    if (tree == null) return null;
+    final node = _attributeNode(tree);
+    if (node == null) return null;
+    return _attributePicker(tree, node.id, enabled);
+  }
+
+  Widget _attributePicker(EngineTree tree, int id, bool enabled) => Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      const AppText('Атрибут пассива'),
+      DropdownButton<EnginePassiveAttribute>(
+        key: const Key('engine-tree-attribute'),
+        isExpanded: true,
+        hint: const AppText('Выберите атрибут'),
+        value: _attribute ?? tree.attributes[id],
+        onChanged: enabled && !_refund ? _chooseAttribute : null,
+        items: [
+          for (final attribute in EnginePassiveAttribute.values)
+            DropdownMenuItem(
+              value: attribute,
+              child: AppText(_attributeLabel(attribute)),
+            ),
+        ],
+      ),
+      if (tree.nodes.contains(id))
+        CheckboxListTile(
+          key: const Key('engine-tree-refund'),
+          contentPadding: EdgeInsets.zero,
+          controlAffinity: ListTileControlAffinity.leading,
+          title: const AppText('Снять пассив'),
+          value: _refund,
+          onChanged: enabled ? _chooseRefund : null,
+        ),
+    ],
+  );
 
   Widget _searchField(EngineSnapshot? current, String? version) {
     final enabled = current != null && version != null;
@@ -263,7 +348,21 @@ class _TreeComparison extends StatelessWidget {
     children: [
       if (preview.added.isNotEmpty) _nodes('Будут назначены', preview.added),
       if (preview.removed.isNotEmpty) _nodes('Будут сняты', preview.removed),
+      for (final change in preview.attributes) _attributeChange(change),
       EngineBuildComparisonPanel(preview.comparison, fresh: fresh),
+    ],
+  );
+
+  Widget _attributeChange(EnginePassiveAttributeChange change) => Wrap(
+    key: ValueKey('engine-tree-attribute-change-${change.nodeId}'),
+    spacing: 8,
+    children: [
+      AppText('#${change.nodeId}', localize: false),
+      if (change.before case final before?) ...[
+        AppText(_attributeLabel(before)),
+        const AppText('→', localize: false),
+      ],
+      AppText(_attributeLabel(change.after)),
     ],
   );
 
@@ -276,3 +375,9 @@ class _TreeComparison extends StatelessWidget {
     ],
   );
 }
+
+String _attributeLabel(EnginePassiveAttribute attribute) => switch (attribute) {
+  EnginePassiveAttribute.strength => 'Сила',
+  EnginePassiveAttribute.dexterity => 'Ловкость',
+  EnginePassiveAttribute.intelligence => 'Интеллект',
+};

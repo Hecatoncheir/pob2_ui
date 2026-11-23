@@ -244,6 +244,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get m63141a77bf => 'Amulette';
 
   @override
+  String get m4b70491e0e => 'Attribut du passif';
+
+  @override
   String get mc11be494c0 => 'Base d\'articles';
 
   @override
@@ -427,6 +430,9 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get m99068c6fe4 => 'Deuxième build';
+
+  @override
+  String get mea642413c7 => 'Choisir un attribut';
 
   @override
   String get m27c00630ba => 'Sélectionnez deux nœuds différents.';
@@ -1348,6 +1354,11 @@ class AppLocalizationsFr extends AppLocalizations {
   String get m4b8f0df7bc => 'Action d\'application inconnue.';
 
   @override
+  String m51629e8867(String p0) {
+    return 'Attribut du passif inconnu : $p0';
+  }
+
+  @override
   String m88bb56b333(String p0) {
     return 'Mode scène PoB inconnu : $p0';
   }
@@ -2005,6 +2016,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get mad582b726d => 'Aperçu du nettoyage du profil';
 
   @override
+  String get m93f8a89eb5 => 'Aperçu du changement d’attribut';
+
+  @override
   String get m665711d6eb => 'Aperçu du retrait';
 
   @override
@@ -2507,6 +2521,9 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get md4b51f7a04 => 'Retirer';
+
+  @override
+  String get mcf5e71cc14 => 'Rembourser le passif';
 
   @override
   String get mf3f1d96087 => 'Posséder des propriétés';

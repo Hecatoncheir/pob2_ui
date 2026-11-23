@@ -236,6 +236,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m63141a77bf => 'Amulet';
 
   @override
+  String get m4b70491e0e => 'Passive attribute';
+
+  @override
   String get mc11be494c0 => 'Item base';
 
   @override
@@ -415,6 +418,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get m99068c6fe4 => 'Second build';
+
+  @override
+  String get mea642413c7 => 'Choose an attribute';
 
   @override
   String get m27c00630ba => 'Select two different nodes.';
@@ -1316,6 +1322,11 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m4b8f0df7bc => 'Unknown application action.';
 
   @override
+  String m51629e8867(String p0) {
+    return 'Unknown passive attribute: $p0';
+  }
+
+  @override
   String m88bb56b333(String p0) {
     return 'Unknown PoB scene mode: $p0';
   }
@@ -1963,6 +1974,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get mad582b726d => 'Preview of profile cleaning';
 
   @override
+  String get m93f8a89eb5 => 'Preview attribute change';
+
+  @override
   String get m665711d6eb => 'Preview refund';
 
   @override
@@ -2454,6 +2468,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get md4b51f7a04 => 'Unequip';
+
+  @override
+  String get mcf5e71cc14 => 'Refund passive';
 
   @override
   String get mf3f1d96087 => 'Own properties';

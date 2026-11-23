@@ -292,6 +292,9 @@ class EngineSessionCubit extends Cubit<EngineSessionState> {
   bool get supportsTreePreview =>
       state.connected && (_connection?.supportsTreePreview ?? false);
 
+  bool get supportsTreeAttributes =>
+      state.connected && (_connection?.supportsTreeAttributes ?? false);
+
   Future<EnginePassivePage> findPassives(
     EngineSnapshot current,
     String version,

@@ -115,11 +115,7 @@ void main() {
       await _checkEquipment(tester, equipmentMcp);
       await equipmentMcp.close();
     }
-    if (Platform.environment['POB2_ENGINE_TEST_TREE'] == '1') {
-      final treeMcp = await _attachMcp(executable, flags);
-      addTearDown(treeMcp.close);
-      await _checkTree(tester, treeMcp);
-    }
+    await _checkTreeFeatures(tester, executable, flags);
     expect(await local.readAsString(), localBefore);
     expect(await File(_fixture).readAsString(), original);
     await tester.pumpWidget(const SizedBox.shrink());
@@ -206,6 +202,20 @@ Future<int> _checkSupportFromMcp(WidgetTester tester, EngineMcpPeer mcp) async {
   return 11;
 }
 
+Future<void> _checkTreeFeatures(
+  WidgetTester tester,
+  String executable,
+  List<String> flags,
+) async {
+  final tree = Platform.environment['POB2_ENGINE_TEST_TREE'] == '1';
+  final attributes = Platform.environment['POB2_ENGINE_TEST_ATTRIBUTES'] == '1';
+  if (!tree && !attributes) return;
+  final mcp = await _attachMcp(executable, flags);
+  addTearDown(mcp.close);
+  if (tree) await _checkTree(tester, mcp);
+  if (attributes) await _checkTreeAttributes(tester, mcp);
+}
+
 Future<void> _checkTree(WidgetTester tester, EngineMcpPeer mcp) async {
   final before = await mcp.call('get_snapshot');
   await _openTreeNode(tester);
@@ -232,6 +242,135 @@ Future<void> _checkTree(WidgetTester tester, EngineMcpPeer mcp) async {
   expect(_xml(await mcp.call('get_snapshot')), contains('nodes="54447,4739"'));
 }
 
+const _attributeNodeId = 18407;
+const _attributePicker = Key('engine-tree-attribute');
+
+Future<void> _checkTreeAttributes(
+  WidgetTester tester,
+  EngineMcpPeer mcp,
+) async {
+  final before = await mcp.call('get_snapshot');
+  final revision = before['revision'] as int;
+  await _openTreeNode(tester, _attributeNodeId);
+  expect(_treeAttribute(tester), isNull);
+  await _chooseTreeAttribute(tester, 'Ловкость');
+  await _previewTreeNode(tester, 'Будут назначены');
+  _expectAttributeChange(22419, 'Ловкость');
+  _expectAttributeChange(_attributeNodeId, 'Ловкость');
+  expect(await mcp.call('get_snapshot'), before);
+  await _applyTreeNode(tester, revision + 1);
+
+  final allocated = await mcp.call('get_snapshot');
+  expect(
+    _treeAttributes(allocated),
+    containsPair('$_attributeNodeId', 'dexterity'),
+  );
+  await _checkAttributeSwitch(tester, mcp, allocated, revision + 1);
+}
+
+Future<void> _checkAttributeSwitch(
+  WidgetTester tester,
+  EngineMcpPeer mcp,
+  Map<String, dynamic> allocated,
+  int revision,
+) async {
+  await _openTreeNode(tester, _attributeNodeId);
+  expect(_treeAttribute(tester), EnginePassiveAttribute.dexterity);
+  await _chooseTreeAttribute(tester, 'Интеллект');
+  await _previewTreeNode(tester, '→');
+  _expectAttributeChange(_attributeNodeId, 'Ловкость');
+  _expectAttributeChange(_attributeNodeId, 'Интеллект');
+  await _chooseTreeAttribute(tester, 'Сила');
+  expect(
+    tester
+        .widget<FilledButton>(find.byKey(const Key('engine-tree-apply')))
+        .onPressed,
+    isNull,
+  );
+  await tester.tap(find.byKey(const Key('engine-tree-cancel')));
+  await tester.pumpAndSettle();
+  expect(await mcp.call('get_snapshot'), allocated);
+
+  await _openTreeNode(tester, _attributeNodeId);
+  expect(_treeAttribute(tester), EnginePassiveAttribute.dexterity);
+  await _chooseTreeAttribute(tester, 'Интеллект');
+  await _previewTreeNode(tester, '→');
+  await _applyTreeNode(tester, revision + 1);
+
+  final switched = await mcp.call('get_snapshot');
+  expect(_treeAttributes(switched), {
+    '22419': 'dexterity',
+    '$_attributeNodeId': 'intelligence',
+  });
+  await _openTreeNode(tester, _attributeNodeId);
+  expect(_treeAttribute(tester), EnginePassiveAttribute.intelligence);
+  await _checkAttributeChangeFromMcp(tester, mcp, revision + 1);
+}
+
+Future<void> _checkAttributeChangeFromMcp(
+  WidgetTester tester,
+  EngineMcpPeer mcp,
+  int revision,
+) async {
+  await _chooseTreeAttribute(tester, 'Сила');
+  await _previewTreeNode(tester, '→');
+  await mcp.call('edit_build', {
+    'expected_revision': revision,
+    'request_id': 'attribute-external-change',
+    'edit': {
+      'tree_node': {
+        'node_id': _attributeNodeId,
+        'action': 'set_attribute',
+        'attribute': 'dexterity',
+      },
+    },
+  });
+  await _waitFor(
+    tester,
+    find.text('Выполните предпросмотр для текущей ревизии'),
+  );
+  final apply = find.byKey(const Key('engine-tree-apply'));
+  expect(tester.widget<FilledButton>(apply).onPressed, isNull);
+  await tester.tap(find.byKey(const Key('engine-tree-cancel')));
+  await tester.pumpAndSettle();
+
+  await _openTreeNode(tester, _attributeNodeId);
+  expect(_treeAttribute(tester), EnginePassiveAttribute.dexterity);
+  await tester.tap(find.byKey(const Key('engine-tree-cancel')));
+  await tester.pumpAndSettle();
+}
+
+EnginePassiveAttribute? _treeAttribute(WidgetTester tester) => tester
+    .widget<DropdownButton<EnginePassiveAttribute>>(
+      find.byKey(_attributePicker),
+    )
+    .value;
+
+Future<void> _chooseTreeAttribute(WidgetTester tester, String label) async {
+  final picker = find.byKey(_attributePicker);
+  await tester.ensureVisible(picker);
+  await tester.tap(picker);
+  await tester.pumpAndSettle();
+  await tester.tap(find.text(label).last);
+  await tester.pumpAndSettle();
+}
+
+void _expectAttributeChange(int id, String label) {
+  expect(
+    find.descendant(
+      of: find.byKey(ValueKey('engine-tree-attribute-change-$id')),
+      matching: find.text(label),
+    ),
+    findsOneWidget,
+  );
+}
+
+Map<String, dynamic> _treeAttributes(Map<String, dynamic> snapshot) {
+  final build = snapshot['build'] as Map<String, dynamic>;
+  final model = build['model'] as Map<String, dynamic>;
+  return model['passive_attributes'] as Map<String, dynamic>;
+}
+
 Future<void> _applyTreeNode(WidgetTester tester, int revision) async {
   await tester.tap(find.byKey(const Key('engine-tree-apply')));
   await _waitFor(tester, find.text('Ревизия $revision'));
@@ -239,14 +378,14 @@ Future<void> _applyTreeNode(WidgetTester tester, int revision) async {
   expect(find.byKey(const Key('engine-tree-apply')), findsNothing);
 }
 
-Future<void> _openTreeNode(WidgetTester tester) async {
+Future<void> _openTreeNode(WidgetTester tester, [int nodeId = 18845]) async {
   final tree = find.byKey(const Key('engine-open-tree'));
   await tester.ensureVisible(tree);
   await tester.tap(tree);
   await tester.pumpAndSettle();
-  await tester.enterText(find.byKey(const Key('engine-tree-query')), '18845');
+  await tester.enterText(find.byKey(const Key('engine-tree-query')), '$nodeId');
   await tester.tap(find.byKey(const Key('engine-tree-search')));
-  await _waitFor(tester, find.byKey(const Key('engine-tree-node-18845')));
+  await _waitFor(tester, find.byKey(ValueKey('engine-tree-node-$nodeId')));
 }
 
 Future<void> _previewTreeNode(WidgetTester tester, String action) async {

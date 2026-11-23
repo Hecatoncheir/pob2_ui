@@ -37,6 +37,7 @@ abstract interface class EngineConnection {
     String requestId,
   );
   bool get supportsTreePreview;
+  bool get supportsTreeAttributes;
   Future<EnginePassivePage> findPassives(
     String version,
     String query,
@@ -85,6 +86,7 @@ class EngineSessionClient implements EngineConnection {
     this.supportsAddSupport,
     this.supportsEquipmentPreview,
     this.supportsTreePreview,
+    this.supportsTreeAttributes,
   );
   final Process _helper;
   final StreamSubscription<String> _output;
@@ -97,6 +99,8 @@ class EngineSessionClient implements EngineConnection {
   final bool supportsEquipmentPreview;
   @override
   final bool supportsTreePreview;
+  @override
+  final bool supportsTreeAttributes;
   bool _closed = false;
 
   static Future<EngineConnection> open(EngineOptions options) async {
@@ -172,6 +176,7 @@ class EngineSessionClient implements EngineConnection {
         info.capabilities.contains('build.add_support'),
         info.capabilities.contains('build.equipment_preview'),
         info.capabilities.contains('build.tree_preview'),
+        info.capabilities.contains('build.tree_attributes'),
       );
     } catch (_) {
       await channel?.terminate();
@@ -264,6 +269,12 @@ class EngineSessionClient implements EngineConnection {
       spec: model.activeSets.tree,
       version: model.treeVersion,
       nodes: Set.unmodifiable(model.nodes),
+      attributes: Map.unmodifiable(
+        model.passiveAttributes.map(
+          (id, attribute) =>
+              MapEntry(id, EnginePassiveAttribute.parse(attribute)),
+        ),
+      ),
     );
   }
 
@@ -485,7 +496,11 @@ class EngineSessionClient implements EngineConnection {
       throw StateError('Каталог PoB относится к другой версии дерева');
     }
     final matches = page.entries.map(
-      (entry) => (id: int.parse(entry.id), name: entry.name),
+      (entry) => (
+        id: int.parse(entry.id),
+        name: entry.name,
+        attributeChoice: entry.attributeChoice,
+      ),
     );
     final next = page.offset + page.limit;
     return (
@@ -507,6 +522,17 @@ class EngineSessionClient implements EngineConnection {
       comparison: _buildComparison(result),
       added: List<int>.unmodifiable(result.passiveChange.added),
       removed: List<int>.unmodifiable(result.passiveChange.removed),
+      attributes: List<EnginePassiveAttributeChange>.unmodifiable(
+        result.passiveChange.attributes.map(
+          (change) => (
+            nodeId: change.nodeId,
+            before: change.hasBefore()
+                ? EnginePassiveAttribute.parse(change.before)
+                : null,
+            after: EnginePassiveAttribute.parse(change.after),
+          ),
+        ),
+      ),
     );
   }
 
@@ -520,7 +546,8 @@ class EngineSessionClient implements EngineConnection {
   static builds.BuildEdit _treeChange(EngineTreeEdit edit) => builds.BuildEdit(
     treeNode: builds.TreeNodeEdit(
       nodeId: edit.nodeId,
-      action: edit.refund ? 'refund' : 'allocate',
+      action: edit.action.wireName,
+      attribute: edit.attribute?.name,
     ),
   );
 

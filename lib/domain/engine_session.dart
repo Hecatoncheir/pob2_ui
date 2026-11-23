@@ -73,14 +73,49 @@ typedef EngineBuildComparison = ({
   List<EngineStatDelta> deltas,
 });
 
-typedef EngineTree = ({int spec, String version, Set<int> nodes});
-typedef EnginePassive = ({int id, String name});
+enum EnginePassiveAttribute {
+  strength,
+  dexterity,
+  intelligence;
+
+  static EnginePassiveAttribute parse(String name) =>
+      values.where((attribute) => attribute.name == name).firstOrNull ??
+      (throw FormatException('Неизвестный атрибут пассива: $name'));
+}
+
+enum EngineTreeAction {
+  allocate('allocate'),
+  refund('refund'),
+  setAttribute('set_attribute');
+
+  const EngineTreeAction(this.wireName);
+
+  final String wireName;
+}
+
+typedef EngineTree = ({
+  int spec,
+  String version,
+  Set<int> nodes,
+  Map<int, EnginePassiveAttribute> attributes,
+});
+typedef EnginePassive = ({int id, String name, bool attributeChoice});
 typedef EnginePassivePage = ({List<EnginePassive> entries, int? nextOffset});
-typedef EngineTreeEdit = ({int nodeId, bool refund});
+typedef EngineTreeEdit = ({
+  int nodeId,
+  EngineTreeAction action,
+  EnginePassiveAttribute? attribute,
+});
+typedef EnginePassiveAttributeChange = ({
+  int nodeId,
+  EnginePassiveAttribute? before,
+  EnginePassiveAttribute after,
+});
 typedef EngineTreePreview = ({
   EngineBuildComparison comparison,
   List<int> added,
   List<int> removed,
+  List<EnginePassiveAttributeChange> attributes,
 });
 
 class EngineSupportPreview {

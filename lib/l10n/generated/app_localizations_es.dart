@@ -240,6 +240,9 @@ class AppLocalizationsEs extends AppLocalizations {
   String get m63141a77bf => 'Amuleto';
 
   @override
+  String get m4b70491e0e => 'Atributo de la pasiva';
+
+  @override
   String get mc11be494c0 => 'Base de artículos';
 
   @override
@@ -422,6 +425,9 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get m99068c6fe4 => 'Segunda configuración';
+
+  @override
+  String get mea642413c7 => 'Elegir un atributo';
 
   @override
   String get m27c00630ba => 'Seleccione dos nodos diferentes.';
@@ -1334,6 +1340,11 @@ class AppLocalizationsEs extends AppLocalizations {
   String get m4b8f0df7bc => 'Acción de aplicación desconocida.';
 
   @override
+  String m51629e8867(String p0) {
+    return 'Atributo de la pasiva desconocido: $p0';
+  }
+
+  @override
   String m88bb56b333(String p0) {
     return 'Modo de escena PoB desconocido: $p0';
   }
@@ -1990,6 +2001,9 @@ class AppLocalizationsEs extends AppLocalizations {
   String get mad582b726d => 'Vista previa de la limpieza del perfil';
 
   @override
+  String get m93f8a89eb5 => 'Vista previa del cambio de atributo';
+
+  @override
   String get m665711d6eb => 'Previsualizar reembolso';
 
   @override
@@ -2491,6 +2505,9 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get md4b51f7a04 => 'Desequipar';
+
+  @override
+  String get mcf5e71cc14 => 'Reembolsar pasiva';
 
   @override
   String get mf3f1d96087 => 'Propiedades propias';

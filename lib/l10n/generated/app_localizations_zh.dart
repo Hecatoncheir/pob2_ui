@@ -230,6 +230,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m63141a77bf => '護身符';
 
   @override
+  String get m4b70491e0e => '天賦屬性';
+
+  @override
   String get mc11be494c0 => '物品基礎';
 
   @override
@@ -408,6 +411,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m99068c6fe4 => '第二個流派';
+
+  @override
+  String get mea642413c7 => '選擇屬性';
 
   @override
   String get m27c00630ba => '選擇兩個不同的節點。';
@@ -1289,6 +1295,11 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m4b8f0df7bc => '未知的應用程式操作。';
 
   @override
+  String m51629e8867(String p0) {
+    return '未知的天賦屬性：$p0';
+  }
+
+  @override
   String m88bb56b333(String p0) {
     return '未知 PoB 場景模式：$p0';
   }
@@ -1926,6 +1937,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get mad582b726d => '輪廓清理預覽';
 
   @override
+  String get m93f8a89eb5 => '預覽屬性變更';
+
+  @override
   String get m665711d6eb => '預覽重置';
 
   @override
@@ -2407,6 +2421,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get md4b51f7a04 => '卸下';
+
+  @override
+  String get mcf5e71cc14 => '移除天賦';
 
   @override
   String get mf3f1d96087 => '自己的房產';
@@ -3077,6 +3094,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m63141a77bf => '護身符';
 
   @override
+  String get m4b70491e0e => '天賦屬性';
+
+  @override
   String get mc11be494c0 => '物品基礎';
 
   @override
@@ -3255,6 +3275,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m99068c6fe4 => '第二個流派';
+
+  @override
+  String get mea642413c7 => '選擇屬性';
 
   @override
   String get m27c00630ba => '選擇兩個不同的節點。';
@@ -4136,6 +4159,11 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m4b8f0df7bc => '未知的應用程式操作。';
 
   @override
+  String m51629e8867(String p0) {
+    return '未知的天賦屬性：$p0';
+  }
+
+  @override
   String m88bb56b333(String p0) {
     return '未知 PoB 場景模式：$p0';
   }
@@ -4773,6 +4801,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get mad582b726d => '輪廓清理預覽';
 
   @override
+  String get m93f8a89eb5 => '預覽屬性變更';
+
+  @override
   String get m665711d6eb => '預覽重置';
 
   @override
@@ -5254,6 +5285,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get md4b51f7a04 => '卸下';
+
+  @override
+  String get mcf5e71cc14 => '移除天賦';
 
   @override
   String get mf3f1d96087 => '自己的房產';

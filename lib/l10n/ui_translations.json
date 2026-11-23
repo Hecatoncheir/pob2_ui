@@ -64,6 +64,7 @@
     "mb7b217c429": "{p0}: потрачено {p1} из {p2} очков",
     "m607c57804e": "Активное оружие · {p0}",
     "m63141a77bf": "Амулет",
+    "m4b70491e0e": "Атрибут пассива",
     "mc11be494c0": "База предмета",
     "m7d4b534b8d": "Без восхождения",
     "m0792a052a1": "Без ограничения",
@@ -122,6 +123,7 @@
     "m6bf3b12df4": "Вставьте XML сборки. Она будет проверена и рассчитана в Lua.",
     "m5b1968a662": "Всё для работы",
     "m99068c6fe4": "Вторая сборка",
+    "mea642413c7": "Выберите атрибут",
     "m27c00630ba": "Выберите два разных узла.",
     "mbe5d3137c5": "Выберите два целевых узла на дереве.",
     "m33813b1d8e": "Выберите значение",
@@ -389,6 +391,7 @@
     "m596dfa75c4": "Неизвестная команда.",
     "md86c6427dc": "Неизвестное действие интерфейса.",
     "m4b8f0df7bc": "Неизвестное действие приложения.",
+    "m51629e8867": "Неизвестный атрибут пассива: {p0}",
     "m88bb56b333": "Неизвестный режим сцены PoB: {p0}",
     "m520286c8d7": "Неизвестный статус",
     "me6b70e080e": "Неизвестный тип установки",
@@ -594,6 +597,7 @@
     "m32060a34f5": "Предпросмотр",
     "m7ece05214c": "Предпросмотр назначения",
     "mad582b726d": "Предпросмотр очистки профиля",
+    "m93f8a89eb5": "Предпросмотр смены атрибута",
     "m665711d6eb": "Предпросмотр снятия",
     "m3c2b5cfe97": "Предупреждения Lua",
     "m39215290bb": "Предупреждения · {p0}",
@@ -745,6 +749,7 @@
     "ma386719073": "Сначала установите оба компонента",
     "m5ebbc9d7a5": "Снимутся",
     "md4b51f7a04": "Снять",
+    "mcf5e71cc14": "Снять пассив",
     "mf3f1d96087": "Собственные свойства",
     "m2cdbcd559d": "Соединение восстановлено",
     "m7d3f9a98b5": "Соединение может потратить пассивные очки. Сброс снимет все назначенные узлы текущего дерева.",
@@ -1771,7 +1776,12 @@
     "mc6826c7837": "Show more",
     "m7ece05214c": "Preview allocation",
     "m665711d6eb": "Preview refund",
-    "mf534a9d6b4": "Tree setup {p0}"
+    "mf534a9d6b4": "Tree setup {p0}",
+    "m4b70491e0e": "Passive attribute",
+    "mea642413c7": "Choose an attribute",
+    "m51629e8867": "Unknown passive attribute: {p0}",
+    "m93f8a89eb5": "Preview attribute change",
+    "mcf5e71cc14": "Refund passive"
   },
   "fr": {
     "m0c63e733f9": "Lua n'a pas renvoyé toutes les icônes",
@@ -2658,7 +2668,12 @@
     "mc6826c7837": "Afficher plus",
     "m7ece05214c": "Aperçu de l’attribution",
     "m665711d6eb": "Aperçu du retrait",
-    "mf534a9d6b4": "Configuration d’arbre {p0}"
+    "mf534a9d6b4": "Configuration d’arbre {p0}",
+    "m4b70491e0e": "Attribut du passif",
+    "mea642413c7": "Choisir un attribut",
+    "m51629e8867": "Attribut du passif inconnu : {p0}",
+    "m93f8a89eb5": "Aperçu du changement d’attribut",
+    "mcf5e71cc14": "Rembourser le passif"
   },
   "de": {
     "m0c63e733f9": "Lua hat nicht alle Symbole zurückgegeben",
@@ -3545,7 +3560,12 @@
     "mc6826c7837": "Mehr anzeigen",
     "m7ece05214c": "Zuweisung ansehen",
     "m665711d6eb": "Rückerstattung ansehen",
-    "mf534a9d6b4": "Baumkonfiguration {p0}"
+    "mf534a9d6b4": "Baumkonfiguration {p0}",
+    "m4b70491e0e": "Attribut der Passiven",
+    "mea642413c7": "Attribut wählen",
+    "m51629e8867": "Unbekanntes Attribut der Passiven: {p0}",
+    "m93f8a89eb5": "Attributwechsel ansehen",
+    "mcf5e71cc14": "Passive zurückerstatten"
   },
   "es": {
     "m0c63e733f9": "Lua no devolvió todos los íconos",
@@ -4432,7 +4452,12 @@
     "mc6826c7837": "Mostrar más",
     "m7ece05214c": "Previsualizar asignación",
     "m665711d6eb": "Previsualizar reembolso",
-    "mf534a9d6b4": "Configuración de árbol {p0}"
+    "mf534a9d6b4": "Configuración de árbol {p0}",
+    "m4b70491e0e": "Atributo de la pasiva",
+    "mea642413c7": "Elegir un atributo",
+    "m51629e8867": "Atributo de la pasiva desconocido: {p0}",
+    "m93f8a89eb5": "Vista previa del cambio de atributo",
+    "mcf5e71cc14": "Reembolsar pasiva"
   },
   "pt_BR": {
     "m0c63e733f9": "Lua não retornou todos os ícones",
@@ -5319,7 +5344,12 @@
     "mc6826c7837": "Mostrar mais",
     "m7ece05214c": "Prévia da alocação",
     "m665711d6eb": "Prévia da remoção",
-    "mf534a9d6b4": "Configuração de árvore {p0}"
+    "mf534a9d6b4": "Configuração de árvore {p0}",
+    "m4b70491e0e": "Atributo da passiva",
+    "mea642413c7": "Escolher um atributo",
+    "m51629e8867": "Atributo da passiva desconhecido: {p0}",
+    "m93f8a89eb5": "Prévia da alteração de atributo",
+    "mcf5e71cc14": "Restituir passiva"
   },
   "ja": {
     "m0c63e733f9": "Lua はすべてのアイコンを返しませんでした",
@@ -6206,7 +6236,12 @@
     "mc6826c7837": "さらに表示",
     "m7ece05214c": "割り当てをプレビュー",
     "m665711d6eb": "振り直しをプレビュー",
-    "mf534a9d6b4": "ツリー構成 {p0}"
+    "mf534a9d6b4": "ツリー構成 {p0}",
+    "m4b70491e0e": "パッシブの能力値",
+    "mea642413c7": "能力値を選択",
+    "m51629e8867": "不明なパッシブの能力値: {p0}",
+    "m93f8a89eb5": "能力値の変更をプレビュー",
+    "mcf5e71cc14": "パッシブを解除"
   },
   "ko": {
     "m0c63e733f9": "Lua이 모든 아이콘을 반환하지 않았습니다.",
@@ -7093,7 +7128,12 @@
     "mc6826c7837": "더 보기",
     "m7ece05214c": "할당 미리 보기",
     "m665711d6eb": "반환 미리 보기",
-    "mf534a9d6b4": "트리 구성 {p0}"
+    "mf534a9d6b4": "트리 구성 {p0}",
+    "m4b70491e0e": "패시브 능력치",
+    "mea642413c7": "능력치 선택",
+    "m51629e8867": "알 수 없는 패시브 능력치: {p0}",
+    "m93f8a89eb5": "능력치 변경 미리 보기",
+    "mcf5e71cc14": "패시브 반환"
   },
   "th": {
     "m0c63e733f9": "Lua ไม่ได้ส่งคืนไอคอนทั้งหมด",
@@ -7980,7 +8020,12 @@
     "mc6826c7837": "แสดงเพิ่มเติม",
     "m7ece05214c": "ดูตัวอย่างการจัดสรร",
     "m665711d6eb": "ดูตัวอย่างการคืนแต้ม",
-    "mf534a9d6b4": "ชุดผัง {p0}"
+    "mf534a9d6b4": "ชุดผัง {p0}",
+    "m4b70491e0e": "คุณสมบัติพาสซีฟ",
+    "mea642413c7": "เลือกคุณสมบัติ",
+    "m51629e8867": "ไม่รู้จักคุณสมบัติพาสซีฟ: {p0}",
+    "m93f8a89eb5": "ดูตัวอย่างการเปลี่ยนคุณสมบัติ",
+    "mcf5e71cc14": "คืนแต้มพาสซีฟ"
   },
   "zh_Hant": {
     "m0c63e733f9": "Lua 未傳回所有圖標",
@@ -8867,6 +8912,11 @@
     "mc6826c7837": "顯示更多",
     "m7ece05214c": "預覽配置",
     "m665711d6eb": "預覽重置",
-    "mf534a9d6b4": "天賦配置 {p0}"
+    "mf534a9d6b4": "天賦配置 {p0}",
+    "m4b70491e0e": "天賦屬性",
+    "mea642413c7": "選擇屬性",
+    "m51629e8867": "未知的天賦屬性：{p0}",
+    "m93f8a89eb5": "預覽屬性變更",
+    "mcf5e71cc14": "移除天賦"
   }
 }

@@ -238,6 +238,9 @@ class AppLocalizationsPt extends AppLocalizations {
   String get m63141a77bf => 'Amuleto';
 
   @override
+  String get m4b70491e0e => 'Atributo da passiva';
+
+  @override
   String get mc11be494c0 => 'Base de itens';
 
   @override
@@ -417,6 +420,9 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get m99068c6fe4 => 'Segunda build';
+
+  @override
+  String get mea642413c7 => 'Escolher um atributo';
 
   @override
   String get m27c00630ba => 'Selecione dois nós diferentes.';
@@ -1325,6 +1331,11 @@ class AppLocalizationsPt extends AppLocalizations {
   String get m4b8f0df7bc => 'Ação de aplicativo desconhecida.';
 
   @override
+  String m51629e8867(String p0) {
+    return 'Atributo da passiva desconhecido: $p0';
+  }
+
+  @override
   String m88bb56b333(String p0) {
     return 'Modo de cena PoB desconhecido: $p0';
   }
@@ -1979,6 +1990,9 @@ class AppLocalizationsPt extends AppLocalizations {
   String get mad582b726d => 'Visualização da limpeza de perfil';
 
   @override
+  String get m93f8a89eb5 => 'Prévia da alteração de atributo';
+
+  @override
   String get m665711d6eb => 'Prévia da remoção';
 
   @override
@@ -2478,6 +2492,9 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get md4b51f7a04 => 'Desequipar';
+
+  @override
+  String get mcf5e71cc14 => 'Restituir passiva';
 
   @override
   String get mf3f1d96087 => 'Propriedades próprias';
@@ -3176,6 +3193,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get m63141a77bf => 'Amuleto';
 
   @override
+  String get m4b70491e0e => 'Atributo da passiva';
+
+  @override
   String get mc11be494c0 => 'Base de itens';
 
   @override
@@ -3355,6 +3375,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get m99068c6fe4 => 'Segunda build';
+
+  @override
+  String get mea642413c7 => 'Escolher um atributo';
 
   @override
   String get m27c00630ba => 'Selecione dois nós diferentes.';
@@ -4263,6 +4286,11 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get m4b8f0df7bc => 'Ação de aplicativo desconhecida.';
 
   @override
+  String m51629e8867(String p0) {
+    return 'Atributo da passiva desconhecido: $p0';
+  }
+
+  @override
   String m88bb56b333(String p0) {
     return 'Modo de cena PoB desconhecido: $p0';
   }
@@ -4917,6 +4945,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get mad582b726d => 'Visualização da limpeza de perfil';
 
   @override
+  String get m93f8a89eb5 => 'Prévia da alteração de atributo';
+
+  @override
   String get m665711d6eb => 'Prévia da remoção';
 
   @override
@@ -5416,6 +5447,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get md4b51f7a04 => 'Desequipar';
+
+  @override
+  String get mcf5e71cc14 => 'Restituir passiva';
 
   @override
   String get mf3f1d96087 => 'Propriedades próprias';

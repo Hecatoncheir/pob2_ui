@@ -232,6 +232,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m63141a77bf => 'アミュレット';
 
   @override
+  String get m4b70491e0e => 'パッシブの能力値';
+
+  @override
   String get mc11be494c0 => 'アイテムベース';
 
   @override
@@ -410,6 +413,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m99068c6fe4 => '2つ目のビルド';
+
+  @override
+  String get mea642413c7 => '能力値を選択';
 
   @override
   String get m27c00630ba => '2 つの異なるノードを選択します。';
@@ -1294,6 +1300,11 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m4b8f0df7bc => '不明なアプリケーション アクション。';
 
   @override
+  String m51629e8867(String p0) {
+    return '不明なパッシブの能力値: $p0';
+  }
+
+  @override
   String m88bb56b333(String p0) {
     return '不明な PoB シーン モード: $p0';
   }
@@ -1933,6 +1944,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get mad582b726d => 'プロファイルのクリーニングのプレビュー';
 
   @override
+  String get m93f8a89eb5 => '能力値の変更をプレビュー';
+
+  @override
   String get m665711d6eb => '振り直しをプレビュー';
 
   @override
@@ -2414,6 +2428,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get md4b51f7a04 => '装備を外す';
+
+  @override
+  String get mcf5e71cc14 => 'パッシブを解除';
 
   @override
   String get mf3f1d96087 => '独自のプロパティ';

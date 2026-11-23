@@ -248,6 +248,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get m63141a77bf => 'Amulett';
 
   @override
+  String get m4b70491e0e => 'Attribut der Passiven';
+
+  @override
   String get mc11be494c0 => 'Artikelbasis';
 
   @override
@@ -429,6 +432,9 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get m99068c6fe4 => 'Zweiter Build';
+
+  @override
+  String get mea642413c7 => 'Attribut wählen';
 
   @override
   String get m27c00630ba => 'Wählen Sie zwei verschiedene Knoten aus.';
@@ -1349,6 +1355,11 @@ class AppLocalizationsDe extends AppLocalizations {
   String get m4b8f0df7bc => 'Unbekannte Anwendungsaktion.';
 
   @override
+  String m51629e8867(String p0) {
+    return 'Unbekanntes Attribut der Passiven: $p0';
+  }
+
+  @override
   String m88bb56b333(String p0) {
     return 'Unbekannter PoB-Szenenmodus: $p0';
   }
@@ -2004,6 +2015,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get mad582b726d => 'Vorschau der Profilbereinigung';
 
   @override
+  String get m93f8a89eb5 => 'Attributwechsel ansehen';
+
+  @override
   String get m665711d6eb => 'Rückerstattung ansehen';
 
   @override
@@ -2510,6 +2524,9 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get md4b51f7a04 => 'Ablegen';
+
+  @override
+  String get mcf5e71cc14 => 'Passive zurückerstatten';
 
   @override
   String get mf3f1d96087 => 'Eigene Immobilien';

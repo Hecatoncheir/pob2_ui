@@ -236,6 +236,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m63141a77bf => 'Амулет';
 
   @override
+  String get m4b70491e0e => 'Атрибут пассива';
+
+  @override
   String get mc11be494c0 => 'База предмета';
 
   @override
@@ -415,6 +418,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get m99068c6fe4 => 'Вторая сборка';
+
+  @override
+  String get mea642413c7 => 'Выберите атрибут';
 
   @override
   String get m27c00630ba => 'Выберите два разных узла.';
@@ -1316,6 +1322,11 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m4b8f0df7bc => 'Неизвестное действие приложения.';
 
   @override
+  String m51629e8867(String p0) {
+    return 'Неизвестный атрибут пассива: $p0';
+  }
+
+  @override
   String m88bb56b333(String p0) {
     return 'Неизвестный режим сцены PoB: $p0';
   }
@@ -1963,6 +1974,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get mad582b726d => 'Предпросмотр очистки профиля';
 
   @override
+  String get m93f8a89eb5 => 'Предпросмотр смены атрибута';
+
+  @override
   String get m665711d6eb => 'Предпросмотр снятия';
 
   @override
@@ -2455,6 +2469,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get md4b51f7a04 => 'Снять';
+
+  @override
+  String get mcf5e71cc14 => 'Снять пассив';
 
   @override
   String get mf3f1d96087 => 'Собственные свойства';
