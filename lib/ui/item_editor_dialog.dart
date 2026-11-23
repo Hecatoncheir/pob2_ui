@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../data/equipment_repository.dart';
 import '../data/item_art_catalog.dart';
 import '../domain/build_report.dart';
+import '../domain/equipment_item.dart';
 import '../domain/item_name.dart';
 import 'core/app_text.dart';
 import 'core/motion.dart';
@@ -41,12 +42,7 @@ class _ItemEditorDialog extends StatefulWidget {
 class _ItemEditorDialogState extends State<_ItemEditorDialog> {
   late final repository = EquipmentRepository(widget.model.engine);
   late final editor = ItemEditorCubit(
-    ({raw, itemId}) => repository.inspect(
-      slot: widget.slot,
-      raw: raw,
-      itemId: itemId,
-      compare: true,
-    ),
+    _inspect,
     ({raw, itemId, expectedRevision}) => widget.model.equipItem(
       widget.slot,
       raw: raw,
@@ -54,6 +50,23 @@ class _ItemEditorDialogState extends State<_ItemEditorDialog> {
       expectedRevision: expectedRevision,
     ),
   );
+  Future<ItemInspection> _inspect({String? raw, int? itemId}) async {
+    final comparison = await repository.inspect(
+      slot: widget.slot,
+      raw: raw,
+      itemId: itemId,
+      compare: true,
+    );
+    if (!comparison.compatible || !widget.model.hasSharedTree)
+      return comparison;
+    final revision = await widget.model.previewSharedEquipment((
+      slot: widget.slot,
+      raw: raw ?? '',
+      itemId: itemId ?? 0,
+    ));
+    return ItemInspection.withBuildRevision(comparison, revision);
+  }
+
   late final text = TextEditingController(text: widget.initial);
   late final AppLifecycleListener exitListener;
   @override

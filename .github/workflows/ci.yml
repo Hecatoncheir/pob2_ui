@@ -34,6 +34,10 @@ on:
         description: 'Проверить ветви оружия в общей сборке PoB II'
         type: boolean
         default: false
+      engine_workshop:
+        description: 'Проверить штатное дерево, редакторы, заметки и историю общей сборки'
+        type: boolean
+        default: false
       cold_install:
         description: 'Проверить первый запуск без предварительной загрузки архивов'
         type: boolean
@@ -43,6 +47,12 @@ on:
       ref:
         type: string
         default: ''
+      engine_release:
+        type: string
+        default: ''
+      engine_workshop:
+        type: boolean
+        default: false
       locked_components:
         type: boolean
         default: false
@@ -190,8 +200,13 @@ jobs:
           POB2_ENGINE_TEST_SUPPORT: ${{ inputs.engine_support && '1' || '0' }}
           POB2_ENGINE_TEST_EQUIPMENT: ${{ inputs.engine_equipment && '1' || '0' }}
           POB2_ENGINE_TEST_TREE: ${{ inputs.engine_tree && '1' || '0' }}
-          POB2_ENGINE_TEST_ATTRIBUTES: ${{ inputs.engine_attributes && '1' || '0' }}
+          POB2_ENGINE_TEST_ATTRIBUTES: ${{ (inputs.engine_attributes || inputs.engine_workshop) && '1' || '0' }}
           POB2_ENGINE_TEST_WEAPON_MODES: ${{ inputs.engine_weapon_modes && '1' || '0' }}
+          POB2_ENGINE_TEST_SOCKETS: ${{ inputs.engine_workshop && '1' || '0' }}
+          POB2_ENGINE_TEST_JEWELS: ${{ inputs.engine_workshop && '1' || '0' }}
+          POB2_ENGINE_TEST_TREE_SPECS: ${{ inputs.engine_workshop && '1' || '0' }}
+          POB2_ENGINE_TEST_TREE_CLASS: ${{ inputs.engine_workshop && '1' || '0' }}
+          POB2_ENGINE_TEST_WORKSHOP: ${{ inputs.engine_workshop && '1' || '0' }}
           POB2_ENGINE_POB_GITHUB_TOKEN: ${{ github.token }}
           GH_TOKEN: ${{ github.token }}
           POB2_UI_HOME: ${{ runner.temp }}/pob2-lua-smoke
@@ -230,6 +245,8 @@ jobs:
           runner=()
           if [[ "$RUNNER_OS" == Linux ]]; then runner=(xvfb-run -a); fi
           "${runner[@]}" flutter test --no-pub integration_test/engine_session_desktop_test.dart -d "${{ matrix.platform }}"
+          echo "POB2_PACKAGED_ENGINE=$POB2_ENGINE_TEST_EXECUTABLE" >> "$GITHUB_ENV"
+          echo "POB2_PACKAGED_ENGINE_VERSION=$ENGINE_TAG" >> "$GITHUB_ENV"
       - name: Тесты приложения
         run: flutter test
       - uses: actions/setup-go@v7.1.0
@@ -261,7 +278,13 @@ jobs:
       - name: Собрать приложение
         run: flutter build ${{ matrix.platform }} --release
       - name: Собрать установщик
-        run: python tool/release.py --package ${{ matrix.target }}
+        shell: bash
+        run: |
+          args=(--package ${{ matrix.target }})
+          if [[ -n "${POB2_PACKAGED_ENGINE:-}" ]]; then
+            args+=(--engine-binary "$POB2_PACKAGED_ENGINE")
+          fi
+          python tool/release.py "${args[@]}"
       - name: Проверить выбор установленной версии загрузчиком
         if: runner.os != 'macOS'
         run: python tool/check_launcher.py --target ${{ matrix.target }}

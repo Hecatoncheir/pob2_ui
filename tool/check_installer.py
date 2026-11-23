@@ -312,6 +312,23 @@ def archive_check_environment(environment):
     return environment
 
 
+def check_bundled_engine(executable, base, environment):
+    expected = environment.get('POB2_PACKAGED_ENGINE_VERSION')
+    if expected is None:
+        return
+    engine = executable.with_name('pob2-engine.exe' if os.name == 'nt' else 'pob2-engine')
+    info = subprocess.check_output([engine, '--version', '--json'], timeout=20)
+    if json.loads(info)['version'] != expected:
+        raise ValueError('Версия установленного движка расходится с комплектом')
+    flags = ['--profile', 'installer', '--runtime-dir', base / 'engine-runtime', '--data-dir', base / 'engine-data']
+    env = dict(environment, POB2_ENGINE_CALCULATOR='go')
+    try:
+        run(engine, 'session', 'create', *flags, '--start-server',
+            '--session', 'smoke', '--name', 'Installer', '--request-id', 'installer', env=env, timeout=45)
+    finally:
+        run(engine, 'shutdown', *flags, env=env, timeout=30)
+
+
 def check(target, *, build_check=False, components=None, archives=None, package=None, previous=None, verify_link=False):
     number = version()
     if previous is not None and not previous.is_file():
@@ -330,6 +347,7 @@ def check(target, *, build_check=False, components=None, archives=None, package=
             environment['HOME'] = str(base / 'home')
         if target == 'macos-arm64':
             executable = check_macos(package, base, data, environment)
+            check_bundled_engine(executable, base, environment)
             if build_check:
                 check_build(executable, base, environment, target, **options)
             return
@@ -378,8 +396,9 @@ def check(target, *, build_check=False, components=None, archives=None, package=
         run(install / binary, env=environment)
         assert (install / 'active-version').read_text().strip() == number
         stop_versions(install, environment)
+        executable = install / 'versions' / number / ('pob2_ui.exe' if os.name == 'nt' else 'pob2_ui')
+        check_bundled_engine(executable, base, environment)
         if build_check:
-            executable = install / 'versions' / number / ('pob2_ui.exe' if os.name == 'nt' else 'pob2_ui')
             check_build(executable, base, environment, target, **options)
     print(f'{target}: установщик и настоящий запуск проверены')
 

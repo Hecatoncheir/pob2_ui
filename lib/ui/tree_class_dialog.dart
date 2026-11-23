@@ -1,7 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_ui/material_ui.dart';
 
+import '../domain/build_edit_result.dart';
 import '../domain/build_report.dart';
+import '../domain/engine_session.dart';
 import 'core/app_text.dart';
 import 'core/motion.dart';
 import 'core/spark_art.dart';
@@ -63,8 +65,9 @@ int _ascendancyId(JsonMap entry, Object? name) =>
     0;
 
 class _TreeClassCubit extends Cubit<_DialogState> {
-  _TreeClassCubit(this.model, this.initial)
+  _TreeClassCubit(WorkshopCubit model, this.initial)
     : classes = model.state.classes,
+      save = model.treeClassSelection(),
       super((
         selection: initial,
         applying: false,
@@ -72,7 +75,7 @@ class _TreeClassCubit extends Cubit<_DialogState> {
         error: null,
       ));
 
-  final WorkshopCubit model;
+  final Future<BuildEditResult> Function(EngineTreeClassEdit) save;
   final _Character initial;
   final List<JsonMap> classes;
 
@@ -92,14 +95,13 @@ class _TreeClassCubit extends Cubit<_DialogState> {
       needsTreeChoice: current.needsTreeChoice,
       error: null,
     ));
-    final result = await model.selectTreeClass(
+    final result = await save((
       classId: current.selection.classId,
       ascendancyId: current.selection.ascendancyId,
-      connect: change == _TreeChange.connect,
-      reset: change == _TreeChange.reset,
-    );
+      mode: change == _TreeChange.select ? '' : change.name,
+    ));
     if (isClosed) return false;
-    final needsChoice = result.error == _treeChoiceError;
+    final needsChoice = result.error?.contains(_treeChoiceError) ?? false;
     emit((
       selection: current.selection,
       applying: false,

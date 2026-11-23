@@ -4,6 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:grpc/grpc.dart';
 
 import '../data/engine_session_client.dart';
+import '../data/mcp_editor_gateway.dart';
+import '../domain/build_report.dart';
 import '../domain/engine_session.dart';
 
 class EngineSessionState {
@@ -312,8 +314,31 @@ class EngineSessionCubit extends Cubit<EngineSessionState> {
       throw StateError('Выполните предпросмотр для текущей ревизии');
     }
     final snapshot = state.snapshot!;
-    await _connectedTo(snapshot)
-        .editEquipment(snapshot, offer.edit, engineRequestId());
+    await writeEquipment(snapshot, offer.edit);
+  }
+
+  Future<EngineSnapshot> writeEquipment(
+    EngineSnapshot current,
+    EngineEquipmentEdit edit,
+  ) async {
+    try {
+      return await _connectedTo(current)
+          .editEquipment(current, edit, engineRequestId());
+    } on GrpcError catch (error) {
+      throw StateError(engineError(error));
+    }
+  }
+
+  Future<EngineSnapshot> selectWeaponSet(
+    EngineSnapshot current,
+    int weaponSet,
+  ) async {
+    try {
+      return await _connectedTo(current)
+          .selectWeaponSet(current, weaponSet, engineRequestId());
+    } on GrpcError catch (error) {
+      throw StateError(engineError(error));
+    }
   }
 
   bool get supportsTreePreview =>
@@ -419,6 +444,55 @@ class EngineSessionCubit extends Cubit<EngineSessionState> {
     }
     try {
       return await connection.selectTreeSpec(current, spec, engineRequestId());
+    } on GrpcError catch (error) {
+      throw StateError(engineError(error));
+    }
+  }
+
+  Future<EngineSnapshot> selectTreeClass(
+    EngineSnapshot current,
+    EngineTreeClassEdit edit,
+  ) async {
+    final connection = _connectedTo(current);
+    if (!connection.supportsTreeClass) {
+      throw StateError('Для смены класса обновите движок.');
+    }
+    try {
+      return await connection.selectTreeClass(current, edit, engineRequestId());
+    } on GrpcError catch (error) {
+      throw StateError(engineError(error));
+    }
+  }
+
+  Future<EngineSnapshot> replaceBuild(
+    EngineSnapshot current,
+    String xml,
+  ) async {
+    try {
+      return await _connectedTo(current)
+          .replaceBuild(current, xml, engineRequestId());
+    } on GrpcError catch (error) {
+      throw StateError(engineError(error));
+    }
+  }
+
+  Future<Future<void> Function()?> openEditorBridge(
+    McpEditorRequest execute,
+    Future<void> Function(JsonMap) afterReply,
+  ) async {
+    final current = state.snapshot;
+    if (!state.connected || current == null) return null;
+    return _connectedTo(current)
+        .openEditorBridge(current.sessionId, execute, afterReply);
+  }
+
+  Future<EngineSnapshot> renameShared(
+    EngineSnapshot current,
+    String name,
+  ) async {
+    try {
+      return await _connectedTo(current)
+          .rename(current, name, engineRequestId());
     } on GrpcError catch (error) {
       throw StateError(engineError(error));
     }

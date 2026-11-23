@@ -325,7 +325,10 @@ class PobBuildLibrary implements BuildStorage, BuildNotesStorage {
     String xml, {
     String? title,
     TreeProgressionKey? progressionSource,
-  }) => _write(() => _save(state, report, xml, title, progressionSource));
+    String? expectedXml,
+  }) => _write(
+    () => _save(state, report, xml, title, progressionSource, expectedXml),
+  );
 
   Future<LibraryState> _save(
     LibraryState state,
@@ -333,6 +336,7 @@ class PobBuildLibrary implements BuildStorage, BuildNotesStorage {
     String xml,
     String? title,
     TreeProgressionKey? progressionSource,
+    String? expectedXml,
   ) async {
     final root = _root;
     await _checkRoot(root);
@@ -352,6 +356,7 @@ class PobBuildLibrary implements BuildStorage, BuildNotesStorage {
             xml,
             title,
             progressionSource,
+            expectedXml,
           );
     final entry = _entry(root, file, document, DateTime.now());
     await activate(entry.id);
@@ -374,6 +379,7 @@ class PobBuildLibrary implements BuildStorage, BuildNotesStorage {
     String xml,
     String? title,
     TreeProgressionKey? progressionSource,
+    String? expectedXml,
   ) async {
     final file = _buildPath(root, previous.id);
     final current = await changed(previous.id, null);
@@ -381,9 +387,8 @@ class PobBuildLibrary implements BuildStorage, BuildNotesStorage {
       await _preserveAttempt(file, previous, xml, document);
       throw _conflict();
     }
-    final updated = current.document.notes == document.notes
-        ? xml
-        : document.withNotes(current.document.notes);
+    if (expectedXml != null && current.xml != expectedXml) throw _conflict();
+    final updated = _mergeSavedNotes(current, document, xml, expectedXml);
     if (title != null && title != previous.title) {
       return _rename(
         file,
@@ -393,11 +398,22 @@ class PobBuildLibrary implements BuildStorage, BuildNotesStorage {
         progressionSource,
       );
     }
-    if (current.entry.revision != document.revision) {
+    if (expectedXml == null
+        ? current.entry.revision != document.revision
+        : current.xml != updated) {
       await _saveLocal(file, current, updated);
     }
     return file;
   }
+
+  String _mergeSavedNotes(
+    PobBuildVersion current,
+    PobBuildDocument document,
+    String xml,
+    String? expectedXml,
+  ) => expectedXml != null || current.document.notes == document.notes
+      ? xml
+      : document.withNotes(current.document.notes);
 
   Future<void> _preserveAttempt(
     File file,

@@ -9,7 +9,9 @@ import 'package:pob2_engine_api/pob2/v1/build.pb.dart' as builds;
 import 'package:pob2_engine_api/pob2/v1/catalog.pb.dart' as catalog;
 import 'package:pob2_engine_api/pob2/v1/session.pbgrpc.dart' as pb;
 
+import '../domain/build_report.dart';
 import '../domain/engine_session.dart';
+import 'mcp_editor_gateway.dart';
 import '../domain/tree_allocation_mode.dart';
 import 'pob_build_document.dart';
 
@@ -39,9 +41,24 @@ abstract interface class EngineConnection {
     EngineSnapshot current,
     EngineEquipmentEdit edit,
   );
-  Future<void> editEquipment(
+  Future<EngineSnapshot> editEquipment(
     EngineSnapshot current,
     EngineEquipmentEdit edit,
+    String requestId,
+  );
+  Future<EngineSnapshot> selectWeaponSet(
+    EngineSnapshot current,
+    int weaponSet,
+    String requestId,
+  );
+  Future<Future<void> Function()?> openEditorBridge(
+    String sessionId,
+    McpEditorRequest execute,
+    Future<void> Function(JsonMap) afterReply,
+  );
+  Future<EngineSnapshot> replaceBuild(
+    EngineSnapshot current,
+    String xml,
     String requestId,
   );
   bool get supportsTreePreview;
@@ -50,6 +67,12 @@ abstract interface class EngineConnection {
   bool get supportsTreeSockets;
   bool get supportsTreeJewels;
   bool get supportsTreeSpecs;
+  bool get supportsTreeClass;
+  Future<EngineSnapshot> selectTreeClass(
+    EngineSnapshot current,
+    EngineTreeClassEdit edit,
+    String requestId,
+  );
   Future<EngineSnapshot> selectTreeSpec(
     EngineSnapshot current,
     int spec,
@@ -111,12 +134,15 @@ class EngineSessionClient implements EngineConnection {
     this._rpc,
     this.supportsAddSupport,
     this.supportsEquipmentPreview,
+    this._supportsExistingEquipment,
     this.supportsTreePreview,
     this.supportsTreeAttributes,
     this.supportsTreeAllocationModes,
     this.supportsTreeSockets,
     this.supportsTreeJewels,
     this.supportsTreeSpecs,
+    this.supportsTreeClass,
+    this._supportsEditorBridge,
   );
   final Process _helper;
   final StreamSubscription<String> _output;
@@ -127,6 +153,7 @@ class EngineSessionClient implements EngineConnection {
   final bool supportsAddSupport;
   @override
   final bool supportsEquipmentPreview;
+  final bool _supportsExistingEquipment;
   @override
   final bool supportsTreePreview;
   @override
@@ -139,10 +166,21 @@ class EngineSessionClient implements EngineConnection {
   final bool supportsTreeJewels;
   @override
   final bool supportsTreeSpecs;
+  @override
+  final bool supportsTreeClass;
+  final bool _supportsEditorBridge;
   bool _closed = false;
 
+  static String _engineExecutable(String configured) {
+    if (configured != 'pob2-engine') return configured;
+    final filename = Platform.isWindows ? 'pob2-engine.exe' : 'pob2-engine';
+    final directory = File(Platform.resolvedExecutable).parent;
+    final bundled = File.fromUri(directory.uri.resolve(filename));
+    return bundled.existsSync() ? bundled.path : configured;
+  }
+
   static Future<EngineConnection> open(EngineOptions options) async {
-    final helper = await Process.start(options.executable, [
+    final helper = await Process.start(_engineExecutable(options.executable), [
       'connect',
       '--kind',
       'ui',
@@ -213,12 +251,15 @@ class EngineSessionClient implements EngineConnection {
         rpc,
         info.capabilities.contains('build.add_support'),
         info.capabilities.contains('build.equipment_preview'),
+        info.capabilities.contains('build.equipment_existing'),
         info.capabilities.contains('build.tree_preview'),
         info.capabilities.contains('build.tree_attributes'),
         info.capabilities.contains('build.tree_allocation_modes'),
         info.capabilities.contains('build.tree_sockets'),
         info.capabilities.contains('build.tree_jewels'),
         info.capabilities.contains('build.tree_specs'),
+        info.capabilities.contains('build.tree_class'),
+        info.capabilities.contains('ui.bridge'),
       );
     } catch (_) {
       await channel?.terminate();
@@ -555,16 +596,39 @@ class EngineSessionClient implements EngineConnection {
   );
 
   @override
-  Future<void> editEquipment(
+  Future<EngineSnapshot> editEquipment(
     EngineSnapshot current,
     EngineEquipmentEdit edit,
     String requestId,
-  ) => _applyEdit(current, _equipmentChange(edit), requestId);
+  ) async => _snapshot(
+    (await _applyEdit(current, _equipmentChange(edit), requestId)).snapshot,
+  );
 
-  static builds.BuildEdit _equipmentChange(EngineEquipmentEdit edit) =>
-      builds.BuildEdit(
-        equipment: builds.EquipmentEdit(slot: edit.slot, raw: edit.raw),
-      );
+  builds.BuildEdit _equipmentChange(EngineEquipmentEdit edit) {
+    if (edit.itemId > 0 && !_supportsExistingEquipment) {
+      throw StateError('Для выбора предмета из сборки обновите движок.');
+    }
+    return builds.BuildEdit(
+      equipment: builds.EquipmentEdit(
+        slot: edit.slot,
+        raw: edit.raw,
+        itemId: edit.itemId,
+      ),
+    );
+  }
+
+  @override
+  Future<EngineSnapshot> selectWeaponSet(
+    EngineSnapshot current,
+    int weaponSet,
+    String requestId,
+  ) async => _snapshot(
+    (await _applyEdit(
+      current,
+      builds.BuildEdit(selection: builds.SelectionEdit(weaponSet: weaponSet)),
+      requestId,
+    )).snapshot,
+  );
 
   @override
   Future<EnginePassivePage> findPassives(
@@ -672,6 +736,25 @@ class EngineSessionClient implements EngineConnection {
     return _snapshot(response.snapshot);
   }
 
+  @override
+  Future<EngineSnapshot> selectTreeClass(
+    EngineSnapshot current,
+    EngineTreeClassEdit edit,
+    String requestId,
+  ) async => _snapshot(
+    (await _applyEdit(
+      current,
+      builds.BuildEdit(
+        treeClass: builds.TreeClassEdit(
+          classId: edit.classId,
+          ascendancyId: edit.ascendancyId,
+          mode: edit.mode,
+        ),
+      ),
+      requestId,
+    )).snapshot,
+  );
+
   static builds.BuildEdit _treeChange(EngineTreeEdit edit) => builds.BuildEdit(
     treeNode: builds.TreeNodeEdit(
       nodeId: edit.nodeId,
@@ -729,6 +812,99 @@ class EngineSessionClient implements EngineConnection {
         : builds.ConfigValue(type: type, value: '$value');
   }
 
+  @override
+  Future<Future<void> Function()?> openEditorBridge(
+    String sessionId,
+    McpEditorRequest execute,
+    Future<void> Function(JsonMap) afterReply,
+  ) async {
+    if (!_supportsEditorBridge) return null;
+    final stream = StreamIterator(
+      _rpc.watchEditor(pb.WatchEditorRequest(sessionId: sessionId)),
+    );
+    try {
+      if (!await stream.moveNext().timeout(const Duration(seconds: 10)) ||
+          !stream.current.attached) {
+        throw StateError('Сервер не подтвердил подключение окна PoB II.');
+      }
+    } catch (_) {
+      await stream.cancel();
+      rethrow;
+    }
+    unawaited(_relayEditor(stream, sessionId, execute, afterReply));
+    return stream.cancel;
+  }
+
+  Future<void> _relayEditor(
+    StreamIterator<pb.WatchEditorResponse> stream,
+    String sessionId,
+    McpEditorRequest execute,
+    Future<void> Function(JsonMap) afterReply,
+  ) async {
+    try {
+      while (await stream.moveNext()) {
+        final command = stream.current;
+        final reply = await _executeEditor(command, execute);
+        await _rpc.replyEditor(
+          pb.ReplyEditorRequest(
+            sessionId: sessionId,
+            requestId: command.requestId,
+            resultJson: jsonEncode(reply),
+          ),
+          options: _timeout,
+        );
+        if (!reply.containsKey('error')) await afterReply(reply);
+      }
+    } catch (_) {
+      // При разрыве новый поток поднимает кубит разрешённого редактора.
+    } finally {
+      await stream.cancel();
+    }
+  }
+
+  Future<JsonMap> _executeEditor(
+    pb.WatchEditorResponse command,
+    McpEditorRequest execute,
+  ) async {
+    try {
+      final arguments = jsonDecode(command.argumentsJson) as JsonMap;
+      final revision = arguments['expectedRevision'];
+      return await execute(
+        command.tool,
+        arguments,
+        revision is int ? revision : null,
+      );
+    } on McpEditorFault catch (error) {
+      return {
+        'error': {'code': error.code, 'message': error.message},
+      };
+    } catch (_) {
+      return {
+        'error': {
+          'code': 'EDITOR_FAILED',
+          'message': 'Редактор PoB II не выполнил команду.',
+        },
+      };
+    }
+  }
+
+  @override
+  Future<EngineSnapshot> replaceBuild(
+    EngineSnapshot current,
+    String xml,
+    String requestId,
+  ) async => _snapshot(
+    (await _rpc.applyBuild(
+      pb.ApplyBuildRequest(
+        sessionId: current.sessionId,
+        expectedRevision: Int64(current.revision),
+        requestId: requestId,
+        xml: xml,
+      ),
+      options: _calculationTimeout,
+    )).snapshot,
+  );
+
   Future<pb.ApplyBuildResponse> _applyEdit(
     EngineSnapshot current,
     builds.BuildEdit edit,
@@ -743,6 +919,7 @@ class EngineSessionClient implements EngineConnection {
     options:
         edit.hasEquipment() ||
             edit.hasTreeNode() ||
+            edit.hasTreeClass() ||
             edit.hasJewel() ||
             (edit.hasSelection() && edit.selection.sets.tree != 0)
         ? _calculationTimeout

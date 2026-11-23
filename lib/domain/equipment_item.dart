@@ -22,12 +22,21 @@ class ItemInspection {
       slots = List.unmodifiable(jsonStrings(json['slots'])),
       compatible = json['compatible'] == true,
       lines = List.unmodifiable(jsonRows(json['lines'])),
+      buildRevision = null,
       comparison = json['comparison'] is JsonMap
           ? ItemComparison.fromJson(json['comparison'] as JsonMap)
           : null {
     if (json['source'] != 'original-lua')
       throw const FormatException('Ожидалось описание предмета из Lua');
   }
+  ItemInspection.withBuildRevision(ItemInspection source, this.buildRevision)
+    : item = source.item,
+      slots = source.slots,
+      compatible = source.compatible,
+      lines = source.lines,
+      comparison = source.comparison;
+
+  final int? buildRevision;
   final EquipmentItem item;
   final List<String> slots;
   final List<JsonMap> lines;

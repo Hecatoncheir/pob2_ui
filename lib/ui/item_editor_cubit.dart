@@ -106,7 +106,8 @@ class ItemEditorCubit extends Cubit<ItemEditorState> {
       final result = await equip(
         raw: state.itemId == null ? state.raw : null,
         itemId: state.itemId,
-        expectedRevision: state.preview?.comparison?.revision,
+        expectedRevision:
+            state.preview?.buildRevision ?? state.preview?.comparison?.revision,
       );
       if (!result.committed) {
         await _failed(

@@ -8,12 +8,16 @@ import 'atomic_text_file.dart';
 import 'tree_progression_exchange.dart';
 
 class TreeProgressionRepository {
-  TreeProgressionRepository(Directory profile, TreeProgressionKey key)
-    : _file = File.fromUri(
-        profile.uri.resolve('tree-progression/${_id(key)}.json'),
-      );
+  TreeProgressionRepository(
+    Directory profile,
+    TreeProgressionKey key, {
+    this.saveShared,
+  }) : _file = File.fromUri(
+         profile.uri.resolve('tree-progression/${_id(key)}.json'),
+       );
 
   final File _file;
+  final Future<void> Function(List<TreeProgressionStep>)? saveShared;
   final _files = AtomicTextFile();
   static Future<void>? _writes;
 
@@ -40,6 +44,9 @@ class TreeProgressionRepository {
       });
 
   Future<void> save(List<TreeProgressionStep> steps) =>
+      saveShared?.call(steps) ?? restoreFromSnapshot(steps);
+
+  Future<void> restoreFromSnapshot(List<TreeProgressionStep> steps) =>
       _write(() => _save(steps));
 
   Future<void> _save(List<TreeProgressionStep> steps) =>

@@ -11,6 +11,7 @@ import 'package:pob2_ui/data/pob_build_library.dart';
 import 'package:pob2_ui/domain/condition_definition.dart';
 import 'package:pob2_ui/domain/engine_session.dart';
 import 'package:pob2_ui/domain/tree_allocation_mode.dart';
+import 'package:pob2_ui/domain/tree_progression.dart';
 import 'package:pob2_ui/ui/condition_editor_cubit.dart';
 import 'package:pob2_ui/ui/workshop_cubit.dart';
 
@@ -168,6 +169,34 @@ void main() {
             Platform.environment['POB2_ENGINE_TEST_ATTRIBUTES'] == '1'
         ? false
         : 'Для проверки атрибутов укажите POB2_ENGINE_TEST_ATTRIBUTES=1',
+    timeout: const Timeout(Duration(minutes: 2)),
+  );
+  test(
+    'Штатный выбор класса и восхождения сохраняется в общей сборке',
+    () => _checkSharedTreeClass(executable!),
+    skip:
+        canUseWorkshop &&
+            Platform.environment['POB2_ENGINE_TEST_TREE_CLASS'] == '1'
+        ? false
+        : 'Для проверки класса укажите POB2_ENGINE_TEST_TREE_CLASS=1',
+    timeout: const Timeout(Duration(minutes: 2)),
+  );
+  test(
+    'Штатная примерка и оружие записываются в общую сборку',
+    () => _checkSharedEquipment(executable!),
+    skip: _skipWorkshopRelease(canUseWorkshop),
+    timeout: const Timeout(Duration(minutes: 2)),
+  );
+  test(
+    'Штатные группы, заметки, план и Undo/Redo используют общий XML',
+    () => _checkSharedWorkshopEdits(executable!),
+    skip: _skipWorkshopRelease(canUseWorkshop),
+    timeout: const Timeout(Duration(minutes: 2)),
+  );
+  test(
+    'Движок передаёт команду только окну с включённым разрешением',
+    () => _checkEditorBridge(executable!),
+    skip: _skipWorkshopRelease(canUseWorkshop),
     timeout: const Timeout(Duration(minutes: 2)),
   );
   test(
@@ -360,6 +389,148 @@ Future<void> _checkSharedAttributes(String executable) async {
     await _cliBuildXml(executable, opened.flags),
     await opened.file.readAsString(),
   );
+}
+
+Future<void> _checkSharedTreeClass(String executable) async {
+  final opened = await _startWorkshop(executable, 'warrior_witch_specs');
+  final model = opened.model;
+  final select = model.treeClassSelection();
+  final before = await opened.file.readAsString();
+  final blocked = await select((classId: 1, ascendancyId: 1, mode: ''));
+  expect(blocked.committed, isFalse);
+  expect(blocked.error, contains('соединения или сброса'));
+  expect(await opened.file.readAsString(), before);
+  final result = await select((classId: 1, ascendancyId: 1, mode: 'reset'));
+  expect(result.committed, isTrue, reason: result.error);
+  expect(model.state.report!.characterClass, 'Witch');
+  expect(model.state.report!.character['ascendancy'], 'Infernalist');
+  final updated = await opened.file.readAsString();
+  expect(updated, contains('className="Witch"'));
+  expect(updated, contains('ascendClassName="Infernalist"'));
+  expect(await _cliBuildXml(executable, opened.flags), updated);
+  final stale = await select((classId: 6, ascendancyId: 0, mode: 'reset'));
+  expect(stale.committed, isFalse);
+  expect(await opened.file.readAsString(), updated);
+}
+
+Object _skipWorkshopRelease(bool canUseWorkshop) =>
+    canUseWorkshop && Platform.environment['POB2_ENGINE_TEST_WORKSHOP'] == '1'
+    ? false
+    : 'Для этих сценариев укажите POB2_ENGINE_TEST_WORKSHOP=1';
+
+Future<void> _checkSharedEquipment(String executable) async {
+  final opened = await _startWorkshop(executable, 'witch_fireball');
+  final model = opened.model;
+  const slot = 'Ring 1';
+  const raw = 'Rarity: NORMAL\nLazuli Ring\nImplicits: 1\n+25 to maximum Mana';
+  final revision = await model.previewSharedEquipment((
+    slot: slot,
+    raw: raw,
+    itemId: 0,
+  ));
+  final moved = await model.selectWeaponSet(2);
+  expect(moved.committed, isTrue, reason: moved.error);
+  final stale = await model.equipItem(
+    slot,
+    raw: raw,
+    expectedRevision: revision,
+  );
+  expect(stale.committed, isFalse);
+  final fresh = await model.previewSharedEquipment((
+    slot: slot,
+    raw: raw,
+    itemId: 0,
+  ));
+  final equipped = await model.equipItem(
+    slot,
+    raw: raw,
+    expectedRevision: fresh,
+  );
+  expect(equipped.committed, isTrue, reason: equipped.error);
+  final xml = await opened.file.readAsString();
+  expect(xml, contains('Lazuli Ring'));
+  expect(await _cliBuildXml(executable, opened.flags), xml);
+}
+
+Future<void> _checkSharedWorkshopEdits(String executable) async {
+  final opened = await _startWorkshop(executable, 'witch_fireball');
+  final model = opened.model;
+  final add = await model.addSkillGroup('Дополнительная группа', [
+    {'id': 'Metadata/Items/Gems/SkillGemFlameWall', 'level': 1, 'quality': 0},
+  ]);
+  expect(add.committed, isTrue, reason: add.error);
+  final groups = await opened.file.readAsString();
+  expect(groups, contains('Дополнительная группа'));
+  expect(await _cliBuildXml(executable, opened.flags), groups);
+  await _checkSharedNotesHistory(executable, opened, groups);
+  await _checkSharedProgression(executable, opened);
+}
+
+Future<void> _checkSharedNotesHistory(
+  String executable,
+  _SharedWorkshop opened,
+  String before,
+) async {
+  final model = opened.model;
+  final save = model.sharedNotesEditor(model.state.library.activeId!)!;
+  const notes = 'План & проверка';
+  await save(notes);
+  final withNotes = await opened.file.readAsString();
+  expect(withNotes, contains('План &amp; проверка'));
+  expect(await _cliBuildXml(executable, opened.flags), withNotes);
+  await model.undo();
+  expect(await opened.file.readAsString(), before);
+  expect(await _cliBuildXml(executable, opened.flags), before);
+  await model.redo();
+  expect(await opened.file.readAsString(), withNotes);
+  expect(await _cliBuildXml(executable, opened.flags), withNotes);
+}
+
+Future<void> _checkSharedProgression(
+  String executable,
+  _SharedWorkshop opened,
+) async {
+  final model = opened.model;
+  final repository = model.progressionRepository(model.progressionKey!);
+  await repository.save([TreeProgressionStep(10, {}, title: 'Первые пассивы')]);
+  final xml = await opened.file.readAsString();
+  expect(xml, contains('<!-- PoB II progression:'));
+  expect(await _cliBuildXml(executable, opened.flags), xml);
+  expect((await repository.load()).single.title, 'Первые пассивы');
+  await model.undo();
+  expect(await repository.load(), isEmpty);
+  expect(
+    await _cliBuildXml(executable, opened.flags),
+    isNot(contains('PoB II progression:')),
+  );
+  await model.redo();
+  expect((await repository.load()).single.title, 'Первые пассивы');
+  expect(await _cliBuildXml(executable, opened.flags), xml);
+}
+
+Future<void> _checkEditorBridge(String executable) async {
+  final opened = await _startWorkshop(executable, 'witch_fireball');
+  final model = opened.model;
+  final editor = model.mcpEditor;
+  final mcp = EngineMcpPeer(
+    await Process.start(executable, [
+      'mcp',
+      '--attach',
+      'main',
+      ...opened.flags,
+    ]),
+  );
+  addTearDown(mcp.close);
+  await mcp.initialize();
+  const status = {'name': 'pob_editor_status', 'arguments': {}};
+  expect((await mcp.request('tools/call', status))['isError'], isTrue);
+  editor.uiAction = (arguments) async => {'snapshotId': 'test', 'nodes': []};
+  await editor.enable();
+  expect(editor.enabled, isTrue, reason: editor.state.error);
+  final snapshot = await mcp.call('pob_editor_ui', {'action': 'snapshot'});
+  expect(snapshot['snapshotId'], 'test');
+  await editor.disable();
+  expect((await mcp.request('tools/call', status))['isError'], isTrue);
 }
 
 Future<void> _checkSharedSocket(String executable) async {

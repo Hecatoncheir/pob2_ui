@@ -128,16 +128,31 @@ def macos(number, output):
         run('/usr/bin/hdiutil', 'create', '-volname', 'PoB II', '-srcfolder', staging, '-format', 'UDZO', output / filename(number, 'macos-arm64'))
 
 
+def stage_engine(target, binary, root=ROOT):
+    folders = {
+        'windows-x64': 'build/windows/x64/runner/Release',
+        'linux-x64': 'build/linux/x64/release/bundle',
+        'macos-arm64': 'build/macos/Build/Products/Release/PoB II.app/Contents/MacOS',
+    }
+    name = 'pob2-engine.exe' if target == 'windows-x64' else 'pob2-engine'
+    destination = root / folders[target] / name
+    shutil.copy2(binary, destination)
+    destination.chmod(0o755)
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--tag')
     parser.add_argument('--check-only', action='store_true')
     parser.add_argument('--package', choices=TARGETS)
+    parser.add_argument('--engine-binary', type=Path)
     parser.add_argument('--artifacts', type=Path, default=ROOT / 'build/packages')
     args = parser.parse_args()
     if args.check_only:
         validate(args.tag or 'v' + version())
     elif args.package:
+        if args.engine_binary:
+            stage_engine(args.package, args.engine_binary)
         args.artifacts.mkdir(parents=True, exist_ok=True)
         {'windows-x64': windows, 'linux-x64': linux, 'macos-arm64': macos}[args.package](version(), args.artifacts.resolve())
     else:

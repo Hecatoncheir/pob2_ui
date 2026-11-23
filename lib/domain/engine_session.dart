@@ -68,7 +68,7 @@ typedef EngineStatDelta = ({
   double difference,
 });
 
-typedef EngineEquipmentEdit = ({String slot, String raw});
+typedef EngineEquipmentEdit = ({String slot, String raw, int itemId});
 typedef EngineJewelEdit = ({int nodeId, int itemId, String raw});
 typedef EngineEquipmentPreview = EngineBuildComparison;
 typedef EngineBuildComparison = ({
@@ -115,6 +115,7 @@ typedef EngineTreeEdit = ({
   EnginePassiveAttribute? attribute,
   TreeAllocationMode? allocationMode,
 });
+typedef EngineTreeClassEdit = ({int classId, int ascendancyId, String mode});
 typedef EnginePassiveAttributeChange = ({
   int nodeId,
   EnginePassiveAttribute? before,

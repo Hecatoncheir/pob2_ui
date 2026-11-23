@@ -134,7 +134,7 @@ class _EngineEquipmentDialogState extends State<_EngineEquipmentDialog> {
     final raw = _remove ? '' : _text.text.trim();
     if (raw == equipped.trim()) return null;
     if (!_remove && raw.isEmpty) return null;
-    return (slot: widget.slot, raw: raw);
+    return (slot: widget.slot, raw: raw, itemId: 0);
   }
 
   @override

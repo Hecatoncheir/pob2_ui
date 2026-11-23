@@ -26,6 +26,7 @@ jobs:
     outputs:
       tag: ${{ steps.version.outputs.tag }}
       commit: ${{ steps.version.outputs.commit }}
+      engine: ${{ steps.version.outputs.engine }}
     env:
       RELEASE_TAG: ${{ inputs.tag || github.ref_name }}
     steps:
@@ -47,12 +48,17 @@ jobs:
           python tool/release.py --tag "$RELEASE_TAG" --check-only
           echo "tag=$RELEASE_TAG" >> "$GITHUB_OUTPUT"
           echo "commit=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+          engine=$(cat tool/engine-release.txt)
+          [[ "$engine" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]
+          echo "engine=$engine" >> "$GITHUB_OUTPUT"
   checks:
     needs: metadata
     uses: ./.github/workflows/ci.yml
     with:
       ref: ${{ needs.metadata.outputs.commit }}
       locked_components: true
+      engine_release: ${{ needs.metadata.outputs.engine }}
+      engine_workshop: true
   publish:
     needs: [metadata, checks]
     runs-on: ubuntu-22.04
