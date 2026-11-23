@@ -893,6 +893,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get mdb8bc611c3 => 'Importer depuis PoB';
 
   @override
+  String get m71d80e4773 => 'Importer le build ouvert';
+
+  @override
   String get mcaa43cf432 => 'Importer un caractère';
 
   @override
@@ -1664,6 +1667,10 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get m654046a00d =>
       'Ouvrez le personnage sur poe.ninja, cliquez sur Copy PoB code, puis collez le code dans PoB II.';
+
+  @override
+  String get m54df7b22c7 =>
+      'Ouvrez un build à importer dans la session partagée';
 
   @override
   String get mea1f408246 => 'Ouvrir';

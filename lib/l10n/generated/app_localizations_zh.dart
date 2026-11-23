@@ -845,6 +845,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get mdb8bc611c3 => '從 PoB 匯入';
 
   @override
+  String get m71d80e4773 => '匯入已開啟的配置';
+
+  @override
   String get mcaa43cf432 => '導入角色';
 
   @override
@@ -1592,6 +1595,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m654046a00d => '在 poe.ninja 開啟角色，點選 Copy PoB code，再將代碼貼到 PoB II。';
+
+  @override
+  String get m54df7b22c7 => '開啟要匯入共用工作階段的配置';
 
   @override
   String get mea1f408246 => '打開';
@@ -3715,6 +3721,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get mdb8bc611c3 => '從 PoB 匯入';
 
   @override
+  String get m71d80e4773 => '匯入已開啟的配置';
+
+  @override
   String get mcaa43cf432 => '導入角色';
 
   @override
@@ -4462,6 +4471,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m654046a00d => '在 poe.ninja 開啟角色，點選 Copy PoB code，再將代碼貼到 PoB II。';
+
+  @override
+  String get m54df7b22c7 => '開啟要匯入共用工作階段的配置';
 
   @override
   String get mea1f408246 => '打開';

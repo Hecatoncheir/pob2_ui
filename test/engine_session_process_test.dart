@@ -38,6 +38,21 @@ void main() {
       var connection = await EngineSessionClient.open(options);
       addTearDown(() => connection.close());
       await connection.create('main', 'Начальная', 'create');
+      final xml = await File('integration_test/fixtures/witch_fireball.xml')
+          .readAsString();
+      final imported = await connection.create(
+        'workshop',
+        'Ведьма',
+        'create-with-xml',
+        xml: xml,
+      );
+      expect(imported.revision, 1);
+      expect(imported.buildName, 'Ведьма');
+      expect(imported.build?.xml, contains('<PathOfBuilding2>'));
+      expect(
+        (await connection.snapshot('workshop')).build?.xml,
+        imported.build?.xml,
+      );
       var events = StreamIterator(connection.watch('main', 1));
       addTearDown(() => events.cancel());
       await _cli(executable, [

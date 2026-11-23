@@ -85,11 +85,20 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     EngineOptions options, {
     String? createName,
     bool bindCurrentBuild = false,
+    bool importOpenBuild = false,
   }) async {
+    final xml = importOpenBuild ? await exportXml() : null;
+    if (importOpenBuild && (createName == null || xml == null)) {
+      throw StateError('Откройте сборку для импорта в общую сессию');
+    }
     _engineBindingEpoch++;
     _engineBinding = bindCurrentBuild ? _currentEngineBinding : null;
     try {
-      await engineSession.connect(options, createName: createName);
+      await engineSession.connect(
+        options,
+        createName: createName,
+        createXml: xml,
+      );
     } catch (_) {
       _engineBinding = null;
       rethrow;

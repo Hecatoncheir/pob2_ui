@@ -1673,6 +1673,12 @@ abstract class AppLocalizations {
   /// **'Import from PoB'**
   String get mdb8bc611c3;
 
+  /// Импортировать открытую сборку
+  ///
+  /// In en, this message translates to:
+  /// **'Import the open build'**
+  String get m71d80e4773;
+
   /// Импортировать персонажа
   ///
   /// In en, this message translates to:
@@ -3047,6 +3053,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Open the character on poe.ninja, select Copy PoB code, then paste the code into PoB II.'**
   String get m654046a00d;
+
+  /// Откройте сборку для импорта в общую сессию
+  ///
+  /// In en, this message translates to:
+  /// **'Open a build to import into the shared session'**
+  String get m54df7b22c7;
 
   /// Открыть
   ///

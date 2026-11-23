@@ -18,8 +18,9 @@ abstract interface class EngineConnection {
   Future<EngineSnapshot> create(
     String sessionId,
     String name,
-    String requestId,
-  );
+    String requestId, {
+    String? xml,
+  });
   Future<EngineSnapshot> rename(
     EngineSnapshot current,
     String name,
@@ -346,17 +347,32 @@ class EngineSessionClient implements EngineConnection {
   Future<EngineSnapshot> create(
     String sessionId,
     String name,
-    String requestId,
-  ) async => _snapshot(
-    (await _rpc.createSession(
+    String requestId, {
+    String? xml,
+  }) async {
+    if (xml != null) {
+      final response = await _rpc.createSessionFromXml(
+        pb.CreateSessionFromXmlRequest(
+          sessionId: sessionId,
+          buildName: name,
+          requestId: requestId,
+          xml: xml,
+        ),
+        options: _timeout,
+      );
+      return _snapshot(response.snapshot);
+    }
+    final response = await _rpc.createSession(
       pb.CreateSessionRequest(
         sessionId: sessionId,
         buildName: name,
         requestId: requestId,
       ),
       options: _timeout,
-    )).snapshot,
-  );
+    );
+    return _snapshot(response.snapshot);
+  }
+
   @override
   Future<EngineSnapshot> rename(
     EngineSnapshot current,

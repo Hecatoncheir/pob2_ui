@@ -32,6 +32,7 @@ class _EngineSessionDialogState extends State<_EngineSessionDialog> {
   final session = TextEditingController();
   final name = TextEditingController();
   bool create = false;
+  bool importOpenBuild = false;
   bool bind = false;
   bool busy = false;
   String? error;
@@ -78,6 +79,7 @@ class _EngineSessionDialogState extends State<_EngineSessionDialog> {
         ),
         createName: create ? name.text.trim() : null,
         bindCurrentBuild: bind,
+        importOpenBuild: create && importOpenBuild,
       );
       if (mounted) Navigator.pop(context);
     } catch (failure) {
@@ -128,6 +130,17 @@ class _EngineSessionDialogState extends State<_EngineSessionDialog> {
                   : (value) => setState(() => create = value ?? false),
             ),
             if (create) _field(name, 'Название сборки', 'engine-create-name'),
+            if (create && widget.model.state.report != null)
+              CheckboxListTile(
+                key: const Key('engine-import-open-build'),
+                contentPadding: EdgeInsets.zero,
+                title: const AppText('Импортировать открытую сборку'),
+                value: importOpenBuild,
+                onChanged: busy
+                    ? null
+                    : (value) =>
+                          setState(() => importOpenBuild = value ?? false),
+              ),
             CheckboxListTile(
               contentPadding: EdgeInsets.zero,
               title: const AppText('Связать с открытой сборкой'),

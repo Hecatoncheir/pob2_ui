@@ -499,6 +499,8 @@ final uiExactTranslations = <String, String Function(AppLocalizations)>{
   "Import": (l) => l.m848ed36881,
   "Импортировать из PoB": (l) => l.mdb8bc611c3,
   "Import from PoB": (l) => l.mdb8bc611c3,
+  "Импортировать открытую сборку": (l) => l.m71d80e4773,
+  "Import the open build": (l) => l.m71d80e4773,
   "Импортировать персонажа": (l) => l.mcaa43cf432,
   "Import character": (l) => l.mcaa43cf432,
   "Импортировать по ссылке": (l) => l.m4376254217,
@@ -916,6 +918,8 @@ final uiExactTranslations = <String, String Function(AppLocalizations)>{
       (l) => l.m654046a00d,
   "Open the character on poe.ninja, select Copy PoB code, then paste the code into PoB II.":
       (l) => l.m654046a00d,
+  "Откройте сборку для импорта в общую сессию": (l) => l.m54df7b22c7,
+  "Open a build to import into the shared session": (l) => l.m54df7b22c7,
   "Открыть": (l) => l.mea1f408246,
   "Open": (l) => l.mea1f408246,
   "Открыть XML": (l) => l.mdccda63f51,

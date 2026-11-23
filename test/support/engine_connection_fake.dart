@@ -34,8 +34,9 @@ class FakeEngineConnection implements EngineConnection {
   Future<EngineSnapshot> create(
     String sessionId,
     String name,
-    String requestId,
-  ) async => current;
+    String requestId, {
+    String? xml,
+  }) async => current;
   @override
   Future<EngineSnapshot> rename(
     EngineSnapshot current,

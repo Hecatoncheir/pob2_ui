@@ -859,6 +859,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get mdb8bc611c3 => 'นำเข้าจาก PoB';
 
   @override
+  String get m71d80e4773 => 'นำเข้าบิลด์ที่เปิดอยู่';
+
+  @override
   String get mcaa43cf432 => 'นำเข้าอักขระ';
 
   @override
@@ -1613,6 +1616,9 @@ class AppLocalizationsTh extends AppLocalizations {
   @override
   String get m654046a00d =>
       'เปิดตัวละครบน poe.ninja กด Copy PoB code แล้ววางโค้ดใน PoB II';
+
+  @override
+  String get m54df7b22c7 => 'เปิดบิลด์ที่จะนำเข้าในเซสชันที่ใช้ร่วมกัน';
 
   @override
   String get mea1f408246 => 'เปิด';

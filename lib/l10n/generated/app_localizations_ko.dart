@@ -848,6 +848,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get mdb8bc611c3 => 'PoB에서 가져오기';
 
   @override
+  String get m71d80e4773 => '열린 빌드 가져오기';
+
+  @override
   String get mcaa43cf432 => '캐릭터 가져오기';
 
   @override
@@ -1599,6 +1602,9 @@ class AppLocalizationsKo extends AppLocalizations {
   @override
   String get m654046a00d =>
       'poe.ninja에서 캐릭터를 열고 Copy PoB code를 선택한 다음 PoB II에 코드를 붙여넣으세요.';
+
+  @override
+  String get m54df7b22c7 => '공유 세션에 가져올 빌드를 여세요';
 
   @override
   String get mea1f408246 => '열기';

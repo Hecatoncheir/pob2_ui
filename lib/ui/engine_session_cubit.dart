@@ -61,7 +61,11 @@ class EngineSessionCubit extends Cubit<EngineSessionState> {
   int _connectionId = 0;
   Future<void> _applying = Future.value();
 
-  Future<void> connect(EngineOptions options, {String? createName}) async {
+  Future<void> connect(
+    EngineOptions options, {
+    String? createName,
+    String? createXml,
+  }) async {
     final releasing = disconnect();
     final generation = _generation;
     await releasing;
@@ -86,6 +90,7 @@ class EngineSessionCubit extends Cubit<EngineSessionState> {
               options.sessionId,
               createName,
               engineRequestId(),
+              xml: createXml,
             );
       if (generation != _generation) return;
       _accept(EngineChange(snapshot: snapshot, kind: 'snapshot'), generation);

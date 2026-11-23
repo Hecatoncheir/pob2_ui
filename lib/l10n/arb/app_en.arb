@@ -1430,6 +1430,11 @@
     "description": "Импортировать из PoB",
     "placeholders": {}
   },
+  "m71d80e4773": "Import the open build",
+  "@m71d80e4773": {
+    "description": "Импортировать открытую сборку",
+    "placeholders": {}
+  },
   "mcaa43cf432": "Import character",
   "@mcaa43cf432": {
     "description": "Импортировать персонажа",
@@ -2706,6 +2711,11 @@
   "m654046a00d": "Open the character on poe.ninja, select Copy PoB code, then paste the code into PoB II.",
   "@m654046a00d": {
     "description": "Откройте персонажа на poe.ninja, нажмите Copy PoB code и вставьте код в PoB II.",
+    "placeholders": {}
+  },
+  "m54df7b22c7": "Open a build to import into the shared session",
+  "@m54df7b22c7": {
+    "description": "Откройте сборку для импорта в общую сессию",
     "placeholders": {}
   },
   "mea1f408246": "Open",

@@ -866,6 +866,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get mdb8bc611c3 => 'Импортировать из PoB';
 
   @override
+  String get m71d80e4773 => 'Импортировать открытую сборку';
+
+  @override
   String get mcaa43cf432 => 'Импортировать персонажа';
 
   @override
@@ -1625,6 +1628,9 @@ class AppLocalizationsRu extends AppLocalizations {
   @override
   String get m654046a00d =>
       'Откройте персонажа на poe.ninja, нажмите Copy PoB code и вставьте код в PoB II.';
+
+  @override
+  String get m54df7b22c7 => 'Откройте сборку для импорта в общую сессию';
 
   @override
   String get mea1f408246 => 'Открыть';

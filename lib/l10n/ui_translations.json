@@ -259,6 +259,7 @@
     "m2c72186c20": "Импортированная сборка",
     "m848ed36881": "Импортировать",
     "mdb8bc611c3": "Импортировать из PoB",
+    "m71d80e4773": "Импортировать открытую сборку",
     "mcaa43cf432": "Импортировать персонажа",
     "m4376254217": "Импортировать по ссылке",
     "md9d1b9437e": "Имя или ID пассива",
@@ -488,6 +489,7 @@
     "mbb5bdd176c": "Отключить",
     "ma3fbed9442": "Отключён",
     "m654046a00d": "Откройте персонажа на poe.ninja, нажмите Copy PoB code и вставьте код в PoB II.",
+    "m54df7b22c7": "Откройте сборку для импорта в общую сессию",
     "mea1f408246": "Открыть",
     "mdccda63f51": "Открыть XML",
     "m38ec738ed2": "Открыть XML из PoB",
@@ -1785,7 +1787,9 @@
     "m93f8a89eb5": "Preview attribute change",
     "mcf5e71cc14": "Refund passive",
     "m484c9330fa": "Shared passives",
-    "m8abb4db975": "Allocation mode"
+    "m8abb4db975": "Allocation mode",
+    "m71d80e4773": "Import the open build",
+    "m54df7b22c7": "Open a build to import into the shared session"
   },
   "fr": {
     "m0c63e733f9": "Lua n'a pas renvoyé toutes les icônes",
@@ -2679,7 +2683,9 @@
     "m93f8a89eb5": "Aperçu du changement d’attribut",
     "mcf5e71cc14": "Rembourser le passif",
     "m484c9330fa": "Passifs communs",
-    "m8abb4db975": "Mode d’attribution"
+    "m8abb4db975": "Mode d’attribution",
+    "m71d80e4773": "Importer le build ouvert",
+    "m54df7b22c7": "Ouvrez un build à importer dans la session partagée"
   },
   "de": {
     "m0c63e733f9": "Lua hat nicht alle Symbole zurückgegeben",
@@ -3573,7 +3579,9 @@
     "m93f8a89eb5": "Attributwechsel ansehen",
     "mcf5e71cc14": "Passive zurückerstatten",
     "m484c9330fa": "Gemeinsame Passive",
-    "m8abb4db975": "Zuweisungsmodus"
+    "m8abb4db975": "Zuweisungsmodus",
+    "m71d80e4773": "Geöffneten Build importieren",
+    "m54df7b22c7": "Einen Build zum Import in die gemeinsame Sitzung öffnen"
   },
   "es": {
     "m0c63e733f9": "Lua no devolvió todos los íconos",
@@ -4467,7 +4475,9 @@
     "m93f8a89eb5": "Vista previa del cambio de atributo",
     "mcf5e71cc14": "Reembolsar pasiva",
     "m484c9330fa": "Pasivas comunes",
-    "m8abb4db975": "Modo de asignación"
+    "m8abb4db975": "Modo de asignación",
+    "m71d80e4773": "Importar la build abierta",
+    "m54df7b22c7": "Abre una build para importarla en la sesión compartida"
   },
   "pt_BR": {
     "m0c63e733f9": "Lua não retornou todos os ícones",
@@ -5361,7 +5371,9 @@
     "m93f8a89eb5": "Prévia da alteração de atributo",
     "mcf5e71cc14": "Restituir passiva",
     "m484c9330fa": "Passivas compartilhadas",
-    "m8abb4db975": "Modo de alocação"
+    "m8abb4db975": "Modo de alocação",
+    "m71d80e4773": "Importar a build aberta",
+    "m54df7b22c7": "Abra uma build para importá-la na sessão compartilhada"
   },
   "ja": {
     "m0c63e733f9": "Lua はすべてのアイコンを返しませんでした",
@@ -6255,7 +6267,9 @@
     "m93f8a89eb5": "能力値の変更をプレビュー",
     "mcf5e71cc14": "パッシブを解除",
     "m484c9330fa": "共通パッシブ",
-    "m8abb4db975": "割り当てモード"
+    "m8abb4db975": "割り当てモード",
+    "m71d80e4773": "開いているビルドをインポート",
+    "m54df7b22c7": "共有セッションに取り込むビルドを開いてください"
   },
   "ko": {
     "m0c63e733f9": "Lua이 모든 아이콘을 반환하지 않았습니다.",
@@ -7149,7 +7163,9 @@
     "m93f8a89eb5": "능력치 변경 미리 보기",
     "mcf5e71cc14": "패시브 반환",
     "m484c9330fa": "공용 패시브",
-    "m8abb4db975": "할당 모드"
+    "m8abb4db975": "할당 모드",
+    "m71d80e4773": "열린 빌드 가져오기",
+    "m54df7b22c7": "공유 세션에 가져올 빌드를 여세요"
   },
   "th": {
     "m0c63e733f9": "Lua ไม่ได้ส่งคืนไอคอนทั้งหมด",
@@ -8043,7 +8059,9 @@
     "m93f8a89eb5": "ดูตัวอย่างการเปลี่ยนคุณสมบัติ",
     "mcf5e71cc14": "คืนแต้มพาสซีฟ",
     "m484c9330fa": "พาสซีฟร่วม",
-    "m8abb4db975": "โหมดจัดสรร"
+    "m8abb4db975": "โหมดจัดสรร",
+    "m71d80e4773": "นำเข้าบิลด์ที่เปิดอยู่",
+    "m54df7b22c7": "เปิดบิลด์ที่จะนำเข้าในเซสชันที่ใช้ร่วมกัน"
   },
   "zh_Hant": {
     "m0c63e733f9": "Lua 未傳回所有圖標",
@@ -8937,6 +8955,8 @@
     "m93f8a89eb5": "預覽屬性變更",
     "mcf5e71cc14": "移除天賦",
     "m484c9330fa": "共用天賦",
-    "m8abb4db975": "配置模式"
+    "m8abb4db975": "配置模式",
+    "m71d80e4773": "匯入已開啟的配置",
+    "m54df7b22c7": "開啟要匯入共用工作階段的配置"
   }
 }
