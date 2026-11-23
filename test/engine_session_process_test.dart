@@ -1,9 +1,17 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:pob2_ui/data/engine_session_client.dart';
+import 'package:pob2_ui/data/component_repository.dart';
+import 'package:pob2_ui/data/installation_store.dart';
+import 'package:pob2_ui/data/mcp_client.dart';
+import 'package:pob2_ui/data/pob_build_library.dart';
+import 'package:pob2_ui/domain/condition_definition.dart';
 import 'package:pob2_ui/domain/engine_session.dart';
+import 'package:pob2_ui/ui/condition_editor_cubit.dart';
+import 'package:pob2_ui/ui/workshop_cubit.dart';
 
 import 'support/engine_mcp_peer.dart';
 import 'support/temporary_directory.dart';
@@ -133,6 +141,169 @@ void main() {
         ? 'Нужен POB2_ENGINE_TEST_EXECUTABLE; CI запускает этот сценарий на Linux'
         : false,
     timeout: const Timeout(Duration(seconds: 35)),
+  );
+  test(
+    'Штатное условие в общей сборке сохраняется в XML и переживает перезапуск',
+    () => _checkSharedCondition(executable!),
+    skip: executable == null || Platform.environment['POB2_UI_HOME'] == null
+        ? 'Нужен отдельный профиль PoB II с Lua и MCP и бинарник движка'
+        : false,
+    timeout: const Timeout(Duration(minutes: 2)),
+  );
+}
+
+Future<void> _checkSharedCondition(String executable) async {
+  final root = await Directory.systemTemp.createTemp(
+    'pob2-workshop-condition-',
+  );
+  final options = EngineOptions(
+    executable: executable,
+    profile: 'test',
+    runtimeDirectory: root.uri.resolve('runtime').toFilePath(),
+    dataDirectory: root.uri.resolve('data').toFilePath(),
+  );
+  final flags = [
+    '--profile',
+    options.profile,
+    '--runtime-dir',
+    options.runtimeDirectory,
+    '--data-dir',
+    options.dataDirectory,
+  ];
+  addTearDown(() async {
+    await Process.run(executable, ['shutdown', ...flags]);
+    await _waitForShutdown(options);
+    await removeTemporaryDirectory(root);
+  });
+  final model = await _openWorkshop(root);
+  addTearDown(model.close);
+  await model.initialize();
+  expect(model.state.error, isNull);
+  expect(model.state.report!.config['enemyLevel'], 67);
+  await model.connectEngine(
+    options,
+    createName: 'Fireball',
+    bindCurrentBuild: true,
+    importOpenBuild: true,
+  );
+  final mcp = EngineMcpPeer(
+    await Process.start(executable, ['mcp', '--attach', 'main', ...flags]),
+  );
+  addTearDown(mcp.close);
+  await mcp.initialize();
+  await _editWorkshopCondition(model, mcp);
+  await mcp.close();
+  await model.disconnectEngine();
+  await Process.run(executable, ['shutdown', ...flags]);
+  await _waitForShutdown(options);
+  await model.connectEngine(
+    options,
+    bindCurrentBuild: true,
+    useSessionXml: true,
+  );
+  expect(model.state.report!.config['enemyLevel'], 79);
+  final binaryExport = await Process.run(executable, [
+    'build',
+    'export',
+    '--session',
+    'main',
+    '--raw',
+    ...flags,
+  ], stdoutEncoding: utf8);
+  expect(binaryExport.exitCode, 0, reason: '${binaryExport.stderr}');
+  final file = File.fromUri(root.uri.resolve('builds/Fireball.xml'));
+  final saved = await file.readAsString();
+  expect(binaryExport.stdout, saved);
+  await _rejectDivergedFile(model, file, saved);
+}
+
+Future<void> _rejectDivergedFile(
+  WorkshopCubit model,
+  File file,
+  String saved,
+) async {
+  final form = _conditionForm(model)..text('81');
+  final external = saved.replaceFirst(
+    'name="enemyLevel" number="79"',
+    'name="enemyLevel" number="80"',
+  );
+  expect(external, isNot(saved));
+  await file.writeAsString(external);
+  final revision = model.engineSession.state.snapshot!.revision;
+  expect(await form.save(), isFalse);
+  expect(await file.readAsString(), external);
+  expect(model.engineSession.state.snapshot!.revision, revision);
+  expect(model.engineSession.state.snapshot!.build!.xml, saved);
+}
+
+Future<WorkshopCubit> _openWorkshop(Directory root) async {
+  final builds = await Directory.fromUri(root.uri.resolve('builds/')).create();
+  await File('integration_test/fixtures/witch_fireball.xml')
+      .copy(builds.uri.resolve('Fireball.xml').toFilePath());
+  await File.fromUri(
+    InstallationStore.defaultRoot().uri.resolve('components.json'),
+  ).copy(root.uri.resolve('components.json').toFilePath());
+  final library = PobBuildLibrary(root);
+  await library.configure(builds.path);
+  await library.activate('Fireball.xml');
+  return WorkshopCubit(
+    ComponentRepository(store: InstallationStore(root)),
+    McpClient(),
+    library: library,
+  );
+}
+
+ConditionEditorCubit _conditionForm(WorkshopCubit model) {
+  final editor = ConditionEditorCubit(
+    ConditionDefinition(
+      id: 'enemyLevel',
+      name: 'Уровень противника',
+      type: 'count',
+    ),
+    model.state.report!.config['enemyLevel'],
+    model.conditionEditorCommit(),
+  );
+  addTearDown(editor.close);
+  return editor;
+}
+
+Future<void> _editWorkshopCondition(
+  WorkshopCubit model,
+  EngineMcpPeer mcp,
+) async {
+  final stale = _conditionForm(model);
+  final afterExternal = model.stream.firstWhere(
+    (state) => !state.busy && state.report?.config['enemyLevel'] == 68,
+  );
+  await mcp.call('edit_build', {
+    'expected_revision': 1,
+    'request_id': 'condition-mcp',
+    'edit': {
+      'config': {
+        'name': 'enemyLevel',
+        'value': {'type': 'number', 'value': '68'},
+      },
+    },
+  });
+  await afterExternal.timeout(const Duration(seconds: 30));
+  stale.text('69');
+  expect(await stale.save(), isFalse);
+  expect(stale.state.error, contains('Сборка изменилась'));
+  final editor = _conditionForm(model)..text('79');
+  expect(await editor.save(), isTrue, reason: editor.state.error);
+  expect(model.state.report!.config['enemyLevel'], 79);
+  final exported = await mcp.call('export_build');
+  expect(exported['xml'], contains('name="enemyLevel" number="79"'));
+  final timer = Stopwatch()..start();
+  while (model.engineSession.state.snapshot?.build?.calculation == null) {
+    if (timer.elapsed > const Duration(seconds: 25)) {
+      fail('Движок не опубликовал расчёт новой ревизии');
+    }
+    await Future<void>.delayed(const Duration(milliseconds: 50));
+  }
+  expect(
+    model.engineSession.state.snapshot?.build?.calculation?.life,
+    greaterThan(0),
   );
 }
 

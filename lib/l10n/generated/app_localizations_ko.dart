@@ -767,6 +767,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get ma7a4033657 => '닫기';
 
   @override
+  String get m6ea0e6ef03 => '열린 빌드를 세션 스냅샷으로 교체';
+
+  @override
   String get mbfc7b67eb5 => '아이템 교체';
 
   @override
@@ -2263,6 +2266,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m66d08814d9 => '빌드가 변경되었습니다. 새 리비전을 기다린 후 다시 시도하세요.';
 
   @override
+  String get m5cab61bd8f => '빌드가 변경되었습니다. 조건 편집기를 다시 여세요.';
+
+  @override
   String get m1aee4fe817 => '빌드가 변경되었습니다. 단계를 다시 여세요.';
 
   @override
@@ -2754,6 +2760,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m64bd568b72 => '업데이트 파일에 확인 가능한 체크섬이 없습니다.';
+
+  @override
+  String get m0ae0be6b7f => '빌드 파일이 변경되었습니다. 다시 연결하기 전에 두 버전을 확인하세요.';
 
   @override
   String get ma6b9ff9cd6 => '파일이 존재합니다. 바꾸려면 overwrite=true를 지정합니다.';

@@ -799,6 +799,10 @@ class AppLocalizationsEs extends AppLocalizations {
   String get ma7a4033657 => 'Cerrar';
 
   @override
+  String get m6ea0e6ef03 =>
+      'Reemplazar la configuración abierta por la de la sesión';
+
+  @override
   String get mbfc7b67eb5 => 'Reemplazar objeto';
 
   @override
@@ -2331,6 +2335,10 @@ class AppLocalizationsEs extends AppLocalizations {
       'La configuración cambió. Espera la nueva revisión y vuelve a intentarlo.';
 
   @override
+  String get m5cab61bd8f =>
+      'La configuración cambió. Vuelve a abrir el editor de condiciones.';
+
+  @override
   String get m1aee4fe817 => 'La build ha cambiado. Vuelve a abrir la etapa.';
 
   @override
@@ -2844,6 +2852,10 @@ class AppLocalizationsEs extends AppLocalizations {
   @override
   String get m64bd568b72 =>
       'El archivo de actualización no tiene una suma de verificación verificable';
+
+  @override
+  String get m0ae0be6b7f =>
+      'El archivo de la configuración cambió. Revisa ambas versiones antes de volver a conectar.';
 
   @override
   String get ma6b9ff9cd6 =>

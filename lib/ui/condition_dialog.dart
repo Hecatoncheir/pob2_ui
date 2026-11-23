@@ -33,7 +33,7 @@ class _ConditionDialogState extends State<_ConditionDialog> {
   late final editor = ConditionEditorCubit(
     widget.definition,
     widget.model.state.report!.config[widget.definition.id],
-    widget.model.setCondition,
+    widget.model.conditionEditorCommit(),
   );
   late final text = TextEditingController(text: editor.state.text);
   @override

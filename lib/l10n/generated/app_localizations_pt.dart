@@ -791,6 +791,9 @@ class AppLocalizationsPt extends AppLocalizations {
   String get ma7a4033657 => 'Fechar';
 
   @override
+  String get m6ea0e6ef03 => 'Substituir a build aberta pelo estado da sessão';
+
+  @override
   String get mbfc7b67eb5 => 'Substituir item';
 
   @override
@@ -2320,6 +2323,10 @@ class AppLocalizationsPt extends AppLocalizations {
       'A build mudou. Aguarde a nova revisão e tente novamente.';
 
   @override
+  String get m5cab61bd8f =>
+      'A build mudou. Abra novamente o editor de condições.';
+
+  @override
   String get m1aee4fe817 => 'A build mudou. Abra a etapa novamente.';
 
   @override
@@ -2830,6 +2837,10 @@ class AppLocalizationsPt extends AppLocalizations {
   @override
   String get m64bd568b72 =>
       'O arquivo de atualização não possui uma soma de verificação verificável';
+
+  @override
+  String get m0ae0be6b7f =>
+      'O arquivo da build mudou. Confira as duas versões antes de reconectar.';
 
   @override
   String get ma6b9ff9cd6 =>
@@ -3759,6 +3770,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get ma7a4033657 => 'Fechar';
 
   @override
+  String get m6ea0e6ef03 => 'Substituir a build aberta pelo estado da sessão';
+
+  @override
   String get mbfc7b67eb5 => 'Substituir item';
 
   @override
@@ -5288,6 +5302,10 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
       'A build mudou. Aguarde a nova revisão e tente novamente.';
 
   @override
+  String get m5cab61bd8f =>
+      'A build mudou. Abra novamente o editor de condições.';
+
+  @override
   String get m1aee4fe817 => 'A build mudou. Abra a etapa novamente.';
 
   @override
@@ -5798,6 +5816,10 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   @override
   String get m64bd568b72 =>
       'O arquivo de atualização não possui uma soma de verificação verificável';
+
+  @override
+  String get m0ae0be6b7f =>
+      'O arquivo da build mudou. Confira as duas versões antes de reconectar.';
 
   @override
   String get ma6b9ff9cd6 =>

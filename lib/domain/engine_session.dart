@@ -32,6 +32,7 @@ class EngineBuild {
   const EngineBuild({
     required this.xml,
     required this.level,
+    required this.inputRevision,
     this.calculation,
     this.group,
     this.equipment = const {},
@@ -40,6 +41,7 @@ class EngineBuild {
 
   final String xml;
   final int level;
+  final int inputRevision;
   final EngineCalculation? calculation;
   final EngineSkillGroup? group;
   final Map<String, String> equipment;

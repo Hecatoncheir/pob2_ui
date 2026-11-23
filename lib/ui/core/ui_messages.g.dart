@@ -446,6 +446,8 @@ final uiExactTranslations = <String, String Function(AppLocalizations)>{
   "Close other PoB II instances and repeat the cleanup.": (l) => l.m37326b558a,
   "Закрыть": (l) => l.ma7a4033657,
   "Close": (l) => l.ma7a4033657,
+  "Заменить открытую сборку снимком сессии": (l) => l.m6ea0e6ef03,
+  "Replace the open build with the session snapshot": (l) => l.m6ea0e6ef03,
   "Заменить предмет": (l) => l.mbfc7b67eb5,
   "Replace item": (l) => l.mbfc7b67eb5,
   "Заметка к этапу": (l) => l.md4bac1da57,
@@ -1295,6 +1297,8 @@ final uiExactTranslations = <String, String Function(AppLocalizations)>{
       l.m66d08814d9,
   "The build changed. Wait for the new revision and try again.": (l) =>
       l.m66d08814d9,
+  "Сборка изменилась. Откройте условие заново.": (l) => l.m5cab61bd8f,
+  "The build has changed. Reopen the condition editor.": (l) => l.m5cab61bd8f,
   "Сборка изменилась. Откройте этап снова.": (l) => l.m1aee4fe817,
   "The build changed. Open the stage again.": (l) => l.m1aee4fe817,
   "Сборка изменилась. Пересчитайте пути.": (l) => l.md582f99ed2,
@@ -1618,6 +1622,10 @@ final uiExactTranslations = <String, String Function(AppLocalizations)>{
   "Файл обновления не имеет проверяемой контрольной суммы": (l) =>
       l.m64bd568b72,
   "The update file does not have a verifiable checksum": (l) => l.m64bd568b72,
+  "Файл сборки изменился. Проверьте версии перед переподключением.": (l) =>
+      l.m0ae0be6b7f,
+  "The build file has changed. Check both versions before reconnecting.": (l) =>
+      l.m0ae0be6b7f,
   "Файл существует. Для замены укажите overwrite=true.": (l) => l.ma6b9ff9cd6,
   "The file exists. To replace, specify overwrite=true.": (l) => l.ma6b9ff9cd6,
   "Флакон здоровья": (l) => l.md8a38f5bc2,

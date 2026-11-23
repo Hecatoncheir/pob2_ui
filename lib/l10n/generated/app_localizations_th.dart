@@ -778,6 +778,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get ma7a4033657 => 'ปิด';
 
   @override
+  String get m6ea0e6ef03 => 'แทนที่บิลด์ที่เปิดอยู่ด้วยสแนปช็อตของเซสชัน';
+
+  @override
   String get mbfc7b67eb5 => 'เปลี่ยนไอเทม';
 
   @override
@@ -2282,6 +2285,10 @@ class AppLocalizationsTh extends AppLocalizations {
       'บิลด์เปลี่ยนแปลงแล้ว รอฉบับแก้ไขใหม่แล้วลองอีกครั้ง';
 
   @override
+  String get m5cab61bd8f =>
+      'บิลด์มีการเปลี่ยนแปลง โปรดเปิดตัวแก้ไขเงื่อนไขอีกครั้ง';
+
+  @override
   String get m1aee4fe817 => 'บิลด์มีการเปลี่ยนแปลง โปรดเปิดขั้นนี้อีกครั้ง';
 
   @override
@@ -2781,6 +2788,10 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m64bd568b72 => 'ไฟล์อัพเดตไม่มีเช็คซัมที่ตรวจสอบได้';
+
+  @override
+  String get m0ae0be6b7f =>
+      'ไฟล์บิลด์มีการเปลี่ยนแปลง โปรดตรวจสอบทั้งสองเวอร์ชันก่อนเชื่อมต่อใหม่';
 
   @override
   String get ma6b9ff9cd6 =>

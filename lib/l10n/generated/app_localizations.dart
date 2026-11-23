@@ -1511,6 +1511,12 @@ abstract class AppLocalizations {
   /// **'Close'**
   String get ma7a4033657;
 
+  /// Заменить открытую сборку снимком сессии
+  ///
+  /// In en, this message translates to:
+  /// **'Replace the open build with the session snapshot'**
+  String get m6ea0e6ef03;
+
   /// Заменить предмет
   ///
   /// In en, this message translates to:
@@ -4284,6 +4290,12 @@ abstract class AppLocalizations {
   /// **'The build changed. Wait for the new revision and try again.'**
   String get m66d08814d9;
 
+  /// Сборка изменилась. Откройте условие заново.
+  ///
+  /// In en, this message translates to:
+  /// **'The build has changed. Reopen the condition editor.'**
+  String get m5cab61bd8f;
+
   /// Сборка изменилась. Откройте этап снова.
   ///
   /// In en, this message translates to:
@@ -5219,6 +5231,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'The update file does not have a verifiable checksum'**
   String get m64bd568b72;
+
+  /// Файл сборки изменился. Проверьте версии перед переподключением.
+  ///
+  /// In en, this message translates to:
+  /// **'The build file has changed. Check both versions before reconnecting.'**
+  String get m0ae0be6b7f;
 
   /// Файл существует. Для замены укажите overwrite=true.
   ///

@@ -134,6 +134,8 @@ class EngineSessionCubit extends Cubit<EngineSessionState> {
     );
   }
 
+  Future<void> waitForSnapshot() => _applying;
+
   Future<void> _applySnapshot(EngineSnapshot snapshot, int generation) async {
     if (generation != _generation) return;
     try {
@@ -212,6 +214,19 @@ class EngineSessionCubit extends Cubit<EngineSessionState> {
 
   Future<void> setLevel(EngineSnapshot current, int level) =>
       _connectedTo(current).setLevel(current, level, engineRequestId());
+
+  Future<EngineSnapshot> setCondition(
+    EngineSnapshot current,
+    String name,
+    Object? value,
+  ) async {
+    try {
+      return await _connectedTo(current)
+          .setCondition(current, name, value, engineRequestId());
+    } on GrpcError catch (error) {
+      throw StateError(engineError(error));
+    }
+  }
 
   Future<void> calculate(EngineSnapshot current) =>
       _connectedTo(current).calculate(current, engineRequestId());

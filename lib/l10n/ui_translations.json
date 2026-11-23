@@ -232,6 +232,7 @@
     "m7ab4920661": "Закройте выбранный PoB вручную и повторите запуск.",
     "m37326b558a": "Закройте другие экземпляры PoB II и повторите очистку.",
     "ma7a4033657": "Закрыть",
+    "m6ea0e6ef03": "Заменить открытую сборку снимком сессии",
     "mbfc7b67eb5": "Заменить предмет",
     "md4bac1da57": "Заметка к этапу",
     "mdc4baf32ac": "Заметки к сборке",
@@ -694,6 +695,7 @@
     "mee1bd6d18c": "Сборка изменена в PoB. Правки PoB II сохранены отдельно: {p0}",
     "m7806bb3683": "Сборка изменилась на диске. Дождитесь обновления из PoB.",
     "m66d08814d9": "Сборка изменилась. Дождитесь новой ревизии и повторите действие",
+    "m5cab61bd8f": "Сборка изменилась. Откройте условие заново.",
     "m1aee4fe817": "Сборка изменилась. Откройте этап снова.",
     "md582f99ed2": "Сборка изменилась. Пересчитайте пути.",
     "m544bec7909": "Сборка изменится после нажатия «Применить»",
@@ -850,6 +852,7 @@
     "m45b81fa451": "Установленная пара компонентов проверена и подключена",
     "mb4dd85a98a": "Файл или папка изменились после предпросмотра.",
     "m64bd568b72": "Файл обновления не имеет проверяемой контрольной суммы",
+    "m0ae0be6b7f": "Файл сборки изменился. Проверьте версии перед переподключением.",
     "ma6b9ff9cd6": "Файл существует. Для замены укажите overwrite=true.",
     "md8a38f5bc2": "Флакон здоровья",
     "m5d2173db9c": "Флакон маны",
@@ -1789,7 +1792,10 @@
     "m484c9330fa": "Shared passives",
     "m8abb4db975": "Allocation mode",
     "m71d80e4773": "Import the open build",
-    "m54df7b22c7": "Open a build to import into the shared session"
+    "m54df7b22c7": "Open a build to import into the shared session",
+    "m6ea0e6ef03": "Replace the open build with the session snapshot",
+    "m5cab61bd8f": "The build has changed. Reopen the condition editor.",
+    "m0ae0be6b7f": "The build file has changed. Check both versions before reconnecting."
   },
   "fr": {
     "m0c63e733f9": "Lua n'a pas renvoyé toutes les icônes",
@@ -2685,7 +2691,10 @@
     "m484c9330fa": "Passifs communs",
     "m8abb4db975": "Mode d’attribution",
     "m71d80e4773": "Importer le build ouvert",
-    "m54df7b22c7": "Ouvrez un build à importer dans la session partagée"
+    "m54df7b22c7": "Ouvrez un build à importer dans la session partagée",
+    "m6ea0e6ef03": "Remplacer le build ouvert par celui de la session",
+    "m5cab61bd8f": "Le build a changé. Rouvrez l’éditeur de conditions.",
+    "m0ae0be6b7f": "Le fichier du build a changé. Vérifiez les deux versions avant de vous reconnecter."
   },
   "de": {
     "m0c63e733f9": "Lua hat nicht alle Symbole zurückgegeben",
@@ -3581,7 +3590,10 @@
     "m484c9330fa": "Gemeinsame Passive",
     "m8abb4db975": "Zuweisungsmodus",
     "m71d80e4773": "Geöffneten Build importieren",
-    "m54df7b22c7": "Einen Build zum Import in die gemeinsame Sitzung öffnen"
+    "m54df7b22c7": "Einen Build zum Import in die gemeinsame Sitzung öffnen",
+    "m6ea0e6ef03": "Offenen Build durch den Stand der Sitzung ersetzen",
+    "m5cab61bd8f": "Der Build wurde geändert. Öffnen Sie den Bedingungseditor erneut.",
+    "m0ae0be6b7f": "Die Build-Datei wurde geändert. Prüfen Sie beide Versionen, bevor Sie sich erneut verbinden."
   },
   "es": {
     "m0c63e733f9": "Lua no devolvió todos los íconos",
@@ -4477,7 +4489,10 @@
     "m484c9330fa": "Pasivas comunes",
     "m8abb4db975": "Modo de asignación",
     "m71d80e4773": "Importar la build abierta",
-    "m54df7b22c7": "Abre una build para importarla en la sesión compartida"
+    "m54df7b22c7": "Abre una build para importarla en la sesión compartida",
+    "m6ea0e6ef03": "Reemplazar la configuración abierta por la de la sesión",
+    "m5cab61bd8f": "La configuración cambió. Vuelve a abrir el editor de condiciones.",
+    "m0ae0be6b7f": "El archivo de la configuración cambió. Revisa ambas versiones antes de volver a conectar."
   },
   "pt_BR": {
     "m0c63e733f9": "Lua não retornou todos os ícones",
@@ -5373,7 +5388,10 @@
     "m484c9330fa": "Passivas compartilhadas",
     "m8abb4db975": "Modo de alocação",
     "m71d80e4773": "Importar a build aberta",
-    "m54df7b22c7": "Abra uma build para importá-la na sessão compartilhada"
+    "m54df7b22c7": "Abra uma build para importá-la na sessão compartilhada",
+    "m6ea0e6ef03": "Substituir a build aberta pelo estado da sessão",
+    "m5cab61bd8f": "A build mudou. Abra novamente o editor de condições.",
+    "m0ae0be6b7f": "O arquivo da build mudou. Confira as duas versões antes de reconectar."
   },
   "ja": {
     "m0c63e733f9": "Lua はすべてのアイコンを返しませんでした",
@@ -6269,7 +6287,10 @@
     "m484c9330fa": "共通パッシブ",
     "m8abb4db975": "割り当てモード",
     "m71d80e4773": "開いているビルドをインポート",
-    "m54df7b22c7": "共有セッションに取り込むビルドを開いてください"
+    "m54df7b22c7": "共有セッションに取り込むビルドを開いてください",
+    "m6ea0e6ef03": "開いているビルドをセッションの状態に置き換える",
+    "m5cab61bd8f": "ビルドが変更されました。条件エディターを開き直してください。",
+    "m0ae0be6b7f": "ビルドファイルが変更されました。再接続する前に両方のバージョンを確認してください。"
   },
   "ko": {
     "m0c63e733f9": "Lua이 모든 아이콘을 반환하지 않았습니다.",
@@ -7165,7 +7186,10 @@
     "m484c9330fa": "공용 패시브",
     "m8abb4db975": "할당 모드",
     "m71d80e4773": "열린 빌드 가져오기",
-    "m54df7b22c7": "공유 세션에 가져올 빌드를 여세요"
+    "m54df7b22c7": "공유 세션에 가져올 빌드를 여세요",
+    "m6ea0e6ef03": "열린 빌드를 세션 스냅샷으로 교체",
+    "m5cab61bd8f": "빌드가 변경되었습니다. 조건 편집기를 다시 여세요.",
+    "m0ae0be6b7f": "빌드 파일이 변경되었습니다. 다시 연결하기 전에 두 버전을 확인하세요."
   },
   "th": {
     "m0c63e733f9": "Lua ไม่ได้ส่งคืนไอคอนทั้งหมด",
@@ -8061,7 +8085,10 @@
     "m484c9330fa": "พาสซีฟร่วม",
     "m8abb4db975": "โหมดจัดสรร",
     "m71d80e4773": "นำเข้าบิลด์ที่เปิดอยู่",
-    "m54df7b22c7": "เปิดบิลด์ที่จะนำเข้าในเซสชันที่ใช้ร่วมกัน"
+    "m54df7b22c7": "เปิดบิลด์ที่จะนำเข้าในเซสชันที่ใช้ร่วมกัน",
+    "m6ea0e6ef03": "แทนที่บิลด์ที่เปิดอยู่ด้วยสแนปช็อตของเซสชัน",
+    "m5cab61bd8f": "บิลด์มีการเปลี่ยนแปลง โปรดเปิดตัวแก้ไขเงื่อนไขอีกครั้ง",
+    "m0ae0be6b7f": "ไฟล์บิลด์มีการเปลี่ยนแปลง โปรดตรวจสอบทั้งสองเวอร์ชันก่อนเชื่อมต่อใหม่"
   },
   "zh_Hant": {
     "m0c63e733f9": "Lua 未傳回所有圖標",
@@ -8957,6 +8984,9 @@
     "m484c9330fa": "共用天賦",
     "m8abb4db975": "配置模式",
     "m71d80e4773": "匯入已開啟的配置",
-    "m54df7b22c7": "開啟要匯入共用工作階段的配置"
+    "m54df7b22c7": "開啟要匯入共用工作階段的配置",
+    "m6ea0e6ef03": "以工作階段快照取代已開啟的流派配置",
+    "m5cab61bd8f": "流派配置已變更。請重新開啟條件編輯器。",
+    "m0ae0be6b7f": "流派配置檔案已變更。重新連線前請檢查兩個版本。"
   }
 }

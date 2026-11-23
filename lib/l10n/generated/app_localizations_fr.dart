@@ -812,6 +812,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get ma7a4033657 => 'Close';
 
   @override
+  String get m6ea0e6ef03 => 'Remplacer le build ouvert par celui de la session';
+
+  @override
   String get mbfc7b67eb5 => 'Remplacer l’objet';
 
   @override
@@ -2347,6 +2350,10 @@ class AppLocalizationsFr extends AppLocalizations {
       'Le build a changé. Attendez la nouvelle révision, puis réessayez.';
 
   @override
+  String get m5cab61bd8f =>
+      'Le build a changé. Rouvrez l’éditeur de conditions.';
+
+  @override
   String get m1aee4fe817 => 'Le build a changé. Rouvrez l’étape.';
 
   @override
@@ -2862,6 +2869,10 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get m64bd568b72 =>
       'Le fichier de mise à jour n\'a pas de somme de contrôle vérifiable';
+
+  @override
+  String get m0ae0be6b7f =>
+      'Le fichier du build a changé. Vérifiez les deux versions avant de vous reconnecter.';
 
   @override
   String get ma6b9ff9cd6 =>

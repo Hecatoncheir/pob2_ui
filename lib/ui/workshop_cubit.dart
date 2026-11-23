@@ -44,6 +44,12 @@ import 'engine_session_cubit.dart';
 
 typedef _BuildSnapshot = ({String xml, String title});
 typedef _ComponentValidation = Future<void> Function(Installations);
+typedef _EngineXmlBinding = ({int inputRevision, String libraryRevision});
+
+const _missingEngineXml = 'В общей сессии нет XML сборки';
+const _staleCondition = 'Сборка изменилась. Откройте условие заново.';
+const _divergedBuild =
+    'Файл сборки изменился. Проверьте версии перед переподключением.';
 
 class WorkshopCubit extends Cubit<WorkshopState> {
   WorkshopCubit(
@@ -76,6 +82,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
   );
   ({String folder, String id})? _engineBinding;
   int _engineBindingEpoch = 0;
+  _EngineXmlBinding? _engineXmlBinding;
   ({String folder, String id})? get _currentEngineBinding {
     final id = state.library.activeId;
     return id == null ? null : (folder: sharedLibrary?.directory ?? '', id: id);
@@ -86,28 +93,66 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     String? createName,
     bool bindCurrentBuild = false,
     bool importOpenBuild = false,
+    bool useSessionXml = false,
   }) async {
-    final xml = importOpenBuild ? await exportXml() : null;
-    if (importOpenBuild && (createName == null || xml == null)) {
-      throw StateError('Откройте сборку для импорта в общую сессию');
-    }
-    _engineBindingEpoch++;
+    final opened = _currentEngineBinding;
+    final xml = importOpenBuild ? await _exportEngineXml(createName) : null;
+    final syncXml = bindCurrentBuild && (importOpenBuild || useSessionXml);
+    final input = syncXml ? _startEngineXmlBinding(opened) : null;
+    final epoch = ++_engineBindingEpoch;
     _engineBinding = bindCurrentBuild ? _currentEngineBinding : null;
+    _engineXmlBinding = input;
     try {
       await engineSession.connect(
         options,
         createName: createName,
         createXml: xml,
       );
+      if (syncXml) await _confirmEngineXmlBinding(epoch);
     } catch (_) {
-      _engineBinding = null;
+      if (epoch == _engineBindingEpoch) _clearEngineBinding();
       rethrow;
     }
   }
 
-  Future<void> disconnectEngine() async {
+  Future<String> _exportEngineXml(String? createName) async {
+    final xml = createName == null ? null : await exportXml();
+    if (xml == null) {
+      throw StateError('Откройте сборку для импорта в общую сессию');
+    }
+    return xml;
+  }
+
+  Future<void> _confirmEngineXmlBinding(int epoch) async {
+    await engineSession.waitForSnapshot();
+    if (epoch != _engineBindingEpoch) return;
+    if (_engineXmlBinding!.inputRevision == 0) {
+      throw StateError(state.error ?? _missingEngineXml);
+    }
+  }
+
+  _EngineXmlBinding _startEngineXmlBinding(
+    ({String folder, String id})? opened,
+  ) {
+    final revision = state.library.active?.revision;
+    if (opened == null ||
+        opened != _currentEngineBinding ||
+        revision == null ||
+        state.document == null ||
+        sharedLibrary == null) {
+      throw StateError('Откройте сборку для импорта в общую сессию');
+    }
+    return (inputRevision: 0, libraryRevision: revision);
+  }
+
+  void _clearEngineBinding() {
     _engineBindingEpoch++;
     _engineBinding = null;
+    _engineXmlBinding = null;
+  }
+
+  Future<void> disconnectEngine() async {
+    _clearEngineBinding();
     await engineSession.disconnect();
   }
 
@@ -122,11 +167,77 @@ class WorkshopCubit extends Cubit<WorkshopState> {
         _currentEngineBinding != binding ||
         epoch != _engineBindingEpoch)
       return;
+    if (_engineXmlBinding != null) {
+      await _acceptEngineXml(snapshot);
+      return;
+    }
     await _renameLocalBuild(snapshot.buildName);
     if (state.error case final error?) throw StateError(error);
     addLog(
       'Общая сессия ${snapshot.sessionId}, ревизия ${snapshot.revision}: название «${snapshot.buildName}»',
     );
+  }
+
+  Future<void> _acceptEngineXml(EngineSnapshot snapshot) async {
+    final binding = _engineXmlBinding!;
+    if (binding.inputRevision != 0 &&
+        snapshot.revision != engineSession.state.snapshot?.revision) {
+      return;
+    }
+    final incoming = snapshot.build;
+    if (incoming == null) return;
+    if (incoming.inputRevision > binding.inputRevision) {
+      await _run(() => _mirrorEngineBuild(snapshot, binding));
+      if (state.error case final error?) throw StateError(error);
+      return;
+    }
+    if (state.library.active?.title != snapshot.buildName) {
+      await _renameLocalBuild(snapshot.buildName, binding: binding);
+      if (state.error case final error?) throw StateError(error);
+    }
+  }
+
+  Future<void> _checkEngineFile(_EngineXmlBinding binding) async {
+    final entry = state.library.active;
+    if (entry == null || entry.revision != binding.libraryRevision) {
+      throw StateError(_divergedBuild);
+    }
+    final file = await sharedLibrary!.changed(entry.id, null);
+    if (file?.entry.revision != binding.libraryRevision) {
+      throw StateError(_divergedBuild);
+    }
+  }
+
+  Future<void> _mirrorEngineBuild(
+    EngineSnapshot snapshot,
+    _EngineXmlBinding binding,
+  ) async {
+    await _checkEngineFile(binding);
+    await _flushText();
+    if (binding != _engineXmlBinding) throw StateError(_staleCondition);
+    final document = state.document!;
+    final target = state.library;
+    final before = await _currentXml();
+    final incoming = snapshot.build!;
+    final (:xml, :progression) = splitTreeProgression(incoming.xml);
+    _markStale();
+    try {
+      await _loadXml(xml);
+      await _readReport(
+        target: target,
+        title: snapshot.buildName,
+        progression: progression,
+        progressionSource: _storedProgressionKey,
+        savedXml: xml,
+      );
+      _engineXmlBinding = (
+        inputRevision: incoming.inputRevision,
+        libraryRevision: state.library.active!.revision!,
+      );
+    } catch (_) {
+      await _restoreWorking(before, document, target);
+      rethrow;
+    }
   }
 
   final PobShareLinks _shareLinks;
@@ -414,7 +525,9 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     if (isClosed) return;
     final wasBusy = state.busy;
     emit(next);
-    if (_engineBinding != _currentEngineBinding) _engineBinding = null;
+    if (_engineBinding != null && _engineBinding != _currentEngineBinding) {
+      _clearEngineBinding();
+    }
     _mcpEditor?.checkBuild();
     _watchOpenBuild();
     if (wasBusy && !next.busy) resumeBuildSync();
@@ -1011,6 +1124,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     LibraryState? target,
     String? title,
     bool persist = true,
+    String? savedXml,
     TreeProgressionTransfer? progression,
     TreeProgressionKey? progressionSource,
   }) async {
@@ -1021,7 +1135,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
         ? await _saveBuild(
             target ?? state.library,
             report,
-            attachTreeProgression(xml, progression),
+            attachTreeProgression(savedXml ?? xml, progression),
             title: title,
             progressionSource: progressionSource,
           )
@@ -1076,6 +1190,21 @@ class WorkshopCubit extends Cubit<WorkshopState> {
         after.activeId == null)
       return;
     _engineBinding = (folder: binding.folder, id: after.activeId!);
+    _followEngineFileRevision(before, after);
+  }
+
+  void _followEngineFileRevision(LibraryState before, LibraryState after) {
+    final binding = _engineXmlBinding;
+    final revision = after.active?.revision;
+    if (binding == null ||
+        revision == null ||
+        before.active?.revision != binding.libraryRevision) {
+      return;
+    }
+    _engineXmlBinding = (
+      inputRevision: binding.inputRevision,
+      libraryRevision: revision,
+    );
   }
 
   void _checkProgression(
@@ -1474,22 +1603,24 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     return _renameLocalBuild(title);
   }
 
-  Future<void> _renameLocalBuild(String title) => _run(() async {
-    if (state.report == null || title.trim().isEmpty) return;
-    final previousTitle = state.library.active?.title ?? state.report!.name;
-    if (previousTitle == title.trim()) return;
-    await _flushText();
-    final xml = await _currentXml();
-    final builds = await _saveBuild(
-      state.library,
-      state.report!,
-      xml,
-      title: title.trim(),
-      progressionSource: _storedProgressionKey,
-    );
-    _update(state.copyWith(library: builds));
-    _pushUndo(xml, title: previousTitle);
-  });
+  Future<void> _renameLocalBuild(String title, {_EngineXmlBinding? binding}) =>
+      _run(() async {
+        if (state.report == null || title.trim().isEmpty) return;
+        final previousTitle = state.library.active?.title ?? state.report!.name;
+        if (previousTitle == title.trim()) return;
+        if (binding != null) await _checkEngineFile(binding);
+        await _flushText();
+        final xml = await _currentXml();
+        final builds = await _saveBuild(
+          state.library,
+          state.report!,
+          xml,
+          title: title.trim(),
+          progressionSource: _storedProgressionKey,
+        );
+        _update(state.copyWith(library: builds));
+        _pushUndo(xml, title: previousTitle);
+      });
 
   Future<JsonMap> readTreeNode(int id) async {
     final catalog = await engine.call('pob_catalog', {
@@ -1643,12 +1774,70 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     await engine.call('pob_select_weapon_set', {'index': index});
   });
 
-  Future<BuildEditResult> setCondition(String key, dynamic value) =>
-      _changeBuild(() async {
-        await engine.call('pob_set_config', {
-          'values': {key: value},
-        });
+  Future<BuildEditResult> Function(String, Object) conditionEditorCommit() {
+    final binding = _engineXmlBinding;
+    if (binding == null) return setCondition;
+    final epoch = _engineBindingEpoch;
+    return (key, value) =>
+        _setEngineCondition(key, value, binding.inputRevision, epoch);
+  }
+
+  Future<BuildEditResult> setCondition(String key, dynamic value) {
+    final binding = _engineXmlBinding;
+    if (binding != null) {
+      return _setEngineCondition(
+        key,
+        value,
+        binding.inputRevision,
+        _engineBindingEpoch,
+      );
+    }
+    return _changeBuild(() async {
+      await engine.call('pob_set_config', {
+        'values': {key: value},
       });
+    });
+  }
+
+  Future<BuildEditResult> _setEngineCondition(
+    String key,
+    Object? value,
+    int expectedInput,
+    int epoch,
+  ) async {
+    var committed = false;
+    await _run(() async {
+      final binding = _engineXmlBinding;
+      final current = engineSession.state.snapshot;
+      if (binding == null ||
+          expectedInput == 0 ||
+          current?.build?.inputRevision != expectedInput ||
+          binding.inputRevision != expectedInput ||
+          epoch != _engineBindingEpoch) {
+        throw StateError(_staleCondition);
+      }
+      await _checkEngineFile(binding);
+      final updated = await engineSession.setCondition(current!, key, value);
+      if (epoch != _engineBindingEpoch) throw StateError(_staleCondition);
+      if (updated.build!.inputRevision > binding.inputRevision) {
+        await _mirrorEngineBuild(updated, binding);
+      }
+      committed = true;
+      unawaited(_calculateEngineCondition(updated));
+    });
+    return (
+      committed: committed,
+      error: committed ? null : state.error ?? 'Действие недоступно',
+    );
+  }
+
+  Future<void> _calculateEngineCondition(EngineSnapshot snapshot) async {
+    try {
+      await engineSession.calculate(snapshot);
+    } catch (error) {
+      if (!isClosed && !_closing) addLog(error.toString());
+    }
+  }
 
   Future<JsonMap> createMcpBuild(JsonMap arguments) async {
     JsonMap? result;

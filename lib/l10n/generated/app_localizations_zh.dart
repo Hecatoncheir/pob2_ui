@@ -764,6 +764,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get ma7a4033657 => '關閉';
 
   @override
+  String get m6ea0e6ef03 => '以工作階段快照取代已開啟的流派配置';
+
+  @override
   String get mbfc7b67eb5 => '替換物品';
 
   @override
@@ -2256,6 +2259,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m66d08814d9 => '流派已變更。請等待新的修訂後再試一次。';
 
   @override
+  String get m5cab61bd8f => '流派配置已變更。請重新開啟條件編輯器。';
+
+  @override
   String get m1aee4fe817 => '流派已變更。請重新開啟此階段。';
 
   @override
@@ -2744,6 +2750,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m64bd568b72 => '更新檔案沒有可驗證的校驗和';
+
+  @override
+  String get m0ae0be6b7f => '流派配置檔案已變更。重新連線前請檢查兩個版本。';
 
   @override
   String get ma6b9ff9cd6 => '文件存在。若要替換，請指定 overwrite=true。';
@@ -3640,6 +3649,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get ma7a4033657 => '關閉';
 
   @override
+  String get m6ea0e6ef03 => '以工作階段快照取代已開啟的流派配置';
+
+  @override
   String get mbfc7b67eb5 => '替換物品';
 
   @override
@@ -5132,6 +5144,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m66d08814d9 => '流派已變更。請等待新的修訂後再試一次。';
 
   @override
+  String get m5cab61bd8f => '流派配置已變更。請重新開啟條件編輯器。';
+
+  @override
   String get m1aee4fe817 => '流派已變更。請重新開啟此階段。';
 
   @override
@@ -5620,6 +5635,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m64bd568b72 => '更新檔案沒有可驗證的校驗和';
+
+  @override
+  String get m0ae0be6b7f => '流派配置檔案已變更。重新連線前請檢查兩個版本。';
 
   @override
   String get ma6b9ff9cd6 => '文件存在。若要替換，請指定 overwrite=true。';

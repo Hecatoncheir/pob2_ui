@@ -27,6 +27,12 @@ abstract interface class EngineConnection {
     String requestId,
   );
   Future<void> setLevel(EngineSnapshot current, int level, String requestId);
+  Future<EngineSnapshot> setCondition(
+    EngineSnapshot current,
+    String name,
+    Object? value,
+    String requestId,
+  );
   bool get supportsAddSupport;
   bool get supportsEquipmentPreview;
   Future<EngineEquipmentPreview> previewEquipment(
@@ -263,6 +269,7 @@ class EngineSessionClient implements EngineConnection {
     return EngineBuild(
       xml: value.xml,
       level: value.model.level,
+      inputRevision: value.inputRevision.toInt(),
       calculation: calculation,
       group: _selectedGroup(value.model),
       equipment: _equipment(value.model),
@@ -619,23 +626,52 @@ class EngineSessionClient implements EngineConnection {
     requestId,
   );
 
-  Future<void> _applyEdit(
+  @override
+  Future<EngineSnapshot> setCondition(
+    EngineSnapshot current,
+    String name,
+    Object? value,
+    String requestId,
+  ) async {
+    final response = await _applyEdit(
+      current,
+      builds.BuildEdit(
+        config: builds.ConfigEdit(name: name, value: _conditionValue(value)),
+      ),
+      requestId,
+    );
+    return _snapshot(response.snapshot);
+  }
+
+  static builds.ConfigValue? _conditionValue(Object? value) {
+    final type = switch (value) {
+      null => null,
+      bool() => builds.ConfigValueType.CONFIG_VALUE_TYPE_BOOLEAN,
+      num() when value.isFinite =>
+        builds.ConfigValueType.CONFIG_VALUE_TYPE_NUMBER,
+      String() => builds.ConfigValueType.CONFIG_VALUE_TYPE_STRING,
+      _ => throw ArgumentError.value(value, 'value'),
+    };
+    return type == null
+        ? null
+        : builds.ConfigValue(type: type, value: '$value');
+  }
+
+  Future<pb.ApplyBuildResponse> _applyEdit(
     EngineSnapshot current,
     builds.BuildEdit edit,
     String requestId,
-  ) async {
-    await _rpc.applyBuild(
-      pb.ApplyBuildRequest(
-        sessionId: current.sessionId,
-        expectedRevision: Int64(current.revision),
-        requestId: requestId,
-        edit: edit,
-      ),
-      options: edit.hasEquipment() || edit.hasTreeNode()
-          ? _calculationTimeout
-          : _timeout,
-    );
-  }
+  ) => _rpc.applyBuild(
+    pb.ApplyBuildRequest(
+      sessionId: current.sessionId,
+      expectedRevision: Int64(current.revision),
+      requestId: requestId,
+      edit: edit,
+    ),
+    options: edit.hasEquipment() || edit.hasTreeNode()
+        ? _calculationTimeout
+        : _timeout,
+  );
 
   CallOptions get _calculationTimeout =>
       CallOptions(timeout: const Duration(seconds: 90));

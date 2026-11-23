@@ -784,6 +784,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get ma7a4033657 => 'Close';
 
   @override
+  String get m6ea0e6ef03 => 'Replace the open build with the session snapshot';
+
+  @override
   String get mbfc7b67eb5 => 'Replace item';
 
   @override
@@ -2298,6 +2301,10 @@ class AppLocalizationsEn extends AppLocalizations {
       'The build changed. Wait for the new revision and try again.';
 
   @override
+  String get m5cab61bd8f =>
+      'The build has changed. Reopen the condition editor.';
+
+  @override
   String get m1aee4fe817 => 'The build changed. Open the stage again.';
 
   @override
@@ -2804,6 +2811,10 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get m64bd568b72 =>
       'The update file does not have a verifiable checksum';
+
+  @override
+  String get m0ae0be6b7f =>
+      'The build file has changed. Check both versions before reconnecting.';
 
   @override
   String get ma6b9ff9cd6 =>

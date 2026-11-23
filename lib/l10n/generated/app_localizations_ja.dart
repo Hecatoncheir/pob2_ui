@@ -767,6 +767,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get ma7a4033657 => '閉じる';
 
   @override
+  String get m6ea0e6ef03 => '開いているビルドをセッションの状態に置き換える';
+
+  @override
   String get mbfc7b67eb5 => 'アイテムを交換';
 
   @override
@@ -2263,6 +2266,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m66d08814d9 => 'ビルドが変更されました。新しいリビジョンを待ってから再度お試しください。';
 
   @override
+  String get m5cab61bd8f => 'ビルドが変更されました。条件エディターを開き直してください。';
+
+  @override
   String get m1aee4fe817 => 'ビルドが変更されました。ステージを開き直してください。';
 
   @override
@@ -2754,6 +2760,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m64bd568b72 => 'アップデート ファイルには検証可能なチェックサムがありません';
+
+  @override
+  String get m0ae0be6b7f => 'ビルドファイルが変更されました。再接続する前に両方のバージョンを確認してください。';
 
   @override
   String get ma6b9ff9cd6 => 'ファイルは存在します。置き換える場合はoverwrite=trueを指定します。';

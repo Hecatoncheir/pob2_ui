@@ -1295,6 +1295,11 @@
     "description": "Закрыть",
     "placeholders": {}
   },
+  "m6ea0e6ef03": "Replace the open build with the session snapshot",
+  "@m6ea0e6ef03": {
+    "description": "Заменить открытую сборку снимком сессии",
+    "placeholders": {}
+  },
   "mbfc7b67eb5": "Replace item",
   "@mbfc7b67eb5": {
     "description": "Заменить предмет",
@@ -3835,6 +3840,11 @@
     "description": "Сборка изменилась. Дождитесь новой ревизии и повторите действие",
     "placeholders": {}
   },
+  "m5cab61bd8f": "The build has changed. Reopen the condition editor.",
+  "@m5cab61bd8f": {
+    "description": "Сборка изменилась. Откройте условие заново.",
+    "placeholders": {}
+  },
   "m1aee4fe817": "The build changed. Open the stage again.",
   "@m1aee4fe817": {
     "description": "Сборка изменилась. Откройте этап снова.",
@@ -4663,6 +4673,11 @@
   "m64bd568b72": "The update file does not have a verifiable checksum",
   "@m64bd568b72": {
     "description": "Файл обновления не имеет проверяемой контрольной суммы",
+    "placeholders": {}
+  },
+  "m0ae0be6b7f": "The build file has changed. Check both versions before reconnecting.",
+  "@m0ae0be6b7f": {
+    "description": "Файл сборки изменился. Проверьте версии перед переподключением.",
     "placeholders": {}
   },
   "ma6b9ff9cd6": "The file exists. To replace, specify overwrite=true.",

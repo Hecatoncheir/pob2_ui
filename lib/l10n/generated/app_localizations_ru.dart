@@ -785,6 +785,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get ma7a4033657 => 'Закрыть';
 
   @override
+  String get m6ea0e6ef03 => 'Заменить открытую сборку снимком сессии';
+
+  @override
   String get mbfc7b67eb5 => 'Заменить предмет';
 
   @override
@@ -2300,6 +2303,9 @@ class AppLocalizationsRu extends AppLocalizations {
       'Сборка изменилась. Дождитесь новой ревизии и повторите действие';
 
   @override
+  String get m5cab61bd8f => 'Сборка изменилась. Откройте условие заново.';
+
+  @override
   String get m1aee4fe817 => 'Сборка изменилась. Откройте этап снова.';
 
   @override
@@ -2804,6 +2810,10 @@ class AppLocalizationsRu extends AppLocalizations {
   @override
   String get m64bd568b72 =>
       'Файл обновления не имеет проверяемой контрольной суммы';
+
+  @override
+  String get m0ae0be6b7f =>
+      'Файл сборки изменился. Проверьте версии перед переподключением.';
 
   @override
   String get ma6b9ff9cd6 =>

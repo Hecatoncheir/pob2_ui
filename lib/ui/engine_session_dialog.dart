@@ -34,6 +34,7 @@ class _EngineSessionDialogState extends State<_EngineSessionDialog> {
   bool create = false;
   bool importOpenBuild = false;
   bool bind = false;
+  bool useSessionXml = false;
   bool busy = false;
   String? error;
 
@@ -80,6 +81,7 @@ class _EngineSessionDialogState extends State<_EngineSessionDialog> {
         createName: create ? name.text.trim() : null,
         bindCurrentBuild: bind,
         importOpenBuild: create && importOpenBuild,
+        useSessionXml: bind && !create && useSessionXml,
       );
       if (mounted) Navigator.pop(context);
     } catch (failure) {
@@ -150,6 +152,16 @@ class _EngineSessionDialogState extends State<_EngineSessionDialog> {
               value: bind,
               onChanged: _bindCallback(),
             ),
+            if (bind && !create)
+              CheckboxListTile(
+                key: const Key('engine-use-session-xml'),
+                contentPadding: EdgeInsets.zero,
+                title: const AppText('Заменить открытую сборку снимком сессии'),
+                value: useSessionXml,
+                onChanged: busy
+                    ? null
+                    : (value) => setState(() => useSessionXml = value ?? false),
+              ),
             if (error case final message?)
               AppText(
                 message,

@@ -815,6 +815,10 @@ class AppLocalizationsDe extends AppLocalizations {
   String get ma7a4033657 => 'Schließen';
 
   @override
+  String get m6ea0e6ef03 =>
+      'Offenen Build durch den Stand der Sitzung ersetzen';
+
+  @override
   String get mbfc7b67eb5 => 'Gegenstand ersetzen';
 
   @override
@@ -2347,6 +2351,10 @@ class AppLocalizationsDe extends AppLocalizations {
       'Der Build wurde geändert. Warte auf die neue Revision und versuche es erneut.';
 
   @override
+  String get m5cab61bd8f =>
+      'Der Build wurde geändert. Öffnen Sie den Bedingungseditor erneut.';
+
+  @override
   String get m1aee4fe817 =>
       'Der Build wurde geändert. Öffne die Etappe erneut.';
 
@@ -2863,6 +2871,10 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get m64bd568b72 =>
       'Die Update-Datei verfügt über keine überprüfbare Prüfsumme';
+
+  @override
+  String get m0ae0be6b7f =>
+      'Die Build-Datei wurde geändert. Prüfen Sie beide Versionen, bevor Sie sich erneut verbinden.';
 
   @override
   String get ma6b9ff9cd6 =>

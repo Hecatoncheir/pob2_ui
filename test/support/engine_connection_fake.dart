@@ -53,6 +53,14 @@ class FakeEngineConnection implements EngineConnection {
       throw UnimplementedError();
 
   @override
+  Future<EngineSnapshot> setCondition(
+    EngineSnapshot current,
+    String name,
+    Object? value,
+    String requestId,
+  ) => throw UnimplementedError();
+
+  @override
   bool get supportsAddSupport => false;
 
   @override
