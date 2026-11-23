@@ -5,6 +5,7 @@ import '../domain/engine_session.dart';
 import 'core/app_text.dart';
 import 'core/dialog_close_button.dart';
 import 'core/motion.dart';
+import 'engine_equipment_dialog.dart';
 import 'engine_session_cubit.dart';
 import 'engine_support_dialog.dart';
 import 'workshop_cubit.dart';
@@ -98,6 +99,7 @@ class _EngineBuildDialogState extends State<_EngineBuildDialog> {
               if (build.group case final group?) _EngineBuildGroup(group),
               const SizedBox(height: 12),
               _EngineBuildResult(build.calculation),
+              EngineEquipmentPanel(_session, build),
               if (!state.connected) AppText(state.message, localize: false),
               if (_error case final message?)
                 AppText(message, key: const Key('engine-build-error')),

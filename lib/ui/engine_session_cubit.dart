@@ -30,6 +30,13 @@ typedef EngineSupportOffer = ({
   EngineSupportPreview preview,
 });
 
+typedef EngineEquipmentOffer = ({
+  String sessionId,
+  int connectionId,
+  EngineEquipmentEdit edit,
+  EngineEquipmentPreview preview,
+});
+
 class EngineSessionCubit extends Cubit<EngineSessionState> {
   EngineSessionCubit({
     Future<EngineConnection> Function(EngineOptions)? open,
@@ -223,9 +230,11 @@ class EngineSessionCubit extends Cubit<EngineSessionState> {
 
   bool isCurrentSupportOffer(EngineSupportOffer offer) =>
       supportsAddSupport &&
-      offer.connectionId == _connectionId &&
-      offer.sessionId == state.snapshot?.sessionId &&
-      offer.preview.revision == state.snapshot?.revision;
+      _isCurrentOffer(
+        offer.sessionId,
+        offer.connectionId,
+        offer.preview.revision,
+      );
 
   Future<void> addSupport(EngineSupportOffer offer) async {
     if (!isCurrentSupportOffer(offer)) {
@@ -238,6 +247,45 @@ class EngineSessionCubit extends Cubit<EngineSessionState> {
     await _connectedTo(snapshot)
         .addSupport(snapshot, offer.selection, engineRequestId());
   }
+
+  bool get supportsEquipmentPreview =>
+      state.connected && (_connection?.supportsEquipmentPreview ?? false);
+
+  Future<EngineEquipmentOffer> previewEquipment(
+    EngineSnapshot current,
+    EngineEquipmentEdit edit,
+  ) async {
+    final connectionId = _connectionId;
+    final preview = await _connectedTo(current).previewEquipment(current, edit);
+    return (
+      sessionId: current.sessionId,
+      connectionId: connectionId,
+      edit: edit,
+      preview: preview,
+    );
+  }
+
+  bool isCurrentEquipmentOffer(EngineEquipmentOffer offer) =>
+      supportsEquipmentPreview &&
+      _isCurrentOffer(
+        offer.sessionId,
+        offer.connectionId,
+        offer.preview.revision,
+      );
+
+  Future<void> editEquipment(EngineEquipmentOffer offer) async {
+    if (!isCurrentEquipmentOffer(offer)) {
+      throw StateError('Выполните предпросмотр для текущей ревизии');
+    }
+    final snapshot = state.snapshot!;
+    await _connectedTo(snapshot)
+        .editEquipment(snapshot, offer.edit, engineRequestId());
+  }
+
+  bool _isCurrentOffer(String sessionId, int connectionId, int revision) =>
+      connectionId == _connectionId &&
+      sessionId == state.snapshot?.sessionId &&
+      revision == state.snapshot?.revision;
 
   EngineConnection _connectedTo(EngineSnapshot current) {
     final connection = _connection;

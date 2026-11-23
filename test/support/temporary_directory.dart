@@ -7,7 +7,7 @@ Future<void> removeTemporaryDirectory(Directory directory) async {
   final temporary = await Directory.systemTemp.resolveSymbolicLinks();
   if (parent != temporary)
     throw StateError('Каталог теста находится вне временной папки');
-  await _remove(target, 3);
+  await _remove(target, 20);
 }
 
 Future<void> _remove(Directory target, int attempts) async {
@@ -15,10 +15,13 @@ Future<void> _remove(Directory target, int attempts) async {
     await target.delete(recursive: true);
   } on FileSystemException catch (error) {
     if (!await target.exists()) return;
-    if (!Platform.isWindows || error.osError?.errorCode != 145 || attempts == 0)
+    if (!Platform.isWindows ||
+        !const {32, 145}.contains(error.osError?.errorCode) ||
+        attempts == 0) {
       rethrow;
-    // Windows иногда завершает удаление содержимого позже ответа файловой операции.
-    await Future<void>.delayed(const Duration(milliseconds: 50));
+    }
+    // После остановки сервера Windows может ещё освобождать файлы профиля.
+    await Future<void>.delayed(const Duration(milliseconds: 100));
     await _remove(target, attempts - 1);
   }
 }

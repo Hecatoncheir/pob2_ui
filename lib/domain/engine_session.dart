@@ -32,12 +32,14 @@ class EngineBuild {
     required this.level,
     this.calculation,
     this.group,
+    this.equipment = const {},
   });
 
   final String xml;
   final int level;
   final EngineCalculation? calculation;
   final EngineSkillGroup? group;
+  final Map<String, String> equipment;
 }
 
 typedef EngineGem = ({String name, int level, int quality, bool enabled});
@@ -58,6 +60,14 @@ typedef EngineStatDelta = ({
   double before,
   double after,
   double difference,
+});
+
+typedef EngineEquipmentEdit = ({String slot, String raw});
+typedef EngineEquipmentPreview = ({
+  int revision,
+  EngineCalculation before,
+  EngineCalculation after,
+  List<EngineStatDelta> deltas,
 });
 
 class EngineSupportPreview {

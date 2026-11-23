@@ -33,7 +33,60 @@ class _XmlEngine extends McpClient {
   };
 }
 
+class _EquipmentConnection extends FakeEngineConnection {
+  final applied = <EngineEquipmentEdit>[];
+
+  @override
+  bool get supportsEquipmentPreview => true;
+
+  @override
+  Future<EngineEquipmentPreview> previewEquipment(
+    EngineSnapshot current,
+    EngineEquipmentEdit edit,
+  ) async {
+    const report = EngineCalculation(status: 'complete', warnings: []);
+    return (
+      revision: current.revision,
+      before: report,
+      after: report,
+      deltas: const <EngineStatDelta>[],
+    );
+  }
+
+  @override
+  Future<void> editEquipment(
+    EngineSnapshot current,
+    EngineEquipmentEdit edit,
+    String requestId,
+  ) async => applied.add(edit);
+}
+
 void main() {
+  test('После переподключения та же ревизия требует новой примерки', () async {
+    final first = _EquipmentConnection();
+    final second = _EquipmentConnection();
+    var next = first;
+    final cubit = EngineSessionCubit(open: (_) async => next);
+    addTearDown(first.events.close);
+    addTearDown(second.events.close);
+    addTearDown(cubit.close);
+
+    const options = EngineOptions();
+    const edit = (slot: 'Ring 1', raw: 'Rarity: NORMAL\nIron Ring');
+    await cubit.connect(options);
+    final original = await cubit.previewEquipment(cubit.state.snapshot!, edit);
+    expect(cubit.isCurrentEquipmentOffer(original), isTrue);
+
+    next = second;
+    await cubit.connect(options);
+    expect(cubit.state.snapshot!.revision, original.preview.revision);
+    await expectLater(cubit.editEquipment(original), throwsStateError);
+    expect(second.applied, isEmpty);
+    final renewed = await cubit.previewEquipment(cubit.state.snapshot!, edit);
+    await cubit.editEquipment(renewed);
+    expect(second.applied, [edit]);
+  });
+
   test(
     'Последнее подключение отменяет предыдущее до открытия процесса',
     () async {

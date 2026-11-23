@@ -1,6 +1,12 @@
 import 'build_report.dart';
 
 class ItemComparison {
+  ItemComparison({
+    required this.revision,
+    required List<ItemComparisonRow> rows,
+  }) : reason = null,
+       rows = List.unmodifiable(rows);
+
   ItemComparison.fromJson(JsonMap json)
     : revision = json['revision'] as int,
       reason = json['reason'] as String?,
@@ -13,6 +19,15 @@ class ItemComparison {
 }
 
 class ItemComparisonRow {
+  const ItemComparisonRow({
+    required this.id,
+    required this.label,
+    this.actor = 'player',
+    this.before,
+    this.after,
+    this.change,
+  });
+
   ItemComparisonRow.fromJson(JsonMap json)
     : id = json['id'] as String,
       label = json['label'] as String,

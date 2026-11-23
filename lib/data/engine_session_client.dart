@@ -26,6 +26,16 @@ abstract interface class EngineConnection {
   );
   Future<void> setLevel(EngineSnapshot current, int level, String requestId);
   bool get supportsAddSupport;
+  bool get supportsEquipmentPreview;
+  Future<EngineEquipmentPreview> previewEquipment(
+    EngineSnapshot current,
+    EngineEquipmentEdit edit,
+  );
+  Future<void> editEquipment(
+    EngineSnapshot current,
+    EngineEquipmentEdit edit,
+    String requestId,
+  );
   Future<EngineSupportPage> findSupports(String query, int offset);
   Future<EngineSupportPreview> previewSupport(
     EngineSnapshot current,
@@ -58,6 +68,7 @@ class EngineSessionClient implements EngineConnection {
     this._channel,
     this._rpc,
     this.supportsAddSupport,
+    this.supportsEquipmentPreview,
   );
   final Process _helper;
   final StreamSubscription<String> _output;
@@ -66,6 +77,8 @@ class EngineSessionClient implements EngineConnection {
   final pb.SessionServiceClient _rpc;
   @override
   final bool supportsAddSupport;
+  @override
+  final bool supportsEquipmentPreview;
   bool _closed = false;
 
   static Future<EngineConnection> open(EngineOptions options) async {
@@ -139,6 +152,7 @@ class EngineSessionClient implements EngineConnection {
         channel,
         rpc,
         info.capabilities.contains('build.add_support'),
+        info.capabilities.contains('build.equipment_preview'),
       );
     } catch (_) {
       await channel?.terminate();
@@ -220,7 +234,16 @@ class EngineSessionClient implements EngineConnection {
       level: value.model.level,
       calculation: calculation,
       group: _selectedGroup(value.model),
+      equipment: _equipment(value.model),
     );
+  }
+
+  static Map<String, String> _equipment(builds.BuildModel model) {
+    final items = {for (final item in model.items) item.id: item.raw};
+    return Map.unmodifiable({
+      for (final entry in model.slots.entries)
+        entry.key: items[entry.value] ?? '',
+    });
   }
 
   static EngineSkillGroup? _selectedGroup(builds.BuildModel model) {
@@ -356,8 +379,13 @@ class EngineSessionClient implements EngineConnection {
       compatible: preview.compatible,
       before: _calculation(preview.comparison.before),
       after: _calculation(preview.comparison.after),
-      deltas: List.unmodifiable(
-        preview.comparison.deltas.map(
+      deltas: _statDeltas(preview.comparison),
+    );
+  }
+
+  static List<EngineStatDelta> _statDeltas(builds.BuildComparison comparison) =>
+      List.unmodifiable(
+        comparison.deltas.map(
           (delta) => (
             name: delta.stat,
             before: delta.before,
@@ -365,9 +393,40 @@ class EngineSessionClient implements EngineConnection {
             difference: delta.difference,
           ),
         ),
+      );
+
+  @override
+  Future<EngineEquipmentPreview> previewEquipment(
+    EngineSnapshot current,
+    EngineEquipmentEdit edit,
+  ) async {
+    final result = await _rpc.compareBuild(
+      pb.CompareBuildRequest(
+        sessionId: current.sessionId,
+        expectedRevision: Int64(current.revision),
+        edit: _equipmentChange(edit),
       ),
+      options: _calculationTimeout,
+    );
+    return (
+      revision: result.revision.toInt(),
+      before: _calculation(result.comparison.before),
+      after: _calculation(result.comparison.after),
+      deltas: _statDeltas(result.comparison),
     );
   }
+
+  @override
+  Future<void> editEquipment(
+    EngineSnapshot current,
+    EngineEquipmentEdit edit,
+    String requestId,
+  ) => _applyEdit(current, _equipmentChange(edit), requestId);
+
+  static builds.BuildEdit _equipmentChange(EngineEquipmentEdit edit) =>
+      builds.BuildEdit(
+        equipment: builds.EquipmentEdit(slot: edit.slot, raw: edit.raw),
+      );
 
   @override
   Future<void> addSupport(
@@ -398,7 +457,7 @@ class EngineSessionClient implements EngineConnection {
         requestId: requestId,
         edit: edit,
       ),
-      options: _timeout,
+      options: edit.hasEquipment() ? _calculationTimeout : _timeout,
     );
   }
 

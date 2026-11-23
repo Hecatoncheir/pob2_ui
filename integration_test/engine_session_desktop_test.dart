@@ -24,6 +24,9 @@ const _fromMcp = 'Переименовано через MCP';
 const _fromUi = 'Переименовано в PoB II';
 const _profile = 'desktop-test';
 const _session = 'fireball';
+const _ringSlot = 'Ring 1';
+const _ringText =
+    'Rarity: NORMAL\nLazuli Ring\nImplicits: 1\n+25 to maximum Mana';
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
@@ -107,6 +110,11 @@ void main() {
     if (checkSupport) await _checkStalePreviewAfterReconnect(tester);
     await _waitFor(tester, find.byKey(const Key('engine-build-life')));
 
+    if (Platform.environment['POB2_ENGINE_TEST_EQUIPMENT'] == '1') {
+      final equipmentMcp = await _attachMcp(executable, flags);
+      await _checkEquipment(tester, equipmentMcp);
+      await equipmentMcp.close();
+    }
     expect(await local.readAsString(), localBefore);
     expect(await File(_fixture).readAsString(), original);
     await tester.pumpWidget(const SizedBox.shrink());
@@ -191,6 +199,119 @@ Future<int> _checkSupportFromMcp(WidgetTester tester, EngineMcpPeer mcp) async {
   expect(snapshot['revision'], 11);
   _checkCalculation(tester, snapshot['build'] as Map<String, dynamic>);
   return 11;
+}
+
+Future<void> _checkEquipment(WidgetTester tester, EngineMcpPeer mcp) async {
+  final before = await mcp.call('get_snapshot');
+  await _openEquipment(tester);
+  await _previewEquipment(tester, _ringText);
+  expect(await mcp.call('get_snapshot'), before);
+  await tester.tap(find.byKey(const Key('engine-equipment-cancel')));
+  await tester.pumpAndSettle();
+  expect(await mcp.call('get_snapshot'), before);
+
+  await _openEquipment(tester);
+  final input = find.byKey(const Key('engine-equipment-text'));
+  await tester.enterText(input, 'Rarity: NORMAL\nUnknown test base');
+  await tester.pump();
+  await tester.tap(find.byKey(const Key('engine-equipment-preview')));
+  await tester.pump();
+  await _waitFor(tester, find.textContaining('не распознал базу'));
+  await _previewEquipment(tester, _ringText);
+  await _editSharedLevel(mcp, 46, before['revision'] as int);
+  await _waitFor(
+    tester,
+    find.text('Выполните предпросмотр для текущей ревизии'),
+  );
+  final apply = find.byKey(const Key('engine-equipment-apply'));
+  expect(tester.widget<FilledButton>(apply).onPressed, isNull);
+  await tester.tap(find.byKey(const Key('engine-equipment-preview')));
+  await tester.pump();
+  await _waitForEquipmentPreview(tester);
+  await tester.tap(apply);
+  await _waitFor(tester, _equippedRing('Lazuli Ring'));
+  final applied = await mcp.call('get_snapshot');
+  expect(_xml(applied), contains('Lazuli Ring'));
+  final build = applied['build'] as Map<String, dynamic>;
+  expect(build['calculation'], isNull);
+  await _removeEquipment(tester, mcp, applied['revision'] as int);
+}
+
+Future<void> _openEquipment(WidgetTester tester) async {
+  const slotKey = Key('engine-equipment-slot-$_ringSlot');
+  final slot = find.byKey(slotKey);
+  if (slot.evaluate().isEmpty) {
+    final section = find.byKey(const Key('engine-equipment'));
+    await tester.ensureVisible(section);
+    await tester.tap(section);
+    await tester.pumpAndSettle();
+  }
+  await tester.ensureVisible(slot);
+  await tester.tap(slot);
+  await tester.pumpAndSettle();
+}
+
+Finder _equippedRing(String name) => find.descendant(
+  of: find.byKey(const Key('engine-equipment-slot-$_ringSlot')),
+  matching: find.byWidgetPredicate(
+    (widget) => widget is AppText && widget.data == name,
+  ),
+);
+
+Future<void> _previewEquipment(WidgetTester tester, String raw) async {
+  final input = find.byKey(const Key('engine-equipment-text'));
+  await tester.ensureVisible(input);
+  await tester.tap(input);
+  await tester.pumpAndSettle();
+  await tester.enterText(input, raw);
+  await tester.pumpAndSettle();
+  expect(tester.widget<TextField>(input).controller!.text, raw);
+  final preview = find.byKey(const Key('engine-equipment-preview'));
+  expect(tester.widget<TextButton>(preview).onPressed, isNotNull);
+  await tester.tap(preview);
+  await tester.pump();
+  await _waitForEquipmentPreview(tester);
+}
+
+Future<void> _waitForEquipmentPreview(WidgetTester tester) async {
+  const resultKey = Key('engine-equipment-result');
+  const errorKey = Key('engine-equipment-error');
+  await _waitFor(
+    tester,
+    find.byWidgetPredicate(
+      (widget) => widget.key == resultKey || widget.key == errorKey,
+    ),
+  );
+  final error = find.byKey(errorKey);
+  if (error.evaluate().isNotEmpty) fail(tester.widget<AppText>(error).data);
+}
+
+Future<void> _removeEquipment(
+  WidgetTester tester,
+  EngineMcpPeer mcp,
+  int revision,
+) async {
+  await _openEquipment(tester);
+  await tester.tap(find.byKey(const Key('engine-equipment-remove')));
+  await tester.pumpAndSettle();
+  await tester.tap(find.byKey(const Key('engine-equipment-preview')));
+  await tester.pump();
+  await _waitForEquipmentPreview(tester);
+  await tester.tap(find.byKey(const Key('engine-equipment-apply')));
+  await _waitFor(tester, _equippedRing('—'));
+
+  await mcp.call('edit_build', {
+    'edit': {
+      'equipment': {'slot': _ringSlot, 'raw': 'Rarity: NORMAL\nIron Ring'},
+    },
+    'expected_revision': revision + 1,
+    'request_id': 'desktop-mcp-ring',
+  });
+  await _waitFor(tester, _equippedRing('Iron Ring'));
+  await tester.tap(find.byKey(const Key('engine-calculate')));
+  await _waitFor(tester, find.byKey(const Key('engine-build-life')));
+  final saved = await mcp.call('get_snapshot');
+  _checkCalculation(tester, saved['build'] as Map<String, dynamic>);
 }
 
 String _xml(Map<String, dynamic> snapshot) =>

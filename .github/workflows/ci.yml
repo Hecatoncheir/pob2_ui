@@ -18,6 +18,10 @@ on:
         description: 'Проверить предпросмотр и применение поддержки в общей сборке'
         type: boolean
         default: false
+      engine_equipment:
+        description: 'Проверить примерку экипировки в общей сборке'
+        type: boolean
+        default: false
       cold_install:
         description: 'Проверить первый запуск без предварительной загрузки архивов'
         type: boolean
@@ -172,6 +176,7 @@ jobs:
         env:
           ENGINE_TAG: ${{ inputs.engine_release }}
           POB2_ENGINE_TEST_SUPPORT: ${{ inputs.engine_support && '1' || '0' }}
+          POB2_ENGINE_TEST_EQUIPMENT: ${{ inputs.engine_equipment && '1' || '0' }}
           GH_TOKEN: ${{ github.token }}
           POB2_UI_HOME: ${{ runner.temp }}/pob2-lua-smoke
           TARGET: ${{ matrix.target }}

@@ -55,6 +55,22 @@ class FakeEngineConnection implements EngineConnection {
   bool get supportsAddSupport => false;
 
   @override
+  bool get supportsEquipmentPreview => false;
+
+  @override
+  Future<EngineEquipmentPreview> previewEquipment(
+    EngineSnapshot current,
+    EngineEquipmentEdit edit,
+  ) => throw UnimplementedError();
+
+  @override
+  Future<void> editEquipment(
+    EngineSnapshot current,
+    EngineEquipmentEdit edit,
+    String requestId,
+  ) => throw UnimplementedError();
+
+  @override
   Future<EngineSupportPage> findSupports(String query, int offset) =>
       throw UnimplementedError();
 
