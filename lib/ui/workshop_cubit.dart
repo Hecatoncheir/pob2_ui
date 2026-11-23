@@ -1701,7 +1701,11 @@ class WorkshopCubit extends Cubit<WorkshopState> {
 
   bool get hasSharedTree => _engineXmlBinding != null;
 
-  Future<WorkshopTreeOffer> previewSharedTreeNode(int nodeId) async {
+  Future<WorkshopTreeOffer> previewSharedTreeNode(
+    int nodeId, {
+    EngineTreeAction? action,
+    EnginePassiveAttribute? attribute,
+  }) async {
     final epoch = _engineBindingEpoch;
     final (:snapshot, :binding) = _engineEditSource(
       _engineXmlBinding?.inputRevision,
@@ -1712,12 +1716,17 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     if (tree == null || !engineSession.supportsTreeAllocationModes) {
       throw StateError('Дерево пока недоступно');
     }
+    if (attribute != null && !engineSession.supportsTreeAttributes) {
+      throw StateError('Для выбора атрибута обновите движок.');
+    }
     await _checkEngineFile(binding);
     final allocated = tree.nodes.contains(nodeId);
     final offer = await engineSession.previewTree(snapshot, (
       nodeId: nodeId,
-      action: allocated ? EngineTreeAction.refund : EngineTreeAction.allocate,
-      attribute: null,
+      action:
+          action ??
+          (allocated ? EngineTreeAction.refund : EngineTreeAction.allocate),
+      attribute: attribute,
       allocationMode: _sharedTreeMode(tree, nodeId, allocated),
     ));
     return (

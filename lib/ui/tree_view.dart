@@ -15,6 +15,7 @@ import 'tree_hover_card.dart';
 import 'package:flutter/foundation.dart' show mapEquals, setEquals;
 
 import '../domain/build_report.dart';
+import '../domain/engine_session.dart';
 import '../domain/tree_progression.dart';
 import '../domain/tree_geometry.dart';
 import 'core/motion.dart';
@@ -1046,28 +1047,29 @@ class _NodeDialogState extends State<_NodeDialog> {
     if (mounted && applied == true) Navigator.pop(context);
   }
 
+  bool get _usesSharedSession => _usesSharedTree(widget.model, widget.node);
+
   bool _canApply(List<JsonMap> attributes) =>
-      !widget.model.state.busy &&
-      (widget.node.allocated || attributes.isEmpty || attribute != null);
+      !widget.model.state.busy && (attributes.isEmpty || attribute != null);
 
   String _actionLabel(List<JsonMap> attributes) {
+    if (_usesSharedSession) return 'Предпросмотр';
     if (!widget.node.allocated) return 'Выбрать путь';
     return attributes.isEmpty ? 'Вернуть узел' : 'Применить';
   }
 
-  void _refund() {
+  Future<void> _refund() async {
+    if (_usesSharedSession) {
+      await _previewSharedEdit(action: EngineTreeAction.refund);
+      return;
+    }
     widget.model.treeAction(widget.node.id, true);
     Navigator.pop(context);
   }
 
   Future<void> _apply(List<JsonMap> attributes) async {
-    if (attributes.isEmpty && _usesSharedTree(widget.model, widget.node)) {
-      final applied = await showWorkshopTreePreview(
-        context,
-        widget.model,
-        widget.node,
-      );
-      if (mounted && applied == true) Navigator.pop(context);
+    if (_usesSharedSession) {
+      await _previewSelection(attributes);
       return;
     }
     widget.model.treeAction(
@@ -1076,5 +1078,32 @@ class _NodeDialogState extends State<_NodeDialog> {
       attribute: attribute,
     );
     Navigator.pop(context);
+  }
+
+  Future<void> _previewSelection(List<JsonMap> options) async {
+    if (options.isEmpty) {
+      await _previewSharedEdit();
+      return;
+    }
+    final name = options[attribute! - 1]['name'] as String;
+    final selected = EnginePassiveAttribute.parse(name.toLowerCase());
+    final action = widget.node.allocated
+        ? EngineTreeAction.setAttribute
+        : EngineTreeAction.allocate;
+    await _previewSharedEdit(action: action, attribute: selected);
+  }
+
+  Future<void> _previewSharedEdit({
+    EngineTreeAction? action,
+    EnginePassiveAttribute? attribute,
+  }) async {
+    final applied = await showWorkshopTreePreview(
+      context,
+      widget.model,
+      widget.node,
+      action: action,
+      attribute: attribute,
+    );
+    if (mounted && applied == true) Navigator.pop(context);
   }
 }

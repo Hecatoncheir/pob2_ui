@@ -58,7 +58,10 @@ void main() {
       await tester.binding.setSurfaceSize(const Size(1280, 800));
       addTearDown(() => tester.binding.setSurfaceSize(null));
       final connection = FakeEngineConnection();
-      final model = _PreviewWorkshop(connection, geometry: _socketTree());
+      final model = _PreviewWorkshop(
+        connection,
+        geometry: _testTree(kind: 'Socket'),
+      );
       addTearDown(connection.events.close);
       addTearDown(model.close);
       await model.engineSession.connect(const EngineOptions());
@@ -84,6 +87,55 @@ void main() {
       await tester.pumpWidget(const SizedBox.shrink());
     },
   );
+  for (final allocated in [false, true]) {
+    testWidgets('Штатное дерево выбирает атрибут, назначен: $allocated', (
+      tester,
+    ) async {
+      await tester.binding.setSurfaceSize(const Size(1280, 800));
+      addTearDown(() => tester.binding.setSurfaceSize(null));
+      final connection = FakeEngineConnection();
+      final model = _PreviewWorkshop(
+        connection,
+        geometry: _testTree(
+          kind: 'Normal',
+          allocated: allocated,
+          attribute: true,
+        ),
+      );
+      addTearDown(connection.events.close);
+      addTearDown(model.close);
+      await model.engineSession.connect(const EngineOptions());
+      await tester.pumpWidget(PobApp(model: model));
+      await tester.pumpAndSettle();
+
+      await _clickPassive(tester);
+      await tester.tap(find.byKey(const Key('attribute-2')));
+      await tester.pumpAndSettle();
+      await tester.tap(find.widgetWithText(FilledButton, 'Предпросмотр'));
+      await tester.pumpAndSettle();
+      const apply = Key('workshop-tree-apply');
+      connection.change('Новая ревизия MCP');
+      await tester.pumpAndSettle();
+      expect(tester.widget<FilledButton>(find.byKey(apply)).onPressed, isNull);
+
+      await tester.tap(find.widgetWithText(TextButton, 'Предпросмотр'));
+      await tester.pumpAndSettle();
+      await tester.tap(find.byKey(apply));
+      await tester.pumpAndSettle();
+      expect(
+        model.appliedTreeEdits.single.action,
+        allocated ? EngineTreeAction.setAttribute : EngineTreeAction.allocate,
+      );
+      expect(
+        model.appliedTreeEdits.single.attribute,
+        EnginePassiveAttribute.dexterity,
+      );
+      expect(model.applied, [2]);
+      expect(find.byKey(const Key('attribute-2')), findsNothing);
+      expect(tester.takeException(), isNull);
+      await tester.pumpWidget(const SizedBox.shrink());
+    });
+  }
   testWidgets('Список дерева вызывает выбор, сохранённый при открытии', (
     tester,
   ) async {
@@ -118,7 +170,11 @@ void main() {
   });
 }
 
-TreeGeometry _socketTree() => TreeGeometry.fromJson({
+TreeGeometry _testTree({
+  required String kind,
+  bool allocated = true,
+  bool attribute = false,
+}) => TreeGeometry.fromJson({
   'version': tree.version,
   'nodes': [
     for (final node in tree.nodes)
@@ -127,8 +183,9 @@ TreeGeometry _socketTree() => TreeGeometry.fromJson({
         'x': node.x,
         'y': node.y,
         'name': node.name,
-        'type': node.id == 2 ? 'Socket' : node.kind,
-        'allocated': true,
+        'type': node.id == 2 ? kind : node.kind,
+        'allocated': node.id != 2 || allocated,
+        'isAttribute': node.id == 2 && attribute,
       },
   ],
   'edges': [
@@ -189,10 +246,21 @@ class _PreviewWorkshop extends WorkshopCubit {
   }
 
   final applied = <int>[];
+  final appliedTreeEdits = <EngineTreeEdit>[];
   final jewelEdits = <EngineJewelEdit>[];
 
   @override
-  Future<JsonMap> readTreeNode(int id) async => {};
+  Future<JsonMap> readTreeNode(int id) async => {
+    if (state.document?.tree?.nodes
+            .singleWhere((node) => node.id == id)
+            .isAttribute ==
+        true)
+      'attributeOptions': [
+        {'name': 'Strength'},
+        {'name': 'Dexterity'},
+        {'name': 'Intelligence'},
+      ],
+  };
 
   @override
   bool get canEditSharedJewel => true;
@@ -234,7 +302,11 @@ class _PreviewWorkshop extends WorkshopCubit {
   Future<bool> isAttributeNode(int id) async => false;
 
   @override
-  Future<WorkshopTreeOffer> previewSharedTreeNode(int nodeId) async {
+  Future<WorkshopTreeOffer> previewSharedTreeNode(
+    int nodeId, {
+    EngineTreeAction? action,
+    EnginePassiveAttribute? attribute,
+  }) async {
     expect(nodeId, 2);
     final revision = engineSession.state.snapshot!.revision;
     const calculation = EngineCalculation(status: 'complete', warnings: []);
@@ -246,8 +318,8 @@ class _PreviewWorkshop extends WorkshopCubit {
         connectionId: 1,
         edit: (
           nodeId: nodeId,
-          action: EngineTreeAction.allocate,
-          attribute: null,
+          action: action ?? EngineTreeAction.allocate,
+          attribute: attribute,
           allocationMode: TreeAllocationMode.common,
         ),
         preview: (
@@ -275,6 +347,7 @@ class _PreviewWorkshop extends WorkshopCubit {
   @override
   Future<BuildEditResult> applySharedTreeNode(WorkshopTreeOffer preview) async {
     applied.add(preview.offer.preview.comparison.revision);
+    appliedTreeEdits.add(preview.offer.edit);
     return (committed: true, error: null);
   }
 }

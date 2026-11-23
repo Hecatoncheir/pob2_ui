@@ -161,6 +161,16 @@ void main() {
     timeout: const Timeout(Duration(minutes: 3)),
   );
   test(
+    'Штатное дерево назначает и меняет атрибут общей сборки',
+    () => _checkSharedAttributes(executable!),
+    skip:
+        canUseWorkshop &&
+            Platform.environment['POB2_ENGINE_TEST_ATTRIBUTES'] == '1'
+        ? false
+        : 'Для проверки атрибутов укажите POB2_ENGINE_TEST_ATTRIBUTES=1',
+    timeout: const Timeout(Duration(minutes: 2)),
+  );
+  test(
     'Штатное дерево редактирует пустое гнездо в общем режиме',
     () => _checkSharedSocket(executable!),
     skip:
@@ -304,6 +314,48 @@ Future<void> _checkSharedTree(String executable) async {
   for (final mode in TreeAllocationMode.values) {
     await _editWorkshopTree(opened, mcp, mode);
   }
+  expect(
+    await _cliBuildXml(executable, opened.flags),
+    await opened.file.readAsString(),
+  );
+}
+
+Future<void> _checkSharedAttributes(String executable) async {
+  final opened = await _startWorkshop(executable, 'witch_fireball');
+  final model = opened.model;
+  const nodeId = 18407;
+  expect(model.engineSession.supportsTreeAttributes, isTrue);
+  final allocate = await model.previewSharedTreeNode(
+    nodeId,
+    action: EngineTreeAction.allocate,
+    attribute: EnginePassiveAttribute.dexterity,
+  );
+  expect(allocate.offer.preview.added, contains(nodeId));
+  final added = await model.applySharedTreeNode(allocate);
+  expect(added.committed, isTrue, reason: added.error);
+  final xml = await opened.file.readAsString();
+  final swap = await model.previewSharedTreeNode(
+    nodeId,
+    action: EngineTreeAction.setAttribute,
+    attribute: EnginePassiveAttribute.intelligence,
+  );
+  expect(swap.offer.preview.added, isEmpty);
+  expect(swap.offer.preview.removed, isEmpty);
+  expect(swap.offer.preview.attributes, [
+    (
+      nodeId: nodeId,
+      before: EnginePassiveAttribute.dexterity,
+      after: EnginePassiveAttribute.intelligence,
+    ),
+  ]);
+  expect(await opened.file.readAsString(), xml);
+  final applied = await model.applySharedTreeNode(swap);
+  expect(applied.committed, isTrue, reason: applied.error);
+  final snapshot = model.engineSession.state.snapshot!;
+  expect(
+    snapshot.build!.tree!.attributes[nodeId],
+    EnginePassiveAttribute.intelligence,
+  );
   expect(
     await _cliBuildXml(executable, opened.flags),
     await opened.file.readAsString(),
