@@ -331,7 +331,9 @@ class WorkshopCubit extends Cubit<WorkshopState> {
       pob: pair[Component.pob]?.directory,
       native: Platform.isWindows || mcp == null
           ? null
-          : Directory.fromUri(Directory(mcp).uri.resolve('native/')).path,
+          : Directory.fromUri(
+              Directory(mcp).uri.resolve('pob_poe2_mcp/native/'),
+            ).path,
     );
   }
 
