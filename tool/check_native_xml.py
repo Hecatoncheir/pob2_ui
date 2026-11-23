@@ -1,6 +1,7 @@
 """Проверка настоящих диалогов XML в отдельном профиле Windows и Linux."""
 
 import argparse
+from contextlib import ExitStack
 import ctypes as C
 from ctypes import wintypes as W
 import os
@@ -297,12 +298,30 @@ def allocation(file):
             for name in ('nodes', 'WeaponSet1', 'WeaponSet2')}
 
 
+def stop_profile_engine(binary, root, environment):
+    runtime = root / 'engine-run'
+    record = runtime / 'pob2-engine' / 'pob2-ui' / 'connection.json'
+    if not record.is_file():
+        return
+    engine = binary.with_name('pob2-engine.exe' if sys.platform == 'win32' else 'pob2-engine')
+    command = [
+        str(engine), 'shutdown', '--profile', 'pob2-ui',
+        '--runtime-dir', str(runtime), '--data-dir', str(root / 'engine-data'),
+        '--timeout', '15s',
+    ]
+    result = subprocess.run(command, env=environment, capture_output=True, text=True, timeout=20)
+    if result.returncode and record.is_file():
+        raise RuntimeError('Не удалось остановить движок проверяемого профиля: ' + result.stderr.strip())
+    wait_for(lambda: not record.exists(), 'Движок проверяемого профиля не завершился', timeout=30)
+
+
 def check(binary, components):
-    with tempfile.TemporaryDirectory(prefix='pob2-native-') as temporary:
+    with tempfile.TemporaryDirectory(prefix='pob2-native-') as temporary, ExitStack() as cleanup:
         root = Path(temporary).resolve()
         prepare_profile(root, components)
         environment = dict(os.environ, POB2_UI_HOME=str(root), POB2_UI_CHECK_FIXTURE=str(FIXTURES / 'witch_fireball.xml'))
         environment.pop('POB2_UI_CHECK_CODE', None)
+        cleanup.callback(stop_profile_engine, binary, root, environment)
         run_build_check(binary, root, environment, 'save')
         (root / 'language.json').write_text('{"schema":1,"language":"en"}', encoding='utf-8')
         source = root / 'Ведьма оружие.xml'
