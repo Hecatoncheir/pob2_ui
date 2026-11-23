@@ -56,7 +56,9 @@ class EngineMcpPeer {
     while (await _lines.moveNext().timeout(const Duration(seconds: 5))) {
       final json = jsonDecode(_lines.current) as Map<String, dynamic>;
       if (json['id'] != id) continue;
-      expect(json['error'], isNull);
+      if (json['error'] case final error?) {
+        throw StateError('Ошибка протокола MCP: $error');
+      }
       return json['result'] as Map<String, dynamic>;
     }
     throw StateError('MCP закрыл stdout');

@@ -10,7 +10,7 @@ class NotesCubit extends Cubit<NotesState> {
   final BuildNotesStorage repository;
   final String id;
   final Future<void> Function(String text)? write;
-  Future<void> _pending = Future.value();
+  Future<void>? _pending;
   int _generation = 0;
   bool _loaded = false;
   bool get canEdit => _loaded;
@@ -36,7 +36,14 @@ class NotesCubit extends Cubit<NotesState> {
     if (!canEdit) return;
     final generation = ++_generation;
     emit((text: text, loading: false, saving: true, error: null));
-    _pending = _pending.then((_) => _save(text, generation));
+    if (write == null) {
+      _save(text, generation);
+      return;
+    }
+    final pending = _pending;
+    _pending = pending == null
+        ? _save(text, generation)
+        : pending.then((_) => _save(text, generation));
   }
 
   Future<void> _save(String text, int generation) async {
@@ -65,7 +72,7 @@ class NotesCubit extends Cubit<NotesState> {
 
   Future<bool> flush() async {
     try {
-      await _pending;
+      if (_pending case final pending?) await pending;
       if (write != null && state.error != null) return false;
       await repository.flushText();
       if (!isClosed)

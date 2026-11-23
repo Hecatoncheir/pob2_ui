@@ -158,18 +158,25 @@ Future<void> _checkDesktopEditorBridge(WidgetTester tester) async {
   expect((await mcp.request('tools/call', status))['isError'], isTrue);
   await model.mcpEditor.enable();
   expect(model.mcpEditor.enabled, isTrue);
-  await _expectEditorPng(mcp);
+  await _expectEditorPng(tester, mcp);
   await model.mcpEditor.disable();
   expect((await mcp.request('tools/call', status))['isError'], isTrue);
   await tester.pumpWidget(const SizedBox.shrink());
   await tester.pumpAndSettle();
 }
 
-Future<void> _expectEditorPng(EngineMcpPeer mcp) async {
-  final screenshot = await mcp.request('tools/call', {
+Future<void> _expectEditorPng(WidgetTester tester, EngineMcpPeer mcp) async {
+  final reply = mcp.request('tools/call', {
     'name': 'pob_editor_ui',
     'arguments': {'action': 'screenshot'},
   });
+  var received = false;
+  reply.then((_) => received = true, onError: (Object _) => received = true);
+  while (!received) {
+    await tester.pump(const Duration(milliseconds: 20));
+    await Future<void>.delayed(const Duration(milliseconds: 1));
+  }
+  final screenshot = await reply;
   expect(screenshot['isError'], isNot(true));
   final nodes =
       (screenshot['structuredContent'] as Map<String, dynamic>)['nodes'];
