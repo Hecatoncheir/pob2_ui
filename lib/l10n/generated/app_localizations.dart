@@ -1199,6 +1199,18 @@ abstract class AppLocalizations {
   /// **'The archive requires a pinned revision'**
   String get mff31635225;
 
+  /// Для выбора атрибута обновите движок.
+  ///
+  /// In en, this message translates to:
+  /// **'Update the engine to select an attribute.'**
+  String get m7152adf5d3;
+
+  /// Для выбора предмета из сборки обновите движок.
+  ///
+  /// In en, this message translates to:
+  /// **'Update the engine to select an item from the build.'**
+  String get m0b5173c45c;
+
   /// Для готового дерева PoB обновите MCP до 0.7.0.
   ///
   /// In en, this message translates to:
@@ -1240,6 +1252,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No purchases needed for upcoming stages'**
   String get m9a923fd47c;
+
+  /// Для смены класса обновите движок.
+  ///
+  /// In en, this message translates to:
+  /// **'Update the engine to change class.'**
+  String get mf7dd91f91b;
 
   /// Для сравнения подготовьте PoB и MCP
   ///
@@ -1535,6 +1553,12 @@ abstract class AppLocalizations {
   /// **'Milestone note'**
   String get md4bac1da57;
 
+  /// Заметки изменились. Откройте их заново.
+  ///
+  /// In en, this message translates to:
+  /// **'The notes have changed. Open them again.'**
+  String get me00429e1a8;
+
   /// Заметки к сборке
   ///
   /// In en, this message translates to:
@@ -1792,6 +1816,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Support gems'**
   String get m566d4d32d7;
+
+  /// Канал окна PoB II: {p0}
+  ///
+  /// In en, this message translates to:
+  /// **'PoB II window connection: {p0}'**
+  String m8bfc4312d8(String p0);
 
   /// Каталог
   ///
@@ -3348,6 +3378,12 @@ abstract class AppLocalizations {
   /// **'Leveling plan'**
   String get m48d5bea474;
 
+  /// План прокачки изменился. Откройте его заново.
+  ///
+  /// In en, this message translates to:
+  /// **'The leveling plan has changed. Open it again.'**
+  String get m9d28683954;
+
   /// Планы, предметы, варианты развития…
   ///
   /// In en, this message translates to:
@@ -4463,6 +4499,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Server does not support shared session subscriptions'**
   String get mf0ca78d984;
+
+  /// Сервер не подтвердил подключение окна PoB II.
+  ///
+  /// In en, this message translates to:
+  /// **'The server did not confirm the PoB II window connection.'**
+  String get m4bd93e3298;
 
   /// Сессия закрыта
   ///

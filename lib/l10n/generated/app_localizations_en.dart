@@ -603,6 +603,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get mff31635225 => 'The archive requires a pinned revision';
 
   @override
+  String get m7152adf5d3 => 'Update the engine to select an attribute.';
+
+  @override
+  String get m0b5173c45c =>
+      'Update the engine to select an item from the build.';
+
+  @override
   String get m7c2e51e000 => 'For a finished PoB tree, update MCP to 0.7.0.';
 
   @override
@@ -624,6 +631,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get m9a923fd47c => 'No purchases needed for upcoming stages';
+
+  @override
+  String get mf7dd91f91b => 'Update the engine to change class.';
 
   @override
   String get m10db96c5ff => 'Set up PoB and MCP to compare builds';
@@ -796,6 +806,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get md4bac1da57 => 'Milestone note';
 
   @override
+  String get me00429e1a8 => 'The notes have changed. Open them again.';
+
+  @override
   String get mdc4baf32ac => 'Build notes';
 
   @override
@@ -928,6 +941,11 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get m566d4d32d7 => 'Support gems';
+
+  @override
+  String m8bfc4312d8(String p0) {
+    return 'PoB II window connection: $p0';
+  }
 
   @override
   String get md0ef3540b0 => 'Catalog';
@@ -1791,6 +1809,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m48d5bea474 => 'Leveling plan';
 
   @override
+  String get m9d28683954 => 'The leveling plan has changed. Open it again.';
+
+  @override
   String get m1474fac529 => 'Plans, items, development options...';
 
   @override
@@ -2392,6 +2413,10 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get mf0ca78d984 =>
       'Server does not support shared session subscriptions';
+
+  @override
+  String get m4bd93e3298 =>
+      'The server did not confirm the PoB II window connection.';
 
   @override
   String get m32bb1c680f => 'Session closed';

@@ -592,6 +592,12 @@ class AppLocalizationsKo extends AppLocalizations {
   String get mff31635225 => '압축 파일에 고정된 리비전이 필요합니다';
 
   @override
+  String get m7152adf5d3 => '능력치를 선택하려면 엔진을 업데이트하세요.';
+
+  @override
+  String get m0b5173c45c => '빌드의 아이템을 선택하려면 엔진을 업데이트하세요.';
+
+  @override
   String get m7c2e51e000 => '완성된 PoB 트리의 경우 MCP을 0.7.0으로 업데이트하세요.';
 
   @override
@@ -612,6 +618,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m9a923fd47c => '다음 단계에 구매할 항목이 없습니다';
+
+  @override
+  String get mf7dd91f91b => '클래스를 변경하려면 엔진을 업데이트하세요.';
 
   @override
   String get m10db96c5ff => '비교하려면 PoB와 MCP를 설정하세요';
@@ -779,6 +788,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get md4bac1da57 => '단계 메모';
 
   @override
+  String get me00429e1a8 => '메모가 변경되었습니다. 다시 여세요.';
+
+  @override
   String get mdc4baf32ac => '빌드 노트';
 
   @override
@@ -911,6 +923,11 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m566d4d32d7 => '보조 젬';
+
+  @override
+  String m8bfc4312d8(String p0) {
+    return 'PoB II 창 연결: $p0';
+  }
 
   @override
   String get md0ef3540b0 => '카탈로그';
@@ -1761,6 +1778,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m48d5bea474 => '레벨링 계획';
 
   @override
+  String get m9d28683954 => '레벨링 계획이 변경되었습니다. 다시 여세요.';
+
+  @override
   String get m1474fac529 => '계획, 아이템, 개발 옵션...';
 
   @override
@@ -2353,6 +2373,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get mf0ca78d984 => '서버가 공유 세션 구독을 지원하지 않습니다.';
+
+  @override
+  String get m4bd93e3298 => '서버에서 PoB II 창 연결을 확인하지 못했습니다.';
 
   @override
   String get m32bb1c680f => '세션이 종료되었습니다.';

@@ -622,6 +622,13 @@ class AppLocalizationsFr extends AppLocalizations {
   String get mff31635225 => 'Une révision précise est requise pour l’archive';
 
   @override
+  String get m7152adf5d3 => 'Mettez le moteur à jour pour choisir un attribut.';
+
+  @override
+  String get m0b5173c45c =>
+      'Mettez le moteur à jour pour choisir un objet du build.';
+
+  @override
   String get m7c2e51e000 =>
       'Pour une arborescence PoB terminée, mettez à jour MCP vers 0.7.0.';
 
@@ -647,6 +654,9 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get m9a923fd47c => 'Aucun achat requis pour les prochaines étapes';
+
+  @override
+  String get mf7dd91f91b => 'Mettez le moteur à jour pour changer de classe.';
 
   @override
   String get m10db96c5ff => 'Configurez PoB et MCP pour comparer les builds';
@@ -825,6 +835,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get md4bac1da57 => 'Note de l’étape';
 
   @override
+  String get me00429e1a8 => 'Les notes ont changé. Ouvrez-les à nouveau.';
+
+  @override
   String get mdc4baf32ac => 'Notes de construction';
 
   @override
@@ -958,6 +971,11 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get m566d4d32d7 => 'Gemmes de soutien';
+
+  @override
+  String m8bfc4312d8(String p0) {
+    return 'Connexion à la fenêtre PoB II : $p0';
+  }
 
   @override
   String get md0ef3540b0 => 'Catalogue';
@@ -1833,6 +1851,10 @@ class AppLocalizationsFr extends AppLocalizations {
   String get m48d5bea474 => 'Plan de progression';
 
   @override
+  String get m9d28683954 =>
+      'Le plan de progression a changé. Ouvrez-le à nouveau.';
+
+  @override
   String get m1474fac529 => 'Plans, éléments, options d\'aménagement...';
 
   @override
@@ -2444,6 +2466,10 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get mf0ca78d984 =>
       'Le serveur ne prend pas en charge les abonnements aux sessions partagées';
+
+  @override
+  String get m4bd93e3298 =>
+      'Le serveur n’a pas confirmé la connexion à la fenêtre PoB II.';
 
   @override
   String get m32bb1c680f => 'Session fermée';

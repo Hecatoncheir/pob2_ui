@@ -592,6 +592,12 @@ class AppLocalizationsJa extends AppLocalizations {
   String get mff31635225 => 'アーカイブには固定リビジョンが必要です';
 
   @override
+  String get m7152adf5d3 => '能力値を選ぶにはエンジンを更新してください。';
+
+  @override
+  String get m0b5173c45c => 'ビルド内のアイテムを選ぶにはエンジンを更新してください。';
+
+  @override
   String get m7c2e51e000 => '完成した PoB ツリーの場合、MCP を 0.7.0 に更新します。';
 
   @override
@@ -612,6 +618,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m9a923fd47c => '今後の段階に必要な購入品はありません';
+
+  @override
+  String get mf7dd91f91b => 'クラスを変更するにはエンジンを更新してください。';
 
   @override
   String get m10db96c5ff => '比較するには PoB と MCP をセットアップしてください';
@@ -779,6 +788,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get md4bac1da57 => '段階のメモ';
 
   @override
+  String get me00429e1a8 => 'メモが変更されました。開き直してください。';
+
+  @override
   String get mdc4baf32ac => 'ビルドノート';
 
   @override
@@ -911,6 +923,11 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m566d4d32d7 => 'サポートジェム';
+
+  @override
+  String m8bfc4312d8(String p0) {
+    return 'PoB II のウィンドウ接続：$p0';
+  }
 
   @override
   String get md0ef3540b0 => 'カタログ';
@@ -1761,6 +1778,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m48d5bea474 => '育成プラン';
 
   @override
+  String get m9d28683954 => 'レベル上げ計画が変更されました。開き直してください。';
+
+  @override
   String get m1474fac529 => '計画、項目、開発オプション...';
 
   @override
@@ -2353,6 +2373,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get mf0ca78d984 => 'サーバーは共有セッション サブスクリプションをサポートしていません';
+
+  @override
+  String get m4bd93e3298 => 'サーバーが PoB II のウィンドウ接続を確認できませんでした。';
 
   @override
   String get m32bb1c680f => 'セッションは終了しました';

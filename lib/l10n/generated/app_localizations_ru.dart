@@ -600,6 +600,12 @@ class AppLocalizationsRu extends AppLocalizations {
   String get mff31635225 => 'Для архива нужна закреплённая ревизия';
 
   @override
+  String get m7152adf5d3 => 'Для выбора атрибута обновите движок.';
+
+  @override
+  String get m0b5173c45c => 'Для выбора предмета из сборки обновите движок.';
+
+  @override
   String get m7c2e51e000 => 'Для готового дерева PoB обновите MCP до 0.7.0.';
 
   @override
@@ -622,6 +628,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get m9a923fd47c => 'Для следующих этапов покупки не нужны';
+
+  @override
+  String get mf7dd91f91b => 'Для смены класса обновите движок.';
 
   @override
   String get m10db96c5ff => 'Для сравнения подготовьте PoB и MCP';
@@ -797,6 +806,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get md4bac1da57 => 'Заметка к этапу';
 
   @override
+  String get me00429e1a8 => 'Заметки изменились. Откройте их заново.';
+
+  @override
   String get mdc4baf32ac => 'Заметки к сборке';
 
   @override
@@ -929,6 +941,11 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get m566d4d32d7 => 'Камни поддержки';
+
+  @override
+  String m8bfc4312d8(String p0) {
+    return 'Канал окна PoB II: $p0';
+  }
 
   @override
   String get md0ef3540b0 => 'Каталог';
@@ -1790,6 +1807,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m48d5bea474 => 'План прокачки';
 
   @override
+  String get m9d28683954 => 'План прокачки изменился. Откройте его заново.';
+
+  @override
   String get m1474fac529 => 'Планы, предметы, варианты развития…';
 
   @override
@@ -2393,6 +2413,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get mf0ca78d984 => 'Сервер не поддерживает подписки общей сессии';
+
+  @override
+  String get m4bd93e3298 => 'Сервер не подтвердил подключение окна PoB II.';
 
   @override
   String get m32bb1c680f => 'Сессия закрыта';

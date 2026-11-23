@@ -613,6 +613,13 @@ class AppLocalizationsEs extends AppLocalizations {
   String get mff31635225 => 'El archivo requiere una revisión concreta';
 
   @override
+  String get m7152adf5d3 => 'Actualiza el motor para elegir un atributo.';
+
+  @override
+  String get m0b5173c45c =>
+      'Actualiza el motor para elegir un objeto de la configuración.';
+
+  @override
   String get m7c2e51e000 =>
       'Para obtener un árbol PoB terminado, actualice MCP a 0.7.0.';
 
@@ -637,6 +644,9 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get m9a923fd47c => 'No hacen falta compras para las próximas etapas';
+
+  @override
+  String get mf7dd91f91b => 'Actualiza el motor para cambiar de clase.';
 
   @override
   String get m10db96c5ff => 'Configura PoB y MCP para comparar';
@@ -813,6 +823,9 @@ class AppLocalizationsEs extends AppLocalizations {
   String get md4bac1da57 => 'Nota de la etapa';
 
   @override
+  String get me00429e1a8 => 'Las notas han cambiado. Vuelve a abrirlas.';
+
+  @override
   String get mdc4baf32ac => 'Notas de compilación';
 
   @override
@@ -945,6 +958,11 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get m566d4d32d7 => 'Gemas de asistencia';
+
+  @override
+  String m8bfc4312d8(String p0) {
+    return 'Conexión con la ventana de PoB II: $p0';
+  }
 
   @override
   String get md0ef3540b0 => 'Catálogo';
@@ -1820,6 +1838,10 @@ class AppLocalizationsEs extends AppLocalizations {
   String get m48d5bea474 => 'Plan de progresión';
 
   @override
+  String get m9d28683954 =>
+      'El plan de progresión ha cambiado. Vuelve a abrirlo.';
+
+  @override
   String get m1474fac529 => 'Planos, partidas, opciones de desarrollo...';
 
   @override
@@ -2430,6 +2452,10 @@ class AppLocalizationsEs extends AppLocalizations {
   @override
   String get mf0ca78d984 =>
       'El servidor no admite suscripciones a sesiones compartidas';
+
+  @override
+  String get m4bd93e3298 =>
+      'El servidor no confirmó la conexión con la ventana de PoB II.';
 
   @override
   String get m32bb1c680f => 'Sesión cerrada';
