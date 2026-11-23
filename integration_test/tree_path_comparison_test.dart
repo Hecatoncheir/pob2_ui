@@ -119,7 +119,7 @@ void main() {
     expect(result.error, contains('ответ MCP'));
     expect(
       engine.appliedNodes,
-      PobBuildDocument(preview.reports.second.xml).allocationModes,
+      PobBuildDocument(preview.reports.second.xml!).allocationModes,
     );
     expect(model.state.history, history);
     expect(model.state.document!.stale, isTrue);
@@ -294,7 +294,7 @@ Future<void> _verifyWeaponPreview(
       final actual = PobBuildDocument(await session.exportBuildXml());
       expect(
         actual.allocationModes,
-        PobBuildDocument(option.xml).allocationModes,
+        PobBuildDocument(option.xml!).allocationModes,
       );
       expect(report.weaponSet, preview.weaponSet);
       expect(report.config['enemyLevel'], 67);
@@ -361,7 +361,10 @@ Future<void> _applyWeaponPath(
   expect(panel.cubit.state.error, isNull);
   expect(model.state.history, (undo: history + 1, redo: 0));
   final applied = PobBuildDocument(await _export(model));
-  expect(applied.allocationModes, PobBuildDocument(option.xml).allocationModes);
+  expect(
+    applied.allocationModes,
+    PobBuildDocument(option.xml!).allocationModes,
+  );
   expect(model.state.report!.weaponSet, preview.weaponSet);
   expect(
     model.state.report!.stats['TotalDPS'],
@@ -532,7 +535,7 @@ Future<String> _applyAndCheckHistory(
   expect(model.state.report!.stats['TotalDPS'], closeTo(_dpsAfter, 0.00001));
   final xml = await _export(model);
   final nodes = PobBuildDocument(xml).allocatedNodes;
-  expect(nodes, PobBuildDocument(preview.reports.second.xml).allocatedNodes);
+  expect(nodes, PobBuildDocument(preview.reports.second.xml!).allocatedNodes);
   await model.undo();
   expect(model.state.report!.stats['TotalDPS'], closeTo(_dpsBefore, 0.00001));
   expect(

@@ -1,6 +1,8 @@
 import 'dart:io';
 
 import 'data/appearance_repository.dart';
+import 'data/bundled_engine.dart';
+import 'domain/engine_session.dart';
 import 'installer_check.dart';
 import 'ui/appearance_bloc.dart';
 
@@ -42,6 +44,7 @@ Future<void> main(List<String> arguments) async {
     ),
     McpClient(),
     library: PobBuildLibrary(root),
+    primaryEngine: _primaryEngineOptions(root, check),
   );
   final updates = AppUpdateCubit(root: model.components.store.root);
   final preferences = AppearanceRepository(model.components.store.root);
@@ -92,11 +95,22 @@ Future<void> main(List<String> arguments) async {
     }
     if (arguments.contains('--mcp-editor')) {
       await initialization;
+      await model.waitForPrimarySession();
       await model.mcpEditor.enable();
     }
     await updates.initialize();
   });
   if (check == null) language.add(const LanguageLoadRequested());
+}
+
+EngineOptions? _primaryEngineOptions(Directory root, String? installerCheck) {
+  if (installerCheck == 'cleanup' || installerCheck == 'link') return null;
+  if (!bundledEngineFile().existsSync()) return null;
+  return EngineOptions(
+    profile: 'pob2-ui',
+    runtimeDirectory: Directory.fromUri(root.uri.resolve('engine-run/')).path,
+    dataDirectory: Directory.fromUri(root.uri.resolve('engine-data/')).path,
+  );
 }
 
 String? _installerCheckStage() {

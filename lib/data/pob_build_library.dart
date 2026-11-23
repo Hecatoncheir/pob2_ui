@@ -11,6 +11,7 @@ import '../domain/tree_progression.dart';
 import 'atomic_text_file.dart';
 import 'build_library.dart';
 import 'pob_build_document.dart';
+import 'pob_engine_bindings.dart';
 import 'session_repository.dart';
 import 'tree_progression_repository.dart';
 
@@ -33,9 +34,11 @@ class PobBuildLibrary implements BuildStorage, BuildNotesStorage {
     : _settings = File(path.join(_profile.path, 'pob-builds.json')),
       _recovery = Directory(path.join(_profile.path, 'pob-build-recovery')),
       _legacy = BuildLibrary(_profile),
-      _legacySession = SessionRepository(_profile);
+      _legacySession = SessionRepository(_profile),
+      engineBindings = PobEngineBindings(_profile);
 
   final Directory _profile;
+  final PobEngineBindings engineBindings;
   final File _settings;
   final Directory _recovery;
   final BuildLibrary _legacy;
@@ -359,6 +362,12 @@ class PobBuildLibrary implements BuildStorage, BuildNotesStorage {
             expectedXml,
           );
     final entry = _entry(root, file, document, DateTime.now());
+    if (previous != null && previous.id != entry.id) {
+      await engineBindings.move(
+        (folder: root.path, id: previous.id),
+        (folder: root.path, id: entry.id),
+      );
+    }
     await activate(entry.id);
     return LibraryState(
       entries: [
@@ -614,6 +623,7 @@ class PobBuildLibrary implements BuildStorage, BuildNotesStorage {
     final current = await _readFile(_root, file);
     if (expected.revision != current.entry.revision) throw _conflict();
     await _retire(file, current.xml);
+    await engineBindings.forget((folder: _root.path, id: id));
     if (state.activeId == id) await activate(null);
     return LibraryState(
       entries: state.entries.where((entry) => entry.id != id).toList(),

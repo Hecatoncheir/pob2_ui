@@ -46,12 +46,7 @@ typedef EngineJewelOffer = ({
   EngineBuildComparison preview,
 });
 
-typedef EngineTreeOffer = ({
-  String sessionId,
-  int connectionId,
-  EngineTreeEdit edit,
-  EngineTreePreview preview,
-});
+typedef EngineTreeOffer = EngineTreePreviewOffer;
 
 class EngineSessionCubit extends Cubit<EngineSessionState> {
   EngineSessionCubit({
@@ -79,6 +74,7 @@ class EngineSessionCubit extends Cubit<EngineSessionState> {
     EngineOptions options, {
     String? createName,
     String? createXml,
+    Future<EngineSnapshot> Function(EngineConnection)? initialSnapshot,
   }) async {
     final releasing = disconnect();
     final generation = _generation;
@@ -98,7 +94,9 @@ class EngineSessionCubit extends Cubit<EngineSessionState> {
         return;
       }
       _connection = connection;
-      final snapshot = createName == null
+      final snapshot = initialSnapshot != null
+          ? await initialSnapshot(connection)
+          : createName == null
           ? await connection.snapshot(options.sessionId)
           : await connection.create(
               options.sessionId,
@@ -464,6 +462,24 @@ class EngineSessionCubit extends Cubit<EngineSessionState> {
     }
     try {
       return await connection.selectTreeClass(current, edit, engineRequestId());
+    } on GrpcError catch (error) {
+      throw StateError(engineError(error));
+    }
+  }
+
+  bool get supportsSkillGroups => switch (_connection) {
+    final EngineSkillGroupWriter writer when state.connected =>
+      writer.supportsSkillGroups,
+    _ => false,
+  };
+
+  Future<EngineSnapshot> editSkillGroup(
+    EngineSnapshot current,
+    EngineSkillGroupEdit edit,
+  ) async {
+    final connection = _connectedTo(current) as EngineSkillGroupWriter;
+    try {
+      return await connection.editSkillGroup(current, edit, engineRequestId());
     } on GrpcError catch (error) {
       throw StateError(engineError(error));
     }

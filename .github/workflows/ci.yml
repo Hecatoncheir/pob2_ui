@@ -197,11 +197,11 @@ jobs:
         shell: bash
         env:
           ENGINE_TAG: ${{ inputs.engine_release }}
-          POB2_ENGINE_TEST_SUPPORT: ${{ inputs.engine_support && '1' || '0' }}
-          POB2_ENGINE_TEST_EQUIPMENT: ${{ inputs.engine_equipment && '1' || '0' }}
-          POB2_ENGINE_TEST_TREE: ${{ inputs.engine_tree && '1' || '0' }}
+          POB2_ENGINE_TEST_SUPPORT: ${{ (inputs.engine_support || inputs.engine_workshop) && '1' || '0' }}
+          POB2_ENGINE_TEST_EQUIPMENT: ${{ (inputs.engine_equipment || inputs.engine_workshop) && '1' || '0' }}
+          POB2_ENGINE_TEST_TREE: ${{ (inputs.engine_tree || inputs.engine_workshop) && '1' || '0' }}
           POB2_ENGINE_TEST_ATTRIBUTES: ${{ (inputs.engine_attributes || inputs.engine_workshop) && '1' || '0' }}
-          POB2_ENGINE_TEST_WEAPON_MODES: ${{ inputs.engine_weapon_modes && '1' || '0' }}
+          POB2_ENGINE_TEST_WEAPON_MODES: ${{ (inputs.engine_weapon_modes || inputs.engine_workshop) && '1' || '0' }}
           POB2_ENGINE_TEST_SOCKETS: ${{ inputs.engine_workshop && '1' || '0' }}
           POB2_ENGINE_TEST_JEWELS: ${{ inputs.engine_workshop && '1' || '0' }}
           POB2_ENGINE_TEST_TREE_SPECS: ${{ inputs.engine_workshop && '1' || '0' }}

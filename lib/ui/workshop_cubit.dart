@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:grpc/grpc.dart';
 
 import 'dart:async';
 import 'dart:io';
@@ -17,6 +18,7 @@ import '../data/pob_share_links.dart';
 import '../data/profile_cleanup.dart';
 import '../data/progression_comparison_session.dart';
 import '../data/pob_build_library.dart';
+import '../data/pob_engine_bindings.dart';
 import '../data/pob_build_locations.dart';
 import '../data/session_repository.dart';
 import '../data/build_library.dart';
@@ -90,6 +92,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     PobShareLinks? shareLinks,
     McpClient Function()? createEngine,
     Future<EngineConnection> Function(EngineOptions)? openEngineSession,
+    EngineOptions? primaryEngine,
   }) : _engine = engine,
        _createEngine = createEngine ?? McpClient.new,
        session = session ?? SessionRepository(components.store.root),
@@ -99,6 +102,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
        buildLocations = buildLocations ?? PobBuildLocations(),
        _shareLinks = shareLinks ?? PobShareLinks(),
        _openEngineSession = openEngineSession,
+       _primaryEngine = primaryEngine,
        super(initialState ?? WorkshopState());
   final ComponentRepository components;
   final Future<EngineConnection> Function(EngineOptions)? _openEngineSession;
@@ -106,10 +110,15 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     open: _openEngineSession,
     onSnapshot: _applyEngineSnapshot,
   );
-  ({String folder, String id})? _engineBinding;
+  final EngineOptions? _primaryEngine;
+  Future<void>? _primaryOpening;
+  EngineBindingKey? _primaryAttempt;
+  bool _managedEngine = false;
+  int? _primaryDiskRevision;
+  EngineBindingKey? _engineBinding;
   int _engineBindingEpoch = 0;
   _EngineXmlBinding? _engineXmlBinding;
-  ({String folder, String id})? get _currentEngineBinding {
+  EngineBindingKey? get _currentEngineBinding {
     final id = state.library.activeId;
     return id == null ? null : (folder: sharedLibrary?.directory ?? '', id: id);
   }
@@ -122,6 +131,8 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     bool useSessionXml = false,
   }) async {
     final opened = _currentEngineBinding;
+    _primaryAttempt = opened;
+    _managedEngine = false;
     final xml = importOpenBuild ? await _exportEngineXml(createName) : null;
     final syncXml = bindCurrentBuild && (importOpenBuild || useSessionXml);
     final input = syncXml ? _startEngineXmlBinding(opened) : null;
@@ -172,12 +183,15 @@ class WorkshopCubit extends Cubit<WorkshopState> {
   }
 
   void _clearEngineBinding() {
+    _managedEngine = false;
+    _primaryDiskRevision = null;
     _engineBindingEpoch++;
     _engineBinding = null;
     _engineXmlBinding = null;
   }
 
   Future<void> disconnectEngine() async {
+    _primaryAttempt = _currentEngineBinding;
     _clearEngineBinding();
     await engineSession.disconnect();
   }
@@ -202,6 +216,208 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     addLog(
       'Общая сессия ${snapshot.sessionId}, ревизия ${snapshot.revision}: название «${snapshot.buildName}»',
     );
+  }
+
+  bool get usesPrimaryEngine => _primaryEngine != null;
+
+  Future<void> waitForPrimarySession() async {
+    var opening = _primaryOpening;
+    while (opening != null) {
+      await opening;
+      opening = _primaryOpening;
+    }
+  }
+
+  void _schedulePrimarySession() {
+    final key = _currentEngineBinding;
+    final shared = sharedLibrary;
+    if (_primaryEngine == null ||
+        _primaryOpening != null ||
+        key == null ||
+        key == _primaryAttempt ||
+        shared == null ||
+        state.report == null)
+      return;
+    if (_closing || isClosed || _engineBinding != null || state.busy) return;
+    _primaryAttempt = key;
+    _primaryOpening = _openPrimarySession(shared, key).whenComplete(() {
+      _primaryOpening = null;
+      _schedulePrimarySession();
+    });
+    unawaited(_primaryOpening!);
+  }
+
+  Future<void> _openPrimarySession(
+    PobBuildLibrary shared,
+    EngineBindingKey key,
+  ) async {
+    final startingEpoch = _engineBindingEpoch;
+    int? bindingEpoch;
+    try {
+      final disk = await shared.open(key.id);
+      final saved = await _ensurePrimaryBinding(shared, key, disk);
+      if (_primarySourceChanged(key, startingEpoch)) {
+        if (state.busy &&
+            key == _currentEngineBinding &&
+            startingEpoch == _engineBindingEpoch) {
+          _primaryAttempt = null;
+        }
+        return;
+      }
+      final epoch = ++_engineBindingEpoch;
+      bindingEpoch = epoch;
+      _managedEngine = true;
+      _engineBinding = key;
+      _engineXmlBinding = (
+        inputRevision: 0,
+        libraryRevision: disk.entry.revision!,
+        fileXml: disk.xml,
+      );
+      final options = _primaryOptions(saved.sessionId);
+      await engineSession.connect(
+        options,
+        initialSnapshot: (connection) =>
+            _restorePrimarySession(connection, saved, disk, epoch),
+      );
+      await _confirmEngineXmlBinding(epoch);
+    } catch (error) {
+      if (isClosed ||
+          _closing ||
+          (bindingEpoch ?? startingEpoch) != _engineBindingEpoch)
+        return;
+      _clearEngineBinding();
+      _update(
+        state.copyWith(
+          operation: (busy: state.busy, error: engineError(error)),
+        ),
+      );
+      addLog(engineError(error));
+    }
+  }
+
+  bool _primarySourceChanged(EngineBindingKey key, int epoch) =>
+      isClosed ||
+      _closing ||
+      state.busy ||
+      key != _currentEngineBinding ||
+      epoch != _engineBindingEpoch ||
+      _engineBinding != null;
+
+  Future<SavedEngineBinding> _ensurePrimaryBinding(
+    PobBuildLibrary shared,
+    EngineBindingKey key,
+    PobBuildVersion disk,
+  ) async {
+    final existing = await shared.engineBindings.read(key);
+    if (existing != null) return existing;
+    final binding = (
+      sessionId: shared.engineBindings.initialSessionId(
+        key,
+        disk.xml,
+        disk.entry.updated,
+      ),
+      fileHash: PobEngineBindings.hash(disk.xml),
+      engineHash: null,
+    );
+    await shared.engineBindings.write(key, binding);
+    return binding;
+  }
+
+  EngineOptions _primaryOptions(String sessionId) {
+    final pair = components.active;
+    final mcp = pair[Component.mcp]?.directory;
+    return _primaryEngine!.forBuild(
+      sessionId,
+      pob: pair[Component.pob]?.directory,
+      native: Platform.isWindows || mcp == null
+          ? null
+          : Directory.fromUri(Directory(mcp).uri.resolve('native/')).path,
+    );
+  }
+
+  Future<EngineSnapshot> _restorePrimarySession(
+    EngineConnection connection,
+    SavedEngineBinding saved,
+    PobBuildVersion disk,
+    int epoch,
+  ) async {
+    final session = await _existingPrimarySession(connection, saved.sessionId);
+    if (epoch != _engineBindingEpoch) throw StateError(_staleBuild);
+
+    if (session == null)
+      return _createPrimarySession(connection, saved, disk, epoch);
+    final engineXml = session.build?.xml;
+    if (engineXml == null) throw StateError(_missingEngineXml);
+    final sameEngine = saved.engineHash == PobEngineBindings.hash(engineXml);
+    final sameFile = saved.fileHash == PobEngineBindings.hash(disk.xml);
+    if (engineXml == disk.xml || (sameFile && sameEngine)) {
+      return _loadedFromDisk(session, epoch);
+    }
+    if (sameFile) return session;
+    if (!sameEngine) throw StateError(_divergedBuild);
+    await _checkEngineFile(_engineXmlBinding!);
+    if (epoch != _engineBindingEpoch) throw StateError(_staleBuild);
+    final replaced = await connection.replaceBuild(
+      session,
+      disk.xml,
+      engineRequestId(),
+    );
+    return _loadedFromDisk(replaced, epoch);
+  }
+
+  Future<EngineSnapshot> _createPrimarySession(
+    EngineConnection connection,
+    SavedEngineBinding saved,
+    PobBuildVersion disk,
+    int epoch,
+  ) async {
+    try {
+      final created = await connection.create(
+        saved.sessionId,
+        disk.entry.title,
+        engineRequestId(),
+        xml: disk.xml,
+      );
+      return _loadedFromDisk(created, epoch);
+    } on GrpcError catch (error) {
+      if (error.code != StatusCode.alreadyExists) rethrow;
+      return _restorePrimarySession(connection, saved, disk, epoch);
+    }
+  }
+
+  EngineSnapshot _loadedFromDisk(EngineSnapshot snapshot, int epoch) {
+    if (epoch != _engineBindingEpoch) throw StateError(_staleBuild);
+    _primaryDiskRevision = snapshot.revision;
+    return snapshot;
+  }
+
+  Future<EngineSnapshot?> _existingPrimarySession(
+    EngineConnection connection,
+    String id,
+  ) async {
+    try {
+      return await connection.snapshot(id);
+    } on GrpcError catch (error) {
+      if (error.code == StatusCode.notFound) return null;
+      rethrow;
+    }
+  }
+
+  Future<void> _checkpointPrimarySession(
+    EngineSnapshot snapshot,
+    String diskXml,
+  ) async {
+    final key = _engineBinding;
+    if (!_managedEngine || key == null) return;
+    try {
+      await sharedLibrary!.engineBindings.write(key, (
+        sessionId: snapshot.sessionId,
+        fileHash: PobEngineBindings.hash(diskXml),
+        engineHash: PobEngineBindings.hash(snapshot.build!.xml),
+      ));
+    } on FileSystemException catch (error) {
+      addLog(error.toString());
+    }
   }
 
   Future<void> _acceptEngineXml(EngineSnapshot snapshot) async {
@@ -254,6 +470,11 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     final target = state.library;
     final before = await _currentXml();
     final incoming = snapshot.build!;
+    final keepDisk =
+        _managedEngine &&
+        binding.inputRevision == 0 &&
+        snapshot.revision == _primaryDiskRevision;
+    final fileXml = keepDisk ? diskXml : incoming.xml;
     final (:xml, :progression) = splitTreeProgression(incoming.xml);
     _markStale();
     try {
@@ -263,7 +484,8 @@ class WorkshopCubit extends Cubit<WorkshopState> {
         title: snapshot.buildName,
         progression: progression,
         progressionSource: _storedProgressionKey,
-        savedXml: incoming.xml,
+        persist: !keepDisk,
+        savedXml: fileXml,
         expectedXml: diskXml,
         snapshot: snapshot,
       );
@@ -271,12 +493,14 @@ class WorkshopCubit extends Cubit<WorkshopState> {
       _engineXmlBinding = (
         inputRevision: incoming.inputRevision,
         libraryRevision: state.library.active!.revision!,
-        fileXml: incoming.xml,
+        fileXml: fileXml,
       );
     } catch (_) {
       await _restoreWorking(before, document, target);
       rethrow;
     }
+    _seenBuildXml = fileXml;
+    await _checkpointPrimarySession(snapshot, fileXml);
   }
 
   Future<void> _clearMissingProgression(String previousXml) async {
@@ -495,11 +719,15 @@ class WorkshopCubit extends Cubit<WorkshopState> {
       engine.connected &&
       !state.busy &&
       state.document?.stale == false &&
-      engine.tools.containsAll({
-        'pob_node_tooltip',
-        'pob_tree_action',
-        'pob_tree_options',
-      });
+      (_canCompareSharedPaths ||
+          engine.tools.containsAll({
+            'pob_node_tooltip',
+            'pob_tree_action',
+            'pob_tree_options',
+          }));
+
+  bool get _canCompareSharedPaths =>
+      hasSharedTree && engineSession.supportsTreeAllocationModes;
 
   Future<TreePathComparison> compareTreePaths(int first, int second) async {
     final report = state.report;
@@ -508,16 +736,15 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     final buildId = state.library.activeId;
     final mode = state.treeMode;
     final componentSource = _componentSource;
-    final pair = Map<Component, Installation>.unmodifiable(components.active);
-    final xml = await _currentXml();
-    final reports = await paths.compareTreePaths(
-      _createEngine(),
-      pair,
-      xml,
-      first,
-      second,
-      mode: mode,
-    );
+    final shared = _canCompareSharedPaths
+        ? await _compareSharedPaths(first, second)
+        : null;
+    final xml = shared == null
+        ? await _currentXml()
+        : engineSession.state.snapshot!.build!.xml;
+    final reports = shared == null
+        ? await _compareLegacyPaths(xml, first, second, mode)
+        : _enginePathReports(shared);
     final comparison = TreePathComparison(
       source: report,
       sourceRevision: PobBuildDocument(xml).revision,
@@ -526,12 +753,87 @@ class WorkshopCubit extends Cubit<WorkshopState> {
       mode: mode,
       weaponSet: report.weaponSet,
       componentSource: componentSource,
+      enginePaths: shared,
     );
     if (!canCompareTreePaths || !isTreePathCurrent(comparison)) {
       throw StateError(staleTreePaths);
     }
     return comparison;
   }
+
+  Future<TreePathReports> _compareLegacyPaths(
+    String xml,
+    int first,
+    int second,
+    TreeAllocationMode mode,
+  ) => paths.compareTreePaths(
+    _createEngine(),
+    Map<Component, Installation>.unmodifiable(components.active),
+    xml,
+    first,
+    second,
+    mode: mode,
+  );
+
+  Future<EngineTreePaths?> _compareSharedPaths(int first, int second) async {
+    if (first == second)
+      throw const FormatException('Выберите два разных узла.');
+    try {
+      final left = await previewSharedTreeNode(
+        first,
+        action: EngineTreeAction.allocate,
+      );
+      final right = await previewSharedTreeNode(
+        second,
+        action: EngineTreeAction.allocate,
+      );
+      if (!isCurrentSharedTreeOffer(left) || !isCurrentSharedTreeOffer(right)) {
+        throw StateError(staleTreePaths);
+      }
+      return (
+        first: left.offer,
+        second: right.offer,
+        inputRevision: left.inputRevision,
+        bindingEpoch: left.bindingEpoch,
+      );
+    } on GrpcError catch (error) {
+      if (error.code == StatusCode.invalidArgument) return null;
+      rethrow;
+    }
+  }
+
+  static TreePathReports _enginePathReports(EngineTreePaths source) => (
+    baseline: _enginePathStats(source.first.preview.comparison.before),
+    first: _enginePathOption(source.first),
+    second: _enginePathOption(source.second),
+  );
+
+  static TreePathStats _enginePathStats(EngineCalculation result) =>
+      (dps: result.dps, life: result.life);
+
+  static TreePathOption _enginePathOption(EngineTreeOffer offer) {
+    final preview = offer.preview;
+    final points = preview.points!;
+    final mode = offer.edit.allocationMode;
+    return (
+      target: offer.edit.nodeId,
+      points:
+          _pathPointCount(points.after, mode) -
+          _pathPointCount(points.before, mode),
+      nodes: preview.added,
+      stats: _enginePathStats(preview.comparison.after),
+      xml: null,
+    );
+  }
+
+  static int _pathPointCount(
+    EnginePassivePoints points,
+    TreeAllocationMode? mode,
+  ) => switch (mode) {
+    TreeAllocationMode.weaponOne => points.weaponOne,
+    TreeAllocationMode.weaponTwo => points.weaponTwo,
+    _ => points.passives,
+  };
 
   bool isTreePathCurrent(TreePathComparison comparison) =>
       ready &&
@@ -540,12 +842,29 @@ class WorkshopCubit extends Cubit<WorkshopState> {
       state.report?.weaponSet == comparison.weaponSet &&
       _componentSource == comparison.componentSource &&
       identical(state.report, comparison.source) &&
-      state.library.activeId == comparison.buildId;
+      state.library.activeId == comparison.buildId &&
+      _isCurrentPathPreview(comparison.enginePaths);
+
+  bool _isCurrentPathPreview(EngineTreePaths? paths) =>
+      paths == null ||
+      (_isCurrentEngineInput(paths.bindingEpoch, paths.inputRevision) &&
+          engineSession.isCurrentTreeOffer(paths.first) &&
+          engineSession.isCurrentTreeOffer(paths.second));
 
   Future<BuildEditResult> applyTreePath(
     TreePathComparison comparison, {
     required bool first,
   }) {
+    if (comparison.enginePaths case final shared?) {
+      if (!isTreePathCurrent(comparison)) {
+        return Future.value((committed: false, error: staleTreePaths));
+      }
+      return applySharedTreeNode((
+        offer: first ? shared.first : shared.second,
+        inputRevision: shared.inputRevision,
+        bindingEpoch: shared.bindingEpoch,
+      ));
+    }
     final option = first ? comparison.reports.first : comparison.reports.second;
     late String updated;
     return _changeBuild(
@@ -556,7 +875,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
             current.revision != comparison.sourceRevision) {
           throw StateError(staleTreePaths);
         }
-        updated = current.withTreeAllocation(PobBuildDocument(option.xml));
+        updated = current.withTreeAllocation(PobBuildDocument(option.xml!));
       },
       validate: (after) => paths.checkAppliedTreePath(after, option),
     );
@@ -669,7 +988,9 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     final wasBusy = state.busy;
     emit(next);
     if (_engineBinding != null && _engineBinding != _currentEngineBinding) {
+      final release = _managedEngine && _currentEngineBinding == null;
       _clearEngineBinding();
+      if (release) unawaited(engineSession.disconnect());
     }
     _mcpEditor?.checkBuild();
     _watchOpenBuild();
@@ -710,6 +1031,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
           clearSetupStage: state.error == null,
         ),
       );
+      _schedulePrimarySession();
     }
   }
 
@@ -1373,6 +1695,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
       ),
       null => library.save(target, report, xml, title: title),
     };
+    if (sharedLibrary != null && target.activeId == null) _seenBuildXml = xml;
     if (title != null) _followEngineRename(target, builds, epoch);
     return builds;
   }
@@ -1386,6 +1709,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
         after.activeId == null)
       return;
     _engineBinding = (folder: binding.folder, id: after.activeId!);
+    if (_managedEngine) _primaryAttempt = _engineBinding;
     _followEngineFileRevision(before, after);
   }
 
@@ -1607,6 +1931,11 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     if (copy != null) _update(state.copyWith(library: _withEntry(copy)));
     _seenBuildXml = disk.xml;
     final entry = disk.entry;
+    if (automatic && _managedEngine) {
+      _primaryAttempt = null;
+      _clearEngineBinding();
+      await engineSession.disconnect();
+    }
     if (!automatic || entry.revision != state.library.active?.revision) {
       await _switchXml(
         disk.xml,
@@ -1858,6 +2187,10 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     );
     _update(state.copyWith(library: builds));
     _recordRename(binding, xml, previousTitle);
+    if (binding != null) {
+      _seenBuildXml = xml;
+      await _checkpointPrimarySession(engineSession.state.snapshot!, xml);
+    }
   }
 
   void _recordRename(
@@ -2176,29 +2509,70 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     return group != null && (group['source'] as String? ?? '').isEmpty;
   }
 
+  bool get hasSharedSkillGroups =>
+      _engineXmlBinding != null && engineSession.supportsSkillGroups;
+
+  Future<BuildEditResult> Function(String, List<JsonMap>) skillGroupEditor(
+    int? id,
+  ) {
+    final revision = _engineXmlBinding?.inputRevision;
+    final epoch = _engineBindingEpoch;
+    return (label, gems) => _writeSkillGroup(
+      (id: id, label: label, delete: false, gems: gems),
+      revision,
+      epoch,
+    );
+  }
+
   Future<BuildEditResult> addSkillGroup(String label, List<JsonMap> gems) =>
-      _changeBuild(() async {
-        await engine.call('pob_add_skill_group', {
-          'label': label,
-          'gems': gems,
-        });
-      });
+      skillGroupEditor(null)(label, gems);
 
   Future<BuildEditResult> updateSkillGroup(
     int id,
     String label,
     List<JsonMap> gems,
-  ) => _changeBuild(() async {
-    await engine.call('pob_update_skill_group', {
-      'groupId': id,
-      'label': label,
-      'gems': gems,
-    });
-  });
+  ) => skillGroupEditor(id)(label, gems);
 
-  Future<BuildEditResult> deleteSkillGroup(int id) => _changeBuild(() async {
-    await engine.call('pob_delete_skill_group', {'groupId': id});
-  });
+  Future<BuildEditResult> deleteSkillGroup(int id) => _writeSkillGroup(
+    (id: id, label: null, delete: true, gems: const []),
+    _engineXmlBinding?.inputRevision,
+    _engineBindingEpoch,
+  );
+
+  Future<BuildEditResult> _writeSkillGroup(
+    EngineSkillGroupEdit edit,
+    int? revision,
+    int epoch,
+  ) {
+    if (epoch != _engineBindingEpoch ||
+        revision != _engineXmlBinding?.inputRevision) {
+      return Future.value((committed: false, error: _staleBuild));
+    }
+    if (revision != null && engineSession.supportsSkillGroups) {
+      return _applyEngineEdit(
+        expectedInput: revision,
+        epoch: epoch,
+        staleMessage: _staleBuild,
+        apply: (current) => engineSession.editSkillGroup(current, edit),
+        calculate: true,
+      );
+    }
+    return _legacySkillGroup(edit);
+  }
+
+  Future<BuildEditResult> _legacySkillGroup(EngineSkillGroupEdit edit) =>
+      _changeBuild(() async {
+        final method = switch (edit) {
+          (delete: true, id: _, label: _, gems: _) => 'pob_delete_skill_group',
+          (id: null, label: _, delete: _, gems: _) => 'pob_add_skill_group',
+          _ => 'pob_update_skill_group',
+        };
+        await engine.call(method, {
+          if (edit.id != null) 'groupId': edit.id,
+          if (!edit.delete) 'label': edit.label,
+          if (!edit.delete) 'gems': edit.gems,
+        });
+      });
 
   EquipmentRepository equipmentRepository() =>
       EquipmentRepository(engine, readShared: _readSharedEquipment);
@@ -2764,6 +3138,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
   Future<void> close() async {
     _closing = true;
     await engineSession.close();
+    await _primaryOpening;
     _buildChangeDelay?.cancel();
     await _buildChanges?.cancel();
     await _buildSync?.future;

@@ -7,13 +7,34 @@ class EngineOptions {
     this.sessionId = 'main',
     this.runtimeDirectory = '',
     this.dataDirectory = '',
+    this.pobDirectory,
+    this.pobNativeDirectory,
   });
   final String executable;
   final String profile;
   final String sessionId;
   final String runtimeDirectory;
   final String dataDirectory;
+  final String? pobDirectory, pobNativeDirectory;
+
+  EngineOptions forBuild(String id, {String? pob, String? native}) =>
+      EngineOptions(
+        executable: executable,
+        profile: profile,
+        sessionId: id,
+        runtimeDirectory: runtimeDirectory,
+        dataDirectory: dataDirectory,
+        pobDirectory: pobDirectory ?? pob,
+        pobNativeDirectory: pobNativeDirectory ?? native,
+      );
 }
+
+typedef EngineSkillGroupEdit = ({
+  int? id,
+  String? label,
+  bool delete,
+  List<Map<String, dynamic>> gems,
+});
 
 class EngineSnapshot {
   const EngineSnapshot(
@@ -138,6 +159,13 @@ typedef EngineTreePreview = ({
   List<EnginePassiveAttributeChange> attributes,
   List<EnginePassiveAllocationChange> allocations,
   EnginePassivePointsChange? points,
+});
+
+typedef EngineTreePreviewOffer = ({
+  String sessionId,
+  int connectionId,
+  EngineTreeEdit edit,
+  EngineTreePreview preview,
 });
 
 class EngineSupportPreview {

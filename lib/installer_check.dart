@@ -82,6 +82,7 @@ Future<Map<String, Object?>> _checkBuild(
       await _saveBuild(model, progress);
     }
     progress.record(stage == 'save' ? 'xml-saved' : 'xml-reopened');
+    final sessionId = await _checkInstalledSession(model, progress);
     final report = model.state.report;
     final id = model.state.library.activeId;
     _require(model.state.error == null && model.luaReady, model);
@@ -89,6 +90,7 @@ Future<Map<String, Object?>> _checkBuild(
     _require(await model.buildNotes.readNotes(id!) == _notes, model);
     await _checkRestoredTreeArtwork(model, stage, progress);
     return {
+      if (sessionId != null) 'engineSession': sessionId,
       'source': report!.raw['source'],
       'id': id,
       'level': report.level,
@@ -98,6 +100,21 @@ Future<Map<String, Object?>> _checkBuild(
   } finally {
     await model.close();
   }
+}
+
+Future<String?> _checkInstalledSession(
+  WorkshopCubit model,
+  InstallerCheckProgress progress,
+) async {
+  if (!model.usesPrimaryEngine) return null;
+  await model.waitForPrimarySession();
+  final snapshot = model.engineSession.state.snapshot;
+  _require(
+    snapshot?.build != null && model.hasSharedTree && model.state.error == null,
+    model,
+  );
+  progress.record('bundled-engine-session');
+  return snapshot!.sessionId;
 }
 
 Future<void> _checkRestoredTreeArtwork(
@@ -179,6 +196,7 @@ Future<void> _saveBuild(
   _require(model.state.library.entries.isEmpty, model);
   progress.record('open-build');
   await _openWitch(model);
+  await _checkInstalledSession(model, progress);
   progress.record('calculate-and-save');
   final before = model.state.report?.stats['Life'];
   _require(before is num && before > 0, model);
@@ -186,8 +204,7 @@ Future<void> _saveBuild(
   final after = model.state.report?.stats['Life'];
   _require(edited.committed && after is num && after > (before as num), model);
   final id = model.state.library.activeId!;
-  await model.buildNotes.readNotes(id);
-  await model.buildNotes.saveNotes(id, _notes);
+  await model.writeMcpNotes(id, _notes);
   await model.checkpoint();
 }
 

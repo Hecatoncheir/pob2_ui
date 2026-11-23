@@ -112,7 +112,7 @@ TreePathStats _stats(BuildReport report) =>
 
 void checkAppliedTreePath(String xml, TreePathOption option) {
   final applied = PobBuildDocument(xml);
-  final expected = PobBuildDocument(option.xml);
+  final expected = PobBuildDocument(option.xml!);
   final nodes = applied.allocatedNodes;
   final previewNodes = expected.allocatedNodes;
   if (nodes.length != previewNodes.length ||

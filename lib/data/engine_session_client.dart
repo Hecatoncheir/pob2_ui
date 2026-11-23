@@ -152,6 +152,15 @@ abstract interface class EngineTreePowerReader {
   );
 }
 
+abstract interface class EngineSkillGroupWriter {
+  bool get supportsSkillGroups;
+  Future<EngineSnapshot> editSkillGroup(
+    EngineSnapshot current,
+    EngineSkillGroupEdit edit,
+    String requestId,
+  );
+}
+
 abstract interface class EngineSkillChoiceWriter {
   bool get supportsSkillChoice;
   Future<EngineSnapshot> chooseSkill(
@@ -176,6 +185,7 @@ class EngineSessionClient
         EngineConnection,
         EngineWorkshopReader,
         EngineSkillChoiceWriter,
+        EngineSkillGroupWriter,
         EngineTreePowerReader {
   EngineSessionClient._(
     this._helper,
@@ -231,23 +241,31 @@ class EngineSessionClient
   }
 
   static Future<EngineConnection> open(EngineOptions options) async {
-    final helper = await Process.start(_engineExecutable(options.executable), [
-      'connect',
-      '--kind',
-      'ui',
-      '--connection-json',
-      '--start-server',
-      '--profile',
-      options.profile,
-      if (options.runtimeDirectory.isNotEmpty) ...[
-        '--runtime-dir',
-        options.runtimeDirectory,
+    final helper = await Process.start(
+      _engineExecutable(options.executable),
+      [
+        'connect',
+        '--kind',
+        'ui',
+        '--connection-json',
+        '--start-server',
+        '--profile',
+        options.profile,
+        if (options.runtimeDirectory.isNotEmpty) ...[
+          '--runtime-dir',
+          options.runtimeDirectory,
+        ],
+        if (options.dataDirectory.isNotEmpty) ...[
+          '--data-dir',
+          options.dataDirectory,
+        ],
       ],
-      if (options.dataDirectory.isNotEmpty) ...[
-        '--data-dir',
-        options.dataDirectory,
-      ],
-    ]);
+      environment: {
+        if (options.pobDirectory case final path?) 'POB2_ENGINE_POB_DIR': path,
+        if (options.pobNativeDirectory case final path?)
+          'POB2_ENGINE_POB_NATIVE_DIR': path,
+      },
+    );
     final first = Completer<String>();
     final output = helper.stdout
         .transform(utf8.decoder)
@@ -1072,6 +1090,39 @@ class EngineSessionClient
       _workshopCapabilities.contains('build.skill_choice');
 
   @override
+  bool get supportsSkillGroups =>
+      _workshopCapabilities.contains('build.skill_group');
+
+  @override
+  Future<EngineSnapshot> editSkillGroup(
+    EngineSnapshot current,
+    EngineSkillGroupEdit edit,
+    String requestId,
+  ) async => _snapshot(
+    (await _applyEdit(
+      current,
+      builds.BuildEdit(
+        skillGroup: builds.SkillGroupEdit(
+          groupId: edit.id,
+          label: edit.label,
+          delete: edit.delete,
+          gems: edit.gems.map(_skillGroupGem),
+        ),
+      ),
+      requestId,
+    )).snapshot,
+  );
+
+  static builds.SkillGroupGem _skillGroupGem(JsonMap gem) =>
+      builds.SkillGroupGem(
+        id: gem['id'] as String,
+        level: gem['level'] as int? ?? 1,
+        quality: gem['quality'] as int? ?? 0,
+        enabled: gem['enabled'] as bool?,
+        sourceIndex: gem['sourceIndex'] as int?,
+      );
+
+  @override
   Future<EngineSnapshot> chooseSkill(
     EngineSnapshot current,
     String control,
@@ -1255,6 +1306,7 @@ class EngineSessionClient
         edit.hasEquipment() ||
             edit.hasTreeNode() ||
             edit.hasTreeClass() ||
+            edit.hasSkillGroup() ||
             edit.hasJewel() ||
             (edit.hasSelection() && edit.selection.sets.tree != 0)
         ? _calculationTimeout

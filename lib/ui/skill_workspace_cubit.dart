@@ -60,7 +60,7 @@ class SkillWorkspaceCubit extends Cubit<SkillWorkspaceState> {
     unawaited(editor?.close());
     editor = SkillGroupCubit(
       model.catalogs,
-      (label, gems) => model.updateSkillGroup(id, label, gems),
+      model.skillGroupEditor(id),
       groupId: id,
       group: group,
       initial: initial,
@@ -110,7 +110,8 @@ class SkillWorkspaceCubit extends Cubit<SkillWorkspaceState> {
   });
 
   Future<void> delete(int id) => _run(() async {
-    if (!model.engine.tools.contains('pob_delete_skill_group'))
+    if (!model.hasSharedSkillGroups &&
+        !model.engine.tools.contains('pob_delete_skill_group'))
       throw const FormatException('Обновите MCP для удаления умения');
     final result = await model.deleteSkillGroup(id);
     if (!result.committed)

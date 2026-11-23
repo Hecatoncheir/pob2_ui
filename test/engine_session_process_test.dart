@@ -7,6 +7,7 @@ import 'package:pob2_ui/data/engine_session_client.dart';
 import 'package:pob2_ui/data/component_repository.dart';
 import 'package:pob2_ui/data/installation_store.dart';
 import 'package:pob2_ui/data/mcp_client.dart';
+import 'package:pob2_ui/data/pob_build_document.dart';
 import 'package:pob2_ui/data/pob_build_library.dart';
 import 'package:pob2_ui/domain/build_report.dart';
 import 'package:pob2_ui/domain/condition_definition.dart';
@@ -226,6 +227,12 @@ void main() {
     timeout: const Timeout(Duration(minutes: 2)),
   );
   test(
+    'Библиотека восстанавливает прежнюю общую сессию и сохраняет обе стороны конфликта',
+    () => _checkPrimaryLibrary(executable!),
+    skip: _skipWorkshopRelease(canUseWorkshop),
+    timeout: const Timeout(Duration(minutes: 3)),
+  );
+  test(
     'Движок передаёт команду только окну с включённым разрешением',
     () => _checkEditorBridge(executable!),
     skip: _skipWorkshopRelease(canUseWorkshop),
@@ -314,6 +321,132 @@ typedef _SharedWorkshop = ({
   List<String> flags,
   File file,
 });
+
+Future<void> _checkPrimaryLibrary(String executable) async {
+  final root = await Directory.systemTemp.createTemp('pob2-primary-library-');
+  final options = EngineOptions(
+    executable: executable,
+    profile: 'primary-test',
+    pobDirectory: Platform.environment['POB2_ENGINE_POB_DIR'],
+    pobNativeDirectory: Platform.environment['POB2_ENGINE_POB_NATIVE_DIR'],
+    runtimeDirectory: root.uri.resolve('runtime').toFilePath(),
+    dataDirectory: root.uri.resolve('data').toFilePath(),
+  );
+  final flags = [
+    '--profile',
+    options.profile,
+    '--runtime-dir',
+    options.runtimeDirectory,
+    '--data-dir',
+    options.dataDirectory,
+  ];
+  addTearDown(() async {
+    await Process.run(executable, ['shutdown', ...flags]);
+    await _waitForShutdown(options);
+    await removeTemporaryDirectory(root);
+  });
+  final model = await _openWorkshop(root, 'witch_fireball', primary: options);
+  await _initializePrimary(model);
+  final id = model.engineSession.state.snapshot!.sessionId;
+  expect(id, startsWith('build-'));
+  final file = await _renamePrimaryBuild(model, root);
+  expect(
+    await _cliBuildXml(executable, flags, session: id),
+    await file.readAsString(),
+  );
+  await model.close();
+  await Process.run(executable, ['shutdown', ...flags]);
+  await _waitForShutdown(options);
+
+  final diskEdit = PobBuildDocument(await file.readAsString())
+      .withNotes('Правка файла');
+  await file.writeAsString(diskEdit);
+  final resumed = _primaryWorkshop(root, options);
+  await _initializePrimary(resumed);
+  expect(resumed.engineSession.state.snapshot!.sessionId, id);
+  expect(await file.readAsString(), diskEdit);
+  final exported = await _cliBuildXml(executable, flags, session: id);
+  expect(PobBuildDocument(exported).notes, 'Правка файла');
+  await _checkPrimaryShareCode(resumed, file, id);
+  await resumed.close();
+
+  await _checkPrimaryConflict(root, options, file, id);
+}
+
+Future<void> _initializePrimary(WorkshopCubit model) async {
+  addTearDown(() async {
+    if (!model.isClosed) await model.close();
+  });
+  await model.initialize();
+  await model.waitForPrimarySession();
+  expect(model.hasSharedTree, isTrue, reason: model.state.error);
+}
+
+Future<File> _renamePrimaryBuild(WorkshopCubit model, Directory root) async {
+  final renamed = model.stream.firstWhere(
+    (state) => !state.busy && state.library.active?.title == 'Fireball renamed',
+  );
+  await model.renameBuild('Fireball renamed');
+  await renamed.timeout(const Duration(seconds: 30));
+  await model.engineSession.waitForSnapshot();
+  return File.fromUri(root.uri.resolve('builds/Fireball%20renamed.xml'));
+}
+
+Future<void> _checkPrimaryShareCode(
+  WorkshopCubit model,
+  File file,
+  String sourceId,
+) async {
+  final saved = await file.readAsString();
+  String? code;
+  await model.copyShareCode((value) async => code = value);
+  expect(code, isNotEmpty);
+  await model.importShareCode(code!);
+  await model.waitForPrimarySession();
+  expect(model.state.error, isNull);
+  final copy = model.engineSession.state.snapshot!;
+  expect(copy.sessionId, isNot(sourceId));
+  expect(PobBuildDocument(copy.build!.xml).notes, 'Правка файла');
+  expect(await file.readAsString(), saved);
+}
+
+Future<void> _checkPrimaryConflict(
+  Directory root,
+  EngineOptions options,
+  File file,
+  String id,
+) async {
+  final connection = await EngineSessionClient.open(options.forBuild(id));
+  addTearDown(connection.close);
+  final snapshot = await connection.snapshot(id);
+  final doc = PobBuildDocument(snapshot.build!.xml);
+  final remote = await connection.replaceBuild(
+    snapshot,
+    doc.withNotes('Правка движка'),
+    'remote-note',
+  );
+  final local = doc.withNotes('Независимая правка файла');
+  await file.writeAsString(local);
+  final library = PobBuildLibrary(root);
+  await library.load();
+  await library.activate('Fireball renamed.xml');
+  final conflict = _primaryWorkshop(root, options);
+  addTearDown(conflict.close);
+  await conflict.initialize();
+  await conflict.waitForPrimarySession();
+  expect(conflict.hasSharedTree, isFalse);
+  expect(conflict.state.error, contains('Проверьте версии'));
+  expect(await file.readAsString(), local);
+  expect((await connection.snapshot(id)).build!.xml, remote.build!.xml);
+}
+
+WorkshopCubit _primaryWorkshop(Directory root, EngineOptions? options) =>
+    WorkshopCubit(
+      ComponentRepository(store: InstallationStore(root)),
+      McpClient(),
+      library: PobBuildLibrary(root),
+      primaryEngine: options,
+    );
 
 Future<_SharedWorkshop> _startWorkshop(
   String executable,
@@ -566,6 +699,7 @@ Future<void> _checkWorkshopReads(String executable) async {
   if (Platform.environment['POB2_ENGINE_TEST_WORKSHOP_TEXTURES'] == '1') {
     await _checkSharedArtwork(model);
     await _checkSharedPower(model);
+    await _checkSharedPaths(executable, opened);
   }
 }
 
@@ -608,6 +742,29 @@ Future<void> _checkSharedPower(WorkshopCubit model) async {
   expect(power.state.report?.images, isNotEmpty);
   expect(power.state.report?.entries, isNotEmpty);
   expect(updates, isNotEmpty);
+}
+
+Future<void> _checkSharedPaths(
+  String executable,
+  _SharedWorkshop opened,
+) async {
+  final model = opened.model;
+  final before = await opened.file.readAsString();
+  final comparison = await model.compareTreePaths(3936, 13397);
+  expect(comparison.enginePaths, isNotNull);
+  expect(comparison.reports.first.points, 1);
+  expect(comparison.reports.second.nodes, [3936, 13397]);
+  expect(comparison.reports.second.points, 2);
+  expect(await opened.file.readAsString(), before);
+  final applied = await model.applyTreePath(comparison, first: false);
+  expect(applied.committed, isTrue, reason: applied.error);
+  final xml = await _cliBuildXml(executable, opened.flags);
+  expect(xml, await opened.file.readAsString());
+  expect(PobBuildDocument(xml).allocatedNodes, containsAll([3936, 13397]));
+  expect(
+    (await model.applyTreePath(comparison, first: true)).committed,
+    isFalse,
+  );
 }
 
 Future<void> _checkWorkshopForms(String executable) async {
@@ -987,7 +1144,11 @@ Future<void> _applyWorkshopTree(
   expect(model.state.report!.stats['Life'], expected);
 }
 
-Future<WorkshopCubit> _openWorkshop(Directory root, String fixture) async {
+Future<WorkshopCubit> _openWorkshop(
+  Directory root,
+  String fixture, {
+  EngineOptions? primary,
+}) async {
   final builds = await Directory.fromUri(root.uri.resolve('builds/')).create();
   await File('integration_test/fixtures/$fixture.xml')
       .copy(builds.uri.resolve('Fireball.xml').toFilePath());
@@ -997,11 +1158,7 @@ Future<WorkshopCubit> _openWorkshop(Directory root, String fixture) async {
   final library = PobBuildLibrary(root);
   await library.configure(builds.path);
   await library.activate('Fireball.xml');
-  return WorkshopCubit(
-    ComponentRepository(store: InstallationStore(root)),
-    McpClient(),
-    library: library,
-  );
+  return _primaryWorkshop(root, primary);
 }
 
 ConditionEditorCubit _conditionForm(WorkshopCubit model) {
@@ -1058,12 +1215,16 @@ Future<void> _editWorkshopCondition(
   );
 }
 
-Future<String> _cliBuildXml(String executable, List<String> flags) async {
+Future<String> _cliBuildXml(
+  String executable,
+  List<String> flags, {
+  String session = 'main',
+}) async {
   final result = await Process.run(executable, [
     'build',
     'export',
     '--session',
-    'main',
+    session,
     '--raw',
     ...flags,
   ], stdoutEncoding: utf8);
