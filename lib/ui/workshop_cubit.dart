@@ -1044,10 +1044,16 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     }
   }
 
-  Future<void> initialize() =>
-      _initialization ??= _run(_loadWorkspace).whenComplete(() {
-        _initialization = null;
-      });
+  Future<void> initialize() async {
+    if (_initialization != null) return;
+    final loading = _run(_loadWorkspace);
+    _initialization = loading;
+    try {
+      await loading;
+    } finally {
+      _initialization = null;
+    }
+  }
 
   Future<void> _loadWorkspace() async {
     await components.load();
@@ -3089,18 +3095,20 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     addLog('$error');
   }
 
-  Future<void> checkpoint({bool closePob = false}) async {
+  Future<void> checkpointBeforeExit({bool closePob = false}) async {
     if (_initialization case final initialization?) {
       await initialization;
       if (state.error case final error?) throw StateError(error);
     }
-    await _protectExit(() async {
-      await session.saveDraft(state.draftXml);
-      await _flushText();
-      await _checkpointBuild();
-      if (closePob) await pobWindow.closeLaunchedWindows();
-    });
+    await checkpoint(closePob: closePob);
   }
+
+  Future<void> checkpoint({bool closePob = false}) => _protectExit(() async {
+    await session.saveDraft(state.draftXml);
+    await _flushText();
+    await _checkpointBuild();
+    if (closePob) await pobWindow.closeLaunchedWindows();
+  });
 
   Future<List<CleanupEntry>> previewProfileCleanup() async {
     // Загрузка текстур меняет состав и размер кеша, пока строится список.
