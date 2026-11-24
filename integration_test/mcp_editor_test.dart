@@ -215,7 +215,7 @@ Future<void> _checkApplicationTools(
 
   final image = await client.call('pob_render_image', {'view': 'overview'});
   if (Platform.isWindows) {
-    expect(image['isError'], isFalse, reason: '$image');
+    expect(image['isError'], isNot(true), reason: '$image');
     expect(
       jsonRows(image['content']).where((b) => b['type'] == 'image'),
       hasLength(1),
@@ -363,7 +363,7 @@ Future<void> _checkScreenshot(_ExternalEditor client) async {
   final screenshot = await client.call('pob_editor_ui', {
     'action': 'screenshot',
   });
-  expect(screenshot['isError'], isFalse);
+  expect(screenshot['isError'], isNot(true));
   final png = jsonRows(screenshot['content'])
       .firstWhere((item) => item['type'] == 'image');
   final bytes = base64Decode(png['data'] as String);
@@ -780,14 +780,16 @@ class _ExternalEditor {
       await Future<void>.delayed(const Duration(milliseconds: 100));
       result = await call(name, arguments);
     }
-    expect(result['isError'], isFalse, reason: '$result');
+    expect(result['isError'], isNot(true), reason: '$result');
     return jsonMap(jsonMap(result['structuredContent'])['result']);
   }
 
   bool _busy(JsonMap result) =>
       result['isError'] == true &&
-      jsonRows(result['content'])
-          .any((item) => '${item['text']}'.contains('"code": "APP_BUSY"'));
+      jsonRows(result['content']).any(
+        (item) =>
+            RegExp(r'"code"\s*:\s*"APP_BUSY"').hasMatch('${item['text']}'),
+      );
 
   Future<JsonMap> _rpc(String method, JsonMap params) async {
     process.stdin.writeln(
