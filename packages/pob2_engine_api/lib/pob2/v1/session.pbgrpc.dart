@@ -159,6 +159,15 @@ class SessionServiceClient extends $grpc.Client {
     return $createUnaryCall(_$getTreeTexture, request, options: options);
   }
 
+  $grpc.ResponseStream<$2.GetTreeTexturesResponse> getTreeTextures(
+    $2.GetTreeTexturesRequest request, {
+    $grpc.CallOptions? options,
+  }) {
+    return $createStreamingCall(
+        _$getTreeTextures, $async.Stream.fromIterable([request]),
+        options: options);
+  }
+
   $grpc.ResponseFuture<$3.GetCatalogResponse> getCatalog(
     $3.GetCatalogRequest request, {
     $grpc.CallOptions? options,
@@ -336,6 +345,11 @@ class SessionServiceClient extends $grpc.Client {
           '/pob2.v1.SessionService/GetTreeTexture',
           ($2.GetTreeTextureRequest value) => value.writeToBuffer(),
           $2.GetTreeTextureResponse.fromBuffer);
+  static final _$getTreeTextures =
+      $grpc.ClientMethod<$2.GetTreeTexturesRequest, $2.GetTreeTexturesResponse>(
+          '/pob2.v1.SessionService/GetTreeTextures',
+          ($2.GetTreeTexturesRequest value) => value.writeToBuffer(),
+          $2.GetTreeTexturesResponse.fromBuffer);
   static final _$getCatalog =
       $grpc.ClientMethod<$3.GetCatalogRequest, $3.GetCatalogResponse>(
           '/pob2.v1.SessionService/GetCatalog',
@@ -550,6 +564,15 @@ abstract class SessionServiceBase extends $grpc.Service {
         ($core.List<$core.int> value) =>
             $2.GetTreeTextureRequest.fromBuffer(value),
         ($2.GetTreeTextureResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$2.GetTreeTexturesRequest,
+            $2.GetTreeTexturesResponse>(
+        'GetTreeTextures',
+        getTreeTextures_Pre,
+        false,
+        true,
+        ($core.List<$core.int> value) =>
+            $2.GetTreeTexturesRequest.fromBuffer(value),
+        ($2.GetTreeTexturesResponse value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$3.GetCatalogRequest, $3.GetCatalogResponse>(
         'GetCatalog',
         getCatalog_Pre,
@@ -799,6 +822,15 @@ abstract class SessionServiceBase extends $grpc.Service {
 
   $async.Future<$2.GetTreeTextureResponse> getTreeTexture(
       $grpc.ServiceCall call, $2.GetTreeTextureRequest request);
+
+  $async.Stream<$2.GetTreeTexturesResponse> getTreeTextures_Pre(
+      $grpc.ServiceCall $call,
+      $async.Future<$2.GetTreeTexturesRequest> $request) async* {
+    yield* getTreeTextures($call, await $request);
+  }
+
+  $async.Stream<$2.GetTreeTexturesResponse> getTreeTextures(
+      $grpc.ServiceCall call, $2.GetTreeTexturesRequest request);
 
   $async.Future<$3.GetCatalogResponse> getCatalog_Pre($grpc.ServiceCall $call,
       $async.Future<$3.GetCatalogRequest> $request) async {

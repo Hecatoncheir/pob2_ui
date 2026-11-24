@@ -141,7 +141,9 @@ class SkillGroupCubit extends Cubit<SkillGroupState> {
       _checkEditorAvailable();
       final entries = await repository.gems();
       if (!isClosed) emit(state.copyWith(catalog: entries, loading: false));
-      if (!isClosed && state.supportTarget != null) refreshSupports();
+      if (!isClosed && state.supportTarget != null) {
+        refreshSupports(immediately: true);
+      }
     } catch (error) {
       if (!isClosed)
         emit(state.copyWith(loading: false, error: mcpErrorMessage(error)));
@@ -301,7 +303,7 @@ class SkillGroupCubit extends Cubit<SkillGroupState> {
     refreshSupports();
   }
 
-  void refreshSupports() {
+  void refreshSupports({bool immediately = false}) {
     if (supportScope == 'none') return;
     _timer?.cancel();
     final generation = ++_generation;
@@ -315,7 +317,14 @@ class SkillGroupCubit extends Cubit<SkillGroupState> {
       ),
     );
     if (state.supportTarget == null) return;
-    _timer = Timer(const Duration(milliseconds: 300), () => _check(generation));
+    if (immediately) {
+      unawaited(_check(generation));
+    } else {
+      _timer = Timer(
+        const Duration(milliseconds: 300),
+        () => _check(generation),
+      );
+    }
   }
 
   Future<void> _check(int generation) async {

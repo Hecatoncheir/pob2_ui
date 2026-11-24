@@ -11,8 +11,12 @@ import 'core/ui_translation.dart';
 import 'workshop_cubit.dart';
 import 'pob_link_dialog.dart';
 
-Future<void> showNewBuild(BuildContext context, WorkshopCubit model) =>
-    sparkDialog<void>(context, _NewBuildDialog(model));
+Future<void> showNewBuild(BuildContext context, WorkshopCubit model) async {
+  if (await model.loadClasses() && context.mounted) {
+    await sparkDialog<void>(context, _NewBuildDialog(model));
+  }
+}
+
 Future<void> showXmlImport(BuildContext context, WorkshopCubit model) =>
     model.openXmlFile();
 Future<void> showXmlPaste(BuildContext context, WorkshopCubit model) =>

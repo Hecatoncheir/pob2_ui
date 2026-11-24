@@ -111,6 +111,7 @@ Future<WorkshopCubit> _openWorkshop(Directory root, String? check) async {
     pobWindow: PobWindowRepository(engineExecutable: executable),
     library: PobBuildLibrary(root),
     primaryEngine: _primaryEngineOptions(root, check, executable),
+    deferTree: true,
   );
 }
 

@@ -236,4 +236,6 @@ dependency_overrides:
 
 Для сквозного теста задайте `POB2_ENGINE_TEST_WEAPON_MODES=1`.
 В GitHub Actions укажите `engine_release` и включите `engine_weapon_modes`.
-Коммит текущего Dart API закреплён в `pubspec.yaml`.
+Тег комплектного движка указан в `tool/engine-release.txt`.
+Файлы Dart API из `gen/dart/lib` этого же тега хранятся в
+`packages/pob2_engine_api/lib`.

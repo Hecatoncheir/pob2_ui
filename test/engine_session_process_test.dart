@@ -366,8 +366,24 @@ Future<void> _checkPrimaryLibrary(String executable) async {
   final diskEdit = PobBuildDocument(await file.readAsString())
       .withNotes('Правка файла');
   await file.writeAsString(diskEdit);
-  final resumed = _primaryWorkshop(root, options.executable, primary: options);
+  final resumed = _primaryWorkshop(
+    root,
+    options.executable,
+    primary: options,
+    deferTree: true,
+  );
   await _initializePrimary(resumed);
+  expect(resumed.state.report, isNotNull);
+  expect(resumed.state.classes, isEmpty);
+  expect(resumed.state.document!.tree, isNull);
+  await Future.wait([resumed.requestTree(), resumed.requestTree()]);
+  expect(resumed.state.document!.tree!.nodes, isNotEmpty);
+  expect(resumed.state.document!.tree!.original, isNull);
+  await resumed.waitForTreeArtwork();
+  expect(resumed.state.document!.tree?.original, isNotNull);
+  expect(resumed.state.document!.tree!.icons, isNotEmpty);
+  expect(resumed.state.document!.tree!.iconError, isNull);
+  expect(await resumed.loadClasses(), isTrue);
   expect(resumed.engineSession.state.snapshot!.sessionId, id);
   expect(await file.readAsString(), diskEdit);
   final exported = await _cliBuildXml(executable, flags, session: id);
@@ -449,11 +465,13 @@ WorkshopCubit _primaryWorkshop(
   Directory root,
   String executable, {
   EngineOptions? primary,
+  bool deferTree = false,
 }) => WorkshopCubit(
   EngineComponents(store: InstallationStore(root), executable: executable),
   WorkbenchClient(executable),
   library: PobBuildLibrary(root),
   primaryEngine: primary,
+  deferTree: deferTree,
 );
 
 Future<_SharedWorkshop> _startWorkshop(

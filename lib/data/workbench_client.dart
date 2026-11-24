@@ -19,6 +19,8 @@ class WorkbenchClient {
   Process? _worker;
   ClientChannel? _channel;
   api.WorkbenchServiceClient? _rpc;
+  ({String xml, int? mode})? _pendingBuild;
+  Future<void>? _restoringBuild;
   final _subscriptions = <StreamSubscription<String>>[];
 
   bool get connected => _rpc != null;
@@ -135,11 +137,43 @@ class WorkbenchClient {
         _ => throw const FormatException('Lua не вернул XML сборки'),
       };
 
+  void restoreOnDemand(String xml, int? mode) {
+    _pendingBuild = (xml: xml, mode: mode);
+  }
+
+  Future<void> _restoreBuild() async {
+    final pending = _pendingBuild;
+    if (pending == null) return;
+    await _invoke('pob_import_xml', {'xml': pending.xml});
+    if (!identical(_pendingBuild, pending)) return;
+    if (pending.mode case final mode?) {
+      await _invoke('pob_tree_options', {'mode': mode});
+    }
+    if (identical(_pendingBuild, pending)) _pendingBuild = null;
+  }
+
   Future<({Map<String, dynamic> result, List<dynamic> content})>
   callWithContent(
     String name, [
     Map<String, dynamic> arguments = const {},
   ]) async {
+    if (_pendingBuild != null && name != 'pob_tree_textures') {
+      final connection = _rpc;
+      final loading = _restoringBuild ??= _restoreBuild();
+      try {
+        await loading;
+        if (_rpc != connection) throw StateError('Рабочая копия закрыта');
+      } finally {
+        if (_restoringBuild == loading) _restoringBuild = null;
+      }
+    }
+    return _invoke(name, arguments);
+  }
+
+  Future<({Map<String, dynamic> result, List<dynamic> content})> _invoke(
+    String name,
+    Map<String, dynamic> arguments,
+  ) async {
     final rpc = _rpc;
     if (rpc == null) throw StateError('Подключите Lua');
     final reply = await _callTool(rpc, name, arguments);
@@ -191,6 +225,8 @@ class WorkbenchClient {
     _worker = null;
     _channel = null;
     _rpc = null;
+    _pendingBuild = null;
+    _restoringBuild = null;
     _subscriptions.clear();
     tools = const {};
     await channel?.terminate();

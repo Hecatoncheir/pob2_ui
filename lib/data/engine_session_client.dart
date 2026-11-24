@@ -133,8 +133,12 @@ abstract interface class EngineWorkshopReader {
     int? itemId,
     required bool compare,
   });
-  Future<TreeGeometry?> readTree(EngineSnapshot snapshot);
+  Future<TreeGeometry?> readTree(
+    EngineSnapshot snapshot, {
+    bool includeScene = true,
+  });
   Future<Uint8List?> readTreeTexture(TreeTextureReference reference);
+  Stream<Uint8List>? readTreeTextures(List<TreeTextureReference> references);
   Future<JsonMap?> readNodeTooltip(
     EngineSnapshot snapshot,
     int id,
@@ -408,29 +412,31 @@ class EngineSessionClient
       });
 
   @override
-  Future<TreeGeometry?> readTree(EngineSnapshot snapshot) =>
-      _readWorkshop('build.tree_geometry', () async {
-        final reply = await _rpc.getTreeGeometry(
-          builds.GetTreeGeometryRequest(
-            sessionId: snapshot.sessionId,
-            expectedRevision: Int64(snapshot.revision),
-            includeScene: _workshopCapabilities.contains('build.tree_textures'),
-          ),
-          options: _workshopReadOptions(),
-        );
-        final tree = TreeGeometry.fromNodes(
-          reply.version,
-          reply.nodes.map(_geometryNode),
-          reply.edges.map((edge) => (edge.fromNode, edge.toNode)),
-          hiddenEdges: [
-            for (final edge in reply.edges)
-              if (edge.hiddenInScene) (edge.fromNode, edge.toNode),
-          ],
-        );
-        return reply.hasScene()
-            ? tree.withScene(_engineScene(reply.scene))
-            : tree;
-      });
+  Future<TreeGeometry?> readTree(
+    EngineSnapshot snapshot, {
+    bool includeScene = true,
+  }) => _readWorkshop('build.tree_geometry', () async {
+    final reply = await _rpc.getTreeGeometry(
+      builds.GetTreeGeometryRequest(
+        sessionId: snapshot.sessionId,
+        expectedRevision: Int64(snapshot.revision),
+        includeScene:
+            includeScene &&
+            _workshopCapabilities.contains('build.tree_textures'),
+      ),
+      options: _workshopReadOptions(),
+    );
+    final tree = TreeGeometry.fromNodes(
+      reply.version,
+      reply.nodes.map(_geometryNode),
+      reply.edges.map((edge) => (edge.fromNode, edge.toNode)),
+      hiddenEdges: [
+        for (final edge in reply.edges)
+          if (edge.hiddenInScene) (edge.fromNode, edge.toNode),
+      ],
+    );
+    return reply.hasScene() ? tree.withScene(_engineScene(reply.scene)) : tree;
+  });
 
   @override
   Future<ItemInspection?> readEquipmentDetails(
@@ -544,6 +550,25 @@ class EngineSessionClient
         );
         return Uint8List.fromList(reply.png);
       });
+
+  @override
+  Stream<Uint8List>? readTreeTextures(List<TreeTextureReference> references) {
+    if (!_workshopCapabilities.contains('build.tree_textures_batch'))
+      return null;
+    final request = builds.GetTreeTexturesRequest(
+      file: references.first.file,
+      layers: [
+        for (final reference in references)
+          builds.TreeTextureLayer(
+            index: reference.index,
+            targetSize: reference.targetSize,
+          ),
+      ],
+    );
+    return _rpc
+        .getTreeTextures(request, options: _workshopReadOptions())
+        .map((reply) => Uint8List.fromList(reply.texture.png));
+  }
 
   static OriginalTreeScene _engineScene(builds.TreeScene scene) =>
       OriginalTreeScene.fromJson({

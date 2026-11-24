@@ -57,6 +57,7 @@ class TreePainter extends CustomPainter {
     this.viewport,
     this.artwork,
     this.hoverArtwork, {
+    this.partialArtwork = false,
     this.matches,
     this.progression,
     this.planHovered,
@@ -71,6 +72,7 @@ class TreePainter extends CustomPainter {
   final TransformationController transform;
   final Size viewport;
   final ui.Picture? artwork;
+  final bool partialArtwork;
   final ui.Picture? hoverArtwork;
   final Set<int>? matches;
   final TreeProgressionChange? progression;
@@ -159,10 +161,11 @@ class TreePainter extends CustomPainter {
 
   void _paintTree(Canvas canvas) {
     final picture = artwork;
-    if (picture == null) {
+    if (picture == null || partialArtwork) {
       _connections(canvas);
       _paintVisibleNodes(canvas, _node);
-    } else {
+    }
+    if (picture != null) {
       canvas.drawPicture(picture);
       _paintVisibleNodes(canvas, _highlight);
     }

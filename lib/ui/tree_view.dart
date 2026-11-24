@@ -98,6 +98,7 @@ class _TreeViewState extends State<TreeView>
   void initState() {
     super.initState();
     powerBuildId = widget.model.state.library.activeId;
+    transform.addListener(_reportViewport);
     _loadIcons();
   }
 
@@ -112,9 +113,14 @@ class _TreeViewState extends State<TreeView>
     }
     _planPath = const [];
     WidgetsBinding.instance.addPostFrameCallback((_) => _refreshPower());
-    scene = TreeScene(widget.tree);
+    final previous = scene;
+    final next = scene = TreeScene(widget.tree);
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (mounted) hoverModel.clear();
+      if (!mounted || scene != next) return;
+      hoverModel.clear();
+      if (identical(previous.tree.nodes, next.tree.nodes)) {
+        _keepViewport(previous, next);
+      }
     });
     _updateArtwork(old.tree);
     if (_root(old.tree) != _root(widget.tree) ||
@@ -472,6 +478,9 @@ class _TreeViewState extends State<TreeView>
                           size,
                           powerArtwork?.artwork.picture ?? artwork?.picture,
                           hoverArtwork?.picture,
+                          partialArtwork:
+                              powerArtwork == null &&
+                              widget.tree.partialArtwork,
                           matches: _matchedIds(),
                           progression: progression,
                           planHovered: planHovered,
@@ -727,6 +736,39 @@ class _TreeViewState extends State<TreeView>
       end: target,
     ).animate(CurvedAnimation(parent: zoomAnimation, curve: Spark.curve));
     zoomAnimation.forward(from: 0);
+  }
+
+  void _reportViewport() {
+    final size = viewport;
+    if (size == null) return;
+    final anchor = widget.tree.nodes.first;
+    final origin = scene.points[anchor.id]!;
+    final a = (transform.toScene(Offset.zero) - origin) / scene.scale;
+    final b =
+        (transform.toScene(size.bottomRight(Offset.zero)) - origin) /
+        scene.scale;
+    widget.model.updateTreeViewport(
+      widget.tree,
+      math.Rectangle(
+        anchor.x + a.dx,
+        anchor.y + a.dy,
+        b.dx - a.dx,
+        b.dy - a.dy,
+      ),
+    );
+  }
+
+  void _keepViewport(TreeScene previous, TreeScene next) {
+    final size = viewport;
+    if (size == null) return;
+    final anchor = next.tree.nodes.first.id;
+    final center = transform.toScene(size.center(Offset.zero));
+    final ratio = next.scale / previous.scale;
+    final point =
+        next.points[anchor]! + (center - previous.points[anchor]!) * ratio;
+    final zoom = (transform.value.getMaxScaleOnAxis() / ratio).clamp(.08, 12.0);
+    zoomAnimation.stop();
+    _center(point, zoom, animate: false);
   }
 
   void _focusAllocated() {

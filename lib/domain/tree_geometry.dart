@@ -66,7 +66,8 @@ class TreeGeometry {
           ? OriginalTreeScene.fromJson(json['scene'] as JsonMap)
           : null,
       icons = const {},
-      iconError = null {
+      iconError = null,
+      partialArtwork = false {
     if (nodes.isEmpty) throw const FormatException('Lua вернул пустое дерево');
   }
   TreeGeometry.fromNodes(
@@ -79,7 +80,8 @@ class TreeGeometry {
        hiddenEdges = Set.unmodifiable(hiddenEdges),
        icons = const {},
        iconError = null,
-       original = null;
+       original = null,
+       partialArtwork = false;
 
   TreeGeometry._(
     this.nodes,
@@ -89,20 +91,33 @@ class TreeGeometry {
     this.icons,
     this.iconError,
     this.original,
+    this.partialArtwork,
   );
-  TreeGeometry withIcons(Map<String, Uint8List> values, String? error) =>
-      TreeGeometry._(
-        nodes,
-        edges,
-        hiddenEdges,
-        version,
-        Map.unmodifiable(values),
-        error,
-        original,
-      );
+  TreeGeometry withIcons(
+    Map<String, Uint8List> values,
+    String? error, {
+    bool partial = false,
+  }) => TreeGeometry._(
+    nodes,
+    edges,
+    hiddenEdges,
+    version,
+    Map.unmodifiable(values),
+    error,
+    original,
+    partial,
+  );
   final List<TreeNode> nodes;
-  TreeGeometry withScene(OriginalTreeScene scene) =>
-      TreeGeometry._(nodes, edges, hiddenEdges, version, const {}, null, scene);
+  TreeGeometry withScene(OriginalTreeScene scene) => TreeGeometry._(
+    nodes,
+    edges,
+    hiddenEdges,
+    version,
+    const {},
+    null,
+    scene,
+    false,
+  );
   final List<(int, int)> edges;
   final Set<(int, int)> hiddenEdges;
 
@@ -111,6 +126,7 @@ class TreeGeometry {
   final String version;
   final Map<String, Uint8List> icons;
   final String? iconError;
+  final bool partialArtwork;
   final OriginalTreeScene? original;
   static (int, int) _edge(dynamic value) => switch (value) {
     [final int a, final int b] => (a, b),

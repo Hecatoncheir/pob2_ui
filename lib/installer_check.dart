@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:flutter/widgets.dart' show WidgetsBinding;
 import 'package:path/path.dart' as path;
 
 import 'domain/component.dart';
@@ -127,6 +128,10 @@ Future<void> _checkRestoredTreeArtwork(
     return;
   }
   progress.record('restore-tree-artwork');
+  await model.requestTree();
+  _require(model.state.document?.tree?.nodes.isNotEmpty == true, model);
+  await WidgetsBinding.instance.endOfFrame;
+  progress.record('tree-interactive');
   await model.waitForTreeArtwork();
   final tree = model.state.document?.tree;
   if (tree?.iconError case final error?) throw StateError(error);

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'core/app_text.dart';
 import 'core/language_scope.dart';
 import 'core/ui_translation.dart';
@@ -462,18 +464,28 @@ class _EditorStageState extends State<_EditorStage>
     },
     builder: (context, state) {
       final document = widget.model.state.document!;
+      if (state.tab == WorkshopTab.tree &&
+          document.tree == null &&
+          document.treeError == null) {
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          if (mounted && widget.shell.state.tab == WorkshopTab.tree) {
+            unawaited(widget.model.requestTree());
+          }
+        });
+      }
       return FadeTransition(
         opacity: CurvedAnimation(parent: animation, curve: Spark.curve),
         child: IndexedStack(
           index: state.tab.index,
           children: [
-            document.tree == null
-                ? EmptyPanel(
-                    title: 'Дерево пока недоступно',
-                    message:
-                        document.treeError ?? 'Попробуйте пересчитать сборку.',
-                  )
-                : TreeView(model: widget.model, tree: document.tree!),
+            switch ((document.tree, document.treeError)) {
+              (final tree?, _) => TreeView(model: widget.model, tree: tree),
+              (_, final error?) => EmptyPanel(
+                title: 'Дерево пока недоступно',
+                message: error,
+              ),
+              _ => const Center(child: CircularProgressIndicator()),
+            },
             ItemsView(model: widget.model),
             SkillsView(model: widget.model),
             ConditionsView(model: widget.model),

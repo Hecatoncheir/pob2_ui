@@ -28,31 +28,37 @@ class TreeClassButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final report = model.state.report!;
-    final entry = model.state.classes
-        .where((entry) => entry['name'] == report.characterClass)
-        .firstOrNull;
-    if (entry == null || !model.engine.tools.contains('pob_tree_options')) {
+    if (!model.engine.tools.contains('pob_tree_options')) {
       return const SizedBox.shrink();
     }
-    final initial = (
-      classId: entry['id'] as int,
-      ascendancyId: _ascendancyId(entry, report.character['ascendancy']),
-    );
     return ArtIconButton.material(
       Icons.person_outline,
       key: const Key('tree-class'),
       label: _title,
       onPressed: model.state.busy || model.state.document!.stale
           ? null
-          : () => sparkDialog<void>(
-              context,
-              BlocProvider(
-                create: (_) => _TreeClassCubit(model, initial),
-                child: const _TreeClassDialog(),
-              ),
-              barrierDismissible: false,
-            ),
+          : () => _open(context),
+    );
+  }
+
+  Future<void> _open(BuildContext context) async {
+    if (!await model.loadClasses() || !context.mounted) return;
+    final report = model.state.report;
+    final entry = model.state.classes
+        .where((entry) => entry['name'] == report?.characterClass)
+        .firstOrNull;
+    if (entry == null || report == null) return;
+    final initial = (
+      classId: entry['id'] as int,
+      ascendancyId: _ascendancyId(entry, report.character['ascendancy']),
+    );
+    await sparkDialog<void>(
+      context,
+      BlocProvider(
+        create: (_) => _TreeClassCubit(model, initial),
+        child: const _TreeClassDialog(),
+      ),
+      barrierDismissible: false,
     );
   }
 }

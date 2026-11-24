@@ -4270,6 +4270,204 @@ class GetTreeTextureResponse extends $pb.GeneratedMessage {
   void clearPng() => $_clearField(4);
 }
 
+class TreeTextureLayer extends $pb.GeneratedMessage {
+  factory TreeTextureLayer({
+    $core.int? index,
+    $core.int? targetSize,
+  }) {
+    final result = TreeTextureLayer._();
+    if (index != null) result.index = index;
+    if (targetSize != null) result.targetSize = targetSize;
+    return result;
+  }
+
+  TreeTextureLayer._();
+
+  factory TreeTextureLayer.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      TreeTextureLayer()..mergeFromBuffer(data, registry);
+  factory TreeTextureLayer.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      TreeTextureLayer()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'TreeTextureLayer',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'pob2.v1'),
+      createEmptyInstance: TreeTextureLayer.$_createMessage)
+    ..aI(1, _omitFieldNames ? '' : 'index', fieldType: $pb.PbFieldType.OU3)
+    ..aI(2, _omitFieldNames ? '' : 'targetSize', fieldType: $pb.PbFieldType.OU3)
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  TreeTextureLayer clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  TreeTextureLayer copyWith(void Function(TreeTextureLayer) updates) =>
+      super.copyWith((message) => updates(message as TreeTextureLayer))
+          as TreeTextureLayer;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  @$core.Deprecated('Use TreeTextureLayer() / TreeTextureLayer.new instead')
+  static TreeTextureLayer create() => TreeTextureLayer._();
+  static $pb.GeneratedMessage $_createMessage() => TreeTextureLayer._();
+  @$core.override
+  TreeTextureLayer createEmptyInstance() => TreeTextureLayer._();
+  @$core.pragma('dart2js:noInline')
+  static TreeTextureLayer getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<TreeTextureLayer>(
+          TreeTextureLayer.$_createMessage);
+  static TreeTextureLayer? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.int get index => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set index($core.int value) => $_setUnsignedInt32(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasIndex() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearIndex() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.int get targetSize => $_getIZ(1);
+  @$pb.TagNumber(2)
+  set targetSize($core.int value) => $_setUnsignedInt32(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasTargetSize() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearTargetSize() => $_clearField(2);
+}
+
+class GetTreeTexturesRequest extends $pb.GeneratedMessage {
+  factory GetTreeTexturesRequest({
+    $core.String? file,
+    $core.Iterable<TreeTextureLayer>? layers,
+  }) {
+    final result = GetTreeTexturesRequest._();
+    if (file != null) result.file = file;
+    if (layers != null) result.layers.addAll(layers);
+    return result;
+  }
+
+  GetTreeTexturesRequest._();
+
+  factory GetTreeTexturesRequest.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      GetTreeTexturesRequest()..mergeFromBuffer(data, registry);
+  factory GetTreeTexturesRequest.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      GetTreeTexturesRequest()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'GetTreeTexturesRequest',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'pob2.v1'),
+      createEmptyInstance: GetTreeTexturesRequest.$_createMessage)
+    ..aOS(1, _omitFieldNames ? '' : 'file')
+    ..pPM<TreeTextureLayer>(2, _omitFieldNames ? '' : 'layers',
+        subBuilder: TreeTextureLayer.$_createMessage)
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetTreeTexturesRequest clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetTreeTexturesRequest copyWith(
+          void Function(GetTreeTexturesRequest) updates) =>
+      super.copyWith((message) => updates(message as GetTreeTexturesRequest))
+          as GetTreeTexturesRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  @$core.Deprecated(
+      'Use GetTreeTexturesRequest() / GetTreeTexturesRequest.new instead')
+  static GetTreeTexturesRequest create() => GetTreeTexturesRequest._();
+  static $pb.GeneratedMessage $_createMessage() => GetTreeTexturesRequest._();
+  @$core.override
+  GetTreeTexturesRequest createEmptyInstance() => GetTreeTexturesRequest._();
+  @$core.pragma('dart2js:noInline')
+  static GetTreeTexturesRequest getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<GetTreeTexturesRequest>(
+          GetTreeTexturesRequest.$_createMessage);
+  static GetTreeTexturesRequest? _defaultInstance;
+
+  /// Все слои относятся к одному файлу. Ответы идут в порядке запроса.
+  @$pb.TagNumber(1)
+  $core.String get file => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set file($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasFile() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearFile() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  $pb.PbList<TreeTextureLayer> get layers => $_getList(1);
+}
+
+class GetTreeTexturesResponse extends $pb.GeneratedMessage {
+  factory GetTreeTexturesResponse({
+    GetTreeTextureResponse? texture,
+  }) {
+    final result = GetTreeTexturesResponse._();
+    if (texture != null) result.texture = texture;
+    return result;
+  }
+
+  GetTreeTexturesResponse._();
+
+  factory GetTreeTexturesResponse.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      GetTreeTexturesResponse()..mergeFromBuffer(data, registry);
+  factory GetTreeTexturesResponse.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      GetTreeTexturesResponse()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'GetTreeTexturesResponse',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'pob2.v1'),
+      createEmptyInstance: GetTreeTexturesResponse.$_createMessage)
+    ..aOM<GetTreeTextureResponse>(1, _omitFieldNames ? '' : 'texture',
+        subBuilder: GetTreeTextureResponse.$_createMessage)
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetTreeTexturesResponse clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetTreeTexturesResponse copyWith(
+          void Function(GetTreeTexturesResponse) updates) =>
+      super.copyWith((message) => updates(message as GetTreeTexturesResponse))
+          as GetTreeTexturesResponse;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  @$core.Deprecated(
+      'Use GetTreeTexturesResponse() / GetTreeTexturesResponse.new instead')
+  static GetTreeTexturesResponse create() => GetTreeTexturesResponse._();
+  static $pb.GeneratedMessage $_createMessage() => GetTreeTexturesResponse._();
+  @$core.override
+  GetTreeTexturesResponse createEmptyInstance() => GetTreeTexturesResponse._();
+  @$core.pragma('dart2js:noInline')
+  static GetTreeTexturesResponse getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<GetTreeTexturesResponse>(
+          GetTreeTexturesResponse.$_createMessage);
+  static GetTreeTexturesResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  GetTreeTextureResponse get texture => $_getN(0);
+  @$pb.TagNumber(1)
+  set texture(GetTreeTextureResponse value) => $_setField(1, value);
+  @$pb.TagNumber(1)
+  $core.bool hasTexture() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearTexture() => $_clearField(1);
+  @$pb.TagNumber(1)
+  GetTreeTextureResponse ensureTexture() => $_ensure(0);
+}
+
 enum GetEquipmentDetailsRequest_Item { itemId, raw, notSet }
 
 class GetEquipmentDetailsRequest extends $pb.GeneratedMessage {

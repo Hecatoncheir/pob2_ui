@@ -1178,6 +1178,63 @@ final $typed_data.Uint8List getTreeTextureResponseDescriptor = $convert.base64De
     'QYAiABKA1SBmhlaWdodBIbCgltaXBfbGV2ZWwYAyABKA1SCG1pcExldmVsEhAKA3BuZxgEIAEo'
     'DFIDcG5n');
 
+@$core.Deprecated('Use treeTextureLayerDescriptor instead')
+const TreeTextureLayer$json = {
+  '1': 'TreeTextureLayer',
+  '2': [
+    {'1': 'index', '3': 1, '4': 1, '5': 13, '10': 'index'},
+    {'1': 'target_size', '3': 2, '4': 1, '5': 13, '10': 'targetSize'},
+  ],
+};
+
+/// Descriptor for `TreeTextureLayer`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List treeTextureLayerDescriptor = $convert.base64Decode(
+    'ChBUcmVlVGV4dHVyZUxheWVyEhQKBWluZGV4GAEgASgNUgVpbmRleBIfCgt0YXJnZXRfc2l6ZR'
+    'gCIAEoDVIKdGFyZ2V0U2l6ZQ==');
+
+@$core.Deprecated('Use getTreeTexturesRequestDescriptor instead')
+const GetTreeTexturesRequest$json = {
+  '1': 'GetTreeTexturesRequest',
+  '2': [
+    {'1': 'file', '3': 1, '4': 1, '5': 9, '10': 'file'},
+    {
+      '1': 'layers',
+      '3': 2,
+      '4': 3,
+      '5': 11,
+      '6': '.pob2.v1.TreeTextureLayer',
+      '10': 'layers'
+    },
+  ],
+};
+
+/// Descriptor for `GetTreeTexturesRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getTreeTexturesRequestDescriptor =
+    $convert.base64Decode(
+        'ChZHZXRUcmVlVGV4dHVyZXNSZXF1ZXN0EhIKBGZpbGUYASABKAlSBGZpbGUSMQoGbGF5ZXJzGA'
+        'IgAygLMhkucG9iMi52MS5UcmVlVGV4dHVyZUxheWVyUgZsYXllcnM=');
+
+@$core.Deprecated('Use getTreeTexturesResponseDescriptor instead')
+const GetTreeTexturesResponse$json = {
+  '1': 'GetTreeTexturesResponse',
+  '2': [
+    {
+      '1': 'texture',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.pob2.v1.GetTreeTextureResponse',
+      '10': 'texture'
+    },
+  ],
+};
+
+/// Descriptor for `GetTreeTexturesResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getTreeTexturesResponseDescriptor =
+    $convert.base64Decode(
+        'ChdHZXRUcmVlVGV4dHVyZXNSZXNwb25zZRI5Cgd0ZXh0dXJlGAEgASgLMh8ucG9iMi52MS5HZX'
+        'RUcmVlVGV4dHVyZVJlc3BvbnNlUgd0ZXh0dXJl');
+
 @$core.Deprecated('Use getEquipmentDetailsRequestDescriptor instead')
 const GetEquipmentDetailsRequest$json = {
   '1': 'GetEquipmentDetailsRequest',
