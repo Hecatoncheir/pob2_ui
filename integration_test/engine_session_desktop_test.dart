@@ -230,12 +230,19 @@ Future<void> _previewSupport(
   String support, {
   bool compatible = true,
 }) async {
-  await tester.tap(find.byKey(const Key('engine-open-support')));
-  await tester.pumpAndSettle();
-  await tester.enterText(
-    find.byKey(const Key('engine-support-query')),
-    support,
-  );
+  final open = find
+      .byWidgetPredicate(
+        (widget) =>
+            widget is TextButton &&
+            widget.key == const Key('engine-open-support') &&
+            widget.onPressed != null,
+      )
+      .hitTestable();
+  await _waitFor(tester, open);
+  await tester.tap(open);
+  final query = find.byKey(const Key('engine-support-query')).hitTestable();
+  await _waitFor(tester, query);
+  await tester.enterText(query, support);
   await tester.tap(find.byKey(const Key('engine-support-search')));
   await _waitFor(tester, find.byKey(const Key('engine-support-gem')));
   await tester.tap(find.byKey(const Key('engine-support-preview')));
