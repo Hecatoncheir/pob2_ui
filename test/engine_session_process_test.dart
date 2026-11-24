@@ -3,14 +3,12 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:pob2_ui/data/engine_components.dart';
 import 'package:pob2_ui/data/engine_session_client.dart';
-
-import 'support/legacy/component_repository.dart';
-
 import 'package:pob2_ui/data/installation_store.dart';
-import 'package:pob2_ui/data/workbench_client.dart';
 import 'package:pob2_ui/data/pob_build_document.dart';
 import 'package:pob2_ui/data/pob_build_library.dart';
+import 'package:pob2_ui/data/workbench_client.dart';
 import 'package:pob2_ui/domain/build_report.dart';
 import 'package:pob2_ui/domain/condition_definition.dart';
 import 'package:pob2_ui/domain/engine_session.dart';
@@ -347,7 +345,12 @@ Future<void> _checkPrimaryLibrary(String executable) async {
     await _waitForShutdown(options);
     await removeTemporaryDirectory(root);
   });
-  final model = await _openWorkshop(root, 'witch_fireball', primary: options);
+  final model = await _openWorkshop(
+    root,
+    'witch_fireball',
+    executable: executable,
+    primary: options,
+  );
   await _initializePrimary(model);
   final id = model.engineSession.state.snapshot!.sessionId;
   expect(id, startsWith('build-'));
@@ -363,7 +366,7 @@ Future<void> _checkPrimaryLibrary(String executable) async {
   final diskEdit = PobBuildDocument(await file.readAsString())
       .withNotes('Правка файла');
   await file.writeAsString(diskEdit);
-  final resumed = _primaryWorkshop(root, options);
+  final resumed = _primaryWorkshop(root, options.executable, primary: options);
   await _initializePrimary(resumed);
   expect(resumed.engineSession.state.snapshot!.sessionId, id);
   expect(await file.readAsString(), diskEdit);
@@ -432,7 +435,7 @@ Future<void> _checkPrimaryConflict(
   final library = PobBuildLibrary(root);
   await library.load();
   await library.activate('Fireball renamed.xml');
-  final conflict = _primaryWorkshop(root, options);
+  final conflict = _primaryWorkshop(root, options.executable, primary: options);
   addTearDown(conflict.close);
   await conflict.initialize();
   await conflict.waitForPrimarySession();
@@ -442,13 +445,16 @@ Future<void> _checkPrimaryConflict(
   expect((await connection.snapshot(id)).build!.xml, remote.build!.xml);
 }
 
-WorkshopCubit _primaryWorkshop(Directory root, EngineOptions? options) =>
-    WorkshopCubit(
-      ComponentRepository(store: InstallationStore(root)),
-      WorkbenchClient(),
-      library: PobBuildLibrary(root),
-      primaryEngine: options,
-    );
+WorkshopCubit _primaryWorkshop(
+  Directory root,
+  String executable, {
+  EngineOptions? primary,
+}) => WorkshopCubit(
+  EngineComponents(store: InstallationStore(root), executable: executable),
+  WorkbenchClient(executable),
+  library: PobBuildLibrary(root),
+  primaryEngine: primary,
+);
 
 Future<_SharedWorkshop> _startWorkshop(
   String executable,
@@ -474,7 +480,7 @@ Future<_SharedWorkshop> _startWorkshop(
     await _waitForShutdown(options);
     await removeTemporaryDirectory(root);
   });
-  final model = await _openWorkshop(root, fixture);
+  final model = await _openWorkshop(root, fixture, executable: executable);
   addTearDown(model.close);
   await model.initialize();
   expect(model.state.error, isNull);
@@ -1149,18 +1155,16 @@ Future<void> _applyWorkshopTree(
 Future<WorkshopCubit> _openWorkshop(
   Directory root,
   String fixture, {
+  required String executable,
   EngineOptions? primary,
 }) async {
   final builds = await Directory.fromUri(root.uri.resolve('builds/')).create();
   await File('integration_test/fixtures/$fixture.xml')
       .copy(builds.uri.resolve('Fireball.xml').toFilePath());
-  await File.fromUri(
-    InstallationStore.defaultRoot().uri.resolve('components.json'),
-  ).copy(root.uri.resolve('components.json').toFilePath());
   final library = PobBuildLibrary(root);
   await library.configure(builds.path);
   await library.activate('Fireball.xml');
-  return _primaryWorkshop(root, primary);
+  return _primaryWorkshop(root, executable, primary: primary);
 }
 
 ConditionEditorCubit _conditionForm(WorkshopCubit model) {
