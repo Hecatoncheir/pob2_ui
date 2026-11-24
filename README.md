@@ -1,15 +1,16 @@
 # pob2_ui
 
-Отдельное Flutter-приложение с собственным интерфейсом для Path of Building — Path of Exile 2. Оно загружает PoB и MCP, проверяет выпуски и запускает оригинальные Lua-расчёты.
+Отдельное Flutter-приложение с собственным интерфейсом для Path of Building — Path of Exile 2. Оно проверяет выпуски, загружает данные PoB и запускает оригинальные Lua-расчёты.
 
 Приложение использует собственный дизайн. В 1.x комплектный [pob2_engine](https://github.com/Hecatoncheir/pob2_engine) управляет сессиями, расчётными процессами Lua, MCP и импортом из окна оригинального PoB.
 
 ## Текущий выпуск
 
-Ветка **`1.x.x`** — отдельная линия существующего приложения с новым
-[`pob2_engine`](https://github.com/Hecatoncheir/pob2_engine). Здесь готовится
-`1.0.0+49`; выпуск ещё не опубликован. В `main` остаётся линия 0.x.
-Порядок подключения и текущие ограничения: [общая сессия Go](docs/ENGINE-SESSION.md).
+**[PoB II v1.0.0](https://github.com/Hecatoncheir/pob2_ui/releases/tag/v1.0.0)** (`1.0.0+49`) выпущен из ветки `1.x.x` с комплектным [pob2_engine v0.0.14](https://github.com/Hecatoncheir/pob2_engine/releases/tag/v0.0.14). Доступны установщики Windows x64 (`.exe`), Linux x64 (`.run`) и macOS arm64 (`.dmg`). Контрольные суммы опубликованы в `SHA256SUMS`. [Подключение к общей сессии](docs/ENGINE-SESSION.md).
+
+### Линия 0.x
+
+Ветка `main` содержит линию 0.x.
 
 **[PoB II v0.12.0](https://github.com/Hecatoncheir/pob2_ui/releases/tag/v0.12.0)** (`0.12.0+48`), 20 ноября 2026 года. Установщики: Windows x64 (`.exe`), Linux x64 (`.run`), macOS arm64 (`.dmg`); контрольные суммы — в `SHA256SUMS`.
 
