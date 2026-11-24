@@ -161,7 +161,7 @@ Future<void> _witchSupportWorkflow(WidgetTester tester) async {
   expect(
     model.engine.tools,
     contains('pob_preview_support'),
-    reason: 'Для предпросмотра нужен PoB MCP v0.21.0 или новее',
+    reason: 'PoB2Engine должен поддерживать предпросмотр черновика группы',
   );
   final source = _fixture('witch_fireball');
   final original = await source.readAsString();
@@ -420,11 +420,11 @@ Future<void> _recoverAfterDroppedReply(
   expect(engine.shieldAfterLostEdit, 0);
   expect(engine.connected, isFalse);
   expect(model.state.document!.stale, isTrue);
-  expect(model.state.error, contains('ответ MCP'));
+  expect(model.state.error, contains('ответ gRPC'));
   expect(model.state.history, history);
   await tester.tap(find.byKey(const ValueKey('page-components')).hitTestable());
   await tester.pumpAndSettle();
-  final connect = find.text('Подключить Lua');
+  final connect = find.text('Подключить движок');
   await tester.scrollUntilVisible(
     connect,
     150,
@@ -455,7 +455,7 @@ class _LostEditReply extends WorkbenchClient {
     shieldAfterLostEdit = report.stats['EnergyShield'] as num?;
     // Lua применил правку. Закрываем реальную сессию до передачи ответа редактору.
     await close();
-    final error = StateError('Потерян ответ MCP во время правки');
+    final error = StateError('Потерян ответ gRPC во время правки');
     onDisconnected?.call(error);
     throw error;
   }

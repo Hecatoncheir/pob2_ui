@@ -289,6 +289,35 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: gh release download v0.11.0 --dir build/previous --pattern '*${{ matrix.target }}*'
+      - name: Подготовить архив адаптера для обновления с PoB II v0.11.0
+        if: inputs.cold_install != true
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TARGET: ${{ matrix.target }}
+        run: |
+          archive="mcp-$TARGET.zip"
+          staging="$RUNNER_TEMP/previous-component"
+          gh release download components-0.23.1-0.22.0-2 \
+            --pattern "$archive" --pattern SHA256SUMS --dir "$staging"
+          python - "$staging" "$archive" "$RUNNER_TEMP/pob2-lua-smoke/component-downloads" <<'PY'
+          from hashlib import file_digest
+          from pathlib import Path
+          from shutil import move
+          from sys import argv
+
+          root, name, cache = argv[1:]
+          source = Path(root) / name
+          manifest = source.with_name('SHA256SUMS').read_text(encoding='utf-8')
+          sums = {filename.lstrip('*'): sha for sha, filename in map(str.split, manifest.splitlines())}
+          expected = sums[name]
+          with source.open('rb') as stream:
+              if file_digest(stream, 'sha256').hexdigest() != expected:
+                  raise SystemExit('Не совпадает SHA-256 архива для PoB II v0.11.0')
+          destination = Path(cache) / expected
+          destination.mkdir(parents=True, exist_ok=True)
+          move(source, destination / name)
+          PY
       - name: Проверить фактическое завершение через MCP
         if: inputs.cold_install != true
         shell: bash

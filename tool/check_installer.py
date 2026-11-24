@@ -257,6 +257,8 @@ def check_previous(target, package, executable, base, environment, components, v
     setup_env = dict(env, PATH=os.environ.get('PATH', ''))
     old = previous_executable(target, package, base / f'v{PREVIOUS_VERSION}-installation', setup_env)
     saved = run_build_check(old, data, env, 'save')
+    if archives is not None:
+        verify_archive_reuse(data, target)
     verify_launcher_upgrade(target, old, executable, current_package, setup_env)
     prepare_cleanup_profile(data)
     before = {file.name: file.read_bytes() for file in builds.glob('*.xml')}
