@@ -131,7 +131,7 @@ jobs:
         if: runner.os == 'Linux'
         run: |
           sudo apt-get update
-          sudo apt-get install -y xvfb libgtk-3-0
+          sudo apt-get install -y xvfb libgtk-3-0 libegl1 libegl-mesa0 libgles2
       - name: Скачать выпуск, сверить SHA-256 и проверить установку
         shell: bash
         run: |
