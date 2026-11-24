@@ -4,6 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:grpc/grpc.dart';
 
 import '../data/engine_session_client.dart';
+import '../data/mcp_editor_gateway.dart';
+import '../domain/build_report.dart';
 import '../domain/engine_session.dart';
 
 class EngineSessionState {
@@ -37,12 +39,14 @@ typedef EngineEquipmentOffer = ({
   EngineEquipmentPreview preview,
 });
 
-typedef EngineTreeOffer = ({
+typedef EngineJewelOffer = ({
   String sessionId,
   int connectionId,
-  EngineTreeEdit edit,
-  EngineTreePreview preview,
+  EngineJewelEdit edit,
+  EngineBuildComparison preview,
 });
+
+typedef EngineTreeOffer = EngineTreePreviewOffer;
 
 class EngineSessionCubit extends Cubit<EngineSessionState> {
   EngineSessionCubit({
@@ -53,6 +57,11 @@ class EngineSessionCubit extends Cubit<EngineSessionState> {
   final Future<EngineConnection> Function(EngineOptions) _open;
   final Future<void> Function(EngineSnapshot)? onSnapshot;
   EngineConnection? _connection;
+
+  EngineWorkshopReader? get workshopReader => switch (_connection) {
+    final EngineWorkshopReader reader when state.connected => reader,
+    _ => null,
+  };
   // Подписка закрывается в _disposeConnection при смене сессии и close.
   // ignore: cancel_subscriptions
   StreamSubscription<EngineChange>? _watch;
@@ -65,6 +74,7 @@ class EngineSessionCubit extends Cubit<EngineSessionState> {
     EngineOptions options, {
     String? createName,
     String? createXml,
+    Future<EngineSnapshot> Function(EngineConnection)? initialSnapshot,
   }) async {
     final releasing = disconnect();
     final generation = _generation;
@@ -84,7 +94,9 @@ class EngineSessionCubit extends Cubit<EngineSessionState> {
         return;
       }
       _connection = connection;
-      final snapshot = createName == null
+      final snapshot = initialSnapshot != null
+          ? await initialSnapshot(connection)
+          : createName == null
           ? await connection.snapshot(options.sessionId)
           : await connection.create(
               options.sessionId,
@@ -305,8 +317,31 @@ class EngineSessionCubit extends Cubit<EngineSessionState> {
       throw StateError('Выполните предпросмотр для текущей ревизии');
     }
     final snapshot = state.snapshot!;
-    await _connectedTo(snapshot)
-        .editEquipment(snapshot, offer.edit, engineRequestId());
+    await writeEquipment(snapshot, offer.edit);
+  }
+
+  Future<EngineSnapshot> writeEquipment(
+    EngineSnapshot current,
+    EngineEquipmentEdit edit,
+  ) async {
+    try {
+      return await _connectedTo(current)
+          .editEquipment(current, edit, engineRequestId());
+    } on GrpcError catch (error) {
+      throw StateError(engineError(error));
+    }
+  }
+
+  Future<EngineSnapshot> selectWeaponSet(
+    EngineSnapshot current,
+    int weaponSet,
+  ) async {
+    try {
+      return await _connectedTo(current)
+          .selectWeaponSet(current, weaponSet, engineRequestId());
+    } on GrpcError catch (error) {
+      throw StateError(engineError(error));
+    }
   }
 
   bool get supportsTreePreview =>
@@ -317,6 +352,47 @@ class EngineSessionCubit extends Cubit<EngineSessionState> {
 
   bool get supportsTreeAllocationModes =>
       state.connected && (_connection?.supportsTreeAllocationModes ?? false);
+
+  bool get supportsTreeSockets =>
+      state.connected && (_connection?.supportsTreeSockets ?? false);
+
+  bool get supportsTreeJewels =>
+      state.connected && (_connection?.supportsTreeJewels ?? false);
+
+  Future<EngineJewelOffer> previewJewel(
+    EngineSnapshot current,
+    EngineJewelEdit edit,
+  ) async {
+    final connectionId = _connectionId;
+    final preview = await _connectedTo(current).previewJewel(current, edit);
+    return (
+      sessionId: current.sessionId,
+      connectionId: connectionId,
+      edit: edit,
+      preview: preview,
+    );
+  }
+
+  bool isCurrentJewelOffer(EngineJewelOffer offer) =>
+      supportsTreeJewels &&
+      _isCurrentOffer(
+        offer.sessionId,
+        offer.connectionId,
+        offer.preview.revision,
+      );
+
+  Future<EngineSnapshot> editJewel(EngineJewelOffer offer) async {
+    if (!isCurrentJewelOffer(offer)) {
+      throw StateError('Выполните предпросмотр для текущей ревизии');
+    }
+    final snapshot = state.snapshot!;
+    try {
+      return await _connectedTo(snapshot)
+          .editJewel(snapshot, offer.edit, engineRequestId());
+    } on GrpcError catch (error) {
+      throw StateError(engineError(error));
+    }
+  }
 
   Future<EnginePassivePage> findPassives(
     EngineSnapshot current,
@@ -355,6 +431,113 @@ class EngineSessionCubit extends Cubit<EngineSessionState> {
     try {
       return await _connectedTo(snapshot)
           .editTree(snapshot, offer.edit, engineRequestId());
+    } on GrpcError catch (error) {
+      throw StateError(engineError(error));
+    }
+  }
+
+  Future<EngineSnapshot> selectTreeSpec(
+    EngineSnapshot current,
+    int spec,
+  ) async {
+    if (current.build?.tree?.spec == spec) return current;
+    final connection = _connectedTo(current);
+    if (!connection.supportsTreeSpecs) {
+      throw StateError('Дерево пока недоступно');
+    }
+    try {
+      return await connection.selectTreeSpec(current, spec, engineRequestId());
+    } on GrpcError catch (error) {
+      throw StateError(engineError(error));
+    }
+  }
+
+  Future<EngineSnapshot> selectTreeClass(
+    EngineSnapshot current,
+    EngineTreeClassEdit edit,
+  ) async {
+    final connection = _connectedTo(current);
+    if (!connection.supportsTreeClass) {
+      throw StateError('Для смены класса обновите движок.');
+    }
+    try {
+      return await connection.selectTreeClass(current, edit, engineRequestId());
+    } on GrpcError catch (error) {
+      throw StateError(engineError(error));
+    }
+  }
+
+  bool get supportsSkillGroups => switch (_connection) {
+    final EngineSkillGroupWriter writer when state.connected =>
+      writer.supportsSkillGroups,
+    _ => false,
+  };
+
+  Future<EngineSnapshot> editSkillGroup(
+    EngineSnapshot current,
+    EngineSkillGroupEdit edit,
+  ) async {
+    final connection = _connectedTo(current) as EngineSkillGroupWriter;
+    try {
+      return await connection.editSkillGroup(current, edit, engineRequestId());
+    } on GrpcError catch (error) {
+      throw StateError(engineError(error));
+    }
+  }
+
+  bool get supportsSkillChoice => switch (_connection) {
+    final EngineSkillChoiceWriter writer when state.connected =>
+      writer.supportsSkillChoice,
+    _ => false,
+  };
+
+  Future<EngineSnapshot> chooseSkill(
+    EngineSnapshot current,
+    String control,
+    int id,
+  ) async {
+    final connection = _connectedTo(current) as EngineSkillChoiceWriter;
+    try {
+      return await connection.chooseSkill(
+        current,
+        control,
+        id,
+        engineRequestId(),
+      );
+    } on GrpcError catch (error) {
+      throw StateError(engineError(error));
+    }
+  }
+
+  Future<EngineSnapshot> replaceBuild(
+    EngineSnapshot current,
+    String xml,
+  ) async {
+    try {
+      return await _connectedTo(current)
+          .replaceBuild(current, xml, engineRequestId());
+    } on GrpcError catch (error) {
+      throw StateError(engineError(error));
+    }
+  }
+
+  Future<Future<void> Function()?> openEditorBridge(
+    McpEditorRequest execute,
+    Future<void> Function(JsonMap) afterReply,
+  ) async {
+    final current = state.snapshot;
+    if (!state.connected || current == null) return null;
+    return _connectedTo(current)
+        .openEditorBridge(current.sessionId, execute, afterReply);
+  }
+
+  Future<EngineSnapshot> renameShared(
+    EngineSnapshot current,
+    String name,
+  ) async {
+    try {
+      return await _connectedTo(current)
+          .rename(current, name, engineRequestId());
     } on GrpcError catch (error) {
       throw StateError(engineError(error));
     }

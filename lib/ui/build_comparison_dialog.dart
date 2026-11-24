@@ -297,15 +297,19 @@ class _ComparisonResult extends StatelessWidget {
 
   Widget _conditions(BuildReport before, Installations components) {
     final pob = components[Component.pob]!;
-    final mcp = components[Component.mcp]!;
+    final mcp = components[Component.mcp];
     final enemyLevel = before.config['enemyLevel'];
     return Wrap(
       spacing: 16,
       runSpacing: 4,
       children: [
         Tooltip(
-          message: 'PoB ${pob.commit} · MCP ${mcp.commit}',
-          child: Text('PoB ${pob.tag} · MCP ${mcp.tag}'),
+          message: mcp == null
+              ? 'PoB ${pob.commit}'
+              : 'PoB ${pob.commit} · MCP ${mcp.commit}',
+          child: Text(
+            mcp == null ? 'PoB ${pob.tag}' : 'PoB ${pob.tag} · MCP ${mcp.tag}',
+          ),
         ),
         if (enemyLevel is num)
           Wrap(

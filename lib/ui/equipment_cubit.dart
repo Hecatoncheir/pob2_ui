@@ -19,7 +19,7 @@ typedef EquipmentState = ({
 
 class EquipmentCubit extends Cubit<EquipmentState> {
   EquipmentCubit(this.model)
-    : repository = EquipmentRepository(model.engine),
+    : repository = model.equipmentRepository(),
       super((slot: null, preview: null, loading: false, error: null)) {
     _lastReport = model.state.report;
     _subscription = model.stream.listen(_changed);

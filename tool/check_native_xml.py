@@ -1,6 +1,7 @@
 """Проверка настоящих диалогов XML в отдельном профиле Windows и Linux."""
 
 import argparse
+from contextlib import ExitStack
 import ctypes as C
 from ctypes import wintypes as W
 import os
@@ -12,16 +13,7 @@ import time
 import xml.etree.ElementTree as ET
 
 from check_installer import FIXTURES, ROOT, prepare_profile, run_build_check
-
-
-def wait_for(read, message, timeout=45):
-    deadline = time.monotonic() + timeout
-    while time.monotonic() < deadline:
-        value = read()
-        if value:
-            return value
-        time.sleep(.1)
-    raise RuntimeError(message)
+from check_profile import remove_native_profile, stop_profile_engine, wait_for
 
 
 class WindowsUi:
@@ -298,11 +290,14 @@ def allocation(file):
 
 
 def check(binary, components):
-    with tempfile.TemporaryDirectory(prefix='pob2-native-') as temporary:
-        root = Path(temporary).resolve()
+    with ExitStack() as cleanup:
+        temporary = tempfile.TemporaryDirectory(prefix='pob2-native-')
+        cleanup.callback(remove_native_profile, temporary)
+        root = Path(temporary.name).resolve()
         prepare_profile(root, components)
         environment = dict(os.environ, POB2_UI_HOME=str(root), POB2_UI_CHECK_FIXTURE=str(FIXTURES / 'witch_fireball.xml'))
         environment.pop('POB2_UI_CHECK_CODE', None)
+        cleanup.callback(stop_profile_engine, binary, root, environment)
         run_build_check(binary, root, environment, 'save')
         (root / 'language.json').write_text('{"schema":1,"language":"en"}', encoding='utf-8')
         source = root / 'Ведьма оружие.xml'

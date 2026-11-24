@@ -93,7 +93,7 @@ void main() {
       expect(result.first.points, 1);
       expect(result.second.points, 3);
       expect(result.second.nodes, [13, 14, 22]);
-      expect(PobBuildDocument(result.second.xml).allocationModes[21], 2);
+      expect(PobBuildDocument(result.second.xml!).allocationModes[21], 2);
       expect(engine.imports, 2);
       expect(engine.modes, [1, 1]);
       expect(engine.closed, isTrue);

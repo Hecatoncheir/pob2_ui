@@ -1,0 +1,31 @@
+<PathOfBuilding2>
+  <Build className="Warrior" ascendClassName="None" level="40" characterLevelAutoMode="false" targetVersion="0_1" mainSocketGroup="1" />
+  <Items activeItemSet="1">
+    <ItemSet id="1"><Slot name="Weapon 1" itemId="1" /></ItemSet>
+    <Item id="1">Rarity: NORMAL
+Wooden Club</Item>
+    <Item id="2">Rarity: RARE
+Reference Ruby
+Ruby
+--------
++17% to Fire Resistance</Item>
+  </Items>
+  <Skills activeSkillSet="1">
+    <SkillSet id="1">
+      <Skill label="Attack" enabled="true" includeInFullDPS="true" mainActiveSkill="1" mainActiveSkillCalcs="1" groupCount="1">
+        <Gem nameSpec="Rolling Slam" gemId="Metadata/Items/Gems/SkillGemRollingSlam" variantId="RollingSlam" skillId="RollingSlamPlayer" level="1" quality="0" enabled="true" statSetIndex="1" />
+      </Skill>
+    </SkillSet>
+  </Skills>
+  <Tree activeSpec="1">
+    <Spec title="Воин" treeVersion="0_5" classId="6" classInternalId="6" ascendClassId="0" nodes="47175,38646" />
+    <Spec title="Ведьма" treeVersion="0_5" classId="1" classInternalId="1" ascendClassId="0" nodes="54447,44871,56216,9485,60685,1826,39037,57710,8616,46819,61419,4739">
+      <WeaponSet2 nodes="4739" />
+      <Sockets><Socket nodeId="61419" itemId="2" /></Sockets>
+    </Spec>
+  </Tree>
+  <Config activeConfigSet="1">
+    <ConfigSet id="1"><Input name="resistancePenalty" number="0" /><Input name="enemyLevel" number="40" /></ConfigSet>
+  </Config>
+  <Notes>Обе спецификации и заметка должны сохраниться.</Notes>
+</PathOfBuilding2>

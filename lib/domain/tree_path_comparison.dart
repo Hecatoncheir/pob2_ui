@@ -1,4 +1,5 @@
 import 'build_report.dart';
+import 'engine_session.dart';
 import 'tree_allocation_mode.dart';
 
 typedef TreePathStats = ({num? dps, num? life});
@@ -7,12 +8,19 @@ typedef TreePathOption = ({
   int points,
   List<int> nodes,
   TreePathStats stats,
-  String xml,
+  String? xml,
 });
 typedef TreePathReports = ({
   TreePathStats baseline,
   TreePathOption first,
   TreePathOption second,
+});
+
+typedef EngineTreePaths = ({
+  EngineTreePreviewOffer first,
+  EngineTreePreviewOffer second,
+  int inputRevision,
+  int bindingEpoch,
 });
 
 class TreePathComparison {
@@ -24,6 +32,7 @@ class TreePathComparison {
     required this.mode,
     required this.weaponSet,
     required this.componentSource,
+    this.enginePaths,
   });
 
   final BuildReport source;
@@ -33,6 +42,7 @@ class TreePathComparison {
   final TreeAllocationMode mode;
   final int weaponSet;
   final String componentSource;
+  final EngineTreePaths? enginePaths;
 }
 
 const staleTreePaths = 'Сборка изменилась. Пересчитайте пути.';

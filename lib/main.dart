@@ -1,6 +1,8 @@
 import 'dart:io';
 
 import 'data/appearance_repository.dart';
+import 'data/bundled_engine.dart';
+import 'domain/engine_session.dart';
 import 'installer_check.dart';
 import 'ui/appearance_bloc.dart';
 
@@ -9,10 +11,11 @@ import 'package:material_ui/material_ui.dart';
 import 'data/startup_health.dart';
 import 'ui/app_update_cubit.dart';
 
-import 'data/component_repository.dart';
+import 'data/engine_components.dart';
 import 'data/installation_store.dart';
 import 'data/mcp_client.dart';
 import 'data/pob_build_library.dart';
+import 'data/pob_window_repository.dart';
 import 'data/profile_use.dart';
 import 'ui/app.dart';
 import 'ui/workshop_cubit.dart';
@@ -31,17 +34,11 @@ Future<void> main(List<String> arguments) async {
   final progress = check == null ? null : InstallerCheckProgress(root, check);
   progress?.record('startup');
   WidgetsFlutterBinding.ensureInitialized();
+  if (!await checkUpdateEngine(arguments)) exit(1);
   if (check == 'restore' || check == 'cleanup') {
     HttpOverrides.global = OfflineInstallerCheck();
   }
-  final model = WorkshopCubit(
-    ComponentRepository(
-      store: InstallationStore(root),
-      profileUse: await ProfileUse.open(root),
-    ),
-    McpClient(),
-    library: PobBuildLibrary(root),
-  );
+  final model = await _openWorkshop(root, check);
   final updates = AppUpdateCubit(root: model.components.store.root);
   final preferences = AppearanceRepository(model.components.store.root);
   final appearance = AppearanceBloc(
@@ -91,11 +88,53 @@ Future<void> main(List<String> arguments) async {
     }
     if (arguments.contains('--mcp-editor')) {
       await initialization;
+      await model.waitForPrimarySession();
       await model.mcpEditor.enable();
     }
     await updates.initialize();
   });
   if (check == null) language.add(const LanguageLoadRequested());
+}
+
+Future<WorkshopCubit> _openWorkshop(Directory root, String? check) async {
+  final executable = _engineExecutable();
+  final components = EngineComponents(
+    store: InstallationStore(root),
+    profileUse: await ProfileUse.open(root),
+    executable: executable,
+  );
+  McpClient createWorkbench() => McpClient(workbenchExecutable: executable);
+  return WorkshopCubit(
+    components,
+    createWorkbench(),
+    createEngine: createWorkbench,
+    pobWindow: PobWindowRepository(engineExecutable: executable),
+    library: PobBuildLibrary(root),
+    primaryEngine: _primaryEngineOptions(root, check, executable),
+  );
+}
+
+String _engineExecutable() {
+  final path = Platform.environment['POB2_ENGINE_EXECUTABLE'];
+  if (path != null && path.isNotEmpty) return path;
+  final executable = bundledEngineFile();
+  return executable.existsSync()
+      ? executable.path
+      : executable.uri.pathSegments.last;
+}
+
+EngineOptions? _primaryEngineOptions(
+  Directory root,
+  String? installerCheck,
+  String executable,
+) {
+  if (installerCheck == 'cleanup' || installerCheck == 'link') return null;
+  return EngineOptions(
+    executable: executable,
+    profile: 'pob2-ui',
+    runtimeDirectory: Directory.fromUri(root.uri.resolve('engine-run/')).path,
+    dataDirectory: Directory.fromUri(root.uri.resolve('engine-data/')).path,
+  );
 }
 
 String? _installerCheckStage() {

@@ -23,7 +23,11 @@ class _BuildNotesDialog extends StatefulWidget {
 }
 
 class _BuildNotesDialogState extends State<_BuildNotesDialog> {
-  late final notes = NotesCubit(widget.model.buildNotes, widget.id);
+  late final notes = NotesCubit(
+    widget.model.buildNotes,
+    widget.id,
+    write: widget.model.sharedNotesEditor(widget.id),
+  );
   final controller = TextEditingController();
   bool _allowClose = false;
   bool _closing = false;

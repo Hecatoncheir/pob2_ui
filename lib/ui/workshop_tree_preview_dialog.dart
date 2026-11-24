@@ -2,6 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_ui/material_ui.dart';
 
 import '../data/mcp_error_message.dart';
+import '../domain/engine_session.dart';
 import '../domain/tree_geometry.dart';
 import 'core/app_text.dart';
 import 'core/motion.dart';
@@ -13,17 +14,26 @@ import 'workshop_state.dart';
 Future<bool?> showWorkshopTreePreview(
   BuildContext context,
   WorkshopCubit model,
-  TreeNode node,
-) => sparkDialog<bool>(
+  TreeNode node, {
+  EngineTreeAction? action,
+  EnginePassiveAttribute? attribute,
+}) => sparkDialog<bool>(
   context,
-  _WorkshopTreePreviewDialog(model, node),
+  _WorkshopTreePreviewDialog(model, node, action, attribute),
   barrierDismissible: false,
 );
 
 class _WorkshopTreePreviewDialog extends StatefulWidget {
-  const _WorkshopTreePreviewDialog(this.model, this.node);
+  const _WorkshopTreePreviewDialog(
+    this.model,
+    this.node,
+    this.action,
+    this.attribute,
+  );
   final WorkshopCubit model;
   final TreeNode node;
+  final EngineTreeAction? action;
+  final EnginePassiveAttribute? attribute;
 
   @override
   State<_WorkshopTreePreviewDialog> createState() =>
@@ -50,7 +60,11 @@ class _WorkshopTreePreviewDialogState
       _error = null;
     });
     try {
-      final offer = await widget.model.previewSharedTreeNode(widget.node.id);
+      final offer = await widget.model.previewSharedTreeNode(
+        widget.node.id,
+        action: widget.action,
+        attribute: widget.attribute,
+      );
       if (mounted) setState(() => _offer = offer);
     } catch (error) {
       if (mounted) setState(() => _error = mcpErrorMessage(engineError(error)));

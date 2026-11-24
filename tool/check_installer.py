@@ -1,16 +1,19 @@
 """Проверить готовый установщик и подтверждение первого запуска Flutter."""
 
 import argparse
+from contextlib import ExitStack
 import hashlib
 import json
 import os
 from pathlib import Path
 import shutil
 import subprocess
+import sys
 import tempfile
 import time
 import xml.etree.ElementTree as ET
 
+from check_profile import stop_installation_profiles, temporary_profile
 from release import ROOT, dart_executable, filename, version
 
 PREVIOUS_VERSION = '0.11.0'
@@ -72,9 +75,13 @@ def failed_macos_package(bundle, base):
     staging.mkdir()
     candidate = staging / bundle.name
     run('ditto', bundle, candidate)
-    source = base / 'failed.c'
-    source.write_text('#include <unistd.h>\nint main(void) { sleep(60); return 0; }\n')
-    run('clang', source, '-o', candidate / 'Contents/MacOS/PoB II')
+    marker = candidate / 'Contents/Resources/pob2-engine.version'
+    if marker.is_file():
+        marker.write_text('v999.0.2\n', encoding='utf-8')
+    else:
+        source = base / 'failed.c'
+        source.write_text('#include <unistd.h>\nint main(void) { sleep(60); return 0; }\n')
+        run('clang', source, '-o', candidate / 'Contents/MacOS/PoB II')
     run('codesign', '--force', '--deep', '--sign', '-', candidate)
     package = base / 'failed.dmg'
     run('hdiutil', 'create', '-volname', 'PoB II', '-srcfolder', staging, '-format', 'UDZO', package)
@@ -166,28 +173,45 @@ def verify_reopened(executable, data, builds, environment, saved, *, restore_tre
     original = files[0].read_bytes()
     restore_env = dict(environment, POB2_UI_CHECK_TREE_CACHE='1') if restore_tree_cache else environment
     restored = run_build_check(executable, data, restore_env, 'restore')
-    assert restored == saved, (saved, restored)
+    restored_session = restored.pop('engineSession', None)
+    saved_report = dict(saved)
+    saved_session = saved_report.pop('engineSession', None)
+    assert restored == saved_report, (saved_report, restored)
+    if saved_session is not None:
+        assert restored_session == saved_session, (saved_session, restored_session)
+    elif environment.get('POB2_PACKAGED_ENGINE_VERSION'):
+        assert isinstance(restored_session, str) and restored_session.startswith('build-'), restored_session
     assert files[0].read_bytes() == original, 'Повторный запуск изменил XML'
 
 
 def check_build(executable, base, environment, target, *, components, archives, previous, verify_link, package):
     data = base / 'build-profile'
-    builds = prepare_profile(data, components, archives)
+    native = bool(environment.get('POB2_PACKAGED_ENGINE_VERSION'))
+    builds = prepare_profile(data, None if native else components, None if native else archives)
     env = dict(environment, POB2_UI_HOME=str(data), PYTHONDONTWRITEBYTECODE='1')
-    if components is None:
+    if native or components is None:
         env = archive_check_environment(env)
+    if native:
+        env['POB2_UI_PYTHON'] = str(base / 'python-not-installed')
     saved = run_build_check(executable, data, env, 'save')
     assert saved['source'] == 'original-lua' and saved['level'] == 90 and saved['life'] > 0
     manifest = data / 'components.json'
-    if components is None:
-        active = json.loads(manifest.read_text(encoding='utf-8'))['active']
-        assert all(component.get('archiveSha256') for component in active.values())
-    if archives is not None:
-        verify_archive_reuse(data, target)
+    if native:
+        assert not manifest.exists(), 'PoB II установил прежнюю пару компонентов'
+        assert saved.get('engineSession'), 'PoB II не открыл сессию комплектного движка'
+        print('Чистый профиль использует Lua через Go без Python MCP')
+    else:
+        if components is None:
+            active = json.loads(manifest.read_text(encoding='utf-8'))['active']
+            assert all(component.get('archiveSha256') for component in active.values())
+        if archives is not None:
+            verify_archive_reuse(data, target)
     verify_reopened(executable, data, builds, env, saved)
     print('Установленный PoB II: расчёт Lua, XML и заметки восстановлены без HTTP после перезапуска')
     if previous is not None:
-        check_previous(target, previous, executable, base, env, manifest, verify_link, package)
+        previous_components = components if native else manifest
+        check_previous(target, previous, executable, base, env, previous_components,
+                       verify_link, package, archives if native else None)
 
 
 def verify_archive_reuse(data, target):
@@ -224,9 +248,9 @@ def verify_launcher_upgrade(target, old, executable, package, environment):
     print('Установщик обновил прежний корневой загрузчик')
 
 
-def check_previous(target, package, executable, base, environment, components, verify_link, current_package):
+def check_previous(target, package, executable, base, environment, components, verify_link, current_package, archives=None):
     data = base / f'v{PREVIOUS_VERSION}-profile'
-    builds = prepare_profile(data, components)
+    builds = prepare_profile(data, components, archives)
     env = dict(environment, POB2_UI_HOME=str(data),
                POB2_UI_CHECK_FIXTURE=str(FIXTURES / 'witch_fireball.xml'))
     env.pop('POB2_UI_CHECK_CODE', None)
@@ -236,8 +260,11 @@ def check_previous(target, package, executable, base, environment, components, v
     verify_launcher_upgrade(target, old, executable, current_package, setup_env)
     prepare_cleanup_profile(data)
     before = {file.name: file.read_bytes() for file in builds.glob('*.xml')}
+    saved_components = (data / 'components.json').read_bytes()
     assert run_build_check(executable, data, env, 'cleanup') == saved
     assert {file.name: file.read_bytes() for file in builds.glob('*.xml')} == before
+    if environment.get('POB2_PACKAGED_ENGINE_VERSION'):
+        assert (data / 'components.json').read_bytes() == saved_components
     verify_reopened(executable, data, builds, env, saved, restore_tree_cache=True)
     assert any((data / 'tree-cache').rglob('*.png')), 'Кеш дерева не восстановлен из Lua'
     print(f'После обновления с v{PREVIOUS_VERSION}, очистки и отката совпали XML, заметки и отчёт Lua')
@@ -312,6 +339,36 @@ def archive_check_environment(environment):
     return environment
 
 
+def bad_version(current, failed):
+    marker = current / 'pob2-engine.version'
+    if marker.is_file():
+        shutil.copytree(current, failed, symlinks=True)
+        (failed / marker.name).write_text('v999.0.2\n', encoding='utf-8')
+        return
+    failed.mkdir()
+    name = 'pob2_ui.exe' if os.name == 'nt' else 'pob2_ui'
+    run(dart_executable(), 'compile', 'exe', ROOT / 'tool/fixtures/failed_candidate.dart', '-o', failed / name)
+
+
+def check_bundled_engine(executable, base, environment):
+    expected = environment.get('POB2_PACKAGED_ENGINE_VERSION')
+    if expected is None:
+        return
+    engine = executable.with_name('pob2-engine.exe' if os.name == 'nt' else 'pob2-engine')
+    manifest_dir = executable.parent.parent / 'Resources' if sys.platform == 'darwin' else executable.parent
+    assert (manifest_dir / 'pob2-engine.version').read_text(encoding='utf-8').strip() == expected
+    info = subprocess.check_output([engine, '--version', '--json'], timeout=20)
+    if json.loads(info)['version'] != expected:
+        raise ValueError('Версия установленного движка расходится с комплектом')
+    flags = ['--profile', 'installer', '--runtime-dir', base / 'engine-runtime', '--data-dir', base / 'engine-data']
+    env = dict(environment, POB2_ENGINE_CALCULATOR='go')
+    try:
+        run(engine, 'session', 'create', *flags, '--start-server',
+            '--session', 'smoke', '--name', 'Installer', '--request-id', 'installer', env=env, timeout=45)
+    finally:
+        run(engine, 'shutdown', *flags, env=env, timeout=30)
+
+
 def check(target, *, build_check=False, components=None, archives=None, package=None, previous=None, verify_link=False):
     number = version()
     if previous is not None and not previous.is_file():
@@ -319,17 +376,20 @@ def check(target, *, build_check=False, components=None, archives=None, package=
     package = package or ROOT / 'build/packages' / filename(number, target)
     options = dict(components=components, archives=archives, previous=previous,
                    verify_link=verify_link, package=package)
-    with tempfile.TemporaryDirectory(prefix='pob2-install-check-') as temporary:
-        base = Path(temporary).resolve()
+    with temporary_profile('pob2-install-check-') as base, ExitStack() as cleanup:
         install = base / 'PoB II'
         data = base / 'data'
         environment = dict(os.environ, POB2_UI_HOME=str(data))
         environment.pop('POB2_UI_INSTALLER_CHECK', None)
+        if environment.get('POB2_PACKAGED_ENGINE_VERSION'):
+            environment['POB2_ENGINE_POB_CACHE_DIR'] = str(base / 'engine-cache')
         if target == 'linux-x64':
             environment['XDG_DATA_HOME'] = str(base / 'xdg-data')
             environment['HOME'] = str(base / 'home')
         if target == 'macos-arm64':
             executable = check_macos(package, base, data, environment)
+            cleanup.callback(stop_installation_profiles, executable, base, environment)
+            check_bundled_engine(executable, base, environment)
             if build_check:
                 check_build(executable, base, environment, target, **options)
             return
@@ -350,9 +410,7 @@ def check(target, *, build_check=False, components=None, archives=None, package=
         assert not (install / 'pending-version').exists()
         assert '999.0.0' in (install / 'update.log').read_text(encoding='utf-8')
         stop_versions(install, environment)
-        failed = install / 'versions/999.0.2'
-        failed.mkdir()
-        run(dart_executable(), 'compile', 'exe', ROOT / 'tool/fixtures/failed_candidate.dart', '-o', failed / ('pob2_ui.exe' if os.name == 'nt' else 'pob2_ui'))
+        bad_version(install / 'versions' / number, install / 'versions/999.0.2')
         (install / 'pending-version').write_text('999.0.2')
         run(install / binary, env=environment, timeout=45)
         assert (install / 'active-version').read_text().strip() == number
@@ -378,8 +436,10 @@ def check(target, *, build_check=False, components=None, archives=None, package=
         run(install / binary, env=environment)
         assert (install / 'active-version').read_text().strip() == number
         stop_versions(install, environment)
+        executable = install / 'versions' / number / ('pob2_ui.exe' if os.name == 'nt' else 'pob2_ui')
+        cleanup.callback(stop_installation_profiles, executable, base, environment)
+        check_bundled_engine(executable, base, environment)
         if build_check:
-            executable = install / 'versions' / number / ('pob2_ui.exe' if os.name == 'nt' else 'pob2_ui')
             check_build(executable, base, environment, target, **options)
     print(f'{target}: установщик и настоящий запуск проверены')
 

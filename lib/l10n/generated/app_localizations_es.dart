@@ -613,6 +613,13 @@ class AppLocalizationsEs extends AppLocalizations {
   String get mff31635225 => 'El archivo requiere una revisión concreta';
 
   @override
+  String get m7152adf5d3 => 'Actualiza el motor para elegir un atributo.';
+
+  @override
+  String get m0b5173c45c =>
+      'Actualiza el motor para elegir un objeto de la configuración.';
+
+  @override
   String get m7c2e51e000 =>
       'Para obtener un árbol PoB terminado, actualice MCP a 0.7.0.';
 
@@ -632,7 +639,14 @@ class AppLocalizationsEs extends AppLocalizations {
       'Para buscar por característica, actualice MCP a 0.9.0 en la sección Componentes.';
 
   @override
+  String get mbeaac9e727 =>
+      'Actualiza el motor para editar los engarces de joyas.';
+
+  @override
   String get m9a923fd47c => 'No hacen falta compras para las próximas etapas';
+
+  @override
+  String get mf7dd91f91b => 'Actualiza el motor para cambiar de clase.';
 
   @override
   String get m10db96c5ff => 'Configura PoB y MCP para comparar';
@@ -809,6 +823,9 @@ class AppLocalizationsEs extends AppLocalizations {
   String get md4bac1da57 => 'Nota de la etapa';
 
   @override
+  String get me00429e1a8 => 'Las notas han cambiado. Vuelve a abrirlas.';
+
+  @override
   String get mdc4baf32ac => 'Notas de compilación';
 
   @override
@@ -941,6 +958,11 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get m566d4d32d7 => 'Gemas de asistencia';
+
+  @override
+  String m8bfc4312d8(String p0) {
+    return 'Conexión con la ventana de PoB II: $p0';
+  }
 
   @override
   String get md0ef3540b0 => 'Catálogo';
@@ -1464,6 +1486,9 @@ class AppLocalizationsEs extends AppLocalizations {
       'El texto original se muestra cuando una traducción no está disponible';
 
   @override
+  String get md6c5445cf8 => 'No hay una instalación anterior de PoB';
+
+  @override
   String get m8a210e3e2e => 'No hay conexión a la sesión compartida';
 
   @override
@@ -1816,10 +1841,18 @@ class AppLocalizationsEs extends AppLocalizations {
   String get m48d5bea474 => 'Plan de progresión';
 
   @override
+  String get m9d28683954 =>
+      'El plan de progresión ha cambiado. Vuelve a abrirlo.';
+
+  @override
   String get m1474fac529 => 'Planos, partidas, opciones de desarrollo...';
 
   @override
   String get mfd0560ebbf => 'Predeterminado';
+
+  @override
+  String get m9fd15a00ec =>
+      'El vínculo de la configuración con el motor está dañado';
 
   @override
   String get m5189135a61 => 'Reintentar';
@@ -1847,6 +1880,10 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get mc1b2f9e3a6 => 'Configurar PoB II';
+
+  @override
+  String get m413fa4fd39 =>
+      'Preparando el Lua original de PoB con el motor incluido';
 
   @override
   String get m52d7142d18 => 'Windows x64, Linux x64 y macOS arm64 compatibles';
@@ -2312,6 +2349,9 @@ class AppLocalizationsEs extends AppLocalizations {
   }
 
   @override
+  String get mc3da8e80c2 => 'Joya';
+
+  @override
   String get m49db3482db => 'Joyas';
 
   @override
@@ -2423,6 +2463,10 @@ class AppLocalizationsEs extends AppLocalizations {
   @override
   String get mf0ca78d984 =>
       'El servidor no admite suscripciones a sesiones compartidas';
+
+  @override
+  String get m4bd93e3298 =>
+      'El servidor no confirmó la conexión con la ventana de PoB II.';
 
   @override
   String get m32bb1c680f => 'Sesión cerrada';
@@ -2824,6 +2868,10 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get mfdeaa71380 => 'Instalar componentes';
+
+  @override
+  String get m536db585fd =>
+      'El motor incluido administra las instalaciones de PoB';
 
   @override
   String get mfcb7c67f91 => 'Versión actual instalada';

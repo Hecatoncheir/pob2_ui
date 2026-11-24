@@ -5,11 +5,13 @@ import 'dart:ui' show AppExitResponse;
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:pob2_ui/data/build_library.dart';
 import 'package:pob2_ui/data/component_repository.dart';
 import 'package:pob2_ui/data/installation_store.dart';
 import 'package:pob2_ui/data/mcp_client.dart';
 import 'package:pob2_ui/data/pob_window_repository.dart';
 import 'package:pob2_ui/data/session_repository.dart';
+import 'package:pob2_ui/domain/library_entry.dart';
 import 'package:pob2_ui/ui/build_notes_dialog.dart';
 import 'package:pob2_ui/ui/core/spark_theme.dart';
 import 'package:pob2_ui/ui/exit_protection.dart';
@@ -19,6 +21,9 @@ import 'package:pob2_ui/ui/workshop_cubit.dart';
 class MemoryText extends SessionRepository {
   MemoryText() : super(Directory('unused-notes-tests'));
   String text = 'План сборки';
+  final draft = '<draft>Сохранённый XML</draft>';
+  String? savedDraft;
+  Completer<void>? saveGate;
   String? pending;
   bool failRead = false;
   bool failWrite = false;
@@ -35,7 +40,15 @@ class MemoryText extends SessionRepository {
   }
 
   @override
-  Future<void> saveDraft(String xml) => flushText();
+  Future<bool> exists() async => false;
+  @override
+  Future<String> readDraft() async => draft;
+  @override
+  Future<void> saveDraft(String xml) async {
+    await saveGate?.future;
+    await flushText();
+    savedDraft = xml;
+  }
 
   @override
   Future<void> flushText() async {
@@ -54,6 +67,21 @@ class OwnedWindows extends PobWindowRepository {
     closeRequests++;
     if (refuseClose) throw StateError('PoB ещё открыт');
   }
+}
+
+class LoadingComponents extends ComponentRepository {
+  LoadingComponents(Directory root) : super(store: InstallationStore(root));
+  final ready = Completer<void>();
+
+  @override
+  Future<void> load() => ready.future;
+}
+
+class EmptyLibrary extends BuildLibrary {
+  EmptyLibrary(super.root);
+
+  @override
+  Future<LibraryState> load() async => LibraryState();
 }
 
 WorkshopCubit createModel(MemoryText session, {PobWindowRepository? windows}) =>
@@ -135,6 +163,60 @@ void main() {
       expect(tester.takeException(), isNull);
     },
   );
+
+  testWidgets(
+    'Закрытие при запуске ждёт чтения профиля и сохраняет загруженный XML',
+    (tester) async {
+      final session = MemoryText();
+      final components = LoadingComponents(session.root);
+      final model = WorkshopCubit(
+        components,
+        McpClient(),
+        session: session,
+        library: EmptyLibrary(session.root),
+        pobWindow: OwnedWindows(),
+      );
+      addTearDown(model.close);
+      final initialization = model.initialize();
+      await tester.pumpWidget(
+        ExitProtection(
+          model: model,
+          child: const MaterialApp(home: SizedBox()),
+        ),
+      );
+      expect(model.state.busy, isTrue);
+      bool? response;
+      final closing = nativeClose(tester)
+          .then((accepted) => response = accepted);
+      await tester.pump();
+      final responseBeforeLoad = response;
+      final draftBeforeLoad = session.savedDraft;
+      components.ready.complete();
+      await initialization;
+      expect(await closing, isTrue);
+      expect(responseBeforeLoad, isNull);
+      expect(draftBeforeLoad, isNull);
+      expect(session.savedDraft, session.draft);
+    },
+  );
+
+  test('Принятое завершение через MCP ждёт текущего сохранения', () async {
+    final session = MemoryText();
+    final windows = OwnedWindows();
+    final model = createModel(session, windows: windows);
+    addTearDown(model.close);
+    await model.checkpoint();
+
+    final gate = session.saveGate = Completer<void>();
+    final saving = model.checkpoint();
+    final closing = model.finishScheduledExit();
+    expect(model.state.busy, isTrue);
+    expect(windows.closeRequests, 0);
+    gate.complete();
+    await saving;
+    await closing;
+    expect(windows.closeRequests, 1);
+  });
 
   testWidgets(
     'При выходе PoB закрывается после сохранения и согласия диалогов',

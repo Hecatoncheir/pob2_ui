@@ -15,6 +15,7 @@ import 'tree_hover_card.dart';
 import 'package:flutter/foundation.dart' show mapEquals, setEquals;
 
 import '../domain/build_report.dart';
+import '../domain/engine_session.dart';
 import '../domain/tree_progression.dart';
 import '../domain/tree_geometry.dart';
 import 'core/motion.dart';
@@ -40,6 +41,7 @@ import 'mcp_editor_cubit.dart';
 import 'core/language_scope.dart';
 import 'tree_progression_bloc.dart';
 import 'workshop_tree_preview_dialog.dart';
+import 'workshop_jewel_dialog.dart';
 
 typedef _ProgressionCanvasState = ({
   List<TreeProgressionStep> steps,
@@ -61,6 +63,7 @@ class _TreeViewState extends State<TreeView>
   final transform = TransformationController();
   late TreeScene scene = TreeScene(widget.tree);
   int? selected;
+  Future<void> Function(int)? _chooseTreeSpec;
   List<int> _planPath = const [];
   String query = '';
   Size? viewport;
@@ -87,6 +90,8 @@ class _TreeViewState extends State<TreeView>
   late final powerModel = NodePowerCubit(
     widget.model.engine,
     widget.model.loadTreeSceneImages,
+    sharedMetrics: widget.model.readSharedPowerMetrics,
+    sharedPower: widget.model.watchSharedPower,
   );
   late final pathModel = TreePathCubit(widget.model);
   @override
@@ -437,6 +442,7 @@ class _TreeViewState extends State<TreeView>
                 onExit: (_) => hoverModel.clear(),
                 child: GestureDetector(
                   onTapUp: _select,
+                  onSecondaryTapUp: (event) => _detailsAt(event.localPosition),
                   onLongPressStart: (event) => _detailsAt(event.localPosition),
                   child: InteractiveViewer(
                     key: const Key('passive-tree'),
@@ -560,8 +566,16 @@ class _TreeViewState extends State<TreeView>
             child: Text(_specTitle(spec)),
           ),
       ],
-      onSelected: widget.model.selectTreeSpec,
+      onOpened: () => _chooseTreeSpec = widget.model.treeSpecSelection(),
+      onCanceled: () => _chooseTreeSpec = null,
+      onSelected: _selectTreeSpecFromMenu,
     );
+  }
+
+  void _selectTreeSpecFromMenu(int id) {
+    final select = _chooseTreeSpec;
+    _chooseTreeSpec = null;
+    select?.call(id);
   }
 
   String _specTitle(({int id, String title}) spec) => spec.title.trim().isEmpty
@@ -922,7 +936,7 @@ class _TreeViewState extends State<TreeView>
 
 bool _usesSharedTree(WorkshopCubit model, TreeNode node) =>
     model.hasSharedTree &&
-    const {'Normal', 'Notable', 'Keystone'}.contains(node.kind);
+    const {'Normal', 'Notable', 'Keystone', 'Socket'}.contains(node.kind);
 
 class _NodeDialog extends StatefulWidget {
   const _NodeDialog(this.model, this.node);
@@ -967,6 +981,12 @@ class _NodeDialogState extends State<_NodeDialog> {
           ),
           actions: [
             const DialogCloseButton(label: 'Закрыть'),
+            if (_canEditJewel)
+              TextButton(
+                key: const Key('tree-open-jewel'),
+                onPressed: _editJewel,
+                child: const AppText('Самоцвет'),
+              ),
             if (widget.node.allocated &&
                 snapshot.data?.attributes.isNotEmpty == true)
               TextButton(
@@ -1015,28 +1035,43 @@ class _NodeDialogState extends State<_NodeDialog> {
     );
   }
 
+  bool get _canEditJewel =>
+      widget.node.allocated &&
+      widget.node.kind == 'Socket' &&
+      widget.model.canEditSharedJewel;
+
+  Future<void> _editJewel() async {
+    final applied = await showWorkshopJewelDialog(
+      context,
+      widget.model,
+      widget.node,
+    );
+    if (mounted && applied == true) Navigator.pop(context);
+  }
+
+  bool get _usesSharedSession => _usesSharedTree(widget.model, widget.node);
+
   bool _canApply(List<JsonMap> attributes) =>
-      !widget.model.state.busy &&
-      (widget.node.allocated || attributes.isEmpty || attribute != null);
+      !widget.model.state.busy && (attributes.isEmpty || attribute != null);
 
   String _actionLabel(List<JsonMap> attributes) {
+    if (_usesSharedSession) return 'Предпросмотр';
     if (!widget.node.allocated) return 'Выбрать путь';
     return attributes.isEmpty ? 'Вернуть узел' : 'Применить';
   }
 
-  void _refund() {
+  Future<void> _refund() async {
+    if (_usesSharedSession) {
+      await _previewSharedEdit(action: EngineTreeAction.refund);
+      return;
+    }
     widget.model.treeAction(widget.node.id, true);
     Navigator.pop(context);
   }
 
   Future<void> _apply(List<JsonMap> attributes) async {
-    if (attributes.isEmpty && _usesSharedTree(widget.model, widget.node)) {
-      final applied = await showWorkshopTreePreview(
-        context,
-        widget.model,
-        widget.node,
-      );
-      if (mounted && applied == true) Navigator.pop(context);
+    if (_usesSharedSession) {
+      await _previewSelection(attributes);
       return;
     }
     widget.model.treeAction(
@@ -1045,5 +1080,32 @@ class _NodeDialogState extends State<_NodeDialog> {
       attribute: attribute,
     );
     Navigator.pop(context);
+  }
+
+  Future<void> _previewSelection(List<JsonMap> options) async {
+    if (options.isEmpty) {
+      await _previewSharedEdit();
+      return;
+    }
+    final name = options[attribute! - 1]['name'] as String;
+    final selected = EnginePassiveAttribute.parse(name.toLowerCase());
+    final action = widget.node.allocated
+        ? EngineTreeAction.setAttribute
+        : EngineTreeAction.allocate;
+    await _previewSharedEdit(action: action, attribute: selected);
+  }
+
+  Future<void> _previewSharedEdit({
+    EngineTreeAction? action,
+    EnginePassiveAttribute? attribute,
+  }) async {
+    final applied = await showWorkshopTreePreview(
+      context,
+      widget.model,
+      widget.node,
+      action: action,
+      attribute: attribute,
+    );
+    if (mounted && applied == true) Navigator.pop(context);
   }
 }

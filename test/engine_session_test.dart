@@ -54,11 +54,14 @@ class _EquipmentConnection extends FakeEngineConnection {
   }
 
   @override
-  Future<void> editEquipment(
+  Future<EngineSnapshot> editEquipment(
     EngineSnapshot current,
     EngineEquipmentEdit edit,
     String requestId,
-  ) async => applied.add(edit);
+  ) async {
+    applied.add(edit);
+    return current;
+  }
 }
 
 void main() {
@@ -72,7 +75,7 @@ void main() {
     addTearDown(cubit.close);
 
     const options = EngineOptions();
-    const edit = (slot: 'Ring 1', raw: 'Rarity: NORMAL\nIron Ring');
+    const edit = (slot: 'Ring 1', raw: 'Rarity: NORMAL\nIron Ring', itemId: 0);
     await cubit.connect(options);
     final original = await cubit.previewEquipment(cubit.state.snapshot!, edit);
     expect(cubit.isCurrentEquipmentOffer(original), isTrue);

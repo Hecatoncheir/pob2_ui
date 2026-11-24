@@ -599,6 +599,12 @@ class AppLocalizationsTh extends AppLocalizations {
   String get mff31635225 => 'ต้องระบุรีวิชันที่แน่นอนสำหรับไฟล์บีบอัด';
 
   @override
+  String get m7152adf5d3 => 'อัปเดตเอนจินเพื่อเลือกค่าสถานะ';
+
+  @override
+  String get m0b5173c45c => 'อัปเดตเอนจินเพื่อเลือกไอเทมจากบิลด์';
+
+  @override
   String get m7c2e51e000 =>
       'สำหรับแผนผัง PoB ที่เสร็จสมบูรณ์แล้ว ให้อัปเดต MCP เป็น 0.7.0';
 
@@ -617,7 +623,13 @@ class AppLocalizationsTh extends AppLocalizations {
       'หากต้องการค้นหาตามคุณลักษณะ ให้อัปเดต MCP เป็น 0.9.0 ในส่วนส่วนประกอบ';
 
   @override
+  String get mbeaac9e727 => 'อัปเดตเอนจินเพื่อแก้ไขช่องใส่จิวเวล';
+
+  @override
   String get m9a923fd47c => 'ไม่ต้องซื้ออะไรสำหรับขั้นถัดไป';
+
+  @override
+  String get mf7dd91f91b => 'อัปเดตเอนจินเพื่อเปลี่ยนคลาส';
 
   @override
   String get m10db96c5ff => 'ตั้งค่า PoB และ MCP เพื่อเปรียบเทียบ';
@@ -787,6 +799,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get md4bac1da57 => 'บันทึกของขั้น';
 
   @override
+  String get me00429e1a8 => 'โน้ตมีการเปลี่ยนแปลง โปรดเปิดใหม่';
+
+  @override
   String get mdc4baf32ac => 'บันทึกการสร้าง';
 
   @override
@@ -919,6 +934,11 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m566d4d32d7 => 'หินเสริม';
+
+  @override
+  String m8bfc4312d8(String p0) {
+    return 'การเชื่อมต่อกับหน้าต่าง PoB II: $p0';
+  }
 
   @override
   String get md0ef3540b0 => 'แค็ตตาล็อก';
@@ -1430,6 +1450,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m323494c6da => 'ข้อความต้นฉบับจะแสดงขึ้นเมื่อการแปลไม่พร้อมใช้งาน';
 
   @override
+  String get md6c5445cf8 => 'ไม่พบการติดตั้ง PoB เวอร์ชันก่อนหน้า';
+
+  @override
   String get m8a210e3e2e => 'ไม่มีการเชื่อมต่อกับเซสชันที่แชร์';
 
   @override
@@ -1773,10 +1796,16 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m48d5bea474 => 'แผนการอัปเลเวล';
 
   @override
+  String get m9d28683954 => 'แผนเก็บเลเวลมีการเปลี่ยนแปลง โปรดเปิดใหม่';
+
+  @override
   String get m1474fac529 => 'แผน รายการ ทางเลือกการพัฒนา...';
 
   @override
   String get mfd0560ebbf => 'ค่าเริ่มต้น';
+
+  @override
+  String get m9fd15a00ec => 'ข้อมูลการเชื่อมโยงบิลด์กับเอนจินเสียหาย';
 
   @override
   String get m5189135a61 => 'ลองอีกครั้ง';
@@ -1804,6 +1833,10 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get mc1b2f9e3a6 => 'ตั้งค่า PoB II';
+
+  @override
+  String get m413fa4fd39 =>
+      'กำลังเตรียม Lua ต้นฉบับของ PoB ด้วยเอนจินที่มาพร้อมแอป';
 
   @override
   String get m52d7142d18 => 'รองรับ Windows x64, Linux x64 และ macOS arm64';
@@ -2262,6 +2295,9 @@ class AppLocalizationsTh extends AppLocalizations {
   }
 
   @override
+  String get mc3da8e80c2 => 'จิวเวล';
+
+  @override
   String get m49db3482db => 'จิวเวล';
 
   @override
@@ -2368,6 +2404,10 @@ class AppLocalizationsTh extends AppLocalizations {
   @override
   String get mf0ca78d984 =>
       'เซิร์ฟเวอร์ไม่รองรับการสมัครสมาชิกเซสชันที่ใช้ร่วมกัน';
+
+  @override
+  String get m4bd93e3298 =>
+      'เซิร์ฟเวอร์ไม่ได้ยืนยันการเชื่อมต่อกับหน้าต่าง PoB II';
 
   @override
   String get m32bb1c680f => 'ปิดเซสชันแล้ว';
@@ -2762,6 +2802,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get mfdeaa71380 => 'ติดตั้งส่วนประกอบ';
+
+  @override
+  String get m536db585fd => 'เอนจินที่มาพร้อมแอปจัดการการติดตั้ง PoB';
 
   @override
   String get mfcb7c67f91 => 'ติดตั้งเวอร์ชันปัจจุบันแล้ว';

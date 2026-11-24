@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:pob2_ui/data/engine_session_client.dart';
+import 'package:pob2_ui/data/mcp_editor_gateway.dart';
+import 'package:pob2_ui/domain/build_report.dart';
 import 'package:pob2_ui/domain/engine_session.dart';
 
 class FakeEngineConnection implements EngineConnection {
@@ -73,9 +75,30 @@ class FakeEngineConnection implements EngineConnection {
   ) => throw UnimplementedError();
 
   @override
-  Future<void> editEquipment(
+  Future<EngineSnapshot> editEquipment(
     EngineSnapshot current,
     EngineEquipmentEdit edit,
+    String requestId,
+  ) => throw UnimplementedError();
+
+  @override
+  Future<EngineSnapshot> selectWeaponSet(
+    EngineSnapshot current,
+    int weaponSet,
+    String requestId,
+  ) => throw UnimplementedError();
+
+  @override
+  Future<Future<void> Function()?> openEditorBridge(
+    String sessionId,
+    McpEditorRequest execute,
+    Future<void> Function(JsonMap) afterReply,
+  ) async => null;
+
+  @override
+  Future<EngineSnapshot> replaceBuild(
+    EngineSnapshot current,
+    String xml,
     String requestId,
   ) => throw UnimplementedError();
 
@@ -87,6 +110,45 @@ class FakeEngineConnection implements EngineConnection {
 
   @override
   bool get supportsTreeAllocationModes => false;
+
+  @override
+  bool get supportsTreeSockets => false;
+
+  @override
+  bool get supportsTreeJewels => false;
+
+  @override
+  bool get supportsTreeSpecs => false;
+
+  @override
+  bool get supportsTreeClass => false;
+
+  @override
+  Future<EngineSnapshot> selectTreeClass(
+    EngineSnapshot current,
+    EngineTreeClassEdit edit,
+    String requestId,
+  ) => throw UnimplementedError();
+
+  @override
+  Future<EngineSnapshot> selectTreeSpec(
+    EngineSnapshot current,
+    int spec,
+    String requestId,
+  ) => throw UnimplementedError();
+
+  @override
+  Future<EngineBuildComparison> previewJewel(
+    EngineSnapshot current,
+    EngineJewelEdit edit,
+  ) => throw UnimplementedError();
+
+  @override
+  Future<EngineSnapshot> editJewel(
+    EngineSnapshot current,
+    EngineJewelEdit edit,
+    String requestId,
+  ) => throw UnimplementedError();
 
   @override
   Future<EnginePassivePage> findPassives(

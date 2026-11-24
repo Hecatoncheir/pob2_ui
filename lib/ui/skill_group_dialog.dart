@@ -60,13 +60,7 @@ class _SkillGroupDialogState extends State<_SkillGroupDialog> {
   late final AppLifecycleListener exitListener;
   late final editor = SkillGroupCubit(
     widget.model.catalogs,
-    widget.group == null
-        ? widget.model.addSkillGroup
-        : (label, gems) => widget.model.updateSkillGroup(
-            widget.group!['id'] as int,
-            label,
-            gems,
-          ),
+    widget.model.skillGroupEditor(widget.group?['id'] as int?),
     groupId: widget.group?['id'] as int?,
     group: widget.group,
     initial: widget.initial,

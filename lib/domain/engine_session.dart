@@ -7,13 +7,34 @@ class EngineOptions {
     this.sessionId = 'main',
     this.runtimeDirectory = '',
     this.dataDirectory = '',
+    this.pobDirectory,
+    this.pobNativeDirectory,
   });
   final String executable;
   final String profile;
   final String sessionId;
   final String runtimeDirectory;
   final String dataDirectory;
+  final String? pobDirectory, pobNativeDirectory;
+
+  EngineOptions forBuild(String id, {String? pob, String? native}) =>
+      EngineOptions(
+        executable: executable,
+        profile: profile,
+        sessionId: id,
+        runtimeDirectory: runtimeDirectory,
+        dataDirectory: dataDirectory,
+        pobDirectory: pobDirectory ?? pob,
+        pobNativeDirectory: pobNativeDirectory ?? native,
+      );
 }
+
+typedef EngineSkillGroupEdit = ({
+  int? id,
+  String? label,
+  bool delete,
+  List<Map<String, dynamic>> gems,
+});
 
 class EngineSnapshot {
   const EngineSnapshot(
@@ -68,7 +89,8 @@ typedef EngineStatDelta = ({
   double difference,
 });
 
-typedef EngineEquipmentEdit = ({String slot, String raw});
+typedef EngineEquipmentEdit = ({String slot, String raw, int itemId});
+typedef EngineJewelEdit = ({int nodeId, int itemId, String raw});
 typedef EngineEquipmentPreview = EngineBuildComparison;
 typedef EngineBuildComparison = ({
   int revision,
@@ -103,6 +125,7 @@ typedef EngineTree = ({
   Set<int> nodes,
   Map<int, EnginePassiveAttribute> attributes,
   Map<int, TreeAllocationMode> allocations,
+  Map<int, int> jewels,
   int weaponSet,
 });
 typedef EnginePassive = ({int id, String name, bool attributeChoice});
@@ -113,6 +136,7 @@ typedef EngineTreeEdit = ({
   EnginePassiveAttribute? attribute,
   TreeAllocationMode? allocationMode,
 });
+typedef EngineTreeClassEdit = ({int classId, int ascendancyId, String mode});
 typedef EnginePassiveAttributeChange = ({
   int nodeId,
   EnginePassiveAttribute? before,
@@ -135,6 +159,13 @@ typedef EngineTreePreview = ({
   List<EnginePassiveAttributeChange> attributes,
   List<EnginePassiveAllocationChange> allocations,
   EnginePassivePointsChange? points,
+});
+
+typedef EngineTreePreviewOffer = ({
+  String sessionId,
+  int connectionId,
+  EngineTreeEdit edit,
+  EngineTreePreview preview,
 });
 
 class EngineSupportPreview {

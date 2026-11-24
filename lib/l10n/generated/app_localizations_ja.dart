@@ -592,6 +592,12 @@ class AppLocalizationsJa extends AppLocalizations {
   String get mff31635225 => 'アーカイブには固定リビジョンが必要です';
 
   @override
+  String get m7152adf5d3 => '能力値を選ぶにはエンジンを更新してください。';
+
+  @override
+  String get m0b5173c45c => 'ビルド内のアイテムを選ぶにはエンジンを更新してください。';
+
+  @override
   String get m7c2e51e000 => '完成した PoB ツリーの場合、MCP を 0.7.0 に更新します。';
 
   @override
@@ -608,7 +614,13 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m6f9519e788 => '特性で検索するには、「コンポーネント」セクションで MCP を 0.9.0 に更新します。';
 
   @override
+  String get mbeaac9e727 => 'ジュエルソケットを編集するには、エンジンを更新してください。';
+
+  @override
   String get m9a923fd47c => '今後の段階に必要な購入品はありません';
+
+  @override
+  String get mf7dd91f91b => 'クラスを変更するにはエンジンを更新してください。';
 
   @override
   String get m10db96c5ff => '比較するには PoB と MCP をセットアップしてください';
@@ -776,6 +788,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get md4bac1da57 => '段階のメモ';
 
   @override
+  String get me00429e1a8 => 'メモが変更されました。開き直してください。';
+
+  @override
   String get mdc4baf32ac => 'ビルドノート';
 
   @override
@@ -908,6 +923,11 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m566d4d32d7 => 'サポートジェム';
+
+  @override
+  String m8bfc4312d8(String p0) {
+    return 'PoB II のウィンドウ接続：$p0';
+  }
 
   @override
   String get md0ef3540b0 => 'カタログ';
@@ -1418,6 +1438,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m323494c6da => '翻訳が利用できない場合は元のテキストが表示されます';
 
   @override
+  String get md6c5445cf8 => '以前の PoB インストールはありません';
+
+  @override
   String get m8a210e3e2e => '共有セッションに接続できません';
 
   @override
@@ -1758,10 +1781,16 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m48d5bea474 => '育成プラン';
 
   @override
+  String get m9d28683954 => 'レベル上げ計画が変更されました。開き直してください。';
+
+  @override
   String get m1474fac529 => '計画、項目、開発オプション...';
 
   @override
   String get mfd0560ebbf => 'デフォルト';
+
+  @override
+  String get m9fd15a00ec => 'ビルドとエンジンの関連付けが破損しています';
 
   @override
   String get m5189135a61 => '再試行';
@@ -1789,6 +1818,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get mc1b2f9e3a6 => 'PoB II のセットアップ';
+
+  @override
+  String get m413fa4fd39 => '同梱エンジンで PoB のオリジナル Lua を準備しています';
 
   @override
   String get m52d7142d18 => 'Windows x64、Linux x64、および macOS arm64 をサポート';
@@ -2246,6 +2278,9 @@ class AppLocalizationsJa extends AppLocalizations {
   }
 
   @override
+  String get mc3da8e80c2 => 'ジュエル';
+
+  @override
   String get m49db3482db => 'ジュエル';
 
   @override
@@ -2347,6 +2382,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get mf0ca78d984 => 'サーバーは共有セッション サブスクリプションをサポートしていません';
+
+  @override
+  String get m4bd93e3298 => 'サーバーが PoB II のウィンドウ接続を確認できませんでした。';
 
   @override
   String get m32bb1c680f => 'セッションは終了しました';
@@ -2735,6 +2773,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get mfdeaa71380 => 'コンポーネントをインストール';
+
+  @override
+  String get m536db585fd => 'PoB のインストールは同梱エンジンが管理します';
 
   @override
   String get mfcb7c67f91 => '現在のバージョンがインストールされています';

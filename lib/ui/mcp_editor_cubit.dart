@@ -66,6 +66,10 @@ class McpEditorCubit extends Cubit<McpEditorState> {
   final WorkshopCubit model;
   final McpEditorGateway _gateway;
   Future<void>? _starting;
+  int _bridgeGeneration = 0;
+  Future<void>? _bridgeUpdates;
+  StreamSubscription<String?>? _bridgeWatch;
+  Future<void> Function()? _closeBridge;
   bool _closing = false;
   bool _creating = false;
   bool remoteChanging = false;
@@ -85,7 +89,9 @@ class McpEditorCubit extends Cubit<McpEditorState> {
   int _revision = 0;
 
   bool get enabled => state.command != null;
-  bool get canEnable => model.components.active[Component.mcp] != null;
+  bool get canEnable => model.components.engineExecutable == null
+      ? model.components.active[Component.mcp] != null
+      : model.ready;
 
   Future<void> enable() async {
     if (enabled || state.busy || _closing) return;
@@ -114,6 +120,8 @@ class McpEditorCubit extends Cubit<McpEditorState> {
       _report = model.state.report;
       _revision = 0;
       emit((busy: false, command: command, error: null, change: null));
+      _watchBridge();
+      await _refreshBridge();
     } catch (_) {
       if (!_closing) {
         emit((
@@ -126,6 +134,48 @@ class McpEditorCubit extends Cubit<McpEditorState> {
     }
   }
 
+  void _watchBridge() {
+    _bridgeWatch = model.engineSession.stream
+        .map((state) => state.connected ? state.snapshot?.sessionId : null)
+        .distinct()
+        .listen((_) => unawaited(_refreshBridge()));
+  }
+
+  Future<void> _refreshBridge() {
+    final generation = ++_bridgeGeneration;
+    final pending = _bridgeUpdates;
+    return _bridgeUpdates = pending == null
+        ? _replaceBridge(generation)
+        : pending.then((_) => _replaceBridge(generation));
+  }
+
+  Future<void> _replaceBridge(int generation) async {
+    try {
+      final previous = _closeBridge;
+      _closeBridge = null;
+      await previous?.call();
+      if (!_canBridge(generation)) return;
+      final close = await model.engineSession.openEditorBridge(
+        _execute,
+        _afterReply,
+      );
+      if (_canBridge(generation)) {
+        _closeBridge = close;
+      } else {
+        await close?.call();
+      }
+    } catch (error) {
+      if (_canBridge(generation)) model.addLog('Канал окна PoB II: $error');
+    }
+  }
+
+  bool _canBridge(int generation) =>
+      generation == _bridgeGeneration &&
+      !_closing &&
+      enabled &&
+      model.hasSharedTree &&
+      _matches(_buildId);
+
   bool _matches(String? id) => canEnable && model.state.library.activeId == id;
 
   void checkBuild() {
@@ -136,13 +186,32 @@ class McpEditorCubit extends Cubit<McpEditorState> {
 
   Future<void> disable() async {
     _buildId = null;
-    final stopping = _gateway.stop();
+    _bridgeGeneration++;
     if (!_closing) emit((busy: true, command: null, error: null, change: null));
+    final stopping = _gateway.stop();
+    if (_bridgeUpdates != null) await _stopEditorBridge();
     await stopping;
     if (!_closing) emit(_off);
   }
 
+  Future<void> _stopEditorBridge() async {
+    await _bridgeWatch?.cancel();
+    _bridgeWatch = null;
+    await _bridgeUpdates;
+    _bridgeUpdates = null;
+    await _closeBridge?.call();
+    _closeBridge = null;
+  }
+
   Future<String> _connectionCommand() async {
+    if (model.components.engineExecutable case final executable?) {
+      return _command([
+        executable,
+        'editor',
+        '--endpoint',
+        _gateway.endpoint.path,
+      ]);
+    }
     final mcp = model.components.active[Component.mcp]!;
     final process = ProcessService();
     final python = await process.runtimePython(mcp);
@@ -167,14 +236,13 @@ class McpEditorCubit extends Cubit<McpEditorState> {
         },
       },
     }) {
-      final invocation = [
-        command,
-        ...args.cast<String>(),
-      ].map(_quote).join(' ');
-      return 'codex mcp add pob2-editor -- $invocation';
+      return _command([command, ...args.cast<String>()]);
     }
     throw const FormatException();
   }
+
+  String _command(List<String> arguments) =>
+      'codex mcp add pob2-editor -- ${arguments.map(_quote).join(' ')}';
 
   String _quote(String argument) {
     if (Platform.isWindows) return "'${argument.replaceAll("'", "''")}'";

@@ -17,9 +17,11 @@ class ComponentsView extends StatelessWidget {
   Widget build(BuildContext context) => ListView(
     padding: const EdgeInsets.all(26),
     children: [
-      const SectionHeading(
+      SectionHeading(
         'Всё для работы',
-        subtitle: 'Два компонента. Расчёты на вашем компьютере.',
+        subtitle: model.components.engineExecutable == null
+            ? 'Два компонента. Расчёты на вашем компьютере.'
+            : null,
       ),
       _firstSetup(),
       _profileActions(context),
@@ -33,7 +35,7 @@ class ComponentsView extends StatelessWidget {
             spacing: 16,
             runSpacing: 16,
             children: [
-              for (final component in Component.values)
+              for (final component in model.components.requiredComponents)
                 SizedBox(width: width, child: _Component(model, component)),
             ],
           );
@@ -144,7 +146,10 @@ class _BridgeSetupButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final mcp = model.components.active[Component.mcp];
+    final pair = model.components.active;
+    final mcp = model.components.engineExecutable == null
+        ? pair[Component.mcp]
+        : pair[Component.pob];
     return OutlinedButton(
       onPressed: model.state.busy || mcp == null
           ? null

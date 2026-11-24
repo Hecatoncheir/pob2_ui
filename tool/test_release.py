@@ -5,7 +5,7 @@ import tempfile
 import unittest
 from unittest.mock import patch
 
-from release import TARGETS, entry, filename, prepare, validate, version
+from release import TARGETS, entry, filename, prepare, stage_engine, validate, version
 
 
 class ReleaseTests(unittest.TestCase):
@@ -20,6 +20,26 @@ class ReleaseTests(unittest.TestCase):
         self.assertEqual(entry(text, '1.2.3'), '- Нужно\n')
         with self.assertRaises(ValueError):
             entry('## [1.2.3] - 2026-11-05\n', '1.2.3')
+
+    def test_stages_engine_by_native_executable(self):
+        folders = {
+            'windows-x64': ('build/windows/x64/runner/Release', 'pob2-engine.exe'),
+            'linux-x64': ('build/linux/x64/release/bundle', 'pob2-engine'),
+            'macos-arm64': ('build/macos/Build/Products/Release/PoB II.app/Contents/MacOS', 'pob2-engine'),
+        }
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            binary = root / 'verified'
+            binary.write_bytes(b'engine')
+            for target, (folder, name) in folders.items():
+                with self.subTest(target=target):
+                    (root / folder).mkdir(parents=True)
+                    directory = root / folder
+                    manifest_dir = directory.parent / 'Resources' if target == 'macos-arm64' else directory
+                    manifest_dir.mkdir(exist_ok=True)
+                    stage_engine(target, binary, 'v0.0.13-rc.2', root=root)
+                    self.assertEqual((directory / name).read_bytes(), b'engine')
+                    self.assertEqual((manifest_dir / 'pob2-engine.version').read_text().strip(), 'v0.0.13-rc.2')
 
     def test_all_three_installers_are_required(self):
         with tempfile.TemporaryDirectory() as temporary, patch('release.validate', return_value='Описание\n'):

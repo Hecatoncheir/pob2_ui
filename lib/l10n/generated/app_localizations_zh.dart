@@ -590,6 +590,12 @@ class AppLocalizationsZh extends AppLocalizations {
   String get mff31635225 => '壓縮檔需要固定的修訂版本';
 
   @override
+  String get m7152adf5d3 => '請更新引擎以選擇屬性。';
+
+  @override
+  String get m0b5173c45c => '請更新引擎以選擇配置中的物品。';
+
+  @override
   String get m7c2e51e000 => '對於完成的 PoB 樹，將 MCP 更新為 0.7.0。';
 
   @override
@@ -605,7 +611,13 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m6f9519e788 => '若要依特徵搜索，請將「組件」部分中的 MCP 更新為 0.9.0。';
 
   @override
+  String get mbeaac9e727 => '請更新引擎以編輯珠寶插槽。';
+
+  @override
   String get m9a923fd47c => '接下來的階段無需購買任何物品';
+
+  @override
+  String get mf7dd91f91b => '請更新引擎以變更職業。';
 
   @override
   String get m10db96c5ff => '請先設定 PoB 和 MCP 再進行比較';
@@ -773,6 +785,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get md4bac1da57 => '階段備註';
 
   @override
+  String get me00429e1a8 => '備註已變更，請重新開啟。';
+
+  @override
   String get mdc4baf32ac => '建構說明';
 
   @override
@@ -904,6 +919,11 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m566d4d32d7 => '輔助寶石';
+
+  @override
+  String m8bfc4312d8(String p0) {
+    return 'PoB II 視窗連線：$p0';
+  }
 
   @override
   String get md0ef3540b0 => '目錄';
@@ -1413,6 +1433,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m323494c6da => '當翻譯不可用時顯示原始文本';
 
   @override
+  String get md6c5445cf8 => '沒有先前的 PoB 安裝';
+
+  @override
   String get m8a210e3e2e => '沒有連接到共享會話';
 
   @override
@@ -1751,10 +1774,16 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m48d5bea474 => '練等計畫';
 
   @override
+  String get m9d28683954 => '升級計畫已變更，請重新開啟。';
+
+  @override
   String get m1474fac529 => '計劃、專案、開發選項...';
 
   @override
   String get mfd0560ebbf => '默認';
+
+  @override
+  String get m9fd15a00ec => '流派配置與引擎的關聯資料已損毀';
 
   @override
   String get m5189135a61 => '重試';
@@ -1782,6 +1811,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get mc1b2f9e3a6 => '設定 PoB II';
+
+  @override
+  String get m413fa4fd39 => '正在使用內附引擎準備 PoB 原始 Lua';
 
   @override
   String get m52d7142d18 => '支援 Windows x64、Linux x64 和 macOS arm64';
@@ -2239,6 +2271,9 @@ class AppLocalizationsZh extends AppLocalizations {
   }
 
   @override
+  String get mc3da8e80c2 => '珠寶';
+
+  @override
   String get m49db3482db => '珠寶';
 
   @override
@@ -2340,6 +2375,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get mf0ca78d984 => '服务器不支持共享会话订阅';
+
+  @override
+  String get m4bd93e3298 => '伺服器未確認 PoB II 視窗連線。';
 
   @override
   String get m32bb1c680f => '會議已結束';
@@ -2725,6 +2763,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get mfdeaa71380 => '安裝元件';
+
+  @override
+  String get m536db585fd => 'PoB 安裝由內附引擎管理';
 
   @override
   String get mfcb7c67f91 => '安裝的目前版本';
@@ -3475,6 +3516,12 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get mff31635225 => '壓縮檔需要固定的修訂版本';
 
   @override
+  String get m7152adf5d3 => '請更新引擎以選擇屬性。';
+
+  @override
+  String get m0b5173c45c => '請更新引擎以選擇配置中的物品。';
+
+  @override
   String get m7c2e51e000 => '對於完成的 PoB 樹，將 MCP 更新為 0.7.0。';
 
   @override
@@ -3490,7 +3537,13 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m6f9519e788 => '若要依特徵搜索，請將「組件」部分中的 MCP 更新為 0.9.0。';
 
   @override
+  String get mbeaac9e727 => '請更新引擎以編輯珠寶插槽。';
+
+  @override
   String get m9a923fd47c => '接下來的階段無需購買任何物品';
+
+  @override
+  String get mf7dd91f91b => '請更新引擎以變更職業。';
 
   @override
   String get m10db96c5ff => '請先設定 PoB 和 MCP 再進行比較';
@@ -3658,6 +3711,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get md4bac1da57 => '階段備註';
 
   @override
+  String get me00429e1a8 => '備註已變更，請重新開啟。';
+
+  @override
   String get mdc4baf32ac => '建構說明';
 
   @override
@@ -3789,6 +3845,11 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m566d4d32d7 => '輔助寶石';
+
+  @override
+  String m8bfc4312d8(String p0) {
+    return 'PoB II 視窗連線：$p0';
+  }
 
   @override
   String get md0ef3540b0 => '目錄';
@@ -4298,6 +4359,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m323494c6da => '當翻譯不可用時顯示原始文本';
 
   @override
+  String get md6c5445cf8 => '沒有先前的 PoB 安裝';
+
+  @override
   String get m8a210e3e2e => '沒有連接到共享會話';
 
   @override
@@ -4636,10 +4700,16 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m48d5bea474 => '練等計畫';
 
   @override
+  String get m9d28683954 => '升級計畫已變更，請重新開啟。';
+
+  @override
   String get m1474fac529 => '計劃、專案、開發選項...';
 
   @override
   String get mfd0560ebbf => '默認';
+
+  @override
+  String get m9fd15a00ec => '流派配置與引擎的關聯資料已損毀';
 
   @override
   String get m5189135a61 => '重試';
@@ -4667,6 +4737,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get mc1b2f9e3a6 => '設定 PoB II';
+
+  @override
+  String get m413fa4fd39 => '正在使用內附引擎準備 PoB 原始 Lua';
 
   @override
   String get m52d7142d18 => '支援 Windows x64、Linux x64 和 macOS arm64';
@@ -5124,6 +5197,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   }
 
   @override
+  String get mc3da8e80c2 => '珠寶';
+
+  @override
   String get m49db3482db => '珠寶';
 
   @override
@@ -5225,6 +5301,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get mf0ca78d984 => '服务器不支持共享会话订阅';
+
+  @override
+  String get m4bd93e3298 => '伺服器未確認 PoB II 視窗連線。';
 
   @override
   String get m32bb1c680f => '會議已結束';
@@ -5610,6 +5689,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get mfdeaa71380 => '安裝元件';
+
+  @override
+  String get m536db585fd => 'PoB 安裝由內附引擎管理';
 
   @override
   String get mfcb7c67f91 => '安裝的目前版本';

@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:grpc/grpc.dart';
 
 import 'dart:async';
 import 'dart:io';
@@ -6,6 +7,7 @@ import 'dart:typed_data';
 
 import '../data/component_repository.dart';
 import '../data/engine_session_client.dart';
+import '../data/equipment_repository.dart';
 import '../data/mcp_client.dart';
 import '../data/mcp_editor_gateway.dart';
 import '../data/mcp_error_message.dart';
@@ -16,6 +18,7 @@ import '../data/pob_share_links.dart';
 import '../data/profile_cleanup.dart';
 import '../data/progression_comparison_session.dart';
 import '../data/pob_build_library.dart';
+import '../data/pob_engine_bindings.dart';
 import '../data/pob_build_locations.dart';
 import '../data/session_repository.dart';
 import '../data/build_library.dart';
@@ -24,10 +27,12 @@ import '../data/tree_progression_exchange.dart';
 import '../data/tree_progression_repository.dart';
 import '../data/tree_path_comparison.dart' as paths;
 import '../domain/build_report.dart';
+import '../domain/equipment_item.dart';
 import '../domain/tree_geometry.dart';
 import '../domain/tree_progression.dart';
 import '../domain/tree_path_comparison.dart';
 import '../domain/original_tree_scene.dart';
+import '../domain/node_power.dart';
 import '../domain/node_preview.dart';
 import '../domain/library_entry.dart';
 import '../domain/component.dart';
@@ -44,15 +49,32 @@ import 'engine_session_cubit.dart';
 
 typedef _BuildSnapshot = ({String xml, String title});
 typedef _ComponentValidation = Future<void> Function(Installations);
-typedef _EngineXmlBinding = ({int inputRevision, String libraryRevision});
+typedef _EngineXmlBinding = ({
+  int inputRevision,
+  String libraryRevision,
+  String? fileXml,
+});
+typedef _SharedEditSource = ({
+  EngineSnapshot snapshot,
+  _EngineXmlBinding binding,
+  int epoch,
+});
 typedef WorkshopTreeOffer = ({
   EngineTreeOffer offer,
   int inputRevision,
   int bindingEpoch,
 });
 
+typedef WorkshopJewelOffer = ({
+  EngineJewelOffer offer,
+  int inputRevision,
+  int bindingEpoch,
+});
+
 const _missingEngineXml = 'В общей сессии нет XML сборки';
 const _staleTree = 'Выполните предпросмотр для текущей ревизии';
+const _staleBuild =
+    'Сборка изменилась. Дождитесь новой ревизии и повторите действие';
 const _staleCondition = 'Сборка изменилась. Откройте условие заново.';
 const _divergedBuild =
     'Файл сборки изменился. Проверьте версии перед переподключением.';
@@ -70,6 +92,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     PobShareLinks? shareLinks,
     McpClient Function()? createEngine,
     Future<EngineConnection> Function(EngineOptions)? openEngineSession,
+    EngineOptions? primaryEngine,
   }) : _engine = engine,
        _createEngine = createEngine ?? McpClient.new,
        session = session ?? SessionRepository(components.store.root),
@@ -79,6 +102,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
        buildLocations = buildLocations ?? PobBuildLocations(),
        _shareLinks = shareLinks ?? PobShareLinks(),
        _openEngineSession = openEngineSession,
+       _primaryEngine = primaryEngine,
        super(initialState ?? WorkshopState());
   final ComponentRepository components;
   final Future<EngineConnection> Function(EngineOptions)? _openEngineSession;
@@ -86,10 +110,16 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     open: _openEngineSession,
     onSnapshot: _applyEngineSnapshot,
   );
-  ({String folder, String id})? _engineBinding;
+  final EngineOptions? _primaryEngine;
+  Future<void>? _initialization;
+  Future<void>? _primaryOpening;
+  EngineBindingKey? _primaryAttempt;
+  bool _managedEngine = false;
+  int? _primaryDiskRevision;
+  EngineBindingKey? _engineBinding;
   int _engineBindingEpoch = 0;
   _EngineXmlBinding? _engineXmlBinding;
-  ({String folder, String id})? get _currentEngineBinding {
+  EngineBindingKey? get _currentEngineBinding {
     final id = state.library.activeId;
     return id == null ? null : (folder: sharedLibrary?.directory ?? '', id: id);
   }
@@ -102,6 +132,8 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     bool useSessionXml = false,
   }) async {
     final opened = _currentEngineBinding;
+    _primaryAttempt = opened;
+    _managedEngine = false;
     final xml = importOpenBuild ? await _exportEngineXml(createName) : null;
     final syncXml = bindCurrentBuild && (importOpenBuild || useSessionXml);
     final input = syncXml ? _startEngineXmlBinding(opened) : null;
@@ -148,16 +180,19 @@ class WorkshopCubit extends Cubit<WorkshopState> {
         sharedLibrary == null) {
       throw StateError('Откройте сборку для импорта в общую сессию');
     }
-    return (inputRevision: 0, libraryRevision: revision);
+    return (inputRevision: 0, libraryRevision: revision, fileXml: null);
   }
 
   void _clearEngineBinding() {
+    _managedEngine = false;
+    _primaryDiskRevision = null;
     _engineBindingEpoch++;
     _engineBinding = null;
     _engineXmlBinding = null;
   }
 
   Future<void> disconnectEngine() async {
+    _primaryAttempt = _currentEngineBinding;
     _clearEngineBinding();
     await engineSession.disconnect();
   }
@@ -184,6 +219,214 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     );
   }
 
+  bool get usesPrimaryEngine => _primaryEngine != null;
+
+  Future<void> waitForPrimarySession() async {
+    var opening = _primaryOpening;
+    while (opening != null) {
+      await opening;
+      opening = _primaryOpening;
+    }
+  }
+
+  void _schedulePrimarySession() {
+    final key = _currentEngineBinding;
+    final shared = sharedLibrary;
+    if (_primaryEngine == null ||
+        _primaryOpening != null ||
+        key == null ||
+        key == _primaryAttempt ||
+        shared == null ||
+        state.report == null)
+      return;
+    if (_closing || isClosed || _engineBinding != null || state.busy) return;
+    _primaryAttempt = key;
+    _primaryOpening = _openPrimarySession(shared, key).whenComplete(() {
+      _primaryOpening = null;
+      _schedulePrimarySession();
+    });
+    unawaited(_primaryOpening!);
+  }
+
+  Future<void> _openPrimarySession(
+    PobBuildLibrary shared,
+    EngineBindingKey key,
+  ) async {
+    final startingEpoch = _engineBindingEpoch;
+    int? bindingEpoch;
+    try {
+      final disk = await shared.open(key.id);
+      final saved = await _ensurePrimaryBinding(shared, key, disk);
+      if (_primarySourceChanged(key, startingEpoch)) {
+        if (state.busy &&
+            key == _currentEngineBinding &&
+            startingEpoch == _engineBindingEpoch) {
+          _primaryAttempt = null;
+        }
+        return;
+      }
+      final epoch = ++_engineBindingEpoch;
+      bindingEpoch = epoch;
+      _managedEngine = true;
+      _engineBinding = key;
+      _engineXmlBinding = (
+        inputRevision: 0,
+        libraryRevision: disk.entry.revision!,
+        fileXml: disk.xml,
+      );
+      final options = _primaryOptions(saved.sessionId);
+      await engineSession.connect(
+        options,
+        initialSnapshot: (connection) =>
+            _restorePrimarySession(connection, saved, disk, epoch),
+      );
+      await _confirmEngineXmlBinding(epoch);
+    } catch (error) {
+      if (isClosed ||
+          _closing ||
+          (bindingEpoch ?? startingEpoch) != _engineBindingEpoch)
+        return;
+      _clearEngineBinding();
+      _update(
+        state.copyWith(
+          operation: (busy: state.busy, error: engineError(error)),
+        ),
+      );
+      addLog(engineError(error));
+    }
+  }
+
+  bool _primarySourceChanged(EngineBindingKey key, int epoch) =>
+      isClosed ||
+      _closing ||
+      state.busy ||
+      key != _currentEngineBinding ||
+      epoch != _engineBindingEpoch ||
+      _engineBinding != null;
+
+  Future<SavedEngineBinding> _ensurePrimaryBinding(
+    PobBuildLibrary shared,
+    EngineBindingKey key,
+    PobBuildVersion disk,
+  ) async {
+    final existing = await shared.engineBindings.read(key);
+    if (existing != null) return existing;
+    final binding = (
+      sessionId: shared.engineBindings.initialSessionId(
+        key,
+        disk.xml,
+        disk.entry.updated,
+      ),
+      fileHash: PobEngineBindings.hash(disk.xml),
+      engineHash: null,
+    );
+    await shared.engineBindings.write(key, binding);
+    return binding;
+  }
+
+  EngineOptions _primaryOptions(String sessionId) {
+    final pair = components.active;
+    final pob = pair[Component.pob];
+    final native = pob?.nativeDirectory ?? _legacyNativeDirectory(pair);
+    return _primaryEngine!.forBuild(
+      sessionId,
+      pob: pob?.directory,
+      native: native,
+    );
+  }
+
+  String? _legacyNativeDirectory(Installations pair) {
+    final mcp = pair[Component.mcp]?.directory;
+    if (Platform.isWindows || mcp == null) return null;
+    return Directory.fromUri(Directory(mcp).uri.resolve('pob_poe2_mcp/native/'))
+        .path;
+  }
+
+  Future<EngineSnapshot> _restorePrimarySession(
+    EngineConnection connection,
+    SavedEngineBinding saved,
+    PobBuildVersion disk,
+    int epoch,
+  ) async {
+    final session = await _existingPrimarySession(connection, saved.sessionId);
+    if (epoch != _engineBindingEpoch) throw StateError(_staleBuild);
+
+    if (session == null)
+      return _createPrimarySession(connection, saved, disk, epoch);
+    final engineXml = session.build?.xml;
+    if (engineXml == null) throw StateError(_missingEngineXml);
+    final sameEngine = saved.engineHash == PobEngineBindings.hash(engineXml);
+    final sameFile = saved.fileHash == PobEngineBindings.hash(disk.xml);
+    if (engineXml == disk.xml || (sameFile && sameEngine)) {
+      return _loadedFromDisk(session, epoch);
+    }
+    if (sameFile) return session;
+    if (!sameEngine) throw StateError(_divergedBuild);
+    await _checkEngineFile(_engineXmlBinding!);
+    if (epoch != _engineBindingEpoch) throw StateError(_staleBuild);
+    final replaced = await connection.replaceBuild(
+      session,
+      disk.xml,
+      engineRequestId(),
+    );
+    return _loadedFromDisk(replaced, epoch);
+  }
+
+  Future<EngineSnapshot> _createPrimarySession(
+    EngineConnection connection,
+    SavedEngineBinding saved,
+    PobBuildVersion disk,
+    int epoch,
+  ) async {
+    try {
+      final created = await connection.create(
+        saved.sessionId,
+        disk.entry.title,
+        engineRequestId(),
+        xml: disk.xml,
+      );
+      return _loadedFromDisk(created, epoch);
+    } on GrpcError catch (error) {
+      if (error.code != StatusCode.alreadyExists) rethrow;
+      return _restorePrimarySession(connection, saved, disk, epoch);
+    }
+  }
+
+  EngineSnapshot _loadedFromDisk(EngineSnapshot snapshot, int epoch) {
+    if (epoch != _engineBindingEpoch) throw StateError(_staleBuild);
+    _primaryDiskRevision = snapshot.revision;
+    return snapshot;
+  }
+
+  Future<EngineSnapshot?> _existingPrimarySession(
+    EngineConnection connection,
+    String id,
+  ) async {
+    try {
+      return await connection.snapshot(id);
+    } on GrpcError catch (error) {
+      if (error.code == StatusCode.notFound) return null;
+      rethrow;
+    }
+  }
+
+  Future<void> _checkpointPrimarySession(
+    EngineSnapshot snapshot,
+    String diskXml,
+  ) async {
+    final key = _engineBinding;
+    if (!_managedEngine || key == null) return;
+    try {
+      await sharedLibrary!.engineBindings.write(key, (
+        sessionId: snapshot.sessionId,
+        fileHash: PobEngineBindings.hash(diskXml),
+        engineHash: PobEngineBindings.hash(snapshot.build!.xml),
+      ));
+    } on FileSystemException catch (error) {
+      addLog(error.toString());
+    }
+  }
+
   Future<void> _acceptEngineXml(EngineSnapshot snapshot) async {
     final binding = _engineXmlBinding!;
     if (binding.inputRevision != 0 &&
@@ -193,7 +436,10 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     final incoming = snapshot.build;
     if (incoming == null) return;
     if (incoming.inputRevision > binding.inputRevision) {
-      await _run(() => _mirrorEngineBuild(snapshot, binding));
+      await _run(() async {
+        await _mirrorEngineBuild(snapshot, binding);
+        _clearHistory();
+      });
       if (state.error case final error?) throw StateError(error);
       return;
     }
@@ -203,15 +449,18 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     }
   }
 
-  Future<void> _checkEngineFile(_EngineXmlBinding binding) async {
+  Future<String> _checkEngineFile(_EngineXmlBinding binding) async {
     final entry = state.library.active;
     if (entry == null || entry.revision != binding.libraryRevision) {
       throw StateError(_divergedBuild);
     }
     final file = await sharedLibrary!.changed(entry.id, null);
-    if (file?.entry.revision != binding.libraryRevision) {
+    if (file == null ||
+        file.entry.revision != binding.libraryRevision ||
+        (binding.fileXml != null && file.xml != binding.fileXml)) {
       throw StateError(_divergedBuild);
     }
+    return file.xml;
   }
 
   Future<void> _mirrorEngineBuild(
@@ -219,17 +468,20 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     _EngineXmlBinding binding,
   ) async {
     final epoch = _engineBindingEpoch;
-    await _checkEngineFile(binding);
+    final diskXml = await _checkEngineFile(binding);
     await _flushText();
     if (epoch != _engineBindingEpoch || binding != _engineXmlBinding) {
-      throw StateError(
-        'Сборка изменилась. Дождитесь новой ревизии и повторите действие',
-      );
+      throw StateError(_staleBuild);
     }
     final document = state.document!;
     final target = state.library;
     final before = await _currentXml();
     final incoming = snapshot.build!;
+    final keepDisk =
+        _managedEngine &&
+        binding.inputRevision == 0 &&
+        snapshot.revision == _primaryDiskRevision;
+    final fileXml = keepDisk ? diskXml : incoming.xml;
     final (:xml, :progression) = splitTreeProgression(incoming.xml);
     _markStale();
     try {
@@ -239,16 +491,31 @@ class WorkshopCubit extends Cubit<WorkshopState> {
         title: snapshot.buildName,
         progression: progression,
         progressionSource: _storedProgressionKey,
-        savedXml: xml,
+        persist: !keepDisk,
+        savedXml: fileXml,
+        expectedXml: diskXml,
+        snapshot: snapshot,
       );
+      if (progression == null) await _clearMissingProgression(diskXml);
       _engineXmlBinding = (
         inputRevision: incoming.inputRevision,
         libraryRevision: state.library.active!.revision!,
+        fileXml: fileXml,
       );
     } catch (_) {
       await _restoreWorking(before, document, target);
       rethrow;
     }
+    _seenBuildXml = fileXml;
+    await _checkpointPrimarySession(snapshot, fileXml);
+  }
+
+  Future<void> _clearMissingProgression(String previousXml) async {
+    final plan = splitTreeProgression(previousXml).progression;
+    final id = state.library.activeId;
+    if (plan == null || id == null) return;
+    final key = _progressionKey(id, plan.version, plan.characterClass);
+    await progressionRepository(key).restoreFromSnapshot([]);
   }
 
   final PobShareLinks _shareLinks;
@@ -295,7 +562,48 @@ class WorkshopCubit extends Cubit<WorkshopState> {
   );
 
   TreeProgressionRepository progressionRepository(TreeProgressionKey key) =>
-      TreeProgressionRepository(components.store.root, key);
+      TreeProgressionRepository(
+        components.store.root,
+        key,
+        saveShared: _sharedProgressionEditor(key),
+      );
+
+  Future<void> Function(List<TreeProgressionStep>)? _sharedProgressionEditor(
+    TreeProgressionKey key,
+  ) {
+    if (!hasSharedTree || key != progressionKey) return null;
+    final epoch = _engineBindingEpoch;
+    final source = engineSession.state.snapshot?.build?.xml;
+    if (source == null) return null;
+    var previous = _progressionValue(source);
+    return (steps) async {
+      final plan = (
+        version: key.version,
+        characterClass: key.characterClass,
+        steps: steps,
+      );
+      final result = await _applyEngineEdit(
+        expectedInput: _engineXmlBinding?.inputRevision ?? 0,
+        epoch: epoch,
+        staleMessage: _staleBuild,
+        apply: (current) {
+          if (_progressionValue(current.build!.xml) != previous) {
+            throw StateError('План прокачки изменился. Откройте его заново.');
+          }
+          final base = splitTreeProgression(current.build!.xml).xml;
+          return engineSession.replaceBuild(
+            current,
+            attachTreeProgression(base, plan),
+          );
+        },
+      );
+      if (!result.committed) throw StateError(result.error!);
+      previous = attachTreeProgression('', plan);
+    };
+  }
+
+  String _progressionValue(String xml) =>
+      attachTreeProgression('', splitTreeProgression(xml).progression);
 
   Set<int> get _progressionStarts => {
     for (final node in state.document!.tree!.nodes)
@@ -357,7 +665,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
           xml: xml,
           starts: _progressionStarts,
         );
-      });
+      }, engine: _createEngine());
 
   bool _canCompareProgression(TreeProgressionKey key) =>
       key == progressionKey && !state.busy && state.document?.stale == false;
@@ -383,6 +691,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
   GameCatalogRepository get catalogs => _catalogs;
   late final treeIcons = TreeIconRepository(
     root: Directory.fromUri(components.store.root.uri.resolve('tree-cache/')),
+    readShared: _readSharedTexture,
   );
   TreeGeometry? _pendingTreeArtwork;
   Future<void>? _treeArtworkLoad;
@@ -398,7 +707,8 @@ class WorkshopCubit extends Cubit<WorkshopState> {
   final List<_BuildSnapshot> _undoHistory = [];
   final List<_BuildSnapshot> _redoHistory = [];
 
-  bool get ready => components.active.length == Component.values.length;
+  bool get ready =>
+      components.requiredComponents.every(components.active.containsKey);
   bool get luaReady => engine.connected && state.classes.isNotEmpty;
 
   Future<BuildComparison> compareSavedBuilds(
@@ -417,11 +727,15 @@ class WorkshopCubit extends Cubit<WorkshopState> {
       engine.connected &&
       !state.busy &&
       state.document?.stale == false &&
-      engine.tools.containsAll({
-        'pob_node_tooltip',
-        'pob_tree_action',
-        'pob_tree_options',
-      });
+      (_canCompareSharedPaths ||
+          engine.tools.containsAll({
+            'pob_node_tooltip',
+            'pob_tree_action',
+            'pob_tree_options',
+          }));
+
+  bool get _canCompareSharedPaths =>
+      hasSharedTree && engineSession.supportsTreeAllocationModes;
 
   Future<TreePathComparison> compareTreePaths(int first, int second) async {
     final report = state.report;
@@ -430,16 +744,15 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     final buildId = state.library.activeId;
     final mode = state.treeMode;
     final componentSource = _componentSource;
-    final pair = Map<Component, Installation>.unmodifiable(components.active);
-    final xml = await _currentXml();
-    final reports = await paths.compareTreePaths(
-      _createEngine(),
-      pair,
-      xml,
-      first,
-      second,
-      mode: mode,
-    );
+    final shared = _canCompareSharedPaths
+        ? await _compareSharedPaths(first, second)
+        : null;
+    final xml = shared == null
+        ? await _currentXml()
+        : engineSession.state.snapshot!.build!.xml;
+    final reports = shared == null
+        ? await _compareLegacyPaths(xml, first, second, mode)
+        : _enginePathReports(shared);
     final comparison = TreePathComparison(
       source: report,
       sourceRevision: PobBuildDocument(xml).revision,
@@ -448,12 +761,87 @@ class WorkshopCubit extends Cubit<WorkshopState> {
       mode: mode,
       weaponSet: report.weaponSet,
       componentSource: componentSource,
+      enginePaths: shared,
     );
     if (!canCompareTreePaths || !isTreePathCurrent(comparison)) {
       throw StateError(staleTreePaths);
     }
     return comparison;
   }
+
+  Future<TreePathReports> _compareLegacyPaths(
+    String xml,
+    int first,
+    int second,
+    TreeAllocationMode mode,
+  ) => paths.compareTreePaths(
+    _createEngine(),
+    Map<Component, Installation>.unmodifiable(components.active),
+    xml,
+    first,
+    second,
+    mode: mode,
+  );
+
+  Future<EngineTreePaths?> _compareSharedPaths(int first, int second) async {
+    if (first == second)
+      throw const FormatException('Выберите два разных узла.');
+    try {
+      final left = await previewSharedTreeNode(
+        first,
+        action: EngineTreeAction.allocate,
+      );
+      final right = await previewSharedTreeNode(
+        second,
+        action: EngineTreeAction.allocate,
+      );
+      if (!isCurrentSharedTreeOffer(left) || !isCurrentSharedTreeOffer(right)) {
+        throw StateError(staleTreePaths);
+      }
+      return (
+        first: left.offer,
+        second: right.offer,
+        inputRevision: left.inputRevision,
+        bindingEpoch: left.bindingEpoch,
+      );
+    } on GrpcError catch (error) {
+      if (error.code == StatusCode.invalidArgument) return null;
+      rethrow;
+    }
+  }
+
+  static TreePathReports _enginePathReports(EngineTreePaths source) => (
+    baseline: _enginePathStats(source.first.preview.comparison.before),
+    first: _enginePathOption(source.first),
+    second: _enginePathOption(source.second),
+  );
+
+  static TreePathStats _enginePathStats(EngineCalculation result) =>
+      (dps: result.dps, life: result.life);
+
+  static TreePathOption _enginePathOption(EngineTreeOffer offer) {
+    final preview = offer.preview;
+    final points = preview.points!;
+    final mode = offer.edit.allocationMode;
+    return (
+      target: offer.edit.nodeId,
+      points:
+          _pathPointCount(points.after, mode) -
+          _pathPointCount(points.before, mode),
+      nodes: preview.added,
+      stats: _enginePathStats(preview.comparison.after),
+      xml: null,
+    );
+  }
+
+  static int _pathPointCount(
+    EnginePassivePoints points,
+    TreeAllocationMode? mode,
+  ) => switch (mode) {
+    TreeAllocationMode.weaponOne => points.weaponOne,
+    TreeAllocationMode.weaponTwo => points.weaponTwo,
+    _ => points.passives,
+  };
 
   bool isTreePathCurrent(TreePathComparison comparison) =>
       ready &&
@@ -462,12 +850,29 @@ class WorkshopCubit extends Cubit<WorkshopState> {
       state.report?.weaponSet == comparison.weaponSet &&
       _componentSource == comparison.componentSource &&
       identical(state.report, comparison.source) &&
-      state.library.activeId == comparison.buildId;
+      state.library.activeId == comparison.buildId &&
+      _isCurrentPathPreview(comparison.enginePaths);
+
+  bool _isCurrentPathPreview(EngineTreePaths? paths) =>
+      paths == null ||
+      (_isCurrentEngineInput(paths.bindingEpoch, paths.inputRevision) &&
+          engineSession.isCurrentTreeOffer(paths.first) &&
+          engineSession.isCurrentTreeOffer(paths.second));
 
   Future<BuildEditResult> applyTreePath(
     TreePathComparison comparison, {
     required bool first,
   }) {
+    if (comparison.enginePaths case final shared?) {
+      if (!isTreePathCurrent(comparison)) {
+        return Future.value((committed: false, error: staleTreePaths));
+      }
+      return applySharedTreeNode((
+        offer: first ? shared.first : shared.second,
+        inputRevision: shared.inputRevision,
+        bindingEpoch: shared.bindingEpoch,
+      ));
+    }
     final option = first ? comparison.reports.first : comparison.reports.second;
     late String updated;
     return _changeBuild(
@@ -478,7 +883,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
             current.revision != comparison.sourceRevision) {
           throw StateError(staleTreePaths);
         }
-        updated = current.withTreeAllocation(PobBuildDocument(option.xml));
+        updated = current.withTreeAllocation(PobBuildDocument(option.xml!));
       },
       validate: (after) => paths.checkAppliedTreePath(after, option),
     );
@@ -487,15 +892,28 @@ class WorkshopCubit extends Cubit<WorkshopState> {
   String get _componentSource => _pairSource(components.active);
 
   String _pairSource(Installations pair) =>
-      Component.values.map((key) => pair[key]!.commit).join('-');
+      components.requiredComponents.map((key) => pair[key]!.commit).join('-');
 
   Future<NodePreview> previewNode(int id) async {
+    final hovered = await _sharedNodeTooltip(
+      id,
+      compare: true,
+      includeScene: true,
+    );
+    if (hovered?['engineScene'] case final OriginalTreeScene scene) {
+      final images = await loadTreeSceneImages(scene);
+      return NodePreview(tooltip: hovered!, scene: scene, images: images);
+    }
+    return _legacyNodePreview(id);
+  }
+
+  Future<NodePreview> _legacyNodePreview(int id) async {
+    final tip = await _sharedNodeTooltip(id, compare: true);
     if (!engine.tools.contains('pob_tree_hover')) {
       return NodePreview(
-        tooltip: await engine.call('pob_node_tooltip', {
-          'id': id,
-          'compare': true,
-        }),
+        tooltip:
+            tip ??
+            await engine.call('pob_node_tooltip', {'id': id, 'compare': true}),
       );
     }
     final result = await engine.call('pob_tree_hover', {
@@ -505,22 +923,63 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     final scene = OriginalTreeScene.fromJson(jsonMap(result['scene']));
     final images = await loadTreeSceneImages(scene);
     return NodePreview(
-      tooltip: jsonMap(result['tooltip']),
+      tooltip: tip ?? jsonMap(result['tooltip']),
       scene: scene,
       images: images,
     );
   }
 
+  Future<JsonMap?> _sharedNodeTooltip(
+    int id, {
+    required bool compare,
+    bool includeScene = false,
+  }) async {
+    final snapshot = _engineXmlBinding == null
+        ? null
+        : engineSession.state.snapshot;
+    if (snapshot == null) return null;
+    return engineSession.workshopReader?.readNodeTooltip(
+      snapshot,
+      id,
+      compare,
+      includeScene: includeScene,
+    );
+  }
+
   Future<List<int>> progressionPath(int id) async {
     final report = state.report;
-    final result = await engine.call('pob_node_tooltip', {
-      'id': id,
-      'compare': false,
-    });
+    final result =
+        await _sharedNodeTooltip(id, compare: false) ??
+        await engine.call('pob_node_tooltip', {'id': id, 'compare': false});
     if (state.report != report || state.busy) return const [];
     final path = NodePreview(tooltip: result).path;
     return path.firstOrNull == id ? List.unmodifiable(path.reversed) : const [];
   }
+
+  ({EngineTreePowerReader reader, EngineSnapshot snapshot})? get _sharedPower {
+    if (_engineXmlBinding == null) return null;
+    final Object? reader = engineSession.workshopReader;
+    final snapshot = engineSession.state.snapshot;
+    if (reader is EngineTreePowerReader &&
+        reader.supportsTreePower &&
+        snapshot != null) {
+      return (reader: reader, snapshot: snapshot);
+    }
+    return null;
+  }
+
+  Future<List<JsonMap>>? readSharedPowerMetrics() {
+    final power = _sharedPower;
+    return power?.reader.readPowerMetrics(power.snapshot);
+  }
+
+  Stream<NodePowerUpdate>? watchSharedPower(NodePowerOptions options) {
+    final power = _sharedPower;
+    return power?.reader.watchTreePower(power.snapshot, options);
+  }
+
+  Future<Uint8List?> _readSharedTexture(TreeTextureReference reference) async =>
+      engineSession.workshopReader?.readTreeTexture(reference);
 
   Future<Map<String, Uint8List>> loadTreeSceneImages(OriginalTreeScene scene) =>
       treeIcons.overlay(
@@ -529,15 +988,18 @@ class WorkshopCubit extends Cubit<WorkshopState> {
         _componentSource,
       );
 
-  bool get canRollback =>
-      components.store.previous.length == Component.values.length;
+  bool get canRollback => components.requiredComponents.every(
+    components.store.previous.containsKey,
+  );
 
   void _update(WorkshopState next) {
     if (isClosed) return;
     final wasBusy = state.busy;
     emit(next);
     if (_engineBinding != null && _engineBinding != _currentEngineBinding) {
+      final release = _managedEngine && _currentEngineBinding == null;
       _clearEngineBinding();
+      if (release) unawaited(engineSession.disconnect());
     }
     _mcpEditor?.checkBuild();
     _watchOpenBuild();
@@ -578,10 +1040,22 @@ class WorkshopCubit extends Cubit<WorkshopState> {
           clearSetupStage: state.error == null,
         ),
       );
+      _schedulePrimarySession();
     }
   }
 
-  Future<void> initialize() => _run(() async {
+  Future<void> initialize() async {
+    if (_initialization != null) return;
+    final loading = _run(_loadWorkspace);
+    _initialization = loading;
+    try {
+      await loading;
+    } finally {
+      _initialization = null;
+    }
+  }
+
+  Future<void> _loadWorkspace() async {
     await components.load();
     final builds = await _loadLibrary();
     final saved = !builds.skipSessionRecovery && await session.exists();
@@ -597,7 +1071,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
       ),
     );
     await _resume();
-  });
+  }
 
   Future<LibraryState> _loadLibrary() async {
     try {
@@ -694,7 +1168,8 @@ class WorkshopCubit extends Cubit<WorkshopState> {
   Future<void> prepareComponents() => _run(() async {
     if (!ready) {
       await _installFirstPair();
-    } else if (!luaReady &&
+    } else if (components.engineExecutable == null &&
+        !luaReady &&
         components.active.values.any((item) => item.archiveSha256 == null)) {
       await _migrateLegacyPair();
     }
@@ -754,7 +1229,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
   }
 
   Future<void> updateComponents() => _runComponentChange(() async {
-    if (state.releases.length != Component.values.length) {
+    if (!components.requiredComponents.every(state.releases.containsKey)) {
       await _checkComponentReleases();
     }
     await _changeComponentPair(
@@ -792,17 +1267,58 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     );
   }
 
-  Future<void> writeMcpNotes(String id, String text) => _run(() async {
-    await buildNotes.flushText();
-    await buildNotes.readNotes(id);
-    await buildNotes.saveNotes(id, text);
-    await buildNotes.flushText();
-    if (sharedLibrary case final shared?) {
-      final disk = await shared.open(id);
-      _seenBuildXml = disk.xml;
-      _update(state.copyWith(library: _withEntry(disk.entry)));
+  Future<void> Function(String text)? sharedNotesEditor(String id) {
+    if (!hasSharedTree || state.library.activeId != id) return null;
+    final epoch = _engineBindingEpoch;
+    final source = engineSession.state.snapshot?.build?.xml;
+    if (source == null) return null;
+    var previous = PobBuildDocument(splitTreeProgression(source).xml).notes;
+    return (text) async {
+      final result = await _editSharedXml(epoch, (document) {
+        if (document.notes != previous) {
+          throw StateError('Заметки изменились. Откройте их заново.');
+        }
+        return document.withNotes(text);
+      });
+      if (!result.committed) throw StateError(result.error!);
+      previous = text.replaceAll('\r\n', '\n');
+    };
+  }
+
+  Future<BuildEditResult> _editSharedXml(
+    int epoch,
+    String Function(PobBuildDocument) change,
+  ) => _applyEngineEdit(
+    expectedInput: _engineXmlBinding?.inputRevision ?? 0,
+    epoch: epoch,
+    staleMessage: _staleBuild,
+    apply: (current) {
+      final (:xml, :progression) = splitTreeProgression(current.build!.xml);
+      final changed = change(PobBuildDocument(xml));
+      return engineSession.replaceBuild(
+        current,
+        attachTreeProgression(changed, progression),
+      );
+    },
+  );
+
+  Future<void> writeMcpNotes(String id, String text) async {
+    if (sharedNotesEditor(id) case final save?) {
+      await save(text);
+      return;
     }
-  });
+    await _run(() async {
+      await buildNotes.flushText();
+      await buildNotes.readNotes(id);
+      await buildNotes.saveNotes(id, text);
+      await buildNotes.flushText();
+      if (sharedLibrary case final shared?) {
+        final disk = await shared.open(id);
+        _seenBuildXml = disk.xml;
+        _update(state.copyWith(library: _withEntry(disk.entry)));
+      }
+    });
+  }
 
   Future<void> _runComponentChange(Future<void> Function() action) async {
     if (_closing || isClosed || state.busy) return;
@@ -1125,7 +1641,13 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     );
   });
 
-  Future<({BuildReport report, String xml})> _readResult() async {
+  Future<({BuildReport report, String xml})> _readResult([
+    EngineSnapshot? snapshot,
+  ]) async {
+    if (snapshot != null && snapshot.build != null) {
+      final report = await engineSession.workshopReader?.readReport(snapshot);
+      if (report != null) return (report: report, xml: snapshot.build!.xml);
+    }
     final result = await engine.call('pob_check_build');
     final report = parseBuildReport(result);
     return (report: report, xml: await _currentXml());
@@ -1136,24 +1658,28 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     String? title,
     bool persist = true,
     String? savedXml,
+    String? expectedXml,
     TreeProgressionTransfer? progression,
     TreeProgressionKey? progressionSource,
+    EngineSnapshot? snapshot,
   }) async {
-    final (:report, :xml) = await _readResult();
-    final (:tree, :error) = await _readTree(engine);
-    if (progression != null) _checkProgression(progression, report, tree);
+    final (:report, :xml) = await _readResult(snapshot);
+    final (:tree, :error) = await _readWorkshopTree(snapshot);
+    if (progression != null && expectedXml == null) {
+      _checkProgression(progression, report, tree);
+    }
     final builds = persist
         ? await _saveBuild(
             target ?? state.library,
             report,
-            attachTreeProgression(savedXml ?? xml, progression),
+            savedXml ?? attachTreeProgression(xml, progression),
             title: title,
             progressionSource: progressionSource,
+            expectedXml: expectedXml,
           )
         : target ?? state.library;
     if ((progression, builds.activeId) case (final plan?, final id?)) {
-      final key = _progressionKey(id, plan.version, plan.characterClass);
-      await progressionRepository(key).restoreIfMissing(plan.steps);
+      await _restoreProgression(plan, id, fromEngine: expectedXml != null);
     }
     final saved = sharedLibrary != null
         ? builds.active != null
@@ -1176,6 +1702,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     String xml, {
     String? title,
     TreeProgressionKey? progressionSource,
+    String? expectedXml,
   }) async {
     final epoch = _engineBindingEpoch;
     final builds = await switch (sharedLibrary) {
@@ -1185,9 +1712,11 @@ class WorkshopCubit extends Cubit<WorkshopState> {
         xml,
         title: title,
         progressionSource: progressionSource,
+        expectedXml: expectedXml,
       ),
       null => library.save(target, report, xml, title: title),
     };
+    if (sharedLibrary != null && target.activeId == null) _seenBuildXml = xml;
     if (title != null) _followEngineRename(target, builds, epoch);
     return builds;
   }
@@ -1201,6 +1730,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
         after.activeId == null)
       return;
     _engineBinding = (folder: binding.folder, id: after.activeId!);
+    if (_managedEngine) _primaryAttempt = _engineBinding;
     _followEngineFileRevision(before, after);
   }
 
@@ -1215,7 +1745,20 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     _engineXmlBinding = (
       inputRevision: binding.inputRevision,
       libraryRevision: revision,
+      fileXml: binding.fileXml,
     );
+  }
+
+  Future<void> _restoreProgression(
+    TreeProgressionTransfer plan,
+    String id, {
+    required bool fromEngine,
+  }) {
+    final key = _progressionKey(id, plan.version, plan.characterClass);
+    final repository = progressionRepository(key);
+    return fromEngine
+        ? repository.restoreFromSnapshot(plan.steps)
+        : repository.restoreIfMissing(plan.steps);
   }
 
   void _checkProgression(
@@ -1239,6 +1782,24 @@ class WorkshopCubit extends Cubit<WorkshopState> {
       );
       return false;
     }
+  }
+
+  Future<({TreeGeometry? tree, String? error})> _readWorkshopTree(
+    EngineSnapshot? snapshot,
+  ) async {
+    final geometry = snapshot == null
+        ? null
+        : await engineSession.workshopReader?.readTree(snapshot);
+    if (geometry?.original != null) return (tree: geometry, error: null);
+    final artwork = await _readTree(engine);
+    if (geometry == null) return artwork;
+    final scene = artwork.tree?.version == geometry.version
+        ? artwork.tree?.original
+        : null;
+    return (
+      tree: scene == null ? geometry : geometry.withScene(scene),
+      error: null,
+    );
   }
 
   Future<({TreeGeometry? tree, String? error})> _readTree(
@@ -1391,6 +1952,11 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     if (copy != null) _update(state.copyWith(library: _withEntry(copy)));
     _seenBuildXml = disk.xml;
     final entry = disk.entry;
+    if (automatic && _managedEngine) {
+      _primaryAttempt = null;
+      _clearEngineBinding();
+      await engineSession.disconnect();
+    }
     if (!automatic || entry.revision != state.library.active?.revision) {
       await _switchXml(
         disk.xml,
@@ -1619,19 +2185,55 @@ class WorkshopCubit extends Cubit<WorkshopState> {
         if (state.report == null || title.trim().isEmpty) return;
         final previousTitle = state.library.active?.title ?? state.report!.name;
         if (previousTitle == title.trim()) return;
-        if (binding != null) await _checkEngineFile(binding);
-        await _flushText();
-        final xml = await _currentXml();
-        final builds = await _saveBuild(
-          state.library,
-          state.report!,
-          xml,
-          title: title.trim(),
-          progressionSource: _storedProgressionKey,
-        );
-        _update(state.copyWith(library: builds));
-        _pushUndo(xml, title: previousTitle);
+        await _persistRename(title.trim(), previousTitle, binding);
       });
+
+  Future<void> _persistRename(
+    String title,
+    String previousTitle,
+    _EngineXmlBinding? binding,
+  ) async {
+    final diskXml = binding == null ? null : await _checkEngineFile(binding);
+    await _flushText();
+    final xml = diskXml == null
+        ? await _currentXml()
+        : engineSession.state.snapshot!.build!.xml;
+    final builds = await _saveBuild(
+      state.library,
+      state.report!,
+      xml,
+      title: title,
+      progressionSource: _storedProgressionKey,
+      expectedXml: diskXml,
+    );
+    _update(state.copyWith(library: builds));
+    _recordRename(binding, xml, previousTitle);
+    if (binding != null) {
+      _seenBuildXml = xml;
+      await _checkpointPrimarySession(engineSession.state.snapshot!, xml);
+    }
+  }
+
+  void _recordRename(
+    _EngineXmlBinding? binding,
+    String xml,
+    String previousTitle,
+  ) {
+    if (binding == null) {
+      _pushUndo(xml, title: previousTitle);
+      return;
+    }
+    _updateEngineFileRevision(binding);
+    _pushUndo(engineSession.state.snapshot!.build!.xml, title: previousTitle);
+  }
+
+  void _updateEngineFileRevision(_EngineXmlBinding binding) {
+    _engineXmlBinding = (
+      inputRevision: binding.inputRevision,
+      libraryRevision: state.library.active!.revision!,
+      fileXml: engineSession.state.snapshot!.build!.xml,
+    );
+  }
 
   Future<JsonMap> readTreeNode(int id) async {
     final catalog = await engine.call('pob_catalog', {
@@ -1695,7 +2297,11 @@ class WorkshopCubit extends Cubit<WorkshopState> {
 
   bool get hasSharedTree => _engineXmlBinding != null;
 
-  Future<WorkshopTreeOffer> previewSharedTreeNode(int nodeId) async {
+  Future<WorkshopTreeOffer> previewSharedTreeNode(
+    int nodeId, {
+    EngineTreeAction? action,
+    EnginePassiveAttribute? attribute,
+  }) async {
     final epoch = _engineBindingEpoch;
     final (:snapshot, :binding) = _engineEditSource(
       _engineXmlBinding?.inputRevision,
@@ -1706,15 +2312,18 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     if (tree == null || !engineSession.supportsTreeAllocationModes) {
       throw StateError('Дерево пока недоступно');
     }
+    if (attribute != null && !engineSession.supportsTreeAttributes) {
+      throw StateError('Для выбора атрибута обновите движок.');
+    }
     await _checkEngineFile(binding);
     final allocated = tree.nodes.contains(nodeId);
     final offer = await engineSession.previewTree(snapshot, (
       nodeId: nodeId,
-      action: allocated ? EngineTreeAction.refund : EngineTreeAction.allocate,
-      attribute: null,
-      allocationMode: allocated
-          ? tree.allocations[nodeId] ?? TreeAllocationMode.common
-          : state.treeMode,
+      action:
+          action ??
+          (allocated ? EngineTreeAction.refund : EngineTreeAction.allocate),
+      attribute: attribute,
+      allocationMode: _sharedTreeMode(tree, nodeId, allocated),
     ));
     return (
       offer: offer,
@@ -1723,13 +2332,66 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     );
   }
 
-  bool isCurrentSharedTreeOffer(WorkshopTreeOffer preview) {
-    final binding = _engineXmlBinding;
-    return preview.bindingEpoch == _engineBindingEpoch &&
-        preview.inputRevision == binding?.inputRevision &&
-        state.library.active?.revision == binding?.libraryRevision &&
-        engineSession.isCurrentTreeOffer(preview.offer);
+  TreeAllocationMode _sharedTreeMode(
+    EngineTree tree,
+    int nodeId,
+    bool allocated,
+  ) {
+    final node = state.document?.tree?.nodes
+        .where((node) => node.id == nodeId)
+        .firstOrNull;
+    if (node?.kind == 'Socket') {
+      if (!engineSession.supportsTreeSockets) {
+        throw StateError('Для правки гнёзд самоцветов обновите движок.');
+      }
+      return TreeAllocationMode.common;
+    }
+    return allocated
+        ? tree.allocations[nodeId] ?? TreeAllocationMode.common
+        : state.treeMode;
   }
+
+  bool _isCurrentEngineInput(int epoch, int inputRevision) {
+    final binding = _engineXmlBinding;
+    return epoch == _engineBindingEpoch &&
+        inputRevision == binding?.inputRevision &&
+        state.library.active?.revision == binding?.libraryRevision;
+  }
+
+  bool isCurrentSharedTreeOffer(WorkshopTreeOffer preview) =>
+      _isCurrentEngineInput(preview.bindingEpoch, preview.inputRevision) &&
+      engineSession.isCurrentTreeOffer(preview.offer);
+
+  bool get canEditSharedJewel =>
+      hasSharedTree && engineSession.supportsTreeJewels;
+
+  Future<WorkshopJewelOffer> previewSharedJewel(EngineJewelEdit edit) async {
+    final epoch = _engineBindingEpoch;
+    final (:snapshot, :binding) = _engineEditSource(
+      _engineXmlBinding?.inputRevision,
+      epoch,
+      _staleTree,
+    );
+    await _checkEngineFile(binding);
+    final offer = await engineSession.previewJewel(snapshot, edit);
+    return (
+      offer: offer,
+      inputRevision: binding.inputRevision,
+      bindingEpoch: epoch,
+    );
+  }
+
+  bool isCurrentSharedJewelOffer(WorkshopJewelOffer preview) =>
+      _isCurrentEngineInput(preview.bindingEpoch, preview.inputRevision) &&
+      engineSession.isCurrentJewelOffer(preview.offer);
+
+  Future<BuildEditResult> applySharedJewel(WorkshopJewelOffer preview) =>
+      _applyEngineEdit(
+        expectedInput: preview.inputRevision,
+        epoch: preview.bindingEpoch,
+        staleMessage: _staleTree,
+        apply: (_) => engineSession.editJewel(preview.offer),
+      );
 
   Future<BuildEditResult> applySharedTreeNode(WorkshopTreeOffer preview) =>
       _applyEngineEdit(
@@ -1748,30 +2410,66 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     await _readReport(persist: !hasSharedTree);
   });
 
-  Future<BuildEditResult> selectTreeSpec(int id) => _changeBuild(() async {
-    await engine.call('pob_tree_options', {'spec': id});
-    // MCP применяет mode к текущему набору до обработки spec.
-    await engine.call('pob_tree_options', {'mode': state.treeMode.luaValue});
-  });
+  Future<BuildEditResult> Function(int) treeSpecSelection() {
+    final binding = _engineXmlBinding;
+    if (binding == null) return _selectLocalTreeSpec;
+    final epoch = _engineBindingEpoch;
+    return (id) => _applyEngineEdit(
+      expectedInput: binding.inputRevision,
+      epoch: epoch,
+      staleMessage: _staleBuild,
+      apply: (current) => engineSession.selectTreeSpec(current, id),
+    );
+  }
+
+  Future<BuildEditResult> selectTreeSpec(int id) => treeSpecSelection()(id);
+
+  Future<BuildEditResult> _selectLocalTreeSpec(int id) => _changeBuild(
+    () async {
+      await engine.call('pob_tree_options', {'spec': id});
+      // MCP применяет mode к текущему набору до обработки spec.
+      await engine.call('pob_tree_options', {'mode': state.treeMode.luaValue});
+    },
+  );
 
   Future<BuildEditResult> selectTreeClass({
     required int classId,
     required int ascendancyId,
     bool connect = false,
     bool reset = false,
-  }) => _changeBuild(() async {
-    final sameClass = state.classes.any(
-      (entry) =>
-          entry['id'] == classId &&
-          entry['name'] == state.report!.characterClass,
+  }) => treeClassSelection()((
+    classId: classId,
+    ascendancyId: ascendancyId,
+    mode: reset ? 'reset' : (connect ? 'connect' : ''),
+  ));
+
+  Future<BuildEditResult> Function(EngineTreeClassEdit) treeClassSelection() {
+    final binding = _engineXmlBinding;
+    if (binding == null) return _selectLocalTreeClass;
+    final epoch = _engineBindingEpoch;
+    final revision = binding.inputRevision;
+    return (edit) => _applyEngineEdit(
+      expectedInput: revision,
+      epoch: epoch,
+      staleMessage: _staleTree,
+      apply: (current) => engineSession.selectTreeClass(current, edit),
     );
-    await engine.call('pob_tree_options', {
-      if (!sameClass) 'class': classId,
-      'ascendancy': ascendancyId,
-      if (connect) 'connect': true,
-      if (reset) 'reset': true,
-    });
-  });
+  }
+
+  Future<BuildEditResult> _selectLocalTreeClass(EngineTreeClassEdit edit) =>
+      _changeBuild(() async {
+        final sameClass = state.classes.any(
+          (entry) =>
+              entry['id'] == edit.classId &&
+              entry['name'] == state.report!.characterClass,
+        );
+        await engine.call('pob_tree_options', {
+          if (!sameClass) 'class': edit.classId,
+          'ascendancy': edit.ascendancyId,
+          if (edit.mode == 'connect') 'connect': true,
+          if (edit.mode == 'reset') 'reset': true,
+        });
+      });
 
   Future<void> _restoreTreeMode([McpClient? client]) async {
     if (state.treeMode == TreeAllocationMode.common) return;
@@ -1785,51 +2483,193 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     await _restoreTreeMode();
   }
 
-  Future<void> selectMain(String control, int id) => _changeBuild(() async {
-    await engine.call('pob_select_main_skill', {'control': control, 'id': id});
-  });
+  Future<void> Function(String, int) mainSkillEditor() {
+    final revision = _engineXmlBinding?.inputRevision;
+    final epoch = _engineBindingEpoch;
+    return (control, id) {
+      if (epoch != _engineBindingEpoch ||
+          revision != _engineXmlBinding?.inputRevision) {
+        return _run(() async => throw StateError(_staleBuild));
+      }
+      return selectMain(control, id);
+    };
+  }
+
+  Future<void> selectMain(String control, int id) async {
+    final revision = _engineXmlBinding?.inputRevision;
+    final epoch = _engineBindingEpoch;
+    if (revision != null &&
+        engineSession.supportsSkillChoice &&
+        _hasPersistentSkill(control)) {
+      await _applyEngineEdit(
+        expectedInput: revision,
+        epoch: epoch,
+        staleMessage: _staleBuild,
+        apply: (current) => engineSession.chooseSkill(current, control, id),
+      );
+      return;
+    }
+    await _changeBuild(() async {
+      await engine.call('pob_select_main_skill', {
+        'control': control,
+        'id': id,
+      });
+    });
+  }
+
+  bool _hasPersistentSkill(String control) {
+    if (control == 'groups') return true;
+    final report = state.report!;
+    final id = report.groupSelector['selected'];
+    final group = report.groups.where((group) => group['id'] == id).firstOrNull;
+    return group != null && (group['source'] as String? ?? '').isEmpty;
+  }
+
+  bool get hasSharedSkillGroups =>
+      _engineXmlBinding != null && engineSession.supportsSkillGroups;
+
+  Future<BuildEditResult> Function(String, List<JsonMap>) skillGroupEditor(
+    int? id,
+  ) {
+    final revision = _engineXmlBinding?.inputRevision;
+    final epoch = _engineBindingEpoch;
+    return (label, gems) {
+      if (epoch != _engineBindingEpoch ||
+          revision != _engineXmlBinding?.inputRevision) {
+        return Future.value((committed: false, error: _staleBuild));
+      }
+      return id == null
+          ? addSkillGroup(label, gems)
+          : updateSkillGroup(id, label, gems);
+    };
+  }
 
   Future<BuildEditResult> addSkillGroup(String label, List<JsonMap> gems) =>
-      _changeBuild(() async {
-        await engine.call('pob_add_skill_group', {
-          'label': label,
-          'gems': gems,
-        });
-      });
+      _writeSkillGroup((id: null, label: label, delete: false, gems: gems));
 
   Future<BuildEditResult> updateSkillGroup(
     int id,
     String label,
     List<JsonMap> gems,
-  ) => _changeBuild(() async {
-    await engine.call('pob_update_skill_group', {
-      'groupId': id,
-      'label': label,
-      'gems': gems,
-    });
-  });
+  ) => _writeSkillGroup((id: id, label: label, delete: false, gems: gems));
 
-  Future<BuildEditResult> deleteSkillGroup(int id) => _changeBuild(() async {
-    await engine.call('pob_delete_skill_group', {'groupId': id});
-  });
+  Future<BuildEditResult> deleteSkillGroup(int id) =>
+      _writeSkillGroup((id: id, label: null, delete: true, gems: const []));
+
+  Future<BuildEditResult> _writeSkillGroup(EngineSkillGroupEdit edit) {
+    final revision = _engineXmlBinding?.inputRevision;
+    final epoch = _engineBindingEpoch;
+    if (revision != null && engineSession.supportsSkillGroups) {
+      return _applyEngineEdit(
+        expectedInput: revision,
+        epoch: epoch,
+        staleMessage: _staleBuild,
+        apply: (current) => engineSession.editSkillGroup(current, edit),
+        calculate: true,
+      );
+    }
+    return _legacySkillGroup(edit);
+  }
+
+  Future<BuildEditResult> _legacySkillGroup(EngineSkillGroupEdit edit) =>
+      _changeBuild(() async {
+        final method = switch (edit) {
+          (delete: true, id: _, label: _, gems: _) => 'pob_delete_skill_group',
+          (id: null, label: _, delete: _, gems: _) => 'pob_add_skill_group',
+          _ => 'pob_update_skill_group',
+        };
+        await engine.call(method, {
+          if (edit.id != null) 'groupId': edit.id,
+          if (!edit.delete) 'label': edit.label,
+          if (!edit.delete) 'gems': edit.gems,
+        });
+      });
+
+  EquipmentRepository equipmentRepository() =>
+      EquipmentRepository(engine, readShared: _readSharedEquipment);
+
+  Future<ItemInspection?> _readSharedEquipment({
+    String? slot,
+    String? raw,
+    int? itemId,
+    required bool compare,
+  }) async {
+    if (_engineXmlBinding == null) return null;
+    final snapshot = engineSession.state.snapshot;
+    if (snapshot == null) return null;
+    return engineSession.workshopReader?.readEquipmentDetails(
+      snapshot,
+      slot: slot,
+      raw: raw,
+      itemId: itemId,
+      compare: compare,
+    );
+  }
+
+  Future<int> previewSharedEquipment(EngineEquipmentEdit edit) async {
+    final epoch = _engineBindingEpoch;
+    final (:snapshot, :binding) = _engineEditSource(
+      _engineXmlBinding?.inputRevision,
+      epoch,
+      _staleBuild,
+    );
+    await _checkEngineFile(binding);
+    final offer = await engineSession.previewEquipment(snapshot, edit);
+    if (!_isCurrentEngineInput(epoch, binding.inputRevision) ||
+        !engineSession.isCurrentEquipmentOffer(offer)) {
+      throw StateError(_staleBuild);
+    }
+    return offer.preview.revision;
+  }
 
   Future<BuildEditResult> equipItem(
     String slot, {
     String? raw,
     int? itemId,
     int? expectedRevision,
-  }) => _changeBuild(() async {
-    await engine.call('pob_equip_item', {
-      'slot': slot,
-      if (raw != null) 'raw': raw,
-      if (itemId != null) 'itemId': itemId,
-      if (expectedRevision != null) 'expectedRevision': expectedRevision,
-    });
-  });
+  }) {
+    final binding = _engineXmlBinding;
+    if (binding == null) {
+      return _changeBuild(() async {
+        await engine.call('pob_equip_item', {
+          'slot': slot,
+          if (raw != null) 'raw': raw,
+          if (itemId != null) 'itemId': itemId,
+          if (expectedRevision != null) 'expectedRevision': expectedRevision,
+        });
+      });
+    }
+    return _applyEngineEdit(
+      expectedInput: binding.inputRevision,
+      epoch: _engineBindingEpoch,
+      staleMessage: _staleBuild,
+      apply: (current) {
+        if (expectedRevision != null && expectedRevision != current.revision) {
+          throw StateError(_staleBuild);
+        }
+        return engineSession.writeEquipment(current, (
+          slot: slot,
+          raw: raw ?? '',
+          itemId: itemId ?? 0,
+        ));
+      },
+    );
+  }
 
-  Future<BuildEditResult> selectWeaponSet(int index) => _changeBuild(() async {
-    await engine.call('pob_select_weapon_set', {'index': index});
-  });
+  Future<BuildEditResult> selectWeaponSet(int index) {
+    final binding = _engineXmlBinding;
+    if (binding == null) {
+      return _changeBuild(() async {
+        await engine.call('pob_select_weapon_set', {'index': index});
+      });
+    }
+    return _applyEngineEdit(
+      expectedInput: binding.inputRevision,
+      epoch: _engineBindingEpoch,
+      staleMessage: _staleBuild,
+      apply: (current) => engineSession.selectWeaponSet(current, index),
+    );
+  }
 
   Future<BuildEditResult> Function(String, Object) conditionEditorCommit() {
     final binding = _engineXmlBinding;
@@ -1893,6 +2733,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     required String staleMessage,
     required Future<EngineSnapshot> Function(EngineSnapshot) apply,
     bool calculate = false,
+    bool recordUndo = true,
   }) async {
     var committed = false;
     await _run(() async {
@@ -1905,9 +2746,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
       if (epoch != _engineBindingEpoch) throw StateError(staleMessage);
       final updated = await apply(snapshot);
       if (epoch != _engineBindingEpoch) throw StateError(staleMessage);
-      if (updated.build!.inputRevision > binding.inputRevision) {
-        await _mirrorEngineBuild(updated, binding);
-      }
+      await _acceptEngineEdit(snapshot, updated, binding, recordUndo);
       committed = true;
       if (calculate) unawaited(_calculateEngineCondition(updated));
     });
@@ -1915,6 +2754,17 @@ class WorkshopCubit extends Cubit<WorkshopState> {
       committed: committed,
       error: committed ? null : state.error ?? 'Действие недоступно',
     );
+  }
+
+  Future<void> _acceptEngineEdit(
+    EngineSnapshot before,
+    EngineSnapshot after,
+    _EngineXmlBinding binding,
+    bool recordUndo,
+  ) async {
+    if (after.build!.inputRevision <= binding.inputRevision) return;
+    await _mirrorEngineBuild(after, binding);
+    if (recordUndo) _pushUndo(before.build!.xml, title: before.buildName);
   }
 
   Future<void> _calculateEngineCondition(EngineSnapshot snapshot) async {
@@ -1998,6 +2848,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
       final document = state.document;
       if (document == null) return;
       final builds = state.library;
+      final shared = await _captureSharedEdit();
       final before = await _currentXml();
       guard?.call(before);
       _markStale();
@@ -2005,8 +2856,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
         await action();
         final after = await _currentXml();
         validate?.call(after);
-        await _readReport();
-        if (after != before) _pushUndo(before);
+        await _finishWorkshopEdit(before, after, shared);
         committed = true;
       } catch (_) {
         await _restoreWorking(before, document, builds);
@@ -2017,6 +2867,40 @@ class WorkshopCubit extends Cubit<WorkshopState> {
       committed: committed,
       error: committed ? null : state.error ?? 'Действие недоступно',
     );
+  }
+
+  Future<_SharedEditSource?> _captureSharedEdit() async {
+    final binding = _engineXmlBinding;
+    if (binding == null) return null;
+    final epoch = _engineBindingEpoch;
+    final source = _engineEditSource(binding.inputRevision, epoch, _staleBuild);
+    await _checkEngineFile(binding);
+    return (snapshot: source.snapshot, binding: binding, epoch: epoch);
+  }
+
+  Future<void> _finishWorkshopEdit(
+    String before,
+    String after,
+    _SharedEditSource? shared,
+  ) async {
+    if (shared == null) {
+      await _readReport();
+      if (after != before) _pushUndo(before);
+      return;
+    }
+    if (after == before) {
+      await _readReport(persist: false);
+      return;
+    }
+    final plan = splitTreeProgression(shared.snapshot.build!.xml).progression;
+    await _checkEngineFile(shared.binding);
+    if (shared.epoch != _engineBindingEpoch) throw StateError(_staleBuild);
+    final updated = await engineSession.replaceBuild(
+      shared.snapshot,
+      attachTreeProgression(after, plan),
+    );
+    if (shared.epoch != _engineBindingEpoch) throw StateError(_staleBuild);
+    await _acceptEngineEdit(shared.snapshot, updated, shared.binding, true);
   }
 
   void _pushUndo(String xml, {String? title}) {
@@ -2050,6 +2934,73 @@ class WorkshopCubit extends Cubit<WorkshopState> {
   Future<void> redo() => _moveHistory(_redoHistory, _undoHistory);
 
   Future<void> _moveHistory(
+    List<_BuildSnapshot> source,
+    List<_BuildSnapshot> destination,
+  ) {
+    if (source.isEmpty) return Future.value();
+    return hasSharedTree
+        ? _moveSharedHistory(source, destination)
+        : _moveLocalHistory(source, destination);
+  }
+
+  Future<void> _moveSharedHistory(
+    List<_BuildSnapshot> source,
+    List<_BuildSnapshot> destination,
+  ) async {
+    final from = engineSession.state.snapshot;
+    final target = source.last;
+    if (from?.build == null) return;
+    if (from!.buildName != target.title) {
+      await _moveSharedTitle(source, destination, from, target);
+      return;
+    }
+    final restored = await _applyEngineEdit(
+      expectedInput: from.build!.inputRevision,
+      epoch: _engineBindingEpoch,
+      staleMessage: _staleBuild,
+      recordUndo: false,
+      apply: (current) => engineSession.replaceBuild(current, target.xml),
+    );
+    if (restored.committed)
+      _advanceSharedHistory(source, destination, from, target);
+  }
+
+  void _advanceSharedHistory(
+    List<_BuildSnapshot> source,
+    List<_BuildSnapshot> destination,
+    EngineSnapshot from,
+    _BuildSnapshot target,
+  ) {
+    if (source.lastOrNull != target) return;
+    source.removeLast();
+    _appendSnapshot(destination, (xml: from.build!.xml, title: from.buildName));
+    _publishHistory();
+  }
+
+  Future<void> _moveSharedTitle(
+    List<_BuildSnapshot> source,
+    List<_BuildSnapshot> destination,
+    EngineSnapshot from,
+    _BuildSnapshot target,
+  ) => _run(() async {
+    final binding = _engineXmlBinding!;
+    final diskXml = await _checkEngineFile(binding);
+    if (target.xml != from.build!.xml) throw StateError(_staleBuild);
+    final renamed = await engineSession.renameShared(from, target.title);
+    final builds = await _saveBuild(
+      state.library,
+      state.report!,
+      renamed.build!.xml,
+      title: renamed.buildName,
+      progressionSource: _storedProgressionKey,
+      expectedXml: diskXml,
+    );
+    _update(state.copyWith(library: builds));
+    _updateEngineFileRevision(binding);
+    _advanceSharedHistory(source, destination, from, target);
+  });
+
+  Future<void> _moveLocalHistory(
     List<_BuildSnapshot> source,
     List<_BuildSnapshot> destination,
   ) => _run(() async {
@@ -2144,6 +3095,21 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     addLog('$error');
   }
 
+  Future<void> checkpointBeforeExit() async {
+    if (_initialization case final initialization?) {
+      await initialization;
+      if (state.error case final error?) throw StateError(error);
+    }
+    await checkpoint();
+  }
+
+  Future<void> finishScheduledExit() async {
+    while (!isClosed && state.busy) {
+      await stream.firstWhere((value) => !value.busy, orElse: () => state);
+    }
+    if (!isClosed) await checkpoint(closePob: true);
+  }
+
   Future<void> checkpoint({bool closePob = false}) => _protectExit(() async {
     await session.saveDraft(state.draftXml);
     await _flushText();
@@ -2198,6 +3164,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
   Future<void> close() async {
     _closing = true;
     await engineSession.close();
+    await _primaryOpening;
     _buildChangeDelay?.cancel();
     await _buildChanges?.cancel();
     await _buildSync?.future;

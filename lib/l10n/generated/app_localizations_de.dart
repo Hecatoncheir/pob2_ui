@@ -625,6 +625,14 @@ class AppLocalizationsDe extends AppLocalizations {
       'Für das Archiv ist eine festgelegte Revision erforderlich';
 
   @override
+  String get m7152adf5d3 =>
+      'Aktualisiere die Engine, um ein Attribut auszuwählen.';
+
+  @override
+  String get m0b5173c45c =>
+      'Aktualisiere die Engine, um einen Gegenstand aus dem Build auszuwählen.';
+
+  @override
   String get m7c2e51e000 =>
       'Für einen fertigen PoB-Baum aktualisieren Sie MCP auf 0.7.0.';
 
@@ -645,7 +653,15 @@ class AppLocalizationsDe extends AppLocalizations {
       'Um nach Merkmalen zu suchen, aktualisieren Sie MCP im Abschnitt „Komponenten“ auf 0.9.0.';
 
   @override
+  String get mbeaac9e727 =>
+      'Aktualisieren Sie die Engine, um Juwelenfassungen zu bearbeiten.';
+
+  @override
   String get m9a923fd47c => 'Für die nächsten Etappen sind keine Käufe nötig';
+
+  @override
+  String get mf7dd91f91b =>
+      'Aktualisiere die Engine, um die Klasse zu wechseln.';
 
   @override
   String get m10db96c5ff => 'Richte PoB und MCP zum Vergleichen ein';
@@ -825,6 +841,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get md4bac1da57 => 'Notiz zur Etappe';
 
   @override
+  String get me00429e1a8 => 'Die Notizen wurden geändert. Öffne sie erneut.';
+
+  @override
   String get mdc4baf32ac => 'Build-Notizen';
 
   @override
@@ -957,6 +976,11 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get m566d4d32d7 => 'Unterstützungsgemmen';
+
+  @override
+  String m8bfc4312d8(String p0) {
+    return 'Verbindung zum PoB-II-Fenster: $p0';
+  }
 
   @override
   String get md0ef3540b0 => 'Katalog';
@@ -1476,6 +1500,9 @@ class AppLocalizationsDe extends AppLocalizations {
       'Der Originaltext wird angezeigt, wenn keine Übersetzung verfügbar ist';
 
   @override
+  String get md6c5445cf8 => 'Keine vorherige PoB-Installation';
+
+  @override
   String get m8a210e3e2e => 'Keine Verbindung zur freigegebenen Sitzung';
 
   @override
@@ -1827,10 +1854,17 @@ class AppLocalizationsDe extends AppLocalizations {
   String get m48d5bea474 => 'Stufenplan';
 
   @override
+  String get m9d28683954 => 'Der Levelplan wurde geändert. Öffne ihn erneut.';
+
+  @override
   String get m1474fac529 => 'Pläne, Gegenstände, Entwicklungsmöglichkeiten...';
 
   @override
   String get mfd0560ebbf => 'Standard';
+
+  @override
+  String get m9fd15a00ec =>
+      'Die Zuordnung des Builds zur Engine ist beschädigt';
 
   @override
   String get m5189135a61 => 'Erneut versuchen';
@@ -1858,6 +1892,10 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get mc1b2f9e3a6 => 'PoB II einrichten';
+
+  @override
+  String get m413fa4fd39 =>
+      'Originales PoB-Lua wird mit der integrierten Engine vorbereitet';
 
   @override
   String get m52d7142d18 =>
@@ -2328,6 +2366,9 @@ class AppLocalizationsDe extends AppLocalizations {
   }
 
   @override
+  String get mc3da8e80c2 => 'Juwel';
+
+  @override
   String get m49db3482db => 'Juwelen';
 
   @override
@@ -2441,6 +2482,10 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get mf0ca78d984 =>
       'Der Server unterstützt keine gemeinsamen Sitzungsabonnements';
+
+  @override
+  String get m4bd93e3298 =>
+      'Der Server hat die Verbindung zum PoB-II-Fenster nicht bestätigt.';
 
   @override
   String get m32bb1c680f => 'Sitzung geschlossen';
@@ -2843,6 +2888,10 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get mfdeaa71380 => 'Komponenten installieren';
+
+  @override
+  String get m536db585fd =>
+      'Die integrierte Engine verwaltet die PoB-Installationen';
 
   @override
   String get mfcb7c67f91 => 'Aktuelle Version installiert';

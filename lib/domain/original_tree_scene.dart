@@ -1,5 +1,7 @@
 import 'build_report.dart';
 
+typedef TreeTextureReference = ({String file, int index, int targetSize});
+
 class OriginalTreeScene {
   OriginalTreeScene.fromJson(JsonMap json)
     : scale = (json['scale'] as num).toDouble(),
@@ -7,11 +9,13 @@ class OriginalTreeScene {
       height = (json['height'] as num?)?.toDouble(),
       offsetX = (json['offsetX'] as num).toDouble(),
       offsetY = (json['offsetY'] as num).toDouble(),
+      assetId = json['assetId'] as String?,
       commands = List.unmodifiable(
         jsonRows(json['commands']).map(TreeDrawCommand.fromJson),
       );
   final double scale, offsetX, offsetY;
   final double? width, height;
+  final String? assetId;
   final List<TreeDrawCommand> commands;
 }
 
@@ -22,8 +26,18 @@ class TreeDrawCommand {
       uv = _coordinates(json['uv'], 8),
       color = _coordinates(json['color'], 4),
       blend = json['blend'] as String,
-      clamp = json['clamp'] as bool;
+      clamp = json['clamp'] as bool,
+      reference = switch (json['engineTexture']) {
+        {
+          'file': final String file,
+          'index': final int index,
+          'targetSize': final int targetSize,
+        } =>
+          (file: file, index: index, targetSize: targetSize),
+        _ => null,
+      };
   final String texture, blend;
+  final TreeTextureReference? reference;
   final bool clamp;
   final List<double> positions, uv, color;
 

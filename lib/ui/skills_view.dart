@@ -131,6 +131,7 @@ class _SkillsViewState extends State<SkillsView> {
         message: 'Добавьте группу камней, чтобы получить расчёт умения.',
         art: 'gem',
       );
+    final choose = widget.model.mainSkillEditor();
     return ListView.separated(
       key: const Key('skill-groups-list'),
       itemCount: groups.length,
@@ -147,7 +148,7 @@ class _SkillsViewState extends State<SkillsView> {
           busy: _busy,
           select: () => workspace.select(id),
           edit: () => _edit(group),
-          chooseMain: () => _chooseMain(id),
+          chooseMain: () => _chooseMain(id, choose),
           add: (data) => workspace.add(id, data),
           remove: () => workspace.delete(id),
         );
@@ -161,9 +162,12 @@ class _SkillsViewState extends State<SkillsView> {
       await showSkillGroupEditor(context, widget.model, group: group);
   }
 
-  Future<void> _chooseMain(int id) async {
+  Future<void> _chooseMain(
+    int id,
+    Future<void> Function(String, int) choose,
+  ) async {
     await workspace.select(id);
-    await widget.model.selectMain('groups', id);
+    await choose('groups', id);
   }
 
   Widget _library(SkillWorkspaceState state) {

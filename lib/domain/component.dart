@@ -52,17 +52,20 @@ class Installation {
     required this.commit,
     required this.directory,
     this.archiveSha256,
+    this.nativeDirectory,
   });
   final String tag;
   final String commit;
   final String directory;
   final String? archiveSha256;
+  final String? nativeDirectory;
 
   factory Installation.fromJson(Map<String, dynamic> json) => Installation(
     tag: json['tag'] as String,
     commit: json['commit'] as String,
     directory: json['directory'] as String,
     archiveSha256: json['archiveSha256'] as String?,
+    nativeDirectory: json['nativeDirectory'] as String?,
   );
 
   Map<String, dynamic> toJson() => {
@@ -70,6 +73,7 @@ class Installation {
     'commit': commit,
     'directory': directory,
     if (archiveSha256 != null) 'archiveSha256': archiveSha256,
+    if (nativeDirectory != null) 'nativeDirectory': nativeDirectory,
   };
 }
 

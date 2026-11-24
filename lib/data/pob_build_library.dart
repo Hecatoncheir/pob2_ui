@@ -11,6 +11,7 @@ import '../domain/tree_progression.dart';
 import 'atomic_text_file.dart';
 import 'build_library.dart';
 import 'pob_build_document.dart';
+import 'pob_engine_bindings.dart';
 import 'session_repository.dart';
 import 'tree_progression_repository.dart';
 
@@ -33,9 +34,11 @@ class PobBuildLibrary implements BuildStorage, BuildNotesStorage {
     : _settings = File(path.join(_profile.path, 'pob-builds.json')),
       _recovery = Directory(path.join(_profile.path, 'pob-build-recovery')),
       _legacy = BuildLibrary(_profile),
-      _legacySession = SessionRepository(_profile);
+      _legacySession = SessionRepository(_profile),
+      engineBindings = PobEngineBindings(_profile);
 
   final Directory _profile;
+  final PobEngineBindings engineBindings;
   final File _settings;
   final Directory _recovery;
   final BuildLibrary _legacy;
@@ -325,7 +328,10 @@ class PobBuildLibrary implements BuildStorage, BuildNotesStorage {
     String xml, {
     String? title,
     TreeProgressionKey? progressionSource,
-  }) => _write(() => _save(state, report, xml, title, progressionSource));
+    String? expectedXml,
+  }) => _write(
+    () => _save(state, report, xml, title, progressionSource, expectedXml),
+  );
 
   Future<LibraryState> _save(
     LibraryState state,
@@ -333,6 +339,7 @@ class PobBuildLibrary implements BuildStorage, BuildNotesStorage {
     String xml,
     String? title,
     TreeProgressionKey? progressionSource,
+    String? expectedXml,
   ) async {
     final root = _root;
     await _checkRoot(root);
@@ -352,8 +359,15 @@ class PobBuildLibrary implements BuildStorage, BuildNotesStorage {
             xml,
             title,
             progressionSource,
+            expectedXml,
           );
     final entry = _entry(root, file, document, DateTime.now());
+    if (previous != null && previous.id != entry.id) {
+      await engineBindings.move(
+        (folder: root.path, id: previous.id),
+        (folder: root.path, id: entry.id),
+      );
+    }
     await activate(entry.id);
     return LibraryState(
       entries: [
@@ -374,6 +388,7 @@ class PobBuildLibrary implements BuildStorage, BuildNotesStorage {
     String xml,
     String? title,
     TreeProgressionKey? progressionSource,
+    String? expectedXml,
   ) async {
     final file = _buildPath(root, previous.id);
     final current = await changed(previous.id, null);
@@ -381,9 +396,8 @@ class PobBuildLibrary implements BuildStorage, BuildNotesStorage {
       await _preserveAttempt(file, previous, xml, document);
       throw _conflict();
     }
-    final updated = current.document.notes == document.notes
-        ? xml
-        : document.withNotes(current.document.notes);
+    if (expectedXml != null && current.xml != expectedXml) throw _conflict();
+    final updated = _mergeSavedNotes(current, document, xml, expectedXml);
     if (title != null && title != previous.title) {
       return _rename(
         file,
@@ -393,11 +407,22 @@ class PobBuildLibrary implements BuildStorage, BuildNotesStorage {
         progressionSource,
       );
     }
-    if (current.entry.revision != document.revision) {
+    if (expectedXml == null
+        ? current.entry.revision != document.revision
+        : current.xml != updated) {
       await _saveLocal(file, current, updated);
     }
     return file;
   }
+
+  String _mergeSavedNotes(
+    PobBuildVersion current,
+    PobBuildDocument document,
+    String xml,
+    String? expectedXml,
+  ) => expectedXml != null || current.document.notes == document.notes
+      ? xml
+      : document.withNotes(current.document.notes);
 
   Future<void> _preserveAttempt(
     File file,
@@ -598,6 +623,7 @@ class PobBuildLibrary implements BuildStorage, BuildNotesStorage {
     final current = await _readFile(_root, file);
     if (expected.revision != current.entry.revision) throw _conflict();
     await _retire(file, current.xml);
+    await engineBindings.forget((folder: _root.path, id: id));
     if (state.activeId == id) await activate(null);
     return LibraryState(
       entries: state.entries.where((entry) => entry.id != id).toList(),

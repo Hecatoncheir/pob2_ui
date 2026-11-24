@@ -1199,6 +1199,18 @@ abstract class AppLocalizations {
   /// **'The archive requires a pinned revision'**
   String get mff31635225;
 
+  /// Для выбора атрибута обновите движок.
+  ///
+  /// In en, this message translates to:
+  /// **'Update the engine to select an attribute.'**
+  String get m7152adf5d3;
+
+  /// Для выбора предмета из сборки обновите движок.
+  ///
+  /// In en, this message translates to:
+  /// **'Update the engine to select an item from the build.'**
+  String get m0b5173c45c;
+
   /// Для готового дерева PoB обновите MCP до 0.7.0.
   ///
   /// In en, this message translates to:
@@ -1229,11 +1241,23 @@ abstract class AppLocalizations {
   /// **'To search by characteristic, update MCP to 0.9.0 in the Components section.'**
   String get m6f9519e788;
 
+  /// Для правки гнёзд самоцветов обновите движок.
+  ///
+  /// In en, this message translates to:
+  /// **'Update the engine to edit jewel sockets.'**
+  String get mbeaac9e727;
+
   /// Для следующих этапов покупки не нужны
   ///
   /// In en, this message translates to:
   /// **'No purchases needed for upcoming stages'**
   String get m9a923fd47c;
+
+  /// Для смены класса обновите движок.
+  ///
+  /// In en, this message translates to:
+  /// **'Update the engine to change class.'**
+  String get mf7dd91f91b;
 
   /// Для сравнения подготовьте PoB и MCP
   ///
@@ -1529,6 +1553,12 @@ abstract class AppLocalizations {
   /// **'Milestone note'**
   String get md4bac1da57;
 
+  /// Заметки изменились. Откройте их заново.
+  ///
+  /// In en, this message translates to:
+  /// **'The notes have changed. Open them again.'**
+  String get me00429e1a8;
+
   /// Заметки к сборке
   ///
   /// In en, this message translates to:
@@ -1786,6 +1816,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Support gems'**
   String get m566d4d32d7;
+
+  /// Канал окна PoB II: {p0}
+  ///
+  /// In en, this message translates to:
+  /// **'PoB II window connection: {p0}'**
+  String m8bfc4312d8(String p0);
 
   /// Каталог
   ///
@@ -2694,6 +2730,12 @@ abstract class AppLocalizations {
   /// **'Original text is shown when a translation is unavailable'**
   String get m323494c6da;
 
+  /// Нет предыдущей установки PoB
+  ///
+  /// In en, this message translates to:
+  /// **'No previous PoB installation'**
+  String get md6c5445cf8;
+
   /// Нет соединения с общей сессией
   ///
   /// In en, this message translates to:
@@ -3342,6 +3384,12 @@ abstract class AppLocalizations {
   /// **'Leveling plan'**
   String get m48d5bea474;
 
+  /// План прокачки изменился. Откройте его заново.
+  ///
+  /// In en, this message translates to:
+  /// **'The leveling plan has changed. Open it again.'**
+  String get m9d28683954;
+
   /// Планы, предметы, варианты развития…
   ///
   /// In en, this message translates to:
@@ -3353,6 +3401,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Default'**
   String get mfd0560ebbf;
+
+  /// Повреждена привязка сборки к движку
+  ///
+  /// In en, this message translates to:
+  /// **'The build\'\'s engine binding is corrupted'**
+  String get m9fd15a00ec;
 
   /// Повторить
   ///
@@ -3407,6 +3461,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Set up PoB II'**
   String get mc1b2f9e3a6;
+
+  /// Подготовка исходного Lua PoB через комплектный движок
+  ///
+  /// In en, this message translates to:
+  /// **'Preparing the original PoB Lua with the bundled engine'**
+  String get m413fa4fd39;
 
   /// Поддерживаются Windows x64, Linux x64 и macOS arm64
   ///
@@ -4254,6 +4314,12 @@ abstract class AppLocalizations {
   /// **'The {p0} site did not respond on time.'**
   String m389de358a7(String p0);
 
+  /// Самоцвет
+  ///
+  /// In en, this message translates to:
+  /// **'Jewel'**
+  String get mc3da8e80c2;
+
   /// Самоцветы
   ///
   /// In en, this message translates to:
@@ -4451,6 +4517,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Server does not support shared session subscriptions'**
   String get mf0ca78d984;
+
+  /// Сервер не подтвердил подключение окна PoB II.
+  ///
+  /// In en, this message translates to:
+  /// **'The server did not confirm the PoB II window connection.'**
+  String get m4bd93e3298;
 
   /// Сессия закрыта
   ///
@@ -5189,6 +5261,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Install components'**
   String get mfdeaa71380;
+
+  /// Установками PoB управляет комплектный движок
+  ///
+  /// In en, this message translates to:
+  /// **'The bundled engine manages PoB installations'**
+  String get m536db585fd;
 
   /// Установлена актуальная версия
   ///

@@ -122,6 +122,79 @@ void main() {
     await tester.pumpWidget(const SizedBox.shrink());
     await tester.pumpAndSettle();
   }, timeout: const Timeout(Duration(minutes: 3)));
+
+  testWidgets(
+    'Нативное окно выдаёт PNG через общую сессию и отзывает доступ',
+    _checkDesktopEditorBridge,
+    skip: Platform.environment['POB2_ENGINE_TEST_WORKSHOP'] != '1',
+    timeout: const Timeout(Duration(minutes: 2)),
+  );
+}
+
+Future<void> _checkDesktopEditorBridge(WidgetTester tester) async {
+  final executable = Platform.environment['POB2_ENGINE_TEST_EXECUTABLE']!;
+  final root = await Directory.systemTemp.createTemp('pob2-editor-desktop-');
+  addTearDown(() => removeTemporaryDirectory(root));
+  final model = await _openBuild(root);
+  final flags = _profileFlags(root);
+  addTearDown(() => _stopEngine(executable, flags, root));
+  addTearDown(model.close);
+  await model.initialize();
+  await model.connectEngine(
+    EngineOptions(
+      executable: executable,
+      profile: _profile,
+      sessionId: _session,
+    ),
+    createName: _initial,
+    bindCurrentBuild: true,
+    importOpenBuild: true,
+  );
+  await tester.pumpWidget(PobApp(model: model));
+  await tester.pumpAndSettle();
+
+  final mcp = await _attachMcp(executable, flags);
+  const status = {'name': 'pob_editor_status', 'arguments': {}};
+  expect((await mcp.request('tools/call', status))['isError'], isTrue);
+  await model.mcpEditor.enable();
+  expect(model.mcpEditor.enabled, isTrue);
+  await _expectEditorPng(tester, mcp);
+  await model.mcpEditor.disable();
+  expect((await mcp.request('tools/call', status))['isError'], isTrue);
+  await tester.pumpWidget(const SizedBox.shrink());
+  await tester.pumpAndSettle();
+}
+
+Future<void> _expectEditorPng(WidgetTester tester, EngineMcpPeer mcp) async {
+  final reply = mcp.request('tools/call', {
+    'name': 'pob_editor_ui',
+    'arguments': {'action': 'screenshot'},
+  });
+  var received = false;
+  reply.then((_) => received = true, onError: (Object _) => received = true);
+  while (!received) {
+    await tester.pump(const Duration(milliseconds: 20));
+    await Future<void>.delayed(const Duration(milliseconds: 1));
+  }
+  final screenshot = await reply;
+  expect(screenshot['isError'], isNot(true));
+  final nodes =
+      (screenshot['structuredContent'] as Map<String, dynamic>)['nodes'];
+  expect(nodes, isNotEmpty);
+  final content = (screenshot['content'] as List).cast<Map<String, dynamic>>();
+  final image = content.singleWhere(
+    (value) => value['mimeType'] == 'image/png',
+  );
+  expect(base64Decode(image['data'] as String).take(8), [
+    137,
+    80,
+    78,
+    71,
+    13,
+    10,
+    26,
+    10,
+  ]);
 }
 
 Future<int> _checkSupports(WidgetTester tester, EngineMcpPeer mcp) async {

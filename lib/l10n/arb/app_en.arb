@@ -996,6 +996,16 @@
     "description": "Для архива нужна закреплённая ревизия",
     "placeholders": {}
   },
+  "m7152adf5d3": "Update the engine to select an attribute.",
+  "@m7152adf5d3": {
+    "description": "Для выбора атрибута обновите движок.",
+    "placeholders": {}
+  },
+  "m0b5173c45c": "Update the engine to select an item from the build.",
+  "@m0b5173c45c": {
+    "description": "Для выбора предмета из сборки обновите движок.",
+    "placeholders": {}
+  },
   "m7c2e51e000": "For a finished PoB tree, update MCP to 0.7.0.",
   "@m7c2e51e000": {
     "description": "Для готового дерева PoB обновите MCP до 0.7.0.",
@@ -1021,9 +1031,19 @@
     "description": "Для поиска по характеристике обновите MCP до 0.9.0 в разделе «Компоненты».",
     "placeholders": {}
   },
+  "mbeaac9e727": "Update the engine to edit jewel sockets.",
+  "@mbeaac9e727": {
+    "description": "Для правки гнёзд самоцветов обновите движок.",
+    "placeholders": {}
+  },
   "m9a923fd47c": "No purchases needed for upcoming stages",
   "@m9a923fd47c": {
     "description": "Для следующих этапов покупки не нужны",
+    "placeholders": {}
+  },
+  "mf7dd91f91b": "Update the engine to change class.",
+  "@mf7dd91f91b": {
+    "description": "Для смены класса обновите движок.",
     "placeholders": {}
   },
   "m10db96c5ff": "Set up PoB and MCP to compare builds",
@@ -1310,6 +1330,11 @@
     "description": "Заметка к этапу",
     "placeholders": {}
   },
+  "me00429e1a8": "The notes have changed. Open them again.",
+  "@me00429e1a8": {
+    "description": "Заметки изменились. Откройте их заново.",
+    "placeholders": {}
+  },
   "mdc4baf32ac": "Build notes",
   "@mdc4baf32ac": {
     "description": "Заметки к сборке",
@@ -1532,6 +1557,15 @@
   "@m566d4d32d7": {
     "description": "Камни поддержки",
     "placeholders": {}
+  },
+  "m8bfc4312d8": "PoB II window connection: {p0}",
+  "@m8bfc4312d8": {
+    "description": "Канал окна PoB II: {p0}",
+    "placeholders": {
+      "p0": {
+        "type": "String"
+      }
+    }
   },
   "md0ef3540b0": "Catalog",
   "@md0ef3540b0": {
@@ -2399,6 +2433,11 @@
     "description": "Нет перевода — показываем оригинал",
     "placeholders": {}
   },
+  "md6c5445cf8": "No previous PoB installation",
+  "@md6c5445cf8": {
+    "description": "Нет предыдущей установки PoB",
+    "placeholders": {}
+  },
   "m8a210e3e2e": "No connection to shared session",
   "@m8a210e3e2e": {
     "description": "Нет соединения с общей сессией",
@@ -2973,6 +3012,11 @@
     "description": "План прокачки",
     "placeholders": {}
   },
+  "m9d28683954": "The leveling plan has changed. Open it again.",
+  "@m9d28683954": {
+    "description": "План прокачки изменился. Откройте его заново.",
+    "placeholders": {}
+  },
   "m1474fac529": "Plans, items, development options...",
   "@m1474fac529": {
     "description": "Планы, предметы, варианты развития…",
@@ -2981,6 +3025,11 @@
   "mfd0560ebbf": "Default",
   "@mfd0560ebbf": {
     "description": "По умолчанию",
+    "placeholders": {}
+  },
+  "m9fd15a00ec": "The build''s engine binding is corrupted",
+  "@m9fd15a00ec": {
+    "description": "Повреждена привязка сборки к движку",
     "placeholders": {}
   },
   "m5189135a61": "Retry",
@@ -3026,6 +3075,11 @@
   "mc1b2f9e3a6": "Set up PoB II",
   "@mc1b2f9e3a6": {
     "description": "Подготовка PoB II",
+    "placeholders": {}
+  },
+  "m413fa4fd39": "Preparing the original PoB Lua with the bundled engine",
+  "@m413fa4fd39": {
+    "description": "Подготовка исходного Lua PoB через комплектный движок",
     "placeholders": {}
   },
   "m52d7142d18": "Windows x64, Linux x64 and macOS arm64 supported",
@@ -3806,6 +3860,11 @@
       }
     }
   },
+  "mc3da8e80c2": "Jewel",
+  "@mc3da8e80c2": {
+    "description": "Самоцвет",
+    "placeholders": {}
+  },
   "m49db3482db": "Jewels",
   "@m49db3482db": {
     "description": "Самоцветы",
@@ -3977,6 +4036,11 @@
   "mf0ca78d984": "Server does not support shared session subscriptions",
   "@mf0ca78d984": {
     "description": "Сервер не поддерживает подписки общей сессии",
+    "placeholders": {}
+  },
+  "m4bd93e3298": "The server did not confirm the PoB II window connection.",
+  "@m4bd93e3298": {
+    "description": "Сервер не подтвердил подключение окна PoB II.",
     "placeholders": {}
   },
   "m32bb1c680f": "Session closed",
@@ -4630,6 +4694,11 @@
   "mfdeaa71380": "Install components",
   "@mfdeaa71380": {
     "description": "Установить компоненты",
+    "placeholders": {}
+  },
+  "m536db585fd": "The bundled engine manages PoB installations",
+  "@m536db585fd": {
+    "description": "Установками PoB управляет комплектный движок",
     "placeholders": {}
   },
   "mfcb7c67f91": "Current version installed",

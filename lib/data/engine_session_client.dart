@@ -2,6 +2,9 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
+import 'dart:typed_data';
+
+import 'package:crypto/crypto.dart';
 
 import 'package:fixnum/fixnum.dart';
 import 'package:grpc/grpc.dart';
@@ -9,7 +12,14 @@ import 'package:pob2_engine_api/pob2/v1/build.pb.dart' as builds;
 import 'package:pob2_engine_api/pob2/v1/catalog.pb.dart' as catalog;
 import 'package:pob2_engine_api/pob2/v1/session.pbgrpc.dart' as pb;
 
+import '../domain/build_report.dart';
 import '../domain/engine_session.dart';
+import '../domain/equipment_item.dart';
+import '../domain/node_power.dart';
+import '../domain/original_tree_scene.dart';
+import '../domain/tree_geometry.dart';
+import 'bundled_engine.dart';
+import 'mcp_editor_gateway.dart';
 import '../domain/tree_allocation_mode.dart';
 import 'pob_build_document.dart';
 
@@ -39,14 +49,52 @@ abstract interface class EngineConnection {
     EngineSnapshot current,
     EngineEquipmentEdit edit,
   );
-  Future<void> editEquipment(
+  Future<EngineSnapshot> editEquipment(
     EngineSnapshot current,
     EngineEquipmentEdit edit,
+    String requestId,
+  );
+  Future<EngineSnapshot> selectWeaponSet(
+    EngineSnapshot current,
+    int weaponSet,
+    String requestId,
+  );
+  Future<Future<void> Function()?> openEditorBridge(
+    String sessionId,
+    McpEditorRequest execute,
+    Future<void> Function(JsonMap) afterReply,
+  );
+  Future<EngineSnapshot> replaceBuild(
+    EngineSnapshot current,
+    String xml,
     String requestId,
   );
   bool get supportsTreePreview;
   bool get supportsTreeAttributes;
   bool get supportsTreeAllocationModes;
+  bool get supportsTreeSockets;
+  bool get supportsTreeJewels;
+  bool get supportsTreeSpecs;
+  bool get supportsTreeClass;
+  Future<EngineSnapshot> selectTreeClass(
+    EngineSnapshot current,
+    EngineTreeClassEdit edit,
+    String requestId,
+  );
+  Future<EngineSnapshot> selectTreeSpec(
+    EngineSnapshot current,
+    int spec,
+    String requestId,
+  );
+  Future<EngineBuildComparison> previewJewel(
+    EngineSnapshot current,
+    EngineJewelEdit edit,
+  );
+  Future<EngineSnapshot> editJewel(
+    EngineSnapshot current,
+    EngineJewelEdit edit,
+    String requestId,
+  );
   Future<EnginePassivePage> findPassives(
     String version,
     String query,
@@ -76,6 +124,53 @@ abstract interface class EngineConnection {
   Future<void> close();
 }
 
+abstract interface class EngineWorkshopReader {
+  Future<BuildReport?> readReport(EngineSnapshot snapshot);
+  Future<ItemInspection?> readEquipmentDetails(
+    EngineSnapshot snapshot, {
+    String? slot,
+    String? raw,
+    int? itemId,
+    required bool compare,
+  });
+  Future<TreeGeometry?> readTree(EngineSnapshot snapshot);
+  Future<Uint8List?> readTreeTexture(TreeTextureReference reference);
+  Future<JsonMap?> readNodeTooltip(
+    EngineSnapshot snapshot,
+    int id,
+    bool compare, {
+    bool includeScene = false,
+  });
+}
+
+abstract interface class EngineTreePowerReader {
+  bool get supportsTreePower;
+  Future<List<JsonMap>> readPowerMetrics(EngineSnapshot snapshot);
+  Stream<NodePowerUpdate> watchTreePower(
+    EngineSnapshot snapshot,
+    NodePowerOptions options,
+  );
+}
+
+abstract interface class EngineSkillGroupWriter {
+  bool get supportsSkillGroups;
+  Future<EngineSnapshot> editSkillGroup(
+    EngineSnapshot current,
+    EngineSkillGroupEdit edit,
+    String requestId,
+  );
+}
+
+abstract interface class EngineSkillChoiceWriter {
+  bool get supportsSkillChoice;
+  Future<EngineSnapshot> chooseSkill(
+    EngineSnapshot current,
+    String control,
+    int id,
+    String requestId,
+  );
+}
+
 String engineRequestId() {
   final random = Random.secure();
   return List.generate(
@@ -85,7 +180,13 @@ String engineRequestId() {
 }
 
 // Дочерний connect владеет обнаружением и одной арендой приложения.
-class EngineSessionClient implements EngineConnection {
+class EngineSessionClient
+    implements
+        EngineConnection,
+        EngineWorkshopReader,
+        EngineSkillChoiceWriter,
+        EngineSkillGroupWriter,
+        EngineTreePowerReader {
   EngineSessionClient._(
     this._helper,
     this._output,
@@ -94,9 +195,16 @@ class EngineSessionClient implements EngineConnection {
     this._rpc,
     this.supportsAddSupport,
     this.supportsEquipmentPreview,
+    this._supportsExistingEquipment,
     this.supportsTreePreview,
     this.supportsTreeAttributes,
     this.supportsTreeAllocationModes,
+    this.supportsTreeSockets,
+    this.supportsTreeJewels,
+    this.supportsTreeSpecs,
+    this.supportsTreeClass,
+    this._supportsEditorBridge,
+    this._workshopCapabilities,
   );
   final Process _helper;
   final StreamSubscription<String> _output;
@@ -107,32 +215,57 @@ class EngineSessionClient implements EngineConnection {
   final bool supportsAddSupport;
   @override
   final bool supportsEquipmentPreview;
+  final bool _supportsExistingEquipment;
   @override
   final bool supportsTreePreview;
   @override
   final bool supportsTreeAttributes;
   @override
   final bool supportsTreeAllocationModes;
+  @override
+  final bool supportsTreeSockets;
+  @override
+  final bool supportsTreeJewels;
+  @override
+  final bool supportsTreeSpecs;
+  @override
+  final bool supportsTreeClass;
+  final bool _supportsEditorBridge;
+  final Set<String> _workshopCapabilities;
   bool _closed = false;
 
+  static String _engineExecutable(String configured) {
+    if (configured != 'pob2-engine') return configured;
+    final bundled = bundledEngineFile();
+    return bundled.existsSync() ? bundled.path : configured;
+  }
+
   static Future<EngineConnection> open(EngineOptions options) async {
-    final helper = await Process.start(options.executable, [
-      'connect',
-      '--kind',
-      'ui',
-      '--connection-json',
-      '--start-server',
-      '--profile',
-      options.profile,
-      if (options.runtimeDirectory.isNotEmpty) ...[
-        '--runtime-dir',
-        options.runtimeDirectory,
+    final helper = await Process.start(
+      _engineExecutable(options.executable),
+      [
+        'connect',
+        '--kind',
+        'ui',
+        '--connection-json',
+        '--start-server',
+        '--profile',
+        options.profile,
+        if (options.runtimeDirectory.isNotEmpty) ...[
+          '--runtime-dir',
+          options.runtimeDirectory,
+        ],
+        if (options.dataDirectory.isNotEmpty) ...[
+          '--data-dir',
+          options.dataDirectory,
+        ],
       ],
-      if (options.dataDirectory.isNotEmpty) ...[
-        '--data-dir',
-        options.dataDirectory,
-      ],
-    ]);
+      environment: {
+        if (options.pobDirectory case final path?) 'POB2_ENGINE_POB_DIR': path,
+        if (options.pobNativeDirectory case final path?)
+          'POB2_ENGINE_POB_NATIVE_DIR': path,
+      },
+    );
     final first = Completer<String>();
     final output = helper.stdout
         .transform(utf8.decoder)
@@ -187,9 +320,16 @@ class EngineSessionClient implements EngineConnection {
         rpc,
         info.capabilities.contains('build.add_support'),
         info.capabilities.contains('build.equipment_preview'),
+        info.capabilities.contains('build.equipment_existing'),
         info.capabilities.contains('build.tree_preview'),
         info.capabilities.contains('build.tree_attributes'),
         info.capabilities.contains('build.tree_allocation_modes'),
+        info.capabilities.contains('build.tree_sockets'),
+        info.capabilities.contains('build.tree_jewels'),
+        info.capabilities.contains('build.tree_specs'),
+        info.capabilities.contains('build.tree_class'),
+        info.capabilities.contains('ui.bridge'),
+        info.capabilities.toSet(),
       );
     } catch (_) {
       await channel?.terminate();
@@ -252,6 +392,266 @@ class EngineSessionClient implements EngineConnection {
     }
   }
 
+  @override
+  Future<BuildReport?> readReport(EngineSnapshot snapshot) =>
+      _readWorkshop('build.report', () async {
+        final reply = await _rpc.getBuildReport(
+          builds.GetBuildReportRequest(
+            sessionId: snapshot.sessionId,
+            expectedRevision: Int64(snapshot.revision),
+          ),
+          options: _workshopReadOptions(),
+        );
+        return BuildReport.fromJson(
+          jsonMap(jsonDecode(utf8.decode(reply.reportJson))),
+        );
+      });
+
+  @override
+  Future<TreeGeometry?> readTree(EngineSnapshot snapshot) =>
+      _readWorkshop('build.tree_geometry', () async {
+        final reply = await _rpc.getTreeGeometry(
+          builds.GetTreeGeometryRequest(
+            sessionId: snapshot.sessionId,
+            expectedRevision: Int64(snapshot.revision),
+            includeScene: _workshopCapabilities.contains('build.tree_textures'),
+          ),
+          options: _workshopReadOptions(),
+        );
+        final tree = TreeGeometry.fromNodes(
+          reply.version,
+          reply.nodes.map(_geometryNode),
+          reply.edges.map((edge) => (edge.fromNode, edge.toNode)),
+        );
+        return reply.hasScene()
+            ? tree.withScene(_engineScene(reply.scene))
+            : tree;
+      });
+
+  @override
+  Future<ItemInspection?> readEquipmentDetails(
+    EngineSnapshot snapshot, {
+    String? slot,
+    String? raw,
+    int? itemId,
+    required bool compare,
+  }) => _readWorkshop('build.equipment_details', () async {
+    final reply = await _rpc.getEquipmentDetails(
+      builds.GetEquipmentDetailsRequest(
+        sessionId: snapshot.sessionId,
+        expectedRevision: Int64(snapshot.revision),
+        slot: slot,
+        raw: raw,
+        itemId: itemId,
+        compare: compare,
+      ),
+      options: _workshopReadOptions(),
+    );
+    final data = jsonMap(jsonDecode(utf8.decode(reply.detailsJson)));
+    final revision = snapshot.build?.inputRevision;
+    if (data['comparison'] case final JsonMap comparison) {
+      data['comparison'] = {
+        ...comparison,
+        'revision': revision ?? reply.revision.toInt(),
+      };
+    }
+    return ItemInspection.withBuildRevision(
+      ItemInspection.fromJson(data),
+      revision,
+    );
+  });
+
+  @override
+  bool get supportsTreePower =>
+      _workshopCapabilities.contains('build.tree_power_watch');
+
+  @override
+  Future<List<JsonMap>> readPowerMetrics(EngineSnapshot snapshot) async {
+    final reply = await _rpc.getTreePower(
+      builds.GetTreePowerRequest(
+        sessionId: snapshot.sessionId,
+        expectedRevision: Int64(snapshot.revision),
+      ),
+      options: _workshopReadOptions(),
+    );
+    return [
+      for (final metric in reply.metrics)
+        {'id': metric.id, 'label': metric.label},
+    ];
+  }
+
+  @override
+  Stream<NodePowerUpdate> watchTreePower(
+    EngineSnapshot snapshot,
+    NodePowerOptions options,
+  ) => _rpc
+      .watchTreePower(
+        builds.WatchTreePowerRequest(
+          query: builds.GetTreePowerRequest(
+            sessionId: snapshot.sessionId,
+            expectedRevision: Int64(snapshot.revision),
+            metric: options.stat,
+            maxDistance: options.distance,
+            allocation: options.allocation,
+            includeScene: true,
+          ),
+        ),
+        options: CallOptions(timeout: const Duration(minutes: 5)),
+      )
+      .map(_powerUpdate);
+
+  static NodePowerUpdate _powerUpdate(builds.WatchTreePowerResponse event) {
+    if (event.hasProgress()) {
+      return (progress: event.progress / 100, report: null);
+    }
+    final result = event.result;
+    return (
+      progress: null,
+      report: NodePowerReport(
+        entries: result.entries.map(_powerEntry).toList(),
+        scene: _engineScene(result.scene),
+        images: const {},
+      ),
+    );
+  }
+
+  static JsonMap _powerEntry(builds.TreePowerEntry entry) => {
+    'id': entry.id,
+    'name': entry.name,
+    'type': entry.kind,
+    'allocated': entry.allocated,
+    'pathDist': entry.distance,
+    'power': entry.power,
+    'pathPower': entry.pathPower,
+    'powerStr': entry.powerText,
+    'pathPowerStr': entry.pathPowerText,
+  };
+
+  @override
+  Future<Uint8List?> readTreeTexture(TreeTextureReference reference) =>
+      _readWorkshop('build.tree_textures', () async {
+        final reply = await _rpc.getTreeTexture(
+          builds.GetTreeTextureRequest(
+            file: reference.file,
+            index: reference.index,
+            targetSize: reference.targetSize,
+          ),
+          options: _workshopReadOptions(),
+        );
+        return Uint8List.fromList(reply.png);
+      });
+
+  static OriginalTreeScene _engineScene(builds.TreeScene scene) =>
+      OriginalTreeScene.fromJson({
+        'width': scene.width,
+        'height': scene.height,
+        'scale': scene.scale,
+        'offsetX': scene.offsetX,
+        'offsetY': scene.offsetY,
+        'assetId': scene.assetId,
+        'commands': scene.commands.map(_drawCommand).toList(),
+      });
+
+  static JsonMap _drawCommand(builds.TreeDrawCommand command) {
+    final target = _textureTarget(command);
+    final key = sha256
+        .convert(utf8.encode(jsonEncode([command.file, command.index, target])))
+        .toString();
+    return {
+      'texture': key,
+      'engineTexture': {
+        'file': command.file,
+        'index': command.index,
+        'targetSize': target,
+      },
+      'positions': command.positions,
+      'uv': command.uv,
+      'color': command.color,
+      'blend': command.blend,
+      'clamp': command.clamp,
+    };
+  }
+
+  static int _textureTarget(builds.TreeDrawCommand command) {
+    if (!command.file.endsWith('.dds.zst')) return 1;
+    final horizontal =
+        _span(command.positions, 0) / max(_span(command.uv, 0), 0.001);
+    final vertical =
+        _span(command.positions, 1) / max(_span(command.uv, 1), 0.001);
+    final target = max(horizontal, vertical).clamp(1, 8192).ceil();
+    return 1 << (target - 1).bitLength;
+  }
+
+  static double _span(List<double> coordinates, int axis) {
+    final values = [
+      for (var i = axis; i < coordinates.length; i += 2) coordinates[i],
+    ];
+    return values.reduce(max) - values.reduce(min);
+  }
+
+  static TreeNode _geometryNode(builds.TreeGeometryNode value) => TreeNode(
+    id: value.id,
+    x: value.x,
+    y: value.y,
+    name: value.name,
+    kind: value.kind,
+    allocated: value.allocated,
+    isAttribute: value.attribute,
+    allocationMode: value.allocationMode,
+    icon: value.icon,
+    drawSize: value.drawSize,
+  );
+
+  @override
+  Future<JsonMap?> readNodeTooltip(
+    EngineSnapshot snapshot,
+    int id,
+    bool compare, {
+    bool includeScene = false,
+  }) => _readWorkshop(
+    includeScene ? 'build.tree_hover' : 'build.tree_tooltip',
+    () async {
+      final reply = await _rpc.getTreeNodeTooltip(
+        builds.GetTreeNodeTooltipRequest(
+          sessionId: snapshot.sessionId,
+          expectedRevision: Int64(snapshot.revision),
+          nodeId: id,
+          compare: compare,
+          includeScene: includeScene,
+        ),
+        options: _workshopReadOptions(),
+      );
+      return <String, dynamic>{
+        'lines': [
+          for (final line in reply.lines)
+            <String, dynamic>{
+              'size': line.size,
+              'text': line.text,
+              'separator': line.separator,
+            },
+        ],
+        'path': reply.path,
+        if (reply.hasScene()) 'engineScene': _engineScene(reply.scene),
+      };
+    },
+  );
+
+  CallOptions _workshopReadOptions() =>
+      CallOptions(timeout: const Duration(seconds: 30));
+
+  Future<T?> _readWorkshop<T>(
+    String capability,
+    Future<T> Function() query,
+  ) async {
+    if (!_workshopCapabilities.contains(capability)) return null;
+    try {
+      return await query();
+    } on GrpcError catch (error) {
+      if (error.code == StatusCode.aborted) return null;
+      rethrow;
+    }
+  }
+
   static EngineSnapshot _snapshot(pb.SessionSnapshot value) => EngineSnapshot(
     value.sessionId,
     value.buildName,
@@ -283,6 +683,7 @@ class EngineSessionClient implements EngineConnection {
       spec: model.activeSets.tree,
       version: model.treeVersion,
       nodes: Set.unmodifiable(model.nodes),
+      jewels: Map.unmodifiable(model.passiveJewels),
       allocations: Map.unmodifiable({
         for (final entry in model.passiveAllocations.entries)
           if (TreeAllocationMode.fromWire(entry.value) case final mode?)
@@ -479,6 +880,30 @@ class EngineSessionClient implements EngineConnection {
     return _buildComparison(result);
   }
 
+  @override
+  Future<EngineBuildComparison> previewJewel(
+    EngineSnapshot current,
+    EngineJewelEdit edit,
+  ) async => _buildComparison(await _compareEdit(current, _jewelChange(edit)));
+
+  @override
+  Future<EngineSnapshot> editJewel(
+    EngineSnapshot current,
+    EngineJewelEdit edit,
+    String requestId,
+  ) async => _snapshot(
+    (await _applyEdit(current, _jewelChange(edit), requestId)).snapshot,
+  );
+
+  static builds.BuildEdit _jewelChange(EngineJewelEdit edit) =>
+      builds.BuildEdit(
+        jewel: builds.JewelEdit(
+          nodeId: edit.nodeId,
+          itemId: edit.itemId,
+          raw: edit.raw,
+        ),
+      );
+
   Future<pb.CompareBuildResponse> _compareEdit(
     EngineSnapshot current,
     builds.BuildEdit edit,
@@ -501,16 +926,39 @@ class EngineSessionClient implements EngineConnection {
   );
 
   @override
-  Future<void> editEquipment(
+  Future<EngineSnapshot> editEquipment(
     EngineSnapshot current,
     EngineEquipmentEdit edit,
     String requestId,
-  ) => _applyEdit(current, _equipmentChange(edit), requestId);
+  ) async => _snapshot(
+    (await _applyEdit(current, _equipmentChange(edit), requestId)).snapshot,
+  );
 
-  static builds.BuildEdit _equipmentChange(EngineEquipmentEdit edit) =>
-      builds.BuildEdit(
-        equipment: builds.EquipmentEdit(slot: edit.slot, raw: edit.raw),
-      );
+  builds.BuildEdit _equipmentChange(EngineEquipmentEdit edit) {
+    if (edit.itemId > 0 && !_supportsExistingEquipment) {
+      throw StateError('Для выбора предмета из сборки обновите движок.');
+    }
+    return builds.BuildEdit(
+      equipment: builds.EquipmentEdit(
+        slot: edit.slot,
+        raw: edit.raw,
+        itemId: edit.itemId,
+      ),
+    );
+  }
+
+  @override
+  Future<EngineSnapshot> selectWeaponSet(
+    EngineSnapshot current,
+    int weaponSet,
+    String requestId,
+  ) async => _snapshot(
+    (await _applyEdit(
+      current,
+      builds.BuildEdit(selection: builds.SelectionEdit(weaponSet: weaponSet)),
+      requestId,
+    )).snapshot,
+  );
 
   @override
   Future<EnginePassivePage> findPassives(
@@ -602,6 +1050,97 @@ class EngineSessionClient implements EngineConnection {
     weaponTwo: value.weaponSet2,
   );
 
+  @override
+  Future<EngineSnapshot> selectTreeSpec(
+    EngineSnapshot current,
+    int spec,
+    String requestId,
+  ) async {
+    final response = await _applyEdit(
+      current,
+      builds.BuildEdit(
+        selection: builds.SelectionEdit(sets: builds.ActiveSets(tree: spec)),
+      ),
+      requestId,
+    );
+    return _snapshot(response.snapshot);
+  }
+
+  @override
+  Future<EngineSnapshot> selectTreeClass(
+    EngineSnapshot current,
+    EngineTreeClassEdit edit,
+    String requestId,
+  ) async => _snapshot(
+    (await _applyEdit(
+      current,
+      builds.BuildEdit(
+        treeClass: builds.TreeClassEdit(
+          classId: edit.classId,
+          ascendancyId: edit.ascendancyId,
+          mode: edit.mode,
+        ),
+      ),
+      requestId,
+    )).snapshot,
+  );
+
+  @override
+  bool get supportsSkillChoice =>
+      _workshopCapabilities.contains('build.skill_choice');
+
+  @override
+  bool get supportsSkillGroups =>
+      _workshopCapabilities.contains('build.skill_group');
+
+  @override
+  Future<EngineSnapshot> editSkillGroup(
+    EngineSnapshot current,
+    EngineSkillGroupEdit edit,
+    String requestId,
+  ) async => _snapshot(
+    (await _applyEdit(
+      current,
+      builds.BuildEdit(
+        skillGroup: builds.SkillGroupEdit(
+          groupId: edit.id,
+          label: edit.label,
+          delete: edit.delete,
+          gems: edit.gems.map(_skillGroupGem),
+        ),
+      ),
+      requestId,
+    )).snapshot,
+  );
+
+  static builds.SkillGroupGem _skillGroupGem(JsonMap gem) =>
+      builds.SkillGroupGem(
+        id: gem['id'] as String,
+        level: gem['level'] as int? ?? 1,
+        quality: gem['quality'] as int? ?? 0,
+        enabled: gem['enabled'] as bool?,
+        sourceIndex: gem['sourceIndex'] as int?,
+      );
+
+  @override
+  Future<EngineSnapshot> chooseSkill(
+    EngineSnapshot current,
+    String control,
+    int id,
+    String requestId,
+  ) async => _snapshot(
+    (await _applyEdit(
+      current,
+      builds.BuildEdit(
+        skillChoice: builds.SkillChoiceEdit(
+          control: control == 'statSets' ? 'stat_sets' : control,
+          optionId: id,
+        ),
+      ),
+      requestId,
+    )).snapshot,
+  );
+
   static builds.BuildEdit _treeChange(EngineTreeEdit edit) => builds.BuildEdit(
     treeNode: builds.TreeNodeEdit(
       nodeId: edit.nodeId,
@@ -659,6 +1198,99 @@ class EngineSessionClient implements EngineConnection {
         : builds.ConfigValue(type: type, value: '$value');
   }
 
+  @override
+  Future<Future<void> Function()?> openEditorBridge(
+    String sessionId,
+    McpEditorRequest execute,
+    Future<void> Function(JsonMap) afterReply,
+  ) async {
+    if (!_supportsEditorBridge) return null;
+    final stream = StreamIterator(
+      _rpc.watchEditor(pb.WatchEditorRequest(sessionId: sessionId)),
+    );
+    try {
+      if (!await stream.moveNext().timeout(const Duration(seconds: 10)) ||
+          !stream.current.attached) {
+        throw StateError('Сервер не подтвердил подключение окна PoB II.');
+      }
+    } catch (_) {
+      await stream.cancel();
+      rethrow;
+    }
+    unawaited(_relayEditor(stream, sessionId, execute, afterReply));
+    return stream.cancel;
+  }
+
+  Future<void> _relayEditor(
+    StreamIterator<pb.WatchEditorResponse> stream,
+    String sessionId,
+    McpEditorRequest execute,
+    Future<void> Function(JsonMap) afterReply,
+  ) async {
+    try {
+      while (await stream.moveNext()) {
+        final command = stream.current;
+        final reply = await _executeEditor(command, execute);
+        await _rpc.replyEditor(
+          pb.ReplyEditorRequest(
+            sessionId: sessionId,
+            requestId: command.requestId,
+            resultJson: jsonEncode(reply),
+          ),
+          options: _timeout,
+        );
+        if (!reply.containsKey('error')) await afterReply(reply);
+      }
+    } catch (_) {
+      // При разрыве новый поток поднимает кубит разрешённого редактора.
+    } finally {
+      await stream.cancel();
+    }
+  }
+
+  Future<JsonMap> _executeEditor(
+    pb.WatchEditorResponse command,
+    McpEditorRequest execute,
+  ) async {
+    try {
+      final arguments = jsonDecode(command.argumentsJson) as JsonMap;
+      final revision = arguments['expectedRevision'];
+      return await execute(
+        command.tool,
+        arguments,
+        revision is int ? revision : null,
+      );
+    } on McpEditorFault catch (error) {
+      return {
+        'error': {'code': error.code, 'message': error.message},
+      };
+    } catch (_) {
+      return {
+        'error': {
+          'code': 'EDITOR_FAILED',
+          'message': 'Редактор PoB II не выполнил команду.',
+        },
+      };
+    }
+  }
+
+  @override
+  Future<EngineSnapshot> replaceBuild(
+    EngineSnapshot current,
+    String xml,
+    String requestId,
+  ) async => _snapshot(
+    (await _rpc.applyBuild(
+      pb.ApplyBuildRequest(
+        sessionId: current.sessionId,
+        expectedRevision: Int64(current.revision),
+        requestId: requestId,
+        xml: xml,
+      ),
+      options: _calculationTimeout,
+    )).snapshot,
+  );
+
   Future<pb.ApplyBuildResponse> _applyEdit(
     EngineSnapshot current,
     builds.BuildEdit edit,
@@ -670,7 +1302,13 @@ class EngineSessionClient implements EngineConnection {
       requestId: requestId,
       edit: edit,
     ),
-    options: edit.hasEquipment() || edit.hasTreeNode()
+    options:
+        edit.hasEquipment() ||
+            edit.hasTreeNode() ||
+            edit.hasTreeClass() ||
+            edit.hasSkillGroup() ||
+            edit.hasJewel() ||
+            (edit.hasSelection() && edit.selection.sets.tree != 0)
         ? _calculationTimeout
         : _timeout,
   );
