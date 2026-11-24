@@ -39,7 +39,7 @@ class _ExitProtectionState extends State<ExitProtection> {
 
   Future<void> _remoteExit(String action) async {
     try {
-      await widget.model.checkpointBeforeExit(closePob: true);
+      await widget.model.finishScheduledExit();
       if (action == 'restart') {
         await Process.start(
           Platform.resolvedExecutable,

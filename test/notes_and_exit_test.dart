@@ -23,6 +23,7 @@ class MemoryText extends SessionRepository {
   String text = 'План сборки';
   final draft = '<draft>Сохранённый XML</draft>';
   String? savedDraft;
+  Completer<void>? saveGate;
   String? pending;
   bool failRead = false;
   bool failWrite = false;
@@ -44,6 +45,7 @@ class MemoryText extends SessionRepository {
   Future<String> readDraft() async => draft;
   @override
   Future<void> saveDraft(String xml) async {
+    await saveGate?.future;
     await flushText();
     savedDraft = xml;
   }
@@ -197,6 +199,24 @@ void main() {
       expect(session.savedDraft, session.draft);
     },
   );
+
+  test('Принятое завершение через MCP ждёт текущего сохранения', () async {
+    final session = MemoryText();
+    final windows = OwnedWindows();
+    final model = createModel(session, windows: windows);
+    addTearDown(model.close);
+    await model.checkpoint();
+
+    final gate = session.saveGate = Completer<void>();
+    final saving = model.checkpoint();
+    final closing = model.finishScheduledExit();
+    expect(model.state.busy, isTrue);
+    expect(windows.closeRequests, 0);
+    gate.complete();
+    await saving;
+    await closing;
+    expect(windows.closeRequests, 1);
+  });
 
   testWidgets(
     'При выходе PoB закрывается после сохранения и согласия диалогов',

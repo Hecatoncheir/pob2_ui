@@ -3095,12 +3095,19 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     addLog('$error');
   }
 
-  Future<void> checkpointBeforeExit({bool closePob = false}) async {
+  Future<void> checkpointBeforeExit() async {
     if (_initialization case final initialization?) {
       await initialization;
       if (state.error case final error?) throw StateError(error);
     }
-    await checkpoint(closePob: closePob);
+    await checkpoint();
+  }
+
+  Future<void> finishScheduledExit() async {
+    while (!isClosed && state.busy) {
+      await stream.firstWhere((value) => !value.busy, orElse: () => state);
+    }
+    if (!isClosed) await checkpoint(closePob: true);
   }
 
   Future<void> checkpoint({bool closePob = false}) => _protectExit(() async {
