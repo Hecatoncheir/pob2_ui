@@ -159,6 +159,7 @@
     "md05c31a479": "Данные Path of Building",
     "m5ecb894ab9": "Данные PoB обновлены",
     "m30423a9ce2": "Движок",
+    "m03be18c368": "Движок вернул не все слои атласа",
     "m2206bb2615": "Движок вернул некорректные параметры подключения",
     "mf68d71e67c": "Движок вернул несовместимые параметры подключения",
     "m1e48341f0d": "Движок завершился. {p0}",
@@ -583,7 +584,6 @@
     "m2ffaee13bd": "Получаемый физический урон",
     "ma25a5c7093": "Получен снимок сессии",
     "m8c0ef0f511": "Пользовательские модификаторы",
-    "md90da4d82c": "Попробуйте пересчитать сборку.",
     "mce98e63b90": "Порядок ключевых узлов",
     "m8e807c5b72": "После добавления",
     "m032a431609": "Последняя: {p0}",
@@ -1088,7 +1088,6 @@
     "m53788df38a": "Indicators of the current build state",
     "m21a6bb1840": "Show whole tree",
     "m233d77b731": "Full DPS",
-    "md90da4d82c": "Try recalculating the build.",
     "m032a431609": "Last: {p0}",
     "m51d2753a44": "Belt",
     "m1a132e5834": "Runtime exceeded {p0}",
@@ -1795,7 +1794,8 @@
     "m750e822c58": "Install PoB data",
     "m3a77f812b1": "The engine is up to date",
     "m3eaf0b57cf": "Reading engine version…",
-    "m3a1df08aa5": "The local bridge connects PoB II to the original Path of Building window. PoB2Engine can use it to import the build open there, import a character, or read the builds folder from the original PoB settings."
+    "m3a1df08aa5": "The local bridge connects PoB II to the original Path of Building window. PoB2Engine can use it to import the build open there, import a character, or read the builds folder from the original PoB settings.",
+    "m03be18c368": "The engine did not return all atlas layers"
   },
   "fr": {
     "m0c63e733f9": "Lua n'a pas renvoyé toutes les icônes",
@@ -1977,7 +1977,6 @@
     "m53788df38a": "Indicateurs de l'état actuel de la build",
     "m21a6bb1840": "Afficher l'arbre entier",
     "m233d77b731": "Complet DPS",
-    "md90da4d82c": "Essayez de recalculer l'assemblage.",
     "m032a431609": "Dernier : {p0}",
     "m51d2753a44": "Ceinture",
     "m1a132e5834": "Durée d'exécution dépassée {p0}",
@@ -2694,7 +2693,8 @@
     "m750e822c58": "Installer les données PoB",
     "m3a77f812b1": "Le moteur est à jour",
     "m3eaf0b57cf": "Lecture de la version du moteur…",
-    "m3a1df08aa5": "Le pont local relie PoB II à la fenêtre de Path of Building d’origine. PoB2Engine peut ainsi importer le build ouvert dans cette fenêtre, importer un personnage ou lire le dossier des builds dans les paramètres de PoB d’origine."
+    "m3a1df08aa5": "Le pont local relie PoB II à la fenêtre de Path of Building d’origine. PoB2Engine peut ainsi importer le build ouvert dans cette fenêtre, importer un personnage ou lire le dossier des builds dans les paramètres de PoB d’origine.",
+    "m03be18c368": "Le moteur n’a pas renvoyé toutes les couches de l’atlas"
   },
   "de": {
     "m0c63e733f9": "Lua hat nicht alle Symbole zurückgegeben",
@@ -2876,7 +2876,6 @@
     "m53788df38a": "Indikatoren für den aktuellen Build-Status",
     "m21a6bb1840": "Gesamten Baum anzeigen",
     "m233d77b731": "Voll DPS",
-    "md90da4d82c": "Versuchen Sie, die Baugruppe neu zu berechnen.",
     "m032a431609": "Letzter: {p0}",
     "m51d2753a44": "Gürtel",
     "m1a132e5834": "Laufzeit überschritten {p0}",
@@ -3593,7 +3592,8 @@
     "m750e822c58": "PoB-Daten installieren",
     "m3a77f812b1": "Die Engine ist auf dem neuesten Stand",
     "m3eaf0b57cf": "Lese-Engine-Version…",
-    "m3a1df08aa5": "Die lokale Brücke verbindet PoB II mit dem Fenster des ursprünglichen Path of Building. PoB2Engine kann darüber den dort geöffneten Build oder einen Charakter importieren und den Build-Ordner aus den Einstellungen des ursprünglichen PoB auslesen."
+    "m3a1df08aa5": "Die lokale Brücke verbindet PoB II mit dem Fenster des ursprünglichen Path of Building. PoB2Engine kann darüber den dort geöffneten Build oder einen Charakter importieren und den Build-Ordner aus den Einstellungen des ursprünglichen PoB auslesen.",
+    "m03be18c368": "Die Engine hat nicht alle Ebenen des Atlas zurückgegeben"
   },
   "es": {
     "m0c63e733f9": "Lua no devolvió todos los íconos",
@@ -3775,7 +3775,6 @@
     "m53788df38a": "Indicadores del estado de compilación actual",
     "m21a6bb1840": "Mostrar árbol completo",
     "m233d77b731": "Completo DPS",
-    "md90da4d82c": "Intente recalcular el ensamblaje.",
     "m032a431609": "Último: {p0}",
     "m51d2753a44": "Cinturón",
     "m1a132e5834": "El tiempo de ejecución excedió {p0}",
@@ -4492,7 +4491,8 @@
     "m750e822c58": "Instalar datos PoB",
     "m3a77f812b1": "El motor está al día.",
     "m3eaf0b57cf": "Leyendo la versión del motor…",
-    "m3a1df08aa5": "El puente local conecta PoB II con la ventana del Path of Building original. PoB2Engine puede usarlo para importar la build que esté abierta allí, importar un personaje o consultar la carpeta de builds en la configuración del PoB original."
+    "m3a1df08aa5": "El puente local conecta PoB II con la ventana del Path of Building original. PoB2Engine puede usarlo para importar la build que esté abierta allí, importar un personaje o consultar la carpeta de builds en la configuración del PoB original.",
+    "m03be18c368": "El motor no devolvió todas las capas del atlas"
   },
   "pt_BR": {
     "m0c63e733f9": "Lua não retornou todos os ícones",
@@ -4674,7 +4674,6 @@
     "m53788df38a": "Indicadores do estado de construção atual",
     "m21a6bb1840": "Mostrar árvore inteira",
     "m233d77b731": "Completo DPS",
-    "md90da4d82c": "Tente recalcular a montagem.",
     "m032a431609": "Último: {p0}",
     "m51d2753a44": "Cinto",
     "m1a132e5834": "Tempo de execução excedido {p0}",
@@ -5391,7 +5390,8 @@
     "m750e822c58": "Instalar dados PoB",
     "m3a77f812b1": "O mecanismo está atualizado",
     "m3eaf0b57cf": "Lendo a versão do mecanismo…",
-    "m3a1df08aa5": "A ponte local conecta o PoB II à janela do Path of Building original. Por ela, o PoB2Engine pode importar a build aberta, importar um personagem ou consultar a pasta de builds nas configurações do PoB original."
+    "m3a1df08aa5": "A ponte local conecta o PoB II à janela do Path of Building original. Por ela, o PoB2Engine pode importar a build aberta, importar um personagem ou consultar a pasta de builds nas configurações do PoB original.",
+    "m03be18c368": "O motor não retornou todas as camadas do atlas"
   },
   "ja": {
     "m0c63e733f9": "Lua はすべてのアイコンを返しませんでした",
@@ -5573,7 +5573,6 @@
     "m53788df38a": "現在のビルド状態のインジケーター",
     "m21a6bb1840": "ツリー全体を表示",
     "m233d77b731": "フル DPS",
-    "md90da4d82c": "アセンブリを再計算してみてください。",
     "m032a431609": "最後: {p0}\n【m51d2753a44】ベルト",
     "m51d2753a44": "ベルト",
     "m1a132e5834": "ランタイムが {p0} を超えました",
@@ -6290,7 +6289,8 @@
     "m750e822c58": "PoB データのインストール",
     "m3a77f812b1": "エンジンは最新です",
     "m3eaf0b57cf": "読み取りエンジンのバージョン…",
-    "m3a1df08aa5": "ローカルブリッジは PoB II とオリジナルの Path of Building のウィンドウを接続します。PoB2Engine は、この接続を使って開いているビルドやキャラクターをインポートしたり、オリジナルの PoB の設定からビルドフォルダーを確認したりできます。"
+    "m3a1df08aa5": "ローカルブリッジは PoB II とオリジナルの Path of Building のウィンドウを接続します。PoB2Engine は、この接続を使って開いているビルドやキャラクターをインポートしたり、オリジナルの PoB の設定からビルドフォルダーを確認したりできます。",
+    "m03be18c368": "エンジンからアトラスの全レイヤーが返されませんでした"
   },
   "ko": {
     "m0c63e733f9": "Lua이 모든 아이콘을 반환하지 않았습니다.",
@@ -6472,7 +6472,6 @@
     "m53788df38a": "현재 빌드 상태 표시기",
     "m21a6bb1840": "전체 트리 표시",
     "m233d77b731": "전체 DPS",
-    "md90da4d82c": "어셈블리를 다시 계산해 보세요.",
     "m032a431609": "마지막: {p0}",
     "m51d2753a44": "벨트",
     "m1a132e5834": "런타임이 {p0}을(를) 초과했습니다.",
@@ -7189,7 +7188,8 @@
     "m750e822c58": "PoB 데이터 설치",
     "m3a77f812b1": "엔진이 최신입니다",
     "m3eaf0b57cf": "엔진 버전을 읽는 중…",
-    "m3a1df08aa5": "로컬 브리지는 PoB II를 원본 Path of Building 창에 연결합니다. PoB2Engine은 이 연결을 통해 열린 빌드나 캐릭터를 가져오거나 원본 PoB 설정에서 빌드 폴더를 확인할 수 있습니다."
+    "m3a1df08aa5": "로컬 브리지는 PoB II를 원본 Path of Building 창에 연결합니다. PoB2Engine은 이 연결을 통해 열린 빌드나 캐릭터를 가져오거나 원본 PoB 설정에서 빌드 폴더를 확인할 수 있습니다.",
+    "m03be18c368": "엔진이 아틀라스의 모든 레이어를 반환하지 않았습니다"
   },
   "th": {
     "m0c63e733f9": "Lua ไม่ได้ส่งคืนไอคอนทั้งหมด",
@@ -7371,7 +7371,6 @@
     "m53788df38a": "ตัวบ่งชี้สถานะการสร้างปัจจุบัน",
     "m21a6bb1840": "แสดงทั้งต้นไม้",
     "m233d77b731": "เต็ม DPS",
-    "md90da4d82c": "ลองคำนวณแอสเซมบลีใหม่",
     "m032a431609": "ล่าสุด: {p0}",
     "m51d2753a44": "เข็มขัด",
     "m1a132e5834": "รันไทม์เกิน {p0}",
@@ -8088,7 +8087,8 @@
     "m750e822c58": "ติดตั้งข้อมูล PoB",
     "m3a77f812b1": "เครื่องยนต์เป็นเวอร์ชันล่าสุดแล้ว",
     "m3eaf0b57cf": "กำลังอ่านเวอร์ชันเอ็นจิ้น…",
-    "m3a1df08aa5": "บริดจ์ภายในเครื่องเชื่อมต่อ PoB II กับหน้าต่าง Path of Building ต้นฉบับ PoB2Engine สามารถใช้การเชื่อมต่อนี้เพื่อนำเข้าบิลด์ที่เปิดอยู่ นำเข้าตัวละคร หรือดูโฟลเดอร์บิลด์จากการตั้งค่าของ PoB ต้นฉบับ"
+    "m3a1df08aa5": "บริดจ์ภายในเครื่องเชื่อมต่อ PoB II กับหน้าต่าง Path of Building ต้นฉบับ PoB2Engine สามารถใช้การเชื่อมต่อนี้เพื่อนำเข้าบิลด์ที่เปิดอยู่ นำเข้าตัวละคร หรือดูโฟลเดอร์บิลด์จากการตั้งค่าของ PoB ต้นฉบับ",
+    "m03be18c368": "เอนจินส่งคืนเลเยอร์ของแอตลาสไม่ครบ"
   },
   "zh_Hant": {
     "m0c63e733f9": "Lua 未傳回所有圖標",
@@ -8270,7 +8270,6 @@
     "m53788df38a": "目前建置狀態的指示器",
     "m21a6bb1840": "顯示整棵樹",
     "m233d77b731": "完整 DPS",
-    "md90da4d82c": "嘗試重新計算組件。",
     "m032a431609": "最後：{p0}",
     "m51d2753a44": "腰帶",
     "m1a132e5834": "運行時間超出 {p0}",
@@ -8987,6 +8986,7 @@
     "m750e822c58": "安裝PoB數據",
     "m3a77f812b1": "引擎是最新的",
     "m3eaf0b57cf": "正在讀取引擎版本...",
-    "m3a1df08aa5": "本機橋接功能可將 PoB II 連接至原版 Path of Building 視窗。PoB2Engine 可透過這個連線匯入視窗中開啟的配置、匯入角色，或從原版 PoB 的設定取得配置資料夾的位置。"
+    "m3a1df08aa5": "本機橋接功能可將 PoB II 連接至原版 Path of Building 視窗。PoB2Engine 可透過這個連線匯入視窗中開啟的配置、匯入角色，或從原版 PoB 的設定取得配置資料夾的位置。",
+    "m03be18c368": "引擎未傳回圖集的所有圖層"
   }
 }

@@ -522,6 +522,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m30423a9ce2 => 'เครื่องยนต์';
 
   @override
+  String get m03be18c368 => 'เอนจินส่งคืนเลเยอร์ของแอตลาสไม่ครบ';
+
+  @override
   String get m2206bb2615 => 'โปรแกรมส่งคืนพารามิเตอร์การเชื่อมต่อที่ไม่ถูกต้อง';
 
   @override
@@ -1893,9 +1896,6 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m8c0ef0f511 => 'ตัวปรับแต่งแบบกำหนดเอง';
-
-  @override
-  String get md90da4d82c => 'ลองคำนวณแอสเซมบลีใหม่';
 
   @override
   String get mce98e63b90 => 'ลำดับโหนดสำคัญ';

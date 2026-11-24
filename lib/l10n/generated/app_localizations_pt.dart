@@ -528,6 +528,9 @@ class AppLocalizationsPt extends AppLocalizations {
   String get m30423a9ce2 => 'Motor';
 
   @override
+  String get m03be18c368 => 'O motor não retornou todas as camadas do atlas';
+
+  @override
   String get m2206bb2615 =>
       'O mecanismo retornou parâmetros de conexão incorretos';
 
@@ -1924,9 +1927,6 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get m8c0ef0f511 => 'Modificadores personalizados';
-
-  @override
-  String get md90da4d82c => 'Tente recalcular a montagem.';
 
   @override
   String get mce98e63b90 => 'Ordem dos nós-chave';
@@ -3485,6 +3485,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get m30423a9ce2 => 'Motor';
 
   @override
+  String get m03be18c368 => 'O motor não retornou todas as camadas do atlas';
+
+  @override
   String get m2206bb2615 =>
       'O mecanismo retornou parâmetros de conexão incorretos';
 
@@ -4881,9 +4884,6 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get m8c0ef0f511 => 'Modificadores personalizados';
-
-  @override
-  String get md90da4d82c => 'Tente recalcular a montagem.';
 
   @override
   String get mce98e63b90 => 'Ordem dos nós-chave';

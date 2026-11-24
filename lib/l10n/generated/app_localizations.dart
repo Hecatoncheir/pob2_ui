@@ -1073,6 +1073,12 @@ abstract class AppLocalizations {
   /// **'Engine'**
   String get m30423a9ce2;
 
+  /// Движок вернул не все слои атласа
+  ///
+  /// In en, this message translates to:
+  /// **'The engine did not return all atlas layers'**
+  String get m03be18c368;
+
   /// Движок вернул некорректные параметры подключения
   ///
   /// In en, this message translates to:
@@ -3617,12 +3623,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Custom modifiers'**
   String get m8c0ef0f511;
-
-  /// Попробуйте пересчитать сборку.
-  ///
-  /// In en, this message translates to:
-  /// **'Try recalculating the build.'**
-  String get md90da4d82c;
 
   /// Порядок ключевых узлов
   ///

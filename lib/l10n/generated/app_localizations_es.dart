@@ -535,6 +535,9 @@ class AppLocalizationsEs extends AppLocalizations {
   String get m30423a9ce2 => 'Motor';
 
   @override
+  String get m03be18c368 => 'El motor no devolvió todas las capas del atlas';
+
+  @override
   String get m2206bb2615 =>
       'El motor devolvió parámetros de conexión incorrectos';
 
@@ -1937,9 +1940,6 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get m8c0ef0f511 => 'Modificadores personalizados';
-
-  @override
-  String get md90da4d82c => 'Intente recalcular el ensamblaje.';
 
   @override
   String get mce98e63b90 => 'Orden de los nodos clave';

@@ -858,6 +858,11 @@
     "description": "Движок",
     "placeholders": {}
   },
+  "m03be18c368": "The engine did not return all atlas layers",
+  "@m03be18c368": {
+    "description": "Движок вернул не все слои атласа",
+    "placeholders": {}
+  },
   "m2206bb2615": "The engine returned incorrect connection parameters",
   "@m2206bb2615": {
     "description": "Движок вернул некорректные параметры подключения",
@@ -3153,11 +3158,6 @@
   "m8c0ef0f511": "Custom modifiers",
   "@m8c0ef0f511": {
     "description": "Пользовательские модификаторы",
-    "placeholders": {}
-  },
-  "md90da4d82c": "Try recalculating the build.",
-  "@md90da4d82c": {
-    "description": "Попробуйте пересчитать сборку.",
     "placeholders": {}
   },
   "mce98e63b90": "Key node order",

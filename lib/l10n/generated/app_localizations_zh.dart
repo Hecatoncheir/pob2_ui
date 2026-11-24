@@ -514,6 +514,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m30423a9ce2 => '發動機';
 
   @override
+  String get m03be18c368 => '引擎未傳回圖集的所有圖層';
+
+  @override
   String get m2206bb2615 => '引擎回傳了錯誤的連接參數';
 
   @override
@@ -1869,9 +1872,6 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m8c0ef0f511 => '自訂修飾符';
-
-  @override
-  String get md90da4d82c => '嘗試重新計算組件。';
 
   @override
   String get mce98e63b90 => '關鍵天賦節點順序';
@@ -3377,6 +3377,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m30423a9ce2 => '發動機';
 
   @override
+  String get m03be18c368 => '引擎未傳回圖集的所有圖層';
+
+  @override
   String get m2206bb2615 => '引擎回傳了錯誤的連接參數';
 
   @override
@@ -4732,9 +4735,6 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m8c0ef0f511 => '自訂修飾符';
-
-  @override
-  String get md90da4d82c => '嘗試重新計算組件。';
 
   @override
   String get mce98e63b90 => '關鍵天賦節點順序';
