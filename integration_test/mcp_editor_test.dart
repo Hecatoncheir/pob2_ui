@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -214,16 +215,7 @@ Future<void> _checkApplicationTools(
   await client.success('pob_editor_app', {'action': 'save'});
 
   final image = await client.call('pob_render_image', {'view': 'overview'});
-  if (Platform.isWindows) {
-    expect(image['isError'], isNot(true), reason: '$image');
-    expect(
-      jsonRows(image['content']).where((b) => b['type'] == 'image'),
-      hasLength(1),
-    );
-  } else {
-    expect(image['isError'], isTrue);
-    expect(jsonRows(image['content']).first['text'], contains('Windows'));
-  }
+  _expectPng(image);
   final lifecycle = <String>[];
   model.mcpEditor.lifecycleAction = (action) async {
     lifecycle.add(action);
@@ -359,15 +351,21 @@ Future<bool> _openDps(WidgetTester tester, _ExternalEditor client) async {
   return !visible;
 }
 
+Uint8List _expectPng(JsonMap reply) {
+  expect(reply['isError'], isNot(true), reason: '${reply['content']}');
+  final png = jsonRows(reply['content'])
+      .singleWhere((item) => item['type'] == 'image');
+  expect(png['mimeType'], 'image/png');
+  final bytes = base64Decode(png['data'] as String);
+  expect(bytes.take(8), [137, 80, 78, 71, 13, 10, 26, 10]);
+  return bytes;
+}
+
 Future<void> _checkScreenshot(_ExternalEditor client) async {
   final screenshot = await client.call('pob_editor_ui', {
     'action': 'screenshot',
   });
-  expect(screenshot['isError'], isNot(true));
-  final png = jsonRows(screenshot['content'])
-      .firstWhere((item) => item['type'] == 'image');
-  final bytes = base64Decode(png['data'] as String);
-  expect(bytes.take(8), [137, 80, 78, 71, 13, 10, 26, 10]);
+  final bytes = _expectPng(screenshot);
   final result = jsonMap(jsonMap(screenshot['structuredContent'])['result']);
   final viewport = jsonMap(result['viewport']);
   final width = (viewport['width'] as num).ceil();
