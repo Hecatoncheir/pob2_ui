@@ -1,11 +1,11 @@
 import 'dart:convert';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:pob2_ui/data/mcp_client.dart';
+import 'package:pob2_ui/data/workbench_client.dart';
 import 'package:pob2_ui/data/tree_icon_repository.dart';
 import 'package:pob2_ui/domain/tree_geometry.dart';
 
-class IconEngine extends McpClient {
+class IconEngine extends WorkbenchClient {
   IconEngine() {
     tools = {'pob_tree_icons'};
   }

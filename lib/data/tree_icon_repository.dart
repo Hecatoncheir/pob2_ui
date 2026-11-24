@@ -5,12 +5,12 @@ import 'dart:typed_data';
 import '../domain/build_report.dart';
 import '../domain/original_tree_scene.dart';
 import '../domain/tree_geometry.dart';
-import 'mcp_client.dart';
+import 'workbench_client.dart';
 
 class TreeIconRepository {
   Future<Map<String, Uint8List>> overlay(
     TreeGeometry tree,
-    McpClient engine,
+    WorkbenchClient engine,
     String source,
   ) async {
     final loaded = await _loadArtwork(tree, engine, source, null);
@@ -27,7 +27,7 @@ class TreeIconRepository {
 
   Future<TreeGeometry> load(
     TreeGeometry tree,
-    McpClient engine,
+    WorkbenchClient engine,
     String source, {
     bool Function()? canContinue,
   }) async {
@@ -56,7 +56,7 @@ class TreeIconRepository {
 
   Future<TreeGeometry> _loadArtwork(
     TreeGeometry tree,
-    McpClient engine,
+    WorkbenchClient engine,
     String source,
     bool Function()? canContinue,
   ) {
@@ -107,7 +107,7 @@ class TreeIconRepository {
 
   Future<TreeGeometry> _loadScene(
     TreeGeometry tree,
-    McpClient engine,
+    WorkbenchClient engine,
     String source,
     bool Function()? canContinue,
   ) async {
@@ -156,8 +156,8 @@ class TreeIconRepository {
   }, error);
 
   File? _file(String source, String version, String token) {
-    if (root == null) return null;
-    if (!RegExp(r'^(?:[a-f0-9]{64}|[a-f0-9]{40}-[a-f0-9]{40})$')
+    if (root == null || source.isEmpty) return null;
+    if (!RegExp(r'^(?:[a-f0-9]{64}|[a-f0-9]{40}(?:-[a-f0-9]{40})?)$')
             .hasMatch(source) ||
         !RegExp(r'^[0-9_]{1,32}$').hasMatch(version) ||
         !RegExp(r'^[a-f0-9]{64}$').hasMatch(token)) {
@@ -167,7 +167,7 @@ class TreeIconRepository {
   }
 
   Future<Uint8List?> _texture(
-    McpClient engine,
+    WorkbenchClient engine,
     String token,
     String source,
     String version,
@@ -221,7 +221,7 @@ class TreeIconRepository {
   Future<bool> _loadMissing(
     List<String> keys,
     Map<String, Uint8List> cache,
-    McpClient engine,
+    WorkbenchClient engine,
     bool Function()? canContinue,
   ) async {
     for (var start = 0; start < keys.length; start += 32) {

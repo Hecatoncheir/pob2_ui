@@ -89,7 +89,7 @@ class ShellBloc extends Bloc<ShellEvent, ShellState> {
 const pageLabels = {
   AppPage.library: 'Мои сборки',
   AppPage.workspace: 'Мастерская',
-  AppPage.components: 'Компоненты',
+  AppPage.components: 'PoB2Engine',
 };
 const pageIcons = {
   AppPage.library: 'grid',

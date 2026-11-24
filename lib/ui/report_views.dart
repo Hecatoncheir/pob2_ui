@@ -336,31 +336,9 @@ class _StatGroup extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Padding(
     padding: const EdgeInsets.only(bottom: 10),
-    child: ExpansionTile(
+    child: PanelExpansionTile(
       key: PageStorageKey('stat-group-$title'),
-      tilePadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 2),
-      childrenPadding: const EdgeInsets.fromLTRB(12, 0, 12, 12),
-      visualDensity: VisualDensity.compact,
-      clipBehavior: Clip.antiAlias,
-      collapsedBackgroundColor: Theme.of(context)
-          .colorScheme
-          .surfaceContainerHigh,
-      backgroundColor: Color.alphaBlend(
-        Theme.of(context).colorScheme.primary.withValues(alpha: .06),
-        Theme.of(context).colorScheme.surfaceContainerHigh,
-      ),
-      title: AppText(
-        title,
-        style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w700),
-      ),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(14),
-        side: BorderSide(color: Spark.of(context).line),
-      ),
-      collapsedShape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(14),
-        side: BorderSide(color: Spark.of(context).line),
-      ),
+      title: title,
       children: entries.entries
           .map(
             (entry) =>

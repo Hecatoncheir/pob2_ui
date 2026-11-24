@@ -6,10 +6,12 @@ import 'package:integration_test/integration_test.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:path/path.dart' as path;
 import 'package:pob2_ui/data/component_ownership.dart';
-import 'package:pob2_ui/data/component_repository.dart';
+
+import '../test/support/legacy/component_repository.dart';
+
 import 'package:pob2_ui/data/file_digest.dart';
 import 'package:pob2_ui/data/installation_store.dart';
-import 'package:pob2_ui/data/mcp_client.dart';
+import 'package:pob2_ui/data/workbench_client.dart';
 import 'package:pob2_ui/data/profile_use.dart';
 import 'package:pob2_ui/domain/component.dart';
 import 'package:pob2_ui/ui/components_view.dart';
@@ -199,7 +201,7 @@ Future<WorkshopCubit> _open(
     profileUse: use,
   );
   await repository.load();
-  final model = WorkshopCubit(repository, McpClient());
+  final model = WorkshopCubit(repository, WorkbenchClient());
   addTearDown(model.close);
   await tester.pumpWidget(
     MaterialApp(

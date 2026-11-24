@@ -1,18 +1,34 @@
 import 'dart:convert';
+import 'dart:io';
 
 import '../domain/component.dart';
-import 'component_repository.dart';
+import 'bundled_engine.dart';
+import 'component_source.dart';
+import 'installation_store.dart';
+import 'process_service.dart';
+import 'profile_cleanup.dart';
+import 'profile_use.dart';
 
 typedef _Installations = ({Installations current, Installations previous});
 
-class EngineComponents extends ComponentRepository {
+class EngineComponents implements ComponentSource {
   EngineComponents({
-    required super.store,
-    required super.profileUse,
-    required this.executable,
-  });
+    required this.store,
+    this.profileUse,
+    String? executable,
+    this.processes = const ProcessService(),
+  }) : executable = executable ?? defaultEngineExecutable();
 
+  @override
+  final InstallationStore store;
+  @override
+  final ProfileUse? profileUse;
   final String executable;
+  final ProcessService processes;
+  @override
+  Installations active = {};
+  @override
+  late final profileCleanup = ProfileCleanup(store, active: () => active);
 
   @override
   List<Component> get requiredComponents => const [Component.pob];
@@ -22,7 +38,11 @@ class EngineComponents extends ComponentRepository {
 
   @override
   Map<Component, Release> availableReleases() => {
-    Component.pob: super.availableReleases()[Component.pob]!,
+    Component.pob: Release(
+      'v0.23.1',
+      '${Component.pob.url}/releases/tag/v0.23.1',
+      DateTime.utc(2026, 11, 20),
+    ),
   };
 
   @override
@@ -39,19 +59,6 @@ class EngineComponents extends ComponentRepository {
       if (state.current.isNotEmpty) state.current,
       if (state.previous.isNotEmpty) state.previous,
     ];
-  }
-
-  @override
-  Future<Installation> install(
-    Component component,
-    Release release,
-    void Function(String) log,
-  ) async {
-    if (component != Component.pob) {
-      throw StateError('Установками PoB управляет комплектный движок');
-    }
-    await installPair({component: release}, log);
-    return active[component]!;
   }
 
   @override
@@ -141,6 +148,22 @@ class EngineComponents extends ComponentRepository {
       'status': pob == null ? 'not_installed' : 'ok',
       'pob': pob?.toJson(),
     };
+  }
+
+  @override
+  Future<CleanupResult> cleanProfile(Set<CleanupEntry> selected) {
+    final use = profileUse;
+    if (use == null) throw StateError('Очистка профиля сейчас недоступна.');
+    return use.exclusively(store.root, () async {
+      final lock = await File.fromUri(store.root.uri.resolve('.install.lock'))
+          .open(mode: FileMode.append);
+      try {
+        await lock.lock(FileLock.exclusive);
+        return await profileCleanup.apply(selected);
+      } finally {
+        await lock.close();
+      }
+    });
   }
 
   void _adopt(_Installations state) {

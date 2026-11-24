@@ -6,7 +6,6 @@ import json
 import os
 from pathlib import Path
 import queue
-import shutil
 import subprocess
 import threading
 import time
@@ -39,14 +38,9 @@ def failure_status(profile):
 
 
 class Editor:
-    def __init__(self, profile, component, engine, environment):
+    def __init__(self, profile, engine, environment):
         endpoint = str(profile / 'mcp-editor/endpoint.json')
-        if engine:
-            command = [engine, 'editor', '--endpoint', endpoint]
-        else:
-            binary = 'python/python.exe' if os.name == 'nt' else 'python/bin/python3'
-            command = [str(component / binary), '-X', 'utf8', str(component / 'run.py'),
-                       'serve', '--mode', 'editor', '--editor-endpoint', endpoint]
+        command = [engine, 'editor', '--endpoint', endpoint]
         self.process = subprocess.Popen(
             command, env=environment, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
             text=True, encoding='utf-8',
@@ -100,15 +94,13 @@ def wait_for_editor(process, profile):
     raise TimeoutError('Приложение не включило MCP')
 
 
-def check(binary, components):
+def check(binary, engine):
     with temporary_profile('pob2-mcp-exit-') as profile, ExitStack() as cleanup:
         builds = profile / 'builds'
         builds.mkdir()
-        engine = os.environ.get('POB2_PACKAGED_ENGINE')
         environment = dict(os.environ, POB2_UI_HOME=str(profile))
-        component = prepare_runtime(profile, components, engine, environment)
-        if engine:
-            cleanup.callback(stop_profile_engine, binary, profile, environment, Path(engine))
+        prepare_runtime(profile, engine, environment)
+        cleanup.callback(stop_profile_engine, binary, profile, environment, Path(engine))
         (profile / 'pob-builds.json').write_text(json.dumps({
             'directory': str(builds), 'migrated': True,
         }), encoding='utf-8')
@@ -116,7 +108,7 @@ def check(binary, components):
         editor = None
         try:
             wait_for_editor(process, profile)
-            editor = Editor(profile, component, engine, environment)
+            editor = Editor(profile, engine, environment)
             tools = editor.rpc('tools/list', {})['tools']
             assert len(tools) == 42, len(tools)
             status = editor.call('pob_editor_status')
@@ -127,16 +119,15 @@ def check(binary, components):
             editor.call('pob_create_build', {'classId': witch['id'], 'level': 90,
                                             'name': 'MCP lifecycle check'})
             editor.call('pob_editor_status')
-            if engine:
-                assert_window_image(editor)
-                assert not (profile / 'components.json').exists()
+            assert_window_image(editor)
+            assert not (profile / 'components.json').exists()
             editor_action_when_idle(editor, 'save')
             editor_action_when_idle(editor, 'close')
             code = process.wait(timeout=30)
             assert code == 0, f'После ответа MCP процесс завершился с кодом {code}'
             assert list(builds.glob('*.xml')), 'Не сохранён XML'
             return {'appVersion': status['appVersion'], 'appBuild': status['appBuild'],
-                    'tools': len(tools), 'exitCode': code, 'xmlSaved': True, 'nativeEditor': bool(engine)}
+                    'tools': len(tools), 'exitCode': code, 'xmlSaved': True, 'nativeEditor': True}
         except Exception:
             print(json.dumps({'failureStatus': failure_status(profile)},
                              ensure_ascii=False), flush=True)
@@ -149,15 +140,10 @@ def check(binary, components):
                 editor.close()
 
 
-def prepare_runtime(profile, components, engine, environment):
-    if not engine:
-        shutil.copyfile(components, profile / 'components.json')
-        manifest = json.loads(components.read_text(encoding='utf-8-sig'))
-        return Path(manifest['active']['mcp']['directory'])
+def prepare_runtime(profile, engine, environment):
     environment['POB2_ENGINE_EXECUTABLE'] = engine
     environment['POB2_UI_PYTHON'] = str(profile / 'python-not-installed')
     subprocess.run([engine, 'pob-data', 'ensure'], env=environment, check=True, timeout=310)
-    return None
 
 
 def editor_action_when_idle(editor, action):
@@ -189,10 +175,12 @@ def assert_window_image(editor):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--target', required=True, choices=BINARIES)
-    parser.add_argument('--components', required=True, type=Path)
+    parser.add_argument('--engine', default=os.environ.get('POB2_PACKAGED_ENGINE'))
     parser.add_argument('--output', required=True, type=Path)
     arguments = parser.parse_args()
-    result = check(ROOT / BINARIES[arguments.target], arguments.components)
+    if not arguments.engine:
+        parser.error('Укажите --engine или POB2_PACKAGED_ENGINE')
+    result = check(ROOT / BINARIES[arguments.target], str(Path(arguments.engine).resolve()))
     arguments.output.parent.mkdir(parents=True, exist_ok=True)
     arguments.output.write_text(json.dumps(result, indent=2), encoding='utf-8')
     print(json.dumps(result), flush=True)

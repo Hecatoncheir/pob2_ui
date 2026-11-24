@@ -2,8 +2,9 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:pob2_ui/data/native_runtime_installer.dart';
-import 'package:pob2_ui/data/process_service.dart';
+
+import 'support/legacy/native_runtime_installer.dart';
+import 'support/legacy/legacy_process_service.dart';
 
 void main() {
   for (final scenario in [
@@ -17,7 +18,7 @@ void main() {
       final root = await Directory.systemTemp.createTemp('pob2-native-test-');
       addTearDown(() => root.delete(recursive: true));
       await Directory.fromUri(root.uri.resolve('pob_poe2_mcp/')).create();
-      final python = await ProcessService().python();
+      final python = await LegacyProcessService().python();
       final package = File.fromUri(root.uri.resolve('runtime.zip'));
       final entries = <Map<String, dynamic>>[
         {'name': 'native/libluajit-5.1.so.2'},

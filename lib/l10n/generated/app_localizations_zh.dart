@@ -88,12 +88,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get mecc0fe5cd1 => 'Lua 未回傳特徵';
 
   @override
-  String get mddf65e8cca => 'Lua 未連接';
-
-  @override
-  String get m43ddb3a975 => 'Lua 驗證失敗';
-
-  @override
   String get m4358fa9bda => 'Lua 無法套用這個階段';
 
   @override
@@ -102,23 +96,10 @@ class AppLocalizationsZh extends AppLocalizations {
   }
 
   @override
-  String md9540a4b84(String p0) {
-    return 'Lua 個答案。目錄中的類別：$p0';
-  }
-
-  @override
   String get m79df86397e => 'Lua 已停用';
 
   @override
-  String get mbf7bbb22e3 => 'Lua 已連接';
-
-  @override
   String get m3717fab485 => 'Lua 套用了不同的計算條件';
-
-  @override
-  String m12e8f27f62(String p0) {
-    return 'MCP 已結束。 $p0';
-  }
 
   @override
   String get m9f82e876bd => 'MCP 可以編輯組件、管理庫、檔案、元件和應用程式。如果您手動變更版本，存取將被停用。';
@@ -163,6 +144,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get maaaf9e5923 => 'PoB 已開啟，但尚未連接橋接器。請重新啟動一次。';
 
   @override
+  String get mcc15d998ab => '尚未連線至 PoB2Engine';
+
+  @override
   String get m3127345008 => 'XML 超過 16 MB';
 
   @override
@@ -176,15 +160,6 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get me097dcd9f8 => 'XML 已儲存';
-
-  @override
-  String get m0aefd8ac88 =>
-      '導入系統，結構；斷言 sys.version_info >= (3,11) 且 struct.calcsize(\"P\") == 8, \"需要 64 位元 Python 3.11+\"';
-
-  @override
-  String mad59a0d2ab(String p0, String p1, String p2) {
-    return '已下載 $p0 $p1。Git：$p2';
-  }
 
   @override
   String m613198439d(String p0) {
@@ -265,11 +240,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m84e960d40a => '預算';
 
   @override
-  String m7daed90e2c(String p0, String p1) {
-    return '$p0 中沒有 $p1；需要 MCP 0.4.0 或更高版本';
-  }
-
-  @override
   String get m2b96f1cb20 => '帳戶上沒有可用的字元。';
 
   @override
@@ -279,15 +249,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get mfd96d5c7e6 => '此組別沒有主動技能';
 
   @override
-  String m1163ee245e(String p0) {
-    return '元件缺少 $p0。工作版本已儲存。';
-  }
-
-  @override
   String get meccb4de0ee => '共用工作階段沒有流派 XML';
-
-  @override
-  String get m9bb974d2c9 => 'MCP 套件缺少 Python';
 
   @override
   String get m3e8bb03d9a => '重要指標';
@@ -335,10 +297,16 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m73cac6c239 => '返回點';
 
   @override
-  String get mea2c4cbc02 => '返回前一對';
+  String get m25b7d02ad2 => '恢復先前的 PoB 版本';
 
   @override
   String get m495763fa3e => '返回節點';
+
+  @override
+  String get m07200fa94e => '已更新';
+
+  @override
+  String get m7a228e0249 => 'PoB資料版本已更改。重新啟動 PoB II 以更新所有會話。';
 
   @override
   String get m4d1d43042e => '已啟用';
@@ -405,9 +373,6 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m6bf3b12df4 => '插入 XML 程序集。將在Lua中進行檢查和計算。';
-
-  @override
-  String get m5b1968a662 => '一切為了工作';
 
   @override
   String get m99068c6fe4 => '第二個流派';
@@ -540,13 +505,24 @@ class AppLocalizationsZh extends AppLocalizations {
   String get mcd8c587351 => '組';
 
   @override
-  String get ma755f360c2 => '兩個組件。在您的計算機上進行計算。';
+  String get md05c31a479 => '建構資料的路徑';
+
+  @override
+  String get m5ecb894ab9 => 'PoB資料已更新';
+
+  @override
+  String get m30423a9ce2 => '發動機';
 
   @override
   String get m2206bb2615 => '引擎回傳了錯誤的連接參數';
 
   @override
   String get mf68d71e67c => '引擎返回不兼容的连接参数';
+
+  @override
+  String m1e48341f0d(String p0) {
+    return '引擎已停止。$p0';
+  }
 
   @override
   String get mb6dc5488ee => '引擎未回傳變更的節點';
@@ -556,6 +532,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get md3339c001c => '引擎不可用';
+
+  @override
+  String get ma7cb5ed831 => '引擎已更新。重新啟動PoB II。';
 
   @override
   String get md27019b2d6 => '該操作或其參數不可用。';
@@ -581,13 +560,13 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m57d9f5cb7c => '樹尚未可用';
 
   @override
+  String get mc9da1721e6 => 'PoB2Engine 診斷';
+
+  @override
   String get m748d0b0dbd => '已複製診斷資訊';
 
   @override
   String get mff23476c58 => '對話 MCP 未開啟；其他對話方塊要求您完成輸入。';
-
-  @override
-  String get mff31635225 => '壓縮檔需要固定的修訂版本';
 
   @override
   String get m7152adf5d3 => '請更新引擎以選擇屬性。';
@@ -697,6 +676,9 @@ class AppLocalizationsZh extends AppLocalizations {
   }
 
   @override
+  String get m0983ea89cf => '有更新';
+
+  @override
   String get m41a4fa8b6a => '精魂';
 
   @override
@@ -732,20 +714,10 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m230ebdecca => '自動下載更新';
 
   @override
-  String m65a1b960c7(String p0) {
-    return '正在載入 $p0 的 LuaJIT 和 lua-utf8...';
-  }
-
-  @override
   String get m4f87fe4ac6 => '正在下載 Path of Building';
 
   @override
   String get ma3d462aeec => '正在下載 PoB MCP';
-
-  @override
-  String maafcfa710b(String p0, String p1) {
-    return '正在載入 $p0 $p1...';
-  }
 
   @override
   String m912da5cc75(String p0) {
@@ -792,6 +764,12 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get mbdb05f34ee => '筆記自動儲存';
+
+  @override
+  String get m5f5979b1b0 => '運行診斷...';
+
+  @override
+  String get m44d5f03bb0 => '跑醫生';
 
   @override
   String get ma2d2d73bb5 => '開始設定';
@@ -887,17 +865,10 @@ class AppLocalizationsZh extends AppLocalizations {
   String get mb1f4f27181 => '搜尋市場';
 
   @override
-  String ma8584a8e11(String p0) {
-    return '正在使用已驗證的封存檔 $p0';
-  }
+  String get m86da26d649 => '使用 PoB 資料的本機副本';
 
   @override
   String get m56e46960c1 => '來源';
-
-  @override
-  String m8b48ab31e9(String p0) {
-    return '來源 Lua 連接 · $p0 類';
-  }
 
   @override
   String get m26c6ade68e => '來源 Lua 引擎與遊戲數據';
@@ -959,7 +930,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m4d1b5babac => '此指令在 PoB II 編輯器中不可用。';
 
   @override
-  String get m1e8466ebeb => '組件';
+  String get m0e73d7c8d1 => '捆綁引擎更新為 PoB II';
 
   @override
   String get m9c01f77f07 => '組件已安裝。您可以連接Lua。';
@@ -983,10 +954,17 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m609fc60c74 => '敏捷';
 
   @override
+  String get m78692a3041 => '本地診斷已通過';
+
+  @override
   String get m5da5bd2f47 => '本地介面連線與運算';
 
   @override
   String get mba18ba5922 => 'PoB 本機橋接';
+
+  @override
+  String get m3a1df08aa5 =>
+      '本機橋接功能可將 PoB II 連接至原版 Path of Building 視窗。PoB2Engine 可透過這個連線匯入視窗中開啟的配置、匯入角色，或從原版 PoB 的設定取得配置資料夾的位置。';
 
   @override
   String get mab7d96eb1a => '任何鹼基';
@@ -1109,11 +1087,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m985b5e0f2c => '設定';
 
   @override
-  String m5ffb2fa414(String p0) {
-    return '本機版本 MCP：HTTP $p0';
-  }
-
-  @override
   String get m28997f7565 => '未選擇';
 
   @override
@@ -1164,11 +1137,6 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m6dc7d664a3 => '无法保护连接目录 MCP';
-
-  @override
-  String ma33f1f1a50(String p0) {
-    return '無法更新連線指令 MCP：$p0';
-  }
 
   @override
   String m8644bfa547(String p0) {
@@ -1234,6 +1202,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String m7a15f7eafb(String p0) {
     return '無法套用快照：$p0';
   }
+
+  @override
+  String get md005a7dc93 => '無法檢查版本';
 
   @override
   String m4d1a8400d5(String p0) {
@@ -1303,12 +1274,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m5426ce4a91 => '發佈文件來源無效';
 
   @override
-  String get mead5c633d1 => '壓縮檔中的路徑無效';
-
-  @override
-  String get m153634f023 => '壓縮檔中的檔案類型無效';
-
-  @override
   String get m34f418bb26 => '未知設定版本';
 
   @override
@@ -1367,6 +1332,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m571195d148 => 'PoB 座標不正確';
 
   @override
+  String get md50501d05c => '引擎工作區位址無效';
+
+  @override
   String get mec07f569e3 => '筆記 ID 不正確';
 
   @override
@@ -1385,9 +1353,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get mbfa40c4fb1 => 'PoB 組件的路徑不正確。';
 
   @override
-  String get m4e15785017 => '大小 Lua 運行時不正確';
-
-  @override
   String get m6ddcbfade2 => '檔案大小不正確';
 
   @override
@@ -1397,19 +1362,10 @@ class AppLocalizationsZh extends AppLocalizations {
   String get mf6d959d4c7 => '可選';
 
   @override
-  String get m5f5263f78b => '不明確的校驗和 Lua 運行時';
-
-  @override
-  String get m14889e0664 => '意外的來源 Lua 執行階段';
-
-  @override
   String get mab1d20e880 => '不支援的發布標籤格式';
 
   @override
   String get m7b3c2887b7 => '不完整的 PoB 渲染指令';
-
-  @override
-  String get m6f381f6aed => '此架構沒有 Lua 執行時期';
 
   @override
   String get m41d413ec96 => '沒有要清除的資料。';
@@ -1421,13 +1377,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get ma76f928c09 => '沒有單包校驗和';
 
   @override
-  String get mb71873c826 => '無校驗和 Lua 運行時';
-
-  @override
   String get mad247478cb => '無回應Lua';
-
-  @override
-  String get m0497e1e404 => '沒有答案MCP。會議結束；重新導入XML。';
 
   @override
   String get m323494c6da => '當翻譯不可用時顯示原始文本';
@@ -1478,6 +1428,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m4a1afe7893 => '護符 III';
 
   @override
+  String get m6920e9bb20 => '發現問題';
+
+  @override
   String get md65eeeeaab => '更新「元件」部分中的 MCP。';
 
   @override
@@ -1508,7 +1461,10 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m124cd4a205 => '更新 MCP 以刪除技能';
 
   @override
-  String get m74e1571298 => '更新 PoB 和 MCP';
+  String get m3ec99cd760 => '更新 PoB2Engine';
+
+  @override
+  String get maddc4848e6 => '更新PoB數據';
 
   @override
   String get m3d7df93803 => '更新建置列表';
@@ -1535,6 +1491,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m1eb91e3a52 => '應用程式更新';
+
+  @override
+  String get m2cabe451c6 => '正在更新 PoB2Engine...';
 
   @override
   String get m9e0611bf9b => '鞋子';
@@ -1579,9 +1538,6 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get mab5f9b4d06 => 'PoB 交易目錄預計';
-
-  @override
-  String get mb3f794d1cf => '尚未進行任何操作';
 
   @override
   String get m47cd7c0de1 => '無發布說明';
@@ -1801,9 +1757,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m3c320d7fe3 => '再次儲存';
 
   @override
-  String get m8b614efa1f => '壓縮檔中有重複路徑';
-
-  @override
   String get mbcc0fdbe14 => '法術抑制幾率';
 
   @override
@@ -1814,9 +1767,6 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m413fa4fd39 => '正在使用內附引擎準備 PoB 原始 Lua';
-
-  @override
-  String get m52d7142d18 => '支援 Windows x64、Linux x64 和 macOS arm64';
 
   @override
   String get m8ba2618d75 => '找不到輔助寶石';
@@ -1840,19 +1790,22 @@ class AppLocalizationsZh extends AppLocalizations {
   String get ma33d11be60 => '透過 pob_editor_app 連接 Lua。';
 
   @override
-  String get m0d8b14b475 => '重新連接橋接器並重新啟動 PoB。';
-
-  @override
   String get m3af435b32e => '連接';
 
   @override
   String get m538d913ee0 => '連接 Lua';
 
   @override
+  String get m2465d97173 => '連接到發動機';
+
+  @override
   String get m80cc1bdb9b => '連接橋接';
 
   @override
   String get m929d292c0e => '連接配置資料夾';
+
+  @override
+  String get mda6427ff8a => '已連線至 PoB2Engine';
 
   @override
   String get m6287090984 => '確認清潔';
@@ -1892,6 +1845,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m233d77b731 => '完整 DPS';
+
+  @override
+  String get mfc913f923a => '完整報告';
 
   @override
   String get m56f7dfa459 => '閃電傷害';
@@ -2000,10 +1956,12 @@ class AppLocalizationsZh extends AppLocalizations {
   }
 
   @override
-  String get mb45f78d483 => '先前的配對已透過 Lua 恢復並驗證';
+  String ma27300a22c(String p0) {
+    return '先前版本：$p0';
+  }
 
   @override
-  String get mf969e13b83 => '尚無先前的完整組件對';
+  String get mb45f78d483 => '先前的配對已透過 Lua 恢復並驗證';
 
   @override
   String get mec5dbc31fc => '之前的結果 · 重新計算 Lua';
@@ -2064,14 +2022,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m87cb1172f2 => '檢查連線';
 
   @override
-  String get mfa4af9bbe7 => '檢查相容性';
-
-  @override
-  String mcb69e5c81f(String p0) {
-    return '正在驗證 $p0 的 SHA-256';
-  }
-
-  @override
   String mfeb5830ec9(String p0) {
     return '發布檢查：HTTP $p0';
   }
@@ -2092,21 +2042,13 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m908d1b1e7c => '正在檢查 Lua 相容性';
 
   @override
-  String get m9353cfd5f6 => '相容性檢查：執行原始 Lua...';
-
-  @override
-  String me498367e06(String p0) {
-    return '正在驗證 $p0 的檔案';
-  }
-
-  @override
-  String get md8164e1acb => '檢查您的網路和請求限制。';
-
-  @override
   String get m21d9ad659d => '檢查文字以查看說明和相容性';
 
   @override
   String get m1ea3791d9d => '檢查版本...';
+
+  @override
+  String get m0a597163f4 => '檢查 PoB 資料和開放建置...';
 
   @override
   String get m1d1347fc69 => '正在檢查個人資料...';
@@ -2116,6 +2058,14 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get mce86d859e2 => 'pob2引擎程序';
+
+  @override
+  String m748bd43447(String p0) {
+    return '協定：$p0';
+  }
+
+  @override
+  String get m359497aff5 => '簡介';
 
   @override
   String get me881a16f50 => '伺服器設定檔';
@@ -2140,6 +2090,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m913b373c85 => '在應用程式視窗中工作。單擊組合即可更改它。';
+
+  @override
+  String get m6ce42ad925 => '工作副本已關閉';
 
   @override
   String m0964e41783(String p0) {
@@ -2169,17 +2122,6 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m13601ffe54 => '允许通过 MCP 进行编辑';
-
-  @override
-  String get m0449346093 => '解壓縮後的元件過大';
-
-  @override
-  String get m221310ed98 => '解壓縮後的檔案大小不符';
-
-  @override
-  String ma1af9f3f0e(String p0) {
-    return '正在解壓縮 $p0';
-  }
 
   @override
   String get mde6527a5fe => '到節點的距離';
@@ -2219,11 +2161,6 @@ class AppLocalizationsZh extends AppLocalizations {
   @override
   String md6e28957de(String p0) {
     return '修訂 $p0';
-  }
-
-  @override
-  String m7fce31d207(String p0, String p1, String p2, String p3) {
-    return '$p0 $p1 的修訂版本不符：預期為 $p2，實際為 $p3。';
   }
 
   @override
@@ -2281,6 +2218,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m15d7545f05 => 'PoB 建置不再可用。更新建置清單。';
+
+  @override
+  String get m5b78f6ab13 => '開發構建';
 
   @override
   String mee1bd6d18c(String p0) {
@@ -2365,6 +2305,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get mfc68d94f44 => '已確認連線至 PoB。請開啟要匯入的流派。';
 
   @override
+  String get ma44e570b5e => '與引擎的連線已中斷。請重新開啟配置。';
+
+  @override
   String get m7434b2e81b => '向左移動';
 
   @override
@@ -2378,9 +2321,6 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m4bd93e3298 => '伺服器未確認 PoB II 視窗連線。';
-
-  @override
-  String get m32bb1c680f => '會議已結束';
 
   @override
   String get mff4d880370 => '找不到会话。明確創建它';
@@ -2455,9 +2395,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get mba5ec4071c => '變更職業或昇華';
 
   @override
-  String get mde2ce6f05b => '請先選擇兩個元件的版本';
-
-  @override
   String get m93e0cd3908 => '首先開啟程序集。';
 
   @override
@@ -2468,9 +2405,6 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m59b50cc146 => '先移除支撐石';
-
-  @override
-  String get ma386719073 => '先安裝兩個組件';
 
   @override
   String get m5ebbc9d7a5 => '將取消配置';
@@ -2653,9 +2587,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get md9dc2e9ec2 => '刪除階段';
 
   @override
-  String get m97ac4c501c => '安裝已在進行中';
-
-  @override
   String get m2748676635 => '已開啟另一個 PoB 安裝。請在「元件」中連接。';
 
   @override
@@ -2762,13 +2693,16 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m4d9acf3506 => '安裝組件以打開組裝體並獲得真正的計算。';
 
   @override
+  String get m750e822c58 => '安裝PoB數據';
+
+  @override
   String get mfdeaa71380 => '安裝元件';
 
   @override
-  String get m536db585fd => 'PoB 安裝由內附引擎管理';
+  String get mfcb7c67f91 => '安裝的目前版本';
 
   @override
-  String get mfcb7c67f91 => '安裝的目前版本';
+  String get m3a77f812b1 => '引擎是最新的';
 
   @override
   String m44150e69ff(String p0) {
@@ -2832,6 +2766,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get mdab05cc16d => '技能部分';
+
+  @override
+  String get m3eaf0b57cf => '正在讀取引擎版本...';
 
   @override
   String get me24055fecd => '離下一階段還差什麼？';
@@ -3014,12 +2951,6 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get mecc0fe5cd1 => 'Lua 未回傳特徵';
 
   @override
-  String get mddf65e8cca => 'Lua 未連接';
-
-  @override
-  String get m43ddb3a975 => 'Lua 驗證失敗';
-
-  @override
   String get m4358fa9bda => 'Lua 無法套用這個階段';
 
   @override
@@ -3028,23 +2959,10 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   }
 
   @override
-  String md9540a4b84(String p0) {
-    return 'Lua 個答案。目錄中的類別：$p0';
-  }
-
-  @override
   String get m79df86397e => 'Lua 已停用';
 
   @override
-  String get mbf7bbb22e3 => 'Lua 已連接';
-
-  @override
   String get m3717fab485 => 'Lua 套用了不同的計算條件';
-
-  @override
-  String m12e8f27f62(String p0) {
-    return 'MCP 已結束。 $p0';
-  }
 
   @override
   String get m9f82e876bd => 'MCP 可以編輯組件、管理庫、檔案、元件和應用程式。如果您手動變更版本，存取將被停用。';
@@ -3089,6 +3007,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get maaaf9e5923 => 'PoB 已開啟，但尚未連接橋接器。請重新啟動一次。';
 
   @override
+  String get mcc15d998ab => '尚未連線至 PoB2Engine';
+
+  @override
   String get m3127345008 => 'XML 超過 16 MB';
 
   @override
@@ -3102,15 +3023,6 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get me097dcd9f8 => 'XML 已儲存';
-
-  @override
-  String get m0aefd8ac88 =>
-      '導入系統，結構；斷言 sys.version_info >= (3,11) 且 struct.calcsize(\"P\") == 8, \"需要 64 位元 Python 3.11+\"';
-
-  @override
-  String mad59a0d2ab(String p0, String p1, String p2) {
-    return '已下載 $p0 $p1。Git：$p2';
-  }
 
   @override
   String m613198439d(String p0) {
@@ -3191,11 +3103,6 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m84e960d40a => '預算';
 
   @override
-  String m7daed90e2c(String p0, String p1) {
-    return '$p0 中沒有 $p1；需要 MCP 0.4.0 或更高版本';
-  }
-
-  @override
   String get m2b96f1cb20 => '帳戶上沒有可用的字元。';
 
   @override
@@ -3205,15 +3112,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get mfd96d5c7e6 => '此組別沒有主動技能';
 
   @override
-  String m1163ee245e(String p0) {
-    return '元件缺少 $p0。工作版本已儲存。';
-  }
-
-  @override
   String get meccb4de0ee => '共用工作階段沒有流派 XML';
-
-  @override
-  String get m9bb974d2c9 => 'MCP 套件缺少 Python';
 
   @override
   String get m3e8bb03d9a => '重要指標';
@@ -3261,10 +3160,16 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m73cac6c239 => '返回點';
 
   @override
-  String get mea2c4cbc02 => '返回前一對';
+  String get m25b7d02ad2 => '恢復先前的 PoB 版本';
 
   @override
   String get m495763fa3e => '返回節點';
+
+  @override
+  String get m07200fa94e => '已更新';
+
+  @override
+  String get m7a228e0249 => 'PoB資料版本已更改。重新啟動 PoB II 以更新所有會話。';
 
   @override
   String get m4d1d43042e => '已啟用';
@@ -3331,9 +3236,6 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m6bf3b12df4 => '插入 XML 程序集。將在Lua中進行檢查和計算。';
-
-  @override
-  String get m5b1968a662 => '一切為了工作';
 
   @override
   String get m99068c6fe4 => '第二個流派';
@@ -3466,13 +3368,24 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get mcd8c587351 => '組';
 
   @override
-  String get ma755f360c2 => '兩個組件。在您的計算機上進行計算。';
+  String get md05c31a479 => '建構資料的路徑';
+
+  @override
+  String get m5ecb894ab9 => 'PoB資料已更新';
+
+  @override
+  String get m30423a9ce2 => '發動機';
 
   @override
   String get m2206bb2615 => '引擎回傳了錯誤的連接參數';
 
   @override
   String get mf68d71e67c => '引擎返回不兼容的连接参数';
+
+  @override
+  String m1e48341f0d(String p0) {
+    return '引擎已停止。$p0';
+  }
 
   @override
   String get mb6dc5488ee => '引擎未回傳變更的節點';
@@ -3482,6 +3395,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get md3339c001c => '引擎不可用';
+
+  @override
+  String get ma7cb5ed831 => '引擎已更新。重新啟動PoB II。';
 
   @override
   String get md27019b2d6 => '該操作或其參數不可用。';
@@ -3507,13 +3423,13 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m57d9f5cb7c => '樹尚未可用';
 
   @override
+  String get mc9da1721e6 => 'PoB2Engine 診斷';
+
+  @override
   String get m748d0b0dbd => '已複製診斷資訊';
 
   @override
   String get mff23476c58 => '對話 MCP 未開啟；其他對話方塊要求您完成輸入。';
-
-  @override
-  String get mff31635225 => '壓縮檔需要固定的修訂版本';
 
   @override
   String get m7152adf5d3 => '請更新引擎以選擇屬性。';
@@ -3623,6 +3539,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   }
 
   @override
+  String get m0983ea89cf => '有更新';
+
+  @override
   String get m41a4fa8b6a => '精魂';
 
   @override
@@ -3658,20 +3577,10 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m230ebdecca => '自動下載更新';
 
   @override
-  String m65a1b960c7(String p0) {
-    return '正在載入 $p0 的 LuaJIT 和 lua-utf8...';
-  }
-
-  @override
   String get m4f87fe4ac6 => '正在下載 Path of Building';
 
   @override
   String get ma3d462aeec => '正在下載 PoB MCP';
-
-  @override
-  String maafcfa710b(String p0, String p1) {
-    return '正在載入 $p0 $p1...';
-  }
 
   @override
   String m912da5cc75(String p0) {
@@ -3718,6 +3627,12 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get mbdb05f34ee => '筆記自動儲存';
+
+  @override
+  String get m5f5979b1b0 => '運行診斷...';
+
+  @override
+  String get m44d5f03bb0 => '跑醫生';
 
   @override
   String get ma2d2d73bb5 => '開始設定';
@@ -3813,17 +3728,10 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get mb1f4f27181 => '搜尋市場';
 
   @override
-  String ma8584a8e11(String p0) {
-    return '正在使用已驗證的封存檔 $p0';
-  }
+  String get m86da26d649 => '使用 PoB 資料的本機副本';
 
   @override
   String get m56e46960c1 => '來源';
-
-  @override
-  String m8b48ab31e9(String p0) {
-    return '來源 Lua 連接 · $p0 類';
-  }
 
   @override
   String get m26c6ade68e => '來源 Lua 引擎與遊戲數據';
@@ -3885,7 +3793,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m4d1b5babac => '此指令在 PoB II 編輯器中不可用。';
 
   @override
-  String get m1e8466ebeb => '組件';
+  String get m0e73d7c8d1 => '捆綁引擎更新為 PoB II';
 
   @override
   String get m9c01f77f07 => '組件已安裝。您可以連接Lua。';
@@ -3909,10 +3817,17 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m609fc60c74 => '敏捷';
 
   @override
+  String get m78692a3041 => '本地診斷已通過';
+
+  @override
   String get m5da5bd2f47 => '本地介面連線與運算';
 
   @override
   String get mba18ba5922 => 'PoB 本機橋接';
+
+  @override
+  String get m3a1df08aa5 =>
+      '本機橋接功能可將 PoB II 連接至原版 Path of Building 視窗。PoB2Engine 可透過這個連線匯入視窗中開啟的配置、匯入角色，或從原版 PoB 的設定取得配置資料夾的位置。';
 
   @override
   String get mab7d96eb1a => '任何鹼基';
@@ -4035,11 +3950,6 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m985b5e0f2c => '設定';
 
   @override
-  String m5ffb2fa414(String p0) {
-    return '本機版本 MCP：HTTP $p0';
-  }
-
-  @override
   String get m28997f7565 => '未選擇';
 
   @override
@@ -4090,11 +4000,6 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m6dc7d664a3 => '无法保护连接目录 MCP';
-
-  @override
-  String ma33f1f1a50(String p0) {
-    return '無法更新連線指令 MCP：$p0';
-  }
 
   @override
   String m8644bfa547(String p0) {
@@ -4160,6 +4065,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String m7a15f7eafb(String p0) {
     return '無法套用快照：$p0';
   }
+
+  @override
+  String get md005a7dc93 => '無法檢查版本';
 
   @override
   String m4d1a8400d5(String p0) {
@@ -4229,12 +4137,6 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m5426ce4a91 => '發佈文件來源無效';
 
   @override
-  String get mead5c633d1 => '壓縮檔中的路徑無效';
-
-  @override
-  String get m153634f023 => '壓縮檔中的檔案類型無效';
-
-  @override
   String get m34f418bb26 => '未知設定版本';
 
   @override
@@ -4293,6 +4195,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m571195d148 => 'PoB 座標不正確';
 
   @override
+  String get md50501d05c => '引擎工作區位址無效';
+
+  @override
   String get mec07f569e3 => '筆記 ID 不正確';
 
   @override
@@ -4311,9 +4216,6 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get mbfa40c4fb1 => 'PoB 組件的路徑不正確。';
 
   @override
-  String get m4e15785017 => '大小 Lua 運行時不正確';
-
-  @override
   String get m6ddcbfade2 => '檔案大小不正確';
 
   @override
@@ -4323,19 +4225,10 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get mf6d959d4c7 => '可選';
 
   @override
-  String get m5f5263f78b => '不明確的校驗和 Lua 運行時';
-
-  @override
-  String get m14889e0664 => '意外的來源 Lua 執行階段';
-
-  @override
   String get mab1d20e880 => '不支援的發布標籤格式';
 
   @override
   String get m7b3c2887b7 => '不完整的 PoB 渲染指令';
-
-  @override
-  String get m6f381f6aed => '此架構沒有 Lua 執行時期';
 
   @override
   String get m41d413ec96 => '沒有要清除的資料。';
@@ -4347,13 +4240,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get ma76f928c09 => '沒有單包校驗和';
 
   @override
-  String get mb71873c826 => '無校驗和 Lua 運行時';
-
-  @override
   String get mad247478cb => '無回應Lua';
-
-  @override
-  String get m0497e1e404 => '沒有答案MCP。會議結束；重新導入XML。';
 
   @override
   String get m323494c6da => '當翻譯不可用時顯示原始文本';
@@ -4404,6 +4291,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m4a1afe7893 => '護符 III';
 
   @override
+  String get m6920e9bb20 => '發現問題';
+
+  @override
   String get md65eeeeaab => '更新「元件」部分中的 MCP。';
 
   @override
@@ -4434,7 +4324,10 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m124cd4a205 => '更新 MCP 以刪除技能';
 
   @override
-  String get m74e1571298 => '更新 PoB 和 MCP';
+  String get m3ec99cd760 => '更新 PoB2Engine';
+
+  @override
+  String get maddc4848e6 => '更新PoB數據';
 
   @override
   String get m3d7df93803 => '更新建置列表';
@@ -4461,6 +4354,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m1eb91e3a52 => '應用程式更新';
+
+  @override
+  String get m2cabe451c6 => '正在更新 PoB2Engine...';
 
   @override
   String get m9e0611bf9b => '鞋子';
@@ -4505,9 +4401,6 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get mab5f9b4d06 => 'PoB 交易目錄預計';
-
-  @override
-  String get mb3f794d1cf => '尚未進行任何操作';
 
   @override
   String get m47cd7c0de1 => '無發布說明';
@@ -4727,9 +4620,6 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m3c320d7fe3 => '再次儲存';
 
   @override
-  String get m8b614efa1f => '壓縮檔中有重複路徑';
-
-  @override
   String get mbcc0fdbe14 => '法術抑制幾率';
 
   @override
@@ -4740,9 +4630,6 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m413fa4fd39 => '正在使用內附引擎準備 PoB 原始 Lua';
-
-  @override
-  String get m52d7142d18 => '支援 Windows x64、Linux x64 和 macOS arm64';
 
   @override
   String get m8ba2618d75 => '找不到輔助寶石';
@@ -4766,19 +4653,22 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get ma33d11be60 => '透過 pob_editor_app 連接 Lua。';
 
   @override
-  String get m0d8b14b475 => '重新連接橋接器並重新啟動 PoB。';
-
-  @override
   String get m3af435b32e => '連接';
 
   @override
   String get m538d913ee0 => '連接 Lua';
 
   @override
+  String get m2465d97173 => '連接到發動機';
+
+  @override
   String get m80cc1bdb9b => '連接橋接';
 
   @override
   String get m929d292c0e => '連接配置資料夾';
+
+  @override
+  String get mda6427ff8a => '已連線至 PoB2Engine';
 
   @override
   String get m6287090984 => '確認清潔';
@@ -4818,6 +4708,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m233d77b731 => '完整 DPS';
+
+  @override
+  String get mfc913f923a => '完整報告';
 
   @override
   String get m56f7dfa459 => '閃電傷害';
@@ -4926,10 +4819,12 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   }
 
   @override
-  String get mb45f78d483 => '先前的配對已透過 Lua 恢復並驗證';
+  String ma27300a22c(String p0) {
+    return '先前版本：$p0';
+  }
 
   @override
-  String get mf969e13b83 => '尚無先前的完整組件對';
+  String get mb45f78d483 => '先前的配對已透過 Lua 恢復並驗證';
 
   @override
   String get mec5dbc31fc => '之前的結果 · 重新計算 Lua';
@@ -4990,14 +4885,6 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m87cb1172f2 => '檢查連線';
 
   @override
-  String get mfa4af9bbe7 => '檢查相容性';
-
-  @override
-  String mcb69e5c81f(String p0) {
-    return '正在驗證 $p0 的 SHA-256';
-  }
-
-  @override
   String mfeb5830ec9(String p0) {
     return '發布檢查：HTTP $p0';
   }
@@ -5018,21 +4905,13 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m908d1b1e7c => '正在檢查 Lua 相容性';
 
   @override
-  String get m9353cfd5f6 => '相容性檢查：執行原始 Lua...';
-
-  @override
-  String me498367e06(String p0) {
-    return '正在驗證 $p0 的檔案';
-  }
-
-  @override
-  String get md8164e1acb => '檢查您的網路和請求限制。';
-
-  @override
   String get m21d9ad659d => '檢查文字以查看說明和相容性';
 
   @override
   String get m1ea3791d9d => '檢查版本...';
+
+  @override
+  String get m0a597163f4 => '檢查 PoB 資料和開放建置...';
 
   @override
   String get m1d1347fc69 => '正在檢查個人資料...';
@@ -5042,6 +4921,14 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get mce86d859e2 => 'pob2引擎程序';
+
+  @override
+  String m748bd43447(String p0) {
+    return '協定：$p0';
+  }
+
+  @override
+  String get m359497aff5 => '簡介';
 
   @override
   String get me881a16f50 => '伺服器設定檔';
@@ -5066,6 +4953,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m913b373c85 => '在應用程式視窗中工作。單擊組合即可更改它。';
+
+  @override
+  String get m6ce42ad925 => '工作副本已關閉';
 
   @override
   String m0964e41783(String p0) {
@@ -5095,17 +4985,6 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m13601ffe54 => '允许通过 MCP 进行编辑';
-
-  @override
-  String get m0449346093 => '解壓縮後的元件過大';
-
-  @override
-  String get m221310ed98 => '解壓縮後的檔案大小不符';
-
-  @override
-  String ma1af9f3f0e(String p0) {
-    return '正在解壓縮 $p0';
-  }
 
   @override
   String get mde6527a5fe => '到節點的距離';
@@ -5145,11 +5024,6 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   @override
   String md6e28957de(String p0) {
     return '修訂 $p0';
-  }
-
-  @override
-  String m7fce31d207(String p0, String p1, String p2, String p3) {
-    return '$p0 $p1 的修訂版本不符：預期為 $p2，實際為 $p3。';
   }
 
   @override
@@ -5207,6 +5081,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m15d7545f05 => 'PoB 建置不再可用。更新建置清單。';
+
+  @override
+  String get m5b78f6ab13 => '開發構建';
 
   @override
   String mee1bd6d18c(String p0) {
@@ -5291,6 +5168,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get mfc68d94f44 => '已確認連線至 PoB。請開啟要匯入的流派。';
 
   @override
+  String get ma44e570b5e => '與引擎的連線已中斷。請重新開啟配置。';
+
+  @override
   String get m7434b2e81b => '向左移動';
 
   @override
@@ -5304,9 +5184,6 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m4bd93e3298 => '伺服器未確認 PoB II 視窗連線。';
-
-  @override
-  String get m32bb1c680f => '會議已結束';
 
   @override
   String get mff4d880370 => '找不到会话。明確創建它';
@@ -5381,9 +5258,6 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get mba5ec4071c => '變更職業或昇華';
 
   @override
-  String get mde2ce6f05b => '請先選擇兩個元件的版本';
-
-  @override
   String get m93e0cd3908 => '首先開啟程序集。';
 
   @override
@@ -5394,9 +5268,6 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m59b50cc146 => '先移除支撐石';
-
-  @override
-  String get ma386719073 => '先安裝兩個組件';
 
   @override
   String get m5ebbc9d7a5 => '將取消配置';
@@ -5579,9 +5450,6 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get md9dc2e9ec2 => '刪除階段';
 
   @override
-  String get m97ac4c501c => '安裝已在進行中';
-
-  @override
   String get m2748676635 => '已開啟另一個 PoB 安裝。請在「元件」中連接。';
 
   @override
@@ -5688,13 +5556,16 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m4d9acf3506 => '安裝組件以打開組裝體並獲得真正的計算。';
 
   @override
+  String get m750e822c58 => '安裝PoB數據';
+
+  @override
   String get mfdeaa71380 => '安裝元件';
 
   @override
-  String get m536db585fd => 'PoB 安裝由內附引擎管理';
+  String get mfcb7c67f91 => '安裝的目前版本';
 
   @override
-  String get mfcb7c67f91 => '安裝的目前版本';
+  String get m3a77f812b1 => '引擎是最新的';
 
   @override
   String m44150e69ff(String p0) {
@@ -5758,6 +5629,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get mdab05cc16d => '技能部分';
+
+  @override
+  String get m3eaf0b57cf => '正在讀取引擎版本...';
 
   @override
   String get me24055fecd => '離下一階段還差什麼？';

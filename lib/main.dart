@@ -13,7 +13,7 @@ import 'ui/app_update_cubit.dart';
 
 import 'data/engine_components.dart';
 import 'data/installation_store.dart';
-import 'data/mcp_client.dart';
+import 'data/workbench_client.dart';
 import 'data/pob_build_library.dart';
 import 'data/pob_window_repository.dart';
 import 'data/profile_use.dart';
@@ -97,13 +97,13 @@ Future<void> main(List<String> arguments) async {
 }
 
 Future<WorkshopCubit> _openWorkshop(Directory root, String? check) async {
-  final executable = _engineExecutable();
+  final executable = defaultEngineExecutable();
   final components = EngineComponents(
     store: InstallationStore(root),
     profileUse: await ProfileUse.open(root),
     executable: executable,
   );
-  McpClient createWorkbench() => McpClient(workbenchExecutable: executable);
+  WorkbenchClient createWorkbench() => WorkbenchClient(executable);
   return WorkshopCubit(
     components,
     createWorkbench(),
@@ -112,15 +112,6 @@ Future<WorkshopCubit> _openWorkshop(Directory root, String? check) async {
     library: PobBuildLibrary(root),
     primaryEngine: _primaryEngineOptions(root, check, executable),
   );
-}
-
-String _engineExecutable() {
-  final path = Platform.environment['POB2_ENGINE_EXECUTABLE'];
-  if (path != null && path.isNotEmpty) return path;
-  final executable = bundledEngineFile();
-  return executable.existsSync()
-      ? executable.path
-      : executable.uri.pathSegments.last;
 }
 
 EngineOptions? _primaryEngineOptions(

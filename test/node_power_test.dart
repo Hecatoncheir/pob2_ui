@@ -3,9 +3,11 @@ import 'dart:io';
 
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:pob2_ui/data/component_repository.dart';
+
+import 'support/legacy/component_repository.dart';
+
 import 'package:pob2_ui/data/installation_store.dart';
-import 'package:pob2_ui/data/mcp_client.dart';
+import 'package:pob2_ui/data/workbench_client.dart';
 import 'package:pob2_ui/domain/build_report.dart';
 import 'package:pob2_ui/domain/component.dart';
 import 'package:pob2_ui/ui/app.dart';
@@ -17,7 +19,7 @@ import 'package:pob2_ui/ui/workshop_state.dart';
 
 import 'support/workshop_fixture.dart';
 
-class PowerEngine extends McpClient {
+class PowerEngine extends WorkbenchClient {
   PowerEngine() {
     tools = {'pob_node_power'};
   }

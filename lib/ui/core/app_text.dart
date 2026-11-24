@@ -11,6 +11,7 @@ class AppText extends StatelessWidget {
     this.maxLines,
     this.overflow,
     this.textAlign,
+    this.textWidthBasis,
     this.softWrap,
     this.game = false,
     this.localize = true,
@@ -20,6 +21,7 @@ class AppText extends StatelessWidget {
   final int? maxLines;
   final TextOverflow? overflow;
   final TextAlign? textAlign;
+  final TextWidthBasis? textWidthBasis;
   final bool? softWrap;
   final bool game, localize;
 
@@ -30,6 +32,7 @@ class AppText extends StatelessWidget {
     maxLines: maxLines,
     overflow: overflow,
     textAlign: textAlign,
+    textWidthBasis: textWidthBasis,
     softWrap: softWrap,
   );
 

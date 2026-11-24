@@ -5,11 +5,11 @@ import '../domain/gem_icon.dart';
 import '../domain/build_report.dart';
 import '../domain/condition_definition.dart';
 import '../domain/skill_gem.dart';
-import 'mcp_client.dart';
+import 'workbench_client.dart';
 
 class GameCatalogRepository {
   GameCatalogRepository(this.engine);
-  final McpClient engine;
+  final WorkbenchClient engine;
   final Map<String, Future<List<JsonMap>>> _cache = {};
   final Map<String, Future<GemIcon>> _icons = {};
   final Map<String, Completer<GemIcon>> _queuedIcons = {};

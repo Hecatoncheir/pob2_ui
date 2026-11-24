@@ -125,16 +125,6 @@
     "description": "Lua не вернул характеристики",
     "placeholders": {}
   },
-  "mddf65e8cca": "Lua not connected",
-  "@mddf65e8cca": {
-    "description": "Lua не подключён",
-    "placeholders": {}
-  },
-  "m43ddb3a975": "Lua failed verification",
-  "@m43ddb3a975": {
-    "description": "Lua не прошёл проверку",
-    "placeholders": {}
-  },
   "m4358fa9bda": "Lua could not apply this milestone",
   "@m4358fa9bda": {
     "description": "Lua не смог применить этот этап",
@@ -149,38 +139,15 @@
       }
     }
   },
-  "md9540a4b84": "Lua responding. Classes in the catalog: {p0}",
-  "@md9540a4b84": {
-    "description": "Lua отвечает. Классов в каталоге: {p0}",
-    "placeholders": {
-      "p0": {
-        "type": "String"
-      }
-    }
-  },
   "m79df86397e": "Lua disconnected",
   "@m79df86397e": {
     "description": "Lua отключён",
-    "placeholders": {}
-  },
-  "mbf7bbb22e3": "Lua connected",
-  "@mbf7bbb22e3": {
-    "description": "Lua подключён",
     "placeholders": {}
   },
   "m3717fab485": "Lua applied different calculation settings",
   "@m3717fab485": {
     "description": "Lua применил разные условия расчёта",
     "placeholders": {}
-  },
-  "m12e8f27f62": "MCP has ended. {p0}",
-  "@m12e8f27f62": {
-    "description": "MCP завершился. {p0}",
-    "placeholders": {
-      "p0": {
-        "type": "String"
-      }
-    }
   },
   "m9f82e876bd": "MCP can edit builds and manage the library, files, components and application. Switching builds manually disables access.",
   "@m9f82e876bd": {
@@ -252,6 +219,11 @@
     "description": "PoB уже открыт без связи с мостом. Перезапустите его один раз.",
     "placeholders": {}
   },
+  "mcc15d998ab": "PoB2Engine disconnected",
+  "@mcc15d998ab": {
+    "description": "PoB2Engine не подключён",
+    "placeholders": {}
+  },
   "m3127345008": "XML more than 16 MB",
   "@m3127345008": {
     "description": "XML больше 16 МБ",
@@ -276,26 +248,6 @@
   "@me097dcd9f8": {
     "description": "XML сохранён",
     "placeholders": {}
-  },
-  "m0aefd8ac88": "import sys, struct; assert sys.version_info >= (3,11) and struct.calcsize(\"P\") == 8, \"Need 64-bit Python 3.11+\"",
-  "@m0aefd8ac88": {
-    "description": "import sys, struct; assert sys.version_info >= (3,11) and struct.calcsize(\"P\") == 8, \"Нужен 64-битный Python 3.11+\"",
-    "placeholders": {}
-  },
-  "mad59a0d2ab": "Downloaded {p0} {p1}. Git: {p2}",
-  "@mad59a0d2ab": {
-    "description": "{p0} {p1} загружен. Git: {p2}",
-    "placeholders": {
-      "p0": {
-        "type": "String"
-      },
-      "p1": {
-        "type": "String"
-      },
-      "p2": {
-        "type": "String"
-      }
-    }
   },
   "m613198439d": "{p0} · copy",
   "@m613198439d": {
@@ -448,18 +400,6 @@
     "description": "Бюджет",
     "placeholders": {}
   },
-  "m7daed90e2c": "There is no {p1} in {p0}; requires MCP 0.4.0 or later",
-  "@m7daed90e2c": {
-    "description": "В {p0} нет {p1}; требуется MCP 0.4.0 или новее",
-    "placeholders": {
-      "p0": {
-        "type": "String"
-      },
-      "p1": {
-        "type": "String"
-      }
-    }
-  },
   "m2b96f1cb20": "There are no characters available on the account.",
   "@m2b96f1cb20": {
     "description": "В аккаунте нет доступных персонажей.",
@@ -475,23 +415,9 @@
     "description": "В группе нет активных умений",
     "placeholders": {}
   },
-  "m1163ee245e": "The component is missing {p0}. The working version has been saved.",
-  "@m1163ee245e": {
-    "description": "В компоненте отсутствует {p0}. Рабочая версия сохранена.",
-    "placeholders": {
-      "p0": {
-        "type": "String"
-      }
-    }
-  },
   "meccb4de0ee": "The shared session has no build XML",
   "@meccb4de0ee": {
     "description": "В общей сессии нет XML сборки",
-    "placeholders": {}
-  },
-  "m9bb974d2c9": "The MCP package is missing Python",
-  "@m9bb974d2c9": {
-    "description": "В пакете MCP отсутствует Python",
     "placeholders": {}
   },
   "m3e8bb03d9a": "Important indicators",
@@ -569,14 +495,24 @@
     "description": "Вернуть очко",
     "placeholders": {}
   },
-  "mea2c4cbc02": "Return previous pair",
-  "@mea2c4cbc02": {
-    "description": "Вернуть предыдущую пару",
+  "m25b7d02ad2": "Restore the previous PoB version",
+  "@m25b7d02ad2": {
+    "description": "Вернуть предыдущую версию PoB",
     "placeholders": {}
   },
   "m495763fa3e": "Return node",
   "@m495763fa3e": {
     "description": "Вернуть узел",
+    "placeholders": {}
+  },
+  "m07200fa94e": "Up to date",
+  "@m07200fa94e": {
+    "description": "Версия актуальна",
+    "placeholders": {}
+  },
+  "m7a228e0249": "The PoB data version changed. Restart PoB II to update all sessions.",
+  "@m7a228e0249": {
+    "description": "Версия данных PoB изменена. Перезапустите PoB II для обновления всех сессий.",
     "placeholders": {}
   },
   "m4d1d43042e": "Enabled",
@@ -687,11 +623,6 @@
   "m6bf3b12df4": "Paste the build XML. Lua will validate and calculate it.",
   "@m6bf3b12df4": {
     "description": "Вставьте XML сборки. Она будет проверена и рассчитана в Lua.",
-    "placeholders": {}
-  },
-  "m5b1968a662": "Everything for work",
-  "@m5b1968a662": {
-    "description": "Всё для работы",
     "placeholders": {}
   },
   "m99068c6fe4": "Second build",
@@ -912,9 +843,19 @@
     "description": "Группы",
     "placeholders": {}
   },
-  "ma755f360c2": "Two components. Calculations on your computer.",
-  "@ma755f360c2": {
-    "description": "Два компонента. Расчёты на вашем компьютере.",
+  "md05c31a479": "Path of Building data",
+  "@md05c31a479": {
+    "description": "Данные Path of Building",
+    "placeholders": {}
+  },
+  "m5ecb894ab9": "PoB data updated",
+  "@m5ecb894ab9": {
+    "description": "Данные PoB обновлены",
+    "placeholders": {}
+  },
+  "m30423a9ce2": "Engine",
+  "@m30423a9ce2": {
+    "description": "Движок",
     "placeholders": {}
   },
   "m2206bb2615": "The engine returned incorrect connection parameters",
@@ -926,6 +867,15 @@
   "@mf68d71e67c": {
     "description": "Движок вернул несовместимые параметры подключения",
     "placeholders": {}
+  },
+  "m1e48341f0d": "The engine has stopped. {p0}",
+  "@m1e48341f0d": {
+    "description": "Движок завершился. {p0}",
+    "placeholders": {
+      "p0": {
+        "type": "String"
+      }
+    }
   },
   "mb6dc5488ee": "The engine did not return the changed nodes",
   "@mb6dc5488ee": {
@@ -940,6 +890,11 @@
   "md3339c001c": "Engine unavailable",
   "@md3339c001c": {
     "description": "Движок недоступен",
+    "placeholders": {}
+  },
+  "ma7cb5ed831": "Engine updated. Restart PoB II.",
+  "@ma7cb5ed831": {
+    "description": "Движок обновлён. Перезапустите PoB II.",
     "placeholders": {}
   },
   "md27019b2d6": "The action or its parameters are not available.",
@@ -981,6 +936,11 @@
     "description": "Дерево пока недоступно",
     "placeholders": {}
   },
+  "mc9da1721e6": "PoB2Engine diagnostics",
+  "@mc9da1721e6": {
+    "description": "Диагностика PoB2Engine",
+    "placeholders": {}
+  },
   "m748d0b0dbd": "Diagnostics copied",
   "@m748d0b0dbd": {
     "description": "Диагностика скопирована",
@@ -989,11 +949,6 @@
   "mff23476c58": "Dialogue MCP is not open; other dialogs require you to complete your input.",
   "@mff23476c58": {
     "description": "Диалог MCP не открыт; другие диалоги требуют завершения ввода.",
-    "placeholders": {}
-  },
-  "mff31635225": "The archive requires a pinned revision",
-  "@mff31635225": {
-    "description": "Для архива нужна закреплённая ревизия",
     "placeholders": {}
   },
   "m7152adf5d3": "Update the engine to select an attribute.",
@@ -1177,6 +1132,11 @@
       }
     }
   },
+  "m0983ea89cf": "Update available",
+  "@m0983ea89cf": {
+    "description": "Доступно обновление",
+    "placeholders": {}
+  },
   "m41a4fa8b6a": "Spirit",
   "@m41a4fa8b6a": {
     "description": "Дух",
@@ -1236,15 +1196,6 @@
     "description": "Загружать обновления автоматически",
     "placeholders": {}
   },
-  "m65a1b960c7": "Loading LuaJIT and lua-utf8 for {p0}...",
-  "@m65a1b960c7": {
-    "description": "Загрузка LuaJIT и lua-utf8 для {p0}…",
-    "placeholders": {
-      "p0": {
-        "type": "String"
-      }
-    }
-  },
   "m4f87fe4ac6": "Downloading Path of Building",
   "@m4f87fe4ac6": {
     "description": "Загрузка Path of Building",
@@ -1254,18 +1205,6 @@
   "@ma3d462aeec": {
     "description": "Загрузка PoB MCP",
     "placeholders": {}
-  },
-  "maafcfa710b": "Loading {p0} {p1}…",
-  "@maafcfa710b": {
-    "description": "Загрузка {p0} {p1}…",
-    "placeholders": {
-      "p0": {
-        "type": "String"
-      },
-      "p1": {
-        "type": "String"
-      }
-    }
   },
   "m912da5cc75": "Loading incomplete: {p0}",
   "@m912da5cc75": {
@@ -1343,6 +1282,16 @@
   "mbdb05f34ee": "Notes are saved automatically",
   "@mbdb05f34ee": {
     "description": "Заметки сохраняются автоматически",
+    "placeholders": {}
+  },
+  "m5f5979b1b0": "Running diagnostics…",
+  "@m5f5979b1b0": {
+    "description": "Запускаем диагностику…",
+    "placeholders": {}
+  },
+  "m44d5f03bb0": "Run doctor",
+  "@m44d5f03bb0": {
+    "description": "Запустить doctor",
     "placeholders": {}
   },
   "ma2d2d73bb5": "Start setup",
@@ -1500,28 +1449,15 @@
     "description": "Искать на рынке",
     "placeholders": {}
   },
-  "ma8584a8e11": "Using verified archive {p0}",
-  "@ma8584a8e11": {
-    "description": "Используется проверенный архив {p0}",
-    "placeholders": {
-      "p0": {
-        "type": "String"
-      }
-    }
+  "m86da26d649": "Using a local copy of the PoB data",
+  "@m86da26d649": {
+    "description": "Используется локальная копия данных PoB",
+    "placeholders": {}
   },
   "m56e46960c1": "Source",
   "@m56e46960c1": {
     "description": "Источник",
     "placeholders": {}
-  },
-  "m8b48ab31e9": "Source Lua connected · {p0} classes",
-  "@m8b48ab31e9": {
-    "description": "Исходный Lua подключён · {p0} классов",
-    "placeholders": {
-      "p0": {
-        "type": "String"
-      }
-    }
   },
   "m26c6ade68e": "Source Lua engine and game data",
   "@m26c6ade68e": {
@@ -1622,9 +1558,9 @@
     "description": "Команда недоступна в редакторе PoB II.",
     "placeholders": {}
   },
-  "m1e8466ebeb": "Components",
-  "@m1e8466ebeb": {
-    "description": "Компоненты",
+  "m0e73d7c8d1": "The bundled engine updates with PoB II",
+  "@m0e73d7c8d1": {
+    "description": "Комплектный движок обновляется вместе с PoB II",
     "placeholders": {}
   },
   "m9c01f77f07": "Components are installed. You can connect Lua.",
@@ -1662,6 +1598,11 @@
     "description": "Ловкость",
     "placeholders": {}
   },
+  "m78692a3041": "Local diagnostics passed",
+  "@m78692a3041": {
+    "description": "Локальная проверка пройдена",
+    "placeholders": {}
+  },
   "m5da5bd2f47": "Local interface connection with calculations",
   "@m5da5bd2f47": {
     "description": "Локальная связь интерфейса с расчётами",
@@ -1670,6 +1611,11 @@
   "mba18ba5922": "Local PoB bridge",
   "@mba18ba5922": {
     "description": "Локальный мост PoB",
+    "placeholders": {}
+  },
+  "m3a1df08aa5": "The local bridge connects PoB II to the original Path of Building window. PoB2Engine can use it to import the build open there, import a character, or read the builds folder from the original PoB settings.",
+  "@m3a1df08aa5": {
+    "description": "Локальный мост нужен для связи PoB II с окном оригинального Path of Building. Через него PoB2Engine может забрать открытую там сборку, импортировать персонажа или узнать папку сборок из настроек оригинального PoB.",
     "placeholders": {}
   },
   "mab7d96eb1a": "Any base",
@@ -1877,15 +1823,6 @@
     "description": "Настройки",
     "placeholders": {}
   },
-  "m5ffb2fa414": "Native release MCP: HTTP {p0}",
-  "@m5ffb2fa414": {
-    "description": "Нативный выпуск MCP: HTTP {p0}",
-    "placeholders": {
-      "p0": {
-        "type": "String"
-      }
-    }
-  },
   "m28997f7565": "Not selected",
   "@m28997f7565": {
     "description": "Не выбраны",
@@ -1975,15 +1912,6 @@
   "@m6dc7d664a3": {
     "description": "Не удалось защитить каталог подключения MCP",
     "placeholders": {}
-  },
-  "ma33f1f1a50": "Failed to update connection command MCP: {p0}",
-  "@ma33f1f1a50": {
-    "description": "Не удалось обновить команду подключения MCP: {p0}",
-    "placeholders": {
-      "p0": {
-        "type": "String"
-      }
-    }
   },
   "m8644bfa547": "Could not disable the previous MCP editor: {p0}",
   "@m8644bfa547": {
@@ -2100,6 +2028,11 @@
       }
     }
   },
+  "md005a7dc93": "Could not check the version",
+  "@md005a7dc93": {
+    "description": "Не удалось проверить версию",
+    "placeholders": {}
+  },
   "m4d1a8400d5": "Failed to check for updates: {p0}",
   "@m4d1a8400d5": {
     "description": "Не удалось проверить обновления: {p0}",
@@ -2215,16 +2148,6 @@
     "description": "Неверный источник файла выпуска",
     "placeholders": {}
   },
-  "mead5c633d1": "Invalid path in archive",
-  "@mead5c633d1": {
-    "description": "Недопустимый путь в архиве",
-    "placeholders": {}
-  },
-  "m153634f023": "Invalid file type in archive",
-  "@m153634f023": {
-    "description": "Недопустимый тип файла в архиве",
-    "placeholders": {}
-  },
   "m34f418bb26": "Unknown settings version",
   "@m34f418bb26": {
     "description": "Неизвестная версия настроек",
@@ -2323,6 +2246,11 @@
     "description": "Некорректные координаты PoB",
     "placeholders": {}
   },
+  "md50501d05c": "Invalid engine workspace address",
+  "@md50501d05c": {
+    "description": "Некорректный адрес рабочей копии движка",
+    "placeholders": {}
+  },
   "mec07f569e3": "Incorrect note ID",
   "@mec07f569e3": {
     "description": "Некорректный идентификатор заметок",
@@ -2353,11 +2281,6 @@
     "description": "Некорректный путь к сборке PoB.",
     "placeholders": {}
   },
-  "m4e15785017": "Incorrect size Lua runtime",
-  "@m4e15785017": {
-    "description": "Некорректный размер Lua runtime",
-    "placeholders": {}
-  },
   "m6ddcbfade2": "Incorrect file size",
   "@m6ddcbfade2": {
     "description": "Некорректный размер файла",
@@ -2373,16 +2296,6 @@
     "description": "Необязательно",
     "placeholders": {}
   },
-  "m5f5263f78b": "Ambiguous checksum Lua runtime",
-  "@m5f5263f78b": {
-    "description": "Неоднозначная контрольная сумма Lua runtime",
-    "placeholders": {}
-  },
-  "m14889e0664": "Unexpected source Lua runtime",
-  "@m14889e0664": {
-    "description": "Неожиданный источник Lua runtime",
-    "placeholders": {}
-  },
   "mab1d20e880": "Unsupported release tag format",
   "@mab1d20e880": {
     "description": "Неподдерживаемый формат тега выпуска",
@@ -2391,11 +2304,6 @@
   "m7b3c2887b7": "Incomplete PoB render command",
   "@m7b3c2887b7": {
     "description": "Неполная команда отрисовки PoB",
-    "placeholders": {}
-  },
-  "m6f381f6aed": "No Lua runtime for this architecture",
-  "@m6f381f6aed": {
-    "description": "Нет Lua runtime для этой архитектуры",
     "placeholders": {}
   },
   "m41d413ec96": "No data to clear.",
@@ -2413,19 +2321,9 @@
     "description": "Нет единственной контрольной суммы пакета",
     "placeholders": {}
   },
-  "mb71873c826": "No checksum Lua runtime",
-  "@mb71873c826": {
-    "description": "Нет контрольной суммы Lua runtime",
-    "placeholders": {}
-  },
   "mad247478cb": "No answer Lua",
   "@mad247478cb": {
     "description": "Нет ответа Lua",
-    "placeholders": {}
-  },
-  "m0497e1e404": "No answer MCP. The session is closed; re-import XML.",
-  "@m0497e1e404": {
-    "description": "Нет ответа MCP. Сессия закрыта; повторно импортируйте XML.",
     "placeholders": {}
   },
   "m323494c6da": "Original text is shown when a translation is unavailable",
@@ -2508,6 +2406,11 @@
     "description": "Оберег III",
     "placeholders": {}
   },
+  "m6920e9bb20": "Issues found",
+  "@m6920e9bb20": {
+    "description": "Обнаружены проблемы",
+    "placeholders": {}
+  },
   "md65eeeeaab": "Update MCP in the Components section.",
   "@md65eeeeaab": {
     "description": "Обновите MCP в разделе «Компоненты».",
@@ -2558,9 +2461,14 @@
     "description": "Обновите MCP для удаления умения",
     "placeholders": {}
   },
-  "m74e1571298": "Update PoB and MCP",
-  "@m74e1571298": {
-    "description": "Обновить PoB и MCP",
+  "m3ec99cd760": "Update PoB2Engine",
+  "@m3ec99cd760": {
+    "description": "Обновить PoB2Engine",
+    "placeholders": {}
+  },
+  "maddc4848e6": "Update PoB data",
+  "@maddc4848e6": {
+    "description": "Обновить данные PoB",
     "placeholders": {}
   },
   "m3d7df93803": "Update build list",
@@ -2605,6 +2513,11 @@
   "m1eb91e3a52": "Application updates",
   "@m1eb91e3a52": {
     "description": "Обновления приложения",
+    "placeholders": {}
+  },
+  "m2cabe451c6": "Updating PoB2Engine…",
+  "@m2cabe451c6": {
+    "description": "Обновляем PoB2Engine…",
     "placeholders": {}
   },
   "m9e0611bf9b": "Shoes",
@@ -2685,11 +2598,6 @@
   "mab5f9b4d06": "PoB trade catalog was expected",
   "@mab5f9b4d06": {
     "description": "Ожидался торговый каталог PoB",
-    "placeholders": {}
-  },
-  "mb3f794d1cf": "No operations yet",
-  "@mb3f794d1cf": {
-    "description": "Операций пока нет",
     "placeholders": {}
   },
   "m47cd7c0de1": "No release description",
@@ -3057,11 +2965,6 @@
     "description": "Повторить сохранение",
     "placeholders": {}
   },
-  "m8b614efa1f": "Duplicate path in archive",
-  "@m8b614efa1f": {
-    "description": "Повторяющийся путь в архиве",
-    "placeholders": {}
-  },
   "mbcc0fdbe14": "Spell Suppression Chance",
   "@mbcc0fdbe14": {
     "description": "Подавление урона чар",
@@ -3080,11 +2983,6 @@
   "m413fa4fd39": "Preparing the original PoB Lua with the bundled engine",
   "@m413fa4fd39": {
     "description": "Подготовка исходного Lua PoB через комплектный движок",
-    "placeholders": {}
-  },
-  "m52d7142d18": "Windows x64, Linux x64 and macOS arm64 supported",
-  "@m52d7142d18": {
-    "description": "Поддерживаются Windows x64, Linux x64 и macOS arm64",
     "placeholders": {}
   },
   "m8ba2618d75": "No support gems found",
@@ -3122,11 +3020,6 @@
     "description": "Подключите Lua через pob_editor_app.",
     "placeholders": {}
   },
-  "m0d8b14b475": "Reconnect the bridge and restart PoB.",
-  "@m0d8b14b475": {
-    "description": "Подключите мост заново и перезапустите PoB.",
-    "placeholders": {}
-  },
   "m3af435b32e": "Connect",
   "@m3af435b32e": {
     "description": "Подключить",
@@ -3137,6 +3030,11 @@
     "description": "Подключить Lua",
     "placeholders": {}
   },
+  "m2465d97173": "Connect to the engine",
+  "@m2465d97173": {
+    "description": "Подключить движок",
+    "placeholders": {}
+  },
   "m80cc1bdb9b": "Connect bridge",
   "@m80cc1bdb9b": {
     "description": "Подключить мост",
@@ -3145,6 +3043,11 @@
   "m929d292c0e": "Connect builds folder",
   "@m929d292c0e": {
     "description": "Подключить папку сборок",
+    "placeholders": {}
+  },
+  "mda6427ff8a": "PoB2Engine connected",
+  "@mda6427ff8a": {
+    "description": "Подключён PoB2Engine",
     "placeholders": {}
   },
   "m6287090984": "Confirm cleaning",
@@ -3210,6 +3113,11 @@
   "m233d77b731": "Full DPS",
   "@m233d77b731": {
     "description": "Полный DPS",
+    "placeholders": {}
+  },
+  "mfc913f923a": "Full report",
+  "@mfc913f923a": {
+    "description": "Полный отчёт",
     "placeholders": {}
   },
   "m56f7dfa459": "Taken Lightning dmg",
@@ -3392,14 +3300,18 @@
       }
     }
   },
+  "ma27300a22c": "Previous version: {p0}",
+  "@ma27300a22c": {
+    "description": "Предыдущая версия: {p0}",
+    "placeholders": {
+      "p0": {
+        "type": "String"
+      }
+    }
+  },
   "mb45f78d483": "Previous pair restored and verified through Lua",
   "@mb45f78d483": {
     "description": "Предыдущая пара восстановлена и проверена через Lua",
-    "placeholders": {}
-  },
-  "mf969e13b83": "There is no previous complete pair of components yet",
-  "@mf969e13b83": {
-    "description": "Предыдущей полной пары компонентов пока нет",
     "placeholders": {}
   },
   "mec5dbc31fc": "Previous results · recalculation Lua",
@@ -3500,20 +3412,6 @@
     "description": "Проверить связь",
     "placeholders": {}
   },
-  "mfa4af9bbe7": "Check compatibility",
-  "@mfa4af9bbe7": {
-    "description": "Проверить совместимость",
-    "placeholders": {}
-  },
-  "mcb69e5c81f": "Checking SHA-256 of {p0}",
-  "@mcb69e5c81f": {
-    "description": "Проверка SHA-256 архива {p0}",
-    "placeholders": {
-      "p0": {
-        "type": "String"
-      }
-    }
-  },
   "mfeb5830ec9": "Release check: HTTP {p0}",
   "@mfeb5830ec9": {
     "description": "Проверка выпуска: HTTP {p0}",
@@ -3548,25 +3446,6 @@
     "description": "Проверка совместимости Lua",
     "placeholders": {}
   },
-  "m9353cfd5f6": "Compatibility check: running original Lua...",
-  "@m9353cfd5f6": {
-    "description": "Проверка совместимости: запуск исходного Lua…",
-    "placeholders": {}
-  },
-  "me498367e06": "Checking {p0} files",
-  "@me498367e06": {
-    "description": "Проверка файлов {p0}",
-    "placeholders": {
-      "p0": {
-        "type": "String"
-      }
-    }
-  },
-  "md8164e1acb": "Check your network and request limit.",
-  "@md8164e1acb": {
-    "description": "Проверьте сеть и лимит запросов.",
-    "placeholders": {}
-  },
   "m21d9ad659d": "Check text to see description and compatibility",
   "@m21d9ad659d": {
     "description": "Проверьте текст, чтобы увидеть описание и совместимость",
@@ -3575,6 +3454,11 @@
   "m1ea3791d9d": "Checking the releases...",
   "@m1ea3791d9d": {
     "description": "Проверяем выпуски…",
+    "placeholders": {}
+  },
+  "m0a597163f4": "Checking PoB data and the open build…",
+  "@m0a597163f4": {
+    "description": "Проверяем данные PoB и открытую сборку…",
     "placeholders": {}
   },
   "m1d1347fc69": "Checking the profile...",
@@ -3590,6 +3474,20 @@
   "mce86d859e2": "pob2-engine program",
   "@mce86d859e2": {
     "description": "Программа pob2-engine",
+    "placeholders": {}
+  },
+  "m748bd43447": "Protocol: {p0}",
+  "@m748bd43447": {
+    "description": "Протокол: {p0}",
+    "placeholders": {
+      "p0": {
+        "type": "String"
+      }
+    }
+  },
+  "m359497aff5": "Profile",
+  "@m359497aff5": {
+    "description": "Профиль",
     "placeholders": {}
   },
   "me881a16f50": "Server profile",
@@ -3630,6 +3528,11 @@
   "m913b373c85": "Work in the application window. Click on a combination to change it.",
   "@m913b373c85": {
     "description": "Работают в окне приложения. Нажмите на сочетание, чтобы изменить его.",
+    "placeholders": {}
+  },
+  "m6ce42ad925": "The working copy is closed",
+  "@m6ce42ad925": {
+    "description": "Рабочая копия закрыта",
     "placeholders": {}
   },
   "m0964e41783": "The working build was saved; could not restore Lua: {p0}",
@@ -3680,25 +3583,6 @@
   "@m13601ffe54": {
     "description": "Разрешить правки через MCP",
     "placeholders": {}
-  },
-  "m0449346093": "The extracted component is too large",
-  "@m0449346093": {
-    "description": "Распакованный компонент слишком велик",
-    "placeholders": {}
-  },
-  "m221310ed98": "The extracted file size does not match",
-  "@m221310ed98": {
-    "description": "Распакованный размер файла не совпал",
-    "placeholders": {}
-  },
-  "ma1af9f3f0e": "Extracting {p0}",
-  "@ma1af9f3f0e": {
-    "description": "Распаковка архива {p0}",
-    "placeholders": {
-      "p0": {
-        "type": "String"
-      }
-    }
   },
   "mde6527a5fe": "Distance to node",
   "@mde6527a5fe": {
@@ -3764,24 +3648,6 @@
     "description": "Ревизия {p0}",
     "placeholders": {
       "p0": {
-        "type": "String"
-      }
-    }
-  },
-  "m7fce31d207": "Revision mismatch for {p0} {p1}: expected {p2}, got {p3}.",
-  "@m7fce31d207": {
-    "description": "Ревизия {p0} {p1} не совпадает: ожидалась {p2}, получена {p3}.",
-    "placeholders": {
-      "p0": {
-        "type": "String"
-      },
-      "p1": {
-        "type": "String"
-      },
-      "p2": {
-        "type": "String"
-      },
-      "p3": {
         "type": "String"
       }
     }
@@ -3878,6 +3744,11 @@
   "m15d7545f05": "PoB build is no longer available. Update the build list.",
   "@m15d7545f05": {
     "description": "Сборка PoB больше недоступна. Обновите список сборок.",
+    "placeholders": {}
+  },
+  "m5b78f6ab13": "Development build",
+  "@m5b78f6ab13": {
+    "description": "Сборка для разработки",
     "placeholders": {}
   },
   "mee1bd6d18c": "The build changed in PoB. PoB II edits saved separately: {p0}",
@@ -4018,6 +3889,11 @@
     "description": "Связь с PoB подтверждена. Откройте сборку для импорта.",
     "placeholders": {}
   },
+  "ma44e570b5e": "Connection to the engine was lost. Reopen the build.",
+  "@ma44e570b5e": {
+    "description": "Связь с движком потеряна. Повторно откройте сборку.",
+    "placeholders": {}
+  },
   "m7434b2e81b": "Move left",
   "@m7434b2e81b": {
     "description": "Сдвинуть влево",
@@ -4041,11 +3917,6 @@
   "m4bd93e3298": "The server did not confirm the PoB II window connection.",
   "@m4bd93e3298": {
     "description": "Сервер не подтвердил подключение окна PoB II.",
-    "placeholders": {}
-  },
-  "m32bb1c680f": "Session closed",
-  "@m32bb1c680f": {
-    "description": "Сессия закрыта",
     "placeholders": {}
   },
   "mff4d880370": "Session not found. Create it explicitly",
@@ -4168,11 +4039,6 @@
     "description": "Сменить класс или восхождение",
     "placeholders": {}
   },
-  "mde2ce6f05b": "Select versions for both components first",
-  "@mde2ce6f05b": {
-    "description": "Сначала выберите версии обоих компонентов",
-    "placeholders": {}
-  },
   "m93e0cd3908": "Open a build first.",
   "@m93e0cd3908": {
     "description": "Сначала откройте сборку.",
@@ -4191,11 +4057,6 @@
   "m59b50cc146": "Remove support gems first",
   "@m59b50cc146": {
     "description": "Сначала уберите камни поддержки",
-    "placeholders": {}
-  },
-  "ma386719073": "Install both components first",
-  "@ma386719073": {
-    "description": "Сначала установите оба компонента",
     "placeholders": {}
   },
   "m5ebbc9d7a5": "Removed",
@@ -4500,11 +4361,6 @@
     "description": "Удалить этап",
     "placeholders": {}
   },
-  "m97ac4c501c": "Installation already in progress",
-  "@m97ac4c501c": {
-    "description": "Уже выполняется установка",
-    "placeholders": {}
-  },
   "m2748676635": "Another PoB installation is already open. Connect it in Components.",
   "@m2748676635": {
     "description": "Уже открыта другая установка PoB. Подключите её в разделе «Компоненты».",
@@ -4691,19 +4547,24 @@
     "description": "Установите компоненты, чтобы открыть сборку и получить настоящий расчёт.",
     "placeholders": {}
   },
+  "m750e822c58": "Install PoB data",
+  "@m750e822c58": {
+    "description": "Установить данные PoB",
+    "placeholders": {}
+  },
   "mfdeaa71380": "Install components",
   "@mfdeaa71380": {
     "description": "Установить компоненты",
     "placeholders": {}
   },
-  "m536db585fd": "The bundled engine manages PoB installations",
-  "@m536db585fd": {
-    "description": "Установками PoB управляет комплектный движок",
-    "placeholders": {}
-  },
   "mfcb7c67f91": "Current version installed",
   "@mfcb7c67f91": {
     "description": "Установлена актуальная версия",
+    "placeholders": {}
+  },
+  "m3a77f812b1": "The engine is up to date",
+  "@m3a77f812b1": {
+    "description": "Установлена актуальная версия движка",
     "placeholders": {}
   },
   "m44150e69ff": "Version {p0} installed",
@@ -4811,6 +4672,11 @@
   "mdab05cc16d": "Skill part",
   "@mdab05cc16d": {
     "description": "Часть умения",
+    "placeholders": {}
+  },
+  "m3eaf0b57cf": "Reading engine version…",
+  "@m3eaf0b57cf": {
+    "description": "Читаем версию движка…",
     "placeholders": {}
   },
   "me24055fecd": "What remains before the next stage?",

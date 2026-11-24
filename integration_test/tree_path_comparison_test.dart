@@ -7,9 +7,9 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:material_ui/material_ui.dart';
-import 'package:pob2_ui/data/component_repository.dart';
+import 'package:pob2_ui/data/engine_components.dart';
 import 'package:pob2_ui/data/installation_store.dart';
-import 'package:pob2_ui/data/mcp_client.dart';
+import 'package:pob2_ui/data/workbench_client.dart';
 import 'package:pob2_ui/data/pob_build_document.dart';
 import 'package:pob2_ui/data/pob_build_library.dart';
 import 'package:pob2_ui/data/xml_file_service.dart';
@@ -166,7 +166,7 @@ void main() {
   }, timeout: const Timeout(Duration(minutes: 5)));
 }
 
-class _PausedPathSession extends McpClient {
+class _PausedPathSession extends WorkbenchClient {
   final started = Completer<void>();
   final resume = Completer<void>();
 
@@ -181,7 +181,7 @@ class _PausedPathSession extends McpClient {
   }
 }
 
-class _LostPathReply extends McpClient {
+class _LostPathReply extends WorkbenchClient {
   var dropNext = false;
   String? attempted;
   Map<int, int>? appliedNodes;
@@ -211,8 +211,6 @@ Future<Directory> _profile() async {
   final root = await prepared.createTemp('tree-paths-');
   addTearDown(() => root.delete(recursive: true));
   final builds = await Directory.fromUri(root.uri.resolve('builds/')).create();
-  await File.fromUri(prepared.uri.resolve('components.json'))
-      .copy(File.fromUri(root.uri.resolve('components.json')).path);
   await PobBuildLibrary(root).configure(builds.path);
   return root;
 }
@@ -221,12 +219,12 @@ Future<WorkshopCubit> _open(
   WidgetTester tester,
   Directory root,
   SelectPaths dialogs, {
-  McpClient? engine,
-  McpClient Function()? createEngine,
+  WorkbenchClient? engine,
+  WorkbenchClient Function()? createEngine,
 }) async {
   final model = WorkshopCubit(
-    ComponentRepository(store: InstallationStore(root)),
-    engine ?? McpClient(),
+    EngineComponents(store: InstallationStore(root)),
+    engine ?? WorkbenchClient(),
     library: PobBuildLibrary(root),
     files: XmlFileService(dialogs: dialogs),
     createEngine: createEngine,
@@ -280,7 +278,7 @@ Future<void> _verifyWeaponPreview(
   TreePathComparison preview,
   String baseline,
 ) async {
-  final session = McpClient();
+  final session = WorkbenchClient();
   try {
     await session.connect(model.components.active);
     for (final option in [preview.reports.first, preview.reports.second]) {
@@ -450,7 +448,7 @@ Future<void> _verifyPreview(
 ) async {
   expect(preview.reports.baseline.dps, closeTo(_dpsBefore, 0.00001));
   expect(preview.reports.baseline.life, 1187);
-  final session = McpClient();
+  final session = WorkbenchClient();
   try {
     await session.connect(model.components.active);
     for (final option in [preview.reports.first, preview.reports.second]) {
@@ -470,7 +468,7 @@ Future<void> _verifyPreview(
 }
 
 Future<void> _verifyWithOriginal(
-  McpClient session,
+  WorkbenchClient session,
   String baseline,
   TreePathOption option,
 ) async {

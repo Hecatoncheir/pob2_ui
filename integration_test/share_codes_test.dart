@@ -5,13 +5,15 @@ import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:material_ui/material_ui.dart';
-import 'package:pob2_ui/data/component_repository.dart';
+import 'package:pob2_ui/data/engine_components.dart';
 import 'package:pob2_ui/data/installation_store.dart';
-import 'package:pob2_ui/data/mcp_client.dart';
+import 'package:pob2_ui/data/workbench_client.dart';
 import 'package:pob2_ui/data/pob_build_document.dart';
 import 'package:pob2_ui/data/pob_build_library.dart';
 import 'package:pob2_ui/data/pob_share_code.dart';
-import 'package:pob2_ui/data/process_service.dart';
+
+import '../test/support/legacy/legacy_process_service.dart';
+
 import 'package:pob2_ui/data/xml_file_service.dart';
 import 'package:pob2_ui/domain/component.dart';
 import 'package:pob2_ui/installer_check.dart';
@@ -67,7 +69,7 @@ void main() {
       await _rejectInvalid(tester, initial);
 
       final originals = await _verifyInOriginalPob(
-        initial.components.active,
+        await InstallationStore(root).load(),
         checks,
       );
       await tester.pumpWidget(const SizedBox.shrink());
@@ -94,8 +96,8 @@ Future<WorkshopCubit> _open(
   SelectPaths dialogs,
 ) async {
   final model = WorkshopCubit(
-    ComponentRepository(store: InstallationStore(root)),
-    McpClient(),
+    EngineComponents(store: InstallationStore(root)),
+    WorkbenchClient(),
     library: PobBuildLibrary(root),
     files: XmlFileService(dialogs: dialogs),
   );
@@ -234,7 +236,7 @@ Future<List<String>> _verifyInOriginalPob(
     Directory(mcp.directory).uri.resolve('pob_poe2_mcp/runner.py'),
   );
   final process = await Process.start(
-    await ProcessService().runtimePython(mcp),
+    await LegacyProcessService().runtimePython(mcp),
     [
       '-X',
       'utf8',

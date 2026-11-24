@@ -33,6 +33,52 @@ Map<String, dynamic> _rectangle(double start, double end, List<double> color) =>
     };
 
 void main() {
+  test('Связи перехода к старту не рисуются даже при подсветке пути', () {
+    final tree = TreeGeometry.fromJson({
+      'version': '0_5',
+      'nodes': [
+        for (final id in [4739, 12795, 44871])
+          {
+            'id': id,
+            'x': id / 20,
+            'y': (id % 7) * 20,
+            'name': '$id',
+            'type': 'Normal',
+            'allocated': false,
+          },
+      ],
+      'edges': [
+        [4739, 12795],
+        [4739, 44871],
+        [12795, 44871],
+      ],
+      'hiddenEdges': [
+        [4739, 12795],
+        [12795, 44871],
+      ],
+    });
+    final transform = TransformationController();
+    addTearDown(transform.dispose);
+    final painter = TreePainter(
+      TreeScene(tree),
+      null,
+      null,
+      '',
+      {},
+      transform,
+      const Size(1800, 1800),
+      null,
+      null,
+      planPath: const [44871, 12795, 4739],
+      comparisonPaths: (const [44871, 12795, 4739], const []),
+    );
+    expect(tree.edges, hasLength(3));
+    expect(
+      (Canvas canvas) => painter.paint(canvas, const Size(1800, 1800)),
+      paintsExactlyCountTimes(#drawLine, 2),
+    );
+  });
+
   testWidgets('Миниатюра следует за самоцветом при смене гнезда', (
     tester,
   ) async {

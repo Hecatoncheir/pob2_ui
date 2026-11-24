@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:pob2_ui/data/mcp_client.dart';
+import 'package:pob2_ui/data/workbench_client.dart';
 import 'package:pob2_ui/data/pob_build_document.dart';
 import 'package:pob2_ui/data/tree_path_comparison.dart';
 import 'package:pob2_ui/domain/build_report.dart';
@@ -12,7 +12,7 @@ const _source = '''
 </Spec></Tree></PathOfBuilding2>
 ''';
 
-class _PathEngine extends McpClient {
+class _PathEngine extends WorkbenchClient {
   var mode = 0;
   var target = 0;
   var imports = 0;

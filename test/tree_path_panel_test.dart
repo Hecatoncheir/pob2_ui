@@ -2,9 +2,11 @@ import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:material_ui/material_ui.dart';
-import 'package:pob2_ui/data/component_repository.dart';
+
+import 'support/legacy/component_repository.dart';
+
 import 'package:pob2_ui/data/installation_store.dart';
-import 'package:pob2_ui/data/mcp_client.dart';
+import 'package:pob2_ui/data/workbench_client.dart';
 import 'package:pob2_ui/domain/tree_allocation_mode.dart';
 import 'package:pob2_ui/domain/tree_geometry.dart';
 import 'package:pob2_ui/domain/tree_path_comparison.dart';
@@ -21,7 +23,7 @@ class _PanelWorkshop extends WorkshopCubit {
         ComponentRepository(
           store: InstallationStore(Directory('unused-path-panel')),
         ),
-        McpClient(),
+        WorkbenchClient(),
       );
 
   @override

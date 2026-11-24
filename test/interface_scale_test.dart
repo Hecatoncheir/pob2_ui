@@ -10,9 +10,11 @@ import 'package:pob2_ui/ui/interface_scale_bloc.dart';
 import 'package:pob2_ui/ui/interface_scale_picker.dart';
 import 'package:pob2_ui/ui/interface_viewport.dart';
 import 'package:pob2_ui/ui/core/spark_theme.dart';
-import 'package:pob2_ui/data/component_repository.dart';
+
+import 'support/legacy/component_repository.dart';
+
 import 'package:pob2_ui/data/installation_store.dart';
-import 'package:pob2_ui/data/mcp_client.dart';
+import 'package:pob2_ui/data/workbench_client.dart';
 import 'package:pob2_ui/ui/app.dart';
 import 'package:pob2_ui/ui/workshop_cubit.dart';
 
@@ -55,7 +57,7 @@ void main() {
         ComponentRepository(
           store: InstallationStore(Directory('unused-scale-test')),
         ),
-        McpClient(),
+        WorkbenchClient(),
       );
       await tester.pumpWidget(PobApp(model: model, interfaceScale: scale));
       await tester.pumpAndSettle();

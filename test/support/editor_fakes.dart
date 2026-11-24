@@ -1,8 +1,9 @@
 import 'dart:io';
 
-import 'package:pob2_ui/data/component_repository.dart';
+import 'legacy/component_repository.dart';
+
 import 'package:pob2_ui/data/installation_store.dart';
-import 'package:pob2_ui/data/mcp_client.dart';
+import 'package:pob2_ui/data/workbench_client.dart';
 import 'package:pob2_ui/domain/build_edit_result.dart';
 import 'package:pob2_ui/domain/build_report.dart';
 import 'package:pob2_ui/ui/workshop_cubit.dart';
@@ -32,7 +33,7 @@ const boss = {
   ],
 };
 
-class EditorCatalogEngine extends McpClient {
+class EditorCatalogEngine extends WorkbenchClient {
   EditorCatalogEngine({this.gemEntries = const [fireball]}) {
     tools = {
       'pob_gem_icons',

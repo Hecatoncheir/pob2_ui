@@ -5,9 +5,9 @@ import 'package:material_ui/material_ui.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
-import 'package:pob2_ui/data/component_repository.dart';
+import 'package:pob2_ui/data/engine_components.dart';
 import 'package:pob2_ui/data/installation_store.dart';
-import 'package:pob2_ui/data/mcp_client.dart';
+import 'package:pob2_ui/data/workbench_client.dart';
 import 'package:pob2_ui/data/pob_build_library.dart';
 import 'package:pob2_ui/data/xml_file_service.dart';
 import 'package:pob2_ui/domain/build_report.dart';
@@ -35,10 +35,10 @@ void main() {
         throw StateError('Для проверки нужен отдельный профиль POB2_UI_HOME');
       }
       final model = WorkshopCubit(
-        ComponentRepository(
+        EngineComponents(
           store: InstallationStore(InstallationStore.defaultRoot()),
         ),
-        McpClient(),
+        WorkbenchClient(),
       );
       addTearDown(model.close);
       final appearance = AppearanceBloc(
@@ -114,7 +114,7 @@ void main() {
 
 Future<({WorkshopCubit model, SelectPaths dialogs})> _prepareFileWorkshop(
   WidgetTester tester,
-  McpClient engine,
+  WorkbenchClient engine,
 ) async {
   if (!Platform.environment.containsKey('POB2_UI_HOME')) {
     throw StateError('Для проверки нужен отдельный профиль POB2_UI_HOME');
@@ -122,14 +122,12 @@ Future<({WorkshopCubit model, SelectPaths dialogs})> _prepareFileWorkshop(
   final profile = InstallationStore.defaultRoot();
   final root = await profile.createTemp('file-editors-');
   addTearDown(() => root.delete(recursive: true));
-  final manifest = File.fromUri(profile.uri.resolve('components.json'));
-  await manifest.copy(File.fromUri(root.uri.resolve('components.json')).path);
   final dialogs = SelectPaths();
   final library = PobBuildLibrary(root);
   final builds = await Directory.fromUri(root.uri.resolve('builds/')).create();
   await library.configure(builds.path);
   final model = WorkshopCubit(
-    ComponentRepository(store: InstallationStore(root)),
+    EngineComponents(store: InstallationStore(root)),
     engine,
     library: library,
     files: XmlFileService(dialogs: dialogs),
@@ -156,7 +154,10 @@ File _fixture(String name) =>
     File('integration_test/fixtures/$name.xml').absolute;
 
 Future<void> _witchSupportWorkflow(WidgetTester tester) async {
-  final (:model, :dialogs) = await _prepareFileWorkshop(tester, McpClient());
+  final (:model, :dialogs) = await _prepareFileWorkshop(
+    tester,
+    WorkbenchClient(),
+  );
   expect(
     model.engine.tools,
     contains('pob_preview_support'),
@@ -438,7 +439,7 @@ Future<void> _recoverAfterDroppedReply(
   expect(engine.equipmentEdits, attempted + 1);
 }
 
-class _LostEditReply extends McpClient {
+class _LostEditReply extends WorkbenchClient {
   bool dropNext = false;
   num? shieldAfterLostEdit;
   int equipmentEdits = 0;

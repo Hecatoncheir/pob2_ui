@@ -1,13 +1,12 @@
+import '../data/bundled_engine.dart';
+
 import 'dart:async';
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../data/mcp_editor_gateway.dart';
-import '../data/process_service.dart';
 import '../domain/build_report.dart';
-import '../domain/component.dart';
 import '../domain/app_info.dart';
 import 'shell_bloc.dart';
 import 'workshop_cubit.dart';
@@ -89,9 +88,7 @@ class McpEditorCubit extends Cubit<McpEditorState> {
   int _revision = 0;
 
   bool get enabled => state.command != null;
-  bool get canEnable => model.components.engineExecutable == null
-      ? model.components.active[Component.mcp] != null
-      : model.ready;
+  bool get canEnable => model.ready;
 
   Future<void> enable() async {
     if (enabled || state.busy || _closing) return;
@@ -106,7 +103,7 @@ class McpEditorCubit extends Cubit<McpEditorState> {
 
   Future<void> _start(String? id) async {
     try {
-      final command = await _connectionCommand();
+      final command = _connectionCommand();
       if (_closing || !_matches(id)) {
         if (!_closing) emit(_off);
         return;
@@ -203,43 +200,12 @@ class McpEditorCubit extends Cubit<McpEditorState> {
     _closeBridge = null;
   }
 
-  Future<String> _connectionCommand() async {
-    if (model.components.engineExecutable case final executable?) {
-      return _command([
-        executable,
-        'editor',
-        '--endpoint',
-        _gateway.endpoint.path,
-      ]);
-    }
-    final mcp = model.components.active[Component.mcp]!;
-    final process = ProcessService();
-    final python = await process.runtimePython(mcp);
-    final script = File.fromUri(
-      Directory(mcp.directory).absolute.uri.resolve('run.py'),
-    ).path;
-    final config = await process.run(python, [
-      '-X',
-      'utf8',
-      script,
-      'config',
-      '--mode',
-      'editor',
-      '--editor-endpoint',
-      _gateway.endpoint.path,
-    ], timeout: const Duration(seconds: 15));
-    if (jsonDecode(config) case {
-      'mcpServers': {
-        'pob2-editor': {
-          'command': final String command,
-          'args': final List<Object?> args,
-        },
-      },
-    }) {
-      return _command([command, ...args.cast<String>()]);
-    }
-    throw const FormatException();
-  }
+  String _connectionCommand() => _command([
+    model.components.engineExecutable ?? defaultEngineExecutable(),
+    'editor',
+    '--endpoint',
+    _gateway.endpoint.path,
+  ]);
 
   String _command(List<String> arguments) =>
       'codex mcp add pob2-editor -- ${arguments.map(_quote).join(' ')}';
@@ -299,12 +265,10 @@ class McpEditorCubit extends Cubit<McpEditorState> {
   Future<JsonMap> _uiTool(String tool, JsonMap args, int? revision) async {
     final read = mcpApplicationRead(tool, args);
     if (!read) _checkRevision(revision, args['expectedRevision']);
-    final previousMcp = model.components.active[Component.mcp]?.directory;
     if (!read) _uiChanges++;
     try {
       final result = await _application(tool, args);
       if (!read) {
-        await _refreshConnectionCommand(previousMcp);
         _buildId = model.state.library.activeId;
         _revision++;
       }
@@ -324,7 +288,6 @@ class McpEditorCubit extends Cubit<McpEditorState> {
   }
 
   JsonMap _startJob(String tool, JsonMap args) {
-    final previousMcp = model.components.active[Component.mcp]?.directory;
     _executing = true;
     remoteChanging = true;
     final id = ++_jobId;
@@ -337,7 +300,6 @@ class McpEditorCubit extends Cubit<McpEditorState> {
     _jobFuture = Future<void>(() async {
       try {
         final result = await _application(tool, args);
-        await _refreshConnectionCommand(previousMcp);
         _buildId = model.state.library.activeId;
         _syncRevision();
         _revision++;
@@ -357,18 +319,6 @@ class McpEditorCubit extends Cubit<McpEditorState> {
       }
     });
     return _reply(_job);
-  }
-
-  Future<void> _refreshConnectionCommand(String? previousMcp) async {
-    if (model.components.active[Component.mcp]?.directory == previousMcp)
-      return;
-    try {
-      final command = await _connectionCommand();
-      if (!enabled || _closing) return;
-      emit((busy: false, command: command, error: null, change: state.change));
-    } catch (error) {
-      model.addLog('Не удалось обновить команду подключения MCP: $error');
-    }
   }
 
   Future<JsonMap> _appTool(

@@ -2,10 +2,14 @@ import 'dart:io';
 
 import 'package:archive/archive.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:pob2_ui/data/component_repository.dart';
+
+import 'support/legacy/component_repository.dart';
+
 import 'package:pob2_ui/data/file_digest.dart';
 import 'package:pob2_ui/data/installation_store.dart';
-import 'package:pob2_ui/data/process_service.dart';
+
+import 'support/legacy/legacy_process_service.dart';
+
 import 'package:pob2_ui/data/verified_download.dart';
 import 'package:pob2_ui/domain/app_release.dart';
 import 'package:pob2_ui/domain/component.dart';
@@ -179,7 +183,7 @@ class _LocalDownload extends VerifiedDownload {
   }
 }
 
-class _Lua extends ProcessService {
+class _Lua extends LegacyProcessService {
   final calls = <String>[];
   bool valid = true;
 

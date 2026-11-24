@@ -1,6 +1,6 @@
-import '../domain/app_release.dart';
-import '../domain/component.dart';
-import 'managed_installation.dart';
+import 'package:pob2_ui/domain/app_release.dart';
+import 'package:pob2_ui/domain/component.dart';
+import 'package:pob2_ui/data/managed_installation.dart';
 
 const componentPackageTag = 'components-0.23.1-0.23.0';
 const _base =

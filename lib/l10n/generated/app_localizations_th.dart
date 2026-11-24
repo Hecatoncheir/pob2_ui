@@ -89,12 +89,6 @@ class AppLocalizationsTh extends AppLocalizations {
   String get mecc0fe5cd1 => 'Lua ไม่ได้ส่งคืนคุณลักษณะ';
 
   @override
-  String get mddf65e8cca => 'Lua ไม่ได้เชื่อมต่อ';
-
-  @override
-  String get m43ddb3a975 => 'Lua การตรวจสอบล้มเหลว';
-
-  @override
   String get m4358fa9bda => 'Lua ไม่สามารถใช้ขั้นตอนนี้ได้';
 
   @override
@@ -103,23 +97,10 @@ class AppLocalizationsTh extends AppLocalizations {
   }
 
   @override
-  String md9540a4b84(String p0) {
-    return 'Lua คำตอบ ชั้นเรียนในแค็ตตาล็อก: $p0';
-  }
-
-  @override
   String get m79df86397e => 'Lua ปิดการใช้งาน';
 
   @override
-  String get mbf7bbb22e3 => 'เชื่อมต่อแล้ว Lua';
-
-  @override
   String get m3717fab485 => 'Lua ใช้เงื่อนไขการคำนวณที่ต่างกัน';
-
-  @override
-  String m12e8f27f62(String p0) {
-    return 'MCP สิ้นสุดแล้ว $p0';
-  }
 
   @override
   String get m9f82e876bd =>
@@ -168,6 +149,9 @@ class AppLocalizationsTh extends AppLocalizations {
       'PoB เปิดอยู่โดยไม่ได้เชื่อมต่อกับบริดจ์ โปรดเริ่มโปรแกรมใหม่หนึ่งครั้ง';
 
   @override
+  String get mcc15d998ab => 'ไม่ได้เชื่อมต่อ PoB2Engine';
+
+  @override
   String get m3127345008 => 'XML มากกว่า 16 MB';
 
   @override
@@ -181,15 +165,6 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get me097dcd9f8 => 'บันทึกแล้ว XML';
-
-  @override
-  String get m0aefd8ac88 =>
-      'นำเข้าระบบ, โครงสร้าง; assert sys.version_info >= (3,11) และ struct.calcsize(\"P\") == 8, \"ต้องการ Python 3.11+ แบบ 64 บิต\"';
-
-  @override
-  String mad59a0d2ab(String p0, String p1, String p2) {
-    return 'ดาวน์โหลด $p0 $p1 แล้ว Git: $p2';
-  }
 
   @override
   String m613198439d(String p0) {
@@ -270,11 +245,6 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m84e960d40a => 'งบประมาณ';
 
   @override
-  String m7daed90e2c(String p0, String p1) {
-    return 'ไม่มี $p1 ใน $p0; ต้องใช้ MCP 0.4.0 หรือใหม่กว่า';
-  }
-
-  @override
   String get m2b96f1cb20 => 'ไม่มีอักขระในบัญชี';
 
   @override
@@ -284,15 +254,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get mfd96d5c7e6 => 'กลุ่มนี้ไม่มีสกิลใช้งาน';
 
   @override
-  String m1163ee245e(String p0) {
-    return 'ส่วนประกอบหายไป $p0 บันทึกเวอร์ชันการทำงานแล้ว';
-  }
-
-  @override
   String get meccb4de0ee => 'เซสชันที่แชร์ไม่มี XML ของบิลด์';
-
-  @override
-  String get m9bb974d2c9 => 'แพ็กเกจ MCP ไม่มี Python';
 
   @override
   String get m3e8bb03d9a => 'ตัวชี้วัดที่สำคัญ';
@@ -340,10 +302,17 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m73cac6c239 => 'จุดกลับ';
 
   @override
-  String get mea2c4cbc02 => 'ส่งคืนคู่ก่อนหน้า';
+  String get m25b7d02ad2 => 'กู้คืนเวอร์ชัน PoB ก่อนหน้า';
 
   @override
   String get m495763fa3e => 'ส่งคืนโหนด';
+
+  @override
+  String get m07200fa94e => 'อัปเดตแล้ว';
+
+  @override
+  String get m7a228e0249 =>
+      'เวอร์ชันข้อมูล PoB มีการเปลี่ยนแปลง รีสตาร์ท PoB II เพื่ออัปเดตเซสชันทั้งหมด';
 
   @override
   String get m4d1d43042e => 'เปิดใช้งานแล้ว';
@@ -410,9 +379,6 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m6bf3b12df4 => 'ใส่แอสเซมบลี XML จะมีการตรวจสอบและคำนวณในปี Lua';
-
-  @override
-  String get m5b1968a662 => 'ทุกอย่างเพื่อการทำงาน';
 
   @override
   String get m99068c6fe4 => 'บิลด์ที่สอง';
@@ -547,7 +513,13 @@ class AppLocalizationsTh extends AppLocalizations {
   String get mcd8c587351 => 'กลุ่ม';
 
   @override
-  String get ma755f360c2 => 'สองส่วนประกอบ การคำนวณบนคอมพิวเตอร์ของคุณ';
+  String get md05c31a479 => 'ข้อมูลเส้นทางการสร้าง';
+
+  @override
+  String get m5ecb894ab9 => 'อัปเดตข้อมูล PoB แล้ว';
+
+  @override
+  String get m30423a9ce2 => 'เครื่องยนต์';
 
   @override
   String get m2206bb2615 => 'โปรแกรมส่งคืนพารามิเตอร์การเชื่อมต่อที่ไม่ถูกต้อง';
@@ -557,6 +529,11 @@ class AppLocalizationsTh extends AppLocalizations {
       'โปรแกรมส่งคืนพารามิเตอร์การเชื่อมต่อที่เข้ากันไม่ได้';
 
   @override
+  String m1e48341f0d(String p0) {
+    return 'เอนจินหยุดทำงานแล้ว $p0';
+  }
+
+  @override
   String get mb6dc5488ee => 'เอนจินไม่ได้ส่งคืนโหนดที่เปลี่ยนแปลง';
 
   @override
@@ -564,6 +541,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get md3339c001c => 'เครื่องยนต์ไม่พร้อมใช้งาน';
+
+  @override
+  String get ma7cb5ed831 => 'อัปเดตเครื่องยนต์แล้ว รีสตาร์ท PoB II';
 
   @override
   String get md27019b2d6 => 'การดำเนินการหรือพารามิเตอร์ไม่พร้อมใช้งาน';
@@ -589,14 +569,14 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m57d9f5cb7c => 'ต้นไม้ยังไม่พร้อมใช้งาน';
 
   @override
+  String get mc9da1721e6 => 'การวินิจฉัย PoB2Engine';
+
+  @override
   String get m748d0b0dbd => 'คัดลอกข้อมูลวินิจฉัยแล้ว';
 
   @override
   String get mff23476c58 =>
       'บทสนทนา MCP ไม่เปิดอยู่ กล่องโต้ตอบอื่นๆ ต้องการให้คุณกรอกข้อมูลให้ครบถ้วน';
-
-  @override
-  String get mff31635225 => 'ต้องระบุรีวิชันที่แน่นอนสำหรับไฟล์บีบอัด';
 
   @override
   String get m7152adf5d3 => 'อัปเดตเอนจินเพื่อเลือกค่าสถานะ';
@@ -710,6 +690,9 @@ class AppLocalizationsTh extends AppLocalizations {
   }
 
   @override
+  String get m0983ea89cf => 'มีการอัปเดตแล้ว';
+
+  @override
   String get m41a4fa8b6a => 'พลังวิญญาณ';
 
   @override
@@ -746,20 +729,10 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m230ebdecca => 'ดาวน์โหลดอัพเดตอัตโนมัติ';
 
   @override
-  String m65a1b960c7(String p0) {
-    return 'กำลังโหลด LuaJIT และ lua-utf8 สำหรับ $p0...';
-  }
-
-  @override
   String get m4f87fe4ac6 => 'กำลังดาวน์โหลด Path of Building';
 
   @override
   String get ma3d462aeec => 'กำลังดาวน์โหลด PoB MCP';
-
-  @override
-  String maafcfa710b(String p0, String p1) {
-    return 'กำลังโหลด $p0 $p1...';
-  }
 
   @override
   String m912da5cc75(String p0) {
@@ -806,6 +779,12 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get mbdb05f34ee => 'บันทึกย่อจะถูกบันทึกโดยอัตโนมัติ';
+
+  @override
+  String get m5f5979b1b0 => 'กำลังเรียกใช้การวินิจฉัย...';
+
+  @override
+  String get m44d5f03bb0 => 'วิ่งหมอ';
 
   @override
   String get ma2d2d73bb5 => 'เริ่มการตั้งค่า';
@@ -902,17 +881,10 @@ class AppLocalizationsTh extends AppLocalizations {
   String get mb1f4f27181 => 'ค้นหาตลาด';
 
   @override
-  String ma8584a8e11(String p0) {
-    return 'กำลังใช้ไฟล์เก็บถาวรที่ตรวจสอบแล้ว $p0';
-  }
+  String get m86da26d649 => 'การใช้สำเนาข้อมูล PoB ในเครื่อง';
 
   @override
   String get m56e46960c1 => 'ที่มา';
-
-  @override
-  String m8b48ab31e9(String p0) {
-    return 'แหล่งที่มา Lua เชื่อมต่อแล้ว · $p0 คลาส';
-  }
 
   @override
   String get m26c6ade68e => 'แหล่งที่มา Lua ข้อมูลเอ็นจิ้นและเกม';
@@ -974,7 +946,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m4d1b5babac => 'คำสั่งไม่พร้อมใช้งานในตัวแก้ไข PoB II';
 
   @override
-  String get m1e8466ebeb => 'ส่วนประกอบ';
+  String get m0e73d7c8d1 => 'เอ็นจิ้นที่รวมมาอัปเดตด้วย PoB II';
 
   @override
   String get m9c01f77f07 => 'มีการติดตั้งส่วนประกอบแล้ว คุณสามารถเชื่อมต่อ Lua';
@@ -998,10 +970,17 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m609fc60c74 => 'Dexterity';
 
   @override
+  String get m78692a3041 => 'ผ่านการวินิจฉัยในเครื่องแล้ว';
+
+  @override
   String get m5da5bd2f47 => 'การเชื่อมต่ออินเทอร์เฟซท้องถิ่นพร้อมการคำนวณ';
 
   @override
   String get mba18ba5922 => 'บริดจ์ PoB ในเครื่อง';
+
+  @override
+  String get m3a1df08aa5 =>
+      'บริดจ์ภายในเครื่องเชื่อมต่อ PoB II กับหน้าต่าง Path of Building ต้นฉบับ PoB2Engine สามารถใช้การเชื่อมต่อนี้เพื่อนำเข้าบิลด์ที่เปิดอยู่ นำเข้าตัวละคร หรือดูโฟลเดอร์บิลด์จากการตั้งค่าของ PoB ต้นฉบับ';
 
   @override
   String get mab7d96eb1a => 'ฐานใดก็ได้';
@@ -1125,11 +1104,6 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m985b5e0f2c => 'การตั้งค่า';
 
   @override
-  String m5ffb2fa414(String p0) {
-    return 'รุ่นดั้งเดิม MCP: HTTP $p0';
-  }
-
-  @override
   String get m28997f7565 => 'ไม่ได้เลือก';
 
   @override
@@ -1181,11 +1155,6 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m6dc7d664a3 => 'ไม่สามารถป้องกันไดเร็กทอรีการเชื่อมต่อ MCP';
-
-  @override
-  String ma33f1f1a50(String p0) {
-    return 'ไม่สามารถอัปเดตคำสั่งการเชื่อมต่อ MCP: $p0';
-  }
 
   @override
   String m8644bfa547(String p0) {
@@ -1251,6 +1220,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String m7a15f7eafb(String p0) {
     return 'ใช้สแนปช็อตไม่ได้: $p0';
   }
+
+  @override
+  String get md005a7dc93 => 'ไม่สามารถตรวจสอบเวอร์ชันได้';
 
   @override
   String m4d1a8400d5(String p0) {
@@ -1320,12 +1292,6 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m5426ce4a91 => 'แหล่งไฟล์รีลีสไม่ถูกต้อง';
 
   @override
-  String get mead5c633d1 => 'พาธในไฟล์บีบอัดไม่ถูกต้อง';
-
-  @override
-  String get m153634f023 => 'ชนิดไฟล์ในไฟล์บีบอัดไม่ถูกต้อง';
-
-  @override
   String get m34f418bb26 => 'เวอร์ชันการตั้งค่าที่ไม่รู้จัก';
 
   @override
@@ -1384,6 +1350,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m571195d148 => 'พิกัด PoB ไม่ถูกต้อง';
 
   @override
+  String get md50501d05c => 'ที่อยู่พื้นที่ทำงานของเอนจินไม่ถูกต้อง';
+
+  @override
   String get mec07f569e3 => 'ID บันทึกไม่ถูกต้อง';
 
   @override
@@ -1402,9 +1371,6 @@ class AppLocalizationsTh extends AppLocalizations {
   String get mbfa40c4fb1 => 'เส้นทางไม่ถูกต้องไปยังชุดประกอบ PoB';
 
   @override
-  String get m4e15785017 => 'ขนาดรันไทม์ Lua ไม่ถูกต้อง';
-
-  @override
   String get m6ddcbfade2 => 'ขนาดไฟล์ไม่ถูกต้อง';
 
   @override
@@ -1414,19 +1380,10 @@ class AppLocalizationsTh extends AppLocalizations {
   String get mf6d959d4c7 => 'ไม่จำเป็น';
 
   @override
-  String get m5f5263f78b => 'รันไทม์การตรวจสอบผลรวม Lua ที่ไม่ชัดเจน';
-
-  @override
-  String get m14889e0664 => 'รันไทม์แหล่งที่มาที่ไม่คาดคิด Lua';
-
-  @override
   String get mab1d20e880 => 'รูปแบบแท็กการเปิดตัวที่ไม่รองรับ';
 
   @override
   String get m7b3c2887b7 => 'คำสั่งการเรนเดอร์ PoB ไม่สมบูรณ์';
-
-  @override
-  String get m6f381f6aed => 'ไม่มี Lua รันไทม์สำหรับสถาปัตยกรรมนี้';
 
   @override
   String get m41d413ec96 => 'ไม่มีข้อมูลให้ล้าง';
@@ -1438,13 +1395,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get ma76f928c09 => 'ไม่มีการตรวจสอบแพ็คเก็ตเดี่ยว';
 
   @override
-  String get mb71873c826 => 'ไม่มีรันไทม์ตรวจสอบ Lua';
-
-  @override
   String get mad247478cb => 'ไม่มีคำตอบ Lua';
-
-  @override
-  String get m0497e1e404 => 'ไม่มีคำตอบ MCP ปิดเซสชันแล้ว นำเข้าอีกครั้ง XML';
 
   @override
   String get m323494c6da => 'ข้อความต้นฉบับจะแสดงขึ้นเมื่อการแปลไม่พร้อมใช้งาน';
@@ -1495,6 +1446,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m4a1afe7893 => 'เครื่องราง III';
 
   @override
+  String get m6920e9bb20 => 'พบปัญหา';
+
+  @override
   String get md65eeeeaab => 'อัปเดต MCP ในส่วนส่วนประกอบ';
 
   @override
@@ -1525,7 +1479,10 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m124cd4a205 => 'อัปเดต MCP เพื่อลบทักษะ';
 
   @override
-  String get m74e1571298 => 'อัปเดต PoB และ MCP';
+  String get m3ec99cd760 => 'อัปเดต PoB2Engine\n[madc4848e6] อัปเดตข้อมูล PoB';
+
+  @override
+  String get maddc4848e6 => 'อัปเดตข้อมูล PoB';
 
   @override
   String get m3d7df93803 => 'อัปเดตรายการบิลด์';
@@ -1554,6 +1511,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m1eb91e3a52 => 'การอัปเดตแอปพลิเคชัน';
+
+  @override
+  String get m2cabe451c6 => 'กำลังอัปเดต PoB2Engine...';
 
   @override
   String get m9e0611bf9b => 'รองเท้า';
@@ -1599,9 +1559,6 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get mab5f9b4d06 => 'แค็ตตาล็อกการค้า PoB คาดว่าจะเกิดขึ้น';
-
-  @override
-  String get mb3f794d1cf => 'ยังไม่มีการดำเนินการใดๆ';
 
   @override
   String get m47cd7c0de1 => 'ไม่มีคำอธิบายการเปิดตัว';
@@ -1823,9 +1780,6 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m3c320d7fe3 => 'บันทึกอีกครั้ง';
 
   @override
-  String get m8b614efa1f => 'มีพาธซ้ำในไฟล์บีบอัด';
-
-  @override
   String get mbcc0fdbe14 => 'โอกาสในการสะกดคำ';
 
   @override
@@ -1837,9 +1791,6 @@ class AppLocalizationsTh extends AppLocalizations {
   @override
   String get m413fa4fd39 =>
       'กำลังเตรียม Lua ต้นฉบับของ PoB ด้วยเอนจินที่มาพร้อมแอป';
-
-  @override
-  String get m52d7142d18 => 'รองรับ Windows x64, Linux x64 และ macOS arm64';
 
   @override
   String get m8ba2618d75 => 'ไม่พบหินสกิลเสริม';
@@ -1863,19 +1814,22 @@ class AppLocalizationsTh extends AppLocalizations {
   String get ma33d11be60 => 'เชื่อมต่อ Lua ผ่าน pob_editor_app';
 
   @override
-  String get m0d8b14b475 => 'เชื่อมต่อบริดจ์อีกครั้งและรีสตาร์ท PoB';
-
-  @override
   String get m3af435b32e => 'เชื่อมต่อ';
 
   @override
   String get m538d913ee0 => 'เชื่อมต่อ Lua';
 
   @override
+  String get m2465d97173 => 'เชื่อมต่อกับเครื่องยนต์';
+
+  @override
   String get m80cc1bdb9b => 'เชื่อมต่อบริดจ์';
 
   @override
   String get m929d292c0e => 'เชื่อมต่อโฟลเดอร์บิลด์';
+
+  @override
+  String get mda6427ff8a => 'เชื่อมต่อ PoB2Engine แล้ว';
 
   @override
   String get m6287090984 => 'ยืนยันการทำความสะอาด';
@@ -1915,6 +1869,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m233d77b731 => 'เต็ม DPS';
+
+  @override
+  String get mfc913f923a => 'รายงานฉบับเต็ม';
 
   @override
   String get m56f7dfa459 => 'ได้รับความเสียหายจากสายฟ้าแล้ว';
@@ -2023,10 +1980,12 @@ class AppLocalizationsTh extends AppLocalizations {
   }
 
   @override
-  String get mb45f78d483 => 'คู่ก่อนหน้าได้รับการกู้คืนและตรวจสอบผ่าน Lua';
+  String ma27300a22c(String p0) {
+    return 'เวอร์ชันก่อนหน้า: $p0';
+  }
 
   @override
-  String get mf969e13b83 => 'ยังไม่มีคู่ส่วนประกอบที่สมบูรณ์ก่อนหน้านี้';
+  String get mb45f78d483 => 'คู่ก่อนหน้าได้รับการกู้คืนและตรวจสอบผ่าน Lua';
 
   @override
   String get mec5dbc31fc => 'ผลลัพธ์ก่อนหน้า · การคำนวณใหม่ Lua';
@@ -2087,14 +2046,6 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m87cb1172f2 => 'ตรวจสอบการเชื่อมต่อ';
 
   @override
-  String get mfa4af9bbe7 => 'ตรวจสอบความเข้ากันได้';
-
-  @override
-  String mcb69e5c81f(String p0) {
-    return 'กำลังตรวจสอบ SHA-256 ของ $p0';
-  }
-
-  @override
   String mfeb5830ec9(String p0) {
     return 'การตรวจสอบการเปิดตัว: HTTP $p0';
   }
@@ -2115,21 +2066,13 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m908d1b1e7c => 'กำลังตรวจสอบความเข้ากันได้กับ Lua';
 
   @override
-  String get m9353cfd5f6 => 'การตรวจสอบความเข้ากันได้: ใช้งานต้นฉบับ Lua...';
-
-  @override
-  String me498367e06(String p0) {
-    return 'กำลังตรวจสอบไฟล์ของ $p0';
-  }
-
-  @override
-  String get md8164e1acb => 'ตรวจสอบเครือข่ายของคุณและขีดจำกัดคำขอ';
-
-  @override
   String get m21d9ad659d => 'ตรวจสอบข้อความเพื่อดูคำอธิบายและความเข้ากันได้';
 
   @override
   String get m1ea3791d9d => 'กำลังตรวจสอบการเผยแพร่...';
+
+  @override
+  String get m0a597163f4 => 'กำลังตรวจสอบข้อมูล PoB และบิลด์ที่เปิดอยู่...';
 
   @override
   String get m1d1347fc69 => 'กำลังตรวจสอบโปรไฟล์...';
@@ -2139,6 +2082,14 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get mce86d859e2 => 'โปรแกรมเครื่องยนต์ pob2';
+
+  @override
+  String m748bd43447(String p0) {
+    return 'โปรโตคอล: $p0';
+  }
+
+  @override
+  String get m359497aff5 => 'โปรไฟล์';
 
   @override
   String get me881a16f50 => 'โปรไฟล์เซิร์ฟเวอร์';
@@ -2164,6 +2115,9 @@ class AppLocalizationsTh extends AppLocalizations {
   @override
   String get m913b373c85 =>
       'ทำงานในหน้าต่างแอปพลิเคชัน คลิกที่ชุดค่าผสมเพื่อเปลี่ยน';
+
+  @override
+  String get m6ce42ad925 => 'ปิดสำเนาการทำงานแล้ว';
 
   @override
   String m0964e41783(String p0) {
@@ -2193,17 +2147,6 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m13601ffe54 => 'อนุญาตให้แก้ไขผ่าน MCP';
-
-  @override
-  String get m0449346093 => 'ส่วนประกอบที่แตกไฟล์แล้วมีขนาดใหญ่เกินไป';
-
-  @override
-  String get m221310ed98 => 'ขนาดไฟล์ที่แตกแล้วไม่ตรงกัน';
-
-  @override
-  String ma1af9f3f0e(String p0) {
-    return 'กำลังแตกไฟล์ $p0';
-  }
 
   @override
   String get mde6527a5fe => 'Distance to node';
@@ -2243,11 +2186,6 @@ class AppLocalizationsTh extends AppLocalizations {
   @override
   String md6e28957de(String p0) {
     return 'ฉบับแก้ไข $p0';
-  }
-
-  @override
-  String m7fce31d207(String p0, String p1, String p2, String p3) {
-    return 'รีวิชันของ $p0 $p1 ไม่ตรงกัน: คาดว่าเป็น $p2 แต่ได้ $p3';
   }
 
   @override
@@ -2306,6 +2244,9 @@ class AppLocalizationsTh extends AppLocalizations {
   @override
   String get m15d7545f05 =>
       'PoB build ไม่พร้อมใช้งานอีกต่อไป อัพเดตรายการจัดสร้าง.';
+
+  @override
+  String get m5b78f6ab13 => 'การพัฒนาบิลด์';
 
   @override
   String mee1bd6d18c(String p0) {
@@ -2393,6 +2334,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get mfc68d94f44 => 'ยืนยันการเชื่อมต่อ PoB แล้ว เปิดบิลด์เพื่อนำเข้า';
 
   @override
+  String get ma44e570b5e => 'การเชื่อมต่อเอนจินขาดหาย โปรดเปิดบิลด์อีกครั้ง';
+
+  @override
   String get m7434b2e81b => 'เลื่อนไปทางซ้าย';
 
   @override
@@ -2408,9 +2352,6 @@ class AppLocalizationsTh extends AppLocalizations {
   @override
   String get m4bd93e3298 =>
       'เซิร์ฟเวอร์ไม่ได้ยืนยันการเชื่อมต่อกับหน้าต่าง PoB II';
-
-  @override
-  String get m32bb1c680f => 'ปิดเซสชันแล้ว';
 
   @override
   String get mff4d880370 => 'ไม่พบเซสชัน สร้างมันขึ้นมาอย่างชัดเจน';
@@ -2485,9 +2426,6 @@ class AppLocalizationsTh extends AppLocalizations {
   String get mba5ec4071c => 'เปลี่ยนคลาสหรือคลาสเสริม';
 
   @override
-  String get mde2ce6f05b => 'เลือกเวอร์ชันของส่วนประกอบทั้งสองก่อน';
-
-  @override
   String get m93e0cd3908 => 'ก่อนอื่นให้เปิดชุดประกอบ';
 
   @override
@@ -2499,9 +2437,6 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m59b50cc146 => 'ถอดหินรองรับออกก่อน';
-
-  @override
-  String get ma386719073 => 'ติดตั้งทั้งสององค์ประกอบก่อน';
 
   @override
   String get m5ebbc9d7a5 => 'นำออก';
@@ -2687,9 +2622,6 @@ class AppLocalizationsTh extends AppLocalizations {
   String get md9dc2e9ec2 => 'ลบขั้น';
 
   @override
-  String get m97ac4c501c => 'การติดตั้งอยู่ในระหว่างดำเนินการ';
-
-  @override
   String get m2748676635 =>
       'PoB อีกชุดกำลังเปิดอยู่ ให้เชื่อมต่อใน «ส่วนประกอบ»';
 
@@ -2801,13 +2733,16 @@ class AppLocalizationsTh extends AppLocalizations {
       'ติดตั้งส่วนประกอบเพื่อเปิดชุดประกอบและรับการคำนวณจริง';
 
   @override
+  String get m750e822c58 => 'ติดตั้งข้อมูล PoB';
+
+  @override
   String get mfdeaa71380 => 'ติดตั้งส่วนประกอบ';
 
   @override
-  String get m536db585fd => 'เอนจินที่มาพร้อมแอปจัดการการติดตั้ง PoB';
+  String get mfcb7c67f91 => 'ติดตั้งเวอร์ชันปัจจุบันแล้ว';
 
   @override
-  String get mfcb7c67f91 => 'ติดตั้งเวอร์ชันปัจจุบันแล้ว';
+  String get m3a77f812b1 => 'เครื่องยนต์เป็นเวอร์ชันล่าสุดแล้ว';
 
   @override
   String m44150e69ff(String p0) {
@@ -2874,6 +2809,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get mdab05cc16d => 'ส่วนของสกิล';
+
+  @override
+  String get m3eaf0b57cf => 'กำลังอ่านเวอร์ชันเอ็นจิ้น…';
 
   @override
   String get me24055fecd => 'เหลืออะไรบ้างก่อนถึงขั้นถัดไป?';

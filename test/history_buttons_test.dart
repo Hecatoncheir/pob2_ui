@@ -2,9 +2,11 @@ import 'dart:io';
 
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:pob2_ui/data/component_repository.dart';
+
+import 'support/legacy/component_repository.dart';
+
 import 'package:pob2_ui/data/installation_store.dart';
-import 'package:pob2_ui/data/mcp_client.dart';
+import 'package:pob2_ui/data/workbench_client.dart';
 import 'package:pob2_ui/ui/app.dart';
 import 'package:pob2_ui/ui/workshop_cubit.dart';
 import 'package:pob2_ui/ui/workshop_state.dart';
@@ -17,7 +19,7 @@ class ButtonHistoryWorkshop extends WorkshopCubit {
         ComponentRepository(
           store: InstallationStore(Directory('unused-history-buttons')),
         ),
-        McpClient(),
+        WorkbenchClient(),
         initialState: WorkshopState(
           history: (undo: 1, redo: 0),
           document: (

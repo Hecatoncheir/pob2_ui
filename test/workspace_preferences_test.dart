@@ -3,9 +3,11 @@ import 'dart:io';
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:pob2_ui/data/component_repository.dart';
+
+import 'support/legacy/component_repository.dart';
+
 import 'package:pob2_ui/data/installation_store.dart';
-import 'package:pob2_ui/data/mcp_client.dart';
+import 'package:pob2_ui/data/workbench_client.dart';
 import 'package:pob2_ui/data/workspace_preferences_repository.dart';
 import 'package:pob2_ui/domain/workspace_preferences.dart';
 import 'package:pob2_ui/ui/app.dart';
@@ -26,7 +28,10 @@ class MemoryWorkspacePreferences extends WorkspacePreferencesRepository {
 
 class ShortcutWorkshop extends WorkshopCubit {
   ShortcutWorkshop(Directory root)
-    : super(ComponentRepository(store: InstallationStore(root)), McpClient());
+    : super(
+        ComponentRepository(store: InstallationStore(root)),
+        WorkbenchClient(),
+      );
   int undoCalls = 0;
   int redoCalls = 0;
   @override
@@ -234,7 +239,7 @@ void main() {
       );
       final model = WorkshopCubit(
         ComponentRepository(store: InstallationStore(root)),
-        McpClient(),
+        WorkbenchClient(),
       );
       await tester.pumpWidget(
         PobApp(model: model, workspacePreferences: preferences),

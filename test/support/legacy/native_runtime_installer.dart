@@ -1,11 +1,13 @@
 import 'dart:convert';
 import 'dart:io';
 
-import '../domain/app_release.dart';
-import 'app_http.dart';
-import 'managed_installation.dart';
-import 'process_service.dart';
-import 'verified_download.dart';
+import 'package:pob2_ui/domain/app_release.dart';
+import 'package:pob2_ui/data/app_http.dart';
+import 'package:pob2_ui/data/managed_installation.dart';
+
+import 'legacy_process_service.dart';
+
+import 'package:pob2_ui/data/verified_download.dart';
 
 class NativeRuntimeInstaller {
   NativeRuntimeInstaller({AppHttp? http, VerifiedDownload? download})
@@ -17,7 +19,7 @@ class NativeRuntimeInstaller {
   Future<void> install(
     Directory candidate,
     String tag,
-    ProcessService processes,
+    LegacyProcessService processes,
     void Function(String) log,
   ) async {
     if (Platform.isWindows) return;

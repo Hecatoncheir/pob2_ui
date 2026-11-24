@@ -6,9 +6,11 @@ import 'package:material_ui/material_ui.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:pob2_ui/data/build_library.dart';
-import 'package:pob2_ui/data/component_repository.dart';
+
+import 'support/legacy/component_repository.dart';
+
 import 'package:pob2_ui/data/installation_store.dart';
-import 'package:pob2_ui/data/mcp_client.dart';
+import 'package:pob2_ui/data/workbench_client.dart';
 import 'package:pob2_ui/data/pob_window_repository.dart';
 import 'package:pob2_ui/data/session_repository.dart';
 import 'package:pob2_ui/domain/library_entry.dart';
@@ -87,7 +89,7 @@ class EmptyLibrary extends BuildLibrary {
 WorkshopCubit createModel(MemoryText session, {PobWindowRepository? windows}) =>
     WorkshopCubit(
       ComponentRepository(store: InstallationStore(session.root)),
-      McpClient(),
+      WorkbenchClient(),
       session: session,
       pobWindow: windows,
     );
@@ -171,7 +173,7 @@ void main() {
       final components = LoadingComponents(session.root);
       final model = WorkshopCubit(
         components,
-        McpClient(),
+        WorkbenchClient(),
         session: session,
         library: EmptyLibrary(session.root),
         pobWindow: OwnedWindows(),

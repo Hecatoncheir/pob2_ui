@@ -4,10 +4,10 @@ import 'dart:io';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:material_ui/material_ui.dart';
-import 'package:pob2_ui/data/component_repository.dart';
+import 'package:pob2_ui/data/engine_components.dart';
 import 'package:pob2_ui/data/engine_session_client.dart';
 import 'package:pob2_ui/data/installation_store.dart';
-import 'package:pob2_ui/data/mcp_client.dart';
+import 'package:pob2_ui/data/workbench_client.dart';
 import 'package:pob2_ui/data/pob_build_library.dart';
 import 'package:pob2_ui/domain/engine_session.dart';
 import 'package:pob2_ui/domain/tree_allocation_mode.dart';
@@ -691,15 +691,12 @@ Finder _groupGem(String name) => find.descendant(
 Future<WorkshopCubit> _openBuild(Directory root) async {
   final builds = await Directory.fromUri(root.uri.resolve('builds/')).create();
   await File(_fixture).copy(builds.uri.resolve('$_initial.xml').toFilePath());
-  await File.fromUri(
-    InstallationStore.defaultRoot().uri.resolve('components.json'),
-  ).copy(root.uri.resolve('components.json').toFilePath());
   final library = PobBuildLibrary(root);
   await library.configure(builds.path);
   await library.activate('$_initial.xml');
   return WorkshopCubit(
-    ComponentRepository(store: InstallationStore(root)),
-    McpClient(),
+    EngineComponents(store: InstallationStore(root)),
+    WorkbenchClient(),
     library: library,
     openEngineSession: (options) => EngineSessionClient.open(
       EngineOptions(

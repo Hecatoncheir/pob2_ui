@@ -6,13 +6,11 @@ import 'package:material_ui/material_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
-import 'package:pob2_ui/data/component_repository.dart';
+import 'package:pob2_ui/data/engine_components.dart';
 import 'package:pob2_ui/data/installation_store.dart';
-import 'package:pob2_ui/data/mcp_client.dart';
+import 'package:pob2_ui/data/workbench_client.dart';
 import 'package:pob2_ui/data/pob_build_library.dart';
-import 'package:pob2_ui/data/process_service.dart';
 import 'package:pob2_ui/domain/build_report.dart';
-import 'package:pob2_ui/domain/component.dart';
 import 'package:pob2_ui/ui/app.dart';
 import 'package:pob2_ui/ui/shell_bloc.dart';
 import 'package:pob2_ui/ui/tree_canvas.dart';
@@ -28,16 +26,17 @@ void main() {
     }
     final profile = InstallationStore.defaultRoot();
     final root = await profile.createTemp('editor-builds-');
-    await File.fromUri(profile.uri.resolve('components.json'))
-        .copy(File.fromUri(root.uri.resolve('components.json')).path);
-    final components = ComponentRepository(store: InstallationStore(root));
+    final components = EngineComponents(store: InstallationStore(root));
     await components.load();
-    await components.store.save(components.active, components.active);
     final builds = await Directory.fromUri(root.uri.resolve('builds/'))
         .create();
     final library = PobBuildLibrary(root);
     await library.configure(builds.path);
-    final model = WorkshopCubit(components, McpClient(), library: library);
+    final model = WorkshopCubit(
+      components,
+      WorkbenchClient(),
+      library: library,
+    );
     addTearDown(model.close);
     await model.initialize();
     expect(model.state.report, isNull);
@@ -51,7 +50,7 @@ void main() {
     final client = await _ExternalEditor.connect(
       tester,
       root,
-      components.active[Component.mcp]!,
+      components.executable,
     );
     addTearDown(client.close);
     final hasSkillControls = await _checkSkillControlSchema(client);
@@ -191,8 +190,12 @@ Future<void> _checkApplicationTools(
 
   await client.success('pob_editor_components', {'action': 'status'});
   await client.success('pob_editor_components', {'action': 'check_updates'});
+  final hasPrevious = model.canRollback;
   await client.success('pob_editor_components', {'action': 'rollback'});
-  expect((await _waitJob(client))['state'], 'complete');
+  expect(
+    (await _waitJob(client))['state'],
+    hasPrevious ? 'complete' : 'failed',
+  );
   expect(model.mcpEditor.enabled, isTrue);
   expect(model.state.library.activeId, id);
   await client.success('pob_editor_components', {
@@ -739,22 +742,24 @@ class _ExternalEditor {
   static Future<_ExternalEditor> connect(
     WidgetTester tester,
     Directory root,
-    Installation mcp,
+    String executable,
   ) async {
     final endpoint = File.fromUri(root.uri.resolve('mcp-editor/endpoint.json'));
-    final process = await Process.start(await ProcessService().python(), [
-      '-X',
-      'utf8',
-      'run.py',
-      'serve',
-      '--mode',
+    final process = await Process.start(executable, [
       'editor',
-      '--editor-endpoint',
+      '--endpoint',
       endpoint.path,
-    ], workingDirectory: mcp.directory);
+    ]);
     unawaited(process.stderr.drain<void>());
     final client = _ExternalEditor(tester, process);
-    await client._rpc('initialize', {});
+    await client._rpc('initialize', {
+      'protocolVersion': '2024-11-05',
+      'capabilities': <String, dynamic>{},
+      'clientInfo': {'name': 'pob2-ui-test', 'version': '1'},
+    });
+    process.stdin.writeln(
+      jsonEncode({'jsonrpc': '2.0', 'method': 'notifications/initialized'}),
+    );
     return client;
   }
 

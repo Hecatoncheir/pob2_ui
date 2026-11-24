@@ -1,5 +1,5 @@
 import '../domain/equipment_item.dart';
-import 'mcp_client.dart';
+import 'workbench_client.dart';
 
 typedef SharedEquipmentReader = Future<ItemInspection?> Function({
   String? slot,
@@ -10,7 +10,7 @@ typedef SharedEquipmentReader = Future<ItemInspection?> Function({
 
 class EquipmentRepository {
   EquipmentRepository(this.engine, {this.readShared});
-  final McpClient engine;
+  final WorkbenchClient engine;
   final SharedEquipmentReader? readShared;
   bool get canCompare => engine.tools.contains('pob_compare_item');
   bool get canInspect => engine.tools.contains('pob_inspect_item');

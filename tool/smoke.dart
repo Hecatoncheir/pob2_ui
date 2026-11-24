@@ -1,45 +1,29 @@
 import 'dart:convert';
 import 'dart:io';
 
-import '../lib/data/component_repository.dart';
+import '../lib/data/engine_components.dart';
 import '../lib/data/installation_store.dart';
-import '../lib/data/mcp_client.dart';
+import '../lib/data/workbench_client.dart';
 import '../lib/data/tree_icon_repository.dart';
 import '../lib/domain/tree_geometry.dart';
 import '../lib/domain/component.dart';
 
 Future<void> main(List<String> arguments) async {
-  final args = [...arguments];
-  final keepArchives = args.remove('--keep-archives');
-  if (keepArchives && args.firstOrNull != '--install') {
-    throw const FormatException('--keep-archives требует --install');
-  }
-  final repository = ComponentRepository(
+  final repository = EngineComponents(
     store: InstallationStore(InstallationStore.defaultRoot()),
-    keepArchives: keepArchives,
   );
   await repository.load();
-  if (args case ['--install', '--lock', final path]) {
-    final releases = repository.availableReleases();
-    await _verifyLock(path, releases);
-    await repository.installPair(releases, stderr.writeln);
-  } else if (args case ['--install']) {
+  if (arguments case ['--install']) {
     await repository.installPair(
       repository.availableReleases(),
       stderr.writeln,
     );
-  } else if (args case ['--install-source']) {
-    final releases = {
-      for (final component in Component.values)
-        component: await repository.github.latest(component),
-    };
-    await repository.installPair(releases, stderr.writeln);
-  } else if (args.isNotEmpty) {
+  } else if (arguments.isNotEmpty) {
     throw const FormatException(
-      'Используйте --install [--lock <файл>] [--keep-archives] или --install-source',
+      'Используйте --install для установки данных PoB',
     );
   }
-  final client = McpClient();
+  final client = WorkbenchClient(repository.executable);
   try {
     final health = await repository.doctor();
     await client.connect(repository.active);
@@ -68,9 +52,7 @@ Future<void> main(List<String> arguments) async {
             await client.call('pob_get_tree', {'includeScene': true}),
           ),
           client,
-          Component.values
-              .map((key) => repository.active[key]!.commit)
-              .join('-'),
+          repository.active[Component.pob]!.commit,
         );
     if (tree.nodes.length < 1000 ||
         tree.original == null ||
@@ -106,21 +88,5 @@ Future<void> main(List<String> arguments) async {
     );
   } finally {
     await client.close();
-  }
-}
-
-Future<void> _verifyLock(String path, Map<Component, Release> releases) async {
-  final data =
-      jsonDecode(await File(path).readAsString()) as Map<String, dynamic>;
-  for (final entry in releases.entries) {
-    final release = entry.value;
-    final locked = data[entry.key.name];
-    if (locked is! Map ||
-        locked['tag'] != release.tag ||
-        locked['commit'] != release.expectedCommit) {
-      throw FormatException(
-        'Архив не соответствует закреплённой ревизии ${entry.key.title}',
-      );
-    }
   }
 }

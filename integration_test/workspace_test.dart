@@ -9,9 +9,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:path/path.dart' as path;
 import 'package:xml/xml.dart';
-import 'package:pob2_ui/data/component_repository.dart';
+import 'package:pob2_ui/data/engine_components.dart';
 import 'package:pob2_ui/data/installation_store.dart';
-import 'package:pob2_ui/data/mcp_client.dart';
+import 'package:pob2_ui/data/workbench_client.dart';
 import 'package:pob2_ui/data/pob_build_library.dart';
 import 'package:pob2_ui/data/tree_progression_exchange.dart';
 import 'package:pob2_ui/data/appearance_repository.dart';
@@ -72,8 +72,8 @@ void main() {
     final library = PobBuildLibrary(root);
     await library.configure(builds.path);
     final model = WorkshopCubit(
-      ComponentRepository(store: InstallationStore(root)),
-      McpClient(),
+      EngineComponents(store: InstallationStore(root)),
+      WorkbenchClient(),
       library: library,
       files: XmlFileService(dialogs: dialogs),
     );

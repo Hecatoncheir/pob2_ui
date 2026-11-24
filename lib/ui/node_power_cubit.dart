@@ -3,7 +3,7 @@ import 'dart:typed_data';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../data/mcp_client.dart';
+import '../data/workbench_client.dart';
 import '../domain/build_report.dart';
 import '../domain/node_power.dart';
 import '../domain/original_tree_scene.dart';
@@ -22,7 +22,7 @@ class NodePowerCubit extends Cubit<NodePowerState> {
          error: null,
          stale: false,
        ));
-  final McpClient engine;
+  final WorkbenchClient engine;
   final Future<Map<String, Uint8List>> Function(OriginalTreeScene) loadImages;
   final Future<List<JsonMap>>? Function()? sharedMetrics;
   final Stream<NodePowerUpdate>? Function(NodePowerOptions)? sharedPower;

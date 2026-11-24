@@ -58,6 +58,9 @@ class TreeGeometry {
   TreeGeometry.fromJson(JsonMap json)
     : nodes = List.unmodifiable(jsonRows(json['nodes']).map(TreeNode.fromJson)),
       edges = List.unmodifiable((json['edges'] as List<dynamic>).map(_edge)),
+      hiddenEdges = Set.unmodifiable(
+        (json['hiddenEdges'] as List<dynamic>? ?? const []).map(_edge),
+      ),
       version = '${json['version']}',
       original = json['scene'] is JsonMap
           ? OriginalTreeScene.fromJson(json['scene'] as JsonMap)
@@ -69,16 +72,19 @@ class TreeGeometry {
   TreeGeometry.fromNodes(
     this.version,
     Iterable<TreeNode> nodes,
-    Iterable<(int, int)> edges,
-  ) : nodes = List.unmodifiable(nodes),
-      edges = List.unmodifiable(edges),
-      icons = const {},
-      iconError = null,
-      original = null;
+    Iterable<(int, int)> edges, {
+    Iterable<(int, int)> hiddenEdges = const [],
+  }) : nodes = List.unmodifiable(nodes),
+       edges = List.unmodifiable(edges),
+       hiddenEdges = Set.unmodifiable(hiddenEdges),
+       icons = const {},
+       iconError = null,
+       original = null;
 
   TreeGeometry._(
     this.nodes,
     this.edges,
+    this.hiddenEdges,
     this.version,
     this.icons,
     this.iconError,
@@ -88,6 +94,7 @@ class TreeGeometry {
       TreeGeometry._(
         nodes,
         edges,
+        hiddenEdges,
         version,
         Map.unmodifiable(values),
         error,
@@ -95,8 +102,12 @@ class TreeGeometry {
       );
   final List<TreeNode> nodes;
   TreeGeometry withScene(OriginalTreeScene scene) =>
-      TreeGeometry._(nodes, edges, version, const {}, null, scene);
+      TreeGeometry._(nodes, edges, hiddenEdges, version, const {}, null, scene);
   final List<(int, int)> edges;
+  final Set<(int, int)> hiddenEdges;
+
+  bool drawsEdge(int a, int b) =>
+      !hiddenEdges.contains(a < b ? (a, b) : (b, a));
   final String version;
   final Map<String, Uint8List> icons;
   final String? iconError;

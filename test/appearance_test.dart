@@ -4,9 +4,11 @@ import 'dart:io';
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:pob2_ui/data/appearance_repository.dart';
-import 'package:pob2_ui/data/component_repository.dart';
+
+import 'support/legacy/component_repository.dart';
+
 import 'package:pob2_ui/data/installation_store.dart';
-import 'package:pob2_ui/data/mcp_client.dart';
+import 'package:pob2_ui/data/workbench_client.dart';
 import 'package:pob2_ui/domain/appearance.dart';
 import 'package:pob2_ui/domain/node_preview.dart';
 import 'package:pob2_ui/ui/app.dart';
@@ -95,7 +97,7 @@ void main() {
         final root = Directory('unused-theme-widget');
         final model = WorkshopCubit(
           ComponentRepository(store: InstallationStore(root)),
-          McpClient(),
+          WorkbenchClient(),
         );
         addTearDown(model.close);
         final preferences = MemoryPreferences(root);

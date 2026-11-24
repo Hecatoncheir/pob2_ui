@@ -2,9 +2,11 @@ import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:path/path.dart' as path;
-import 'package:pob2_ui/data/component_repository.dart';
+
+import 'support/legacy/component_repository.dart';
+
 import 'package:pob2_ui/data/installation_store.dart';
-import 'package:pob2_ui/data/mcp_client.dart';
+import 'package:pob2_ui/data/workbench_client.dart';
 import 'package:pob2_ui/data/pob_build_library.dart';
 import 'package:pob2_ui/data/pob_build_locations.dart';
 import 'package:pob2_ui/data/pob_window_repository.dart';
@@ -81,7 +83,7 @@ void main() {
       final window = _WindowWithoutBridge();
       final model = WorkshopCubit(
         components,
-        McpClient(),
+        WorkbenchClient(),
         library: PobBuildLibrary(profile),
         pobWindow: window,
         buildLocations: PobBuildLocations(
@@ -141,7 +143,7 @@ void main() {
         );
         final model = WorkshopCubit(
           ComponentRepository(store: InstallationStore(profile)),
-          McpClient(),
+          WorkbenchClient(),
           library: PobBuildLibrary(profile),
           buildLocations: locations,
         );
@@ -168,7 +170,7 @@ void main() {
     final commands = _WineCommands();
     final model = WorkshopCubit(
       ComponentRepository(store: InstallationStore(profile)),
-      McpClient(),
+      WorkbenchClient(),
       library: PobBuildLibrary(profile),
       buildLocations: PobBuildLocations(
         system: 'linux',

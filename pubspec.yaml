@@ -1,7 +1,7 @@
 name: pob2_ui
 description: "Независимый интерфейс PoB PoE2 с исходными расчётами Lua"
 publish_to: 'none'
-version: 1.0.0+49
+version: 1.0.1+50
 
 environment:
   sdk: ^3.14.0
@@ -22,10 +22,7 @@ dependencies:
   material_ui: ^1.11.1
   path: 1.9.1
   pob2_engine_api:
-    git:
-      url: https://github.com/Hecatoncheir/pob2_engine.git
-      ref: 708523bab034964087d018ec7fa913f9a06c4ce9
-      path: gen/dart
+    path: packages/pob2_engine_api
   posix: ^6.5.2
   xml: 7.1.0
 

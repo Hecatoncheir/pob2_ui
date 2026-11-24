@@ -5,10 +5,10 @@ import 'dart:async';
 import 'dart:io';
 import 'dart:typed_data';
 
-import '../data/component_repository.dart';
+import '../data/component_source.dart';
 import '../data/engine_session_client.dart';
 import '../data/equipment_repository.dart';
-import '../data/mcp_client.dart';
+import '../data/workbench_client.dart';
 import '../data/mcp_editor_gateway.dart';
 import '../data/mcp_error_message.dart';
 import '../data/pob_window_repository.dart';
@@ -82,7 +82,7 @@ const _divergedBuild =
 class WorkshopCubit extends Cubit<WorkshopState> {
   WorkshopCubit(
     this.components,
-    McpClient engine, {
+    WorkbenchClient engine, {
     WorkshopState? initialState,
     SessionRepository? session,
     BuildStorage? library,
@@ -90,11 +90,11 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     PobWindowRepository? pobWindow,
     PobBuildLocations? buildLocations,
     PobShareLinks? shareLinks,
-    McpClient Function()? createEngine,
+    WorkbenchClient Function()? createEngine,
     Future<EngineConnection> Function(EngineOptions)? openEngineSession,
     EngineOptions? primaryEngine,
   }) : _engine = engine,
-       _createEngine = createEngine ?? McpClient.new,
+       _createEngine = createEngine ?? WorkbenchClient.new,
        session = session ?? SessionRepository(components.store.root),
        library = library ?? BuildLibrary(components.store.root),
        files = files ?? XmlFileService(),
@@ -104,7 +104,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
        _openEngineSession = openEngineSession,
        _primaryEngine = primaryEngine,
        super(initialState ?? WorkshopState());
-  final ComponentRepository components;
+  final ComponentSource components;
   final Future<EngineConnection> Function(EngineOptions)? _openEngineSession;
   late final engineSession = EngineSessionCubit(
     open: _openEngineSession,
@@ -327,19 +327,12 @@ class WorkshopCubit extends Cubit<WorkshopState> {
   EngineOptions _primaryOptions(String sessionId) {
     final pair = components.active;
     final pob = pair[Component.pob];
-    final native = pob?.nativeDirectory ?? _legacyNativeDirectory(pair);
+    final native = pob?.nativeDirectory;
     return _primaryEngine!.forBuild(
       sessionId,
       pob: pob?.directory,
       native: native,
     );
-  }
-
-  String? _legacyNativeDirectory(Installations pair) {
-    final mcp = pair[Component.mcp]?.directory;
-    if (Platform.isWindows || mcp == null) return null;
-    return Directory.fromUri(Directory(mcp).uri.resolve('pob_poe2_mcp/native/'))
-        .path;
   }
 
   Future<EngineSnapshot> _restorePrimarySession(
@@ -519,9 +512,9 @@ class WorkshopCubit extends Cubit<WorkshopState> {
   }
 
   final PobShareLinks _shareLinks;
-  McpClient _engine;
-  McpClient get engine => _engine;
-  final McpClient Function() _createEngine;
+  WorkbenchClient _engine;
+  WorkbenchClient get engine => _engine;
+  final WorkbenchClient Function() _createEngine;
   final SessionRepository session;
   final BuildStorage library;
   PobBuildLibrary? get sharedLibrary =>
@@ -1239,6 +1232,22 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     );
   });
 
+  Future<void> updatePobData(String tag) => _runComponentChange(() async {
+    final release = Release(
+      tag,
+      '${Component.pob.url}/releases/tag/$tag',
+      DateTime.now().toUtc(),
+    );
+    await _changeComponentPair(
+      (validate) => components.installPair(
+        {Component.pob: release},
+        addLog,
+        validate: validate,
+      ),
+      'Данные PoB обновлены',
+    );
+  });
+
   Future<void> rollback() => _runComponentChange(
     () => _changeComponentPair(
       (validate) => components.rollback(validate: validate),
@@ -1374,7 +1383,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
   }
 
   Future<WorkshopDocument> _checkComponentBuild(
-    McpClient candidate,
+    WorkbenchClient candidate,
     String xml,
   ) async {
     await candidate.call('pob_import_xml', {'xml': xml});
@@ -1391,7 +1400,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
   }
 
   Future<void> _activateComponentEngine(
-    McpClient candidate,
+    WorkbenchClient candidate,
     List<JsonMap> classes,
     WorkshopDocument? document,
     String status,
@@ -1426,7 +1435,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
   }
 
   Future<void> _loadUpdatedTree(
-    McpClient candidate,
+    WorkbenchClient candidate,
     WorkshopDocument document,
     String status,
   ) async {
@@ -1446,7 +1455,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     );
   }
 
-  Future<void> _closeComponentEngine(McpClient client) async {
+  Future<void> _closeComponentEngine(WorkbenchClient client) async {
     try {
       await client.close();
     } catch (error) {
@@ -1492,16 +1501,11 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     await engine.connect(components.active);
     catalogs.clear();
     final classes = await _readClasses(engine);
-    _update(
-      state.copyWith(
-        classes: classes,
-        status: 'Исходный Lua подключён · ${classes.length} классов',
-      ),
-    );
+    _update(state.copyWith(classes: classes, status: 'Подключён PoB2Engine'));
     addLog(state.status);
   }
 
-  Future<List<JsonMap>> _readClasses(McpClient client) async {
+  Future<List<JsonMap>> _readClasses(WorkbenchClient client) async {
     final result = await client.call('pob_catalog', {'kind': 'classes'});
     return switch (result) {
       {'entries': final List<dynamic> entries} =>
@@ -1803,7 +1807,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
   }
 
   Future<({TreeGeometry? tree, String? error})> _readTree(
-    McpClient client, {
+    WorkbenchClient client, {
     bool includeScene = true,
   }) async {
     if (!client.tools.contains('pob_get_tree'))
@@ -1824,7 +1828,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     }
   }
 
-  bool _canLoadTreeArtwork(TreeGeometry tree, McpClient client) =>
+  bool _canLoadTreeArtwork(TreeGeometry tree, WorkbenchClient client) =>
       !_closing &&
       !isClosed &&
       !state.busy &&
@@ -1870,7 +1874,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
 
   Future<void> _loadTreeArtwork(
     TreeGeometry tree,
-    McpClient client,
+    WorkbenchClient client,
     String source,
   ) async {
     bool current() => _canLoadTreeArtwork(tree, client);
@@ -2471,7 +2475,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
         });
       });
 
-  Future<void> _restoreTreeMode([McpClient? client]) async {
+  Future<void> _restoreTreeMode([WorkbenchClient? client]) async {
     if (state.treeMode == TreeAllocationMode.common) return;
     await (client ?? engine).call('pob_tree_options', {
       'mode': state.treeMode.luaValue,

@@ -6,9 +6,11 @@ import 'package:crypto/crypto.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:path/path.dart' as path;
-import 'package:pob2_ui/data/component_repository.dart';
+
+import 'support/legacy/component_repository.dart';
+
 import 'package:pob2_ui/data/installation_store.dart';
-import 'package:pob2_ui/data/mcp_client.dart';
+import 'package:pob2_ui/data/workbench_client.dart';
 import 'package:pob2_ui/data/pob_build_document.dart';
 import 'package:pob2_ui/data/pob_build_library.dart';
 import 'package:pob2_ui/data/tree_progression_exchange.dart';
@@ -50,7 +52,7 @@ String buildXml(
       '$ascendancyAttribute/>$tree<Notes>$notes</Notes></PathOfBuilding2>';
 }
 
-class _SyncEngine extends McpClient {
+class _SyncEngine extends WorkbenchClient {
   _SyncEngine() {
     tools = {'pob_get_tree', 'pob_tree_options'};
   }
@@ -260,7 +262,7 @@ String _comparisonXml(
     '$partyDamage% increased Damage</ImportedBuffs></Party>'
     '<Notes>$skill</Notes></PathOfBuilding2>';
 
-class _ComparisonEngine extends McpClient {
+class _ComparisonEngine extends WorkbenchClient {
   String xml = '';
   Installations? pair;
   bool closed = false;
@@ -358,7 +360,7 @@ void main() {
   late _SyncEngine engine;
   late WorkshopCubit model;
 
-  WorkshopCubit createWorkshop({McpClient Function()? createEngine}) {
+  WorkshopCubit createWorkshop({WorkbenchClient Function()? createEngine}) {
     final components = ComponentRepository(store: InstallationStore(profile));
     components.active = {
       for (final component in Component.values)

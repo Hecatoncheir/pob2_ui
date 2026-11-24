@@ -176,7 +176,7 @@ jobs:
           flutter gen-l10n
           dart format lib/l10n lib/ui/core/ui_messages.g.dart
           git diff --exit-code -- lib/l10n lib/ui/core/ui_messages.g.dart
-      - name: Проверить компоненты с настоящим Lua
+      - name: Подготовить профиль прежнего выпуска для проверки обновления
         if: inputs.cold_install != true
         shell: bash
         env:
@@ -191,7 +191,7 @@ jobs:
             test -f tool/components-lock.json
             args+=(--lock tool/components-lock.json)
           fi
-          dart run tool/smoke.dart "${args[@]}" | tee build/review/components.json
+          dart run tool/prepare_legacy_profile.dart "${args[@]}" | tee build/review/components.json
       - name: Загрузить комплектный движок
         shell: bash
         env:
@@ -226,6 +226,7 @@ jobs:
           PY
           chmod +x "$engine_dir/$binary"
           echo "POB2_PACKAGED_ENGINE=$engine_dir/$binary" >> "$GITHUB_ENV"
+          echo "POB2_ENGINE_EXECUTABLE=$engine_dir/$binary" >> "$GITHUB_ENV"
           echo "POB2_PACKAGED_ENGINE_VERSION=$ENGINE_TAG" >> "$GITHUB_ENV"
       - name: Проверить общую XML-сборку с опубликованным движком
         if: inputs.cold_install != true
@@ -253,32 +254,13 @@ jobs:
           "$POB2_ENGINE_TEST_EXECUTABLE" session create --profile ci-install --start-server \
             --runtime-dir "$engine_dir/runtime" --data-dir "$engine_dir/data" --timeout 120s \
             --session install --name CI --request-id install
+          dart run tool/smoke.dart --install
           flutter test --no-pub test/engine_session_process_test.dart
           runner=()
           if [[ "$RUNNER_OS" == Linux ]]; then runner=(xvfb-run -a); fi
           "${runner[@]}" flutter test --no-pub integration_test/engine_session_desktop_test.dart -d "${{ matrix.platform }}"
       - name: Тесты приложения
         run: flutter test
-      - uses: actions/setup-go@v7.1.0
-        if: runner.os == 'Linux'
-        with:
-          go-version: '1.27.4'
-      - uses: actions/checkout@v7.0.1
-        if: runner.os == 'Linux'
-        with:
-          repository: Hecatoncheir/pob2_engine
-          ref: 83b47dab660018c17237ead33a6392f99492dd56
-          path: build/engine-source
-      - name: Подготовить движок для процессного теста
-        if: runner.os == 'Linux'
-        working-directory: build/engine-source
-        run: go build -o ../pob2-engine-test ./cmd/pob2-engine
-      - name: Проверить общую сессию настоящими CLI и MCP
-        if: runner.os == 'Linux'
-        env:
-          POB2_ENGINE_TEST_EXECUTABLE: ${{ github.workspace }}/build/pob2-engine-test
-          POB2_ENGINE_CALCULATOR: go
-        run: flutter test test/engine_session_process_test.dart
       - name: Проверки релиза и прототипа
         shell: bash
         run: |
@@ -316,7 +298,6 @@ jobs:
           runner=()
           if [[ "$RUNNER_OS" == Linux ]]; then runner=(xvfb-run -a); fi
           "${runner[@]}" python tool/check_mcp_lifecycle.py --target ${{ matrix.target }} \
-            --components "$RUNNER_TEMP/pob2-lua-smoke/components.json" \
             --output build/review/mcp-lifecycle-${{ matrix.target }}.json
       - name: Проверить установку и восстановление сборки с Lua
         shell: bash

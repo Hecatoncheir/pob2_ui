@@ -1,12 +1,12 @@
 import '../domain/build_comparison.dart';
 import '../domain/build_report.dart';
 import '../domain/component.dart';
-import 'mcp_client.dart';
+import 'workbench_client.dart';
 import 'pob_build_document.dart';
 import 'tree_progression_exchange.dart';
 
 Future<BuildComparison> compareSavedXml(
-  McpClient session,
+  WorkbenchClient session,
   Installations components,
   String baselineXml,
   String candidateXml,
@@ -41,7 +41,7 @@ Future<BuildComparison> compareSavedXml(
 }
 
 Future<BuildReport> _readWithEnemyLevel(
-  McpClient session,
+  WorkbenchClient session,
   int enemyLevel,
 ) async {
   final report = await _readReport(session);
@@ -53,7 +53,7 @@ Future<BuildReport> _readWithEnemyLevel(
   return _readReport(session);
 }
 
-Future<BuildReport> _readReport(McpClient session) async =>
+Future<BuildReport> _readReport(WorkbenchClient session) async =>
     parseBuildReport(await session.call('pob_check_build'));
 
 int? _positiveLevel(Object? value) => value is int && value > 0 ? value : null;

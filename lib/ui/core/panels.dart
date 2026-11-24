@@ -29,6 +29,45 @@ class SurfacePanel extends StatelessWidget {
   );
 }
 
+class PanelExpansionTile extends StatelessWidget {
+  const PanelExpansionTile({
+    super.key,
+    required this.title,
+    required this.children,
+  });
+
+  final String title;
+  final List<Widget> children;
+
+  @override
+  Widget build(BuildContext context) {
+    final colors = Theme.of(context).colorScheme;
+    final outline = RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(14),
+      side: BorderSide(color: Spark.of(context).line),
+    );
+    return ExpansionTile(
+      tilePadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 2),
+      childrenPadding: const EdgeInsets.fromLTRB(12, 0, 12, 12),
+      expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
+      visualDensity: VisualDensity.compact,
+      clipBehavior: Clip.antiAlias,
+      collapsedBackgroundColor: colors.surfaceContainerHigh,
+      backgroundColor: Color.alphaBlend(
+        colors.primary.withValues(alpha: .06),
+        colors.surfaceContainerHigh,
+      ),
+      title: AppText(
+        title,
+        style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w700),
+      ),
+      shape: outline,
+      collapsedShape: outline,
+      children: children,
+    );
+  }
+}
+
 class EmptyPanel extends StatelessWidget {
   const EmptyPanel({
     super.key,
@@ -104,8 +143,16 @@ class SectionHeading extends StatelessWidget {
 }
 
 class DotLabel extends StatelessWidget {
-  const DotLabel(this.text, {super.key, this.active = true});
+  const DotLabel(
+    this.text, {
+    super.key,
+    this.active = true,
+    this.maxLines,
+    this.textAlign,
+  });
   final String text;
+  final int? maxLines;
+  final TextAlign? textAlign;
   final bool active;
   @override
   Widget build(BuildContext context) => Row(
@@ -123,6 +170,11 @@ class DotLabel extends StatelessWidget {
       Flexible(
         child: AppText(
           text,
+          maxLines: maxLines,
+          textAlign: textAlign,
+          textWidthBasis: textAlign == TextAlign.center
+              ? TextWidthBasis.longestLine
+              : null,
           overflow: TextOverflow.ellipsis,
           style: Theme.of(context).textTheme.bodySmall,
         ),

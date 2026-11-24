@@ -4,9 +4,11 @@ import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:pob2_ui/data/engine_session_client.dart';
-import 'package:pob2_ui/data/component_repository.dart';
+
+import 'support/legacy/component_repository.dart';
+
 import 'package:pob2_ui/data/installation_store.dart';
-import 'package:pob2_ui/data/mcp_client.dart';
+import 'package:pob2_ui/data/workbench_client.dart';
 import 'package:pob2_ui/data/pob_build_document.dart';
 import 'package:pob2_ui/data/pob_build_library.dart';
 import 'package:pob2_ui/domain/build_report.dart';
@@ -443,7 +445,7 @@ Future<void> _checkPrimaryConflict(
 WorkshopCubit _primaryWorkshop(Directory root, EngineOptions? options) =>
     WorkshopCubit(
       ComponentRepository(store: InstallationStore(root)),
-      McpClient(),
+      WorkbenchClient(),
       library: PobBuildLibrary(root),
       primaryEngine: options,
     );

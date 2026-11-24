@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:pob2_ui/data/game_catalog_repository.dart';
-import 'package:pob2_ui/data/mcp_client.dart';
+import 'package:pob2_ui/data/workbench_client.dart';
 import 'package:pob2_ui/domain/build_report.dart';
 import 'package:pob2_ui/domain/condition_definition.dart';
 import 'package:pob2_ui/domain/skill_gem.dart';
@@ -11,7 +11,7 @@ import 'package:pob2_ui/ui/skill_group_cubit.dart';
 
 import 'support/editor_fakes.dart';
 
-class PagedCatalog extends McpClient {
+class PagedCatalog extends WorkbenchClient {
   final offsets = <int>[];
   bool broken = false;
   bool malformed = false;

@@ -3,9 +3,11 @@ import 'dart:io';
 import 'package:flutter/gestures.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:material_ui/material_ui.dart';
-import 'package:pob2_ui/data/component_repository.dart';
+
+import 'support/legacy/component_repository.dart';
+
 import 'package:pob2_ui/data/installation_store.dart';
-import 'package:pob2_ui/data/mcp_client.dart';
+import 'package:pob2_ui/data/workbench_client.dart';
 import 'package:pob2_ui/domain/build_edit_result.dart';
 import 'package:pob2_ui/domain/build_report.dart';
 import 'package:pob2_ui/domain/engine_session.dart';
@@ -352,7 +354,7 @@ class _PreviewWorkshop extends WorkshopCubit {
   }
 }
 
-class _TreeDialogMcp extends McpClient {
+class _TreeDialogMcp extends WorkbenchClient {
   _TreeDialogMcp() {
     tools = const {'pob_tree_options'};
   }

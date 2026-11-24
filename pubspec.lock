@@ -399,11 +399,9 @@ packages:
   pob2_engine_api:
     dependency: "direct main"
     description:
-      path: "gen/dart"
-      ref: "708523bab034964087d018ec7fa913f9a06c4ce9"
-      resolved-ref: "708523bab034964087d018ec7fa913f9a06c4ce9"
-      url: "https://github.com/Hecatoncheir/pob2_engine.git"
-    source: git
+      path: "packages/pob2_engine_api"
+      relative: true
+    source: path
     version: "0.0.0"
   posix:
     dependency: "direct main"

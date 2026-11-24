@@ -5,7 +5,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:path/path.dart' as path;
 import 'package:pob2_ui/data/build_library.dart';
 import 'package:pob2_ui/data/component_ownership.dart';
-import 'package:pob2_ui/data/component_repository.dart';
+
+import 'support/legacy/component_repository.dart';
+
 import 'package:pob2_ui/data/installation_store.dart';
 import 'package:pob2_ui/data/profile_cleanup.dart';
 import 'package:pob2_ui/data/profile_use.dart';

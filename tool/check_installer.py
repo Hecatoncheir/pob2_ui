@@ -361,10 +361,11 @@ def check_bundled_engine(executable, base, environment):
     if json.loads(info)['version'] != expected:
         raise ValueError('Версия установленного движка расходится с комплектом')
     flags = ['--profile', 'installer', '--runtime-dir', base / 'engine-runtime', '--data-dir', base / 'engine-data']
-    env = dict(environment, POB2_ENGINE_CALCULATOR='go')
+    env = environment
     try:
         run(engine, 'session', 'create', *flags, '--start-server',
-            '--session', 'smoke', '--name', 'Installer', '--request-id', 'installer', env=env, timeout=45)
+            '--session', 'smoke', '--name', 'Installer', '--request-id', 'installer',
+            '--timeout', '5m', env=env, timeout=330)
     finally:
         run(engine, 'shutdown', *flags, env=env, timeout=30)
 

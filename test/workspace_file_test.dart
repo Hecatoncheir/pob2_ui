@@ -3,9 +3,11 @@ import 'dart:io';
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:pob2_ui/data/build_library.dart';
-import 'package:pob2_ui/data/component_repository.dart';
+
+import 'support/legacy/component_repository.dart';
+
 import 'package:pob2_ui/data/installation_store.dart';
-import 'package:pob2_ui/data/mcp_client.dart';
+import 'package:pob2_ui/data/workbench_client.dart';
 import 'package:pob2_ui/data/pob_build_library.dart';
 import 'package:pob2_ui/data/pob_window_repository.dart';
 import 'package:pob2_ui/data/session_repository.dart';
@@ -21,7 +23,7 @@ import 'support/file_fakes.dart';
 import 'support/temporary_directory.dart';
 import 'support/workshop_fixture.dart';
 
-class FileEngine extends McpClient {
+class FileEngine extends WorkbenchClient {
   int value = 1;
   @override
   Future<void> connect(Installations pair) async {}
@@ -143,7 +145,7 @@ class SetupWorkshop extends WorkshopCubit {
   @override
   Future<void> prepareComponents() async {
     prepared = true;
-    components.active = {
+    (components as ComponentRepository).active = {
       for (final component in Component.values)
         component: Installation(tag: 'test', commit: 'test', directory: folder),
     };

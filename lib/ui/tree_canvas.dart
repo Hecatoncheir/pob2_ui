@@ -130,7 +130,7 @@ class TreePainter extends CustomPainter {
           for (var index = 1; index < ids.length; index++)
             (ids[index - 1], ids[index]),
         ];
-    for (final (a, b) in edges) {
+    for (final (a, b) in edges.where((edge) => _drawsEdge(edge.$1, edge.$2))) {
       final start = scene.points[a];
       final end = scene.points[b];
       if (start != null && end != null) canvas.drawLine(start, end, paint);
@@ -231,7 +231,7 @@ class TreePainter extends CustomPainter {
   void _connection(Canvas canvas, int a, int b, Paint line, Paint active) {
     final start = scene.points[a], end = scene.points[b];
     if (start == null || end == null) return;
-    if (_hiddenConnection(a, b)) return;
+    if (!_drawsEdge(a, b)) return;
     if (!visible.overlaps(Rect.fromPoints(start, end).inflate(2))) return;
     canvas.drawLine(
       start,
@@ -240,10 +240,10 @@ class TreePainter extends CustomPainter {
     );
   }
 
-  bool _hiddenConnection(int a, int b) {
-    final kinds = {scene.nodes[a]!.kind, scene.nodes[b]!.kind};
-    return kinds.contains('ClassStart') && kinds.contains('AscendClassStart');
-  }
+  bool _drawsEdge(int a, int b) =>
+      scene.nodes[a]?.kind != 'ClassStart' &&
+      scene.nodes[b]?.kind != 'ClassStart' &&
+      scene.tree.drawsEdge(a, b);
 
   bool _matches(TreeNode node) =>
       query.trim().isNotEmpty &&

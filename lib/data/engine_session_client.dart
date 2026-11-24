@@ -422,6 +422,10 @@ class EngineSessionClient
           reply.version,
           reply.nodes.map(_geometryNode),
           reply.edges.map((edge) => (edge.fromNode, edge.toNode)),
+          hiddenEdges: [
+            for (final edge in reply.edges)
+              if (edge.hiddenInScene) (edge.fromNode, edge.toNode),
+          ],
         );
         return reply.hasScene()
             ? tree.withScene(_engineScene(reply.scene))

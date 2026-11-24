@@ -4,9 +4,9 @@ import 'dart:io';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:material_ui/material_ui.dart';
-import 'package:pob2_ui/data/component_repository.dart';
+import 'package:pob2_ui/data/engine_components.dart';
 import 'package:pob2_ui/data/installation_store.dart';
-import 'package:pob2_ui/data/mcp_client.dart';
+import 'package:pob2_ui/data/workbench_client.dart';
 import 'package:pob2_ui/data/pob_build_document.dart';
 import 'package:pob2_ui/data/pob_build_library.dart';
 import 'package:pob2_ui/data/pob_share_links.dart';
@@ -158,8 +158,6 @@ Future<Directory> _testProfile() async {
   final root = await prepared.createTemp('share-links-');
   addTearDown(() => root.delete(recursive: true));
   final builds = await Directory.fromUri(root.uri.resolve('builds/')).create();
-  await File.fromUri(prepared.uri.resolve('components.json'))
-      .copy(File.fromUri(root.uri.resolve('components.json')).path);
   await PobBuildLibrary(root).configure(builds.path);
   return root;
 }
@@ -170,8 +168,8 @@ Future<WorkshopCubit> _open(
   PobShareLinks? shareLinks,
 }) async {
   final model = WorkshopCubit(
-    ComponentRepository(store: InstallationStore(root)),
-    McpClient(),
+    EngineComponents(store: InstallationStore(root)),
+    WorkbenchClient(),
     library: PobBuildLibrary(root),
     shareLinks: shareLinks,
   );

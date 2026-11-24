@@ -2,11 +2,11 @@ import '../domain/build_report.dart';
 import '../domain/component.dart';
 import '../domain/tree_allocation_mode.dart';
 import '../domain/tree_path_comparison.dart';
-import 'mcp_client.dart';
+import 'workbench_client.dart';
 import 'pob_build_document.dart';
 
 Future<TreePathReports> compareTreePaths(
-  McpClient session,
+  WorkbenchClient session,
   Installations components,
   String source,
   int first,
@@ -31,7 +31,7 @@ Future<TreePathReports> compareTreePaths(
 }
 
 Future<void> _import(
-  McpClient session,
+  WorkbenchClient session,
   String source,
   TreeAllocationMode mode,
 ) async {
@@ -40,7 +40,7 @@ Future<void> _import(
 }
 
 Future<TreePathOption> _preview(
-  McpClient session,
+  WorkbenchClient session,
   BuildReport baseline,
   PobBuildDocument before,
   int target,
@@ -104,7 +104,7 @@ void _checkConditions(BuildReport before, BuildReport after) {
   }
 }
 
-Future<BuildReport> _readReport(McpClient session) async =>
+Future<BuildReport> _readReport(WorkbenchClient session) async =>
     parseBuildReport(await session.call('pob_check_build'));
 
 TreePathStats _stats(BuildReport report) =>

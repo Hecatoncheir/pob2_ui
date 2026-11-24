@@ -5,7 +5,7 @@ import '../domain/progression_comparison.dart';
 import '../domain/tree_progression.dart';
 import 'equipment_repository.dart';
 import 'game_catalog_repository.dart';
-import 'mcp_client.dart';
+import 'workbench_client.dart';
 import 'pob_build_document.dart';
 
 typedef ProgressionComparisonSource = ({
@@ -16,11 +16,11 @@ typedef ProgressionComparisonSource = ({
 });
 
 class ProgressionComparisonSession {
-  ProgressionComparisonSession(this.readSource, {McpClient? engine})
-    : _engine = engine ?? McpClient();
+  ProgressionComparisonSession(this.readSource, {WorkbenchClient? engine})
+    : _engine = engine ?? WorkbenchClient();
 
   final Future<ProgressionComparisonSource> Function() readSource;
-  final McpClient _engine;
+  final WorkbenchClient _engine;
   late final _catalog = GameCatalogRepository(_engine);
   late final _equipment = EquipmentRepository(_engine);
 

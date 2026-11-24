@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
 
-import '../domain/component.dart';
-import 'app_http.dart';
+import 'package:pob2_ui/domain/component.dart';
+import 'package:pob2_ui/data/app_http.dart';
 
 class GitHubService {
   GitHubService({AppHttp? http}) : http = http ?? AppHttp();

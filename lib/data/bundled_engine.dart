@@ -8,6 +8,13 @@ File bundledEngineFile() {
   return File.fromUri(executable.parent.uri.resolve(name));
 }
 
+String defaultEngineExecutable() {
+  final explicit = Platform.environment['POB2_ENGINE_EXECUTABLE'];
+  if (explicit != null && explicit.isNotEmpty) return explicit;
+  final bundled = bundledEngineFile();
+  return bundled.existsSync() ? bundled.path : bundled.uri.pathSegments.last;
+}
+
 File _bundledVersionFile() {
   final executable = bundledEngineFile();
   final directory = Platform.isMacOS

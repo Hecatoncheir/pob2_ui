@@ -7,9 +7,9 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
-import 'package:pob2_ui/data/component_repository.dart';
+import 'package:pob2_ui/data/engine_components.dart';
 import 'package:pob2_ui/data/installation_store.dart';
-import 'package:pob2_ui/data/mcp_client.dart';
+import 'package:pob2_ui/data/workbench_client.dart';
 import 'package:pob2_ui/data/appearance_repository.dart';
 import 'package:pob2_ui/domain/appearance.dart';
 import 'package:pob2_ui/ui/appearance_bloc.dart';
@@ -31,10 +31,10 @@ void main() {
       if (!Platform.environment.containsKey('POB2_UI_HOME'))
         throw StateError('Нужен отдельный профиль POB2_UI_HOME');
       final model = WorkshopCubit(
-        ComponentRepository(
+        EngineComponents(
           store: InstallationStore(InstallationStore.defaultRoot()),
         ),
-        McpClient(),
+        WorkbenchClient(),
       );
       addTearDown(model.close);
       final appearance = AppearanceBloc(

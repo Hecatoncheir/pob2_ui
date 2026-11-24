@@ -5,11 +5,11 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:material_ui/material_ui.dart';
-import 'package:pob2_ui/data/component_repository.dart';
+import 'package:pob2_ui/data/engine_components.dart';
 import 'package:pob2_ui/data/game_dictionary_repository.dart';
 import 'package:pob2_ui/data/installation_store.dart';
 import 'package:pob2_ui/data/language_preferences.dart';
-import 'package:pob2_ui/data/mcp_client.dart';
+import 'package:pob2_ui/data/workbench_client.dart';
 import 'package:pob2_ui/domain/app_language.dart';
 import 'package:pob2_ui/ui/app.dart';
 import 'package:pob2_ui/ui/language_bloc.dart';
@@ -33,8 +33,8 @@ void main() {
     }
     final root = InstallationStore.defaultRoot();
     final model = WorkshopCubit(
-      ComponentRepository(store: InstallationStore(root)),
-      McpClient(),
+      EngineComponents(store: InstallationStore(root)),
+      WorkbenchClient(),
     );
     final language = LanguageBloc(
       LanguagePreferences(root),

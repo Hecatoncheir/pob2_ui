@@ -1,10 +1,10 @@
 import '../domain/trade_search.dart';
 import '../domain/build_report.dart';
-import 'mcp_client.dart';
+import 'workbench_client.dart';
 
 class TradeSearchRepository {
   TradeSearchRepository(this.engine);
-  final McpClient engine;
+  final WorkbenchClient engine;
   bool get available =>
       engine.tools.containsAll({'pob_trade_catalog', 'pob_trade_search'});
 

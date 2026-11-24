@@ -1,13 +1,16 @@
 import 'support/workshop_fixture.dart';
 import 'support/dispose_widget_bloc.dart';
+import 'support/editor_fakes.dart';
 
 import 'dart:io';
 
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:pob2_ui/data/component_repository.dart';
+
+import 'support/legacy/component_repository.dart';
+
 import 'package:pob2_ui/data/installation_store.dart';
-import 'package:pob2_ui/data/mcp_client.dart';
+import 'package:pob2_ui/data/workbench_client.dart';
 import 'package:pob2_ui/ui/app.dart';
 import 'package:pob2_ui/ui/build_dialogs.dart';
 import 'package:pob2_ui/ui/workshop_cubit.dart';
@@ -21,7 +24,7 @@ class _ClassPickerModel extends WorkshopCubit {
         ComponentRepository(
           store: InstallationStore(Directory('test-components')),
         ),
-        McpClient(),
+        WorkbenchClient(),
         initialState: WorkshopState(
           classes: [
             {'id': 1, 'name': 'Witch'},
@@ -95,7 +98,7 @@ void main() {
       ComponentRepository(
         store: InstallationStore(Directory('test-components')),
       ),
-      McpClient(),
+      WorkbenchClient(),
       initialState: WorkshopState(
         document: (report: fixture, tree: tree, stale: false, treeError: null),
       ),
@@ -115,6 +118,40 @@ void main() {
     await disposeWidgetBloc(tester, scale);
     await model.close();
   });
+  for (final connected in [false, true]) {
+    testWidgets('Боковая панель показывает состояние PoB2Engine: $connected', (
+      tester,
+    ) async {
+      await tester.binding.setSurfaceSize(const Size(1280, 850));
+      addTearDown(() => tester.binding.setSurfaceSize(null));
+      final model = WorkshopCubit(
+        ComponentRepository(
+          store: InstallationStore(Directory('test-components')),
+        ),
+        connected ? EditorCatalogEngine() : WorkbenchClient(),
+      );
+      addTearDown(model.close);
+      await tester.pumpWidget(PobApp(model: model));
+      await tester.pumpAndSettle();
+
+      final label = find.text(
+        connected ? 'Подключён PoB2Engine' : 'PoB2Engine не подключён',
+      );
+      expect(label, findsOneWidget);
+      final text = tester.widget<Text>(label);
+      expect(text.textAlign, TextAlign.center);
+      expect(text.maxLines, 2);
+      expect(text.textWidthBasis, TextWidthBasis.longestLine);
+      final status = find.byKey(const Key('engine-connection-status'));
+      final dot = find.descendant(of: status, matching: find.byType(Container));
+      final group = tester.getRect(dot).expandToInclude(tester.getRect(label));
+      expect(group.center.dx, closeTo(tester.getCenter(status).dx, 0.1));
+      expect(group.width, lessThan(tester.getSize(status).width));
+      expect(find.text('Lua подключён'), findsNothing);
+      expect(tester.takeException(), isNull);
+    });
+  }
+
   for (final size in const [
     Size(360, 800),
     Size(768, 850),
@@ -131,7 +168,7 @@ void main() {
         ComponentRepository(
           store: InstallationStore(Directory('test-components')),
         ),
-        McpClient(),
+        WorkbenchClient(),
       );
       addTearDown(model.close);
       await tester.pumpWidget(PobApp(model: model));
@@ -157,7 +194,7 @@ void main() {
         ComponentRepository(
           store: InstallationStore(Directory('test-components')),
         ),
-        McpClient(),
+        WorkbenchClient(),
         initialState: WorkshopState(
           document: (
             report: fixture,

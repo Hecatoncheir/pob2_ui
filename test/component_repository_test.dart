@@ -1,11 +1,15 @@
 import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:pob2_ui/data/component_repository.dart';
+
+import 'support/legacy/component_repository.dart';
+
 import 'package:pob2_ui/data/installation_store.dart';
 import 'package:pob2_ui/data/managed_installation.dart';
-import 'package:pob2_ui/data/native_runtime_installer.dart';
-import 'package:pob2_ui/data/process_service.dart';
+
+import 'support/legacy/native_runtime_installer.dart';
+import 'support/legacy/legacy_process_service.dart';
+
 import 'package:pob2_ui/domain/component.dart';
 
 import 'support/temporary_directory.dart';
@@ -36,7 +40,7 @@ Map<Component, Release> _releases({String pob = 'v2', String mcp = 'v2'}) => {
 
 void _ignoreLog(String _) {}
 
-class FailingProcesses extends ProcessService {
+class FailingProcesses extends LegacyProcessService {
   @override
   Future<String> run(
     String executable,
@@ -57,12 +61,12 @@ class _NativeRuntime extends NativeRuntimeInstaller {
   Future<void> install(
     Directory candidate,
     String tag,
-    ProcessService processes,
+    LegacyProcessService processes,
     void Function(String) log,
   ) async => tags.add(tag);
 }
 
-class _PairProcesses extends ProcessService {
+class _PairProcesses extends LegacyProcessService {
   final _components = <String, Component>{};
   final _tags = {
     for (final installation in [..._activePair.values, ..._previousPair.values])

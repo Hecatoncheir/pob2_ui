@@ -201,7 +201,7 @@ class ProfileCleanup {
   );
 }
 
-final _treeSource = RegExp(r'^[a-f0-9]{40}-[a-f0-9]{40}$');
+final _treeSource = RegExp(r'^[a-f0-9]{40}(?:-[a-f0-9]{40})?$');
 final _treeVersion = RegExp(r'^[0-9_]{1,32}$');
 final _digest = RegExp(r'^[a-f0-9]{64}$');
 final _revisionId = RegExp(r'^[a-f0-9]{32}$');

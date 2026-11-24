@@ -305,7 +305,7 @@ class _Shell extends StatelessWidget {
       switch (page) {
         AppPage.library => LibraryView(model: model, shell: shell),
         AppPage.workspace => WorkspaceView(model: model, shell: shell),
-        AppPage.components => ComponentsView(model: model),
+        AppPage.components => ComponentsView(model: model, appUpdates: updates),
       };
 }
 
@@ -526,9 +526,14 @@ class _SidebarTools extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.fromLTRB(8, 6, 8, 12),
             child: Center(
+              key: const Key('engine-connection-status'),
               child: DotLabel(
-                model.engine.connected ? 'Lua подключён' : 'Lua не подключён',
+                model.engine.connected
+                    ? 'Подключён PoB2Engine'
+                    : 'PoB2Engine не подключён',
                 active: model.engine.connected,
+                maxLines: 2,
+                textAlign: TextAlign.center,
               ),
             ),
           ),

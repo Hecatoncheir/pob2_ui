@@ -1,38 +1,47 @@
 import 'dart:convert';
 import 'dart:io';
 
-import '../domain/component.dart';
+import 'package:pob2_ui/domain/component.dart';
+
 import 'component_archive.dart';
-import 'component_ownership.dart';
+
+import 'package:pob2_ui/data/component_ownership.dart';
+
 import 'component_packages.dart';
+
+import 'package:pob2_ui/data/component_source.dart';
+
 import 'github_service.dart';
-import 'installation_store.dart';
-import 'process_service.dart';
+
+import 'package:pob2_ui/data/installation_store.dart';
+
+import 'legacy_process_service.dart';
 import 'native_runtime_installer.dart';
-import 'managed_installation.dart';
-import 'verified_download.dart';
-import 'profile_cleanup.dart';
-import 'profile_use.dart';
 
-enum ComponentInstallStage { pob, mcp, compatibility }
+import 'package:pob2_ui/data/managed_installation.dart';
+import 'package:pob2_ui/data/verified_download.dart';
+import 'package:pob2_ui/data/profile_cleanup.dart';
+import 'package:pob2_ui/data/profile_use.dart';
 
-class ComponentRepository {
+export 'package:pob2_ui/data/component_source.dart' show ComponentInstallStage;
+
+class ComponentRepository implements ComponentSource {
   ComponentRepository({
     required this.store,
     GitHubService? github,
-    ProcessService? processes,
+    LegacyProcessService? processes,
     NativeRuntimeInstaller? runtimeInstaller,
     VerifiedDownload? packageDownload,
     this.keepArchives = false,
     this.profileUse,
   }) : github = github ?? GitHubService(),
-       processes = processes ?? ProcessService(),
+       processes = processes ?? LegacyProcessService(),
        _runtimeInstaller = runtimeInstaller ?? NativeRuntimeInstaller(),
        _packageDownload = packageDownload ?? VerifiedDownload();
 
   final InstallationStore store;
   final GitHubService github;
-  final ProcessService processes;
+  final LegacyProcessService processes;
   final NativeRuntimeInstaller _runtimeInstaller;
   final VerifiedDownload _packageDownload;
   final bool keepArchives;

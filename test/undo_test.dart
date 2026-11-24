@@ -1,16 +1,18 @@
 import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:pob2_ui/data/component_repository.dart';
+
+import 'support/legacy/component_repository.dart';
+
 import 'package:pob2_ui/data/installation_store.dart';
-import 'package:pob2_ui/data/mcp_client.dart';
+import 'package:pob2_ui/data/workbench_client.dart';
 import 'package:pob2_ui/ui/workshop_cubit.dart';
 import 'package:pob2_ui/ui/workshop_state.dart';
 
 import 'support/temporary_directory.dart';
 import 'support/workshop_fixture.dart';
 
-class HistoryEngine extends McpClient {
+class HistoryEngine extends WorkbenchClient {
   int value = 0;
   bool reject = false;
   int failedReports = 0;

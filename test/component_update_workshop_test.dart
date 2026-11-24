@@ -4,9 +4,11 @@ import 'dart:io';
 
 import 'package:crypto/crypto.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:pob2_ui/data/component_repository.dart';
+
+import 'support/legacy/component_repository.dart';
+
 import 'package:pob2_ui/data/installation_store.dart';
-import 'package:pob2_ui/data/mcp_client.dart';
+import 'package:pob2_ui/data/workbench_client.dart';
 import 'package:pob2_ui/data/pob_build_document.dart';
 import 'package:pob2_ui/data/pob_build_library.dart';
 import 'package:pob2_ui/data/profile_cleanup.dart';
@@ -94,7 +96,7 @@ class _ComponentUpdates extends ComponentRepository {
   }
 }
 
-class _Engine extends McpClient {
+class _Engine extends WorkbenchClient {
   _Engine({this.importStarted, this.allowImport, this.rejectImport = false});
 
   final Completer<void>? importStarted, allowImport;

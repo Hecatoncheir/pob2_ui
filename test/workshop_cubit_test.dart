@@ -2,11 +2,17 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:pob2_ui/data/component_repository.dart';
+
+import 'support/legacy/component_repository.dart';
+
 import 'package:pob2_ui/data/installation_store.dart';
-import 'package:pob2_ui/data/github_service.dart';
-import 'package:pob2_ui/data/mcp_client.dart';
-import 'package:pob2_ui/data/process_service.dart';
+
+import 'support/legacy/github_service.dart';
+
+import 'package:pob2_ui/data/workbench_client.dart';
+
+import 'support/legacy/legacy_process_service.dart';
+
 import 'package:pob2_ui/domain/component.dart';
 import 'package:pob2_ui/ui/workshop_cubit.dart';
 
@@ -57,7 +63,7 @@ class _SetupGitHub extends GitHubService {
       Release('v1.0.0', '', DateTime.utc(2026));
 }
 
-class _SetupProcesses extends ProcessService {
+class _SetupProcesses extends LegacyProcessService {
   @override
   Future<String> python() async => 'python';
 
@@ -71,7 +77,7 @@ class _SetupProcesses extends ProcessService {
   }) async => 'git version';
 }
 
-class _SetupEngine extends McpClient {
+class _SetupEngine extends WorkbenchClient {
   int connections = 0;
 
   @override
@@ -102,7 +108,7 @@ void main() {
     'Снимок состояния неизменяем; загрузка не затирает новый черновик',
     () async {
       final components = DelayedComponents(InstallationStore(root));
-      final cubit = WorkshopCubit(components, McpClient());
+      final cubit = WorkshopCubit(components, WorkbenchClient());
       addTearDown(cubit.close);
       await cubit.session.saveDraft('старый XML');
       final before = cubit.state;
@@ -147,7 +153,7 @@ void main() {
 
   test('Обновление ждёт окончания операции; закрытый Cubit не получает новые состояния', () async {
     final components = DelayedComponents(InstallationStore(root));
-    final cubit = WorkshopCubit(components, McpClient());
+    final cubit = WorkshopCubit(components, WorkbenchClient());
     final pending = cubit.initialize();
     await expectLater(cubit.checkpoint(), throwsStateError);
     await cubit.close();

@@ -5,10 +5,12 @@ import 'dart:ui' show PointerDeviceKind;
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:pob2_ui/data/component_repository.dart';
+
+import 'support/legacy/component_repository.dart';
+
 import 'package:pob2_ui/data/installation_store.dart';
 import 'package:pob2_ui/data/item_art_catalog.dart';
-import 'package:pob2_ui/data/mcp_client.dart';
+import 'package:pob2_ui/data/workbench_client.dart';
 import 'package:pob2_ui/data/pob_build_document.dart';
 import 'package:pob2_ui/data/tree_progression_repository.dart';
 import 'package:pob2_ui/data/tree_progression_exchange.dart';
@@ -683,7 +685,7 @@ void main() {
     addTearDown(tester.view.resetPhysicalSize);
     final model = WorkshopCubit(
       ComponentRepository(store: InstallationStore(Directory.systemTemp)),
-      McpClient(),
+      WorkbenchClient(),
       initialState: WorkshopState(
         document: (
           report: fixture.fixture,
