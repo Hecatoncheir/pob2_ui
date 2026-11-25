@@ -573,7 +573,10 @@ class EngineSessionClient
     builds.GetTreeTexturesRequest request,
   ) async* {
     if (_closed) return;
-    final call = _rpc.getTreeTextures(request, options: _workshopReadOptions());
+    final call = _rpc.getTreeTextures(
+      request,
+      options: CallOptions(timeout: const Duration(seconds: 90)),
+    );
     _textureCalls.add(call);
     try {
       await for (final reply in call) {

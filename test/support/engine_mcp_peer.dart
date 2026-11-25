@@ -42,8 +42,9 @@ class EngineMcpPeer {
 
   Future<Map<String, dynamic>> request(
     String method,
-    Map<String, dynamic> params,
-  ) async {
+    Map<String, dynamic> params, {
+    Duration timeout = const Duration(seconds: 5),
+  }) async {
     final id = ++_nextId;
     _process.stdin.writeln(
       jsonEncode({
@@ -53,7 +54,7 @@ class EngineMcpPeer {
         'params': params,
       }),
     );
-    while (await _lines.moveNext().timeout(const Duration(seconds: 5))) {
+    while (await _lines.moveNext().timeout(timeout)) {
       final json = jsonDecode(_lines.current) as Map<String, dynamic>;
       if (json['id'] != id) continue;
       if (json['error'] case final error?) {

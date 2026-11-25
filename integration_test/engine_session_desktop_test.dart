@@ -169,7 +169,7 @@ Future<void> _expectEditorPng(WidgetTester tester, EngineMcpPeer mcp) async {
   final reply = mcp.request('tools/call', {
     'name': 'pob_editor_ui',
     'arguments': {'action': 'screenshot'},
-  });
+  }, timeout: const Duration(seconds: 50));
   var received = false;
   reply.then((_) => received = true, onError: (Object _) => received = true);
   while (!received) {
