@@ -1,4 +1,8 @@
 name: Проверки и установщики
+run-name: >-
+  ${{ github.event_name == 'workflow_dispatch' && inputs.locked_components &&
+      inputs.engine_workshop && !inputs.cold_install && inputs.engine_release != '' &&
+      format('Приёмка PoB II с {0}', inputs.engine_release) || 'Проверки и установщики' }}
 
 on:
   push:
