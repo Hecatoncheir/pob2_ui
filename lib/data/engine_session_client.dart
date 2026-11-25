@@ -399,13 +399,13 @@ class EngineSessionClient
 
   @override
   Future<BuildReport?> readReport(EngineSnapshot snapshot) =>
-      _readWorkshop('build.report', () async {
+      _readSnapshotView('build.report', (options) async {
         final reply = await _rpc.getBuildReport(
           builds.GetBuildReportRequest(
             sessionId: snapshot.sessionId,
             expectedRevision: Int64(snapshot.revision),
           ),
-          options: _workshopReadOptions(),
+          options: options,
         );
         return BuildReport.fromJson(
           jsonMap(jsonDecode(utf8.decode(reply.reportJson))),
@@ -416,7 +416,7 @@ class EngineSessionClient
   Future<TreeGeometry?> readTree(
     EngineSnapshot snapshot, {
     bool includeScene = true,
-  }) => _readWorkshop('build.tree_geometry', () async {
+  }) => _readSnapshotView('build.tree_geometry', (options) async {
     final reply = await _rpc.getTreeGeometry(
       builds.GetTreeGeometryRequest(
         sessionId: snapshot.sessionId,
@@ -425,7 +425,7 @@ class EngineSessionClient
             includeScene &&
             _workshopCapabilities.contains('build.tree_textures'),
       ),
-      options: _workshopReadOptions(),
+      options: options,
     );
     final tree = TreeGeometry.fromNodes(
       reply.version,
@@ -684,6 +684,23 @@ class EngineSessionClient
 
   CallOptions _workshopReadOptions() =>
       CallOptions(timeout: const Duration(seconds: 30));
+
+  Future<T?> _readSnapshotView<T>(
+    String capability,
+    Future<T> Function(CallOptions) query,
+  ) => _readWorkshop(capability, () async {
+    try {
+      return await query(_workshopReadOptions());
+    } on GrpcError catch (error) {
+      if (_closed || error.code != StatusCode.deadlineExceeded) rethrow;
+    }
+    try {
+      return await query(CallOptions(timeout: const Duration(seconds: 90)));
+    } on GrpcError catch (error) {
+      if (error.code != StatusCode.deadlineExceeded) rethrow;
+      throw GrpcError.deadlineExceeded('$capability: ${error.message}');
+    }
+  });
 
   Future<T?> _readWorkshop<T>(
     String capability,
