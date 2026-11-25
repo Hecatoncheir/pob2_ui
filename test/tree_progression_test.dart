@@ -719,6 +719,9 @@ void main() {
     await tester.pumpAndSettle();
     await tester.tap(find.byKey(const Key('open-statistics')));
     await tester.pumpAndSettle();
+    final switcher = tester.getRect(find.byType(SegmentedButton<bool>));
+    final header = tester.getRect(find.byKey(const Key('statistics-header')));
+    expect(header.top - switcher.bottom, 12);
     await tester.tap(find.byKey(const Key('inspector-plan')));
     await tester.pumpAndSettle();
     await tester.tap(find.text('Уровень 12'));
