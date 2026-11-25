@@ -264,13 +264,13 @@ packages:
     source: hosted
     version: "1.6.0"
   http2:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
       name: http2
-      sha256: "382d3aefc5bd6dc68c6b892d7664f29b5beb3251611ae946a98d35158a82bbfa"
+      sha256: "27348caf6edf1a0dc12cf328fdbec5656ffd61ba8fbd0ebb1473edb04b1f0336"
       url: "https://pub.dev"
     source: hosted
-    version: "2.3.1"
+    version: "3.2.0"
   http_parser:
     dependency: transitive
     description:
@@ -403,6 +403,14 @@ packages:
       relative: true
     source: path
     version: "0.0.0"
+  pool:
+    dependency: transitive
+    description:
+      name: pool
+      sha256: "4177f68c237ea2128d1bee66ac17b2ce05ba3dbaafcbdd54c5d40a39d0b6b11c"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.5.3"
   posix:
     dependency: "direct main"
     description:

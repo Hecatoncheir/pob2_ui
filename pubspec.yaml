@@ -26,6 +26,11 @@ dependencies:
   posix: ^6.5.2
   xml: 7.1.0
 
+dependency_overrides:
+  # http2 3.2.0 освобождает очереди при завершении с непрочитанными кадрами.
+  # Убрать переопределение, когда grpc разрешит http2 3.2.0.
+  http2: 3.2.0
+
 dev_dependencies:
   integration_test:
     sdk: flutter
