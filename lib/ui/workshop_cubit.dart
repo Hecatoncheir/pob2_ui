@@ -493,36 +493,36 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     }
     final document = state.document;
     final target = state.library;
-    final before = document == null ? null : await _currentXml();
     final incoming = snapshot.build!;
     final keepDisk =
         _managedEngine &&
         binding.inputRevision == 0 &&
         snapshot.revision == _primaryDiskRevision;
     final fileXml = keepDisk ? diskXml : incoming.xml;
-    _markStale();
-    try {
+    if (keepDisk && deferTree && document != null && !document.stale) {
+      _publishReadReport(
+        document.report,
+        target,
+        state.sessionSaved,
+        (tree: null, error: null),
+        deferred: snapshot,
+        backgroundTree: true,
+      );
+    } else {
       await _readMirroredBuild(
         snapshot,
         target,
         (disk: diskXml, file: fileXml),
+        previous: document,
         keepDisk: keepDisk,
-        first: document == null,
         backgroundTree: backgroundTree,
       );
-      _engineXmlBinding = (
-        inputRevision: incoming.inputRevision,
-        libraryRevision: state.library.active!.revision!,
-        fileXml: fileXml,
-      );
-    } catch (_) {
-      if (document != null) {
-        await _restoreWorking(before!, document, target);
-      } else {
-        _update(state.copyWith(clearReport: true));
-      }
-      rethrow;
     }
+    _engineXmlBinding = (
+      inputRevision: incoming.inputRevision,
+      libraryRevision: state.library.active!.revision!,
+      fileXml: fileXml,
+    );
     _seenBuildXml = fileXml;
     await _checkpointPrimarySession(snapshot, fileXml);
   }
@@ -531,27 +531,38 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     EngineSnapshot snapshot,
     LibraryState target,
     ({String disk, String file}) saved, {
+    required WorkshopDocument? previous,
     required bool keepDisk,
-    required bool first,
     required bool backgroundTree,
   }) async {
-    final (:xml, :progression) = splitTreeProgression(snapshot.build!.xml);
-    final workbenchReady = first ? _connect(xml: xml) : null;
-    if (!first) await _loadXml(xml);
-    final report = _readReport(
-      target: target,
-      title: snapshot.buildName,
-      progression: progression,
-      progressionSource: _storedProgressionKey,
-      persist: !keepDisk,
-      savedXml: saved.file,
-      expectedXml: saved.disk,
-      snapshot: snapshot,
-      workbenchReady: workbenchReady,
-      backgroundTree: backgroundTree,
-    );
-    await Future.wait([report, ?workbenchReady]);
-    if (progression == null) await _clearMissingProgression(saved.disk);
+    final before = previous == null ? null : await _currentXml();
+    _markStale();
+    try {
+      final (:xml, :progression) = splitTreeProgression(snapshot.build!.xml);
+      final workbenchReady = previous == null ? _connect(xml: xml) : null;
+      if (previous != null) await _loadXml(xml);
+      final report = _readReport(
+        target: target,
+        title: snapshot.buildName,
+        progression: progression,
+        progressionSource: _storedProgressionKey,
+        persist: !keepDisk,
+        savedXml: saved.file,
+        expectedXml: saved.disk,
+        snapshot: snapshot,
+        workbenchReady: workbenchReady,
+        backgroundTree: backgroundTree,
+      );
+      await Future.wait([report, ?workbenchReady]);
+      if (progression == null) await _clearMissingProgression(saved.disk);
+    } catch (_) {
+      if (previous != null) {
+        await _restoreWorking(before!, previous, target);
+      } else {
+        _update(state.copyWith(clearReport: true));
+      }
+      rethrow;
+    }
   }
 
   Future<void> _clearMissingProgression(String previousXml) async {

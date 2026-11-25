@@ -423,8 +423,10 @@ Future<void> _checkPrimaryShareCode(
   await model.copyShareCode((value) async => code = value);
   expect(code, isNotEmpty);
   await model.importShareCode(code!);
+  final report = model.state.report;
   await model.waitForPrimarySession();
   expect(model.state.error, isNull);
+  expect(model.state.report, same(report));
   final copy = model.engineSession.state.snapshot!;
   expect(copy.sessionId, isNot(sourceId));
   expect(PobBuildDocument(copy.build!.xml).notes, 'Правка файла');
