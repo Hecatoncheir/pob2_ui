@@ -6,7 +6,7 @@
 
 ## Текущий выпуск
 
-**[PoB II v1.0.6](https://github.com/Hecatoncheir/pob2_ui/releases/tag/v1.0.6)** (`1.0.6+55`) выпущен из ветки `1.x.x` с комплектным [pob2_engine v0.0.18](https://github.com/Hecatoncheir/pob2_engine/releases/tag/v0.0.18). Доступны установщики Windows x64 (`.exe`), Linux x64 (`.run`) и macOS arm64 (`.dmg`). Контрольные суммы опубликованы в `SHA256SUMS`. [Подключение к общей сессии](docs/ENGINE-SESSION.md).
+**[PoB II v1.0.7](https://github.com/Hecatoncheir/pob2_ui/releases/tag/v1.0.7)** (`1.0.7+56`) выпущен из ветки `1.x.x` с комплектным [pob2_engine v0.0.18](https://github.com/Hecatoncheir/pob2_engine/releases/tag/v0.0.18). Доступны установщики Windows x64 (`.exe`), Linux x64 (`.run`) и macOS arm64 (`.dmg`). Контрольные суммы опубликованы в `SHA256SUMS`. [Подключение к общей сессии](docs/ENGINE-SESSION.md).
 
 ### Линия 0.x
 

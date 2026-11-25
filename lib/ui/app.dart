@@ -571,13 +571,19 @@ class _SidebarTools extends StatelessWidget {
             padding: const EdgeInsets.fromLTRB(8, 6, 8, 12),
             child: Center(
               key: const Key('engine-connection-status'),
-              child: DotLabel(
-                model.engine.connected
-                    ? 'Подключён PoB2Engine'
-                    : 'PoB2Engine не подключён',
-                active: model.engine.connected,
-                maxLines: 2,
-                textAlign: TextAlign.center,
+              child: Semantics(
+                label: model.engine.connected
+                    ? translateUi(context, 'Подключён PoB2Engine')
+                    : null,
+                excludeSemantics: model.engine.connected,
+                child: DotLabel(
+                  model.engine.connected
+                      ? 'PoB2Engine'
+                      : 'PoB2Engine не подключён',
+                  active: model.engine.connected,
+                  maxLines: 2,
+                  textAlign: TextAlign.center,
+                ),
               ),
             ),
           ),

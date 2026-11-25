@@ -134,15 +134,24 @@ void main() {
       await tester.pumpWidget(PobApp(model: model));
       await tester.pumpAndSettle();
 
-      final label = find.text(
-        connected ? 'Подключён PoB2Engine' : 'PoB2Engine не подключён',
+      final status = find.byKey(const Key('engine-connection-status'));
+      final label = find.descendant(
+        of: status,
+        matching: find.text(
+          connected ? 'PoB2Engine' : 'PoB2Engine не подключён',
+        ),
       );
       expect(label, findsOneWidget);
+      expect(
+        find.bySemanticsLabel(
+          connected ? 'Подключён PoB2Engine' : 'PoB2Engine не подключён',
+        ),
+        findsOneWidget,
+      );
       final text = tester.widget<Text>(label);
       expect(text.textAlign, TextAlign.center);
       expect(text.maxLines, 2);
       expect(text.textWidthBasis, TextWidthBasis.longestLine);
-      final status = find.byKey(const Key('engine-connection-status'));
       final dot = find.descendant(of: status, matching: find.byType(Container));
       final group = tester.getRect(dot).expandToInclude(tester.getRect(label));
       expect(group.center.dx, closeTo(tester.getCenter(status).dx, 0.1));
