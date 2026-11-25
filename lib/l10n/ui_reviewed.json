@@ -68,7 +68,6 @@
     "Оружие": "Weapon",
     "Перевод больше ожидаемого размера": "Translation exceeds the expected size",
     "Перетащите камень сюда или нажмите на иконку для настройки": "Drag a gem here or select its icon to configure it",
-    "Попробуйте пересчитать сборку.": "Try recalculating the build.",
     "Проверить место в профиле": "Check profile disk usage",
     "Рабочая сборка сохранена; не удалось восстановить Lua: {p0}": "The working build was saved; could not restore Lua: {p0}",
     "Регенерация здоровья": "Life regeneration",
