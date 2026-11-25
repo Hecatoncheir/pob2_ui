@@ -236,6 +236,7 @@ class EngineSessionClient
   final bool supportsTreeClass;
   final bool _supportsEditorBridge;
   final Set<String> _workshopCapabilities;
+  final _textureCalls = <ResponseStream<builds.GetTreeTexturesResponse>>{};
   bool _closed = false;
 
   static String _engineExecutable(String configured) {
@@ -565,9 +566,22 @@ class EngineSessionClient
           ),
       ],
     );
-    return _rpc
-        .getTreeTextures(request, options: _workshopReadOptions())
-        .map((reply) => Uint8List.fromList(reply.texture.png));
+    return _readTextureLayers(request);
+  }
+
+  Stream<Uint8List> _readTextureLayers(
+    builds.GetTreeTexturesRequest request,
+  ) async* {
+    if (_closed) return;
+    final call = _rpc.getTreeTextures(request, options: _workshopReadOptions());
+    _textureCalls.add(call);
+    try {
+      await for (final reply in call) {
+        yield Uint8List.fromList(reply.texture.png);
+      }
+    } finally {
+      _textureCalls.remove(call);
+    }
   }
 
   static OriginalTreeScene _engineScene(builds.TreeScene scene) =>
@@ -1382,7 +1396,19 @@ class EngineSessionClient
   Future<void> close() async {
     if (_closed) return;
     _closed = true;
-    await _channel.shutdown();
+    try {
+      final pending = _textureCalls.toList();
+      await Future.wait(pending.map((call) => call.cancel()));
+      await _channel.shutdown().timeout(
+        const Duration(seconds: 3),
+        onTimeout: _channel.terminate,
+      );
+    } finally {
+      await _closeHelper();
+    }
+  }
+
+  Future<void> _closeHelper() async {
     try {
       await _helper.stdin.close();
     } on IOException {
