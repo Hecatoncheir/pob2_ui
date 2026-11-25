@@ -151,6 +151,8 @@ def editor_action_when_idle(editor, action):
         status = editor.call('pob_editor_status')
         if status['busy'] or status['dialogOpen']:
             return False
+        if status['error']:
+            raise RuntimeError(status['error'])
         try:
             editor.call('pob_editor_app', {'action': action})
         except RuntimeError as error:
@@ -160,7 +162,8 @@ def editor_action_when_idle(editor, action):
                 return False
             raise
         return True
-    wait_for(apply, 'Редактор PoB II остался занят перед ' + action, timeout=30)
+    wait_for(apply, 'Редактор PoB II остался занят перед ' + action,
+             timeout=120 if action == 'save' else 30)
 
 
 def assert_window_image(editor):
