@@ -496,17 +496,39 @@ class EngineSessionCubit extends Cubit<EngineSessionState> {
     String control,
     int id,
   ) async {
-    final connection = _connectedTo(current) as EngineSkillChoiceWriter;
+    final connection = _connectedTo(current);
+    final writer = connection as EngineSkillChoiceWriter;
+    final connectionId = _connectionId;
+    Future<EngineSnapshot> choose(EngineSnapshot snapshot) =>
+        writer.chooseSkill(snapshot, control, id, engineRequestId());
     try {
-      return await connection.chooseSkill(
-        current,
-        control,
-        id,
-        engineRequestId(),
-      );
+      try {
+        return await choose(current);
+      } on GrpcError catch (error) {
+        if (error.code != StatusCode.aborted) rethrow;
+        final fresh = await connection.snapshot(current.sessionId);
+        if (!_canRetrySkillChoice(current, fresh, connectionId)) rethrow;
+        return await choose(fresh);
+      }
     } on GrpcError catch (error) {
       throw StateError(engineError(error));
     }
+  }
+
+  bool _canRetrySkillChoice(
+    EngineSnapshot previous,
+    EngineSnapshot fresh,
+    int connectionId,
+  ) {
+    final build = previous.build;
+    return state.connected &&
+        connectionId == _connectionId &&
+        state.snapshot?.sessionId == previous.sessionId &&
+        fresh.sessionId == previous.sessionId &&
+        fresh.revision > previous.revision &&
+        build != null &&
+        fresh.build?.inputRevision == build.inputRevision &&
+        fresh.build?.xml == build.xml;
   }
 
   Future<EngineSnapshot> replaceBuild(

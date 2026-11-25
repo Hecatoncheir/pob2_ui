@@ -459,12 +459,9 @@ class EngineSessionClient
       options: _workshopReadOptions(),
     );
     final data = jsonMap(jsonDecode(utf8.decode(reply.detailsJson)));
-    final revision = snapshot.build?.inputRevision;
+    final revision = reply.revision.toInt();
     if (data['comparison'] case final JsonMap comparison) {
-      data['comparison'] = {
-        ...comparison,
-        'revision': revision ?? reply.revision.toInt(),
-      };
+      data['comparison'] = {...comparison, 'revision': revision};
     }
     return ItemInspection.withBuildRevision(
       ItemInspection.fromJson(data),

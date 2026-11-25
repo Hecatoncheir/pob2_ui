@@ -2,11 +2,13 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:grpc/grpc.dart';
 import 'package:material_ui/material_ui.dart';
 
 import 'support/legacy/component_repository.dart';
 
 import 'package:pob2_ui/data/installation_store.dart';
+import 'package:pob2_ui/data/engine_session_client.dart';
 import 'package:pob2_ui/data/workbench_client.dart';
 import 'package:pob2_ui/data/pob_build_library.dart';
 import 'package:pob2_ui/domain/engine_session.dart';
@@ -66,7 +68,65 @@ class _EquipmentConnection extends FakeEngineConnection {
   }
 }
 
+class _SkillChoiceConnection extends FakeEngineConnection
+    implements EngineSkillChoiceWriter {
+  _SkillChoiceConnection(EngineBuild original, this.freshBuild)
+    : super(EngineSnapshot('main', 'Начальная', 1, build: original));
+
+  final EngineBuild freshBuild;
+  final attemptedRevisions = <int>[];
+
+  @override
+  bool get supportsSkillChoice => true;
+
+  @override
+  Future<EngineSnapshot> chooseSkill(
+    EngineSnapshot snapshot,
+    String control,
+    int id,
+    String requestId,
+  ) async {
+    attemptedRevisions.add(snapshot.revision);
+    if (attemptedRevisions.length == 1) {
+      current = EngineSnapshot('main', 'Начальная', 2, build: freshBuild);
+      throw const GrpcError.aborted();
+    }
+    return snapshot;
+  }
+}
+
 void main() {
+  const original = EngineBuild(xml: '<Build/>', level: 1, inputRevision: 1);
+  for (final (name, fresh, retry) in [
+    ('Расчёт не мешает выбрать умение', original, true),
+    (
+      'Новая входная ревизия отклоняет выбор умения',
+      const EngineBuild(xml: '<Build/>', level: 1, inputRevision: 2),
+      false,
+    ),
+    (
+      'Изменённый XML отклоняет выбор умения',
+      const EngineBuild(xml: '<Build level="2"/>', level: 2, inputRevision: 1),
+      false,
+    ),
+  ]) {
+    test(name, () async {
+      final connection = _SkillChoiceConnection(original, fresh);
+      final cubit = EngineSessionCubit(open: (_) async => connection);
+      addTearDown(connection.events.close);
+      addTearDown(cubit.close);
+
+      await cubit.connect(const EngineOptions());
+      final choice = cubit.chooseSkill(cubit.state.snapshot!, 'groups', 2);
+      if (retry) {
+        expect((await choice).revision, 2);
+      } else {
+        await expectLater(choice, throwsStateError);
+      }
+      expect(connection.attemptedRevisions, retry ? [1, 2] : [1]);
+    });
+  }
+
   test('После переподключения та же ревизия требует новой примерки', () async {
     final first = _EquipmentConnection();
     final second = _EquipmentConnection();

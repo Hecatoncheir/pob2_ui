@@ -63,6 +63,11 @@ class ItemComparisonPanel extends StatelessWidget {
           ),
           const Divider(height: 20),
           for (final row in comparison.rows.where(_visible)) _row(row),
+          for (final warning in comparison.warnings)
+            Padding(
+              padding: const EdgeInsets.only(top: 8),
+              child: PoBText('^1$warning', size: 12),
+            ),
           if (comparison.rows.every((row) => row.change == null))
             const Padding(
               padding: EdgeInsets.only(top: 10),

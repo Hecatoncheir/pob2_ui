@@ -2990,20 +2990,62 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     );
   }
 
-  Future<int> previewSharedEquipment(EngineEquipmentEdit edit) async {
+  Future<ItemInspection> previewEquipmentItem(
+    String slot, {
+    String? raw,
+    int? itemId,
+  }) async {
+    Future<ItemInspection> previewInWorkbench() =>
+        EquipmentRepository(engine)
+            .inspect(slot: slot, raw: raw, itemId: itemId, compare: true);
+    if (!hasSharedTree) return previewInWorkbench();
+
     final epoch = _engineBindingEpoch;
     final (:snapshot, :binding) = _engineEditSource(
       _engineXmlBinding?.inputRevision,
       epoch,
       _staleBuild,
     );
+    final reader = engineSession.workshopReader;
     await _checkEngineFile(binding);
-    final offer = await engineSession.previewEquipment(snapshot, edit);
+    final preview = await reader?.readEquipmentDetails(
+      snapshot,
+      slot: slot,
+      raw: raw,
+      itemId: itemId,
+      compare: true,
+    );
+    if (preview == null) {
+      final fallback = await previewInWorkbench();
+      return _confirmWorkbenchEquipment(fallback, snapshot, (
+        slot: slot,
+        raw: raw ?? '',
+        itemId: itemId ?? 0,
+      ), epoch: epoch);
+    }
+    final current = engineSession.state.snapshot;
     if (!_isCurrentEngineInput(epoch, binding.inputRevision) ||
+        reader != engineSession.workshopReader ||
+        current?.sessionId != snapshot.sessionId ||
+        current?.revision != preview.buildRevision) {
+      throw StateError(_staleBuild);
+    }
+    return preview;
+  }
+
+  Future<ItemInspection> _confirmWorkbenchEquipment(
+    ItemInspection preview,
+    EngineSnapshot snapshot,
+    EngineEquipmentEdit edit, {
+    required int epoch,
+  }) async {
+    if (!preview.compatible) return preview;
+    final offer = await engineSession.previewEquipment(snapshot, edit);
+    if (!_isCurrentEngineInput(epoch, snapshot.build!.inputRevision) ||
         !engineSession.isCurrentEquipmentOffer(offer)) {
       throw StateError(_staleBuild);
     }
-    return offer.preview.revision;
+    return ItemInspection.withBuildRevision(preview, offer.preview.revision);
   }
 
   Future<BuildEditResult> equipItem(

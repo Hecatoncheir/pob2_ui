@@ -616,11 +616,18 @@ Future<void> _checkSharedEquipment(String executable) async {
   final model = opened.model;
   const slot = 'Ring 1';
   const raw = 'Rarity: NORMAL\nLazuli Ring\nImplicits: 1\n+25 to maximum Mana';
-  final revision = await model.previewSharedEquipment((
-    slot: slot,
-    raw: raw,
-    itemId: 0,
-  ));
+  final initial = model.engineSession.state.snapshot!;
+  final calculated = model.engineSession.stream.firstWhere(
+    (state) => (state.snapshot?.revision ?? 0) > initial.revision,
+  );
+  await model.engineSession.calculate(initial);
+  await calculated;
+  final original = await model.previewEquipmentItem(slot, raw: raw);
+  final revision = original.buildRevision!;
+  expect(original.compatible, isTrue);
+  expect(original.comparison?.rows, isNotEmpty);
+  expect(revision, model.engineSession.state.snapshot!.revision);
+  expect(revision, greaterThan(initial.revision));
   final moved = await model.selectWeaponSet(2);
   expect(moved.committed, isTrue, reason: moved.error);
   final stale = await model.equipItem(
@@ -629,15 +636,12 @@ Future<void> _checkSharedEquipment(String executable) async {
     expectedRevision: revision,
   );
   expect(stale.committed, isFalse);
-  final fresh = await model.previewSharedEquipment((
-    slot: slot,
-    raw: raw,
-    itemId: 0,
-  ));
+  final fresh = await model.previewEquipmentItem(slot, raw: raw);
+  expect(fresh.buildRevision, isNot(revision));
   final equipped = await model.equipItem(
     slot,
     raw: raw,
-    expectedRevision: fresh,
+    expectedRevision: fresh.buildRevision!,
   );
   expect(equipped.committed, isTrue, reason: equipped.error);
   final xml = await opened.file.readAsString();
@@ -811,7 +815,7 @@ Future<void> _checkWorkshopForms(String executable) async {
   expect(description.comparison?.rows, isNotEmpty);
   expect(
     description.buildRevision,
-    model.engineSession.state.snapshot!.build!.inputRevision,
+    model.engineSession.state.snapshot!.revision,
   );
   expect(await opened.file.readAsString(), before);
 }

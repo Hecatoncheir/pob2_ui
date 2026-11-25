@@ -5,16 +5,19 @@ class ItemComparison {
     required this.revision,
     required List<ItemComparisonRow> rows,
   }) : reason = null,
+       warnings = const [],
        rows = List.unmodifiable(rows);
 
   ItemComparison.fromJson(JsonMap json)
     : revision = json['revision'] as int,
       reason = json['reason'] as String?,
+      warnings = List.unmodifiable(jsonStrings(json['warnings'])),
       rows = List.unmodifiable(
         jsonRows(json['rows']).map(ItemComparisonRow.fromJson),
       );
   final int revision;
   final String? reason;
+  final List<String> warnings;
   final List<ItemComparisonRow> rows;
 }
 

@@ -141,6 +141,8 @@ class WorkbenchClient {
     _pendingBuild = (xml: xml, mode: mode);
   }
 
+  bool get hasDeferredBuild => _pendingBuild != null;
+
   Future<void> _restoreBuild() async {
     final pending = _pendingBuild;
     if (pending == null) return;

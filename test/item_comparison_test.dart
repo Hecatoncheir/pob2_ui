@@ -5,12 +5,15 @@ import 'package:pob2_ui/ui/core/spark_theme.dart';
 import 'package:pob2_ui/ui/item_comparison_panel.dart';
 import 'package:pob2_ui/ui/item_editor_cubit.dart';
 
+const requirementWarning = 'You do not meet the Strength requirement';
+
 ItemInspection preview({int revision = 7}) => ItemInspection.fromJson({
   'source': 'original-lua',
   'item': {'name': 'Ring', 'raw': 'raw'},
   'compatible': true,
   'comparison': {
     'revision': revision,
+    'warnings': [requirementWarning],
     'rows': [
       {
         'id': 'Life',
@@ -77,6 +80,10 @@ void main() {
         expect(find.text('Стало'), findsOneWidget);
         expect(find.text('+50 (+50%)', findRichText: true), findsOneWidget);
         expect(find.text('-25%', findRichText: true), findsOneWidget);
+        expect(
+          find.text(requirementWarning, findRichText: true),
+          findsOneWidget,
+        );
         expect(find.text('—', findRichText: true), findsOneWidget);
         expect(tester.takeException(), isNull);
       },
