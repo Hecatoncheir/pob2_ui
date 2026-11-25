@@ -25,6 +25,7 @@ import 'workspace_inspector.dart';
 import 'workshop_cubit.dart';
 import 'workshop_state.dart';
 import 'build_notes_dialog.dart';
+import 'tree_window_scope.dart';
 
 class WorkspaceView extends StatelessWidget {
   const WorkspaceView({super.key, required this.model, required this.shell});
@@ -48,11 +49,12 @@ class WorkspaceView extends StatelessWidget {
           before.change != after.change && after.change != null,
       listener: (context, state) =>
           shell.add(WorkshopTabSelected(state.change!.tab)),
-      child: _withPlan(_workspace(context)),
+      child: _withPlan(context, _workspace(context)),
     );
   }
 
-  Widget _withPlan(Widget child) {
+  Widget _withPlan(BuildContext context, Widget child) {
+    if (context.read<TreeProgressionBloc?>() != null) return child;
     final key = model.progressionKey;
     if (key == null) return child;
     return BlocProvider(
@@ -479,6 +481,8 @@ class _EditorStageState extends State<_EditorStage>
           index: state.tab.index,
           children: [
             switch ((document.tree, document.treeError)) {
+              (_?, _) when TreeWindowScope.maybeOf(context) != null =>
+                const TreeWindowChrome(),
               (final tree?, _) => TreeView(model: widget.model, tree: tree),
               (_, final error?) => EmptyPanel(
                 title: 'Дерево пока недоступно',

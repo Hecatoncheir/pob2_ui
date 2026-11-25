@@ -18,6 +18,7 @@ import 'package:pob2_ui/ui/workshop_cubit.dart';
 import 'package:pob2_ui/ui/workshop_state.dart';
 
 import 'support/engine_connection_fake.dart';
+import 'support/tree_interaction.dart';
 import 'support/workshop_fixture.dart';
 
 void main() {
@@ -200,14 +201,13 @@ Future<void> _clickPassive(
   bool secondary = false,
 }) async {
   final search = find.byKey(const Key('tree-search'));
-  final canvas = find.byKey(const Key('passive-tree'));
   await tester.ensureVisible(search);
   await tester.tap(search);
   await tester.enterText(search, '2');
   await tester.testTextInput.receiveAction(TextInputAction.done);
   await tester.pumpAndSettle();
   await tester.tapAt(
-    tester.getCenter(canvas),
+    treeInteractionCenter(tester),
     kind: secondary ? PointerDeviceKind.mouse : PointerDeviceKind.touch,
     buttons: secondary ? kSecondaryMouseButton : kPrimaryButton,
   );

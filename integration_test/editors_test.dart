@@ -23,6 +23,7 @@ import 'package:pob2_ui/data/appearance_repository.dart';
 import 'package:pob2_ui/domain/appearance.dart';
 
 import '../test/support/file_fakes.dart';
+import '../test/support/tree_interaction.dart';
 
 const _witchScenario = 'Ведьма из XML: предпросмотр DPS, применение и история';
 
@@ -265,6 +266,13 @@ Future<void> _tapEditorAction(
   Finder control,
 ) async {
   await tester.tap(control);
+  await _settleEditorAction(tester, model);
+}
+
+Future<void> _settleEditorAction(
+  WidgetTester tester,
+  WorkshopCubit model,
+) async {
   await _wait(tester, () => !model.state.busy);
   await tester.pumpAndSettle();
   expect(model.state.error, isNull);
@@ -338,7 +346,8 @@ Future<void> _allocateWarriorNode(
   await tester.enterText(find.byKey(const Key('tree-search')), '$id');
   await tester.testTextInput.receiveAction(TextInputAction.done);
   await tester.pumpAndSettle();
-  await _tapEditorAction(tester, model, find.byKey(const Key('passive-tree')));
+  await tester.tapAt(treeInteractionCenter(tester));
+  await _settleEditorAction(tester, model);
   expect(_warriorNodeAllocated(model, id), isTrue);
   expect(model.state.report!.stats['TotalDPS'], greaterThan(dps));
   await _tapEditorAction(tester, model, find.byKey(const Key('undo-build')));

@@ -1156,6 +1156,7 @@ Future<void> _applyWorkshopTree(
   final (:model, :file, options: _, flags: _) = opened;
   final result = await model.applySharedTreeNode(preview);
   expect(result.committed, isTrue, reason: result.error);
+  await model.requestTree();
   final node = model.state.document!.tree!.nodes.singleWhere(
     (node) => node.id == preview.offer.edit.nodeId,
   );

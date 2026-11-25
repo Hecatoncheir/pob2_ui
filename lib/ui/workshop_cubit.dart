@@ -60,6 +60,16 @@ typedef _SharedEditSource = ({
   _EngineXmlBinding binding,
   int epoch,
 });
+typedef _TreeArtworkRequest = ({
+  TreeGeometry tree,
+  EngineSnapshot? snapshot,
+  bool needsScene,
+});
+typedef _ApplyTreeRequest = ({
+  BuildReport report,
+  EngineSnapshot snapshot,
+  int epoch,
+});
 typedef WorkshopTreeOffer = ({
   EngineTreeOffer offer,
   int inputRevision,
@@ -74,6 +84,8 @@ typedef WorkshopJewelOffer = ({
 
 const _missingEngineXml = 'В общей сессии нет XML сборки';
 const _staleTree = 'Выполните предпросмотр для текущей ревизии';
+const _staleTreeGeometry =
+    'Сборка или подключение изменились. Обновите сборку, чтобы загрузить дерево.';
 const _staleBuild =
     'Сборка изменилась. Дождитесь новой ревизии и повторите действие';
 const _staleCondition = 'Сборка изменилась. Откройте условие заново.';
@@ -470,8 +482,9 @@ class WorkshopCubit extends Cubit<WorkshopState> {
 
   Future<void> _mirrorEngineBuild(
     EngineSnapshot snapshot,
-    _EngineXmlBinding binding,
-  ) async {
+    _EngineXmlBinding binding, {
+    bool backgroundTree = false,
+  }) async {
     final epoch = _engineBindingEpoch;
     final diskXml = await _checkEngineFile(binding);
     await _flushText();
@@ -495,6 +508,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
         (disk: diskXml, file: fileXml),
         keepDisk: keepDisk,
         first: document == null,
+        backgroundTree: backgroundTree,
       );
       _engineXmlBinding = (
         inputRevision: incoming.inputRevision,
@@ -519,6 +533,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     ({String disk, String file}) saved, {
     required bool keepDisk,
     required bool first,
+    required bool backgroundTree,
   }) async {
     final (:xml, :progression) = splitTreeProgression(snapshot.build!.xml);
     final workbenchReady = first ? _connect(xml: xml) : null;
@@ -533,6 +548,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
       expectedXml: saved.disk,
       snapshot: snapshot,
       workbenchReady: workbenchReady,
+      backgroundTree: backgroundTree,
     );
     await Future.wait([report, ?workbenchReady]);
     if (progression == null) await _clearMissingProgression(saved.disk);
@@ -725,11 +741,15 @@ class WorkshopCubit extends Cubit<WorkshopState> {
   );
   EngineBindingKey? _requestedTreeBuild;
   EngineSnapshot? _deferredTreeSnapshot;
+  _ApplyTreeRequest? _deferredApplyTree;
   ({BuildReport report, Future<void> future})? _treeRead;
-  ({TreeGeometry tree, EngineSnapshot? snapshot, bool needsScene})?
-  _pendingTreeArtwork;
+  _TreeArtworkRequest? _pendingTreeArtwork;
   Future<void>? _treeArtworkLoad;
   ({List<TreeNode> nodes, Rectangle<double> area})? _treeViewport;
+
+  bool get treeGeometryPending =>
+      _deferredApplyTree != null &&
+      identical(_deferredApplyTree?.report, state.report);
 
   void updateTreeViewport(TreeGeometry tree, Rectangle<double> area) {
     _treeViewport = (nodes: tree.nodes, area: area);
@@ -1762,11 +1782,16 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     TreeProgressionKey? progressionSource,
     EngineSnapshot? snapshot,
     Future<void>? workbenchReady,
+    bool backgroundTree = false,
   }) async {
     final (:report, :xml) = await _readResult(snapshot, workbenchReady);
     final validateProgression = progression != null && expectedXml == null;
     final active = target ?? state.library;
-    final readTree = _needsTreeGeometry(active, validateProgression);
+    final readTree = _needsTreeGeometry(
+      active,
+      validateProgression,
+      backgroundTree: backgroundTree,
+    );
     final (:tree, :error) = readTree
         ? await _readWorkshopTree(snapshot, workbenchReady: workbenchReady)
         : (tree: null, error: null);
@@ -1789,25 +1814,63 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     final saved = sharedLibrary != null
         ? builds.active != null
         : await _saveRecovery(xml);
-    _deferredTreeSnapshot = readTree ? null : snapshot;
-    _queueTreeArtwork(tree);
+    _publishReadReport(
+      report,
+      builds,
+      saved,
+      (tree: tree, error: error),
+      deferred: readTree ? null : snapshot,
+      backgroundTree: backgroundTree,
+    );
+  }
+
+  void _publishReadReport(
+    BuildReport report,
+    LibraryState builds,
+    bool saved,
+    ({TreeGeometry? tree, String? error}) geometry, {
+    required EngineSnapshot? deferred,
+    required bool backgroundTree,
+  }) {
+    _deferredTreeSnapshot = deferred;
+    final pending = _deferredApplyTree = switch ((backgroundTree, deferred)) {
+      (true, final snapshot?) => (
+        report: report,
+        snapshot: snapshot,
+        epoch: _engineBindingEpoch,
+      ),
+      _ => null,
+    };
+    _queueTreeArtwork(geometry.tree);
+    final tree = pending == null ? geometry.tree : state.document?.tree;
     _update(
       state.copyWith(
-        document: (report: report, tree: tree, stale: false, treeError: error),
+        document: (
+          report: report,
+          tree: tree,
+          stale: false,
+          treeError: geometry.error,
+        ),
         library: builds,
         sessionSaved: saved,
         status: 'Сборка рассчитана исходным Lua',
       ),
     );
     addLog(state.status);
+    if (pending != null) unawaited(requestTree());
   }
 
-  bool _needsTreeGeometry(LibraryState active, bool validateProgression) =>
-      !deferTree ||
+  bool _needsTreeGeometry(
+    LibraryState active,
+    bool validateProgression, {
+    required bool backgroundTree,
+  }) =>
       validateProgression ||
-      (_requestedTreeBuild != null &&
-          _requestedTreeBuild == _currentEngineBinding &&
-          active.activeId == state.library.activeId);
+      !backgroundTree &&
+          (!deferTree ||
+              (_requestedTreeBuild != null &&
+                  _requestedTreeBuild == _currentEngineBinding &&
+                  active.activeId == state.library.activeId));
 
   Future<LibraryState> _saveBuild(
     LibraryState target,
@@ -1986,9 +2049,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     });
   }
 
-  Future<TreeGeometry> _treeWithScene(
-    ({TreeGeometry tree, EngineSnapshot? snapshot, bool needsScene}) request,
-  ) async {
+  Future<TreeGeometry> _treeWithScene(_TreeArtworkRequest request) async {
     if (!request.needsScene) return request.tree;
     final latest = engineSession.state.snapshot;
     final initial = request.snapshot;
@@ -2034,7 +2095,12 @@ class WorkshopCubit extends Cubit<WorkshopState> {
 
   Future<void> _readRequestedTree(BuildReport report) async {
     final key = _currentEngineBinding;
+    final applied = _deferredApplyTree;
     await _waitForWorkshop();
+    if (applied case final request? when identical(request.report, report)) {
+      await _readAppliedTree(request, key);
+      return;
+    }
     if (!_canReadTree(report, key)) return;
 
     final document = state.document!;
@@ -2049,12 +2115,77 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     await _waitForWorkshop();
     if (!_canReadTree(report, key)) return;
     _queueTreeArtwork(tree, snapshot: snapshot, needsScene: true);
+    _publishTreeGeometry(tree, error);
+  }
+
+  Future<void> _readAppliedTree(
+    _ApplyTreeRequest request,
+    EngineBindingKey? key,
+  ) async {
+    final snapshot = _applyTreeSnapshot(request, key);
+    if (snapshot == null) {
+      _failAppliedTree(request, _staleTreeGeometry);
+      return;
+    }
+    _requestedTreeBuild = key;
+    final (:tree, :error) = await _readDeferredTree(
+      snapshot,
+      includeScene: true,
+    );
+    await _waitForWorkshop();
+    if (_applyTreeSnapshot(request, key) == null) {
+      _failAppliedTree(request, _staleTreeGeometry);
+      return;
+    }
+    if (tree == null) {
+      _failAppliedTree(request, error ?? 'Дерево недоступно');
+      return;
+    }
+    _deferredApplyTree = null;
+    _deferredTreeSnapshot = null;
+    _queueTreeArtwork(tree);
+    _publishTreeGeometry(tree, error);
+  }
+
+  void _failAppliedTree(_ApplyTreeRequest request, String error) {
+    if (_deferredApplyTree != request) return;
+    _deferredApplyTree = null;
+    _deferredTreeSnapshot = null;
+    if (_closing || isClosed || !identical(state.report, request.report)) {
+      return;
+    }
+    _publishTreeGeometry(state.document?.tree, error);
+  }
+
+  EngineSnapshot? _applyTreeSnapshot(
+    _ApplyTreeRequest request,
+    EngineBindingKey? key,
+  ) {
+    final initial = request.snapshot;
+    final input = initial.build!.inputRevision;
+    if (_deferredApplyTree != request ||
+        !_canReadTree(request.report, key) ||
+        request.epoch != _engineBindingEpoch ||
+        input != _engineXmlBinding?.inputRevision) {
+      return null;
+    }
+    final latest = engineSession.state.snapshot;
+    if (latest == null || latest.sessionId != initial.sessionId) return null;
+    final latestInput = latest.build?.inputRevision ?? 0;
+    if (latestInput > input) return null;
+    return latestInput == input && latest.revision >= initial.revision
+        ? latest
+        : initial;
+  }
+
+  void _publishTreeGeometry(TreeGeometry? tree, String? error) {
+    final document = state.document!;
     _update(
       state.copyWith(
         document: (
           report: document.report,
           tree: tree,
-          stale: false,
+          stale: document.stale,
           treeError: error,
         ),
       ),
@@ -2640,6 +2771,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
         epoch: preview.bindingEpoch,
         staleMessage: _staleTree,
         apply: (_) => engineSession.editTree(preview.offer),
+        backgroundTree: true,
       );
 
   Future<void> selectTreeMode(TreeAllocationMode mode) => _run(() async {
@@ -2975,6 +3107,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     required Future<EngineSnapshot> Function(EngineSnapshot) apply,
     bool calculate = false,
     bool recordUndo = true,
+    bool backgroundTree = false,
   }) async {
     var committed = false;
     await _run(() async {
@@ -2987,7 +3120,13 @@ class WorkshopCubit extends Cubit<WorkshopState> {
       if (epoch != _engineBindingEpoch) throw StateError(staleMessage);
       final updated = await apply(snapshot);
       if (epoch != _engineBindingEpoch) throw StateError(staleMessage);
-      await _acceptEngineEdit(snapshot, updated, binding, recordUndo);
+      await _acceptEngineEdit(
+        snapshot,
+        updated,
+        binding,
+        recordUndo,
+        backgroundTree: backgroundTree,
+      );
       committed = true;
       if (calculate) unawaited(_calculateEngineCondition(updated));
     });
@@ -3001,10 +3140,11 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     EngineSnapshot before,
     EngineSnapshot after,
     _EngineXmlBinding binding,
-    bool recordUndo,
-  ) async {
+    bool recordUndo, {
+    bool backgroundTree = false,
+  }) async {
     if (after.build!.inputRevision <= binding.inputRevision) return;
-    await _mirrorEngineBuild(after, binding);
+    await _mirrorEngineBuild(after, binding, backgroundTree: backgroundTree);
     if (recordUndo) _pushUndo(before.build!.xml, title: before.buildName);
   }
 

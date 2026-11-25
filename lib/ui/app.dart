@@ -51,8 +51,11 @@ import 'setup_wizard.dart';
 import 'mcp_editor_ui.dart';
 import 'mcp_ui_driver.dart';
 import 'core/ui_translation.dart';
+import 'core/tree_glass.dart';
 import 'engine_session_view.dart';
 import 'engine_session_dialog.dart';
+import 'tree_view.dart';
+import 'tree_progression_bloc.dart';
 
 class PobApp extends StatelessWidget {
   const PobApp({
@@ -258,7 +261,12 @@ class _Shell extends StatelessWidget {
           builder: (context, state) {
             final shell = context.read<ShellBloc>();
             final narrow = MediaQuery.sizeOf(context).width < 650;
-            return Scaffold(
+            final glass =
+                model.state.document?.tree != null &&
+                state.page == AppPage.workspace &&
+                state.tab == WorkshopTab.tree;
+            final foreground = Scaffold(
+              backgroundColor: glass ? Colors.transparent : null,
               body: SafeArea(
                 child: ScrollableWorkspace(
                   child: Row(
@@ -298,9 +306,45 @@ class _Shell extends StatelessWidget {
                   ? _BottomNav(state.page, shell)
                   : null,
             );
+            return _withTree(context, glass, foreground);
           },
         ),
       );
+
+  Widget _withTree(BuildContext context, bool glass, Widget foreground) {
+    final tree = model.state.document?.tree;
+    if (tree == null) return foreground;
+    final theme = Theme.of(context);
+    final content = TreeGlassScope(
+      active: glass,
+      child: Theme(
+        data: glass
+            ? theme.copyWith(
+                inputDecorationTheme: theme.inputDecorationTheme.copyWith(
+                  fillColor: Spark.of(context).surface.withValues(alpha: .30),
+                ),
+              )
+            : theme,
+        child: TreeView(
+          key: ObjectKey(model.engine),
+          model: model,
+          tree: tree,
+          active: glass,
+          foreground: foreground,
+        ),
+      ),
+    );
+    final key = model.progressionKey;
+    if (key == null) return content;
+    return BlocProvider(
+      key: ValueKey(key),
+      create: (_) =>
+          TreeProgressionBloc(model.progressionRepository(key))
+            ..add(const TreeProgressionOpened()),
+      child: content,
+    );
+  }
+
   Widget _page(AppPage page, WorkshopCubit model, ShellBloc shell) =>
       switch (page) {
         AppPage.library => LibraryView(model: model, shell: shell),
@@ -514,7 +558,7 @@ class _SidebarTools extends StatelessWidget {
   Widget build(BuildContext context) => Container(
     padding: EdgeInsets.symmetric(horizontal: compact ? 0 : 8, vertical: 8),
     decoration: BoxDecoration(
-      color: Spark.of(context).surface,
+      color: TreeGlassScope.surface(context, Spark.of(context).surface),
       borderRadius: BorderRadius.circular(16),
       border: Border.all(color: Spark.of(context).line),
     ),
@@ -733,7 +777,7 @@ class _BottomNav extends StatelessWidget {
   @override
   Widget build(BuildContext context) => NavigationBar(
     height: 68,
-    backgroundColor: Spark.of(context).surface,
+    backgroundColor: TreeGlassScope.surface(context, Spark.of(context).surface),
     indicatorColor: Spark.of(context).sage,
     selectedIndex: page.index,
     onDestinationSelected: (index) =>

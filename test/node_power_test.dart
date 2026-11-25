@@ -266,8 +266,8 @@ void main() {
     addTearDown(model.close);
     await tester.pumpWidget(PobApp(model: model));
     await tester.pumpAndSettle();
-    final treeCanvas = find.byKey(const Key('passive-tree'));
-    final originalHeight = tester.getSize(treeCanvas).height;
+    final treeViewport = find.byKey(const Key('tree-interaction-viewport'));
+    final originalHeight = tester.getSize(treeViewport).height;
     expect(find.byIcon(Icons.manage_search_rounded), findsOneWidget);
     expect(find.byIcon(Icons.leaderboard_outlined), findsOneWidget);
     await tester.tap(find.byKey(const Key('node-power-toggle')));
@@ -285,7 +285,10 @@ void main() {
     );
     expect(find.byKey(const ValueKey('power-node-1')), findsOneWidget);
     expect(tester.getSize(panel).height, lessThanOrEqualTo(210));
-    expect(tester.getSize(treeCanvas).height, greaterThan(originalHeight * .4));
+    expect(
+      tester.getSize(treeViewport).height,
+      greaterThan(originalHeight * .4),
+    );
     await tester.drag(
       find.byKey(const ValueKey('power-node-1')),
       const Offset(0, -80),
@@ -299,10 +302,10 @@ void main() {
       find.byKey(const Key('node-power-stat')).hitTestable(),
       findsOneWidget,
     );
-    final expandedHeight = tester.getSize(treeCanvas).height;
+    final expandedHeight = tester.getSize(treeViewport).height;
     await tester.tap(find.byKey(const Key('node-power-collapse')));
     await tester.pumpAndSettle();
-    expect(tester.getSize(treeCanvas).height, greaterThan(expandedHeight));
+    expect(tester.getSize(treeViewport).height, greaterThan(expandedHeight));
     await tester.tap(find.byKey(const ValueKey('tab-conditions')));
     await tester.pumpAndSettle();
     await tester.tap(find.byKey(const Key('open-statistics')));
