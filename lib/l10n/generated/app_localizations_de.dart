@@ -586,6 +586,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get me1daa9e250 => 'Baum';
 
   @override
+  String get m4c84b5ae39 => 'Baum nicht verfügbar';
+
+  @override
   String m0e1306f92c(String p0) {
     return 'Baum nicht verfügbar: $p0';
   }
@@ -2340,6 +2343,10 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get m544bec7909 =>
       'Der Build ändert sich, nachdem Sie auf „Übernehmen“ geklickt haben.';
+
+  @override
+  String get maec22a5cb3 =>
+      'Der Build oder die Verbindung hat sich geändert. Aktualisiere den Build, um den Baum zu laden.';
 
   @override
   String get m5c8bb47697 => 'Baugruppe nicht gefunden';

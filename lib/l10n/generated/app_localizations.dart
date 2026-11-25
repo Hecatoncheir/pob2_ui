@@ -1145,6 +1145,12 @@ abstract class AppLocalizations {
   /// **'Tree'**
   String get me1daa9e250;
 
+  /// Дерево недоступно
+  ///
+  /// In en, this message translates to:
+  /// **'Tree unavailable'**
+  String get m4c84b5ae39;
+
   /// Дерево недоступно: {p0}
   ///
   /// In en, this message translates to:
@@ -4307,6 +4313,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'The build will change after clicking \"Apply\"'**
   String get m544bec7909;
+
+  /// Сборка или подключение изменились. Обновите сборку, чтобы загрузить дерево.
+  ///
+  /// In en, this message translates to:
+  /// **'The build or connection has changed. Refresh the build to load the tree.'**
+  String get maec22a5cb3;
 
   /// Сборка не найдена
   ///

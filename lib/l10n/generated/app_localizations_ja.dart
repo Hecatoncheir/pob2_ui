@@ -555,6 +555,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get me1daa9e250 => 'ツリー';
 
   @override
+  String get m4c84b5ae39 => 'パッシブツリーを表示できません';
+
+  @override
   String m0e1306f92c(String p0) {
     return 'ツリーが利用できません: $p0';
   }
@@ -2252,6 +2255,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m544bec7909 => '「適用」をクリックするとビルドが変更されます';
+
+  @override
+  String get maec22a5cb3 => 'ビルドまたは接続が変更されました。ビルドを更新してパッシブツリーを読み込んでください。';
 
   @override
   String get m5c8bb47697 => 'アセンブリが見つかりません';

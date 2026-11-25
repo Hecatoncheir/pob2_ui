@@ -337,6 +337,8 @@ final uiExactTranslations = <String, String Function(AppLocalizations)>{
   "Actions per second": (l) => l.m062c95654b,
   "Дерево": (l) => l.me1daa9e250,
   "Tree": (l) => l.me1daa9e250,
+  "Дерево недоступно": (l) => l.m4c84b5ae39,
+  "Tree unavailable": (l) => l.m4c84b5ae39,
   "Дерево пассивов": (l) => l.mb7363b6692,
   "Passive tree": (l) => l.mb7363b6692,
   "Дерево пока недоступно": (l) => l.m57d9f5cb7c,
@@ -1327,6 +1329,11 @@ final uiExactTranslations = <String, String Function(AppLocalizations)>{
   "The build has changed. Recalculate the paths.": (l) => l.md582f99ed2,
   "Сборка изменится после нажатия «Применить»": (l) => l.m544bec7909,
   "The build will change after clicking \"Apply\"": (l) => l.m544bec7909,
+  "Сборка или подключение изменились. Обновите сборку, чтобы загрузить дерево.":
+      (l) => l.maec22a5cb3,
+  "The build or connection has changed. Refresh the build to load the tree.": (
+    l,
+  ) => l.maec22a5cb3,
   "Сборка не найдена": (l) => l.m5c8bb47697,
   "Build not found": (l) => l.m5c8bb47697,
   "Сборка обновлена": (l) => l.m460924c692,

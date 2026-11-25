@@ -562,6 +562,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get me1daa9e250 => 'Дерево';
 
   @override
+  String get m4c84b5ae39 => 'Дерево недоступно';
+
+  @override
   String m0e1306f92c(String p0) {
     return 'Дерево недоступно: $p0';
   }
@@ -2288,6 +2291,10 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get m544bec7909 => 'Сборка изменится после нажатия «Применить»';
+
+  @override
+  String get maec22a5cb3 =>
+      'Сборка или подключение изменились. Обновите сборку, чтобы загрузить дерево.';
 
   @override
   String get m5c8bb47697 => 'Сборка не найдена';

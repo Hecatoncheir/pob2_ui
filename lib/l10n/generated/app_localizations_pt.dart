@@ -568,6 +568,9 @@ class AppLocalizationsPt extends AppLocalizations {
   String get me1daa9e250 => 'Árvore';
 
   @override
+  String get m4c84b5ae39 => 'Árvore indisponível';
+
+  @override
   String m0e1306f92c(String p0) {
     return 'Árvore indisponível: $p0';
   }
@@ -2309,6 +2312,10 @@ class AppLocalizationsPt extends AppLocalizations {
   @override
   String get m544bec7909 =>
       'A compilação será alterada após clicar em \"Aplicar\"';
+
+  @override
+  String get maec22a5cb3 =>
+      'A build ou a conexão mudou. Atualize a build para carregar a árvore.';
 
   @override
   String get m5c8bb47697 => 'Montagem não encontrada';
@@ -3525,6 +3532,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get me1daa9e250 => 'Árvore';
 
   @override
+  String get m4c84b5ae39 => 'Árvore indisponível';
+
+  @override
   String m0e1306f92c(String p0) {
     return 'Árvore indisponível: $p0';
   }
@@ -5266,6 +5276,10 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   @override
   String get m544bec7909 =>
       'A compilação será alterada após clicar em \"Aplicar\"';
+
+  @override
+  String get maec22a5cb3 =>
+      'A build ou a conexão mudou. Atualize a build para carregar a árvore.';
 
   @override
   String get m5c8bb47697 => 'Montagem não encontrada';

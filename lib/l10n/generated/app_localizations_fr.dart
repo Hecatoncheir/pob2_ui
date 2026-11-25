@@ -585,6 +585,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get me1daa9e250 => 'Arbre';
 
   @override
+  String get m4c84b5ae39 => 'Arbre indisponible';
+
+  @override
   String m0e1306f92c(String p0) {
     return 'Arbre indisponible : $p0';
   }
@@ -2340,6 +2343,10 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get m544bec7909 =>
       'La build changera après avoir cliqué sur \"Appliquer\"';
+
+  @override
+  String get maec22a5cb3 =>
+      'Le build ou la connexion a changé. Actualisez le build pour charger l’arbre.';
 
   @override
   String get m5c8bb47697 => 'Assemblage introuvable';

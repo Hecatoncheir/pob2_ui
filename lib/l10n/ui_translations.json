@@ -171,6 +171,7 @@
     "me3c3ea3a85": "Действие недоступно",
     "m062c95654b": "Действий в секунду",
     "me1daa9e250": "Дерево",
+    "m4c84b5ae39": "Дерево недоступно",
     "m0e1306f92c": "Дерево недоступно: {p0}",
     "mb7363b6692": "Дерево пассивов",
     "m57d9f5cb7c": "Дерево пока недоступно",
@@ -698,6 +699,7 @@
     "m1aee4fe817": "Сборка изменилась. Откройте этап снова.",
     "md582f99ed2": "Сборка изменилась. Пересчитайте пути.",
     "m544bec7909": "Сборка изменится после нажатия «Применить»",
+    "maec22a5cb3": "Сборка или подключение изменились. Обновите сборку, чтобы загрузить дерево.",
     "m5c8bb47697": "Сборка не найдена",
     "m460924c692": "Сборка обновлена",
     "ma8f340d211": "Сборка обновлена из Path of Building",
@@ -1795,7 +1797,9 @@
     "m3a77f812b1": "The engine is up to date",
     "m3eaf0b57cf": "Reading engine version…",
     "m3a1df08aa5": "The local bridge connects PoB II to the original Path of Building window. PoB2Engine can use it to import the build open there, import a character, or read the builds folder from the original PoB settings.",
-    "m03be18c368": "The engine did not return all atlas layers"
+    "m03be18c368": "The engine did not return all atlas layers",
+    "m4c84b5ae39": "Tree unavailable",
+    "maec22a5cb3": "The build or connection has changed. Refresh the build to load the tree."
   },
   "fr": {
     "m0c63e733f9": "Lua n'a pas renvoyé toutes les icônes",
@@ -2694,7 +2698,9 @@
     "m3a77f812b1": "Le moteur est à jour",
     "m3eaf0b57cf": "Lecture de la version du moteur…",
     "m3a1df08aa5": "Le pont local relie PoB II à la fenêtre de Path of Building d’origine. PoB2Engine peut ainsi importer le build ouvert dans cette fenêtre, importer un personnage ou lire le dossier des builds dans les paramètres de PoB d’origine.",
-    "m03be18c368": "Le moteur n’a pas renvoyé toutes les couches de l’atlas"
+    "m03be18c368": "Le moteur n’a pas renvoyé toutes les couches de l’atlas",
+    "m4c84b5ae39": "Arbre indisponible",
+    "maec22a5cb3": "Le build ou la connexion a changé. Actualisez le build pour charger l’arbre."
   },
   "de": {
     "m0c63e733f9": "Lua hat nicht alle Symbole zurückgegeben",
@@ -3593,7 +3599,9 @@
     "m3a77f812b1": "Die Engine ist auf dem neuesten Stand",
     "m3eaf0b57cf": "Lese-Engine-Version…",
     "m3a1df08aa5": "Die lokale Brücke verbindet PoB II mit dem Fenster des ursprünglichen Path of Building. PoB2Engine kann darüber den dort geöffneten Build oder einen Charakter importieren und den Build-Ordner aus den Einstellungen des ursprünglichen PoB auslesen.",
-    "m03be18c368": "Die Engine hat nicht alle Ebenen des Atlas zurückgegeben"
+    "m03be18c368": "Die Engine hat nicht alle Ebenen des Atlas zurückgegeben",
+    "m4c84b5ae39": "Baum nicht verfügbar",
+    "maec22a5cb3": "Der Build oder die Verbindung hat sich geändert. Aktualisiere den Build, um den Baum zu laden."
   },
   "es": {
     "m0c63e733f9": "Lua no devolvió todos los íconos",
@@ -4492,7 +4500,9 @@
     "m3a77f812b1": "El motor está al día.",
     "m3eaf0b57cf": "Leyendo la versión del motor…",
     "m3a1df08aa5": "El puente local conecta PoB II con la ventana del Path of Building original. PoB2Engine puede usarlo para importar la build que esté abierta allí, importar un personaje o consultar la carpeta de builds en la configuración del PoB original.",
-    "m03be18c368": "El motor no devolvió todas las capas del atlas"
+    "m03be18c368": "El motor no devolvió todas las capas del atlas",
+    "m4c84b5ae39": "Árbol no disponible",
+    "maec22a5cb3": "La build o la conexión ha cambiado. Actualiza la build para cargar el árbol."
   },
   "pt_BR": {
     "m0c63e733f9": "Lua não retornou todos os ícones",
@@ -5391,7 +5401,9 @@
     "m3a77f812b1": "O mecanismo está atualizado",
     "m3eaf0b57cf": "Lendo a versão do mecanismo…",
     "m3a1df08aa5": "A ponte local conecta o PoB II à janela do Path of Building original. Por ela, o PoB2Engine pode importar a build aberta, importar um personagem ou consultar a pasta de builds nas configurações do PoB original.",
-    "m03be18c368": "O motor não retornou todas as camadas do atlas"
+    "m03be18c368": "O motor não retornou todas as camadas do atlas",
+    "m4c84b5ae39": "Árvore indisponível",
+    "maec22a5cb3": "A build ou a conexão mudou. Atualize a build para carregar a árvore."
   },
   "ja": {
     "m0c63e733f9": "Lua はすべてのアイコンを返しませんでした",
@@ -6290,7 +6302,9 @@
     "m3a77f812b1": "エンジンは最新です",
     "m3eaf0b57cf": "読み取りエンジンのバージョン…",
     "m3a1df08aa5": "ローカルブリッジは PoB II とオリジナルの Path of Building のウィンドウを接続します。PoB2Engine は、この接続を使って開いているビルドやキャラクターをインポートしたり、オリジナルの PoB の設定からビルドフォルダーを確認したりできます。",
-    "m03be18c368": "エンジンからアトラスの全レイヤーが返されませんでした"
+    "m03be18c368": "エンジンからアトラスの全レイヤーが返されませんでした",
+    "m4c84b5ae39": "パッシブツリーを表示できません",
+    "maec22a5cb3": "ビルドまたは接続が変更されました。ビルドを更新してパッシブツリーを読み込んでください。"
   },
   "ko": {
     "m0c63e733f9": "Lua이 모든 아이콘을 반환하지 않았습니다.",
@@ -7189,7 +7203,9 @@
     "m3a77f812b1": "엔진이 최신입니다",
     "m3eaf0b57cf": "엔진 버전을 읽는 중…",
     "m3a1df08aa5": "로컬 브리지는 PoB II를 원본 Path of Building 창에 연결합니다. PoB2Engine은 이 연결을 통해 열린 빌드나 캐릭터를 가져오거나 원본 PoB 설정에서 빌드 폴더를 확인할 수 있습니다.",
-    "m03be18c368": "엔진이 아틀라스의 모든 레이어를 반환하지 않았습니다"
+    "m03be18c368": "엔진이 아틀라스의 모든 레이어를 반환하지 않았습니다",
+    "m4c84b5ae39": "패시브 트리를 사용할 수 없습니다",
+    "maec22a5cb3": "빌드 또는 연결이 변경되었습니다. 패시브 트리를 불러오려면 빌드를 새로 고치세요."
   },
   "th": {
     "m0c63e733f9": "Lua ไม่ได้ส่งคืนไอคอนทั้งหมด",
@@ -8088,7 +8104,9 @@
     "m3a77f812b1": "เครื่องยนต์เป็นเวอร์ชันล่าสุดแล้ว",
     "m3eaf0b57cf": "กำลังอ่านเวอร์ชันเอ็นจิ้น…",
     "m3a1df08aa5": "บริดจ์ภายในเครื่องเชื่อมต่อ PoB II กับหน้าต่าง Path of Building ต้นฉบับ PoB2Engine สามารถใช้การเชื่อมต่อนี้เพื่อนำเข้าบิลด์ที่เปิดอยู่ นำเข้าตัวละคร หรือดูโฟลเดอร์บิลด์จากการตั้งค่าของ PoB ต้นฉบับ",
-    "m03be18c368": "เอนจินส่งคืนเลเยอร์ของแอตลาสไม่ครบ"
+    "m03be18c368": "เอนจินส่งคืนเลเยอร์ของแอตลาสไม่ครบ",
+    "m4c84b5ae39": "ไม่สามารถแสดงผังพาสซีฟได้",
+    "maec22a5cb3": "บิลด์หรือการเชื่อมต่อมีการเปลี่ยนแปลง โปรดรีเฟรชบิลด์เพื่อโหลดผังพาสซีฟ"
   },
   "zh_Hant": {
     "m0c63e733f9": "Lua 未傳回所有圖標",
@@ -8987,6 +9005,8 @@
     "m3a77f812b1": "引擎是最新的",
     "m3eaf0b57cf": "正在讀取引擎版本...",
     "m3a1df08aa5": "本機橋接功能可將 PoB II 連接至原版 Path of Building 視窗。PoB2Engine 可透過這個連線匯入視窗中開啟的配置、匯入角色，或從原版 PoB 的設定取得配置資料夾的位置。",
-    "m03be18c368": "引擎未傳回圖集的所有圖層"
+    "m03be18c368": "引擎未傳回圖集的所有圖層",
+    "m4c84b5ae39": "無法顯示天賦樹",
+    "maec22a5cb3": "流派配置或連線已變更。請重新整理流派配置以載入天賦樹。"
   }
 }

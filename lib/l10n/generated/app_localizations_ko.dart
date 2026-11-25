@@ -555,6 +555,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get me1daa9e250 => '트리';
 
   @override
+  String get m4c84b5ae39 => '패시브 트리를 사용할 수 없습니다';
+
+  @override
   String m0e1306f92c(String p0) {
     return '트리를 사용할 수 없음: $p0';
   }
@@ -2252,6 +2255,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m544bec7909 => '\"적용\"을 클릭하면 빌드가 변경됩니다.';
+
+  @override
+  String get maec22a5cb3 => '빌드 또는 연결이 변경되었습니다. 패시브 트리를 불러오려면 빌드를 새로 고치세요.';
 
   @override
   String get m5c8bb47697 => '어셈블리를 찾을 수 없습니다.';

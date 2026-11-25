@@ -575,6 +575,9 @@ class AppLocalizationsEs extends AppLocalizations {
   String get me1daa9e250 => 'Árbol';
 
   @override
+  String get m4c84b5ae39 => 'Árbol no disponible';
+
+  @override
   String m0e1306f92c(String p0) {
     return 'Árbol no disponible: $p0';
   }
@@ -2324,6 +2327,10 @@ class AppLocalizationsEs extends AppLocalizations {
   @override
   String get m544bec7909 =>
       'La compilación cambiará después de hacer clic en \"Aplicar\"';
+
+  @override
+  String get maec22a5cb3 =>
+      'La build o la conexión ha cambiado. Actualiza la build para cargar el árbol.';
 
   @override
   String get m5c8bb47697 => 'Conjunto no encontrado';

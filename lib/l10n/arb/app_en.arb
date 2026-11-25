@@ -922,6 +922,11 @@
     "description": "Дерево",
     "placeholders": {}
   },
+  "m4c84b5ae39": "Tree unavailable",
+  "@m4c84b5ae39": {
+    "description": "Дерево недоступно",
+    "placeholders": {}
+  },
   "m0e1306f92c": "Tree unavailable: {p0}",
   "@m0e1306f92c": {
     "description": "Дерево недоступно: {p0}",
@@ -3788,6 +3793,11 @@
   "m544bec7909": "The build will change after clicking \"Apply\"",
   "@m544bec7909": {
     "description": "Сборка изменится после нажатия «Применить»",
+    "placeholders": {}
+  },
+  "maec22a5cb3": "The build or connection has changed. Refresh the build to load the tree.",
+  "@maec22a5cb3": {
+    "description": "Сборка или подключение изменились. Обновите сборку, чтобы загрузить дерево.",
     "placeholders": {}
   },
   "m5c8bb47697": "Build not found",

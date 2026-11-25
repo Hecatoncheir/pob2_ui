@@ -565,6 +565,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get me1daa9e250 => 'Tree';
 
   @override
+  String get m4c84b5ae39 => 'Tree unavailable';
+
+  @override
   String m0e1306f92c(String p0) {
     return 'Tree unavailable: $p0';
   }
@@ -2288,6 +2291,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get m544bec7909 => 'The build will change after clicking \"Apply\"';
+
+  @override
+  String get maec22a5cb3 =>
+      'The build or connection has changed. Refresh the build to load the tree.';
 
   @override
   String get m5c8bb47697 => 'Build not found';

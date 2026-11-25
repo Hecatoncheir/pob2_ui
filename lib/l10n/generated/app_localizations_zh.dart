@@ -552,6 +552,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get me1daa9e250 => '天賦樹';
 
   @override
+  String get m4c84b5ae39 => '無法顯示天賦樹';
+
+  @override
   String m0e1306f92c(String p0) {
     return '樹不可用：$p0';
   }
@@ -2244,6 +2247,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m544bec7909 => '點選「應用」後建置將會發生變化';
+
+  @override
+  String get maec22a5cb3 => '流派配置或連線已變更。請重新整理流派配置以載入天賦樹。';
 
   @override
   String get m5c8bb47697 => '找不到程序集';
@@ -3415,6 +3421,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get me1daa9e250 => '天賦樹';
 
   @override
+  String get m4c84b5ae39 => '無法顯示天賦樹';
+
+  @override
   String m0e1306f92c(String p0) {
     return '樹不可用：$p0';
   }
@@ -5107,6 +5116,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m544bec7909 => '點選「應用」後建置將會發生變化';
+
+  @override
+  String get maec22a5cb3 => '流派配置或連線已變更。請重新整理流派配置以載入天賦樹。';
 
   @override
   String get m5c8bb47697 => '找不到程序集';

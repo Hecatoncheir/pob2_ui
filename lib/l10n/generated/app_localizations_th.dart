@@ -561,6 +561,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get me1daa9e250 => 'ผังพาสซีฟ';
 
   @override
+  String get m4c84b5ae39 => 'ไม่สามารถแสดงผังพาสซีฟได้';
+
+  @override
   String m0e1306f92c(String p0) {
     return 'แผนผังไม่พร้อมใช้งาน: $p0';
   }
@@ -2273,6 +2276,10 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m544bec7909 => 'โครงสร้างจะเปลี่ยนไปหลังจากคลิก \"นำไปใช้\"';
+
+  @override
+  String get maec22a5cb3 =>
+      'บิลด์หรือการเชื่อมต่อมีการเปลี่ยนแปลง โปรดรีเฟรชบิลด์เพื่อโหลดผังพาสซีฟ';
 
   @override
   String get m5c8bb47697 => 'ไม่พบชุดประกอบ';
