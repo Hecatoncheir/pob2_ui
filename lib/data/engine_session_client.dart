@@ -1382,7 +1382,7 @@ class EngineSessionClient
   Future<void> close() async {
     if (_closed) return;
     _closed = true;
-    await _channel.terminate();
+    await _channel.shutdown();
     try {
       await _helper.stdin.close();
     } on IOException {

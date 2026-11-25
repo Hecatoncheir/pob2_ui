@@ -3404,6 +3404,7 @@ class WorkshopCubit extends Cubit<WorkshopState> {
   @override
   Future<void> close() async {
     _closing = true;
+    await _treeArtworkLoad;
     await engineSession.close();
     await _primaryOpening;
     _buildChangeDelay?.cancel();
@@ -3413,7 +3414,6 @@ class WorkshopCubit extends Cubit<WorkshopState> {
     await _mcpEditor?.close();
     await _flushText();
     await engine.close();
-    await _treeArtworkLoad;
     await components.profileUse?.close();
     await super.close();
   }
