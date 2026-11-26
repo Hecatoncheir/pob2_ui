@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
 
+import '../domain/build_card_appearance.dart';
 import '../domain/build_report.dart';
 import '../domain/library_entry.dart';
 import 'atomic_text_file.dart';
@@ -15,6 +16,11 @@ abstract interface class BuildStorage {
     String xml, {
     String? title,
   });
+  Future<LibraryState> updateAppearance(
+    LibraryState state,
+    String id,
+    BuildCardAppearance appearance,
+  );
   Future<LibraryState> remove(LibraryState state, String id);
   Future<String> read(String id);
 }
@@ -141,7 +147,7 @@ class BuildLibrary implements BuildStorage {
     if (!await _xml(entry.id).exists()) return entry;
     final revision = newId();
     await files.write(_revision(revision), await _xml(entry.id).readAsString());
-    return entry.withRevision(revision);
+    return entry.copyWith(revision: revision);
   }
 
   Future<void> writeIndex(LibraryState state, {bool backup = true}) async {
@@ -163,14 +169,16 @@ class BuildLibrary implements BuildStorage {
     String xml, {
     String? title,
   }) async {
+    final active = state.active;
     final id = state.activeId ?? newId();
     final entry = LibraryEntry(
       id: id,
-      title: title ?? state.active?.title ?? report.name,
+      title: title ?? active?.title ?? report.name,
       characterClass: report.characterClass,
       level: report.level,
       updated: DateTime.now(),
       revision: newId(),
+      appearance: active?.appearance ?? const BuildCardAppearance(),
     );
     await files.write(_revision(entry.revision!), xml);
     await files.write(_xml(id), xml);
@@ -178,6 +186,17 @@ class BuildLibrary implements BuildStorage {
       activeId: id,
       entries: [entry, ...state.entries.where((item) => item.id != id)],
     );
+    await writeIndex(next);
+    return next;
+  }
+
+  @override
+  Future<LibraryState> updateAppearance(
+    LibraryState state,
+    String id,
+    BuildCardAppearance appearance,
+  ) async {
+    final next = state.withAppearance(id, appearance);
     await writeIndex(next);
     return next;
   }

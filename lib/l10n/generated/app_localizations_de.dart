@@ -235,6 +235,12 @@ class AppLocalizationsDe extends AppLocalizations {
   String get m0792a052a1 => 'Keine Begrenzung';
 
   @override
+  String get m312fc0deca => 'Ohne Akzentfarbe';
+
+  @override
+  String get m1174a37a5a => 'Türkis';
+
+  @override
   String get mfc52cf98ef => 'Blockieren';
 
   @override
@@ -849,10 +855,16 @@ class AppLocalizationsDe extends AppLocalizations {
   String get m0cc21de8b8 => 'Leben';
 
   @override
+  String get ma4bb19e143 => 'Grün';
+
+  @override
   String get mf869293c62 => 'Wert';
 
   @override
   String get mf6a527732e => 'Wert aus dem aktuellen Lua PoB-Bericht.';
+
+  @override
+  String get mb039d623c2 => 'Gold';
 
   @override
   String get ma9f9d23dcb => 'Spielübersetzungen werden geladen…';
@@ -889,6 +901,9 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get m1ccb8777b8 => 'Steinbild nicht verfügbar';
+
+  @override
+  String get ma3bb99f458 => 'Symbol';
 
   @override
   String get medafd2f9d8 => 'Importieren eines Charakters aus PoB';
@@ -1003,6 +1018,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get mcf9fbc3f41 => 'Die Übertragungsprüfsumme stimmte nicht überein';
 
   @override
+  String get m21b4d916f3 => 'Rot';
+
+  @override
   String get m6916d088f3 => 'Krit. Chance';
 
   @override
@@ -1053,6 +1071,9 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get mbe517dba6c => 'Schnittstellenskala';
+
+  @override
+  String get mbf2ab0ec3e => 'Schwert';
 
   @override
   String get m10808f1297 => 'Mindestens';
@@ -1695,6 +1716,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get m1731619efa => 'Design';
 
   @override
+  String get mde891dbc66 => 'Kartenstil';
+
+  @override
   String get m28af538cbc => 'Unterstützung prüfen';
 
   @override
@@ -2089,6 +2113,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get ma000cd3129 => 'DPS-Änderung';
 
   @override
+  String get m1678dcfc2b => 'Diener';
+
+  @override
   String m0680c9d188(String p0) {
     return 'Diener $p0';
   }
@@ -2446,6 +2473,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get m69c1590a47 => 'Stärke';
 
   @override
+  String get m66d12fb992 => 'Blau';
+
+  @override
   String get m3860f59770 => 'System';
 
   @override
@@ -2643,6 +2673,9 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get mf7eaffec2f => 'Veröffentlichungen';
+
+  @override
+  String get m4a4e112cd2 => 'Bogenschießen';
 
   @override
   String get m4ef88e033d => 'Zusammenfassungseigenschaften';
@@ -2864,6 +2897,9 @@ class AppLocalizationsDe extends AppLocalizations {
       'Die Datei existiert. Geben Sie zum Ersetzen overwrite=true an.';
 
   @override
+  String get m4aed2cd288 => 'Violett';
+
+  @override
   String get md8a38f5bc2 => 'Lebensfläschchen';
 
   @override
@@ -2880,6 +2916,9 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get m8295a5b3a5 => 'Kalt';
+
+  @override
+  String get m06984c12fe => 'Akzentfarbe';
 
   @override
   String get mb88cddfeb4 => 'ZAHLEN UND REGELN · LUA POB';
@@ -2937,6 +2976,9 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get me43836c564 => 'Widerstandsstrafe';
+
+  @override
+  String get mf2518d913d => 'Schild';
 
   @override
   String get m0b5051e1b2 => 'Ausrüstung';

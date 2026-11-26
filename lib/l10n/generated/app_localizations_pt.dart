@@ -225,6 +225,12 @@ class AppLocalizationsPt extends AppLocalizations {
   String get m0792a052a1 => 'Sem limite';
 
   @override
+  String get m312fc0deca => 'Sem cor de destaque';
+
+  @override
+  String get m1174a37a5a => 'Turquesa';
+
+  @override
   String get mfc52cf98ef => 'Bloquear';
 
   @override
@@ -821,10 +827,16 @@ class AppLocalizationsPt extends AppLocalizations {
   String get m0cc21de8b8 => 'Vida';
 
   @override
+  String get ma4bb19e143 => 'Verde';
+
+  @override
   String get mf869293c62 => 'Valor';
 
   @override
   String get mf6a527732e => 'Valor do relatório Lua PoB atual.';
+
+  @override
+  String get mb039d623c2 => 'Dourado';
 
   @override
   String get ma9f9d23dcb => 'Carregando traduções do jogo…';
@@ -861,6 +873,9 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get m1ccb8777b8 => 'Imagem de pedra indisponível';
+
+  @override
+  String get ma3bb99f458 => 'Ícone';
 
   @override
   String get medafd2f9d8 => 'Importando um personagem do PoB';
@@ -976,6 +991,9 @@ class AppLocalizationsPt extends AppLocalizations {
       'A soma de verificação da transferência não correspondeu';
 
   @override
+  String get m21b4d916f3 => 'Vermelho';
+
+  @override
   String get m6916d088f3 => 'Crítico. acaso';
 
   @override
@@ -1026,6 +1044,9 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get mbe517dba6c => 'Escala de interface';
+
+  @override
+  String get mbf2ab0ec3e => 'Espada';
 
   @override
   String get m10808f1297 => 'Mínimo';
@@ -1668,6 +1689,9 @@ class AppLocalizationsPt extends AppLocalizations {
   String get m1731619efa => 'Projeto';
 
   @override
+  String get mde891dbc66 => 'Aparência do cartão';
+
+  @override
   String get m28af538cbc => 'Avaliar suporte';
 
   @override
@@ -2061,6 +2085,9 @@ class AppLocalizationsPt extends AppLocalizations {
   String get ma000cd3129 => 'Variação de DPS';
 
   @override
+  String get m1678dcfc2b => 'Lacaio';
+
+  @override
   String m0680c9d188(String p0) {
     return 'Lacaio $p0';
   }
@@ -2413,6 +2440,9 @@ class AppLocalizationsPt extends AppLocalizations {
   String get m69c1590a47 => 'Força';
 
   @override
+  String get m66d12fb992 => 'Azul';
+
+  @override
   String get m3860f59770 => 'Sistema';
 
   @override
@@ -2609,6 +2639,9 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get mf7eaffec2f => 'Página de versões';
+
+  @override
+  String get m4a4e112cd2 => 'Tiro com arco';
 
   @override
   String get m4ef88e033d => 'Propriedades de resumo';
@@ -2829,6 +2862,9 @@ class AppLocalizationsPt extends AppLocalizations {
       'O arquivo existe. Para substituir, especifique overwrite=true.';
 
   @override
+  String get m4aed2cd288 => 'Roxo';
+
+  @override
   String get md8a38f5bc2 => 'Frasco de Vida';
 
   @override
@@ -2845,6 +2881,9 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get m8295a5b3a5 => 'Frio';
+
+  @override
+  String get m06984c12fe => 'Cor de destaque';
 
   @override
   String get mb88cddfeb4 => 'NÚMEROS E REGRAS · LUA POB';
@@ -2901,6 +2940,9 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get me43836c564 => 'Penalidade de resistência';
+
+  @override
+  String get mf2518d913d => 'Escudo';
 
   @override
   String get m0b5051e1b2 => 'Equipamento';
@@ -3189,6 +3231,12 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get m0792a052a1 => 'Sem limite';
 
   @override
+  String get m312fc0deca => 'Sem cor de destaque';
+
+  @override
+  String get m1174a37a5a => 'Turquesa';
+
+  @override
   String get mfc52cf98ef => 'Bloquear';
 
   @override
@@ -3785,10 +3833,16 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get m0cc21de8b8 => 'Vida';
 
   @override
+  String get ma4bb19e143 => 'Verde';
+
+  @override
   String get mf869293c62 => 'Valor';
 
   @override
   String get mf6a527732e => 'Valor do relatório Lua PoB atual.';
+
+  @override
+  String get mb039d623c2 => 'Dourado';
 
   @override
   String get ma9f9d23dcb => 'Carregando traduções do jogo…';
@@ -3825,6 +3879,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get m1ccb8777b8 => 'Imagem de pedra indisponível';
+
+  @override
+  String get ma3bb99f458 => 'Ícone';
 
   @override
   String get medafd2f9d8 => 'Importando um personagem do PoB';
@@ -3940,6 +3997,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
       'A soma de verificação da transferência não correspondeu';
 
   @override
+  String get m21b4d916f3 => 'Vermelho';
+
+  @override
   String get m6916d088f3 => 'Crítico. acaso';
 
   @override
@@ -3990,6 +4050,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get mbe517dba6c => 'Escala de interface';
+
+  @override
+  String get mbf2ab0ec3e => 'Espada';
 
   @override
   String get m10808f1297 => 'Mínimo';
@@ -4632,6 +4695,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get m1731619efa => 'Projeto';
 
   @override
+  String get mde891dbc66 => 'Aparência do cartão';
+
+  @override
   String get m28af538cbc => 'Avaliar suporte';
 
   @override
@@ -5025,6 +5091,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get ma000cd3129 => 'Variação de DPS';
 
   @override
+  String get m1678dcfc2b => 'Lacaio';
+
+  @override
   String m0680c9d188(String p0) {
     return 'Lacaio $p0';
   }
@@ -5377,6 +5446,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get m69c1590a47 => 'Força';
 
   @override
+  String get m66d12fb992 => 'Azul';
+
+  @override
   String get m3860f59770 => 'Sistema';
 
   @override
@@ -5573,6 +5645,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get mf7eaffec2f => 'Página de versões';
+
+  @override
+  String get m4a4e112cd2 => 'Tiro com arco';
 
   @override
   String get m4ef88e033d => 'Propriedades de resumo';
@@ -5793,6 +5868,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
       'O arquivo existe. Para substituir, especifique overwrite=true.';
 
   @override
+  String get m4aed2cd288 => 'Roxo';
+
+  @override
   String get md8a38f5bc2 => 'Frasco de Vida';
 
   @override
@@ -5809,6 +5887,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get m8295a5b3a5 => 'Frio';
+
+  @override
+  String get m06984c12fe => 'Cor de destaque';
 
   @override
   String get mb88cddfeb4 => 'NÚMEROS E REGRAS · LUA POB';
@@ -5865,6 +5946,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get me43836c564 => 'Penalidade de resistência';
+
+  @override
+  String get mf2518d913d => 'Escudo';
 
   @override
   String get m0b5051e1b2 => 'Equipamento';

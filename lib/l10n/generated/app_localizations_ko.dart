@@ -219,6 +219,12 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m0792a052a1 => '제한 없음';
 
   @override
+  String get m312fc0deca => '강조 색상 없음';
+
+  @override
+  String get m1174a37a5a => '청록색';
+
+  @override
   String get mfc52cf98ef => '차단';
 
   @override
@@ -797,10 +803,16 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m0cc21de8b8 => '생명력';
 
   @override
+  String get ma4bb19e143 => '초록색';
+
+  @override
   String get mf869293c62 => '값';
 
   @override
   String get mf6a527732e => '현재 Lua PoB 보고서의 값입니다.';
+
+  @override
+  String get mb039d623c2 => '금색';
 
   @override
   String get ma9f9d23dcb => '게임 번역 로드 중…';
@@ -837,6 +849,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m1ccb8777b8 => '스톤 이미지를 사용할 수 없습니다.';
+
+  @override
+  String get ma3bb99f458 => '아이콘';
 
   @override
   String get medafd2f9d8 => 'PoB에서 캐릭터 가져오기';
@@ -950,6 +965,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get mcf9fbc3f41 => '전송 체크섬이 일치하지 않습니다.';
 
   @override
+  String get m21b4d916f3 => '빨간색';
+
+  @override
   String get m6916d088f3 => '치명타. 기회';
 
   @override
@@ -1000,6 +1018,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get mbe517dba6c => '인터페이스 규모';
+
+  @override
+  String get mbf2ab0ec3e => '검';
 
   @override
   String get m10808f1297 => '최소';
@@ -1629,6 +1650,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m1731619efa => '디자인';
 
   @override
+  String get mde891dbc66 => '카드 모양';
+
+  @override
   String get m28af538cbc => '보조 젬 평가';
 
   @override
@@ -2013,6 +2037,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get ma000cd3129 => 'DPS 변화량';
 
   @override
+  String get m1678dcfc2b => '소환수';
+
+  @override
   String m0680c9d188(String p0) {
     return '미니언 $p0';
   }
@@ -2349,6 +2376,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get m69c1590a47 => '힘';
 
   @override
+  String get m66d12fb992 => '파란색';
+
+  @override
   String get m3860f59770 => '시스템';
 
   @override
@@ -2540,6 +2570,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get mf7eaffec2f => '릴리스 페이지';
+
+  @override
+  String get m4a4e112cd2 => '활쏘기';
 
   @override
   String get m4ef88e033d => '요약 속성';
@@ -2750,6 +2783,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get ma6b9ff9cd6 => '파일이 존재합니다. 바꾸려면 overwrite=true를 지정합니다.';
 
   @override
+  String get m4aed2cd288 => '보라색';
+
+  @override
   String get md8a38f5bc2 => '생명력 플라스크';
 
   @override
@@ -2766,6 +2802,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m8295a5b3a5 => '추워요';
+
+  @override
+  String get m06984c12fe => '강조 색상';
 
   @override
   String get mb88cddfeb4 => '숫자 및 규칙 · LUA POB';
@@ -2822,6 +2861,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get me43836c564 => '저항 패널티';
+
+  @override
+  String get mf2518d913d => '방패';
 
   @override
   String get m0b5051e1b2 => '장비';

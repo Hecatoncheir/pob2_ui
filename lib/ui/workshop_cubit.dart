@@ -35,6 +35,7 @@ import '../domain/tree_path_comparison.dart';
 import '../domain/original_tree_scene.dart';
 import '../domain/node_power.dart';
 import '../domain/node_preview.dart';
+import '../domain/build_card_appearance.dart';
 import '../domain/library_entry.dart';
 import '../domain/component.dart';
 import 'workshop_state.dart';
@@ -2421,6 +2422,18 @@ class WorkshopCubit extends Cubit<WorkshopState> {
       resumeBuildSync();
     }
   }
+
+  Future<void> updateBuildAppearance(
+    String id,
+    BuildCardAppearance appearance,
+  ) => _run(() async {
+    final builds = await library.updateAppearance(
+      state.library,
+      id,
+      appearance,
+    );
+    _update(state.copyWith(library: builds));
+  });
 
   Future<void> deleteBuild(String id) => _run(() async {
     await _flushText();

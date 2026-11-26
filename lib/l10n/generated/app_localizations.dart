@@ -491,6 +491,18 @@ abstract class AppLocalizations {
   /// **'No limit'**
   String get m0792a052a1;
 
+  /// Без подсветки
+  ///
+  /// In en, this message translates to:
+  /// **'No accent'**
+  String get m312fc0deca;
+
+  /// Бирюзовый
+  ///
+  /// In en, this message translates to:
+  /// **'Teal'**
+  String get m1174a37a5a;
+
   /// Блок
   ///
   /// In en, this message translates to:
@@ -1595,6 +1607,12 @@ abstract class AppLocalizations {
   /// **'Life'**
   String get m0cc21de8b8;
 
+  /// Зелёный
+  ///
+  /// In en, this message translates to:
+  /// **'Green'**
+  String get ma4bb19e143;
+
   /// Значение
   ///
   /// In en, this message translates to:
@@ -1606,6 +1624,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Value from the current Lua PoB report.'**
   String get mf6a527732e;
+
+  /// Золотой
+  ///
+  /// In en, this message translates to:
+  /// **'Gold'**
+  String get mb039d623c2;
 
   /// Игровые переводы загружаются…
   ///
@@ -1678,6 +1702,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Gem image unavailable'**
   String get m1ccb8777b8;
+
+  /// Иконка
+  ///
+  /// In en, this message translates to:
+  /// **'Icon'**
+  String get ma3bb99f458;
 
   /// Импорт персонажа из PoB
   ///
@@ -1895,6 +1925,12 @@ abstract class AppLocalizations {
   /// **'Translation checksum mismatch'**
   String get mcf9fbc3f41;
 
+  /// Красный
+  ///
+  /// In en, this message translates to:
+  /// **'Red'**
+  String get m21b4d916f3;
+
   /// Крит. шанс
   ///
   /// In en, this message translates to:
@@ -1996,6 +2032,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Interface scale'**
   String get mbe517dba6c;
+
+  /// Меч
+  ///
+  /// In en, this message translates to:
+  /// **'Sword'**
+  String get mbf2ab0ec3e;
 
   /// Минимум
   ///
@@ -3138,6 +3180,12 @@ abstract class AppLocalizations {
   /// **'Appearance'**
   String get m1731619efa;
 
+  /// Оформление карточки
+  ///
+  /// In en, this message translates to:
+  /// **'Card appearance'**
+  String get mde891dbc66;
+
   /// Оценить поддержку
   ///
   /// In en, this message translates to:
@@ -3858,6 +3906,12 @@ abstract class AppLocalizations {
   /// **'DPS change'**
   String get ma000cd3129;
 
+  /// Приспешник
+  ///
+  /// In en, this message translates to:
+  /// **'Minion'**
+  String get m1678dcfc2b;
+
   /// Приспешник · {p0}
   ///
   /// In en, this message translates to:
@@ -4494,6 +4548,12 @@ abstract class AppLocalizations {
   /// **'Strength'**
   String get m69c1590a47;
 
+  /// Синий
+  ///
+  /// In en, this message translates to:
+  /// **'Blue'**
+  String get m66d12fb992;
+
   /// Системная
   ///
   /// In en, this message translates to:
@@ -4865,6 +4925,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Releases page'**
   String get mf7eaffec2f;
+
+  /// Стрельба
+  ///
+  /// In en, this message translates to:
+  /// **'Archery'**
+  String get m4a4e112cd2;
 
   /// Суммарные свойства
   ///
@@ -5250,6 +5316,12 @@ abstract class AppLocalizations {
   /// **'The file exists. To replace, specify overwrite=true.'**
   String get ma6b9ff9cd6;
 
+  /// Фиолетовый
+  ///
+  /// In en, this message translates to:
+  /// **'Purple'**
+  String get m4aed2cd288;
+
   /// Флакон здоровья
   ///
   /// In en, this message translates to:
@@ -5285,6 +5357,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Cold'**
   String get m8295a5b3a5;
+
+  /// Цвет подсветки
+  ///
+  /// In en, this message translates to:
+  /// **'Accent color'**
+  String get m06984c12fe;
 
   /// ЧИСЛА И ПРАВИЛА · LUA POB
   ///
@@ -5393,6 +5471,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Resistance penalty'**
   String get me43836c564;
+
+  /// Щит
+  ///
+  /// In en, this message translates to:
+  /// **'Shield'**
+  String get mf2518d913d;
 
   /// Экипировка
   ///

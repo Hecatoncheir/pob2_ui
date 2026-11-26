@@ -5,6 +5,7 @@ import 'package:crypto/crypto.dart';
 import 'package:path/path.dart' as path;
 import 'package:xml/xml.dart';
 
+import '../domain/build_card_appearance.dart';
 import '../domain/build_report.dart';
 import '../domain/library_entry.dart';
 import '../domain/tree_progression.dart';
@@ -47,6 +48,7 @@ class PobBuildLibrary implements BuildStorage, BuildNotesStorage {
   Directory? _directory;
   String? _active;
   bool _migrated = false;
+  var _appearances = <String, BuildCardAppearance>{};
   String? get directory => _directory?.path;
   final _notes = <String, String>{};
   final _pendingNotes = <String, String>{};
@@ -63,10 +65,11 @@ class PobBuildLibrary implements BuildStorage, BuildNotesStorage {
   String newId() => _legacy.newId();
 
   @override
-  Future<LibraryState> load() async {
-    final saved = jsonDecode(await _files.read(_settings, missing: '{}'));
+  Future<LibraryState> load() => _write(_load);
+
+  Future<LibraryState> _load() async {
+    final saved = await _restoreSettings();
     if (saved case {'directory': final String folder}) {
-      _migrated = saved['migrated'] == true;
       final root = Directory(folder);
       final builds = await _scan(root, saved['active'] as String?);
       _directory = root;
@@ -76,10 +79,29 @@ class PobBuildLibrary implements BuildStorage, BuildNotesStorage {
     return LibraryState(skipSessionRecovery: true);
   }
 
+  Future<JsonMap> _restoreSettings() async {
+    final saved = jsonMap(
+      jsonDecode(await _files.read(_settings, missing: '{}')),
+    );
+    _migrated = saved['migrated'] == true;
+    _appearances = {
+      for (final entry in jsonMap(saved['appearances']).entries)
+        entry.key: BuildCardAppearance.fromJson(jsonMap(entry.value)),
+    };
+    return saved;
+  }
+
   Future<LibraryState> configure(String folder) =>
       _write(() => _configure(folder));
 
   Future<LibraryState> _configure(String folder) async {
+    if (_directory == null) {
+      try {
+        await _restoreSettings();
+      } on FormatException {
+        // Выбор папки восстанавливает повреждённые настройки библиотеки.
+      }
+    }
     final selected = Directory(await Directory(folder).resolveSymbolicLinks());
     final sameFolder = path.equals(selected.path, directory ?? '');
     final active = _migrated
@@ -190,7 +212,13 @@ class PobBuildLibrary implements BuildStorage, BuildNotesStorage {
     level: document.level,
     updated: updated,
     revision: document.revision,
+    appearance:
+        _appearances[path.canonicalize(file.path)] ??
+        const BuildCardAppearance(),
   );
+
+  String _appearanceKey(Directory root, String id) =>
+      path.canonicalize(path.join(root.path, id));
 
   Future<PobBuildVersion> open(String id) async {
     final root = _root;
@@ -305,8 +333,10 @@ class PobBuildLibrary implements BuildStorage, BuildNotesStorage {
     }
   }
 
-  Future<void> activate(String? id) async {
-    if (_active == id) return;
+  Future<void> activate(String? id) => _write(() => _activate(id));
+
+  Future<void> _activate(String? id, {bool saveAppearance = false}) async {
+    if (_active == id && !saveAppearance) return;
     _active = id;
     try {
       await _writeSettings(_root, id);
@@ -315,11 +345,47 @@ class PobBuildLibrary implements BuildStorage, BuildNotesStorage {
     }
   }
 
-  Future<void> _writeSettings(Directory root, String? active) => _files.write(
+  Future<void> _writeSettings(
+    Directory root,
+    String? active, {
+    Map<String, BuildCardAppearance>? appearances,
+  }) => _files.write(
     _settings,
-    jsonEncode({'directory': root.path, 'active': active, 'migrated': true}),
+    jsonEncode({
+      'directory': root.path,
+      'active': active,
+      'migrated': true,
+      'appearances': appearances ?? _appearances,
+    }),
     backup: true,
   );
+
+  @override
+  Future<LibraryState> updateAppearance(
+    LibraryState state,
+    String id,
+    BuildCardAppearance appearance,
+  ) {
+    final root = _root;
+    return _write(() async {
+      if (!path.equals(root.path, _root.path)) {
+        throw StateError('Папка сборок PoB изменилась.');
+      }
+      final next = state.withAppearance(id, appearance);
+      await _checkRoot(root);
+      await _file(root, id);
+      final key = _appearanceKey(root, id);
+      final appearances = Map.of(_appearances);
+      if (appearance.isDefault) {
+        appearances.remove(key);
+      } else {
+        appearances[key] = appearance;
+      }
+      await _writeSettings(root, _active, appearances: appearances);
+      _appearances = appearances;
+      return next;
+    });
+  }
 
   @override
   Future<LibraryState> save(
@@ -361,14 +427,17 @@ class PobBuildLibrary implements BuildStorage, BuildNotesStorage {
             progressionSource,
             expectedXml,
           );
-    final entry = _entry(root, file, document, DateTime.now());
-    if (previous != null && previous.id != entry.id) {
+    final id = path.relative(file.path, from: root.path);
+    final renamed = previous != null && previous.id != id;
+    if (renamed) {
       await engineBindings.move(
         (folder: root.path, id: previous.id),
-        (folder: root.path, id: entry.id),
+        (folder: root.path, id: id),
       );
+      _moveAppearance(root, previous.id, id);
     }
-    await activate(entry.id);
+    await _activate(id, saveAppearance: renamed);
+    final entry = _entry(root, file, document, DateTime.now());
     return LibraryState(
       entries: [
         entry,
@@ -379,6 +448,15 @@ class PobBuildLibrary implements BuildStorage, BuildNotesStorage {
       activeId: entry.id,
       skipSessionRecovery: true,
     );
+  }
+
+  void _moveAppearance(Directory root, String previous, String current) {
+    final oldKey = _appearanceKey(root, previous);
+    final newKey = _appearanceKey(root, current);
+    if (oldKey == newKey) return;
+    final appearance = _appearances.remove(oldKey);
+    _appearances.remove(newKey);
+    if (appearance != null) _appearances[newKey] = appearance;
   }
 
   Future<File> _saveExisting(
@@ -624,7 +702,11 @@ class PobBuildLibrary implements BuildStorage, BuildNotesStorage {
     if (expected.revision != current.entry.revision) throw _conflict();
     await _retire(file, current.xml);
     await engineBindings.forget((folder: _root.path, id: id));
-    if (state.activeId == id) await activate(null);
+    final appearance = _appearances.remove(_appearanceKey(_root, id));
+    await _activate(
+      state.activeId == id ? null : _active,
+      saveAppearance: appearance != null,
+    );
     return LibraryState(
       entries: state.entries.where((entry) => entry.id != id).toList(),
       activeId: _active,
@@ -652,6 +734,9 @@ class PobBuildLibrary implements BuildStorage, BuildNotesStorage {
     String? active;
     for (final entry in old.entries) {
       final id = await _migrateEntry(root, entry);
+      if (!entry.appearance.isDefault) {
+        _appearances[_appearanceKey(root, id)] = entry.appearance;
+      }
       if (entry.id == old.activeId) active = id;
     }
     if (old.entries.isEmpty &&

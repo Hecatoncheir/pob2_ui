@@ -4,6 +4,7 @@ import 'package:material_ui/material_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../domain/library_entry.dart';
+import 'build_card_appearance_dialog.dart';
 import 'build_comparison_dialog.dart';
 import 'build_setup.dart';
 import 'core/motion.dart';
@@ -210,12 +211,14 @@ class _BuildCard extends StatelessWidget {
   final ShellBloc shell;
   @override
   Widget build(BuildContext context) => SurfacePanel(
+    key: ValueKey('build-card-${entry.id}'),
+    accent: entry.appearance.color.accent,
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(
           children: [
-            const SparkArt('illustrations/gem', width: 60, height: 55),
+            _appearanceButton(context),
             const Spacer(),
             AppText(
               'ур. ${entry.level}',
@@ -276,6 +279,53 @@ class _BuildCard extends StatelessWidget {
       ],
     ),
   );
+
+  Widget _appearanceButton(BuildContext context) => SizedBox(
+    width: 60,
+    height: 55,
+    child: IconButton(
+      key: ValueKey('build-appearance-${entry.id}'),
+      padding: EdgeInsets.zero,
+      tooltip: translateUi(context, 'Оформление карточки'),
+      onPressed: model.state.busy ? null : () => _editAppearance(context),
+      icon: Stack(
+        alignment: Alignment.center,
+        children: [
+          SizedBox(
+            width: 60,
+            height: 55,
+            child: Center(child: BuildCardIconArt(entry.appearance, size: 48)),
+          ),
+          Positioned(
+            right: 1,
+            bottom: 1,
+            child: DecoratedBox(
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.surfaceContainerHigh,
+                shape: BoxShape.circle,
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(3),
+                child: Icon(
+                  Icons.edit_outlined,
+                  size: 13,
+                  color: Spark.of(context).muted,
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    ),
+  );
+
+  Future<void> _editAppearance(BuildContext context) async {
+    final folder = model.sharedLibrary?.directory;
+    final appearance = await showBuildCardAppearance(context, model, entry);
+    if (appearance == null || !context.mounted) return;
+    if (folder != model.sharedLibrary?.directory) return;
+    await model.updateBuildAppearance(entry.id, appearance);
+  }
 
   Future<void> _confirmDelete(BuildContext context) async {
     final colors = Theme.of(context).colorScheme;

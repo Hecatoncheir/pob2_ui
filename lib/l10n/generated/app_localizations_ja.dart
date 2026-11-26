@@ -219,6 +219,12 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m0792a052a1 => '制限なし';
 
   @override
+  String get m312fc0deca => '強調色なし';
+
+  @override
+  String get m1174a37a5a => '青緑';
+
+  @override
   String get mfc52cf98ef => 'ブロック';
 
   @override
@@ -797,10 +803,16 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m0cc21de8b8 => 'ライフ';
 
   @override
+  String get ma4bb19e143 => '緑';
+
+  @override
   String get mf869293c62 => '値';
 
   @override
   String get mf6a527732e => '現在の Lua PoB レポートの値。';
+
+  @override
+  String get mb039d623c2 => 'ゴールド';
 
   @override
   String get ma9f9d23dcb => 'ゲーム翻訳を読み込み中…';
@@ -837,6 +849,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m1ccb8777b8 => '石の画像が利用できません';
+
+  @override
+  String get ma3bb99f458 => 'アイコン';
 
   @override
   String get medafd2f9d8 => 'PoB からキャラクターをインポートする';
@@ -950,6 +965,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get mcf9fbc3f41 => '転送チェックサムが一致しませんでした';
 
   @override
+  String get m21b4d916f3 => '赤';
+
+  @override
   String get m6916d088f3 => 'クリティカル。チャンス';
 
   @override
@@ -1000,6 +1018,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get mbe517dba6c => 'インターフェーススケール';
+
+  @override
+  String get mbf2ab0ec3e => '剣';
 
   @override
   String get m10808f1297 => '最小値';
@@ -1629,6 +1650,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m1731619efa => 'デザイン';
 
   @override
+  String get mde891dbc66 => 'カードの外観';
+
+  @override
   String get m28af538cbc => 'サポートを試算';
 
   @override
@@ -2013,6 +2037,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get ma000cd3129 => 'DPSの変化';
 
   @override
+  String get m1678dcfc2b => 'ミニオン';
+
+  @override
   String m0680c9d188(String p0) {
     return 'ミニオン $p0';
   }
@@ -2349,6 +2376,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get m69c1590a47 => '筋力';
 
   @override
+  String get m66d12fb992 => '青';
+
+  @override
   String get m3860f59770 => 'システム';
 
   @override
@@ -2540,6 +2570,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get mf7eaffec2f => 'リリースページ';
+
+  @override
+  String get m4a4e112cd2 => '弓術';
 
   @override
   String get m4ef88e033d => '概要プロパティ';
@@ -2750,6 +2783,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get ma6b9ff9cd6 => 'ファイルは存在します。置き換える場合はoverwrite=trueを指定します。';
 
   @override
+  String get m4aed2cd288 => '紫';
+
+  @override
   String get md8a38f5bc2 => 'ライフフラスコ';
 
   @override
@@ -2766,6 +2802,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m8295a5b3a5 => '寒い';
+
+  @override
+  String get m06984c12fe => '強調色';
 
   @override
   String get mb88cddfeb4 => '数字とルール · ルアポブ';
@@ -2822,6 +2861,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get me43836c564 => '耐性ペナルティ';
+
+  @override
+  String get mf2518d913d => '盾';
 
   @override
   String get m0b5051e1b2 => '装備';

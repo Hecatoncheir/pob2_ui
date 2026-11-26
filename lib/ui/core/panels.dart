@@ -12,22 +12,35 @@ class SurfacePanel extends StatelessWidget {
     required this.child,
     this.padding = const EdgeInsets.all(20),
     this.showBorder = true,
+    this.accent,
   });
   final Widget child;
   final EdgeInsetsGeometry padding;
   final bool showBorder;
+  final Color? accent;
   @override
-  Widget build(BuildContext context) => Material(
-    color: TreeGlassScope.surface(context, Spark.of(context).surface),
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(18),
-      side: showBorder
-          ? BorderSide(color: Spark.of(context).line)
-          : BorderSide.none,
-    ),
-    clipBehavior: Clip.antiAlias,
-    child: Padding(padding: padding, child: child),
-  );
+  Widget build(BuildContext context) {
+    final colors = Spark.of(context);
+    final surface = TreeGlassScope.surface(context, colors.surface);
+    return Material(
+      color: _tint(surface, .10),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(18),
+        side: showBorder
+            ? BorderSide(color: _tint(colors.line, .65))
+            : BorderSide.none,
+      ),
+      clipBehavior: Clip.antiAlias,
+      child: Padding(padding: padding, child: child),
+    );
+  }
+
+  Color _tint(Color base, double opacity) {
+    final tint = accent;
+    return tint == null
+        ? base
+        : Color.alphaBlend(tint.withValues(alpha: opacity), base);
+  }
 }
 
 class PanelExpansionTile extends StatelessWidget {

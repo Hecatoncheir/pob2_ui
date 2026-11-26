@@ -6,6 +6,7 @@ import 'package:pob2_ui/data/build_library.dart';
 import 'package:pob2_ui/data/pob_build_library.dart';
 import 'package:pob2_ui/data/pob_build_document.dart';
 import 'package:pob2_ui/data/session_repository.dart';
+import 'package:pob2_ui/domain/build_card_appearance.dart';
 import 'package:pob2_ui/domain/library_entry.dart';
 
 import 'support/temporary_directory.dart';
@@ -13,6 +14,11 @@ import 'support/workshop_fixture.dart';
 
 String buildXml(int level) =>
     '<PathOfBuilding2><Build className="Witch" level="$level"/><Notes/></PathOfBuilding2>';
+
+const cardAppearance = BuildCardAppearance(
+  icon: BuildCardIcon.fire,
+  color: BuildCardColor.red,
+);
 
 void main() {
   late Directory root, profile, builds;
@@ -36,6 +42,16 @@ void main() {
       '<Notes>\r\n\t\tПлан\r\n\tСвой отступ &amp; текст\r\n\t</Notes>',
     );
     expect(PobBuildDocument(xml).notes, 'План\n\tСвой отступ & текст');
+  });
+
+  test('Выбор папки восстанавливает повреждённые настройки', () async {
+    await profile.create();
+    await File(path.join(profile.path, 'pob-builds.json')).writeAsString('{');
+    await expectLater(library.load(), throwsFormatException);
+    final configured = await library.configure(builds.path);
+    expect(configured.entries.single.appearance, const BuildCardAppearance());
+    expect((await PobBuildLibrary(profile).load()).entries, hasLength(1));
+    expect(await existing.readAsString(), buildXml(40));
   });
 
   test(
@@ -83,9 +99,11 @@ void main() {
       );
       await SessionRepository(profile)
           .saveNotes(before.activeId!, 'План < & >\nВторая строка');
+      await legacy.updateAppearance(before, before.activeId!, cardAppearance);
       final migrated = await library.configure(builds.path);
       expect(migrated.entries, hasLength(2));
       expect(migrated.active?.level, 90);
+      expect(migrated.active?.appearance, cardAppearance);
       expect(
         await library.readNotes(migrated.activeId!),
         'План < & >\nВторая строка',
@@ -149,6 +167,89 @@ void main() {
       expect(removed.active, isNull);
       expect((await library.scan()).entries.single.title, 'PoB');
       expect(await existing.readAsString(), buildXml(40));
+    },
+  );
+
+  test(
+    'Оформление одинаковых имён в разных папках хранится раздельно',
+    () async {
+      final first = await library.configure(builds.path);
+      final id = first.entries.single.id;
+      final edited = await library.updateAppearance(first, id, cardAppearance);
+      expect(edited.entries.single.appearance, cardAppearance);
+      expect(edited.entries.single.revision, first.entries.single.revision);
+      expect(edited.entries.single.updated, first.entries.single.updated);
+      expect(await existing.readAsString(), buildXml(40));
+
+      final alternate = await Directory(path.join(root.path, 'Other')).create();
+      final secondFile = File(path.join(alternate.path, 'PoB.xml'));
+      await secondFile.writeAsString(buildXml(50));
+      final second = await library.configure(alternate.path);
+      expect(second.entries.single.id, id);
+      expect(second.entries.single.appearance, const BuildCardAppearance());
+      const alternateAppearance = BuildCardAppearance(
+        color: BuildCardColor.teal,
+      );
+      await library.updateAppearance(second, id, alternateAppearance);
+      final reopened = PobBuildLibrary(profile);
+      expect(
+        (await reopened.load()).entries.single.appearance,
+        alternateAppearance,
+      );
+
+      final restored = await reopened.configure(builds.path);
+      expect(restored.entries.single.appearance, cardAppearance);
+      await reopened.updateAppearance(
+        restored,
+        id,
+        const BuildCardAppearance(),
+      );
+      expect(
+        (await PobBuildLibrary(profile).load()).entries.single.appearance,
+        const BuildCardAppearance(),
+      );
+      expect(await secondFile.readAsString(), buildXml(50));
+    },
+  );
+
+  test(
+    'Оформление общей сборки остаётся при сохранении и переименовании',
+    () async {
+      final scanned = await library.configure(builds.path);
+      final id = scanned.entries.single.id;
+      await library.activate(id);
+      final styled = await library.updateAppearance(
+        await library.scan(),
+        id,
+        cardAppearance,
+      );
+      final saved = await library.save(styled, fixture, buildXml(65));
+      expect(saved.active?.appearance, cardAppearance);
+      final renamed = await library.save(
+        saved,
+        fixture,
+        buildXml(65),
+        title: 'Переименованная',
+      );
+      expect(renamed.active?.appearance, cardAppearance);
+      await existing.writeAsString(buildXml(70));
+      final reopened = PobBuildLibrary(profile);
+      final restored = await reopened.load();
+      expect(restored.active?.appearance, cardAppearance);
+      expect(
+        (await reopened.open(id)).entry.appearance,
+        const BuildCardAppearance(),
+      );
+
+      await reopened.remove(restored, renamed.activeId!);
+      final reused = File(path.join(builds.path, renamed.activeId!));
+      await reused.writeAsString(buildXml(75));
+      expect(
+        (await PobBuildLibrary(profile).load()).entries
+            .singleWhere((entry) => entry.id == renamed.activeId)
+            .appearance,
+        const BuildCardAppearance(),
+      );
     },
   );
 }

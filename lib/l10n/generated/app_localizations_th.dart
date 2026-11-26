@@ -222,6 +222,12 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m0792a052a1 => 'ไม่มีขีดจำกัด';
 
   @override
+  String get m312fc0deca => 'ไม่เน้นสี';
+
+  @override
+  String get m1174a37a5a => 'สีเขียวอมฟ้า';
+
+  @override
   String get mfc52cf98ef => 'บล็อก';
 
   @override
@@ -808,10 +814,16 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m0cc21de8b8 => 'พลังชีวิต';
 
   @override
+  String get ma4bb19e143 => 'สีเขียว';
+
+  @override
   String get mf869293c62 => 'ค่า';
 
   @override
   String get mf6a527732e => 'ค่าจากรายงาน Lua PoB ปัจจุบัน';
+
+  @override
+  String get mb039d623c2 => 'สีทอง';
 
   @override
   String get ma9f9d23dcb => 'กำลังโหลดคำแปลเกม...';
@@ -848,6 +860,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m1ccb8777b8 => 'ไม่มีรูปหิน';
+
+  @override
+  String get ma3bb99f458 => 'ไอคอน';
 
   @override
   String get medafd2f9d8 => 'การนำเข้าตัวละครจาก PoB';
@@ -961,6 +976,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get mcf9fbc3f41 => 'การตรวจสอบการโอนไม่ตรงกัน';
 
   @override
+  String get m21b4d916f3 => 'สีแดง';
+
+  @override
   String get m6916d088f3 => 'คริติคอล โอกาส';
 
   @override
@@ -1011,6 +1029,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get mbe517dba6c => 'ขนาดอินเทอร์เฟซ';
+
+  @override
+  String get mbf2ab0ec3e => 'ดาบ';
 
   @override
   String get m10808f1297 => 'ขั้นต่ำ';
@@ -1643,6 +1664,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m1731619efa => 'การออกแบบ';
 
   @override
+  String get mde891dbc66 => 'รูปลักษณ์การ์ด';
+
+  @override
   String get m28af538cbc => 'ประเมินหินเสริม';
 
   @override
@@ -2029,6 +2053,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get ma000cd3129 => 'การเปลี่ยนแปลง DPS';
 
   @override
+  String get m1678dcfc2b => 'มิเนียน';
+
+  @override
   String m0680c9d188(String p0) {
     return 'ลูกน้อง $p0';
   }
@@ -2373,6 +2400,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get m69c1590a47 => 'Strength';
 
   @override
+  String get m66d12fb992 => 'สีน้ำเงิน';
+
+  @override
   String get m3860f59770 => 'ตามระบบ';
 
   @override
@@ -2565,6 +2595,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get mf7eaffec2f => 'หน้าเวอร์ชัน';
+
+  @override
+  String get m4a4e112cd2 => 'ยิงธนู';
 
   @override
   String get m4ef88e033d => 'คุณสมบัติสรุป';
@@ -2783,6 +2816,9 @@ class AppLocalizationsTh extends AppLocalizations {
       'มีไฟล์อยู่ หากต้องการแทนที่ ให้ระบุ overwrite=true';
 
   @override
+  String get m4aed2cd288 => 'สีม่วง';
+
+  @override
   String get md8a38f5bc2 => 'ขวดยาพลังชีวิต';
 
   @override
@@ -2799,6 +2835,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m8295a5b3a5 => 'หนาว';
+
+  @override
+  String get m06984c12fe => 'สีเน้น';
 
   @override
   String get mb88cddfeb4 => 'ตัวเลขและกฎเกณฑ์ · ลัวะ ปอบ';
@@ -2855,6 +2894,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get me43836c564 => 'การลงโทษความต้านทาน';
+
+  @override
+  String get mf2518d913d => 'โล่';
 
   @override
   String get m0b5051e1b2 => 'อุปกรณ์';

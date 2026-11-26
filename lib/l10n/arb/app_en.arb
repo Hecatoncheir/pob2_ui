@@ -361,6 +361,16 @@
     "description": "Без ограничения",
     "placeholders": {}
   },
+  "m312fc0deca": "No accent",
+  "@m312fc0deca": {
+    "description": "Без подсветки",
+    "placeholders": {}
+  },
+  "m1174a37a5a": "Teal",
+  "@m1174a37a5a": {
+    "description": "Бирюзовый",
+    "placeholders": {}
+  },
   "mfc52cf98ef": "Block",
   "@mfc52cf98ef": {
     "description": "Блок",
@@ -1329,6 +1339,11 @@
     "description": "Здоровье",
     "placeholders": {}
   },
+  "ma4bb19e143": "Green",
+  "@ma4bb19e143": {
+    "description": "Зелёный",
+    "placeholders": {}
+  },
   "mf869293c62": "Value",
   "@mf869293c62": {
     "description": "Значение",
@@ -1337,6 +1352,11 @@
   "mf6a527732e": "Value from the current Lua PoB report.",
   "@mf6a527732e": {
     "description": "Значение из текущего отчёта Lua PoB.",
+    "placeholders": {}
+  },
+  "mb039d623c2": "Gold",
+  "@mb039d623c2": {
+    "description": "Золотой",
     "placeholders": {}
   },
   "ma9f9d23dcb": "Loading game translations…",
@@ -1397,6 +1417,11 @@
   "m1ccb8777b8": "Gem image unavailable",
   "@m1ccb8777b8": {
     "description": "Изображение камня недоступно",
+    "placeholders": {}
+  },
+  "ma3bb99f458": "Icon",
+  "@ma3bb99f458": {
+    "description": "Иконка",
     "placeholders": {}
   },
   "medafd2f9d8": "Importing a character from PoB",
@@ -1583,6 +1608,11 @@
     "description": "Контрольная сумма перевода не совпала",
     "placeholders": {}
   },
+  "m21b4d916f3": "Red",
+  "@m21b4d916f3": {
+    "description": "Красный",
+    "placeholders": {}
+  },
   "m6916d088f3": "Crit. chance",
   "@m6916d088f3": {
     "description": "Крит. шанс",
@@ -1666,6 +1696,11 @@
   "mbe517dba6c": "Interface scale",
   "@mbe517dba6c": {
     "description": "Масштаб интерфейса",
+    "placeholders": {}
+  },
+  "mbf2ab0ec3e": "Sword",
+  "@mbf2ab0ec3e": {
+    "description": "Меч",
     "placeholders": {}
   },
   "m10808f1297": "Minimum",
@@ -2735,6 +2770,11 @@
     "description": "Оформление",
     "placeholders": {}
   },
+  "mde891dbc66": "Card appearance",
+  "@mde891dbc66": {
+    "description": "Оформление карточки",
+    "placeholders": {}
+  },
   "m28af538cbc": "Preview support",
   "@m28af538cbc": {
     "description": "Оценить поддержку",
@@ -3383,6 +3423,11 @@
     "description": "Прирост DPS",
     "placeholders": {}
   },
+  "m1678dcfc2b": "Minion",
+  "@m1678dcfc2b": {
+    "description": "Приспешник",
+    "placeholders": {}
+  },
   "m0680c9d188": "Minion {p0}",
   "@m0680c9d188": {
     "description": "Приспешник · {p0}",
@@ -3949,6 +3994,11 @@
     "description": "Сила",
     "placeholders": {}
   },
+  "m66d12fb992": "Blue",
+  "@m66d12fb992": {
+    "description": "Синий",
+    "placeholders": {}
+  },
   "m3860f59770": "System",
   "@m3860f59770": {
     "description": "Системная",
@@ -4265,6 +4315,11 @@
   "mf7eaffec2f": "Releases page",
   "@mf7eaffec2f": {
     "description": "Страница выпусков",
+    "placeholders": {}
+  },
+  "m4a4e112cd2": "Archery",
+  "@m4a4e112cd2": {
+    "description": "Стрельба",
     "placeholders": {}
   },
   "m4ef88e033d": "Summary properties",
@@ -4625,6 +4680,11 @@
     "description": "Файл существует. Для замены укажите overwrite=true.",
     "placeholders": {}
   },
+  "m4aed2cd288": "Purple",
+  "@m4aed2cd288": {
+    "description": "Фиолетовый",
+    "placeholders": {}
+  },
   "md8a38f5bc2": "Life flask",
   "@md8a38f5bc2": {
     "description": "Флакон здоровья",
@@ -4653,6 +4713,11 @@
   "m8295a5b3a5": "Cold",
   "@m8295a5b3a5": {
     "description": "Холод",
+    "placeholders": {}
+  },
+  "m06984c12fe": "Accent color",
+  "@m06984c12fe": {
+    "description": "Цвет подсветки",
     "placeholders": {}
   },
   "mb88cddfeb4": "NUMBERS AND RULES · LUA POB",
@@ -4747,6 +4812,11 @@
   "me43836c564": "Resistance penalty",
   "@me43836c564": {
     "description": "Штраф сопротивлений",
+    "placeholders": {}
+  },
+  "mf2518d913d": "Shield",
+  "@mf2518d913d": {
+    "description": "Щит",
     "placeholders": {}
   },
   "m0b5051e1b2": "Equipment",

@@ -223,6 +223,12 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m0792a052a1 => 'Без ограничения';
 
   @override
+  String get m312fc0deca => 'Без подсветки';
+
+  @override
+  String get m1174a37a5a => 'Бирюзовый';
+
+  @override
   String get mfc52cf98ef => 'Блок';
 
   @override
@@ -815,10 +821,16 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m0cc21de8b8 => 'Здоровье';
 
   @override
+  String get ma4bb19e143 => 'Зелёный';
+
+  @override
   String get mf869293c62 => 'Значение';
 
   @override
   String get mf6a527732e => 'Значение из текущего отчёта Lua PoB.';
+
+  @override
+  String get mb039d623c2 => 'Золотой';
 
   @override
   String get ma9f9d23dcb => 'Игровые переводы загружаются…';
@@ -855,6 +867,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get m1ccb8777b8 => 'Изображение камня недоступно';
+
+  @override
+  String get ma3bb99f458 => 'Иконка';
 
   @override
   String get medafd2f9d8 => 'Импорт персонажа из PoB';
@@ -968,6 +983,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get mcf9fbc3f41 => 'Контрольная сумма перевода не совпала';
 
   @override
+  String get m21b4d916f3 => 'Красный';
+
+  @override
   String get m6916d088f3 => 'Крит. шанс';
 
   @override
@@ -1018,6 +1036,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get mbe517dba6c => 'Масштаб интерфейса';
+
+  @override
+  String get mbf2ab0ec3e => 'Меч';
 
   @override
   String get m10808f1297 => 'Минимум';
@@ -1654,6 +1675,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m1731619efa => 'Оформление';
 
   @override
+  String get mde891dbc66 => 'Оформление карточки';
+
+  @override
   String get m28af538cbc => 'Оценить поддержку';
 
   @override
@@ -2043,6 +2067,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get ma000cd3129 => 'Прирост DPS';
 
   @override
+  String get m1678dcfc2b => 'Приспешник';
+
+  @override
   String m0680c9d188(String p0) {
     return 'Приспешник · $p0';
   }
@@ -2390,6 +2417,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get m69c1590a47 => 'Сила';
 
   @override
+  String get m66d12fb992 => 'Синий';
+
+  @override
   String get m3860f59770 => 'Системная';
 
   @override
@@ -2584,6 +2614,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get mf7eaffec2f => 'Страница выпусков';
+
+  @override
+  String get m4a4e112cd2 => 'Стрельба';
 
   @override
   String get m4ef88e033d => 'Суммарные свойства';
@@ -2803,6 +2836,9 @@ class AppLocalizationsRu extends AppLocalizations {
       'Файл существует. Для замены укажите overwrite=true.';
 
   @override
+  String get m4aed2cd288 => 'Фиолетовый';
+
+  @override
   String get md8a38f5bc2 => 'Флакон здоровья';
 
   @override
@@ -2819,6 +2855,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get m8295a5b3a5 => 'Холод';
+
+  @override
+  String get m06984c12fe => 'Цвет подсветки';
 
   @override
   String get mb88cddfeb4 => 'ЧИСЛА И ПРАВИЛА · LUA POB';
@@ -2875,6 +2914,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get me43836c564 => 'Штраф сопротивлений';
+
+  @override
+  String get mf2518d913d => 'Щит';
 
   @override
   String get m0b5051e1b2 => 'Экипировка';

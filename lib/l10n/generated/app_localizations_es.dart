@@ -227,6 +227,12 @@ class AppLocalizationsEs extends AppLocalizations {
   String get m0792a052a1 => 'Sin límite';
 
   @override
+  String get m312fc0deca => 'Sin color de realce';
+
+  @override
+  String get m1174a37a5a => 'Turquesa';
+
+  @override
   String get mfc52cf98ef => 'Bloquear';
 
   @override
@@ -832,10 +838,16 @@ class AppLocalizationsEs extends AppLocalizations {
   String get m0cc21de8b8 => 'Vida';
 
   @override
+  String get ma4bb19e143 => 'Verde';
+
+  @override
   String get mf869293c62 => 'Valor';
 
   @override
   String get mf6a527732e => 'Valor del informe PoB Lua actual.';
+
+  @override
+  String get mb039d623c2 => 'Dorado';
 
   @override
   String get ma9f9d23dcb => 'Cargando traducciones del juego…';
@@ -872,6 +884,9 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get m1ccb8777b8 => 'Imagen de piedra no disponible';
+
+  @override
+  String get ma3bb99f458 => 'Icono';
 
   @override
   String get medafd2f9d8 => 'Importando un personaje desde PoB';
@@ -988,6 +1003,9 @@ class AppLocalizationsEs extends AppLocalizations {
       'La suma de comprobación de la transferencia no coincide';
 
   @override
+  String get m21b4d916f3 => 'Rojo';
+
+  @override
   String get m6916d088f3 => 'Crítico. oportunidad';
 
   @override
@@ -1038,6 +1056,9 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get mbe517dba6c => 'Escala de interfaz';
+
+  @override
+  String get mbf2ab0ec3e => 'Espada';
 
   @override
   String get m10808f1297 => 'Mínimo';
@@ -1681,6 +1702,9 @@ class AppLocalizationsEs extends AppLocalizations {
   String get m1731619efa => 'Diseño';
 
   @override
+  String get mde891dbc66 => 'Apariencia de la tarjeta';
+
+  @override
   String get m28af538cbc => 'Evaluar asistencia';
 
   @override
@@ -2074,6 +2098,9 @@ class AppLocalizationsEs extends AppLocalizations {
   String get ma000cd3129 => 'Cambio de DPS';
 
   @override
+  String get m1678dcfc2b => 'Esbirro';
+
+  @override
   String m0680c9d188(String p0) {
     return 'Esbirro $p0';
   }
@@ -2428,6 +2455,9 @@ class AppLocalizationsEs extends AppLocalizations {
   String get m69c1590a47 => 'Fuerza';
 
   @override
+  String get m66d12fb992 => 'Azul';
+
+  @override
   String get m3860f59770 => 'Sistema';
 
   @override
@@ -2625,6 +2655,9 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get mf7eaffec2f => 'Página de versiones';
+
+  @override
+  String get m4a4e112cd2 => 'Tiro con arco';
 
   @override
   String get m4ef88e033d => 'Resumen de propiedades';
@@ -2846,6 +2879,9 @@ class AppLocalizationsEs extends AppLocalizations {
       'El archivo existe. Para reemplazar, especifique overwrite=true.';
 
   @override
+  String get m4aed2cd288 => 'Morado';
+
+  @override
   String get md8a38f5bc2 => 'Frasco de vida';
 
   @override
@@ -2862,6 +2898,9 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get m8295a5b3a5 => 'Frío';
+
+  @override
+  String get m06984c12fe => 'Color de realce';
 
   @override
   String get mb88cddfeb4 => 'NÚMEROS Y REGLAS · LUA POB';
@@ -2919,6 +2958,9 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get me43836c564 => 'Penalización de resistencia';
+
+  @override
+  String get mf2518d913d => 'Escudo';
 
   @override
   String get m0b5051e1b2 => 'Equipo';

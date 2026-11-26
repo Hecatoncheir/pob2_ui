@@ -231,6 +231,12 @@ class AppLocalizationsFr extends AppLocalizations {
   String get m0792a052a1 => 'Aucune limite';
 
   @override
+  String get m312fc0deca => 'Sans couleur d’accentuation';
+
+  @override
+  String get m1174a37a5a => 'Turquoise';
+
+  @override
   String get mfc52cf98ef => 'Bloquer';
 
   @override
@@ -845,10 +851,16 @@ class AppLocalizationsFr extends AppLocalizations {
   String get m0cc21de8b8 => 'Vie';
 
   @override
+  String get ma4bb19e143 => 'Vert';
+
+  @override
   String get mf869293c62 => 'Valeur';
 
   @override
   String get mf6a527732e => 'Valeur du rapport PoB Lua actuel.';
+
+  @override
+  String get mb039d623c2 => 'Doré';
 
   @override
   String get ma9f9d23dcb => 'Loading game translations…';
@@ -885,6 +897,9 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get m1ccb8777b8 => 'Image de pierre indisponible';
+
+  @override
+  String get ma3bb99f458 => 'Icône';
 
   @override
   String get medafd2f9d8 => 'Importer un personnage depuis PoB';
@@ -1002,6 +1017,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get mcf9fbc3f41 => 'Transfer checksum did not match';
 
   @override
+  String get m21b4d916f3 => 'Rouge';
+
+  @override
   String get m6916d088f3 => 'Critique. chance';
 
   @override
@@ -1052,6 +1070,9 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get mbe517dba6c => 'Échelle d\'interface';
+
+  @override
+  String get mbf2ab0ec3e => 'Épée';
 
   @override
   String get m10808f1297 => 'Minimum';
@@ -1696,6 +1717,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get m1731619efa => 'Conception';
 
   @override
+  String get mde891dbc66 => 'Apparence de la carte';
+
+  @override
   String get m28af538cbc => 'Évaluer le soutien';
 
   @override
@@ -2089,6 +2113,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get ma000cd3129 => 'Variation du DPS';
 
   @override
+  String get m1678dcfc2b => 'Serviteur';
+
+  @override
   String m0680c9d188(String p0) {
     return 'Minion $p0';
   }
@@ -2445,6 +2472,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get m69c1590a47 => 'Force';
 
   @override
+  String get m66d12fb992 => 'Bleu';
+
+  @override
   String get m3860f59770 => 'Système';
 
   @override
@@ -2642,6 +2672,9 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get mf7eaffec2f => 'Page des versions';
+
+  @override
+  String get m4a4e112cd2 => 'Tir à l’arc';
 
   @override
   String get m4ef88e033d => 'Propriétés récapitulatives';
@@ -2865,6 +2898,9 @@ class AppLocalizationsFr extends AppLocalizations {
       'Le fichier existe. Pour remplacer, spécifiez overwrite=true.';
 
   @override
+  String get m4aed2cd288 => 'Violet';
+
+  @override
   String get md8a38f5bc2 => 'Flacon de vie';
 
   @override
@@ -2881,6 +2917,9 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get m8295a5b3a5 => 'Froid';
+
+  @override
+  String get m06984c12fe => 'Couleur d’accentuation';
 
   @override
   String get mb88cddfeb4 => 'CHIFFRES ET RÈGLES · LUA POB';
@@ -2937,6 +2976,9 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get me43836c564 => 'Pénalité de résistance';
+
+  @override
+  String get mf2518d913d => 'Bouclier';
 
   @override
   String get m0b5051e1b2 => 'Équipement';

@@ -217,6 +217,12 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m0792a052a1 => '無限制';
 
   @override
+  String get m312fc0deca => '不使用強調色';
+
+  @override
+  String get m1174a37a5a => '藍綠色';
+
+  @override
   String get mfc52cf98ef => '塊';
 
   @override
@@ -793,10 +799,16 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m0cc21de8b8 => '生命';
 
   @override
+  String get ma4bb19e143 => '綠色';
+
+  @override
   String get mf869293c62 => '數值';
 
   @override
   String get mf6a527732e => '目前 Lua PoB 報告中的值。';
+
+  @override
+  String get mb039d623c2 => '金色';
 
   @override
   String get ma9f9d23dcb => '正在載入遊戲翻譯...';
@@ -833,6 +845,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m1ccb8777b8 => '石頭圖像不可用';
+
+  @override
+  String get ma3bb99f458 => '圖示';
 
   @override
   String get medafd2f9d8 => '從 PoB 導入角色';
@@ -945,6 +960,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get mcf9fbc3f41 => '傳輸校驗與不匹配';
 
   @override
+  String get m21b4d916f3 => '紅色';
+
+  @override
   String get m6916d088f3 => '暴擊。機會';
 
   @override
@@ -995,6 +1013,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get mbe517dba6c => '介面規模';
+
+  @override
+  String get mbf2ab0ec3e => '劍';
 
   @override
   String get m10808f1297 => '最小值';
@@ -1621,6 +1642,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m1731619efa => '設計';
 
   @override
+  String get mde891dbc66 => '卡片外觀';
+
+  @override
   String get m28af538cbc => '評估輔助寶石';
 
   @override
@@ -2005,6 +2029,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get ma000cd3129 => 'DPS 變化';
 
   @override
+  String get m1678dcfc2b => '召喚物';
+
+  @override
   String m0680c9d188(String p0) {
     return '小小兵 $p0';
   }
@@ -2341,6 +2368,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get m69c1590a47 => '力量';
 
   @override
+  String get m66d12fb992 => '藍色';
+
+  @override
   String get m3860f59770 => '跟隨系統';
 
   @override
@@ -2529,6 +2559,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get mf7eaffec2f => '版本頁面';
+
+  @override
+  String get m4a4e112cd2 => '射箭';
 
   @override
   String get m4ef88e033d => '屬性摘要';
@@ -2739,6 +2772,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get ma6b9ff9cd6 => '文件存在。若要替換，請指定 overwrite=true。';
 
   @override
+  String get m4aed2cd288 => '紫色';
+
+  @override
   String get md8a38f5bc2 => '生命藥劑';
 
   @override
@@ -2755,6 +2791,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m8295a5b3a5 => '冷';
+
+  @override
+  String get m06984c12fe => '強調色';
 
   @override
   String get mb88cddfeb4 => '數字與規則·LUA POB';
@@ -2811,6 +2850,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get me43836c564 => '抵抗懲罰';
+
+  @override
+  String get mf2518d913d => '盾牌';
 
   @override
   String get m0b5051e1b2 => '裝備';
@@ -3086,6 +3128,12 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m0792a052a1 => '無限制';
 
   @override
+  String get m312fc0deca => '不使用強調色';
+
+  @override
+  String get m1174a37a5a => '藍綠色';
+
+  @override
   String get mfc52cf98ef => '塊';
 
   @override
@@ -3662,10 +3710,16 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m0cc21de8b8 => '生命';
 
   @override
+  String get ma4bb19e143 => '綠色';
+
+  @override
   String get mf869293c62 => '數值';
 
   @override
   String get mf6a527732e => '目前 Lua PoB 報告中的值。';
+
+  @override
+  String get mb039d623c2 => '金色';
 
   @override
   String get ma9f9d23dcb => '正在載入遊戲翻譯...';
@@ -3702,6 +3756,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m1ccb8777b8 => '石頭圖像不可用';
+
+  @override
+  String get ma3bb99f458 => '圖示';
 
   @override
   String get medafd2f9d8 => '從 PoB 導入角色';
@@ -3814,6 +3871,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get mcf9fbc3f41 => '傳輸校驗與不匹配';
 
   @override
+  String get m21b4d916f3 => '紅色';
+
+  @override
   String get m6916d088f3 => '暴擊。機會';
 
   @override
@@ -3864,6 +3924,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get mbe517dba6c => '介面規模';
+
+  @override
+  String get mbf2ab0ec3e => '劍';
 
   @override
   String get m10808f1297 => '最小值';
@@ -4490,6 +4553,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m1731619efa => '設計';
 
   @override
+  String get mde891dbc66 => '卡片外觀';
+
+  @override
   String get m28af538cbc => '評估輔助寶石';
 
   @override
@@ -4874,6 +4940,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get ma000cd3129 => 'DPS 變化';
 
   @override
+  String get m1678dcfc2b => '召喚物';
+
+  @override
   String m0680c9d188(String p0) {
     return '小小兵 $p0';
   }
@@ -5210,6 +5279,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get m69c1590a47 => '力量';
 
   @override
+  String get m66d12fb992 => '藍色';
+
+  @override
   String get m3860f59770 => '跟隨系統';
 
   @override
@@ -5398,6 +5470,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get mf7eaffec2f => '版本頁面';
+
+  @override
+  String get m4a4e112cd2 => '射箭';
 
   @override
   String get m4ef88e033d => '屬性摘要';
@@ -5608,6 +5683,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get ma6b9ff9cd6 => '文件存在。若要替換，請指定 overwrite=true。';
 
   @override
+  String get m4aed2cd288 => '紫色';
+
+  @override
   String get md8a38f5bc2 => '生命藥劑';
 
   @override
@@ -5624,6 +5702,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m8295a5b3a5 => '冷';
+
+  @override
+  String get m06984c12fe => '強調色';
 
   @override
   String get mb88cddfeb4 => '數字與規則·LUA POB';
@@ -5680,6 +5761,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get me43836c564 => '抵抗懲罰';
+
+  @override
+  String get mf2518d913d => '盾牌';
 
   @override
   String get m0b5051e1b2 => '裝備';

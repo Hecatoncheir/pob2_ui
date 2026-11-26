@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:pob2_ui/data/build_library.dart';
+import 'package:pob2_ui/domain/build_card_appearance.dart';
 import 'package:pob2_ui/domain/build_report.dart';
 import 'package:pob2_ui/domain/library_entry.dart';
 
@@ -75,6 +76,72 @@ void main() {
       expect(restored.active!.title, 'Копия');
       expect(restored.activeId, second.activeId);
       expect(() => library.read('../outside'), throwsFormatException);
+    },
+  );
+
+  test('Старая карточка и неизвестный цвет используют стандартный вид', () {
+    final oldEntry = {
+      'id': 'old',
+      'title': 'Первая',
+      'class': 'Witch',
+      'level': 90,
+      'updated': '2026-11-25T00:00:00Z',
+    };
+    expect(
+      LibraryEntry.fromJson(oldEntry).appearance,
+      const BuildCardAppearance(),
+    );
+    expect(
+      LibraryEntry.fromJson({
+        ...oldEntry,
+        'appearance': {'icon': 'shield', 'color': 'future-color'},
+      }).appearance,
+      const BuildCardAppearance(icon: BuildCardIcon.shield),
+    );
+  });
+
+  test(
+    'Локальная карточка сохраняет вид отдельно от новой ревизии XML',
+    () async {
+      final root = await Directory.systemTemp.createTemp('pob2-card-');
+      addTearDown(() => root.delete(recursive: true));
+      final library = BuildLibrary(root);
+      final first = await library.save(LibraryState(), report(), '<first/>');
+      final second = await library.save(
+        LibraryState(entries: first.entries),
+        report(),
+        '<second/>',
+      );
+      const appearance = BuildCardAppearance(
+        icon: BuildCardIcon.shield,
+        color: BuildCardColor.blue,
+      );
+      final id = first.activeId!;
+      final edited = await library.updateAppearance(second, id, appearance);
+      expect(edited.activeId, second.activeId);
+      expect(edited.active?.appearance, const BuildCardAppearance());
+      expect(edited.entries.last.revision, first.active?.revision);
+      expect(await library.read(id), '<first/>');
+
+      final saved = await library.save(
+        LibraryState(entries: edited.entries, activeId: id),
+        report(),
+        '<recalculated/>',
+      );
+      expect(saved.active?.appearance, appearance);
+      final reopened = BuildLibrary(root);
+      final restored = await reopened.load();
+      expect(restored.active?.appearance, appearance);
+      await reopened.updateAppearance(
+        restored,
+        id,
+        const BuildCardAppearance(),
+      );
+      expect(
+        (await library.load()).active?.appearance,
+        const BuildCardAppearance(),
+      );
+      expect(await library.read(id), '<recalculated/>');
     },
   );
 }

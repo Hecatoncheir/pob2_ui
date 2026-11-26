@@ -223,6 +223,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m0792a052a1 => 'No limit';
 
   @override
+  String get m312fc0deca => 'No accent';
+
+  @override
+  String get m1174a37a5a => 'Teal';
+
+  @override
   String get mfc52cf98ef => 'Block';
 
   @override
@@ -815,10 +821,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m0cc21de8b8 => 'Life';
 
   @override
+  String get ma4bb19e143 => 'Green';
+
+  @override
   String get mf869293c62 => 'Value';
 
   @override
   String get mf6a527732e => 'Value from the current Lua PoB report.';
+
+  @override
+  String get mb039d623c2 => 'Gold';
 
   @override
   String get ma9f9d23dcb => 'Loading game translations…';
@@ -855,6 +867,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get m1ccb8777b8 => 'Gem image unavailable';
+
+  @override
+  String get ma3bb99f458 => 'Icon';
 
   @override
   String get medafd2f9d8 => 'Importing a character from PoB';
@@ -969,6 +984,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get mcf9fbc3f41 => 'Translation checksum mismatch';
 
   @override
+  String get m21b4d916f3 => 'Red';
+
+  @override
   String get m6916d088f3 => 'Crit. chance';
 
   @override
@@ -1019,6 +1037,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get mbe517dba6c => 'Interface scale';
+
+  @override
+  String get mbf2ab0ec3e => 'Sword';
 
   @override
   String get m10808f1297 => 'Minimum';
@@ -1657,6 +1678,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m1731619efa => 'Appearance';
 
   @override
+  String get mde891dbc66 => 'Card appearance';
+
+  @override
   String get m28af538cbc => 'Preview support';
 
   @override
@@ -2044,6 +2068,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get ma000cd3129 => 'DPS change';
 
   @override
+  String get m1678dcfc2b => 'Minion';
+
+  @override
   String m0680c9d188(String p0) {
     return 'Minion $p0';
   }
@@ -2391,6 +2418,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get m69c1590a47 => 'Strength';
 
   @override
+  String get m66d12fb992 => 'Blue';
+
+  @override
   String get m3860f59770 => 'System';
 
   @override
@@ -2587,6 +2617,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get mf7eaffec2f => 'Releases page';
+
+  @override
+  String get m4a4e112cd2 => 'Archery';
 
   @override
   String get m4ef88e033d => 'Summary properties';
@@ -2806,6 +2839,9 @@ class AppLocalizationsEn extends AppLocalizations {
       'The file exists. To replace, specify overwrite=true.';
 
   @override
+  String get m4aed2cd288 => 'Purple';
+
+  @override
   String get md8a38f5bc2 => 'Life flask';
 
   @override
@@ -2822,6 +2858,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get m8295a5b3a5 => 'Cold';
+
+  @override
+  String get m06984c12fe => 'Accent color';
 
   @override
   String get mb88cddfeb4 => 'NUMBERS AND RULES · LUA POB';
@@ -2878,6 +2917,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get me43836c564 => 'Resistance penalty';
+
+  @override
+  String get mf2518d913d => 'Shield';
 
   @override
   String get m0b5051e1b2 => 'Equipment';
