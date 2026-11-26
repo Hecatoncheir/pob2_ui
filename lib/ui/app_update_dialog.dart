@@ -44,6 +44,14 @@ class _UpdateDialog extends StatelessWidget {
                   : () => Navigator.pop(context),
               child: const AppText('Закрыть'),
             ),
+            if (state.phase == UpdatePhase.available &&
+                state.error != null &&
+                state.installation != null &&
+                state.release?.installer != null)
+              TextButton(
+                onPressed: context.read<AppUpdateCubit>().openReleases,
+                child: const AppText('Страница выпусков'),
+              ),
             _PrimaryAction(state),
           ],
         ),

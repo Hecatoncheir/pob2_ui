@@ -41,6 +41,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get mf5593e021c => 'DPS de la compétence';
 
   @override
+  String get m90c737452b => 'Proxy HTTP';
+
+  @override
   String get m0c63e733f9 => 'Lua n\'a pas renvoyé toutes les icônes';
 
   @override
@@ -211,6 +214,12 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
+  String get m353cf589e9 => 'Automatique';
+
+  @override
+  String get mfdee5c1897 => 'Adresse et port';
+
+  @override
   String m607c57804e(String p0) {
     return 'Arme active · $p0';
   }
@@ -232,6 +241,9 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get m312fc0deca => 'Sans couleur d’accentuation';
+
+  @override
+  String get m2f8bfdf88b => 'Sans proxy';
 
   @override
   String get m1174a37a5a => 'Turquoise';
@@ -287,6 +299,10 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get m65d05ab17f => 'Votre prochaine version';
+
+  @override
+  String get mda2dced409 =>
+      'Saisissez l’adresse du proxy HTTP au format hôte:port.';
 
   @override
   String get mfc903d7f16 => 'Entrez un numéro valide';
@@ -1335,6 +1351,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get mef9d01550d => 'Échec de l\'enregistrement de l\'échelle.';
 
   @override
+  String get m3b051f718e => 'Impossible d’enregistrer les paramètres du proxy';
+
+  @override
   String get mdc2f51b827 => 'Impossible d’enregistrer le plan de progression';
 
   @override
@@ -2175,6 +2194,9 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get mce86d859e2 => 'programme moteur pob2';
+
+  @override
+  String get ma567776c79 => 'Proxy';
 
   @override
   String m748bd43447(String p0) {

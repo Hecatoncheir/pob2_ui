@@ -41,6 +41,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get mf5593e021c => 'スキルDPS';
 
   @override
+  String get m90c737452b => 'HTTP プロキシ';
+
+  @override
   String get m0c63e733f9 => 'Lua はすべてのアイコンを返しませんでした';
 
   @override
@@ -199,6 +202,12 @@ class AppLocalizationsJa extends AppLocalizations {
   }
 
   @override
+  String get m353cf589e9 => '自動';
+
+  @override
+  String get mfdee5c1897 => 'アドレスとポート';
+
+  @override
   String m607c57804e(String p0) {
     return '使用中の武器 · $p0';
   }
@@ -220,6 +229,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m312fc0deca => '強調色なし';
+
+  @override
+  String get m2f8bfdf88b => 'プロキシなし';
 
   @override
   String get m1174a37a5a => '青緑';
@@ -273,6 +285,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get m65d05ab17f => '次のビルド';
+
+  @override
+  String get mda2dced409 => 'HTTP プロキシのアドレスをホスト:ポートの形式で入力してください。';
 
   @override
   String get mfc903d7f16 => '有効な数値を入力してください';
@@ -1278,6 +1293,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get mef9d01550d => 'スケールの保存に失敗しました。';
 
   @override
+  String get m3b051f718e => 'プロキシ設定を保存できませんでした';
+
+  @override
   String get mdc2f51b827 => '育成プランを保存できませんでした';
 
   @override
@@ -2096,6 +2114,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get mce86d859e2 => 'pob2 エンジン プログラム';
+
+  @override
+  String get ma567776c79 => 'プロキシ';
 
   @override
   String m748bd43447(String p0) {

@@ -41,6 +41,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get mf5593e021c => '스킬 DPS';
 
   @override
+  String get m90c737452b => 'HTTP 프록시';
+
+  @override
   String get m0c63e733f9 => 'Lua이 모든 아이콘을 반환하지 않았습니다.';
 
   @override
@@ -199,6 +202,12 @@ class AppLocalizationsKo extends AppLocalizations {
   }
 
   @override
+  String get m353cf589e9 => '자동';
+
+  @override
+  String get mfdee5c1897 => '주소 및 포트';
+
+  @override
   String m607c57804e(String p0) {
     return '현재 무기 · $p0';
   }
@@ -220,6 +229,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m312fc0deca => '강조 색상 없음';
+
+  @override
+  String get m2f8bfdf88b => '프록시 사용 안 함';
 
   @override
   String get m1174a37a5a => '청록색';
@@ -273,6 +285,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get m65d05ab17f => '다음 빌드';
+
+  @override
+  String get mda2dced409 => 'HTTP 프록시 주소를 호스트:포트 형식으로 입력하세요.';
 
   @override
   String get mfc903d7f16 => '유효한 번호를 입력하세요.';
@@ -1278,6 +1293,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get mef9d01550d => '스케일을 저장하지 못했습니다.';
 
   @override
+  String get m3b051f718e => '프록시 설정을 저장하지 못했습니다';
+
+  @override
   String get mdc2f51b827 => '레벨링 계획을 저장할 수 없습니다';
 
   @override
@@ -2096,6 +2114,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get mce86d859e2 => 'pob2 엔진 프로그램';
+
+  @override
+  String get ma567776c79 => '프록시';
 
   @override
   String m748bd43447(String p0) {

@@ -40,6 +40,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get mf5593e021c => '技能 DPS';
 
   @override
+  String get m90c737452b => 'HTTP 代理伺服器';
+
+  @override
   String get m0c63e733f9 => 'Lua 未傳回所有圖標';
 
   @override
@@ -197,6 +200,12 @@ class AppLocalizationsZh extends AppLocalizations {
   }
 
   @override
+  String get m353cf589e9 => '自動';
+
+  @override
+  String get mfdee5c1897 => '位址和連接埠';
+
+  @override
   String m607c57804e(String p0) {
     return '目前武器 · $p0';
   }
@@ -218,6 +227,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m312fc0deca => '不使用強調色';
+
+  @override
+  String get m2f8bfdf88b => '不使用代理伺服器';
 
   @override
   String get m1174a37a5a => '藍綠色';
@@ -271,6 +283,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get m65d05ab17f => '你的下一個版本';
+
+  @override
+  String get mda2dced409 => '請以主機:連接埠格式輸入 HTTP 代理伺服器位址。';
 
   @override
   String get mfc903d7f16 => '輸入有效號碼';
@@ -1272,6 +1287,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get mef9d01550d => '無法保存比例。';
 
   @override
+  String get m3b051f718e => '無法儲存代理伺服器設定';
+
+  @override
   String get mdc2f51b827 => '無法儲存練等計畫';
 
   @override
@@ -2088,6 +2106,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get mce86d859e2 => 'pob2引擎程序';
+
+  @override
+  String get ma567776c79 => '代理伺服器';
 
   @override
   String m748bd43447(String p0) {
@@ -2951,6 +2972,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get mf5593e021c => '技能 DPS';
 
   @override
+  String get m90c737452b => 'HTTP 代理伺服器';
+
+  @override
   String get m0c63e733f9 => 'Lua 未傳回所有圖標';
 
   @override
@@ -3108,6 +3132,12 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   }
 
   @override
+  String get m353cf589e9 => '自動';
+
+  @override
+  String get mfdee5c1897 => '位址和連接埠';
+
+  @override
   String m607c57804e(String p0) {
     return '目前武器 · $p0';
   }
@@ -3129,6 +3159,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m312fc0deca => '不使用強調色';
+
+  @override
+  String get m2f8bfdf88b => '不使用代理伺服器';
 
   @override
   String get m1174a37a5a => '藍綠色';
@@ -3182,6 +3215,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get m65d05ab17f => '你的下一個版本';
+
+  @override
+  String get mda2dced409 => '請以主機:連接埠格式輸入 HTTP 代理伺服器位址。';
 
   @override
   String get mfc903d7f16 => '輸入有效號碼';
@@ -4183,6 +4219,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get mef9d01550d => '無法保存比例。';
 
   @override
+  String get m3b051f718e => '無法儲存代理伺服器設定';
+
+  @override
   String get mdc2f51b827 => '無法儲存練等計畫';
 
   @override
@@ -4999,6 +5038,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get mce86d859e2 => 'pob2引擎程序';
+
+  @override
+  String get ma567776c79 => '代理伺服器';
 
   @override
   String m748bd43447(String p0) {

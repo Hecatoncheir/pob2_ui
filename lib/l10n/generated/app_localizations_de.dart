@@ -41,6 +41,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get mf5593e021c => 'Fertigkeits-DPS';
 
   @override
+  String get m90c737452b => 'HTTP-Proxy';
+
+  @override
   String get m0c63e733f9 => 'Lua hat nicht alle Symbole zurückgegeben';
 
   @override
@@ -215,6 +218,12 @@ class AppLocalizationsDe extends AppLocalizations {
   }
 
   @override
+  String get m353cf589e9 => 'Automatisch';
+
+  @override
+  String get mfdee5c1897 => 'Adresse und Port';
+
+  @override
   String m607c57804e(String p0) {
     return 'Aktive Waffe · $p0';
   }
@@ -236,6 +245,9 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get m312fc0deca => 'Ohne Akzentfarbe';
+
+  @override
+  String get m2f8bfdf88b => 'Ohne Proxy';
 
   @override
   String get m1174a37a5a => 'Türkis';
@@ -289,6 +301,10 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get m65d05ab17f => 'Ihr nächster Build';
+
+  @override
+  String get mda2dced409 =>
+      'Gib die Adresse des HTTP-Proxys im Format Host:Port ein.';
 
   @override
   String get mfc903d7f16 => 'Geben Sie eine gültige Nummer ein';
@@ -1337,6 +1353,10 @@ class AppLocalizationsDe extends AppLocalizations {
   String get mef9d01550d => 'Maßstab konnte nicht gespeichert werden.';
 
   @override
+  String get m3b051f718e =>
+      'Proxy-Einstellungen konnten nicht gespeichert werden';
+
+  @override
   String get mdc2f51b827 => 'Stufenplan konnte nicht gespeichert werden';
 
   @override
@@ -2174,6 +2194,9 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get mce86d859e2 => 'pob2-engine-Programm';
+
+  @override
+  String get ma567776c79 => 'Proxy';
 
   @override
   String m748bd43447(String p0) {

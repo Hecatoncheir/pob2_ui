@@ -12,7 +12,11 @@ import 'data/startup_health.dart';
 import 'ui/app_update_cubit.dart';
 
 import 'data/engine_components.dart';
+import 'data/engine_session_client.dart';
 import 'data/installation_store.dart';
+import 'data/process_service.dart';
+import 'data/proxy_http_overrides.dart';
+import 'data/proxy_preferences.dart';
 import 'data/workbench_client.dart';
 import 'data/pob_build_library.dart';
 import 'data/pob_window_repository.dart';
@@ -27,6 +31,7 @@ import 'ui/interface_scale_bloc.dart';
 import 'data/workspace_preferences_repository.dart';
 import 'ui/workspace_preferences_bloc.dart';
 import 'ui/exit_protection.dart';
+import 'ui/proxy_cubit.dart';
 
 Future<void> main(List<String> arguments) async {
   final check = _installerCheckStage();
@@ -35,10 +40,10 @@ Future<void> main(List<String> arguments) async {
   progress?.record('startup');
   WidgetsFlutterBinding.ensureInitialized();
   if (!await checkUpdateEngine(arguments)) exit(1);
-  if (check == 'restore' || check == 'cleanup') {
-    HttpOverrides.global = OfflineInstallerCheck();
-  }
-  final model = await _openWorkshop(root, check);
+  final proxy = await _configureProxy(root, check);
+  Map<String, String> engineEnvironment() =>
+      check == null ? proxy.state.engineEnvironment : const {};
+  final model = await _openWorkshop(root, check, engineEnvironment);
   final updates = AppUpdateCubit(root: model.components.store.root);
   final preferences = AppearanceRepository(model.components.store.root);
   final appearance = AppearanceBloc(
@@ -76,6 +81,7 @@ Future<void> main(List<String> arguments) async {
         language: language,
         interfaceScale: interfaceScale,
         workspacePreferences: workspacePreferences,
+        proxy: proxy,
         initialization: check == null ? initialization : null,
       ),
     ),
@@ -96,18 +102,36 @@ Future<void> main(List<String> arguments) async {
   if (check == null) language.add(const LanguageLoadRequested());
 }
 
-Future<WorkshopCubit> _openWorkshop(Directory root, String? check) async {
+Future<ProxyCubit> _configureProxy(Directory root, String? check) async {
+  final preferences = ProxyPreferences(root);
+  final proxy = ProxyCubit(preferences, initial: await preferences.load());
+  HttpOverrides.global = switch (check) {
+    'restore' || 'cleanup' => OfflineInstallerCheck(),
+    _ => ProxyHttpOverrides(() => proxy.state),
+  };
+  return proxy;
+}
+
+Future<WorkshopCubit> _openWorkshop(
+  Directory root,
+  String? check,
+  Map<String, String> Function() engineEnvironment,
+) async {
   final executable = defaultEngineExecutable();
   final components = EngineComponents(
     store: InstallationStore(root),
     profileUse: await ProfileUse.open(root),
     executable: executable,
+    processes: ProcessService(environment: engineEnvironment),
   );
-  WorkbenchClient createWorkbench() => WorkbenchClient(executable);
+  WorkbenchClient createWorkbench() =>
+      WorkbenchClient(executable, engineEnvironment);
   return WorkshopCubit(
     components,
     createWorkbench(),
     createEngine: createWorkbench,
+    openEngineSession: (options) =>
+        EngineSessionClient.open(options, environment: engineEnvironment()),
     pobWindow: PobWindowRepository(engineExecutable: executable),
     library: PobBuildLibrary(root),
     primaryEngine: _primaryEngineOptions(root, check, executable),

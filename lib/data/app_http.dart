@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
@@ -71,14 +72,26 @@ class AppHttp {
     int offset,
   ) async {
     for (var attempt = 0; attempt < 3; attempt++) {
-      final response = await _request(client, uri, offset);
-      if (!const {502, 503, 504}.contains(response.statusCode) || attempt == 2)
-        return response;
-      await response.drain<void>().timeout(const Duration(seconds: 30));
+      final lastAttempt = attempt == 2;
+      try {
+        final response = await _request(client, uri, offset);
+        if (lastAttempt ||
+            !const {502, 503, 504}.contains(response.statusCode)) {
+          return response;
+        }
+        await response.drain<void>().timeout(const Duration(seconds: 30));
+      } on Exception catch (failure) {
+        if (lastAttempt || !_retryableConnection(failure)) rethrow;
+      }
       await Future<void>.delayed(Duration(milliseconds: 400 * (attempt + 1)));
     }
     throw const HttpException('Не удалось получить ответ сервера');
   }
+
+  static bool _retryableConnection(Exception failure) =>
+      failure is HandshakeException ||
+      failure is SocketException ||
+      failure is TimeoutException;
 
   Future<String> readText(
     HttpClientResponse response, {

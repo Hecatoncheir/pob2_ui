@@ -173,6 +173,12 @@ abstract class AppLocalizations {
   /// **'Skill DPS'**
   String get mf5593e021c;
 
+  /// HTTP-прокси
+  ///
+  /// In en, this message translates to:
+  /// **'HTTP proxy'**
+  String get m90c737452b;
+
   /// Lua вернул не все иконки
   ///
   /// In en, this message translates to:
@@ -455,6 +461,18 @@ abstract class AppLocalizations {
   /// **'{p0}: {p1} of {p2} points spent'**
   String mb7b217c429(String p0, String p1, String p2);
 
+  /// Автоматически
+  ///
+  /// In en, this message translates to:
+  /// **'Automatic'**
+  String get m353cf589e9;
+
+  /// Адрес и порт
+  ///
+  /// In en, this message translates to:
+  /// **'Address and port'**
+  String get mfdee5c1897;
+
   /// Активное оружие · {p0}
   ///
   /// In en, this message translates to:
@@ -496,6 +514,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No accent'**
   String get m312fc0deca;
+
+  /// Без прокси
+  ///
+  /// In en, this message translates to:
+  /// **'No proxy'**
+  String get m2f8bfdf88b;
 
   /// Бирюзовый
   ///
@@ -598,6 +622,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Your next build'**
   String get m65d05ab17f;
+
+  /// Введите адрес HTTP-прокси в формате хост:порт.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter the HTTP proxy address in host:port format.'**
+  String get mda2dced409;
 
   /// Введите корректное число
   ///
@@ -2460,6 +2490,12 @@ abstract class AppLocalizations {
   /// **'Failed to save scale.'**
   String get mef9d01550d;
 
+  /// Не удалось сохранить настройки прокси
+  ///
+  /// In en, this message translates to:
+  /// **'Could not save proxy settings'**
+  String get m3b051f718e;
+
   /// Не удалось сохранить план прокачки
   ///
   /// In en, this message translates to:
@@ -4019,6 +4055,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'pob2-engine program'**
   String get mce86d859e2;
+
+  /// Прокси
+  ///
+  /// In en, this message translates to:
+  /// **'Proxy'**
+  String get ma567776c79;
 
   /// Протокол: {p0}
   ///

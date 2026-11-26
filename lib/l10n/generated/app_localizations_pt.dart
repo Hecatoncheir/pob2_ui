@@ -41,6 +41,9 @@ class AppLocalizationsPt extends AppLocalizations {
   String get mf5593e021c => 'DPS da habilidade';
 
   @override
+  String get m90c737452b => 'Proxy HTTP';
+
+  @override
   String get m0c63e733f9 => 'Lua não retornou todos os ícones';
 
   @override
@@ -205,6 +208,12 @@ class AppLocalizationsPt extends AppLocalizations {
   }
 
   @override
+  String get m353cf589e9 => 'Automático';
+
+  @override
+  String get mfdee5c1897 => 'Endereço e porta';
+
+  @override
   String m607c57804e(String p0) {
     return 'Arma ativa · $p0';
   }
@@ -226,6 +235,9 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get m312fc0deca => 'Sem cor de destaque';
+
+  @override
+  String get m2f8bfdf88b => 'Sem proxy';
 
   @override
   String get m1174a37a5a => 'Turquesa';
@@ -279,6 +291,10 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get m65d05ab17f => 'Sua próxima construção';
+
+  @override
+  String get mda2dced409 =>
+      'Insira o endereço do proxy HTTP no formato host:porta.';
 
   @override
   String get mfc903d7f16 => 'Insira um número válido';
@@ -1308,6 +1324,9 @@ class AppLocalizationsPt extends AppLocalizations {
   String get mef9d01550d => 'Falha ao salvar escala.';
 
   @override
+  String get m3b051f718e => 'Não foi possível salvar as configurações do proxy';
+
+  @override
   String get mdc2f51b827 => 'Não foi possível salvar o plano de evolução';
 
   @override
@@ -2146,6 +2165,9 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get mce86d859e2 => 'programa do mecanismo pob2';
+
+  @override
+  String get ma567776c79 => 'Proxy';
 
   @override
   String m748bd43447(String p0) {
@@ -3047,6 +3069,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get mf5593e021c => 'DPS da habilidade';
 
   @override
+  String get m90c737452b => 'Proxy HTTP';
+
+  @override
   String get m0c63e733f9 => 'Lua não retornou todos os ícones';
 
   @override
@@ -3211,6 +3236,12 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   }
 
   @override
+  String get m353cf589e9 => 'Automático';
+
+  @override
+  String get mfdee5c1897 => 'Endereço e porta';
+
+  @override
   String m607c57804e(String p0) {
     return 'Arma ativa · $p0';
   }
@@ -3232,6 +3263,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get m312fc0deca => 'Sem cor de destaque';
+
+  @override
+  String get m2f8bfdf88b => 'Sem proxy';
 
   @override
   String get m1174a37a5a => 'Turquesa';
@@ -3285,6 +3319,10 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get m65d05ab17f => 'Sua próxima construção';
+
+  @override
+  String get mda2dced409 =>
+      'Insira o endereço do proxy HTTP no formato host:porta.';
 
   @override
   String get mfc903d7f16 => 'Insira um número válido';
@@ -4314,6 +4352,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get mef9d01550d => 'Falha ao salvar escala.';
 
   @override
+  String get m3b051f718e => 'Não foi possível salvar as configurações do proxy';
+
+  @override
   String get mdc2f51b827 => 'Não foi possível salvar o plano de evolução';
 
   @override
@@ -5152,6 +5193,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get mce86d859e2 => 'programa do mecanismo pob2';
+
+  @override
+  String get ma567776c79 => 'Proxy';
 
   @override
   String m748bd43447(String p0) {

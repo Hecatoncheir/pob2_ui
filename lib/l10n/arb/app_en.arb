@@ -45,6 +45,11 @@
     "description": "DPS умения",
     "placeholders": {}
   },
+  "m90c737452b": "HTTP proxy",
+  "@m90c737452b": {
+    "description": "HTTP-прокси",
+    "placeholders": {}
+  },
   "m0c63e733f9": "Lua did not return all icons",
   "@m0c63e733f9": {
     "description": "Lua вернул не все иконки",
@@ -327,6 +332,16 @@
       }
     }
   },
+  "m353cf589e9": "Automatic",
+  "@m353cf589e9": {
+    "description": "Автоматически",
+    "placeholders": {}
+  },
+  "mfdee5c1897": "Address and port",
+  "@mfdee5c1897": {
+    "description": "Адрес и порт",
+    "placeholders": {}
+  },
   "m607c57804e": "Active weapon · {p0}",
   "@m607c57804e": {
     "description": "Активное оружие · {p0}",
@@ -364,6 +379,11 @@
   "m312fc0deca": "No accent",
   "@m312fc0deca": {
     "description": "Без подсветки",
+    "placeholders": {}
+  },
+  "m2f8bfdf88b": "No proxy",
+  "@m2f8bfdf88b": {
+    "description": "Без прокси",
     "placeholders": {}
   },
   "m1174a37a5a": "Teal",
@@ -453,6 +473,11 @@
   "m65d05ab17f": "Your next build",
   "@m65d05ab17f": {
     "description": "Ваша следующая сборка",
+    "placeholders": {}
+  },
+  "mda2dced409": "Enter the HTTP proxy address in host:port format.",
+  "@mda2dced409": {
+    "description": "Введите адрес HTTP-прокси в формате хост:порт.",
     "placeholders": {}
   },
   "mfc903d7f16": "Enter a valid number",
@@ -2144,6 +2169,11 @@
     "description": "Не удалось сохранить масштаб.",
     "placeholders": {}
   },
+  "m3b051f718e": "Could not save proxy settings",
+  "@m3b051f718e": {
+    "description": "Не удалось сохранить настройки прокси",
+    "placeholders": {}
+  },
   "mdc2f51b827": "Could not save the leveling plan",
   "@mdc2f51b827": {
     "description": "Не удалось сохранить план прокачки",
@@ -3524,6 +3554,11 @@
   "mce86d859e2": "pob2-engine program",
   "@mce86d859e2": {
     "description": "Программа pob2-engine",
+    "placeholders": {}
+  },
+  "ma567776c79": "Proxy",
+  "@ma567776c79": {
+    "description": "Прокси",
     "placeholders": {}
   },
   "m748bd43447": "Protocol: {p0}",

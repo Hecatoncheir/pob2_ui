@@ -9,10 +9,11 @@ import '../domain/component.dart';
 import 'bundled_engine.dart';
 
 class WorkbenchClient {
-  WorkbenchClient([String? executable])
+  WorkbenchClient([String? executable, this.environment])
     : executable = executable ?? defaultEngineExecutable();
 
   final String executable;
+  final Map<String, String> Function()? environment;
   final diagnostics = StringBuffer();
   Set<String> tools = const {};
   void Function(Object)? onDisconnected;
@@ -33,6 +34,7 @@ class WorkbenchClient {
       executable,
       ['workbench', '--grpc'],
       environment: {
+        ...?environment?.call(),
         'POB2_ENGINE_POB_DIR': pob.directory,
         'POB2_ENGINE_POB_NATIVE_DIR': pob.nativeDirectory ?? '',
       },

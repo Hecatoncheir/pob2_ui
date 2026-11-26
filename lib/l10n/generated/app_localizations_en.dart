@@ -41,6 +41,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get mf5593e021c => 'Skill DPS';
 
   @override
+  String get m90c737452b => 'HTTP proxy';
+
+  @override
   String get m0c63e733f9 => 'Lua did not return all icons';
 
   @override
@@ -203,6 +206,12 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String get m353cf589e9 => 'Automatic';
+
+  @override
+  String get mfdee5c1897 => 'Address and port';
+
+  @override
   String m607c57804e(String p0) {
     return 'Active weapon · $p0';
   }
@@ -224,6 +233,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get m312fc0deca => 'No accent';
+
+  @override
+  String get m2f8bfdf88b => 'No proxy';
 
   @override
   String get m1174a37a5a => 'Teal';
@@ -277,6 +289,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get m65d05ab17f => 'Your next build';
+
+  @override
+  String get mda2dced409 => 'Enter the HTTP proxy address in host:port format.';
 
   @override
   String get mfc903d7f16 => 'Enter a valid number';
@@ -1301,6 +1316,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get mef9d01550d => 'Failed to save scale.';
 
   @override
+  String get m3b051f718e => 'Could not save proxy settings';
+
+  @override
   String get mdc2f51b827 => 'Could not save the leveling plan';
 
   @override
@@ -2127,6 +2145,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get mce86d859e2 => 'pob2-engine program';
+
+  @override
+  String get ma567776c79 => 'Proxy';
 
   @override
   String m748bd43447(String p0) {

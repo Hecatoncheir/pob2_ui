@@ -18,14 +18,22 @@ import 'support/temporary_directory.dart';
 
 const digestAbc =
     'ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad';
+const releaseAssetsHost = 'release-assets.githubusercontent.com';
+const handshakeFailure = HandshakeException(
+  'Connection terminated during handshake',
+);
 
 class RoutedClient implements HttpClient {
-  RoutedClient(this.server);
+  RoutedClient(this.server, {this.beforeGet});
   final HttpServer server;
+  final void Function(Uri)? beforeGet;
   final HttpClient inner = HttpClient();
   @override
-  Future<HttpClientRequest> getUrl(Uri url) =>
-      inner.getUrl(Uri.http('127.0.0.1:${server.port}', url.path));
+  Future<HttpClientRequest> getUrl(Uri url) async {
+    beforeGet?.call(url);
+    return inner.getUrl(Uri.http('127.0.0.1:${server.port}', url.path));
+  }
+
   @override
   set connectionTimeout(Duration? value) => inner.connectionTimeout = value;
   @override
@@ -189,6 +197,94 @@ void main() {
     await response.drain<void>();
     expect(response.statusCode, 206);
     expect(ranges, ['bytes=5-', 'bytes=5-', 'bytes=5-']);
+  });
+
+  test(
+    'Разовый обрыв TLS после перенаправления сохраняет Range и SHA-256',
+    () async {
+      final server = await HttpServer.bind(InternetAddress.loopbackIPv4, 0);
+      addTearDown(() => server.close(force: true));
+      final ranges = <String?>[];
+      server.listen((request) async {
+        ranges.add(request.headers.value(HttpHeaders.rangeHeader));
+        if (request.uri.path == '/test') {
+          request.response.statusCode = HttpStatus.found;
+          request.response.headers.set(
+            HttpHeaders.locationHeader,
+            'https://$releaseAssetsHost/asset',
+          );
+        } else {
+          request.response.statusCode = HttpStatus.partialContent;
+          request.response.headers.set(
+            HttpHeaders.contentRangeHeader,
+            'bytes 1-2/3',
+          );
+          request.response.write('bc');
+        }
+        await request.response.close();
+      });
+      var assetAttempts = 0;
+      final http = AppHttp(
+        clientFactory: () => RoutedClient(
+          server,
+          beforeGet: (uri) {
+            if (uri.host == releaseAssetsHost && ++assetAttempts == 1) {
+              throw handshakeFailure;
+            }
+          },
+        ),
+      );
+      final asset = AppAsset(
+        name: 'test.run',
+        url: Uri.https('github.com', '/test'),
+        size: 3,
+        sha256: digestAbc,
+      );
+      final part = File.fromUri(temporary.uri.resolve('test.run.part'));
+      await part.writeAsString('a');
+
+      final result = await VerifiedDownload(http: http)
+          .download(asset, temporary, onProgress: (_) {});
+
+      expect(assetAttempts, 2);
+      expect(ranges, everyElement('bytes=1-'));
+      expect(await fileSha256(result), digestAbc);
+      expect(await part.exists(), isFalse);
+    },
+  );
+
+  test('Постоянный обрыв TLS прекращает загрузку после трёх попыток', () async {
+    final server = await HttpServer.bind(InternetAddress.loopbackIPv4, 0);
+    addTearDown(() => server.close(force: true));
+    server.listen((request) async {
+      request.response.statusCode = HttpStatus.found;
+      request.response.headers.set(
+        HttpHeaders.locationHeader,
+        'https://$releaseAssetsHost/asset',
+      );
+      await request.response.close();
+    });
+    var assetAttempts = 0;
+    final http = AppHttp(
+      clientFactory: () => RoutedClient(
+        server,
+        beforeGet: (uri) {
+          if (uri.host == releaseAssetsHost) {
+            assetAttempts++;
+            throw handshakeFailure;
+          }
+        },
+      ),
+    );
+    final client = http.createClient();
+    addTearDown(() => client.close(force: true));
+
+    await expectLater(
+      http.get(client, Uri.https('github.com', '/test')),
+      throwsA(isA<HandshakeException>()),
+    );
+
+    expect(assetAttempts, 3);
   });
 
   test('404 означает отсутствие релиза, 500 — ошибку проверки', () async {

@@ -245,7 +245,10 @@ class EngineSessionClient
     return bundled.existsSync() ? bundled.path : configured;
   }
 
-  static Future<EngineConnection> open(EngineOptions options) async {
+  static Future<EngineConnection> open(
+    EngineOptions options, {
+    Map<String, String> environment = const {},
+  }) async {
     final helper = await Process.start(
       _engineExecutable(options.executable),
       [
@@ -266,6 +269,7 @@ class EngineSessionClient
         ],
       ],
       environment: {
+        ...environment,
         if (options.pobDirectory case final path?) 'POB2_ENGINE_POB_DIR': path,
         if (options.pobNativeDirectory case final path?)
           'POB2_ENGINE_POB_NATIVE_DIR': path,

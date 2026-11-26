@@ -241,6 +241,13 @@
     "Набор оружия": ["Weapon set", "Jeu d’armes", "Waffenset", "Conjunto de armas", "Conjunto de armas", "武器セット", "무기 세트", "ชุดอาวุธ", "武器組"],
     "Повторить": ["Retry", "Réessayer", "Erneut versuchen", "Reintentar", "Tentar novamente", "再試行", "다시 시도", "ลองอีกครั้ง", "重試"],
     "Отмена": ["Cancel", "Annuler", "Abbrechen", "Cancelar", "Cancelar", "キャンセル", "취소", "ยกเลิก", "取消"],
-    "Сохранить": ["Save", "Enregistrer", "Speichern", "Guardar", "Salvar", "保存", "저장", "บันทึก", "儲存"]
+    "Сохранить": ["Save", "Enregistrer", "Speichern", "Guardar", "Salvar", "保存", "저장", "บันทึก", "儲存"],
+    "Прокси": ["Proxy", "Proxy", "Proxy", "Proxy", "Proxy", "プロキシ", "프록시", "พร็อกซี", "代理伺服器"],
+    "Автоматически": ["Automatic", "Automatique", "Automatisch", "Automático", "Automático", "自動", "자동", "อัตโนมัติ", "自動"],
+    "Без прокси": ["No proxy", "Sans proxy", "Ohne Proxy", "Sin proxy", "Sem proxy", "プロキシなし", "프록시 사용 안 함", "ไม่ใช้พร็อกซี", "不使用代理伺服器"],
+    "HTTP-прокси": ["HTTP proxy", "Proxy HTTP", "HTTP-Proxy", "Proxy HTTP", "Proxy HTTP", "HTTP プロキシ", "HTTP 프록시", "พร็อกซี HTTP", "HTTP 代理伺服器"],
+    "Адрес и порт": ["Address and port", "Adresse et port", "Adresse und Port", "Dirección y puerto", "Endereço e porta", "アドレスとポート", "주소 및 포트", "ที่อยู่และพอร์ต", "位址和連接埠"],
+    "Введите адрес HTTP-прокси в формате хост:порт.": ["Enter the HTTP proxy address in host:port format.", "Saisissez l’adresse du proxy HTTP au format hôte:port.", "Gib die Adresse des HTTP-Proxys im Format Host:Port ein.", "Introduce la dirección del proxy HTTP en formato host:puerto.", "Insira o endereço do proxy HTTP no formato host:porta.", "HTTP プロキシのアドレスをホスト:ポートの形式で入力してください。", "HTTP 프록시 주소를 호스트:포트 형식으로 입력하세요.", "ป้อนที่อยู่พร็อกซี HTTP ในรูปแบบโฮสต์:พอร์ต", "請以主機:連接埠格式輸入 HTTP 代理伺服器位址。"],
+    "Не удалось сохранить настройки прокси": ["Could not save proxy settings", "Impossible d’enregistrer les paramètres du proxy", "Proxy-Einstellungen konnten nicht gespeichert werden", "No se pudo guardar la configuración del proxy", "Não foi possível salvar as configurações do proxy", "プロキシ設定を保存できませんでした", "프록시 설정을 저장하지 못했습니다", "บันทึกการตั้งค่าพร็อกซีไม่สำเร็จ", "無法儲存代理伺服器設定"]
   }
 }

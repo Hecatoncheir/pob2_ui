@@ -56,6 +56,8 @@ import 'engine_session_view.dart';
 import 'engine_session_dialog.dart';
 import 'tree_view.dart';
 import 'tree_progression_bloc.dart';
+import 'proxy_cubit.dart';
+import 'proxy_settings_dialog.dart';
 
 class PobApp extends StatelessWidget {
   const PobApp({
@@ -66,6 +68,7 @@ class PobApp extends StatelessWidget {
     this.language,
     this.interfaceScale,
     this.workspacePreferences,
+    this.proxy,
     this.initialization,
   });
   final WorkshopCubit model;
@@ -74,12 +77,15 @@ class PobApp extends StatelessWidget {
   final LanguageBloc? language;
   final InterfaceScaleBloc? interfaceScale;
   final WorkspacePreferencesBloc? workspacePreferences;
+  final ProxyCubit? proxy;
   final Future<void>? initialization;
   @override
   Widget build(BuildContext context) => MultiBlocProvider(
     providers: [
       BlocProvider<WorkshopCubit>.value(value: model),
       BlocProvider(create: (_) => ShellBloc()),
+      if (proxy case final settings?)
+        BlocProvider<ProxyCubit>.value(value: settings),
       if (workspacePreferences case final preferences?)
         BlocProvider<WorkspacePreferencesBloc>.value(value: preferences)
       else
@@ -935,6 +941,7 @@ class _SettingsButton extends StatelessWidget {
   Future<void> _show(BuildContext context) async {
     final shell = context.read<ShellBloc>();
     final model = context.read<WorkshopCubit>();
+    final proxy = context.read<ProxyCubit?>();
     final openSetup = await sparkDialog<bool>(
       context,
       AlertDialog(
@@ -953,6 +960,10 @@ class _SettingsButton extends StatelessWidget {
                   const SizedBox(height: 20),
                   const InterfaceScalePicker(),
                   const SizedBox(height: 20),
+                  if (proxy != null) ...[
+                    ProxySettingsButton(proxy: proxy),
+                    const SizedBox(height: 20),
+                  ],
                   const ShortcutSettings(),
                   const SizedBox(height: 20),
                   SwitchListTile(

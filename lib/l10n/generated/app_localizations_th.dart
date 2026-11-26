@@ -41,6 +41,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get mf5593e021c => 'DPS ของสกิล';
 
   @override
+  String get m90c737452b => 'พร็อกซี HTTP';
+
+  @override
   String get m0c63e733f9 => 'Lua ไม่ได้ส่งคืนไอคอนทั้งหมด';
 
   @override
@@ -202,6 +205,12 @@ class AppLocalizationsTh extends AppLocalizations {
   }
 
   @override
+  String get m353cf589e9 => 'อัตโนมัติ';
+
+  @override
+  String get mfdee5c1897 => 'ที่อยู่และพอร์ต';
+
+  @override
   String m607c57804e(String p0) {
     return 'อาวุธที่ใช้งาน · $p0';
   }
@@ -223,6 +232,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m312fc0deca => 'ไม่เน้นสี';
+
+  @override
+  String get m2f8bfdf88b => 'ไม่ใช้พร็อกซี';
 
   @override
   String get m1174a37a5a => 'สีเขียวอมฟ้า';
@@ -276,6 +288,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get m65d05ab17f => 'งานสร้างครั้งต่อไปของคุณ';
+
+  @override
+  String get mda2dced409 => 'ป้อนที่อยู่พร็อกซี HTTP ในรูปแบบโฮสต์:พอร์ต';
 
   @override
   String get mfc903d7f16 => 'ป้อนตัวเลขที่ถูกต้อง';
@@ -1290,6 +1305,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get mef9d01550d => 'ไม่สามารถบันทึกมาตราส่วนได้';
 
   @override
+  String get m3b051f718e => 'บันทึกการตั้งค่าพร็อกซีไม่สำเร็จ';
+
+  @override
   String get mdc2f51b827 => 'บันทึกแผนการอัปเลเวลไม่ได้';
 
   @override
@@ -2112,6 +2130,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get mce86d859e2 => 'โปรแกรมเครื่องยนต์ pob2';
+
+  @override
+  String get ma567776c79 => 'พร็อกซี';
 
   @override
   String m748bd43447(String p0) {

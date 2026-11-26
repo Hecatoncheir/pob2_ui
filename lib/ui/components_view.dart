@@ -3,7 +3,9 @@ import 'dart:convert';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_ui/material_ui.dart';
 
+import '../data/engine_components.dart';
 import '../data/engine_maintenance.dart';
+import '../data/process_service.dart';
 import '../domain/component.dart';
 import 'app_update_cubit.dart';
 import 'app_update_dialog.dart';
@@ -36,6 +38,10 @@ class _ComponentsViewState extends State<ComponentsView> {
       widget.maintenance ??
       EngineMaintenance(
         model.components.engineExecutable ?? model.engine.executable,
+        processes: switch (model.components) {
+          EngineComponents(:final processes) => processes,
+          _ => const ProcessService(),
+        },
       );
   Map<String, dynamic>? _version;
   Map<String, dynamic>? _diagnosis;

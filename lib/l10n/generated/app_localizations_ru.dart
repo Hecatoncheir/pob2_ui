@@ -41,6 +41,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get mf5593e021c => 'DPS умения';
 
   @override
+  String get m90c737452b => 'HTTP-прокси';
+
+  @override
   String get m0c63e733f9 => 'Lua вернул не все иконки';
 
   @override
@@ -203,6 +206,12 @@ class AppLocalizationsRu extends AppLocalizations {
   }
 
   @override
+  String get m353cf589e9 => 'Автоматически';
+
+  @override
+  String get mfdee5c1897 => 'Адрес и порт';
+
+  @override
   String m607c57804e(String p0) {
     return 'Активное оружие · $p0';
   }
@@ -224,6 +233,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get m312fc0deca => 'Без подсветки';
+
+  @override
+  String get m2f8bfdf88b => 'Без прокси';
 
   @override
   String get m1174a37a5a => 'Бирюзовый';
@@ -277,6 +289,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get m65d05ab17f => 'Ваша следующая сборка';
+
+  @override
+  String get mda2dced409 => 'Введите адрес HTTP-прокси в формате хост:порт.';
 
   @override
   String get mfc903d7f16 => 'Введите корректное число';
@@ -1300,6 +1315,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get mef9d01550d => 'Не удалось сохранить масштаб.';
 
   @override
+  String get m3b051f718e => 'Не удалось сохранить настройки прокси';
+
+  @override
   String get mdc2f51b827 => 'Не удалось сохранить план прокачки';
 
   @override
@@ -2127,6 +2145,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get mce86d859e2 => 'Программа pob2-engine';
+
+  @override
+  String get ma567776c79 => 'Прокси';
 
   @override
   String m748bd43447(String p0) {

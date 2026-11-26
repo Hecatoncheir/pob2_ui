@@ -3,7 +3,9 @@ import 'dart:convert';
 import 'dart:io';
 
 class ProcessService {
-  const ProcessService();
+  const ProcessService({this.environment});
+
+  final Map<String, String> Function()? environment;
 
   Future<String> run(
     String executable,
@@ -16,6 +18,7 @@ class ProcessService {
       executable,
       arguments,
       workingDirectory: directory,
+      environment: environment?.call(),
     );
     final output = StringBuffer();
     final errors = StringBuffer();
